@@ -1,0 +1,43 @@
+version: 2
+jobs:
+  go/test:
+    docker:
+      - image: cimg/go:1.15
+    environment:
+      - GO111MODULE: 'on'
+      - TEST_RESULTS: /tmp/test-results
+      - GOMAXPROCS: 8
+    resource_class: xlarge
+    steps:
+    - checkout
+    - run:
+        command: |
+          go mod download
+          go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.35.2
+          go get gotest.tools/gotestsum
+        name: Get CI dependencies
+    - run:
+        command: |
+          make test-ci
+          go tool cover -html=cover.out -o=coverage.html
+        environment:
+          GO_TEST_ARGS: -coverprofile=cover.out
+        name: test
+    - store_artifacts:
+        destination: coverage.html
+        path: coverage.html
+    - store_test_results:
+        path: /tmp/test-results
+    - store_artifacts:
+        path: /tmp/test-results
+workflows:
+  main:
+    jobs:
+    - go/test
+  version: 2
+experimental:
+  notify:
+    branches:
+      only:
+      - master
+

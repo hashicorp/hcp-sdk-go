@@ -1,0 +1,42 @@
+run:
+  timeout: 5m
+  tests: true
+
+linters:
+  enable:
+  - deadcode
+  - errcheck
+  - govet
+  - ineffassign
+  - unused
+  - bodyclose
+  - gocritic
+  - misspell
+  - unconvert
+  - staticcheck
+  - varcheck
+  - gosimple
+  - stylecheck
+  - goimports
+  - depguard
+
+linters-settings:
+  depguard:
+    list-type: blacklist
+    packages:
+      - github.com/gogo/status
+      - github.com/gogo/codes
+      - github.com/gogo/protobuf
+  misspell:
+    locale: US
+
+issues:
+  exclude:
+  - ifElseChain
+  exclude-rules:
+  - path: _test\.go
+    linters:
+    - bodyclose
+  - linters:
+    - staticcheck
+    text: "SA1019: package github.com/golang/protobuf"
