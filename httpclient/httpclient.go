@@ -13,8 +13,8 @@ import (
 	"github.com/hashicorp/go-cleanhttp"
 	"golang.org/x/oauth2"
 
-	"github.com/hashicorp/cloud-sdk-go/auth"
-	"github.com/hashicorp/cloud-sdk-go/version"
+	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/version"
 )
 
 // Config contains the client's configuration options

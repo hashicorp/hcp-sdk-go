@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	consul "github.com/hashicorp/cloud-sdk-go/clients/cloud-consul-service/preview/2020-08-26/client/consul_service"
+	consul "github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/preview/2020-08-26/client/consul_service"
 	"github.com/stretchr/testify/require"
 )
 

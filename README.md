@@ -1,4 +1,4 @@
-# HashiCorp Cloud Platform Go SDK 
+# HashiCorp Cloud Platform Go SDK
 
 This SDK provides versioned Go packages for using HashiCorp Cloud Platform services. This is a *preview* version. It is not intended for use outside of local testing environments.
 
@@ -6,7 +6,7 @@ This SDK provides versioned Go packages for using HashiCorp Cloud Platform servi
 
 Fetch and install the package:
 ```
-$ go get github.com/hashicorp/cloud-sdk-go
+$ go get github.com/hashicorp/hcp-sdk-go
 ```
 
 #### Authentication
@@ -35,8 +35,8 @@ Set the client ID and secret as the environment variables HCP_CLIENT_ID and HCP_
 Import the desired version of each service SDK.
 ```
 import (
-	network "github.com/hashicorp/cloud-sdk-go/clients/cloud-network/preview/2020-09-07/client/network_service"
+	network "github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/client/network_service"
 )
 ```
 
-See `cmd/cloud-sdk-go-client` for a complete example.
+See `cmd/hcp-sdk-go-client` for a complete example.
