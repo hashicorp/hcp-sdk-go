@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	consul "github.com/hashicorp/cloud-sdk-go/clients/cloud-consul-service/preview/2020-08-26/client/consul_service"
-	network "github.com/hashicorp/cloud-sdk-go/clients/cloud-network/preview/2020-09-07/client/network_service"
-	"github.com/hashicorp/cloud-sdk-go/httpclient"
+	consul "github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/preview/2020-08-26/client/consul_service"
+	network "github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/client/network_service"
+	"github.com/hashicorp/hcp-sdk-go/httpclient"
 )
 
 func main() {

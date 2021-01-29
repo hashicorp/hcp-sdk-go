@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/hashicorp/cloud-sdk-go/clients/cloud-network/preview/2020-09-07/models"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/models"
 )
 
 // GetReader is a Reader for the Get structure.

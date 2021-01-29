@@ -9,7 +9,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	cloud "github.com/hashicorp/cloud-sdk-go/clients/cloud-shared/v1/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudConsul20200826UpdateResponse hashicorp cloud consul 20200826 update response

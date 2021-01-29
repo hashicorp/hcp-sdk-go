@@ -1,4 +1,4 @@
-NAME := cloud-sdk-go
+NAME := hcp-sdk-go
 
 GO ?= go
 GO_LINT ?= golangci-lint

@@ -10,7 +10,7 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/hashicorp/cloud-sdk-go/clients/cloud-operation/preview/2020-05-05/client/operation_service"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-operation/preview/2020-05-05/client/operation_service"
 )
 
 // Default cloud operation HTTP client.
