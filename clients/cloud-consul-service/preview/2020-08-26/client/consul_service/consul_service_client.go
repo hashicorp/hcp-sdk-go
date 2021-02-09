@@ -6,8 +6,6 @@ package consul_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"fmt"
-
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -27,59 +25,59 @@ type Client struct {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error)
+	ConsulServiceCreate(params *ConsulServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateOK, error)
 
-	CreateCustomerMasterACLToken(params *CreateCustomerMasterACLTokenParams, authInfo runtime.ClientAuthInfoWriter) (*CreateCustomerMasterACLTokenOK, error)
+	ConsulServiceCreateCustomerMasterACLToken(params *ConsulServiceCreateCustomerMasterACLTokenParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateCustomerMasterACLTokenOK, error)
 
-	CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*CreateSnapshotOK, error)
+	ConsulServiceCreateSnapshot(params *ConsulServiceCreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateSnapshotOK, error)
 
-	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error)
+	ConsulServiceDelete(params *ConsulServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceDeleteOK, error)
 
-	DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteSnapshotOK, error)
+	ConsulServiceDeleteSnapshot(params *ConsulServiceDeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceDeleteSnapshotOK, error)
 
-	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
+	ConsulServiceGet(params *ConsulServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetOK, error)
 
-	GetClientConfig(params *GetClientConfigParams, authInfo runtime.ClientAuthInfoWriter) (*GetClientConfigOK, error)
+	ConsulServiceGetClientConfig(params *ConsulServiceGetClientConfigParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetClientConfigOK, error)
 
-	GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*GetSnapshotOK, error)
+	ConsulServiceGetSnapshot(params *ConsulServiceGetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetSnapshotOK, error)
 
-	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
+	ConsulServiceList(params *ConsulServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListOK, error)
 
-	ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ListSnapshotsOK, error)
+	ConsulServiceListSnapshots(params *ConsulServiceListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListSnapshotsOK, error)
 
-	ListUpgradeVersions(params *ListUpgradeVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListUpgradeVersionsOK, error)
+	ConsulServiceListUpgradeVersions(params *ConsulServiceListUpgradeVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListUpgradeVersionsOK, error)
 
-	ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListVersionsOK, error)
+	ConsulServiceListVersions(params *ConsulServiceListVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListVersionsOK, error)
 
-	ListVersions2(params *ListVersions2Params, authInfo runtime.ClientAuthInfoWriter) (*ListVersions2OK, error)
+	ConsulServiceListVersions2(params *ConsulServiceListVersions2Params, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListVersions2OK, error)
 
-	RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*RestoreSnapshotOK, error)
+	ConsulServiceRestoreSnapshot(params *ConsulServiceRestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceRestoreSnapshotOK, error)
 
-	Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateOK, error)
+	ConsulServiceUpdate(params *ConsulServiceUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceUpdateOK, error)
 
-	UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateSnapshotOK, error)
+	ConsulServiceUpdateSnapshot(params *ConsulServiceUpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceUpdateSnapshotOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  Create creates creates a new h c p consul cluster
+  ConsulServiceCreate creates creates a new h c p consul cluster
 */
-func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error) {
+func (a *Client) ConsulServiceCreate(params *ConsulServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateParams()
+		params = NewConsulServiceCreateParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "Create",
+		ID:                 "ConsulService_Create",
 		Method:             "POST",
 		PathPattern:        "/consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateReader{formats: a.formats},
+		Reader:             &ConsulServiceCreateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -87,34 +85,33 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateOK)
+	success, ok := result.(*ConsulServiceCreateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceCreateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  CreateCustomerMasterACLToken creates customer master ACL token creates a new master ACL token for the customer on the specified cluster external clients will invoke this endpoint to re generate new master tokens
+  ConsulServiceCreateCustomerMasterACLToken creates customer master ACL token creates a new master ACL token for the customer on the specified cluster external clients will invoke this endpoint to re generate new master tokens
 */
-func (a *Client) CreateCustomerMasterACLToken(params *CreateCustomerMasterACLTokenParams, authInfo runtime.ClientAuthInfoWriter) (*CreateCustomerMasterACLTokenOK, error) {
+func (a *Client) ConsulServiceCreateCustomerMasterACLToken(params *ConsulServiceCreateCustomerMasterACLTokenParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateCustomerMasterACLTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateCustomerMasterACLTokenParams()
+		params = NewConsulServiceCreateCustomerMasterACLTokenParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "CreateCustomerMasterACLToken",
+		ID:                 "ConsulService_CreateCustomerMasterACLToken",
 		Method:             "POST",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/master-acl-tokens",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateCustomerMasterACLTokenReader{formats: a.formats},
+		Reader:             &ConsulServiceCreateCustomerMasterACLTokenReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -122,34 +119,33 @@ func (a *Client) CreateCustomerMasterACLToken(params *CreateCustomerMasterACLTok
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateCustomerMasterACLTokenOK)
+	success, ok := result.(*ConsulServiceCreateCustomerMasterACLTokenOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateCustomerMasterACLToken: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceCreateCustomerMasterACLTokenDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  CreateSnapshot creates snapshot takes a new snapshot asynchronously
+  ConsulServiceCreateSnapshot creates snapshot takes a new snapshot asynchronously
 */
-func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*CreateSnapshotOK, error) {
+func (a *Client) ConsulServiceCreateSnapshot(params *ConsulServiceCreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateSnapshotParams()
+		params = NewConsulServiceCreateSnapshotParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "CreateSnapshot",
+		ID:                 "ConsulService_CreateSnapshot",
 		Method:             "POST",
 		PathPattern:        "/consul/2020-08-26/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateSnapshotReader{formats: a.formats},
+		Reader:             &ConsulServiceCreateSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -157,34 +153,33 @@ func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateSnapshotOK)
+	success, ok := result.(*ConsulServiceCreateSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateSnapshot: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceCreateSnapshotDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  Delete deletes deletes the specified h c p consul cluster
+  ConsulServiceDelete deletes deletes the specified h c p consul cluster
 */
-func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error) {
+func (a *Client) ConsulServiceDelete(params *ConsulServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteParams()
+		params = NewConsulServiceDeleteParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "Delete",
+		ID:                 "ConsulService_Delete",
 		Method:             "DELETE",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteReader{formats: a.formats},
+		Reader:             &ConsulServiceDeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -192,34 +187,33 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteOK)
+	success, ok := result.(*ConsulServiceDeleteOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceDeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  DeleteSnapshot deletes snapshot removes the snapshot from storage asynchronously
+  ConsulServiceDeleteSnapshot deletes snapshot removes the snapshot from storage asynchronously
 */
-func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteSnapshotOK, error) {
+func (a *Client) ConsulServiceDeleteSnapshot(params *ConsulServiceDeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceDeleteSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteSnapshotParams()
+		params = NewConsulServiceDeleteSnapshotParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteSnapshot",
+		ID:                 "ConsulService_DeleteSnapshot",
 		Method:             "DELETE",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteSnapshotReader{formats: a.formats},
+		Reader:             &ConsulServiceDeleteSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -227,34 +221,33 @@ func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteSnapshotOK)
+	success, ok := result.(*ConsulServiceDeleteSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteSnapshot: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceDeleteSnapshotDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  Get gets reads a single h c p consul cluster
+  ConsulServiceGet gets reads a single h c p consul cluster
 */
-func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error) {
+func (a *Client) ConsulServiceGet(params *ConsulServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetParams()
+		params = NewConsulServiceGetParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "Get",
+		ID:                 "ConsulService_Get",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetReader{formats: a.formats},
+		Reader:             &ConsulServiceGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -262,34 +255,33 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetOK)
+	success, ok := result.(*ConsulServiceGetOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Get: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetClientConfig gets client config files returns the config files for a consul agent running in client mode the files are base64 encoded
+  ConsulServiceGetClientConfig gets client config files returns the config files for a consul agent running in client mode the files are base64 encoded
 */
-func (a *Client) GetClientConfig(params *GetClientConfigParams, authInfo runtime.ClientAuthInfoWriter) (*GetClientConfigOK, error) {
+func (a *Client) ConsulServiceGetClientConfig(params *ConsulServiceGetClientConfigParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetClientConfigOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetClientConfigParams()
+		params = NewConsulServiceGetClientConfigParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetClientConfig",
+		ID:                 "ConsulService_GetClientConfig",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/client-config",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetClientConfigReader{formats: a.formats},
+		Reader:             &ConsulServiceGetClientConfigReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -297,34 +289,33 @@ func (a *Client) GetClientConfig(params *GetClientConfigParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetClientConfigOK)
+	success, ok := result.(*ConsulServiceGetClientConfigOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetClientConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceGetClientConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetSnapshot gets snapshot retrieves an existing snapshot
+  ConsulServiceGetSnapshot gets snapshot retrieves an existing snapshot
 */
-func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*GetSnapshotOK, error) {
+func (a *Client) ConsulServiceGetSnapshot(params *ConsulServiceGetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetSnapshotParams()
+		params = NewConsulServiceGetSnapshotParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetSnapshot",
+		ID:                 "ConsulService_GetSnapshot",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetSnapshotReader{formats: a.formats},
+		Reader:             &ConsulServiceGetSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -332,34 +323,33 @@ func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetSnapshotOK)
+	success, ok := result.(*ConsulServiceGetSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetSnapshot: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceGetSnapshotDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  List lists lists all h c p consul clusters
+  ConsulServiceList lists lists all h c p consul clusters
 */
-func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
+func (a *Client) ConsulServiceList(params *ConsulServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListParams()
+		params = NewConsulServiceListParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "List",
+		ID:                 "ConsulService_List",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListReader{formats: a.formats},
+		Reader:             &ConsulServiceListReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -367,34 +357,33 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListOK)
+	success, ok := result.(*ConsulServiceListOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for List: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceListDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListSnapshots lists snapshots lists snapshots
+  ConsulServiceListSnapshots lists snapshots lists snapshots
 */
-func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ListSnapshotsOK, error) {
+func (a *Client) ConsulServiceListSnapshots(params *ConsulServiceListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListSnapshotsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListSnapshotsParams()
+		params = NewConsulServiceListSnapshotsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListSnapshots",
+		ID:                 "ConsulService_ListSnapshots",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListSnapshotsReader{formats: a.formats},
+		Reader:             &ConsulServiceListSnapshotsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -402,34 +391,33 @@ func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListSnapshotsOK)
+	success, ok := result.(*ConsulServiceListSnapshotsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListSnapshots: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceListSnapshotsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListUpgradeVersions lists upgrade versions returns the versions available for this consul cluster to upgrade to
+  ConsulServiceListUpgradeVersions lists upgrade versions returns the versions available for this consul cluster to upgrade to
 */
-func (a *Client) ListUpgradeVersions(params *ListUpgradeVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListUpgradeVersionsOK, error) {
+func (a *Client) ConsulServiceListUpgradeVersions(params *ConsulServiceListUpgradeVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListUpgradeVersionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListUpgradeVersionsParams()
+		params = NewConsulServiceListUpgradeVersionsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListUpgradeVersions",
+		ID:                 "ConsulService_ListUpgradeVersions",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/upgrade-versions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListUpgradeVersionsReader{formats: a.formats},
+		Reader:             &ConsulServiceListUpgradeVersionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -437,34 +425,33 @@ func (a *Client) ListUpgradeVersions(params *ListUpgradeVersionsParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListUpgradeVersionsOK)
+	success, ok := result.(*ConsulServiceListUpgradeVersionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListUpgradeVersions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceListUpgradeVersionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListVersions lists versions returns the versions available for this org and project
+  ConsulServiceListVersions lists versions returns the versions available for this org and project
 */
-func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListVersionsOK, error) {
+func (a *Client) ConsulServiceListVersions(params *ConsulServiceListVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListVersionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListVersionsParams()
+		params = NewConsulServiceListVersionsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListVersions",
+		ID:                 "ConsulService_ListVersions",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/versions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListVersionsReader{formats: a.formats},
+		Reader:             &ConsulServiceListVersionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -472,34 +459,33 @@ func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListVersionsOK)
+	success, ok := result.(*ConsulServiceListVersionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListVersions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceListVersionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListVersions2 lists versions returns the versions available for this org and project
+  ConsulServiceListVersions2 lists versions returns the versions available for this org and project
 */
-func (a *Client) ListVersions2(params *ListVersions2Params, authInfo runtime.ClientAuthInfoWriter) (*ListVersions2OK, error) {
+func (a *Client) ConsulServiceListVersions2(params *ConsulServiceListVersions2Params, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListVersions2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListVersions2Params()
+		params = NewConsulServiceListVersions2Params()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListVersions2",
+		ID:                 "ConsulService_ListVersions2",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/versions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListVersions2Reader{formats: a.formats},
+		Reader:             &ConsulServiceListVersions2Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -507,34 +493,33 @@ func (a *Client) ListVersions2(params *ListVersions2Params, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListVersions2OK)
+	success, ok := result.(*ConsulServiceListVersions2OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListVersions2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceListVersions2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  RestoreSnapshot restores snapshot restores a snapshot on a given cluster asynchronously
+  ConsulServiceRestoreSnapshot restores snapshot restores a snapshot on a given cluster asynchronously
 */
-func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*RestoreSnapshotOK, error) {
+func (a *Client) ConsulServiceRestoreSnapshot(params *ConsulServiceRestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceRestoreSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRestoreSnapshotParams()
+		params = NewConsulServiceRestoreSnapshotParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "RestoreSnapshot",
+		ID:                 "ConsulService_RestoreSnapshot",
 		Method:             "POST",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/restore",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RestoreSnapshotReader{formats: a.formats},
+		Reader:             &ConsulServiceRestoreSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -542,34 +527,33 @@ func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*RestoreSnapshotOK)
+	success, ok := result.(*ConsulServiceRestoreSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for RestoreSnapshot: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceRestoreSnapshotDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  Update updates updates the properties of an existing h c p consul cluster
+  ConsulServiceUpdate updates updates the properties of an existing h c p consul cluster
 */
-func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateOK, error) {
+func (a *Client) ConsulServiceUpdate(params *ConsulServiceUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateParams()
+		params = NewConsulServiceUpdateParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "Update",
+		ID:                 "ConsulService_Update",
 		Method:             "PATCH",
 		PathPattern:        "/consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateReader{formats: a.formats},
+		Reader:             &ConsulServiceUpdateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -577,36 +561,35 @@ func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateOK)
+	success, ok := result.(*ConsulServiceUpdateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceUpdateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  UpdateSnapshot updates snapshot updates an existing snapshot
+  ConsulServiceUpdateSnapshot updates snapshot updates an existing snapshot
 
   Right now only the name can be changed.
 */
-func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateSnapshotOK, error) {
+func (a *Client) ConsulServiceUpdateSnapshot(params *ConsulServiceUpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceUpdateSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateSnapshotParams()
+		params = NewConsulServiceUpdateSnapshotParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "UpdateSnapshot",
+		ID:                 "ConsulService_UpdateSnapshot",
 		Method:             "PATCH",
 		PathPattern:        "/consul/2020-08-26/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateSnapshotReader{formats: a.formats},
+		Reader:             &ConsulServiceUpdateSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -614,14 +597,13 @@ func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateSnapshotOK)
+	success, ok := result.(*ConsulServiceUpdateSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UpdateSnapshot: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ConsulServiceUpdateSnapshotDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

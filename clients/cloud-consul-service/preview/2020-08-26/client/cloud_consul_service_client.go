@@ -26,7 +26,7 @@ const (
 )
 
 // DefaultSchemes are the default schemes found in Meta (info) section of spec file
-var DefaultSchemes = []string{"http", "https"}
+var DefaultSchemes = []string{"http"}
 
 // NewHTTPClient creates a new cloud consul service HTTP client.
 func NewHTTPClient(formats strfmt.Registry) *CloudConsulService {
