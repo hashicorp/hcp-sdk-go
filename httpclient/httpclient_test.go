@@ -79,11 +79,11 @@ func TestNew(t *testing.T) {
 	require.NoError(t, err)
 
 	consulClient := consul.New(cl, nil)
-	listParams := consul.NewListParams()
+	listParams := consul.NewConsulServiceListParams()
 	listParams.LocationOrganizationID = orgID
 	listParams.LocationProjectID = projID
 
 	// This SDK request hits the mock Consul List API handler above ('/consul/2020-08-26/organizations...').
 	// The handler verifies that the expected bearer token is provided.
-	consulClient.List(listParams, nil) // nolint:errcheck
+	consulClient.ConsulServiceList(listParams, nil) // nolint:errcheck
 }
