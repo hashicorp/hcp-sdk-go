@@ -30,6 +30,11 @@ Once the service principal is created, navigate to its detail page by selecting 
 
 Set the client ID and secret as the environment variables HCP_CLIENT_ID and HCP_CLIENT_SECRET.
 
+```
+export HCP_CLIENT_ID="service-principal-key-client-id"
+export HCP_CLIENT_SECRET="service-principal-key-client-secret"
+```
+
 ## Usage
 
 Import the desired version of each service SDK.
