@@ -6,8 +6,10 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudConsul20200826ConsulConfig ConsulConfig exposes user settable configurations for a Consul cluster.
@@ -23,10 +25,40 @@ type HashicorpCloudConsul20200826ConsulConfig struct {
 	//
 	// https://www.consul.io/docs/agent/options.html#datacenter
 	Datacenter string `json:"datacenter,omitempty"`
+
+	// primary contains a link to the primary consul cluster in a federation.
+	Primary *cloud.HashicorpCloudLocationLink `json:"primary,omitempty"`
 }
 
 // Validate validates this hashicorp cloud consul 20200826 consul config
 func (m *HashicorpCloudConsul20200826ConsulConfig) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validatePrimary(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudConsul20200826ConsulConfig) validatePrimary(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Primary) { // not required
+		return nil
+	}
+
+	if m.Primary != nil {
+		if err := m.Primary.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("primary")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
