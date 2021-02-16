@@ -1,4 +1,4 @@
 package version
 
 // Version refers to the current version of hcp-sdk-go.
-var Version = "0.1.0"
+var Version = "0.2.0"
