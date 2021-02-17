@@ -29,8 +29,8 @@ const (
 	// HashicorpCloudResourcemanagerPolicyBindingMemberTypeGROUP captures enum value "GROUP"
 	HashicorpCloudResourcemanagerPolicyBindingMemberTypeGROUP HashicorpCloudResourcemanagerPolicyBindingMemberType = "GROUP"
 
-	// HashicorpCloudResourcemanagerPolicyBindingMemberTypeSERVICEACCOUNT captures enum value "SERVICE_ACCOUNT"
-	HashicorpCloudResourcemanagerPolicyBindingMemberTypeSERVICEACCOUNT HashicorpCloudResourcemanagerPolicyBindingMemberType = "SERVICE_ACCOUNT"
+	// HashicorpCloudResourcemanagerPolicyBindingMemberTypeSERVICEPRINCIPAL captures enum value "SERVICE_PRINCIPAL"
+	HashicorpCloudResourcemanagerPolicyBindingMemberTypeSERVICEPRINCIPAL HashicorpCloudResourcemanagerPolicyBindingMemberType = "SERVICE_PRINCIPAL"
 )
 
 // for schema
@@ -38,7 +38,7 @@ var hashicorpCloudResourcemanagerPolicyBindingMemberTypeEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudResourcemanagerPolicyBindingMemberType
-	if err := json.Unmarshal([]byte(`["UNSET","USER","GROUP","SERVICE_ACCOUNT"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["UNSET","USER","GROUP","SERVICE_PRINCIPAL"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
