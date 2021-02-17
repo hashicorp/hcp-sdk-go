@@ -6,8 +6,6 @@ package operation_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"fmt"
-
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -27,37 +25,37 @@ type Client struct {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
+	OperationServiceGet(params *OperationServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceGetOK, error)
 
-	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
+	OperationServiceList(params *OperationServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceListOK, error)
 
-	Wait(params *WaitParams, authInfo runtime.ClientAuthInfoWriter) (*WaitOK, error)
+	OperationServiceWait(params *OperationServiceWaitParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceWaitOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  Get gets returns the latest state of a specific operation
+  OperationServiceGet gets returns the latest state of a specific operation
 
   The Location's organization and project IDs are included in the path in
 order to support RBAC checks. We perform RBAC checks early in the request
 lifecycle, before loading the resource targeted by the request.
 */
-func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error) {
+func (a *Client) OperationServiceGet(params *OperationServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetParams()
+		params = NewOperationServiceGetParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "Get",
+		ID:                 "OperationService_Get",
 		Method:             "GET",
 		PathPattern:        "/operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetReader{formats: a.formats},
+		Reader:             &OperationServiceGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -65,34 +63,33 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetOK)
+	success, ok := result.(*OperationServiceGetOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Get: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*OperationServiceGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  List lists selects a list of operations that match some filters and then returns them in the response the supported filters are the location s organization id and project id the project id supports the special value to allow requesting operations that match any project within the organization
+  OperationServiceList lists selects a list of operations that match some filters and then returns them in the response the supported filters are the location s organization id and project id the project id supports the special value to allow requesting operations that match any project within the organization
 */
-func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
+func (a *Client) OperationServiceList(params *OperationServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListParams()
+		params = NewOperationServiceListParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "List",
+		ID:                 "OperationService_List",
 		Method:             "GET",
 		PathPattern:        "/operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListReader{formats: a.formats},
+		Reader:             &OperationServiceListReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -100,18 +97,17 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListOK)
+	success, ok := result.(*OperationServiceListOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for List: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*OperationServiceListDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  Wait waits blocks until an operation is d o n e or a timeout is reached whichever occurs first it then returns the latest state of the operation that it had at the time of the timeout
+  OperationServiceWait waits blocks until an operation is d o n e or a timeout is reached whichever occurs first it then returns the latest state of the operation that it had at the time of the timeout
 
   Note that Wait may return at any time. In most cases, the timeout will
 be respected but it is not guaranteed. Therefore, clients should always
@@ -122,21 +118,21 @@ The Location's organization and project IDs are included in the path in
 order to support RBAC checks. We perform RBAC checks early in the request
 lifecycle, before loading the resource targeted by the request.
 */
-func (a *Client) Wait(params *WaitParams, authInfo runtime.ClientAuthInfoWriter) (*WaitOK, error) {
+func (a *Client) OperationServiceWait(params *OperationServiceWaitParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceWaitOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewWaitParams()
+		params = NewOperationServiceWaitParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "Wait",
+		ID:                 "OperationService_Wait",
 		Method:             "GET",
 		PathPattern:        "/operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &WaitReader{formats: a.formats},
+		Reader:             &OperationServiceWaitReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -144,14 +140,13 @@ func (a *Client) Wait(params *WaitParams, authInfo runtime.ClientAuthInfoWriter)
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*WaitOK)
+	success, ok := result.(*OperationServiceWaitOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Wait: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*OperationServiceWaitDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client
