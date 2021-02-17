@@ -6,8 +6,6 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"fmt"
-
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -27,55 +25,55 @@ type Client struct {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter) (*AssociateHVNWithAWSRoute53PrivateHostedZoneOK, error)
+	NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZone(params *NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneOK, error)
 
-	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error)
+	NetworkServiceCreate(params *NetworkServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreateOK, error)
 
-	CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePeeringOK, error)
+	NetworkServiceCreatePeering(params *NetworkServiceCreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreatePeeringOK, error)
 
-	CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*CreateTGWAttachmentOK, error)
+	NetworkServiceCreateTGWAttachment(params *NetworkServiceCreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreateTGWAttachmentOK, error)
 
-	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error)
+	NetworkServiceDelete(params *NetworkServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeleteOK, error)
 
-	DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePeeringOK, error)
+	NetworkServiceDeletePeering(params *NetworkServiceDeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeletePeeringOK, error)
 
-	DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTGWAttachmentOK, error)
+	NetworkServiceDeleteTGWAttachment(params *NetworkServiceDeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeleteTGWAttachmentOK, error)
 
-	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
+	NetworkServiceGet(params *NetworkServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetOK, error)
 
-	GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*GetPeeringOK, error)
+	NetworkServiceGetPeering(params *NetworkServiceGetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetPeeringOK, error)
 
-	GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*GetTGWAttachmentOK, error)
+	NetworkServiceGetTGWAttachment(params *NetworkServiceGetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetTGWAttachmentOK, error)
 
-	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
+	NetworkServiceList(params *NetworkServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListOK, error)
 
-	ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*ListDependenciesOK, error)
+	NetworkServiceListDependencies(params *NetworkServiceListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListDependenciesOK, error)
 
-	ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPeeringsOK, error)
+	NetworkServiceListPeerings(params *NetworkServiceListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListPeeringsOK, error)
 
-	ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTGWAttachmentsOK, error)
+	NetworkServiceListTGWAttachments(params *NetworkServiceListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListTGWAttachmentsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  AssociateHVNWithAWSRoute53PrivateHostedZone associates h v n with a w s route53 private hosted zone will associate the h v n s v p c with a user s private hosted zone in a w s route53 this will enable the resolution of records of the private hosted zone from within the v p c
+  NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZone associates h v n with a w s route53 private hosted zone will associate the h v n s v p c with a user s private hosted zone in a w s route53 this will enable the resolution of records of the private hosted zone from within the v p c
 */
-func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter) (*AssociateHVNWithAWSRoute53PrivateHostedZoneOK, error) {
+func (a *Client) NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZone(params *NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAssociateHVNWithAWSRoute53PrivateHostedZoneParams()
+		params = NewNetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "AssociateHVNWithAWSRoute53PrivateHostedZone",
+		ID:                 "NetworkService_AssociateHVNWithAWSRoute53PrivateHostedZone",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AssociateHVNWithAWSRoute53PrivateHostedZoneReader{formats: a.formats},
+		Reader:             &NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -83,34 +81,33 @@ func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHV
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*AssociateHVNWithAWSRoute53PrivateHostedZoneOK)
+	success, ok := result.(*NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for AssociateHVNWithAWSRoute53PrivateHostedZone: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  Create creates creates a new h v n
+  NetworkServiceCreate creates creates a new h v n
 */
-func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error) {
+func (a *Client) NetworkServiceCreate(params *NetworkServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateParams()
+		params = NewNetworkServiceCreateParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "Create",
+		ID:                 "NetworkService_Create",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateReader{formats: a.formats},
+		Reader:             &NetworkServiceCreateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -118,34 +115,33 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateOK)
+	success, ok := result.(*NetworkServiceCreateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceCreateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  CreatePeering creates peering creates a new network peering between h v n v p c and target v p c
+  NetworkServiceCreatePeering creates peering creates a new network peering between h v n v p c and target v p c
 */
-func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePeeringOK, error) {
+func (a *Client) NetworkServiceCreatePeering(params *NetworkServiceCreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreatePeeringOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreatePeeringParams()
+		params = NewNetworkServiceCreatePeeringParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "CreatePeering",
+		ID:                 "NetworkService_CreatePeering",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreatePeeringReader{formats: a.formats},
+		Reader:             &NetworkServiceCreatePeeringReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -153,34 +149,33 @@ func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreatePeeringOK)
+	success, ok := result.(*NetworkServiceCreatePeeringOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreatePeering: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceCreatePeeringDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  CreateTGWAttachment creates t g w attachment creates a new transit gateway attachment for an h v n
+  NetworkServiceCreateTGWAttachment creates t g w attachment creates a new transit gateway attachment for an h v n
 */
-func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*CreateTGWAttachmentOK, error) {
+func (a *Client) NetworkServiceCreateTGWAttachment(params *NetworkServiceCreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreateTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateTGWAttachmentParams()
+		params = NewNetworkServiceCreateTGWAttachmentParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "CreateTGWAttachment",
+		ID:                 "NetworkService_CreateTGWAttachment",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateTGWAttachmentReader{formats: a.formats},
+		Reader:             &NetworkServiceCreateTGWAttachmentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -188,34 +183,33 @@ func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateTGWAttachmentOK)
+	success, ok := result.(*NetworkServiceCreateTGWAttachmentOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateTGWAttachment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceCreateTGWAttachmentDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  Delete deletes deletes a new h v n
+  NetworkServiceDelete deletes deletes a new h v n
 */
-func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error) {
+func (a *Client) NetworkServiceDelete(params *NetworkServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteParams()
+		params = NewNetworkServiceDeleteParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "Delete",
+		ID:                 "NetworkService_Delete",
 		Method:             "DELETE",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteReader{formats: a.formats},
+		Reader:             &NetworkServiceDeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -223,34 +217,33 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteOK)
+	success, ok := result.(*NetworkServiceDeleteOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceDeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  DeletePeering deletes peering deletes specified peering and triggers updating network configuration
+  NetworkServiceDeletePeering deletes peering deletes specified peering and triggers updating network configuration
 */
-func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePeeringOK, error) {
+func (a *Client) NetworkServiceDeletePeering(params *NetworkServiceDeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeletePeeringOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeletePeeringParams()
+		params = NewNetworkServiceDeletePeeringParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeletePeering",
+		ID:                 "NetworkService_DeletePeering",
 		Method:             "DELETE",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeletePeeringReader{formats: a.formats},
+		Reader:             &NetworkServiceDeletePeeringReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -258,34 +251,33 @@ func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeletePeeringOK)
+	success, ok := result.(*NetworkServiceDeletePeeringOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeletePeering: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceDeletePeeringDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  DeleteTGWAttachment deletes t g w attachment deletes specified transit gateway attachment and triggers updating network configuration
+  NetworkServiceDeleteTGWAttachment deletes t g w attachment deletes specified transit gateway attachment and triggers updating network configuration
 */
-func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTGWAttachmentOK, error) {
+func (a *Client) NetworkServiceDeleteTGWAttachment(params *NetworkServiceDeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeleteTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteTGWAttachmentParams()
+		params = NewNetworkServiceDeleteTGWAttachmentParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteTGWAttachment",
+		ID:                 "NetworkService_DeleteTGWAttachment",
 		Method:             "DELETE",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteTGWAttachmentReader{formats: a.formats},
+		Reader:             &NetworkServiceDeleteTGWAttachmentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -293,34 +285,33 @@ func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteTGWAttachmentOK)
+	success, ok := result.(*NetworkServiceDeleteTGWAttachmentOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteTGWAttachment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceDeleteTGWAttachmentDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  Get gets reads a single h v n
+  NetworkServiceGet gets reads a single h v n
 */
-func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error) {
+func (a *Client) NetworkServiceGet(params *NetworkServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetParams()
+		params = NewNetworkServiceGetParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "Get",
+		ID:                 "NetworkService_Get",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetReader{formats: a.formats},
+		Reader:             &NetworkServiceGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -328,34 +319,33 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetOK)
+	success, ok := result.(*NetworkServiceGetOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Get: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetPeering gets peering returns information about peering
+  NetworkServiceGetPeering gets peering returns information about peering
 */
-func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*GetPeeringOK, error) {
+func (a *Client) NetworkServiceGetPeering(params *NetworkServiceGetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetPeeringOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetPeeringParams()
+		params = NewNetworkServiceGetPeeringParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetPeering",
+		ID:                 "NetworkService_GetPeering",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetPeeringReader{formats: a.formats},
+		Reader:             &NetworkServiceGetPeeringReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -363,34 +353,33 @@ func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetPeeringOK)
+	success, ok := result.(*NetworkServiceGetPeeringOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPeering: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceGetPeeringDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetTGWAttachment gets t g w attachment returns existing t g w attachment
+  NetworkServiceGetTGWAttachment gets t g w attachment returns existing t g w attachment
 */
-func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*GetTGWAttachmentOK, error) {
+func (a *Client) NetworkServiceGetTGWAttachment(params *NetworkServiceGetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetTGWAttachmentParams()
+		params = NewNetworkServiceGetTGWAttachmentParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetTGWAttachment",
+		ID:                 "NetworkService_GetTGWAttachment",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetTGWAttachmentReader{formats: a.formats},
+		Reader:             &NetworkServiceGetTGWAttachmentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -398,34 +387,33 @@ func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetTGWAttachmentOK)
+	success, ok := result.(*NetworkServiceGetTGWAttachmentOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetTGWAttachment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceGetTGWAttachmentDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  List lists lists all h v ns
+  NetworkServiceList lists lists all h v ns
 */
-func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
+func (a *Client) NetworkServiceList(params *NetworkServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListParams()
+		params = NewNetworkServiceListParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "List",
+		ID:                 "NetworkService_List",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListReader{formats: a.formats},
+		Reader:             &NetworkServiceListReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -433,34 +421,33 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListOK)
+	success, ok := result.(*NetworkServiceListOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for List: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceListDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListDependencies lists dependencies lists the dependent services on the given h v n
+  NetworkServiceListDependencies lists dependencies lists the dependent services on the given h v n
 */
-func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*ListDependenciesOK, error) {
+func (a *Client) NetworkServiceListDependencies(params *NetworkServiceListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListDependenciesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListDependenciesParams()
+		params = NewNetworkServiceListDependenciesParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListDependencies",
+		ID:                 "NetworkService_ListDependencies",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListDependenciesReader{formats: a.formats},
+		Reader:             &NetworkServiceListDependenciesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -468,34 +455,33 @@ func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListDependenciesOK)
+	success, ok := result.(*NetworkServiceListDependenciesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListDependencies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceListDependenciesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListPeerings lists peerings returns a list of peerings matching the request
+  NetworkServiceListPeerings lists peerings returns a list of peerings matching the request
 */
-func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPeeringsOK, error) {
+func (a *Client) NetworkServiceListPeerings(params *NetworkServiceListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListPeeringsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListPeeringsParams()
+		params = NewNetworkServiceListPeeringsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListPeerings",
+		ID:                 "NetworkService_ListPeerings",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListPeeringsReader{formats: a.formats},
+		Reader:             &NetworkServiceListPeeringsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -503,34 +489,33 @@ func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListPeeringsOK)
+	success, ok := result.(*NetworkServiceListPeeringsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListPeerings: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceListPeeringsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListTGWAttachments lists t g w attachments returns a list of t g w attachments matching the request
+  NetworkServiceListTGWAttachments lists t g w attachments returns a list of t g w attachments matching the request
 */
-func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTGWAttachmentsOK, error) {
+func (a *Client) NetworkServiceListTGWAttachments(params *NetworkServiceListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListTGWAttachmentsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListTGWAttachmentsParams()
+		params = NewNetworkServiceListTGWAttachmentsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListTGWAttachments",
+		ID:                 "NetworkService_ListTGWAttachments",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListTGWAttachmentsReader{formats: a.formats},
+		Reader:             &NetworkServiceListTGWAttachmentsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -538,14 +523,13 @@ func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListTGWAttachmentsOK)
+	success, ok := result.(*NetworkServiceListTGWAttachmentsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListTGWAttachments: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*NetworkServiceListTGWAttachmentsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

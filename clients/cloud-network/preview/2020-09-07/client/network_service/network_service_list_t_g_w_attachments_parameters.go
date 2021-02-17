@@ -17,49 +17,49 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewListTGWAttachmentsParams creates a new ListTGWAttachmentsParams object
+// NewNetworkServiceListTGWAttachmentsParams creates a new NetworkServiceListTGWAttachmentsParams object
 // with the default values initialized.
-func NewListTGWAttachmentsParams() *ListTGWAttachmentsParams {
+func NewNetworkServiceListTGWAttachmentsParams() *NetworkServiceListTGWAttachmentsParams {
 	var ()
-	return &ListTGWAttachmentsParams{
+	return &NetworkServiceListTGWAttachmentsParams{
 
 		timeout: cr.DefaultTimeout,
 	}
 }
 
-// NewListTGWAttachmentsParamsWithTimeout creates a new ListTGWAttachmentsParams object
+// NewNetworkServiceListTGWAttachmentsParamsWithTimeout creates a new NetworkServiceListTGWAttachmentsParams object
 // with the default values initialized, and the ability to set a timeout on a request
-func NewListTGWAttachmentsParamsWithTimeout(timeout time.Duration) *ListTGWAttachmentsParams {
+func NewNetworkServiceListTGWAttachmentsParamsWithTimeout(timeout time.Duration) *NetworkServiceListTGWAttachmentsParams {
 	var ()
-	return &ListTGWAttachmentsParams{
+	return &NetworkServiceListTGWAttachmentsParams{
 
 		timeout: timeout,
 	}
 }
 
-// NewListTGWAttachmentsParamsWithContext creates a new ListTGWAttachmentsParams object
+// NewNetworkServiceListTGWAttachmentsParamsWithContext creates a new NetworkServiceListTGWAttachmentsParams object
 // with the default values initialized, and the ability to set a context for a request
-func NewListTGWAttachmentsParamsWithContext(ctx context.Context) *ListTGWAttachmentsParams {
+func NewNetworkServiceListTGWAttachmentsParamsWithContext(ctx context.Context) *NetworkServiceListTGWAttachmentsParams {
 	var ()
-	return &ListTGWAttachmentsParams{
+	return &NetworkServiceListTGWAttachmentsParams{
 
 		Context: ctx,
 	}
 }
 
-// NewListTGWAttachmentsParamsWithHTTPClient creates a new ListTGWAttachmentsParams object
+// NewNetworkServiceListTGWAttachmentsParamsWithHTTPClient creates a new NetworkServiceListTGWAttachmentsParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
-func NewListTGWAttachmentsParamsWithHTTPClient(client *http.Client) *ListTGWAttachmentsParams {
+func NewNetworkServiceListTGWAttachmentsParamsWithHTTPClient(client *http.Client) *NetworkServiceListTGWAttachmentsParams {
 	var ()
-	return &ListTGWAttachmentsParams{
+	return &NetworkServiceListTGWAttachmentsParams{
 		HTTPClient: client,
 	}
 }
 
-/*ListTGWAttachmentsParams contains all the parameters to send to the API endpoint
-for the list t g w attachments operation typically these are written to a http.Request
+/*NetworkServiceListTGWAttachmentsParams contains all the parameters to send to the API endpoint
+for the network service list t g w attachments operation typically these are written to a http.Request
 */
-type ListTGWAttachmentsParams struct {
+type NetworkServiceListTGWAttachmentsParams struct {
 
 	/*HvnDescription
 	  description is a human-friendly description for this link. This is
@@ -139,173 +139,173 @@ type ListTGWAttachmentsParams struct {
 	HTTPClient *http.Client
 }
 
-// WithTimeout adds the timeout to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithTimeout(timeout time.Duration) *ListTGWAttachmentsParams {
+// WithTimeout adds the timeout to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithTimeout(timeout time.Duration) *NetworkServiceListTGWAttachmentsParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetTimeout(timeout time.Duration) {
+// SetTimeout adds the timeout to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetTimeout(timeout time.Duration) {
 	o.timeout = timeout
 }
 
-// WithContext adds the context to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithContext(ctx context.Context) *ListTGWAttachmentsParams {
+// WithContext adds the context to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithContext(ctx context.Context) *NetworkServiceListTGWAttachmentsParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetContext(ctx context.Context) {
+// SetContext adds the context to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithHTTPClient(client *http.Client) *ListTGWAttachmentsParams {
+// WithHTTPClient adds the HTTPClient to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithHTTPClient(client *http.Client) *NetworkServiceListTGWAttachmentsParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetHTTPClient(client *http.Client) {
+// SetHTTPClient adds the HTTPClient to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithHvnDescription adds the hvnDescription to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithHvnDescription(hvnDescription *string) *ListTGWAttachmentsParams {
+// WithHvnDescription adds the hvnDescription to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithHvnDescription(hvnDescription *string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetHvnDescription(hvnDescription)
 	return o
 }
 
-// SetHvnDescription adds the hvnDescription to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetHvnDescription(hvnDescription *string) {
+// SetHvnDescription adds the hvnDescription to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetHvnDescription(hvnDescription *string) {
 	o.HvnDescription = hvnDescription
 }
 
-// WithHvnID adds the hvnID to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithHvnID(hvnID string) *ListTGWAttachmentsParams {
+// WithHvnID adds the hvnID to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithHvnID(hvnID string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetHvnID(hvnID)
 	return o
 }
 
-// SetHvnID adds the hvnId to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetHvnID(hvnID string) {
+// SetHvnID adds the hvnId to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetHvnID(hvnID string) {
 	o.HvnID = hvnID
 }
 
-// WithHvnLocationOrganizationID adds the hvnLocationOrganizationID to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithHvnLocationOrganizationID(hvnLocationOrganizationID string) *ListTGWAttachmentsParams {
+// WithHvnLocationOrganizationID adds the hvnLocationOrganizationID to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithHvnLocationOrganizationID(hvnLocationOrganizationID string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetHvnLocationOrganizationID(hvnLocationOrganizationID)
 	return o
 }
 
-// SetHvnLocationOrganizationID adds the hvnLocationOrganizationId to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetHvnLocationOrganizationID(hvnLocationOrganizationID string) {
+// SetHvnLocationOrganizationID adds the hvnLocationOrganizationId to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetHvnLocationOrganizationID(hvnLocationOrganizationID string) {
 	o.HvnLocationOrganizationID = hvnLocationOrganizationID
 }
 
-// WithHvnLocationProjectID adds the hvnLocationProjectID to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithHvnLocationProjectID(hvnLocationProjectID string) *ListTGWAttachmentsParams {
+// WithHvnLocationProjectID adds the hvnLocationProjectID to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithHvnLocationProjectID(hvnLocationProjectID string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetHvnLocationProjectID(hvnLocationProjectID)
 	return o
 }
 
-// SetHvnLocationProjectID adds the hvnLocationProjectId to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetHvnLocationProjectID(hvnLocationProjectID string) {
+// SetHvnLocationProjectID adds the hvnLocationProjectId to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetHvnLocationProjectID(hvnLocationProjectID string) {
 	o.HvnLocationProjectID = hvnLocationProjectID
 }
 
-// WithHvnLocationRegionProvider adds the hvnLocationRegionProvider to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithHvnLocationRegionProvider(hvnLocationRegionProvider *string) *ListTGWAttachmentsParams {
+// WithHvnLocationRegionProvider adds the hvnLocationRegionProvider to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithHvnLocationRegionProvider(hvnLocationRegionProvider *string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetHvnLocationRegionProvider(hvnLocationRegionProvider)
 	return o
 }
 
-// SetHvnLocationRegionProvider adds the hvnLocationRegionProvider to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetHvnLocationRegionProvider(hvnLocationRegionProvider *string) {
+// SetHvnLocationRegionProvider adds the hvnLocationRegionProvider to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetHvnLocationRegionProvider(hvnLocationRegionProvider *string) {
 	o.HvnLocationRegionProvider = hvnLocationRegionProvider
 }
 
-// WithHvnLocationRegionRegion adds the hvnLocationRegionRegion to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithHvnLocationRegionRegion(hvnLocationRegionRegion *string) *ListTGWAttachmentsParams {
+// WithHvnLocationRegionRegion adds the hvnLocationRegionRegion to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithHvnLocationRegionRegion(hvnLocationRegionRegion *string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetHvnLocationRegionRegion(hvnLocationRegionRegion)
 	return o
 }
 
-// SetHvnLocationRegionRegion adds the hvnLocationRegionRegion to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetHvnLocationRegionRegion(hvnLocationRegionRegion *string) {
+// SetHvnLocationRegionRegion adds the hvnLocationRegionRegion to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetHvnLocationRegionRegion(hvnLocationRegionRegion *string) {
 	o.HvnLocationRegionRegion = hvnLocationRegionRegion
 }
 
-// WithHvnType adds the hvnType to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithHvnType(hvnType *string) *ListTGWAttachmentsParams {
+// WithHvnType adds the hvnType to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithHvnType(hvnType *string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetHvnType(hvnType)
 	return o
 }
 
-// SetHvnType adds the hvnType to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetHvnType(hvnType *string) {
+// SetHvnType adds the hvnType to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetHvnType(hvnType *string) {
 	o.HvnType = hvnType
 }
 
-// WithHvnUUID adds the hvnUUID to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithHvnUUID(hvnUUID *string) *ListTGWAttachmentsParams {
+// WithHvnUUID adds the hvnUUID to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithHvnUUID(hvnUUID *string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetHvnUUID(hvnUUID)
 	return o
 }
 
-// SetHvnUUID adds the hvnUuid to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetHvnUUID(hvnUUID *string) {
+// SetHvnUUID adds the hvnUuid to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetHvnUUID(hvnUUID *string) {
 	o.HvnUUID = hvnUUID
 }
 
-// WithPaginationNextPageToken adds the paginationNextPageToken to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithPaginationNextPageToken(paginationNextPageToken *string) *ListTGWAttachmentsParams {
+// WithPaginationNextPageToken adds the paginationNextPageToken to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithPaginationNextPageToken(paginationNextPageToken *string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetPaginationNextPageToken(paginationNextPageToken)
 	return o
 }
 
-// SetPaginationNextPageToken adds the paginationNextPageToken to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
+// SetPaginationNextPageToken adds the paginationNextPageToken to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
 	o.PaginationNextPageToken = paginationNextPageToken
 }
 
-// WithPaginationPageSize adds the paginationPageSize to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithPaginationPageSize(paginationPageSize *int64) *ListTGWAttachmentsParams {
+// WithPaginationPageSize adds the paginationPageSize to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithPaginationPageSize(paginationPageSize *int64) *NetworkServiceListTGWAttachmentsParams {
 	o.SetPaginationPageSize(paginationPageSize)
 	return o
 }
 
-// SetPaginationPageSize adds the paginationPageSize to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetPaginationPageSize(paginationPageSize *int64) {
+// SetPaginationPageSize adds the paginationPageSize to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetPaginationPageSize(paginationPageSize *int64) {
 	o.PaginationPageSize = paginationPageSize
 }
 
-// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *ListTGWAttachmentsParams {
+// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetPaginationPreviousPageToken(paginationPreviousPageToken)
 	return o
 }
 
-// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
+// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
 	o.PaginationPreviousPageToken = paginationPreviousPageToken
 }
 
-// WithStates adds the states to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) WithStates(states []string) *ListTGWAttachmentsParams {
+// WithStates adds the states to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) WithStates(states []string) *NetworkServiceListTGWAttachmentsParams {
 	o.SetStates(states)
 	return o
 }
 
-// SetStates adds the states to the list t g w attachments params
-func (o *ListTGWAttachmentsParams) SetStates(states []string) {
+// SetStates adds the states to the network service list t g w attachments params
+func (o *NetworkServiceListTGWAttachmentsParams) SetStates(states []string) {
 	o.States = states
 }
 
 // WriteToRequest writes these params to a swagger request
-func (o *ListTGWAttachmentsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
+func (o *NetworkServiceListTGWAttachmentsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
 	if err := r.SetTimeout(o.timeout); err != nil {
 		return err

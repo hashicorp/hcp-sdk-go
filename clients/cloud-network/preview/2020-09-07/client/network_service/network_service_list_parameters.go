@@ -17,55 +17,50 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewListDependenciesParams creates a new ListDependenciesParams object
+// NewNetworkServiceListParams creates a new NetworkServiceListParams object
 // with the default values initialized.
-func NewListDependenciesParams() *ListDependenciesParams {
+func NewNetworkServiceListParams() *NetworkServiceListParams {
 	var ()
-	return &ListDependenciesParams{
+	return &NetworkServiceListParams{
 
 		timeout: cr.DefaultTimeout,
 	}
 }
 
-// NewListDependenciesParamsWithTimeout creates a new ListDependenciesParams object
+// NewNetworkServiceListParamsWithTimeout creates a new NetworkServiceListParams object
 // with the default values initialized, and the ability to set a timeout on a request
-func NewListDependenciesParamsWithTimeout(timeout time.Duration) *ListDependenciesParams {
+func NewNetworkServiceListParamsWithTimeout(timeout time.Duration) *NetworkServiceListParams {
 	var ()
-	return &ListDependenciesParams{
+	return &NetworkServiceListParams{
 
 		timeout: timeout,
 	}
 }
 
-// NewListDependenciesParamsWithContext creates a new ListDependenciesParams object
+// NewNetworkServiceListParamsWithContext creates a new NetworkServiceListParams object
 // with the default values initialized, and the ability to set a context for a request
-func NewListDependenciesParamsWithContext(ctx context.Context) *ListDependenciesParams {
+func NewNetworkServiceListParamsWithContext(ctx context.Context) *NetworkServiceListParams {
 	var ()
-	return &ListDependenciesParams{
+	return &NetworkServiceListParams{
 
 		Context: ctx,
 	}
 }
 
-// NewListDependenciesParamsWithHTTPClient creates a new ListDependenciesParams object
+// NewNetworkServiceListParamsWithHTTPClient creates a new NetworkServiceListParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
-func NewListDependenciesParamsWithHTTPClient(client *http.Client) *ListDependenciesParams {
+func NewNetworkServiceListParamsWithHTTPClient(client *http.Client) *NetworkServiceListParams {
 	var ()
-	return &ListDependenciesParams{
+	return &NetworkServiceListParams{
 		HTTPClient: client,
 	}
 }
 
-/*ListDependenciesParams contains all the parameters to send to the API endpoint
-for the list dependencies operation typically these are written to a http.Request
+/*NetworkServiceListParams contains all the parameters to send to the API endpoint
+for the network service list operation typically these are written to a http.Request
 */
-type ListDependenciesParams struct {
+type NetworkServiceListParams struct {
 
-	/*ID
-	  id the id of the HVN we are listing dependencies for.
-
-	*/
-	ID string
 	/*LocationOrganizationID
 	  organization_id is the id of the organization.
 
@@ -114,139 +109,123 @@ type ListDependenciesParams struct {
 	HTTPClient *http.Client
 }
 
-// WithTimeout adds the timeout to the list dependencies params
-func (o *ListDependenciesParams) WithTimeout(timeout time.Duration) *ListDependenciesParams {
+// WithTimeout adds the timeout to the network service list params
+func (o *NetworkServiceListParams) WithTimeout(timeout time.Duration) *NetworkServiceListParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the list dependencies params
-func (o *ListDependenciesParams) SetTimeout(timeout time.Duration) {
+// SetTimeout adds the timeout to the network service list params
+func (o *NetworkServiceListParams) SetTimeout(timeout time.Duration) {
 	o.timeout = timeout
 }
 
-// WithContext adds the context to the list dependencies params
-func (o *ListDependenciesParams) WithContext(ctx context.Context) *ListDependenciesParams {
+// WithContext adds the context to the network service list params
+func (o *NetworkServiceListParams) WithContext(ctx context.Context) *NetworkServiceListParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the list dependencies params
-func (o *ListDependenciesParams) SetContext(ctx context.Context) {
+// SetContext adds the context to the network service list params
+func (o *NetworkServiceListParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the list dependencies params
-func (o *ListDependenciesParams) WithHTTPClient(client *http.Client) *ListDependenciesParams {
+// WithHTTPClient adds the HTTPClient to the network service list params
+func (o *NetworkServiceListParams) WithHTTPClient(client *http.Client) *NetworkServiceListParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the list dependencies params
-func (o *ListDependenciesParams) SetHTTPClient(client *http.Client) {
+// SetHTTPClient adds the HTTPClient to the network service list params
+func (o *NetworkServiceListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithID adds the id to the list dependencies params
-func (o *ListDependenciesParams) WithID(id string) *ListDependenciesParams {
-	o.SetID(id)
-	return o
-}
-
-// SetID adds the id to the list dependencies params
-func (o *ListDependenciesParams) SetID(id string) {
-	o.ID = id
-}
-
-// WithLocationOrganizationID adds the locationOrganizationID to the list dependencies params
-func (o *ListDependenciesParams) WithLocationOrganizationID(locationOrganizationID string) *ListDependenciesParams {
+// WithLocationOrganizationID adds the locationOrganizationID to the network service list params
+func (o *NetworkServiceListParams) WithLocationOrganizationID(locationOrganizationID string) *NetworkServiceListParams {
 	o.SetLocationOrganizationID(locationOrganizationID)
 	return o
 }
 
-// SetLocationOrganizationID adds the locationOrganizationId to the list dependencies params
-func (o *ListDependenciesParams) SetLocationOrganizationID(locationOrganizationID string) {
+// SetLocationOrganizationID adds the locationOrganizationId to the network service list params
+func (o *NetworkServiceListParams) SetLocationOrganizationID(locationOrganizationID string) {
 	o.LocationOrganizationID = locationOrganizationID
 }
 
-// WithLocationProjectID adds the locationProjectID to the list dependencies params
-func (o *ListDependenciesParams) WithLocationProjectID(locationProjectID string) *ListDependenciesParams {
+// WithLocationProjectID adds the locationProjectID to the network service list params
+func (o *NetworkServiceListParams) WithLocationProjectID(locationProjectID string) *NetworkServiceListParams {
 	o.SetLocationProjectID(locationProjectID)
 	return o
 }
 
-// SetLocationProjectID adds the locationProjectId to the list dependencies params
-func (o *ListDependenciesParams) SetLocationProjectID(locationProjectID string) {
+// SetLocationProjectID adds the locationProjectId to the network service list params
+func (o *NetworkServiceListParams) SetLocationProjectID(locationProjectID string) {
 	o.LocationProjectID = locationProjectID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the list dependencies params
-func (o *ListDependenciesParams) WithLocationRegionProvider(locationRegionProvider *string) *ListDependenciesParams {
+// WithLocationRegionProvider adds the locationRegionProvider to the network service list params
+func (o *NetworkServiceListParams) WithLocationRegionProvider(locationRegionProvider *string) *NetworkServiceListParams {
 	o.SetLocationRegionProvider(locationRegionProvider)
 	return o
 }
 
-// SetLocationRegionProvider adds the locationRegionProvider to the list dependencies params
-func (o *ListDependenciesParams) SetLocationRegionProvider(locationRegionProvider *string) {
+// SetLocationRegionProvider adds the locationRegionProvider to the network service list params
+func (o *NetworkServiceListParams) SetLocationRegionProvider(locationRegionProvider *string) {
 	o.LocationRegionProvider = locationRegionProvider
 }
 
-// WithLocationRegionRegion adds the locationRegionRegion to the list dependencies params
-func (o *ListDependenciesParams) WithLocationRegionRegion(locationRegionRegion *string) *ListDependenciesParams {
+// WithLocationRegionRegion adds the locationRegionRegion to the network service list params
+func (o *NetworkServiceListParams) WithLocationRegionRegion(locationRegionRegion *string) *NetworkServiceListParams {
 	o.SetLocationRegionRegion(locationRegionRegion)
 	return o
 }
 
-// SetLocationRegionRegion adds the locationRegionRegion to the list dependencies params
-func (o *ListDependenciesParams) SetLocationRegionRegion(locationRegionRegion *string) {
+// SetLocationRegionRegion adds the locationRegionRegion to the network service list params
+func (o *NetworkServiceListParams) SetLocationRegionRegion(locationRegionRegion *string) {
 	o.LocationRegionRegion = locationRegionRegion
 }
 
-// WithPaginationNextPageToken adds the paginationNextPageToken to the list dependencies params
-func (o *ListDependenciesParams) WithPaginationNextPageToken(paginationNextPageToken *string) *ListDependenciesParams {
+// WithPaginationNextPageToken adds the paginationNextPageToken to the network service list params
+func (o *NetworkServiceListParams) WithPaginationNextPageToken(paginationNextPageToken *string) *NetworkServiceListParams {
 	o.SetPaginationNextPageToken(paginationNextPageToken)
 	return o
 }
 
-// SetPaginationNextPageToken adds the paginationNextPageToken to the list dependencies params
-func (o *ListDependenciesParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
+// SetPaginationNextPageToken adds the paginationNextPageToken to the network service list params
+func (o *NetworkServiceListParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
 	o.PaginationNextPageToken = paginationNextPageToken
 }
 
-// WithPaginationPageSize adds the paginationPageSize to the list dependencies params
-func (o *ListDependenciesParams) WithPaginationPageSize(paginationPageSize *int64) *ListDependenciesParams {
+// WithPaginationPageSize adds the paginationPageSize to the network service list params
+func (o *NetworkServiceListParams) WithPaginationPageSize(paginationPageSize *int64) *NetworkServiceListParams {
 	o.SetPaginationPageSize(paginationPageSize)
 	return o
 }
 
-// SetPaginationPageSize adds the paginationPageSize to the list dependencies params
-func (o *ListDependenciesParams) SetPaginationPageSize(paginationPageSize *int64) {
+// SetPaginationPageSize adds the paginationPageSize to the network service list params
+func (o *NetworkServiceListParams) SetPaginationPageSize(paginationPageSize *int64) {
 	o.PaginationPageSize = paginationPageSize
 }
 
-// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the list dependencies params
-func (o *ListDependenciesParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *ListDependenciesParams {
+// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the network service list params
+func (o *NetworkServiceListParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *NetworkServiceListParams {
 	o.SetPaginationPreviousPageToken(paginationPreviousPageToken)
 	return o
 }
 
-// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the list dependencies params
-func (o *ListDependenciesParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
+// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the network service list params
+func (o *NetworkServiceListParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
 	o.PaginationPreviousPageToken = paginationPreviousPageToken
 }
 
 // WriteToRequest writes these params to a swagger request
-func (o *ListDependenciesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
+func (o *NetworkServiceListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
 	if err := r.SetTimeout(o.timeout); err != nil {
 		return err
 	}
 	var res []error
-
-	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
-		return err
-	}
 
 	// path param location.organization_id
 	if err := r.SetPathParam("location.organization_id", o.LocationOrganizationID); err != nil {
