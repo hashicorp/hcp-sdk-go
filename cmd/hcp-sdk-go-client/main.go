@@ -28,11 +28,11 @@ func main() {
 
 	// Exercise the versioned clients via a single http client,
 	// rather than initializing a new http client per service.
-	listParams := network.NewNetworkServiceListParams()
+	listParams := network.NewListParams()
 	listParams.LocationOrganizationID = orgID
 	listParams.LocationProjectID = projID
 
-	resp, err := networkClient.NetworkServiceList(listParams, nil)
+	resp, err := networkClient.List(listParams, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -42,11 +42,11 @@ func main() {
 		fmt.Printf("Response: %#v\n\n", resp.Payload)
 	}
 
-	listParams2 := consul.NewConsulServiceListParams()
+	listParams2 := consul.NewListParams()
 	listParams2.LocationOrganizationID = orgID
 	listParams2.LocationProjectID = projID
 
-	resp2, err := consulClient.ConsulServiceList(listParams2, nil)
+	resp2, err := consulClient.List(listParams2, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -55,15 +55,4 @@ func main() {
 	} else {
 		fmt.Printf("Response: %#v\n\n", resp2.Payload)
 	}
-
-	// getParams := consul.NewConsulServiceGetParams()
-	// getParams.LocationOrganizationID = orgID
-	// getParams.LocationProjectID = projID
-	// getParams.ID := "not-found"
-
-	// resp3, err := consulClient.ConsulServiceGet(getParams, nil)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Printf("Response: %#v\n\n", resp3.Payload)
 }
