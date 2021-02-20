@@ -17,49 +17,49 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewNetworkServiceListPeeringsParams creates a new NetworkServiceListPeeringsParams object
+// NewListPeeringsParams creates a new ListPeeringsParams object
 // with the default values initialized.
-func NewNetworkServiceListPeeringsParams() *NetworkServiceListPeeringsParams {
+func NewListPeeringsParams() *ListPeeringsParams {
 	var ()
-	return &NetworkServiceListPeeringsParams{
+	return &ListPeeringsParams{
 
 		timeout: cr.DefaultTimeout,
 	}
 }
 
-// NewNetworkServiceListPeeringsParamsWithTimeout creates a new NetworkServiceListPeeringsParams object
+// NewListPeeringsParamsWithTimeout creates a new ListPeeringsParams object
 // with the default values initialized, and the ability to set a timeout on a request
-func NewNetworkServiceListPeeringsParamsWithTimeout(timeout time.Duration) *NetworkServiceListPeeringsParams {
+func NewListPeeringsParamsWithTimeout(timeout time.Duration) *ListPeeringsParams {
 	var ()
-	return &NetworkServiceListPeeringsParams{
+	return &ListPeeringsParams{
 
 		timeout: timeout,
 	}
 }
 
-// NewNetworkServiceListPeeringsParamsWithContext creates a new NetworkServiceListPeeringsParams object
+// NewListPeeringsParamsWithContext creates a new ListPeeringsParams object
 // with the default values initialized, and the ability to set a context for a request
-func NewNetworkServiceListPeeringsParamsWithContext(ctx context.Context) *NetworkServiceListPeeringsParams {
+func NewListPeeringsParamsWithContext(ctx context.Context) *ListPeeringsParams {
 	var ()
-	return &NetworkServiceListPeeringsParams{
+	return &ListPeeringsParams{
 
 		Context: ctx,
 	}
 }
 
-// NewNetworkServiceListPeeringsParamsWithHTTPClient creates a new NetworkServiceListPeeringsParams object
+// NewListPeeringsParamsWithHTTPClient creates a new ListPeeringsParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
-func NewNetworkServiceListPeeringsParamsWithHTTPClient(client *http.Client) *NetworkServiceListPeeringsParams {
+func NewListPeeringsParamsWithHTTPClient(client *http.Client) *ListPeeringsParams {
 	var ()
-	return &NetworkServiceListPeeringsParams{
+	return &ListPeeringsParams{
 		HTTPClient: client,
 	}
 }
 
-/*NetworkServiceListPeeringsParams contains all the parameters to send to the API endpoint
-for the network service list peerings operation typically these are written to a http.Request
+/*ListPeeringsParams contains all the parameters to send to the API endpoint
+for the list peerings operation typically these are written to a http.Request
 */
-type NetworkServiceListPeeringsParams struct {
+type ListPeeringsParams struct {
 
 	/*HvnID
 	  HvnId is an id of the HVN we are listing peerings for
@@ -114,129 +114,129 @@ type NetworkServiceListPeeringsParams struct {
 	HTTPClient *http.Client
 }
 
-// WithTimeout adds the timeout to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithTimeout(timeout time.Duration) *NetworkServiceListPeeringsParams {
+// WithTimeout adds the timeout to the list peerings params
+func (o *ListPeeringsParams) WithTimeout(timeout time.Duration) *ListPeeringsParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetTimeout(timeout time.Duration) {
+// SetTimeout adds the timeout to the list peerings params
+func (o *ListPeeringsParams) SetTimeout(timeout time.Duration) {
 	o.timeout = timeout
 }
 
-// WithContext adds the context to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithContext(ctx context.Context) *NetworkServiceListPeeringsParams {
+// WithContext adds the context to the list peerings params
+func (o *ListPeeringsParams) WithContext(ctx context.Context) *ListPeeringsParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetContext(ctx context.Context) {
+// SetContext adds the context to the list peerings params
+func (o *ListPeeringsParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithHTTPClient(client *http.Client) *NetworkServiceListPeeringsParams {
+// WithHTTPClient adds the HTTPClient to the list peerings params
+func (o *ListPeeringsParams) WithHTTPClient(client *http.Client) *ListPeeringsParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetHTTPClient(client *http.Client) {
+// SetHTTPClient adds the HTTPClient to the list peerings params
+func (o *ListPeeringsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithHvnID adds the hvnID to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithHvnID(hvnID string) *NetworkServiceListPeeringsParams {
+// WithHvnID adds the hvnID to the list peerings params
+func (o *ListPeeringsParams) WithHvnID(hvnID string) *ListPeeringsParams {
 	o.SetHvnID(hvnID)
 	return o
 }
 
-// SetHvnID adds the hvnId to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetHvnID(hvnID string) {
+// SetHvnID adds the hvnId to the list peerings params
+func (o *ListPeeringsParams) SetHvnID(hvnID string) {
 	o.HvnID = hvnID
 }
 
-// WithLocationOrganizationID adds the locationOrganizationID to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithLocationOrganizationID(locationOrganizationID string) *NetworkServiceListPeeringsParams {
+// WithLocationOrganizationID adds the locationOrganizationID to the list peerings params
+func (o *ListPeeringsParams) WithLocationOrganizationID(locationOrganizationID string) *ListPeeringsParams {
 	o.SetLocationOrganizationID(locationOrganizationID)
 	return o
 }
 
-// SetLocationOrganizationID adds the locationOrganizationId to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetLocationOrganizationID(locationOrganizationID string) {
+// SetLocationOrganizationID adds the locationOrganizationId to the list peerings params
+func (o *ListPeeringsParams) SetLocationOrganizationID(locationOrganizationID string) {
 	o.LocationOrganizationID = locationOrganizationID
 }
 
-// WithLocationProjectID adds the locationProjectID to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithLocationProjectID(locationProjectID string) *NetworkServiceListPeeringsParams {
+// WithLocationProjectID adds the locationProjectID to the list peerings params
+func (o *ListPeeringsParams) WithLocationProjectID(locationProjectID string) *ListPeeringsParams {
 	o.SetLocationProjectID(locationProjectID)
 	return o
 }
 
-// SetLocationProjectID adds the locationProjectId to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetLocationProjectID(locationProjectID string) {
+// SetLocationProjectID adds the locationProjectId to the list peerings params
+func (o *ListPeeringsParams) SetLocationProjectID(locationProjectID string) {
 	o.LocationProjectID = locationProjectID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithLocationRegionProvider(locationRegionProvider *string) *NetworkServiceListPeeringsParams {
+// WithLocationRegionProvider adds the locationRegionProvider to the list peerings params
+func (o *ListPeeringsParams) WithLocationRegionProvider(locationRegionProvider *string) *ListPeeringsParams {
 	o.SetLocationRegionProvider(locationRegionProvider)
 	return o
 }
 
-// SetLocationRegionProvider adds the locationRegionProvider to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetLocationRegionProvider(locationRegionProvider *string) {
+// SetLocationRegionProvider adds the locationRegionProvider to the list peerings params
+func (o *ListPeeringsParams) SetLocationRegionProvider(locationRegionProvider *string) {
 	o.LocationRegionProvider = locationRegionProvider
 }
 
-// WithLocationRegionRegion adds the locationRegionRegion to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithLocationRegionRegion(locationRegionRegion *string) *NetworkServiceListPeeringsParams {
+// WithLocationRegionRegion adds the locationRegionRegion to the list peerings params
+func (o *ListPeeringsParams) WithLocationRegionRegion(locationRegionRegion *string) *ListPeeringsParams {
 	o.SetLocationRegionRegion(locationRegionRegion)
 	return o
 }
 
-// SetLocationRegionRegion adds the locationRegionRegion to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetLocationRegionRegion(locationRegionRegion *string) {
+// SetLocationRegionRegion adds the locationRegionRegion to the list peerings params
+func (o *ListPeeringsParams) SetLocationRegionRegion(locationRegionRegion *string) {
 	o.LocationRegionRegion = locationRegionRegion
 }
 
-// WithPaginationNextPageToken adds the paginationNextPageToken to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithPaginationNextPageToken(paginationNextPageToken *string) *NetworkServiceListPeeringsParams {
+// WithPaginationNextPageToken adds the paginationNextPageToken to the list peerings params
+func (o *ListPeeringsParams) WithPaginationNextPageToken(paginationNextPageToken *string) *ListPeeringsParams {
 	o.SetPaginationNextPageToken(paginationNextPageToken)
 	return o
 }
 
-// SetPaginationNextPageToken adds the paginationNextPageToken to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
+// SetPaginationNextPageToken adds the paginationNextPageToken to the list peerings params
+func (o *ListPeeringsParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
 	o.PaginationNextPageToken = paginationNextPageToken
 }
 
-// WithPaginationPageSize adds the paginationPageSize to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithPaginationPageSize(paginationPageSize *int64) *NetworkServiceListPeeringsParams {
+// WithPaginationPageSize adds the paginationPageSize to the list peerings params
+func (o *ListPeeringsParams) WithPaginationPageSize(paginationPageSize *int64) *ListPeeringsParams {
 	o.SetPaginationPageSize(paginationPageSize)
 	return o
 }
 
-// SetPaginationPageSize adds the paginationPageSize to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetPaginationPageSize(paginationPageSize *int64) {
+// SetPaginationPageSize adds the paginationPageSize to the list peerings params
+func (o *ListPeeringsParams) SetPaginationPageSize(paginationPageSize *int64) {
 	o.PaginationPageSize = paginationPageSize
 }
 
-// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *NetworkServiceListPeeringsParams {
+// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the list peerings params
+func (o *ListPeeringsParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *ListPeeringsParams {
 	o.SetPaginationPreviousPageToken(paginationPreviousPageToken)
 	return o
 }
 
-// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the network service list peerings params
-func (o *NetworkServiceListPeeringsParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
+// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the list peerings params
+func (o *ListPeeringsParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
 	o.PaginationPreviousPageToken = paginationPreviousPageToken
 }
 
 // WriteToRequest writes these params to a swagger request
-func (o *NetworkServiceListPeeringsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
+func (o *ListPeeringsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
 	if err := r.SetTimeout(o.timeout); err != nil {
 		return err

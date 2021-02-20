@@ -25,55 +25,55 @@ type Client struct {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZone(params *NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneOK, error)
+	AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter) (*AssociateHVNWithAWSRoute53PrivateHostedZoneOK, error)
 
-	NetworkServiceCreate(params *NetworkServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreateOK, error)
+	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error)
 
-	NetworkServiceCreatePeering(params *NetworkServiceCreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreatePeeringOK, error)
+	CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePeeringOK, error)
 
-	NetworkServiceCreateTGWAttachment(params *NetworkServiceCreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreateTGWAttachmentOK, error)
+	CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*CreateTGWAttachmentOK, error)
 
-	NetworkServiceDelete(params *NetworkServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeleteOK, error)
+	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error)
 
-	NetworkServiceDeletePeering(params *NetworkServiceDeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeletePeeringOK, error)
+	DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePeeringOK, error)
 
-	NetworkServiceDeleteTGWAttachment(params *NetworkServiceDeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeleteTGWAttachmentOK, error)
+	DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTGWAttachmentOK, error)
 
-	NetworkServiceGet(params *NetworkServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetOK, error)
+	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
 
-	NetworkServiceGetPeering(params *NetworkServiceGetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetPeeringOK, error)
+	GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*GetPeeringOK, error)
 
-	NetworkServiceGetTGWAttachment(params *NetworkServiceGetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetTGWAttachmentOK, error)
+	GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*GetTGWAttachmentOK, error)
 
-	NetworkServiceList(params *NetworkServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListOK, error)
+	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
 
-	NetworkServiceListDependencies(params *NetworkServiceListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListDependenciesOK, error)
+	ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*ListDependenciesOK, error)
 
-	NetworkServiceListPeerings(params *NetworkServiceListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListPeeringsOK, error)
+	ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPeeringsOK, error)
 
-	NetworkServiceListTGWAttachments(params *NetworkServiceListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListTGWAttachmentsOK, error)
+	ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTGWAttachmentsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZone associates h v n with a w s route53 private hosted zone will associate the h v n s v p c with a user s private hosted zone in a w s route53 this will enable the resolution of records of the private hosted zone from within the v p c
+  AssociateHVNWithAWSRoute53PrivateHostedZone associates h v n with a w s route53 private hosted zone will associate the h v n s v p c with a user s private hosted zone in a w s route53 this will enable the resolution of records of the private hosted zone from within the v p c
 */
-func (a *Client) NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZone(params *NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneOK, error) {
+func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter) (*AssociateHVNWithAWSRoute53PrivateHostedZoneOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneParams()
+		params = NewAssociateHVNWithAWSRoute53PrivateHostedZoneParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_AssociateHVNWithAWSRoute53PrivateHostedZone",
+		ID:                 "AssociateHVNWithAWSRoute53PrivateHostedZone",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneReader{formats: a.formats},
+		Reader:             &AssociateHVNWithAWSRoute53PrivateHostedZoneReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -81,33 +81,33 @@ func (a *Client) NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZone(param
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneOK)
+	success, ok := result.(*AssociateHVNWithAWSRoute53PrivateHostedZoneOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceAssociateHVNWithAWSRoute53PrivateHostedZoneDefault)
+	unexpectedSuccess := result.(*AssociateHVNWithAWSRoute53PrivateHostedZoneDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceCreate creates creates a new h v n
+  Create creates creates a new h v n
 */
-func (a *Client) NetworkServiceCreate(params *NetworkServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreateOK, error) {
+func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceCreateParams()
+		params = NewCreateParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_Create",
+		ID:                 "Create",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceCreateReader{formats: a.formats},
+		Reader:             &CreateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -115,33 +115,33 @@ func (a *Client) NetworkServiceCreate(params *NetworkServiceCreateParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceCreateOK)
+	success, ok := result.(*CreateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceCreateDefault)
+	unexpectedSuccess := result.(*CreateDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceCreatePeering creates peering creates a new network peering between h v n v p c and target v p c
+  CreatePeering creates peering creates a new network peering between h v n v p c and target v p c
 */
-func (a *Client) NetworkServiceCreatePeering(params *NetworkServiceCreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreatePeeringOK, error) {
+func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePeeringOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceCreatePeeringParams()
+		params = NewCreatePeeringParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_CreatePeering",
+		ID:                 "CreatePeering",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceCreatePeeringReader{formats: a.formats},
+		Reader:             &CreatePeeringReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -149,33 +149,33 @@ func (a *Client) NetworkServiceCreatePeering(params *NetworkServiceCreatePeering
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceCreatePeeringOK)
+	success, ok := result.(*CreatePeeringOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceCreatePeeringDefault)
+	unexpectedSuccess := result.(*CreatePeeringDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceCreateTGWAttachment creates t g w attachment creates a new transit gateway attachment for an h v n
+  CreateTGWAttachment creates t g w attachment creates a new transit gateway attachment for an h v n
 */
-func (a *Client) NetworkServiceCreateTGWAttachment(params *NetworkServiceCreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceCreateTGWAttachmentOK, error) {
+func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*CreateTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceCreateTGWAttachmentParams()
+		params = NewCreateTGWAttachmentParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_CreateTGWAttachment",
+		ID:                 "CreateTGWAttachment",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceCreateTGWAttachmentReader{formats: a.formats},
+		Reader:             &CreateTGWAttachmentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -183,33 +183,33 @@ func (a *Client) NetworkServiceCreateTGWAttachment(params *NetworkServiceCreateT
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceCreateTGWAttachmentOK)
+	success, ok := result.(*CreateTGWAttachmentOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceCreateTGWAttachmentDefault)
+	unexpectedSuccess := result.(*CreateTGWAttachmentDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceDelete deletes deletes a new h v n
+  Delete deletes deletes a new h v n
 */
-func (a *Client) NetworkServiceDelete(params *NetworkServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeleteOK, error) {
+func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceDeleteParams()
+		params = NewDeleteParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_Delete",
+		ID:                 "Delete",
 		Method:             "DELETE",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceDeleteReader{formats: a.formats},
+		Reader:             &DeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -217,33 +217,33 @@ func (a *Client) NetworkServiceDelete(params *NetworkServiceDeleteParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceDeleteOK)
+	success, ok := result.(*DeleteOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceDeleteDefault)
+	unexpectedSuccess := result.(*DeleteDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceDeletePeering deletes peering deletes specified peering and triggers updating network configuration
+  DeletePeering deletes peering deletes specified peering and triggers updating network configuration
 */
-func (a *Client) NetworkServiceDeletePeering(params *NetworkServiceDeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeletePeeringOK, error) {
+func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePeeringOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceDeletePeeringParams()
+		params = NewDeletePeeringParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_DeletePeering",
+		ID:                 "DeletePeering",
 		Method:             "DELETE",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceDeletePeeringReader{formats: a.formats},
+		Reader:             &DeletePeeringReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -251,33 +251,33 @@ func (a *Client) NetworkServiceDeletePeering(params *NetworkServiceDeletePeering
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceDeletePeeringOK)
+	success, ok := result.(*DeletePeeringOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceDeletePeeringDefault)
+	unexpectedSuccess := result.(*DeletePeeringDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceDeleteTGWAttachment deletes t g w attachment deletes specified transit gateway attachment and triggers updating network configuration
+  DeleteTGWAttachment deletes t g w attachment deletes specified transit gateway attachment and triggers updating network configuration
 */
-func (a *Client) NetworkServiceDeleteTGWAttachment(params *NetworkServiceDeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceDeleteTGWAttachmentOK, error) {
+func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceDeleteTGWAttachmentParams()
+		params = NewDeleteTGWAttachmentParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_DeleteTGWAttachment",
+		ID:                 "DeleteTGWAttachment",
 		Method:             "DELETE",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceDeleteTGWAttachmentReader{formats: a.formats},
+		Reader:             &DeleteTGWAttachmentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -285,33 +285,33 @@ func (a *Client) NetworkServiceDeleteTGWAttachment(params *NetworkServiceDeleteT
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceDeleteTGWAttachmentOK)
+	success, ok := result.(*DeleteTGWAttachmentOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceDeleteTGWAttachmentDefault)
+	unexpectedSuccess := result.(*DeleteTGWAttachmentDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceGet gets reads a single h v n
+  Get gets reads a single h v n
 */
-func (a *Client) NetworkServiceGet(params *NetworkServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetOK, error) {
+func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceGetParams()
+		params = NewGetParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_Get",
+		ID:                 "Get",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceGetReader{formats: a.formats},
+		Reader:             &GetReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -319,33 +319,33 @@ func (a *Client) NetworkServiceGet(params *NetworkServiceGetParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceGetOK)
+	success, ok := result.(*GetOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceGetDefault)
+	unexpectedSuccess := result.(*GetDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceGetPeering gets peering returns information about peering
+  GetPeering gets peering returns information about peering
 */
-func (a *Client) NetworkServiceGetPeering(params *NetworkServiceGetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetPeeringOK, error) {
+func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*GetPeeringOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceGetPeeringParams()
+		params = NewGetPeeringParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_GetPeering",
+		ID:                 "GetPeering",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceGetPeeringReader{formats: a.formats},
+		Reader:             &GetPeeringReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -353,33 +353,33 @@ func (a *Client) NetworkServiceGetPeering(params *NetworkServiceGetPeeringParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceGetPeeringOK)
+	success, ok := result.(*GetPeeringOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceGetPeeringDefault)
+	unexpectedSuccess := result.(*GetPeeringDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceGetTGWAttachment gets t g w attachment returns existing t g w attachment
+  GetTGWAttachment gets t g w attachment returns existing t g w attachment
 */
-func (a *Client) NetworkServiceGetTGWAttachment(params *NetworkServiceGetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceGetTGWAttachmentOK, error) {
+func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*GetTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceGetTGWAttachmentParams()
+		params = NewGetTGWAttachmentParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_GetTGWAttachment",
+		ID:                 "GetTGWAttachment",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceGetTGWAttachmentReader{formats: a.formats},
+		Reader:             &GetTGWAttachmentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -387,33 +387,33 @@ func (a *Client) NetworkServiceGetTGWAttachment(params *NetworkServiceGetTGWAtta
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceGetTGWAttachmentOK)
+	success, ok := result.(*GetTGWAttachmentOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceGetTGWAttachmentDefault)
+	unexpectedSuccess := result.(*GetTGWAttachmentDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceList lists lists all h v ns
+  List lists lists all h v ns
 */
-func (a *Client) NetworkServiceList(params *NetworkServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListOK, error) {
+func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceListParams()
+		params = NewListParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_List",
+		ID:                 "List",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceListReader{formats: a.formats},
+		Reader:             &ListReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -421,33 +421,33 @@ func (a *Client) NetworkServiceList(params *NetworkServiceListParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceListOK)
+	success, ok := result.(*ListOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceListDefault)
+	unexpectedSuccess := result.(*ListDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceListDependencies lists dependencies lists the dependent services on the given h v n
+  ListDependencies lists dependencies lists the dependent services on the given h v n
 */
-func (a *Client) NetworkServiceListDependencies(params *NetworkServiceListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListDependenciesOK, error) {
+func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*ListDependenciesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceListDependenciesParams()
+		params = NewListDependenciesParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_ListDependencies",
+		ID:                 "ListDependencies",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceListDependenciesReader{formats: a.formats},
+		Reader:             &ListDependenciesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -455,33 +455,33 @@ func (a *Client) NetworkServiceListDependencies(params *NetworkServiceListDepend
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceListDependenciesOK)
+	success, ok := result.(*ListDependenciesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceListDependenciesDefault)
+	unexpectedSuccess := result.(*ListDependenciesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceListPeerings lists peerings returns a list of peerings matching the request
+  ListPeerings lists peerings returns a list of peerings matching the request
 */
-func (a *Client) NetworkServiceListPeerings(params *NetworkServiceListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListPeeringsOK, error) {
+func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPeeringsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceListPeeringsParams()
+		params = NewListPeeringsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_ListPeerings",
+		ID:                 "ListPeerings",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceListPeeringsReader{formats: a.formats},
+		Reader:             &ListPeeringsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -489,33 +489,33 @@ func (a *Client) NetworkServiceListPeerings(params *NetworkServiceListPeeringsPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceListPeeringsOK)
+	success, ok := result.(*ListPeeringsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceListPeeringsDefault)
+	unexpectedSuccess := result.(*ListPeeringsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  NetworkServiceListTGWAttachments lists t g w attachments returns a list of t g w attachments matching the request
+  ListTGWAttachments lists t g w attachments returns a list of t g w attachments matching the request
 */
-func (a *Client) NetworkServiceListTGWAttachments(params *NetworkServiceListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkServiceListTGWAttachmentsOK, error) {
+func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTGWAttachmentsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewNetworkServiceListTGWAttachmentsParams()
+		params = NewListTGWAttachmentsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "NetworkService_ListTGWAttachments",
+		ID:                 "ListTGWAttachments",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &NetworkServiceListTGWAttachmentsReader{formats: a.formats},
+		Reader:             &ListTGWAttachmentsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -523,12 +523,12 @@ func (a *Client) NetworkServiceListTGWAttachments(params *NetworkServiceListTGWA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*NetworkServiceListTGWAttachmentsOK)
+	success, ok := result.(*ListTGWAttachmentsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*NetworkServiceListTGWAttachmentsDefault)
+	unexpectedSuccess := result.(*ListTGWAttachmentsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
