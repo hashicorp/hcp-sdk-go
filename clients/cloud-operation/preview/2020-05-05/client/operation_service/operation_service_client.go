@@ -25,37 +25,37 @@ type Client struct {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	OperationServiceGet(params *OperationServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceGetOK, error)
+	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
 
-	OperationServiceList(params *OperationServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceListOK, error)
+	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
 
-	OperationServiceWait(params *OperationServiceWaitParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceWaitOK, error)
+	Wait(params *WaitParams, authInfo runtime.ClientAuthInfoWriter) (*WaitOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  OperationServiceGet gets returns the latest state of a specific operation
+  Get gets returns the latest state of a specific operation
 
   The Location's organization and project IDs are included in the path in
 order to support RBAC checks. We perform RBAC checks early in the request
 lifecycle, before loading the resource targeted by the request.
 */
-func (a *Client) OperationServiceGet(params *OperationServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceGetOK, error) {
+func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewOperationServiceGetParams()
+		params = NewGetParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "OperationService_Get",
+		ID:                 "Get",
 		Method:             "GET",
 		PathPattern:        "/operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &OperationServiceGetReader{formats: a.formats},
+		Reader:             &GetReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -63,33 +63,33 @@ func (a *Client) OperationServiceGet(params *OperationServiceGetParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*OperationServiceGetOK)
+	success, ok := result.(*GetOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*OperationServiceGetDefault)
+	unexpectedSuccess := result.(*GetDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  OperationServiceList lists selects a list of operations that match some filters and then returns them in the response the supported filters are the location s organization id and project id the project id supports the special value to allow requesting operations that match any project within the organization
+  List lists selects a list of operations that match some filters and then returns them in the response the supported filters are the location s organization id and project id the project id supports the special value to allow requesting operations that match any project within the organization
 */
-func (a *Client) OperationServiceList(params *OperationServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceListOK, error) {
+func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewOperationServiceListParams()
+		params = NewListParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "OperationService_List",
+		ID:                 "List",
 		Method:             "GET",
 		PathPattern:        "/operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &OperationServiceListReader{formats: a.formats},
+		Reader:             &ListReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -97,17 +97,17 @@ func (a *Client) OperationServiceList(params *OperationServiceListParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*OperationServiceListOK)
+	success, ok := result.(*ListOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*OperationServiceListDefault)
+	unexpectedSuccess := result.(*ListDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  OperationServiceWait waits blocks until an operation is d o n e or a timeout is reached whichever occurs first it then returns the latest state of the operation that it had at the time of the timeout
+  Wait waits blocks until an operation is d o n e or a timeout is reached whichever occurs first it then returns the latest state of the operation that it had at the time of the timeout
 
   Note that Wait may return at any time. In most cases, the timeout will
 be respected but it is not guaranteed. Therefore, clients should always
@@ -118,21 +118,21 @@ The Location's organization and project IDs are included in the path in
 order to support RBAC checks. We perform RBAC checks early in the request
 lifecycle, before loading the resource targeted by the request.
 */
-func (a *Client) OperationServiceWait(params *OperationServiceWaitParams, authInfo runtime.ClientAuthInfoWriter) (*OperationServiceWaitOK, error) {
+func (a *Client) Wait(params *WaitParams, authInfo runtime.ClientAuthInfoWriter) (*WaitOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewOperationServiceWaitParams()
+		params = NewWaitParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "OperationService_Wait",
+		ID:                 "Wait",
 		Method:             "GET",
 		PathPattern:        "/operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &OperationServiceWaitReader{formats: a.formats},
+		Reader:             &WaitReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -140,12 +140,12 @@ func (a *Client) OperationServiceWait(params *OperationServiceWaitParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*OperationServiceWaitOK)
+	success, ok := result.(*WaitOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*OperationServiceWaitDefault)
+	unexpectedSuccess := result.(*WaitDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

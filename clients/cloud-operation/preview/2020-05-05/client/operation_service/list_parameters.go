@@ -17,49 +17,49 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewOperationServiceListParams creates a new OperationServiceListParams object
+// NewListParams creates a new ListParams object
 // with the default values initialized.
-func NewOperationServiceListParams() *OperationServiceListParams {
+func NewListParams() *ListParams {
 	var ()
-	return &OperationServiceListParams{
+	return &ListParams{
 
 		timeout: cr.DefaultTimeout,
 	}
 }
 
-// NewOperationServiceListParamsWithTimeout creates a new OperationServiceListParams object
+// NewListParamsWithTimeout creates a new ListParams object
 // with the default values initialized, and the ability to set a timeout on a request
-func NewOperationServiceListParamsWithTimeout(timeout time.Duration) *OperationServiceListParams {
+func NewListParamsWithTimeout(timeout time.Duration) *ListParams {
 	var ()
-	return &OperationServiceListParams{
+	return &ListParams{
 
 		timeout: timeout,
 	}
 }
 
-// NewOperationServiceListParamsWithContext creates a new OperationServiceListParams object
+// NewListParamsWithContext creates a new ListParams object
 // with the default values initialized, and the ability to set a context for a request
-func NewOperationServiceListParamsWithContext(ctx context.Context) *OperationServiceListParams {
+func NewListParamsWithContext(ctx context.Context) *ListParams {
 	var ()
-	return &OperationServiceListParams{
+	return &ListParams{
 
 		Context: ctx,
 	}
 }
 
-// NewOperationServiceListParamsWithHTTPClient creates a new OperationServiceListParams object
+// NewListParamsWithHTTPClient creates a new ListParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
-func NewOperationServiceListParamsWithHTTPClient(client *http.Client) *OperationServiceListParams {
+func NewListParamsWithHTTPClient(client *http.Client) *ListParams {
 	var ()
-	return &OperationServiceListParams{
+	return &ListParams{
 		HTTPClient: client,
 	}
 }
 
-/*OperationServiceListParams contains all the parameters to send to the API endpoint
-for the operation service list operation typically these are written to a http.Request
+/*ListParams contains all the parameters to send to the API endpoint
+for the list operation typically these are written to a http.Request
 */
-type OperationServiceListParams struct {
+type ListParams struct {
 
 	/*LinkedResourceDescription
 	  description is a human-friendly description for this link. This is
@@ -143,184 +143,184 @@ type OperationServiceListParams struct {
 	HTTPClient *http.Client
 }
 
-// WithTimeout adds the timeout to the operation service list params
-func (o *OperationServiceListParams) WithTimeout(timeout time.Duration) *OperationServiceListParams {
+// WithTimeout adds the timeout to the list params
+func (o *ListParams) WithTimeout(timeout time.Duration) *ListParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the operation service list params
-func (o *OperationServiceListParams) SetTimeout(timeout time.Duration) {
+// SetTimeout adds the timeout to the list params
+func (o *ListParams) SetTimeout(timeout time.Duration) {
 	o.timeout = timeout
 }
 
-// WithContext adds the context to the operation service list params
-func (o *OperationServiceListParams) WithContext(ctx context.Context) *OperationServiceListParams {
+// WithContext adds the context to the list params
+func (o *ListParams) WithContext(ctx context.Context) *ListParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the operation service list params
-func (o *OperationServiceListParams) SetContext(ctx context.Context) {
+// SetContext adds the context to the list params
+func (o *ListParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the operation service list params
-func (o *OperationServiceListParams) WithHTTPClient(client *http.Client) *OperationServiceListParams {
+// WithHTTPClient adds the HTTPClient to the list params
+func (o *ListParams) WithHTTPClient(client *http.Client) *ListParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the operation service list params
-func (o *OperationServiceListParams) SetHTTPClient(client *http.Client) {
+// SetHTTPClient adds the HTTPClient to the list params
+func (o *ListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithLinkedResourceDescription adds the linkedResourceDescription to the operation service list params
-func (o *OperationServiceListParams) WithLinkedResourceDescription(linkedResourceDescription *string) *OperationServiceListParams {
+// WithLinkedResourceDescription adds the linkedResourceDescription to the list params
+func (o *ListParams) WithLinkedResourceDescription(linkedResourceDescription *string) *ListParams {
 	o.SetLinkedResourceDescription(linkedResourceDescription)
 	return o
 }
 
-// SetLinkedResourceDescription adds the linkedResourceDescription to the operation service list params
-func (o *OperationServiceListParams) SetLinkedResourceDescription(linkedResourceDescription *string) {
+// SetLinkedResourceDescription adds the linkedResourceDescription to the list params
+func (o *ListParams) SetLinkedResourceDescription(linkedResourceDescription *string) {
 	o.LinkedResourceDescription = linkedResourceDescription
 }
 
-// WithLinkedResourceID adds the linkedResourceID to the operation service list params
-func (o *OperationServiceListParams) WithLinkedResourceID(linkedResourceID *string) *OperationServiceListParams {
+// WithLinkedResourceID adds the linkedResourceID to the list params
+func (o *ListParams) WithLinkedResourceID(linkedResourceID *string) *ListParams {
 	o.SetLinkedResourceID(linkedResourceID)
 	return o
 }
 
-// SetLinkedResourceID adds the linkedResourceId to the operation service list params
-func (o *OperationServiceListParams) SetLinkedResourceID(linkedResourceID *string) {
+// SetLinkedResourceID adds the linkedResourceId to the list params
+func (o *ListParams) SetLinkedResourceID(linkedResourceID *string) {
 	o.LinkedResourceID = linkedResourceID
 }
 
-// WithLinkedResourceLocationRegionProvider adds the linkedResourceLocationRegionProvider to the operation service list params
-func (o *OperationServiceListParams) WithLinkedResourceLocationRegionProvider(linkedResourceLocationRegionProvider *string) *OperationServiceListParams {
+// WithLinkedResourceLocationRegionProvider adds the linkedResourceLocationRegionProvider to the list params
+func (o *ListParams) WithLinkedResourceLocationRegionProvider(linkedResourceLocationRegionProvider *string) *ListParams {
 	o.SetLinkedResourceLocationRegionProvider(linkedResourceLocationRegionProvider)
 	return o
 }
 
-// SetLinkedResourceLocationRegionProvider adds the linkedResourceLocationRegionProvider to the operation service list params
-func (o *OperationServiceListParams) SetLinkedResourceLocationRegionProvider(linkedResourceLocationRegionProvider *string) {
+// SetLinkedResourceLocationRegionProvider adds the linkedResourceLocationRegionProvider to the list params
+func (o *ListParams) SetLinkedResourceLocationRegionProvider(linkedResourceLocationRegionProvider *string) {
 	o.LinkedResourceLocationRegionProvider = linkedResourceLocationRegionProvider
 }
 
-// WithLinkedResourceLocationRegionRegion adds the linkedResourceLocationRegionRegion to the operation service list params
-func (o *OperationServiceListParams) WithLinkedResourceLocationRegionRegion(linkedResourceLocationRegionRegion *string) *OperationServiceListParams {
+// WithLinkedResourceLocationRegionRegion adds the linkedResourceLocationRegionRegion to the list params
+func (o *ListParams) WithLinkedResourceLocationRegionRegion(linkedResourceLocationRegionRegion *string) *ListParams {
 	o.SetLinkedResourceLocationRegionRegion(linkedResourceLocationRegionRegion)
 	return o
 }
 
-// SetLinkedResourceLocationRegionRegion adds the linkedResourceLocationRegionRegion to the operation service list params
-func (o *OperationServiceListParams) SetLinkedResourceLocationRegionRegion(linkedResourceLocationRegionRegion *string) {
+// SetLinkedResourceLocationRegionRegion adds the linkedResourceLocationRegionRegion to the list params
+func (o *ListParams) SetLinkedResourceLocationRegionRegion(linkedResourceLocationRegionRegion *string) {
 	o.LinkedResourceLocationRegionRegion = linkedResourceLocationRegionRegion
 }
 
-// WithLinkedResourceType adds the linkedResourceType to the operation service list params
-func (o *OperationServiceListParams) WithLinkedResourceType(linkedResourceType *string) *OperationServiceListParams {
+// WithLinkedResourceType adds the linkedResourceType to the list params
+func (o *ListParams) WithLinkedResourceType(linkedResourceType *string) *ListParams {
 	o.SetLinkedResourceType(linkedResourceType)
 	return o
 }
 
-// SetLinkedResourceType adds the linkedResourceType to the operation service list params
-func (o *OperationServiceListParams) SetLinkedResourceType(linkedResourceType *string) {
+// SetLinkedResourceType adds the linkedResourceType to the list params
+func (o *ListParams) SetLinkedResourceType(linkedResourceType *string) {
 	o.LinkedResourceType = linkedResourceType
 }
 
-// WithLinkedResourceUUID adds the linkedResourceUUID to the operation service list params
-func (o *OperationServiceListParams) WithLinkedResourceUUID(linkedResourceUUID *string) *OperationServiceListParams {
+// WithLinkedResourceUUID adds the linkedResourceUUID to the list params
+func (o *ListParams) WithLinkedResourceUUID(linkedResourceUUID *string) *ListParams {
 	o.SetLinkedResourceUUID(linkedResourceUUID)
 	return o
 }
 
-// SetLinkedResourceUUID adds the linkedResourceUuid to the operation service list params
-func (o *OperationServiceListParams) SetLinkedResourceUUID(linkedResourceUUID *string) {
+// SetLinkedResourceUUID adds the linkedResourceUuid to the list params
+func (o *ListParams) SetLinkedResourceUUID(linkedResourceUUID *string) {
 	o.LinkedResourceUUID = linkedResourceUUID
 }
 
-// WithLocationOrganizationID adds the locationOrganizationID to the operation service list params
-func (o *OperationServiceListParams) WithLocationOrganizationID(locationOrganizationID string) *OperationServiceListParams {
+// WithLocationOrganizationID adds the locationOrganizationID to the list params
+func (o *ListParams) WithLocationOrganizationID(locationOrganizationID string) *ListParams {
 	o.SetLocationOrganizationID(locationOrganizationID)
 	return o
 }
 
-// SetLocationOrganizationID adds the locationOrganizationId to the operation service list params
-func (o *OperationServiceListParams) SetLocationOrganizationID(locationOrganizationID string) {
+// SetLocationOrganizationID adds the locationOrganizationId to the list params
+func (o *ListParams) SetLocationOrganizationID(locationOrganizationID string) {
 	o.LocationOrganizationID = locationOrganizationID
 }
 
-// WithLocationProjectID adds the locationProjectID to the operation service list params
-func (o *OperationServiceListParams) WithLocationProjectID(locationProjectID string) *OperationServiceListParams {
+// WithLocationProjectID adds the locationProjectID to the list params
+func (o *ListParams) WithLocationProjectID(locationProjectID string) *ListParams {
 	o.SetLocationProjectID(locationProjectID)
 	return o
 }
 
-// SetLocationProjectID adds the locationProjectId to the operation service list params
-func (o *OperationServiceListParams) SetLocationProjectID(locationProjectID string) {
+// SetLocationProjectID adds the locationProjectId to the list params
+func (o *ListParams) SetLocationProjectID(locationProjectID string) {
 	o.LocationProjectID = locationProjectID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the operation service list params
-func (o *OperationServiceListParams) WithLocationRegionProvider(locationRegionProvider *string) *OperationServiceListParams {
+// WithLocationRegionProvider adds the locationRegionProvider to the list params
+func (o *ListParams) WithLocationRegionProvider(locationRegionProvider *string) *ListParams {
 	o.SetLocationRegionProvider(locationRegionProvider)
 	return o
 }
 
-// SetLocationRegionProvider adds the locationRegionProvider to the operation service list params
-func (o *OperationServiceListParams) SetLocationRegionProvider(locationRegionProvider *string) {
+// SetLocationRegionProvider adds the locationRegionProvider to the list params
+func (o *ListParams) SetLocationRegionProvider(locationRegionProvider *string) {
 	o.LocationRegionProvider = locationRegionProvider
 }
 
-// WithLocationRegionRegion adds the locationRegionRegion to the operation service list params
-func (o *OperationServiceListParams) WithLocationRegionRegion(locationRegionRegion *string) *OperationServiceListParams {
+// WithLocationRegionRegion adds the locationRegionRegion to the list params
+func (o *ListParams) WithLocationRegionRegion(locationRegionRegion *string) *ListParams {
 	o.SetLocationRegionRegion(locationRegionRegion)
 	return o
 }
 
-// SetLocationRegionRegion adds the locationRegionRegion to the operation service list params
-func (o *OperationServiceListParams) SetLocationRegionRegion(locationRegionRegion *string) {
+// SetLocationRegionRegion adds the locationRegionRegion to the list params
+func (o *ListParams) SetLocationRegionRegion(locationRegionRegion *string) {
 	o.LocationRegionRegion = locationRegionRegion
 }
 
-// WithPaginationNextPageToken adds the paginationNextPageToken to the operation service list params
-func (o *OperationServiceListParams) WithPaginationNextPageToken(paginationNextPageToken *string) *OperationServiceListParams {
+// WithPaginationNextPageToken adds the paginationNextPageToken to the list params
+func (o *ListParams) WithPaginationNextPageToken(paginationNextPageToken *string) *ListParams {
 	o.SetPaginationNextPageToken(paginationNextPageToken)
 	return o
 }
 
-// SetPaginationNextPageToken adds the paginationNextPageToken to the operation service list params
-func (o *OperationServiceListParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
+// SetPaginationNextPageToken adds the paginationNextPageToken to the list params
+func (o *ListParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
 	o.PaginationNextPageToken = paginationNextPageToken
 }
 
-// WithPaginationPageSize adds the paginationPageSize to the operation service list params
-func (o *OperationServiceListParams) WithPaginationPageSize(paginationPageSize *int64) *OperationServiceListParams {
+// WithPaginationPageSize adds the paginationPageSize to the list params
+func (o *ListParams) WithPaginationPageSize(paginationPageSize *int64) *ListParams {
 	o.SetPaginationPageSize(paginationPageSize)
 	return o
 }
 
-// SetPaginationPageSize adds the paginationPageSize to the operation service list params
-func (o *OperationServiceListParams) SetPaginationPageSize(paginationPageSize *int64) {
+// SetPaginationPageSize adds the paginationPageSize to the list params
+func (o *ListParams) SetPaginationPageSize(paginationPageSize *int64) {
 	o.PaginationPageSize = paginationPageSize
 }
 
-// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the operation service list params
-func (o *OperationServiceListParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *OperationServiceListParams {
+// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the list params
+func (o *ListParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *ListParams {
 	o.SetPaginationPreviousPageToken(paginationPreviousPageToken)
 	return o
 }
 
-// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the operation service list params
-func (o *OperationServiceListParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
+// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the list params
+func (o *ListParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
 	o.PaginationPreviousPageToken = paginationPreviousPageToken
 }
 
 // WriteToRequest writes these params to a swagger request
-func (o *OperationServiceListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
+func (o *ListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
 	if err := r.SetTimeout(o.timeout); err != nil {
 		return err
