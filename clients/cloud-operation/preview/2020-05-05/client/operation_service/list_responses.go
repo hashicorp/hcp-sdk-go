@@ -29,9 +29,15 @@ func (o *ListReader) ReadResponse(response runtime.ClientResponse, consumer runt
 			return nil, err
 		}
 		return result, nil
-
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewListDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -59,6 +65,48 @@ func (o *ListOK) GetPayload() *models.HashicorpCloudOperationListResponse {
 func (o *ListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.HashicorpCloudOperationListResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListDefault creates a ListDefault with default headers values
+func NewListDefault(code int) *ListDefault {
+	return &ListDefault{
+		_statusCode: code,
+	}
+}
+
+/*ListDefault handles this case with default header values.
+
+An unexpected error response.
+*/
+type ListDefault struct {
+	_statusCode int
+
+	Payload *models.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the list default response
+func (o *ListDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *ListDefault) Error() string {
+	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations][%d] List default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ListDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+	return o.Payload
+}
+
+func (o *ListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

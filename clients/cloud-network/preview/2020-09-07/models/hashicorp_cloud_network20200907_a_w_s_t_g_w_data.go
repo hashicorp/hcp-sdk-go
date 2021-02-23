@@ -16,6 +16,9 @@ import (
 // swagger:model hashicorp.cloud.network_20200907.AWS.TGWData
 type HashicorpCloudNetwork20200907AWSTGWData struct {
 
+	// account_id is the ID of the AWS account where TGW belongs too
+	AccountID string `json:"account_id,omitempty"`
+
 	// tgw_id is the ID of the Transit Gateway
 	TgwID string `json:"tgw_id,omitempty"`
 }

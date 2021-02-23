@@ -6,8 +6,6 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"fmt"
-
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -73,7 +71,7 @@ func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHV
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &AssociateHVNWithAWSRoute53PrivateHostedZoneReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -88,9 +86,8 @@ func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHV
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for AssociateHVNWithAWSRoute53PrivateHostedZone: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*AssociateHVNWithAWSRoute53PrivateHostedZoneDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -108,7 +105,7 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 		PathPattern:        "/network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &CreateReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -123,9 +120,8 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*CreateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -143,7 +139,7 @@ func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.Cli
 		PathPattern:        "/network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &CreatePeeringReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -158,9 +154,8 @@ func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.Cli
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreatePeering: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*CreatePeeringDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -178,7 +173,7 @@ func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &CreateTGWAttachmentReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -193,9 +188,8 @@ func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateTGWAttachment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*CreateTGWAttachmentDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -213,7 +207,7 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &DeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -228,9 +222,8 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*DeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -248,7 +241,7 @@ func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.Cli
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &DeletePeeringReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -263,9 +256,8 @@ func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.Cli
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeletePeering: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*DeletePeeringDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -283,7 +275,7 @@ func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &DeleteTGWAttachmentReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -298,9 +290,8 @@ func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteTGWAttachment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*DeleteTGWAttachmentDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -318,7 +309,7 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &GetReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -333,9 +324,8 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Get: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*GetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -353,7 +343,7 @@ func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAut
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &GetPeeringReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -368,9 +358,8 @@ func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAut
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPeering: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*GetPeeringDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -388,7 +377,7 @@ func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runti
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &GetTGWAttachmentReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -403,9 +392,8 @@ func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetTGWAttachment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*GetTGWAttachmentDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -423,7 +411,7 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ListReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -438,9 +426,8 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for List: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ListDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -458,7 +445,7 @@ func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runti
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ListDependenciesReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -473,9 +460,8 @@ func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListDependencies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ListDependenciesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -493,7 +479,7 @@ func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.Clien
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ListPeeringsReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -508,9 +494,8 @@ func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.Clien
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListPeerings: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ListPeeringsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -528,7 +513,7 @@ func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo r
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ListTGWAttachmentsReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -543,9 +528,8 @@ func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListTGWAttachments: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ListTGWAttachmentsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

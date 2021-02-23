@@ -25,59 +25,59 @@ type Client struct {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ConsulServiceCreate(params *ConsulServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateOK, error)
+	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error)
 
-	ConsulServiceCreateCustomerMasterACLToken(params *ConsulServiceCreateCustomerMasterACLTokenParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateCustomerMasterACLTokenOK, error)
+	CreateCustomerMasterACLToken(params *CreateCustomerMasterACLTokenParams, authInfo runtime.ClientAuthInfoWriter) (*CreateCustomerMasterACLTokenOK, error)
 
-	ConsulServiceCreateSnapshot(params *ConsulServiceCreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateSnapshotOK, error)
+	CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*CreateSnapshotOK, error)
 
-	ConsulServiceDelete(params *ConsulServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceDeleteOK, error)
+	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error)
 
-	ConsulServiceDeleteSnapshot(params *ConsulServiceDeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceDeleteSnapshotOK, error)
+	DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteSnapshotOK, error)
 
-	ConsulServiceGet(params *ConsulServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetOK, error)
+	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
 
-	ConsulServiceGetClientConfig(params *ConsulServiceGetClientConfigParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetClientConfigOK, error)
+	GetClientConfig(params *GetClientConfigParams, authInfo runtime.ClientAuthInfoWriter) (*GetClientConfigOK, error)
 
-	ConsulServiceGetSnapshot(params *ConsulServiceGetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetSnapshotOK, error)
+	GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*GetSnapshotOK, error)
 
-	ConsulServiceList(params *ConsulServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListOK, error)
+	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
 
-	ConsulServiceListSnapshots(params *ConsulServiceListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListSnapshotsOK, error)
+	ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ListSnapshotsOK, error)
 
-	ConsulServiceListUpgradeVersions(params *ConsulServiceListUpgradeVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListUpgradeVersionsOK, error)
+	ListUpgradeVersions(params *ListUpgradeVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListUpgradeVersionsOK, error)
 
-	ConsulServiceListVersions(params *ConsulServiceListVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListVersionsOK, error)
+	ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListVersionsOK, error)
 
-	ConsulServiceListVersions2(params *ConsulServiceListVersions2Params, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListVersions2OK, error)
+	ListVersions2(params *ListVersions2Params, authInfo runtime.ClientAuthInfoWriter) (*ListVersions2OK, error)
 
-	ConsulServiceRestoreSnapshot(params *ConsulServiceRestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceRestoreSnapshotOK, error)
+	RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*RestoreSnapshotOK, error)
 
-	ConsulServiceUpdate(params *ConsulServiceUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceUpdateOK, error)
+	Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateOK, error)
 
-	ConsulServiceUpdateSnapshot(params *ConsulServiceUpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceUpdateSnapshotOK, error)
+	UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateSnapshotOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  ConsulServiceCreate creates creates a new h c p consul cluster
+  Create creates creates a new h c p consul cluster
 */
-func (a *Client) ConsulServiceCreate(params *ConsulServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateOK, error) {
+func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceCreateParams()
+		params = NewCreateParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_Create",
+		ID:                 "Create",
 		Method:             "POST",
 		PathPattern:        "/consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceCreateReader{formats: a.formats},
+		Reader:             &CreateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -85,33 +85,33 @@ func (a *Client) ConsulServiceCreate(params *ConsulServiceCreateParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceCreateOK)
+	success, ok := result.(*CreateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceCreateDefault)
+	unexpectedSuccess := result.(*CreateDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceCreateCustomerMasterACLToken creates customer master ACL token creates a new master ACL token for the customer on the specified cluster external clients will invoke this endpoint to re generate new master tokens
+  CreateCustomerMasterACLToken creates customer master ACL token creates a new master ACL token for the customer on the specified cluster external clients will invoke this endpoint to re generate new master tokens
 */
-func (a *Client) ConsulServiceCreateCustomerMasterACLToken(params *ConsulServiceCreateCustomerMasterACLTokenParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateCustomerMasterACLTokenOK, error) {
+func (a *Client) CreateCustomerMasterACLToken(params *CreateCustomerMasterACLTokenParams, authInfo runtime.ClientAuthInfoWriter) (*CreateCustomerMasterACLTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceCreateCustomerMasterACLTokenParams()
+		params = NewCreateCustomerMasterACLTokenParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_CreateCustomerMasterACLToken",
+		ID:                 "CreateCustomerMasterACLToken",
 		Method:             "POST",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/master-acl-tokens",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceCreateCustomerMasterACLTokenReader{formats: a.formats},
+		Reader:             &CreateCustomerMasterACLTokenReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -119,33 +119,33 @@ func (a *Client) ConsulServiceCreateCustomerMasterACLToken(params *ConsulService
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceCreateCustomerMasterACLTokenOK)
+	success, ok := result.(*CreateCustomerMasterACLTokenOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceCreateCustomerMasterACLTokenDefault)
+	unexpectedSuccess := result.(*CreateCustomerMasterACLTokenDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceCreateSnapshot creates snapshot takes a new snapshot asynchronously
+  CreateSnapshot creates snapshot takes a new snapshot asynchronously
 */
-func (a *Client) ConsulServiceCreateSnapshot(params *ConsulServiceCreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceCreateSnapshotOK, error) {
+func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*CreateSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceCreateSnapshotParams()
+		params = NewCreateSnapshotParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_CreateSnapshot",
+		ID:                 "CreateSnapshot",
 		Method:             "POST",
 		PathPattern:        "/consul/2020-08-26/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceCreateSnapshotReader{formats: a.formats},
+		Reader:             &CreateSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -153,33 +153,33 @@ func (a *Client) ConsulServiceCreateSnapshot(params *ConsulServiceCreateSnapshot
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceCreateSnapshotOK)
+	success, ok := result.(*CreateSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceCreateSnapshotDefault)
+	unexpectedSuccess := result.(*CreateSnapshotDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceDelete deletes deletes the specified h c p consul cluster
+  Delete deletes deletes the specified h c p consul cluster
 */
-func (a *Client) ConsulServiceDelete(params *ConsulServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceDeleteOK, error) {
+func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceDeleteParams()
+		params = NewDeleteParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_Delete",
+		ID:                 "Delete",
 		Method:             "DELETE",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceDeleteReader{formats: a.formats},
+		Reader:             &DeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -187,33 +187,33 @@ func (a *Client) ConsulServiceDelete(params *ConsulServiceDeleteParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceDeleteOK)
+	success, ok := result.(*DeleteOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceDeleteDefault)
+	unexpectedSuccess := result.(*DeleteDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceDeleteSnapshot deletes snapshot removes the snapshot from storage asynchronously
+  DeleteSnapshot deletes snapshot removes the snapshot from storage asynchronously
 */
-func (a *Client) ConsulServiceDeleteSnapshot(params *ConsulServiceDeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceDeleteSnapshotOK, error) {
+func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceDeleteSnapshotParams()
+		params = NewDeleteSnapshotParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_DeleteSnapshot",
+		ID:                 "DeleteSnapshot",
 		Method:             "DELETE",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceDeleteSnapshotReader{formats: a.formats},
+		Reader:             &DeleteSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -221,33 +221,33 @@ func (a *Client) ConsulServiceDeleteSnapshot(params *ConsulServiceDeleteSnapshot
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceDeleteSnapshotOK)
+	success, ok := result.(*DeleteSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceDeleteSnapshotDefault)
+	unexpectedSuccess := result.(*DeleteSnapshotDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceGet gets reads a single h c p consul cluster
+  Get gets reads a single h c p consul cluster
 */
-func (a *Client) ConsulServiceGet(params *ConsulServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetOK, error) {
+func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceGetParams()
+		params = NewGetParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_Get",
+		ID:                 "Get",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceGetReader{formats: a.formats},
+		Reader:             &GetReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -255,33 +255,33 @@ func (a *Client) ConsulServiceGet(params *ConsulServiceGetParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceGetOK)
+	success, ok := result.(*GetOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceGetDefault)
+	unexpectedSuccess := result.(*GetDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceGetClientConfig gets client config files returns the config files for a consul agent running in client mode the files are base64 encoded
+  GetClientConfig gets client config files returns the config files for a consul agent running in client mode the files are base64 encoded
 */
-func (a *Client) ConsulServiceGetClientConfig(params *ConsulServiceGetClientConfigParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetClientConfigOK, error) {
+func (a *Client) GetClientConfig(params *GetClientConfigParams, authInfo runtime.ClientAuthInfoWriter) (*GetClientConfigOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceGetClientConfigParams()
+		params = NewGetClientConfigParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_GetClientConfig",
+		ID:                 "GetClientConfig",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/client-config",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceGetClientConfigReader{formats: a.formats},
+		Reader:             &GetClientConfigReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -289,33 +289,33 @@ func (a *Client) ConsulServiceGetClientConfig(params *ConsulServiceGetClientConf
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceGetClientConfigOK)
+	success, ok := result.(*GetClientConfigOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceGetClientConfigDefault)
+	unexpectedSuccess := result.(*GetClientConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceGetSnapshot gets snapshot retrieves an existing snapshot
+  GetSnapshot gets snapshot retrieves an existing snapshot
 */
-func (a *Client) ConsulServiceGetSnapshot(params *ConsulServiceGetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceGetSnapshotOK, error) {
+func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*GetSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceGetSnapshotParams()
+		params = NewGetSnapshotParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_GetSnapshot",
+		ID:                 "GetSnapshot",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceGetSnapshotReader{formats: a.formats},
+		Reader:             &GetSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -323,33 +323,33 @@ func (a *Client) ConsulServiceGetSnapshot(params *ConsulServiceGetSnapshotParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceGetSnapshotOK)
+	success, ok := result.(*GetSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceGetSnapshotDefault)
+	unexpectedSuccess := result.(*GetSnapshotDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceList lists lists all h c p consul clusters
+  List lists lists all h c p consul clusters
 */
-func (a *Client) ConsulServiceList(params *ConsulServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListOK, error) {
+func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceListParams()
+		params = NewListParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_List",
+		ID:                 "List",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceListReader{formats: a.formats},
+		Reader:             &ListReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -357,33 +357,33 @@ func (a *Client) ConsulServiceList(params *ConsulServiceListParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceListOK)
+	success, ok := result.(*ListOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceListDefault)
+	unexpectedSuccess := result.(*ListDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceListSnapshots lists snapshots lists snapshots
+  ListSnapshots lists snapshots lists snapshots
 */
-func (a *Client) ConsulServiceListSnapshots(params *ConsulServiceListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListSnapshotsOK, error) {
+func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ListSnapshotsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceListSnapshotsParams()
+		params = NewListSnapshotsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_ListSnapshots",
+		ID:                 "ListSnapshots",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceListSnapshotsReader{formats: a.formats},
+		Reader:             &ListSnapshotsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -391,33 +391,33 @@ func (a *Client) ConsulServiceListSnapshots(params *ConsulServiceListSnapshotsPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceListSnapshotsOK)
+	success, ok := result.(*ListSnapshotsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceListSnapshotsDefault)
+	unexpectedSuccess := result.(*ListSnapshotsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceListUpgradeVersions lists upgrade versions returns the versions available for this consul cluster to upgrade to
+  ListUpgradeVersions lists upgrade versions returns the versions available for this consul cluster to upgrade to
 */
-func (a *Client) ConsulServiceListUpgradeVersions(params *ConsulServiceListUpgradeVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListUpgradeVersionsOK, error) {
+func (a *Client) ListUpgradeVersions(params *ListUpgradeVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListUpgradeVersionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceListUpgradeVersionsParams()
+		params = NewListUpgradeVersionsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_ListUpgradeVersions",
+		ID:                 "ListUpgradeVersions",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/upgrade-versions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceListUpgradeVersionsReader{formats: a.formats},
+		Reader:             &ListUpgradeVersionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -425,33 +425,33 @@ func (a *Client) ConsulServiceListUpgradeVersions(params *ConsulServiceListUpgra
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceListUpgradeVersionsOK)
+	success, ok := result.(*ListUpgradeVersionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceListUpgradeVersionsDefault)
+	unexpectedSuccess := result.(*ListUpgradeVersionsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceListVersions lists versions returns the versions available for this org and project
+  ListVersions lists versions returns the versions available for this org and project
 */
-func (a *Client) ConsulServiceListVersions(params *ConsulServiceListVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListVersionsOK, error) {
+func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListVersionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceListVersionsParams()
+		params = NewListVersionsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_ListVersions",
+		ID:                 "ListVersions",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/versions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceListVersionsReader{formats: a.formats},
+		Reader:             &ListVersionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -459,33 +459,33 @@ func (a *Client) ConsulServiceListVersions(params *ConsulServiceListVersionsPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceListVersionsOK)
+	success, ok := result.(*ListVersionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceListVersionsDefault)
+	unexpectedSuccess := result.(*ListVersionsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceListVersions2 lists versions returns the versions available for this org and project
+  ListVersions2 lists versions returns the versions available for this org and project
 */
-func (a *Client) ConsulServiceListVersions2(params *ConsulServiceListVersions2Params, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceListVersions2OK, error) {
+func (a *Client) ListVersions2(params *ListVersions2Params, authInfo runtime.ClientAuthInfoWriter) (*ListVersions2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceListVersions2Params()
+		params = NewListVersions2Params()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_ListVersions2",
+		ID:                 "ListVersions2",
 		Method:             "GET",
 		PathPattern:        "/consul/2020-08-26/versions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceListVersions2Reader{formats: a.formats},
+		Reader:             &ListVersions2Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -493,33 +493,33 @@ func (a *Client) ConsulServiceListVersions2(params *ConsulServiceListVersions2Pa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceListVersions2OK)
+	success, ok := result.(*ListVersions2OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceListVersions2Default)
+	unexpectedSuccess := result.(*ListVersions2Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceRestoreSnapshot restores snapshot restores a snapshot on a given cluster asynchronously
+  RestoreSnapshot restores snapshot restores a snapshot on a given cluster asynchronously
 */
-func (a *Client) ConsulServiceRestoreSnapshot(params *ConsulServiceRestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceRestoreSnapshotOK, error) {
+func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*RestoreSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceRestoreSnapshotParams()
+		params = NewRestoreSnapshotParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_RestoreSnapshot",
+		ID:                 "RestoreSnapshot",
 		Method:             "POST",
 		PathPattern:        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/restore",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceRestoreSnapshotReader{formats: a.formats},
+		Reader:             &RestoreSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -527,33 +527,33 @@ func (a *Client) ConsulServiceRestoreSnapshot(params *ConsulServiceRestoreSnapsh
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceRestoreSnapshotOK)
+	success, ok := result.(*RestoreSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceRestoreSnapshotDefault)
+	unexpectedSuccess := result.(*RestoreSnapshotDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceUpdate updates updates the properties of an existing h c p consul cluster
+  Update updates updates the properties of an existing h c p consul cluster
 */
-func (a *Client) ConsulServiceUpdate(params *ConsulServiceUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceUpdateOK, error) {
+func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceUpdateParams()
+		params = NewUpdateParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_Update",
+		ID:                 "Update",
 		Method:             "PATCH",
 		PathPattern:        "/consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceUpdateReader{formats: a.formats},
+		Reader:             &UpdateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -561,35 +561,35 @@ func (a *Client) ConsulServiceUpdate(params *ConsulServiceUpdateParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceUpdateOK)
+	success, ok := result.(*UpdateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceUpdateDefault)
+	unexpectedSuccess := result.(*UpdateDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ConsulServiceUpdateSnapshot updates snapshot updates an existing snapshot
+  UpdateSnapshot updates snapshot updates an existing snapshot
 
   Right now only the name can be changed.
 */
-func (a *Client) ConsulServiceUpdateSnapshot(params *ConsulServiceUpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*ConsulServiceUpdateSnapshotOK, error) {
+func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConsulServiceUpdateSnapshotParams()
+		params = NewUpdateSnapshotParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ConsulService_UpdateSnapshot",
+		ID:                 "UpdateSnapshot",
 		Method:             "PATCH",
 		PathPattern:        "/consul/2020-08-26/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConsulServiceUpdateSnapshotReader{formats: a.formats},
+		Reader:             &UpdateSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -597,12 +597,12 @@ func (a *Client) ConsulServiceUpdateSnapshot(params *ConsulServiceUpdateSnapshot
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConsulServiceUpdateSnapshotOK)
+	success, ok := result.(*UpdateSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConsulServiceUpdateSnapshotDefault)
+	unexpectedSuccess := result.(*UpdateSnapshotDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

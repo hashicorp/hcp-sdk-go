@@ -29,9 +29,15 @@ func (o *GetReader) ReadResponse(response runtime.ClientResponse, consumer runti
 			return nil, err
 		}
 		return result, nil
-
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewGetDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -59,6 +65,48 @@ func (o *GetOK) GetPayload() *models.HashicorpCloudNetwork20200907GetResponse {
 func (o *GetOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.HashicorpCloudNetwork20200907GetResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDefault creates a GetDefault with default headers values
+func NewGetDefault(code int) *GetDefault {
+	return &GetDefault{
+		_statusCode: code,
+	}
+}
+
+/*GetDefault handles this case with default header values.
+
+An unexpected error response.
+*/
+type GetDefault struct {
+	_statusCode int
+
+	Payload *models.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the get default response
+func (o *GetDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *GetDefault) Error() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Get default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GetDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+	return o.Payload
+}
+
+func (o *GetDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

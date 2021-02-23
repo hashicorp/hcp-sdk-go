@@ -29,9 +29,15 @@ func (o *DeleteTGWAttachmentReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return result, nil
-
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewDeleteTGWAttachmentDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -59,6 +65,48 @@ func (o *DeleteTGWAttachmentOK) GetPayload() *models.HashicorpCloudNetwork202009
 func (o *DeleteTGWAttachmentOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.HashicorpCloudNetwork20200907DeleteTGWAttachmentResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteTGWAttachmentDefault creates a DeleteTGWAttachmentDefault with default headers values
+func NewDeleteTGWAttachmentDefault(code int) *DeleteTGWAttachmentDefault {
+	return &DeleteTGWAttachmentDefault{
+		_statusCode: code,
+	}
+}
+
+/*DeleteTGWAttachmentDefault handles this case with default header values.
+
+An unexpected error response.
+*/
+type DeleteTGWAttachmentDefault struct {
+	_statusCode int
+
+	Payload *models.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the delete t g w attachment default response
+func (o *DeleteTGWAttachmentDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *DeleteTGWAttachmentDefault) Error() string {
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] DeleteTGWAttachment default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *DeleteTGWAttachmentDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+	return o.Payload
+}
+
+func (o *DeleteTGWAttachmentDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

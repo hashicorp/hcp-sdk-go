@@ -29,9 +29,15 @@ func (o *ListDependenciesReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return result, nil
-
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewListDependenciesDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -59,6 +65,48 @@ func (o *ListDependenciesOK) GetPayload() *models.HashicorpCloudNetwork20200907L
 func (o *ListDependenciesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.HashicorpCloudNetwork20200907ListDependenciesResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListDependenciesDefault creates a ListDependenciesDefault with default headers values
+func NewListDependenciesDefault(code int) *ListDependenciesDefault {
+	return &ListDependenciesDefault{
+		_statusCode: code,
+	}
+}
+
+/*ListDependenciesDefault handles this case with default header values.
+
+An unexpected error response.
+*/
+type ListDependenciesDefault struct {
+	_statusCode int
+
+	Payload *models.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the list dependencies default response
+func (o *ListDependenciesDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *ListDependenciesDefault) Error() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] ListDependencies default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ListDependenciesDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+	return o.Payload
+}
+
+func (o *ListDependenciesDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

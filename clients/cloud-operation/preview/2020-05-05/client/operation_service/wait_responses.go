@@ -29,9 +29,15 @@ func (o *WaitReader) ReadResponse(response runtime.ClientResponse, consumer runt
 			return nil, err
 		}
 		return result, nil
-
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewWaitDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -59,6 +65,48 @@ func (o *WaitOK) GetPayload() *models.HashicorpCloudOperationWaitResponse {
 func (o *WaitOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.HashicorpCloudOperationWaitResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewWaitDefault creates a WaitDefault with default headers values
+func NewWaitDefault(code int) *WaitDefault {
+	return &WaitDefault{
+		_statusCode: code,
+	}
+}
+
+/*WaitDefault handles this case with default header values.
+
+An unexpected error response.
+*/
+type WaitDefault struct {
+	_statusCode int
+
+	Payload *models.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the wait default response
+func (o *WaitDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *WaitDefault) Error() string {
+	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] Wait default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *WaitDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+	return o.Payload
+}
+
+func (o *WaitDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

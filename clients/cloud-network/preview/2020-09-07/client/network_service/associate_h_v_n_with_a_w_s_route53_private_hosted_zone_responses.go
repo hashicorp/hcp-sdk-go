@@ -11,6 +11,8 @@ import (
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/models"
 )
 
 // AssociateHVNWithAWSRoute53PrivateHostedZoneReader is a Reader for the AssociateHVNWithAWSRoute53PrivateHostedZone structure.
@@ -27,9 +29,15 @@ func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneReader) ReadResponse(respons
 			return nil, err
 		}
 		return result, nil
-
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewAssociateHVNWithAWSRoute53PrivateHostedZoneDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -58,6 +66,48 @@ func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) readResponse(response ru
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewAssociateHVNWithAWSRoute53PrivateHostedZoneDefault creates a AssociateHVNWithAWSRoute53PrivateHostedZoneDefault with default headers values
+func NewAssociateHVNWithAWSRoute53PrivateHostedZoneDefault(code int) *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault {
+	return &AssociateHVNWithAWSRoute53PrivateHostedZoneDefault{
+		_statusCode: code,
+	}
+}
+
+/*AssociateHVNWithAWSRoute53PrivateHostedZoneDefault handles this case with default header values.
+
+An unexpected error response.
+*/
+type AssociateHVNWithAWSRoute53PrivateHostedZoneDefault struct {
+	_statusCode int
+
+	Payload *models.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the associate h v n with a w s route53 private hosted zone default response
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) Error() string {
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] AssociateHVNWithAWSRoute53PrivateHostedZone default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+	return o.Payload
+}
+
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.GrpcGatewayRuntimeError)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

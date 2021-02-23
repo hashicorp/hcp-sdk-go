@@ -29,9 +29,15 @@ func (o *DeletePeeringReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return result, nil
-
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewDeletePeeringDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -59,6 +65,48 @@ func (o *DeletePeeringOK) GetPayload() *models.HashicorpCloudNetwork20200907Dele
 func (o *DeletePeeringOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.HashicorpCloudNetwork20200907DeletePeeringResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeletePeeringDefault creates a DeletePeeringDefault with default headers values
+func NewDeletePeeringDefault(code int) *DeletePeeringDefault {
+	return &DeletePeeringDefault{
+		_statusCode: code,
+	}
+}
+
+/*DeletePeeringDefault handles this case with default header values.
+
+An unexpected error response.
+*/
+type DeletePeeringDefault struct {
+	_statusCode int
+
+	Payload *models.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the delete peering default response
+func (o *DeletePeeringDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *DeletePeeringDefault) Error() string {
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] DeletePeering default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *DeletePeeringDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+	return o.Payload
+}
+
+func (o *DeletePeeringDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

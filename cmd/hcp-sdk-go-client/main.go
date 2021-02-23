@@ -42,11 +42,11 @@ func main() {
 		fmt.Printf("Response: %#v\n\n", resp.Payload)
 	}
 
-	listParams2 := consul.NewConsulServiceListParams()
+	listParams2 := consul.NewListParams()
 	listParams2.LocationOrganizationID = orgID
 	listParams2.LocationProjectID = projID
 
-	resp2, err := consulClient.ConsulServiceList(listParams2, nil)
+	resp2, err := consulClient.List(listParams2, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
