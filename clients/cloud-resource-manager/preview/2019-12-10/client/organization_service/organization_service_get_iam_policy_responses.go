@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/preview/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // OrganizationServiceGetIamPolicyReader is a Reader for the OrganizationServiceGetIamPolicy structure.
@@ -88,7 +89,7 @@ An unexpected error response.
 type OrganizationServiceGetIamPolicyDefault struct {
 	_statusCode int
 
-	Payload *models.GrpcGatewayRuntimeError
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // Code gets the status code for the organization service get iam policy default response
@@ -100,13 +101,13 @@ func (o *OrganizationServiceGetIamPolicyDefault) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *OrganizationServiceGetIamPolicyDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+func (o *OrganizationServiceGetIamPolicyDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *OrganizationServiceGetIamPolicyDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
