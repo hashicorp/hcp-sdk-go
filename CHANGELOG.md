@@ -1,3 +1,8 @@
+## 0.4.0 (March 16, 2021)
+
+FEATURES:
+* Add SDK support for new version (2021-02-04) of cloud-consul-service
+
 ## 0.3.0 (February 23, 2021)
 
 BUGS:
