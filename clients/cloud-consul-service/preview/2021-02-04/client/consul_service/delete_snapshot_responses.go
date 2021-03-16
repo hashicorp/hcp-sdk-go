@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/preview/2021-02-04/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // DeleteSnapshotReader is a Reader for the DeleteSnapshot structure.
@@ -88,7 +89,7 @@ An unexpected error response.
 type DeleteSnapshotDefault struct {
 	_statusCode int
 
-	Payload *models.GrpcGatewayRuntimeError
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // Code gets the status code for the delete snapshot default response
@@ -100,13 +101,13 @@ func (o *DeleteSnapshotDefault) Error() string {
 	return fmt.Sprintf("[DELETE /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}][%d] DeleteSnapshot default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *DeleteSnapshotDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+func (o *DeleteSnapshotDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *DeleteSnapshotDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

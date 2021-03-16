@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/preview/2021-02-04/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // UpdateReader is a Reader for the Update structure.
@@ -88,7 +89,7 @@ An unexpected error response.
 type UpdateDefault struct {
 	_statusCode int
 
-	Payload *models.GrpcGatewayRuntimeError
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // Code gets the status code for the update default response
@@ -100,13 +101,13 @@ func (o *UpdateDefault) Error() string {
 	return fmt.Sprintf("[PATCH /consul/2021-02-04/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] Update default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *UpdateDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+func (o *UpdateDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *UpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/preview/2021-02-04/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // ListSnapshotsReader is a Reader for the ListSnapshots structure.
@@ -88,7 +89,7 @@ An unexpected error response.
 type ListSnapshotsDefault struct {
 	_statusCode int
 
-	Payload *models.GrpcGatewayRuntimeError
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // Code gets the status code for the list snapshots default response
@@ -100,13 +101,13 @@ func (o *ListSnapshotsDefault) Error() string {
 	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] ListSnapshots default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListSnapshotsDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+func (o *ListSnapshotsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *ListSnapshotsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
