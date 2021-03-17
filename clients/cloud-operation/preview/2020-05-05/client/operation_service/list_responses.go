@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-operation/preview/2020-05-05/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // ListReader is a Reader for the List structure.
@@ -88,7 +89,7 @@ An unexpected error response.
 type ListDefault struct {
 	_statusCode int
 
-	Payload *models.GrpcGatewayRuntimeError
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // Code gets the status code for the list default response
@@ -100,13 +101,13 @@ func (o *ListDefault) Error() string {
 	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations][%d] List default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+func (o *ListDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *ListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

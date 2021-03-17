@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // CreateTGWAttachmentReader is a Reader for the CreateTGWAttachment structure.
@@ -88,7 +89,7 @@ An unexpected error response.
 type CreateTGWAttachmentDefault struct {
 	_statusCode int
 
-	Payload *models.GrpcGatewayRuntimeError
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // Code gets the status code for the create t g w attachment default response
@@ -100,13 +101,13 @@ func (o *CreateTGWAttachmentDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] CreateTGWAttachment default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateTGWAttachmentDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+func (o *CreateTGWAttachmentDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *CreateTGWAttachmentDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

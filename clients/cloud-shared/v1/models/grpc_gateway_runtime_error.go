@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // GrpcGatewayRuntimeError grpc gateway runtime error
@@ -23,7 +22,7 @@ type GrpcGatewayRuntimeError struct {
 	Code int32 `json:"code,omitempty"`
 
 	// details
-	Details []*cloud.GoogleProtobufAny `json:"details"`
+	Details []*GoogleProtobufAny `json:"details"`
 
 	// error
 	Error string `json:"error,omitempty"`

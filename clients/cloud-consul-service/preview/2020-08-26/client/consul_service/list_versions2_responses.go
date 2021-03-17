@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/preview/2020-08-26/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // ListVersions2Reader is a Reader for the ListVersions2 structure.
@@ -88,7 +89,7 @@ An unexpected error response.
 type ListVersions2Default struct {
 	_statusCode int
 
-	Payload *models.GrpcGatewayRuntimeError
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // Code gets the status code for the list versions2 default response
@@ -100,13 +101,13 @@ func (o *ListVersions2Default) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/versions][%d] ListVersions2 default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListVersions2Default) GetPayload() *models.GrpcGatewayRuntimeError {
+func (o *ListVersions2Default) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *ListVersions2Default) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

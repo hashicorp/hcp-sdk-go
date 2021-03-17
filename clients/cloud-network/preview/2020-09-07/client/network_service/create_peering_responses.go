@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // CreatePeeringReader is a Reader for the CreatePeering structure.
@@ -88,7 +89,7 @@ An unexpected error response.
 type CreatePeeringDefault struct {
 	_statusCode int
 
-	Payload *models.GrpcGatewayRuntimeError
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // Code gets the status code for the create peering default response
@@ -100,13 +101,13 @@ func (o *CreatePeeringDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] CreatePeering default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreatePeeringDefault) GetPayload() *models.GrpcGatewayRuntimeError {
+func (o *CreatePeeringDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *CreatePeeringDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
