@@ -1,3 +1,8 @@
+## 0.5.0 (March 22, 2021)
+
+FEATURES:
+* Add SDK support for two new preview versions (2020-04-20 and 2020-11-25) of cloud-vault-service
+
 ## 0.4.0 (March 16, 2021)
 
 FEATURES:
