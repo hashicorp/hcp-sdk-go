@@ -1,3 +1,8 @@
+## 0.6.0 (March 22, 2021)
+
+FEATURES:
+* Update cloud-network/preview/2020-09-07 to include support for HVN routes
+
 ## 0.5.0 (March 22, 2021)
 
 FEATURES:
