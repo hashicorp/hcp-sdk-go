@@ -29,11 +29,15 @@ type ClientService interface {
 
 	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error)
 
+	CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*CreateHVNRouteOK, error)
+
 	CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePeeringOK, error)
 
 	CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*CreateTGWAttachmentOK, error)
 
 	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error)
+
+	DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteHVNRouteOK, error)
 
 	DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePeeringOK, error)
 
@@ -48,6 +52,8 @@ type ClientService interface {
 	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
 
 	ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*ListDependenciesOK, error)
+
+	ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.ClientAuthInfoWriter) (*ListHVNRoutesOK, error)
 
 	ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPeeringsOK, error)
 
@@ -121,6 +127,42 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  CreateHVNRoute hs v n routes
+
+  CreateHVNRoute creates a new HVN Route
+*/
+func (a *Client) CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*CreateHVNRouteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateHVNRouteParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "CreateHVNRoute",
+		Method:             "POST",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateHVNRouteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateHVNRouteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateHVNRouteDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -223,6 +265,40 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  DeleteHVNRoute deletes h v n route triggers h v n route deletion workflow
+*/
+func (a *Client) DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteHVNRouteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteHVNRouteParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "DeleteHVNRoute",
+		Method:             "DELETE",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteHVNRouteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteHVNRouteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteHVNRouteDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -461,6 +537,40 @@ func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runti
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListDependenciesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ListHVNRoutes lists h v n routes returns a list of routes for an h v n
+*/
+func (a *Client) ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.ClientAuthInfoWriter) (*ListHVNRoutesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListHVNRoutesParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListHVNRoutes",
+		Method:             "GET",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListHVNRoutesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListHVNRoutesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListHVNRoutesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

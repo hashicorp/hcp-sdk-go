@@ -18,6 +18,9 @@ type HashicorpCloudNetwork20200907PeeringTarget struct {
 
 	// aws target
 	AwsTarget *HashicorpCloudNetwork20200907AWSPeeringTarget `json:"aws_target,omitempty"`
+
+	// hvn target
+	HvnTarget *HashicorpCloudNetwork20200907NetworkTarget `json:"hvn_target,omitempty"`
 }
 
 // Validate validates this hashicorp cloud network 20200907 peering target
@@ -25,6 +28,10 @@ func (m *HashicorpCloudNetwork20200907PeeringTarget) Validate(formats strfmt.Reg
 	var res []error
 
 	if err := m.validateAwsTarget(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHvnTarget(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -44,6 +51,24 @@ func (m *HashicorpCloudNetwork20200907PeeringTarget) validateAwsTarget(formats s
 		if err := m.AwsTarget.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_target")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907PeeringTarget) validateHvnTarget(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.HvnTarget) { // not required
+		return nil
+	}
+
+	if m.HvnTarget != nil {
+		if err := m.HvnTarget.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hvn_target")
 			}
 			return err
 		}
