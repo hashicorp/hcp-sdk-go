@@ -1,7 +1,7 @@
 ## 0.7.0 (April 26, 2021)
 
 FEATURES:
-* Updated cloud-network/preview/2020-09-07 to include changes introduced in https://github.com/hashicorp/cloud-network/pull/503 (additional optional parameter for ListHVNRoutes - `destination`)
+* Updated cloud-network/preview/2020-09-07 to include changes introduced to add an optional parameter for ListHVNRoutes - `destination`
 
 ## 0.6.0 (April 16, 2021)
 
