@@ -61,6 +61,12 @@ for the list h v n routes operation typically these are written to a http.Reques
 */
 type ListHVNRoutesParams struct {
 
+	/*Destination
+	  destination is an optional parameter that allows returning only routes
+	that has a specific destination.
+
+	*/
+	Destination *string
 	/*HvnDescription
 	  description is a human-friendly description for this link. This is
 	used primarily for informational purposes such as error messages.
@@ -176,6 +182,17 @@ func (o *ListHVNRoutesParams) WithHTTPClient(client *http.Client) *ListHVNRoutes
 // SetHTTPClient adds the HTTPClient to the list h v n routes params
 func (o *ListHVNRoutesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
+}
+
+// WithDestination adds the destination to the list h v n routes params
+func (o *ListHVNRoutesParams) WithDestination(destination *string) *ListHVNRoutesParams {
+	o.SetDestination(destination)
+	return o
+}
+
+// SetDestination adds the destination to the list h v n routes params
+func (o *ListHVNRoutesParams) SetDestination(destination *string) {
+	o.Destination = destination
 }
 
 // WithHvnDescription adds the hvnDescription to the list h v n routes params
@@ -328,6 +345,22 @@ func (o *ListHVNRoutesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
+
+	if o.Destination != nil {
+
+		// query param destination
+		var qrDestination string
+		if o.Destination != nil {
+			qrDestination = *o.Destination
+		}
+		qDestination := qrDestination
+		if qDestination != "" {
+			if err := r.SetQueryParam("destination", qDestination); err != nil {
+				return err
+			}
+		}
+
+	}
 
 	if o.HvnDescription != nil {
 
