@@ -1,3 +1,8 @@
+## 0.8.0 (May 20, 2021)
+
+FEATURES:
+* Updated cloud-network/preview/2020-09-07 to include GetHVNRoute and add UpdatedAt fields on Peering and TGW
+
 ## 0.7.0 (April 26, 2021)
 
 FEATURES:
