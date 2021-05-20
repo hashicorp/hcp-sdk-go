@@ -30,10 +30,16 @@ type HashicorpCloudNetwork20200907TGWAttachment struct {
 
 	// ExpiresAt is the timestamp after which TGW Attachment will be considered
 	// Expired if it doesn't transition into Accepted or Active state before that
+	//
+	// Output only.
+	// Read Only: true
 	// Format: date-time
 	ExpiresAt strfmt.DateTime `json:"expires_at,omitempty"`
 
 	// HVN is a link to the HVN the TGW Attachment belongs to.
+	//
+	// Output only.
+	// Read Only: true
 	Hvn *cloud.HashicorpCloudLocationLink `json:"hvn,omitempty"`
 
 	// id is the user set, slug identifier for the TGW Attachment. It is unique
@@ -51,7 +57,17 @@ type HashicorpCloudNetwork20200907TGWAttachment struct {
 	ProviderTgwAttachmentID string `json:"provider_tgw_attachment_id,omitempty"`
 
 	// state is the state of this TGW Attachment
+	//
+	// Output only.
+	// Read Only: true
 	State HashicorpCloudNetwork20200907TGWAttachmentState `json:"state,omitempty"`
+
+	// updated_at is a timestamp when TGW Attachment was last updated.
+	//
+	// Output only.
+	// Read Only: true
+	// Format: date-time
+	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }
 
 // Validate validates this hashicorp cloud network 20200907 t g w attachment
@@ -79,6 +95,10 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) Validate(formats strfmt.Reg
 	}
 
 	if err := m.validateState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUpdatedAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -178,6 +198,19 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateState(formats strfm
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("state")
 		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907TGWAttachment) validateUpdatedAt(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UpdatedAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
 	}
 

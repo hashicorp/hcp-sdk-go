@@ -15,6 +15,8 @@ import (
 
 // HashicorpCloudNetwork20200907TGWAttachmentState state is one of the states the TGW Attachment could be in.
 //
+// Output only.
+//
 // swagger:model hashicorp.cloud.network_20200907.TGWAttachment.State
 type HashicorpCloudNetwork20200907TGWAttachmentState string
 

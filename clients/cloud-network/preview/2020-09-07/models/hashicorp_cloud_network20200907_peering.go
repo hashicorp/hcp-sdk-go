@@ -53,6 +53,13 @@ type HashicorpCloudNetwork20200907Peering struct {
 
 	// Target is a provider specific details about peering target
 	Target *HashicorpCloudNetwork20200907PeeringTarget `json:"target,omitempty"`
+
+	// UpdatedAt is a timestamp when peering was originally created
+	//
+	// Output only.
+	// Read Only: true
+	// Format: date-time
+	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }
 
 // Validate validates this hashicorp cloud network 20200907 peering
@@ -76,6 +83,10 @@ func (m *HashicorpCloudNetwork20200907Peering) Validate(formats strfmt.Registry)
 	}
 
 	if err := m.validateTarget(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUpdatedAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -158,6 +169,19 @@ func (m *HashicorpCloudNetwork20200907Peering) validateTarget(formats strfmt.Reg
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907Peering) validateUpdatedAt(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UpdatedAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
+		return err
 	}
 
 	return nil
