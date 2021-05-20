@@ -45,6 +45,8 @@ type ClientService interface {
 
 	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
 
+	GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*GetHVNRouteOK, error)
+
 	GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*GetPeeringOK, error)
 
 	GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*GetTGWAttachmentOK, error)
@@ -401,6 +403,40 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  GetHVNRoute gets h v n route returns a specific h v n route
+*/
+func (a *Client) GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*GetHVNRouteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetHVNRouteParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetHVNRoute",
+		Method:             "GET",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetHVNRouteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetHVNRouteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetHVNRouteDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
