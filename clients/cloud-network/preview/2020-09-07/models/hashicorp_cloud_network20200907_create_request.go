@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -35,13 +37,40 @@ func (m *HashicorpCloudNetwork20200907CreateRequest) Validate(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudNetwork20200907CreateRequest) validateNetwork(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Network) { // not required
 		return nil
 	}
 
 	if m.Network != nil {
 		if err := m.Network.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("network")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 create request based on the context it is used
+func (m *HashicorpCloudNetwork20200907CreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateNetwork(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907CreateRequest) contextValidateNetwork(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Network != nil {
+		if err := m.Network.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("network")
 			}

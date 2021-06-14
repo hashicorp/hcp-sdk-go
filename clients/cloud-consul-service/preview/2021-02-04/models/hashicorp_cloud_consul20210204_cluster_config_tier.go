@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -18,6 +19,11 @@ import (
 // swagger:model hashicorp.cloud.consul_20210204.ClusterConfig.Tier
 type HashicorpCloudConsul20210204ClusterConfigTier string
 
+func NewHashicorpCloudConsul20210204ClusterConfigTier(value HashicorpCloudConsul20210204ClusterConfigTier) *HashicorpCloudConsul20210204ClusterConfigTier {
+	v := value
+	return &v
+}
+
 const (
 
 	// HashicorpCloudConsul20210204ClusterConfigTierUNSET captures enum value "UNSET"
@@ -28,6 +34,9 @@ const (
 
 	// HashicorpCloudConsul20210204ClusterConfigTierSTANDARD captures enum value "STANDARD"
 	HashicorpCloudConsul20210204ClusterConfigTierSTANDARD HashicorpCloudConsul20210204ClusterConfigTier = "STANDARD"
+
+	// HashicorpCloudConsul20210204ClusterConfigTierPLUS captures enum value "PLUS"
+	HashicorpCloudConsul20210204ClusterConfigTierPLUS HashicorpCloudConsul20210204ClusterConfigTier = "PLUS"
 )
 
 // for schema
@@ -35,7 +44,7 @@ var hashicorpCloudConsul20210204ClusterConfigTierEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudConsul20210204ClusterConfigTier
-	if err := json.Unmarshal([]byte(`["UNSET","DEVELOPMENT","STANDARD"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["UNSET","DEVELOPMENT","STANDARD","PLUS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -62,5 +71,10 @@ func (m HashicorpCloudConsul20210204ClusterConfigTier) Validate(formats strfmt.R
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud consul 20210204 cluster config tier based on context it is used
+func (m HashicorpCloudConsul20210204ClusterConfigTier) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

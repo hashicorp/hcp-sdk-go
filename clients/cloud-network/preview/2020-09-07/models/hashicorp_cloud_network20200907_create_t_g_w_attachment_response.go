@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -43,7 +45,6 @@ func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) Validate(form
 }
 
 func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) validateOperation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Operation) { // not required
 		return nil
 	}
@@ -61,13 +62,58 @@ func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) validateOpera
 }
 
 func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) validateTgwAttachment(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.TgwAttachment) { // not required
 		return nil
 	}
 
 	if m.TgwAttachment != nil {
 		if err := m.TgwAttachment.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("tgw_attachment")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 create t g w attachment response based on the context it is used
+func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateOperation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTgwAttachment(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Operation != nil {
+		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("operation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) contextValidateTgwAttachment(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TgwAttachment != nil {
+		if err := m.TgwAttachment.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tgw_attachment")
 			}
