@@ -39,6 +39,8 @@ type HashicorpCloudConsul20210204ClusterConfig struct {
 	// Use consul_config.primary to federate clusters. The difference between these two fields
 	// is that this field is present on primaries and secondaries. Whereas consul_config.primary
 	// is only present on secondaries.
+	// Output only.
+	// Read Only: true
 	Primary *cloud.HashicorpCloudLocationLink `json:"primary,omitempty"`
 
 	// snapshot_config contains the configuration for how often to snapshot and
