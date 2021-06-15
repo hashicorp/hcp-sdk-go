@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -41,40 +39,13 @@ func (m *HashicorpCloudConsul20210204CreateSnapshotResponse) Validate(formats st
 }
 
 func (m *HashicorpCloudConsul20210204CreateSnapshotResponse) validateOperation(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Operation) { // not required
 		return nil
 	}
 
 	if m.Operation != nil {
 		if err := m.Operation.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("operation")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud consul 20210204 create snapshot response based on the context it is used
-func (m *HashicorpCloudConsul20210204CreateSnapshotResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateOperation(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudConsul20210204CreateSnapshotResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Operation != nil {
-		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operation")
 			}

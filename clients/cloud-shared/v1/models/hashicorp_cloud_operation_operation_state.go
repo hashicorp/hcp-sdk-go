@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -23,11 +22,6 @@ import (
 //
 // swagger:model hashicorp.cloud.operation.Operation.State
 type HashicorpCloudOperationOperationState string
-
-func NewHashicorpCloudOperationOperationState(value HashicorpCloudOperationOperationState) *HashicorpCloudOperationOperationState {
-	v := value
-	return &v
-}
 
 const (
 
@@ -76,10 +70,5 @@ func (m HashicorpCloudOperationOperationState) Validate(formats strfmt.Registry)
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-// ContextValidate validates this hashicorp cloud operation operation state based on context it is used
-func (m HashicorpCloudOperationOperationState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

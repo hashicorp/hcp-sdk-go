@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -20,11 +19,6 @@ import (
 //
 // swagger:model hashicorp.cloud.consul_20210204.CapacityConfig.Size
 type HashicorpCloudConsul20210204CapacityConfigSize string
-
-func NewHashicorpCloudConsul20210204CapacityConfigSize(value HashicorpCloudConsul20210204CapacityConfigSize) *HashicorpCloudConsul20210204CapacityConfigSize {
-	v := value
-	return &v
-}
 
 const (
 
@@ -76,10 +70,5 @@ func (m HashicorpCloudConsul20210204CapacityConfigSize) Validate(formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-// ContextValidate validates this hashicorp cloud consul 20210204 capacity config size based on context it is used
-func (m HashicorpCloudConsul20210204CapacityConfigSize) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

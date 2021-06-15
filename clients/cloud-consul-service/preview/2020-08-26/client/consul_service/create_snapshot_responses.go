@@ -47,7 +47,7 @@ func NewCreateSnapshotOK() *CreateSnapshotOK {
 	return &CreateSnapshotOK{}
 }
 
-/* CreateSnapshotOK describes a response with status code 200, with default header values.
+/*CreateSnapshotOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type CreateSnapshotOK struct {
 func (o *CreateSnapshotOK) Error() string {
 	return fmt.Sprintf("[POST /consul/2020-08-26/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] createSnapshotOK  %+v", 200, o.Payload)
 }
+
 func (o *CreateSnapshotOK) GetPayload() *models.HashicorpCloudConsul20200826CreateSnapshotResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewCreateSnapshotDefault(code int) *CreateSnapshotDefault {
 	}
 }
 
-/* CreateSnapshotDefault describes a response with status code -1, with default header values.
+/*CreateSnapshotDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *CreateSnapshotDefault) Code() int {
 func (o *CreateSnapshotDefault) Error() string {
 	return fmt.Sprintf("[POST /consul/2020-08-26/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] CreateSnapshot default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *CreateSnapshotDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

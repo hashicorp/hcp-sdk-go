@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -48,7 +46,7 @@ type HashicorpCloudConsul20210204ClusterConfig struct {
 	SnapshotConfig HashicorpCloudConsul20210204SnapshotConfig `json:"snapshot_config,omitempty"`
 
 	// tier is the type of tier this Consul cluster should be provisioned as.
-	Tier *HashicorpCloudConsul20210204ClusterConfigTier `json:"tier,omitempty"`
+	Tier HashicorpCloudConsul20210204ClusterConfigTier `json:"tier,omitempty"`
 }
 
 // Validate validates this hashicorp cloud consul 20210204 cluster config
@@ -82,6 +80,7 @@ func (m *HashicorpCloudConsul20210204ClusterConfig) Validate(formats strfmt.Regi
 }
 
 func (m *HashicorpCloudConsul20210204ClusterConfig) validateCapacityConfig(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.CapacityConfig) { // not required
 		return nil
 	}
@@ -99,6 +98,7 @@ func (m *HashicorpCloudConsul20210204ClusterConfig) validateCapacityConfig(forma
 }
 
 func (m *HashicorpCloudConsul20210204ClusterConfig) validateConsulConfig(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.ConsulConfig) { // not required
 		return nil
 	}
@@ -116,6 +116,7 @@ func (m *HashicorpCloudConsul20210204ClusterConfig) validateConsulConfig(formats
 }
 
 func (m *HashicorpCloudConsul20210204ClusterConfig) validateNetworkConfig(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.NetworkConfig) { // not required
 		return nil
 	}
@@ -133,6 +134,7 @@ func (m *HashicorpCloudConsul20210204ClusterConfig) validateNetworkConfig(format
 }
 
 func (m *HashicorpCloudConsul20210204ClusterConfig) validatePrimary(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Primary) { // not required
 		return nil
 	}
@@ -150,117 +152,16 @@ func (m *HashicorpCloudConsul20210204ClusterConfig) validatePrimary(formats strf
 }
 
 func (m *HashicorpCloudConsul20210204ClusterConfig) validateTier(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Tier) { // not required
 		return nil
 	}
 
-	if m.Tier != nil {
-		if err := m.Tier.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("tier")
-			}
-			return err
+	if err := m.Tier.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("tier")
 		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud consul 20210204 cluster config based on the context it is used
-func (m *HashicorpCloudConsul20210204ClusterConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateCapacityConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateConsulConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateNetworkConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidatePrimary(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateTier(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudConsul20210204ClusterConfig) contextValidateCapacityConfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.CapacityConfig != nil {
-		if err := m.CapacityConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("capacity_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudConsul20210204ClusterConfig) contextValidateConsulConfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ConsulConfig != nil {
-		if err := m.ConsulConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("consul_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudConsul20210204ClusterConfig) contextValidateNetworkConfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.NetworkConfig != nil {
-		if err := m.NetworkConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("network_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudConsul20210204ClusterConfig) contextValidatePrimary(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Primary != nil {
-		if err := m.Primary.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("primary")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudConsul20210204ClusterConfig) contextValidateTier(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Tier != nil {
-		if err := m.Tier.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("tier")
-			}
-			return err
-		}
+		return err
 	}
 
 	return nil

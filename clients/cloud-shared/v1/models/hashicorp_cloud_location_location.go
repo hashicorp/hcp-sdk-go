@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -44,40 +42,13 @@ func (m *HashicorpCloudLocationLocation) Validate(formats strfmt.Registry) error
 }
 
 func (m *HashicorpCloudLocationLocation) validateRegion(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Region) { // not required
 		return nil
 	}
 
 	if m.Region != nil {
 		if err := m.Region.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("region")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud location location based on the context it is used
-func (m *HashicorpCloudLocationLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateRegion(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudLocationLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Region != nil {
-		if err := m.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("region")
 			}

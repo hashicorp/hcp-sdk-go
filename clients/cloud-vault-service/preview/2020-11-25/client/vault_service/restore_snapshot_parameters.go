@@ -18,85 +18,68 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-service/preview/2020-11-25/models"
 )
 
-// NewRestoreSnapshotParams creates a new RestoreSnapshotParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewRestoreSnapshotParams creates a new RestoreSnapshotParams object
+// with the default values initialized.
 func NewRestoreSnapshotParams() *RestoreSnapshotParams {
+	var ()
 	return &RestoreSnapshotParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewRestoreSnapshotParamsWithTimeout creates a new RestoreSnapshotParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewRestoreSnapshotParamsWithTimeout(timeout time.Duration) *RestoreSnapshotParams {
+	var ()
 	return &RestoreSnapshotParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewRestoreSnapshotParamsWithContext creates a new RestoreSnapshotParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewRestoreSnapshotParamsWithContext(ctx context.Context) *RestoreSnapshotParams {
+	var ()
 	return &RestoreSnapshotParams{
+
 		Context: ctx,
 	}
 }
 
 // NewRestoreSnapshotParamsWithHTTPClient creates a new RestoreSnapshotParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewRestoreSnapshotParamsWithHTTPClient(client *http.Client) *RestoreSnapshotParams {
+	var ()
 	return &RestoreSnapshotParams{
 		HTTPClient: client,
 	}
 }
 
-/* RestoreSnapshotParams contains all the parameters to send to the API endpoint
-   for the restore snapshot operation.
-
-   Typically these are written to a http.Request.
+/*RestoreSnapshotParams contains all the parameters to send to the API endpoint
+for the restore snapshot operation typically these are written to a http.Request
 */
 type RestoreSnapshotParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.HashicorpCloudVault20201125RestoreSnapshotRequest
-
-	// ClusterID.
+	/*ClusterID*/
 	ClusterID string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the restore snapshot params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *RestoreSnapshotParams) WithDefaults() *RestoreSnapshotParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the restore snapshot params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *RestoreSnapshotParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the restore snapshot params
@@ -183,6 +166,7 @@ func (o *RestoreSnapshotParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -37,40 +35,13 @@ func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) Validate(forma
 }
 
 func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) validateAwsNetworkData(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.AwsNetworkData) { // not required
 		return nil
 	}
 
 	if m.AwsNetworkData != nil {
 		if err := m.AwsNetworkData.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("aws_network_data")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud network 20200907 network provider network data based on the context it is used
-func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateAwsNetworkData(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) contextValidateAwsNetworkData(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.AwsNetworkData != nil {
-		if err := m.AwsNetworkData.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_network_data")
 			}

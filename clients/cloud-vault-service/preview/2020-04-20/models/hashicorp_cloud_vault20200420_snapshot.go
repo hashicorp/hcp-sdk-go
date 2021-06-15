@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -41,10 +39,10 @@ type HashicorpCloudVault20200420Snapshot struct {
 	SnapshotID string `json:"snapshot_id,omitempty"`
 
 	// state is represents the current status for this snapshot.
-	State *HashicorpCloudVault20200420SnapshotState `json:"state,omitempty"`
+	State HashicorpCloudVault20200420SnapshotState `json:"state,omitempty"`
 
 	// type is the type of snapshot.
-	Type *HashicorpCloudVault20200420SnapshotType `json:"type,omitempty"`
+	Type HashicorpCloudVault20200420SnapshotType `json:"type,omitempty"`
 
 	// vault_version is the version of the Vault cluster this snapshot was taken from.
 	VaultVersion string `json:"vault_version,omitempty"`
@@ -81,6 +79,7 @@ func (m *HashicorpCloudVault20200420Snapshot) Validate(formats strfmt.Registry) 
 }
 
 func (m *HashicorpCloudVault20200420Snapshot) validateFinishedAt(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.FinishedAt) { // not required
 		return nil
 	}
@@ -93,6 +92,7 @@ func (m *HashicorpCloudVault20200420Snapshot) validateFinishedAt(formats strfmt.
 }
 
 func (m *HashicorpCloudVault20200420Snapshot) validateLocation(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -110,6 +110,7 @@ func (m *HashicorpCloudVault20200420Snapshot) validateLocation(formats strfmt.Re
 }
 
 func (m *HashicorpCloudVault20200420Snapshot) validateRequestedAt(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.RequestedAt) { // not required
 		return nil
 	}
@@ -122,98 +123,32 @@ func (m *HashicorpCloudVault20200420Snapshot) validateRequestedAt(formats strfmt
 }
 
 func (m *HashicorpCloudVault20200420Snapshot) validateState(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
 
-	if m.State != nil {
-		if err := m.State.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("state")
-			}
-			return err
+	if err := m.State.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("state")
 		}
+		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudVault20200420Snapshot) validateType(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
 
-	if m.Type != nil {
-		if err := m.Type.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("type")
-			}
-			return err
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
 		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud vault 20200420 snapshot based on the context it is used
-func (m *HashicorpCloudVault20200420Snapshot) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateLocation(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateState(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudVault20200420Snapshot) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Location != nil {
-		if err := m.Location.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("location")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudVault20200420Snapshot) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.State != nil {
-		if err := m.State.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("state")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudVault20200420Snapshot) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Type != nil {
-		if err := m.Type.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("type")
-			}
-			return err
-		}
+		return err
 	}
 
 	return nil

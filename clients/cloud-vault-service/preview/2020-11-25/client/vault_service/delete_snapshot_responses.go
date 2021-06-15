@@ -47,7 +47,7 @@ func NewDeleteSnapshotOK() *DeleteSnapshotOK {
 	return &DeleteSnapshotOK{}
 }
 
-/* DeleteSnapshotOK describes a response with status code 200, with default header values.
+/*DeleteSnapshotOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type DeleteSnapshotOK struct {
 func (o *DeleteSnapshotOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}][%d] deleteSnapshotOK  %+v", 200, o.Payload)
 }
+
 func (o *DeleteSnapshotOK) GetPayload() *models.HashicorpCloudVault20201125DeleteSnapshotResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewDeleteSnapshotDefault(code int) *DeleteSnapshotDefault {
 	}
 }
 
-/* DeleteSnapshotDefault describes a response with status code -1, with default header values.
+/*DeleteSnapshotDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *DeleteSnapshotDefault) Code() int {
 func (o *DeleteSnapshotDefault) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}][%d] DeleteSnapshot default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *DeleteSnapshotDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

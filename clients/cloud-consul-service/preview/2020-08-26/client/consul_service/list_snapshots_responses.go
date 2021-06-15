@@ -47,7 +47,7 @@ func NewListSnapshotsOK() *ListSnapshotsOK {
 	return &ListSnapshotsOK{}
 }
 
-/* ListSnapshotsOK describes a response with status code 200, with default header values.
+/*ListSnapshotsOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type ListSnapshotsOK struct {
 func (o *ListSnapshotsOK) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] listSnapshotsOK  %+v", 200, o.Payload)
 }
+
 func (o *ListSnapshotsOK) GetPayload() *models.HashicorpCloudConsul20200826ListSnapshotsResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewListSnapshotsDefault(code int) *ListSnapshotsDefault {
 	}
 }
 
-/* ListSnapshotsDefault describes a response with status code -1, with default header values.
+/*ListSnapshotsDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *ListSnapshotsDefault) Code() int {
 func (o *ListSnapshotsDefault) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] ListSnapshots default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *ListSnapshotsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
