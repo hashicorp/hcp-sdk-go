@@ -19,99 +19,81 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/preview/2020-08-26/models"
 )
 
-// NewUpdateSnapshotParams creates a new UpdateSnapshotParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewUpdateSnapshotParams creates a new UpdateSnapshotParams object
+// with the default values initialized.
 func NewUpdateSnapshotParams() *UpdateSnapshotParams {
+	var ()
 	return &UpdateSnapshotParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateSnapshotParamsWithTimeout creates a new UpdateSnapshotParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewUpdateSnapshotParamsWithTimeout(timeout time.Duration) *UpdateSnapshotParams {
+	var ()
 	return &UpdateSnapshotParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewUpdateSnapshotParamsWithContext creates a new UpdateSnapshotParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewUpdateSnapshotParamsWithContext(ctx context.Context) *UpdateSnapshotParams {
+	var ()
 	return &UpdateSnapshotParams{
+
 		Context: ctx,
 	}
 }
 
 // NewUpdateSnapshotParamsWithHTTPClient creates a new UpdateSnapshotParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewUpdateSnapshotParamsWithHTTPClient(client *http.Client) *UpdateSnapshotParams {
+	var ()
 	return &UpdateSnapshotParams{
 		HTTPClient: client,
 	}
 }
 
-/* UpdateSnapshotParams contains all the parameters to send to the API endpoint
-   for the update snapshot operation.
-
-   Typically these are written to a http.Request.
+/*UpdateSnapshotParams contains all the parameters to send to the API endpoint
+for the update snapshot operation typically these are written to a http.Request
 */
 type UpdateSnapshotParams struct {
 
-	/* Body.
-
-	     snapshot contains the fields to update.
+	/*Body
+	  snapshot contains the fields to update.
 
 	Supported fields: name
+
 	*/
 	Body *models.HashicorpCloudConsul20200826Snapshot
+	/*MaskPaths
+	  The set of field mask paths.
 
-	/* MaskPaths.
-
-	   The set of field mask paths.
 	*/
 	MaskPaths []string
+	/*SnapshotID
+	  id is the snapshot’s ID.
 
-	/* SnapshotID.
-
-	   id is the snapshot’s ID.
 	*/
 	SnapshotID string
+	/*SnapshotLocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* SnapshotLocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	SnapshotLocationOrganizationID string
+	/*SnapshotLocationProjectID
+	  project_id is the projects id.
 
-	/* SnapshotLocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	SnapshotLocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the update snapshot params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdateSnapshotParams) WithDefaults() *UpdateSnapshotParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the update snapshot params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdateSnapshotParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update snapshot params
@@ -209,21 +191,19 @@ func (o *UpdateSnapshotParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
 		}
 	}
 
-	if o.MaskPaths != nil {
+	valuesMaskPaths := o.MaskPaths
 
-		// binding items for mask.paths
-		joinedMaskPaths := o.bindParamMaskPaths(reg)
-
-		// query array param mask.paths
-		if err := r.SetQueryParam("mask.paths", joinedMaskPaths...); err != nil {
-			return err
-		}
+	joinedMaskPaths := swag.JoinByFormat(valuesMaskPaths, "multi")
+	// query array param mask.paths
+	if err := r.SetQueryParam("mask.paths", joinedMaskPaths...); err != nil {
+		return err
 	}
 
 	// path param snapshot.id
@@ -245,21 +225,4 @@ func (o *UpdateSnapshotParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
-}
-
-// bindParamUpdateSnapshot binds the parameter mask.paths
-func (o *UpdateSnapshotParams) bindParamMaskPaths(formats strfmt.Registry) []string {
-	maskPathsIR := o.MaskPaths
-
-	var maskPathsIC []string
-	for _, maskPathsIIR := range maskPathsIR { // explode []string
-
-		maskPathsIIV := maskPathsIIR // string as string
-		maskPathsIC = append(maskPathsIC, maskPathsIIV)
-	}
-
-	// items.CollectionFormat: "multi"
-	maskPathsIS := swag.JoinByFormat(maskPathsIC, "multi")
-
-	return maskPathsIS
 }

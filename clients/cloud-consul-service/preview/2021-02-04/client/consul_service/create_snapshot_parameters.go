@@ -18,82 +18,66 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/preview/2021-02-04/models"
 )
 
-// NewCreateSnapshotParams creates a new CreateSnapshotParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewCreateSnapshotParams creates a new CreateSnapshotParams object
+// with the default values initialized.
 func NewCreateSnapshotParams() *CreateSnapshotParams {
+	var ()
 	return &CreateSnapshotParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreateSnapshotParamsWithTimeout creates a new CreateSnapshotParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewCreateSnapshotParamsWithTimeout(timeout time.Duration) *CreateSnapshotParams {
+	var ()
 	return &CreateSnapshotParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewCreateSnapshotParamsWithContext creates a new CreateSnapshotParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewCreateSnapshotParamsWithContext(ctx context.Context) *CreateSnapshotParams {
+	var ()
 	return &CreateSnapshotParams{
+
 		Context: ctx,
 	}
 }
 
 // NewCreateSnapshotParamsWithHTTPClient creates a new CreateSnapshotParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewCreateSnapshotParamsWithHTTPClient(client *http.Client) *CreateSnapshotParams {
+	var ()
 	return &CreateSnapshotParams{
 		HTTPClient: client,
 	}
 }
 
-/* CreateSnapshotParams contains all the parameters to send to the API endpoint
-   for the create snapshot operation.
-
-   Typically these are written to a http.Request.
+/*CreateSnapshotParams contains all the parameters to send to the API endpoint
+for the create snapshot operation typically these are written to a http.Request
 */
 type CreateSnapshotParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.HashicorpCloudConsul20210204CreateSnapshotRequest
+	/*ResourceLocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* ResourceLocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	ResourceLocationOrganizationID string
+	/*ResourceLocationProjectID
+	  project_id is the projects id.
 
-	/* ResourceLocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	ResourceLocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the create snapshot params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *CreateSnapshotParams) WithDefaults() *CreateSnapshotParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the create snapshot params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *CreateSnapshotParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create snapshot params
@@ -169,6 +153,7 @@ func (o *CreateSnapshotParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

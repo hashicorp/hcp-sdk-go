@@ -47,7 +47,7 @@ func NewGetAuditLogStatusOK() *GetAuditLogStatusOK {
 	return &GetAuditLogStatusOK{}
 }
 
-/* GetAuditLogStatusOK describes a response with status code 200, with default header values.
+/*GetAuditLogStatusOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type GetAuditLogStatusOK struct {
 func (o *GetAuditLogStatusOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] getAuditLogStatusOK  %+v", 200, o.Payload)
 }
+
 func (o *GetAuditLogStatusOK) GetPayload() *models.HashicorpCloudVault20201125GetAuditLogStatusResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewGetAuditLogStatusDefault(code int) *GetAuditLogStatusDefault {
 	}
 }
 
-/* GetAuditLogStatusDefault describes a response with status code -1, with default header values.
+/*GetAuditLogStatusDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *GetAuditLogStatusDefault) Code() int {
 func (o *GetAuditLogStatusDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] GetAuditLogStatus default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetAuditLogStatusDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

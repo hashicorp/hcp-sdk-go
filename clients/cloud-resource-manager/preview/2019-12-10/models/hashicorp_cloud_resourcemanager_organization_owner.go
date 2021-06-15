@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -23,11 +21,6 @@ type HashicorpCloudResourcemanagerOrganizationOwner struct {
 
 // Validate validates this hashicorp cloud resourcemanager organization owner
 func (m *HashicorpCloudResourcemanagerOrganizationOwner) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this hashicorp cloud resourcemanager organization owner based on context it is used
-func (m *HashicorpCloudResourcemanagerOrganizationOwner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

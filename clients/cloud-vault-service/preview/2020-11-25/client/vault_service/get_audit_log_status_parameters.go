@@ -16,97 +16,78 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewGetAuditLogStatusParams creates a new GetAuditLogStatusParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewGetAuditLogStatusParams creates a new GetAuditLogStatusParams object
+// with the default values initialized.
 func NewGetAuditLogStatusParams() *GetAuditLogStatusParams {
+	var ()
 	return &GetAuditLogStatusParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetAuditLogStatusParamsWithTimeout creates a new GetAuditLogStatusParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewGetAuditLogStatusParamsWithTimeout(timeout time.Duration) *GetAuditLogStatusParams {
+	var ()
 	return &GetAuditLogStatusParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewGetAuditLogStatusParamsWithContext creates a new GetAuditLogStatusParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewGetAuditLogStatusParamsWithContext(ctx context.Context) *GetAuditLogStatusParams {
+	var ()
 	return &GetAuditLogStatusParams{
+
 		Context: ctx,
 	}
 }
 
 // NewGetAuditLogStatusParamsWithHTTPClient creates a new GetAuditLogStatusParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewGetAuditLogStatusParamsWithHTTPClient(client *http.Client) *GetAuditLogStatusParams {
+	var ()
 	return &GetAuditLogStatusParams{
 		HTTPClient: client,
 	}
 }
 
-/* GetAuditLogStatusParams contains all the parameters to send to the API endpoint
-   for the get audit log status operation.
-
-   Typically these are written to a http.Request.
+/*GetAuditLogStatusParams contains all the parameters to send to the API endpoint
+for the get audit log status operation typically these are written to a http.Request
 */
 type GetAuditLogStatusParams struct {
 
-	// ClusterID.
+	/*ClusterID*/
 	ClusterID string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
+	/*LocationRegionProvider
+	  provider is the named cloud provider ("aws", "gcp", "azure").
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
+	/*LocationRegionRegion
+	  region is the cloud region ("us-west1", "us-east1").
 
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
-
-	// LogID.
+	/*LogID*/
 	LogID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the get audit log status params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetAuditLogStatusParams) WithDefaults() *GetAuditLogStatusParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the get audit log status params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetAuditLogStatusParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get audit log status params
@@ -235,34 +216,32 @@ func (o *GetAuditLogStatusParams) WriteToRequest(r runtime.ClientRequest, reg st
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
-
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
-
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
-
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
-
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	// path param log_id

@@ -18,88 +18,71 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/models"
 )
 
-// NewCreatePeeringParams creates a new CreatePeeringParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewCreatePeeringParams creates a new CreatePeeringParams object
+// with the default values initialized.
 func NewCreatePeeringParams() *CreatePeeringParams {
+	var ()
 	return &CreatePeeringParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreatePeeringParamsWithTimeout creates a new CreatePeeringParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewCreatePeeringParamsWithTimeout(timeout time.Duration) *CreatePeeringParams {
+	var ()
 	return &CreatePeeringParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewCreatePeeringParamsWithContext creates a new CreatePeeringParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewCreatePeeringParamsWithContext(ctx context.Context) *CreatePeeringParams {
+	var ()
 	return &CreatePeeringParams{
+
 		Context: ctx,
 	}
 }
 
 // NewCreatePeeringParamsWithHTTPClient creates a new CreatePeeringParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewCreatePeeringParamsWithHTTPClient(client *http.Client) *CreatePeeringParams {
+	var ()
 	return &CreatePeeringParams{
 		HTTPClient: client,
 	}
 }
 
-/* CreatePeeringParams contains all the parameters to send to the API endpoint
-   for the create peering operation.
-
-   Typically these are written to a http.Request.
+/*CreatePeeringParams contains all the parameters to send to the API endpoint
+for the create peering operation typically these are written to a http.Request
 */
 type CreatePeeringParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.HashicorpCloudNetwork20200907CreatePeeringRequest
+	/*PeeringHvnID
+	  id is the identifier for this resource.
 
-	/* PeeringHvnID.
-
-	   id is the identifier for this resource.
 	*/
 	PeeringHvnID string
+	/*PeeringHvnLocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* PeeringHvnLocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	PeeringHvnLocationOrganizationID string
+	/*PeeringHvnLocationProjectID
+	  project_id is the projects id.
 
-	/* PeeringHvnLocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	PeeringHvnLocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the create peering params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *CreatePeeringParams) WithDefaults() *CreatePeeringParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the create peering params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *CreatePeeringParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create peering params
@@ -186,6 +169,7 @@ func (o *CreatePeeringParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

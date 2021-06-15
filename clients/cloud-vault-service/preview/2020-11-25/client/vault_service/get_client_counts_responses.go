@@ -47,7 +47,7 @@ func NewGetClientCountsOK() *GetClientCountsOK {
 	return &GetClientCountsOK{}
 }
 
-/* GetClientCountsOK describes a response with status code 200, with default header values.
+/*GetClientCountsOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type GetClientCountsOK struct {
 func (o *GetClientCountsOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] getClientCountsOK  %+v", 200, o.Payload)
 }
+
 func (o *GetClientCountsOK) GetPayload() *models.HashicorpCloudVault20201125GetClientCountsResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewGetClientCountsDefault(code int) *GetClientCountsDefault {
 	}
 }
 
-/* GetClientCountsDefault describes a response with status code -1, with default header values.
+/*GetClientCountsDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *GetClientCountsDefault) Code() int {
 func (o *GetClientCountsDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] GetClientCounts default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetClientCountsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

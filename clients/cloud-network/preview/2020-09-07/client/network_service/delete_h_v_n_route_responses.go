@@ -47,7 +47,7 @@ func NewDeleteHVNRouteOK() *DeleteHVNRouteOK {
 	return &DeleteHVNRouteOK{}
 }
 
-/* DeleteHVNRouteOK describes a response with status code 200, with default header values.
+/*DeleteHVNRouteOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type DeleteHVNRouteOK struct {
 func (o *DeleteHVNRouteOK) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] deleteHVNRouteOK  %+v", 200, o.Payload)
 }
+
 func (o *DeleteHVNRouteOK) GetPayload() *models.HashicorpCloudNetwork20200907DeleteHVNRouteResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewDeleteHVNRouteDefault(code int) *DeleteHVNRouteDefault {
 	}
 }
 
-/* DeleteHVNRouteDefault describes a response with status code -1, with default header values.
+/*DeleteHVNRouteDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *DeleteHVNRouteDefault) Code() int {
 func (o *DeleteHVNRouteDefault) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] DeleteHVNRoute default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *DeleteHVNRouteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

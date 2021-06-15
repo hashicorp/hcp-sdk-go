@@ -16,97 +16,79 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewListUpgradeVersionsParams creates a new ListUpgradeVersionsParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewListUpgradeVersionsParams creates a new ListUpgradeVersionsParams object
+// with the default values initialized.
 func NewListUpgradeVersionsParams() *ListUpgradeVersionsParams {
+	var ()
 	return &ListUpgradeVersionsParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewListUpgradeVersionsParamsWithTimeout creates a new ListUpgradeVersionsParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewListUpgradeVersionsParamsWithTimeout(timeout time.Duration) *ListUpgradeVersionsParams {
+	var ()
 	return &ListUpgradeVersionsParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewListUpgradeVersionsParamsWithContext creates a new ListUpgradeVersionsParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewListUpgradeVersionsParamsWithContext(ctx context.Context) *ListUpgradeVersionsParams {
+	var ()
 	return &ListUpgradeVersionsParams{
+
 		Context: ctx,
 	}
 }
 
 // NewListUpgradeVersionsParamsWithHTTPClient creates a new ListUpgradeVersionsParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewListUpgradeVersionsParamsWithHTTPClient(client *http.Client) *ListUpgradeVersionsParams {
+	var ()
 	return &ListUpgradeVersionsParams{
 		HTTPClient: client,
 	}
 }
 
-/* ListUpgradeVersionsParams contains all the parameters to send to the API endpoint
-   for the list upgrade versions operation.
-
-   Typically these are written to a http.Request.
+/*ListUpgradeVersionsParams contains all the parameters to send to the API endpoint
+for the list upgrade versions operation typically these are written to a http.Request
 */
 type ListUpgradeVersionsParams struct {
 
-	/* ID.
+	/*ID
+	  id of the Consul cluster to list versions for.
 
-	   id of the Consul cluster to list versions for.
 	*/
 	ID string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
+	/*LocationRegionProvider
+	  provider is the named cloud provider ("aws", "gcp", "azure").
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
+	/*LocationRegionRegion
+	  region is the cloud region ("us-west1", "us-east1").
 
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the list upgrade versions params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *ListUpgradeVersionsParams) WithDefaults() *ListUpgradeVersionsParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the list upgrade versions params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *ListUpgradeVersionsParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the list upgrade versions params
@@ -224,34 +206,32 @@ func (o *ListUpgradeVersionsParams) WriteToRequest(r runtime.ClientRequest, reg 
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
-
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
-
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
-
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
-
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if len(res) > 0 {

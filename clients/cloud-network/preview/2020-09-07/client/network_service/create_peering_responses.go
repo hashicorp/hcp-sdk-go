@@ -47,7 +47,7 @@ func NewCreatePeeringOK() *CreatePeeringOK {
 	return &CreatePeeringOK{}
 }
 
-/* CreatePeeringOK describes a response with status code 200, with default header values.
+/*CreatePeeringOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type CreatePeeringOK struct {
 func (o *CreatePeeringOK) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] createPeeringOK  %+v", 200, o.Payload)
 }
+
 func (o *CreatePeeringOK) GetPayload() *models.HashicorpCloudNetwork20200907CreatePeeringResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewCreatePeeringDefault(code int) *CreatePeeringDefault {
 	}
 }
 
-/* CreatePeeringDefault describes a response with status code -1, with default header values.
+/*CreatePeeringDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *CreatePeeringDefault) Code() int {
 func (o *CreatePeeringDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] CreatePeering default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *CreatePeeringDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

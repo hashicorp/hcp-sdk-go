@@ -47,7 +47,7 @@ func NewGetAdminTokenOK() *GetAdminTokenOK {
 	return &GetAdminTokenOK{}
 }
 
-/* GetAdminTokenOK describes a response with status code 200, with default header values.
+/*GetAdminTokenOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type GetAdminTokenOK struct {
 func (o *GetAdminTokenOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] getAdminTokenOK  %+v", 200, o.Payload)
 }
+
 func (o *GetAdminTokenOK) GetPayload() *models.HashicorpCloudVault20200420GetAdminTokenResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewGetAdminTokenDefault(code int) *GetAdminTokenDefault {
 	}
 }
 
-/* GetAdminTokenDefault describes a response with status code -1, with default header values.
+/*GetAdminTokenDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *GetAdminTokenDefault) Code() int {
 func (o *GetAdminTokenDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] GetAdminToken default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetAdminTokenDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

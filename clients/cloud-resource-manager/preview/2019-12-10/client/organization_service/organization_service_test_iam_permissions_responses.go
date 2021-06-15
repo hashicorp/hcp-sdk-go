@@ -47,7 +47,7 @@ func NewOrganizationServiceTestIamPermissionsOK() *OrganizationServiceTestIamPer
 	return &OrganizationServiceTestIamPermissionsOK{}
 }
 
-/* OrganizationServiceTestIamPermissionsOK describes a response with status code 200, with default header values.
+/*OrganizationServiceTestIamPermissionsOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type OrganizationServiceTestIamPermissionsOK struct {
 func (o *OrganizationServiceTestIamPermissionsOK) Error() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations/{id}/test-iam-permissions][%d] organizationServiceTestIamPermissionsOK  %+v", 200, o.Payload)
 }
+
 func (o *OrganizationServiceTestIamPermissionsOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationTestIamPermissionsResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewOrganizationServiceTestIamPermissionsDefault(code int) *OrganizationServ
 	}
 }
 
-/* OrganizationServiceTestIamPermissionsDefault describes a response with status code -1, with default header values.
+/*OrganizationServiceTestIamPermissionsDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *OrganizationServiceTestIamPermissionsDefault) Code() int {
 func (o *OrganizationServiceTestIamPermissionsDefault) Error() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations/{id}/test-iam-permissions][%d] OrganizationService_TestIamPermissions default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *OrganizationServiceTestIamPermissionsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -47,7 +47,7 @@ func NewCreateCustomerMasterACLTokenOK() *CreateCustomerMasterACLTokenOK {
 	return &CreateCustomerMasterACLTokenOK{}
 }
 
-/* CreateCustomerMasterACLTokenOK describes a response with status code 200, with default header values.
+/*CreateCustomerMasterACLTokenOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type CreateCustomerMasterACLTokenOK struct {
 func (o *CreateCustomerMasterACLTokenOK) Error() string {
 	return fmt.Sprintf("[POST /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/master-acl-tokens][%d] createCustomerMasterAclTokenOK  %+v", 200, o.Payload)
 }
+
 func (o *CreateCustomerMasterACLTokenOK) GetPayload() *models.HashicorpCloudConsul20210204CreateCustomerMasterACLTokenResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewCreateCustomerMasterACLTokenDefault(code int) *CreateCustomerMasterACLTo
 	}
 }
 
-/* CreateCustomerMasterACLTokenDefault describes a response with status code -1, with default header values.
+/*CreateCustomerMasterACLTokenDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *CreateCustomerMasterACLTokenDefault) Code() int {
 func (o *CreateCustomerMasterACLTokenDefault) Error() string {
 	return fmt.Sprintf("[POST /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/master-acl-tokens][%d] CreateCustomerMasterACLToken default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *CreateCustomerMasterACLTokenDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

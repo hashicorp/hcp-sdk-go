@@ -47,7 +47,7 @@ func NewOrganizationServiceGetOK() *OrganizationServiceGetOK {
 	return &OrganizationServiceGetOK{}
 }
 
-/* OrganizationServiceGetOK describes a response with status code 200, with default header values.
+/*OrganizationServiceGetOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type OrganizationServiceGetOK struct {
 func (o *OrganizationServiceGetOK) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}][%d] organizationServiceGetOK  %+v", 200, o.Payload)
 }
+
 func (o *OrganizationServiceGetOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationGetResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewOrganizationServiceGetDefault(code int) *OrganizationServiceGetDefault {
 	}
 }
 
-/* OrganizationServiceGetDefault describes a response with status code -1, with default header values.
+/*OrganizationServiceGetDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *OrganizationServiceGetDefault) Code() int {
 func (o *OrganizationServiceGetDefault) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}][%d] OrganizationService_Get default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *OrganizationServiceGetDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

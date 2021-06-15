@@ -23,12 +23,9 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
-type ClientOption func(*runtime.ClientOperation)
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ResourceServiceList(params *ResourceServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceListOK, error)
+	ResourceServiceList(params *ResourceServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*ResourceServiceListOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -36,12 +33,13 @@ type ClientService interface {
 /*
   ResourceServiceList lists lists the resources the caller has access to
 */
-func (a *Client) ResourceServiceList(params *ResourceServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceListOK, error) {
+func (a *Client) ResourceServiceList(params *ResourceServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*ResourceServiceListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewResourceServiceListParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ResourceService_List",
 		Method:             "GET",
 		PathPattern:        "/resource-manager/2019-12-10/resources",
@@ -53,12 +51,7 @@ func (a *Client) ResourceServiceList(params *ResourceServiceListParams, authInfo
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}

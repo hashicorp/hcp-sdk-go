@@ -47,7 +47,7 @@ func NewOrganizationServiceGetIamPolicyOK() *OrganizationServiceGetIamPolicyOK {
 	return &OrganizationServiceGetIamPolicyOK{}
 }
 
-/* OrganizationServiceGetIamPolicyOK describes a response with status code 200, with default header values.
+/*OrganizationServiceGetIamPolicyOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type OrganizationServiceGetIamPolicyOK struct {
 func (o *OrganizationServiceGetIamPolicyOK) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceGetIamPolicyOK  %+v", 200, o.Payload)
 }
+
 func (o *OrganizationServiceGetIamPolicyOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationGetIamPolicyResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewOrganizationServiceGetIamPolicyDefault(code int) *OrganizationServiceGet
 	}
 }
 
-/* OrganizationServiceGetIamPolicyDefault describes a response with status code -1, with default header values.
+/*OrganizationServiceGetIamPolicyDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *OrganizationServiceGetIamPolicyDefault) Code() int {
 func (o *OrganizationServiceGetIamPolicyDefault) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *OrganizationServiceGetIamPolicyDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

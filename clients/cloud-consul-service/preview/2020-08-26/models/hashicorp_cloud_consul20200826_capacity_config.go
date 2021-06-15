@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -23,11 +21,6 @@ type HashicorpCloudConsul20200826CapacityConfig struct {
 
 // Validate validates this hashicorp cloud consul 20200826 capacity config
 func (m *HashicorpCloudConsul20200826CapacityConfig) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this hashicorp cloud consul 20200826 capacity config based on context it is used
-func (m *HashicorpCloudConsul20200826CapacityConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

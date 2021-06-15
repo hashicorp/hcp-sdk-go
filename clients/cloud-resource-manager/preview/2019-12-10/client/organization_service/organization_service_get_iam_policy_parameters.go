@@ -16,73 +16,59 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewOrganizationServiceGetIamPolicyParams creates a new OrganizationServiceGetIamPolicyParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewOrganizationServiceGetIamPolicyParams creates a new OrganizationServiceGetIamPolicyParams object
+// with the default values initialized.
 func NewOrganizationServiceGetIamPolicyParams() *OrganizationServiceGetIamPolicyParams {
+	var ()
 	return &OrganizationServiceGetIamPolicyParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewOrganizationServiceGetIamPolicyParamsWithTimeout creates a new OrganizationServiceGetIamPolicyParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewOrganizationServiceGetIamPolicyParamsWithTimeout(timeout time.Duration) *OrganizationServiceGetIamPolicyParams {
+	var ()
 	return &OrganizationServiceGetIamPolicyParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewOrganizationServiceGetIamPolicyParamsWithContext creates a new OrganizationServiceGetIamPolicyParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewOrganizationServiceGetIamPolicyParamsWithContext(ctx context.Context) *OrganizationServiceGetIamPolicyParams {
+	var ()
 	return &OrganizationServiceGetIamPolicyParams{
+
 		Context: ctx,
 	}
 }
 
 // NewOrganizationServiceGetIamPolicyParamsWithHTTPClient creates a new OrganizationServiceGetIamPolicyParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewOrganizationServiceGetIamPolicyParamsWithHTTPClient(client *http.Client) *OrganizationServiceGetIamPolicyParams {
+	var ()
 	return &OrganizationServiceGetIamPolicyParams{
 		HTTPClient: client,
 	}
 }
 
-/* OrganizationServiceGetIamPolicyParams contains all the parameters to send to the API endpoint
-   for the organization service get iam policy operation.
-
-   Typically these are written to a http.Request.
+/*OrganizationServiceGetIamPolicyParams contains all the parameters to send to the API endpoint
+for the organization service get iam policy operation typically these are written to a http.Request
 */
 type OrganizationServiceGetIamPolicyParams struct {
 
-	/* ID.
+	/*ID
+	  ID is the identifier of the organization.
 
-	   ID is the identifier of the organization.
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the organization service get iam policy params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *OrganizationServiceGetIamPolicyParams) WithDefaults() *OrganizationServiceGetIamPolicyParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the organization service get iam policy params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *OrganizationServiceGetIamPolicyParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the organization service get iam policy params

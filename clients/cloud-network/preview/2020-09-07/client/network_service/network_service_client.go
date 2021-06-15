@@ -23,46 +23,43 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
-type ClientOption func(*runtime.ClientOperation)
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AssociateHVNWithAWSRoute53PrivateHostedZoneOK, error)
+	AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter) (*AssociateHVNWithAWSRoute53PrivateHostedZoneOK, error)
 
-	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error)
+	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error)
 
-	CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHVNRouteOK, error)
+	CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*CreateHVNRouteOK, error)
 
-	CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePeeringOK, error)
+	CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePeeringOK, error)
 
-	CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTGWAttachmentOK, error)
+	CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*CreateTGWAttachmentOK, error)
 
-	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error)
+	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error)
 
-	DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteHVNRouteOK, error)
+	DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteHVNRouteOK, error)
 
-	DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePeeringOK, error)
+	DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePeeringOK, error)
 
-	DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTGWAttachmentOK, error)
+	DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTGWAttachmentOK, error)
 
-	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error)
+	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
 
-	GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHVNRouteOK, error)
+	GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*GetHVNRouteOK, error)
 
-	GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPeeringOK, error)
+	GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*GetPeeringOK, error)
 
-	GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTGWAttachmentOK, error)
+	GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*GetTGWAttachmentOK, error)
 
-	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error)
+	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
 
-	ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDependenciesOK, error)
+	ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*ListDependenciesOK, error)
 
-	ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListHVNRoutesOK, error)
+	ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.ClientAuthInfoWriter) (*ListHVNRoutesOK, error)
 
-	ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPeeringsOK, error)
+	ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPeeringsOK, error)
 
-	ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTGWAttachmentsOK, error)
+	ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTGWAttachmentsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -70,12 +67,13 @@ type ClientService interface {
 /*
   AssociateHVNWithAWSRoute53PrivateHostedZone associates h v n with a w s route53 private hosted zone will associate the h v n s v p c with a user s private hosted zone in a w s route53 this will enable the resolution of records of the private hosted zone from within the v p c
 */
-func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AssociateHVNWithAWSRoute53PrivateHostedZoneOK, error) {
+func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter) (*AssociateHVNWithAWSRoute53PrivateHostedZoneOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAssociateHVNWithAWSRoute53PrivateHostedZoneParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "AssociateHVNWithAWSRoute53PrivateHostedZone",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations",
@@ -87,12 +85,7 @@ func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHV
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -108,12 +101,13 @@ func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHV
 /*
   Create creates creates a new h v n
 */
-func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
+func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "Create",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks",
@@ -125,12 +119,7 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -148,12 +137,13 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 
   CreateHVNRoute creates a new HVN Route
 */
-func (a *Client) CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHVNRouteOK, error) {
+func (a *Client) CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*CreateHVNRouteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateHVNRouteParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "CreateHVNRoute",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes",
@@ -165,12 +155,7 @@ func (a *Client) CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -186,12 +171,13 @@ func (a *Client) CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.C
 /*
   CreatePeering creates peering creates a new network peering between h v n v p c and target v p c
 */
-func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePeeringOK, error) {
+func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePeeringOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreatePeeringParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "CreatePeering",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings",
@@ -203,12 +189,7 @@ func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -224,12 +205,13 @@ func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.Cli
 /*
   CreateTGWAttachment creates t g w attachment creates a new transit gateway attachment for an h v n
 */
-func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTGWAttachmentOK, error) {
+func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*CreateTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateTGWAttachmentParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "CreateTGWAttachment",
 		Method:             "POST",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments",
@@ -241,12 +223,7 @@ func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -262,12 +239,13 @@ func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo
 /*
   Delete deletes deletes a new h v n
 */
-func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
+func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "Delete",
 		Method:             "DELETE",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}",
@@ -279,12 +257,7 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -300,12 +273,13 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 /*
   DeleteHVNRoute deletes h v n route triggers h v n route deletion workflow
 */
-func (a *Client) DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteHVNRouteOK, error) {
+func (a *Client) DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteHVNRouteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteHVNRouteParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "DeleteHVNRoute",
 		Method:             "DELETE",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}",
@@ -317,12 +291,7 @@ func (a *Client) DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -338,12 +307,13 @@ func (a *Client) DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.C
 /*
   DeletePeering deletes peering deletes specified peering and triggers updating network configuration
 */
-func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePeeringOK, error) {
+func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePeeringOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeletePeeringParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "DeletePeering",
 		Method:             "DELETE",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}",
@@ -355,12 +325,7 @@ func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -376,12 +341,13 @@ func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.Cli
 /*
   DeleteTGWAttachment deletes t g w attachment deletes specified transit gateway attachment and triggers updating network configuration
 */
-func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTGWAttachmentOK, error) {
+func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteTGWAttachmentParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "DeleteTGWAttachment",
 		Method:             "DELETE",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}",
@@ -393,12 +359,7 @@ func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -414,12 +375,13 @@ func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo
 /*
   Get gets reads a single h v n
 */
-func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error) {
+func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "Get",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}",
@@ -431,12 +393,7 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, o
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -452,12 +409,13 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, o
 /*
   GetHVNRoute gets h v n route returns a specific h v n route
 */
-func (a *Client) GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHVNRouteOK, error) {
+func (a *Client) GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientAuthInfoWriter) (*GetHVNRouteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetHVNRouteParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "GetHVNRoute",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}",
@@ -469,12 +427,7 @@ func (a *Client) GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -490,12 +443,13 @@ func (a *Client) GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientA
 /*
   GetPeering gets peering returns information about peering
 */
-func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPeeringOK, error) {
+func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter) (*GetPeeringOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetPeeringParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "GetPeering",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}",
@@ -507,12 +461,7 @@ func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAut
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -528,12 +477,13 @@ func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAut
 /*
   GetTGWAttachment gets t g w attachment returns existing t g w attachment
 */
-func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTGWAttachmentOK, error) {
+func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter) (*GetTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetTGWAttachmentParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "GetTGWAttachment",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}",
@@ -545,12 +495,7 @@ func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runti
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -566,12 +511,13 @@ func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runti
 /*
   List lists lists all h v ns
 */
-func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
+func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "List",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks",
@@ -583,12 +529,7 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -604,12 +545,13 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 /*
   ListDependencies lists dependencies lists the dependent services on the given h v n
 */
-func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDependenciesOK, error) {
+func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter) (*ListDependenciesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListDependenciesParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ListDependencies",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies",
@@ -621,12 +563,7 @@ func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runti
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -642,12 +579,13 @@ func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runti
 /*
   ListHVNRoutes lists h v n routes returns a list of routes for an h v n
 */
-func (a *Client) ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListHVNRoutesOK, error) {
+func (a *Client) ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.ClientAuthInfoWriter) (*ListHVNRoutesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListHVNRoutesParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ListHVNRoutes",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes",
@@ -659,12 +597,7 @@ func (a *Client) ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -680,12 +613,13 @@ func (a *Client) ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.Cli
 /*
   ListPeerings lists peerings returns a list of peerings matching the request
 */
-func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPeeringsOK, error) {
+func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPeeringsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListPeeringsParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ListPeerings",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings",
@@ -697,12 +631,7 @@ func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -718,12 +647,13 @@ func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.Clien
 /*
   ListTGWAttachments lists t g w attachments returns a list of t g w attachments matching the request
 */
-func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTGWAttachmentsOK, error) {
+func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTGWAttachmentsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListTGWAttachmentsParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ListTGWAttachments",
 		Method:             "GET",
 		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments",
@@ -735,12 +665,7 @@ func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo r
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}

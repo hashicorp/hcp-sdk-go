@@ -18,85 +18,68 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-service/preview/2020-04-20/models"
 )
 
-// NewUpdatePublicIpsParams creates a new UpdatePublicIpsParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewUpdatePublicIpsParams creates a new UpdatePublicIpsParams object
+// with the default values initialized.
 func NewUpdatePublicIpsParams() *UpdatePublicIpsParams {
+	var ()
 	return &UpdatePublicIpsParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdatePublicIpsParamsWithTimeout creates a new UpdatePublicIpsParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewUpdatePublicIpsParamsWithTimeout(timeout time.Duration) *UpdatePublicIpsParams {
+	var ()
 	return &UpdatePublicIpsParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewUpdatePublicIpsParamsWithContext creates a new UpdatePublicIpsParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewUpdatePublicIpsParamsWithContext(ctx context.Context) *UpdatePublicIpsParams {
+	var ()
 	return &UpdatePublicIpsParams{
+
 		Context: ctx,
 	}
 }
 
 // NewUpdatePublicIpsParamsWithHTTPClient creates a new UpdatePublicIpsParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewUpdatePublicIpsParamsWithHTTPClient(client *http.Client) *UpdatePublicIpsParams {
+	var ()
 	return &UpdatePublicIpsParams{
 		HTTPClient: client,
 	}
 }
 
-/* UpdatePublicIpsParams contains all the parameters to send to the API endpoint
-   for the update public ips operation.
-
-   Typically these are written to a http.Request.
+/*UpdatePublicIpsParams contains all the parameters to send to the API endpoint
+for the update public ips operation typically these are written to a http.Request
 */
 type UpdatePublicIpsParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.HashicorpCloudVault20200420UpdatePublicIpsRequest
-
-	// ClusterID.
+	/*ClusterID*/
 	ClusterID string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the update public ips params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdatePublicIpsParams) WithDefaults() *UpdatePublicIpsParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the update public ips params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdatePublicIpsParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update public ips params
@@ -183,6 +166,7 @@ func (o *UpdatePublicIpsParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

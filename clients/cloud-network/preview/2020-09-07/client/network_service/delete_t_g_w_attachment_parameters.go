@@ -16,125 +16,103 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDeleteTGWAttachmentParams creates a new DeleteTGWAttachmentParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewDeleteTGWAttachmentParams creates a new DeleteTGWAttachmentParams object
+// with the default values initialized.
 func NewDeleteTGWAttachmentParams() *DeleteTGWAttachmentParams {
+	var ()
 	return &DeleteTGWAttachmentParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeleteTGWAttachmentParamsWithTimeout creates a new DeleteTGWAttachmentParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewDeleteTGWAttachmentParamsWithTimeout(timeout time.Duration) *DeleteTGWAttachmentParams {
+	var ()
 	return &DeleteTGWAttachmentParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewDeleteTGWAttachmentParamsWithContext creates a new DeleteTGWAttachmentParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewDeleteTGWAttachmentParamsWithContext(ctx context.Context) *DeleteTGWAttachmentParams {
+	var ()
 	return &DeleteTGWAttachmentParams{
+
 		Context: ctx,
 	}
 }
 
 // NewDeleteTGWAttachmentParamsWithHTTPClient creates a new DeleteTGWAttachmentParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewDeleteTGWAttachmentParamsWithHTTPClient(client *http.Client) *DeleteTGWAttachmentParams {
+	var ()
 	return &DeleteTGWAttachmentParams{
 		HTTPClient: client,
 	}
 }
 
-/* DeleteTGWAttachmentParams contains all the parameters to send to the API endpoint
-   for the delete t g w attachment operation.
-
-   Typically these are written to a http.Request.
+/*DeleteTGWAttachmentParams contains all the parameters to send to the API endpoint
+for the delete t g w attachment operation typically these are written to a http.Request
 */
 type DeleteTGWAttachmentParams struct {
 
-	/* HvnDescription.
-
-	     description is a human-friendly description for this link. This is
+	/*HvnDescription
+	  description is a human-friendly description for this link. This is
 	used primarily for informational purposes such as error messages.
+
 	*/
 	HvnDescription *string
+	/*HvnID
+	  id is the identifier for this resource.
 
-	/* HvnID.
-
-	   id is the identifier for this resource.
 	*/
 	HvnID string
+	/*HvnLocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* HvnLocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	HvnLocationOrganizationID string
+	/*HvnLocationProjectID
+	  project_id is the projects id.
 
-	/* HvnLocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	HvnLocationProjectID string
+	/*HvnLocationRegionProvider
+	  provider is the named cloud provider ("aws", "gcp", "azure").
 
-	/* HvnLocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	HvnLocationRegionProvider *string
+	/*HvnLocationRegionRegion
+	  region is the cloud region ("us-west1", "us-east1").
 
-	/* HvnLocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	HvnLocationRegionRegion *string
-
-	/* HvnType.
-
-	     type is the unique type of the resource. Each service publishes a
+	/*HvnType
+	  type is the unique type of the resource. Each service publishes a
 	unique set of types. The type value is recommended to be formatted
 	in "<org>.<type>" such as "hashicorp.hvn". This is to prevent conflicts
 	in the future, but any string value will work.
+
 	*/
 	HvnType *string
+	/*HvnUUID
+	  uuid is the unique UUID for this resource.
 
-	/* HvnUUID.
-
-	   uuid is the unique UUID for this resource.
 	*/
 	HvnUUID *string
+	/*ID
+	  id of a TGW Attachment to delete
 
-	/* ID.
-
-	   id of a TGW Attachment to delete
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the delete t g w attachment params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *DeleteTGWAttachmentParams) WithDefaults() *DeleteTGWAttachmentParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the delete t g w attachment params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *DeleteTGWAttachmentParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete t g w attachment params
@@ -281,17 +259,16 @@ func (o *DeleteTGWAttachmentParams) WriteToRequest(r runtime.ClientRequest, reg 
 
 		// query param hvn.description
 		var qrHvnDescription string
-
 		if o.HvnDescription != nil {
 			qrHvnDescription = *o.HvnDescription
 		}
 		qHvnDescription := qrHvnDescription
 		if qHvnDescription != "" {
-
 			if err := r.SetQueryParam("hvn.description", qHvnDescription); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	// path param hvn.id
@@ -313,68 +290,64 @@ func (o *DeleteTGWAttachmentParams) WriteToRequest(r runtime.ClientRequest, reg 
 
 		// query param hvn.location.region.provider
 		var qrHvnLocationRegionProvider string
-
 		if o.HvnLocationRegionProvider != nil {
 			qrHvnLocationRegionProvider = *o.HvnLocationRegionProvider
 		}
 		qHvnLocationRegionProvider := qrHvnLocationRegionProvider
 		if qHvnLocationRegionProvider != "" {
-
 			if err := r.SetQueryParam("hvn.location.region.provider", qHvnLocationRegionProvider); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.HvnLocationRegionRegion != nil {
 
 		// query param hvn.location.region.region
 		var qrHvnLocationRegionRegion string
-
 		if o.HvnLocationRegionRegion != nil {
 			qrHvnLocationRegionRegion = *o.HvnLocationRegionRegion
 		}
 		qHvnLocationRegionRegion := qrHvnLocationRegionRegion
 		if qHvnLocationRegionRegion != "" {
-
 			if err := r.SetQueryParam("hvn.location.region.region", qHvnLocationRegionRegion); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.HvnType != nil {
 
 		// query param hvn.type
 		var qrHvnType string
-
 		if o.HvnType != nil {
 			qrHvnType = *o.HvnType
 		}
 		qHvnType := qrHvnType
 		if qHvnType != "" {
-
 			if err := r.SetQueryParam("hvn.type", qHvnType); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.HvnUUID != nil {
 
 		// query param hvn.uuid
 		var qrHvnUUID string
-
 		if o.HvnUUID != nil {
 			qrHvnUUID = *o.HvnUUID
 		}
 		qHvnUUID := qrHvnUUID
 		if qHvnUUID != "" {
-
 			if err := r.SetQueryParam("hvn.uuid", qHvnUUID); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	// path param id

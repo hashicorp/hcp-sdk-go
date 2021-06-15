@@ -18,88 +18,71 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/models"
 )
 
-// NewCreateHVNRouteParams creates a new CreateHVNRouteParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewCreateHVNRouteParams creates a new CreateHVNRouteParams object
+// with the default values initialized.
 func NewCreateHVNRouteParams() *CreateHVNRouteParams {
+	var ()
 	return &CreateHVNRouteParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreateHVNRouteParamsWithTimeout creates a new CreateHVNRouteParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewCreateHVNRouteParamsWithTimeout(timeout time.Duration) *CreateHVNRouteParams {
+	var ()
 	return &CreateHVNRouteParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewCreateHVNRouteParamsWithContext creates a new CreateHVNRouteParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewCreateHVNRouteParamsWithContext(ctx context.Context) *CreateHVNRouteParams {
+	var ()
 	return &CreateHVNRouteParams{
+
 		Context: ctx,
 	}
 }
 
 // NewCreateHVNRouteParamsWithHTTPClient creates a new CreateHVNRouteParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewCreateHVNRouteParamsWithHTTPClient(client *http.Client) *CreateHVNRouteParams {
+	var ()
 	return &CreateHVNRouteParams{
 		HTTPClient: client,
 	}
 }
 
-/* CreateHVNRouteParams contains all the parameters to send to the API endpoint
-   for the create h v n route operation.
-
-   Typically these are written to a http.Request.
+/*CreateHVNRouteParams contains all the parameters to send to the API endpoint
+for the create h v n route operation typically these are written to a http.Request
 */
 type CreateHVNRouteParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.HashicorpCloudNetwork20200907CreateHVNRouteRequest
+	/*HvnID
+	  id is the identifier for this resource.
 
-	/* HvnID.
-
-	   id is the identifier for this resource.
 	*/
 	HvnID string
+	/*HvnLocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* HvnLocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	HvnLocationOrganizationID string
+	/*HvnLocationProjectID
+	  project_id is the projects id.
 
-	/* HvnLocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	HvnLocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the create h v n route params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *CreateHVNRouteParams) WithDefaults() *CreateHVNRouteParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the create h v n route params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *CreateHVNRouteParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create h v n route params
@@ -186,6 +169,7 @@ func (o *CreateHVNRouteParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -48,6 +46,7 @@ func (m *HashicorpCloudConsul20210204SnapshotSnapshotMeta) Validate(formats strf
 }
 
 func (m *HashicorpCloudConsul20210204SnapshotSnapshotMeta) validateRestoredAt(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.RestoredAt) { // not required
 		return nil
 	}
@@ -56,11 +55,6 @@ func (m *HashicorpCloudConsul20210204SnapshotSnapshotMeta) validateRestoredAt(fo
 		return err
 	}
 
-	return nil
-}
-
-// ContextValidate validates this hashicorp cloud consul 20210204 snapshot snapshot meta based on context it is used
-func (m *HashicorpCloudConsul20210204SnapshotSnapshotMeta) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

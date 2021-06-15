@@ -47,7 +47,7 @@ func NewUnsealOK() *UnsealOK {
 	return &UnsealOK{}
 }
 
-/* UnsealOK describes a response with status code 200, with default header values.
+/*UnsealOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type UnsealOK struct {
 func (o *UnsealOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] unsealOK  %+v", 200, o.Payload)
 }
+
 func (o *UnsealOK) GetPayload() *models.HashicorpCloudVault20200420UnsealResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewUnsealDefault(code int) *UnsealDefault {
 	}
 }
 
-/* UnsealDefault describes a response with status code -1, with default header values.
+/*UnsealDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *UnsealDefault) Code() int {
 func (o *UnsealDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] Unseal default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *UnsealDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
