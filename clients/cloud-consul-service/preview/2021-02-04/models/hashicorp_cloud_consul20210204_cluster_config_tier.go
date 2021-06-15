@@ -28,6 +28,9 @@ const (
 
 	// HashicorpCloudConsul20210204ClusterConfigTierSTANDARD captures enum value "STANDARD"
 	HashicorpCloudConsul20210204ClusterConfigTierSTANDARD HashicorpCloudConsul20210204ClusterConfigTier = "STANDARD"
+
+	// HashicorpCloudConsul20210204ClusterConfigTierPLUS captures enum value "PLUS"
+	HashicorpCloudConsul20210204ClusterConfigTierPLUS HashicorpCloudConsul20210204ClusterConfigTier = "PLUS"
 )
 
 // for schema
@@ -35,7 +38,7 @@ var hashicorpCloudConsul20210204ClusterConfigTierEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudConsul20210204ClusterConfigTier
-	if err := json.Unmarshal([]byte(`["UNSET","DEVELOPMENT","STANDARD"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["UNSET","DEVELOPMENT","STANDARD","PLUS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

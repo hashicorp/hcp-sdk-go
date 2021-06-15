@@ -9,6 +9,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudConsul20210204ClusterConfig ClusterConfig holds the configuration for a Consul cluster.
@@ -29,6 +30,16 @@ type HashicorpCloudConsul20210204ClusterConfig struct {
 
 	// NetworkConfig contains the network to launch the Consul cluster into.
 	NetworkConfig *HashicorpCloudConsul20210204NetworkConfig `json:"network_config,omitempty"`
+
+	// primary is readonly and contains a link to the primary consul cluster in a federation.
+	// If this link points to itself, this cluster is the primary of a federation.
+	// If the link points to another cluster, this cluster is a secondary in a federation.
+	// Use consul_config.primary to federate clusters. The difference between these two fields
+	// is that this field is present on primaries and secondaries. Whereas consul_config.primary
+	// is only present on secondaries.
+	// Output only.
+	// Read Only: true
+	Primary *cloud.HashicorpCloudLocationLink `json:"primary,omitempty"`
 
 	// snapshot_config contains the configuration for how often to snapshot and
 	// how many to maintain.
@@ -51,6 +62,10 @@ func (m *HashicorpCloudConsul20210204ClusterConfig) Validate(formats strfmt.Regi
 	}
 
 	if err := m.validateNetworkConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePrimary(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -110,6 +125,24 @@ func (m *HashicorpCloudConsul20210204ClusterConfig) validateNetworkConfig(format
 		if err := m.NetworkConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("network_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudConsul20210204ClusterConfig) validatePrimary(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Primary) { // not required
+		return nil
+	}
+
+	if m.Primary != nil {
+		if err := m.Primary.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("primary")
 			}
 			return err
 		}
