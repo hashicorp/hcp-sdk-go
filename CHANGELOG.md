@@ -1,27 +1,32 @@
+## 0.9.0 (June 16, 2021)
+
+FEATURES:
+* Updated cloud-consul-service/preview/2021-02-04 to Plus tier (#24)
+
 ## 0.8.0 (May 20, 2021)
 
 FEATURES:
-* Updated cloud-network/preview/2020-09-07 to include GetHVNRoute and add UpdatedAt fields on Peering and TGW
+* Updated cloud-network/preview/2020-09-07 to include GetHVNRoute and add UpdatedAt fields on Peering and TGW (#22)
 
 ## 0.7.0 (April 26, 2021)
 
 FEATURES:
-* Updated cloud-network/preview/2020-09-07 to include changes introduced to add an optional parameter for ListHVNRoutes - `destination`
+* Updated cloud-network/preview/2020-09-07 to include changes introduced to add an optional parameter for ListHVNRoutes - `destination` (#20)
 
 ## 0.6.0 (April 16, 2021)
 
 FEATURES:
-* Update cloud-network/preview/2020-09-07 to include support for HVN routes
+* Update cloud-network/preview/2020-09-07 to include support for HVN routes (#17)
 
 ## 0.5.0 (March 22, 2021)
 
 FEATURES:
-* Add SDK support for two new preview versions (2020-04-20 and 2020-11-25) of cloud-vault-service
+* Add SDK support for two new preview versions (2020-04-20 and 2020-11-25) of cloud-vault-service (#14)
 
 ## 0.4.0 (March 16, 2021)
 
 FEATURES:
-* Add SDK support for new preview version (2021-02-04) of cloud-consul-service
+* Add SDK support for new preview version (2021-02-04) of cloud-consul-service (#10)
 
 ## 0.3.0 (February 23, 2021)
 
