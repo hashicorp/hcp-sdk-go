@@ -17,6 +17,12 @@ import (
 // swagger:model hashicorp.cloud.consul_20210204.ClusterConfig
 type HashicorpCloudConsul20210204ClusterConfig struct {
 
+	// auto_hvn_to_hvn_peering is only used together with the field consul_config.primary when
+	// creating secondary clusters in a federation. Enable auto_hvn_to_hvn_peering if the
+	// secondary HVN should be peered automatically to every other cluster's HVN in the federation.
+	// If left disabled, the peering has to be done manually.
+	AutoHvnToHvnPeering bool `json:"auto_hvn_to_hvn_peering,omitempty"`
+
 	// capacity_config contains the configuration for the cluster size settings.
 	CapacityConfig *HashicorpCloudConsul20210204CapacityConfig `json:"capacity_config,omitempty"`
 
