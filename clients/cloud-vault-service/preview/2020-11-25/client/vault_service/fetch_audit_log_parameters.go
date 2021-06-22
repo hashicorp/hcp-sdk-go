@@ -18,68 +18,85 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-service/preview/2020-11-25/models"
 )
 
-// NewFetchAuditLogParams creates a new FetchAuditLogParams object
-// with the default values initialized.
+// NewFetchAuditLogParams creates a new FetchAuditLogParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewFetchAuditLogParams() *FetchAuditLogParams {
-	var ()
 	return &FetchAuditLogParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewFetchAuditLogParamsWithTimeout creates a new FetchAuditLogParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewFetchAuditLogParamsWithTimeout(timeout time.Duration) *FetchAuditLogParams {
-	var ()
 	return &FetchAuditLogParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewFetchAuditLogParamsWithContext creates a new FetchAuditLogParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewFetchAuditLogParamsWithContext(ctx context.Context) *FetchAuditLogParams {
-	var ()
 	return &FetchAuditLogParams{
-
 		Context: ctx,
 	}
 }
 
 // NewFetchAuditLogParamsWithHTTPClient creates a new FetchAuditLogParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewFetchAuditLogParamsWithHTTPClient(client *http.Client) *FetchAuditLogParams {
-	var ()
 	return &FetchAuditLogParams{
 		HTTPClient: client,
 	}
 }
 
-/*FetchAuditLogParams contains all the parameters to send to the API endpoint
-for the fetch audit log operation typically these are written to a http.Request
+/* FetchAuditLogParams contains all the parameters to send to the API endpoint
+   for the fetch audit log operation.
+
+   Typically these are written to a http.Request.
 */
 type FetchAuditLogParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudVault20201125FetchAuditLogRequest
-	/*ClusterID*/
-	ClusterID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	// ClusterID.
+	ClusterID string
+
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the fetch audit log params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *FetchAuditLogParams) WithDefaults() *FetchAuditLogParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the fetch audit log params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *FetchAuditLogParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the fetch audit log params
@@ -166,7 +183,6 @@ func (o *FetchAuditLogParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

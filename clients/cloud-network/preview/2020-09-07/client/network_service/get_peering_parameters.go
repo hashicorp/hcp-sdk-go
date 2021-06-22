@@ -16,84 +16,103 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewGetPeeringParams creates a new GetPeeringParams object
-// with the default values initialized.
+// NewGetPeeringParams creates a new GetPeeringParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewGetPeeringParams() *GetPeeringParams {
-	var ()
 	return &GetPeeringParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetPeeringParamsWithTimeout creates a new GetPeeringParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewGetPeeringParamsWithTimeout(timeout time.Duration) *GetPeeringParams {
-	var ()
 	return &GetPeeringParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewGetPeeringParamsWithContext creates a new GetPeeringParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewGetPeeringParamsWithContext(ctx context.Context) *GetPeeringParams {
-	var ()
 	return &GetPeeringParams{
-
 		Context: ctx,
 	}
 }
 
 // NewGetPeeringParamsWithHTTPClient creates a new GetPeeringParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewGetPeeringParamsWithHTTPClient(client *http.Client) *GetPeeringParams {
-	var ()
 	return &GetPeeringParams{
 		HTTPClient: client,
 	}
 }
 
-/*GetPeeringParams contains all the parameters to send to the API endpoint
-for the get peering operation typically these are written to a http.Request
+/* GetPeeringParams contains all the parameters to send to the API endpoint
+   for the get peering operation.
+
+   Typically these are written to a http.Request.
 */
 type GetPeeringParams struct {
 
-	/*HvnID
-	  HvnId is an ID of the HVN where the peering belongs to
+	/* HvnID.
 
+	   HvnId is an ID of the HVN where the peering belongs to
 	*/
 	HvnID string
-	/*ID
-	  Id is the ID of a peering to fetch
 
+	/* ID.
+
+	   Id is the ID of a peering to fetch
 	*/
 	ID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*LocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* LocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
-	/*LocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* LocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the get peering params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetPeeringParams) WithDefaults() *GetPeeringParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the get peering params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetPeeringParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get peering params
@@ -227,32 +246,34 @@ func (o *GetPeeringParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
+
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
+
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

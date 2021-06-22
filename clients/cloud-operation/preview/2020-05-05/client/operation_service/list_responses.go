@@ -47,7 +47,7 @@ func NewListOK() *ListOK {
 	return &ListOK{}
 }
 
-/*ListOK handles this case with default header values.
+/* ListOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type ListOK struct {
 func (o *ListOK) Error() string {
 	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations][%d] listOK  %+v", 200, o.Payload)
 }
-
 func (o *ListOK) GetPayload() *models.HashicorpCloudOperationListResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewListDefault(code int) *ListDefault {
 	}
 }
 
-/*ListDefault handles this case with default header values.
+/* ListDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *ListDefault) Code() int {
 func (o *ListDefault) Error() string {
 	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations][%d] List default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ListDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
