@@ -1,7 +1,12 @@
+## 0.9.0 (June 23, 2021)
+
+FEATURES:
+* Updated cloud-consul-service/preview/2021-02-04 to add the AutoHvnToHvnPeering option to Consul clusters (#25)
+
 ## 0.9.0 (June 16, 2021)
 
 FEATURES:
-* Updated cloud-consul-service/preview/2021-02-04 to Plus tier (#24)
+* Updated cloud-consul-service/preview/2021-02-04 to add Plus tier (#24)
 
 ## 0.8.0 (May 20, 2021)
 
