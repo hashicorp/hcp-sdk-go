@@ -1,4 +1,4 @@
-## 0.9.0 (June 23, 2021)
+## 0.10.0 (June 23, 2021)
 
 FEATURES:
 * Updated cloud-consul-service/preview/2021-02-04 to add the AutoHvnToHvnPeering option to Consul clusters (#25)
