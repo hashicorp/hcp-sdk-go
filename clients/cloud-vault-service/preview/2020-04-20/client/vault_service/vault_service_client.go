@@ -23,45 +23,48 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error)
+	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error)
 
-	CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*CreateSnapshotOK, error)
+	CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSnapshotOK, error)
 
-	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error)
+	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error)
 
-	DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteSnapshotOK, error)
+	DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSnapshotOK, error)
 
-	DisableCORS(params *DisableCORSParams, authInfo runtime.ClientAuthInfoWriter) (*DisableCORSOK, error)
+	DisableCORS(params *DisableCORSParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DisableCORSOK, error)
 
-	FetchAuditLog(params *FetchAuditLogParams, authInfo runtime.ClientAuthInfoWriter) (*FetchAuditLogOK, error)
+	FetchAuditLog(params *FetchAuditLogParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FetchAuditLogOK, error)
 
-	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
+	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error)
 
-	GetAdminToken(params *GetAdminTokenParams, authInfo runtime.ClientAuthInfoWriter) (*GetAdminTokenOK, error)
+	GetAdminToken(params *GetAdminTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAdminTokenOK, error)
 
-	GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo runtime.ClientAuthInfoWriter) (*GetAuditLogStatusOK, error)
+	GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuditLogStatusOK, error)
 
-	GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.ClientAuthInfoWriter) (*GetCORSConfigOK, error)
+	GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCORSConfigOK, error)
 
-	GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*GetSnapshotOK, error)
+	GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSnapshotOK, error)
 
-	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
+	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error)
 
-	ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ListSnapshotsOK, error)
+	ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSnapshotsOK, error)
 
-	RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*RestoreSnapshotOK, error)
+	RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSnapshotOK, error)
 
-	Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter) (*SealOK, error)
+	Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SealOK, error)
 
-	Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWriter) (*UnsealOK, error)
+	Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnsealOK, error)
 
-	UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateCORSConfigOK, error)
+	UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCORSConfigOK, error)
 
-	UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePublicIpsOK, error)
+	UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePublicIpsOK, error)
 
-	UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateSnapshotOK, error)
+	UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSnapshotOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -69,13 +72,12 @@ type ClientService interface {
 /*
   Create create API
 */
-func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error) {
+func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Create",
 		Method:             "POST",
 		PathPattern:        "/vault/2020-04-20/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters",
@@ -87,7 +89,12 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -103,13 +110,12 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 /*
   CreateSnapshot create snapshot API
 */
-func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*CreateSnapshotOK, error) {
+func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateSnapshotParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "CreateSnapshot",
 		Method:             "POST",
 		PathPattern:        "/vault/2020-04-20/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots",
@@ -121,7 +127,12 @@ func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -137,13 +148,12 @@ func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.C
 /*
   Delete delete API
 */
-func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error) {
+func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Delete",
 		Method:             "DELETE",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}",
@@ -155,7 +165,12 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -171,13 +186,12 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 /*
   DeleteSnapshot delete snapshot API
 */
-func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteSnapshotOK, error) {
+func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteSnapshotParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "DeleteSnapshot",
 		Method:             "DELETE",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}",
@@ -189,7 +203,12 @@ func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -205,13 +224,12 @@ func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.C
 /*
   DisableCORS disable c o r s API
 */
-func (a *Client) DisableCORS(params *DisableCORSParams, authInfo runtime.ClientAuthInfoWriter) (*DisableCORSOK, error) {
+func (a *Client) DisableCORS(params *DisableCORSParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DisableCORSOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDisableCORSParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "DisableCORS",
 		Method:             "DELETE",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors",
@@ -223,7 +241,12 @@ func (a *Client) DisableCORS(params *DisableCORSParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -239,13 +262,12 @@ func (a *Client) DisableCORS(params *DisableCORSParams, authInfo runtime.ClientA
 /*
   FetchAuditLog fetch audit log API
 */
-func (a *Client) FetchAuditLog(params *FetchAuditLogParams, authInfo runtime.ClientAuthInfoWriter) (*FetchAuditLogOK, error) {
+func (a *Client) FetchAuditLog(params *FetchAuditLogParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FetchAuditLogOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewFetchAuditLogParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "FetchAuditLog",
 		Method:             "POST",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog",
@@ -257,7 +279,12 @@ func (a *Client) FetchAuditLog(params *FetchAuditLogParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -273,13 +300,12 @@ func (a *Client) FetchAuditLog(params *FetchAuditLogParams, authInfo runtime.Cli
 /*
   Get get API
 */
-func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error) {
+func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Get",
 		Method:             "GET",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}",
@@ -291,7 +317,12 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -307,13 +338,12 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 /*
   GetAdminToken get admin token API
 */
-func (a *Client) GetAdminToken(params *GetAdminTokenParams, authInfo runtime.ClientAuthInfoWriter) (*GetAdminTokenOK, error) {
+func (a *Client) GetAdminToken(params *GetAdminTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAdminTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetAdminTokenParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "GetAdminToken",
 		Method:             "GET",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken",
@@ -325,7 +355,12 @@ func (a *Client) GetAdminToken(params *GetAdminTokenParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -341,13 +376,12 @@ func (a *Client) GetAdminToken(params *GetAdminTokenParams, authInfo runtime.Cli
 /*
   GetAuditLogStatus get audit log status API
 */
-func (a *Client) GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo runtime.ClientAuthInfoWriter) (*GetAuditLogStatusOK, error) {
+func (a *Client) GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuditLogStatusOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetAuditLogStatusParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "GetAuditLogStatus",
 		Method:             "GET",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}",
@@ -359,7 +393,12 @@ func (a *Client) GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo run
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -375,13 +414,12 @@ func (a *Client) GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo run
 /*
   GetCORSConfig get c o r s config API
 */
-func (a *Client) GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.ClientAuthInfoWriter) (*GetCORSConfigOK, error) {
+func (a *Client) GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCORSConfigOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetCORSConfigParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "GetCORSConfig",
 		Method:             "GET",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config",
@@ -393,7 +431,12 @@ func (a *Client) GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -409,13 +452,12 @@ func (a *Client) GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.Cli
 /*
   GetSnapshot get snapshot API
 */
-func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*GetSnapshotOK, error) {
+func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetSnapshotParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "GetSnapshot",
 		Method:             "GET",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}",
@@ -427,7 +469,12 @@ func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -443,13 +490,12 @@ func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientA
 /*
   List list API
 */
-func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
+func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "List",
 		Method:             "GET",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters",
@@ -461,7 +507,12 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -477,13 +528,12 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 /*
   ListSnapshots list snapshots API
 */
-func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ListSnapshotsOK, error) {
+func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSnapshotsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListSnapshotsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ListSnapshots",
 		Method:             "GET",
 		PathPattern:        "/vault/2020-04-20/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots",
@@ -495,7 +545,12 @@ func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -511,13 +566,12 @@ func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.Cli
 /*
   RestoreSnapshot restore snapshot API
 */
-func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*RestoreSnapshotOK, error) {
+func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewRestoreSnapshotParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "RestoreSnapshot",
 		Method:             "POST",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/restore",
@@ -529,7 +583,12 @@ func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -545,13 +604,12 @@ func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime
 /*
   Seal seal API
 */
-func (a *Client) Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter) (*SealOK, error) {
+func (a *Client) Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SealOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSealParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Seal",
 		Method:             "POST",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal",
@@ -563,7 +621,12 @@ func (a *Client) Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter)
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -579,13 +642,12 @@ func (a *Client) Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter)
 /*
   Unseal unseal API
 */
-func (a *Client) Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWriter) (*UnsealOK, error) {
+func (a *Client) Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnsealOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUnsealParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Unseal",
 		Method:             "POST",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal",
@@ -597,7 +659,12 @@ func (a *Client) Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWri
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -613,13 +680,12 @@ func (a *Client) Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWri
 /*
   UpdateCORSConfig update c o r s config API
 */
-func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateCORSConfigOK, error) {
+func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCORSConfigOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateCORSConfigParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "UpdateCORSConfig",
 		Method:             "POST",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-cors-config",
@@ -631,7 +697,12 @@ func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runti
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -647,13 +718,12 @@ func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runti
 /*
   UpdatePublicIps update public ips API
 */
-func (a *Client) UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePublicIpsOK, error) {
+func (a *Client) UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePublicIpsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdatePublicIpsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "UpdatePublicIps",
 		Method:             "POST",
 		PathPattern:        "/vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips",
@@ -665,7 +735,12 @@ func (a *Client) UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -681,13 +756,12 @@ func (a *Client) UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime
 /*
   UpdateSnapshot update snapshot API
 */
-func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateSnapshotOK, error) {
+func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateSnapshotParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "UpdateSnapshot",
 		Method:             "POST",
 		PathPattern:        "/vault/2020-04-20/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.snapshot_id}",
@@ -699,7 +773,12 @@ func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

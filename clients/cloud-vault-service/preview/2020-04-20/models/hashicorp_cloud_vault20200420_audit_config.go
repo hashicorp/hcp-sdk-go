@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -21,6 +23,11 @@ type HashicorpCloudVault20200420AuditConfig struct {
 
 // Validate validates this hashicorp cloud vault 20200420 audit config
 func (m *HashicorpCloudVault20200420AuditConfig) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud vault 20200420 audit config based on context it is used
+func (m *HashicorpCloudVault20200420AuditConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

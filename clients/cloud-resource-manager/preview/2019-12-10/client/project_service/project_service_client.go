@@ -23,13 +23,16 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ProjectServiceCreate(params *ProjectServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*ProjectServiceCreateOK, error)
+	ProjectServiceCreate(params *ProjectServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceCreateOK, error)
 
-	ProjectServiceGet(params *ProjectServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*ProjectServiceGetOK, error)
+	ProjectServiceGet(params *ProjectServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceGetOK, error)
 
-	ProjectServiceList(params *ProjectServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*ProjectServiceListOK, error)
+	ProjectServiceList(params *ProjectServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceListOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -37,13 +40,12 @@ type ClientService interface {
 /*
   ProjectServiceCreate creates creates a new project
 */
-func (a *Client) ProjectServiceCreate(params *ProjectServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*ProjectServiceCreateOK, error) {
+func (a *Client) ProjectServiceCreate(params *ProjectServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewProjectServiceCreateParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ProjectService_Create",
 		Method:             "POST",
 		PathPattern:        "/resource-manager/2019-12-10/projects",
@@ -55,7 +57,12 @@ func (a *Client) ProjectServiceCreate(params *ProjectServiceCreateParams, authIn
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -71,13 +78,12 @@ func (a *Client) ProjectServiceCreate(params *ProjectServiceCreateParams, authIn
 /*
   ProjectServiceGet gets retrieves the requested project by ID
 */
-func (a *Client) ProjectServiceGet(params *ProjectServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*ProjectServiceGetOK, error) {
+func (a *Client) ProjectServiceGet(params *ProjectServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewProjectServiceGetParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ProjectService_Get",
 		Method:             "GET",
 		PathPattern:        "/resource-manager/2019-12-10/projects/{id}",
@@ -89,7 +95,12 @@ func (a *Client) ProjectServiceGet(params *ProjectServiceGetParams, authInfo run
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -105,13 +116,12 @@ func (a *Client) ProjectServiceGet(params *ProjectServiceGetParams, authInfo run
 /*
   ProjectServiceList lists list the projects the caller has access to
 */
-func (a *Client) ProjectServiceList(params *ProjectServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*ProjectServiceListOK, error) {
+func (a *Client) ProjectServiceList(params *ProjectServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewProjectServiceListParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ProjectService_List",
 		Method:             "GET",
 		PathPattern:        "/resource-manager/2019-12-10/projects",
@@ -123,7 +133,12 @@ func (a *Client) ProjectServiceList(params *ProjectServiceListParams, authInfo r
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

@@ -47,7 +47,7 @@ func NewCreateHVNRouteOK() *CreateHVNRouteOK {
 	return &CreateHVNRouteOK{}
 }
 
-/*CreateHVNRouteOK handles this case with default header values.
+/* CreateHVNRouteOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type CreateHVNRouteOK struct {
 func (o *CreateHVNRouteOK) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] createHVNRouteOK  %+v", 200, o.Payload)
 }
-
 func (o *CreateHVNRouteOK) GetPayload() *models.HashicorpCloudNetwork20200907CreateHVNRouteResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewCreateHVNRouteDefault(code int) *CreateHVNRouteDefault {
 	}
 }
 
-/*CreateHVNRouteDefault handles this case with default header values.
+/* CreateHVNRouteDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *CreateHVNRouteDefault) Code() int {
 func (o *CreateHVNRouteDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] CreateHVNRoute default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *CreateHVNRouteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

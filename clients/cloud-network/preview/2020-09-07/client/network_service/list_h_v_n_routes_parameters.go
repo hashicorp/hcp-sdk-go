@@ -17,138 +17,167 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewListHVNRoutesParams creates a new ListHVNRoutesParams object
-// with the default values initialized.
+// NewListHVNRoutesParams creates a new ListHVNRoutesParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewListHVNRoutesParams() *ListHVNRoutesParams {
-	var ()
 	return &ListHVNRoutesParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewListHVNRoutesParamsWithTimeout creates a new ListHVNRoutesParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewListHVNRoutesParamsWithTimeout(timeout time.Duration) *ListHVNRoutesParams {
-	var ()
 	return &ListHVNRoutesParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewListHVNRoutesParamsWithContext creates a new ListHVNRoutesParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewListHVNRoutesParamsWithContext(ctx context.Context) *ListHVNRoutesParams {
-	var ()
 	return &ListHVNRoutesParams{
-
 		Context: ctx,
 	}
 }
 
 // NewListHVNRoutesParamsWithHTTPClient creates a new ListHVNRoutesParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewListHVNRoutesParamsWithHTTPClient(client *http.Client) *ListHVNRoutesParams {
-	var ()
 	return &ListHVNRoutesParams{
 		HTTPClient: client,
 	}
 }
 
-/*ListHVNRoutesParams contains all the parameters to send to the API endpoint
-for the list h v n routes operation typically these are written to a http.Request
+/* ListHVNRoutesParams contains all the parameters to send to the API endpoint
+   for the list h v n routes operation.
+
+   Typically these are written to a http.Request.
 */
 type ListHVNRoutesParams struct {
 
-	/*Destination
-	  destination is an optional parameter that allows returning only routes
-	that has a specific destination.
+	/* Destination.
 
+	     destination is an optional parameter that allows returning only routes
+	that has a specific destination.
 	*/
 	Destination *string
-	/*HvnDescription
-	  description is a human-friendly description for this link. This is
-	used primarily for informational purposes such as error messages.
 
+	/* HvnDescription.
+
+	     description is a human-friendly description for this link. This is
+	used primarily for informational purposes such as error messages.
 	*/
 	HvnDescription *string
-	/*HvnID
-	  id is the identifier for this resource.
 
+	/* HvnID.
+
+	   id is the identifier for this resource.
 	*/
 	HvnID string
-	/*HvnLocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* HvnLocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	HvnLocationOrganizationID string
-	/*HvnLocationProjectID
-	  project_id is the projects id.
 
+	/* HvnLocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	HvnLocationProjectID string
-	/*HvnLocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* HvnLocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	HvnLocationRegionProvider *string
-	/*HvnLocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* HvnLocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	HvnLocationRegionRegion *string
-	/*HvnType
-	  type is the unique type of the resource. Each service publishes a
+
+	/* HvnType.
+
+	     type is the unique type of the resource. Each service publishes a
 	unique set of types. The type value is recommended to be formatted
 	in "<org>.<type>" such as "hashicorp.hvn". This is to prevent conflicts
 	in the future, but any string value will work.
-
 	*/
 	HvnType *string
-	/*HvnUUID
-	  uuid is the unique UUID for this resource.
 
+	/* HvnUUID.
+
+	   uuid is the unique UUID for this resource.
 	*/
 	HvnUUID *string
-	/*PaginationNextPageToken
-	  Specifies a page token to use to retrieve the next page. Set this to the
+
+	/* PaginationNextPageToken.
+
+	     Specifies a page token to use to retrieve the next page. Set this to the
 	`next_page_token` returned by previous list requests to get the next page of
 	results. If set, `previous_page_token` must not be set.
-
 	*/
 	PaginationNextPageToken *string
-	/*PaginationPageSize
-	  The max number of results per page that should be returned. If the number
+
+	/* PaginationPageSize.
+
+	     The max number of results per page that should be returned. If the number
 	of available results is larger than `page_size`, a `next_page_token` is
 	returned which can be used to get the next page of results in subsequent
 	requests. A value of zero will cause `page_size` to be defaulted.
 
+	     Format: int64
 	*/
 	PaginationPageSize *int64
-	/*PaginationPreviousPageToken
-	  Specifies a page token to use to retrieve the previous page. Set this to
+
+	/* PaginationPreviousPageToken.
+
+	     Specifies a page token to use to retrieve the previous page. Set this to
 	the `previous_page_token` returned by previous list requests to get the
 	previous page of results. If set, `next_page_token` must not be set.
-
 	*/
 	PaginationPreviousPageToken *string
-	/*TargetID
-	  target_id is an optional parameter that allows returning only routes
-	that has a specific target Id.
 
+	/* TargetID.
+
+	     target_id is an optional parameter that allows returning only routes
+	that has a specific target Id.
 	*/
 	TargetID *string
-	/*TargetType
-	  target_type is an optional parameter that allows returning only routes
-	that has a specific target Type.
 
+	/* TargetType.
+
+	     target_type is an optional parameter that allows returning only routes
+	that has a specific target Type.
 	*/
 	TargetType *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the list h v n routes params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListHVNRoutesParams) WithDefaults() *ListHVNRoutesParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the list h v n routes params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListHVNRoutesParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the list h v n routes params
@@ -350,32 +379,34 @@ func (o *ListHVNRoutesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 		// query param destination
 		var qrDestination string
+
 		if o.Destination != nil {
 			qrDestination = *o.Destination
 		}
 		qDestination := qrDestination
 		if qDestination != "" {
+
 			if err := r.SetQueryParam("destination", qDestination); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.HvnDescription != nil {
 
 		// query param hvn.description
 		var qrHvnDescription string
+
 		if o.HvnDescription != nil {
 			qrHvnDescription = *o.HvnDescription
 		}
 		qHvnDescription := qrHvnDescription
 		if qHvnDescription != "" {
+
 			if err := r.SetQueryParam("hvn.description", qHvnDescription); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	// path param hvn.id
@@ -397,144 +428,153 @@ func (o *ListHVNRoutesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 		// query param hvn.location.region.provider
 		var qrHvnLocationRegionProvider string
+
 		if o.HvnLocationRegionProvider != nil {
 			qrHvnLocationRegionProvider = *o.HvnLocationRegionProvider
 		}
 		qHvnLocationRegionProvider := qrHvnLocationRegionProvider
 		if qHvnLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("hvn.location.region.provider", qHvnLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.HvnLocationRegionRegion != nil {
 
 		// query param hvn.location.region.region
 		var qrHvnLocationRegionRegion string
+
 		if o.HvnLocationRegionRegion != nil {
 			qrHvnLocationRegionRegion = *o.HvnLocationRegionRegion
 		}
 		qHvnLocationRegionRegion := qrHvnLocationRegionRegion
 		if qHvnLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("hvn.location.region.region", qHvnLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.HvnType != nil {
 
 		// query param hvn.type
 		var qrHvnType string
+
 		if o.HvnType != nil {
 			qrHvnType = *o.HvnType
 		}
 		qHvnType := qrHvnType
 		if qHvnType != "" {
+
 			if err := r.SetQueryParam("hvn.type", qHvnType); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.HvnUUID != nil {
 
 		// query param hvn.uuid
 		var qrHvnUUID string
+
 		if o.HvnUUID != nil {
 			qrHvnUUID = *o.HvnUUID
 		}
 		qHvnUUID := qrHvnUUID
 		if qHvnUUID != "" {
+
 			if err := r.SetQueryParam("hvn.uuid", qHvnUUID); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.PaginationNextPageToken != nil {
 
 		// query param pagination.next_page_token
 		var qrPaginationNextPageToken string
+
 		if o.PaginationNextPageToken != nil {
 			qrPaginationNextPageToken = *o.PaginationNextPageToken
 		}
 		qPaginationNextPageToken := qrPaginationNextPageToken
 		if qPaginationNextPageToken != "" {
+
 			if err := r.SetQueryParam("pagination.next_page_token", qPaginationNextPageToken); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.PaginationPageSize != nil {
 
 		// query param pagination.page_size
 		var qrPaginationPageSize int64
+
 		if o.PaginationPageSize != nil {
 			qrPaginationPageSize = *o.PaginationPageSize
 		}
 		qPaginationPageSize := swag.FormatInt64(qrPaginationPageSize)
 		if qPaginationPageSize != "" {
+
 			if err := r.SetQueryParam("pagination.page_size", qPaginationPageSize); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.PaginationPreviousPageToken != nil {
 
 		// query param pagination.previous_page_token
 		var qrPaginationPreviousPageToken string
+
 		if o.PaginationPreviousPageToken != nil {
 			qrPaginationPreviousPageToken = *o.PaginationPreviousPageToken
 		}
 		qPaginationPreviousPageToken := qrPaginationPreviousPageToken
 		if qPaginationPreviousPageToken != "" {
+
 			if err := r.SetQueryParam("pagination.previous_page_token", qPaginationPreviousPageToken); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.TargetID != nil {
 
 		// query param target_id
 		var qrTargetID string
+
 		if o.TargetID != nil {
 			qrTargetID = *o.TargetID
 		}
 		qTargetID := qrTargetID
 		if qTargetID != "" {
+
 			if err := r.SetQueryParam("target_id", qTargetID); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.TargetType != nil {
 
 		// query param target_type
 		var qrTargetType string
+
 		if o.TargetType != nil {
 			qrTargetType = *o.TargetType
 		}
 		qTargetType := qrTargetType
 		if qTargetType != "" {
+
 			if err := r.SetQueryParam("target_type", qTargetType); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

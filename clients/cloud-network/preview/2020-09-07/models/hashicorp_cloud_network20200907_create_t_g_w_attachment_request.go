@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -51,7 +53,6 @@ func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequest) Validate(forma
 }
 
 func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequest) validateHvn(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Hvn) { // not required
 		return nil
 	}
@@ -69,13 +70,58 @@ func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequest) validateHvn(fo
 }
 
 func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequest) validateProviderData(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ProviderData) { // not required
 		return nil
 	}
 
 	if m.ProviderData != nil {
 		if err := m.ProviderData.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("provider_data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 create t g w attachment request based on the context it is used
+func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateHvn(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateProviderData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequest) contextValidateHvn(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Hvn != nil {
+		if err := m.Hvn.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hvn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequest) contextValidateProviderData(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ProviderData != nil {
+		if err := m.ProviderData.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("provider_data")
 			}

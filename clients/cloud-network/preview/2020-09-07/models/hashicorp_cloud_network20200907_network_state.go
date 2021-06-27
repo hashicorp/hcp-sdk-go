@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -19,6 +20,11 @@ import (
 //
 // swagger:model hashicorp.cloud.network_20200907.Network.State
 type HashicorpCloudNetwork20200907NetworkState string
+
+func NewHashicorpCloudNetwork20200907NetworkState(value HashicorpCloudNetwork20200907NetworkState) *HashicorpCloudNetwork20200907NetworkState {
+	v := value
+	return &v
+}
 
 const (
 
@@ -73,5 +79,10 @@ func (m HashicorpCloudNetwork20200907NetworkState) Validate(formats strfmt.Regis
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud network 20200907 network state based on context it is used
+func (m HashicorpCloudNetwork20200907NetworkState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

@@ -47,7 +47,7 @@ func NewUpdateOK() *UpdateOK {
 	return &UpdateOK{}
 }
 
-/*UpdateOK handles this case with default header values.
+/* UpdateOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type UpdateOK struct {
 func (o *UpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] updateOK  %+v", 200, o.Payload)
 }
-
 func (o *UpdateOK) GetPayload() *models.HashicorpCloudConsul20200826UpdateResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewUpdateDefault(code int) *UpdateDefault {
 	}
 }
 
-/*UpdateDefault handles this case with default header values.
+/* UpdateDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *UpdateDefault) Code() int {
 func (o *UpdateDefault) Error() string {
 	return fmt.Sprintf("[PATCH /consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] Update default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *UpdateDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

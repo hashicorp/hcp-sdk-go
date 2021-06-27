@@ -16,74 +16,91 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewListVersionsParams creates a new ListVersionsParams object
-// with the default values initialized.
+// NewListVersionsParams creates a new ListVersionsParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewListVersionsParams() *ListVersionsParams {
-	var ()
 	return &ListVersionsParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewListVersionsParamsWithTimeout creates a new ListVersionsParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewListVersionsParamsWithTimeout(timeout time.Duration) *ListVersionsParams {
-	var ()
 	return &ListVersionsParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewListVersionsParamsWithContext creates a new ListVersionsParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewListVersionsParamsWithContext(ctx context.Context) *ListVersionsParams {
-	var ()
 	return &ListVersionsParams{
-
 		Context: ctx,
 	}
 }
 
 // NewListVersionsParamsWithHTTPClient creates a new ListVersionsParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewListVersionsParamsWithHTTPClient(client *http.Client) *ListVersionsParams {
-	var ()
 	return &ListVersionsParams{
 		HTTPClient: client,
 	}
 }
 
-/*ListVersionsParams contains all the parameters to send to the API endpoint
-for the list versions operation typically these are written to a http.Request
+/* ListVersionsParams contains all the parameters to send to the API endpoint
+   for the list versions operation.
+
+   Typically these are written to a http.Request.
 */
 type ListVersionsParams struct {
 
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
+	/* LocationOrganizationID.
 
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*LocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* LocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
-	/*LocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* LocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the list versions params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListVersionsParams) WithDefaults() *ListVersionsParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the list versions params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListVersionsParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the list versions params
@@ -185,32 +202,34 @@ func (o *ListVersionsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
+
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
+
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

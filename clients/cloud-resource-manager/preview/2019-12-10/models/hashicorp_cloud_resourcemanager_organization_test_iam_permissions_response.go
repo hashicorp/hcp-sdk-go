@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -21,6 +23,11 @@ type HashicorpCloudResourcemanagerOrganizationTestIamPermissionsResponse struct 
 
 // Validate validates this hashicorp cloud resourcemanager organization test iam permissions response
 func (m *HashicorpCloudResourcemanagerOrganizationTestIamPermissionsResponse) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud resourcemanager organization test iam permissions response based on context it is used
+func (m *HashicorpCloudResourcemanagerOrganizationTestIamPermissionsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -47,7 +47,7 @@ func NewWaitOK() *WaitOK {
 	return &WaitOK{}
 }
 
-/*WaitOK handles this case with default header values.
+/* WaitOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type WaitOK struct {
 func (o *WaitOK) Error() string {
 	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] waitOK  %+v", 200, o.Payload)
 }
-
 func (o *WaitOK) GetPayload() *models.HashicorpCloudOperationWaitResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewWaitDefault(code int) *WaitDefault {
 	}
 }
 
-/*WaitDefault handles this case with default header values.
+/* WaitDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *WaitDefault) Code() int {
 func (o *WaitDefault) Error() string {
 	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] Wait default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *WaitDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

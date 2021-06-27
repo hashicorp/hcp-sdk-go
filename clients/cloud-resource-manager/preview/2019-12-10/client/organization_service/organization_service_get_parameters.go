@@ -16,59 +16,73 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewOrganizationServiceGetParams creates a new OrganizationServiceGetParams object
-// with the default values initialized.
+// NewOrganizationServiceGetParams creates a new OrganizationServiceGetParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewOrganizationServiceGetParams() *OrganizationServiceGetParams {
-	var ()
 	return &OrganizationServiceGetParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewOrganizationServiceGetParamsWithTimeout creates a new OrganizationServiceGetParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewOrganizationServiceGetParamsWithTimeout(timeout time.Duration) *OrganizationServiceGetParams {
-	var ()
 	return &OrganizationServiceGetParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewOrganizationServiceGetParamsWithContext creates a new OrganizationServiceGetParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewOrganizationServiceGetParamsWithContext(ctx context.Context) *OrganizationServiceGetParams {
-	var ()
 	return &OrganizationServiceGetParams{
-
 		Context: ctx,
 	}
 }
 
 // NewOrganizationServiceGetParamsWithHTTPClient creates a new OrganizationServiceGetParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewOrganizationServiceGetParamsWithHTTPClient(client *http.Client) *OrganizationServiceGetParams {
-	var ()
 	return &OrganizationServiceGetParams{
 		HTTPClient: client,
 	}
 }
 
-/*OrganizationServiceGetParams contains all the parameters to send to the API endpoint
-for the organization service get operation typically these are written to a http.Request
+/* OrganizationServiceGetParams contains all the parameters to send to the API endpoint
+   for the organization service get operation.
+
+   Typically these are written to a http.Request.
 */
 type OrganizationServiceGetParams struct {
 
-	/*ID
-	  ID is the identifier of the organization to retrieve.
+	/* ID.
 
+	   ID is the identifier of the organization to retrieve.
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the organization service get params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *OrganizationServiceGetParams) WithDefaults() *OrganizationServiceGetParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the organization service get params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *OrganizationServiceGetParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the organization service get params

@@ -23,19 +23,22 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	OrganizationServiceCreate(params *OrganizationServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceCreateOK, error)
+	OrganizationServiceCreate(params *OrganizationServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceCreateOK, error)
 
-	OrganizationServiceGet(params *OrganizationServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceGetOK, error)
+	OrganizationServiceGet(params *OrganizationServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetOK, error)
 
-	OrganizationServiceGetIamPolicy(params *OrganizationServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceGetIamPolicyOK, error)
+	OrganizationServiceGetIamPolicy(params *OrganizationServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetIamPolicyOK, error)
 
-	OrganizationServiceList(params *OrganizationServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceListOK, error)
+	OrganizationServiceList(params *OrganizationServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceListOK, error)
 
-	OrganizationServiceSetIamPolicy(params *OrganizationServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceSetIamPolicyOK, error)
+	OrganizationServiceSetIamPolicy(params *OrganizationServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceSetIamPolicyOK, error)
 
-	OrganizationServiceTestIamPermissions(params *OrganizationServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceTestIamPermissionsOK, error)
+	OrganizationServiceTestIamPermissions(params *OrganizationServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceTestIamPermissionsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -43,13 +46,12 @@ type ClientService interface {
 /*
   OrganizationServiceCreate creates creates a new organization the owner is set to the identity of the caller an organization can not be owned by a machine account
 */
-func (a *Client) OrganizationServiceCreate(params *OrganizationServiceCreateParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceCreateOK, error) {
+func (a *Client) OrganizationServiceCreate(params *OrganizationServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOrganizationServiceCreateParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "OrganizationService_Create",
 		Method:             "POST",
 		PathPattern:        "/resource-manager/2019-12-10/organizations",
@@ -61,7 +63,12 @@ func (a *Client) OrganizationServiceCreate(params *OrganizationServiceCreatePara
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -77,13 +84,12 @@ func (a *Client) OrganizationServiceCreate(params *OrganizationServiceCreatePara
 /*
   OrganizationServiceGet gets retrieves the requested organization by ID
 */
-func (a *Client) OrganizationServiceGet(params *OrganizationServiceGetParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceGetOK, error) {
+func (a *Client) OrganizationServiceGet(params *OrganizationServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOrganizationServiceGetParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "OrganizationService_Get",
 		Method:             "GET",
 		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}",
@@ -95,7 +101,12 @@ func (a *Client) OrganizationServiceGet(params *OrganizationServiceGetParams, au
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -111,13 +122,12 @@ func (a *Client) OrganizationServiceGet(params *OrganizationServiceGetParams, au
 /*
   OrganizationServiceGetIamPolicy gets iam policy retrieves the requested organization s i a m policy
 */
-func (a *Client) OrganizationServiceGetIamPolicy(params *OrganizationServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceGetIamPolicyOK, error) {
+func (a *Client) OrganizationServiceGetIamPolicy(params *OrganizationServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetIamPolicyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOrganizationServiceGetIamPolicyParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "OrganizationService_GetIamPolicy",
 		Method:             "GET",
 		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/iam-policy",
@@ -129,7 +139,12 @@ func (a *Client) OrganizationServiceGetIamPolicy(params *OrganizationServiceGetI
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -145,13 +160,12 @@ func (a *Client) OrganizationServiceGetIamPolicy(params *OrganizationServiceGetI
 /*
   OrganizationServiceList lists lists the organizations the caller has access to
 */
-func (a *Client) OrganizationServiceList(params *OrganizationServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceListOK, error) {
+func (a *Client) OrganizationServiceList(params *OrganizationServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOrganizationServiceListParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "OrganizationService_List",
 		Method:             "GET",
 		PathPattern:        "/resource-manager/2019-12-10/organizations",
@@ -163,7 +177,12 @@ func (a *Client) OrganizationServiceList(params *OrganizationServiceListParams, 
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -179,13 +198,12 @@ func (a *Client) OrganizationServiceList(params *OrganizationServiceListParams, 
 /*
   OrganizationServiceSetIamPolicy sets iam policy sets the i a m policy for an organization
 */
-func (a *Client) OrganizationServiceSetIamPolicy(params *OrganizationServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceSetIamPolicyOK, error) {
+func (a *Client) OrganizationServiceSetIamPolicy(params *OrganizationServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceSetIamPolicyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOrganizationServiceSetIamPolicyParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "OrganizationService_SetIamPolicy",
 		Method:             "PUT",
 		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/iam-policy",
@@ -197,7 +215,12 @@ func (a *Client) OrganizationServiceSetIamPolicy(params *OrganizationServiceSetI
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -213,13 +236,12 @@ func (a *Client) OrganizationServiceSetIamPolicy(params *OrganizationServiceSetI
 /*
   OrganizationServiceTestIamPermissions tests iam permissions returns a subset of the request permissions the calling principal has for the organization
 */
-func (a *Client) OrganizationServiceTestIamPermissions(params *OrganizationServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceTestIamPermissionsOK, error) {
+func (a *Client) OrganizationServiceTestIamPermissions(params *OrganizationServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceTestIamPermissionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOrganizationServiceTestIamPermissionsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "OrganizationService_TestIamPermissions",
 		Method:             "POST",
 		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/test-iam-permissions",
@@ -231,7 +253,12 @@ func (a *Client) OrganizationServiceTestIamPermissions(params *OrganizationServi
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

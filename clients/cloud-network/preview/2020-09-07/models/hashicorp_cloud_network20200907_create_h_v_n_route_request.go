@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -49,7 +51,6 @@ func (m *HashicorpCloudNetwork20200907CreateHVNRouteRequest) Validate(formats st
 }
 
 func (m *HashicorpCloudNetwork20200907CreateHVNRouteRequest) validateHvn(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Hvn) { // not required
 		return nil
 	}
@@ -67,13 +68,58 @@ func (m *HashicorpCloudNetwork20200907CreateHVNRouteRequest) validateHvn(formats
 }
 
 func (m *HashicorpCloudNetwork20200907CreateHVNRouteRequest) validateTarget(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Target) { // not required
 		return nil
 	}
 
 	if m.Target != nil {
 		if err := m.Target.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("target")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 create h v n route request based on the context it is used
+func (m *HashicorpCloudNetwork20200907CreateHVNRouteRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateHvn(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTarget(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907CreateHVNRouteRequest) contextValidateHvn(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Hvn != nil {
+		if err := m.Hvn.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hvn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907CreateHVNRouteRequest) contextValidateTarget(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Target != nil {
+		if err := m.Target.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("target")
 			}

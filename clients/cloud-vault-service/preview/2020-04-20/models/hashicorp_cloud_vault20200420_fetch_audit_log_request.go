@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -56,7 +58,6 @@ func (m *HashicorpCloudVault20200420FetchAuditLogRequest) Validate(formats strfm
 }
 
 func (m *HashicorpCloudVault20200420FetchAuditLogRequest) validateIntervalEnd(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.IntervalEnd) { // not required
 		return nil
 	}
@@ -69,7 +70,6 @@ func (m *HashicorpCloudVault20200420FetchAuditLogRequest) validateIntervalEnd(fo
 }
 
 func (m *HashicorpCloudVault20200420FetchAuditLogRequest) validateIntervalStart(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.IntervalStart) { // not required
 		return nil
 	}
@@ -82,13 +82,40 @@ func (m *HashicorpCloudVault20200420FetchAuditLogRequest) validateIntervalStart(
 }
 
 func (m *HashicorpCloudVault20200420FetchAuditLogRequest) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
 
 	if m.Location != nil {
 		if err := m.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20200420 fetch audit log request based on the context it is used
+func (m *HashicorpCloudVault20200420FetchAuditLogRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20200420FetchAuditLogRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
 			}

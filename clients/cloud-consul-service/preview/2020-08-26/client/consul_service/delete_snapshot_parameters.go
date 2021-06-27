@@ -16,79 +16,97 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDeleteSnapshotParams creates a new DeleteSnapshotParams object
-// with the default values initialized.
+// NewDeleteSnapshotParams creates a new DeleteSnapshotParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDeleteSnapshotParams() *DeleteSnapshotParams {
-	var ()
 	return &DeleteSnapshotParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeleteSnapshotParamsWithTimeout creates a new DeleteSnapshotParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewDeleteSnapshotParamsWithTimeout(timeout time.Duration) *DeleteSnapshotParams {
-	var ()
 	return &DeleteSnapshotParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewDeleteSnapshotParamsWithContext creates a new DeleteSnapshotParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewDeleteSnapshotParamsWithContext(ctx context.Context) *DeleteSnapshotParams {
-	var ()
 	return &DeleteSnapshotParams{
-
 		Context: ctx,
 	}
 }
 
 // NewDeleteSnapshotParamsWithHTTPClient creates a new DeleteSnapshotParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewDeleteSnapshotParamsWithHTTPClient(client *http.Client) *DeleteSnapshotParams {
-	var ()
 	return &DeleteSnapshotParams{
 		HTTPClient: client,
 	}
 }
 
-/*DeleteSnapshotParams contains all the parameters to send to the API endpoint
-for the delete snapshot operation typically these are written to a http.Request
+/* DeleteSnapshotParams contains all the parameters to send to the API endpoint
+   for the delete snapshot operation.
+
+   Typically these are written to a http.Request.
 */
 type DeleteSnapshotParams struct {
 
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
+	/* LocationOrganizationID.
 
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*LocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* LocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
-	/*LocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* LocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
-	/*SnapshotID
-	  snapshot_id represents the snapshot to delete.
 
+	/* SnapshotID.
+
+	   snapshot_id represents the snapshot to delete.
 	*/
 	SnapshotID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the delete snapshot params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeleteSnapshotParams) WithDefaults() *DeleteSnapshotParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the delete snapshot params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeleteSnapshotParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete snapshot params
@@ -201,32 +219,34 @@ func (o *DeleteSnapshotParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
+
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
+
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	// path param snapshot_id

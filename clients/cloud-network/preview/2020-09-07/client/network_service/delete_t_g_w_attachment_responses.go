@@ -47,7 +47,7 @@ func NewDeleteTGWAttachmentOK() *DeleteTGWAttachmentOK {
 	return &DeleteTGWAttachmentOK{}
 }
 
-/*DeleteTGWAttachmentOK handles this case with default header values.
+/* DeleteTGWAttachmentOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type DeleteTGWAttachmentOK struct {
 func (o *DeleteTGWAttachmentOK) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] deleteTGWAttachmentOK  %+v", 200, o.Payload)
 }
-
 func (o *DeleteTGWAttachmentOK) GetPayload() *models.HashicorpCloudNetwork20200907DeleteTGWAttachmentResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewDeleteTGWAttachmentDefault(code int) *DeleteTGWAttachmentDefault {
 	}
 }
 
-/*DeleteTGWAttachmentDefault handles this case with default header values.
+/* DeleteTGWAttachmentDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *DeleteTGWAttachmentDefault) Code() int {
 func (o *DeleteTGWAttachmentDefault) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] DeleteTGWAttachment default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *DeleteTGWAttachmentDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

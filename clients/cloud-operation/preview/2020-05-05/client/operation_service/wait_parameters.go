@@ -16,88 +16,107 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewWaitParams creates a new WaitParams object
-// with the default values initialized.
+// NewWaitParams creates a new WaitParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewWaitParams() *WaitParams {
-	var ()
 	return &WaitParams{
-
 		requestTimeout: cr.DefaultTimeout,
 	}
 }
 
 // NewWaitParamsWithTimeout creates a new WaitParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewWaitParamsWithTimeout(timeout time.Duration) *WaitParams {
-	var ()
 	return &WaitParams{
-
 		requestTimeout: timeout,
 	}
 }
 
 // NewWaitParamsWithContext creates a new WaitParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewWaitParamsWithContext(ctx context.Context) *WaitParams {
-	var ()
 	return &WaitParams{
-
 		Context: ctx,
 	}
 }
 
 // NewWaitParamsWithHTTPClient creates a new WaitParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewWaitParamsWithHTTPClient(client *http.Client) *WaitParams {
-	var ()
 	return &WaitParams{
 		HTTPClient: client,
 	}
 }
 
-/*WaitParams contains all the parameters to send to the API endpoint
-for the wait operation typically these are written to a http.Request
+/* WaitParams contains all the parameters to send to the API endpoint
+   for the wait operation.
+
+   Typically these are written to a http.Request.
 */
 type WaitParams struct {
 
-	/*ID
-	  id is the UUID of the operation.
+	/* ID.
 
+	   id is the UUID of the operation.
 	*/
 	ID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*LocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* LocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
-	/*LocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* LocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
-	/*Timeout
-	  timeout is the duration to wait until timing out and returning.
+
+	/* Timeout.
+
+	     timeout is the duration to wait until timing out and returning.
 	The shortest timeout is always used, so if the HTTP/RPC call has a
 	shorter timeout then that will be used instead. When the timeout is
 	reached, Wait will return with the operation no matter what state it is
 	in.
-
 	*/
 	Timeout *string
 
 	requestTimeout time.Duration
 	Context        context.Context
 	HTTPClient     *http.Client
+}
+
+// WithDefaults hydrates default values in the wait params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *WaitParams) WithDefaults() *WaitParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the wait params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *WaitParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithRequestTimeout adds the timeout to the wait params
@@ -226,48 +245,51 @@ func (o *WaitParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
+
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
+
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.Timeout != nil {
 
 		// query param timeout
 		var qrTimeout string
+
 		if o.Timeout != nil {
 			qrTimeout = *o.Timeout
 		}
 		qTimeout := qrTimeout
 		if qTimeout != "" {
+
 			if err := r.SetQueryParam("timeout", qTimeout); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

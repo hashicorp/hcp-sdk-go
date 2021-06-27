@@ -47,7 +47,7 @@ func NewGetPeeringOK() *GetPeeringOK {
 	return &GetPeeringOK{}
 }
 
-/*GetPeeringOK handles this case with default header values.
+/* GetPeeringOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type GetPeeringOK struct {
 func (o *GetPeeringOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] getPeeringOK  %+v", 200, o.Payload)
 }
-
 func (o *GetPeeringOK) GetPayload() *models.HashicorpCloudNetwork20200907GetPeeringResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewGetPeeringDefault(code int) *GetPeeringDefault {
 	}
 }
 
-/*GetPeeringDefault handles this case with default header values.
+/* GetPeeringDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *GetPeeringDefault) Code() int {
 func (o *GetPeeringDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] GetPeering default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *GetPeeringDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

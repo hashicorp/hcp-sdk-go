@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -44,7 +46,7 @@ type HashicorpCloudConsul20200826Cluster struct {
 	// state is the current state of the cluster.
 	// Output only.
 	// Read Only: true
-	State HashicorpCloudConsul20200826ClusterState `json:"state,omitempty"`
+	State *HashicorpCloudConsul20200826ClusterState `json:"state,omitempty"`
 }
 
 // Validate validates this hashicorp cloud consul 20200826 cluster
@@ -78,7 +80,6 @@ func (m *HashicorpCloudConsul20200826Cluster) Validate(formats strfmt.Registry) 
 }
 
 func (m *HashicorpCloudConsul20200826Cluster) validateConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Config) { // not required
 		return nil
 	}
@@ -96,7 +97,6 @@ func (m *HashicorpCloudConsul20200826Cluster) validateConfig(formats strfmt.Regi
 }
 
 func (m *HashicorpCloudConsul20200826Cluster) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -109,7 +109,6 @@ func (m *HashicorpCloudConsul20200826Cluster) validateCreatedAt(formats strfmt.R
 }
 
 func (m *HashicorpCloudConsul20200826Cluster) validateDNSNames(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.DNSNames) { // not required
 		return nil
 	}
@@ -127,7 +126,6 @@ func (m *HashicorpCloudConsul20200826Cluster) validateDNSNames(formats strfmt.Re
 }
 
 func (m *HashicorpCloudConsul20200826Cluster) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -145,16 +143,112 @@ func (m *HashicorpCloudConsul20200826Cluster) validateLocation(formats strfmt.Re
 }
 
 func (m *HashicorpCloudConsul20200826Cluster) validateState(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
 
-	if err := m.State.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("state")
+	if m.State != nil {
+		if err := m.State.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			}
+			return err
 		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud consul 20200826 cluster based on the context it is used
+func (m *HashicorpCloudConsul20200826Cluster) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateCreatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDNSNames(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudConsul20200826Cluster) contextValidateConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Config != nil {
+		if err := m.Config.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudConsul20200826Cluster) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudConsul20200826Cluster) contextValidateDNSNames(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DNSNames != nil {
+		if err := m.DNSNames.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dns_names")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudConsul20200826Cluster) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudConsul20200826Cluster) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.State != nil {
+		if err := m.State.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			}
+			return err
+		}
 	}
 
 	return nil

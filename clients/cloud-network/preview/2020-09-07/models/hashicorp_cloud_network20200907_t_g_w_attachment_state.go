@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -19,6 +20,11 @@ import (
 //
 // swagger:model hashicorp.cloud.network_20200907.TGWAttachment.State
 type HashicorpCloudNetwork20200907TGWAttachmentState string
+
+func NewHashicorpCloudNetwork20200907TGWAttachmentState(value HashicorpCloudNetwork20200907TGWAttachmentState) *HashicorpCloudNetwork20200907TGWAttachmentState {
+	v := value
+	return &v
+}
 
 const (
 
@@ -76,6 +82,20 @@ func (m HashicorpCloudNetwork20200907TGWAttachmentState) Validate(formats strfmt
 
 	// value enum
 	if err := m.validateHashicorpCloudNetwork20200907TGWAttachmentStateEnum("", "body", m); err != nil {
+		return err
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 t g w attachment state based on the context it is used
+func (m HashicorpCloudNetwork20200907TGWAttachmentState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := validate.ReadOnly(ctx, "", "body", HashicorpCloudNetwork20200907TGWAttachmentState(m)); err != nil {
 		return err
 	}
 

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -43,7 +45,7 @@ type HashicorpCloudOperationOperation struct {
 	// PENDING means the operation is created but not yet started, RUNNING means
 	// the operation is currently running (though it may be very long-running),
 	// and DONE means the operation is complete whether successfully or not.
-	State HashicorpCloudOperationOperationState `json:"state,omitempty"`
+	State *HashicorpCloudOperationOperationState `json:"state,omitempty"`
 
 	// UpdatedAt is the timestamp of when the operation was last updated.
 	// Format: date-time
@@ -89,7 +91,6 @@ func (m *HashicorpCloudOperationOperation) Validate(formats strfmt.Registry) err
 }
 
 func (m *HashicorpCloudOperationOperation) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -102,7 +103,6 @@ func (m *HashicorpCloudOperationOperation) validateCreatedAt(formats strfmt.Regi
 }
 
 func (m *HashicorpCloudOperationOperation) validateError(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Error) { // not required
 		return nil
 	}
@@ -120,7 +120,6 @@ func (m *HashicorpCloudOperationOperation) validateError(formats strfmt.Registry
 }
 
 func (m *HashicorpCloudOperationOperation) validateLink(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Link) { // not required
 		return nil
 	}
@@ -138,7 +137,6 @@ func (m *HashicorpCloudOperationOperation) validateLink(formats strfmt.Registry)
 }
 
 func (m *HashicorpCloudOperationOperation) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -156,7 +154,6 @@ func (m *HashicorpCloudOperationOperation) validateLocation(formats strfmt.Regis
 }
 
 func (m *HashicorpCloudOperationOperation) validateResponse(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Response) { // not required
 		return nil
 	}
@@ -174,29 +171,129 @@ func (m *HashicorpCloudOperationOperation) validateResponse(formats strfmt.Regis
 }
 
 func (m *HashicorpCloudOperationOperation) validateState(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
 
-	if err := m.State.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("state")
+	if m.State != nil {
+		if err := m.State.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudOperationOperation) validateUpdatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud operation operation based on the context it is used
+func (m *HashicorpCloudOperationOperation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateError(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLink(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateResponse(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudOperationOperation) contextValidateError(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Error != nil {
+		if err := m.Error.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("error")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudOperationOperation) contextValidateLink(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Link != nil {
+		if err := m.Link.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("link")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudOperationOperation) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudOperationOperation) contextValidateResponse(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Response != nil {
+		if err := m.Response.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("response")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudOperationOperation) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.State != nil {
+		if err := m.State.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			}
+			return err
+		}
 	}
 
 	return nil

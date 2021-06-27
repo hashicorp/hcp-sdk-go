@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -37,13 +39,40 @@ func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequestProviderData) Va
 }
 
 func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequestProviderData) validateAwsData(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.AwsData) { // not required
 		return nil
 	}
 
 	if m.AwsData != nil {
 		if err := m.AwsData.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("aws_data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 create t g w attachment request provider data based on the context it is used
+func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequestProviderData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAwsData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentRequestProviderData) contextValidateAwsData(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AwsData != nil {
+		if err := m.AwsData.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_data")
 			}

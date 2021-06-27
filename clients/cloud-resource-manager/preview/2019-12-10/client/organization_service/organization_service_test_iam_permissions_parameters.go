@@ -18,61 +18,76 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/preview/2019-12-10/models"
 )
 
-// NewOrganizationServiceTestIamPermissionsParams creates a new OrganizationServiceTestIamPermissionsParams object
-// with the default values initialized.
+// NewOrganizationServiceTestIamPermissionsParams creates a new OrganizationServiceTestIamPermissionsParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewOrganizationServiceTestIamPermissionsParams() *OrganizationServiceTestIamPermissionsParams {
-	var ()
 	return &OrganizationServiceTestIamPermissionsParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewOrganizationServiceTestIamPermissionsParamsWithTimeout creates a new OrganizationServiceTestIamPermissionsParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewOrganizationServiceTestIamPermissionsParamsWithTimeout(timeout time.Duration) *OrganizationServiceTestIamPermissionsParams {
-	var ()
 	return &OrganizationServiceTestIamPermissionsParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewOrganizationServiceTestIamPermissionsParamsWithContext creates a new OrganizationServiceTestIamPermissionsParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewOrganizationServiceTestIamPermissionsParamsWithContext(ctx context.Context) *OrganizationServiceTestIamPermissionsParams {
-	var ()
 	return &OrganizationServiceTestIamPermissionsParams{
-
 		Context: ctx,
 	}
 }
 
 // NewOrganizationServiceTestIamPermissionsParamsWithHTTPClient creates a new OrganizationServiceTestIamPermissionsParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewOrganizationServiceTestIamPermissionsParamsWithHTTPClient(client *http.Client) *OrganizationServiceTestIamPermissionsParams {
-	var ()
 	return &OrganizationServiceTestIamPermissionsParams{
 		HTTPClient: client,
 	}
 }
 
-/*OrganizationServiceTestIamPermissionsParams contains all the parameters to send to the API endpoint
-for the organization service test iam permissions operation typically these are written to a http.Request
+/* OrganizationServiceTestIamPermissionsParams contains all the parameters to send to the API endpoint
+   for the organization service test iam permissions operation.
+
+   Typically these are written to a http.Request.
 */
 type OrganizationServiceTestIamPermissionsParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudResourcemanagerOrganizationTestIamPermissionsRequest
-	/*ID
-	  ID is the identifier of the organization.
 
+	/* ID.
+
+	   ID is the identifier of the organization.
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the organization service test iam permissions params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *OrganizationServiceTestIamPermissionsParams) WithDefaults() *OrganizationServiceTestIamPermissionsParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the organization service test iam permissions params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *OrganizationServiceTestIamPermissionsParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the organization service test iam permissions params
@@ -137,7 +152,6 @@ func (o *OrganizationServiceTestIamPermissionsParams) WriteToRequest(r runtime.C
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

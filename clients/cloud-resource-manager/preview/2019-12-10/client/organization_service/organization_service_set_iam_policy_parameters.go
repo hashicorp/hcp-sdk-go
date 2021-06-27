@@ -18,61 +18,76 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/preview/2019-12-10/models"
 )
 
-// NewOrganizationServiceSetIamPolicyParams creates a new OrganizationServiceSetIamPolicyParams object
-// with the default values initialized.
+// NewOrganizationServiceSetIamPolicyParams creates a new OrganizationServiceSetIamPolicyParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewOrganizationServiceSetIamPolicyParams() *OrganizationServiceSetIamPolicyParams {
-	var ()
 	return &OrganizationServiceSetIamPolicyParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewOrganizationServiceSetIamPolicyParamsWithTimeout creates a new OrganizationServiceSetIamPolicyParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewOrganizationServiceSetIamPolicyParamsWithTimeout(timeout time.Duration) *OrganizationServiceSetIamPolicyParams {
-	var ()
 	return &OrganizationServiceSetIamPolicyParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewOrganizationServiceSetIamPolicyParamsWithContext creates a new OrganizationServiceSetIamPolicyParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewOrganizationServiceSetIamPolicyParamsWithContext(ctx context.Context) *OrganizationServiceSetIamPolicyParams {
-	var ()
 	return &OrganizationServiceSetIamPolicyParams{
-
 		Context: ctx,
 	}
 }
 
 // NewOrganizationServiceSetIamPolicyParamsWithHTTPClient creates a new OrganizationServiceSetIamPolicyParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewOrganizationServiceSetIamPolicyParamsWithHTTPClient(client *http.Client) *OrganizationServiceSetIamPolicyParams {
-	var ()
 	return &OrganizationServiceSetIamPolicyParams{
 		HTTPClient: client,
 	}
 }
 
-/*OrganizationServiceSetIamPolicyParams contains all the parameters to send to the API endpoint
-for the organization service set iam policy operation typically these are written to a http.Request
+/* OrganizationServiceSetIamPolicyParams contains all the parameters to send to the API endpoint
+   for the organization service set iam policy operation.
+
+   Typically these are written to a http.Request.
 */
 type OrganizationServiceSetIamPolicyParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudResourcemanagerOrganizationSetIamPolicyRequest
-	/*ID
-	  ID is the identifier of the organization.
 
+	/* ID.
+
+	   ID is the identifier of the organization.
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the organization service set iam policy params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *OrganizationServiceSetIamPolicyParams) WithDefaults() *OrganizationServiceSetIamPolicyParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the organization service set iam policy params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *OrganizationServiceSetIamPolicyParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the organization service set iam policy params
@@ -137,7 +152,6 @@ func (o *OrganizationServiceSetIamPolicyParams) WriteToRequest(r runtime.ClientR
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

@@ -47,7 +47,7 @@ func NewListVersions2OK() *ListVersions2OK {
 	return &ListVersions2OK{}
 }
 
-/*ListVersions2OK handles this case with default header values.
+/* ListVersions2OK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type ListVersions2OK struct {
 func (o *ListVersions2OK) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/versions][%d] listVersions2OK  %+v", 200, o.Payload)
 }
-
 func (o *ListVersions2OK) GetPayload() *models.HashicorpCloudConsul20200826ListVersionsResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewListVersions2Default(code int) *ListVersions2Default {
 	}
 }
 
-/*ListVersions2Default handles this case with default header values.
+/* ListVersions2Default describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *ListVersions2Default) Code() int {
 func (o *ListVersions2Default) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/versions][%d] ListVersions2 default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ListVersions2Default) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

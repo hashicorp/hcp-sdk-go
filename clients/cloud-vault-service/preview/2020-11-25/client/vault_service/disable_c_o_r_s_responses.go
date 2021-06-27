@@ -47,7 +47,7 @@ func NewDisableCORSOK() *DisableCORSOK {
 	return &DisableCORSOK{}
 }
 
-/*DisableCORSOK handles this case with default header values.
+/* DisableCORSOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type DisableCORSOK struct {
 func (o *DisableCORSOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] disableCORSOK  %+v", 200, o.Payload)
 }
-
 func (o *DisableCORSOK) GetPayload() models.HashicorpCloudVault20201125DisableCORSResponse {
 	return o.Payload
 }
@@ -80,7 +79,7 @@ func NewDisableCORSDefault(code int) *DisableCORSDefault {
 	}
 }
 
-/*DisableCORSDefault handles this case with default header values.
+/* DisableCORSDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -98,7 +97,6 @@ func (o *DisableCORSDefault) Code() int {
 func (o *DisableCORSDefault) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] DisableCORS default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *DisableCORSDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

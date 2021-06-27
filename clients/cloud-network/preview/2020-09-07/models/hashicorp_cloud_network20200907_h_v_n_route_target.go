@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -37,13 +39,40 @@ func (m *HashicorpCloudNetwork20200907HVNRouteTarget) Validate(formats strfmt.Re
 }
 
 func (m *HashicorpCloudNetwork20200907HVNRouteTarget) validateHvnConnection(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.HvnConnection) { // not required
 		return nil
 	}
 
 	if m.HvnConnection != nil {
 		if err := m.HvnConnection.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hvn_connection")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 h v n route target based on the context it is used
+func (m *HashicorpCloudNetwork20200907HVNRouteTarget) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateHvnConnection(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907HVNRouteTarget) contextValidateHvnConnection(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HvnConnection != nil {
+		if err := m.HvnConnection.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hvn_connection")
 			}
