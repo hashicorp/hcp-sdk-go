@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -34,6 +36,11 @@ type HashicorpCloudCommonPaginationRequest struct {
 
 // Validate validates this hashicorp cloud common pagination request
 func (m *HashicorpCloudCommonPaginationRequest) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud common pagination request based on context it is used
+func (m *HashicorpCloudCommonPaginationRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
