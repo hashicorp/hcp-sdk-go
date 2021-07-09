@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/preview/2021-04-30/models"
 )
 
 // NewUpdateBucketParams creates a new UpdateBucketParams object,
@@ -58,6 +60,9 @@ func NewUpdateBucketParamsWithHTTPClient(client *http.Client) *UpdateBucketParam
    Typically these are written to a http.Request.
 */
 type UpdateBucketParams struct {
+
+	// Body.
+	Body *models.HashicorpCloudPackerUpdateBucketRequest
 
 	/* BucketSlug.
 
@@ -130,6 +135,17 @@ func (o *UpdateBucketParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the update bucket params
+func (o *UpdateBucketParams) WithBody(body *models.HashicorpCloudPackerUpdateBucketRequest) *UpdateBucketParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the update bucket params
+func (o *UpdateBucketParams) SetBody(body *models.HashicorpCloudPackerUpdateBucketRequest) {
+	o.Body = body
+}
+
 // WithBucketSlug adds the bucketSlug to the update bucket params
 func (o *UpdateBucketParams) WithBucketSlug(bucketSlug string) *UpdateBucketParams {
 	o.SetBucketSlug(bucketSlug)
@@ -170,6 +186,11 @@ func (o *UpdateBucketParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
+	}
 
 	// path param bucket_slug
 	if err := r.SetPathParam("bucket_slug", o.BucketSlug); err != nil {

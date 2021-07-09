@@ -608,7 +608,7 @@ func (a *Client) GetIteration(params *GetIterationParams, authInfo runtime.Clien
 }
 
 /*
-  ListBuckets ts o d o pagination
+  ListBuckets list buckets API
 */
 func (a *Client) ListBuckets(params *ListBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBucketsOK, error) {
 	// TODO: Validate the params before sending
@@ -646,7 +646,7 @@ func (a *Client) ListBuckets(params *ListBucketsParams, authInfo runtime.ClientA
 }
 
 /*
-  ListBuilds ts o d o pagination
+  ListBuilds list builds API
 */
 func (a *Client) ListBuilds(params *ListBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBuildsOK, error) {
 	// TODO: Validate the params before sending
@@ -722,7 +722,7 @@ func (a *Client) ListChannels(params *ListChannelsParams, authInfo runtime.Clien
 }
 
 /*
-  ListIterations ts o d o pagination
+  ListIterations list iterations API
 */
 func (a *Client) ListIterations(params *ListIterationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIterationsOK, error) {
 	// TODO: Validate the params before sending

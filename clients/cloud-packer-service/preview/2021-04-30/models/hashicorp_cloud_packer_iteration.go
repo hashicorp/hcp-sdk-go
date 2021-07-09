@@ -34,7 +34,7 @@ type HashicorpCloudPackerIteration struct {
 	// list iterations request.
 	Complete bool `json:"complete,omitempty"`
 
-	// created at
+	// when iteration was created or updated
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 

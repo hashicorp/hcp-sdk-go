@@ -35,7 +35,10 @@ type HashicorpCloudPackerChannel struct {
 	// The channel pointer to the iteration
 	Pointer *HashicorpCloudPackerChannelIterationPointer `json:"pointer,omitempty"`
 
-	// timestamp this was "flagged" to be unusable
+	// message with the reason of why this channel was revoked
+	RevocationMessage string `json:"revocation_message,omitempty"`
+
+	// timestamp this channel was revoked at
 	// Format: date-time
 	RevokedAt strfmt.DateTime `json:"revoked_at,omitempty"`
 

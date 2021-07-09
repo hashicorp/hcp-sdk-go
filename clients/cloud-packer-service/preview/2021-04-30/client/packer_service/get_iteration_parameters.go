@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewGetIterationParams creates a new GetIterationParams object,
@@ -62,14 +61,6 @@ type GetIterationParams struct {
 
 	// BucketSlug.
 	BucketSlug *string
-
-	// Fingerprint.
-	Fingerprint *string
-
-	// IncrementalVersion.
-	//
-	// Format: int32
-	IncrementalVersion *int32
 
 	// IterationID.
 	IterationID string
@@ -162,28 +153,6 @@ func (o *GetIterationParams) SetBucketSlug(bucketSlug *string) {
 	o.BucketSlug = bucketSlug
 }
 
-// WithFingerprint adds the fingerprint to the get iteration params
-func (o *GetIterationParams) WithFingerprint(fingerprint *string) *GetIterationParams {
-	o.SetFingerprint(fingerprint)
-	return o
-}
-
-// SetFingerprint adds the fingerprint to the get iteration params
-func (o *GetIterationParams) SetFingerprint(fingerprint *string) {
-	o.Fingerprint = fingerprint
-}
-
-// WithIncrementalVersion adds the incrementalVersion to the get iteration params
-func (o *GetIterationParams) WithIncrementalVersion(incrementalVersion *int32) *GetIterationParams {
-	o.SetIncrementalVersion(incrementalVersion)
-	return o
-}
-
-// SetIncrementalVersion adds the incrementalVersion to the get iteration params
-func (o *GetIterationParams) SetIncrementalVersion(incrementalVersion *int32) {
-	o.IncrementalVersion = incrementalVersion
-}
-
 // WithIterationID adds the iterationID to the get iteration params
 func (o *GetIterationParams) WithIterationID(iterationID string) *GetIterationParams {
 	o.SetIterationID(iterationID)
@@ -259,40 +228,6 @@ func (o *GetIterationParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if qBucketSlug != "" {
 
 			if err := r.SetQueryParam("bucket_slug", qBucketSlug); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Fingerprint != nil {
-
-		// query param fingerprint
-		var qrFingerprint string
-
-		if o.Fingerprint != nil {
-			qrFingerprint = *o.Fingerprint
-		}
-		qFingerprint := qrFingerprint
-		if qFingerprint != "" {
-
-			if err := r.SetQueryParam("fingerprint", qFingerprint); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.IncrementalVersion != nil {
-
-		// query param incremental_version
-		var qrIncrementalVersion int32
-
-		if o.IncrementalVersion != nil {
-			qrIncrementalVersion = *o.IncrementalVersion
-		}
-		qIncrementalVersion := swag.FormatInt32(qrIncrementalVersion)
-		if qIncrementalVersion != "" {
-
-			if err := r.SetQueryParam("incremental_version", qIncrementalVersion); err != nil {
 				return err
 			}
 		}

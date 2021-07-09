@@ -14,24 +14,30 @@ import (
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudPackerCreateIterationRequest hashicorp cloud packer create iteration request
+// HashicorpCloudPackerUpdateBucketRequest hashicorp cloud packer update bucket request
 //
-// swagger:model hashicorp.cloud.packer.CreateIterationRequest
-type HashicorpCloudPackerCreateIterationRequest struct {
+// swagger:model hashicorp.cloud.packer.UpdateBucketRequest
+type HashicorpCloudPackerUpdateBucketRequest struct {
 
-	// bucket slug
+	// base-ubuntu-18-secure
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// fingerprint of the build; this will allow to regroup image builds under
-	// the same iteration. So it could be for example a git sha.
-	Fingerprint string `json:"fingerprint,omitempty"`
+	// "This image is a hardened platform for other teams"
+	Description string `json:"description,omitempty"`
+
+	// Slot for unstructured metadata tags
+	// for example {"repo": "https://github.com/hashicorp/common"}
+	Labels map[string]string `json:"labels,omitempty"`
 
 	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+
+	// ["aws", "gcp"]
+	Platforms []string `json:"platforms"`
 }
 
-// Validate validates this hashicorp cloud packer create iteration request
-func (m *HashicorpCloudPackerCreateIterationRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud packer update bucket request
+func (m *HashicorpCloudPackerUpdateBucketRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateLocation(formats); err != nil {
@@ -44,7 +50,7 @@ func (m *HashicorpCloudPackerCreateIterationRequest) Validate(formats strfmt.Reg
 	return nil
 }
 
-func (m *HashicorpCloudPackerCreateIterationRequest) validateLocation(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerUpdateBucketRequest) validateLocation(formats strfmt.Registry) error {
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -61,8 +67,8 @@ func (m *HashicorpCloudPackerCreateIterationRequest) validateLocation(formats st
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud packer create iteration request based on the context it is used
-func (m *HashicorpCloudPackerCreateIterationRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud packer update bucket request based on the context it is used
+func (m *HashicorpCloudPackerUpdateBucketRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
@@ -75,7 +81,7 @@ func (m *HashicorpCloudPackerCreateIterationRequest) ContextValidate(ctx context
 	return nil
 }
 
-func (m *HashicorpCloudPackerCreateIterationRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerUpdateBucketRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
@@ -90,7 +96,7 @@ func (m *HashicorpCloudPackerCreateIterationRequest) contextValidateLocation(ctx
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudPackerCreateIterationRequest) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudPackerUpdateBucketRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -98,8 +104,8 @@ func (m *HashicorpCloudPackerCreateIterationRequest) MarshalBinary() ([]byte, er
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudPackerCreateIterationRequest) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudPackerCreateIterationRequest
+func (m *HashicorpCloudPackerUpdateBucketRequest) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudPackerUpdateBucketRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

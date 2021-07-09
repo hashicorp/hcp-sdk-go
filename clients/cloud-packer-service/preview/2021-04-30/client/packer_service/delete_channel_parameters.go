@@ -61,7 +61,7 @@ type DeleteChannelParams struct {
 
 	/* BucketSlug.
 
-	   same as in Bucket
+	   The bucket slug
 	*/
 	BucketSlug string
 
@@ -89,9 +89,16 @@ type DeleteChannelParams struct {
 	*/
 	LocationRegionRegion *string
 
+	/* RevocationMessage.
+
+	     Optional field to provide the reason for why this channel is being revoked.
+	Only useful for a channel that is assigned to an iteration.
+	*/
+	RevocationMessage *string
+
 	/* Slug.
 
-	   production-stable
+	   The channel slug. e.g. production-stable
 	*/
 	Slug string
 
@@ -203,6 +210,17 @@ func (o *DeleteChannelParams) SetLocationRegionRegion(locationRegionRegion *stri
 	o.LocationRegionRegion = locationRegionRegion
 }
 
+// WithRevocationMessage adds the revocationMessage to the delete channel params
+func (o *DeleteChannelParams) WithRevocationMessage(revocationMessage *string) *DeleteChannelParams {
+	o.SetRevocationMessage(revocationMessage)
+	return o
+}
+
+// SetRevocationMessage adds the revocationMessage to the delete channel params
+func (o *DeleteChannelParams) SetRevocationMessage(revocationMessage *string) {
+	o.RevocationMessage = revocationMessage
+}
+
 // WithSlug adds the slug to the delete channel params
 func (o *DeleteChannelParams) WithSlug(slug string) *DeleteChannelParams {
 	o.SetSlug(slug)
@@ -266,6 +284,23 @@ func (o *DeleteChannelParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qLocationRegionRegion != "" {
 
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.RevocationMessage != nil {
+
+		// query param revocation_message
+		var qrRevocationMessage string
+
+		if o.RevocationMessage != nil {
+			qrRevocationMessage = *o.RevocationMessage
+		}
+		qRevocationMessage := qrRevocationMessage
+		if qRevocationMessage != "" {
+
+			if err := r.SetQueryParam("revocation_message", qRevocationMessage); err != nil {
 				return err
 			}
 		}
