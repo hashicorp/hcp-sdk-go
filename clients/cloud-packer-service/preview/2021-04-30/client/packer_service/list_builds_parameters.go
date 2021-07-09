@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewListBuildsParams creates a new ListBuildsParams object,
@@ -94,6 +95,48 @@ type ListBuildsParams struct {
 	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
+
+	/* PaginationNextPageToken.
+
+	     Specifies a page token to use to retrieve the next page. Set this to the
+	`next_page_token` returned by previous list requests to get the next page of
+	results. If set, `previous_page_token` must not be set.
+	*/
+	PaginationNextPageToken *string
+
+	/* PaginationPageSize.
+
+	     The max number of results per page that should be returned. If the number
+	of available results is larger than `page_size`, a `next_page_token` is
+	returned which can be used to get the next page of results in subsequent
+	requests. A value of zero will cause `page_size` to be defaulted.
+
+	     Format: int64
+	*/
+	PaginationPageSize *int64
+
+	/* PaginationPreviousPageToken.
+
+	     Specifies a page token to use to retrieve the previous page. Set this to
+	the `previous_page_token` returned by previous list requests to get the
+	previous page of results. If set, `next_page_token` must not be set.
+	*/
+	PaginationPreviousPageToken *string
+
+	/* SortingOrderBy.
+
+	     Specifies the list of per field ordering that should be used for sorting.
+	The order matters as rows are sorted in order by fields and when the field
+	matches, the next field is used to tie break the ordering.
+	The per field default ordering is ascending.
+
+	The fields should be immutabile, unique, and orderable. If the field is
+	not unique, more than one sort fields should be passed.
+
+	Example: oder_by=name,age desc,created_at asc
+	In that case, 'name' will get the default 'ascending' order.
+	*/
+	SortingOrderBy []string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -214,6 +257,50 @@ func (o *ListBuildsParams) SetLocationRegionRegion(locationRegionRegion *string)
 	o.LocationRegionRegion = locationRegionRegion
 }
 
+// WithPaginationNextPageToken adds the paginationNextPageToken to the list builds params
+func (o *ListBuildsParams) WithPaginationNextPageToken(paginationNextPageToken *string) *ListBuildsParams {
+	o.SetPaginationNextPageToken(paginationNextPageToken)
+	return o
+}
+
+// SetPaginationNextPageToken adds the paginationNextPageToken to the list builds params
+func (o *ListBuildsParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
+	o.PaginationNextPageToken = paginationNextPageToken
+}
+
+// WithPaginationPageSize adds the paginationPageSize to the list builds params
+func (o *ListBuildsParams) WithPaginationPageSize(paginationPageSize *int64) *ListBuildsParams {
+	o.SetPaginationPageSize(paginationPageSize)
+	return o
+}
+
+// SetPaginationPageSize adds the paginationPageSize to the list builds params
+func (o *ListBuildsParams) SetPaginationPageSize(paginationPageSize *int64) {
+	o.PaginationPageSize = paginationPageSize
+}
+
+// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the list builds params
+func (o *ListBuildsParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *ListBuildsParams {
+	o.SetPaginationPreviousPageToken(paginationPreviousPageToken)
+	return o
+}
+
+// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the list builds params
+func (o *ListBuildsParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
+	o.PaginationPreviousPageToken = paginationPreviousPageToken
+}
+
+// WithSortingOrderBy adds the sortingOrderBy to the list builds params
+func (o *ListBuildsParams) WithSortingOrderBy(sortingOrderBy []string) *ListBuildsParams {
+	o.SetSortingOrderBy(sortingOrderBy)
+	return o
+}
+
+// SetSortingOrderBy adds the sortingOrderBy to the list builds params
+func (o *ListBuildsParams) SetSortingOrderBy(sortingOrderBy []string) {
+	o.SortingOrderBy = sortingOrderBy
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListBuildsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -276,8 +363,87 @@ func (o *ListBuildsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		}
 	}
 
+	if o.PaginationNextPageToken != nil {
+
+		// query param pagination.next_page_token
+		var qrPaginationNextPageToken string
+
+		if o.PaginationNextPageToken != nil {
+			qrPaginationNextPageToken = *o.PaginationNextPageToken
+		}
+		qPaginationNextPageToken := qrPaginationNextPageToken
+		if qPaginationNextPageToken != "" {
+
+			if err := r.SetQueryParam("pagination.next_page_token", qPaginationNextPageToken); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationPageSize != nil {
+
+		// query param pagination.page_size
+		var qrPaginationPageSize int64
+
+		if o.PaginationPageSize != nil {
+			qrPaginationPageSize = *o.PaginationPageSize
+		}
+		qPaginationPageSize := swag.FormatInt64(qrPaginationPageSize)
+		if qPaginationPageSize != "" {
+
+			if err := r.SetQueryParam("pagination.page_size", qPaginationPageSize); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationPreviousPageToken != nil {
+
+		// query param pagination.previous_page_token
+		var qrPaginationPreviousPageToken string
+
+		if o.PaginationPreviousPageToken != nil {
+			qrPaginationPreviousPageToken = *o.PaginationPreviousPageToken
+		}
+		qPaginationPreviousPageToken := qrPaginationPreviousPageToken
+		if qPaginationPreviousPageToken != "" {
+
+			if err := r.SetQueryParam("pagination.previous_page_token", qPaginationPreviousPageToken); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SortingOrderBy != nil {
+
+		// binding items for sorting.order_by
+		joinedSortingOrderBy := o.bindParamSortingOrderBy(reg)
+
+		// query array param sorting.order_by
+		if err := r.SetQueryParam("sorting.order_by", joinedSortingOrderBy...); err != nil {
+			return err
+		}
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamListBuilds binds the parameter sorting.order_by
+func (o *ListBuildsParams) bindParamSortingOrderBy(formats strfmt.Registry) []string {
+	sortingOrderByIR := o.SortingOrderBy
+
+	var sortingOrderByIC []string
+	for _, sortingOrderByIIR := range sortingOrderByIR { // explode []string
+
+		sortingOrderByIIV := sortingOrderByIIR // string as string
+		sortingOrderByIC = append(sortingOrderByIC, sortingOrderByIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	sortingOrderByIS := swag.JoinByFormat(sortingOrderByIC, "multi")
+
+	return sortingOrderByIS
 }

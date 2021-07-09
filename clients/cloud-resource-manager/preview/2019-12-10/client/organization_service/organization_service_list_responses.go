@@ -47,7 +47,7 @@ func NewOrganizationServiceListOK() *OrganizationServiceListOK {
 	return &OrganizationServiceListOK{}
 }
 
-/*OrganizationServiceListOK handles this case with default header values.
+/* OrganizationServiceListOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type OrganizationServiceListOK struct {
 func (o *OrganizationServiceListOK) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations][%d] organizationServiceListOK  %+v", 200, o.Payload)
 }
-
 func (o *OrganizationServiceListOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationListResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewOrganizationServiceListDefault(code int) *OrganizationServiceListDefault
 	}
 }
 
-/*OrganizationServiceListDefault handles this case with default header values.
+/* OrganizationServiceListDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *OrganizationServiceListDefault) Code() int {
 func (o *OrganizationServiceListDefault) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations][%d] OrganizationService_List default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *OrganizationServiceListDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

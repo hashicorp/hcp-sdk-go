@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -19,11 +20,23 @@ import (
 // swagger:model hashicorp.cloud.packer.CreateIterationRequest
 type HashicorpCloudPackerCreateIterationRequest struct {
 
+	// who created the iteration
+	AuthorID string `json:"author_id,omitempty"`
+
 	// bucket slug
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// iteration
-	Iteration *HashicorpCloudPackerIteration `json:"iteration,omitempty"`
+	// link to set of builds for an image iteration
+	Builds []*HashicorpCloudPackerBuild `json:"builds"`
+
+	// If true, this iteration is considered "ready to use" and will be
+	// returned even if the include_incomplete flag is "false" in the
+	// list iterations request.
+	Complete bool `json:"complete,omitempty"`
+
+	// fingerprint of the build; this will allow to regroup image builds under
+	// the same iteration. So it could be for example a git sha.
+	Fingerprint string `json:"fingerprint,omitempty"`
 
 	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
@@ -33,7 +46,7 @@ type HashicorpCloudPackerCreateIterationRequest struct {
 func (m *HashicorpCloudPackerCreateIterationRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateIteration(formats); err != nil {
+	if err := m.validateBuilds(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -47,18 +60,25 @@ func (m *HashicorpCloudPackerCreateIterationRequest) Validate(formats strfmt.Reg
 	return nil
 }
 
-func (m *HashicorpCloudPackerCreateIterationRequest) validateIteration(formats strfmt.Registry) error {
-	if swag.IsZero(m.Iteration) { // not required
+func (m *HashicorpCloudPackerCreateIterationRequest) validateBuilds(formats strfmt.Registry) error {
+	if swag.IsZero(m.Builds) { // not required
 		return nil
 	}
 
-	if m.Iteration != nil {
-		if err := m.Iteration.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("iteration")
-			}
-			return err
+	for i := 0; i < len(m.Builds); i++ {
+		if swag.IsZero(m.Builds[i]) { // not required
+			continue
 		}
+
+		if m.Builds[i] != nil {
+			if err := m.Builds[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("builds" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -85,7 +105,7 @@ func (m *HashicorpCloudPackerCreateIterationRequest) validateLocation(formats st
 func (m *HashicorpCloudPackerCreateIterationRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateIteration(ctx, formats); err != nil {
+	if err := m.contextValidateBuilds(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -99,15 +119,19 @@ func (m *HashicorpCloudPackerCreateIterationRequest) ContextValidate(ctx context
 	return nil
 }
 
-func (m *HashicorpCloudPackerCreateIterationRequest) contextValidateIteration(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerCreateIterationRequest) contextValidateBuilds(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.Iteration != nil {
-		if err := m.Iteration.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("iteration")
+	for i := 0; i < len(m.Builds); i++ {
+
+		if m.Builds[i] != nil {
+			if err := m.Builds[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("builds" + "." + strconv.Itoa(i))
+				}
+				return err
 			}
-			return err
 		}
+
 	}
 
 	return nil

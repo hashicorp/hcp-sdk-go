@@ -52,19 +52,19 @@ func NewListBuildsOK() *ListBuildsOK {
 A successful response.
 */
 type ListBuildsOK struct {
-	Payload *models.HashicorpCloudPackerListBuildResponse
+	Payload *models.HashicorpCloudPackerListBuildsResponse
 }
 
 func (o *ListBuildsOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}/builds][%d] listBuildsOK  %+v", 200, o.Payload)
 }
-func (o *ListBuildsOK) GetPayload() *models.HashicorpCloudPackerListBuildResponse {
+func (o *ListBuildsOK) GetPayload() *models.HashicorpCloudPackerListBuildsResponse {
 	return o.Payload
 }
 
 func (o *ListBuildsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudPackerListBuildResponse)
+	o.Payload = new(models.HashicorpCloudPackerListBuildsResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

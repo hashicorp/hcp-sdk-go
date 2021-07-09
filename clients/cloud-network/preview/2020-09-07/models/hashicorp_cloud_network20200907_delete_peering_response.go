@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -36,13 +38,40 @@ func (m *HashicorpCloudNetwork20200907DeletePeeringResponse) Validate(formats st
 }
 
 func (m *HashicorpCloudNetwork20200907DeletePeeringResponse) validateOperation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Operation) { // not required
 		return nil
 	}
 
 	if m.Operation != nil {
 		if err := m.Operation.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("operation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 delete peering response based on the context it is used
+func (m *HashicorpCloudNetwork20200907DeletePeeringResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateOperation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907DeletePeeringResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Operation != nil {
+		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operation")
 			}

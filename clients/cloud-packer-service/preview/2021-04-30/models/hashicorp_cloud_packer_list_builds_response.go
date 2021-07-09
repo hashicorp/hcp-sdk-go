@@ -15,20 +15,23 @@ import (
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudPackerListBuildResponse hashicorp cloud packer list build response
+// HashicorpCloudPackerListBuildsResponse hashicorp cloud packer list builds response
 //
-// swagger:model hashicorp.cloud.packer.ListBuildResponse
-type HashicorpCloudPackerListBuildResponse struct {
+// swagger:model hashicorp.cloud.packer.ListBuildsResponse
+type HashicorpCloudPackerListBuildsResponse struct {
 
 	// builds
 	Builds []*HashicorpCloudPackerBuild `json:"builds"`
 
 	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+
+	// pagination
+	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 
-// Validate validates this hashicorp cloud packer list build response
-func (m *HashicorpCloudPackerListBuildResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud packer list builds response
+func (m *HashicorpCloudPackerListBuildsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateBuilds(formats); err != nil {
@@ -39,13 +42,17 @@ func (m *HashicorpCloudPackerListBuildResponse) Validate(formats strfmt.Registry
 		res = append(res, err)
 	}
 
+	if err := m.validatePagination(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
-func (m *HashicorpCloudPackerListBuildResponse) validateBuilds(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerListBuildsResponse) validateBuilds(formats strfmt.Registry) error {
 	if swag.IsZero(m.Builds) { // not required
 		return nil
 	}
@@ -69,7 +76,7 @@ func (m *HashicorpCloudPackerListBuildResponse) validateBuilds(formats strfmt.Re
 	return nil
 }
 
-func (m *HashicorpCloudPackerListBuildResponse) validateLocation(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerListBuildsResponse) validateLocation(formats strfmt.Registry) error {
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -86,8 +93,25 @@ func (m *HashicorpCloudPackerListBuildResponse) validateLocation(formats strfmt.
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud packer list build response based on the context it is used
-func (m *HashicorpCloudPackerListBuildResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerListBuildsResponse) validatePagination(formats strfmt.Registry) error {
+	if swag.IsZero(m.Pagination) { // not required
+		return nil
+	}
+
+	if m.Pagination != nil {
+		if err := m.Pagination.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer list builds response based on the context it is used
+func (m *HashicorpCloudPackerListBuildsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateBuilds(ctx, formats); err != nil {
@@ -98,13 +122,17 @@ func (m *HashicorpCloudPackerListBuildResponse) ContextValidate(ctx context.Cont
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePagination(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
-func (m *HashicorpCloudPackerListBuildResponse) contextValidateBuilds(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerListBuildsResponse) contextValidateBuilds(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Builds); i++ {
 
@@ -122,7 +150,7 @@ func (m *HashicorpCloudPackerListBuildResponse) contextValidateBuilds(ctx contex
 	return nil
 }
 
-func (m *HashicorpCloudPackerListBuildResponse) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerListBuildsResponse) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
@@ -136,8 +164,22 @@ func (m *HashicorpCloudPackerListBuildResponse) contextValidateLocation(ctx cont
 	return nil
 }
 
+func (m *HashicorpCloudPackerListBuildsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pagination != nil {
+		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
-func (m *HashicorpCloudPackerListBuildResponse) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudPackerListBuildsResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -145,8 +187,8 @@ func (m *HashicorpCloudPackerListBuildResponse) MarshalBinary() ([]byte, error) 
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudPackerListBuildResponse) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudPackerListBuildResponse
+func (m *HashicorpCloudPackerListBuildsResponse) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudPackerListBuildsResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

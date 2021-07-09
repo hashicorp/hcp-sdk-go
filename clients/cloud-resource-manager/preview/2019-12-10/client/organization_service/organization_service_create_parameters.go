@@ -18,56 +18,70 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/preview/2019-12-10/models"
 )
 
-// NewOrganizationServiceCreateParams creates a new OrganizationServiceCreateParams object
-// with the default values initialized.
+// NewOrganizationServiceCreateParams creates a new OrganizationServiceCreateParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewOrganizationServiceCreateParams() *OrganizationServiceCreateParams {
-	var ()
 	return &OrganizationServiceCreateParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewOrganizationServiceCreateParamsWithTimeout creates a new OrganizationServiceCreateParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewOrganizationServiceCreateParamsWithTimeout(timeout time.Duration) *OrganizationServiceCreateParams {
-	var ()
 	return &OrganizationServiceCreateParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewOrganizationServiceCreateParamsWithContext creates a new OrganizationServiceCreateParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewOrganizationServiceCreateParamsWithContext(ctx context.Context) *OrganizationServiceCreateParams {
-	var ()
 	return &OrganizationServiceCreateParams{
-
 		Context: ctx,
 	}
 }
 
 // NewOrganizationServiceCreateParamsWithHTTPClient creates a new OrganizationServiceCreateParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewOrganizationServiceCreateParamsWithHTTPClient(client *http.Client) *OrganizationServiceCreateParams {
-	var ()
 	return &OrganizationServiceCreateParams{
 		HTTPClient: client,
 	}
 }
 
-/*OrganizationServiceCreateParams contains all the parameters to send to the API endpoint
-for the organization service create operation typically these are written to a http.Request
+/* OrganizationServiceCreateParams contains all the parameters to send to the API endpoint
+   for the organization service create operation.
+
+   Typically these are written to a http.Request.
 */
 type OrganizationServiceCreateParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudResourcemanagerOrganizationCreateRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the organization service create params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *OrganizationServiceCreateParams) WithDefaults() *OrganizationServiceCreateParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the organization service create params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *OrganizationServiceCreateParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the organization service create params
@@ -121,7 +135,6 @@ func (o *OrganizationServiceCreateParams) WriteToRequest(r runtime.ClientRequest
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

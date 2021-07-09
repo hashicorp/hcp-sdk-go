@@ -47,7 +47,7 @@ func NewSealOK() *SealOK {
 	return &SealOK{}
 }
 
-/*SealOK handles this case with default header values.
+/* SealOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type SealOK struct {
 func (o *SealOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] sealOK  %+v", 200, o.Payload)
 }
-
 func (o *SealOK) GetPayload() *models.HashicorpCloudVault20200420SealResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewSealDefault(code int) *SealDefault {
 	}
 }
 
-/*SealDefault handles this case with default header values.
+/* SealDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *SealDefault) Code() int {
 func (o *SealDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] Seal default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *SealDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

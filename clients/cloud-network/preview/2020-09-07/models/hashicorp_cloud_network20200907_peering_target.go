@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -42,7 +44,6 @@ func (m *HashicorpCloudNetwork20200907PeeringTarget) Validate(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudNetwork20200907PeeringTarget) validateAwsTarget(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.AwsTarget) { // not required
 		return nil
 	}
@@ -60,13 +61,58 @@ func (m *HashicorpCloudNetwork20200907PeeringTarget) validateAwsTarget(formats s
 }
 
 func (m *HashicorpCloudNetwork20200907PeeringTarget) validateHvnTarget(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.HvnTarget) { // not required
 		return nil
 	}
 
 	if m.HvnTarget != nil {
 		if err := m.HvnTarget.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hvn_target")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 peering target based on the context it is used
+func (m *HashicorpCloudNetwork20200907PeeringTarget) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAwsTarget(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHvnTarget(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907PeeringTarget) contextValidateAwsTarget(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AwsTarget != nil {
+		if err := m.AwsTarget.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("aws_target")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907PeeringTarget) contextValidateHvnTarget(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HvnTarget != nil {
+		if err := m.HvnTarget.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hvn_target")
 			}

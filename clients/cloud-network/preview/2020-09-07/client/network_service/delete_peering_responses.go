@@ -47,7 +47,7 @@ func NewDeletePeeringOK() *DeletePeeringOK {
 	return &DeletePeeringOK{}
 }
 
-/*DeletePeeringOK handles this case with default header values.
+/* DeletePeeringOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type DeletePeeringOK struct {
 func (o *DeletePeeringOK) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] deletePeeringOK  %+v", 200, o.Payload)
 }
-
 func (o *DeletePeeringOK) GetPayload() *models.HashicorpCloudNetwork20200907DeletePeeringResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewDeletePeeringDefault(code int) *DeletePeeringDefault {
 	}
 }
 
-/*DeletePeeringDefault handles this case with default header values.
+/* DeletePeeringDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *DeletePeeringDefault) Code() int {
 func (o *DeletePeeringDefault) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] DeletePeering default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *DeletePeeringDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -20,7 +22,7 @@ type HashicorpCloudVault20201125InputClusterConfig struct {
 	NetworkConfig *HashicorpCloudVault20201125InputNetworkConfig `json:"network_config,omitempty"`
 
 	// Tier is the type of Vault cluster that should be provisioned
-	Tier HashicorpCloudVault20201125Tier `json:"tier,omitempty"`
+	Tier *HashicorpCloudVault20201125Tier `json:"tier,omitempty"`
 
 	// vault_config is the Vault specific configuration
 	VaultConfig *HashicorpCloudVault20201125VaultConfig `json:"vault_config,omitempty"`
@@ -49,7 +51,6 @@ func (m *HashicorpCloudVault20201125InputClusterConfig) Validate(formats strfmt.
 }
 
 func (m *HashicorpCloudVault20201125InputClusterConfig) validateNetworkConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.NetworkConfig) { // not required
 		return nil
 	}
@@ -67,29 +68,93 @@ func (m *HashicorpCloudVault20201125InputClusterConfig) validateNetworkConfig(fo
 }
 
 func (m *HashicorpCloudVault20201125InputClusterConfig) validateTier(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Tier) { // not required
 		return nil
 	}
 
-	if err := m.Tier.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("tier")
+	if m.Tier != nil {
+		if err := m.Tier.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("tier")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudVault20201125InputClusterConfig) validateVaultConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.VaultConfig) { // not required
 		return nil
 	}
 
 	if m.VaultConfig != nil {
 		if err := m.VaultConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vault_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 input cluster config based on the context it is used
+func (m *HashicorpCloudVault20201125InputClusterConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateNetworkConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTier(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVaultConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputClusterConfig) contextValidateNetworkConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.NetworkConfig != nil {
+		if err := m.NetworkConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("network_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputClusterConfig) contextValidateTier(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Tier != nil {
+		if err := m.Tier.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("tier")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputClusterConfig) contextValidateVaultConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VaultConfig != nil {
+		if err := m.VaultConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("vault_config")
 			}
