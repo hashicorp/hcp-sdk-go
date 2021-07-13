@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -40,55 +41,66 @@ type Import struct {
 }
 
 func main() {
-	log.Print("Loading shared type definitions")
-	sharedDefs, err := loadSharedDefinitions()
+
+	// These flags collect:
+	// - the path of the service spec, i.e. specs/consul-foo-service/preview/2021-07-09/hcp.swagger.json
+	// - the path of the shared spec directory, should always end with 'specs/cloud-shared'
+	// - the path of the external spec, which should always end with 'specs/external/external.swagger.json'
+
+	svcPathPtr := flag.String("service", "", "the path of the service specs")
+	sharedPathPtr := flag.String("shared", "", "the path of the shared specs")
+	// externalSpecPathPtr := flag.String("external", "", "the path of the external types spec")
+
+	flag.Parse()
+
+	svcPath := *svcPathPtr
+	sharedPath := *sharedPathPtr
+	// externalSpecPath := *externalSpecPathPtr
+
+	log.Print("Creating map of shared type definitions")
+	sharedDefs, err := loadSharedDefinitions(sharedPath, svcPath)
 	if err != nil {
 		log.Fatalf("failed to add load shared type definitions: %v", err)
 	}
 
-	log.Print("Loading service specs")
-	svcDocs, err := loadServiceSpecs("specs")
+	// TODO: refactor to only copy from given spec
+	// log.Print("Copying external type definitions")
+	// err = copyExternalTypes(externalSpecPath, svcPath)
+	// if err != nil {
+	// 	log.Fatalf("failed to copy external type definitions: %v", err)
+	// }
+
+	svcDoc, err := loads.JSONSpec(svcPath)
 	if err != nil {
-		log.Fatalf("failed to add load service specs: %v", err)
+		log.Fatalf("failed to load spec at path %q: %v", svcPath, err)
 	}
 
-	// At this point, no changes are made to the original specs.
-	log.Print("Copying external type definitions")
-	err = copyExternalTypes(svcDocs)
+	sp := svcDoc.Spec()
+
+	// TODO: validate spec
+
+	log.Printf("Adding shared type extension to spec %q", svcPath)
+	updatedSpec, err := addSharedExtension(sp, sharedDefs)
 	if err != nil {
-		log.Fatalf("failed to copy external type definitions: %v", err)
+		log.Fatalf("failed to add shared extension: %v", err)
 	}
 
-	// After this point, the original specs are overwritten by updated specs.
-	for path, svcDoc := range svcDocs {
-
-		sp := svcDoc.Spec()
-
-		// TODO: validate spec
-
-		log.Printf("Adding shared type extension to spec %q", path)
-		updatedSpec, err := addSharedExtension(sp, sharedDefs)
-		if err != nil {
-			log.Fatalf("failed to add shared extension: %v", err)
-		}
-
-		json, err := json.MarshalIndent(updatedSpec, "", "    ")
-		if err != nil {
-			log.Fatalf("failed to marshal json for path %q: %v", path, err)
-		}
-
-		// Overwrite existing json with the updated json spec
-		log.Printf("Overwriting spec %q", path)
-		ioutil.WriteFile(path, json, os.ModePerm)
+	json, err := json.MarshalIndent(updatedSpec, "", "    ")
+	if err != nil {
+		log.Fatalf("failed to marshal json for path %q: %v", svcPath, err)
 	}
+
+	// Overwrite original spec with the transformed spec.
+	log.Printf("Overwriting spec %q", svcPath)
+	ioutil.WriteFile(svcPath, json, os.ModePerm)
 }
 
-// loadSharedDefinitions parses both service and shared specs and returns a map of every shared type name
-func loadSharedDefinitions() (map[string]bool, error) {
+// loadSharedDefinitions parses both the service spec and shared specs and returns a map of every shared type name
+func loadSharedDefinitions(sharedPath, svcPath string) (map[string]bool, error) {
 	sharedDefs := make(map[string]bool)
 
 	// Walk the shared specs to find all internal shared type definitions.
-	err := filepath.Walk("specs/hashicorp/cloud", func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(sharedPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return fmt.Errorf("failed accessing path %q: %w", path, err)
 		}
@@ -111,80 +123,27 @@ func loadSharedDefinitions() (map[string]bool, error) {
 		return nil
 	})
 	if err != nil {
-		log.Fatal(fmt.Errorf("error walking the path 'specs/hashicorp/cloud': %w", err))
+		log.Fatal(fmt.Errorf("error walking the path %q: %w", sharedPath, err))
 	}
 
-	// Walk the service specs to find any external shared type definitions.
-	err = filepath.Walk("specs", func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return fmt.Errorf("failed accessing path %q: %w", path, err)
-		}
+	doc, err := loads.JSONSpec(svcPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load spec at path %q: %w", svcPath, err)
+	}
 
-		if info.IsDir() {
-			return nil
-		}
-
-		doc, err := loads.JSONSpec(path)
-		if err != nil {
-			return fmt.Errorf("failed to load spec at path %q: %w", path, err)
-		}
-
-		for _, def := range doc.Analyzer.AllDefinitions() {
-			if def.TopLevel {
-				if !strings.HasPrefix(def.Name, "hashicorp.cloud") {
-					sharedDefs[def.Name] = true
-				}
+	for _, def := range doc.Analyzer.AllDefinitions() {
+		if def.TopLevel {
+			if !strings.HasPrefix(def.Name, "hashicorp.cloud") {
+				sharedDefs[def.Name] = true
 			}
 		}
-
-		return nil
-	})
-	if err != nil {
-		log.Fatal(fmt.Errorf("error walking the path 'specs': %w", err))
 	}
 
 	return sharedDefs, nil
 }
 
-// loadServiceSpecs parses the spec json at the given path, unmarshals the json into a Document struct,
-// and saves that Document in a map for subsequent validation or mutation.
-func loadServiceSpecs(svcPath string) (svcDocs map[string]*loads.Document, err error) {
-	svcDocs = make(map[string]*loads.Document)
-
-	// Walk over the spec directory
-	err = filepath.Walk(svcPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return fmt.Errorf("failed accessing path %q: %w", path, err)
-		}
-
-		// These subdirectories contains shared specs, which are in a different format than the service specs.
-		subDirToSkip := []string{"hashicorp", "external"}
-
-		if info.IsDir() && (info.Name() == subDirToSkip[0] || info.Name() == subDirToSkip[1]) {
-			return filepath.SkipDir
-		} else if info.IsDir() {
-			return nil
-		}
-
-		// Parse the found spec file into an analyzed struct that can be mutated
-		svcDoc, err := loads.JSONSpec(path)
-		if err != nil {
-			return fmt.Errorf("failed to load spec at path %q: %w", path, err)
-		}
-
-		svcDocs[path] = svcDoc
-
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return svcDocs, nil
-}
-
-// addSharedExtensions loops over each repetition of a shared definition in a service spec and adds the type that it should reuse.
-// Without adding the type reuse extension, separate copies of each shared definition are generated alongside the service-specific type definitions.
+// addSharedExtensions loops over each shared type definition in a service spec and adds the type that it should reuse.
+// Without adding the type reuse extension, separate copies of each shared type definition are generated alongside the service-specific type definitions.
 func addSharedExtension(apiSpec *spec.Swagger, sharedDefs map[string]bool) (*spec.Swagger, error) {
 	for sharedDefName := range sharedDefs {
 
