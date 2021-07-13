@@ -49,13 +49,13 @@ func main() {
 
 	svcPathPtr := flag.String("service", "", "the path of the service specs")
 	sharedPathPtr := flag.String("shared", "", "the path of the shared specs")
-	// externalSpecPathPtr := flag.String("external", "", "the path of the external types spec")
+	externalSpecPathPtr := flag.String("external", "", "the path of the external types spec")
 
 	flag.Parse()
 
 	svcPath := *svcPathPtr
 	sharedPath := *sharedPathPtr
-	// externalSpecPath := *externalSpecPathPtr
+	externalSpecPath := *externalSpecPathPtr
 
 	log.Print("Creating map of shared type definitions")
 	sharedDefs, err := loadSharedDefinitions(sharedPath, svcPath)
@@ -63,12 +63,12 @@ func main() {
 		log.Fatalf("failed to add load shared type definitions: %v", err)
 	}
 
-	// TODO: refactor to only copy from given spec
-	// log.Print("Copying external type definitions")
-	// err = copyExternalTypes(externalSpecPath, svcPath)
-	// if err != nil {
-	// 	log.Fatalf("failed to copy external type definitions: %v", err)
-	// }
+	// No changes are made to the original spec at this step.
+	log.Printf("Copying external type definitions from spec %q", svcPath)
+	err = copyExternalTypes(externalSpecPath, svcPath)
+	if err != nil {
+		log.Fatalf("failed to copy external type definitions: %v", err)
+	}
 
 	svcDoc, err := loads.JSONSpec(svcPath)
 	if err != nil {
@@ -176,52 +176,57 @@ func addSharedExtension(apiSpec *spec.Swagger, sharedDefs map[string]bool) (*spe
 	return apiSpec, nil
 }
 
-// copyExternalTypes traverses struct representations of the service specs and saves any imported types that have been defined in external protos,
-// and copies all of those type definitions into a single swagger file under the shared specs directory.
-// Those external types can then be generated as shared models in the SDK for reuse across any service SDK that requires them.
-func copyExternalTypes(svcDocs map[string]*loads.Document) error {
+// copyExternalTypes reads a given service spec and finds any imported types that have been defined in external protos,
+// then copies those type definitions into an 'external' spec file. Those external types can then be generated as shared models
+// in the SDK for reuse across any service SDK that requires them.
+func copyExternalTypes(externalSpecPath, svcPath string) error {
 	externalTypes := make(map[string]spec.Schema)
 
-	// This map of documents contains go struct copies of the service spec json. The service specs themselves are never overwritten,
-	// so any manipulation of the documents only affects how the external types spec gets overwritten.
-	for path, svcDoc := range svcDocs {
+	// Create a map of existing external definitions.
+	externalDoc, err := loads.JSONSpec(externalSpecPath)
+	if err != nil {
+		return fmt.Errorf("failed to load spec at path %q: %w", externalSpecPath, err)
+	}
 
-		sp := svcDoc.Spec()
-
-		log.Printf("Copying external type definitions at %q", path)
-		for name, def := range sp.SwaggerProps.Definitions {
-
-			// The prefix "hashicorp.cloud" indicates a type that is either defined by a cloud service proto or one of the shared hashicorp/cloud protos.
-			// Any other type is deemed external, even if defined by another 'hashicorp' repo
-			if !strings.HasPrefix(name, "hashicorp.cloud") {
-				// The type definition may include the XGoType extension from a prior transformation of the service spec.
-				// When the type definition is saved in the external spec, the extension must be removed to ensure the type can be generated as a shared model.
-				delete(def.VendorExtensible.Extensions, "x-go-type")
-
-				externalTypes[name] = def
-			}
+	for _, def := range externalDoc.Analyzer.AllDefinitions() {
+		if def.TopLevel {
+			externalTypes[def.Name] = *def.Schema
 		}
 	}
 
-	log.Printf("Adding external type definitions to external.swagger.json")
-
-	externalSpecPath := "specs/external/external.swagger.json"
-
-	externalDoc, err := loads.JSONSpec(externalSpecPath)
+	// Load the service spec.
+	svcDoc, err := loads.JSONSpec(svcPath)
 	if err != nil {
-		return fmt.Errorf("failed to load spec at path %q: %v", externalSpecPath, err)
+		return fmt.Errorf("failed to load spec at path %q: %w", svcPath, err)
 	}
 
-	updatedExternalSpect := externalDoc.Spec()
-	updatedExternalSpect.SwaggerProps.Definitions = externalTypes
+	sp := svcDoc.Spec()
 
-	json, err := json.MarshalIndent(updatedExternalSpect, "", "    ")
+	// Read the service spec to find any external type definitions.
+	log.Printf("Copying external type definitions from %q", svcPath)
+	for name, def := range sp.SwaggerProps.Definitions {
+
+		// The prefix "hashicorp.cloud" indicates a type that is either defined by a cloud service proto or one of the shared hashicorp/cloud protos.
+		// Any other type is deemed external, even if defined by another 'hashicorp' repo.
+		if !strings.HasPrefix(name, "hashicorp.cloud") {
+			// The type definition may include the XGoType extension from a prior transformation of the service spec.
+			// When the type definition is saved in the external spec, the extension must be removed to ensure the type can be generated as a shared model.
+			delete(def.VendorExtensible.Extensions, "x-go-type")
+
+			externalTypes[name] = def
+		}
+	}
+
+	log.Printf("Saving updated external type definitions to %q", externalSpecPath)
+	updatedExternalSpec := externalDoc.Spec()
+	updatedExternalSpec.SwaggerProps.Definitions = externalTypes
+
+	json, err := json.MarshalIndent(updatedExternalSpec, "", "    ")
 	if err != nil {
 		return fmt.Errorf("failed to marshal json for path %q: %v", externalSpecPath, err)
 	}
 
-	// This helper wraps up by overwriting the existing external.swagger.json with the updated external spec,
-	// which contains all the latest external type definitions copied from the service specs.
+	// Overwrite existing external.swagger.json with the updated external definitions.
 	ioutil.WriteFile(externalSpecPath, json, os.ModePerm)
 
 	return nil
