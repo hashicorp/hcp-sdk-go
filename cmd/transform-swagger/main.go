@@ -77,8 +77,6 @@ func main() {
 
 	sp := svcDoc.Spec()
 
-	// TODO: validate spec
-
 	log.Printf("Adding shared type extension to spec %q", svcPath)
 	updatedSpec, err := addSharedExtension(sp, sharedDefs)
 	if err != nil {
