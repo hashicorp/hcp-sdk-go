@@ -38,7 +38,7 @@ type HashicorpCloudPackerBucket struct {
 	Labels map[string]string `json:"labels,omitempty"`
 
 	// latest iteration regardless of completion status
-	LatestIteration string `json:"latest_iteration,omitempty"`
+	LatestIteration *HashicorpCloudPackerIteration `json:"latest_iteration,omitempty"`
 
 	// latest completed version
 	LatestVersion int32 `json:"latest_version,omitempty"`
@@ -65,6 +65,10 @@ func (m *HashicorpCloudPackerBucket) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateLatestIteration(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLocation(formats); err != nil {
 		res = append(res, err)
 	}
@@ -86,6 +90,23 @@ func (m *HashicorpCloudPackerBucket) validateCreatedAt(formats strfmt.Registry) 
 
 	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerBucket) validateLatestIteration(formats strfmt.Registry) error {
+	if swag.IsZero(m.LatestIteration) { // not required
+		return nil
+	}
+
+	if m.LatestIteration != nil {
+		if err := m.LatestIteration.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("latest_iteration")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -124,6 +145,10 @@ func (m *HashicorpCloudPackerBucket) validateUpdatedAt(formats strfmt.Registry) 
 func (m *HashicorpCloudPackerBucket) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateLatestIteration(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -131,6 +156,20 @@ func (m *HashicorpCloudPackerBucket) ContextValidate(ctx context.Context, format
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerBucket) contextValidateLatestIteration(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LatestIteration != nil {
+		if err := m.LatestIteration.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("latest_iteration")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
