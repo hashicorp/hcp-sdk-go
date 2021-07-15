@@ -12,6 +12,7 @@ set -euo pipefail
 # 5. Remove temporary directories.
 
 BOLD='\033[1m'
+GREEN='\033[32m'
 NA='\033[0m' # no attributes (color or format)
 
 generate_sdk() {
@@ -45,8 +46,7 @@ hcloud repo init \
 
 # Copy the latest service specs into a temporary directory in preparation for SDK generation.
 rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/"$service" temp
-# TODO: Change below after rename merged: rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/cloud-shared temp
-rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/hashicorp temp
+rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/cloud-shared temp
 rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/external temp
 
 transformer="$GOPATH"/src/github.com/hashicorp/hcp-sdk-go/cmd/transform-swagger
@@ -89,12 +89,12 @@ swagger generate model \
   -t "$GOPATH"/src/github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1 \
   -q
 
-echo -e "${BOLD}SDK for $service generated!${NA}"
+echo -e "${GREEN}SDK for $service generated!${NA}"
 
 cleanup() {
   # This is where hcloud clones cloud-api from which the specs are pulled.
   rm -rf "$HOME/.local/share/hcp/repos/cloud-api"
-  rm -rf temp
+  rm -rf "$GOPATH"/src/github.com/hashicorp/hcp-sdk-go/temp
 }
 
 trap cleanup EXIT
