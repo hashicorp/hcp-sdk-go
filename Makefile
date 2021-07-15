@@ -42,12 +42,12 @@ test-ci: go/lint
 .PHONY: sdk/update # service=cloud-foo-service commit=true/false
 sdk/update:
 	@if [ -d "clients/$(service)" ]; then \
-		echo "Clearing original SDK from $(service)" && rm -rf clients/$(service); \
+		echo "Removing original SDK for $(service)" && rm -rf clients/$(service); \
 	fi
 
 	@echo "Generating latest SDK for $(service)"
 	@bash ./scripts/gen-go-sdk.sh $(service) $(commit)
 
-ifeq ($(commit),true)
-	@bash ./scripts/open-pr.sh $(service)
-endif
+	@if [ $(commit) = true ]; then \
+		./scripts/open-pr.sh $(service); \
+	fi
