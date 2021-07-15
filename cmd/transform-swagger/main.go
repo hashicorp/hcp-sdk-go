@@ -90,7 +90,10 @@ func main() {
 
 	// Overwrite original spec with the transformed spec.
 	log.Printf("Overwriting spec %q", svcPath)
-	ioutil.WriteFile(svcPath, json, os.ModePerm)
+	err = ioutil.WriteFile(svcPath, json, os.ModePerm)
+	if err != nil {
+		log.Fatalf("failed to overwrite spec at path %q: %v", svcPath, err)
+	}
 }
 
 // loadSharedDefinitions parses both the service spec and shared specs and returns a map of every shared type name
@@ -225,7 +228,10 @@ func copyExternalTypes(externalSpecPath, svcPath string) error {
 	}
 
 	// Overwrite existing external.swagger.json with the updated external definitions.
-	ioutil.WriteFile(externalSpecPath, json, os.ModePerm)
+	err = ioutil.WriteFile(externalSpecPath, json, os.ModePerm)
+	if err != nil {
+		log.Fatalf("failed to overwrite spec at path %q: %v", svcPath, err)
+	}
 
 	return nil
 }
