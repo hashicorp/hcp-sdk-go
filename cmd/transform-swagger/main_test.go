@@ -42,6 +42,8 @@ const specJSON = `{
 	}
 }`
 
+// For reference only, since we do more granular assertions in the test below.
+//nolint
 const transformedSpecJSON = `{
 	"id": "http://localhost:3849/hcp-api",
 	"swagger": "2.0",
@@ -90,6 +92,8 @@ func TestAddSharedExtensions(t *testing.T) {
 
 	var raw json.RawMessage
 	err = json.Unmarshal([]byte(specJSON), &raw)
+	require.NoError(t, err)
+
 	svcDoc, err := loads.Analyzed(raw, "")
 	require.NoError(t, err)
 
@@ -104,6 +108,7 @@ func TestAddSharedExtensions(t *testing.T) {
 	sp := svcDocs["temp"].Spec()
 
 	updatedSpec, err := addSharedExtension(sp, sharedDefs)
+	require.NoError(t, err)
 
 	require.Equal(t, spec.VendorExtensible{
 		Extensions: spec.Extensions{
