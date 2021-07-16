@@ -45,8 +45,13 @@ sdk/update:
 		echo "Removing original SDK for $(service)" && rm -rf clients/$(service); \
 	fi
 
-	@echo "Generating latest SDK for $(service)"
-	@bash ./scripts/gen-go-sdk.sh $(service) $(commit)
+	@if [ $(service) = "cloud-shared" ]; then \
+		echo "Generating latest SDK for cloud-shared"; \
+		bash ./scripts/gen-go-shared-sdk.sh $(service); \
+	else \
+		echo "Generating latest SDK for $(service)"; \
+		bash ./scripts/gen-go-service-sdk.sh $(service); \
+	fi
 
 	@if [ $(commit) = true ]; then \
 		./scripts/open-pr.sh $(service); \
