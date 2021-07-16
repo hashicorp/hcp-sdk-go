@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-set -x
+# This script regenerates the shared models for the HCP Go SDK.
+
+# The steps are:
+# 1. Fetch the latest public shared API specs from the central spec repo.
+# 2. Remove old shared SDK.
+# 3. Iterate over each version and type of shared spec and generate the corresponding SDK. 
+# 4. Remove temporary directories.
 
 BOLD='\033[1m'
 GREEN='\033[32m'
@@ -18,26 +24,30 @@ rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/external temp
 external_spec="$GOPATH"/src/github.com/hashicorp/hcp-sdk-go/temp/external/external.swagger.json
 
 version="v1"
-cd temp/cloud-shared
+if [ -d "clients/cloud-shared/$version" ]; then \
+    echo "Removing original SDK from cloud-shared/$version" && rm -rf clients/cloud-shared/"$version"; \
+fi
 
 echo -e "Creating target shared SDK directory: ${BOLD}hcp-sdk-go/clients/cloud-shared/$version${NA}"
 mkdir -p "$GOPATH"/src/github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/"$version"
 
-# Iterate over each shared directory.
+cd temp/cloud-shared
+
+# Iterate over each shared type directory.
 for d in *; do
-    shared="$d"
-    if [[ -d "$shared" ]]; then
-        cd "$shared"
+    type="$d"
+    if [[ -d "$type" ]]; then
+        cd "$type"
         for f in *; do
             spec=$f
-            echo -e "Generating shared SDK models (version: ${BOLD}$version${NA})"
+            echo -e "Generating shared SDK models (type: $type, version: ${BOLD}$version${NA})"
             swagger generate model \
                 -f "$spec" \
                 -t "$GOPATH"/src/github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/"$version" \
                 -q
         done
     fi
-    
+
     cd ..
 done
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# This script regenerates the Go SDK for a given HCP service ($1). Pass 'cloud-shared' to regenerate shared models.
+# This script regenerates the Go SDK for a given HCP service ($1).
 
 # The steps are:
 # 1. Remove the original SDK files for the service if they exist.
@@ -19,6 +19,10 @@ generate_sdk() {
   service=$1
   stage=$2
   version=$3
+
+  if [ -d "clients/$service/$stage/$version" ]; then \
+    echo "Removing original SDK from clients/$service/$stage/$version" && rm -rf clients/"$service/$stage/$version"; \
+  fi
 
   echo -e "Creating target SDK directory: ${BOLD}hcp-sdk-go/clients/$service/$stage/$version${NA}"
   mkdir -p "$GOPATH/src/github.com/hashicorp/hcp-sdk-go/clients/$service/$stage/$version"

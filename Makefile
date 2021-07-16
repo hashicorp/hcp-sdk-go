@@ -41,10 +41,6 @@ test-ci: go/lint
 
 .PHONY: sdk/update # service=cloud-foo-service commit=true/false
 sdk/update:
-	@if [ -d "clients/$(service)" ]; then \
-		echo "Removing original SDK for $(service)" && rm -rf clients/$(service); \
-	fi
-
 	@if [ $(service) = "cloud-shared" ]; then \
 		echo "Generating latest SDK for cloud-shared"; \
 		bash ./scripts/gen-go-shared-sdk.sh $(service); \
