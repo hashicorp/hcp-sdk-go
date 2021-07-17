@@ -21,6 +21,9 @@ import (
 // swagger:model hashicorp.cloud.packer.BuildUpdates
 type HashicorpCloudPackerBuildUpdates struct {
 
+	// aws, gcp, etc.
+	CloudProvider string `json:"cloud_provider,omitempty"`
+
 	// The length of this list determines how many
 	// rows this combination of iteration_id and builder_type have in the
 	// build table.
@@ -33,7 +36,7 @@ type HashicorpCloudPackerBuildUpdates struct {
 	// previously failed.
 	PackerRunUUID string `json:"packer_run_uuid,omitempty"`
 
-	// status
+	// Running, Done, Failed
 	Status *HashicorpCloudPackerBuildStatus `json:"status,omitempty"`
 }
 

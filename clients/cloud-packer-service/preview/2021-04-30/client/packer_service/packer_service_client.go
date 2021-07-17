@@ -570,7 +570,12 @@ func (a *Client) GetChildImages(params *GetChildImagesParams, authInfo runtime.C
 }
 
 /*
-  GetIteration gets iteration allows to get an iteration by iteration id incremental version fingerprint
+  GetIteration gets iteration allows to get an iteration by iteration id incremental version fingerprint these are supplied as a query parameter e g
+
+  images/mybucket/iteration?iteration_id=fingerprint
+
+bucket_slug must always be set because it is possible for iterations to
+have the same incremental_version or fingerprint across buckets
 */
 func (a *Client) GetIteration(params *GetIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIterationOK, error) {
 	// TODO: Validate the params before sending
@@ -580,7 +585,7 @@ func (a *Client) GetIteration(params *GetIterationParams, authInfo runtime.Clien
 	op := &runtime.ClientOperation{
 		ID:                 "GetIteration",
 		Method:             "GET",
-		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}",
+		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iteration",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

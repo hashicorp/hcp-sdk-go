@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetIterationParams creates a new GetIterationParams object,
@@ -60,10 +61,18 @@ func NewGetIterationParamsWithHTTPClient(client *http.Client) *GetIterationParam
 type GetIterationParams struct {
 
 	// BucketSlug.
-	BucketSlug *string
+	BucketSlug string
+
+	// Fingerprint.
+	Fingerprint *string
+
+	// IncrementalVersion.
+	//
+	// Format: int32
+	IncrementalVersion *int32
 
 	// IterationID.
-	IterationID string
+	IterationID *string
 
 	/* LocationOrganizationID.
 
@@ -143,24 +152,46 @@ func (o *GetIterationParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBucketSlug adds the bucketSlug to the get iteration params
-func (o *GetIterationParams) WithBucketSlug(bucketSlug *string) *GetIterationParams {
+func (o *GetIterationParams) WithBucketSlug(bucketSlug string) *GetIterationParams {
 	o.SetBucketSlug(bucketSlug)
 	return o
 }
 
 // SetBucketSlug adds the bucketSlug to the get iteration params
-func (o *GetIterationParams) SetBucketSlug(bucketSlug *string) {
+func (o *GetIterationParams) SetBucketSlug(bucketSlug string) {
 	o.BucketSlug = bucketSlug
 }
 
+// WithFingerprint adds the fingerprint to the get iteration params
+func (o *GetIterationParams) WithFingerprint(fingerprint *string) *GetIterationParams {
+	o.SetFingerprint(fingerprint)
+	return o
+}
+
+// SetFingerprint adds the fingerprint to the get iteration params
+func (o *GetIterationParams) SetFingerprint(fingerprint *string) {
+	o.Fingerprint = fingerprint
+}
+
+// WithIncrementalVersion adds the incrementalVersion to the get iteration params
+func (o *GetIterationParams) WithIncrementalVersion(incrementalVersion *int32) *GetIterationParams {
+	o.SetIncrementalVersion(incrementalVersion)
+	return o
+}
+
+// SetIncrementalVersion adds the incrementalVersion to the get iteration params
+func (o *GetIterationParams) SetIncrementalVersion(incrementalVersion *int32) {
+	o.IncrementalVersion = incrementalVersion
+}
+
 // WithIterationID adds the iterationID to the get iteration params
-func (o *GetIterationParams) WithIterationID(iterationID string) *GetIterationParams {
+func (o *GetIterationParams) WithIterationID(iterationID *string) *GetIterationParams {
 	o.SetIterationID(iterationID)
 	return o
 }
 
 // SetIterationID adds the iterationId to the get iteration params
-func (o *GetIterationParams) SetIterationID(iterationID string) {
+func (o *GetIterationParams) SetIterationID(iterationID *string) {
 	o.IterationID = iterationID
 }
 
@@ -216,26 +247,60 @@ func (o *GetIterationParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	}
 	var res []error
 
-	if o.BucketSlug != nil {
+	// path param bucket_slug
+	if err := r.SetPathParam("bucket_slug", o.BucketSlug); err != nil {
+		return err
+	}
 
-		// query param bucket_slug
-		var qrBucketSlug string
+	if o.Fingerprint != nil {
 
-		if o.BucketSlug != nil {
-			qrBucketSlug = *o.BucketSlug
+		// query param fingerprint
+		var qrFingerprint string
+
+		if o.Fingerprint != nil {
+			qrFingerprint = *o.Fingerprint
 		}
-		qBucketSlug := qrBucketSlug
-		if qBucketSlug != "" {
+		qFingerprint := qrFingerprint
+		if qFingerprint != "" {
 
-			if err := r.SetQueryParam("bucket_slug", qBucketSlug); err != nil {
+			if err := r.SetQueryParam("fingerprint", qFingerprint); err != nil {
 				return err
 			}
 		}
 	}
 
-	// path param iteration_id
-	if err := r.SetPathParam("iteration_id", o.IterationID); err != nil {
-		return err
+	if o.IncrementalVersion != nil {
+
+		// query param incremental_version
+		var qrIncrementalVersion int32
+
+		if o.IncrementalVersion != nil {
+			qrIncrementalVersion = *o.IncrementalVersion
+		}
+		qIncrementalVersion := swag.FormatInt32(qrIncrementalVersion)
+		if qIncrementalVersion != "" {
+
+			if err := r.SetQueryParam("incremental_version", qIncrementalVersion); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.IterationID != nil {
+
+		// query param iteration_id
+		var qrIterationID string
+
+		if o.IterationID != nil {
+			qrIterationID = *o.IterationID
+		}
+		qIterationID := qrIterationID
+		if qIterationID != "" {
+
+			if err := r.SetQueryParam("iteration_id", qIterationID); err != nil {
+				return err
+			}
+		}
 	}
 
 	// path param location.organization_id

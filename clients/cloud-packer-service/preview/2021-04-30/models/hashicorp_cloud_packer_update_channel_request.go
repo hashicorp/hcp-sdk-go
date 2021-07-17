@@ -22,8 +22,14 @@ type HashicorpCloudPackerUpdateChannelRequest struct {
 	// same as in Bucket
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// The iteration the channel will point to
-	IterationIdentifier *HashicorpCloudPackerIterationIdentifier `json:"iteration_identifier,omitempty"`
+	// fingerprint
+	Fingerprint string `json:"fingerprint,omitempty"`
+
+	// incremental version
+	IncrementalVersion int32 `json:"incremental_version,omitempty"`
+
+	// iteration id
+	IterationID string `json:"iteration_id,omitempty"`
 
 	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
@@ -39,10 +45,6 @@ type HashicorpCloudPackerUpdateChannelRequest struct {
 func (m *HashicorpCloudPackerUpdateChannelRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateIterationIdentifier(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLocation(formats); err != nil {
 		res = append(res, err)
 	}
@@ -50,23 +52,6 @@ func (m *HashicorpCloudPackerUpdateChannelRequest) Validate(formats strfmt.Regis
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *HashicorpCloudPackerUpdateChannelRequest) validateIterationIdentifier(formats strfmt.Registry) error {
-	if swag.IsZero(m.IterationIdentifier) { // not required
-		return nil
-	}
-
-	if m.IterationIdentifier != nil {
-		if err := m.IterationIdentifier.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("iteration_identifier")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -91,10 +76,6 @@ func (m *HashicorpCloudPackerUpdateChannelRequest) validateLocation(formats strf
 func (m *HashicorpCloudPackerUpdateChannelRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateIterationIdentifier(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -102,20 +83,6 @@ func (m *HashicorpCloudPackerUpdateChannelRequest) ContextValidate(ctx context.C
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *HashicorpCloudPackerUpdateChannelRequest) contextValidateIterationIdentifier(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.IterationIdentifier != nil {
-		if err := m.IterationIdentifier.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("iteration_identifier")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

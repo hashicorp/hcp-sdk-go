@@ -56,7 +56,7 @@ type GetIterationOK struct {
 }
 
 func (o *GetIterationOK) Error() string {
-	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] getIterationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iteration][%d] getIterationOK  %+v", 200, o.Payload)
 }
 func (o *GetIterationOK) GetPayload() *models.HashicorpCloudPackerGetIterationResponse {
 	return o.Payload
@@ -97,7 +97,7 @@ func (o *GetIterationDefault) Code() int {
 }
 
 func (o *GetIterationDefault) Error() string {
-	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] GetIteration default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iteration][%d] GetIteration default  %+v", o._statusCode, o.Payload)
 }
 func (o *GetIterationDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
