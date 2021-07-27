@@ -47,7 +47,7 @@ func NewListDependenciesOK() *ListDependenciesOK {
 	return &ListDependenciesOK{}
 }
 
-/* ListDependenciesOK describes a response with status code 200, with default header values.
+/*ListDependenciesOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type ListDependenciesOK struct {
 func (o *ListDependenciesOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] listDependenciesOK  %+v", 200, o.Payload)
 }
+
 func (o *ListDependenciesOK) GetPayload() *models.HashicorpCloudNetwork20200907ListDependenciesResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewListDependenciesDefault(code int) *ListDependenciesDefault {
 	}
 }
 
-/* ListDependenciesDefault describes a response with status code -1, with default header values.
+/*ListDependenciesDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *ListDependenciesDefault) Code() int {
 func (o *ListDependenciesDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] ListDependencies default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *ListDependenciesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

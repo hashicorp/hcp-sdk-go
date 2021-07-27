@@ -18,94 +18,76 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/preview/2021-04-30/models"
 )
 
-// NewUpdateChannelParams creates a new UpdateChannelParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewUpdateChannelParams creates a new UpdateChannelParams object
+// with the default values initialized.
 func NewUpdateChannelParams() *UpdateChannelParams {
+	var ()
 	return &UpdateChannelParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateChannelParamsWithTimeout creates a new UpdateChannelParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewUpdateChannelParamsWithTimeout(timeout time.Duration) *UpdateChannelParams {
+	var ()
 	return &UpdateChannelParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewUpdateChannelParamsWithContext creates a new UpdateChannelParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewUpdateChannelParamsWithContext(ctx context.Context) *UpdateChannelParams {
+	var ()
 	return &UpdateChannelParams{
+
 		Context: ctx,
 	}
 }
 
 // NewUpdateChannelParamsWithHTTPClient creates a new UpdateChannelParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewUpdateChannelParamsWithHTTPClient(client *http.Client) *UpdateChannelParams {
+	var ()
 	return &UpdateChannelParams{
 		HTTPClient: client,
 	}
 }
 
-/* UpdateChannelParams contains all the parameters to send to the API endpoint
-   for the update channel operation.
-
-   Typically these are written to a http.Request.
+/*UpdateChannelParams contains all the parameters to send to the API endpoint
+for the update channel operation typically these are written to a http.Request
 */
 type UpdateChannelParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.HashicorpCloudPackerUpdateChannelRequest
+	/*BucketSlug
+	  same as in Bucket
 
-	/* BucketSlug.
-
-	   same as in Bucket
 	*/
 	BucketSlug string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
+	/*Slug
+	  production-stable
 
-	/* Slug.
-
-	   production-stable
 	*/
 	Slug string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the update channel params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdateChannelParams) WithDefaults() *UpdateChannelParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the update channel params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdateChannelParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update channel params
@@ -203,6 +185,7 @@ func (o *UpdateChannelParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -38,6 +37,7 @@ func (m *HashicorpCloudPackerGetAncestorImagesResponse) Validate(formats strfmt.
 }
 
 func (m *HashicorpCloudPackerGetAncestorImagesResponse) validateAncestors(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Ancestors) { // not required
 		return nil
 	}
@@ -49,38 +49,6 @@ func (m *HashicorpCloudPackerGetAncestorImagesResponse) validateAncestors(format
 
 		if m.Ancestors[i] != nil {
 			if err := m.Ancestors[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("ancestors" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud packer get ancestor images response based on the context it is used
-func (m *HashicorpCloudPackerGetAncestorImagesResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateAncestors(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudPackerGetAncestorImagesResponse) contextValidateAncestors(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Ancestors); i++ {
-
-		if m.Ancestors[i] != nil {
-			if err := m.Ancestors[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ancestors" + "." + strconv.Itoa(i))
 				}

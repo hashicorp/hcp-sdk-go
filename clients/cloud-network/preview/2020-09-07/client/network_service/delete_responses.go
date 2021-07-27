@@ -47,7 +47,7 @@ func NewDeleteOK() *DeleteOK {
 	return &DeleteOK{}
 }
 
-/* DeleteOK describes a response with status code 200, with default header values.
+/*DeleteOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type DeleteOK struct {
 func (o *DeleteOK) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] deleteOK  %+v", 200, o.Payload)
 }
+
 func (o *DeleteOK) GetPayload() *models.HashicorpCloudNetwork20200907DeleteResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewDeleteDefault(code int) *DeleteDefault {
 	}
 }
 
-/* DeleteDefault describes a response with status code -1, with default header values.
+/*DeleteDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *DeleteDefault) Code() int {
 func (o *DeleteDefault) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Delete default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *DeleteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

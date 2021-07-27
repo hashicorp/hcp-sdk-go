@@ -18,94 +18,76 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/preview/2021-04-30/models"
 )
 
-// NewCreateBuildParams creates a new CreateBuildParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewCreateBuildParams creates a new CreateBuildParams object
+// with the default values initialized.
 func NewCreateBuildParams() *CreateBuildParams {
+	var ()
 	return &CreateBuildParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreateBuildParamsWithTimeout creates a new CreateBuildParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewCreateBuildParamsWithTimeout(timeout time.Duration) *CreateBuildParams {
+	var ()
 	return &CreateBuildParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewCreateBuildParamsWithContext creates a new CreateBuildParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewCreateBuildParamsWithContext(ctx context.Context) *CreateBuildParams {
+	var ()
 	return &CreateBuildParams{
+
 		Context: ctx,
 	}
 }
 
 // NewCreateBuildParamsWithHTTPClient creates a new CreateBuildParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewCreateBuildParamsWithHTTPClient(client *http.Client) *CreateBuildParams {
+	var ()
 	return &CreateBuildParams{
 		HTTPClient: client,
 	}
 }
 
-/* CreateBuildParams contains all the parameters to send to the API endpoint
-   for the create build operation.
-
-   Typically these are written to a http.Request.
+/*CreateBuildParams contains all the parameters to send to the API endpoint
+for the create build operation typically these are written to a http.Request
 */
 type CreateBuildParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.HashicorpCloudPackerCreateBuildRequest
+	/*BucketSlug
+	  bucket info
 
-	/* BucketSlug.
-
-	   bucket info
 	*/
 	BucketSlug string
+	/*BuildIterationID
+	  ULID of the iteration
 
-	/* BuildIterationID.
-
-	   ULID of the iteration
 	*/
 	BuildIterationID string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the create build params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *CreateBuildParams) WithDefaults() *CreateBuildParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the create build params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *CreateBuildParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create build params
@@ -203,6 +185,7 @@ func (o *CreateBuildParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

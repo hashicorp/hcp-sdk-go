@@ -16,110 +16,90 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDeleteChannelParams creates a new DeleteChannelParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewDeleteChannelParams creates a new DeleteChannelParams object
+// with the default values initialized.
 func NewDeleteChannelParams() *DeleteChannelParams {
+	var ()
 	return &DeleteChannelParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeleteChannelParamsWithTimeout creates a new DeleteChannelParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewDeleteChannelParamsWithTimeout(timeout time.Duration) *DeleteChannelParams {
+	var ()
 	return &DeleteChannelParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewDeleteChannelParamsWithContext creates a new DeleteChannelParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewDeleteChannelParamsWithContext(ctx context.Context) *DeleteChannelParams {
+	var ()
 	return &DeleteChannelParams{
+
 		Context: ctx,
 	}
 }
 
 // NewDeleteChannelParamsWithHTTPClient creates a new DeleteChannelParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewDeleteChannelParamsWithHTTPClient(client *http.Client) *DeleteChannelParams {
+	var ()
 	return &DeleteChannelParams{
 		HTTPClient: client,
 	}
 }
 
-/* DeleteChannelParams contains all the parameters to send to the API endpoint
-   for the delete channel operation.
-
-   Typically these are written to a http.Request.
+/*DeleteChannelParams contains all the parameters to send to the API endpoint
+for the delete channel operation typically these are written to a http.Request
 */
 type DeleteChannelParams struct {
 
-	/* BucketSlug.
+	/*BucketSlug
+	  The bucket slug
 
-	   The bucket slug
 	*/
 	BucketSlug string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
+	/*LocationRegionProvider
+	  provider is the named cloud provider ("aws", "gcp", "azure").
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
+	/*LocationRegionRegion
+	  region is the cloud region ("us-west1", "us-east1").
 
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
-
-	/* RevocationMessage.
-
-	     Optional field to provide the reason for why this channel is being revoked.
+	/*RevocationMessage
+	  Optional field to provide the reason for why this channel is being revoked.
 	Only useful for a channel that is assigned to an iteration.
+
 	*/
 	RevocationMessage *string
+	/*Slug
+	  The channel slug. e.g. production-stable
 
-	/* Slug.
-
-	   The channel slug. e.g. production-stable
 	*/
 	Slug string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the delete channel params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *DeleteChannelParams) WithDefaults() *DeleteChannelParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the delete channel params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *DeleteChannelParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete channel params
@@ -259,51 +239,48 @@ func (o *DeleteChannelParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
-
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
-
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
-
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
-
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.RevocationMessage != nil {
 
 		// query param revocation_message
 		var qrRevocationMessage string
-
 		if o.RevocationMessage != nil {
 			qrRevocationMessage = *o.RevocationMessage
 		}
 		qRevocationMessage := qrRevocationMessage
 		if qRevocationMessage != "" {
-
 			if err := r.SetQueryParam("revocation_message", qRevocationMessage); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	// path param slug

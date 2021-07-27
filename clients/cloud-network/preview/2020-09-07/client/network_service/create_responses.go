@@ -47,7 +47,7 @@ func NewCreateOK() *CreateOK {
 	return &CreateOK{}
 }
 
-/* CreateOK describes a response with status code 200, with default header values.
+/*CreateOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type CreateOK struct {
 func (o *CreateOK) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks][%d] createOK  %+v", 200, o.Payload)
 }
+
 func (o *CreateOK) GetPayload() *models.HashicorpCloudNetwork20200907CreateResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewCreateDefault(code int) *CreateDefault {
 	}
 }
 
-/* CreateDefault describes a response with status code -1, with default header values.
+/*CreateDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *CreateDefault) Code() int {
 func (o *CreateDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks][%d] Create default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *CreateDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

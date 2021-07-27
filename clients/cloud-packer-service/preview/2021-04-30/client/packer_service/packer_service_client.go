@@ -23,54 +23,51 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
-type ClientOption func(*runtime.ClientOperation)
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateBucket(params *CreateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBucketOK, error)
+	CreateBucket(params *CreateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*CreateBucketOK, error)
 
-	CreateBuild(params *CreateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBuildOK, error)
+	CreateBuild(params *CreateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*CreateBuildOK, error)
 
-	CreateChannel(params *CreateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateChannelOK, error)
+	CreateChannel(params *CreateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*CreateChannelOK, error)
 
-	CreateIteration(params *CreateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateIterationOK, error)
+	CreateIteration(params *CreateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*CreateIterationOK, error)
 
-	DeleteBucket(params *DeleteBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBucketOK, error)
+	DeleteBucket(params *DeleteBucketParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteBucketOK, error)
 
-	DeleteBuild(params *DeleteBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBuildOK, error)
+	DeleteBuild(params *DeleteBuildParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteBuildOK, error)
 
-	DeleteChannel(params *DeleteChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChannelOK, error)
+	DeleteChannel(params *DeleteChannelParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteChannelOK, error)
 
-	DeleteIteration(params *DeleteIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteIterationOK, error)
+	DeleteIteration(params *DeleteIterationParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteIterationOK, error)
 
-	GetAncestorImages(params *GetAncestorImagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAncestorImagesOK, error)
+	GetAncestorImages(params *GetAncestorImagesParams, authInfo runtime.ClientAuthInfoWriter) (*GetAncestorImagesOK, error)
 
-	GetBucket(params *GetBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBucketOK, error)
+	GetBucket(params *GetBucketParams, authInfo runtime.ClientAuthInfoWriter) (*GetBucketOK, error)
 
-	GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBuildOK, error)
+	GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInfoWriter) (*GetBuildOK, error)
 
-	GetChannel(params *GetChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChannelOK, error)
+	GetChannel(params *GetChannelParams, authInfo runtime.ClientAuthInfoWriter) (*GetChannelOK, error)
 
-	GetChildImages(params *GetChildImagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChildImagesOK, error)
+	GetChildImages(params *GetChildImagesParams, authInfo runtime.ClientAuthInfoWriter) (*GetChildImagesOK, error)
 
-	GetIteration(params *GetIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIterationOK, error)
+	GetIteration(params *GetIterationParams, authInfo runtime.ClientAuthInfoWriter) (*GetIterationOK, error)
 
-	ListBuckets(params *ListBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBucketsOK, error)
+	ListBuckets(params *ListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*ListBucketsOK, error)
 
-	ListBuilds(params *ListBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBuildsOK, error)
+	ListBuilds(params *ListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*ListBuildsOK, error)
 
-	ListChannels(params *ListChannelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListChannelsOK, error)
+	ListChannels(params *ListChannelsParams, authInfo runtime.ClientAuthInfoWriter) (*ListChannelsOK, error)
 
-	ListIterations(params *ListIterationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIterationsOK, error)
+	ListIterations(params *ListIterationsParams, authInfo runtime.ClientAuthInfoWriter) (*ListIterationsOK, error)
 
-	UpdateBucket(params *UpdateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBucketOK, error)
+	UpdateBucket(params *UpdateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateBucketOK, error)
 
-	UpdateBuild(params *UpdateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBuildOK, error)
+	UpdateBuild(params *UpdateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateBuildOK, error)
 
-	UpdateChannel(params *UpdateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateChannelOK, error)
+	UpdateChannel(params *UpdateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateChannelOK, error)
 
-	UpdateIteration(params *UpdateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIterationOK, error)
+	UpdateIteration(params *UpdateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateIterationOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -78,12 +75,13 @@ type ClientService interface {
 /*
   CreateBucket operations realted to images
 */
-func (a *Client) CreateBucket(params *CreateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBucketOK, error) {
+func (a *Client) CreateBucket(params *CreateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*CreateBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateBucketParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "CreateBucket",
 		Method:             "PUT",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images",
@@ -95,12 +93,7 @@ func (a *Client) CreateBucket(params *CreateBucketParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -116,12 +109,13 @@ func (a *Client) CreateBucket(params *CreateBucketParams, authInfo runtime.Clien
 /*
   CreateBuild create build API
 */
-func (a *Client) CreateBuild(params *CreateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBuildOK, error) {
+func (a *Client) CreateBuild(params *CreateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*CreateBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateBuildParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "CreateBuild",
 		Method:             "POST",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{build.iteration_id}",
@@ -133,12 +127,7 @@ func (a *Client) CreateBuild(params *CreateBuildParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -154,12 +143,13 @@ func (a *Client) CreateBuild(params *CreateBuildParams, authInfo runtime.ClientA
 /*
   CreateChannel operations related to channels mutable aliases pointers for an image iteration
 */
-func (a *Client) CreateChannel(params *CreateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateChannelOK, error) {
+func (a *Client) CreateChannel(params *CreateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*CreateChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateChannelParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "CreateChannel",
 		Method:             "POST",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels",
@@ -171,12 +161,7 @@ func (a *Client) CreateChannel(params *CreateChannelParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -192,12 +177,13 @@ func (a *Client) CreateChannel(params *CreateChannelParams, authInfo runtime.Cli
 /*
   CreateIteration operations related to image iterations
 */
-func (a *Client) CreateIteration(params *CreateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateIterationOK, error) {
+func (a *Client) CreateIteration(params *CreateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*CreateIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateIterationParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "CreateIteration",
 		Method:             "POST",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations",
@@ -209,12 +195,7 @@ func (a *Client) CreateIteration(params *CreateIterationParams, authInfo runtime
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -230,12 +211,13 @@ func (a *Client) CreateIteration(params *CreateIterationParams, authInfo runtime
 /*
   DeleteBucket delete bucket API
 */
-func (a *Client) DeleteBucket(params *DeleteBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBucketOK, error) {
+func (a *Client) DeleteBucket(params *DeleteBucketParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteBucketParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "DeleteBucket",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}",
@@ -247,12 +229,7 @@ func (a *Client) DeleteBucket(params *DeleteBucketParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -268,12 +245,13 @@ func (a *Client) DeleteBucket(params *DeleteBucketParams, authInfo runtime.Clien
 /*
   DeleteBuild delete build API
 */
-func (a *Client) DeleteBuild(params *DeleteBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBuildOK, error) {
+func (a *Client) DeleteBuild(params *DeleteBuildParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteBuildParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "DeleteBuild",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}",
@@ -285,12 +263,7 @@ func (a *Client) DeleteBuild(params *DeleteBuildParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -306,12 +279,13 @@ func (a *Client) DeleteBuild(params *DeleteBuildParams, authInfo runtime.ClientA
 /*
   DeleteChannel delete channel API
 */
-func (a *Client) DeleteChannel(params *DeleteChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChannelOK, error) {
+func (a *Client) DeleteChannel(params *DeleteChannelParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteChannelParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "DeleteChannel",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}",
@@ -323,12 +297,7 @@ func (a *Client) DeleteChannel(params *DeleteChannelParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -344,12 +313,13 @@ func (a *Client) DeleteChannel(params *DeleteChannelParams, authInfo runtime.Cli
 /*
   DeleteIteration delete iteration API
 */
-func (a *Client) DeleteIteration(params *DeleteIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteIterationOK, error) {
+func (a *Client) DeleteIteration(params *DeleteIterationParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteIterationParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "DeleteIteration",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}",
@@ -361,12 +331,7 @@ func (a *Client) DeleteIteration(params *DeleteIterationParams, authInfo runtime
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -382,12 +347,13 @@ func (a *Client) DeleteIteration(params *DeleteIterationParams, authInfo runtime
 /*
   GetAncestorImages APIs endpoints to ease UI implementation
 */
-func (a *Client) GetAncestorImages(params *GetAncestorImagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAncestorImagesOK, error) {
+func (a *Client) GetAncestorImages(params *GetAncestorImagesParams, authInfo runtime.ClientAuthInfoWriter) (*GetAncestorImagesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetAncestorImagesParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "GetAncestorImages",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/ancestors",
@@ -399,12 +365,7 @@ func (a *Client) GetAncestorImages(params *GetAncestorImagesParams, authInfo run
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -420,12 +381,13 @@ func (a *Client) GetAncestorImages(params *GetAncestorImagesParams, authInfo run
 /*
   GetBucket get bucket API
 */
-func (a *Client) GetBucket(params *GetBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBucketOK, error) {
+func (a *Client) GetBucket(params *GetBucketParams, authInfo runtime.ClientAuthInfoWriter) (*GetBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetBucketParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "GetBucket",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}",
@@ -437,12 +399,7 @@ func (a *Client) GetBucket(params *GetBucketParams, authInfo runtime.ClientAuthI
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -458,12 +415,13 @@ func (a *Client) GetBucket(params *GetBucketParams, authInfo runtime.ClientAuthI
 /*
   GetBuild ts o d o make it possible to query by iteration incremental version not just u l ID
 */
-func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBuildOK, error) {
+func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInfoWriter) (*GetBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetBuildParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "GetBuild",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}",
@@ -475,12 +433,7 @@ func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInf
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -496,12 +449,13 @@ func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInf
 /*
   GetChannel get channel API
 */
-func (a *Client) GetChannel(params *GetChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChannelOK, error) {
+func (a *Client) GetChannel(params *GetChannelParams, authInfo runtime.ClientAuthInfoWriter) (*GetChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetChannelParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "GetChannel",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}",
@@ -513,12 +467,7 @@ func (a *Client) GetChannel(params *GetChannelParams, authInfo runtime.ClientAut
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -534,12 +483,13 @@ func (a *Client) GetChannel(params *GetChannelParams, authInfo runtime.ClientAut
 /*
   GetChildImages get child images API
 */
-func (a *Client) GetChildImages(params *GetChildImagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChildImagesOK, error) {
+func (a *Client) GetChildImages(params *GetChildImagesParams, authInfo runtime.ClientAuthInfoWriter) (*GetChildImagesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetChildImagesParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "GetChildImages",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/children",
@@ -551,12 +501,7 @@ func (a *Client) GetChildImages(params *GetChildImagesParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -577,12 +522,13 @@ func (a *Client) GetChildImages(params *GetChildImagesParams, authInfo runtime.C
 bucket_slug must always be set because it is possible for iterations to
 have the same incremental_version or fingerprint across buckets
 */
-func (a *Client) GetIteration(params *GetIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIterationOK, error) {
+func (a *Client) GetIteration(params *GetIterationParams, authInfo runtime.ClientAuthInfoWriter) (*GetIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetIterationParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "GetIteration",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iteration",
@@ -594,12 +540,7 @@ func (a *Client) GetIteration(params *GetIterationParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -615,12 +556,13 @@ func (a *Client) GetIteration(params *GetIterationParams, authInfo runtime.Clien
 /*
   ListBuckets list buckets API
 */
-func (a *Client) ListBuckets(params *ListBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBucketsOK, error) {
+func (a *Client) ListBuckets(params *ListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*ListBucketsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListBucketsParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ListBuckets",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images",
@@ -632,12 +574,7 @@ func (a *Client) ListBuckets(params *ListBucketsParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -653,12 +590,13 @@ func (a *Client) ListBuckets(params *ListBucketsParams, authInfo runtime.ClientA
 /*
   ListBuilds list builds API
 */
-func (a *Client) ListBuilds(params *ListBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBuildsOK, error) {
+func (a *Client) ListBuilds(params *ListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*ListBuildsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListBuildsParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ListBuilds",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}/builds",
@@ -670,12 +608,7 @@ func (a *Client) ListBuilds(params *ListBuildsParams, authInfo runtime.ClientAut
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -691,12 +624,13 @@ func (a *Client) ListBuilds(params *ListBuildsParams, authInfo runtime.ClientAut
 /*
   ListChannels list channels API
 */
-func (a *Client) ListChannels(params *ListChannelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListChannelsOK, error) {
+func (a *Client) ListChannels(params *ListChannelsParams, authInfo runtime.ClientAuthInfoWriter) (*ListChannelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListChannelsParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ListChannels",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels",
@@ -708,12 +642,7 @@ func (a *Client) ListChannels(params *ListChannelsParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -729,12 +658,13 @@ func (a *Client) ListChannels(params *ListChannelsParams, authInfo runtime.Clien
 /*
   ListIterations list iterations API
 */
-func (a *Client) ListIterations(params *ListIterationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIterationsOK, error) {
+func (a *Client) ListIterations(params *ListIterationsParams, authInfo runtime.ClientAuthInfoWriter) (*ListIterationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListIterationsParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ListIterations",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations",
@@ -746,12 +676,7 @@ func (a *Client) ListIterations(params *ListIterationsParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -767,12 +692,13 @@ func (a *Client) ListIterations(params *ListIterationsParams, authInfo runtime.C
 /*
   UpdateBucket update bucket API
 */
-func (a *Client) UpdateBucket(params *UpdateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBucketOK, error) {
+func (a *Client) UpdateBucket(params *UpdateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateBucketParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "UpdateBucket",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}",
@@ -784,12 +710,7 @@ func (a *Client) UpdateBucket(params *UpdateBucketParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -805,12 +726,13 @@ func (a *Client) UpdateBucket(params *UpdateBucketParams, authInfo runtime.Clien
 /*
   UpdateBuild update build API
 */
-func (a *Client) UpdateBuild(params *UpdateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBuildOK, error) {
+func (a *Client) UpdateBuild(params *UpdateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateBuildParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "UpdateBuild",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}",
@@ -822,12 +744,7 @@ func (a *Client) UpdateBuild(params *UpdateBuildParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -843,12 +760,13 @@ func (a *Client) UpdateBuild(params *UpdateBuildParams, authInfo runtime.ClientA
 /*
   UpdateChannel update channel API
 */
-func (a *Client) UpdateChannel(params *UpdateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateChannelOK, error) {
+func (a *Client) UpdateChannel(params *UpdateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateChannelParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "UpdateChannel",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}",
@@ -860,12 +778,7 @@ func (a *Client) UpdateChannel(params *UpdateChannelParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -881,12 +794,13 @@ func (a *Client) UpdateChannel(params *UpdateChannelParams, authInfo runtime.Cli
 /*
   UpdateIteration onlies used to set incremental version once all builds are complete otherwise update build is used for specific build updates
 */
-func (a *Client) UpdateIteration(params *UpdateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIterationOK, error) {
+func (a *Client) UpdateIteration(params *UpdateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateIterationParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "UpdateIteration",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}",
@@ -898,12 +812,7 @@ func (a *Client) UpdateIteration(params *UpdateIterationParams, authInfo runtime
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}

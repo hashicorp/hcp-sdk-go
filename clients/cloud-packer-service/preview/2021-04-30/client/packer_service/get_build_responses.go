@@ -47,7 +47,7 @@ func NewGetBuildOK() *GetBuildOK {
 	return &GetBuildOK{}
 }
 
-/* GetBuildOK describes a response with status code 200, with default header values.
+/*GetBuildOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type GetBuildOK struct {
 func (o *GetBuildOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}][%d] getBuildOK  %+v", 200, o.Payload)
 }
+
 func (o *GetBuildOK) GetPayload() *models.HashicorpCloudPackerGetBuildResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewGetBuildDefault(code int) *GetBuildDefault {
 	}
 }
 
-/* GetBuildDefault describes a response with status code -1, with default header values.
+/*GetBuildDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *GetBuildDefault) Code() int {
 func (o *GetBuildDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}][%d] GetBuild default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetBuildDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -79,6 +78,7 @@ func (m *HashicorpCloudPackerIteration) Validate(formats strfmt.Registry) error 
 }
 
 func (m *HashicorpCloudPackerIteration) validateBuilds(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Builds) { // not required
 		return nil
 	}
@@ -103,6 +103,7 @@ func (m *HashicorpCloudPackerIteration) validateBuilds(formats strfmt.Registry) 
 }
 
 func (m *HashicorpCloudPackerIteration) validateCreatedAt(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -115,44 +116,13 @@ func (m *HashicorpCloudPackerIteration) validateCreatedAt(formats strfmt.Registr
 }
 
 func (m *HashicorpCloudPackerIteration) validateUpdatedAt(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud packer iteration based on the context it is used
-func (m *HashicorpCloudPackerIteration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateBuilds(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudPackerIteration) contextValidateBuilds(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Builds); i++ {
-
-		if m.Builds[i] != nil {
-			if err := m.Builds[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("builds" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil

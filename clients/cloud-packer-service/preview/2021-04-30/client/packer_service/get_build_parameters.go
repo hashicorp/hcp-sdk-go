@@ -16,97 +16,79 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewGetBuildParams creates a new GetBuildParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewGetBuildParams creates a new GetBuildParams object
+// with the default values initialized.
 func NewGetBuildParams() *GetBuildParams {
+	var ()
 	return &GetBuildParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetBuildParamsWithTimeout creates a new GetBuildParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewGetBuildParamsWithTimeout(timeout time.Duration) *GetBuildParams {
+	var ()
 	return &GetBuildParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewGetBuildParamsWithContext creates a new GetBuildParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewGetBuildParamsWithContext(ctx context.Context) *GetBuildParams {
+	var ()
 	return &GetBuildParams{
+
 		Context: ctx,
 	}
 }
 
 // NewGetBuildParamsWithHTTPClient creates a new GetBuildParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewGetBuildParamsWithHTTPClient(client *http.Client) *GetBuildParams {
+	var ()
 	return &GetBuildParams{
 		HTTPClient: client,
 	}
 }
 
-/* GetBuildParams contains all the parameters to send to the API endpoint
-   for the get build operation.
-
-   Typically these are written to a http.Request.
+/*GetBuildParams contains all the parameters to send to the API endpoint
+for the get build operation typically these are written to a http.Request
 */
 type GetBuildParams struct {
 
-	/* BuildID.
+	/*BuildID
+	  build ULID
 
-	   build ULID
 	*/
 	BuildID string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
+	/*LocationRegionProvider
+	  provider is the named cloud provider ("aws", "gcp", "azure").
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
+	/*LocationRegionRegion
+	  region is the cloud region ("us-west1", "us-east1").
 
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the get build params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetBuildParams) WithDefaults() *GetBuildParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the get build params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetBuildParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get build params
@@ -224,34 +206,32 @@ func (o *GetBuildParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
-
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
-
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
-
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
-
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if len(res) > 0 {

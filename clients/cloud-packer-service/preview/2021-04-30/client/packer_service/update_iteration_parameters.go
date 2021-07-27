@@ -18,85 +18,68 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/preview/2021-04-30/models"
 )
 
-// NewUpdateIterationParams creates a new UpdateIterationParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewUpdateIterationParams creates a new UpdateIterationParams object
+// with the default values initialized.
 func NewUpdateIterationParams() *UpdateIterationParams {
+	var ()
 	return &UpdateIterationParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateIterationParamsWithTimeout creates a new UpdateIterationParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewUpdateIterationParamsWithTimeout(timeout time.Duration) *UpdateIterationParams {
+	var ()
 	return &UpdateIterationParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewUpdateIterationParamsWithContext creates a new UpdateIterationParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewUpdateIterationParamsWithContext(ctx context.Context) *UpdateIterationParams {
+	var ()
 	return &UpdateIterationParams{
+
 		Context: ctx,
 	}
 }
 
 // NewUpdateIterationParamsWithHTTPClient creates a new UpdateIterationParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewUpdateIterationParamsWithHTTPClient(client *http.Client) *UpdateIterationParams {
+	var ()
 	return &UpdateIterationParams{
 		HTTPClient: client,
 	}
 }
 
-/* UpdateIterationParams contains all the parameters to send to the API endpoint
-   for the update iteration operation.
-
-   Typically these are written to a http.Request.
+/*UpdateIterationParams contains all the parameters to send to the API endpoint
+for the update iteration operation typically these are written to a http.Request
 */
 type UpdateIterationParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.HashicorpCloudPackerUpdateIterationRequest
-
-	// IterationID.
+	/*IterationID*/
 	IterationID string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the update iteration params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdateIterationParams) WithDefaults() *UpdateIterationParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the update iteration params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdateIterationParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update iteration params
@@ -183,6 +166,7 @@ func (o *UpdateIterationParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

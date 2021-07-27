@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -36,7 +34,7 @@ type HashicorpCloudResourcemanagerOrganization struct {
 	Owner *HashicorpCloudResourcemanagerOrganizationOwner `json:"owner,omitempty"`
 
 	// State is the state of the organization.
-	State *HashicorpCloudResourcemanagerOrganizationOrganizationState `json:"state,omitempty"`
+	State HashicorpCloudResourcemanagerOrganizationOrganizationState `json:"state,omitempty"`
 }
 
 // Validate validates this hashicorp cloud resourcemanager organization
@@ -62,6 +60,7 @@ func (m *HashicorpCloudResourcemanagerOrganization) Validate(formats strfmt.Regi
 }
 
 func (m *HashicorpCloudResourcemanagerOrganization) validateCreatedAt(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -74,6 +73,7 @@ func (m *HashicorpCloudResourcemanagerOrganization) validateCreatedAt(formats st
 }
 
 func (m *HashicorpCloudResourcemanagerOrganization) validateOwner(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Owner) { // not required
 		return nil
 	}
@@ -91,63 +91,16 @@ func (m *HashicorpCloudResourcemanagerOrganization) validateOwner(formats strfmt
 }
 
 func (m *HashicorpCloudResourcemanagerOrganization) validateState(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
 
-	if m.State != nil {
-		if err := m.State.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("state")
-			}
-			return err
+	if err := m.State.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("state")
 		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud resourcemanager organization based on the context it is used
-func (m *HashicorpCloudResourcemanagerOrganization) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateOwner(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateState(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudResourcemanagerOrganization) contextValidateOwner(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Owner != nil {
-		if err := m.Owner.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("owner")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudResourcemanagerOrganization) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.State != nil {
-		if err := m.State.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("state")
-			}
-			return err
-		}
+		return err
 	}
 
 	return nil

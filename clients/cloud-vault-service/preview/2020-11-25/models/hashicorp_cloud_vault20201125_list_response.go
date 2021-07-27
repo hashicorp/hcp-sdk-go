@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -46,6 +45,7 @@ func (m *HashicorpCloudVault20201125ListResponse) Validate(formats strfmt.Regist
 }
 
 func (m *HashicorpCloudVault20201125ListResponse) validateClusters(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Clusters) { // not required
 		return nil
 	}
@@ -70,62 +70,13 @@ func (m *HashicorpCloudVault20201125ListResponse) validateClusters(formats strfm
 }
 
 func (m *HashicorpCloudVault20201125ListResponse) validatePagination(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Pagination) { // not required
 		return nil
 	}
 
 	if m.Pagination != nil {
 		if err := m.Pagination.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("pagination")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud vault 20201125 list response based on the context it is used
-func (m *HashicorpCloudVault20201125ListResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateClusters(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidatePagination(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudVault20201125ListResponse) contextValidateClusters(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Clusters); i++ {
-
-		if m.Clusters[i] != nil {
-			if err := m.Clusters[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("clusters" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudVault20201125ListResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Pagination != nil {
-		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
 			}

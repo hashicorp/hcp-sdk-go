@@ -47,7 +47,7 @@ func NewCreateBucketOK() *CreateBucketOK {
 	return &CreateBucketOK{}
 }
 
-/* CreateBucketOK describes a response with status code 200, with default header values.
+/*CreateBucketOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type CreateBucketOK struct {
 func (o *CreateBucketOK) Error() string {
 	return fmt.Sprintf("[PUT /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images][%d] createBucketOK  %+v", 200, o.Payload)
 }
+
 func (o *CreateBucketOK) GetPayload() *models.HashicorpCloudPackerCreateBucketResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewCreateBucketDefault(code int) *CreateBucketDefault {
 	}
 }
 
-/* CreateBucketDefault describes a response with status code -1, with default header values.
+/*CreateBucketDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *CreateBucketDefault) Code() int {
 func (o *CreateBucketDefault) Error() string {
 	return fmt.Sprintf("[PUT /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images][%d] CreateBucket default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *CreateBucketDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

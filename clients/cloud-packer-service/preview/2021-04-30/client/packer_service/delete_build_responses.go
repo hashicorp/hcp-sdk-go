@@ -47,7 +47,7 @@ func NewDeleteBuildOK() *DeleteBuildOK {
 	return &DeleteBuildOK{}
 }
 
-/* DeleteBuildOK describes a response with status code 200, with default header values.
+/*DeleteBuildOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type DeleteBuildOK struct {
 func (o *DeleteBuildOK) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}][%d] deleteBuildOK  %+v", 200, o.Payload)
 }
+
 func (o *DeleteBuildOK) GetPayload() models.HashicorpCloudPackerDeleteBuildResponse {
 	return o.Payload
 }
@@ -79,7 +80,7 @@ func NewDeleteBuildDefault(code int) *DeleteBuildDefault {
 	}
 }
 
-/* DeleteBuildDefault describes a response with status code -1, with default header values.
+/*DeleteBuildDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -97,6 +98,7 @@ func (o *DeleteBuildDefault) Code() int {
 func (o *DeleteBuildDefault) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}][%d] DeleteBuild default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *DeleteBuildDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

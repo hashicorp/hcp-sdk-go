@@ -17,109 +17,98 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewListIterationsParams creates a new ListIterationsParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewListIterationsParams creates a new ListIterationsParams object
+// with the default values initialized.
 func NewListIterationsParams() *ListIterationsParams {
+	var ()
 	return &ListIterationsParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewListIterationsParamsWithTimeout creates a new ListIterationsParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewListIterationsParamsWithTimeout(timeout time.Duration) *ListIterationsParams {
+	var ()
 	return &ListIterationsParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewListIterationsParamsWithContext creates a new ListIterationsParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewListIterationsParamsWithContext(ctx context.Context) *ListIterationsParams {
+	var ()
 	return &ListIterationsParams{
+
 		Context: ctx,
 	}
 }
 
 // NewListIterationsParamsWithHTTPClient creates a new ListIterationsParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewListIterationsParamsWithHTTPClient(client *http.Client) *ListIterationsParams {
+	var ()
 	return &ListIterationsParams{
 		HTTPClient: client,
 	}
 }
 
-/* ListIterationsParams contains all the parameters to send to the API endpoint
-   for the list iterations operation.
-
-   Typically these are written to a http.Request.
+/*ListIterationsParams contains all the parameters to send to the API endpoint
+for the list iterations operation typically these are written to a http.Request
 */
 type ListIterationsParams struct {
 
-	// BucketSlug.
+	/*BucketSlug*/
 	BucketSlug string
-
-	// IncludeIncomplete.
+	/*IncludeIncomplete*/
 	IncludeIncomplete *bool
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
+	/*LocationRegionProvider
+	  provider is the named cloud provider ("aws", "gcp", "azure").
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
+	/*LocationRegionRegion
+	  region is the cloud region ("us-west1", "us-east1").
 
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
-
-	/* PaginationNextPageToken.
-
-	     Specifies a page token to use to retrieve the next page. Set this to the
+	/*PaginationNextPageToken
+	  Specifies a page token to use to retrieve the next page. Set this to the
 	`next_page_token` returned by previous list requests to get the next page of
 	results. If set, `previous_page_token` must not be set.
+
 	*/
 	PaginationNextPageToken *string
-
-	/* PaginationPageSize.
-
-	     The max number of results per page that should be returned. If the number
+	/*PaginationPageSize
+	  The max number of results per page that should be returned. If the number
 	of available results is larger than `page_size`, a `next_page_token` is
 	returned which can be used to get the next page of results in subsequent
 	requests. A value of zero will cause `page_size` to be defaulted.
 
-	     Format: int64
 	*/
 	PaginationPageSize *int64
-
-	/* PaginationPreviousPageToken.
-
-	     Specifies a page token to use to retrieve the previous page. Set this to
+	/*PaginationPreviousPageToken
+	  Specifies a page token to use to retrieve the previous page. Set this to
 	the `previous_page_token` returned by previous list requests to get the
 	previous page of results. If set, `next_page_token` must not be set.
+
 	*/
 	PaginationPreviousPageToken *string
-
-	/* SortingOrderBy.
-
-	     Specifies the list of per field ordering that should be used for sorting.
+	/*SortingOrderBy
+	  Specifies the list of per field ordering that should be used for sorting.
 	The order matters as rows are sorted in order by fields and when the field
 	matches, the next field is used to tie break the ordering.
 	The per field default ordering is ascending.
@@ -129,27 +118,13 @@ type ListIterationsParams struct {
 
 	Example: oder_by=name,age desc,created_at asc
 	In that case, 'name' will get the default 'ascending' order.
+
 	*/
 	SortingOrderBy []string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the list iterations params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *ListIterationsParams) WithDefaults() *ListIterationsParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the list iterations params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *ListIterationsParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the list iterations params
@@ -312,17 +287,16 @@ func (o *ListIterationsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 
 		// query param include_incomplete
 		var qrIncludeIncomplete bool
-
 		if o.IncludeIncomplete != nil {
 			qrIncludeIncomplete = *o.IncludeIncomplete
 		}
 		qIncludeIncomplete := swag.FormatBool(qrIncludeIncomplete)
 		if qIncludeIncomplete != "" {
-
 			if err := r.SetQueryParam("include_incomplete", qIncludeIncomplete); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	// path param location.organization_id
@@ -339,117 +313,92 @@ func (o *ListIterationsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
-
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
-
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
-
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
-
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.PaginationNextPageToken != nil {
 
 		// query param pagination.next_page_token
 		var qrPaginationNextPageToken string
-
 		if o.PaginationNextPageToken != nil {
 			qrPaginationNextPageToken = *o.PaginationNextPageToken
 		}
 		qPaginationNextPageToken := qrPaginationNextPageToken
 		if qPaginationNextPageToken != "" {
-
 			if err := r.SetQueryParam("pagination.next_page_token", qPaginationNextPageToken); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.PaginationPageSize != nil {
 
 		// query param pagination.page_size
 		var qrPaginationPageSize int64
-
 		if o.PaginationPageSize != nil {
 			qrPaginationPageSize = *o.PaginationPageSize
 		}
 		qPaginationPageSize := swag.FormatInt64(qrPaginationPageSize)
 		if qPaginationPageSize != "" {
-
 			if err := r.SetQueryParam("pagination.page_size", qPaginationPageSize); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.PaginationPreviousPageToken != nil {
 
 		// query param pagination.previous_page_token
 		var qrPaginationPreviousPageToken string
-
 		if o.PaginationPreviousPageToken != nil {
 			qrPaginationPreviousPageToken = *o.PaginationPreviousPageToken
 		}
 		qPaginationPreviousPageToken := qrPaginationPreviousPageToken
 		if qPaginationPreviousPageToken != "" {
-
 			if err := r.SetQueryParam("pagination.previous_page_token", qPaginationPreviousPageToken); err != nil {
 				return err
 			}
 		}
+
 	}
 
-	if o.SortingOrderBy != nil {
+	valuesSortingOrderBy := o.SortingOrderBy
 
-		// binding items for sorting.order_by
-		joinedSortingOrderBy := o.bindParamSortingOrderBy(reg)
-
-		// query array param sorting.order_by
-		if err := r.SetQueryParam("sorting.order_by", joinedSortingOrderBy...); err != nil {
-			return err
-		}
+	joinedSortingOrderBy := swag.JoinByFormat(valuesSortingOrderBy, "multi")
+	// query array param sorting.order_by
+	if err := r.SetQueryParam("sorting.order_by", joinedSortingOrderBy...); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
-}
-
-// bindParamListIterations binds the parameter sorting.order_by
-func (o *ListIterationsParams) bindParamSortingOrderBy(formats strfmt.Registry) []string {
-	sortingOrderByIR := o.SortingOrderBy
-
-	var sortingOrderByIC []string
-	for _, sortingOrderByIIR := range sortingOrderByIR { // explode []string
-
-		sortingOrderByIIV := sortingOrderByIIR // string as string
-		sortingOrderByIC = append(sortingOrderByIC, sortingOrderByIIV)
-	}
-
-	// items.CollectionFormat: "multi"
-	sortingOrderByIS := swag.JoinByFormat(sortingOrderByIC, "multi")
-
-	return sortingOrderByIS
 }

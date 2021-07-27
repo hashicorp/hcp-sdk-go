@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -37,40 +35,13 @@ func (m *HashicorpCloudPackerCreateBuildResponse) Validate(formats strfmt.Regist
 }
 
 func (m *HashicorpCloudPackerCreateBuildResponse) validateBuild(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Build) { // not required
 		return nil
 	}
 
 	if m.Build != nil {
 		if err := m.Build.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("build")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud packer create build response based on the context it is used
-func (m *HashicorpCloudPackerCreateBuildResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateBuild(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudPackerCreateBuildResponse) contextValidateBuild(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Build != nil {
-		if err := m.Build.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("build")
 			}

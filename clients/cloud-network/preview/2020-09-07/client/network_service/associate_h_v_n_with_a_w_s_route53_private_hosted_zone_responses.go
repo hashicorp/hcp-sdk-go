@@ -46,7 +46,7 @@ func NewAssociateHVNWithAWSRoute53PrivateHostedZoneOK() *AssociateHVNWithAWSRout
 	return &AssociateHVNWithAWSRoute53PrivateHostedZoneOK{}
 }
 
-/* AssociateHVNWithAWSRoute53PrivateHostedZoneOK describes a response with status code 200, with default header values.
+/*AssociateHVNWithAWSRoute53PrivateHostedZoneOK handles this case with default header values.
 
 A successful response.
 */
@@ -57,6 +57,7 @@ type AssociateHVNWithAWSRoute53PrivateHostedZoneOK struct {
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] associateHVNWithAWSRoute53PrivateHostedZoneOK  %+v", 200, o.Payload)
 }
+
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) GetPayload() interface{} {
 	return o.Payload
 }
@@ -78,7 +79,7 @@ func NewAssociateHVNWithAWSRoute53PrivateHostedZoneDefault(code int) *AssociateH
 	}
 }
 
-/* AssociateHVNWithAWSRoute53PrivateHostedZoneDefault describes a response with status code -1, with default header values.
+/*AssociateHVNWithAWSRoute53PrivateHostedZoneDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -96,6 +97,7 @@ func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) Code() int {
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] AssociateHVNWithAWSRoute53PrivateHostedZone default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

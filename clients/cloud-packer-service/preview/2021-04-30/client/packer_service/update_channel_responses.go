@@ -47,7 +47,7 @@ func NewUpdateChannelOK() *UpdateChannelOK {
 	return &UpdateChannelOK{}
 }
 
-/* UpdateChannelOK describes a response with status code 200, with default header values.
+/*UpdateChannelOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type UpdateChannelOK struct {
 func (o *UpdateChannelOK) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] updateChannelOK  %+v", 200, o.Payload)
 }
+
 func (o *UpdateChannelOK) GetPayload() *models.HashicorpCloudPackerUpdateChannelResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewUpdateChannelDefault(code int) *UpdateChannelDefault {
 	}
 }
 
-/* UpdateChannelDefault describes a response with status code -1, with default header values.
+/*UpdateChannelDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *UpdateChannelDefault) Code() int {
 func (o *UpdateChannelDefault) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] UpdateChannel default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *UpdateChannelDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

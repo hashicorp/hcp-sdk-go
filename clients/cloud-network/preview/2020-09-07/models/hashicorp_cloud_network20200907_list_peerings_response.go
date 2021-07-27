@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -46,6 +45,7 @@ func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) Validate(formats str
 }
 
 func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) validatePagination(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Pagination) { // not required
 		return nil
 	}
@@ -63,6 +63,7 @@ func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) validatePagination(f
 }
 
 func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) validatePeerings(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Peerings) { // not required
 		return nil
 	}
@@ -74,56 +75,6 @@ func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) validatePeerings(for
 
 		if m.Peerings[i] != nil {
 			if err := m.Peerings[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("peerings" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud network 20200907 list peerings response based on the context it is used
-func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidatePagination(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidatePeerings(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Pagination != nil {
-		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("pagination")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) contextValidatePeerings(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Peerings); i++ {
-
-		if m.Peerings[i] != nil {
-			if err := m.Peerings[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("peerings" + "." + strconv.Itoa(i))
 				}

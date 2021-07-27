@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -37,40 +35,13 @@ func (m *HashicorpCloudVault20201125GetAuditLogStatusResponse) Validate(formats 
 }
 
 func (m *HashicorpCloudVault20201125GetAuditLogStatusResponse) validateLog(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Log) { // not required
 		return nil
 	}
 
 	if m.Log != nil {
 		if err := m.Log.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("log")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud vault 20201125 get audit log status response based on the context it is used
-func (m *HashicorpCloudVault20201125GetAuditLogStatusResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateLog(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudVault20201125GetAuditLogStatusResponse) contextValidateLog(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Log != nil {
-		if err := m.Log.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("log")
 			}

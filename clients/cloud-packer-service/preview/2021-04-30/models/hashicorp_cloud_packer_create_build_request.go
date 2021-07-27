@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -53,6 +51,7 @@ func (m *HashicorpCloudPackerCreateBuildRequest) Validate(formats strfmt.Registr
 }
 
 func (m *HashicorpCloudPackerCreateBuildRequest) validateBuild(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Build) { // not required
 		return nil
 	}
@@ -70,58 +69,13 @@ func (m *HashicorpCloudPackerCreateBuildRequest) validateBuild(formats strfmt.Re
 }
 
 func (m *HashicorpCloudPackerCreateBuildRequest) validateLocation(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
 
 	if m.Location != nil {
 		if err := m.Location.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("location")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud packer create build request based on the context it is used
-func (m *HashicorpCloudPackerCreateBuildRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateBuild(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateLocation(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudPackerCreateBuildRequest) contextValidateBuild(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Build != nil {
-		if err := m.Build.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("build")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudPackerCreateBuildRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Location != nil {
-		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
 			}

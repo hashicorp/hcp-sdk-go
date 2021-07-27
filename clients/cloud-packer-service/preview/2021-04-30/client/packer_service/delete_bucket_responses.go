@@ -47,7 +47,7 @@ func NewDeleteBucketOK() *DeleteBucketOK {
 	return &DeleteBucketOK{}
 }
 
-/* DeleteBucketOK describes a response with status code 200, with default header values.
+/*DeleteBucketOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type DeleteBucketOK struct {
 func (o *DeleteBucketOK) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}][%d] deleteBucketOK  %+v", 200, o.Payload)
 }
+
 func (o *DeleteBucketOK) GetPayload() models.HashicorpCloudPackerDeleteBucketResponse {
 	return o.Payload
 }
@@ -79,7 +80,7 @@ func NewDeleteBucketDefault(code int) *DeleteBucketDefault {
 	}
 }
 
-/* DeleteBucketDefault describes a response with status code -1, with default header values.
+/*DeleteBucketDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -97,6 +98,7 @@ func (o *DeleteBucketDefault) Code() int {
 func (o *DeleteBucketDefault) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}][%d] DeleteBucket default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *DeleteBucketDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -47,7 +47,7 @@ func NewFetchAuditLogOK() *FetchAuditLogOK {
 	return &FetchAuditLogOK{}
 }
 
-/* FetchAuditLogOK describes a response with status code 200, with default header values.
+/*FetchAuditLogOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type FetchAuditLogOK struct {
 func (o *FetchAuditLogOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] fetchAuditLogOK  %+v", 200, o.Payload)
 }
+
 func (o *FetchAuditLogOK) GetPayload() *models.HashicorpCloudVault20200420FetchAuditLogResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewFetchAuditLogDefault(code int) *FetchAuditLogDefault {
 	}
 }
 
-/* FetchAuditLogDefault describes a response with status code -1, with default header values.
+/*FetchAuditLogDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *FetchAuditLogDefault) Code() int {
 func (o *FetchAuditLogDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] FetchAuditLog default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *FetchAuditLogDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

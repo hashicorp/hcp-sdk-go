@@ -47,7 +47,7 @@ func NewGetChildImagesOK() *GetChildImagesOK {
 	return &GetChildImagesOK{}
 }
 
-/* GetChildImagesOK describes a response with status code 200, with default header values.
+/*GetChildImagesOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type GetChildImagesOK struct {
 func (o *GetChildImagesOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/children][%d] getChildImagesOK  %+v", 200, o.Payload)
 }
+
 func (o *GetChildImagesOK) GetPayload() *models.HashicorpCloudPackerGetChildImagesResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewGetChildImagesDefault(code int) *GetChildImagesDefault {
 	}
 }
 
-/* GetChildImagesDefault describes a response with status code -1, with default header values.
+/*GetChildImagesDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *GetChildImagesDefault) Code() int {
 func (o *GetChildImagesDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/children][%d] GetChildImages default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetChildImagesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

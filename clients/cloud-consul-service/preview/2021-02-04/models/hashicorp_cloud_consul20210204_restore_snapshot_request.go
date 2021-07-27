@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -51,6 +49,7 @@ func (m *HashicorpCloudConsul20210204RestoreSnapshotRequest) Validate(formats st
 }
 
 func (m *HashicorpCloudConsul20210204RestoreSnapshotRequest) validateLocation(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -68,58 +67,13 @@ func (m *HashicorpCloudConsul20210204RestoreSnapshotRequest) validateLocation(fo
 }
 
 func (m *HashicorpCloudConsul20210204RestoreSnapshotRequest) validateSnapshot(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Snapshot) { // not required
 		return nil
 	}
 
 	if m.Snapshot != nil {
 		if err := m.Snapshot.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("snapshot")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud consul 20210204 restore snapshot request based on the context it is used
-func (m *HashicorpCloudConsul20210204RestoreSnapshotRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateLocation(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateSnapshot(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudConsul20210204RestoreSnapshotRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Location != nil {
-		if err := m.Location.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("location")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudConsul20210204RestoreSnapshotRequest) contextValidateSnapshot(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Snapshot != nil {
-		if err := m.Snapshot.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("snapshot")
 			}

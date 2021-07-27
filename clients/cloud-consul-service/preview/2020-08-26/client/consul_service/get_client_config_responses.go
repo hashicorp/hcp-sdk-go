@@ -47,7 +47,7 @@ func NewGetClientConfigOK() *GetClientConfigOK {
 	return &GetClientConfigOK{}
 }
 
-/* GetClientConfigOK describes a response with status code 200, with default header values.
+/*GetClientConfigOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type GetClientConfigOK struct {
 func (o *GetClientConfigOK) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/client-config][%d] getClientConfigOK  %+v", 200, o.Payload)
 }
+
 func (o *GetClientConfigOK) GetPayload() *models.HashicorpCloudConsul20200826GetClientConfigResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewGetClientConfigDefault(code int) *GetClientConfigDefault {
 	}
 }
 
-/* GetClientConfigDefault describes a response with status code -1, with default header values.
+/*GetClientConfigDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *GetClientConfigDefault) Code() int {
 func (o *GetClientConfigDefault) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/client-config][%d] GetClientConfig default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetClientConfigDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

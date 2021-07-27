@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -38,6 +37,7 @@ func (m *HashicorpCloudPackerGetChildImagesResponse) Validate(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudPackerGetChildImagesResponse) validateChildren(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Children) { // not required
 		return nil
 	}
@@ -49,38 +49,6 @@ func (m *HashicorpCloudPackerGetChildImagesResponse) validateChildren(formats st
 
 		if m.Children[i] != nil {
 			if err := m.Children[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("children" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud packer get child images response based on the context it is used
-func (m *HashicorpCloudPackerGetChildImagesResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateChildren(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudPackerGetChildImagesResponse) contextValidateChildren(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Children); i++ {
-
-		if m.Children[i] != nil {
-			if err := m.Children[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("children" + "." + strconv.Itoa(i))
 				}

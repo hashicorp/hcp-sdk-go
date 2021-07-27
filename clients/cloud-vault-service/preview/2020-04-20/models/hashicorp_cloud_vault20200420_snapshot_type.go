@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -18,11 +17,6 @@ import (
 //
 // swagger:model hashicorp.cloud.vault_20200420.Snapshot.Type
 type HashicorpCloudVault20200420SnapshotType string
-
-func NewHashicorpCloudVault20200420SnapshotType(value HashicorpCloudVault20200420SnapshotType) *HashicorpCloudVault20200420SnapshotType {
-	v := value
-	return &v
-}
 
 const (
 
@@ -74,10 +68,5 @@ func (m HashicorpCloudVault20200420SnapshotType) Validate(formats strfmt.Registr
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-// ContextValidate validates this hashicorp cloud vault 20200420 snapshot type based on context it is used
-func (m HashicorpCloudVault20200420SnapshotType) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

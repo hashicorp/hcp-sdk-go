@@ -18,88 +18,71 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/models"
 )
 
-// NewCreateTGWAttachmentParams creates a new CreateTGWAttachmentParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewCreateTGWAttachmentParams creates a new CreateTGWAttachmentParams object
+// with the default values initialized.
 func NewCreateTGWAttachmentParams() *CreateTGWAttachmentParams {
+	var ()
 	return &CreateTGWAttachmentParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreateTGWAttachmentParamsWithTimeout creates a new CreateTGWAttachmentParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewCreateTGWAttachmentParamsWithTimeout(timeout time.Duration) *CreateTGWAttachmentParams {
+	var ()
 	return &CreateTGWAttachmentParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewCreateTGWAttachmentParamsWithContext creates a new CreateTGWAttachmentParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewCreateTGWAttachmentParamsWithContext(ctx context.Context) *CreateTGWAttachmentParams {
+	var ()
 	return &CreateTGWAttachmentParams{
+
 		Context: ctx,
 	}
 }
 
 // NewCreateTGWAttachmentParamsWithHTTPClient creates a new CreateTGWAttachmentParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewCreateTGWAttachmentParamsWithHTTPClient(client *http.Client) *CreateTGWAttachmentParams {
+	var ()
 	return &CreateTGWAttachmentParams{
 		HTTPClient: client,
 	}
 }
 
-/* CreateTGWAttachmentParams contains all the parameters to send to the API endpoint
-   for the create t g w attachment operation.
-
-   Typically these are written to a http.Request.
+/*CreateTGWAttachmentParams contains all the parameters to send to the API endpoint
+for the create t g w attachment operation typically these are written to a http.Request
 */
 type CreateTGWAttachmentParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.HashicorpCloudNetwork20200907CreateTGWAttachmentRequest
+	/*HvnID
+	  id is the identifier for this resource.
 
-	/* HvnID.
-
-	   id is the identifier for this resource.
 	*/
 	HvnID string
+	/*HvnLocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* HvnLocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	HvnLocationOrganizationID string
+	/*HvnLocationProjectID
+	  project_id is the projects id.
 
-	/* HvnLocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	HvnLocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the create t g w attachment params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *CreateTGWAttachmentParams) WithDefaults() *CreateTGWAttachmentParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the create t g w attachment params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *CreateTGWAttachmentParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create t g w attachment params
@@ -186,6 +169,7 @@ func (o *CreateTGWAttachmentParams) WriteToRequest(r runtime.ClientRequest, reg 
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

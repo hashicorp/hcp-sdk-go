@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -23,11 +21,6 @@ type HashicorpCloudNetwork20200907AWSNetworkData struct {
 
 // Validate validates this hashicorp cloud network 20200907 a w s network data
 func (m *HashicorpCloudNetwork20200907AWSNetworkData) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this hashicorp cloud network 20200907 a w s network data based on context it is used
-func (m *HashicorpCloudNetwork20200907AWSNetworkData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

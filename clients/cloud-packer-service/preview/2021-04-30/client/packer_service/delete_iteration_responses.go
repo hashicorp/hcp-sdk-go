@@ -47,7 +47,7 @@ func NewDeleteIterationOK() *DeleteIterationOK {
 	return &DeleteIterationOK{}
 }
 
-/* DeleteIterationOK describes a response with status code 200, with default header values.
+/*DeleteIterationOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type DeleteIterationOK struct {
 func (o *DeleteIterationOK) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] deleteIterationOK  %+v", 200, o.Payload)
 }
+
 func (o *DeleteIterationOK) GetPayload() models.HashicorpCloudPackerDeleteIterationResponse {
 	return o.Payload
 }
@@ -79,7 +80,7 @@ func NewDeleteIterationDefault(code int) *DeleteIterationDefault {
 	}
 }
 
-/* DeleteIterationDefault describes a response with status code -1, with default header values.
+/*DeleteIterationDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -97,6 +98,7 @@ func (o *DeleteIterationDefault) Code() int {
 func (o *DeleteIterationDefault) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] DeleteIteration default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *DeleteIterationDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

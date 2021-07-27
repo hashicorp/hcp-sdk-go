@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -18,11 +17,6 @@ import (
 //
 // swagger:model hashicorp.cloud.resourcemanager.PolicyBindingMemberType
 type HashicorpCloudResourcemanagerPolicyBindingMemberType string
-
-func NewHashicorpCloudResourcemanagerPolicyBindingMemberType(value HashicorpCloudResourcemanagerPolicyBindingMemberType) *HashicorpCloudResourcemanagerPolicyBindingMemberType {
-	v := value
-	return &v
-}
 
 const (
 
@@ -71,10 +65,5 @@ func (m HashicorpCloudResourcemanagerPolicyBindingMemberType) Validate(formats s
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-// ContextValidate validates this hashicorp cloud resourcemanager policy binding member type based on context it is used
-func (m HashicorpCloudResourcemanagerPolicyBindingMemberType) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

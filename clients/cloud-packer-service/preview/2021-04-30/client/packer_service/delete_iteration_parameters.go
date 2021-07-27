@@ -16,100 +16,81 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDeleteIterationParams creates a new DeleteIterationParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewDeleteIterationParams creates a new DeleteIterationParams object
+// with the default values initialized.
 func NewDeleteIterationParams() *DeleteIterationParams {
+	var ()
 	return &DeleteIterationParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeleteIterationParamsWithTimeout creates a new DeleteIterationParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewDeleteIterationParamsWithTimeout(timeout time.Duration) *DeleteIterationParams {
+	var ()
 	return &DeleteIterationParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewDeleteIterationParamsWithContext creates a new DeleteIterationParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewDeleteIterationParamsWithContext(ctx context.Context) *DeleteIterationParams {
+	var ()
 	return &DeleteIterationParams{
+
 		Context: ctx,
 	}
 }
 
 // NewDeleteIterationParamsWithHTTPClient creates a new DeleteIterationParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewDeleteIterationParamsWithHTTPClient(client *http.Client) *DeleteIterationParams {
+	var ()
 	return &DeleteIterationParams{
 		HTTPClient: client,
 	}
 }
 
-/* DeleteIterationParams contains all the parameters to send to the API endpoint
-   for the delete iteration operation.
-
-   Typically these are written to a http.Request.
+/*DeleteIterationParams contains all the parameters to send to the API endpoint
+for the delete iteration operation typically these are written to a http.Request
 */
 type DeleteIterationParams struct {
 
-	// BucketSlug.
+	/*BucketSlug*/
 	BucketSlug *string
+	/*IterationID
+	  id of the iteration you would like to delete
 
-	/* IterationID.
-
-	   id of the iteration you would like to delete
 	*/
 	IterationID string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
+	/*LocationRegionProvider
+	  provider is the named cloud provider ("aws", "gcp", "azure").
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
+	/*LocationRegionRegion
+	  region is the cloud region ("us-west1", "us-east1").
 
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the delete iteration params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *DeleteIterationParams) WithDefaults() *DeleteIterationParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the delete iteration params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *DeleteIterationParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete iteration params
@@ -223,17 +204,16 @@ func (o *DeleteIterationParams) WriteToRequest(r runtime.ClientRequest, reg strf
 
 		// query param bucket_slug
 		var qrBucketSlug string
-
 		if o.BucketSlug != nil {
 			qrBucketSlug = *o.BucketSlug
 		}
 		qBucketSlug := qrBucketSlug
 		if qBucketSlug != "" {
-
 			if err := r.SetQueryParam("bucket_slug", qBucketSlug); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	// path param iteration_id
@@ -255,34 +235,32 @@ func (o *DeleteIterationParams) WriteToRequest(r runtime.ClientRequest, reg strf
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
-
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
-
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
-
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
-
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if len(res) > 0 {

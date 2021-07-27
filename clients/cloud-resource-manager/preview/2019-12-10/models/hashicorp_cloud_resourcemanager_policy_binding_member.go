@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -22,7 +20,7 @@ type HashicorpCloudResourcemanagerPolicyBindingMember struct {
 	MemberID string `json:"member_id,omitempty"`
 
 	// MemberType is the type of the member.
-	MemberType *HashicorpCloudResourcemanagerPolicyBindingMemberType `json:"member_type,omitempty"`
+	MemberType HashicorpCloudResourcemanagerPolicyBindingMemberType `json:"member_type,omitempty"`
 }
 
 // Validate validates this hashicorp cloud resourcemanager policy binding member
@@ -40,45 +38,16 @@ func (m *HashicorpCloudResourcemanagerPolicyBindingMember) Validate(formats strf
 }
 
 func (m *HashicorpCloudResourcemanagerPolicyBindingMember) validateMemberType(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.MemberType) { // not required
 		return nil
 	}
 
-	if m.MemberType != nil {
-		if err := m.MemberType.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("member_type")
-			}
-			return err
+	if err := m.MemberType.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("member_type")
 		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud resourcemanager policy binding member based on the context it is used
-func (m *HashicorpCloudResourcemanagerPolicyBindingMember) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateMemberType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudResourcemanagerPolicyBindingMember) contextValidateMemberType(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.MemberType != nil {
-		if err := m.MemberType.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("member_type")
-			}
-			return err
-		}
+		return err
 	}
 
 	return nil

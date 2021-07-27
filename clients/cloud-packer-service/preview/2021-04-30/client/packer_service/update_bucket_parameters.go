@@ -18,88 +18,71 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/preview/2021-04-30/models"
 )
 
-// NewUpdateBucketParams creates a new UpdateBucketParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewUpdateBucketParams creates a new UpdateBucketParams object
+// with the default values initialized.
 func NewUpdateBucketParams() *UpdateBucketParams {
+	var ()
 	return &UpdateBucketParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateBucketParamsWithTimeout creates a new UpdateBucketParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewUpdateBucketParamsWithTimeout(timeout time.Duration) *UpdateBucketParams {
+	var ()
 	return &UpdateBucketParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewUpdateBucketParamsWithContext creates a new UpdateBucketParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewUpdateBucketParamsWithContext(ctx context.Context) *UpdateBucketParams {
+	var ()
 	return &UpdateBucketParams{
+
 		Context: ctx,
 	}
 }
 
 // NewUpdateBucketParamsWithHTTPClient creates a new UpdateBucketParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewUpdateBucketParamsWithHTTPClient(client *http.Client) *UpdateBucketParams {
+	var ()
 	return &UpdateBucketParams{
 		HTTPClient: client,
 	}
 }
 
-/* UpdateBucketParams contains all the parameters to send to the API endpoint
-   for the update bucket operation.
-
-   Typically these are written to a http.Request.
+/*UpdateBucketParams contains all the parameters to send to the API endpoint
+for the update bucket operation typically these are written to a http.Request
 */
 type UpdateBucketParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.HashicorpCloudPackerUpdateBucketRequest
+	/*BucketSlug
+	  base-ubuntu-18-secure
 
-	/* BucketSlug.
-
-	   base-ubuntu-18-secure
 	*/
 	BucketSlug string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the update bucket params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdateBucketParams) WithDefaults() *UpdateBucketParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the update bucket params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdateBucketParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update bucket params
@@ -186,6 +169,7 @@ func (o *UpdateBucketParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

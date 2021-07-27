@@ -47,7 +47,7 @@ func NewGetAncestorImagesOK() *GetAncestorImagesOK {
 	return &GetAncestorImagesOK{}
 }
 
-/* GetAncestorImagesOK describes a response with status code 200, with default header values.
+/*GetAncestorImagesOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type GetAncestorImagesOK struct {
 func (o *GetAncestorImagesOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/ancestors][%d] getAncestorImagesOK  %+v", 200, o.Payload)
 }
+
 func (o *GetAncestorImagesOK) GetPayload() *models.HashicorpCloudPackerGetAncestorImagesResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewGetAncestorImagesDefault(code int) *GetAncestorImagesDefault {
 	}
 }
 
-/* GetAncestorImagesDefault describes a response with status code -1, with default header values.
+/*GetAncestorImagesDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *GetAncestorImagesDefault) Code() int {
 func (o *GetAncestorImagesDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/ancestors][%d] GetAncestorImages default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetAncestorImagesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

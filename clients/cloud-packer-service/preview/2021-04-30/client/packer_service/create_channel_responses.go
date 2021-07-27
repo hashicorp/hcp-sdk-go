@@ -47,7 +47,7 @@ func NewCreateChannelOK() *CreateChannelOK {
 	return &CreateChannelOK{}
 }
 
-/* CreateChannelOK describes a response with status code 200, with default header values.
+/*CreateChannelOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type CreateChannelOK struct {
 func (o *CreateChannelOK) Error() string {
 	return fmt.Sprintf("[POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels][%d] createChannelOK  %+v", 200, o.Payload)
 }
+
 func (o *CreateChannelOK) GetPayload() *models.HashicorpCloudPackerCreateChannelResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewCreateChannelDefault(code int) *CreateChannelDefault {
 	}
 }
 
-/* CreateChannelDefault describes a response with status code -1, with default header values.
+/*CreateChannelDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *CreateChannelDefault) Code() int {
 func (o *CreateChannelDefault) Error() string {
 	return fmt.Sprintf("[POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels][%d] CreateChannel default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *CreateChannelDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

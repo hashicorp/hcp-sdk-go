@@ -47,7 +47,7 @@ func NewProjectServiceGetOK() *ProjectServiceGetOK {
 	return &ProjectServiceGetOK{}
 }
 
-/* ProjectServiceGetOK describes a response with status code 200, with default header values.
+/*ProjectServiceGetOK handles this case with default header values.
 
 A successful response.
 */
@@ -58,6 +58,7 @@ type ProjectServiceGetOK struct {
 func (o *ProjectServiceGetOK) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}][%d] projectServiceGetOK  %+v", 200, o.Payload)
 }
+
 func (o *ProjectServiceGetOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectGetResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewProjectServiceGetDefault(code int) *ProjectServiceGetDefault {
 	}
 }
 
-/* ProjectServiceGetDefault describes a response with status code -1, with default header values.
+/*ProjectServiceGetDefault handles this case with default header values.
 
 An unexpected error response.
 */
@@ -99,6 +100,7 @@ func (o *ProjectServiceGetDefault) Code() int {
 func (o *ProjectServiceGetDefault) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}][%d] ProjectService_Get default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *ProjectServiceGetDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

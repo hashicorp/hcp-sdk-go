@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -26,11 +24,6 @@ type HashicorpCloudConsul20200826ACLToken struct {
 
 // Validate validates this hashicorp cloud consul 20200826 ACL token
 func (m *HashicorpCloudConsul20200826ACLToken) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this hashicorp cloud consul 20200826 ACL token based on context it is used
-func (m *HashicorpCloudConsul20200826ACLToken) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

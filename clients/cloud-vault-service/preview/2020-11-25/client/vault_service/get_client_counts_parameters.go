@@ -16,94 +16,76 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewGetClientCountsParams creates a new GetClientCountsParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewGetClientCountsParams creates a new GetClientCountsParams object
+// with the default values initialized.
 func NewGetClientCountsParams() *GetClientCountsParams {
+	var ()
 	return &GetClientCountsParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetClientCountsParamsWithTimeout creates a new GetClientCountsParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewGetClientCountsParamsWithTimeout(timeout time.Duration) *GetClientCountsParams {
+	var ()
 	return &GetClientCountsParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewGetClientCountsParamsWithContext creates a new GetClientCountsParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewGetClientCountsParamsWithContext(ctx context.Context) *GetClientCountsParams {
+	var ()
 	return &GetClientCountsParams{
+
 		Context: ctx,
 	}
 }
 
 // NewGetClientCountsParamsWithHTTPClient creates a new GetClientCountsParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewGetClientCountsParamsWithHTTPClient(client *http.Client) *GetClientCountsParams {
+	var ()
 	return &GetClientCountsParams{
 		HTTPClient: client,
 	}
 }
 
-/* GetClientCountsParams contains all the parameters to send to the API endpoint
-   for the get client counts operation.
-
-   Typically these are written to a http.Request.
+/*GetClientCountsParams contains all the parameters to send to the API endpoint
+for the get client counts operation typically these are written to a http.Request
 */
 type GetClientCountsParams struct {
 
-	// ClusterID.
+	/*ClusterID*/
 	ClusterID string
+	/*LocationOrganizationID
+	  organization_id is the id of the organization.
 
-	/* LocationOrganizationID.
-
-	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
+	/*LocationProjectID
+	  project_id is the projects id.
 
-	/* LocationProjectID.
-
-	   project_id is the projects id.
 	*/
 	LocationProjectID string
+	/*LocationRegionProvider
+	  provider is the named cloud provider ("aws", "gcp", "azure").
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
+	/*LocationRegionRegion
+	  region is the cloud region ("us-west1", "us-east1").
 
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the get client counts params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetClientCountsParams) WithDefaults() *GetClientCountsParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the get client counts params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetClientCountsParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get client counts params
@@ -221,34 +203,32 @@ func (o *GetClientCountsParams) WriteToRequest(r runtime.ClientRequest, reg strf
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
-
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
-
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
-
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
-
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
+
 	}
 
 	if len(res) > 0 {

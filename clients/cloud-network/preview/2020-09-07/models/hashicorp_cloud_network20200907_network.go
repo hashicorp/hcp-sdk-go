@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -48,7 +46,7 @@ type HashicorpCloudNetwork20200907Network struct {
 	//
 	// Output only.
 	// Read Only: true
-	State *HashicorpCloudNetwork20200907NetworkState `json:"state,omitempty"`
+	State HashicorpCloudNetwork20200907NetworkState `json:"state,omitempty"`
 }
 
 // Validate validates this hashicorp cloud network 20200907 network
@@ -78,6 +76,7 @@ func (m *HashicorpCloudNetwork20200907Network) Validate(formats strfmt.Registry)
 }
 
 func (m *HashicorpCloudNetwork20200907Network) validateCreatedAt(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -90,6 +89,7 @@ func (m *HashicorpCloudNetwork20200907Network) validateCreatedAt(formats strfmt.
 }
 
 func (m *HashicorpCloudNetwork20200907Network) validateLocation(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -107,6 +107,7 @@ func (m *HashicorpCloudNetwork20200907Network) validateLocation(formats strfmt.R
 }
 
 func (m *HashicorpCloudNetwork20200907Network) validateProviderNetworkData(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.ProviderNetworkData) { // not required
 		return nil
 	}
@@ -124,94 +125,16 @@ func (m *HashicorpCloudNetwork20200907Network) validateProviderNetworkData(forma
 }
 
 func (m *HashicorpCloudNetwork20200907Network) validateState(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
 
-	if m.State != nil {
-		if err := m.State.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("state")
-			}
-			return err
+	if err := m.State.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("state")
 		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud network 20200907 network based on the context it is used
-func (m *HashicorpCloudNetwork20200907Network) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateCreatedAt(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateLocation(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateProviderNetworkData(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateState(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudNetwork20200907Network) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudNetwork20200907Network) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Location != nil {
-		if err := m.Location.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("location")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudNetwork20200907Network) contextValidateProviderNetworkData(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ProviderNetworkData != nil {
-		if err := m.ProviderNetworkData.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("provider_network_data")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudNetwork20200907Network) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.State != nil {
-		if err := m.State.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("state")
-			}
-			return err
-		}
 	}
 
 	return nil
