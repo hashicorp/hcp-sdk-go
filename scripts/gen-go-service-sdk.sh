@@ -32,8 +32,8 @@ generate_sdk() {
   mkdir -p "../../../clients/$service/$stage/$version"
 
   rel=("$version"/*.swagger.json)
-  spec=$(realpath "${rel[0]}")
-  target=$(realpath "../../../clients/$service/$stage/$version")
+  spec="${rel[0]}"
+  target="../../../clients/$service/$stage/$version"
 
   echo -e "Generating SDK for ${BOLD}$service${NA} (stage: ${BOLD}$stage${NA}, version: ${BOLD}$version${NA})"
   swagger generate client \
