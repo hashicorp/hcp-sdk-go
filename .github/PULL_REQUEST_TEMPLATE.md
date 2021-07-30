@@ -8,7 +8,7 @@ version of a service SDK was added, what are the key new features or breaking ch
 <!-- Include any links here that might be helpful for people reviewing your PR. If there are none, feel free to delete this section. -->
 
 ### :ship: Release Note
-Release note for [CHANGELOG](https://github.com/hashicorp/terraform-provider-hcp/blob/main/CHANGELOG.md):
+Release note for [CHANGELOG](https://github.com/hashicorp/hcp-sdk-go/blob/main/CHANGELOG.md):
 <!--
 If change is not user facing, just write "NONE" in the release-note block below.
 -->

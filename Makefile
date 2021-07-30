@@ -38,3 +38,25 @@ test-ci: go/lint
 		-- \
 		$(GO_TEST_ARGS) \
 		$(packages)
+
+# args passed to sdk/update
+commit=false
+
+.PHONY: sdk/update # service=cloud-foo-service commit=true/false
+sdk/update:
+	@if [ -z $(service) ]; then \
+		echo "ERROR: No service argument provided, please provide in the format 'service=...'" >&2; \
+  		exit 1; \
+	fi
+
+	@if [ $(service) = "cloud-shared" ]; then \
+		echo "Generating latest SDK for cloud-shared"; \
+		bash ./scripts/gen-go-shared-sdk.sh $(service); \
+	else \
+		echo "Generating latest SDK for $(service)"; \
+		bash ./scripts/gen-go-service-sdk.sh $(service); \
+	fi
+
+	@if [ $(commit) = true ]; then \
+		./scripts/open-pr.sh $(service); \
+	fi
