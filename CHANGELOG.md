@@ -1,3 +1,8 @@
+## 0.11.0 (July 30, 2021)
+
+FEATURES:
+* Add SDK support for a preview version (2021-04-30) of cloud-packer-service (#29)
+
 ## 0.10.0 (June 23, 2021)
 
 FEATURES:
