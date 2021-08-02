@@ -1,3 +1,7 @@
+## 0.12.0 (August 02, 2021)
+
+* Update cloud-vault-service/preview/2020-11-25 to add Starter tier ([#31](https://github.com/hashicorp/hcp-sdk-go/pull/31))
+
 ## 0.11.0 (July 30, 2021)
 
 FEATURES:
