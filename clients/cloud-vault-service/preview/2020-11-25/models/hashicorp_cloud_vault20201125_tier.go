@@ -31,6 +31,9 @@ const (
 
 	// HashicorpCloudVault20201125TierSTANDARDLARGE captures enum value "STANDARD_LARGE"
 	HashicorpCloudVault20201125TierSTANDARDLARGE HashicorpCloudVault20201125Tier = "STANDARD_LARGE"
+
+	// HashicorpCloudVault20201125TierSTARTERSMALL captures enum value "STARTER_SMALL"
+	HashicorpCloudVault20201125TierSTARTERSMALL HashicorpCloudVault20201125Tier = "STARTER_SMALL"
 )
 
 // for schema
@@ -38,7 +41,7 @@ var hashicorpCloudVault20201125TierEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVault20201125Tier
-	if err := json.Unmarshal([]byte(`["DEV","STANDARD_SMALL","STANDARD_MEDIUM","STANDARD_LARGE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["DEV","STANDARD_SMALL","STANDARD_MEDIUM","STANDARD_LARGE","STARTER_SMALL"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -59,11 +59,15 @@ type ClientService interface {
 
 	Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWriter) (*UnsealOK, error)
 
+	Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateOK, error)
+
 	UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateCORSConfigOK, error)
 
 	UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePublicIpsOK, error)
 
 	UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateSnapshotOK, error)
+
+	UpdateVersion(params *UpdateVersionParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateVersionOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -647,6 +651,40 @@ func (a *Client) Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
+  Update update API
+*/
+func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "Update",
+		Method:             "PATCH",
+		PathPattern:        "/vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
   UpdateCORSConfig update c o r s config API
 */
 func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateCORSConfigOK, error) {
@@ -745,6 +783,40 @@ func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.C
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateSnapshotDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  UpdateVersion update version API
+*/
+func (a *Client) UpdateVersion(params *UpdateVersionParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateVersionParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "UpdateVersion",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/{version}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateVersionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
