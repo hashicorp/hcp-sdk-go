@@ -16,6 +16,9 @@ import (
 // swagger:model hashicorp.cloud.vault_20201125.InputClusterConfig
 type HashicorpCloudVault20201125InputClusterConfig struct {
 
+	// metrics_config is the configuration settings for exporting Vault's observability information
+	MetricsConfig *HashicorpCloudVault20201125ObservabilityConfig `json:"metrics_config,omitempty"`
+
 	// network_config is the network configuration for the cluster
 	NetworkConfig *HashicorpCloudVault20201125InputNetworkConfig `json:"network_config,omitempty"`
 
@@ -29,6 +32,10 @@ type HashicorpCloudVault20201125InputClusterConfig struct {
 // Validate validates this hashicorp cloud vault 20201125 input cluster config
 func (m *HashicorpCloudVault20201125InputClusterConfig) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateMetricsConfig(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateNetworkConfig(formats); err != nil {
 		res = append(res, err)
@@ -45,6 +52,24 @@ func (m *HashicorpCloudVault20201125InputClusterConfig) Validate(formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputClusterConfig) validateMetricsConfig(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.MetricsConfig) { // not required
+		return nil
+	}
+
+	if m.MetricsConfig != nil {
+		if err := m.MetricsConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metrics_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
