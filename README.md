@@ -56,7 +56,7 @@ Requirements:
 - must be an internal Hashicorp employee
 - `hcloud` ([install instructions](https://github.com/hashicorp/hcloud#installation))
 - `gh` (`brew install gh`)
-- GITHUB_TOKEN with `repo` permission ([how to create a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token))
+- GITHUB_TOKEN with `repo` permission and SSO enabled ([how to create a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token))
 
 The `make sdk/update` command will:
 
