@@ -20,7 +20,7 @@ import (
 type HashicorpCloudPackerListIterationsResponse struct {
 
 	// iterations
-	Iterations []*HashicorpCloudPackerIteration `json:"iterations"`
+	Iterations []*HashicorpCloudPackerIterationforList `json:"iterations"`
 
 	// pagination
 	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
