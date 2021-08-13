@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-set -x
-
 # This script regenerates the Go SDK for a given HCP service ($1).
 
 # The steps are:
