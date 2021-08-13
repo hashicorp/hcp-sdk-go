@@ -44,6 +44,11 @@ commit=false
 
 .PHONY: sdk/update # service=cloud-foo-service commit=true/false
 sdk/update:
+	@if [ -z $(GITHUB_TOKEN) ]; then \
+		echo "ERROR: GITHUB_TOKEN is not set. Please ensure the token has 'repo' access and is SSO enabled." >&2; \
+  		exit 1; \
+	fi
+
 	@if [ -z $(service) ]; then \
 		echo "ERROR: No service argument provided, please provide in the format 'service=...'" >&2; \
   		exit 1; \
