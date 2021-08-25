@@ -47,7 +47,7 @@ func NewGetOK() *GetOK {
 	return &GetOK{}
 }
 
-/*GetOK handles this case with default header values.
+/* GetOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type GetOK struct {
 func (o *GetOK) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}][%d] getOK  %+v", 200, o.Payload)
 }
-
 func (o *GetOK) GetPayload() *models.HashicorpCloudConsul20200826GetResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewGetDefault(code int) *GetDefault {
 	}
 }
 
-/*GetDefault handles this case with default header values.
+/* GetDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *GetDefault) Code() int {
 func (o *GetDefault) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}][%d] Get default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *GetDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

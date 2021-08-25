@@ -1,0 +1,1784 @@
+{
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "API for managing Consul clusters.",
+        "title": "HashiCorp Cloud Platform Consul",
+        "version": "2020-08-26"
+    },
+    "host": "api.cloud.hashicorp.com",
+    "paths": {
+        "/consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters": {
+            "post": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "Create creates a new HCP Consul cluster.",
+                "operationId": "Create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "cluster.location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "cluster.location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.CreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.CreateResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}": {
+            "patch": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "Update updates the properties of an existing HCP Consul cluster.",
+                "operationId": "Update",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "cluster.location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "cluster.location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "id is ID of the Consul cluster.",
+                        "name": "cluster.id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "cluster is the complete cluster resource to be updated.",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Cluster"
+                        }
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "The set of field mask paths.",
+                        "name": "update_mask.paths",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.UpdateResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters": {
+            "get": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "List lists all HCP Consul clusters.",
+                "operationId": "List",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\").",
+                        "name": "location.region.provider",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "region is the cloud region (\"us-west1\", \"us-east1\").",
+                        "name": "location.region.region",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "The max number of results per page that should be returned. If the number\nof available results is larger than `page_size`, a `next_page_token` is\nreturned which can be used to get the next page of results in subsequent\nrequests. A value of zero will cause `page_size` to be defaulted.",
+                        "name": "pagination.page_size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Specifies a page token to use to retrieve the next page. Set this to the\n`next_page_token` returned by previous list requests to get the next page of\nresults. If set, `previous_page_token` must not be set.",
+                        "name": "pagination.next_page_token",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Specifies a page token to use to retrieve the previous page. Set this to\nthe `previous_page_token` returned by previous list requests to get the\nprevious page of results. If set, `next_page_token` must not be set.",
+                        "name": "pagination.previous_page_token",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.ListResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/restore": {
+            "post": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "RestoreSnapshot restores a snapshot on a given cluster asynchronously.",
+                "operationId": "RestoreSnapshot",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "cluster_id represents the cluster to restore to.",
+                        "name": "cluster_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.RestoreSnapshotRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.RestoreSnapshotResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}": {
+            "get": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "Get reads a single HCP Consul cluster.",
+                "operationId": "Get",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "id is the unique ID of the HCC cluster to get",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\").",
+                        "name": "location.region.provider",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "region is the cloud region (\"us-west1\", \"us-east1\").",
+                        "name": "location.region.region",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.GetResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "Delete deletes the specified HCP Consul cluster.",
+                "operationId": "Delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "id is the unique ID of the HCC cluster to get",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\").",
+                        "name": "location.region.provider",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "region is the cloud region (\"us-west1\", \"us-east1\").",
+                        "name": "location.region.region",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.DeleteResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/client-config": {
+            "get": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "GetClientConfigFiles returns the config files for a Consul agent running in\nclient mode. The files are base64-encoded.",
+                "operationId": "GetClientConfig",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "id is the unique ID of the HCP Consul cluster to get",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\").",
+                        "name": "location.region.provider",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "region is the cloud region (\"us-west1\", \"us-east1\").",
+                        "name": "location.region.region",
+                        "in": "query"
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "bundle asks the service to respond with a file bundle as a zip archive.",
+                        "name": "bundle",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.GetClientConfigResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/master-acl-tokens": {
+            "post": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "CreateCustomerMasterACLToken creates a new master ACL token for the customer\non the specified cluster. External clients will invoke this endpoint to re-generate\nnew master tokens.",
+                "operationId": "CreateCustomerMasterACLToken",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "id is the ID of the cluster to create a token on.",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.CreateCustomerMasterACLTokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.CreateCustomerMasterACLTokenResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/upgrade-versions": {
+            "get": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "ListUpgradeVersions returns the versions available for this Consul cluster to upgrade to.",
+                "operationId": "ListUpgradeVersions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "id of the Consul cluster to list versions for.",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\").",
+                        "name": "location.region.provider",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "region is the cloud region (\"us-west1\", \"us-east1\").",
+                        "name": "location.region.region",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.ListUpgradeVersionsResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}": {
+            "get": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "GetSnapshot retrieves an existing snapshot.",
+                "operationId": "GetSnapshot",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "snapshot_id represents the snapshot to get.",
+                        "name": "snapshot_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\").",
+                        "name": "location.region.provider",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "region is the cloud region (\"us-west1\", \"us-east1\").",
+                        "name": "location.region.region",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.GetSnapshotResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "DeleteSnapshot removes the snapshot from storage asynchronously.",
+                "operationId": "DeleteSnapshot",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "snapshot_id represents the snapshot to delete.",
+                        "name": "snapshot_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\").",
+                        "name": "location.region.provider",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "region is the cloud region (\"us-west1\", \"us-east1\").",
+                        "name": "location.region.region",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.DeleteSnapshotResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/versions": {
+            "get": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "ListVersions returns the versions available for this org and project.",
+                "operationId": "ListVersions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\").",
+                        "name": "location.region.provider",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "region is the cloud region (\"us-west1\", \"us-east1\").",
+                        "name": "location.region.region",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.ListVersionsResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots": {
+            "get": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "ListSnapshots lists snapshots.",
+                "operationId": "ListSnapshots",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "resource.location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "resource.location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "type is the unique type of the resource. Each service publishes a\nunique set of types. The type value is recommended to be formatted\nin \"\u003corg\u003e.\u003ctype\u003e\" such as \"hashicorp.hvn\". This is to prevent conflicts\nin the future, but any string value will work.",
+                        "name": "resource.type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id is the identifier for this resource.",
+                        "name": "resource.id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "uuid is the unique UUID for this resource.",
+                        "name": "resource.uuid",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\").",
+                        "name": "resource.location.region.provider",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "region is the cloud region (\"us-west1\", \"us-east1\").",
+                        "name": "resource.location.region.region",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "description is a human-friendly description for this link. This is\nused primarily for informational purposes such as error messages.",
+                        "name": "resource.description",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "The max number of results per page that should be returned. If the number\nof available results is larger than `page_size`, a `next_page_token` is\nreturned which can be used to get the next page of results in subsequent\nrequests. A value of zero will cause `page_size` to be defaulted.",
+                        "name": "pagination.page_size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Specifies a page token to use to retrieve the next page. Set this to the\n`next_page_token` returned by previous list requests to get the next page of\nresults. If set, `previous_page_token` must not be set.",
+                        "name": "pagination.next_page_token",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Specifies a page token to use to retrieve the previous page. Set this to\nthe `previous_page_token` returned by previous list requests to get the\nprevious page of results. If set, `next_page_token` must not be set.",
+                        "name": "pagination.previous_page_token",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.ListSnapshotsResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "CreateSnapshot takes a new snapshot asynchronously.",
+                "operationId": "CreateSnapshot",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "resource.location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "resource.location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.CreateSnapshotRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.CreateSnapshotResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.id}": {
+            "patch": {
+                "description": "Right now only the name can be changed.",
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "UpdateSnapshot updates an existing snapshot.",
+                "operationId": "UpdateSnapshot",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "snapshot.location.organization_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "snapshot.location.project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "id is the snapshot’s ID.",
+                        "name": "snapshot.id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "snapshot contains the fields to update.\n\nSupported fields: name",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Snapshot"
+                        }
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "The set of field mask paths.",
+                        "name": "mask.paths",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.UpdateSnapshotResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/consul/2020-08-26/versions": {
+            "get": {
+                "tags": [
+                    "ConsulService"
+                ],
+                "summary": "ListVersions returns the versions available for this org and project.",
+                "operationId": "ListVersions2",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "organization_id is the id of the organization.",
+                        "name": "location.organization_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "project_id is the projects id.",
+                        "name": "location.project_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\").",
+                        "name": "location.region.provider",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "region is the cloud region (\"us-west1\", \"us-east1\").",
+                        "name": "location.region.region",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/hashicorp.cloud.consul_20200826.ListVersionsResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/grpc.gateway.runtime.Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "google.protobuf.Any": {
+            "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := ptypes.MarshalAny(foo)\n     ...\n     foo := \u0026pb.Foo{}\n     if err := ptypes.UnmarshalAny(any, foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }",
+            "type": "object",
+            "properties": {
+                "type_url": {
+                    "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                    "type": "string",
+                    "format": "byte"
+                }
+            },
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "GoogleProtobufAny"
+            }
+        },
+        "google.protobuf.FieldMask": {
+            "description": "paths: \"f.a\"\n    paths: \"f.b.d\"\n\nHere `f` represents a field in some root message, `a` and `b`\nfields in the message found in `f`, and `d` a field found in the\nmessage in `f.b`.\n\nField masks are used to specify a subset of fields that should be\nreturned by a get operation or modified by an update operation.\nField masks also have a custom JSON encoding (see below).\n\n# Field Masks in Projections\n\nWhen used in the context of a projection, a response message or\nsub-message is filtered by the API to only contain those fields as\nspecified in the mask. For example, if the mask in the previous\nexample is applied to a response message as follows:\n\n    f {\n      a : 22\n      b {\n        d : 1\n        x : 2\n      }\n      y : 13\n    }\n    z: 8\n\nThe result will not contain specific values for fields x,y and z\n(their value will be set to the default, and omitted in proto text\noutput):\n\n\n    f {\n      a : 22\n      b {\n        d : 1\n      }\n    }\n\nA repeated field is not allowed except at the last position of a\npaths string.\n\nIf a FieldMask object is not present in a get operation, the\noperation applies to all fields (as if a FieldMask of all fields\nhad been specified).\n\nNote that a field mask does not necessarily apply to the\ntop-level response message. In case of a REST get operation, the\nfield mask applies directly to the response, but in case of a REST\nlist operation, the mask instead applies to each individual message\nin the returned resource list. In case of a REST custom method,\nother definitions may be used. Where the mask applies will be\nclearly documented together with its declaration in the API.  In\nany case, the effect on the returned resource/resources is required\nbehavior for APIs.\n\n# Field Masks in Update Operations\n\nA field mask in update operations specifies which fields of the\ntargeted resource are going to be updated. The API is required\nto only change the values of the fields as specified in the mask\nand leave the others untouched. If a resource is passed in to\ndescribe the updated values, the API ignores the values of all\nfields not covered by the mask.\n\nIf a repeated field is specified for an update operation, new values will\nbe appended to the existing repeated field in the target resource. Note that\na repeated field is only allowed in the last position of a `paths` string.\n\nIf a sub-message is specified in the last position of the field mask for an\nupdate operation, then new value will be merged into the existing sub-message\nin the target resource.\n\nFor example, given the target message:\n\n    f {\n      b {\n        d: 1\n        x: 2\n      }\n      c: [1]\n    }\n\nAnd an update message:\n\n    f {\n      b {\n        d: 10\n      }\n      c: [2]\n    }\n\nthen if the field mask is:\n\n paths: [\"f.b\", \"f.c\"]\n\nthen the result will be:\n\n    f {\n      b {\n        d: 10\n        x: 2\n      }\n      c: [1, 2]\n    }\n\nAn implementation may provide options to override this default behavior for\nrepeated and message fields.\n\nIn order to reset a field's value to the default, the field must\nbe in the mask and set to the default value in the provided resource.\nHence, in order to reset all fields of a resource, provide a default\ninstance of the resource and set all fields in the mask, or do\nnot provide a mask as described below.\n\nIf a field mask is not present on update, the operation applies to\nall fields (as if a field mask of all fields has been specified).\nNote that in the presence of schema evolution, this may mean that\nfields the client does not know and has therefore not filled into\nthe request will be reset to their default. If this is unwanted\nbehavior, a specific service may require a client to always specify\na field mask, producing an error if not.\n\nAs with get operations, the location of the resource which\ndescribes the updated values in the request message depends on the\noperation kind. In any case, the effect of the field mask is\nrequired to be honored by the API.\n\n## Considerations for HTTP REST\n\nThe HTTP kind of an update operation which uses a field mask must\nbe set to PATCH instead of PUT in order to satisfy HTTP semantics\n(PUT must only be used for full updates).\n\n# JSON Encoding of Field Masks\n\nIn JSON, a field mask is encoded as a single string where paths are\nseparated by a comma. Fields name in each path are converted\nto/from lower-camel naming conventions.\n\nAs an example, consider the following message declarations:\n\n    message Profile {\n      User user = 1;\n      Photo photo = 2;\n    }\n    message User {\n      string display_name = 1;\n      string address = 2;\n    }\n\nIn proto a field mask for `Profile` may look as such:\n\n    mask {\n      paths: \"user.display_name\"\n      paths: \"photo\"\n    }\n\nIn JSON, the same mask is represented as below:\n\n    {\n      mask: \"user.displayName,photo\"\n    }\n\n# Field Masks and Oneof Fields\n\nField masks treat fields in oneofs just as regular fields. Consider the\nfollowing message:\n\n    message SampleMessage {\n      oneof test_oneof {\n        string name = 4;\n        SubMessage sub_message = 9;\n      }\n    }\n\nThe field mask can be:\n\n    mask {\n      paths: \"name\"\n    }\n\nOr:\n\n    mask {\n      paths: \"sub_message\"\n    }\n\nNote that oneof type names (\"test_oneof\" in this case) cannot be used in\npaths.\n\n## Field Mask Verification\n\nThe implementation of any API method which has a FieldMask type field in the\nrequest should verify the included field paths, and return an\n`INVALID_ARGUMENT` error if any path is duplicated or unmappable.",
+            "type": "object",
+            "title": "`FieldMask` represents a set of symbolic field paths, for example:",
+            "properties": {
+                "paths": {
+                    "description": "The set of field mask paths.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "GoogleProtobufFieldMask"
+            }
+        },
+        "google.rpc.Status": {
+            "description": "- Simple to use and understand for most users\n- Flexible enough to meet unexpected needs\n\n# Overview\n\nThe `Status` message contains three pieces of data: error code, error\nmessage, and error details. The error code should be an enum value of\n[google.rpc.Code][google.rpc.Code], but it may accept additional error codes\nif needed.  The error message should be a developer-facing English message\nthat helps developers *understand* and *resolve* the error. If a localized\nuser-facing error message is needed, put the localized message in the error\ndetails or localize it in the client. The optional error details may contain\narbitrary information about the error. There is a predefined set of error\ndetail types in the package `google.rpc` that can be used for common error\nconditions.\n\n# Language mapping\n\nThe `Status` message is the logical representation of the error model, but it\nis not necessarily the actual wire format. When the `Status` message is\nexposed in different client libraries and different wire protocols, it can be\nmapped differently. For example, it will likely be mapped to some exceptions\nin Java, but more likely mapped to some error codes in C.\n\n# Other uses\n\nThe error model and the `Status` message can be used in a variety of\nenvironments, either with or without APIs, to provide a\nconsistent developer experience across different environments.\n\nExample uses of this error model include:\n\n- Partial errors. If a service needs to return partial errors to the client,\n    it may embed the `Status` in the normal response to indicate the partial\n    errors.\n\n- Workflow errors. A typical workflow has multiple steps. Each step may\n    have a `Status` message for error reporting.\n\n- Batch operations. If a client uses batch request and batch response, the\n    `Status` message should be used directly inside batch response, one for\n    each error sub-response.\n\n- Asynchronous operations. If an API call embeds asynchronous operation\n    results in its response, the status of those operations should be\n    represented directly using the `Status` message.\n\n- Logging. If some API errors are stored in logs, the message `Status` could\n    be used directly after any stripping needed for security/privacy reasons.",
+            "type": "object",
+            "title": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). The error model is designed to be:",
+            "properties": {
+                "code": {
+                    "description": "The status code, which should be an enum value of\n[google.rpc.Code][google.rpc.Code].",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "details": {
+                    "description": "A list of messages that carry the error details.  There is a common set of\nmessage types for APIs to use.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/google.protobuf.Any"
+                    }
+                },
+                "message": {
+                    "description": "A developer-facing error message, which should be in English. Any\nuser-facing error message should be localized and sent in the\n[google.rpc.Status.details][google.rpc.Status.details] field, or localized\nby the client.",
+                    "type": "string"
+                }
+            },
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "GoogleRpcStatus"
+            }
+        },
+        "grpc.gateway.runtime.Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/google.protobuf.Any"
+                    }
+                },
+                "error": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "GrpcGatewayRuntimeError"
+            }
+        },
+        "hashicorp.cloud.common.PaginationRequest": {
+            "description": "PaginationRequest are the parameters for a paginated list request.",
+            "type": "object",
+            "properties": {
+                "next_page_token": {
+                    "description": "Specifies a page token to use to retrieve the next page. Set this to the\n`next_page_token` returned by previous list requests to get the next page of\nresults. If set, `previous_page_token` must not be set.",
+                    "type": "string"
+                },
+                "page_size": {
+                    "description": "The max number of results per page that should be returned. If the number\nof available results is larger than `page_size`, a `next_page_token` is\nreturned which can be used to get the next page of results in subsequent\nrequests. A value of zero will cause `page_size` to be defaulted.",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "previous_page_token": {
+                    "description": "Specifies a page token to use to retrieve the previous page. Set this to\nthe `previous_page_token` returned by previous list requests to get the\nprevious page of results. If set, `next_page_token` must not be set.",
+                    "type": "string"
+                }
+            },
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "HashicorpCloudCommonPaginationRequest"
+            }
+        },
+        "hashicorp.cloud.common.PaginationResponse": {
+            "description": "PaginationResponse is the response holding the page tokens for a paginated\nlist response.",
+            "type": "object",
+            "properties": {
+                "next_page_token": {
+                    "description": "This token allows you to get the next page of results for list requests.\nIf the number of results is larger than `page_size`, use the\n`next_page_token` as a value for the query parameter `next_page_token` in\nthe next request. The value will become empty when there are no more pages.",
+                    "type": "string"
+                },
+                "previous_page_token": {
+                    "description": "This token allows you to get the previous page of results for list\nrequests. If the number of results is larger than `page_size`, use the\n`previous_page_token` as a value for the query parameter\n`previous_page_token` in the next request. The value will become empty when\nthere are no more pages.",
+                    "type": "string"
+                }
+            },
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "HashicorpCloudCommonPaginationResponse"
+            }
+        },
+        "hashicorp.cloud.consul_20200826.ACLToken": {
+            "description": "ACLToken is represents a single ACL token for a cluster.",
+            "type": "object",
+            "properties": {
+                "accessor_id": {
+                    "description": "accessor_id is the Consul Accessor ID for this ACL token.",
+                    "type": "string"
+                },
+                "secret_id": {
+                    "description": "secret_id is the Consul Secret ID for this ACL Token, it is sensitive.",
+                    "type": "string"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.CapacityConfig": {
+            "description": "CapacityConfig configures capacity settings like number of nodes and vm sizes.",
+            "type": "object",
+            "properties": {
+                "num_servers": {
+                    "description": "num_servers is the number of nodes this Consul cluster should have.",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.Cluster": {
+            "description": "Cluster represents a single Consul cluster.",
+            "type": "object",
+            "properties": {
+                "config": {
+                    "description": "config holds the configuration of the cluster.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.ClusterConfig"
+                },
+                "consul_version": {
+                    "description": "consul_version is the current Consul version the server nodes are running.",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at is the timestamp of when the cluster was first created.\nOutput only.",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "dns_names": {
+                    "description": "dns_names holds the cluster's public and private DNS names.\nOutput only.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Cluster.DNSNames",
+                    "readOnly": true
+                },
+                "id": {
+                    "description": "id is ID of the Consul cluster.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "location is the location of the cluster.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Location"
+                },
+                "state": {
+                    "description": "state is the current state of the cluster.\nOutput only.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Cluster.State",
+                    "readOnly": true
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.Cluster.DNSNames": {
+            "description": "DNSNames holds all of the cluster's DNS names.",
+            "type": "object",
+            "properties": {
+                "private": {
+                    "description": "private is the DNS name pointing to the cluster's private IP addresses.",
+                    "type": "string"
+                },
+                "public": {
+                    "description": "public is the DNS name pointing to the cluster's public IP addresses.",
+                    "type": "string"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.Cluster.State": {
+            "description": "State is the state of the Consul cluster. Note that this state\nrepresents the abstract Consul cluster itself, not necessarily whether\nConsul cluster is currently available or not.\n\n - UNSET: UNSET is a sentinel zero value so that an uninitialized value can be\ndetected.\n - PENDING: PENDING is the state the cluster is in while it is waiting to be created.\n - CREATING: CREATING is the state the cluster is in while it is being provisioned for\nthe first time.\n - RUNNING: RUNNING is the steady state while the cluster is running.\n - FAILED: FAILED is a failure state in which the cluster is unavailable and may\nrequired an operator restore action to recover.\n - UPDATING: UPDATING is the state the cluster is in while undergoing a version\nupdate.\n - RESTORING: RESTORING is the state the cluster is in while restoring from a snapshot.\n - DELETING: DELETING is the state the cluster is in while it is being de-provisioned.\n - DELETED: DELETED is the state the cluster is in when it has been de-provisioned. At\nthis point, the cluster is eligible for garbage collection.",
+            "type": "string",
+            "default": "UNSET",
+            "enum": [
+                "UNSET",
+                "PENDING",
+                "CREATING",
+                "RUNNING",
+                "FAILED",
+                "UPDATING",
+                "RESTORING",
+                "DELETING",
+                "DELETED"
+            ]
+        },
+        "hashicorp.cloud.consul_20200826.ClusterConfig": {
+            "description": "ClusterConfig holds the configuration for a Consul cluster.",
+            "type": "object",
+            "properties": {
+                "capacity_config": {
+                    "description": "capacity_config contains the configuration for the cluster size settings.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.CapacityConfig"
+                },
+                "consul_config": {
+                    "description": "consul_config allows altering certain fields relating to the Consul\ncluster’s configuration.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.ConsulConfig"
+                },
+                "maintenance_config": {
+                    "description": "maintenance_config contains the configuration for maintenance events such as\nauto upgrades.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.MaintenanceConfig"
+                },
+                "network_config": {
+                    "description": "NetworkConfig contains the network to launch the Consul cluster into.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.NetworkConfig"
+                },
+                "snapshot_config": {
+                    "description": "snapshot_config contains the configuration for how often to snapshot and\nhow many to maintain.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.SnapshotConfig"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.ConsulConfig": {
+            "description": "ConsulConfig exposes user settable configurations for a Consul cluster.",
+            "type": "object",
+            "properties": {
+                "connect_enabled": {
+                    "description": "connect_enabled toggles Consul Connect on the Consul servers.",
+                    "type": "boolean"
+                },
+                "datacenter": {
+                    "description": "datacenter sets the datacenter the Consul servers will be running in. If\nnot set, a default value will be used.\n\nhttps://www.consul.io/docs/agent/options.html#datacenter",
+                    "type": "string"
+                },
+                "primary": {
+                    "description": "primary contains a link to the primary consul cluster in a federation.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Link"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.CreateCustomerMasterACLTokenRequest": {
+            "description": "CreateCustomerMasterACLTokenRequest is used to create a master token on a specific cluster.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "id is the ID of the cluster to create a token on.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "location is the location of the cluster.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Location"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.CreateCustomerMasterACLTokenResponse": {
+            "description": "CreateCustomerMasterACLTokenResponse contains the newly created customer master ACL token.",
+            "type": "object",
+            "properties": {
+                "acl_token": {
+                    "description": "acl_token is the newly created master token.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.ACLToken"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.CreateRequest": {
+            "type": "object",
+            "properties": {
+                "cluster": {
+                    "description": "Cluster is the Consul Cluster to create.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Cluster"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.CreateResponse": {
+            "type": "object",
+            "properties": {
+                "cluster": {
+                    "description": "cluster is the newly created Consul cluster.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Cluster"
+                },
+                "operation": {
+                    "description": "operation tracks the asynchronous creation of the Consul cluster.",
+                    "$ref": "#/definitions/hashicorp.cloud.operation.Operation"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.CreateSnapshotRequest": {
+            "description": "CreateSnapshotRequest is a request to create a new snapshot.",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "name identifies the name of the snapshot.",
+                    "type": "string"
+                },
+                "resource": {
+                    "description": "resource identifies what resource to take a snapshot from.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Link"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.CreateSnapshotResponse": {
+            "description": "CreateSnapshotResponse is a response from creating a snapshot.",
+            "type": "object",
+            "properties": {
+                "operation": {
+                    "description": "operation represents the newly created snapshot.",
+                    "$ref": "#/definitions/hashicorp.cloud.operation.Operation"
+                },
+                "snapshot_id": {
+                    "description": "snapshot_id is the identifer of the newly created snapshot.",
+                    "type": "string"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.DeleteResponse": {
+            "type": "object",
+            "properties": {
+                "operation": {
+                    "description": "operation is the operation used to track the deletion of the Consul\ncluster.",
+                    "$ref": "#/definitions/hashicorp.cloud.operation.Operation"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.DeleteSnapshotResponse": {
+            "description": "DeleteSnapshotResponse is a response to deleting a snapshot.",
+            "type": "object",
+            "properties": {
+                "operation": {
+                    "description": "operation represents the deletion of the requested snapshot.",
+                    "$ref": "#/definitions/hashicorp.cloud.operation.Operation"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.GetClientConfigResponse": {
+            "description": "GetClientConfigResponse the client config files for a Consul agent.",
+            "type": "object",
+            "properties": {
+                "ca_file": {
+                    "description": "ca_file is the body of an intermediate certificate authority file.",
+                    "type": "string",
+                    "format": "byte"
+                },
+                "consul_config_file": {
+                    "description": "consul_config_file is the body of JSON config file.",
+                    "type": "string",
+                    "format": "byte"
+                },
+                "file_bundle_zip": {
+                    "description": "file_bundle_zip is the contents of a zip archive containing the other\ntwo files, if the request specified it.",
+                    "type": "string",
+                    "format": "byte"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.GetResponse": {
+            "type": "object",
+            "properties": {
+                "cluster": {
+                    "description": "cluster is the retrieved Consul cluster.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Cluster"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.GetSnapshotResponse": {
+            "description": "GetSnapshotResponse is a response for retrieving a snapshot's information.",
+            "type": "object",
+            "properties": {
+                "snapshot": {
+                    "description": "snapshot is the requested snapshot.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Snapshot"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.ListResponse": {
+            "type": "object",
+            "properties": {
+                "clusters": {
+                    "description": "clusters are the retrieved Consul clusters.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Cluster"
+                    }
+                },
+                "pagination": {
+                    "description": "Pagination contains the pagination tokens for a subsequent request.",
+                    "$ref": "#/definitions/hashicorp.cloud.common.PaginationResponse"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.ListSnapshotsResponse": {
+            "description": "ListSnapshotsResponse is a response from listing snapshots.",
+            "type": "object",
+            "properties": {
+                "pagination": {
+                    "description": "Pagination contains the pagination tokens for a subsequent request.",
+                    "$ref": "#/definitions/hashicorp.cloud.common.PaginationResponse"
+                },
+                "snapshots": {
+                    "description": "snapshots is a list of available snapshots.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Snapshot"
+                    }
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.ListUpgradeVersionsResponse": {
+            "type": "object",
+            "properties": {
+                "versions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Version"
+                    }
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.ListVersionsResponse": {
+            "type": "object",
+            "properties": {
+                "versions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Version"
+                    }
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.MaintenanceConfig": {
+            "description": "MaintenanceConfig configures when maintenance events should be taken on the\nConsul cluster.",
+            "type": "object"
+        },
+        "hashicorp.cloud.consul_20200826.NetworkConfig": {
+            "description": "NetworkConfig configures the network of the Consul cluster.",
+            "type": "object",
+            "properties": {
+                "network": {
+                    "description": "network is the link of the HVN to launch the Consul cluster in.\nThe network cannot be updated once the cluster is created.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Link"
+                },
+                "private": {
+                    "description": "private indicates if this cluster's instances should be configured in a\nnon-externally accessible way.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.RestoreSnapshotRequest": {
+            "description": "RestoreSnapshotRequest is a request to restore a snapshot to a cluster.",
+            "type": "object",
+            "properties": {
+                "cluster_id": {
+                    "description": "cluster_id represents the cluster to restore to.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "location specifies the location to the cluster is in.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Location"
+                },
+                "snapshot": {
+                    "description": "snapshot represents the snapshot to restore.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Link"
+                },
+                "take_snapshot": {
+                    "description": "take_snapshot determines if a snapshot should be taken before performing a restore.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.RestoreSnapshotResponse": {
+            "description": "RestoreSnapshotResponse is a response to restoring a snapshot.",
+            "type": "object",
+            "properties": {
+                "operation": {
+                    "description": "operation represents the restore operation acting on the specified cluster.",
+                    "$ref": "#/definitions/hashicorp.cloud.operation.Operation"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.Snapshot": {
+            "description": "Snapshot is our representation needed to back-up a cluster.",
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "description": "created_at is the time that this snapshot was requested.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "finished_at": {
+                    "description": "finished_at is the time that this snapshot was finished.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "id": {
+                    "description": "id is the snapshot’s ID.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "location is the snapshot’s location.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Location"
+                },
+                "meta": {
+                    "description": "meta is the snapshot metadata.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Snapshot.SnapshotMeta"
+                },
+                "name": {
+                    "description": "name is the name of the snapshot.",
+                    "type": "string"
+                },
+                "resource": {
+                    "description": "resource is the resource the snapshot was taken from.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Link"
+                },
+                "running_operation_id": {
+                    "description": "running_operation_id is the ID of an operation performing work related to the current state of the snapshot.",
+                    "type": "string"
+                },
+                "self_link": {
+                    "description": "self_link is a link referring to this snapshot.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Link"
+                },
+                "state": {
+                    "description": "state represents the current status for this snapshot.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Snapshot.SnapshotState"
+                },
+                "type": {
+                    "description": "type represents the type of this snapshot.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Snapshot.SnapshotType"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.Snapshot.SnapshotMeta": {
+            "type": "object",
+            "properties": {
+                "additional_meta": {
+                    "description": "additional_meta contains additional metadata of the snapshot.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "product_version": {
+                    "description": "product_version is the version of the product of the cluster at creation.",
+                    "type": "string"
+                },
+                "restored_at": {
+                    "description": "restored_at notes the time that this snapshot was restored.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "size": {
+                    "description": "size is the size of the snapshot in bytes.",
+                    "type": "string",
+                    "format": "int64"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.Snapshot.SnapshotState": {
+            "description": "SnapshotState represents the different states a snapshot can be in.\n\n - QUEUED: QUEUED is used for snapshots that haven’t started and are waiting for a cluster operation to finish before starting.\n - CREATING: CREATING is used for snapshots that are creating.\n - CREATING_FAILED: CREATING_FAILED is used for snapshots that failed creating.\n - READY: READY is used for snapshots that are ready to be restored.\n - DELETING: DELETING is used for snapshots that are deleting.\n - DELETING_FAILED: DELETING_FAILED is used for snapshots that failed deleting.\n - RESTORING: RESTORING is used for snapshots that are being restored.\n\nProgress can be tracked using cluster operations.",
+            "type": "string",
+            "default": "STATE_UNSET",
+            "enum": [
+                "STATE_UNSET",
+                "QUEUED",
+                "CREATING",
+                "CREATING_FAILED",
+                "READY",
+                "DELETING",
+                "DELETING_FAILED",
+                "RESTORING"
+            ]
+        },
+        "hashicorp.cloud.consul_20200826.Snapshot.SnapshotType": {
+            "description": "SnapshotType represents the type of a snapshot.\n\n - AUTOMATIC: AUTOMATIC is used for snapshots generated automatically, like a snapshot before update.\n - MANUAL: MANUAL is used for snapshots that are initiated by a user's actions.\n - SCHEDULED: SCHEDULED is used for snapshots that are generated based on a schedule.",
+            "type": "string",
+            "default": "TYPE_UNSET",
+            "enum": [
+                "TYPE_UNSET",
+                "AUTOMATIC",
+                "MANUAL",
+                "SCHEDULED"
+            ]
+        },
+        "hashicorp.cloud.consul_20200826.SnapshotConfig": {
+            "description": "SnapshotConfig configures how often cluster snapshot should be taken and how\nlong they should be retained.",
+            "type": "object"
+        },
+        "hashicorp.cloud.consul_20200826.UpdateResponse": {
+            "type": "object",
+            "properties": {
+                "operation": {
+                    "description": "operation is used to track the progress of the asynchronous update.\nDepending on what was updated in the configuration the update may\nrequire deploying new server nodes which may take some time to complete.",
+                    "$ref": "#/definitions/hashicorp.cloud.operation.Operation"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.UpdateSnapshotResponse": {
+            "description": "UpdateSnapshotResponse is a response to updating a snapshot.",
+            "type": "object",
+            "properties": {
+                "snapshot": {
+                    "description": "snapshot is the updated snapshot.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Snapshot"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.Version": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "description": "status defines the version availability.",
+                    "$ref": "#/definitions/hashicorp.cloud.consul_20200826.Version.Status"
+                },
+                "version": {
+                    "description": "version is the string representation of the Consul version.",
+                    "type": "string"
+                }
+            }
+        },
+        "hashicorp.cloud.consul_20200826.Version.Status": {
+            "description": " - AVAILABLE: AVAILABLE represents a version that is generally available\nbut no longer the preferred/recommended version.\n - RECOMMENDED: RECOMMENDED represents a version that is generally available\nand recommended by HashiCorp.\n - PREVIEW: PREVIEW represents a version that is not generally available.",
+            "type": "string",
+            "default": "AVAILABLE",
+            "enum": [
+                "AVAILABLE",
+                "RECOMMENDED",
+                "PREVIEW"
+            ]
+        },
+        "hashicorp.cloud.location.Link": {
+            "description": "Link is used to uniquely reference any resource within HashiCorp Cloud.\nThis can be conceptually considered a \"foreign key\".",
+            "type": "object",
+            "properties": {
+                "description": {
+                    "description": "description is a human-friendly description for this link. This is\nused primarily for informational purposes such as error messages.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "id is the identifier for this resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "location is the location where this resource is.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Location"
+                },
+                "type": {
+                    "description": "type is the unique type of the resource. Each service publishes a\nunique set of types. The type value is recommended to be formatted\nin \"\u003corg\u003e.\u003ctype\u003e\" such as \"hashicorp.hvn\". This is to prevent conflicts\nin the future, but any string value will work.",
+                    "type": "string"
+                },
+                "uuid": {
+                    "description": "uuid is the unique UUID for this resource.",
+                    "type": "string"
+                }
+            },
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "HashicorpCloudLocationLink"
+            }
+        },
+        "hashicorp.cloud.location.Location": {
+            "description": "Location represents a target for an operation in HCP.",
+            "type": "object",
+            "properties": {
+                "organization_id": {
+                    "description": "organization_id is the id of the organization.",
+                    "type": "string"
+                },
+                "project_id": {
+                    "description": "project_id is the projects id.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "region is the region that the resource is located in. It is\noptional if the object being referenced is a global object.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Region"
+                }
+            },
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "HashicorpCloudLocationLocation"
+            }
+        },
+        "hashicorp.cloud.location.Region": {
+            "description": "Region identifies a Cloud data-plane region.",
+            "type": "object",
+            "properties": {
+                "provider": {
+                    "type": "string",
+                    "title": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")"
+                },
+                "region": {
+                    "type": "string",
+                    "title": "region is the cloud region (\"us-west1\", \"us-east1\")"
+                }
+            },
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "HashicorpCloudLocationRegion"
+            }
+        },
+        "hashicorp.cloud.operation.Operation": {
+            "description": "Operation represents a single operation.",
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "error is the error that occurred in the operation.",
+                    "$ref": "#/definitions/google.rpc.Status"
+                },
+                "id": {
+                    "description": "id is the unique ID for this operation used in other RPC calls.\nThis ID is only guaranteed to be unique within the region that\nthe operation is running in.",
+                    "type": "string"
+                },
+                "link": {
+                    "description": "Link is the resource link the operation is associated with.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Link"
+                },
+                "location": {
+                    "description": "Location is location of the resource that this operation belongs to.",
+                    "$ref": "#/definitions/hashicorp.cloud.location.Location"
+                },
+                "response": {
+                    "description": "response is the result of the operation. See the documentation for the API\ncall creating the operation to understand what the value of this is.",
+                    "$ref": "#/definitions/google.protobuf.Any"
+                },
+                "state": {
+                    "description": "state is the current state of the operation. This is a simple tri-state:\nPENDING means the operation is created but not yet started, RUNNING means\nthe operation is currently running (though it may be very long-running),\nand DONE means the operation is complete whether successfully or not.",
+                    "$ref": "#/definitions/hashicorp.cloud.operation.Operation.State"
+                }
+            },
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "HashicorpCloudOperationOperation"
+            }
+        },
+        "hashicorp.cloud.operation.Operation.State": {
+            "description": "State is one of the states that an Operation can be in.\n\nThe states are purposely coarse grained to make it easy to understand\nthe operation state machine: pending =\u003e running =\u003e done. Or pending =\u003e\nqueued =\u003e running =\u003e done. No other state transitions are possible. \nSuccess/failure can be determined based on the result oneof.",
+            "type": "string",
+            "default": "PENDING",
+            "enum": [
+                "PENDING",
+                "RUNNING",
+                "DONE",
+                "QUEUED"
+            ],
+            "x-go-type": {
+                "import": {
+                    "package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+                    "alias": "cloud"
+                },
+                "type": "HashicorpCloudOperationOperationState"
+            }
+        }
+    },
+    "securityDefinitions": {
+        "bearer": {
+            "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "security": [
+        {
+            "bearer": []
+        }
+    ]
+}
