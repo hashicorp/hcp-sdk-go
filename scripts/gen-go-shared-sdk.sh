@@ -2,26 +2,18 @@
 set -euo pipefail
 
 # This script regenerates the shared models for the HCP Go SDK.
+# It depends on pull-specs.sh to save specs in a temporary directory.
 
 # The steps are:
-# 1. Fetch the latest public shared API specs from the central spec repo.
-# 2. Remove old shared SDK.
-# 3. Iterate over each version and type of shared spec and generate the corresponding SDK. 
-# 4. Remove temporary directories.
+# 1. Remove old shared SDK.
+# 2. Iterate over each version and type of shared spec and generate the corresponding SDK. 
+# 3. Remove temporary directories.
 
 SCRIPTS_DIR=$(dirname "${BASH_SOURCE[0]}")
 
 BOLD='\033[1m'
 GREEN='\033[32m'
 NA='\033[0m' # no attributes (color or format)
-
-echo -e "Fetching latest specs for ${BOLD}cloud-shared${NA}"
-hcloud repo init \
-  --refresh \
-  --only=cloud-api
-
-rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/cloud-shared "$SCRIPTS_DIR"/../temp
-rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/external "$SCRIPTS_DIR"/../temp
 
 external_spec="$SCRIPTS_DIR"/../temp/external/external.swagger.json
 
