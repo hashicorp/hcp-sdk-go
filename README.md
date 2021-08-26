@@ -57,11 +57,12 @@ Requirements:
 - `hcloud` ([install instructions](https://github.com/hashicorp/hcloud#installation))
 - `gh` (`brew install gh`)
 - GITHUB_TOKEN with `repo` permission and SSO enabled ([how to create a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token))
+- swagger (must match version set in cloud-makefiles)
 
 The `make sdk/update` command will:
 
 1. Use the tool `hcloud` to pull temporary copies of the latest public specs from the designated HCP service
-2. Run transformations on the temporary spec copiess
+2. Run transformations on the temporary spec copies.
 3. Generate the SDK from the transformed specs.
 4. (optional) Post a PR to this repo if `commit=true` is passed
 
