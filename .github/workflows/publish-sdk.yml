@@ -7,7 +7,6 @@ on:
         service:
           description: 'The service whose SDK needs to be generated'
           required: true
-          default: 'cloud-shared'
 
 jobs:
   publish-sdk:
@@ -23,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: hashicorp/cloud-api
-          token: ${{ github.token }} # ${{ secrets.PRIVATE_GITHUB_TOKEN }}
+          token: ${{ secrets.SDK_PIPELINE_TOKEN }}
           path: cloud-api
 
       - name: Install go
@@ -42,96 +41,47 @@ jobs:
           apt-get update -y
           apt-get install -y rsync
 
-      - name: Copy latest cloud-consul-service specs # ${{ github.event.inputs.service }}
+      - name: Copy latest service specs
         env: 
-          SERVICE: cloud-consul-service # ${{ github.event.inputs.service }}
+          SERVICE: ${{ github.event.inputs.service }}
         run: |
           rsync -a $GITHUB_WORKSPACE/cloud-api/specs/"$SERVICE" $GITHUB_WORKSPACE/hcp-sdk-go/temp
           rsync -a $GITHUB_WORKSPACE/cloud-api/specs/cloud-shared $GITHUB_WORKSPACE/hcp-sdk-go/temp
           rsync -a $GITHUB_WORKSPACE/cloud-api/specs/external $GITHUB_WORKSPACE/hcp-sdk-go/temp
 
-      - name: Generate SDK for cloud-consul-service # ${{ github.event.inputs.service }}
+      - name: Generate SDK for service
         env: 
-          SERVICE: cloud-consul-service # ${{ github.event.inputs.service }} 
+          SERVICE: ${{ github.event.inputs.service }}
+        if: ${{ github.event.inputs.service != 'cloud-shared' }}
         run: |
-          generate_sdk() {
-            service=$1
-            stage=$2
-            version=$3
+          cd $GITHUB_WORKSPACE/hcp-sdk-go
+          ./scripts/gen-go-service-sdk.sh $SERVICE
+          rm -rf $GITHUB_WORKSPACE/hcp-sdk-go/temp
 
-            if [ -d "clients/$service/$stage/$version" ]; then \
-              echo "Removing original SDK from clients/$service/$stage/$version" && rm -rf "$SCRIPTS_DIR/../clients/$service/$stage/$version"; \
-            fi
-
-            echo "Creating target SDK directory: hcp-sdk-go/clients/$service/$stage/$version"
-            mkdir -p "../../../clients/$service/$stage/$version"
-
-            rel=("$version"/*.swagger.json)
-            spec="${rel[0]}"
-            target="../../../clients/$service/$stage/$version"
-
-            echo "Generating SDK for $service(stage: $stage, version: $version)"
-            swagger generate client \
-              -f "$spec" \
-              -t "$target" \
-              -q \
-              -A "$service"
-          }
-
-          cd hcp-sdk-go/temp/"$SERVICE"
-
-          transformer=../../../cmd/transform-swagger
-          shared_specs=../../../temp/cloud-shared
-          external_spec=../../../temp/external/external.swagger.json
-
-          for d in *; do
-            if [[ -d "$d" ]]; then
-              stage=$d
-
-              cd "$stage"
-            fi
-
-            for f in *; do
-              if [[ -d "$f" ]]; then
-                version=$f
-                service_spec=("$version"/*.swagger.json)
-
-                echo "Transforming specs for $SERVICE (stage: $stage, version: $version) in preparation for SDK generation"
-                go run "$transformer" \
-                  -service="${service_spec[0]}" \
-                  -shared="$shared_specs" \
-                  -external="$external_spec"
-                
-                generate_sdk "$SERVICE" "$stage" "$version"
-              fi
-            done
-          done
-
-          cd ../../..
-
-          echo "Regenerating shared external SDK models"
-          swagger generate model \
-            -f ./temp/external/external.swagger.json \
-            -t ./clients/cloud-shared/v1 \
-            -q
-
-          echo "SDK for $SERVICE generated!"
-
-          rm -rf ./temp
+      - name: Generate SDK for cloud-shared
+        env: 
+          SERVICE: ${{ github.event.inputs.service }}
+        if: ${{ github.event.inputs.service == 'cloud-shared' }}
+        run: |
+          cd $GITHUB_WORKSPACE/hcp-sdk-go
+          ./scripts/gen-go-shared-sdk.sh
+          rm -rf $GITHUB_WORKSPACE/hcp-sdk-go/temp
 
       - name: Open PR
         uses: peter-evans/create-pull-request@v3.10.1
         with:
-          token: ${{ github.token }} # ${{ secrets.PRIVATE_GITHUB_TOKEN }}
+          token: ${{ secrets.SDK_PIPELINE_TOKEN }}
           path: hcp-sdk-go
           branch: auto-update-service-sdk
-          committer: Brenna Hewer-Darroch <21015366+bcmdarroch@users.noreply.github.com>
-          commit-message: Update cloud-consul-service SDK # ${{ github.event.inputs.service }} 
-          title: '[auto] Update cloud-consul-service SDK' # ${{ github.event.inputs.service }} 
+          committer: HashiCorp Cloud Services <59096967+hashicorp-cloud@users.noreply.github.com>
+          commit-message: Update ${{ github.event.inputs.service }} SDK 
+          title: '[auto] Update ${{ github.event.inputs.service }} SDK' 
           body: |
             This is an auto-generated PR created as part of the public SDK pipeline.
 
             Changes:
-            - Pulled the latest public service SDK from cloud-consul-service 
-          # ${{ github.event.inputs.service }} 
+            - Pulled the latest public service SDK from ${{ github.event.inputs.service }}
           delete-branch: true
+
+      - name: Check outputs
+        run: echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
