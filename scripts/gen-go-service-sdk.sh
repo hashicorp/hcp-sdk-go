@@ -2,14 +2,14 @@
 set -euo pipefail
 
 # This script regenerates the Go SDK for a given HCP service ($1).
+# It depends on pull-specs.sh to save specs in a temporary directory.
 
 # The steps are:
 # 1. Remove the original SDK files for the service if they exist.
-# 2. Fetch the latest public API specs for the service from the central spec repo.
-# 3. Run temporary transformations on those specs to prepare them for SDK generation.
-# 4. Iterate over each stage and version of the service specs and generate the corresponding SDK. 
+# 2. Run temporary transformations on those specs to prepare them for SDK generation.
+# 3. Iterate over each stage and version of the service specs and generate the corresponding SDK. 
 #    (Note: Currently only the 'preview' stage is supported)
-# 5. Remove temporary directories.
+# 4. Remove temporary directories.
 
 SCRIPTS_DIR=$(dirname "${BASH_SOURCE[0]}")
 
@@ -44,16 +44,6 @@ generate_sdk() {
 # Beginning of generation script.
 service=$1
 
-echo -e "Fetching latest specs for ${BOLD}$service${NA}"
-hcloud repo init \
-  --refresh \
-  --only=cloud-api
-
-# Copy the latest service specs into a temporary directory in preparation for SDK generation.
-rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/"$service" "$SCRIPTS_DIR"/../temp
-rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/cloud-shared "$SCRIPTS_DIR"/../temp
-rsync -a "$HOME"/.local/share/hcp/repos/cloud-api/specs/external "$SCRIPTS_DIR"/../temp
-
 transformer=../../../cmd/transform-swagger
 shared_specs=../../../temp/cloud-shared
 external_spec=../../../temp/external/external.swagger.json
@@ -61,7 +51,6 @@ external_spec=../../../temp/external/external.swagger.json
 cd temp/"$service"
 
 # Iterate over each stage directory.
-# TODO: Eventually there will be specs under both preview/ and stable/ 
 for d in *; do
   if [[ -d "$d" ]]; then
     stage=$d
@@ -90,7 +79,7 @@ done
 
 # Navigate back to root.
 cd ../../..
-pwd
+
 echo -e "Regenerating shared ${BOLD}external${NA} SDK models"
 swagger generate model \
   -f ./temp/external/external.swagger.json \

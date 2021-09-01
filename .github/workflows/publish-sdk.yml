@@ -1,0 +1,88 @@
+---
+name: publish-sdk
+
+on: 
+  workflow_dispatch:
+      inputs:
+        service:
+          description: 'The service whose SDK needs to be generated'
+          required: true
+
+jobs:
+  publish-sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout hcp-sdk-go
+        uses: actions/checkout@v2
+        with:
+          ref: main
+          path: hcp-sdk-go
+
+      - name: Checkout cloud-api
+        uses: actions/checkout@v2
+        with:
+          repository: hashicorp/cloud-api
+          ref: auto-update-service-specs
+          token: ${{ secrets.SDK_PIPELINE_TOKEN }}
+          path: cloud-api
+
+      - name: Install go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.16.0'
+
+      - name: Install dependencies
+        run: |
+          version=0.25.0
+          goos=$(go env GOOS)
+          goarch="$(go env GOARCH)"
+          download_url="https://github.com/go-swagger/go-swagger/releases/download/v${version}/swagger_${goos}_${goarch}"
+          curl -o /usr/local/bin/swagger -L'#' "$download_url"
+          chmod +x /usr/local/bin/swagger
+          apt-get update -y
+          apt-get install -y rsync
+
+      - name: Copy latest service specs
+        env: 
+          SERVICE: ${{ github.event.inputs.service }}
+        run: |
+          rsync -a $GITHUB_WORKSPACE/cloud-api/specs/"$SERVICE" $GITHUB_WORKSPACE/hcp-sdk-go/temp
+          rsync -a $GITHUB_WORKSPACE/cloud-api/specs/cloud-shared $GITHUB_WORKSPACE/hcp-sdk-go/temp
+          rsync -a $GITHUB_WORKSPACE/cloud-api/specs/external $GITHUB_WORKSPACE/hcp-sdk-go/temp
+
+      - name: Generate SDK for service
+        env: 
+          SERVICE: ${{ github.event.inputs.service }}
+        if: ${{ github.event.inputs.service != 'cloud-shared' }}
+        run: |
+          cd $GITHUB_WORKSPACE/hcp-sdk-go
+          ./scripts/gen-go-service-sdk.sh $SERVICE
+          rm -rf $GITHUB_WORKSPACE/hcp-sdk-go/temp
+
+      - name: Generate SDK for cloud-shared
+        env: 
+          SERVICE: ${{ github.event.inputs.service }}
+        if: ${{ github.event.inputs.service == 'cloud-shared' }}
+        run: |
+          cd $GITHUB_WORKSPACE/hcp-sdk-go
+          ./scripts/gen-go-shared-sdk.sh
+          rm -rf $GITHUB_WORKSPACE/hcp-sdk-go/temp
+
+      - name: Open PR
+        uses: peter-evans/create-pull-request@v3.10.1
+        with:
+          token: ${{ secrets.SDK_PIPELINE_TOKEN }}
+          path: hcp-sdk-go
+          branch: auto-update-service-sdk
+          committer: HashiCorp Cloud Services <59096967+hashicorp-cloud@users.noreply.github.com>
+          commit-message: Update ${{ github.event.inputs.service }} SDK 
+          title: '[auto] Update ${{ github.event.inputs.service }} SDK' 
+          body: |
+            This is an auto-generated PR created as part of the public SDK pipeline.
+
+            Changes:
+            - Pulled the latest public service SDK from ${{ github.event.inputs.service }}
+          delete-branch: true
+
+      - name: Check outputs
+        run: echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"

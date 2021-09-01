@@ -54,6 +54,8 @@ sdk/update:
   		exit 1; \
 	fi
 
+	bash ./scripts/pull-specs.sh $(service);
+
 	@if [ $(service) = "cloud-shared" ]; then \
 		echo "Generating latest SDK for cloud-shared"; \
 		bash ./scripts/gen-go-shared-sdk.sh $(service); \
