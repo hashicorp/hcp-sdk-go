@@ -22,10 +22,6 @@ generate_sdk() {
   stage=$2
   version=$3
 
-  if [ -d "clients/$service/$stage/$version" ]; then \
-    echo "Removing original SDK from clients/$service/$stage/$version" && rm -rf "$SCRIPTS_DIR/../clients/$service/$stage/$version"; \
-  fi
-
   echo -e "Creating target SDK directory: ${BOLD}hcp-sdk-go/clients/$service/$stage/$version${NA}"
   mkdir -p "../../../clients/$service/$stage/$version"
 
@@ -43,6 +39,10 @@ generate_sdk() {
 
 # Beginning of generation script.
 service=$1
+
+if [ -d "clients/$service" ]; then \
+  echo "Removing original SDK from clients/$service" && rm -rf "$SCRIPTS_DIR/../clients/$service"; \
+fi
 
 transformer=../../../cmd/transform-swagger
 shared_specs=../../../temp/cloud-shared
@@ -75,10 +75,12 @@ for d in *; do
       generate_sdk "$service" "$stage" "$version"
     fi
   done
+
+  cd ..
 done
 
 # Navigate back to root.
-cd ../../..
+cd ../..
 
 echo -e "Regenerating shared ${BOLD}external${NA} SDK models"
 swagger generate model \

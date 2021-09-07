@@ -69,6 +69,7 @@ jobs:
           rm -rf $GITHUB_WORKSPACE/hcp-sdk-go/temp
 
       - name: Open PR
+        id: pr
         uses: peter-evans/create-pull-request@v3.10.1
         with:
           token: ${{ secrets.SDK_PIPELINE_TOKEN }}
@@ -84,5 +85,6 @@ jobs:
             - Pulled the latest public service SDK from ${{ github.event.inputs.service }}
           delete-branch: true
 
-      - name: Check outputs
-        run: echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+      - name: Verify PR created
+        run:  |
+          echo "Pull Request URL - ${{ steps.pr.outputs.pull-request-url }}" || exit 1
