@@ -85,6 +85,8 @@ jobs:
             - Pulled the latest public service SDK from ${{ github.event.inputs.service }}
           delete-branch: true
 
+      # The Open PR action won't fail if no PR is opened, so this step verifies that a PR was actually created.
       - name: Verify PR created
         run:  |
-          echo "Pull Request URL - ${{ steps.pr.outputs.pull-request-url }}" || exit 1
+          pr="${{ steps.pr.outputs.pull-request-url }}"
+          [[ ! -z "$pr" ]] && echo "Pull Request URL - $pr" || exit 1
