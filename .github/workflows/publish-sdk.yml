@@ -23,7 +23,7 @@ jobs:
         with:
           repository: hashicorp/cloud-api
           ref: auto-update-service-specs
-          token: ${{ secrets.SDK_PIPELINE_TOKEN }}
+          token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
           path: cloud-api
 
       - name: Install go
@@ -72,7 +72,7 @@ jobs:
         id: pr
         uses: peter-evans/create-pull-request@v3.10.1
         with:
-          token: ${{ secrets.SDK_PIPELINE_TOKEN }}
+          token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
           path: hcp-sdk-go
           branch: auto-update-service-sdk
           committer: HashiCorp Cloud Services <59096967+hashicorp-cloud@users.noreply.github.com>
@@ -85,6 +85,8 @@ jobs:
             - Pulled the latest public service SDK from ${{ github.event.inputs.service }}
           delete-branch: true
 
+      # The Open PR action won't fail if no PR is opened, so this step verifies that a PR was actually created.
       - name: Verify PR created
         run:  |
-          echo "Pull Request URL - ${{ steps.pr.outputs.pull-request-url }}" || exit 1
+          pr="${{ steps.pr.outputs.pull-request-url }}"
+          [[ ! -z "$pr" ]] && echo "Pull Request URL - $pr" || exit 1
