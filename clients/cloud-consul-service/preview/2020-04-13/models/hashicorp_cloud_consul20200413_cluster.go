@@ -13,27 +13,20 @@ import (
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudConsul20210204Cluster Cluster represents a single Consul cluster.
+// HashicorpCloudConsul20200413Cluster Cluster represents a single Consul cluster.
 //
-// swagger:model hashicorp.cloud.consul_20210204.Cluster
-type HashicorpCloudConsul20210204Cluster struct {
+// swagger:model hashicorp.cloud.consul_20200413.Cluster
+type HashicorpCloudConsul20200413Cluster struct {
 
 	// config holds the configuration of the cluster.
-	Config *HashicorpCloudConsul20210204ClusterConfig `json:"config,omitempty"`
-
-	// consul_version is the current Consul version the server nodes are running.
-	ConsulVersion string `json:"consul_version,omitempty"`
+	Config *HashicorpCloudConsul20200413ClusterConfig `json:"config,omitempty"`
 
 	// created_at is the timestamp of when the cluster was first created.
-	// Output only.
-	// Read Only: true
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
 	// dns_names holds the cluster's public and private DNS names.
-	// Output only.
-	// Read Only: true
-	DNSNames *HashicorpCloudConsul20210204ClusterDNSNames `json:"dns_names,omitempty"`
+	DNSNames *HashicorpCloudConsul20200413ClusterDNSNames `json:"dns_names,omitempty"`
 
 	// id is ID of the Consul cluster.
 	ID string `json:"id,omitempty"`
@@ -41,17 +34,15 @@ type HashicorpCloudConsul20210204Cluster struct {
 	// location is the location of the cluster.
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// resource_id is the unique identifier for the consul cluster
-	ResourceID string `json:"resource_id,omitempty"`
+	// name is the name of the Consul cluster.
+	Name string `json:"name,omitempty"`
 
 	// state is the current state of the cluster.
-	// Output only.
-	// Read Only: true
-	State HashicorpCloudConsul20210204ClusterState `json:"state,omitempty"`
+	State HashicorpCloudConsul20200413ClusterState `json:"state,omitempty"`
 }
 
-// Validate validates this hashicorp cloud consul 20210204 cluster
-func (m *HashicorpCloudConsul20210204Cluster) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud consul 20200413 cluster
+func (m *HashicorpCloudConsul20200413Cluster) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateConfig(formats); err != nil {
@@ -80,7 +71,7 @@ func (m *HashicorpCloudConsul20210204Cluster) Validate(formats strfmt.Registry) 
 	return nil
 }
 
-func (m *HashicorpCloudConsul20210204Cluster) validateConfig(formats strfmt.Registry) error {
+func (m *HashicorpCloudConsul20200413Cluster) validateConfig(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Config) { // not required
 		return nil
@@ -98,7 +89,7 @@ func (m *HashicorpCloudConsul20210204Cluster) validateConfig(formats strfmt.Regi
 	return nil
 }
 
-func (m *HashicorpCloudConsul20210204Cluster) validateCreatedAt(formats strfmt.Registry) error {
+func (m *HashicorpCloudConsul20200413Cluster) validateCreatedAt(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
@@ -111,7 +102,7 @@ func (m *HashicorpCloudConsul20210204Cluster) validateCreatedAt(formats strfmt.R
 	return nil
 }
 
-func (m *HashicorpCloudConsul20210204Cluster) validateDNSNames(formats strfmt.Registry) error {
+func (m *HashicorpCloudConsul20200413Cluster) validateDNSNames(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.DNSNames) { // not required
 		return nil
@@ -129,7 +120,7 @@ func (m *HashicorpCloudConsul20210204Cluster) validateDNSNames(formats strfmt.Re
 	return nil
 }
 
-func (m *HashicorpCloudConsul20210204Cluster) validateLocation(formats strfmt.Registry) error {
+func (m *HashicorpCloudConsul20200413Cluster) validateLocation(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Location) { // not required
 		return nil
@@ -147,7 +138,7 @@ func (m *HashicorpCloudConsul20210204Cluster) validateLocation(formats strfmt.Re
 	return nil
 }
 
-func (m *HashicorpCloudConsul20210204Cluster) validateState(formats strfmt.Registry) error {
+func (m *HashicorpCloudConsul20200413Cluster) validateState(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.State) { // not required
 		return nil
@@ -164,7 +155,7 @@ func (m *HashicorpCloudConsul20210204Cluster) validateState(formats strfmt.Regis
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudConsul20210204Cluster) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudConsul20200413Cluster) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -172,8 +163,8 @@ func (m *HashicorpCloudConsul20210204Cluster) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudConsul20210204Cluster) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudConsul20210204Cluster
+func (m *HashicorpCloudConsul20200413Cluster) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudConsul20200413Cluster
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

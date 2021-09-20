@@ -19,11 +19,8 @@ import (
 // NewListVersionsParams creates a new ListVersionsParams object
 // with the default values initialized.
 func NewListVersionsParams() *ListVersionsParams {
-	var (
-		platformTypeDefault = string("NOTSET")
-	)
+	var ()
 	return &ListVersionsParams{
-		PlatformType: &platformTypeDefault,
 
 		timeout: cr.DefaultTimeout,
 	}
@@ -32,11 +29,8 @@ func NewListVersionsParams() *ListVersionsParams {
 // NewListVersionsParamsWithTimeout creates a new ListVersionsParams object
 // with the default values initialized, and the ability to set a timeout on a request
 func NewListVersionsParamsWithTimeout(timeout time.Duration) *ListVersionsParams {
-	var (
-		platformTypeDefault = string("NOTSET")
-	)
+	var ()
 	return &ListVersionsParams{
-		PlatformType: &platformTypeDefault,
 
 		timeout: timeout,
 	}
@@ -45,11 +39,8 @@ func NewListVersionsParamsWithTimeout(timeout time.Duration) *ListVersionsParams
 // NewListVersionsParamsWithContext creates a new ListVersionsParams object
 // with the default values initialized, and the ability to set a context for a request
 func NewListVersionsParamsWithContext(ctx context.Context) *ListVersionsParams {
-	var (
-		platformTypeDefault = string("NOTSET")
-	)
+	var ()
 	return &ListVersionsParams{
-		PlatformType: &platformTypeDefault,
 
 		Context: ctx,
 	}
@@ -58,12 +49,9 @@ func NewListVersionsParamsWithContext(ctx context.Context) *ListVersionsParams {
 // NewListVersionsParamsWithHTTPClient creates a new ListVersionsParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewListVersionsParamsWithHTTPClient(client *http.Client) *ListVersionsParams {
-	var (
-		platformTypeDefault = string("NOTSET")
-	)
+	var ()
 	return &ListVersionsParams{
-		PlatformType: &platformTypeDefault,
-		HTTPClient:   client,
+		HTTPClient: client,
 	}
 }
 
@@ -76,12 +64,12 @@ type ListVersionsParams struct {
 	  organization_id is the id of the organization.
 
 	*/
-	LocationOrganizationID string
+	LocationOrganizationID *string
 	/*LocationProjectID
 	  project_id is the projects id.
 
 	*/
-	LocationProjectID string
+	LocationProjectID *string
 	/*LocationRegionProvider
 	  provider is the named cloud provider ("aws", "gcp", "azure").
 
@@ -92,12 +80,6 @@ type ListVersionsParams struct {
 
 	*/
 	LocationRegionRegion *string
-	/*PlatformType
-	  PlatformType is an optional field specifying the platform (HCS, HCP or NOTSET)
-	NOTSET, the default, will return the list of versions available for HCP.
-
-	*/
-	PlatformType *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -138,24 +120,24 @@ func (o *ListVersionsParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithLocationOrganizationID adds the locationOrganizationID to the list versions params
-func (o *ListVersionsParams) WithLocationOrganizationID(locationOrganizationID string) *ListVersionsParams {
+func (o *ListVersionsParams) WithLocationOrganizationID(locationOrganizationID *string) *ListVersionsParams {
 	o.SetLocationOrganizationID(locationOrganizationID)
 	return o
 }
 
 // SetLocationOrganizationID adds the locationOrganizationId to the list versions params
-func (o *ListVersionsParams) SetLocationOrganizationID(locationOrganizationID string) {
+func (o *ListVersionsParams) SetLocationOrganizationID(locationOrganizationID *string) {
 	o.LocationOrganizationID = locationOrganizationID
 }
 
 // WithLocationProjectID adds the locationProjectID to the list versions params
-func (o *ListVersionsParams) WithLocationProjectID(locationProjectID string) *ListVersionsParams {
+func (o *ListVersionsParams) WithLocationProjectID(locationProjectID *string) *ListVersionsParams {
 	o.SetLocationProjectID(locationProjectID)
 	return o
 }
 
 // SetLocationProjectID adds the locationProjectId to the list versions params
-func (o *ListVersionsParams) SetLocationProjectID(locationProjectID string) {
+func (o *ListVersionsParams) SetLocationProjectID(locationProjectID *string) {
 	o.LocationProjectID = locationProjectID
 }
 
@@ -181,17 +163,6 @@ func (o *ListVersionsParams) SetLocationRegionRegion(locationRegionRegion *strin
 	o.LocationRegionRegion = locationRegionRegion
 }
 
-// WithPlatformType adds the platformType to the list versions params
-func (o *ListVersionsParams) WithPlatformType(platformType *string) *ListVersionsParams {
-	o.SetPlatformType(platformType)
-	return o
-}
-
-// SetPlatformType adds the platformType to the list versions params
-func (o *ListVersionsParams) SetPlatformType(platformType *string) {
-	o.PlatformType = platformType
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *ListVersionsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -200,14 +171,36 @@ func (o *ListVersionsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	}
 	var res []error
 
-	// path param location.organization_id
-	if err := r.SetPathParam("location.organization_id", o.LocationOrganizationID); err != nil {
-		return err
+	if o.LocationOrganizationID != nil {
+
+		// query param location.organization_id
+		var qrLocationOrganizationID string
+		if o.LocationOrganizationID != nil {
+			qrLocationOrganizationID = *o.LocationOrganizationID
+		}
+		qLocationOrganizationID := qrLocationOrganizationID
+		if qLocationOrganizationID != "" {
+			if err := r.SetQueryParam("location.organization_id", qLocationOrganizationID); err != nil {
+				return err
+			}
+		}
+
 	}
 
-	// path param location.project_id
-	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
-		return err
+	if o.LocationProjectID != nil {
+
+		// query param location.project_id
+		var qrLocationProjectID string
+		if o.LocationProjectID != nil {
+			qrLocationProjectID = *o.LocationProjectID
+		}
+		qLocationProjectID := qrLocationProjectID
+		if qLocationProjectID != "" {
+			if err := r.SetQueryParam("location.project_id", qLocationProjectID); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	if o.LocationRegionProvider != nil {
@@ -236,22 +229,6 @@ func (o *ListVersionsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
-				return err
-			}
-		}
-
-	}
-
-	if o.PlatformType != nil {
-
-		// query param platform_type
-		var qrPlatformType string
-		if o.PlatformType != nil {
-			qrPlatformType = *o.PlatformType
-		}
-		qPlatformType := qrPlatformType
-		if qPlatformType != "" {
-			if err := r.SetQueryParam("platform_type", qPlatformType); err != nil {
 				return err
 			}
 		}
