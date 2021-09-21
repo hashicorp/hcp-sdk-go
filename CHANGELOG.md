@@ -1,3 +1,9 @@
+## 0.13.0 (September 21, 2021)
+
+FEATURES:
+* Updated cloud-packer-service/preview/2020-04-30 to remove build information from the IterationforList response ([35](https://github.com/hashicorp/hcp-sdk-go/pull/35))
+* Update cloud-consul-service/preview/2021-02-04 to add PlatformType to ListVersions request ([#52](https://github.com/hashicorp/hcp-sdk-go/pull/52)).
+
 ## 0.12.0 (August 02, 2021)
 
 * Update cloud-vault-service/preview/2020-11-25 to add Starter tier ([#31](https://github.com/hashicorp/hcp-sdk-go/pull/31))
