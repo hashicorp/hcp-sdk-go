@@ -41,6 +41,9 @@ type HashicorpCloudConsul20210204Cluster struct {
 	// location is the location of the cluster.
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
+	// resource_id is the unique identifier for the consul cluster
+	ResourceID string `json:"resource_id,omitempty"`
+
 	// state is the current state of the cluster.
 	// Output only.
 	// Read Only: true

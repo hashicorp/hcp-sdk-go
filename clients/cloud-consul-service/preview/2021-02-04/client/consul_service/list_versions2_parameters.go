@@ -19,8 +19,11 @@ import (
 // NewListVersions2Params creates a new ListVersions2Params object
 // with the default values initialized.
 func NewListVersions2Params() *ListVersions2Params {
-	var ()
+	var (
+		platformTypeDefault = string("NOTSET")
+	)
 	return &ListVersions2Params{
+		PlatformType: &platformTypeDefault,
 
 		timeout: cr.DefaultTimeout,
 	}
@@ -29,8 +32,11 @@ func NewListVersions2Params() *ListVersions2Params {
 // NewListVersions2ParamsWithTimeout creates a new ListVersions2Params object
 // with the default values initialized, and the ability to set a timeout on a request
 func NewListVersions2ParamsWithTimeout(timeout time.Duration) *ListVersions2Params {
-	var ()
+	var (
+		platformTypeDefault = string("NOTSET")
+	)
 	return &ListVersions2Params{
+		PlatformType: &platformTypeDefault,
 
 		timeout: timeout,
 	}
@@ -39,8 +45,11 @@ func NewListVersions2ParamsWithTimeout(timeout time.Duration) *ListVersions2Para
 // NewListVersions2ParamsWithContext creates a new ListVersions2Params object
 // with the default values initialized, and the ability to set a context for a request
 func NewListVersions2ParamsWithContext(ctx context.Context) *ListVersions2Params {
-	var ()
+	var (
+		platformTypeDefault = string("NOTSET")
+	)
 	return &ListVersions2Params{
+		PlatformType: &platformTypeDefault,
 
 		Context: ctx,
 	}
@@ -49,9 +58,12 @@ func NewListVersions2ParamsWithContext(ctx context.Context) *ListVersions2Params
 // NewListVersions2ParamsWithHTTPClient creates a new ListVersions2Params object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewListVersions2ParamsWithHTTPClient(client *http.Client) *ListVersions2Params {
-	var ()
+	var (
+		platformTypeDefault = string("NOTSET")
+	)
 	return &ListVersions2Params{
-		HTTPClient: client,
+		PlatformType: &platformTypeDefault,
+		HTTPClient:   client,
 	}
 }
 
@@ -80,6 +92,12 @@ type ListVersions2Params struct {
 
 	*/
 	LocationRegionRegion *string
+	/*PlatformType
+	  PlatformType is an optional field specifying the platform (HCS, HCP or NOTSET)
+	NOTSET, the default, will return the list of versions available for HCP.
+
+	*/
+	PlatformType *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -163,6 +181,17 @@ func (o *ListVersions2Params) SetLocationRegionRegion(locationRegionRegion *stri
 	o.LocationRegionRegion = locationRegionRegion
 }
 
+// WithPlatformType adds the platformType to the list versions2 params
+func (o *ListVersions2Params) WithPlatformType(platformType *string) *ListVersions2Params {
+	o.SetPlatformType(platformType)
+	return o
+}
+
+// SetPlatformType adds the platformType to the list versions2 params
+func (o *ListVersions2Params) SetPlatformType(platformType *string) {
+	o.PlatformType = platformType
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListVersions2Params) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -229,6 +258,22 @@ func (o *ListVersions2Params) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.PlatformType != nil {
+
+		// query param platform_type
+		var qrPlatformType string
+		if o.PlatformType != nil {
+			qrPlatformType = *o.PlatformType
+		}
+		qPlatformType := qrPlatformType
+		if qPlatformType != "" {
+			if err := r.SetQueryParam("platform_type", qPlatformType); err != nil {
 				return err
 			}
 		}
