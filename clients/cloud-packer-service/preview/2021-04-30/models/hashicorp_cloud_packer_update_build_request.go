@@ -17,13 +17,14 @@ import (
 // swagger:model hashicorp.cloud.packer.UpdateBuildRequest
 type HashicorpCloudPackerUpdateBuildRequest struct {
 
-	// build ULID
+	// Unique identifier of the build that should be updated; this ID was
+	// created and set by the HCP Packer registry when the build was created.
 	BuildID string `json:"build_id,omitempty"`
 
-	// org and project info
+	// HCP-specific information like project and organization ID
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// custom build info
+	// Information about the build you are updating.
 	Updates *HashicorpCloudPackerBuildUpdates `json:"updates,omitempty"`
 }
 

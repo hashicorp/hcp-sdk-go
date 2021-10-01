@@ -16,7 +16,7 @@ import (
 // swagger:model hashicorp.cloud.packer.UpdateBucketResponse
 type HashicorpCloudPackerUpdateBucketResponse struct {
 
-	// bucket
+	// Information about the bucket that was updated.
 	Bucket *HashicorpCloudPackerBucket `json:"bucket,omitempty"`
 }
 

@@ -19,13 +19,13 @@ import (
 // swagger:model hashicorp.cloud.packer.ListBuildsResponse
 type HashicorpCloudPackerListBuildsResponse struct {
 
-	// builds
+	// The requested list of builds.
 	Builds []*HashicorpCloudPackerBuild `json:"builds"`
 
-	// location
+	// HCP-specific information like project and organization ID
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// pagination
+	// Pagination tokens for a subsequent request.
 	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 

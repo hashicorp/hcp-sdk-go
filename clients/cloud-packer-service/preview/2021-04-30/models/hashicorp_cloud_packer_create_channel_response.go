@@ -16,7 +16,7 @@ import (
 // swagger:model hashicorp.cloud.packer.CreateChannelResponse
 type HashicorpCloudPackerCreateChannelResponse struct {
 
-	// channel
+	// Information about the channel that was created.
 	Channel *HashicorpCloudPackerChannel `json:"channel,omitempty"`
 }
 

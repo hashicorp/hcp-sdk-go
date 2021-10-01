@@ -17,18 +17,23 @@ import (
 // swagger:model hashicorp.cloud.packer.CreateBuildRequest
 type HashicorpCloudPackerCreateBuildRequest struct {
 
-	// bucket info
+	// Human-readable name for the bucket.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// Custom build info.
-	// TODO: We may want to make this input object not contain the
-	// ID or ULID, since those are not user-settable.
-	Build *HashicorpCloudPackerBuild `json:"build,omitempty"`
+	// Information about the build to create.
+	Build *HashicorpCloudPackerBuildCreateBody `json:"build,omitempty"`
 
-	// Git sha to match against nascent iteration
+	// Fingerprint of the iteration. The fingerprint is set by Packer when you
+	// call `packer build`. It will most often correspond to a git commit sha,
+	// but can be manually overridden by setting the environment variable
+	// `HCP_PACKER_BUILD_FINGERPRINT`
 	Fingerprint string `json:"fingerprint,omitempty"`
 
-	// org and project info
+	// Unique identifier of the iteration that this build should be associated
+	// with.
+	IterationID string `json:"iteration_id,omitempty"`
+
+	// HCP-specific information like project and organization ID
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 }
 

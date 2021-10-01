@@ -12,27 +12,31 @@ import (
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudPackerCreateChannelRequest Image Channel Messages
+// HashicorpCloudPackerCreateChannelRequest hashicorp cloud packer create channel request
 //
 // swagger:model hashicorp.cloud.packer.CreateChannelRequest
 type HashicorpCloudPackerCreateChannelRequest struct {
 
-	// same as in Bucket
+	// Human-readable name for the bucket to associate the channel with.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// fingerprint
+	// Fingerprint of the iteration. The fingerprint is set by Packer when you
+	// call `packer build`. It will most often correspond to a git commit sha,
+	// but can be manually overridden by setting the environment variable
+	// `HCP_PACKER_BUILD_FINGERPRINT`
 	Fingerprint string `json:"fingerprint,omitempty"`
 
-	// incremental version
+	// The human-readable version number assigned to this iteration.
 	IncrementalVersion int32 `json:"incremental_version,omitempty"`
 
-	// iteration id
+	// Unique identifier of the iteration. This was created and set by the
+	// HCP Packer registry when the iteration was created.
 	IterationID string `json:"iteration_id,omitempty"`
 
-	// location
+	// HCP-specific information like project and organization ID
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// Name of this channel, something like "production".
+	// Human-readable name for the channel.
 	Slug string `json:"slug,omitempty"`
 }
 

@@ -17,16 +17,16 @@ import (
 // swagger:model hashicorp.cloud.packer.CreateBucketRequest
 type HashicorpCloudPackerCreateBucketRequest struct {
 
-	// bucket slug
+	// Human-readable name for the bucket.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// description
+	// A short description of what this bucket's images are for.
 	Description string `json:"description,omitempty"`
 
-	// labels
+	// A key:value map for custom, user-settable metadata about your bucket.
 	Labels map[string]string `json:"labels,omitempty"`
 
-	// location
+	// HCP-specific information like project and organization ID
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 }
 

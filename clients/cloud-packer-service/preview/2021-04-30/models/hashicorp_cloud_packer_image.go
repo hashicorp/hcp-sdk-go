@@ -22,13 +22,16 @@ type HashicorpCloudPackerImage struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// ULID for the image
+	// Unique identifier for the image; created and set by the HCP Packer
+	// registry when the image is created.
 	ID string `json:"id,omitempty"`
 
-	// ID or URL of the remote cloud image as given by a build.
+	// ID or URL of the remote cloud image as given by a build. For example,
+	// ami-12345
 	ImageID string `json:"image_id,omitempty"`
 
-	// region as given by `packer build`. eg. "ap-east-1"
+	// Cloud-specific region as provided by `packer build`. For example,
+	// "ap-east-1".
 	Region string `json:"region,omitempty"`
 }
 

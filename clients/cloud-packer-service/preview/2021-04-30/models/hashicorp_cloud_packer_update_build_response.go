@@ -16,7 +16,7 @@ import (
 // swagger:model hashicorp.cloud.packer.UpdateBuildResponse
 type HashicorpCloudPackerUpdateBuildResponse struct {
 
-	// custom build info
+	// Information about the build you updated.
 	Build *HashicorpCloudPackerBuild `json:"build,omitempty"`
 }
 

@@ -18,39 +18,42 @@ import (
 // swagger:model hashicorp.cloud.packer.Bucket
 type HashicorpCloudPackerBucket struct {
 
-	// created at
+	// When the bucket was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// "This image is a hardened platform for other teams"
+	// A short description of what this bucket's images are for.
 	Description string `json:"description,omitempty"`
 
-	// ULID
+	// Unique identifier of the bucket; created and set by the HCP Packer
+	// registry when the bucket is created.
 	ID string `json:"id,omitempty"`
 
-	// number of total iterations (not just versions), for UI.
+	// The total number of iterations in this bucket.
 	IterationCount string `json:"iteration_count,omitempty"`
 
-	// Slot for unstructured metadata tags
-	// for example {"repo": "https://github.com/hashicorp/common"}
+	// A key:value map for custom, user-settable metadata about your bucket.
 	Labels map[string]string `json:"labels,omitempty"`
 
-	// latest iteration regardless of completion status
+	// The bucket's most recent iteration -- this iteration may be complete or
+	// not
 	LatestIteration *HashicorpCloudPackerIteration `json:"latest_iteration,omitempty"`
 
-	// latest completed version
+	// The human-readable version of the most recent completed iteration in
+	// this bucket.
 	LatestVersion int32 `json:"latest_version,omitempty"`
 
-	// location
+	// HCP-specific information like project and organization ID
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// ["aws", "gcp"]
+	// A list of which cloud providers or other platforms the bucket contains
+	// builds for. For example, AWS, GCP, or Azure.
 	Platforms []string `json:"platforms"`
 
-	// base-ubuntu-18-secure
+	// Human-readable name for the bucket.
 	Slug string `json:"slug,omitempty"`
 
-	// updated at
+	// When the bucket was last updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }

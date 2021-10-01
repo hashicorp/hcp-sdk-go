@@ -25,71 +25,77 @@ type Client struct {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateBucket(params *CreateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*CreateBucketOK, error)
+	PackerServiceCreateBucket(params *PackerServiceCreateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateBucketOK, error)
 
-	CreateBuild(params *CreateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*CreateBuildOK, error)
+	PackerServiceCreateBuild(params *PackerServiceCreateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateBuildOK, error)
 
-	CreateChannel(params *CreateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*CreateChannelOK, error)
+	PackerServiceCreateChannel(params *PackerServiceCreateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateChannelOK, error)
 
-	CreateIteration(params *CreateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*CreateIterationOK, error)
+	PackerServiceCreateIteration(params *PackerServiceCreateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateIterationOK, error)
 
-	DeleteBucket(params *DeleteBucketParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteBucketOK, error)
+	PackerServiceCreateRegistry(params *PackerServiceCreateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateRegistryOK, error)
 
-	DeleteBuild(params *DeleteBuildParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteBuildOK, error)
+	PackerServiceDeleteBucket(params *PackerServiceDeleteBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteBucketOK, error)
 
-	DeleteChannel(params *DeleteChannelParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteChannelOK, error)
+	PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteBuildOK, error)
 
-	DeleteIteration(params *DeleteIterationParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteIterationOK, error)
+	PackerServiceDeleteChannel(params *PackerServiceDeleteChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteChannelOK, error)
 
-	GetAncestorImages(params *GetAncestorImagesParams, authInfo runtime.ClientAuthInfoWriter) (*GetAncestorImagesOK, error)
+	PackerServiceDeleteIteration(params *PackerServiceDeleteIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteIterationOK, error)
 
-	GetBucket(params *GetBucketParams, authInfo runtime.ClientAuthInfoWriter) (*GetBucketOK, error)
+	PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteRegistryOK, error)
 
-	GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInfoWriter) (*GetBuildOK, error)
+	PackerServiceGetAncestorImages(params *PackerServiceGetAncestorImagesParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetAncestorImagesOK, error)
 
-	GetChannel(params *GetChannelParams, authInfo runtime.ClientAuthInfoWriter) (*GetChannelOK, error)
+	PackerServiceGetBucket(params *PackerServiceGetBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBucketOK, error)
 
-	GetChildImages(params *GetChildImagesParams, authInfo runtime.ClientAuthInfoWriter) (*GetChildImagesOK, error)
+	PackerServiceGetBuild(params *PackerServiceGetBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBuildOK, error)
 
-	GetIteration(params *GetIterationParams, authInfo runtime.ClientAuthInfoWriter) (*GetIterationOK, error)
+	PackerServiceGetChannel(params *PackerServiceGetChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetChannelOK, error)
 
-	ListBuckets(params *ListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*ListBucketsOK, error)
+	PackerServiceGetChildImages(params *PackerServiceGetChildImagesParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetChildImagesOK, error)
 
-	ListBuilds(params *ListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*ListBuildsOK, error)
+	PackerServiceGetIteration(params *PackerServiceGetIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetIterationOK, error)
 
-	ListChannels(params *ListChannelsParams, authInfo runtime.ClientAuthInfoWriter) (*ListChannelsOK, error)
+	PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetRegistryOK, error)
 
-	ListIterations(params *ListIterationsParams, authInfo runtime.ClientAuthInfoWriter) (*ListIterationsOK, error)
+	PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBucketsOK, error)
 
-	UpdateBucket(params *UpdateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateBucketOK, error)
+	PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBuildsOK, error)
 
-	UpdateBuild(params *UpdateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateBuildOK, error)
+	PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListChannelsOK, error)
 
-	UpdateChannel(params *UpdateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateChannelOK, error)
+	PackerServiceListIterations(params *PackerServiceListIterationsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListIterationsOK, error)
 
-	UpdateIteration(params *UpdateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateIterationOK, error)
+	PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBucketOK, error)
+
+	PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBuildOK, error)
+
+	PackerServiceUpdateChannel(params *PackerServiceUpdateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateChannelOK, error)
+
+	PackerServiceUpdateIteration(params *PackerServiceUpdateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateIterationOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  CreateBucket operations realted to images
+  PackerServiceCreateBucket packer service create bucket API
 */
-func (a *Client) CreateBucket(params *CreateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*CreateBucketOK, error) {
+func (a *Client) PackerServiceCreateBucket(params *PackerServiceCreateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateBucketParams()
+		params = NewPackerServiceCreateBucketParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "CreateBucket",
+		ID:                 "PackerService_CreateBucket",
 		Method:             "PUT",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateBucketReader{formats: a.formats},
+		Reader:             &PackerServiceCreateBucketReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -97,33 +103,33 @@ func (a *Client) CreateBucket(params *CreateBucketParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateBucketOK)
+	success, ok := result.(*PackerServiceCreateBucketOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateBucketDefault)
+	unexpectedSuccess := result.(*PackerServiceCreateBucketDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  CreateBuild create build API
+  PackerServiceCreateBuild packer service create build API
 */
-func (a *Client) CreateBuild(params *CreateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*CreateBuildOK, error) {
+func (a *Client) PackerServiceCreateBuild(params *PackerServiceCreateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateBuildParams()
+		params = NewPackerServiceCreateBuildParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "CreateBuild",
+		ID:                 "PackerService_CreateBuild",
 		Method:             "POST",
-		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{build.iteration_id}",
+		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateBuildReader{formats: a.formats},
+		Reader:             &PackerServiceCreateBuildReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -131,33 +137,33 @@ func (a *Client) CreateBuild(params *CreateBuildParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateBuildOK)
+	success, ok := result.(*PackerServiceCreateBuildOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateBuildDefault)
+	unexpectedSuccess := result.(*PackerServiceCreateBuildDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  CreateChannel operations related to channels mutable aliases pointers for an image iteration
+  PackerServiceCreateChannel packer service create channel API
 */
-func (a *Client) CreateChannel(params *CreateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*CreateChannelOK, error) {
+func (a *Client) PackerServiceCreateChannel(params *PackerServiceCreateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateChannelParams()
+		params = NewPackerServiceCreateChannelParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "CreateChannel",
+		ID:                 "PackerService_CreateChannel",
 		Method:             "POST",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateChannelReader{formats: a.formats},
+		Reader:             &PackerServiceCreateChannelReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -165,33 +171,33 @@ func (a *Client) CreateChannel(params *CreateChannelParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateChannelOK)
+	success, ok := result.(*PackerServiceCreateChannelOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateChannelDefault)
+	unexpectedSuccess := result.(*PackerServiceCreateChannelDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  CreateIteration operations related to image iterations
+  PackerServiceCreateIteration packer service create iteration API
 */
-func (a *Client) CreateIteration(params *CreateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*CreateIterationOK, error) {
+func (a *Client) PackerServiceCreateIteration(params *PackerServiceCreateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateIterationParams()
+		params = NewPackerServiceCreateIterationParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "CreateIteration",
+		ID:                 "PackerService_CreateIteration",
 		Method:             "POST",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateIterationReader{formats: a.formats},
+		Reader:             &PackerServiceCreateIterationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -199,33 +205,67 @@ func (a *Client) CreateIteration(params *CreateIterationParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateIterationOK)
+	success, ok := result.(*PackerServiceCreateIterationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateIterationDefault)
+	unexpectedSuccess := result.(*PackerServiceCreateIterationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  DeleteBucket delete bucket API
+  PackerServiceCreateRegistry creates registry will create an h c p packer registry and start billing for it
 */
-func (a *Client) DeleteBucket(params *DeleteBucketParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteBucketOK, error) {
+func (a *Client) PackerServiceCreateRegistry(params *PackerServiceCreateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteBucketParams()
+		params = NewPackerServiceCreateRegistryParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteBucket",
+		ID:                 "PackerService_CreateRegistry",
+		Method:             "PUT",
+		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceCreateRegistryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceCreateRegistryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceCreateRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  PackerServiceDeleteBucket packer service delete bucket API
+*/
+func (a *Client) PackerServiceDeleteBucket(params *PackerServiceDeleteBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteBucketOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceDeleteBucketParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PackerService_DeleteBucket",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteBucketReader{formats: a.formats},
+		Reader:             &PackerServiceDeleteBucketReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -233,33 +273,33 @@ func (a *Client) DeleteBucket(params *DeleteBucketParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteBucketOK)
+	success, ok := result.(*PackerServiceDeleteBucketOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteBucketDefault)
+	unexpectedSuccess := result.(*PackerServiceDeleteBucketDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  DeleteBuild delete build API
+  PackerServiceDeleteBuild packer service delete build API
 */
-func (a *Client) DeleteBuild(params *DeleteBuildParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteBuildOK, error) {
+func (a *Client) PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteBuildParams()
+		params = NewPackerServiceDeleteBuildParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteBuild",
+		ID:                 "PackerService_DeleteBuild",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteBuildReader{formats: a.formats},
+		Reader:             &PackerServiceDeleteBuildReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -267,33 +307,33 @@ func (a *Client) DeleteBuild(params *DeleteBuildParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteBuildOK)
+	success, ok := result.(*PackerServiceDeleteBuildOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteBuildDefault)
+	unexpectedSuccess := result.(*PackerServiceDeleteBuildDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  DeleteChannel delete channel API
+  PackerServiceDeleteChannel packer service delete channel API
 */
-func (a *Client) DeleteChannel(params *DeleteChannelParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteChannelOK, error) {
+func (a *Client) PackerServiceDeleteChannel(params *PackerServiceDeleteChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteChannelParams()
+		params = NewPackerServiceDeleteChannelParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteChannel",
+		ID:                 "PackerService_DeleteChannel",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteChannelReader{formats: a.formats},
+		Reader:             &PackerServiceDeleteChannelReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -301,33 +341,33 @@ func (a *Client) DeleteChannel(params *DeleteChannelParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteChannelOK)
+	success, ok := result.(*PackerServiceDeleteChannelOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteChannelDefault)
+	unexpectedSuccess := result.(*PackerServiceDeleteChannelDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  DeleteIteration delete iteration API
+  PackerServiceDeleteIteration packer service delete iteration API
 */
-func (a *Client) DeleteIteration(params *DeleteIterationParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteIterationOK, error) {
+func (a *Client) PackerServiceDeleteIteration(params *PackerServiceDeleteIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteIterationParams()
+		params = NewPackerServiceDeleteIterationParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteIteration",
+		ID:                 "PackerService_DeleteIteration",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteIterationReader{formats: a.formats},
+		Reader:             &PackerServiceDeleteIterationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -335,33 +375,67 @@ func (a *Client) DeleteIteration(params *DeleteIterationParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteIterationOK)
+	success, ok := result.(*PackerServiceDeleteIterationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteIterationDefault)
+	unexpectedSuccess := result.(*PackerServiceDeleteIterationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetAncestorImages APIs endpoints to ease UI implementation
+  PackerServiceDeleteRegistry deletes registry will soft delete an h c p packer registry by making it deactivated soft deletion includes stopping billing
 */
-func (a *Client) GetAncestorImages(params *GetAncestorImagesParams, authInfo runtime.ClientAuthInfoWriter) (*GetAncestorImagesOK, error) {
+func (a *Client) PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAncestorImagesParams()
+		params = NewPackerServiceDeleteRegistryParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetAncestorImages",
+		ID:                 "PackerService_DeleteRegistry",
+		Method:             "DELETE",
+		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceDeleteRegistryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceDeleteRegistryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceDeleteRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  PackerServiceGetAncestorImages APIs endpoints to ease UI implementation
+*/
+func (a *Client) PackerServiceGetAncestorImages(params *PackerServiceGetAncestorImagesParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetAncestorImagesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceGetAncestorImagesParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PackerService_GetAncestorImages",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/ancestors",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAncestorImagesReader{formats: a.formats},
+		Reader:             &PackerServiceGetAncestorImagesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -369,33 +443,33 @@ func (a *Client) GetAncestorImages(params *GetAncestorImagesParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAncestorImagesOK)
+	success, ok := result.(*PackerServiceGetAncestorImagesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetAncestorImagesDefault)
+	unexpectedSuccess := result.(*PackerServiceGetAncestorImagesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetBucket get bucket API
+  PackerServiceGetBucket packer service get bucket API
 */
-func (a *Client) GetBucket(params *GetBucketParams, authInfo runtime.ClientAuthInfoWriter) (*GetBucketOK, error) {
+func (a *Client) PackerServiceGetBucket(params *PackerServiceGetBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetBucketParams()
+		params = NewPackerServiceGetBucketParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetBucket",
+		ID:                 "PackerService_GetBucket",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetBucketReader{formats: a.formats},
+		Reader:             &PackerServiceGetBucketReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -403,33 +477,33 @@ func (a *Client) GetBucket(params *GetBucketParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetBucketOK)
+	success, ok := result.(*PackerServiceGetBucketOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetBucketDefault)
+	unexpectedSuccess := result.(*PackerServiceGetBucketDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetBuild ts o d o make it possible to query by iteration incremental version not just u l ID
+  PackerServiceGetBuild packer service get build API
 */
-func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInfoWriter) (*GetBuildOK, error) {
+func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetBuildParams()
+		params = NewPackerServiceGetBuildParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetBuild",
+		ID:                 "PackerService_GetBuild",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetBuildReader{formats: a.formats},
+		Reader:             &PackerServiceGetBuildReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -437,33 +511,33 @@ func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInf
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetBuildOK)
+	success, ok := result.(*PackerServiceGetBuildOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetBuildDefault)
+	unexpectedSuccess := result.(*PackerServiceGetBuildDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetChannel get channel API
+  PackerServiceGetChannel packer service get channel API
 */
-func (a *Client) GetChannel(params *GetChannelParams, authInfo runtime.ClientAuthInfoWriter) (*GetChannelOK, error) {
+func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetChannelParams()
+		params = NewPackerServiceGetChannelParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetChannel",
+		ID:                 "PackerService_GetChannel",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetChannelReader{formats: a.formats},
+		Reader:             &PackerServiceGetChannelReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -471,33 +545,33 @@ func (a *Client) GetChannel(params *GetChannelParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetChannelOK)
+	success, ok := result.(*PackerServiceGetChannelOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetChannelDefault)
+	unexpectedSuccess := result.(*PackerServiceGetChannelDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetChildImages get child images API
+  PackerServiceGetChildImages packer service get child images API
 */
-func (a *Client) GetChildImages(params *GetChildImagesParams, authInfo runtime.ClientAuthInfoWriter) (*GetChildImagesOK, error) {
+func (a *Client) PackerServiceGetChildImages(params *PackerServiceGetChildImagesParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetChildImagesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetChildImagesParams()
+		params = NewPackerServiceGetChildImagesParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetChildImages",
+		ID:                 "PackerService_GetChildImages",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/children",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetChildImagesReader{formats: a.formats},
+		Reader:             &PackerServiceGetChildImagesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -505,38 +579,39 @@ func (a *Client) GetChildImages(params *GetChildImagesParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetChildImagesOK)
+	success, ok := result.(*PackerServiceGetChildImagesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetChildImagesDefault)
+	unexpectedSuccess := result.(*PackerServiceGetChildImagesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetIteration gets iteration allows to get an iteration by iteration id incremental version fingerprint these are supplied as a query parameter e g
+  PackerServiceGetIteration gets iteration allows the user to retrieve an iteration using one of the following identifiers iteration id incremental version fingerprint
 
-  images/mybucket/iteration?iteration_id=fingerprint
+  These are supplied as a query parameter. For example:
+images/{bucket_slug}/iteration?fingerprint={fingerprint}
 
 bucket_slug must always be set because it is possible for iterations to
 have the same incremental_version or fingerprint across buckets
 */
-func (a *Client) GetIteration(params *GetIterationParams, authInfo runtime.ClientAuthInfoWriter) (*GetIterationOK, error) {
+func (a *Client) PackerServiceGetIteration(params *PackerServiceGetIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetIterationParams()
+		params = NewPackerServiceGetIterationParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetIteration",
+		ID:                 "PackerService_GetIteration",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iteration",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetIterationReader{formats: a.formats},
+		Reader:             &PackerServiceGetIterationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -544,33 +619,67 @@ func (a *Client) GetIteration(params *GetIterationParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetIterationOK)
+	success, ok := result.(*PackerServiceGetIterationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetIterationDefault)
+	unexpectedSuccess := result.(*PackerServiceGetIterationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListBuckets list buckets API
+  PackerServiceGetRegistry gets registry returns an h c p packer registry either activated or not
 */
-func (a *Client) ListBuckets(params *ListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*ListBucketsOK, error) {
+func (a *Client) PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListBucketsParams()
+		params = NewPackerServiceGetRegistryParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListBuckets",
+		ID:                 "PackerService_GetRegistry",
+		Method:             "GET",
+		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceGetRegistryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceGetRegistryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceGetRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  PackerServiceListBuckets packer service list buckets API
+*/
+func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBucketsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceListBucketsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PackerService_ListBuckets",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListBucketsReader{formats: a.formats},
+		Reader:             &PackerServiceListBucketsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -578,33 +687,33 @@ func (a *Client) ListBuckets(params *ListBucketsParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListBucketsOK)
+	success, ok := result.(*PackerServiceListBucketsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListBucketsDefault)
+	unexpectedSuccess := result.(*PackerServiceListBucketsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListBuilds list builds API
+  PackerServiceListBuilds packer service list builds API
 */
-func (a *Client) ListBuilds(params *ListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*ListBuildsOK, error) {
+func (a *Client) PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBuildsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListBuildsParams()
+		params = NewPackerServiceListBuildsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListBuilds",
+		ID:                 "PackerService_ListBuilds",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}/builds",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListBuildsReader{formats: a.formats},
+		Reader:             &PackerServiceListBuildsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -612,33 +721,33 @@ func (a *Client) ListBuilds(params *ListBuildsParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListBuildsOK)
+	success, ok := result.(*PackerServiceListBuildsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListBuildsDefault)
+	unexpectedSuccess := result.(*PackerServiceListBuildsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListChannels list channels API
+  PackerServiceListChannels packer service list channels API
 */
-func (a *Client) ListChannels(params *ListChannelsParams, authInfo runtime.ClientAuthInfoWriter) (*ListChannelsOK, error) {
+func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListChannelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListChannelsParams()
+		params = NewPackerServiceListChannelsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListChannels",
+		ID:                 "PackerService_ListChannels",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListChannelsReader{formats: a.formats},
+		Reader:             &PackerServiceListChannelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -646,33 +755,33 @@ func (a *Client) ListChannels(params *ListChannelsParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListChannelsOK)
+	success, ok := result.(*PackerServiceListChannelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListChannelsDefault)
+	unexpectedSuccess := result.(*PackerServiceListChannelsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListIterations list iterations API
+  PackerServiceListIterations packer service list iterations API
 */
-func (a *Client) ListIterations(params *ListIterationsParams, authInfo runtime.ClientAuthInfoWriter) (*ListIterationsOK, error) {
+func (a *Client) PackerServiceListIterations(params *PackerServiceListIterationsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListIterationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListIterationsParams()
+		params = NewPackerServiceListIterationsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListIterations",
+		ID:                 "PackerService_ListIterations",
 		Method:             "GET",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListIterationsReader{formats: a.formats},
+		Reader:             &PackerServiceListIterationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -680,33 +789,33 @@ func (a *Client) ListIterations(params *ListIterationsParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListIterationsOK)
+	success, ok := result.(*PackerServiceListIterationsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListIterationsDefault)
+	unexpectedSuccess := result.(*PackerServiceListIterationsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  UpdateBucket update bucket API
+  PackerServiceUpdateBucket packer service update bucket API
 */
-func (a *Client) UpdateBucket(params *UpdateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateBucketOK, error) {
+func (a *Client) PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateBucketParams()
+		params = NewPackerServiceUpdateBucketParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "UpdateBucket",
+		ID:                 "PackerService_UpdateBucket",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateBucketReader{formats: a.formats},
+		Reader:             &PackerServiceUpdateBucketReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -714,33 +823,33 @@ func (a *Client) UpdateBucket(params *UpdateBucketParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateBucketOK)
+	success, ok := result.(*PackerServiceUpdateBucketOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdateBucketDefault)
+	unexpectedSuccess := result.(*PackerServiceUpdateBucketDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  UpdateBuild update build API
+  PackerServiceUpdateBuild packer service update build API
 */
-func (a *Client) UpdateBuild(params *UpdateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateBuildOK, error) {
+func (a *Client) PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateBuildParams()
+		params = NewPackerServiceUpdateBuildParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "UpdateBuild",
+		ID:                 "PackerService_UpdateBuild",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateBuildReader{formats: a.formats},
+		Reader:             &PackerServiceUpdateBuildReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -748,33 +857,33 @@ func (a *Client) UpdateBuild(params *UpdateBuildParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateBuildOK)
+	success, ok := result.(*PackerServiceUpdateBuildOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdateBuildDefault)
+	unexpectedSuccess := result.(*PackerServiceUpdateBuildDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  UpdateChannel update channel API
+  PackerServiceUpdateChannel packer service update channel API
 */
-func (a *Client) UpdateChannel(params *UpdateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateChannelOK, error) {
+func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateChannelParams()
+		params = NewPackerServiceUpdateChannelParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "UpdateChannel",
+		ID:                 "PackerService_UpdateChannel",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateChannelReader{formats: a.formats},
+		Reader:             &PackerServiceUpdateChannelReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -782,33 +891,33 @@ func (a *Client) UpdateChannel(params *UpdateChannelParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateChannelOK)
+	success, ok := result.(*PackerServiceUpdateChannelOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdateChannelDefault)
+	unexpectedSuccess := result.(*PackerServiceUpdateChannelDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  UpdateIteration onlies used to set incremental version once all builds are complete otherwise update build is used for specific build updates
+  PackerServiceUpdateIteration updates iteration is used to mark an iteration complete once all builds are complete to make build specific updates for builds within the iteration use the update build endpoint
 */
-func (a *Client) UpdateIteration(params *UpdateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateIterationOK, error) {
+func (a *Client) PackerServiceUpdateIteration(params *PackerServiceUpdateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateIterationParams()
+		params = NewPackerServiceUpdateIterationParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "UpdateIteration",
+		ID:                 "PackerService_UpdateIteration",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateIterationReader{formats: a.formats},
+		Reader:             &PackerServiceUpdateIterationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -816,12 +925,12 @@ func (a *Client) UpdateIteration(params *UpdateIterationParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateIterationOK)
+	success, ok := result.(*PackerServiceUpdateIterationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdateIterationDefault)
+	unexpectedSuccess := result.(*PackerServiceUpdateIterationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

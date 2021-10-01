@@ -16,7 +16,7 @@ import (
 // swagger:model hashicorp.cloud.packer.CreateBucketResponse
 type HashicorpCloudPackerCreateBucketResponse struct {
 
-	// bucket
+	// Information about the bucket that was created.
 	Bucket *HashicorpCloudPackerBucket `json:"bucket,omitempty"`
 }
 

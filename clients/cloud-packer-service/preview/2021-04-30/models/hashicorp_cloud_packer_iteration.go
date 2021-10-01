@@ -14,43 +14,49 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudPackerIteration image iterations messages
+// HashicorpCloudPackerIteration hashicorp cloud packer iteration
 //
 // swagger:model hashicorp.cloud.packer.Iteration
 type HashicorpCloudPackerIteration struct {
 
-	// who created the iteration
+	// The name of the person who created this iteration.
 	AuthorID string `json:"author_id,omitempty"`
 
-	// same bucket_slug as in the Bucket object
+	// Human-readable name for the bucket that this iteration is associated with.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// link to set of builds for an image iteration
+	// A list of all the builds associated with this iteration.
 	Builds []*HashicorpCloudPackerBuild `json:"builds"`
 
-	// If true, this iteration is considered "ready to use" and will be
-	// returned even if the include_incomplete flage is "false" in the
-	// list iterations request.
+	// If true, all builds associated with this iteration have successfully
+	// completed and uploaded metadata to the registry. When "complete" is true,
+	// This iteration is considered ready to use, and can have channels assigned
+	// to it.
 	Complete bool `json:"complete,omitempty"`
 
-	// when iteration was created or updated
+	// When the iteration was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// fingerprint of the build; this will allow to regroup image builds under
-	// the same iteration. So it could be for example a git sha.
+	// Fingerprint of the iteration. The fingerprint is set by Packer when you
+	// call `packer build`. It will most often correspond to a git commit sha,
+	// but can be manually overridden by setting the environment variable
+	// `HCP_PACKER_BUILD_FINGERPRINT`
 	Fingerprint string `json:"fingerprint,omitempty"`
 
-	// ULID
+	// Unique identifier of the iteration; created and set by the HCP Packer
+	// registry when the iteration is created.
 	ID string `json:"id,omitempty"`
 
-	// e.g 15
+	// The human-readable version number assigned to this iteration. This
+	// field will only be set if the iteration is "complete".
 	IncrementalVersion int32 `json:"incremental_version,omitempty"`
 
-	// what image was used as source
+	// The unique identifier of the iteration that was used as a source
+	// for this iteration, if this iteration was built on a base layer.
 	IterationAncestorID string `json:"iteration_ancestor_id,omitempty"`
 
-	// updated at
+	// When the iteration was last updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }
