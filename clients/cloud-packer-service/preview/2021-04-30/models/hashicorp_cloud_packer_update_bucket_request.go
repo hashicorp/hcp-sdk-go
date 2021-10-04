@@ -17,20 +17,20 @@ import (
 // swagger:model hashicorp.cloud.packer.UpdateBucketRequest
 type HashicorpCloudPackerUpdateBucketRequest struct {
 
-	// base-ubuntu-18-secure
+	// Human-readable name for the bucket.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// "This image is a hardened platform for other teams"
+	// A short description of what this bucket's images are for.
 	Description string `json:"description,omitempty"`
 
-	// Slot for unstructured metadata tags
-	// for example {"repo": "https://github.com/hashicorp/common"}
+	// A key:value map for custom, user-settable metadata about your bucket.
 	Labels map[string]string `json:"labels,omitempty"`
 
-	// location
+	// HCP-specific information like project and organization ID
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// ["aws", "gcp"]
+	// A list of which cloud providers or other platforms the bucket contains
+	// builds for. For example, AWS, GCP, or Azure.
 	Platforms []string `json:"platforms"`
 }
 

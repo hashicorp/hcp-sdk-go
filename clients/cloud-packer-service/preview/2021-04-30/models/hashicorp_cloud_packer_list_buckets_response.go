@@ -19,10 +19,10 @@ import (
 // swagger:model hashicorp.cloud.packer.ListBucketsResponse
 type HashicorpCloudPackerListBucketsResponse struct {
 
-	// buckets
+	// List of buckets.
 	Buckets []*HashicorpCloudPackerBucket `json:"buckets"`
 
-	// pagination contains the pagination tokens for a subsequent request.
+	// Pagination tokens for a subsequent request.
 	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 

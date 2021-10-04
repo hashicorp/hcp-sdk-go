@@ -18,7 +18,7 @@ import (
 //  - RUNNING: Running means the Packer build is currently running
 //  - DONE: Done means the Packer build has finished successfully
 //  - CANCELLED: Cancelled means the Packer build was cancelled by a user
-//  - FAILED: Failed means the Packer build and therefore iteration creation failed
+//  - FAILED: Failed means the Packer build failed and therefore image creation failed
 //
 // swagger:model hashicorp.cloud.packer.BuildStatus
 type HashicorpCloudPackerBuildStatus string

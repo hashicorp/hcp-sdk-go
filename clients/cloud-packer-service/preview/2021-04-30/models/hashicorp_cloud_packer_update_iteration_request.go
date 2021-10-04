@@ -17,16 +17,20 @@ import (
 // swagger:model hashicorp.cloud.packer.UpdateIterationRequest
 type HashicorpCloudPackerUpdateIterationRequest struct {
 
-	// bucket slug
+	// Human-readable name for the bucket.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// complete
+	// Set to "true" when all builds associated with this iteration have
+	// successfully completed and uploaded metadata to the registry. When
+	// "complete" is true, this iteration is considered ready to use, and can
+	// have channels assigned to it.
 	Complete bool `json:"complete,omitempty"`
 
-	// iteration id
+	// Unique identifier of the iteration. This was created and set by the
+	// HCP Packer registry when the iteration was created.
 	IterationID string `json:"iteration_id,omitempty"`
 
-	// location
+	// HCP-specific information like project and organization ID
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 }
 

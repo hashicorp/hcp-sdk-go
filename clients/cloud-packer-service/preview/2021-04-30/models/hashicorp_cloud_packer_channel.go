@@ -20,27 +20,28 @@ type HashicorpCloudPackerChannel struct {
 	// The author who created the channel
 	AuthorID string `json:"author_id,omitempty"`
 
-	// image bucket this belongs to
+	// Human-readable name for the bucket this channel is associated with.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// timestamp this channel was created at
+	// When the channel was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// ULID of this chanel
+	// Unique identifier of the channel. This ID is created and set by the HCP
+	// Packer registry when the channel is created.
 	ID string `json:"id,omitempty"`
 
-	// The channel pointer to the iteration
+	// A pointer to the iteration currently associated with this channel.
 	Pointer *HashicorpCloudPackerChannelIterationPointer `json:"pointer,omitempty"`
 
-	// message with the reason of why this channel was revoked
+	// A short explanation of why this channel was revoked.
 	RevocationMessage string `json:"revocation_message,omitempty"`
 
-	// timestamp this channel was revoked at
+	// When the channel was revoked, if it has been revoked.
 	// Format: date-time
 	RevokedAt strfmt.DateTime `json:"revoked_at,omitempty"`
 
-	// Something like "production-stable"
+	// Human-readable name for the channel.
 	Slug string `json:"slug,omitempty"`
 }
 

@@ -19,35 +19,49 @@ import (
 // swagger:model hashicorp.cloud.packer.Build
 type HashicorpCloudPackerBuild struct {
 
-	// aws
+	// The cloud provider that this build produced artifacts for.
+	// For example, AWS, GCP, or Azure.
 	CloudProvider string `json:"cloud_provider,omitempty"`
 
-	// builder or post-processor used to build this
+	// Internal Packer name for the builder or post-processor component used to
+	// build this. For example, "amazon-ebs" or "azure-arm"
 	ComponentType string `json:"component_type,omitempty"`
 
-	// created at
+	// When the build was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// ULID
+	// Unique identifier of the build; created and set by the HCP Packer
+	// registry when the build is created.
 	ID string `json:"id,omitempty"`
 
-	// images
+	// List of images associated with this build.
 	Images []*HashicorpCloudPackerImage `json:"images"`
 
-	// ULID of the iteration
+	// Unique identifier of the iteration associated with this build; this was
+	// created and set by the HCP Packer registry when the iteration was created.
 	IterationID string `json:"iteration_id,omitempty"`
 
-	// unstructured metadata
+	// A key:value map for custom, user-settable metadata about your build.
 	Labels map[string]string `json:"labels,omitempty"`
 
-	// packer run uuid
+	// The UUID specific to this call to Packer build. If you use the manifest
+	// post-processor, this UUID will match the UUID present there.
 	PackerRunUUID string `json:"packer_run_uuid,omitempty"`
 
-	// complete
+	// Unique identifier of the HCP Packer registry build used as the source
+	// for this build. Used for tracking dependencies for build pipelines.
+	SourceBuildUlid string `json:"source_build_ulid,omitempty"`
+
+	// The ID or URL of the remote cloud source image. Used for tracking image
+	// dependencies for build pipelines.
+	SourceImageID string `json:"source_image_id,omitempty"`
+
+	// Status of the build. The status can be RUNNING, DONE, CANCELLED, FAILED,
+	// or UNSET.
 	Status HashicorpCloudPackerBuildStatus `json:"status,omitempty"`
 
-	// updated at
+	// When the build was most recently updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }

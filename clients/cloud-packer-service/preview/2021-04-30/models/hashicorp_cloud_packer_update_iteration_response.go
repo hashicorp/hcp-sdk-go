@@ -16,7 +16,7 @@ import (
 // swagger:model hashicorp.cloud.packer.UpdateIterationResponse
 type HashicorpCloudPackerUpdateIterationResponse struct {
 
-	// iteration
+	// Information about the updated iteration.
 	Iteration *HashicorpCloudPackerIteration `json:"iteration,omitempty"`
 }
 

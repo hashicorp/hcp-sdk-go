@@ -20,22 +20,26 @@ import (
 // swagger:model hashicorp.cloud.packer.BuildUpdates
 type HashicorpCloudPackerBuildUpdates struct {
 
-	// aws, gcp, etc.
+	// The cloud provider that this build produced artifacts for.
+	// For example, AWS, GCP, or Azure.
 	CloudProvider string `json:"cloud_provider,omitempty"`
 
-	// The length of this list determines how many
-	// rows this combination of iteration_id and builder_type have in the
-	// build table.
-	Images []*HashicorpCloudPackerImage `json:"images"`
+	// A list of images to create and associate with this build.
+	Images []*HashicorpCloudPackerImageCreateBody `json:"images"`
 
-	// Labels to add to the build.
+	// A key:value map for custom, user-settable metadata about your build.
 	Labels map[string]string `json:"labels,omitempty"`
 
-	// Packer build run UUID can change because we may be updating a build that
-	// previously failed.
+	// The UUID specific to this call to Packer build. If you use the manifest
+	// post-processor, this UUID will match the UUID present there.
 	PackerRunUUID string `json:"packer_run_uuid,omitempty"`
 
-	// Running, Done, Failed
+	// The ID or URL of the remote cloud source image. Used for tracking image
+	// dependencies for build pipelines.
+	SourceImageID string `json:"source_image_id,omitempty"`
+
+	// Status of the build. The status can be RUNNING, DONE, CANCELLED, FAILED,
+	// or UNSET.
 	Status HashicorpCloudPackerBuildStatus `json:"status,omitempty"`
 }
 

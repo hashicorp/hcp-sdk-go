@@ -17,14 +17,16 @@ import (
 // swagger:model hashicorp.cloud.packer.CreateIterationRequest
 type HashicorpCloudPackerCreateIterationRequest struct {
 
-	// bucket slug
+	// Human-readable name for the bucket.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// fingerprint of the build; this will allow to regroup image builds under
-	// the same iteration. So it could be for example a git sha.
+	// Fingerprint of the iteration. The fingerprint is set by Packer when you
+	// call `packer build`. It will most often correspond to a git commit sha,
+	// but can be manually overridden by setting the environment variable
+	// `HCP_PACKER_BUILD_FINGERPRINT`
 	Fingerprint string `json:"fingerprint,omitempty"`
 
-	// location
+	// HCP-specific information like project and organization ID
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 }
 

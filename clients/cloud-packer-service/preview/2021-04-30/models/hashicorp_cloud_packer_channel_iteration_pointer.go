@@ -12,7 +12,9 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudPackerChannelIterationPointer The information about a channel pointer to a iteration
+// HashicorpCloudPackerChannelIterationPointer A Channel Pointer is a special object that tracks channel
+// history by storing both which iteration the channel points to and also when
+// the channel was updated to point at said iteration.
 //
 // swagger:model hashicorp.cloud.packer.ChannelIterationPointer
 type HashicorpCloudPackerChannelIterationPointer struct {
@@ -20,7 +22,7 @@ type HashicorpCloudPackerChannelIterationPointer struct {
 	// The author who pointed the channel to the iteration
 	AuthorID string `json:"author_id,omitempty"`
 
-	// timestamp this channel pointer was created at
+	// When the channel pointer was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 

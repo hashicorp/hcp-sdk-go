@@ -16,7 +16,7 @@ import (
 // swagger:model hashicorp.cloud.packer.GetBuildResponse
 type HashicorpCloudPackerGetBuildResponse struct {
 
-	// build
+	// The requested build.
 	Build *HashicorpCloudPackerBuild `json:"build,omitempty"`
 }
 
