@@ -1,3 +1,8 @@
+## 0.14.0 (October 19, 2021)
+
+FEATURES:
+* Updated SDK to add SourceImageID field to the UpdateBuild and CreateBuild endpoints ([#52](https://github.com/hashicorp/hcp-sdk-go/pull/55)).
+
 ## 0.13.0 (September 21, 2021)
 
 FEATURES:
