@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# This script fetches the latest public API specs for a given HCP service ($1) 
+# from the central spec repo, cloud-api.
+
+SCRIPTS_DIR=$(dirname "${BASH_SOURCE[0]}")
+
+service=$1
+
+# Copy the latest service specs into a temporary directory in preparation for SDK generation.
+rsync -a "$HOME"/go/src/github.com/hashicorp/cloud-api/specs/"$service" "$SCRIPTS_DIR"/../temp
+rsync -a "$HOME"/go/src/github.com/hashicorp/cloud-api/specs/cloud-shared "$SCRIPTS_DIR"/../temp
+rsync -a "$HOME"/go/src/github.com/hashicorp/cloud-api/specs/external "$SCRIPTS_DIR"/../temp

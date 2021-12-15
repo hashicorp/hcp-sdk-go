@@ -42,6 +42,7 @@ test-ci: go/lint
 # args passed to sdk/update
 commit=false
 
+# This recipe pulls the latest specs for the given service in cloud-api and re-generates the service's go clients.
 .PHONY: sdk/update # service=cloud-foo-service commit=true/false
 sdk/update:
 	@if [ -z $(GITHUB_TOKEN) ]; then \
@@ -66,4 +67,22 @@ sdk/update:
 
 	@if [ $(commit) = true ]; then \
 		./scripts/open-pr.sh $(service); \
+	fi
+
+# This recipe pulls the specs for the given service from locally cloned cloud-api and re-generates the service's go clients.
+.PHONY: sdk/update-local # service=cloud-foo-service
+sdk/update-local:
+	@if [ -z $(service) ]; then \
+		echo "ERROR: No service argument provided, please provide in the format 'service=...'" >&2; \
+  		exit 1; \
+	fi
+
+	bash ./scripts/pull-specs-local.sh $(service);
+
+	@if [ $(service) = "cloud-shared" ]; then \
+		echo "Generating latest SDK for cloud-shared"; \
+		bash ./scripts/gen-go-shared-sdk.sh $(service); \
+	else \
+		echo "Generating latest SDK for $(service)"; \
+		bash ./scripts/gen-go-service-sdk.sh $(service); \
 	fi
