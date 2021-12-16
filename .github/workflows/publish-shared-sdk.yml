@@ -1,15 +1,10 @@
 ---
-name: publish-sdk
+name: publish-shared-sdk
 
-on: 
-  workflow_dispatch:
-      inputs:
-        service:
-          description: 'The service whose SDK needs to be generated'
-          required: true
+on: workflow_dispatch
 
 jobs:
-  publish-sdk:
+  publish-shared-sdk:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout hcp-sdk-go
@@ -22,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: hashicorp/cloud-api
-          ref: auto-update-service-specs
+          ref: master
           token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
           path: cloud-api
 
@@ -42,20 +37,15 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y rsync
 
-      - name: Copy latest service specs
-        env: 
-          SERVICE: ${{ github.event.inputs.service }}
+      - name: Copy latest cloud-shared specs
         run: |
-          rsync -a $GITHUB_WORKSPACE/cloud-api/specs/"$SERVICE" $GITHUB_WORKSPACE/hcp-sdk-go/temp
           rsync -a $GITHUB_WORKSPACE/cloud-api/specs/cloud-shared $GITHUB_WORKSPACE/hcp-sdk-go/temp
           rsync -a $GITHUB_WORKSPACE/cloud-api/specs/external $GITHUB_WORKSPACE/hcp-sdk-go/temp
 
-      - name: Generate SDK for service
-        env: 
-          SERVICE: ${{ github.event.inputs.service }}
+      - name: Generate SDK for cloud-shared
         run: |
           cd $GITHUB_WORKSPACE/hcp-sdk-go
-          ./scripts/gen-go-service-sdk.sh $SERVICE
+          ./scripts/gen-go-shared-sdk.sh
           rm -rf $GITHUB_WORKSPACE/hcp-sdk-go/temp
 
       - name: Open PR
@@ -64,15 +54,15 @@ jobs:
         with:
           token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
           path: hcp-sdk-go
-          branch: auto-update-service-sdk
+          branch: auto-update-shared-sdk
           committer: HashiCorp Cloud Services <59096967+hashicorp-cloud@users.noreply.github.com>
-          commit-message: Update ${{ github.event.inputs.service }} SDK 
-          title: '[auto] Update ${{ github.event.inputs.service }} SDK' 
+          commit-message: Update cloud-shared SDK 
+          title: '[auto] Update cloud-shared SDK' 
           body: |
             This is an auto-generated PR created as part of the public SDK pipeline.
 
             Changes:
-            - Pulled the latest public service SDK from ${{ github.event.inputs.service }}
+            - Pulled the latest public service SDK from cloud-shared
           delete-branch: true
 
       # The Open PR action won't fail if no PR is opened, so this step verifies that a PR was actually created.
