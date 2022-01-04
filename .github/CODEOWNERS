@@ -1,3 +1,20 @@
 # These owners will be the default owners for everything in
 # the repo, unless a later match takes precedence
-*       @hashicorp/cloud-experiences-go
+
+* @hashicorp/cloud-experiences-go
+
+# The Consul clients are owned by Consul
+/clients/cloud-consul-service/ @hashicorp/cloud-experiences-go @hashicorp/consul-cloud-ui @hashicorp/consul-cloud
+
+# The Vault clients are owned by Vault
+/clients/cloud-vault-service/ @hashicorp/cloud-experiences-go @hashicorp/vault-cloud-ui @hashicorp/vault-cloud
+
+# The Packer clients are owned by Packer
+/clients/cloud-packer-service/ @hashicorp/cloud-experiences-go @hashicorp/packer-cloud-ui @hashicorp/packer-cloud
+
+# The Network and Resource Manager clients are owned by Controlplane
+/clients/cloud-resource-manager/ @hashicorp/cloud-experiences-go @hashicorp/cloud-control-plane
+/clients/cloud-operation/ @hashicorp/cloud-experiences-go @hashicorp/cloud-control-plane
+
+# The Operation clients are owned by Dataplane
+/clients/cloud-operation/ @hashicorp/cloud-dataplane @hashicorp/cloud-experiences
