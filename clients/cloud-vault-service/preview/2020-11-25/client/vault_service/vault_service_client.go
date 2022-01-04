@@ -49,7 +49,11 @@ type ClientService interface {
 
 	GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*GetSnapshotOK, error)
 
+	GetUtilization(params *GetUtilizationParams, authInfo runtime.ClientAuthInfoWriter) (*GetUtilizationOK, error)
+
 	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
+
+	ListPerformanceReplicationSecondaries(params *ListPerformanceReplicationSecondariesParams, authInfo runtime.ClientAuthInfoWriter) (*ListPerformanceReplicationSecondariesOK, error)
 
 	ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*ListSnapshotsOK, error)
 
@@ -481,6 +485,40 @@ func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientA
 }
 
 /*
+  GetUtilization get utilization API
+*/
+func (a *Client) GetUtilization(params *GetUtilizationParams, authInfo runtime.ClientAuthInfoWriter) (*GetUtilizationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetUtilizationParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetUtilization",
+		Method:             "GET",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetUtilizationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetUtilizationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetUtilizationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
   List list API
 */
 func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
@@ -511,6 +549,40 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ListPerformanceReplicationSecondaries list performance replication secondaries API
+*/
+func (a *Client) ListPerformanceReplicationSecondaries(params *ListPerformanceReplicationSecondariesParams, authInfo runtime.ClientAuthInfoWriter) (*ListPerformanceReplicationSecondariesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListPerformanceReplicationSecondariesParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListPerformanceReplicationSecondaries",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListPerformanceReplicationSecondariesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListPerformanceReplicationSecondariesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListPerformanceReplicationSecondariesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

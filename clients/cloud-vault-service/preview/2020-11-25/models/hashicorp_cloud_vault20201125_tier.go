@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudVault20201125Tier hashicorp cloud vault 20201125 tier
+// HashicorpCloudVault20201125Tier  - DEV: NOTE: enum 0 values should be invalid. Use this field with care in GORM queries.
 //
 // swagger:model hashicorp.cloud.vault_20201125.Tier
 type HashicorpCloudVault20201125Tier string

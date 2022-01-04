@@ -37,6 +37,9 @@ type HashicorpCloudVault20201125Cluster struct {
 	// location is the location of the cluster.
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
+	// performance_replication_info contains the performance replication information.
+	PerformanceReplicationInfo *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo `json:"performance_replication_info,omitempty"`
+
 	// state is the current state of the cluster.
 	State HashicorpCloudVault20201125ClusterState `json:"state,omitempty"`
 }
@@ -58,6 +61,10 @@ func (m *HashicorpCloudVault20201125Cluster) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePerformanceReplicationInfo(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -130,6 +137,24 @@ func (m *HashicorpCloudVault20201125Cluster) validateLocation(formats strfmt.Reg
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125Cluster) validatePerformanceReplicationInfo(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PerformanceReplicationInfo) { // not required
+		return nil
+	}
+
+	if m.PerformanceReplicationInfo != nil {
+		if err := m.PerformanceReplicationInfo.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("performance_replication_info")
 			}
 			return err
 		}

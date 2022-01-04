@@ -61,6 +61,8 @@ for the list operation typically these are written to a http.Request
 */
 type ListParams struct {
 
+	/*FiltersPrimariesOnly*/
+	FiltersPrimariesOnly *bool
 	/*LocationOrganizationID
 	  organization_id is the id of the organization.
 
@@ -140,6 +142,17 @@ func (o *ListParams) WithHTTPClient(client *http.Client) *ListParams {
 // SetHTTPClient adds the HTTPClient to the list params
 func (o *ListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
+}
+
+// WithFiltersPrimariesOnly adds the filtersPrimariesOnly to the list params
+func (o *ListParams) WithFiltersPrimariesOnly(filtersPrimariesOnly *bool) *ListParams {
+	o.SetFiltersPrimariesOnly(filtersPrimariesOnly)
+	return o
+}
+
+// SetFiltersPrimariesOnly adds the filtersPrimariesOnly to the list params
+func (o *ListParams) SetFiltersPrimariesOnly(filtersPrimariesOnly *bool) {
+	o.FiltersPrimariesOnly = filtersPrimariesOnly
 }
 
 // WithLocationOrganizationID adds the locationOrganizationID to the list params
@@ -226,6 +239,22 @@ func (o *ListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry
 		return err
 	}
 	var res []error
+
+	if o.FiltersPrimariesOnly != nil {
+
+		// query param filters.primaries_only
+		var qrFiltersPrimariesOnly bool
+		if o.FiltersPrimariesOnly != nil {
+			qrFiltersPrimariesOnly = *o.FiltersPrimariesOnly
+		}
+		qFiltersPrimariesOnly := swag.FormatBool(qrFiltersPrimariesOnly)
+		if qFiltersPrimariesOnly != "" {
+			if err := r.SetQueryParam("filters.primaries_only", qFiltersPrimariesOnly); err != nil {
+				return err
+			}
+		}
+
+	}
 
 	// path param location.organization_id
 	if err := r.SetPathParam("location.organization_id", o.LocationOrganizationID); err != nil {
