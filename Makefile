@@ -59,7 +59,7 @@ sdk/update:
 
 	@if [ $(service) = "cloud-shared" ]; then \
 		echo "Generating latest SDK for cloud-shared"; \
-		bash ./scripts/gen-go-shared-sdk.sh $(service); \
+		bash ./scripts/gen-go-shared-sdk.sh; \
 	else \
 		echo "Generating latest SDK for $(service)"; \
 		bash ./scripts/gen-go-service-sdk.sh $(service); \
@@ -81,7 +81,7 @@ sdk/update-local:
 
 	@if [ $(service) = "cloud-shared" ]; then \
 		echo "Generating latest SDK for cloud-shared"; \
-		bash ./scripts/gen-go-shared-sdk.sh $(service); \
+		bash ./scripts/gen-go-shared-sdk.sh; \
 	else \
 		echo "Generating latest SDK for $(service)"; \
 		bash ./scripts/gen-go-service-sdk.sh $(service); \
