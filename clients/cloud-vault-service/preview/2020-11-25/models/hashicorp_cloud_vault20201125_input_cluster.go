@@ -25,6 +25,10 @@ type HashicorpCloudVault20201125InputCluster struct {
 
 	// location is the location of the cluster.
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+
+	// performance_replication_primary_cluster holds the link information of the
+	// primary cluster under performance replication.
+	PerformanceReplicationPrimaryCluster *cloud.HashicorpCloudLocationLink `json:"performance_replication_primary_cluster,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 input cluster
@@ -36,6 +40,10 @@ func (m *HashicorpCloudVault20201125InputCluster) Validate(formats strfmt.Regist
 	}
 
 	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePerformanceReplicationPrimaryCluster(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -73,6 +81,24 @@ func (m *HashicorpCloudVault20201125InputCluster) validateLocation(formats strfm
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputCluster) validatePerformanceReplicationPrimaryCluster(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PerformanceReplicationPrimaryCluster) { // not required
+		return nil
+	}
+
+	if m.PerformanceReplicationPrimaryCluster != nil {
+		if err := m.PerformanceReplicationPrimaryCluster.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("performance_replication_primary_cluster")
 			}
 			return err
 		}
