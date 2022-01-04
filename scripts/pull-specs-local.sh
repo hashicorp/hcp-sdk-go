@@ -9,6 +9,7 @@ SCRIPTS_DIR=$(dirname "${BASH_SOURCE[0]}")
 service=$1
 
 # Copy the latest service specs into a temporary directory in preparation for SDK generation.
-rsync -a "$HOME"/go/src/github.com/hashicorp/cloud-api/specs/"$service" "$SCRIPTS_DIR"/../temp
-rsync -a "$HOME"/go/src/github.com/hashicorp/cloud-api/specs/cloud-shared "$SCRIPTS_DIR"/../temp
-rsync -a "$HOME"/go/src/github.com/hashicorp/cloud-api/specs/external "$SCRIPTS_DIR"/../temp
+mkdir -p "$SCRIPTS_DIR"/../temp/"$service"
+cp -r "$GOPATH"/src/github.com/hashicorp/cloud-api/specs/"$service" "$SCRIPTS_DIR"/../temp
+cp -r "$GOPATH"/src/github.com/hashicorp/cloud-api/specs/cloud-shared "$SCRIPTS_DIR"/../temp
+cp -r "$GOPATH"/src/github.com/hashicorp/cloud-api/specs/external "$SCRIPTS_DIR"/../temp
