@@ -49,6 +49,26 @@ import (
 
 See `cmd/hcp-sdk-go-client` for a complete example.
 
+## SDK Release Cycle
+
+HCP aims to strike a balance between the public SDK consumer's need for a stable SDK interface, and the developer's need to iterate on new features. To this end, we use SDK versions composed of a dated version (`01-06-2022`) and stage (`preview` or `stable`) to allow consumers the flexibility to pin to specific versions or try out new new features.
+
+Preview SDK versions allow consumers to try out features in beta, but may undergo breaking changes. What constitutes a breaking change is described in the [Breaking Changes doc](/docs/breaking-changes.md).
+
+Stable SDK versions present a guaranteed contract to downstream consumers and **will not undergo breaking changes.** Major new features are added to the latest stable version after vetting with a preview version. Any breaking change to a stable SDK version will require a new preview version, which will ultimately be promoted to the next stable version.
+
+### Steps
+
+1. **A preview SDK version is released with features available in public beta.** This version is under active development and may still undergo potential breaking changes.
+
+2. **A new stable SDK version with a later date is released once feature iteration is complete.** This new stable version includes all the finalized changes of the last preview version.
+
+3. **Backwards compatible changes and bug fixes are released directly to the latest stable SDK version.**
+
+4. **Any breaking changes to the stable SDK version are released as a new alpha version set to the current date.** At this point the cycle starts over again.**
+
+![SDK Release Cycle Diagram](/images/sdk-release-cycle-diagram.png)
+
 ## Generating a new service SDK
 
 Requirements:
