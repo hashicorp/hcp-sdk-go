@@ -20,8 +20,8 @@ type HashicorpCloudVault20201125SnapshotState string
 
 const (
 
-	// HashicorpCloudVault20201125SnapshotStateUNSET captures enum value "UNSET"
-	HashicorpCloudVault20201125SnapshotStateUNSET HashicorpCloudVault20201125SnapshotState = "UNSET"
+	// HashicorpCloudVault20201125SnapshotStateSNAPSHOTSTATEINVALID captures enum value "SNAPSHOT_STATE_INVALID"
+	HashicorpCloudVault20201125SnapshotStateSNAPSHOTSTATEINVALID HashicorpCloudVault20201125SnapshotState = "SNAPSHOT_STATE_INVALID"
 
 	// HashicorpCloudVault20201125SnapshotStatePENDING captures enum value "PENDING"
 	HashicorpCloudVault20201125SnapshotStatePENDING HashicorpCloudVault20201125SnapshotState = "PENDING"
@@ -44,7 +44,7 @@ var hashicorpCloudVault20201125SnapshotStateEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVault20201125SnapshotState
-	if err := json.Unmarshal([]byte(`["UNSET","PENDING","CREATING","STORED","FAILED","DELETING"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["SNAPSHOT_STATE_INVALID","PENDING","CREATING","STORED","FAILED","DELETING"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

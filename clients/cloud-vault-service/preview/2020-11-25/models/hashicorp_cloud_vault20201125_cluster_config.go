@@ -19,6 +19,9 @@ type HashicorpCloudVault20201125ClusterConfig struct {
 	// audit config
 	AuditConfig *HashicorpCloudVault20201125AuditConfig `json:"audit_config,omitempty"`
 
+	// audit log export config
+	AuditLogExportConfig *HashicorpCloudVault20201125ObservabilityConfig `json:"audit_log_export_config,omitempty"`
+
 	// capacity config
 	CapacityConfig *HashicorpCloudVault20201125CapacityConfig `json:"capacity_config,omitempty"`
 
@@ -49,6 +52,10 @@ func (m *HashicorpCloudVault20201125ClusterConfig) Validate(formats strfmt.Regis
 	var res []error
 
 	if err := m.validateAuditConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAuditLogExportConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -96,6 +103,24 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateAuditConfig(formats s
 		if err := m.AuditConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("audit_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) validateAuditLogExportConfig(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AuditLogExportConfig) { // not required
+		return nil
+	}
+
+	if m.AuditLogExportConfig != nil {
+		if err := m.AuditLogExportConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("audit_log_export_config")
 			}
 			return err
 		}

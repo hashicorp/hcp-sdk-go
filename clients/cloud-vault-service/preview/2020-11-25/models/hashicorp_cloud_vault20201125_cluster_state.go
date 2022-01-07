@@ -17,7 +17,7 @@ import (
 // represents the abstract Vault cluster itself, not necessarily whether
 // Vault cluster is currently available or not.
 //
-//  - UNSET: UNSET is a sentinel zero value so that an uninitialized value can be
+//  - CLUSTER_STATE_INVALID: CLUSTER_STATE_INVALID is a sentinel zero value so that an uninitialized value can be
 // detected.
 //  - PENDING: PENDING is the state the cluster is in while it is waiting to be created.
 //  - CREATING: CREATING is the state the cluster is in while it is being provisioned for
@@ -40,8 +40,8 @@ type HashicorpCloudVault20201125ClusterState string
 
 const (
 
-	// HashicorpCloudVault20201125ClusterStateUNSET captures enum value "UNSET"
-	HashicorpCloudVault20201125ClusterStateUNSET HashicorpCloudVault20201125ClusterState = "UNSET"
+	// HashicorpCloudVault20201125ClusterStateCLUSTERSTATEINVALID captures enum value "CLUSTER_STATE_INVALID"
+	HashicorpCloudVault20201125ClusterStateCLUSTERSTATEINVALID HashicorpCloudVault20201125ClusterState = "CLUSTER_STATE_INVALID"
 
 	// HashicorpCloudVault20201125ClusterStatePENDING captures enum value "PENDING"
 	HashicorpCloudVault20201125ClusterStatePENDING HashicorpCloudVault20201125ClusterState = "PENDING"
@@ -82,7 +82,7 @@ var hashicorpCloudVault20201125ClusterStateEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVault20201125ClusterState
-	if err := json.Unmarshal([]byte(`["UNSET","PENDING","CREATING","RUNNING","FAILED","UPDATING","RESTORING","DELETING","DELETED","SEALING","SEALED","UNSEALING"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["CLUSTER_STATE_INVALID","PENDING","CREATING","RUNNING","FAILED","UPDATING","RESTORING","DELETING","DELETED","SEALING","SEALED","UNSEALING"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

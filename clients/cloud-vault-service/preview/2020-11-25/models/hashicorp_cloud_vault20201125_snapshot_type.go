@@ -20,8 +20,8 @@ type HashicorpCloudVault20201125SnapshotType string
 
 const (
 
-	// HashicorpCloudVault20201125SnapshotTypeTYPEUNSET captures enum value "TYPE_UNSET"
-	HashicorpCloudVault20201125SnapshotTypeTYPEUNSET HashicorpCloudVault20201125SnapshotType = "TYPE_UNSET"
+	// HashicorpCloudVault20201125SnapshotTypeSNAPSHOTTYPEINVALID captures enum value "SNAPSHOT_TYPE_INVALID"
+	HashicorpCloudVault20201125SnapshotTypeSNAPSHOTTYPEINVALID HashicorpCloudVault20201125SnapshotType = "SNAPSHOT_TYPE_INVALID"
 
 	// HashicorpCloudVault20201125SnapshotTypeAUTOMATIC captures enum value "AUTOMATIC"
 	HashicorpCloudVault20201125SnapshotTypeAUTOMATIC HashicorpCloudVault20201125SnapshotType = "AUTOMATIC"
@@ -41,7 +41,7 @@ var hashicorpCloudVault20201125SnapshotTypeEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVault20201125SnapshotType
-	if err := json.Unmarshal([]byte(`["TYPE_UNSET","AUTOMATIC","SCHEDULED","MANUAL","BEFORE_UPGRADE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["SNAPSHOT_TYPE_INVALID","AUTOMATIC","SCHEDULED","MANUAL","BEFORE_UPGRADE"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
