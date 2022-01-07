@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudVault20201125Tier hashicorp cloud vault 20201125 tier
+// HashicorpCloudVault20201125Tier  - DEV: NOTE: enum 0 values should be invalid. Use this field with care in GORM queries.
 //
 // swagger:model hashicorp.cloud.vault_20201125.Tier
 type HashicorpCloudVault20201125Tier string
@@ -34,6 +34,15 @@ const (
 
 	// HashicorpCloudVault20201125TierSTARTERSMALL captures enum value "STARTER_SMALL"
 	HashicorpCloudVault20201125TierSTARTERSMALL HashicorpCloudVault20201125Tier = "STARTER_SMALL"
+
+	// HashicorpCloudVault20201125TierPLUSSMALL captures enum value "PLUS_SMALL"
+	HashicorpCloudVault20201125TierPLUSSMALL HashicorpCloudVault20201125Tier = "PLUS_SMALL"
+
+	// HashicorpCloudVault20201125TierPLUSMEDIUM captures enum value "PLUS_MEDIUM"
+	HashicorpCloudVault20201125TierPLUSMEDIUM HashicorpCloudVault20201125Tier = "PLUS_MEDIUM"
+
+	// HashicorpCloudVault20201125TierPLUSLARGE captures enum value "PLUS_LARGE"
+	HashicorpCloudVault20201125TierPLUSLARGE HashicorpCloudVault20201125Tier = "PLUS_LARGE"
 )
 
 // for schema
@@ -41,7 +50,7 @@ var hashicorpCloudVault20201125TierEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVault20201125Tier
-	if err := json.Unmarshal([]byte(`["DEV","STANDARD_SMALL","STANDARD_MEDIUM","STANDARD_LARGE","STARTER_SMALL"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["DEV","STANDARD_SMALL","STANDARD_MEDIUM","STANDARD_LARGE","STARTER_SMALL","PLUS_SMALL","PLUS_MEDIUM","PLUS_LARGE"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
