@@ -1,3 +1,12 @@
+## 0.15.0 (January 10, 2022)
+
+FEATURES:
+* Updated cloud-vault-service/preview/2020-11-25 to inclulde new and expanded APIs for PLUS tier ([#60](https://github.com/hashicorp/hcp-sdk-go/pull/60)).
+
+BREAKING CHANGES:
+* Renamed cloud-vault-service/preview/2020-04-20 to cloud-vault-service/stable/2020-04-20 ([#60](https://github.com/hashicorp/hcp-sdk-go/pull/60)).
+* Renamed cloud-vault-service/preview/2020-11-25 to cloud-vault-service/stable/2020-11-25 ([#61](https://github.com/hashicorp/hcp-sdk-go/pull/61)).
+
 ## 0.14.0 (October 19, 2021)
 
 FEATURES:
