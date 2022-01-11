@@ -36,9 +36,6 @@ type HashicorpCloudPackerUpdateChannelRequest struct {
 	// HCP-specific information like project and organization ID
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// Ratifies a revoked channel prior to the update
-	Ratify bool `json:"ratify,omitempty"`
-
 	// Human-readable name for the channel.
 	Slug string `json:"slug,omitempty"`
 }

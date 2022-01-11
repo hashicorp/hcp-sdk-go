@@ -21,17 +21,17 @@ type HashicorpCloudPackerRegistry struct {
 	// config
 	Config *HashicorpCloudPackerRegistryConfig `json:"config,omitempty"`
 
-	// When the registry was create
+	// When the registry was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// ULID of the registry
+	// ULID of the registry.
 	ID string `json:"id,omitempty"`
 
 	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// When the registry was last updated
+	// When the registry was last updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }

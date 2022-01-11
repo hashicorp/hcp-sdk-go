@@ -17,7 +17,7 @@ import (
 // swagger:model hashicorp.cloud.packer.Channel
 type HashicorpCloudPackerChannel struct {
 
-	// The author who created the channel
+	// The author who last updated the channel
 	AuthorID string `json:"author_id,omitempty"`
 
 	// Human-readable name for the bucket this channel is associated with.
@@ -31,18 +31,19 @@ type HashicorpCloudPackerChannel struct {
 	// Packer registry when the channel is created.
 	ID string `json:"id,omitempty"`
 
+	// The iteration the channel is pointing to
+	Iteration *HashicorpCloudPackerIteration `json:"iteration,omitempty"`
+
 	// A pointer to the iteration currently associated with this channel.
+	// Deprecated: look at the Channel.iteration instead.
 	Pointer *HashicorpCloudPackerChannelIterationPointer `json:"pointer,omitempty"`
-
-	// A short explanation of why this channel was revoked.
-	RevocationMessage string `json:"revocation_message,omitempty"`
-
-	// When the channel was revoked, if it has been revoked.
-	// Format: date-time
-	RevokedAt strfmt.DateTime `json:"revoked_at,omitempty"`
 
 	// Human-readable name for the channel.
 	Slug string `json:"slug,omitempty"`
+
+	// When the channel was last updated.
+	// Format: date-time
+	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }
 
 // Validate validates this hashicorp cloud packer channel
@@ -53,11 +54,15 @@ func (m *HashicorpCloudPackerChannel) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateIteration(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePointer(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateRevokedAt(formats); err != nil {
+	if err := m.validateUpdatedAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -75,6 +80,24 @@ func (m *HashicorpCloudPackerChannel) validateCreatedAt(formats strfmt.Registry)
 
 	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerChannel) validateIteration(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Iteration) { // not required
+		return nil
+	}
+
+	if m.Iteration != nil {
+		if err := m.Iteration.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("iteration")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -98,13 +121,13 @@ func (m *HashicorpCloudPackerChannel) validatePointer(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *HashicorpCloudPackerChannel) validateRevokedAt(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerChannel) validateUpdatedAt(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.RevokedAt) { // not required
+	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
-	if err := validate.FormatOf("revoked_at", "body", "date-time", m.RevokedAt.String(), formats); err != nil {
+	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
 	}
 

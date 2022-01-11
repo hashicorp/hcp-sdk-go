@@ -56,6 +56,13 @@ type HashicorpCloudPackerIteration struct {
 	// for this iteration, if this iteration was built on a base layer.
 	IterationAncestorID string `json:"iteration_ancestor_id,omitempty"`
 
+	// A short explanation of why this iteration was revoked.
+	RevocationMessage string `json:"revocation_message,omitempty"`
+
+	// Timestamp from when the iteration is revoked an no longer trusted to be secure.
+	// Format: date-time
+	RevokeAt strfmt.DateTime `json:"revoke_at,omitempty"`
+
 	// When the iteration was last updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
@@ -70,6 +77,10 @@ func (m *HashicorpCloudPackerIteration) Validate(formats strfmt.Registry) error 
 	}
 
 	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRevokeAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -115,6 +126,19 @@ func (m *HashicorpCloudPackerIteration) validateCreatedAt(formats strfmt.Registr
 	}
 
 	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerIteration) validateRevokeAt(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.RevokeAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("revoke_at", "body", "date-time", m.RevokeAt.String(), formats); err != nil {
 		return err
 	}
 
