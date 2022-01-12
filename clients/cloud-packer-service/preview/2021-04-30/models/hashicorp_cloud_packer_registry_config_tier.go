@@ -28,12 +28,6 @@ const (
 
 	// HashicorpCloudPackerRegistryConfigTierSTANDARD captures enum value "STANDARD"
 	HashicorpCloudPackerRegistryConfigTierSTANDARD HashicorpCloudPackerRegistryConfigTier = "STANDARD"
-
-	// HashicorpCloudPackerRegistryConfigTierPLUS captures enum value "PLUS"
-	HashicorpCloudPackerRegistryConfigTierPLUS HashicorpCloudPackerRegistryConfigTier = "PLUS"
-
-	// HashicorpCloudPackerRegistryConfigTierPREMIUM captures enum value "PREMIUM"
-	HashicorpCloudPackerRegistryConfigTierPREMIUM HashicorpCloudPackerRegistryConfigTier = "PREMIUM"
 )
 
 // for schema
@@ -41,7 +35,7 @@ var hashicorpCloudPackerRegistryConfigTierEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudPackerRegistryConfigTier
-	if err := json.Unmarshal([]byte(`["UNSET","PRIVATE_BETA","STANDARD","PLUS","PREMIUM"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["UNSET","PRIVATE_BETA","STANDARD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

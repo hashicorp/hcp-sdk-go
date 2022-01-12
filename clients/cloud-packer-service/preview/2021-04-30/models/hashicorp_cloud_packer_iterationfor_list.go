@@ -23,6 +23,10 @@ type HashicorpCloudPackerIterationforList struct {
 	// Human-readable name for the bucket.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
+	// Maps the build component type to its status enum, for displaying build
+	// status in the iterations view.
+	BuildStatuses map[string]string `json:"build_statuses,omitempty"`
+
 	// If true, all builds associated with this iteration have successfully
 	// completed and uploaded metadata to the registry. When "complete" is true,
 	// This iteration is considered ready to use, and can have channels assigned
@@ -51,6 +55,13 @@ type HashicorpCloudPackerIterationforList struct {
 	// for this iteration, if this iteration was built on a base layer.
 	IterationAncestorID string `json:"iteration_ancestor_id,omitempty"`
 
+	// A short explanation of why this iteration was revoked.
+	RevocationMessage string `json:"revocation_message,omitempty"`
+
+	// Timestamp from when the iteration is revoked an no longer trusted to be secure.
+	// Format: date-time
+	RevokeAt strfmt.DateTime `json:"revoke_at,omitempty"`
+
 	// When the iteration was most recently updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
@@ -61,6 +72,10 @@ func (m *HashicorpCloudPackerIterationforList) Validate(formats strfmt.Registry)
 	var res []error
 
 	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRevokeAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -81,6 +96,19 @@ func (m *HashicorpCloudPackerIterationforList) validateCreatedAt(formats strfmt.
 	}
 
 	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerIterationforList) validateRevokeAt(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.RevokeAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("revoke_at", "body", "date-time", m.RevokeAt.String(), formats); err != nil {
 		return err
 	}
 

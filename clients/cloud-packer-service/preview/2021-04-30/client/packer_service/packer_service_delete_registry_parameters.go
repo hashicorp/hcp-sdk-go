@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewPackerServiceDeleteRegistryParams creates a new PackerServiceDeleteRegistryParams object
@@ -60,6 +61,12 @@ for the packer service delete registry operation typically these are written to 
 */
 type PackerServiceDeleteRegistryParams struct {
 
+	/*HardDelete
+	  When set to true, the registry will be deleted from database
+	and recovery will no longer be possible.
+
+	*/
+	HardDelete *bool
 	/*LocationOrganizationID
 	  organization_id is the id of the organization.
 
@@ -119,6 +126,17 @@ func (o *PackerServiceDeleteRegistryParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithHardDelete adds the hardDelete to the packer service delete registry params
+func (o *PackerServiceDeleteRegistryParams) WithHardDelete(hardDelete *bool) *PackerServiceDeleteRegistryParams {
+	o.SetHardDelete(hardDelete)
+	return o
+}
+
+// SetHardDelete adds the hardDelete to the packer service delete registry params
+func (o *PackerServiceDeleteRegistryParams) SetHardDelete(hardDelete *bool) {
+	o.HardDelete = hardDelete
+}
+
 // WithLocationOrganizationID adds the locationOrganizationID to the packer service delete registry params
 func (o *PackerServiceDeleteRegistryParams) WithLocationOrganizationID(locationOrganizationID string) *PackerServiceDeleteRegistryParams {
 	o.SetLocationOrganizationID(locationOrganizationID)
@@ -170,6 +188,22 @@ func (o *PackerServiceDeleteRegistryParams) WriteToRequest(r runtime.ClientReque
 		return err
 	}
 	var res []error
+
+	if o.HardDelete != nil {
+
+		// query param hard_delete
+		var qrHardDelete bool
+		if o.HardDelete != nil {
+			qrHardDelete = *o.HardDelete
+		}
+		qHardDelete := swag.FormatBool(qrHardDelete)
+		if qHardDelete != "" {
+			if err := r.SetQueryParam("hard_delete", qHardDelete); err != nil {
+				return err
+			}
+		}
+
+	}
 
 	// path param location.organization_id
 	if err := r.SetPathParam("location.organization_id", o.LocationOrganizationID); err != nil {

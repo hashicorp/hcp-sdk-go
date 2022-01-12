@@ -9,22 +9,20 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudPackerRegistryConfig The registry configuration
+// HashicorpCloudPackerRegistryConfig The HCP Packer Registry configuration
 //
 // swagger:model hashicorp.cloud.packer.RegistryConfig
 type HashicorpCloudPackerRegistryConfig struct {
 
-	// A Registry is activated when the system correctly starts billing for it.
+	// A registry is activated when the system correctly starts billing for it.
 	Activated bool `json:"activated,omitempty"`
 
-	// The time the Registry was deprovisioned for billing and deactivated
-	// Format: date-time
-	BillingDeprovisionAt strfmt.DateTime `json:"billing_deprovision_at,omitempty"`
+	// The information about the billing deprovision
+	BillingDeprovision *HashicorpCloudPackerRegistryBillingDeprovision `json:"billing_deprovision,omitempty"`
 
-	// feature_tier is the feature tier for the Registry
+	// feature_tier is the feature tier for the registry.
 	FeatureTier HashicorpCloudPackerRegistryConfigTier `json:"feature_tier,omitempty"`
 }
 
@@ -32,7 +30,7 @@ type HashicorpCloudPackerRegistryConfig struct {
 func (m *HashicorpCloudPackerRegistryConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateBillingDeprovisionAt(formats); err != nil {
+	if err := m.validateBillingDeprovision(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -46,14 +44,19 @@ func (m *HashicorpCloudPackerRegistryConfig) Validate(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *HashicorpCloudPackerRegistryConfig) validateBillingDeprovisionAt(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerRegistryConfig) validateBillingDeprovision(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.BillingDeprovisionAt) { // not required
+	if swag.IsZero(m.BillingDeprovision) { // not required
 		return nil
 	}
 
-	if err := validate.FormatOf("billing_deprovision_at", "body", "date-time", m.BillingDeprovisionAt.String(), formats); err != nil {
-		return err
+	if m.BillingDeprovision != nil {
+		if err := m.BillingDeprovision.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("billing_deprovision")
+			}
+			return err
+		}
 	}
 
 	return nil

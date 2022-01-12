@@ -12,10 +12,10 @@ import (
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudPackerDeleteRegistryResponse hashicorp cloud packer delete registry response
+// HashicorpCloudPackerUpdateRegistryResponse hashicorp cloud packer update registry response
 //
-// swagger:model hashicorp.cloud.packer.DeleteRegistryResponse
-type HashicorpCloudPackerDeleteRegistryResponse struct {
+// swagger:model hashicorp.cloud.packer.UpdateRegistryResponse
+type HashicorpCloudPackerUpdateRegistryResponse struct {
 
 	// operation
 	Operation *cloud.HashicorpCloudOperationOperation `json:"operation,omitempty"`
@@ -24,8 +24,8 @@ type HashicorpCloudPackerDeleteRegistryResponse struct {
 	Registry *HashicorpCloudPackerRegistry `json:"registry,omitempty"`
 }
 
-// Validate validates this hashicorp cloud packer delete registry response
-func (m *HashicorpCloudPackerDeleteRegistryResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud packer update registry response
+func (m *HashicorpCloudPackerUpdateRegistryResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateOperation(formats); err != nil {
@@ -42,7 +42,7 @@ func (m *HashicorpCloudPackerDeleteRegistryResponse) Validate(formats strfmt.Reg
 	return nil
 }
 
-func (m *HashicorpCloudPackerDeleteRegistryResponse) validateOperation(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerUpdateRegistryResponse) validateOperation(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Operation) { // not required
 		return nil
@@ -60,7 +60,7 @@ func (m *HashicorpCloudPackerDeleteRegistryResponse) validateOperation(formats s
 	return nil
 }
 
-func (m *HashicorpCloudPackerDeleteRegistryResponse) validateRegistry(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerUpdateRegistryResponse) validateRegistry(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Registry) { // not required
 		return nil
@@ -79,7 +79,7 @@ func (m *HashicorpCloudPackerDeleteRegistryResponse) validateRegistry(formats st
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudPackerDeleteRegistryResponse) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudPackerUpdateRegistryResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -87,8 +87,8 @@ func (m *HashicorpCloudPackerDeleteRegistryResponse) MarshalBinary() ([]byte, er
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudPackerDeleteRegistryResponse) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudPackerDeleteRegistryResponse
+func (m *HashicorpCloudPackerUpdateRegistryResponse) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudPackerUpdateRegistryResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

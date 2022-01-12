@@ -85,12 +85,6 @@ type PackerServiceDeleteChannelParams struct {
 
 	*/
 	LocationRegionRegion *string
-	/*RevocationMessage
-	  Optional field to provide the reason for why this channel is being revoked.
-	Only useful for a channel that is assigned to an iteration.
-
-	*/
-	RevocationMessage *string
 	/*Slug
 	  Human-readable name for the channel.
 
@@ -190,17 +184,6 @@ func (o *PackerServiceDeleteChannelParams) SetLocationRegionRegion(locationRegio
 	o.LocationRegionRegion = locationRegionRegion
 }
 
-// WithRevocationMessage adds the revocationMessage to the packer service delete channel params
-func (o *PackerServiceDeleteChannelParams) WithRevocationMessage(revocationMessage *string) *PackerServiceDeleteChannelParams {
-	o.SetRevocationMessage(revocationMessage)
-	return o
-}
-
-// SetRevocationMessage adds the revocationMessage to the packer service delete channel params
-func (o *PackerServiceDeleteChannelParams) SetRevocationMessage(revocationMessage *string) {
-	o.RevocationMessage = revocationMessage
-}
-
 // WithSlug adds the slug to the packer service delete channel params
 func (o *PackerServiceDeleteChannelParams) WithSlug(slug string) *PackerServiceDeleteChannelParams {
 	o.SetSlug(slug)
@@ -261,22 +244,6 @@ func (o *PackerServiceDeleteChannelParams) WriteToRequest(r runtime.ClientReques
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
-				return err
-			}
-		}
-
-	}
-
-	if o.RevocationMessage != nil {
-
-		// query param revocation_message
-		var qrRevocationMessage string
-		if o.RevocationMessage != nil {
-			qrRevocationMessage = *o.RevocationMessage
-		}
-		qRevocationMessage := qrRevocationMessage
-		if qRevocationMessage != "" {
-			if err := r.SetQueryParam("revocation_message", qRevocationMessage); err != nil {
 				return err
 			}
 		}

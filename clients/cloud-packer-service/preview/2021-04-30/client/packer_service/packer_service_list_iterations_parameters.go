@@ -66,14 +66,6 @@ type PackerServiceListIterationsParams struct {
 
 	*/
 	BucketSlug string
-	/*IncludeIncomplete
-	  If true, the request will return information about iterations that have
-	not been marked "complete". By default, this is false and the list
-	request will only return information about "complete" iterations that are
-	ready for use.
-
-	*/
-	IncludeIncomplete *bool
 	/*LocationOrganizationID
 	  organization_id is the id of the organization.
 
@@ -180,17 +172,6 @@ func (o *PackerServiceListIterationsParams) SetBucketSlug(bucketSlug string) {
 	o.BucketSlug = bucketSlug
 }
 
-// WithIncludeIncomplete adds the includeIncomplete to the packer service list iterations params
-func (o *PackerServiceListIterationsParams) WithIncludeIncomplete(includeIncomplete *bool) *PackerServiceListIterationsParams {
-	o.SetIncludeIncomplete(includeIncomplete)
-	return o
-}
-
-// SetIncludeIncomplete adds the includeIncomplete to the packer service list iterations params
-func (o *PackerServiceListIterationsParams) SetIncludeIncomplete(includeIncomplete *bool) {
-	o.IncludeIncomplete = includeIncomplete
-}
-
 // WithLocationOrganizationID adds the locationOrganizationID to the packer service list iterations params
 func (o *PackerServiceListIterationsParams) WithLocationOrganizationID(locationOrganizationID string) *PackerServiceListIterationsParams {
 	o.SetLocationOrganizationID(locationOrganizationID)
@@ -290,22 +271,6 @@ func (o *PackerServiceListIterationsParams) WriteToRequest(r runtime.ClientReque
 	// path param bucket_slug
 	if err := r.SetPathParam("bucket_slug", o.BucketSlug); err != nil {
 		return err
-	}
-
-	if o.IncludeIncomplete != nil {
-
-		// query param include_incomplete
-		var qrIncludeIncomplete bool
-		if o.IncludeIncomplete != nil {
-			qrIncludeIncomplete = *o.IncludeIncomplete
-		}
-		qIncludeIncomplete := swag.FormatBool(qrIncludeIncomplete)
-		if qIncludeIncomplete != "" {
-			if err := r.SetQueryParam("include_incomplete", qIncludeIncomplete); err != nil {
-				return err
-			}
-		}
-
 	}
 
 	// path param location.organization_id
