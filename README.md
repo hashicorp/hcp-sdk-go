@@ -61,15 +61,15 @@ Stable SDK versions present a guaranteed contract to downstream consumers and **
 
 ![SDK Release Cycle Diagram](/images/sdk-release-cycle-diagram.png)
 
+1. `stable/2021-02-04` **Only small backwards compatible changes and bug fixes are released directly to the latest stable API version.** No breaking changes allowed.
+
 1. `preview/2021-09-14` **A preview SDK version is released with features available in public beta.** This version is under active development and may still undergo potential breaking changes.
 
 1. `stable/2021-10-25` **A new stable SDK version with a later date is released once feature iteration is complete.** This new stable version includes all the finalized changes of the last preview version.
 
-1. **Backwards compatible changes and bug fixes are released directly to the latest stable SDK version.**
-
 1. `preview/2021-11-07` **A new preview version set to the current date may be released for experimental backwards-compatible features.** After the experimental feature is determined viable, the finalized changes are merged into the latest stable version, similar to how feature branches merge back into main.
 
-1. **Any breaking changes to the stable SDK version are released as a new preview version set to the current date.** At this point the cycle starts over again.
+1. **Any subsequent breaking change starts the cycle all over again.**
 
 ## Generating a new service SDK
 
