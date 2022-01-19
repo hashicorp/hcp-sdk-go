@@ -59,15 +59,15 @@ Stable SDK versions present a guaranteed contract to downstream consumers and **
 
 ### Steps
 
+![SDK Release Cycle Diagram](/images/sdk-release-cycle-diagram.png)
+
 1. **A preview SDK version is released with features available in public beta.** This version is under active development and may still undergo potential breaking changes.
 
 2. **A new stable SDK version with a later date is released once feature iteration is complete.** This new stable version includes all the finalized changes of the last preview version.
 
 3. **Backwards compatible changes and bug fixes are released directly to the latest stable SDK version.**
 
-4. **Any breaking changes to the stable SDK version are released as a new alpha version set to the current date.** At this point the cycle starts over again.**
-
-![SDK Release Cycle Diagram](/images/sdk-release-cycle-diagram.png)
+4. **Any breaking changes to the stable SDK version are released as a new preview version set to the current date.** At this point the cycle starts over again.**
 
 ## Generating a new service SDK
 
