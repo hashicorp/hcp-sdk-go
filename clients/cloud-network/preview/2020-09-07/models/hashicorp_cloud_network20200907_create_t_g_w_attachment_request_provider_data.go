@@ -11,9 +11,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudNetwork20200907CreateTGWAttachmentRequestProviderData CreateTGWAttachmentRequestProviderData is the provider specific
-// data to create a TGW attachment. It is to be distinguished from
-// TGWAttachment.ProviderData despite having overlapping fields.
+// HashicorpCloudNetwork20200907CreateTGWAttachmentRequestProviderData CreateTGWAttachmentRequestProviderData is the provider specific data to create a TGW attachment. It is to be distinguished from TGWAttachment.ProviderData despite having overlapping fields.
 //
 // swagger:model hashicorp.cloud.network_20200907.CreateTGWAttachmentRequestProviderData
 type HashicorpCloudNetwork20200907CreateTGWAttachmentRequestProviderData struct {
