@@ -1,3 +1,9 @@
+## 0.16.0 (January 25, 2022)
+
+FEATURES:
+* Updated cloud-packer-service/preview/2021-04-30 to add UpdateRegistry ([#63](https://github.com/hashicorp/hcp-sdk-go/pull/63)).
+* Updated cloud-network/preview/2020-09-07 ([#64](https://github.com/hashicorp/hcp-sdk-go/pull/64)).
+
 ## 0.15.0 (January 10, 2022)
 
 FEATURES:
