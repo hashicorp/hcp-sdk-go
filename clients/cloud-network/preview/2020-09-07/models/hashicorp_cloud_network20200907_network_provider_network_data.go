@@ -18,6 +18,9 @@ type HashicorpCloudNetwork20200907NetworkProviderNetworkData struct {
 
 	// aws network data
 	AwsNetworkData *HashicorpCloudNetwork20200907AWSNetworkData `json:"aws_network_data,omitempty"`
+
+	// azure network data
+	AzureNetworkData HashicorpCloudNetwork20200907AzureNetworkData `json:"azure_network_data,omitempty"`
 }
 
 // Validate validates this hashicorp cloud network 20200907 network provider network data
