@@ -1,3 +1,8 @@
+## 0.17.0 (February 4, 2022)
+
+FEATURES:
+* Updated cloud-network/preview/2020-09-07 ([#64](https://github.com/hashicorp/hcp-sdk-go/pull/66)).
+
 ## 0.16.0 (January 25, 2022)
 
 FEATURES:
