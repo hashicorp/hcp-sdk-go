@@ -31,6 +31,8 @@ type ClientService interface {
 
 	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error)
 
+	DeletePathsFilter(params *DeletePathsFilterParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePathsFilterOK, error)
+
 	DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteSnapshotOK, error)
 
 	DisableCORS(params *DisableCORSParams, authInfo runtime.ClientAuthInfoWriter) (*DisableCORSOK, error)
@@ -66,6 +68,8 @@ type ClientService interface {
 	Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateOK, error)
 
 	UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateCORSConfigOK, error)
+
+	UpdatePathsFilter(params *UpdatePathsFilterParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePathsFilterOK, error)
 
 	UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePublicIpsOK, error)
 
@@ -175,6 +179,40 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  DeletePathsFilter delete paths filter API
+*/
+func (a *Client) DeletePathsFilter(params *DeletePathsFilterParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePathsFilterOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeletePathsFilterParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "DeletePathsFilter",
+		Method:             "DELETE",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/delete-paths-filter",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeletePathsFilterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeletePathsFilterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeletePathsFilterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -787,6 +825,40 @@ func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runti
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateCORSConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  UpdatePathsFilter update paths filter API
+*/
+func (a *Client) UpdatePathsFilter(params *UpdatePathsFilterParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePathsFilterOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdatePathsFilterParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "UpdatePathsFilter",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-paths-filter",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdatePathsFilterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdatePathsFilterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdatePathsFilterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

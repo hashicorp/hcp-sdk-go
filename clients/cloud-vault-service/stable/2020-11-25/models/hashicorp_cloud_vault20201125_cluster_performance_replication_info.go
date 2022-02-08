@@ -20,6 +20,10 @@ type HashicorpCloudVault20201125ClusterPerformanceReplicationInfo struct {
 	// Mode holds the replication mode type.
 	Mode HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode `json:"mode,omitempty"`
 
+	// paths_filter holds the information on which paths the cluster can replicate from the Primary.
+	// This field only applies when the cluster is a Secondary under Performance Replication.
+	PathsFilter *HashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilter `json:"paths_filter,omitempty"`
+
 	// primary_cluster_link holds the link information of the
 	// primary cluster to which the current cluster is replicated to. This field
 	// only applies when the cluster is a Secondary under Cluster Performance Replication.
@@ -31,6 +35,10 @@ func (m *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo) Validate(
 	var res []error
 
 	if err := m.validateMode(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePathsFilter(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -55,6 +63,24 @@ func (m *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo) validateM
 			return ve.ValidateName("mode")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo) validatePathsFilter(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PathsFilter) { // not required
+		return nil
+	}
+
+	if m.PathsFilter != nil {
+		if err := m.PathsFilter.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("paths_filter")
+			}
+			return err
+		}
 	}
 
 	return nil
