@@ -1,4 +1,4 @@
-## 0.17.0 (January 25, 2022)
+## 0.17.0 (Feburary 9, 2022)
 
 FEATURES:
 * Updated cloud-vault-service/stable/2020-11-25 to add cluster performance replication paths filter newly added attributed ([#68](https://github.com/hashicorp/hcp-sdk-go/pull/68)).
