@@ -1,3 +1,8 @@
+## 0.17.0 (January 25, 2022)
+
+FEATURES:
+* Updated cloud-vault-service/stable/2020-11-25 to add cluster performance replication paths filter newly added attributed ([#68](https://github.com/hashicorp/hcp-sdk-go/pull/68)).
+
 ## 0.16.0 (January 25, 2022)
 
 FEATURES:
@@ -71,10 +76,10 @@ FEATURES:
 ## 0.3.0 (February 23, 2021)
 
 BUGS:
-* update the following to include default error responses ([#7](https://github.com/hashicorp/hcp-sdk-go/pull/7)) 
+* update the following to include default error responses ([#7](https://github.com/hashicorp/hcp-sdk-go/pull/7))
     - cloud-network/preview/2020-09-07
     - cloud-operation/preview/2020-05-05
-    - cloud-resource-manager/preview/2019-12-10 
+    - cloud-resource-manager/preview/2019-12-10
 
 BREAKING CHANGES:
 * cloud-consul-service/preview/2020-08-26: revert service prefix addition to function names
@@ -87,7 +92,7 @@ IMPROVEMENTS:
 BUGS:
 * cloud-consul-service/preview/2020-08-26: update to include default error responses ([#4](https://github.com/hashicorp/hcp-sdk-go/pull/4))
 
-BREAKING CHANGES: 
+BREAKING CHANGES:
 * cloud-consul-service/preview/2020-08-26: change function names to include service name prefix ([#4](https://github.com/hashicorp/hcp-sdk-go/pull/4))
 
 ## 0.1.0 (January 29, 2021)
