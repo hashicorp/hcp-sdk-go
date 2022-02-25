@@ -55,6 +55,8 @@ type ClientService interface {
 
 	PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetRegistryOK, error)
 
+	PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetRegistryTFCRunTaskAPIParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetRegistryTFCRunTaskAPIOK, error)
+
 	PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBucketsOK, error)
 
 	PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBuildsOK, error)
@@ -62,6 +64,10 @@ type ClientService interface {
 	PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListChannelsOK, error)
 
 	PackerServiceListIterations(params *PackerServiceListIterationsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListIterationsOK, error)
+
+	PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceRegenerateTFCRunTaskHmacKeyParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceRegenerateTFCRunTaskHmacKeyOK, error)
+
+	PackerServiceTFCImageValidationRunTask(params *PackerServiceTFCImageValidationRunTaskParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceTFCImageValidationRunTaskOK, error)
 
 	PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBucketOK, error)
 
@@ -597,6 +603,40 @@ func (a *Client) PackerServiceGetRegistry(params *PackerServiceGetRegistryParams
 }
 
 /*
+  PackerServiceGetRegistryTFCRunTaskAPI gets the h c p packer registry API URL and h m a c key to integrate with terraform cloud as a run task
+*/
+func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetRegistryTFCRunTaskAPIParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetRegistryTFCRunTaskAPIOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceGetRegistryTFCRunTaskAPIParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PackerService_GetRegistryTFCRunTaskAPI",
+		Method:             "GET",
+		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceGetRegistryTFCRunTaskAPIReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceGetRegistryTFCRunTaskAPIOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceGetRegistryTFCRunTaskAPIDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
   PackerServiceListBuckets lists buckets returns every existing bucket in the h c p packer registry and their last completed iteration
 */
 func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBucketsOK, error) {
@@ -729,6 +769,74 @@ func (a *Client) PackerServiceListIterations(params *PackerServiceListIterations
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PackerServiceListIterationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  PackerServiceRegenerateTFCRunTaskHmacKey regenerates the h m a c key used to sign requests from terraform cloud to h c p packer run tasks
+*/
+func (a *Client) PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceRegenerateTFCRunTaskHmacKeyParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceRegenerateTFCRunTaskHmacKeyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceRegenerateTFCRunTaskHmacKeyParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PackerService_RegenerateTFCRunTaskHmacKey",
+		Method:             "PATCH",
+		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceRegenerateTFCRunTaskHmacKeyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceRegenerateTFCRunTaskHmacKeyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceRegenerateTFCRunTaskHmacKeyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  PackerServiceTFCImageValidationRunTask terraforms cloud run task hook for validating an h c p packer artifact used in the terraform plan to block a terraform apply for artifacts that are in an invalid state such as revoked iterations
+*/
+func (a *Client) PackerServiceTFCImageValidationRunTask(params *PackerServiceTFCImageValidationRunTaskParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceTFCImageValidationRunTaskOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceTFCImageValidationRunTaskParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PackerService_TFCImageValidationRunTask",
+		Method:             "POST",
+		PathPattern:        "/packer/2021-04-30/terraform-cloud/validation/{api_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceTFCImageValidationRunTaskReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceTFCImageValidationRunTaskOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceTFCImageValidationRunTaskDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

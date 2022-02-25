@@ -24,6 +24,9 @@ type HashicorpCloudPackerRegistryConfig struct {
 
 	// feature_tier is the feature tier for the registry.
 	FeatureTier HashicorpCloudPackerRegistryConfigTier `json:"feature_tier,omitempty"`
+
+	// Required configuration to run TFC run tasks for validation against this registry.
+	TfcRunTaskConfig *HashicorpCloudPackerRegistryTFCRunTaskConfig `json:"tfc_run_task_config,omitempty"`
 }
 
 // Validate validates this hashicorp cloud packer registry config
@@ -35,6 +38,10 @@ func (m *HashicorpCloudPackerRegistryConfig) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateFeatureTier(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTfcRunTaskConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -73,6 +80,24 @@ func (m *HashicorpCloudPackerRegistryConfig) validateFeatureTier(formats strfmt.
 			return ve.ValidateName("feature_tier")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerRegistryConfig) validateTfcRunTaskConfig(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.TfcRunTaskConfig) { // not required
+		return nil
+	}
+
+	if m.TfcRunTaskConfig != nil {
+		if err := m.TfcRunTaskConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("tfc_run_task_config")
+			}
+			return err
+		}
 	}
 
 	return nil
