@@ -56,6 +56,10 @@ type HashicorpCloudPackerIteration struct {
 	// for this iteration, if this iteration was built on a base layer.
 	IterationAncestorID string `json:"iteration_ancestor_id,omitempty"`
 
+	// Who revoked this iteration. For human authors (e.g. HCP Portal) this will is an email address.
+	// For machine authors using service principals, this is the customer-chosen name for this service principal.
+	RevocationAuthor string `json:"revocation_author,omitempty"`
+
 	// A short explanation of why this iteration was revoked.
 	RevocationMessage string `json:"revocation_message,omitempty"`
 
