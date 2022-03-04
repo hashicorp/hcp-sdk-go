@@ -70,8 +70,7 @@ type PackerServiceCreateBuildParams struct {
 	*/
 	BucketSlug string
 	/*IterationID
-	  Unique identifier of the iteration that this build should be associated
-	with.
+	  ULID of the iteration that this build should be associated with.
 
 	*/
 	IterationID string

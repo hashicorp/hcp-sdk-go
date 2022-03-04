@@ -19,8 +19,7 @@ type HashicorpCloudPackerImageCreateBody struct {
 	// ID or URL of the remote cloud image as given by a build.
 	ImageID string `json:"image_id,omitempty"`
 
-	// Cloud-specific region as provided by `packer build`. For example,
-	// "ap-east-1".
+	// Cloud-specific region as provided by `packer build`. For example, "ap-east-1".
 	Region string `json:"region,omitempty"`
 }
 

@@ -67,8 +67,7 @@ type PackerServiceListBuildsParams struct {
 	*/
 	BucketSlug string
 	/*IterationID
-	  Unique identifier of the iteration to list builds for; this was
-	created and set by the HCP Packer registry when the iteration was created.
+	  ULID of the iteration to list builds for.
 
 	*/
 	IterationID string

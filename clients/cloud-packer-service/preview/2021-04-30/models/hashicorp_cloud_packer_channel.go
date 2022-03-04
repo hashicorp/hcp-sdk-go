@@ -17,7 +17,7 @@ import (
 // swagger:model hashicorp.cloud.packer.Channel
 type HashicorpCloudPackerChannel struct {
 
-	// The author who last updated the channel
+	// The user who last updated the channel.
 	AuthorID string `json:"author_id,omitempty"`
 
 	// Human-readable name for the bucket this channel is associated with.
@@ -27,11 +27,10 @@ type HashicorpCloudPackerChannel struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// Unique identifier of the channel. This ID is created and set by the HCP
-	// Packer registry when the channel is created.
+	// Universally Unique Lexicographically Sortable Identifier (ULID) of the channel.
 	ID string `json:"id,omitempty"`
 
-	// The iteration the channel is pointing to
+	// The iteration the channel is pointing to.
 	Iteration *HashicorpCloudPackerIteration `json:"iteration,omitempty"`
 
 	// A pointer to the iteration currently associated with this channel.

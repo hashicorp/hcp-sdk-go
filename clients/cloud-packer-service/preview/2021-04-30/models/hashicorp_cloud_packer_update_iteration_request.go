@@ -27,11 +27,10 @@ type HashicorpCloudPackerUpdateIterationRequest struct {
 	// have channels assigned to it.
 	Complete bool `json:"complete,omitempty"`
 
-	// Unique identifier of the iteration. This was created and set by the
-	// HCP Packer registry when the iteration was created.
+	// ULID of the iteration.
 	IterationID string `json:"iteration_id,omitempty"`
 
-	// HCP-specific information like project and organization ID
+	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
 	// When set to true, will make a previously revoked iteration valid again.

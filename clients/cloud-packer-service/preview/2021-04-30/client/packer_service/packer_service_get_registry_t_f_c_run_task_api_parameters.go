@@ -81,8 +81,8 @@ type PackerServiceGetRegistryTFCRunTaskAPIParams struct {
 	*/
 	LocationRegionRegion *string
 	/*TaskType
-	  The HCP Packer TFC run task type.
-	Currently, the only existing type is 'validation'.
+	  The HCP Packer Terraform Cloud run task type.
+	Currently, the only existing type is `validation`.
 
 	*/
 	TaskType string

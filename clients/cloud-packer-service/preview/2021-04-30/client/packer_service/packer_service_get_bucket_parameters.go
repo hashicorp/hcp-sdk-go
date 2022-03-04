@@ -61,8 +61,7 @@ for the packer service get bucket operation typically these are written to a htt
 type PackerServiceGetBucketParams struct {
 
 	/*BucketID
-	  Unique identifier of the bucket; created and set by the HCP Packer
-	registry when the bucket is created.
+	  ULID of the bucket.
 
 	*/
 	BucketID *string

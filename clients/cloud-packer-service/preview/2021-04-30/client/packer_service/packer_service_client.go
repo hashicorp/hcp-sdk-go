@@ -83,7 +83,7 @@ type ClientService interface {
 }
 
 /*
-  PackerServiceCreateBucket creates bucket creates a image bucket in the h c p packer registry
+  PackerServiceCreateBucket creates an image bucket in the h c p packer registry
 */
 func (a *Client) PackerServiceCreateBucket(params *PackerServiceCreateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateBucketOK, error) {
 	// TODO: Validate the params before sending
@@ -117,7 +117,7 @@ func (a *Client) PackerServiceCreateBucket(params *PackerServiceCreateBucketPara
 }
 
 /*
-  PackerServiceCreateBuild creates build will create an image build in the provided image bucket and iteration it s called once for each build source in a packer build run if the build for a given cloud provider already exists then the create method will fail
+  PackerServiceCreateBuild creates an image build in the provided image iteration it is called once for each build source in a packer build run the request will error if the build for a given cloud provider already exists
 */
 func (a *Client) PackerServiceCreateBuild(params *PackerServiceCreateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -151,7 +151,7 @@ func (a *Client) PackerServiceCreateBuild(params *PackerServiceCreateBuildParams
 }
 
 /*
-  PackerServiceCreateChannel creates channel creates a channel either empty or pointing to an iteration
+  PackerServiceCreateChannel creates a channel either empty or assigned to an iteration
 */
 func (a *Client) PackerServiceCreateChannel(params *PackerServiceCreateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateChannelOK, error) {
 	// TODO: Validate the params before sending
@@ -185,7 +185,7 @@ func (a *Client) PackerServiceCreateChannel(params *PackerServiceCreateChannelPa
 }
 
 /*
-  PackerServiceCreateIteration creates iteration will given a bucket create a new empty iteration to be written to this is called at the beginning of a new packer build if an image iteration with the same iteration number already exists this call will return an error this will not create individual builds for the iteration it will only create the iteration placeholder
+  PackerServiceCreateIteration creates an empty iteration to be written to this API is called at the beginning of a new packer build and does not create individual builds for the iteration
 */
 func (a *Client) PackerServiceCreateIteration(params *PackerServiceCreateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateIterationOK, error) {
 	// TODO: Validate the params before sending
@@ -219,7 +219,7 @@ func (a *Client) PackerServiceCreateIteration(params *PackerServiceCreateIterati
 }
 
 /*
-  PackerServiceCreateRegistry creates registry creates an h c p packer registry and start billing for it
+  PackerServiceCreateRegistry creates a h c p packer registry and starts billing for it
 */
 func (a *Client) PackerServiceCreateRegistry(params *PackerServiceCreateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateRegistryOK, error) {
 	// TODO: Validate the params before sending
@@ -253,7 +253,7 @@ func (a *Client) PackerServiceCreateRegistry(params *PackerServiceCreateRegistry
 }
 
 /*
-  PackerServiceDeleteBucket deletes bucket deletes a bucket and all its information such as iterations and builds
+  PackerServiceDeleteBucket deletes a bucket and all its information such as iterations and builds
 */
 func (a *Client) PackerServiceDeleteBucket(params *PackerServiceDeleteBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteBucketOK, error) {
 	// TODO: Validate the params before sending
@@ -287,7 +287,7 @@ func (a *Client) PackerServiceDeleteBucket(params *PackerServiceDeleteBucketPara
 }
 
 /*
-  PackerServiceDeleteBuild deletes build deletes a build in the provided bucket and iteration
+  PackerServiceDeleteBuild deletes a build in the provided iteration
 */
 func (a *Client) PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -321,7 +321,7 @@ func (a *Client) PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams
 }
 
 /*
-  PackerServiceDeleteChannel deletes channel will delete a channel
+  PackerServiceDeleteChannel deletes a channel
 */
 func (a *Client) PackerServiceDeleteChannel(params *PackerServiceDeleteChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteChannelOK, error) {
 	// TODO: Validate the params before sending
@@ -355,7 +355,7 @@ func (a *Client) PackerServiceDeleteChannel(params *PackerServiceDeleteChannelPa
 }
 
 /*
-  PackerServiceDeleteIteration deletes iteration deletes an iteration and all its information such as its builds
+  PackerServiceDeleteIteration deletes an iteration and all its information such as its builds
 */
 func (a *Client) PackerServiceDeleteIteration(params *PackerServiceDeleteIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteIterationOK, error) {
 	// TODO: Validate the params before sending
@@ -389,7 +389,7 @@ func (a *Client) PackerServiceDeleteIteration(params *PackerServiceDeleteIterati
 }
 
 /*
-  PackerServiceDeleteRegistry deletes registry by default soft deletes an h c p packer registry by making it deactivated soft deletion includes stopping billing set hard delete to true to also delete the registry from database
+  PackerServiceDeleteRegistry deactivates an active h c p packer registry deactivating a registry will stop any additional billing for the resource setting the hard delete param to true will delete the registry and any associated resources from the database
 */
 func (a *Client) PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteRegistryOK, error) {
 	// TODO: Validate the params before sending
@@ -423,7 +423,7 @@ func (a *Client) PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistry
 }
 
 /*
-  PackerServiceGetBucket gets bucket returns a bucket with its latest completed iteration
+  PackerServiceGetBucket gets a bucket with its latest completed iteration
 */
 func (a *Client) PackerServiceGetBucket(params *PackerServiceGetBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBucketOK, error) {
 	// TODO: Validate the params before sending
@@ -457,7 +457,7 @@ func (a *Client) PackerServiceGetBucket(params *PackerServiceGetBucketParams, au
 }
 
 /*
-  PackerServiceGetBuild gets build returns a build with its list of images if the requested build iteration is revoked and the requester is a service principal the image id URL will be omitted from the response to avoid automation scripts to use a revoked image
+  PackerServiceGetBuild gets a build with its list of images if the requested build iteration is revoked and the requester is a service principal the image id URL will be omitted from the response and replaced with error revoked to prevent automation scripts from using a revoked image
 */
 func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -491,7 +491,7 @@ func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, auth
 }
 
 /*
-  PackerServiceGetChannel gets channel returns a channel with the iteration it s pointing to if any if the requested iteration is revoked and the requester is a service principal the image id URL will be omitted from the response to avoid automation scripts to use a revoked image
+  PackerServiceGetChannel gets a channel with the iteration that it is currently assigned if any if the requested iteration is revoked and the requester is a service principal the image id URL will be omitted from the response and replaced with error revoked to prevent automation scripts from using a revoked image
 */
 func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetChannelOK, error) {
 	// TODO: Validate the params before sending
@@ -525,17 +525,7 @@ func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, 
 }
 
 /*
-  PackerServiceGetIteration gets iteration allows the user to retrieve an iteration using one of the following identifiers iteration id incremental version fingerprint
-
-  These are supplied as a query parameter. For example:
-images/{bucket_slug}/iteration?fingerprint={fingerprint}
-
-bucket_slug must always be set because it is possible for iterations to
-have the same incremental_version or fingerprint across buckets.
-
-If the requested iteration is revoked and the requester is a service principal,
-the image id/URL will be omitted from the response to avoid automation scripts
-to use a revoked image.
+  PackerServiceGetIteration allows the user to get an iteration using one of the following identifiers iteration id incremental version fingerprint these are supplied as a query parameter e g images bucket slug iteration fingerprint fingerprint if the requested iteration is revoked and the requester is a service principal the image id URL will be omitted from the response and replaced with error revoked to prevent automation scripts from using a revoked image
 */
 func (a *Client) PackerServiceGetIteration(params *PackerServiceGetIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetIterationOK, error) {
 	// TODO: Validate the params before sending
@@ -569,7 +559,7 @@ func (a *Client) PackerServiceGetIteration(params *PackerServiceGetIterationPara
 }
 
 /*
-  PackerServiceGetRegistry gets registry returns an h c p packer registry either activated or not
+  PackerServiceGetRegistry gets a h c p packer registry
 */
 func (a *Client) PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetRegistryOK, error) {
 	// TODO: Validate the params before sending
@@ -637,7 +627,7 @@ func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetR
 }
 
 /*
-  PackerServiceListBuckets lists buckets returns every existing bucket in the h c p packer registry and their last completed iteration
+  PackerServiceListBuckets lists every existing bucket in the h c p packer registry and their last completed iteration
 */
 func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBucketsOK, error) {
 	// TODO: Validate the params before sending
@@ -671,7 +661,7 @@ func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams
 }
 
 /*
-  PackerServiceListBuilds lists builds returns every existing build and its images for a bucket iteration if the requested iteration is revoked and the requester is a service principal the image id URL will be omitted from the response to avoid automation scripts to use a revoked image
+  PackerServiceListBuilds lists every existing build and its images for an iteration if the requested iteration is revoked and the requester is a service principal the image id URL will be omitted from the response and replaced with error revoked to prevent automation scripts from using a revoked image
 */
 func (a *Client) PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBuildsOK, error) {
 	// TODO: Validate the params before sending
@@ -705,7 +695,7 @@ func (a *Client) PackerServiceListBuilds(params *PackerServiceListBuildsParams, 
 }
 
 /*
-  PackerServiceListChannels lists channels will return all channels of a given bucket
+  PackerServiceListChannels lists all channels of a given bucket
 */
 func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListChannelsOK, error) {
 	// TODO: Validate the params before sending
@@ -739,7 +729,7 @@ func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsPara
 }
 
 /*
-  PackerServiceListIterations lists iterations returns every existing iteration of a bucket either complete or incomplete
+  PackerServiceListIterations lists every existing iteration of a bucket
 */
 func (a *Client) PackerServiceListIterations(params *PackerServiceListIterationsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListIterationsOK, error) {
 	// TODO: Validate the params before sending
@@ -841,7 +831,7 @@ func (a *Client) PackerServiceTFCImageValidationRunTask(params *PackerServiceTFC
 }
 
 /*
-  PackerServiceUpdateBucket updates bucket updates a bucket s basic information
+  PackerServiceUpdateBucket updates a bucket s information
 */
 func (a *Client) PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBucketOK, error) {
 	// TODO: Validate the params before sending
@@ -875,7 +865,7 @@ func (a *Client) PackerServiceUpdateBucket(params *PackerServiceUpdateBucketPara
 }
 
 /*
-  PackerServiceUpdateBuild updates build will update an image build this may be most often used for modifying the status of a currently running build
+  PackerServiceUpdateBuild updates an image build this may be most often used for modifying the status of a currently running build
 */
 func (a *Client) PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -909,7 +899,7 @@ func (a *Client) PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams
 }
 
 /*
-  PackerServiceUpdateChannel updates channel updates a channel to point to a new iteration
+  PackerServiceUpdateChannel updates a channel to clear or point to a new iteration
 */
 func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateChannelOK, error) {
 	// TODO: Validate the params before sending
@@ -943,7 +933,7 @@ func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelPa
 }
 
 /*
-  PackerServiceUpdateIteration updates iteration can be used to mark an iteration complete revoke revoking can be done at any time to complete or incomplete iterations immediately or in the future depending on the passing timestamp revoked iterations cannot be updated to make build specific updates for builds within the iteration use the update build endpoint
+  PackerServiceUpdateIteration this API can be used to revoke restore or complete an iteration revoking can be done at any time to complete or incomplete iterations immediately or in the future depending on the passing timestamp revoked iterations cannot be updated unless restored to make build specific updates for builds within the iteration use the update build endpoint
 */
 func (a *Client) PackerServiceUpdateIteration(params *PackerServiceUpdateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateIterationOK, error) {
 	// TODO: Validate the params before sending
@@ -977,7 +967,7 @@ func (a *Client) PackerServiceUpdateIteration(params *PackerServiceUpdateIterati
 }
 
 /*
-  PackerServiceUpdateRegistry updates registry update the feature tier of h c p packer registry
+  PackerServiceUpdateRegistry updates the feature tier of an h c p packer registry
 */
 func (a *Client) PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateRegistryOK, error) {
 	// TODO: Validate the params before sending

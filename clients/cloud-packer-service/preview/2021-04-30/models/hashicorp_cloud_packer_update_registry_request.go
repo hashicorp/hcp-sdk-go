@@ -17,11 +17,11 @@ import (
 // swagger:model hashicorp.cloud.packer.UpdateRegistryRequest
 type HashicorpCloudPackerUpdateRegistryRequest struct {
 
-	// Activates a deprovisioned registry. A registry can only be activated
+	// Activates a deactivated registry. A registry can only be activated
 	// if the organization billing account is valid (e.g. valid credits or payment method).
 	Activate bool `json:"activate,omitempty"`
 
-	// Feature tier of the Registry
+	// Feature tier of the Registry.
 	FeatureTier HashicorpCloudPackerRegistryConfigTier `json:"feature_tier,omitempty"`
 
 	// location

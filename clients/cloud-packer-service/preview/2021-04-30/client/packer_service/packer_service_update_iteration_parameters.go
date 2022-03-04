@@ -65,8 +65,7 @@ type PackerServiceUpdateIterationParams struct {
 	/*Body*/
 	Body *models.HashicorpCloudPackerUpdateIterationRequest
 	/*IterationID
-	  Unique identifier of the iteration. This was created and set by the
-	HCP Packer registry when the iteration was created.
+	  ULID of the iteration.
 
 	*/
 	IterationID string

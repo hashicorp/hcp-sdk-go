@@ -26,14 +26,13 @@ type HashicorpCloudPackerCreateBuildRequest struct {
 	// Fingerprint of the iteration. The fingerprint is set by Packer when you
 	// call `packer build`. It will most often correspond to a git commit sha,
 	// but can be manually overridden by setting the environment variable
-	// `HCP_PACKER_BUILD_FINGERPRINT`
+	// `HCP_PACKER_BUILD_FINGERPRINT`.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
-	// Unique identifier of the iteration that this build should be associated
-	// with.
+	// ULID of the iteration that this build should be associated with.
 	IterationID string `json:"iteration_id,omitempty"`
 
-	// HCP-specific information like project and organization ID
+	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 }
 

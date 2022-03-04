@@ -61,8 +61,7 @@ for the packer service get build operation typically these are written to a http
 type PackerServiceGetBuildParams struct {
 
 	/*BuildID
-	  Unique identifier of the build that should be retrieved; this ID was
-	created and set by the HCP Packer registry when the build was created.
+	  ULID of the build that should be retrieved.
 
 	*/
 	BuildID string

@@ -41,11 +41,10 @@ type HashicorpCloudPackerIteration struct {
 	// Fingerprint of the iteration. The fingerprint is set by Packer when you
 	// call `packer build`. It will most often correspond to a git commit sha,
 	// but can be manually overridden by setting the environment variable
-	// `HCP_PACKER_BUILD_FINGERPRINT`
+	// `HCP_PACKER_BUILD_FINGERPRINT`.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
-	// Unique identifier of the iteration; created and set by the HCP Packer
-	// registry when the iteration is created.
+	// Universally Unique Lexicographically Sortable Identifier (ULID) of the iteration.
 	ID string `json:"id,omitempty"`
 
 	// The human-readable version number assigned to this iteration. This
@@ -56,7 +55,7 @@ type HashicorpCloudPackerIteration struct {
 	// for this iteration, if this iteration was built on a base layer.
 	IterationAncestorID string `json:"iteration_ancestor_id,omitempty"`
 
-	// Who revoked this iteration. For human authors (e.g. HCP Portal) this will is an email address.
+	// Who revoked this iteration. For human authors (e.g. HCP Portal) this will be an email address.
 	// For machine authors using service principals, this is the customer-chosen name for this service principal.
 	RevocationAuthor string `json:"revocation_author,omitempty"`
 

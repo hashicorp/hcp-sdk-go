@@ -80,8 +80,7 @@ type PackerServiceGetIterationParams struct {
 	*/
 	IncrementalVersion *int32
 	/*IterationID
-	  Unique identifier of the iteration. This was created and set by the
-	HCP Packer registry when the iteration was created.
+	  ULID of the iteration.
 
 	*/
 	IterationID *string

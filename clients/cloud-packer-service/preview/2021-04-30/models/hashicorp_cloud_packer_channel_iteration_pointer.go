@@ -19,14 +19,14 @@ import (
 // swagger:model hashicorp.cloud.packer.ChannelIterationPointer
 type HashicorpCloudPackerChannelIterationPointer struct {
 
-	// The author who pointed the channel to the iteration
+	// The user who pointed the channel to the iteration.
 	AuthorID string `json:"author_id,omitempty"`
 
 	// When the channel pointer was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// The iteration the channel is pointing to
+	// The iteration the channel is pointing to.
 	Iteration *HashicorpCloudPackerIteration `json:"iteration,omitempty"`
 }
 

@@ -60,9 +60,15 @@ for the packer service t f c image validation run task operation typically these
 */
 type PackerServiceTFCImageValidationRunTaskParams struct {
 
-	/*APIID*/
+	/*APIID
+	  UUID of the HCP Packer registry run task API.
+
+	*/
 	APIID string
-	/*Body*/
+	/*Body
+	  The bytes for the JSON payload sent by Terraform Cloud when calling this run task.
+
+	*/
 	Body strfmt.Base64
 
 	timeout    time.Duration

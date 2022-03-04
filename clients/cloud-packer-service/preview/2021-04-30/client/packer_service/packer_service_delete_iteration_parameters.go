@@ -66,7 +66,7 @@ type PackerServiceDeleteIterationParams struct {
 	*/
 	BucketSlug *string
 	/*IterationID
-	  Unique identifier of the iteration. This was created and set by the
+	  ULID of the iteration. This was created and set by the
 	HCP Packer registry when the iteration was created.
 
 	*/

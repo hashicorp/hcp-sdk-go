@@ -65,8 +65,7 @@ type PackerServiceUpdateBuildParams struct {
 	/*Body*/
 	Body *models.HashicorpCloudPackerUpdateBuildRequest
 	/*BuildID
-	  Unique identifier of the build that should be updated; this ID was
-	created and set by the HCP Packer registry when the build was created.
+	  ULID of the build that should be updated.
 
 	*/
 	BuildID string

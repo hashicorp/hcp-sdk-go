@@ -24,15 +24,14 @@ type HashicorpCloudPackerBuild struct {
 	CloudProvider string `json:"cloud_provider,omitempty"`
 
 	// Internal Packer name for the builder or post-processor component used to
-	// build this. For example, "amazon-ebs" or "azure-arm"
+	// build this. For example, "amazon-ebs" or "azure-arm".
 	ComponentType string `json:"component_type,omitempty"`
 
 	// When the build was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// Unique identifier of the build; created and set by the HCP Packer
-	// registry when the build is created.
+	// Universally Unique Lexicographically Sortable Identifier (ULID) of the build.
 	ID string `json:"id,omitempty"`
 
 	// List of images associated with this build.

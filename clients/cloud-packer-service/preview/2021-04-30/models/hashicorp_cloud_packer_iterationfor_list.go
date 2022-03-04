@@ -40,11 +40,10 @@ type HashicorpCloudPackerIterationforList struct {
 	// Fingerprint of the iteration. The fingerprint is set by Packer when you
 	// call `packer build`. It will most often correspond to a git commit sha,
 	// but can be manually overridden by setting the environment variable
-	// `HCP_PACKER_BUILD_FINGERPRINT`
+	// `HCP_PACKER_BUILD_FINGERPRINT`.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
-	// Unique identifier of the iteration; created and set by the HCP Packer
-	// registry when the iteration is created.
+	// Universally Unique Lexicographically Sortable Identifier (ULID) of the iteration.
 	ID string `json:"id,omitempty"`
 
 	// The human-readable version number assigned to this iteration. This
