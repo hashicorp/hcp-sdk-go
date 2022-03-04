@@ -17,11 +17,11 @@ import (
 // swagger:model hashicorp.cloud.packer.RegistryBillingDeprovision
 type HashicorpCloudPackerRegistryBillingDeprovision struct {
 
-	// The time the Registry was deprovisioned of billing
+	// The time the registry was deactivated of billing.
 	// Format: date-time
 	At strfmt.DateTime `json:"at,omitempty"`
 
-	// Reason of why the registry was deprovisioned
+	// Reason of why the registry was deactivated.
 	Reason HashicorpCloudPackerRegistryBillingDeprovisionReason `json:"reason,omitempty"`
 }
 

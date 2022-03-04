@@ -17,7 +17,7 @@ import (
 // swagger:model hashicorp.cloud.packer.CreateRegistryRequest
 type HashicorpCloudPackerCreateRegistryRequest struct {
 
-	// Feature tier of the Registry
+	// Feature tier of the Registry.
 	FeatureTier HashicorpCloudPackerRegistryConfigTier `json:"feature_tier,omitempty"`
 
 	// location

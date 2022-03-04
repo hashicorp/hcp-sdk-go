@@ -22,7 +22,7 @@ type HashicorpCloudPackerListBuildsResponse struct {
 	// The requested list of builds.
 	Builds []*HashicorpCloudPackerBuild `json:"builds"`
 
-	// HCP-specific information like project and organization ID
+	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
 	// Pagination tokens for a subsequent request.

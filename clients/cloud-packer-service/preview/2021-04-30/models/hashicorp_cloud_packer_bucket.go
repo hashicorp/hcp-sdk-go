@@ -25,8 +25,7 @@ type HashicorpCloudPackerBucket struct {
 	// A short description of what this bucket's images are for.
 	Description string `json:"description,omitempty"`
 
-	// Unique identifier of the bucket; created and set by the HCP Packer
-	// registry when the bucket is created.
+	// Universally Unique Lexicographically Sortable Identifier (ULID) of the bucket.
 	ID string `json:"id,omitempty"`
 
 	// The total number of iterations in this bucket.
@@ -35,19 +34,16 @@ type HashicorpCloudPackerBucket struct {
 	// A key:value map for custom, user-settable metadata about your bucket.
 	Labels map[string]string `json:"labels,omitempty"`
 
-	// The bucket's most recent iteration -- this iteration may be complete or
-	// not
+	// The bucket's most recent iteration. This iteration may be complete or not.
 	LatestIteration *HashicorpCloudPackerIteration `json:"latest_iteration,omitempty"`
 
-	// The human-readable version of the most recent completed iteration in
-	// this bucket.
+	// The human-readable version of the most recent completed iteration in this bucket.
 	LatestVersion int32 `json:"latest_version,omitempty"`
 
-	// HCP-specific information like project and organization ID
+	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// A list of which cloud providers or other platforms the bucket contains
-	// builds for. For example, AWS, GCP, or Azure.
+	// A list of the cloud providers or other platforms that are included in the latest complete iteration. e.g aws, gcp, or azure.
 	Platforms []string `json:"platforms"`
 
 	// Human-readable name for the bucket.

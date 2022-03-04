@@ -19,10 +19,10 @@ import (
 // swagger:model hashicorp.cloud.packer.ListIterationsResponse
 type HashicorpCloudPackerListIterationsResponse struct {
 
-	// The requested list of iterations
+	// The requested list of iterations.
 	Iterations []*HashicorpCloudPackerIterationforList `json:"iterations"`
 
-	// Pagination tokens for a subsequent request.
+	// pagination
 	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 

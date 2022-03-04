@@ -17,7 +17,7 @@ import (
 // swagger:model hashicorp.cloud.packer.RegenerateTFCRunTaskHmacKeyRequest
 type HashicorpCloudPackerRegenerateTFCRunTaskHmacKeyRequest struct {
 
-	// HCP-specific information like project and organization ID
+	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 }
 

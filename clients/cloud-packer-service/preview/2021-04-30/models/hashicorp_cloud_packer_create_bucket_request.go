@@ -26,7 +26,7 @@ type HashicorpCloudPackerCreateBucketRequest struct {
 	// A key:value map for custom, user-settable metadata about your bucket.
 	Labels map[string]string `json:"labels,omitempty"`
 
-	// HCP-specific information like project and organization ID
+	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 }
 

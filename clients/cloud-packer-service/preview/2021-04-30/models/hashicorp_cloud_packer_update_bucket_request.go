@@ -26,11 +26,10 @@ type HashicorpCloudPackerUpdateBucketRequest struct {
 	// A key:value map for custom, user-settable metadata about your bucket.
 	Labels map[string]string `json:"labels,omitempty"`
 
-	// HCP-specific information like project and organization ID
+	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// A list of which cloud providers or other platforms the bucket contains
-	// builds for. For example, AWS, GCP, or Azure.
+	// A list of the cloud providers or other platforms that are included in the latest complete iteration. e.g aws, gcp, or azure.
 	Platforms []string `json:"platforms"`
 }
 

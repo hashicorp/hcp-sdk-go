@@ -19,10 +19,10 @@ type HashicorpCloudPackerRegistryConfig struct {
 	// A registry is activated when the system correctly starts billing for it.
 	Activated bool `json:"activated,omitempty"`
 
-	// The information about the billing deprovision
+	// The information about the billing deactivation.
 	BillingDeprovision *HashicorpCloudPackerRegistryBillingDeprovision `json:"billing_deprovision,omitempty"`
 
-	// feature_tier is the feature tier for the registry.
+	// The feature tier for the registry.
 	FeatureTier HashicorpCloudPackerRegistryConfigTier `json:"feature_tier,omitempty"`
 
 	// Required configuration to run TFC run tasks for validation against this registry.

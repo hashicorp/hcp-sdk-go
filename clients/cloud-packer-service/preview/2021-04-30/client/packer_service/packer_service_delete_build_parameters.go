@@ -61,8 +61,7 @@ for the packer service delete build operation typically these are written to a h
 type PackerServiceDeleteBuildParams struct {
 
 	/*BuildID
-	  Unique identifier of the build that should be deleted; this ID was
-	created and set by the HCP Packer registry when the build was created.
+	  ULID of the build that should be deleted.
 
 	*/
 	BuildID string

@@ -18,20 +18,17 @@ import (
 // swagger:model hashicorp.cloud.packer.Image
 type HashicorpCloudPackerImage struct {
 
-	// Timestamp at which this image was created
+	// Timestamp at which this image was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// Unique identifier for the image; created and set by the HCP Packer
-	// registry when the image is created.
+	// Universally Unique Lexicographically Sortable Identifier (ULID) for the image.
 	ID string `json:"id,omitempty"`
 
-	// ID or URL of the remote cloud image as given by a build. For example,
-	// ami-12345
+	// ID or URL of the remote cloud image as given by a build. For example, ami-12345.
 	ImageID string `json:"image_id,omitempty"`
 
-	// Cloud-specific region as provided by `packer build`. For example,
-	// "ap-east-1".
+	// Cloud-specific region as provided by `packer build`. For example, "ap-east-1".
 	Region string `json:"region,omitempty"`
 }
 
