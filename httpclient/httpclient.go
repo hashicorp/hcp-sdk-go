@@ -2,6 +2,7 @@ package httpclient
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -47,6 +48,26 @@ type roundTripperWithSourceChannel struct {
 func (rt *roundTripperWithSourceChannel) RoundTrip(req *http.Request) (*http.Response, error) {
 	req.Header.Set("X-HCP-Source-Channel", rt.SourceChannel)
 	return rt.OriginalRoundTripper.RoundTrip(req)
+}
+
+// Unexported new type so that our context key never collides with another.
+// copied from log logger
+type profileCtxType struct{}
+
+// contextKey for context
+var contextKey = profileCtxType{}
+
+func FromContext(ctx context.Context) (httptransport.Runtime, error) {
+	it := ctx.Value(contextKey)
+	runtime, ok := it.(httptransport.Runtime)
+	if !ok {
+		return httptransport.Runtime{}, errors.New("http runtime not on context")
+	}
+	return runtime, nil
+}
+
+func WithContext(ctx context.Context, rt httptransport.Runtime) context.Context {
+	return context.WithValue(ctx, contextKey, rt)
 }
 
 // New creates a client with the right base path to connect to any HCP API
