@@ -16,7 +16,7 @@ import (
 )
 
 var (
-	callbackURL string = "http://127.0.0.1:8888"
+	callbackURL string = "http://localhost:4200/login/callback"
 	authzPath   string = "/authorize"
 	tokenPath   string = "/oauth/token"
 )
@@ -93,9 +93,10 @@ func getTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Toke
 
 	// Launch a request to Auth0's authorization endpoint.
 	colorstring.Printf("[bold][yellow]The default web browser has been opened at %s. Please continue the login in the web browser.", conf.Endpoint.AuthURL)
-
+	aud := "https://api.hashicorp.cloud"
+	opt := oauth2.SetAuthURLParam("audience", aud)
 	// Prepare the /authorize request with randomly generated state and offline access option
-	authzURL := conf.AuthCodeURL(generateRandomString(32), oauth2.AccessTypeOffline)
+	authzURL := conf.AuthCodeURL(generateRandomString(32), oauth2.AccessTypeOffline, opt)
 
 	if err := open.Start(authzURL); err != nil {
 		return nil, fmt.Errorf("failed to open browser at URL %q: %w", authzURL, err)
@@ -105,14 +106,14 @@ func getTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Toke
 	callbackEndpoint := &callbackEndpoint{}
 	callbackEndpoint.shutdownSignal = make(chan error)
 	server := &http.Server{
-		Addr:           ":8888",
+		Addr:           ":4200",
 		Handler:        nil,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
 	callbackEndpoint.server = server
-	http.Handle("/", callbackEndpoint)
+	http.Handle("/login/callback", callbackEndpoint)
 
 	go func() {
 		err := server.ListenAndServe()
