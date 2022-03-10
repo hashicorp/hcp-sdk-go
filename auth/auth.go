@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/golang-jwt/jwt"
 	"github.com/mitchellh/colorstring"
 	"github.com/skratchdot/open-golang/open"
 	"golang.org/x/oauth2"
@@ -67,6 +68,35 @@ func WithBrowserLogin(ctx context.Context, authURL, auth0ClientID string) (clien
 	return client, nil
 }
 
+// WithBrowserToken accepts an access token string and a refresh token string and returns an oauth2 Token
+func WithBrowserToken(ctx context.Context, accessToken, refreshToken string) (*oauth2.Token, error) {
+	var tok *oauth2.Token
+
+	token, err := jwt.ParseWithClaims(accessToken, &jwt.StandardClaims{}, func(t *jwt.Token) (interface{}, error) {
+		if _, ok := t.Method.(*jwt.SigningMethodRSA); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", t.Header["alg"])
+		}
+		return nil, nil
+	})
+
+	claims, ok := token.Claims.(jwt.StandardClaims)
+	if !ok || !token.Valid {
+		return nil, err
+	}
+
+	var exp time.Time
+	exp = time.Unix(claims.ExpiresAt, 0)
+
+	tok = &oauth2.Token{
+		AccessToken:  accessToken,
+		TokenType:    "Bearer",
+		RefreshToken: refreshToken,
+		Expiry:       exp,
+	}
+
+	return tok, nil
+}
+
 // callbackEndpoint exposes the confiugration for the callback server.
 type callbackEndpoint struct {
 	server         *http.Server
@@ -93,9 +123,10 @@ func getTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Toke
 
 	// Launch a request to Auth0's authorization endpoint.
 	colorstring.Printf("[bold][yellow]The default web browser has been opened at %s. Please continue the login in the web browser.", conf.Endpoint.AuthURL)
+
+	// Prepare the /authorize request with randomly generated state, offline access option, and audience
 	aud := "https://api.hashicorp.cloud"
 	opt := oauth2.SetAuthURLParam("audience", aud)
-	// Prepare the /authorize request with randomly generated state and offline access option
 	authzURL := conf.AuthCodeURL(generateRandomString(32), oauth2.AccessTypeOffline, opt)
 
 	if err := open.Start(authzURL); err != nil {
