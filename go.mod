@@ -13,6 +13,8 @@ require (
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/hashicorp/go-cleanhttp v0.5.1
 	github.com/iancoleman/strcase v0.1.3
+	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db
+	github.com/skratchdot/open-golang v0.0.0-20200116055534-eef842397966
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/oauth2 v0.0.0-20201109201403-9fd604954f58
 )
