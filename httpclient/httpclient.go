@@ -2,7 +2,6 @@ package httpclient
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -34,7 +33,12 @@ type Config struct {
 	// SourceChannel denotes the client (channel) that originiated the request.
 	// This is synonymous to a user-agent.
 	SourceChannel string `json:"source_channel"`
+
+	// OAuth2ClientID is OAuth2 client ID of HCP, which can be provided as an alternative to a configured ClientID and ClientSecret
+	// in order to gain a session through browser login.
+	OAuthClientID string `json:"auth_client_id"`
 }
+
 type roundTripperWithSourceChannel struct {
 	OriginalRoundTripper http.RoundTripper
 	SourceChannel        string
@@ -61,7 +65,11 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 	// The oauth2 client initializer requires the http client to be passed in via context.
 	ctx := context.WithValue(context.Background(), oauth2.HTTPClient, client)
 
-	client, err = auth.WithClientCredentials(ctx, cfg.ClientID, cfg.ClientSecret, cfg.AuthURL)
+	if cfg.ClientID == "" || cfg.ClientSecret == "" {
+		client, err = auth.WithBrowserLogin(ctx, cfg.AuthURL, cfg.OAuthClientID)
+	} else {
+		client, err = auth.WithClientCredentials(ctx, cfg.ClientID, cfg.ClientSecret, cfg.AuthURL)
+	}
 	if err != nil {
 		return nil, fmt.Errorf("failed to obtain credentials: %w", err)
 	}
@@ -99,21 +107,25 @@ func (c *Config) Canonicalize() {
 // Validate ensures the http client configuration is valid.
 func (c *Config) Validate() error {
 
+	if c.OAuthClientID == "" {
+		c.OAuthClientID = os.Getenv("HCP_OAUTH_CLIENT_ID")
+	}
+
 	if c.ClientID == "" {
 		c.ClientID = os.Getenv("HCP_CLIENT_ID")
-		if c.ClientID == "" {
-			return errors.New("client ID not provided")
-		}
 	}
 
 	if c.ClientSecret == "" {
 		c.ClientSecret = os.Getenv("HCP_CLIENT_SECRET")
-		if c.ClientSecret == "" {
-			return errors.New("client secret not provided")
-		}
 	}
 
 	return validation.ValidateStruct(c,
+		// TODO: validation
+		// validation.Field(&c.OAuthClientID, validation.When(c.ClientID == "" && c.ClientSecret == "", validation.Required.Error("must provide either the OAuth Client ID or a Service Principal Client ID and Secret"))),
+		// validation.Field(&c.ClientID, validation.When(c.OAuthClientID == "", validation.Required.Error("must provide either the OAuth Client ID or a Service Principal Client ID and Secret"))),
+		// validation.Field(&c.ClientID, validation.When(c.ClientID == "" && c.ClientSecret != "", validation.Required.Error("must provide both a Service Principal Client ID and Secret"))),
+		// validation.Field(&c.ClientID, validation.When(c.ClientSecret == "" && c.ClientID != "", validation.Required.Error("must provide both a Service Principal Client ID and Secret"))),
+
 		// The scheme will be appended by the go-openapi client, so it must not be included in the host path.
 		validation.Field(&c.HostPath, validation.Required, validation.By(excludesScheme)),
 		// For security, the authentication provider's Token URL must use 'https'.
