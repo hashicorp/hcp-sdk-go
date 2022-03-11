@@ -73,6 +73,15 @@ func WithContext(ctx context.Context, rt httptransport.Runtime) context.Context 
 	return context.WithValue(ctx, contextKey, rt)
 }
 
+// WithClient allows users with a client to retrieve a runtime transport
+// at the same version as the httptransport version this library
+// provides. This allows consumers to invoke the auth methods themselves
+// and then wrap the retunred client in the expected httptransport.Runtime
+func WithClient(cfg Config, client *http.Client) *httptransport.Runtime {
+	// This is the type of runtime that can be used by the generated clients.
+	return httptransport.NewWithClient(cfg.HostPath, "", []string{"https"}, client)
+}
+
 // New creates a client with the right base path to connect to any HCP API
 func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 
@@ -105,10 +114,7 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 		client.Transport = &roundTripperWithSourceChannel{OriginalRoundTripper: client.Transport, SourceChannel: sourceChannel}
 	}
 
-	// This is the type of runtime that can be used by the generated clients.
-	runtime = httptransport.NewWithClient(cfg.HostPath, "", []string{"https"}, client)
-
-	return runtime, nil
+	return WithClient(cfg, client), nil
 }
 
 // Canonicalize populates default values for config fields that are otherwise unset.
