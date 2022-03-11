@@ -38,6 +38,9 @@ type Config struct {
 	// OAuth2ClientID is OAuth2 client ID of HCP, which can be provided as an alternative to a configured ClientID and ClientSecret
 	// in order to gain a session through browser login.
 	OAuthClientID string `json:"auth_client_id"`
+
+	// Optional existing tokens
+	Token *oauth2.Token
 }
 
 type roundTripperWithSourceChannel struct {
@@ -85,9 +88,10 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 
 	// The oauth2 client initializer requires the http client to be passed in via context.
 	ctx := context.WithValue(context.Background(), oauth2.HTTPClient, client)
-
-	if cfg.ClientID == "" || cfg.ClientSecret == "" {
-		client, err = auth.WithBrowserLogin(ctx, cfg.AuthURL, cfg.OAuthClientID)
+	if cfg.Token.Valid() {
+		client, err = auth.WithToken(ctx, cfg.Token, cfg.AuthURL, cfg.OAuthClientID)
+	} else if cfg.ClientID == "" || cfg.ClientSecret == "" {
+		client, _, err = auth.WithBrowserLogin(ctx, cfg.AuthURL, cfg.OAuthClientID)
 	} else {
 		client, err = auth.WithClientCredentials(ctx, cfg.ClientID, cfg.ClientSecret, cfg.AuthURL)
 	}

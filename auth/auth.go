@@ -9,7 +9,6 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/golang-jwt/jwt"
 	"github.com/mitchellh/colorstring"
 	"github.com/skratchdot/open-golang/open"
 	"golang.org/x/oauth2"
@@ -42,8 +41,27 @@ func WithClientCredentials(ctx context.Context, clientID, clientSecret, authURL 
 	return client, nil
 }
 
+func WithToken(ctx context.Context, tok *oauth2.Token, authURL, auth0ClientID string) (client *http.Client, err error) {
+	conf := &oauth2.Config{
+		ClientID: auth0ClientID,
+		Endpoint: oauth2.Endpoint{
+			AuthURL:  authURL + authzPath,
+			TokenURL: authURL + tokenPath,
+		},
+		RedirectURL: callbackURL,
+		Scopes:      []string{"openid", "offline_access"},
+	}
+
+	// The http client is the same one attached to the context,
+	// only now it will be able to authenticate with the token obtained from a successful browser login.
+	client = conf.Client(ctx, tok)
+
+	return client, nil
+
+}
+
 // WithBrowserLogin returns an http client with access and refresh tokens obtained via a user browser login.
-func WithBrowserLogin(ctx context.Context, authURL, auth0ClientID string) (client *http.Client, err error) {
+func WithBrowserLogin(ctx context.Context, authURL, auth0ClientID string) (client *http.Client, token *oauth2.Token, err error) {
 	conf := &oauth2.Config{
 		ClientID: auth0ClientID,
 		Endpoint: oauth2.Endpoint{
@@ -58,43 +76,14 @@ func WithBrowserLogin(ctx context.Context, authURL, auth0ClientID string) (clien
 	var tok *oauth2.Token
 	tok, err = getTokenFromBrowser(ctx, conf)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get token: %w", err)
+		return nil, nil, fmt.Errorf("failed to get token: %w", err)
 	}
 
 	// The http client is the same one attached to the context,
 	// only now it will be able to authenticate with the token obtained from a successful browser login.
 	client = conf.Client(ctx, tok)
 
-	return client, nil
-}
-
-// WithBrowserToken accepts an access token string and a refresh token string and returns an oauth2 Token
-func WithBrowserToken(ctx context.Context, accessToken, refreshToken string) (*oauth2.Token, error) {
-	var tok *oauth2.Token
-
-	token, err := jwt.ParseWithClaims(accessToken, &jwt.StandardClaims{}, func(t *jwt.Token) (interface{}, error) {
-		if _, ok := t.Method.(*jwt.SigningMethodRSA); !ok {
-			return nil, fmt.Errorf("unexpected signing method: %v", t.Header["alg"])
-		}
-		return nil, nil
-	})
-
-	claims, ok := token.Claims.(jwt.StandardClaims)
-	if !ok || !token.Valid {
-		return nil, err
-	}
-
-	var exp time.Time
-	exp = time.Unix(claims.ExpiresAt, 0)
-
-	tok = &oauth2.Token{
-		AccessToken:  accessToken,
-		TokenType:    "Bearer",
-		RefreshToken: refreshToken,
-		Expiry:       exp,
-	}
-
-	return tok, nil
+	return client, tok, nil
 }
 
 // callbackEndpoint exposes the confiugration for the callback server.
