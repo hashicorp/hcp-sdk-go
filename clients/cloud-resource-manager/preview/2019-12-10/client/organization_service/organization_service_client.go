@@ -31,9 +31,15 @@ type ClientService interface {
 
 	OrganizationServiceGetIamPolicy(params *OrganizationServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceGetIamPolicyOK, error)
 
+	OrganizationServiceGetRole(params *OrganizationServiceGetRoleParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceGetRoleOK, error)
+
 	OrganizationServiceList(params *OrganizationServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceListOK, error)
 
+	OrganizationServiceListRoles(params *OrganizationServiceListRolesParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceListRolesOK, error)
+
 	OrganizationServiceSetIamPolicy(params *OrganizationServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceSetIamPolicyOK, error)
+
+	OrganizationServiceSetName(params *OrganizationServiceSetNameParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceSetNameOK, error)
 
 	OrganizationServiceTestIamPermissions(params *OrganizationServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceTestIamPermissionsOK, error)
 
@@ -143,6 +149,40 @@ func (a *Client) OrganizationServiceGetIamPolicy(params *OrganizationServiceGetI
 }
 
 /*
+  OrganizationServiceGetRole gets role returns a role and its mapped permissions
+*/
+func (a *Client) OrganizationServiceGetRole(params *OrganizationServiceGetRoleParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceGetRoleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOrganizationServiceGetRoleParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "OrganizationService_GetRole",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/{role_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OrganizationServiceGetRoleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OrganizationServiceGetRoleOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OrganizationServiceGetRoleDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
   OrganizationServiceList lists lists the organizations the caller has access to
 */
 func (a *Client) OrganizationServiceList(params *OrganizationServiceListParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceListOK, error) {
@@ -177,7 +217,41 @@ func (a *Client) OrganizationServiceList(params *OrganizationServiceListParams, 
 }
 
 /*
-  OrganizationServiceSetIamPolicy sets iam policy sets the i a m policy for an organization
+  OrganizationServiceListRoles lists roles returns a list of all user facing roles for an organization
+*/
+func (a *Client) OrganizationServiceListRoles(params *OrganizationServiceListRolesParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceListRolesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOrganizationServiceListRolesParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "OrganizationService_ListRoles",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/roles",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OrganizationServiceListRolesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OrganizationServiceListRolesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OrganizationServiceListRolesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  OrganizationServiceSetIamPolicy sets iam policy sets the i a m policy for an organization since this updates the full policy the policy takes an etag argument that should match with the current policy stored in the system this is to avoid concurrent writes erasing each other s data hence the client should always get the current policy that includes the etag modify the policy and then set the policy with the same etag if there is no existing policy the etag must be empty
 */
 func (a *Client) OrganizationServiceSetIamPolicy(params *OrganizationServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceSetIamPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -207,6 +281,40 @@ func (a *Client) OrganizationServiceSetIamPolicy(params *OrganizationServiceSetI
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*OrganizationServiceSetIamPolicyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  OrganizationServiceSetName sets name updates the organization s name
+*/
+func (a *Client) OrganizationServiceSetName(params *OrganizationServiceSetNameParams, authInfo runtime.ClientAuthInfoWriter) (*OrganizationServiceSetNameOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOrganizationServiceSetNameParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "OrganizationService_SetName",
+		Method:             "PUT",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/name",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OrganizationServiceSetNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OrganizationServiceSetNameOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OrganizationServiceSetNameDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
