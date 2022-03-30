@@ -1,3 +1,9 @@
+## 0.18.0 (March 29, 2022)
+
+FEATURES:
+
+* Updated cloud-vault-service/stable/2020-11-25 to allow path filter updates ([#68](https://github.com/hashicorp/hcp-sdk-go/pull/75)).
+
 ## 0.17.0 (Feburary 9, 2022)
 
 FEATURES:
