@@ -10,11 +10,11 @@
 /clients/cloud-vault-service/ @hashicorp/cloud-experiences-go @hashicorp/vault-cloud-ui @hashicorp/vault-cloud
 
 # The Packer clients are owned by Packer
-/clients/cloud-packer-service/ @hashicorp/cloud-experiences-go @hashicorp/packer-cloud-ui @hashicorp/packer-cloud
+/clients/cloud-packer-service/ @hashicorp/cloud-experiences-go @hashicorp/packer-cloud-ui @hashicorp/cloud-packer
 
 # The Network and Resource Manager clients are owned by Controlplane
 /clients/cloud-resource-manager/ @hashicorp/cloud-experiences-go @hashicorp/cloud-control-plane
-/clients/cloud-operation/ @hashicorp/cloud-experiences-go @hashicorp/cloud-control-plane
+/clients/cloud-network/ @hashicorp/cloud-experiences-go @hashicorp/cloud-control-plane
 
 # The Operation clients are owned by Dataplane
 /clients/cloud-operation/ @hashicorp/cloud-dataplane @hashicorp/cloud-experiences
