@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 
 	httptransport "github.com/go-openapi/runtime/client"
 	validation "github.com/go-ozzo/ozzo-validation"
@@ -34,6 +35,12 @@ type Config struct {
 	// SourceChannel denotes the client (channel) that originiated the request.
 	// This is synonymous to a user-agent.
 	SourceChannel string `json:"source_channel"`
+
+	// Client allows passing a custom http.Client to be used instead of the
+	// cleanhttp default one for both Auth and API requests. This is mostly useful
+	// in testing to provide the httptest.Server's custom client that will trust
+	// it's TLS cert.
+	Client *http.Client
 }
 type roundTripperWithSourceChannel struct {
 	OriginalRoundTripper http.RoundTripper
@@ -56,7 +63,10 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 	}
 
 	// Initialize an http client with a transport to be shared by the service-specific clients.
-	client := cleanhttp.DefaultPooledClient()
+	client := cfg.Client
+	if client == nil {
+		client = cleanhttp.DefaultPooledClient()
+	}
 
 	// The oauth2 client initializer requires the http client to be passed in via context.
 	ctx := context.WithValue(context.Background(), oauth2.HTTPClient, client)
@@ -94,6 +104,12 @@ func (c *Config) Canonicalize() {
 			c.AuthURL = "https://auth.hashicorp.com"
 		}
 	}
+	// Allow https:// prefix on HostPath even though it's the only scheme we allow
+	// as it's more natural to support the URL. Any other scheme we don't strip
+	// which will fail validation.
+	if strings.HasPrefix(strings.ToLower(c.HostPath), "https://") {
+		c.HostPath = c.HostPath[8:]
+	}
 }
 
 // Validate ensures the http client configuration is valid.
@@ -124,17 +140,9 @@ func (c *Config) Validate() error {
 func excludesScheme(value interface{}) error {
 	u, _ := value.(string)
 
-	p, err := url.Parse(u)
-	if err != nil {
-		return fmt.Errorf("failed to parse %q: %w", u, err)
-	}
-
-	// This scheme is only allowed for testing.
-	if p.Scheme == "localhost" {
-		return nil
-	}
-
-	if p.Scheme != "" {
+	// We expect this to NOT have a scheme which means it's not a valid URL and
+	// url.Parse explicitly doesn't support this in it's docs.
+	if strings.Contains(u, "://") {
 		return fmt.Errorf("%q must not include any scheme", u)
 	}
 
