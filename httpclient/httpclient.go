@@ -1,7 +1,6 @@
 package httpclient
 
 import (
-	"context"
 	"errors"
 	"fmt"
 	"net/http"
@@ -11,9 +10,7 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/hashicorp/go-cleanhttp"
-	"golang.org/x/oauth2"
 
-	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/version"
 )
 
@@ -51,20 +48,24 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 	// Populate default values where possible.
 	cfg.Canonicalize()
 
-	if err := cfg.Validate(); err != nil {
-		return nil, fmt.Errorf("invalid config: %w", err)
-	}
+	// For local dev only
+	// 1. skip client ID/Secret validation
+	// if err := cfg.Validate(); err != nil {
+	// 	return nil, fmt.Errorf("invalid config: %w", err)
+	// }
 
 	// Initialize an http client with a transport to be shared by the service-specific clients.
 	client := cleanhttp.DefaultPooledClient()
 
-	// The oauth2 client initializer requires the http client to be passed in via context.
-	ctx := context.WithValue(context.Background(), oauth2.HTTPClient, client)
+	// For local dev only
+	// 2. skip client ID/Secret authentication
+	// // The oauth2 client initializer requires the http client to be passed in via context.
+	// ctx := context.WithValue(context.Background(), oauth2.HTTPClient, client)
 
-	client, err = auth.WithClientCredentials(ctx, cfg.ClientID, cfg.ClientSecret, cfg.AuthURL)
-	if err != nil {
-		return nil, fmt.Errorf("failed to obtain credentials: %w", err)
-	}
+	// client, err = auth.WithClientCredentials(ctx, cfg.ClientID, cfg.ClientSecret, cfg.AuthURL)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("failed to obtain credentials: %w", err)
+	// }
 
 	if cfg.SourceChannel != "" {
 		// Using a custom transport in order to set the source channel header when it is present.
@@ -74,6 +75,10 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 
 	// This is the type of runtime that can be used by the generated clients.
 	runtime = httptransport.NewWithClient(cfg.HostPath, "", []string{"https"}, client)
+
+	// For local dev only
+	// 2. attach bearer token string
+	runtime.DefaultAuthentication = httptransport.BearerToken(os.Getenv("HCP_BEARER_TOKEN"))
 
 	return runtime, nil
 }
