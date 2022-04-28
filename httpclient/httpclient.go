@@ -37,9 +37,9 @@ type Config struct {
 	SourceChannel string `json:"source_channel"`
 
 	// Client allows passing a custom http.Client to be used instead of the
-	// cleanhttp default one for both Auth and API requests. This is mostly useful
+	// cleanhttp default one for both Auth and API requests. This should be used only for testing
 	// in testing to provide the httptest.Server's custom client that will trust
-	// it's TLS cert.
+	// its TLS cert.
 	Client *http.Client
 }
 type roundTripperWithSourceChannel struct {
@@ -141,7 +141,7 @@ func excludesScheme(value interface{}) error {
 	u, _ := value.(string)
 
 	// We expect this to NOT have a scheme which means it's not a valid URL and
-	// url.Parse explicitly doesn't support this in it's docs.
+	// url.Parse explicitly doesn't support this in its docs.
 	if strings.Contains(u, "://") {
 		return fmt.Errorf("%q must not include any scheme", u)
 	}
