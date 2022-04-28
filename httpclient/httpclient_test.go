@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"strings"
+	"sync/atomic"
 	"testing"
 
 	consul "github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/preview/2020-08-26/client/consul_service"
@@ -23,7 +23,11 @@ func TestNew(t *testing.T) {
 	projID := "test-project"
 	apiPath := fmt.Sprintf("/consul/2020-08-26/organizations/%s/projects/%s/clusters", orgID, projID)
 
+	numRequests := uint32(0)
+
 	ts := httptest.NewUnstartedServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
+		atomic.AddUint32(&numRequests, 1)
 
 		// The incoming test request.
 		switch r.URL.String() {
@@ -61,15 +65,13 @@ func TestNew(t *testing.T) {
 	ts.StartTLS()
 	defer ts.Close()
 
-	// Extract port from the URL.
-	parts := strings.SplitN(ts.URL, ":", 3)
-	port := parts[2]
-
 	cfg := Config{
-		HostPath:     fmt.Sprintf("localhost:%s", port),
-		AuthURL:      fmt.Sprintf("https://localhost:%s", port),
+		HostPath:     ts.URL,
+		AuthURL:      ts.URL,
 		ClientID:     clientID,
 		ClientSecret: clientSecret,
+		// Override the base http.Client so that we trust the test server's TLS
+		Client: ts.Client(),
 	}
 
 	// The test's important assertions occur in the test server handler above.
@@ -85,5 +87,10 @@ func TestNew(t *testing.T) {
 
 	// This SDK request hits the mock Consul List API handler above ('/consul/2020-08-26/organizations...').
 	// The handler verifies that the expected bearer token is provided.
-	consulClient.List(listParams, nil) // nolint:errcheck
+	_, err = consulClient.List(listParams, nil)
+	require.NoError(t, err)
+
+	// Make sure we actually handled both the auth and the GET request and didn't
+	// just skip all the assertions!
+	require.Equal(t, uint32(2), atomic.LoadUint32(&numRequests))
 }
