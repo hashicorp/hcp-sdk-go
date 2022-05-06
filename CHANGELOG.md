@@ -1,8 +1,18 @@
+## 0.19.0 (May 6, 2022)
+
+BREAKING CHANGES:
+
+* Renamed cloud-packer-service/preview/2021-04-30 to cloud-packer-service/stable/2021-04-30 ([#82](https://github.com/hashicorp/hcp-sdk-go/pull/82))
+
+IMPROVEMENTS:
+
+* Fix httpclient test to allow passing in a customer client ([#79](https://github.com/hashicorp/hcp-sdk-go/pull/79)) 
+
 ## 0.18.0 (March 29, 2022)
 
 FEATURES:
 
-* Updated cloud-vault-service/stable/2020-11-25 to allow path filter updates ([#68](https://github.com/hashicorp/hcp-sdk-go/pull/75)).
+* Updated cloud-vault-service/stable/2020-11-25 to allow path filter updates ([#75](https://github.com/hashicorp/hcp-sdk-go/pull/75)).
 
 ## 0.17.0 (Feburary 9, 2022)
 
