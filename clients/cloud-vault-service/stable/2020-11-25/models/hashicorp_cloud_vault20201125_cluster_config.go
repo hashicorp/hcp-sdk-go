@@ -28,6 +28,9 @@ type HashicorpCloudVault20201125ClusterConfig struct {
 	// maintenance config
 	MaintenanceConfig HashicorpCloudVault20201125MaintenanceConfig `json:"maintenance_config,omitempty"`
 
+	// major version upgrade config
+	MajorVersionUpgradeConfig *HashicorpCloudVault20201125MajorVersionUpgradeConfig `json:"major_version_upgrade_config,omitempty"`
+
 	// metrics config
 	MetricsConfig *HashicorpCloudVault20201125ObservabilityConfig `json:"metrics_config,omitempty"`
 
@@ -60,6 +63,10 @@ func (m *HashicorpCloudVault20201125ClusterConfig) Validate(formats strfmt.Regis
 	}
 
 	if err := m.validateCapacityConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMajorVersionUpgradeConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -139,6 +146,24 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateCapacityConfig(format
 		if err := m.CapacityConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("capacity_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) validateMajorVersionUpgradeConfig(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.MajorVersionUpgradeConfig) { // not required
+		return nil
+	}
+
+	if m.MajorVersionUpgradeConfig != nil {
+		if err := m.MajorVersionUpgradeConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("major_version_upgrade_config")
 			}
 			return err
 		}

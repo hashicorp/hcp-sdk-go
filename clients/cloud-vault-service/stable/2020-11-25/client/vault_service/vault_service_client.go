@@ -49,6 +49,8 @@ type ClientService interface {
 
 	GetClientCounts(params *GetClientCountsParams, authInfo runtime.ClientAuthInfoWriter) (*GetClientCountsOK, error)
 
+	GetReplicationStatus(params *GetReplicationStatusParams, authInfo runtime.ClientAuthInfoWriter) (*GetReplicationStatusOK, error)
+
 	GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*GetSnapshotOK, error)
 
 	GetUtilization(params *GetUtilizationParams, authInfo runtime.ClientAuthInfoWriter) (*GetUtilizationOK, error)
@@ -69,6 +71,8 @@ type ClientService interface {
 
 	UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateCORSConfigOK, error)
 
+	UpdateMajorVersionUpgradeConfig(params *UpdateMajorVersionUpgradeConfigParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateMajorVersionUpgradeConfigOK, error)
+
 	UpdatePathsFilter(params *UpdatePathsFilterParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePathsFilterOK, error)
 
 	UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePublicIpsOK, error)
@@ -76,6 +80,8 @@ type ClientService interface {
 	UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateSnapshotOK, error)
 
 	UpdateVersion(params *UpdateVersionParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateVersionOK, error)
+
+	UpgradeMajorVersion(params *UpgradeMajorVersionParams, authInfo runtime.ClientAuthInfoWriter) (*UpgradeMajorVersionOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -489,6 +495,40 @@ func (a *Client) GetClientCounts(params *GetClientCountsParams, authInfo runtime
 }
 
 /*
+  GetReplicationStatus get replication status API
+*/
+func (a *Client) GetReplicationStatus(params *GetReplicationStatusParams, authInfo runtime.ClientAuthInfoWriter) (*GetReplicationStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetReplicationStatusParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetReplicationStatus",
+		Method:             "GET",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetReplicationStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetReplicationStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetReplicationStatusDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
   GetSnapshot get snapshot API
 */
 func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter) (*GetSnapshotOK, error) {
@@ -829,6 +869,40 @@ func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runti
 }
 
 /*
+  UpdateMajorVersionUpgradeConfig update major version upgrade config API
+*/
+func (a *Client) UpdateMajorVersionUpgradeConfig(params *UpdateMajorVersionUpgradeConfigParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateMajorVersionUpgradeConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateMajorVersionUpgradeConfigParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "UpdateMajorVersionUpgradeConfig",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version-upgrade-config/update",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateMajorVersionUpgradeConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateMajorVersionUpgradeConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateMajorVersionUpgradeConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
   UpdatePathsFilter update paths filter API
 */
 func (a *Client) UpdatePathsFilter(params *UpdatePathsFilterParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePathsFilterOK, error) {
@@ -961,6 +1035,40 @@ func (a *Client) UpdateVersion(params *UpdateVersionParams, authInfo runtime.Cli
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  UpgradeMajorVersion upgrade major version API
+*/
+func (a *Client) UpgradeMajorVersion(params *UpgradeMajorVersionParams, authInfo runtime.ClientAuthInfoWriter) (*UpgradeMajorVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpgradeMajorVersionParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "UpgradeMajorVersion",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/upgrade-major-version",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpgradeMajorVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpgradeMajorVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpgradeMajorVersionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
