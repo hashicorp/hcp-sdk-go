@@ -63,6 +63,8 @@ jobs:
           cd $GITHUB_WORKSPACE/hcp-sdk-go
           git config user.name "GitHub Actions"
           git config user.email "<>"
+          service_branch_exists="$(git ls-remote --heads origin auto-update-${{ github.event.inputs.service }}-specs)"
+          [[ -n $service_branch_exists ]] && git push origin --delete auto-update-${{ github.event.inputs.service }}-specs
           git checkout -b auto-update-${{ github.event.inputs.service }}-specs
           git add clients/${{ github.event.inputs.service }}/*
           git commit -m "Update ${{ github.event.inputs.service }} specs"
