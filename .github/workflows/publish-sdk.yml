@@ -64,8 +64,8 @@ jobs:
       - name: Create branch with updated service specs
         run: |
           cd $GITHUB_WORKSPACE/hcp-sdk-go
-          git config user.name "GitHub Actions"
-          git config user.email "<>"
+          git config user.name "HashiCorp Cloud Services"
+          git config user.email "59096967+hashicorp-cloud@users.noreply.github.com"
           service_branch_exists="$(git ls-remote --heads origin ${{ env.SERVICE_BRANCH }})"
           [[ -n $service_branch_exists ]] && git push origin --delete ${{ env.SERVICE_BRANCH }}
           git checkout -b ${{ env.SERVICE_BRANCH }}
@@ -79,7 +79,7 @@ jobs:
           gh pr create --title "$PR_TITLE" --body "$PR_BODY" -H "$PR_SOURCE" -B "$PR_TARGET"
         env:
           PR_TITLE: "[auto] Update ${{ github.event.inputs.service }} specs"
-          PR_BODY: "This is an auto-generated PR created as part of the public SDK pipeline to update API specs for ${{ github.event.inputs.service }}."
+          PR_BODY: "This is an auto-generated PR created as part of the public SDK pipeline to update the SDK for ${{ github.event.inputs.service }}."
           PR_SOURCE: "${{ env.SERVICE_BRANCH }}"
           PR_TARGET: "main"
           GITHUB_TOKEN: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }} 
