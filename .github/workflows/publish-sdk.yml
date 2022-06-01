@@ -81,7 +81,7 @@ jobs:
           PR_TITLE: "[auto] Update ${{ github.event.inputs.service }} specs"
           PR_BODY: "This is an auto-generated PR created as part of the public SDK pipeline to update API specs for ${{ github.event.inputs.service }}."
           PR_SOURCE: "${{ env.SERVICE_BRANCH }}"
-          PR_TARGET: "master"
+          PR_TARGET: "main"
           GITHUB_TOKEN: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }} 
 
       # The Open PR action won't fail if no PR is opened, so this step verifies that a PR was actually created.
