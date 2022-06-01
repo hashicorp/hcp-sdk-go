@@ -12,6 +12,9 @@ jobs:
   publish-sdk:
     runs-on: ubuntu-latest
     steps:
+      - name: Set env service branch
+        run: echo "SERVICE_BRANCH=auto-update-${{ github.event.inputs.service }}-specs" >> $GITHUB_ENV
+
       - name: Checkout hcp-sdk-go
         uses: actions/checkout@v2
         with:
@@ -63,12 +66,12 @@ jobs:
           cd $GITHUB_WORKSPACE/hcp-sdk-go
           git config user.name "GitHub Actions"
           git config user.email "<>"
-          service_branch_exists="$(git ls-remote --heads origin auto-update-${{ github.event.inputs.service }}-specs)"
-          [[ -n $service_branch_exists ]] && git push origin --delete auto-update-${{ github.event.inputs.service }}-specs
-          git checkout -b auto-update-${{ github.event.inputs.service }}-specs
+          service_branch_exists="$(git ls-remote --heads origin ${{ env.SERVICE_BRANCH }})"
+          [[ -n $service_branch_exists ]] && git push origin --delete ${{ env.SERVICE_BRANCH }}
+          git checkout -b ${{ env.SERVICE_BRANCH }}
           git add clients/${{ github.event.inputs.service }}/*
           git commit -m "Update ${{ github.event.inputs.service }} specs"
-          git push --set-upstream origin auto-update-${{ github.event.inputs.service }}-specs    
+          git push --set-upstream origin ${{ env.SERVICE_BRANCH }}    
           
       - name: Open PR
         run: |
@@ -77,7 +80,7 @@ jobs:
         env:
           PR_TITLE: "[auto] Update ${{ github.event.inputs.service }} specs"
           PR_BODY: "This is an auto-generated PR created as part of the public SDK pipeline to update API specs for ${{ github.event.inputs.service }}."
-          PR_SOURCE: "auto-update-${{ github.event.inputs.service }}-specs"
+          PR_SOURCE: "${{ env.SERVICE_BRANCH }}"
           PR_TARGET: "master"
           GITHUB_TOKEN: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }} 
 
