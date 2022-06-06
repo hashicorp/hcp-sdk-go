@@ -83,9 +83,3 @@ jobs:
           PR_SOURCE: "${{ env.SERVICE_BRANCH }}"
           PR_TARGET: "main"
           GITHUB_TOKEN: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }} 
-
-      # The Open PR action won't fail if no PR is opened, so this step verifies that a PR was actually created.
-      - name: Verify PR created
-        run:  |
-          pr="${{ steps.pr.outputs.pull-request-url }}"
-          [[ ! -z "$pr" ]] && echo "Pull Request URL - $pr" || exit 1
