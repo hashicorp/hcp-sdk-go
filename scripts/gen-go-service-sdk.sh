@@ -8,7 +8,6 @@ set -euo pipefail
 # 1. Remove the original SDK files for the service if they exist.
 # 2. Run temporary transformations on those specs to prepare them for SDK generation.
 # 3. Iterate over each stage and version of the service specs and generate the corresponding SDK. 
-#    (Note: Currently only the 'preview' stage is supported)
 # 4. Remove temporary directories.
 
 SCRIPTS_DIR=$(dirname "${BASH_SOURCE[0]}")
