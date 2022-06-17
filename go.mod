@@ -14,5 +14,6 @@ require (
 	github.com/hashicorp/go-cleanhttp v0.5.1
 	github.com/iancoleman/strcase v0.1.3
 	github.com/stretchr/testify v1.7.0
+	golang.org/x/net v0.0.0-20210119194325-5f4716e94777
 	golang.org/x/oauth2 v0.0.0-20201109201403-9fd604954f58
 )
