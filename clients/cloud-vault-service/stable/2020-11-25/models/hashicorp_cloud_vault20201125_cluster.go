@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"strconv"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -25,7 +27,7 @@ type HashicorpCloudVault20201125Cluster struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// currently_deployed_version is the version of the currrent Vault deployment.
+	// currently_deployed_version is the version of the current Vault deployment.
 	CurrentVersion string `json:"current_version,omitempty"`
 
 	// DNSNames holds all of the cluster's DNS names.
@@ -36,6 +38,9 @@ type HashicorpCloudVault20201125Cluster struct {
 
 	// location is the location of the cluster.
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+
+	// notifications is the list of notifications currently valid for the cluster.
+	Notifications []*HashicorpCloudVault20201125ClusterNotification `json:"notifications"`
 
 	// performance_replication_info contains the performance replication information.
 	PerformanceReplicationInfo *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo `json:"performance_replication_info,omitempty"`
@@ -64,6 +69,10 @@ func (m *HashicorpCloudVault20201125Cluster) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNotifications(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -143,6 +152,31 @@ func (m *HashicorpCloudVault20201125Cluster) validateLocation(formats strfmt.Reg
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125Cluster) validateNotifications(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Notifications) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Notifications); i++ {
+		if swag.IsZero(m.Notifications[i]) { // not required
+			continue
+		}
+
+		if m.Notifications[i] != nil {
+			if err := m.Notifications[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("notifications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
