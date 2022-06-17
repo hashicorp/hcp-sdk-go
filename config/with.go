@@ -26,7 +26,7 @@ func WithClientCredentials(clientID, clientSecret string) HCPConfigOption {
 func WithAPI(address string, tlsConfig *tls.Config) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.apiAddress = address
-		config.apiTLSConfig = tlsConfig.Clone()
+		config.apiTLSConfig = cloneTLSConfig(tlsConfig)
 
 		return nil
 	}
@@ -41,7 +41,7 @@ func WithAPI(address string, tlsConfig *tls.Config) HCPConfigOption {
 func WithSCADA(address string, tlsConfig *tls.Config) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.scadaAddress = address
-		config.scadaTLSConfig = tlsConfig.Clone()
+		config.scadaTLSConfig = cloneTLSConfig(tlsConfig)
 
 		return nil
 	}
@@ -86,7 +86,7 @@ func WithAuth(authURL string, tlsConfig *tls.Config) HCPConfigOption {
 		}
 
 		config.authURL = parsedAuthURL
-		config.authTLSConfig = tlsConfig
+		config.authTLSConfig = cloneTLSConfig(tlsConfig)
 
 		return nil
 	}

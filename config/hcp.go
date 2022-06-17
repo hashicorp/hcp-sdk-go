@@ -93,7 +93,7 @@ func (c hcpConfig) GetAPIAddress() string {
 }
 
 func (c hcpConfig) GetAPITLSConfig() *tls.Config {
-	return c.apiTLSConfig.Clone()
+	return cloneTLSConfig(c.apiTLSConfig)
 }
 
 func (c hcpConfig) GetSCADAAddress() string {
@@ -101,7 +101,7 @@ func (c hcpConfig) GetSCADAAddress() string {
 }
 
 func (c hcpConfig) GetSCADATLSConfig() *tls.Config {
-	return c.scadaTLSConfig.Clone()
+	return cloneTLSConfig(c.scadaTLSConfig)
 }
 
 func (c hcpConfig) validate() error {
