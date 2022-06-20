@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// The following variables contain the names of environment variables that can
+// The following constants contain the names of environment variables that can
 // be set to provide configuration values.
 const (
 	envVarAuthURL = "HCP_AUTH_URL"
