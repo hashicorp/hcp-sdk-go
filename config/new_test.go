@@ -15,15 +15,15 @@ func TestNew_Default(t *testing.T) {
 	require.NoError(err)
 
 	// Ensure that the default configuration contains the default values
-	require.Equal(defaultPortalURL, config.GetPortalURL().String())
-	require.Equal(defaultAPIAddress, config.GetAPIAddress())
-	require.Equal(defaultSCADAAddress, config.GetSCADAAddress())
+	require.Equal(defaultPortalURL, config.PortalURL().String())
+	require.Equal(defaultAPIAddress, config.APIAddress())
+	require.Equal(defaultSCADAAddress, config.SCADAAddress())
 
 	// Ensure the default configuration uses secure TLS
-	require.NotNil(config.GetAPITLSConfig())
-	require.False(config.GetAPITLSConfig().InsecureSkipVerify)
-	require.NotNil(config.GetSCADATLSConfig())
-	require.False(config.GetSCADATLSConfig().InsecureSkipVerify)
+	require.NotNil(config.APITLSConfig())
+	require.False(config.APITLSConfig().InsecureSkipVerify)
+	require.NotNil(config.SCADATLSConfig())
+	require.False(config.SCADATLSConfig().InsecureSkipVerify)
 }
 
 func TestNew_Options(t *testing.T) {
@@ -39,9 +39,9 @@ func TestNew_Options(t *testing.T) {
 	require.NoError(err)
 
 	// Ensure the values have been set accordingly
-	require.Equal("https://my-portal:1234", config.GetPortalURL().String())
-	require.Equal("my-api:2345", config.GetAPIAddress())
-	require.Equal("my-scada:3456", config.GetSCADAAddress())
+	require.Equal("https://my-portal:1234", config.PortalURL().String())
+	require.Equal("my-api:2345", config.APIAddress())
+	require.Equal("my-scada:3456", config.SCADAAddress())
 }
 
 func TestNew_Invalid(t *testing.T) {

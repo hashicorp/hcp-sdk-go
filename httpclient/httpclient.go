@@ -70,7 +70,7 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 
 	// Create a transport using the API TLS config.
 	tlsTransport := cleanhttp.DefaultPooledTransport()
-	tlsTransport.TLSClientConfig = cfg.GetAPITLSConfig()
+	tlsTransport.TLSClientConfig = cfg.APITLSConfig()
 
 	// Wrap the transport in an oauth2.Transport.
 	var transport http.RoundTripper = &oauth2.Transport{
@@ -86,12 +86,12 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 
 	// Set the scheme based on the TLS configuration.
 	scheme := "https"
-	if cfg.GetAPITLSConfig() == nil {
+	if cfg.APITLSConfig() == nil {
 		scheme = "http"
 	}
 
 	// Create a runtime that can be used by the generated clients.
-	runtime = httptransport.New(cfg.GetAPIAddress(), "", []string{scheme})
+	runtime = httptransport.New(cfg.APIAddress(), "", []string{scheme})
 	runtime.Transport = transport
 
 	return runtime, nil

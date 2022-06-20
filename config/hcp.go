@@ -14,35 +14,35 @@ type HCPConfig interface {
 	// TokenSource will return a token that can be used to authenticate to HCP.
 	oauth2.TokenSource
 
-	// GetPortalURL will return the URL of the portal.
+	// PortalURL will return the URL of the portal.
 	//
 	// The default portal URL will be the production portal, but the value may
 	// be overwritten for development purposes.
-	GetPortalURL() *url.URL
+	PortalURL() *url.URL
 
-	// GetAPIAddress will return the HCP API address (<hostname>[:port]).
+	// APIAddress will return the HCP API address (<hostname>[:port]).
 	//
 	// The default address will be the HCP production API, but it may be
 	// overwritten for development purposes.
-	GetAPIAddress() string
+	APIAddress() string
 
-	// GetAPITLSConfig will return the API TLS configuration.
+	// APITLSConfig will return the API TLS configuration.
 	//
 	// TLS will be enabled by default but may be disabled for development
 	// purposes.
-	GetAPITLSConfig() *tls.Config
+	APITLSConfig() *tls.Config
 
-	// GetSCADAAddress will return the SCADA address (<hostname>[:port]).
+	// SCADAAddress will return the SCADA address (<hostname>[:port]).
 	//
 	// The default address will be the HCP production SCADA endpoint, but it may
 	// be overwritten for development purposes.
-	GetSCADAAddress() string
+	SCADAAddress() string
 
-	// GetSCADATLSConfig will return the SCADA TLS configuration.
+	// SCADATLSConfig will return the SCADA TLS configuration.
 	//
 	// TLS will be enabled by default but may be disabled for development
 	// purposes.
-	GetSCADATLSConfig() *tls.Config
+	SCADATLSConfig() *tls.Config
 }
 
 type hcpConfig struct {
@@ -81,26 +81,26 @@ func (c *hcpConfig) Token() (*oauth2.Token, error) {
 	return c.tokenSource.Token()
 }
 
-func (c *hcpConfig) GetPortalURL() *url.URL {
+func (c *hcpConfig) PortalURL() *url.URL {
 	// Copy the value in order to not return a pointer to the internal one.
 	portalURL := *c.portalURL
 
 	return &portalURL
 }
 
-func (c *hcpConfig) GetAPIAddress() string {
+func (c *hcpConfig) APIAddress() string {
 	return c.apiAddress
 }
 
-func (c *hcpConfig) GetAPITLSConfig() *tls.Config {
+func (c *hcpConfig) APITLSConfig() *tls.Config {
 	return cloneTLSConfig(c.apiTLSConfig)
 }
 
-func (c *hcpConfig) GetSCADAAddress() string {
+func (c *hcpConfig) SCADAAddress() string {
 	return c.scadaAddress
 }
 
-func (c *hcpConfig) GetSCADATLSConfig() *tls.Config {
+func (c *hcpConfig) SCADATLSConfig() *tls.Config {
 	return cloneTLSConfig(c.scadaTLSConfig)
 }
 

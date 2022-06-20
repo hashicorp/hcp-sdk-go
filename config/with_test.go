@@ -28,7 +28,7 @@ func TestWith_API(t *testing.T) {
 
 	// Ensure that the API configuration have been set
 	require.Equal("my-api:1234", config.apiAddress)
-	require.NotNil(config.GetAPITLSConfig())
+	require.NotNil(config.APITLSConfig())
 }
 
 func TestWith_SCADA(t *testing.T) {
@@ -40,7 +40,7 @@ func TestWith_SCADA(t *testing.T) {
 
 	// Ensure that the SCADA configuration have been set
 	require.Equal("my-scada:1234", config.scadaAddress)
-	require.NotNil(config.GetSCADATLSConfig())
+	require.NotNil(config.SCADATLSConfig())
 }
 
 func TestWith_PortalURL(t *testing.T) {
