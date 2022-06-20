@@ -77,34 +77,34 @@ type hcpConfig struct {
 	scadaTLSConfig *tls.Config
 }
 
-func (c hcpConfig) Token() (*oauth2.Token, error) {
+func (c *hcpConfig) Token() (*oauth2.Token, error) {
 	return c.tokenSource.Token()
 }
 
-func (c hcpConfig) GetPortalURL() *url.URL {
+func (c *hcpConfig) GetPortalURL() *url.URL {
 	// Copy the value in order to not return a pointer to the internal one.
 	portalURL := *c.portalURL
 
 	return &portalURL
 }
 
-func (c hcpConfig) GetAPIAddress() string {
+func (c *hcpConfig) GetAPIAddress() string {
 	return c.apiAddress
 }
 
-func (c hcpConfig) GetAPITLSConfig() *tls.Config {
+func (c *hcpConfig) GetAPITLSConfig() *tls.Config {
 	return cloneTLSConfig(c.apiTLSConfig)
 }
 
-func (c hcpConfig) GetSCADAAddress() string {
+func (c *hcpConfig) GetSCADAAddress() string {
 	return c.scadaAddress
 }
 
-func (c hcpConfig) GetSCADATLSConfig() *tls.Config {
+func (c *hcpConfig) GetSCADATLSConfig() *tls.Config {
 	return cloneTLSConfig(c.scadaTLSConfig)
 }
 
-func (c hcpConfig) validate() error {
+func (c *hcpConfig) validate() error {
 	// Ensure client credentials have been provided
 	if c.clientCredentialsConfig.ClientID == "" && c.clientCredentialsConfig.ClientSecret == "" {
 		return fmt.Errorf("client credentials need to be provided")
@@ -137,4 +137,4 @@ func (c hcpConfig) validate() error {
 	return nil
 }
 
-var _ HCPConfig = hcpConfig{}
+var _ HCPConfig = &hcpConfig{}
