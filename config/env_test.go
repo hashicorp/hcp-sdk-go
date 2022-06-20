@@ -80,8 +80,8 @@ func TestFromEnv_TLSConfig_Plain(t *testing.T) {
 
 	// Prepare the environment
 	os.Clearenv()
-	require.NoError(os.Setenv(envVarAPITLS, tlsSettingPlain))
-	require.NoError(os.Setenv(envVarSCADATLS, tlsSettingPlain))
+	require.NoError(os.Setenv(envVarAPITLS, tlsSettingDisabled))
+	require.NoError(os.Setenv(envVarSCADATLS, tlsSettingDisabled))
 
 	// Exercise
 	config := &hcpConfig{

@@ -37,11 +37,12 @@ const (
 	// This should only be needed for development purposes.
 	tlsSettingInsecure = "insecure"
 
-	// tlsSettingPlain is the value TLS environment variables can be set to if
-	// the communication should happen in plain-text and TLS should be disabled.
+	// tlsSettingDisabled is the value TLS environment variables can be set to
+	// if the communication should happen in plain-text and TLS should be
+	// disabled.
 	//
 	// This should only be needed for development purposes.
-	tlsSettingPlain = "plain"
+	tlsSettingDisabled = "disabled"
 )
 
 // FromEnv will return a HCPConfigOption that will populate the configuration
@@ -121,7 +122,7 @@ func FromEnv() HCPConfigOption {
 
 func tlsConfigForSetting(setting string) (*tls.Config, error) {
 	switch setting {
-	case tlsSettingPlain:
+	case tlsSettingDisabled:
 		return nil, nil
 	case tlsSettingInsecure:
 		return &tls.Config{InsecureSkipVerify: true}, nil
