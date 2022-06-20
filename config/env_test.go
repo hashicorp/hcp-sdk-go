@@ -12,7 +12,8 @@ func TestFromEnv_NoVars(t *testing.T) {
 	require := requirepkg.New(t)
 
 	// Clear the environment
-	os.Clearenv()
+	clearEnv()
+	defer clearEnv()
 
 	// Exercise
 	config := &hcpConfig{}
@@ -25,8 +26,11 @@ func TestFromEnv_NoVars(t *testing.T) {
 func TestFromEnv_SimpleValues(t *testing.T) {
 	require := requirepkg.New(t)
 
+	// Clear the environment
+	clearEnv()
+	defer clearEnv()
+
 	// Prepare the environment
-	os.Clearenv()
 	require.NoError(os.Setenv(envVarAuthURL, "https://my-auth:1234"))
 
 	require.NoError(os.Setenv(envVarClientID, "my-client-id"))
@@ -63,8 +67,11 @@ func TestFromEnv_SimpleValues(t *testing.T) {
 func TestFromEnv_LegacyHostname(t *testing.T) {
 	require := requirepkg.New(t)
 
+	// Clear the environment
+	clearEnv()
+	defer clearEnv()
+
 	// Prepare the environment
-	os.Clearenv()
 	require.NoError(os.Setenv(envVarAPIHostnameLegacy, "https://my-legacy-api"))
 
 	// Exercise
@@ -78,8 +85,11 @@ func TestFromEnv_LegacyHostname(t *testing.T) {
 func TestFromEnv_TLSConfig_Plain(t *testing.T) {
 	require := requirepkg.New(t)
 
+	// Clear the environment
+	clearEnv()
+	defer clearEnv()
+
 	// Prepare the environment
-	os.Clearenv()
 	require.NoError(os.Setenv(envVarAPITLS, tlsSettingDisabled))
 	require.NoError(os.Setenv(envVarSCADATLS, tlsSettingDisabled))
 
@@ -98,8 +108,11 @@ func TestFromEnv_TLSConfig_Plain(t *testing.T) {
 func TestFromEnv_TLSConfig_Insecure(t *testing.T) {
 	require := requirepkg.New(t)
 
+	// Clear the environment
+	clearEnv()
+	defer clearEnv()
+
 	// Prepare the environment
-	os.Clearenv()
 	require.NoError(os.Setenv(envVarAPITLS, tlsSettingInsecure))
 	require.NoError(os.Setenv(envVarSCADATLS, tlsSettingInsecure))
 
@@ -110,4 +123,17 @@ func TestFromEnv_TLSConfig_Insecure(t *testing.T) {
 	// Ensure the TLS configuration is set to insecure
 	require.True(config.apiTLSConfig.InsecureSkipVerify)
 	require.True(config.scadaTLSConfig.InsecureSkipVerify)
+}
+
+// clearEnv will unset any environment variables that FromEnv might read.
+func clearEnv() {
+	os.Unsetenv(envVarAuthURL)
+	os.Unsetenv(envVarClientID)
+	os.Unsetenv(envVarClientSecret)
+	os.Unsetenv(envVarPortalURL)
+	os.Unsetenv(envVarAPIAddress)
+	os.Unsetenv(envVarAPIHostnameLegacy)
+	os.Unsetenv(envVarAPITLS)
+	os.Unsetenv(envVarSCADAAddress)
+	os.Unsetenv(envVarSCADATLS)
 }
