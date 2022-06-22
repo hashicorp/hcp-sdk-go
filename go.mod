@@ -10,9 +10,9 @@ require (
 	github.com/go-openapi/strfmt v0.20.0
 	github.com/go-openapi/swag v0.19.14
 	github.com/go-openapi/validate v0.20.2
-	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/hashicorp/go-cleanhttp v0.5.1
 	github.com/iancoleman/strcase v0.1.3
 	github.com/stretchr/testify v1.7.0
+	golang.org/x/net v0.0.0-20210119194325-5f4716e94777
 	golang.org/x/oauth2 v0.0.0-20201109201403-9fd604954f58
 )
