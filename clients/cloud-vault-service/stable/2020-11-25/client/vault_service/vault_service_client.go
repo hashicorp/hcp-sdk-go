@@ -45,6 +45,8 @@ type ClientService interface {
 
 	GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo runtime.ClientAuthInfoWriter) (*GetAuditLogStatusOK, error)
 
+	GetAvailableProviders(params *GetAvailableProvidersParams, authInfo runtime.ClientAuthInfoWriter) (*GetAvailableProvidersOK, error)
+
 	GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.ClientAuthInfoWriter) (*GetCORSConfigOK, error)
 
 	GetClientCounts(params *GetClientCountsParams, authInfo runtime.ClientAuthInfoWriter) (*GetClientCountsOK, error)
@@ -423,6 +425,40 @@ func (a *Client) GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo run
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetAuditLogStatusDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  GetAvailableProviders get available providers API
+*/
+func (a *Client) GetAvailableProviders(params *GetAvailableProvidersParams, authInfo runtime.ClientAuthInfoWriter) (*GetAvailableProvidersOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAvailableProvidersParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetAvailableProviders",
+		Method:             "GET",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAvailableProvidersReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAvailableProvidersOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetAvailableProvidersDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
