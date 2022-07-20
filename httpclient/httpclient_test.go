@@ -21,7 +21,7 @@ func TestNew(t *testing.T) {
 
 	orgID := "test-org"
 	projID := "test-project"
-	apiPath := fmt.Sprintf("/consul/2020-08-26/organizations/%s/projects/%s/clusters", orgID, projID)
+	apiPath := fmt.Sprintf("/consul/2021-02-04/organizations/%s/projects/%s/clusters", orgID, projID)
 
 	numRequests := uint32(0)
 
@@ -85,7 +85,7 @@ func TestNew(t *testing.T) {
 	listParams.LocationOrganizationID = orgID
 	listParams.LocationProjectID = projID
 
-	// This SDK request hits the mock Consul List API handler above ('/consul/2020-08-26/organizations...').
+	// This SDK request hits the mock Consul List API handler above ('/consul/2021-02-04/organizations...').
 	// The handler verifies that the expected bearer token is provided.
 	_, err = consulClient.List(listParams, nil)
 	require.NoError(t, err)
