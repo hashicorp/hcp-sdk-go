@@ -12,6 +12,9 @@ jobs:
   publish-sdk:
     runs-on: ubuntu-latest
     steps:
+      - name: Set env service branch
+        run: echo "SERVICE_BRANCH=auto-update-${{ github.event.inputs.service }}-sdk" >> $GITHUB_ENV
+
       - name: Checkout hcp-sdk-go
         uses: actions/checkout@v2
         with:
@@ -58,25 +61,25 @@ jobs:
           ./scripts/gen-go-service-sdk.sh $SERVICE
           rm -rf $GITHUB_WORKSPACE/hcp-sdk-go/temp
 
+      - name: Create branch with updated service SDK
+        run: |
+          cd $GITHUB_WORKSPACE/hcp-sdk-go
+          git config user.name "HashiCorp Cloud Services"
+          git config user.email "59096967+hashicorp-cloud@users.noreply.github.com"
+          service_branch_exists="$(git ls-remote --heads origin ${{ env.SERVICE_BRANCH }})"
+          [[ -n $service_branch_exists ]] && git push origin --delete ${{ env.SERVICE_BRANCH }}
+          git checkout -b ${{ env.SERVICE_BRANCH }}
+          git add clients/${{ github.event.inputs.service }}/*
+          git commit -m "Update ${{ github.event.inputs.service }} SDK"
+          git push --set-upstream origin ${{ env.SERVICE_BRANCH }}    
+          
       - name: Open PR
-        id: pr
-        uses: peter-evans/create-pull-request@v3.10.1
-        with:
-          token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
-          path: hcp-sdk-go
-          branch: auto-update-${{ github.event.inputs.service }}-sdk
-          committer: HashiCorp Cloud Services <59096967+hashicorp-cloud@users.noreply.github.com>
-          commit-message: Update ${{ github.event.inputs.service }} SDK 
-          title: '[auto] Update ${{ github.event.inputs.service }} SDK' 
-          body: |
-            This is an auto-generated PR created as part of the public SDK pipeline.
-
-            Changes:
-            - Pulled the latest public service SDK from ${{ github.event.inputs.service }}
-          delete-branch: true
-
-      # The Open PR action won't fail if no PR is opened, so this step verifies that a PR was actually created.
-      - name: Verify PR created
-        run:  |
-          pr="${{ steps.pr.outputs.pull-request-url }}"
-          [[ ! -z "$pr" ]] && echo "Pull Request URL - $pr" || exit 1
+        run: |
+          cd $GITHUB_WORKSPACE/hcp-sdk-go
+          gh pr create --title "$PR_TITLE" --body "$PR_BODY" -H "$PR_SOURCE" -B "$PR_TARGET"
+        env:
+          PR_TITLE: "[auto] Update ${{ github.event.inputs.service }} SDK"
+          PR_BODY: "This is an auto-generated PR created as part of the public SDK pipeline to update the SDK for ${{ github.event.inputs.service }}."
+          PR_SOURCE: "${{ env.SERVICE_BRANCH }}"
+          PR_TARGET: "main"
+          GITHUB_TOKEN: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }} 

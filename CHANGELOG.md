@@ -1,3 +1,8 @@
+## 0.20.0 (June 20, 2022)
+
+FEATURES:
+* Updated cloud-vault-service/stable/2020-11-25 to add major version upgrade features ([#95](https://github.com/hashicorp/hcp-sdk-go/pull/95)).
+
 ## 0.19.0 (May 6, 2022)
 
 BREAKING CHANGES:

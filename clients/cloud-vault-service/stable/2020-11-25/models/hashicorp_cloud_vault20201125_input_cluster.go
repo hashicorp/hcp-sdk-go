@@ -33,6 +33,9 @@ type HashicorpCloudVault20201125InputCluster struct {
 	// performance_replication_primary_cluster holds the link information of the
 	// primary cluster under performance replication.
 	PerformanceReplicationPrimaryCluster *cloud.HashicorpCloudLocationLink `json:"performance_replication_primary_cluster,omitempty"`
+
+	// template_input refers to the template used to create the cluster that will be applied during bootstrap time.
+	TemplateInput *HashicorpCloudVault20201125InputClusterTemplateInput `json:"template_input,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 input cluster
@@ -52,6 +55,10 @@ func (m *HashicorpCloudVault20201125InputCluster) Validate(formats strfmt.Regist
 	}
 
 	if err := m.validatePerformanceReplicationPrimaryCluster(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTemplateInput(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -125,6 +132,24 @@ func (m *HashicorpCloudVault20201125InputCluster) validatePerformanceReplication
 		if err := m.PerformanceReplicationPrimaryCluster.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("performance_replication_primary_cluster")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputCluster) validateTemplateInput(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.TemplateInput) { // not required
+		return nil
+	}
+
+	if m.TemplateInput != nil {
+		if err := m.TemplateInput.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("template_input")
 			}
 			return err
 		}

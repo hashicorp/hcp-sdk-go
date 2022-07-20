@@ -15,7 +15,7 @@ service=$1
 git checkout -b "update-$service-sdk-$d"
 git add "clients/$service/*"
 git commit -m "updates $service SDK on $fmtd"
-git push
+git push -u
 
 gh pr create --title "Updates $service SDK" --body "Updates $service SDK as of $fmtd"
 

@@ -70,38 +70,3 @@ import (
 ```
 
 See `cmd/hcp-sdk-go-client` for a complete example.
-
-## Generating a new service SDK
-
-Requirements:
-
-- must be an internal Hashicorp employee
-- `hcloud` ([install instructions](https://github.com/hashicorp/hcloud#installation))
-- `gh` (`brew install gh`)
-- GITHUB_TOKEN with `repo` permission and SSO enabled ([how to create a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token))
-- swagger (must match version set in cloud-makefiles)
-
-The `make sdk/update` command will:
-
-1. Use the tool `hcloud` to pull temporary copies of the latest public specs from the designated HCP service
-2. Run transformations on the temporary spec copies.
-3. Generate the SDK from the transformed specs.
-4. (optional) Post a PR to this repo if `commit=true` is passed
-
-To generate the SDK for cloud-foo-service ***without** committing the files in a PR:
-
-```bash
-make sdk/update service=cloud-foo-service commit=false
-```
-
-To generate the SDK and commit the files in a PR:
-
-```bash
-make sdk/update service=cloud-foo-service commit=true
-```
-
-To generate shared HCP models and commit the files in a PR:
-
-```bash
-make sdk/update service=cloud-shared commit=true
-```
