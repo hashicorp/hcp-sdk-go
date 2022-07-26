@@ -50,7 +50,6 @@ type HashicorpCloudPackerBuild struct {
 
 	// Unique identifier of the HCP Packer registry build used as the source
 	// for this build. Used for tracking dependencies for build pipelines.
-	// Deprecated
 	SourceBuildUlid string `json:"source_build_ulid,omitempty"`
 
 	// The ID or URL of the remote cloud source image. Used for tracking image

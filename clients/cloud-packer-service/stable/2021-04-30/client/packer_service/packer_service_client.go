@@ -457,7 +457,7 @@ func (a *Client) PackerServiceGetBucket(params *PackerServiceGetBucketParams, au
 }
 
 /*
-  PackerServiceGetBuild gets a build with its list of images if the requested build iteration is revoked and the requester is a service principal the image id URL will be omitted from the response and replaced with error revoked to prevent automation scripts from using a revoked image
+  PackerServiceGetBuild gets a build with its list of images
 */
 func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -491,7 +491,7 @@ func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, auth
 }
 
 /*
-  PackerServiceGetChannel gets a channel with the iteration that it is currently assigned if any if the requested iteration is revoked and the requester is a service principal the image id URL will be omitted from the response and replaced with error revoked to prevent automation scripts from using a revoked image
+  PackerServiceGetChannel gets a channel with the iteration that it is currently assigned if any
 */
 func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetChannelOK, error) {
 	// TODO: Validate the params before sending
@@ -525,7 +525,7 @@ func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, 
 }
 
 /*
-  PackerServiceGetIteration allows the user to get an iteration using one of the following identifiers iteration id incremental version fingerprint these are supplied as a query parameter e g images bucket slug iteration fingerprint fingerprint if the requested iteration is revoked and the requester is a service principal the image id URL will be omitted from the response and replaced with error revoked to prevent automation scripts from using a revoked image
+  PackerServiceGetIteration allows the user to get an iteration using one of the following identifiers iteration id incremental version fingerprint these are supplied as a query parameter e g images bucket slug iteration fingerprint fingerprint
 */
 func (a *Client) PackerServiceGetIteration(params *PackerServiceGetIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetIterationOK, error) {
 	// TODO: Validate the params before sending
@@ -661,7 +661,7 @@ func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams
 }
 
 /*
-  PackerServiceListBuilds lists every existing build and its images for an iteration if the requested iteration is revoked and the requester is a service principal the image id URL will be omitted from the response and replaced with error revoked to prevent automation scripts from using a revoked image
+  PackerServiceListBuilds lists every existing build and its images for an iteration
 */
 func (a *Client) PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBuildsOK, error) {
 	// TODO: Validate the params before sending
