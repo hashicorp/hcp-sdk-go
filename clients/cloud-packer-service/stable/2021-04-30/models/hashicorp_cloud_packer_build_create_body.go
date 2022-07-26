@@ -37,6 +37,10 @@ type HashicorpCloudPackerBuildCreateBody struct {
 	// post-processor, this UUID will match the UUID present there.
 	PackerRunUUID string `json:"packer_run_uuid,omitempty"`
 
+	// The ID of the channel that it was used to fetch the source_iteration_id.
+	// When the source channel ID is set, the source iteration ID should also be set.
+	SourceChannelID string `json:"source_channel_id,omitempty"`
+
 	// The ID or URL of the remote cloud source image. Used for tracking image
 	// dependencies for build pipelines.
 	SourceImageID string `json:"source_image_id,omitempty"`
