@@ -27,6 +27,9 @@ type HashicorpCloudVault20201125Cluster struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
+	// CreationMetadata related to the creation of the cluster including any template output
+	CreationMetadata *HashicorpCloudVault20201125ClusterCreationMetadata `json:"creation_metadata,omitempty"`
+
 	// currently_deployed_version is the version of the current Vault deployment.
 	CurrentVersion string `json:"current_version,omitempty"`
 
@@ -61,6 +64,10 @@ func (m *HashicorpCloudVault20201125Cluster) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreationMetadata(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -116,6 +123,24 @@ func (m *HashicorpCloudVault20201125Cluster) validateCreatedAt(formats strfmt.Re
 
 	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125Cluster) validateCreationMetadata(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CreationMetadata) { // not required
+		return nil
+	}
+
+	if m.CreationMetadata != nil {
+		if err := m.CreationMetadata.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("creation_metadata")
+			}
+			return err
+		}
 	}
 
 	return nil
