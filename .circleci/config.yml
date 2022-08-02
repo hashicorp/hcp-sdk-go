@@ -2,7 +2,7 @@ version: 2
 jobs:
   go/test:
     docker:
-      - image: cimg/go:1.15
+      - image: cimg/go:1.18
     environment:
       - GO111MODULE: 'on'
       - TEST_RESULTS: /tmp/test-results
