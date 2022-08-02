@@ -1,6 +1,6 @@
 module github.com/hashicorp/hcp-sdk-go
 
-go 1.16
+go 1.18
 
 require (
 	github.com/go-openapi/errors v0.19.9
