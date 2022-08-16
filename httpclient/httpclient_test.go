@@ -65,8 +65,8 @@ func TestNew(t *testing.T) {
 			t.Errorf("invalid URL %q requested", r.URL)
 		}
 	}))
-	// Enable once we're on Go 1.14
-	// ts.EnableHTTP2 = true
+
+	ts.EnableHTTP2 = true
 	ts.StartTLS()
 	defer ts.Close()
 
