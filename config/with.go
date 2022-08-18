@@ -67,7 +67,7 @@ func WithPortalURL(portalURL string) HCPConfigOption {
 // WithAuth credentials is an option that can be used to provide a custom URL
 // for the auth endpoint.
 //
-// An alternative TLS configuration can be provided, if non is provided the
+// An alternative TLS configuration can be provided, if none is provided the
 // default TLS configuration will be used. It is not possible to disable TLS for
 // the auth endpoint.
 //
@@ -87,6 +87,24 @@ func WithAuth(authURL string, tlsConfig *tls.Config) HCPConfigOption {
 
 		config.authURL = parsedAuthURL
 		config.authTLSConfig = cloneTLSConfig(tlsConfig)
+
+		// Ensure the OAuth2 endpoints are updated with the new auth URL
+		config.oauth2Config.Endpoint.AuthURL = authURL + "/authorize"
+		config.oauth2Config.Endpoint.TokenURL = authURL + "/oauth/token"
+
+		return nil
+	}
+}
+
+// WithOAuth2ClientID credentials is an option that can be used to provide a custom OAuth2 Client ID.
+//
+// An alternative OAuth2 ClientID can be provided, if none is provided the
+// default OAuth2 Client ID will be used.
+//
+// This should only be necessary for development purposes.
+func WithOAuth2ClientID(oauth2ClientID string) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.oauth2Config.ClientID = oauth2ClientID
 
 		return nil
 	}
