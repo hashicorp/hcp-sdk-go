@@ -10,7 +10,8 @@ import (
 // The following constants contain the names of environment variables that can
 // be set to provide configuration values.
 const (
-	envVarAuthURL = "HCP_AUTH_URL"
+	envVarAuthURL        = "HCP_AUTH_URL"
+	envVarOAuth2ClientID = "HCP_OAUTH_CLIENT_ID"
 
 	envVarClientID     = "HCP_CLIENT_ID"
 	envVarClientSecret = "HCP_CLIENT_SECRET"
@@ -65,7 +66,14 @@ func FromEnv() HCPConfigOption {
 		// Read auth URL from environment
 		if authURL, ok := os.LookupEnv(envVarAuthURL); ok {
 			if err := apply(config, WithAuth(authURL, nil)); err != nil {
-				return fmt.Errorf("failed to parse environment variable %s: %w", envVarPortalURL, err)
+				return fmt.Errorf("failed to parse environment variable %s: %w", envVarAuthURL, err)
+			}
+		}
+
+		// Read oauth2ClientID from environment
+		if oauth2ClientID, ok := os.LookupEnv(envVarOAuth2ClientID); ok {
+			if err := apply(config, WithOAuth2ClientID(oauth2ClientID)); err != nil {
+				return fmt.Errorf("failed to parse environment variable %s: %w", envVarOAuth2ClientID, err)
 			}
 		}
 
