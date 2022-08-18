@@ -50,6 +50,10 @@ type hcpConfig struct {
 	// the token source.
 	clientCredentialsConfig clientcredentials.Config
 
+	// oauth2Config is the configuration that will be used to create
+	// a browser-initiated token source when client credentials are not provided.
+	oauth2Config oauth2.Config
+
 	// authURL is the URL that will be used to authenticate.
 	authURL *url.URL
 	// authTLSConfig is the TLS configuration for the auth endpoint. TLS can not
@@ -105,10 +109,6 @@ func (c *hcpConfig) SCADATLSConfig() *tls.Config {
 }
 
 func (c *hcpConfig) validate() error {
-	// Ensure client credentials have been provided
-	if c.clientCredentialsConfig.ClientID == "" && c.clientCredentialsConfig.ClientSecret == "" {
-		return fmt.Errorf("client credentials need to be provided")
-	}
 
 	// Ensure the auth URL is valid
 	if c.authURL.Host == "" {
