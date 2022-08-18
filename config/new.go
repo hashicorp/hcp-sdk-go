@@ -7,6 +7,7 @@ import (
 	"net/url"
 
 	"github.com/hashicorp/go-cleanhttp"
+	"github.com/hashicorp/hcp-sdk-go/auth"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
@@ -15,6 +16,9 @@ import (
 const (
 	// defaultAuthURL is the URL of the production auth endpoint.
 	defaultAuthURL = "https://auth.idp.hashicorp.com"
+
+	// defaultOAuth2ClientID is the client ID of the production auth application.
+	defaultOAuth2ClientID = "FdZDrkFj8z7LNQBq5sk3K377sgoSKslV"
 
 	// defaultPortalURL is the URL of the production portal.
 	defaultPortalURL = "https://portal.cloud.hashicorp.com"
@@ -60,6 +64,15 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 		authURL:       authURL,
 		authTLSConfig: &tls.Config{},
+		oauth2Config: oauth2.Config{
+			ClientID: defaultOAuth2ClientID,
+			Endpoint: oauth2.Endpoint{
+				AuthURL:  defaultAuthURL + "/authorize",
+				TokenURL: defaultAuthURL + "/oauth/token",
+			},
+			RedirectURL: "http://localhost:8443/oidc/callback",
+			Scopes:      []string{"openid", "offline_access"},
+		},
 
 		portalURL: portalURL,
 
@@ -86,13 +99,28 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		&http.Client{Transport: tokenTransport},
 	)
 
-	// Set token URL based on auth URL
-	tokenURL := config.authURL
-	tokenURL.Path = tokenPath
-	config.clientCredentialsConfig.TokenURL = tokenURL.String()
+	// Set access token via configured client credentials.
+	if config.clientCredentialsConfig.ClientID != "" && config.clientCredentialsConfig.ClientSecret != "" {
+		// Set token URL based on auth URL
+		tokenURL := config.authURL
+		tokenURL.Path = tokenPath
+		config.clientCredentialsConfig.TokenURL = tokenURL.String()
 
-	// Create token source from the client credentials configuration
-	config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
+		// Create token source from the client credentials configuration
+		config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
+
+	} else { // Set access token via browser login.
+
+		// TODO: Right now we fetch a new token on every init of the client. We need to implement a library that will check for existing tokens in a well-known location.
+		// If no token is available or if the available token's max age has exceeded,then we get new token via browser login.
+		var tok *oauth2.Token
+		tok, err := auth.GetTokenFromBrowser(tokenContext, &config.oauth2Config)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get access token: %w", err)
+		}
+
+		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
+	}
 
 	if err := config.validate(); err != nil {
 		return nil, fmt.Errorf("the configuration is not valid: %w", err)
