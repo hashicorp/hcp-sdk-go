@@ -1,3 +1,16 @@
+## 0.21.0 (August 19, 2022)
+
+IMPROVEMENTS:
+* Update CODEOWNERS with new team name ([#105](https://github.com/hashicorp/hcp-sdk-go/pull/105)).
+* Upgrade to Go version 1.18 ([#106](https://github.com/hashicorp/hcp-sdk-go/pull/106)).
+
+FEATURES:
+* Update cloud-packer-service ([#101](https://github.com/hashicorp/hcp-sdk-go/pull/101)).
+* Update cloud-vault-service ([#104](https://github.com/hashicorp/hcp-sdk-go/pull/104)).
+* Update cloud-packer-service ([#108](https://github.com/hashicorp/hcp-sdk-go/pull/108)).
+* Update cloud-vagrant-box-registry ([#109](https://github.com/hashicorp/hcp-sdk-go/pull/109)).
+* Update cloud-vault-service ([#110](https://github.com/hashicorp/hcp-sdk-go/pull/110)).
+
 ## 0.20.0 (June 20, 2022)
 
 FEATURES:
