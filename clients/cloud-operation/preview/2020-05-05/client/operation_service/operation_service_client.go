@@ -73,7 +73,11 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 }
 
 /*
-  List lists selects a list of operations that match some filters and then returns them in the response the supported filters are the location s organization id and project id the project id supports the special value to allow requesting operations that match any project within the organization
+  List lists selects a list of operations that match some filters and then returns them in the response
+
+  The supported filters are the Location's organization_id and project_id.
+The project_id supports the special value "-" to allow requesting operations
+that match any project within the organization.
 */
 func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
 	// TODO: Validate the params before sending
@@ -110,7 +114,7 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
   Wait waits blocks until an operation is d o n e or a timeout is reached whichever occurs first it then returns the latest state of the operation that it had at the time of the timeout
 
   Note that Wait may return at any time. In most cases, the timeout will
-be respected but it is not guaranteed. Therefore, clients should always
+be respected but it isn't guaranteed. Therefore, clients should always
 check the state of the returned operation. A return from Wait does not
 guarantee the operation is DONE.
 
