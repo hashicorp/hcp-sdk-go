@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	tokenPath string = "/oauth/token"
+	tokenPath string = "/oauth2/token"
 )
 
 // WithClientCredentials returns an http client with an access token obtained using the configured client credentials.

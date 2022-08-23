@@ -14,7 +14,7 @@ import (
 
 const (
 	// defaultAuthURL is the URL of the production auth endpoint.
-	defaultAuthURL = "https://auth.hashicorp.com"
+	defaultAuthURL = "https://auth.idp.hashicorp.com"
 
 	// defaultPortalURL is the URL of the production portal.
 	defaultPortalURL = "https://portal.cloud.hashicorp.com"
@@ -31,7 +31,7 @@ const (
 	aud = "https://api.hashicorp.cloud"
 
 	// tokenPath is the path used to retrieve the access token.
-	tokenPath string = "/oauth/token"
+	tokenPath string = "/oauth2/token"
 )
 
 // NewHCPConfig will return a HCPConfig. The configuration will be constructed
