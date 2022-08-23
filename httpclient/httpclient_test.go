@@ -19,7 +19,7 @@ import (
 
 func TestNew(t *testing.T) {
 
-	tokenPath := "/oauth/token"
+	tokenPath := "/oauth2/token"
 	token := "90d64460d14870c08c81352a05dedd3465940a7c"
 	clientID := "CLIENT_ID"
 	clientSecret := "CLIENT_SECRET"
