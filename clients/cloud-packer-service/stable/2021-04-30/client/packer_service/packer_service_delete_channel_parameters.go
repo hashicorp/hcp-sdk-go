@@ -16,84 +16,103 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewPackerServiceDeleteChannelParams creates a new PackerServiceDeleteChannelParams object
-// with the default values initialized.
+// NewPackerServiceDeleteChannelParams creates a new PackerServiceDeleteChannelParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceDeleteChannelParams() *PackerServiceDeleteChannelParams {
-	var ()
 	return &PackerServiceDeleteChannelParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceDeleteChannelParamsWithTimeout creates a new PackerServiceDeleteChannelParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceDeleteChannelParamsWithTimeout(timeout time.Duration) *PackerServiceDeleteChannelParams {
-	var ()
 	return &PackerServiceDeleteChannelParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceDeleteChannelParamsWithContext creates a new PackerServiceDeleteChannelParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceDeleteChannelParamsWithContext(ctx context.Context) *PackerServiceDeleteChannelParams {
-	var ()
 	return &PackerServiceDeleteChannelParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceDeleteChannelParamsWithHTTPClient creates a new PackerServiceDeleteChannelParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceDeleteChannelParamsWithHTTPClient(client *http.Client) *PackerServiceDeleteChannelParams {
-	var ()
 	return &PackerServiceDeleteChannelParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceDeleteChannelParams contains all the parameters to send to the API endpoint
-for the packer service delete channel operation typically these are written to a http.Request
+/* PackerServiceDeleteChannelParams contains all the parameters to send to the API endpoint
+   for the packer service delete channel operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceDeleteChannelParams struct {
 
-	/*BucketSlug
-	  Human-readable name for the bucket that the channel is associated with.
+	/* BucketSlug.
 
+	   Human-readable name for the bucket that the channel is associated with.
 	*/
 	BucketSlug string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*LocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* LocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
-	/*LocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* LocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
-	/*Slug
-	  Human-readable name for the channel.
 
+	/* Slug.
+
+	   Human-readable name for the channel.
 	*/
 	Slug string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service delete channel params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceDeleteChannelParams) WithDefaults() *PackerServiceDeleteChannelParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service delete channel params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceDeleteChannelParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service delete channel params
@@ -222,32 +241,34 @@ func (o *PackerServiceDeleteChannelParams) WriteToRequest(r runtime.ClientReques
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
+
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
+
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	// path param slug

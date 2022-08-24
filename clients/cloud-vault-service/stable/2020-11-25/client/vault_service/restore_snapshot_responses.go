@@ -47,7 +47,7 @@ func NewRestoreSnapshotOK() *RestoreSnapshotOK {
 	return &RestoreSnapshotOK{}
 }
 
-/*RestoreSnapshotOK handles this case with default header values.
+/* RestoreSnapshotOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type RestoreSnapshotOK struct {
 func (o *RestoreSnapshotOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/restore][%d] restoreSnapshotOK  %+v", 200, o.Payload)
 }
-
 func (o *RestoreSnapshotOK) GetPayload() *models.HashicorpCloudVault20201125RestoreSnapshotResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewRestoreSnapshotDefault(code int) *RestoreSnapshotDefault {
 	}
 }
 
-/*RestoreSnapshotDefault handles this case with default header values.
+/* RestoreSnapshotDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *RestoreSnapshotDefault) Code() int {
 func (o *RestoreSnapshotDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/restore][%d] RestoreSnapshot default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *RestoreSnapshotDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

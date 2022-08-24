@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -208,7 +210,7 @@ import (
 //
 // The implementation of any API method which has a FieldMask type field in the
 // request should verify the included field paths, and return an
-// `INVALID_ARGUMENT` error if any path is unmappable.
+// `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
 //
 // swagger:model google.protobuf.FieldMask
 type GoogleProtobufFieldMask struct {
@@ -219,6 +221,11 @@ type GoogleProtobufFieldMask struct {
 
 // Validate validates this google protobuf field mask
 func (m *GoogleProtobufFieldMask) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this google protobuf field mask based on context it is used
+func (m *GoogleProtobufFieldMask) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

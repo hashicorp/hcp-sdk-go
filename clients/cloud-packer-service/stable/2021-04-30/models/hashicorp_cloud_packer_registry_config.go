@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -23,7 +25,7 @@ type HashicorpCloudPackerRegistryConfig struct {
 	BillingDeprovision *HashicorpCloudPackerRegistryBillingDeprovision `json:"billing_deprovision,omitempty"`
 
 	// The feature tier for the registry.
-	FeatureTier HashicorpCloudPackerRegistryConfigTier `json:"feature_tier,omitempty"`
+	FeatureTier *HashicorpCloudPackerRegistryConfigTier `json:"feature_tier,omitempty"`
 
 	// Required configuration to run TFC run tasks for validation against this registry.
 	TfcRunTaskConfig *HashicorpCloudPackerRegistryTFCRunTaskConfig `json:"tfc_run_task_config,omitempty"`
@@ -52,7 +54,6 @@ func (m *HashicorpCloudPackerRegistryConfig) Validate(formats strfmt.Registry) e
 }
 
 func (m *HashicorpCloudPackerRegistryConfig) validateBillingDeprovision(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.BillingDeprovision) { // not required
 		return nil
 	}
@@ -61,6 +62,8 @@ func (m *HashicorpCloudPackerRegistryConfig) validateBillingDeprovision(formats 
 		if err := m.BillingDeprovision.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("billing_deprovision")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("billing_deprovision")
 			}
 			return err
 		}
@@ -70,23 +73,25 @@ func (m *HashicorpCloudPackerRegistryConfig) validateBillingDeprovision(formats 
 }
 
 func (m *HashicorpCloudPackerRegistryConfig) validateFeatureTier(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.FeatureTier) { // not required
 		return nil
 	}
 
-	if err := m.FeatureTier.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("feature_tier")
+	if m.FeatureTier != nil {
+		if err := m.FeatureTier.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("feature_tier")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("feature_tier")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudPackerRegistryConfig) validateTfcRunTaskConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.TfcRunTaskConfig) { // not required
 		return nil
 	}
@@ -95,6 +100,78 @@ func (m *HashicorpCloudPackerRegistryConfig) validateTfcRunTaskConfig(formats st
 		if err := m.TfcRunTaskConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tfc_run_task_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("tfc_run_task_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer registry config based on the context it is used
+func (m *HashicorpCloudPackerRegistryConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateBillingDeprovision(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFeatureTier(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTfcRunTaskConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerRegistryConfig) contextValidateBillingDeprovision(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BillingDeprovision != nil {
+		if err := m.BillingDeprovision.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("billing_deprovision")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("billing_deprovision")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerRegistryConfig) contextValidateFeatureTier(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.FeatureTier != nil {
+		if err := m.FeatureTier.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("feature_tier")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("feature_tier")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerRegistryConfig) contextValidateTfcRunTaskConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TfcRunTaskConfig != nil {
+		if err := m.TfcRunTaskConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("tfc_run_task_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("tfc_run_task_config")
 			}
 			return err
 		}

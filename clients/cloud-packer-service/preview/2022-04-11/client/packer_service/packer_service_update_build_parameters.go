@@ -18,71 +18,88 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/preview/2022-04-11/models"
 )
 
-// NewPackerServiceUpdateBuildParams creates a new PackerServiceUpdateBuildParams object
-// with the default values initialized.
+// NewPackerServiceUpdateBuildParams creates a new PackerServiceUpdateBuildParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceUpdateBuildParams() *PackerServiceUpdateBuildParams {
-	var ()
 	return &PackerServiceUpdateBuildParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceUpdateBuildParamsWithTimeout creates a new PackerServiceUpdateBuildParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceUpdateBuildParamsWithTimeout(timeout time.Duration) *PackerServiceUpdateBuildParams {
-	var ()
 	return &PackerServiceUpdateBuildParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceUpdateBuildParamsWithContext creates a new PackerServiceUpdateBuildParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceUpdateBuildParamsWithContext(ctx context.Context) *PackerServiceUpdateBuildParams {
-	var ()
 	return &PackerServiceUpdateBuildParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceUpdateBuildParamsWithHTTPClient creates a new PackerServiceUpdateBuildParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceUpdateBuildParamsWithHTTPClient(client *http.Client) *PackerServiceUpdateBuildParams {
-	var ()
 	return &PackerServiceUpdateBuildParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceUpdateBuildParams contains all the parameters to send to the API endpoint
-for the packer service update build operation typically these are written to a http.Request
+/* PackerServiceUpdateBuildParams contains all the parameters to send to the API endpoint
+   for the packer service update build operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceUpdateBuildParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudPacker20220411UpdateBuildRequest
-	/*BuildID
-	  ULID of the build that should be updated.
 
+	/* BuildID.
+
+	   ULID of the build that should be updated.
 	*/
 	BuildID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service update build params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceUpdateBuildParams) WithDefaults() *PackerServiceUpdateBuildParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service update build params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceUpdateBuildParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service update build params
@@ -169,7 +186,6 @@ func (o *PackerServiceUpdateBuildParams) WriteToRequest(r runtime.ClientRequest,
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

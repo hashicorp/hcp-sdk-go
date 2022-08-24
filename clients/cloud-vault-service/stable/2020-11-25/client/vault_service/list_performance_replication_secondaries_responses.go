@@ -47,7 +47,7 @@ func NewListPerformanceReplicationSecondariesOK() *ListPerformanceReplicationSec
 	return &ListPerformanceReplicationSecondariesOK{}
 }
 
-/*ListPerformanceReplicationSecondariesOK handles this case with default header values.
+/* ListPerformanceReplicationSecondariesOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type ListPerformanceReplicationSecondariesOK struct {
 func (o *ListPerformanceReplicationSecondariesOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] listPerformanceReplicationSecondariesOK  %+v", 200, o.Payload)
 }
-
 func (o *ListPerformanceReplicationSecondariesOK) GetPayload() *models.HashicorpCloudVault20201125ListPerformanceReplicationSecondariesResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewListPerformanceReplicationSecondariesDefault(code int) *ListPerformanceR
 	}
 }
 
-/*ListPerformanceReplicationSecondariesDefault handles this case with default header values.
+/* ListPerformanceReplicationSecondariesDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *ListPerformanceReplicationSecondariesDefault) Code() int {
 func (o *ListPerformanceReplicationSecondariesDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] ListPerformanceReplicationSecondaries default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ListPerformanceReplicationSecondariesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

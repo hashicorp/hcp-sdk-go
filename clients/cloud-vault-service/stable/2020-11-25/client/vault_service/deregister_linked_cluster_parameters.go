@@ -16,98 +16,119 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDeregisterLinkedClusterParams creates a new DeregisterLinkedClusterParams object
-// with the default values initialized.
+// NewDeregisterLinkedClusterParams creates a new DeregisterLinkedClusterParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDeregisterLinkedClusterParams() *DeregisterLinkedClusterParams {
-	var ()
 	return &DeregisterLinkedClusterParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeregisterLinkedClusterParamsWithTimeout creates a new DeregisterLinkedClusterParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewDeregisterLinkedClusterParamsWithTimeout(timeout time.Duration) *DeregisterLinkedClusterParams {
-	var ()
 	return &DeregisterLinkedClusterParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewDeregisterLinkedClusterParamsWithContext creates a new DeregisterLinkedClusterParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewDeregisterLinkedClusterParamsWithContext(ctx context.Context) *DeregisterLinkedClusterParams {
-	var ()
 	return &DeregisterLinkedClusterParams{
-
 		Context: ctx,
 	}
 }
 
 // NewDeregisterLinkedClusterParamsWithHTTPClient creates a new DeregisterLinkedClusterParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewDeregisterLinkedClusterParamsWithHTTPClient(client *http.Client) *DeregisterLinkedClusterParams {
-	var ()
 	return &DeregisterLinkedClusterParams{
 		HTTPClient: client,
 	}
 }
 
-/*DeregisterLinkedClusterParams contains all the parameters to send to the API endpoint
-for the deregister linked cluster operation typically these are written to a http.Request
+/* DeregisterLinkedClusterParams contains all the parameters to send to the API endpoint
+   for the deregister linked cluster operation.
+
+   Typically these are written to a http.Request.
 */
 type DeregisterLinkedClusterParams struct {
 
-	/*ClusterLinkDescription
-	  description is a human-friendly description for this link. This is
-	used primarily for informational purposes such as error messages.
+	/* ClusterLinkDescription.
 
+	     description is a human-friendly description for this link. This is
+	used primarily for informational purposes such as error messages.
 	*/
 	ClusterLinkDescription *string
-	/*ClusterLinkID
-	  id is the identifier for this resource.
 
+	/* ClusterLinkID.
+
+	   id is the identifier for this resource.
 	*/
 	ClusterLinkID *string
-	/*ClusterLinkLocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* ClusterLinkLocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	ClusterLinkLocationOrganizationID string
-	/*ClusterLinkLocationProjectID
-	  project_id is the projects id.
 
+	/* ClusterLinkLocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	ClusterLinkLocationProjectID string
-	/*ClusterLinkLocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* ClusterLinkLocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	ClusterLinkLocationRegionProvider *string
-	/*ClusterLinkLocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* ClusterLinkLocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	ClusterLinkLocationRegionRegion *string
-	/*ClusterLinkType
-	  type is the unique type of the resource. Each service publishes a
+
+	/* ClusterLinkType.
+
+	     type is the unique type of the resource. Each service publishes a
 	unique set of types. The type value is recommended to be formatted
 	in "<org>.<type>" such as "hashicorp.hvn". This is to prevent conflicts
 	in the future, but any string value will work.
-
 	*/
 	ClusterLinkType *string
-	/*ClusterLinkUUID
-	  uuid is the unique UUID for this resource.
 
+	/* ClusterLinkUUID.
+
+	   uuid is the unique UUID for this resource.
 	*/
 	ClusterLinkUUID *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the deregister linked cluster params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeregisterLinkedClusterParams) WithDefaults() *DeregisterLinkedClusterParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the deregister linked cluster params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeregisterLinkedClusterParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the deregister linked cluster params
@@ -243,32 +264,34 @@ func (o *DeregisterLinkedClusterParams) WriteToRequest(r runtime.ClientRequest, 
 
 		// query param cluster_link.description
 		var qrClusterLinkDescription string
+
 		if o.ClusterLinkDescription != nil {
 			qrClusterLinkDescription = *o.ClusterLinkDescription
 		}
 		qClusterLinkDescription := qrClusterLinkDescription
 		if qClusterLinkDescription != "" {
+
 			if err := r.SetQueryParam("cluster_link.description", qClusterLinkDescription); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.ClusterLinkID != nil {
 
 		// query param cluster_link.id
 		var qrClusterLinkID string
+
 		if o.ClusterLinkID != nil {
 			qrClusterLinkID = *o.ClusterLinkID
 		}
 		qClusterLinkID := qrClusterLinkID
 		if qClusterLinkID != "" {
+
 			if err := r.SetQueryParam("cluster_link.id", qClusterLinkID); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	// path param cluster_link.location.organization_id
@@ -285,64 +308,68 @@ func (o *DeregisterLinkedClusterParams) WriteToRequest(r runtime.ClientRequest, 
 
 		// query param cluster_link.location.region.provider
 		var qrClusterLinkLocationRegionProvider string
+
 		if o.ClusterLinkLocationRegionProvider != nil {
 			qrClusterLinkLocationRegionProvider = *o.ClusterLinkLocationRegionProvider
 		}
 		qClusterLinkLocationRegionProvider := qrClusterLinkLocationRegionProvider
 		if qClusterLinkLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("cluster_link.location.region.provider", qClusterLinkLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.ClusterLinkLocationRegionRegion != nil {
 
 		// query param cluster_link.location.region.region
 		var qrClusterLinkLocationRegionRegion string
+
 		if o.ClusterLinkLocationRegionRegion != nil {
 			qrClusterLinkLocationRegionRegion = *o.ClusterLinkLocationRegionRegion
 		}
 		qClusterLinkLocationRegionRegion := qrClusterLinkLocationRegionRegion
 		if qClusterLinkLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("cluster_link.location.region.region", qClusterLinkLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.ClusterLinkType != nil {
 
 		// query param cluster_link.type
 		var qrClusterLinkType string
+
 		if o.ClusterLinkType != nil {
 			qrClusterLinkType = *o.ClusterLinkType
 		}
 		qClusterLinkType := qrClusterLinkType
 		if qClusterLinkType != "" {
+
 			if err := r.SetQueryParam("cluster_link.type", qClusterLinkType); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.ClusterLinkUUID != nil {
 
 		// query param cluster_link.uuid
 		var qrClusterLinkUUID string
+
 		if o.ClusterLinkUUID != nil {
 			qrClusterLinkUUID = *o.ClusterLinkUUID
 		}
 		qClusterLinkUUID := qrClusterLinkUUID
 		if qClusterLinkUUID != "" {
+
 			if err := r.SetQueryParam("cluster_link.uuid", qClusterLinkUUID); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

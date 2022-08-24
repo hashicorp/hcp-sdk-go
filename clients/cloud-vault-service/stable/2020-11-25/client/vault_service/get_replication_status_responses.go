@@ -47,7 +47,7 @@ func NewGetReplicationStatusOK() *GetReplicationStatusOK {
 	return &GetReplicationStatusOK{}
 }
 
-/*GetReplicationStatusOK handles this case with default header values.
+/* GetReplicationStatusOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type GetReplicationStatusOK struct {
 func (o *GetReplicationStatusOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] getReplicationStatusOK  %+v", 200, o.Payload)
 }
-
 func (o *GetReplicationStatusOK) GetPayload() *models.HashicorpCloudVault20201125GetReplicationStatusResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewGetReplicationStatusDefault(code int) *GetReplicationStatusDefault {
 	}
 }
 
-/*GetReplicationStatusDefault handles this case with default header values.
+/* GetReplicationStatusDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *GetReplicationStatusDefault) Code() int {
 func (o *GetReplicationStatusDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] GetReplicationStatus default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *GetReplicationStatusDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -16,66 +16,81 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDeleteBoxParams creates a new DeleteBoxParams object
-// with the default values initialized.
+// NewDeleteBoxParams creates a new DeleteBoxParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDeleteBoxParams() *DeleteBoxParams {
-	var ()
 	return &DeleteBoxParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeleteBoxParamsWithTimeout creates a new DeleteBoxParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewDeleteBoxParamsWithTimeout(timeout time.Duration) *DeleteBoxParams {
-	var ()
 	return &DeleteBoxParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewDeleteBoxParamsWithContext creates a new DeleteBoxParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewDeleteBoxParamsWithContext(ctx context.Context) *DeleteBoxParams {
-	var ()
 	return &DeleteBoxParams{
-
 		Context: ctx,
 	}
 }
 
 // NewDeleteBoxParamsWithHTTPClient creates a new DeleteBoxParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewDeleteBoxParamsWithHTTPClient(client *http.Client) *DeleteBoxParams {
-	var ()
 	return &DeleteBoxParams{
 		HTTPClient: client,
 	}
 }
 
-/*DeleteBoxParams contains all the parameters to send to the API endpoint
-for the delete box operation typically these are written to a http.Request
+/* DeleteBoxParams contains all the parameters to send to the API endpoint
+   for the delete box operation.
+
+   Typically these are written to a http.Request.
 */
 type DeleteBoxParams struct {
 
-	/*Box
-	  The name segment of the Box to delete. As an example, this field would
-	represent the "vagrant" in "hashicorp/vagrant".
+	/* Box.
 
+	     The name segment of the Box to delete. As an example, this field would
+	represent the "vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the delete box params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeleteBoxParams) WithDefaults() *DeleteBoxParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the delete box params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeleteBoxParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete box params

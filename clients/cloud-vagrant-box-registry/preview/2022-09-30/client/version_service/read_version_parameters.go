@@ -16,71 +16,87 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewReadVersionParams creates a new ReadVersionParams object
-// with the default values initialized.
+// NewReadVersionParams creates a new ReadVersionParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewReadVersionParams() *ReadVersionParams {
-	var ()
 	return &ReadVersionParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewReadVersionParamsWithTimeout creates a new ReadVersionParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewReadVersionParamsWithTimeout(timeout time.Duration) *ReadVersionParams {
-	var ()
 	return &ReadVersionParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewReadVersionParamsWithContext creates a new ReadVersionParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewReadVersionParamsWithContext(ctx context.Context) *ReadVersionParams {
-	var ()
 	return &ReadVersionParams{
-
 		Context: ctx,
 	}
 }
 
 // NewReadVersionParamsWithHTTPClient creates a new ReadVersionParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewReadVersionParamsWithHTTPClient(client *http.Client) *ReadVersionParams {
-	var ()
 	return &ReadVersionParams{
 		HTTPClient: client,
 	}
 }
 
-/*ReadVersionParams contains all the parameters to send to the API endpoint
-for the read version operation typically these are written to a http.Request
+/* ReadVersionParams contains all the parameters to send to the API endpoint
+   for the read version operation.
+
+   Typically these are written to a http.Request.
 */
 type ReadVersionParams struct {
 
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	/* Box.
 
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
-	/*Version
-	  The name of the version to look up.
 
+	/* Version.
+
+	   The name of the version to look up.
 	*/
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the read version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ReadVersionParams) WithDefaults() *ReadVersionParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the read version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ReadVersionParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the read version params

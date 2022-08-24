@@ -47,7 +47,7 @@ func NewGetClusterTelemetryOK() *GetClusterTelemetryOK {
 	return &GetClusterTelemetryOK{}
 }
 
-/*GetClusterTelemetryOK handles this case with default header values.
+/* GetClusterTelemetryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type GetClusterTelemetryOK struct {
 func (o *GetClusterTelemetryOK) Error() string {
 	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/telemetry][%d] getClusterTelemetryOK  %+v", 200, o.Payload)
 }
-
 func (o *GetClusterTelemetryOK) GetPayload() *models.HashicorpCloudConsul20210204GetClusterTelemetryResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewGetClusterTelemetryDefault(code int) *GetClusterTelemetryDefault {
 	}
 }
 
-/*GetClusterTelemetryDefault handles this case with default header values.
+/* GetClusterTelemetryDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *GetClusterTelemetryDefault) Code() int {
 func (o *GetClusterTelemetryDefault) Error() string {
 	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/telemetry][%d] GetClusterTelemetry default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *GetClusterTelemetryDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

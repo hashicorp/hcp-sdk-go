@@ -47,7 +47,7 @@ func NewPackerServiceGetRegistryTFCRunTaskAPIOK() *PackerServiceGetRegistryTFCRu
 	return &PackerServiceGetRegistryTFCRunTaskAPIOK{}
 }
 
-/*PackerServiceGetRegistryTFCRunTaskAPIOK handles this case with default header values.
+/* PackerServiceGetRegistryTFCRunTaskAPIOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type PackerServiceGetRegistryTFCRunTaskAPIOK struct {
 func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] packerServiceGetRegistryTFCRunTaskApiOK  %+v", 200, o.Payload)
 }
-
 func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) GetPayload() *models.HashicorpCloudPackerGetRegistryTFCRunTaskAPIResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewPackerServiceGetRegistryTFCRunTaskAPIDefault(code int) *PackerServiceGet
 	}
 }
 
-/*PackerServiceGetRegistryTFCRunTaskAPIDefault handles this case with default header values.
+/* PackerServiceGetRegistryTFCRunTaskAPIDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) Code() int {
 func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] PackerService_GetRegistryTFCRunTaskAPI default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

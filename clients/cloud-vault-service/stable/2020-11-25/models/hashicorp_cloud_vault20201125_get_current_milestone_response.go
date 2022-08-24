@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -22,7 +24,7 @@ type HashicorpCloudVault20201125GetCurrentMilestoneResponse struct {
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
 	// current milestone
-	CurrentMilestone HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone `json:"current_milestone,omitempty"`
+	CurrentMilestone *HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone `json:"current_milestone,omitempty"`
 
 	// updated_at is the timestamp of when the cluster milestone was last updated
 	// Format: date-time
@@ -52,7 +54,6 @@ func (m *HashicorpCloudVault20201125GetCurrentMilestoneResponse) Validate(format
 }
 
 func (m *HashicorpCloudVault20201125GetCurrentMilestoneResponse) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -65,29 +66,61 @@ func (m *HashicorpCloudVault20201125GetCurrentMilestoneResponse) validateCreated
 }
 
 func (m *HashicorpCloudVault20201125GetCurrentMilestoneResponse) validateCurrentMilestone(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CurrentMilestone) { // not required
 		return nil
 	}
 
-	if err := m.CurrentMilestone.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("current_milestone")
+	if m.CurrentMilestone != nil {
+		if err := m.CurrentMilestone.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("current_milestone")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("current_milestone")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudVault20201125GetCurrentMilestoneResponse) validateUpdatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 get current milestone response based on the context it is used
+func (m *HashicorpCloudVault20201125GetCurrentMilestoneResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateCurrentMilestone(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetCurrentMilestoneResponse) contextValidateCurrentMilestone(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CurrentMilestone != nil {
+		if err := m.CurrentMilestone.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("current_milestone")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("current_milestone")
+			}
+			return err
+		}
 	}
 
 	return nil

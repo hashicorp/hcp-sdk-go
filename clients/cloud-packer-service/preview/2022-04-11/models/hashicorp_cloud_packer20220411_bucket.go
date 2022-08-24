@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -97,7 +99,6 @@ func (m *HashicorpCloudPacker20220411Bucket) Validate(formats strfmt.Registry) e
 }
 
 func (m *HashicorpCloudPacker20220411Bucket) validateChildren(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Children) { // not required
 		return nil
 	}
@@ -106,6 +107,8 @@ func (m *HashicorpCloudPacker20220411Bucket) validateChildren(formats strfmt.Reg
 		if err := m.Children.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("children")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("children")
 			}
 			return err
 		}
@@ -115,7 +118,6 @@ func (m *HashicorpCloudPacker20220411Bucket) validateChildren(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudPacker20220411Bucket) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -128,7 +130,6 @@ func (m *HashicorpCloudPacker20220411Bucket) validateCreatedAt(formats strfmt.Re
 }
 
 func (m *HashicorpCloudPacker20220411Bucket) validateLatestIteration(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.LatestIteration) { // not required
 		return nil
 	}
@@ -137,6 +138,8 @@ func (m *HashicorpCloudPacker20220411Bucket) validateLatestIteration(formats str
 		if err := m.LatestIteration.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("latest_iteration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("latest_iteration")
 			}
 			return err
 		}
@@ -146,7 +149,6 @@ func (m *HashicorpCloudPacker20220411Bucket) validateLatestIteration(formats str
 }
 
 func (m *HashicorpCloudPacker20220411Bucket) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -155,6 +157,8 @@ func (m *HashicorpCloudPacker20220411Bucket) validateLocation(formats strfmt.Reg
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}
@@ -164,7 +168,6 @@ func (m *HashicorpCloudPacker20220411Bucket) validateLocation(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudPacker20220411Bucket) validateParents(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Parents) { // not required
 		return nil
 	}
@@ -173,6 +176,8 @@ func (m *HashicorpCloudPacker20220411Bucket) validateParents(formats strfmt.Regi
 		if err := m.Parents.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("parents")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("parents")
 			}
 			return err
 		}
@@ -182,13 +187,102 @@ func (m *HashicorpCloudPacker20220411Bucket) validateParents(formats strfmt.Regi
 }
 
 func (m *HashicorpCloudPacker20220411Bucket) validateUpdatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 bucket based on the context it is used
+func (m *HashicorpCloudPacker20220411Bucket) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateChildren(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLatestIteration(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateParents(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411Bucket) contextValidateChildren(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Children != nil {
+		if err := m.Children.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("children")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("children")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411Bucket) contextValidateLatestIteration(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LatestIteration != nil {
+		if err := m.LatestIteration.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("latest_iteration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("latest_iteration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411Bucket) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411Bucket) contextValidateParents(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Parents != nil {
+		if err := m.Parents.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("parents")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("parents")
+			}
+			return err
+		}
 	}
 
 	return nil

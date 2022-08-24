@@ -47,7 +47,7 @@ func NewGetCORSConfigOK() *GetCORSConfigOK {
 	return &GetCORSConfigOK{}
 }
 
-/*GetCORSConfigOK handles this case with default header values.
+/* GetCORSConfigOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type GetCORSConfigOK struct {
 func (o *GetCORSConfigOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] getCORSConfigOK  %+v", 200, o.Payload)
 }
-
 func (o *GetCORSConfigOK) GetPayload() *models.HashicorpCloudVault20200420GetCORSConfigResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewGetCORSConfigDefault(code int) *GetCORSConfigDefault {
 	}
 }
 
-/*GetCORSConfigDefault handles this case with default header values.
+/* GetCORSConfigDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *GetCORSConfigDefault) Code() int {
 func (o *GetCORSConfigDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] GetCORSConfig default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *GetCORSConfigDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

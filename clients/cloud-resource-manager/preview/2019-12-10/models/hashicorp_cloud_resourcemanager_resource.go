@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -37,7 +39,6 @@ func (m *HashicorpCloudResourcemanagerResource) Validate(formats strfmt.Registry
 }
 
 func (m *HashicorpCloudResourcemanagerResource) validateLink(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Link) { // not required
 		return nil
 	}
@@ -46,6 +47,38 @@ func (m *HashicorpCloudResourcemanagerResource) validateLink(formats strfmt.Regi
 		if err := m.Link.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("link")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("link")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud resourcemanager resource based on the context it is used
+func (m *HashicorpCloudResourcemanagerResource) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLink(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudResourcemanagerResource) contextValidateLink(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Link != nil {
+		if err := m.Link.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("link")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("link")
 			}
 			return err
 		}

@@ -18,62 +18,77 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewCreateBoxParams creates a new CreateBoxParams object
-// with the default values initialized.
+// NewCreateBoxParams creates a new CreateBoxParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewCreateBoxParams() *CreateBoxParams {
-	var ()
 	return &CreateBoxParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreateBoxParamsWithTimeout creates a new CreateBoxParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewCreateBoxParamsWithTimeout(timeout time.Duration) *CreateBoxParams {
-	var ()
 	return &CreateBoxParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewCreateBoxParamsWithContext creates a new CreateBoxParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewCreateBoxParamsWithContext(ctx context.Context) *CreateBoxParams {
-	var ()
 	return &CreateBoxParams{
-
 		Context: ctx,
 	}
 }
 
 // NewCreateBoxParamsWithHTTPClient creates a new CreateBoxParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewCreateBoxParamsWithHTTPClient(client *http.Client) *CreateBoxParams {
-	var ()
 	return &CreateBoxParams{
 		HTTPClient: client,
 	}
 }
 
-/*CreateBoxParams contains all the parameters to send to the API endpoint
-for the create box operation typically these are written to a http.Request
+/* CreateBoxParams contains all the parameters to send to the API endpoint
+   for the create box operation.
+
+   Typically these are written to a http.Request.
 */
 type CreateBoxParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930CreateBoxRequest
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
+	// Body.
+	Body *models.HashicorpCloudVagrantCreateBoxRequest
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the create box params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateBoxParams) WithDefaults() *CreateBoxParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the create box params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateBoxParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create box params
@@ -110,13 +125,13 @@ func (o *CreateBoxParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create box params
-func (o *CreateBoxParams) WithBody(body *models.HashicorpCloudVagrant20220930CreateBoxRequest) *CreateBoxParams {
+func (o *CreateBoxParams) WithBody(body *models.HashicorpCloudVagrantCreateBoxRequest) *CreateBoxParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create box params
-func (o *CreateBoxParams) SetBody(body *models.HashicorpCloudVagrant20220930CreateBoxRequest) {
+func (o *CreateBoxParams) SetBody(body *models.HashicorpCloudVagrantCreateBoxRequest) {
 	o.Body = body
 }
 
@@ -138,7 +153,6 @@ func (o *CreateBoxParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

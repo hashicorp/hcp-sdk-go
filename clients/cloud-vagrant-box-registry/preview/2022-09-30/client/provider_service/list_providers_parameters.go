@@ -17,93 +17,114 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewListProvidersParams creates a new ListProvidersParams object
-// with the default values initialized.
+// NewListProvidersParams creates a new ListProvidersParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewListProvidersParams() *ListProvidersParams {
-	var ()
 	return &ListProvidersParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewListProvidersParamsWithTimeout creates a new ListProvidersParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewListProvidersParamsWithTimeout(timeout time.Duration) *ListProvidersParams {
-	var ()
 	return &ListProvidersParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewListProvidersParamsWithContext creates a new ListProvidersParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewListProvidersParamsWithContext(ctx context.Context) *ListProvidersParams {
-	var ()
 	return &ListProvidersParams{
-
 		Context: ctx,
 	}
 }
 
 // NewListProvidersParamsWithHTTPClient creates a new ListProvidersParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewListProvidersParamsWithHTTPClient(client *http.Client) *ListProvidersParams {
-	var ()
 	return &ListProvidersParams{
 		HTTPClient: client,
 	}
 }
 
-/*ListProvidersParams contains all the parameters to send to the API endpoint
-for the list providers operation typically these are written to a http.Request
+/* ListProvidersParams contains all the parameters to send to the API endpoint
+   for the list providers operation.
+
+   Typically these are written to a http.Request.
 */
 type ListProvidersParams struct {
 
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	/* Box.
 
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*PaginationNextPageToken
-	  Specifies a page token to use to retrieve the next page. Set this to the
+
+	/* PaginationNextPageToken.
+
+	     Specifies a page token to use to retrieve the next page. Set this to the
 	`next_page_token` returned by previous list requests to get the next page of
 	results. If set, `previous_page_token` must not be set.
-
 	*/
 	PaginationNextPageToken *string
-	/*PaginationPageSize
-	  The max number of results per page that should be returned. If the number
+
+	/* PaginationPageSize.
+
+	     The max number of results per page that should be returned. If the number
 	of available results is larger than `page_size`, a `next_page_token` is
 	returned which can be used to get the next page of results in subsequent
 	requests. A value of zero will cause `page_size` to be defaulted.
 
+	     Format: int64
 	*/
 	PaginationPageSize *int64
-	/*PaginationPreviousPageToken
-	  Specifies a page token to use to retrieve the previous page. Set this to
+
+	/* PaginationPreviousPageToken.
+
+	     Specifies a page token to use to retrieve the previous page. Set this to
 	the `previous_page_token` returned by previous list requests to get the
 	previous page of results. If set, `next_page_token` must not be set.
-
 	*/
 	PaginationPreviousPageToken *string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
-	/*Version
-	  The name of the Version to look up Providers in.
 
+	/* Version.
+
+	   The name of the Version to look up Providers in.
 	*/
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the list providers params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListProvidersParams) WithDefaults() *ListProvidersParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the list providers params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListProvidersParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the list providers params
@@ -222,48 +243,51 @@ func (o *ListProvidersParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 		// query param pagination.next_page_token
 		var qrPaginationNextPageToken string
+
 		if o.PaginationNextPageToken != nil {
 			qrPaginationNextPageToken = *o.PaginationNextPageToken
 		}
 		qPaginationNextPageToken := qrPaginationNextPageToken
 		if qPaginationNextPageToken != "" {
+
 			if err := r.SetQueryParam("pagination.next_page_token", qPaginationNextPageToken); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.PaginationPageSize != nil {
 
 		// query param pagination.page_size
 		var qrPaginationPageSize int64
+
 		if o.PaginationPageSize != nil {
 			qrPaginationPageSize = *o.PaginationPageSize
 		}
 		qPaginationPageSize := swag.FormatInt64(qrPaginationPageSize)
 		if qPaginationPageSize != "" {
+
 			if err := r.SetQueryParam("pagination.page_size", qPaginationPageSize); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.PaginationPreviousPageToken != nil {
 
 		// query param pagination.previous_page_token
 		var qrPaginationPreviousPageToken string
+
 		if o.PaginationPreviousPageToken != nil {
 			qrPaginationPreviousPageToken = *o.PaginationPreviousPageToken
 		}
 		qPaginationPreviousPageToken := qrPaginationPreviousPageToken
 		if qPaginationPreviousPageToken != "" {
+
 			if err := r.SetQueryParam("pagination.previous_page_token", qPaginationPreviousPageToken); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	// path param registry

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -80,7 +82,6 @@ func (m *HashicorpCloudPacker20220411UpdateIterationRequest) Validate(formats st
 }
 
 func (m *HashicorpCloudPacker20220411UpdateIterationRequest) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -89,6 +90,8 @@ func (m *HashicorpCloudPacker20220411UpdateIterationRequest) validateLocation(fo
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}
@@ -98,13 +101,42 @@ func (m *HashicorpCloudPacker20220411UpdateIterationRequest) validateLocation(fo
 }
 
 func (m *HashicorpCloudPacker20220411UpdateIterationRequest) validateRevokeAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.RevokeAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("revoke_at", "body", "date-time", m.RevokeAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 update iteration request based on the context it is used
+func (m *HashicorpCloudPacker20220411UpdateIterationRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411UpdateIterationRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -29,7 +29,6 @@ func (o *DeleteBoxReader) ReadResponse(response runtime.ClientResponse, consumer
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -40,19 +39,18 @@ func NewDeleteBoxOK() *DeleteBoxOK {
 	return &DeleteBoxOK{}
 }
 
-/*DeleteBoxOK handles this case with default header values.
+/* DeleteBoxOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
 type DeleteBoxOK struct {
-	Payload models.HashicorpCloudVagrant20220930DeleteBoxResponse
+	Payload models.HashicorpCloudVagrantDeleteBoxResponse
 }
 
 func (o *DeleteBoxOK) Error() string {
 	return fmt.Sprintf("[DELETE /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] deleteBoxOK  %+v", 200, o.Payload)
 }
-
-func (o *DeleteBoxOK) GetPayload() models.HashicorpCloudVagrant20220930DeleteBoxResponse {
+func (o *DeleteBoxOK) GetPayload() models.HashicorpCloudVagrantDeleteBoxResponse {
 	return o.Payload
 }
 

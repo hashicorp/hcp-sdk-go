@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -58,7 +60,6 @@ func (m *HashicorpCloudConsul20200826ClusterConfig) Validate(formats strfmt.Regi
 }
 
 func (m *HashicorpCloudConsul20200826ClusterConfig) validateCapacityConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CapacityConfig) { // not required
 		return nil
 	}
@@ -67,6 +68,8 @@ func (m *HashicorpCloudConsul20200826ClusterConfig) validateCapacityConfig(forma
 		if err := m.CapacityConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("capacity_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("capacity_config")
 			}
 			return err
 		}
@@ -76,7 +79,6 @@ func (m *HashicorpCloudConsul20200826ClusterConfig) validateCapacityConfig(forma
 }
 
 func (m *HashicorpCloudConsul20200826ClusterConfig) validateConsulConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ConsulConfig) { // not required
 		return nil
 	}
@@ -85,6 +87,8 @@ func (m *HashicorpCloudConsul20200826ClusterConfig) validateConsulConfig(formats
 		if err := m.ConsulConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("consul_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("consul_config")
 			}
 			return err
 		}
@@ -94,7 +98,6 @@ func (m *HashicorpCloudConsul20200826ClusterConfig) validateConsulConfig(formats
 }
 
 func (m *HashicorpCloudConsul20200826ClusterConfig) validateNetworkConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.NetworkConfig) { // not required
 		return nil
 	}
@@ -103,6 +106,78 @@ func (m *HashicorpCloudConsul20200826ClusterConfig) validateNetworkConfig(format
 		if err := m.NetworkConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("network_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("network_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud consul 20200826 cluster config based on the context it is used
+func (m *HashicorpCloudConsul20200826ClusterConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateCapacityConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateConsulConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNetworkConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudConsul20200826ClusterConfig) contextValidateCapacityConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CapacityConfig != nil {
+		if err := m.CapacityConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("capacity_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("capacity_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudConsul20200826ClusterConfig) contextValidateConsulConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ConsulConfig != nil {
+		if err := m.ConsulConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("consul_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("consul_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudConsul20200826ClusterConfig) contextValidateNetworkConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.NetworkConfig != nil {
+		if err := m.NetworkConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("network_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("network_config")
 			}
 			return err
 		}

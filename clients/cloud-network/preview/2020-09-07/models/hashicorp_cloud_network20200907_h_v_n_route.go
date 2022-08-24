@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -33,7 +35,7 @@ type HashicorpCloudNetwork20200907HVNRoute struct {
 	ID string `json:"id,omitempty"`
 
 	// state is the state of this HVN Route
-	State HashicorpCloudNetwork20200907HVNRouteState `json:"state,omitempty"`
+	State *HashicorpCloudNetwork20200907HVNRouteState `json:"state,omitempty"`
 
 	// target is a target for this HVN Route
 	Target *HashicorpCloudNetwork20200907HVNRouteTarget `json:"target,omitempty"`
@@ -66,7 +68,6 @@ func (m *HashicorpCloudNetwork20200907HVNRoute) Validate(formats strfmt.Registry
 }
 
 func (m *HashicorpCloudNetwork20200907HVNRoute) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -79,7 +80,6 @@ func (m *HashicorpCloudNetwork20200907HVNRoute) validateCreatedAt(formats strfmt
 }
 
 func (m *HashicorpCloudNetwork20200907HVNRoute) validateHvn(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Hvn) { // not required
 		return nil
 	}
@@ -88,6 +88,8 @@ func (m *HashicorpCloudNetwork20200907HVNRoute) validateHvn(formats strfmt.Regis
 		if err := m.Hvn.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hvn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hvn")
 			}
 			return err
 		}
@@ -97,23 +99,25 @@ func (m *HashicorpCloudNetwork20200907HVNRoute) validateHvn(formats strfmt.Regis
 }
 
 func (m *HashicorpCloudNetwork20200907HVNRoute) validateState(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
 
-	if err := m.State.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("state")
+	if m.State != nil {
+		if err := m.State.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("state")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudNetwork20200907HVNRoute) validateTarget(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Target) { // not required
 		return nil
 	}
@@ -122,6 +126,78 @@ func (m *HashicorpCloudNetwork20200907HVNRoute) validateTarget(formats strfmt.Re
 		if err := m.Target.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("target")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("target")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 h v n route based on the context it is used
+func (m *HashicorpCloudNetwork20200907HVNRoute) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateHvn(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTarget(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907HVNRoute) contextValidateHvn(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Hvn != nil {
+		if err := m.Hvn.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hvn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hvn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907HVNRoute) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.State != nil {
+		if err := m.State.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("state")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907HVNRoute) contextValidateTarget(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Target != nil {
+		if err := m.Target.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("target")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("target")
 			}
 			return err
 		}

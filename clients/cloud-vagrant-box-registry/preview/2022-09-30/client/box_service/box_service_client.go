@@ -25,17 +25,20 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthInfoWriter) (*CreateBoxOK, error)
+	CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBoxOK, error)
 
-	DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteBoxOK, error)
+	DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBoxOK, error)
 
-	ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthInfoWriter) (*ListBoxesOK, error)
+	ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBoxesOK, error)
 
-	ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoWriter) (*ReadBoxOK, error)
+	ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadBoxOK, error)
 
-	UpdateBox(params *UpdateBoxParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateBoxOK, error)
+	UpdateBox(params *UpdateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBoxOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -43,13 +46,12 @@ type ClientService interface {
 /*
   CreateBox creates box creates a new vagrant box
 */
-func (a *Client) CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthInfoWriter) (*CreateBoxOK, error) {
+func (a *Client) CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBoxOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateBoxParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "CreateBox",
 		Method:             "PUT",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes",
@@ -61,7 +63,12 @@ func (a *Client) CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthI
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -81,13 +88,12 @@ func (a *Client) CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthI
   Deleting a Box removes all its Versions and Providers as
 well. This operation cannot be undone.
 */
-func (a *Client) DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteBoxOK, error) {
+func (a *Client) DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBoxOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteBoxParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "DeleteBox",
 		Method:             "DELETE",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}",
@@ -99,7 +105,12 @@ func (a *Client) DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthI
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -116,13 +127,12 @@ func (a *Client) DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthI
 /*
   ListBoxes lists boxes lists all of the boxes within a particular registry
 */
-func (a *Client) ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthInfoWriter) (*ListBoxesOK, error) {
+func (a *Client) ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBoxesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListBoxesParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ListBoxes",
 		Method:             "GET",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes",
@@ -134,7 +144,12 @@ func (a *Client) ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthI
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -151,13 +166,12 @@ func (a *Client) ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthI
 /*
   ReadBox reads box reads a vagrant box
 */
-func (a *Client) ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoWriter) (*ReadBoxOK, error) {
+func (a *Client) ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadBoxOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewReadBoxParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ReadBox",
 		Method:             "GET",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}",
@@ -169,7 +183,12 @@ func (a *Client) ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoW
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -190,13 +209,12 @@ func (a *Client) ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoW
 work with a Box's Versions or Providers, use those respective
 services.
 */
-func (a *Client) UpdateBox(params *UpdateBoxParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateBoxOK, error) {
+func (a *Client) UpdateBox(params *UpdateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBoxOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateBoxParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "UpdateBox",
 		Method:             "PATCH",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}",
@@ -208,7 +226,12 @@ func (a *Client) UpdateBox(params *UpdateBoxParams, authInfo runtime.ClientAuthI
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

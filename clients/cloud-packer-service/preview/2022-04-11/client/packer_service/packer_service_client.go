@@ -23,63 +23,66 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	PackerServiceCreateBucket(params *PackerServiceCreateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateBucketOK, error)
+	PackerServiceCreateBucket(params *PackerServiceCreateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateBucketOK, error)
 
-	PackerServiceCreateBuild(params *PackerServiceCreateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateBuildOK, error)
+	PackerServiceCreateBuild(params *PackerServiceCreateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateBuildOK, error)
 
-	PackerServiceCreateChannel(params *PackerServiceCreateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateChannelOK, error)
+	PackerServiceCreateChannel(params *PackerServiceCreateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateChannelOK, error)
 
-	PackerServiceCreateIteration(params *PackerServiceCreateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateIterationOK, error)
+	PackerServiceCreateIteration(params *PackerServiceCreateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateIterationOK, error)
 
-	PackerServiceCreateRegistry(params *PackerServiceCreateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateRegistryOK, error)
+	PackerServiceCreateRegistry(params *PackerServiceCreateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateRegistryOK, error)
 
-	PackerServiceDeleteBucket(params *PackerServiceDeleteBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteBucketOK, error)
+	PackerServiceDeleteBucket(params *PackerServiceDeleteBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteBucketOK, error)
 
-	PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteBuildOK, error)
+	PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteBuildOK, error)
 
-	PackerServiceDeleteChannel(params *PackerServiceDeleteChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteChannelOK, error)
+	PackerServiceDeleteChannel(params *PackerServiceDeleteChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteChannelOK, error)
 
-	PackerServiceDeleteIteration(params *PackerServiceDeleteIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteIterationOK, error)
+	PackerServiceDeleteIteration(params *PackerServiceDeleteIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteIterationOK, error)
 
-	PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteRegistryOK, error)
+	PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteRegistryOK, error)
 
-	PackerServiceGetBucket(params *PackerServiceGetBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBucketOK, error)
+	PackerServiceGetBucket(params *PackerServiceGetBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetBucketOK, error)
 
-	PackerServiceGetBuild(params *PackerServiceGetBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBuildOK, error)
+	PackerServiceGetBuild(params *PackerServiceGetBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetBuildOK, error)
 
-	PackerServiceGetChannel(params *PackerServiceGetChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetChannelOK, error)
+	PackerServiceGetChannel(params *PackerServiceGetChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetChannelOK, error)
 
-	PackerServiceGetIteration(params *PackerServiceGetIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetIterationOK, error)
+	PackerServiceGetIteration(params *PackerServiceGetIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetIterationOK, error)
 
-	PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetRegistryOK, error)
+	PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryOK, error)
 
-	PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetRegistryTFCRunTaskAPIParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetRegistryTFCRunTaskAPIOK, error)
+	PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetRegistryTFCRunTaskAPIParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryTFCRunTaskAPIOK, error)
 
-	PackerServiceListBucketAncestry(params *PackerServiceListBucketAncestryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBucketAncestryOK, error)
+	PackerServiceListBucketAncestry(params *PackerServiceListBucketAncestryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketAncestryOK, error)
 
-	PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBucketsOK, error)
+	PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketsOK, error)
 
-	PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBuildsOK, error)
+	PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBuildsOK, error)
 
-	PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListChannelsOK, error)
+	PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListChannelsOK, error)
 
-	PackerServiceListIterations(params *PackerServiceListIterationsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListIterationsOK, error)
+	PackerServiceListIterations(params *PackerServiceListIterationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListIterationsOK, error)
 
-	PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceRegenerateTFCRunTaskHmacKeyParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceRegenerateTFCRunTaskHmacKeyOK, error)
+	PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceRegenerateTFCRunTaskHmacKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceRegenerateTFCRunTaskHmacKeyOK, error)
 
-	PackerServiceTFCImageValidationRunTask(params *PackerServiceTFCImageValidationRunTaskParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceTFCImageValidationRunTaskOK, error)
+	PackerServiceTFCImageValidationRunTask(params *PackerServiceTFCImageValidationRunTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceTFCImageValidationRunTaskOK, error)
 
-	PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBucketOK, error)
+	PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateBucketOK, error)
 
-	PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBuildOK, error)
+	PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateBuildOK, error)
 
-	PackerServiceUpdateChannel(params *PackerServiceUpdateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateChannelOK, error)
+	PackerServiceUpdateChannel(params *PackerServiceUpdateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateChannelOK, error)
 
-	PackerServiceUpdateIteration(params *PackerServiceUpdateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateIterationOK, error)
+	PackerServiceUpdateIteration(params *PackerServiceUpdateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateIterationOK, error)
 
-	PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateRegistryOK, error)
+	PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateRegistryOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -87,13 +90,12 @@ type ClientService interface {
 /*
   PackerServiceCreateBucket creates an image bucket in the h c p packer registry
 */
-func (a *Client) PackerServiceCreateBucket(params *PackerServiceCreateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateBucketOK, error) {
+func (a *Client) PackerServiceCreateBucket(params *PackerServiceCreateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceCreateBucketParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_CreateBucket",
 		Method:             "PUT",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images",
@@ -105,7 +107,12 @@ func (a *Client) PackerServiceCreateBucket(params *PackerServiceCreateBucketPara
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -121,13 +128,12 @@ func (a *Client) PackerServiceCreateBucket(params *PackerServiceCreateBucketPara
 /*
   PackerServiceCreateBuild creates an image build in the provided image iteration it is called once for each build source in a packer build run the request will error if the build for a given cloud provider already exists
 */
-func (a *Client) PackerServiceCreateBuild(params *PackerServiceCreateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateBuildOK, error) {
+func (a *Client) PackerServiceCreateBuild(params *PackerServiceCreateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceCreateBuildParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_CreateBuild",
 		Method:             "POST",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}",
@@ -139,7 +145,12 @@ func (a *Client) PackerServiceCreateBuild(params *PackerServiceCreateBuildParams
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -155,13 +166,12 @@ func (a *Client) PackerServiceCreateBuild(params *PackerServiceCreateBuildParams
 /*
   PackerServiceCreateChannel creates a channel either empty or assigned to an iteration
 */
-func (a *Client) PackerServiceCreateChannel(params *PackerServiceCreateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateChannelOK, error) {
+func (a *Client) PackerServiceCreateChannel(params *PackerServiceCreateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceCreateChannelParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_CreateChannel",
 		Method:             "POST",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels",
@@ -173,7 +183,12 @@ func (a *Client) PackerServiceCreateChannel(params *PackerServiceCreateChannelPa
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -189,13 +204,12 @@ func (a *Client) PackerServiceCreateChannel(params *PackerServiceCreateChannelPa
 /*
   PackerServiceCreateIteration creates an empty iteration to be written to this API is called at the beginning of a new packer build and does not create individual builds for the iteration
 */
-func (a *Client) PackerServiceCreateIteration(params *PackerServiceCreateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateIterationOK, error) {
+func (a *Client) PackerServiceCreateIteration(params *PackerServiceCreateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceCreateIterationParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_CreateIteration",
 		Method:             "POST",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations",
@@ -207,7 +221,12 @@ func (a *Client) PackerServiceCreateIteration(params *PackerServiceCreateIterati
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -223,13 +242,12 @@ func (a *Client) PackerServiceCreateIteration(params *PackerServiceCreateIterati
 /*
   PackerServiceCreateRegistry creates a h c p packer registry and starts billing for it
 */
-func (a *Client) PackerServiceCreateRegistry(params *PackerServiceCreateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceCreateRegistryOK, error) {
+func (a *Client) PackerServiceCreateRegistry(params *PackerServiceCreateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceCreateRegistryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_CreateRegistry",
 		Method:             "PUT",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/registry",
@@ -241,7 +259,12 @@ func (a *Client) PackerServiceCreateRegistry(params *PackerServiceCreateRegistry
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -257,13 +280,12 @@ func (a *Client) PackerServiceCreateRegistry(params *PackerServiceCreateRegistry
 /*
   PackerServiceDeleteBucket deletes a bucket and all its information such as iterations and builds
 */
-func (a *Client) PackerServiceDeleteBucket(params *PackerServiceDeleteBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteBucketOK, error) {
+func (a *Client) PackerServiceDeleteBucket(params *PackerServiceDeleteBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceDeleteBucketParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_DeleteBucket",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}",
@@ -275,7 +297,12 @@ func (a *Client) PackerServiceDeleteBucket(params *PackerServiceDeleteBucketPara
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -291,13 +318,12 @@ func (a *Client) PackerServiceDeleteBucket(params *PackerServiceDeleteBucketPara
 /*
   PackerServiceDeleteBuild deletes a build in the provided iteration
 */
-func (a *Client) PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteBuildOK, error) {
+func (a *Client) PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceDeleteBuildParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_DeleteBuild",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}",
@@ -309,7 +335,12 @@ func (a *Client) PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -325,13 +356,12 @@ func (a *Client) PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams
 /*
   PackerServiceDeleteChannel deletes a channel
 */
-func (a *Client) PackerServiceDeleteChannel(params *PackerServiceDeleteChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteChannelOK, error) {
+func (a *Client) PackerServiceDeleteChannel(params *PackerServiceDeleteChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceDeleteChannelParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_DeleteChannel",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}",
@@ -343,7 +373,12 @@ func (a *Client) PackerServiceDeleteChannel(params *PackerServiceDeleteChannelPa
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -359,13 +394,12 @@ func (a *Client) PackerServiceDeleteChannel(params *PackerServiceDeleteChannelPa
 /*
   PackerServiceDeleteIteration deletes an iteration and all its information such as its builds
 */
-func (a *Client) PackerServiceDeleteIteration(params *PackerServiceDeleteIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteIterationOK, error) {
+func (a *Client) PackerServiceDeleteIteration(params *PackerServiceDeleteIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceDeleteIterationParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_DeleteIteration",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}",
@@ -377,7 +411,12 @@ func (a *Client) PackerServiceDeleteIteration(params *PackerServiceDeleteIterati
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -393,13 +432,12 @@ func (a *Client) PackerServiceDeleteIteration(params *PackerServiceDeleteIterati
 /*
   PackerServiceDeleteRegistry deactivates an active h c p packer registry deactivating a registry will stop any additional billing for the resource setting the hard delete param to true will delete the registry and any associated resources from the database
 */
-func (a *Client) PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceDeleteRegistryOK, error) {
+func (a *Client) PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceDeleteRegistryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_DeleteRegistry",
 		Method:             "DELETE",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/registry",
@@ -411,7 +449,12 @@ func (a *Client) PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistry
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -427,13 +470,12 @@ func (a *Client) PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistry
 /*
   PackerServiceGetBucket gets a bucket with its latest completed iteration
 */
-func (a *Client) PackerServiceGetBucket(params *PackerServiceGetBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBucketOK, error) {
+func (a *Client) PackerServiceGetBucket(params *PackerServiceGetBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceGetBucketParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_GetBucket",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}",
@@ -445,7 +487,12 @@ func (a *Client) PackerServiceGetBucket(params *PackerServiceGetBucketParams, au
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -461,13 +508,12 @@ func (a *Client) PackerServiceGetBucket(params *PackerServiceGetBucketParams, au
 /*
   PackerServiceGetBuild gets a build with its list of images
 */
-func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetBuildOK, error) {
+func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceGetBuildParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_GetBuild",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}",
@@ -479,7 +525,12 @@ func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, auth
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -495,13 +546,12 @@ func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, auth
 /*
   PackerServiceGetChannel gets a channel with the iteration that it is currently assigned if any
 */
-func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetChannelOK, error) {
+func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceGetChannelParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_GetChannel",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}",
@@ -513,7 +563,12 @@ func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, 
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -529,13 +584,12 @@ func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, 
 /*
   PackerServiceGetIteration allows the user to get an iteration using one of the following identifiers iteration id incremental version fingerprint these are supplied as a query parameter e g images bucket slug iteration fingerprint fingerprint
 */
-func (a *Client) PackerServiceGetIteration(params *PackerServiceGetIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetIterationOK, error) {
+func (a *Client) PackerServiceGetIteration(params *PackerServiceGetIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceGetIterationParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_GetIteration",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iteration",
@@ -547,7 +601,12 @@ func (a *Client) PackerServiceGetIteration(params *PackerServiceGetIterationPara
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -563,13 +622,12 @@ func (a *Client) PackerServiceGetIteration(params *PackerServiceGetIterationPara
 /*
   PackerServiceGetRegistry gets a h c p packer registry
 */
-func (a *Client) PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetRegistryOK, error) {
+func (a *Client) PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceGetRegistryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_GetRegistry",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/registry",
@@ -581,7 +639,12 @@ func (a *Client) PackerServiceGetRegistry(params *PackerServiceGetRegistryParams
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -597,13 +660,12 @@ func (a *Client) PackerServiceGetRegistry(params *PackerServiceGetRegistryParams
 /*
   PackerServiceGetRegistryTFCRunTaskAPI gets the h c p packer registry API URL and h m a c key to integrate with terraform cloud as a run task
 */
-func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetRegistryTFCRunTaskAPIParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceGetRegistryTFCRunTaskAPIOK, error) {
+func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetRegistryTFCRunTaskAPIParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryTFCRunTaskAPIOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceGetRegistryTFCRunTaskAPIParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_GetRegistryTFCRunTaskAPI",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}",
@@ -615,7 +677,12 @@ func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetR
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -631,13 +698,12 @@ func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetR
 /*
   PackerServiceListBucketAncestry packer service list bucket ancestry API
 */
-func (a *Client) PackerServiceListBucketAncestry(params *PackerServiceListBucketAncestryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBucketAncestryOK, error) {
+func (a *Client) PackerServiceListBucketAncestry(params *PackerServiceListBucketAncestryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketAncestryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceListBucketAncestryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_ListBucketAncestry",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/ancestry",
@@ -649,7 +715,12 @@ func (a *Client) PackerServiceListBucketAncestry(params *PackerServiceListBucket
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -665,13 +736,12 @@ func (a *Client) PackerServiceListBucketAncestry(params *PackerServiceListBucket
 /*
   PackerServiceListBuckets lists every existing bucket in the h c p packer registry and their last completed iteration
 */
-func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBucketsOK, error) {
+func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceListBucketsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_ListBuckets",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images",
@@ -683,7 +753,12 @@ func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -699,13 +774,12 @@ func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams
 /*
   PackerServiceListBuilds lists every existing build and its images for an iteration
 */
-func (a *Client) PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListBuildsOK, error) {
+func (a *Client) PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBuildsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceListBuildsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_ListBuilds",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}/builds",
@@ -717,7 +791,12 @@ func (a *Client) PackerServiceListBuilds(params *PackerServiceListBuildsParams, 
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -733,13 +812,12 @@ func (a *Client) PackerServiceListBuilds(params *PackerServiceListBuildsParams, 
 /*
   PackerServiceListChannels lists all channels of a given bucket
 */
-func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListChannelsOK, error) {
+func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListChannelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceListChannelsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_ListChannels",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels",
@@ -751,7 +829,12 @@ func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsPara
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -767,13 +850,12 @@ func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsPara
 /*
   PackerServiceListIterations lists every existing iteration of a bucket
 */
-func (a *Client) PackerServiceListIterations(params *PackerServiceListIterationsParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceListIterationsOK, error) {
+func (a *Client) PackerServiceListIterations(params *PackerServiceListIterationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListIterationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceListIterationsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_ListIterations",
 		Method:             "GET",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations",
@@ -785,7 +867,12 @@ func (a *Client) PackerServiceListIterations(params *PackerServiceListIterations
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -801,13 +888,12 @@ func (a *Client) PackerServiceListIterations(params *PackerServiceListIterations
 /*
   PackerServiceRegenerateTFCRunTaskHmacKey regenerates the h m a c key used to sign requests from terraform cloud to h c p packer run tasks
 */
-func (a *Client) PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceRegenerateTFCRunTaskHmacKeyParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceRegenerateTFCRunTaskHmacKeyOK, error) {
+func (a *Client) PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceRegenerateTFCRunTaskHmacKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceRegenerateTFCRunTaskHmacKeyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceRegenerateTFCRunTaskHmacKeyParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_RegenerateTFCRunTaskHmacKey",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac",
@@ -819,7 +905,12 @@ func (a *Client) PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceR
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -835,13 +926,12 @@ func (a *Client) PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceR
 /*
   PackerServiceTFCImageValidationRunTask terraforms cloud run task hook for validating an h c p packer artifact used in the terraform plan to block a terraform apply for artifacts that are in an invalid state such as revoked iterations
 */
-func (a *Client) PackerServiceTFCImageValidationRunTask(params *PackerServiceTFCImageValidationRunTaskParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceTFCImageValidationRunTaskOK, error) {
+func (a *Client) PackerServiceTFCImageValidationRunTask(params *PackerServiceTFCImageValidationRunTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceTFCImageValidationRunTaskOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceTFCImageValidationRunTaskParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_TFCImageValidationRunTask",
 		Method:             "POST",
 		PathPattern:        "/packer/2022-04-11/terraform-cloud/validation/{api_id}",
@@ -853,7 +943,12 @@ func (a *Client) PackerServiceTFCImageValidationRunTask(params *PackerServiceTFC
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -869,13 +964,12 @@ func (a *Client) PackerServiceTFCImageValidationRunTask(params *PackerServiceTFC
 /*
   PackerServiceUpdateBucket updates a bucket s information
 */
-func (a *Client) PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBucketOK, error) {
+func (a *Client) PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateBucketOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceUpdateBucketParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_UpdateBucket",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}",
@@ -887,7 +981,12 @@ func (a *Client) PackerServiceUpdateBucket(params *PackerServiceUpdateBucketPara
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -903,13 +1002,12 @@ func (a *Client) PackerServiceUpdateBucket(params *PackerServiceUpdateBucketPara
 /*
   PackerServiceUpdateBuild updates an image build this may be most often used for modifying the status of a currently running build
 */
-func (a *Client) PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateBuildOK, error) {
+func (a *Client) PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateBuildOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceUpdateBuildParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_UpdateBuild",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}",
@@ -921,7 +1019,12 @@ func (a *Client) PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -937,13 +1040,12 @@ func (a *Client) PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams
 /*
   PackerServiceUpdateChannel updates a channel to clear or point to a new iteration
 */
-func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateChannelOK, error) {
+func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceUpdateChannelParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_UpdateChannel",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}",
@@ -955,7 +1057,12 @@ func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelPa
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -971,13 +1078,12 @@ func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelPa
 /*
   PackerServiceUpdateIteration this API can be used to revoke restore or complete an iteration revoking can be done at any time to complete or incomplete iterations immediately or in the future depending on the passing timestamp when an iteration is revoked all its descendants will automatically get revoked unless skip descendants revocation is set descendants will get revoked asynchronously to the request revoked iterations cannot be updated unless restored to make build specific updates for builds within the iteration use the update build endpoint
 */
-func (a *Client) PackerServiceUpdateIteration(params *PackerServiceUpdateIterationParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateIterationOK, error) {
+func (a *Client) PackerServiceUpdateIteration(params *PackerServiceUpdateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateIterationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceUpdateIterationParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_UpdateIteration",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}",
@@ -989,7 +1095,12 @@ func (a *Client) PackerServiceUpdateIteration(params *PackerServiceUpdateIterati
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -1005,13 +1116,12 @@ func (a *Client) PackerServiceUpdateIteration(params *PackerServiceUpdateIterati
 /*
   PackerServiceUpdateRegistry updates the feature tier of an h c p packer registry
 */
-func (a *Client) PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*PackerServiceUpdateRegistryOK, error) {
+func (a *Client) PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPackerServiceUpdateRegistryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "PackerService_UpdateRegistry",
 		Method:             "PATCH",
 		PathPattern:        "/packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/registry",
@@ -1023,7 +1133,12 @@ func (a *Client) PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistry
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

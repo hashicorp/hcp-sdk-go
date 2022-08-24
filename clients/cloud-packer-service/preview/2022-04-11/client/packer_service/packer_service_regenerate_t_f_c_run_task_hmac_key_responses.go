@@ -47,7 +47,7 @@ func NewPackerServiceRegenerateTFCRunTaskHmacKeyOK() *PackerServiceRegenerateTFC
 	return &PackerServiceRegenerateTFCRunTaskHmacKeyOK{}
 }
 
-/*PackerServiceRegenerateTFCRunTaskHmacKeyOK handles this case with default header values.
+/* PackerServiceRegenerateTFCRunTaskHmacKeyOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type PackerServiceRegenerateTFCRunTaskHmacKeyOK struct {
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] packerServiceRegenerateTFCRunTaskHmacKeyOK  %+v", 200, o.Payload)
 }
-
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) GetPayload() *models.HashicorpCloudPacker20220411RegenerateTFCRunTaskHmacKeyResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewPackerServiceRegenerateTFCRunTaskHmacKeyDefault(code int) *PackerService
 	}
 }
 
-/*PackerServiceRegenerateTFCRunTaskHmacKeyDefault handles this case with default header values.
+/* PackerServiceRegenerateTFCRunTaskHmacKeyDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) Code() int {
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] PackerService_RegenerateTFCRunTaskHmacKey default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -35,7 +37,6 @@ func (m *HashicorpCloudPackerCreateBucketResponse) Validate(formats strfmt.Regis
 }
 
 func (m *HashicorpCloudPackerCreateBucketResponse) validateBucket(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Bucket) { // not required
 		return nil
 	}
@@ -44,6 +45,38 @@ func (m *HashicorpCloudPackerCreateBucketResponse) validateBucket(formats strfmt
 		if err := m.Bucket.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("bucket")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("bucket")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer create bucket response based on the context it is used
+func (m *HashicorpCloudPackerCreateBucketResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateBucket(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerCreateBucketResponse) contextValidateBucket(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Bucket != nil {
+		if err := m.Bucket.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("bucket")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("bucket")
 			}
 			return err
 		}

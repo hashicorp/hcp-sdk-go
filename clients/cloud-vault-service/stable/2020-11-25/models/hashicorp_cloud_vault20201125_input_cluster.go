@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -69,7 +71,6 @@ func (m *HashicorpCloudVault20201125InputCluster) Validate(formats strfmt.Regist
 }
 
 func (m *HashicorpCloudVault20201125InputCluster) validateConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Config) { // not required
 		return nil
 	}
@@ -78,6 +79,8 @@ func (m *HashicorpCloudVault20201125InputCluster) validateConfig(formats strfmt.
 		if err := m.Config.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("config")
 			}
 			return err
 		}
@@ -87,7 +90,6 @@ func (m *HashicorpCloudVault20201125InputCluster) validateConfig(formats strfmt.
 }
 
 func (m *HashicorpCloudVault20201125InputCluster) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -96,6 +98,8 @@ func (m *HashicorpCloudVault20201125InputCluster) validateLocation(formats strfm
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}
@@ -105,7 +109,6 @@ func (m *HashicorpCloudVault20201125InputCluster) validateLocation(formats strfm
 }
 
 func (m *HashicorpCloudVault20201125InputCluster) validatePerformanceReplicationPathsFilter(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PerformanceReplicationPathsFilter) { // not required
 		return nil
 	}
@@ -114,6 +117,8 @@ func (m *HashicorpCloudVault20201125InputCluster) validatePerformanceReplication
 		if err := m.PerformanceReplicationPathsFilter.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("performance_replication_paths_filter")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("performance_replication_paths_filter")
 			}
 			return err
 		}
@@ -123,7 +128,6 @@ func (m *HashicorpCloudVault20201125InputCluster) validatePerformanceReplication
 }
 
 func (m *HashicorpCloudVault20201125InputCluster) validatePerformanceReplicationPrimaryCluster(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PerformanceReplicationPrimaryCluster) { // not required
 		return nil
 	}
@@ -132,6 +136,8 @@ func (m *HashicorpCloudVault20201125InputCluster) validatePerformanceReplication
 		if err := m.PerformanceReplicationPrimaryCluster.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("performance_replication_primary_cluster")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("performance_replication_primary_cluster")
 			}
 			return err
 		}
@@ -141,7 +147,6 @@ func (m *HashicorpCloudVault20201125InputCluster) validatePerformanceReplication
 }
 
 func (m *HashicorpCloudVault20201125InputCluster) validateTemplateInput(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.TemplateInput) { // not required
 		return nil
 	}
@@ -150,6 +155,118 @@ func (m *HashicorpCloudVault20201125InputCluster) validateTemplateInput(formats 
 		if err := m.TemplateInput.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("template_input")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("template_input")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 input cluster based on the context it is used
+func (m *HashicorpCloudVault20201125InputCluster) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePerformanceReplicationPathsFilter(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePerformanceReplicationPrimaryCluster(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTemplateInput(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputCluster) contextValidateConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Config != nil {
+		if err := m.Config.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputCluster) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputCluster) contextValidatePerformanceReplicationPathsFilter(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PerformanceReplicationPathsFilter != nil {
+		if err := m.PerformanceReplicationPathsFilter.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("performance_replication_paths_filter")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("performance_replication_paths_filter")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputCluster) contextValidatePerformanceReplicationPrimaryCluster(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PerformanceReplicationPrimaryCluster != nil {
+		if err := m.PerformanceReplicationPrimaryCluster.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("performance_replication_primary_cluster")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("performance_replication_primary_cluster")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputCluster) contextValidateTemplateInput(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TemplateInput != nil {
+		if err := m.TemplateInput.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("template_input")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("template_input")
 			}
 			return err
 		}

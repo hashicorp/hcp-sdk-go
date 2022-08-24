@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -20,7 +22,7 @@ type HashicorpCloudVault20201125MajorVersionUpgradeConfig struct {
 	MaintenanceWindow *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow `json:"maintenance_window,omitempty"`
 
 	// upgrade_type is the upgrade method that will be used
-	UpgradeType HashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType `json:"upgrade_type,omitempty"`
+	UpgradeType *HashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType `json:"upgrade_type,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 major version upgrade config
@@ -42,7 +44,6 @@ func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfig) Validate(formats 
 }
 
 func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfig) validateMaintenanceWindow(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.MaintenanceWindow) { // not required
 		return nil
 	}
@@ -51,6 +52,8 @@ func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfig) validateMaintenan
 		if err := m.MaintenanceWindow.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("maintenance_window")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("maintenance_window")
 			}
 			return err
 		}
@@ -60,16 +63,69 @@ func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfig) validateMaintenan
 }
 
 func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfig) validateUpgradeType(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpgradeType) { // not required
 		return nil
 	}
 
-	if err := m.UpgradeType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("upgrade_type")
+	if m.UpgradeType != nil {
+		if err := m.UpgradeType.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("upgrade_type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("upgrade_type")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 major version upgrade config based on the context it is used
+func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMaintenanceWindow(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUpgradeType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfig) contextValidateMaintenanceWindow(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MaintenanceWindow != nil {
+		if err := m.MaintenanceWindow.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("maintenance_window")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("maintenance_window")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfig) contextValidateUpgradeType(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.UpgradeType != nil {
+		if err := m.UpgradeType.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("upgrade_type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("upgrade_type")
+			}
+			return err
+		}
 	}
 
 	return nil

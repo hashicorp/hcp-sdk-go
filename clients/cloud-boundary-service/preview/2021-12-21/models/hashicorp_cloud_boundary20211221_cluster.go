@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -35,7 +37,7 @@ type HashicorpCloudBoundary20211221Cluster struct {
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
 	// state is the current state of the cluster.
-	State HashicorpCloudBoundary20211221ClusterState `json:"state,omitempty"`
+	State *HashicorpCloudBoundary20211221ClusterState `json:"state,omitempty"`
 }
 
 // Validate validates this hashicorp cloud boundary 20211221 cluster
@@ -61,7 +63,6 @@ func (m *HashicorpCloudBoundary20211221Cluster) Validate(formats strfmt.Registry
 }
 
 func (m *HashicorpCloudBoundary20211221Cluster) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -74,7 +75,6 @@ func (m *HashicorpCloudBoundary20211221Cluster) validateCreatedAt(formats strfmt
 }
 
 func (m *HashicorpCloudBoundary20211221Cluster) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -83,6 +83,8 @@ func (m *HashicorpCloudBoundary20211221Cluster) validateLocation(formats strfmt.
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}
@@ -92,16 +94,69 @@ func (m *HashicorpCloudBoundary20211221Cluster) validateLocation(formats strfmt.
 }
 
 func (m *HashicorpCloudBoundary20211221Cluster) validateState(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
 
-	if err := m.State.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("state")
+	if m.State != nil {
+		if err := m.State.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("state")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud boundary 20211221 cluster based on the context it is used
+func (m *HashicorpCloudBoundary20211221Cluster) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudBoundary20211221Cluster) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudBoundary20211221Cluster) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.State != nil {
+		if err := m.State.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("state")
+			}
+			return err
+		}
 	}
 
 	return nil

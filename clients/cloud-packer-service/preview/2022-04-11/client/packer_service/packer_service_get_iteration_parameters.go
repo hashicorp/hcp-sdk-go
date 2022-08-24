@@ -17,97 +17,120 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewPackerServiceGetIterationParams creates a new PackerServiceGetIterationParams object
-// with the default values initialized.
+// NewPackerServiceGetIterationParams creates a new PackerServiceGetIterationParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceGetIterationParams() *PackerServiceGetIterationParams {
-	var ()
 	return &PackerServiceGetIterationParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceGetIterationParamsWithTimeout creates a new PackerServiceGetIterationParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceGetIterationParamsWithTimeout(timeout time.Duration) *PackerServiceGetIterationParams {
-	var ()
 	return &PackerServiceGetIterationParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceGetIterationParamsWithContext creates a new PackerServiceGetIterationParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceGetIterationParamsWithContext(ctx context.Context) *PackerServiceGetIterationParams {
-	var ()
 	return &PackerServiceGetIterationParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceGetIterationParamsWithHTTPClient creates a new PackerServiceGetIterationParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceGetIterationParamsWithHTTPClient(client *http.Client) *PackerServiceGetIterationParams {
-	var ()
 	return &PackerServiceGetIterationParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceGetIterationParams contains all the parameters to send to the API endpoint
-for the packer service get iteration operation typically these are written to a http.Request
+/* PackerServiceGetIterationParams contains all the parameters to send to the API endpoint
+   for the packer service get iteration operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceGetIterationParams struct {
 
-	/*BucketSlug
-	  Human-readable name for the bucket.
+	/* BucketSlug.
 
+	   Human-readable name for the bucket.
 	*/
 	BucketSlug string
-	/*Fingerprint
-	  Fingerprint of the iteration. The fingerprint is set by Packer when you
+
+	/* Fingerprint.
+
+	     Fingerprint of the iteration. The fingerprint is set by Packer when you
 	call `packer build`. It will most often correspond to a git commit sha,
 	but can be manually overridden by setting the environment variable
 	`HCP_PACKER_BUILD_FINGERPRINT`.
-
 	*/
 	Fingerprint *string
-	/*IncrementalVersion
-	  The human-readable version number assigned to this iteration.
 
+	/* IncrementalVersion.
+
+	   The human-readable version number assigned to this iteration.
+
+	   Format: int32
 	*/
 	IncrementalVersion *int32
-	/*IterationID
-	  ULID of the iteration.
 
+	/* IterationID.
+
+	   ULID of the iteration.
 	*/
 	IterationID *string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*LocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* LocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
-	/*LocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* LocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service get iteration params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceGetIterationParams) WithDefaults() *PackerServiceGetIterationParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service get iteration params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceGetIterationParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service get iteration params
@@ -248,48 +271,51 @@ func (o *PackerServiceGetIterationParams) WriteToRequest(r runtime.ClientRequest
 
 		// query param fingerprint
 		var qrFingerprint string
+
 		if o.Fingerprint != nil {
 			qrFingerprint = *o.Fingerprint
 		}
 		qFingerprint := qrFingerprint
 		if qFingerprint != "" {
+
 			if err := r.SetQueryParam("fingerprint", qFingerprint); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.IncrementalVersion != nil {
 
 		// query param incremental_version
 		var qrIncrementalVersion int32
+
 		if o.IncrementalVersion != nil {
 			qrIncrementalVersion = *o.IncrementalVersion
 		}
 		qIncrementalVersion := swag.FormatInt32(qrIncrementalVersion)
 		if qIncrementalVersion != "" {
+
 			if err := r.SetQueryParam("incremental_version", qIncrementalVersion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.IterationID != nil {
 
 		// query param iteration_id
 		var qrIterationID string
+
 		if o.IterationID != nil {
 			qrIterationID = *o.IterationID
 		}
 		qIterationID := qrIterationID
 		if qIterationID != "" {
+
 			if err := r.SetQueryParam("iteration_id", qIterationID); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	// path param location.organization_id
@@ -306,32 +332,34 @@ func (o *PackerServiceGetIterationParams) WriteToRequest(r runtime.ClientRequest
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
+
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
+
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

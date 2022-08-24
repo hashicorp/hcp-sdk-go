@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -17,6 +18,15 @@ import (
 //
 // swagger:model hashicorp.cloud.packer.RegistryConfig.Tier
 type HashicorpCloudPackerRegistryConfigTier string
+
+func NewHashicorpCloudPackerRegistryConfigTier(value HashicorpCloudPackerRegistryConfigTier) *HashicorpCloudPackerRegistryConfigTier {
+	return &value
+}
+
+// Pointer returns a pointer to a freshly-allocated HashicorpCloudPackerRegistryConfigTier.
+func (m HashicorpCloudPackerRegistryConfigTier) Pointer() *HashicorpCloudPackerRegistryConfigTier {
+	return &m
+}
 
 const (
 
@@ -65,5 +75,10 @@ func (m HashicorpCloudPackerRegistryConfigTier) Validate(formats strfmt.Registry
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud packer registry config tier based on context it is used
+func (m HashicorpCloudPackerRegistryConfigTier) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

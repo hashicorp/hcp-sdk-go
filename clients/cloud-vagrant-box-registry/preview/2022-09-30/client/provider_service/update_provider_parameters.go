@@ -18,78 +18,96 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewUpdateProviderParams creates a new UpdateProviderParams object
-// with the default values initialized.
+// NewUpdateProviderParams creates a new UpdateProviderParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdateProviderParams() *UpdateProviderParams {
-	var ()
 	return &UpdateProviderParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateProviderParamsWithTimeout creates a new UpdateProviderParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUpdateProviderParamsWithTimeout(timeout time.Duration) *UpdateProviderParams {
-	var ()
 	return &UpdateProviderParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUpdateProviderParamsWithContext creates a new UpdateProviderParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUpdateProviderParamsWithContext(ctx context.Context) *UpdateProviderParams {
-	var ()
 	return &UpdateProviderParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUpdateProviderParamsWithHTTPClient creates a new UpdateProviderParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUpdateProviderParamsWithHTTPClient(client *http.Client) *UpdateProviderParams {
-	var ()
 	return &UpdateProviderParams{
 		HTTPClient: client,
 	}
 }
 
-/*UpdateProviderParams contains all the parameters to send to the API endpoint
-for the update provider operation typically these are written to a http.Request
+/* UpdateProviderParams contains all the parameters to send to the API endpoint
+   for the update provider operation.
+
+   Typically these are written to a http.Request.
 */
 type UpdateProviderParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930UpdateProviderRequest
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	// Body.
+	Body *models.HashicorpCloudVagrantUpdateProviderRequest
 
+	/* Box.
+
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Provider
-	  The name of the Provider.
 
+	/* Provider.
+
+	   The name of the Provider.
 	*/
 	Provider string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
-	/*Version
-	  The name of the Version for the Provider.
 
+	/* Version.
+
+	   The name of the Version for the Provider.
 	*/
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the update provider params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateProviderParams) WithDefaults() *UpdateProviderParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the update provider params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateProviderParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update provider params
@@ -126,13 +144,13 @@ func (o *UpdateProviderParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the update provider params
-func (o *UpdateProviderParams) WithBody(body *models.HashicorpCloudVagrant20220930UpdateProviderRequest) *UpdateProviderParams {
+func (o *UpdateProviderParams) WithBody(body *models.HashicorpCloudVagrantUpdateProviderRequest) *UpdateProviderParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the update provider params
-func (o *UpdateProviderParams) SetBody(body *models.HashicorpCloudVagrant20220930UpdateProviderRequest) {
+func (o *UpdateProviderParams) SetBody(body *models.HashicorpCloudVagrantUpdateProviderRequest) {
 	o.Body = body
 }
 
@@ -187,7 +205,6 @@ func (o *UpdateProviderParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

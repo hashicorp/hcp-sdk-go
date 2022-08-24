@@ -18,68 +18,84 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewCreateVersionParams creates a new CreateVersionParams object
-// with the default values initialized.
+// NewCreateVersionParams creates a new CreateVersionParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewCreateVersionParams() *CreateVersionParams {
-	var ()
 	return &CreateVersionParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreateVersionParamsWithTimeout creates a new CreateVersionParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewCreateVersionParamsWithTimeout(timeout time.Duration) *CreateVersionParams {
-	var ()
 	return &CreateVersionParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewCreateVersionParamsWithContext creates a new CreateVersionParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewCreateVersionParamsWithContext(ctx context.Context) *CreateVersionParams {
-	var ()
 	return &CreateVersionParams{
-
 		Context: ctx,
 	}
 }
 
 // NewCreateVersionParamsWithHTTPClient creates a new CreateVersionParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewCreateVersionParamsWithHTTPClient(client *http.Client) *CreateVersionParams {
-	var ()
 	return &CreateVersionParams{
 		HTTPClient: client,
 	}
 }
 
-/*CreateVersionParams contains all the parameters to send to the API endpoint
-for the create version operation typically these are written to a http.Request
+/* CreateVersionParams contains all the parameters to send to the API endpoint
+   for the create version operation.
+
+   Typically these are written to a http.Request.
 */
 type CreateVersionParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930CreateVersionRequest
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	// Body.
+	Body *models.HashicorpCloudVagrantCreateVersionRequest
 
+	/* Box.
+
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the create version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateVersionParams) WithDefaults() *CreateVersionParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the create version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateVersionParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create version params
@@ -116,13 +132,13 @@ func (o *CreateVersionParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create version params
-func (o *CreateVersionParams) WithBody(body *models.HashicorpCloudVagrant20220930CreateVersionRequest) *CreateVersionParams {
+func (o *CreateVersionParams) WithBody(body *models.HashicorpCloudVagrantCreateVersionRequest) *CreateVersionParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create version params
-func (o *CreateVersionParams) SetBody(body *models.HashicorpCloudVagrant20220930CreateVersionRequest) {
+func (o *CreateVersionParams) SetBody(body *models.HashicorpCloudVagrantCreateVersionRequest) {
 	o.Body = body
 }
 
@@ -155,7 +171,6 @@ func (o *CreateVersionParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

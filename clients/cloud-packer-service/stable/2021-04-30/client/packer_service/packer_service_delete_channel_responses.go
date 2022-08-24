@@ -47,7 +47,7 @@ func NewPackerServiceDeleteChannelOK() *PackerServiceDeleteChannelOK {
 	return &PackerServiceDeleteChannelOK{}
 }
 
-/*PackerServiceDeleteChannelOK handles this case with default header values.
+/* PackerServiceDeleteChannelOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type PackerServiceDeleteChannelOK struct {
 func (o *PackerServiceDeleteChannelOK) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceDeleteChannelOK  %+v", 200, o.Payload)
 }
-
 func (o *PackerServiceDeleteChannelOK) GetPayload() models.HashicorpCloudPackerDeleteChannelResponse {
 	return o.Payload
 }
@@ -80,7 +79,7 @@ func NewPackerServiceDeleteChannelDefault(code int) *PackerServiceDeleteChannelD
 	}
 }
 
-/*PackerServiceDeleteChannelDefault handles this case with default header values.
+/* PackerServiceDeleteChannelDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -98,7 +97,6 @@ func (o *PackerServiceDeleteChannelDefault) Code() int {
 func (o *PackerServiceDeleteChannelDefault) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_DeleteChannel default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *PackerServiceDeleteChannelDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

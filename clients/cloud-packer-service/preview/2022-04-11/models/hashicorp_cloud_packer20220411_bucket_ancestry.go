@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -24,7 +26,7 @@ type HashicorpCloudPacker20220411BucketAncestry struct {
 	Parent *HashicorpCloudPacker20220411BucketAncestryParent `json:"parent,omitempty"`
 
 	// The status of the relation between the parent and child buckets.
-	Status HashicorpCloudPacker20220411BucketAncestryStatus `json:"status,omitempty"`
+	Status *HashicorpCloudPacker20220411BucketAncestryStatus `json:"status,omitempty"`
 }
 
 // Validate validates this hashicorp cloud packer 20220411 bucket ancestry
@@ -50,7 +52,6 @@ func (m *HashicorpCloudPacker20220411BucketAncestry) Validate(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudPacker20220411BucketAncestry) validateChild(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Child) { // not required
 		return nil
 	}
@@ -59,6 +60,8 @@ func (m *HashicorpCloudPacker20220411BucketAncestry) validateChild(formats strfm
 		if err := m.Child.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("child")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("child")
 			}
 			return err
 		}
@@ -68,7 +71,6 @@ func (m *HashicorpCloudPacker20220411BucketAncestry) validateChild(formats strfm
 }
 
 func (m *HashicorpCloudPacker20220411BucketAncestry) validateParent(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Parent) { // not required
 		return nil
 	}
@@ -77,6 +79,8 @@ func (m *HashicorpCloudPacker20220411BucketAncestry) validateParent(formats strf
 		if err := m.Parent.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("parent")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("parent")
 			}
 			return err
 		}
@@ -86,16 +90,89 @@ func (m *HashicorpCloudPacker20220411BucketAncestry) validateParent(formats strf
 }
 
 func (m *HashicorpCloudPacker20220411BucketAncestry) validateStatus(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Status) { // not required
 		return nil
 	}
 
-	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("status")
+	if m.Status != nil {
+		if err := m.Status.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 bucket ancestry based on the context it is used
+func (m *HashicorpCloudPacker20220411BucketAncestry) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateChild(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateParent(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411BucketAncestry) contextValidateChild(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Child != nil {
+		if err := m.Child.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("child")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("child")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411BucketAncestry) contextValidateParent(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Parent != nil {
+		if err := m.Parent.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("parent")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("parent")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411BucketAncestry) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Status != nil {
+		if err := m.Status.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status")
+			}
+			return err
+		}
 	}
 
 	return nil

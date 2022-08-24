@@ -29,7 +29,6 @@ func (o *CreateVersionReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -40,25 +39,24 @@ func NewCreateVersionOK() *CreateVersionOK {
 	return &CreateVersionOK{}
 }
 
-/*CreateVersionOK handles this case with default header values.
+/* CreateVersionOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
 type CreateVersionOK struct {
-	Payload *models.HashicorpCloudVagrant20220930CreateVersionResponse
+	Payload *models.HashicorpCloudVagrantCreateVersionResponse
 }
 
 func (o *CreateVersionOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions][%d] createVersionOK  %+v", 200, o.Payload)
 }
-
-func (o *CreateVersionOK) GetPayload() *models.HashicorpCloudVagrant20220930CreateVersionResponse {
+func (o *CreateVersionOK) GetPayload() *models.HashicorpCloudVagrantCreateVersionResponse {
 	return o.Payload
 }
 
 func (o *CreateVersionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVagrant20220930CreateVersionResponse)
+	o.Payload = new(models.HashicorpCloudVagrantCreateVersionResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

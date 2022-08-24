@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -35,7 +37,6 @@ func (m *HashicorpCloudPackerUpdateChannelResponse) Validate(formats strfmt.Regi
 }
 
 func (m *HashicorpCloudPackerUpdateChannelResponse) validateChannel(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Channel) { // not required
 		return nil
 	}
@@ -44,6 +45,38 @@ func (m *HashicorpCloudPackerUpdateChannelResponse) validateChannel(formats strf
 		if err := m.Channel.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("channel")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("channel")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer update channel response based on the context it is used
+func (m *HashicorpCloudPackerUpdateChannelResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateChannel(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerUpdateChannelResponse) contextValidateChannel(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Channel != nil {
+		if err := m.Channel.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("channel")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("channel")
 			}
 			return err
 		}

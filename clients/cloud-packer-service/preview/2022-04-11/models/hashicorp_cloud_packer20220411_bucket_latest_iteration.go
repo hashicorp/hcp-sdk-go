@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -68,7 +69,7 @@ type HashicorpCloudPacker20220411BucketLatestIteration struct {
 	RevocationMessage string `json:"revocation_message,omitempty"`
 
 	// Revocation type is 'manual' when self revoked or 'inherited' when inherited from a revoked ancestor.
-	RevocationType HashicorpCloudPacker20220411IterationRevocationType `json:"revocation_type,omitempty"`
+	RevocationType *HashicorpCloudPacker20220411IterationRevocationType `json:"revocation_type,omitempty"`
 
 	// Timestamp from when the iteration is revoked an no longer trusted to be secure.
 	// Format: date-time
@@ -114,7 +115,6 @@ func (m *HashicorpCloudPacker20220411BucketLatestIteration) Validate(formats str
 }
 
 func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateBuilds(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Builds) { // not required
 		return nil
 	}
@@ -128,6 +128,8 @@ func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateBuilds(forma
 			if err := m.Builds[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("builds" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("builds" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -139,7 +141,6 @@ func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateBuilds(forma
 }
 
 func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -152,7 +153,6 @@ func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateCreatedAt(fo
 }
 
 func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateRevocationInheritedFrom(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.RevocationInheritedFrom) { // not required
 		return nil
 	}
@@ -161,6 +161,8 @@ func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateRevocationIn
 		if err := m.RevocationInheritedFrom.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("revocation_inherited_from")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("revocation_inherited_from")
 			}
 			return err
 		}
@@ -170,23 +172,25 @@ func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateRevocationIn
 }
 
 func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateRevocationType(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.RevocationType) { // not required
 		return nil
 	}
 
-	if err := m.RevocationType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("revocation_type")
+	if m.RevocationType != nil {
+		if err := m.RevocationType.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("revocation_type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("revocation_type")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateRevokeAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.RevokeAt) { // not required
 		return nil
 	}
@@ -199,13 +203,86 @@ func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateRevokeAt(for
 }
 
 func (m *HashicorpCloudPacker20220411BucketLatestIteration) validateUpdatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 bucket latest iteration based on the context it is used
+func (m *HashicorpCloudPacker20220411BucketLatestIteration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateBuilds(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRevocationInheritedFrom(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRevocationType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411BucketLatestIteration) contextValidateBuilds(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Builds); i++ {
+
+		if m.Builds[i] != nil {
+			if err := m.Builds[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("builds" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("builds" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411BucketLatestIteration) contextValidateRevocationInheritedFrom(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RevocationInheritedFrom != nil {
+		if err := m.RevocationInheritedFrom.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("revocation_inherited_from")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("revocation_inherited_from")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411BucketLatestIteration) contextValidateRevocationType(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RevocationType != nil {
+		if err := m.RevocationType.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("revocation_type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("revocation_type")
+			}
+			return err
+		}
 	}
 
 	return nil

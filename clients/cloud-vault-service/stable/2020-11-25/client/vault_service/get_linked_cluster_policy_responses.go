@@ -47,7 +47,7 @@ func NewGetLinkedClusterPolicyOK() *GetLinkedClusterPolicyOK {
 	return &GetLinkedClusterPolicyOK{}
 }
 
-/*GetLinkedClusterPolicyOK handles this case with default header values.
+/* GetLinkedClusterPolicyOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type GetLinkedClusterPolicyOK struct {
 func (o *GetLinkedClusterPolicyOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
 }
-
 func (o *GetLinkedClusterPolicyOK) GetPayload() *models.HashicorpCloudVault20201125GetLinkedClusterPolicyResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewGetLinkedClusterPolicyDefault(code int) *GetLinkedClusterPolicyDefault {
 	}
 }
 
-/*GetLinkedClusterPolicyDefault handles this case with default header values.
+/* GetLinkedClusterPolicyDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *GetLinkedClusterPolicyDefault) Code() int {
 func (o *GetLinkedClusterPolicyDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *GetLinkedClusterPolicyDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

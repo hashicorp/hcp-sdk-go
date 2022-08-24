@@ -18,68 +18,85 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-service/stable/2020-11-25/models"
 )
 
-// NewUpdateMajorVersionUpgradeConfigParams creates a new UpdateMajorVersionUpgradeConfigParams object
-// with the default values initialized.
+// NewUpdateMajorVersionUpgradeConfigParams creates a new UpdateMajorVersionUpgradeConfigParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdateMajorVersionUpgradeConfigParams() *UpdateMajorVersionUpgradeConfigParams {
-	var ()
 	return &UpdateMajorVersionUpgradeConfigParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateMajorVersionUpgradeConfigParamsWithTimeout creates a new UpdateMajorVersionUpgradeConfigParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUpdateMajorVersionUpgradeConfigParamsWithTimeout(timeout time.Duration) *UpdateMajorVersionUpgradeConfigParams {
-	var ()
 	return &UpdateMajorVersionUpgradeConfigParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUpdateMajorVersionUpgradeConfigParamsWithContext creates a new UpdateMajorVersionUpgradeConfigParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUpdateMajorVersionUpgradeConfigParamsWithContext(ctx context.Context) *UpdateMajorVersionUpgradeConfigParams {
-	var ()
 	return &UpdateMajorVersionUpgradeConfigParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUpdateMajorVersionUpgradeConfigParamsWithHTTPClient creates a new UpdateMajorVersionUpgradeConfigParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUpdateMajorVersionUpgradeConfigParamsWithHTTPClient(client *http.Client) *UpdateMajorVersionUpgradeConfigParams {
-	var ()
 	return &UpdateMajorVersionUpgradeConfigParams{
 		HTTPClient: client,
 	}
 }
 
-/*UpdateMajorVersionUpgradeConfigParams contains all the parameters to send to the API endpoint
-for the update major version upgrade config operation typically these are written to a http.Request
+/* UpdateMajorVersionUpgradeConfigParams contains all the parameters to send to the API endpoint
+   for the update major version upgrade config operation.
+
+   Typically these are written to a http.Request.
 */
 type UpdateMajorVersionUpgradeConfigParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigRequest
-	/*ClusterID*/
-	ClusterID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	// ClusterID.
+	ClusterID string
+
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the update major version upgrade config params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateMajorVersionUpgradeConfigParams) WithDefaults() *UpdateMajorVersionUpgradeConfigParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the update major version upgrade config params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateMajorVersionUpgradeConfigParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update major version upgrade config params
@@ -166,7 +183,6 @@ func (o *UpdateMajorVersionUpgradeConfigParams) WriteToRequest(r runtime.ClientR
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

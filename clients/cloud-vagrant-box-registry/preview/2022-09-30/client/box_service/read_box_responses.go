@@ -29,7 +29,6 @@ func (o *ReadBoxReader) ReadResponse(response runtime.ClientResponse, consumer r
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -40,25 +39,24 @@ func NewReadBoxOK() *ReadBoxOK {
 	return &ReadBoxOK{}
 }
 
-/*ReadBoxOK handles this case with default header values.
+/* ReadBoxOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
 type ReadBoxOK struct {
-	Payload *models.HashicorpCloudVagrant20220930ReadBoxResponse
+	Payload *models.HashicorpCloudVagrantReadBoxResponse
 }
 
 func (o *ReadBoxOK) Error() string {
 	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] readBoxOK  %+v", 200, o.Payload)
 }
-
-func (o *ReadBoxOK) GetPayload() *models.HashicorpCloudVagrant20220930ReadBoxResponse {
+func (o *ReadBoxOK) GetPayload() *models.HashicorpCloudVagrantReadBoxResponse {
 	return o.Payload
 }
 
 func (o *ReadBoxOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVagrant20220930ReadBoxResponse)
+	o.Payload = new(models.HashicorpCloudVagrantReadBoxResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -18,70 +18,88 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-service/stable/2020-11-25/models"
 )
 
-// NewUpdateVersionParams creates a new UpdateVersionParams object
-// with the default values initialized.
+// NewUpdateVersionParams creates a new UpdateVersionParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdateVersionParams() *UpdateVersionParams {
-	var ()
 	return &UpdateVersionParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateVersionParamsWithTimeout creates a new UpdateVersionParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUpdateVersionParamsWithTimeout(timeout time.Duration) *UpdateVersionParams {
-	var ()
 	return &UpdateVersionParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUpdateVersionParamsWithContext creates a new UpdateVersionParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUpdateVersionParamsWithContext(ctx context.Context) *UpdateVersionParams {
-	var ()
 	return &UpdateVersionParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUpdateVersionParamsWithHTTPClient creates a new UpdateVersionParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUpdateVersionParamsWithHTTPClient(client *http.Client) *UpdateVersionParams {
-	var ()
 	return &UpdateVersionParams{
 		HTTPClient: client,
 	}
 }
 
-/*UpdateVersionParams contains all the parameters to send to the API endpoint
-for the update version operation typically these are written to a http.Request
+/* UpdateVersionParams contains all the parameters to send to the API endpoint
+   for the update version operation.
+
+   Typically these are written to a http.Request.
 */
 type UpdateVersionParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudVault20201125UpdateVersionRequest
-	/*ClusterID*/
-	ClusterID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	// ClusterID.
+	ClusterID string
+
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*Version*/
+
+	// Version.
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the update version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateVersionParams) WithDefaults() *UpdateVersionParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the update version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateVersionParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update version params
@@ -179,7 +197,6 @@ func (o *UpdateVersionParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

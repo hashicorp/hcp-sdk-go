@@ -29,7 +29,6 @@ func (o *RevokeVersionReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -40,19 +39,18 @@ func NewRevokeVersionOK() *RevokeVersionOK {
 	return &RevokeVersionOK{}
 }
 
-/*RevokeVersionOK handles this case with default header values.
+/* RevokeVersionOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
 type RevokeVersionOK struct {
-	Payload models.HashicorpCloudVagrant20220930RevokeVersionResponse
+	Payload models.HashicorpCloudVagrantRevokeVersionResponse
 }
 
 func (o *RevokeVersionOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/revoke][%d] revokeVersionOK  %+v", 200, o.Payload)
 }
-
-func (o *RevokeVersionOK) GetPayload() models.HashicorpCloudVagrant20220930RevokeVersionResponse {
+func (o *RevokeVersionOK) GetPayload() models.HashicorpCloudVagrantRevokeVersionResponse {
 	return o.Payload
 }
 

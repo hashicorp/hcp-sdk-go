@@ -16,76 +16,93 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDeleteProviderParams creates a new DeleteProviderParams object
-// with the default values initialized.
+// NewDeleteProviderParams creates a new DeleteProviderParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDeleteProviderParams() *DeleteProviderParams {
-	var ()
 	return &DeleteProviderParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeleteProviderParamsWithTimeout creates a new DeleteProviderParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewDeleteProviderParamsWithTimeout(timeout time.Duration) *DeleteProviderParams {
-	var ()
 	return &DeleteProviderParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewDeleteProviderParamsWithContext creates a new DeleteProviderParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewDeleteProviderParamsWithContext(ctx context.Context) *DeleteProviderParams {
-	var ()
 	return &DeleteProviderParams{
-
 		Context: ctx,
 	}
 }
 
 // NewDeleteProviderParamsWithHTTPClient creates a new DeleteProviderParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewDeleteProviderParamsWithHTTPClient(client *http.Client) *DeleteProviderParams {
-	var ()
 	return &DeleteProviderParams{
 		HTTPClient: client,
 	}
 }
 
-/*DeleteProviderParams contains all the parameters to send to the API endpoint
-for the delete provider operation typically these are written to a http.Request
+/* DeleteProviderParams contains all the parameters to send to the API endpoint
+   for the delete provider operation.
+
+   Typically these are written to a http.Request.
 */
 type DeleteProviderParams struct {
 
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	/* Box.
 
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Provider
-	  The name of the Provider.
 
+	/* Provider.
+
+	   The name of the Provider.
 	*/
 	Provider string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
-	/*Version
-	  The name of the Version for the Provider.
 
+	/* Version.
+
+	   The name of the Version for the Provider.
 	*/
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the delete provider params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeleteProviderParams) WithDefaults() *DeleteProviderParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the delete provider params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeleteProviderParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete provider params

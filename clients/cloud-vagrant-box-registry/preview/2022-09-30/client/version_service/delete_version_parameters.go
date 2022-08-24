@@ -16,71 +16,87 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDeleteVersionParams creates a new DeleteVersionParams object
-// with the default values initialized.
+// NewDeleteVersionParams creates a new DeleteVersionParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDeleteVersionParams() *DeleteVersionParams {
-	var ()
 	return &DeleteVersionParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeleteVersionParamsWithTimeout creates a new DeleteVersionParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewDeleteVersionParamsWithTimeout(timeout time.Duration) *DeleteVersionParams {
-	var ()
 	return &DeleteVersionParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewDeleteVersionParamsWithContext creates a new DeleteVersionParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewDeleteVersionParamsWithContext(ctx context.Context) *DeleteVersionParams {
-	var ()
 	return &DeleteVersionParams{
-
 		Context: ctx,
 	}
 }
 
 // NewDeleteVersionParamsWithHTTPClient creates a new DeleteVersionParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewDeleteVersionParamsWithHTTPClient(client *http.Client) *DeleteVersionParams {
-	var ()
 	return &DeleteVersionParams{
 		HTTPClient: client,
 	}
 }
 
-/*DeleteVersionParams contains all the parameters to send to the API endpoint
-for the delete version operation typically these are written to a http.Request
+/* DeleteVersionParams contains all the parameters to send to the API endpoint
+   for the delete version operation.
+
+   Typically these are written to a http.Request.
 */
 type DeleteVersionParams struct {
 
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	/* Box.
 
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
-	/*Version
-	  The name of the Version to delete.
 
+	/* Version.
+
+	   The name of the Version to delete.
 	*/
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the delete version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeleteVersionParams) WithDefaults() *DeleteVersionParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the delete version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeleteVersionParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete version params

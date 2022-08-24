@@ -47,7 +47,7 @@ func NewGetAvailableProvidersOK() *GetAvailableProvidersOK {
 	return &GetAvailableProvidersOK{}
 }
 
-/*GetAvailableProvidersOK handles this case with default header values.
+/* GetAvailableProvidersOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type GetAvailableProvidersOK struct {
 func (o *GetAvailableProvidersOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] getAvailableProvidersOK  %+v", 200, o.Payload)
 }
-
 func (o *GetAvailableProvidersOK) GetPayload() *models.HashicorpCloudVault20201125GetAvailableProvidersResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewGetAvailableProvidersDefault(code int) *GetAvailableProvidersDefault {
 	}
 }
 
-/*GetAvailableProvidersDefault handles this case with default header values.
+/* GetAvailableProvidersDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *GetAvailableProvidersDefault) Code() int {
 func (o *GetAvailableProvidersDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] GetAvailableProviders default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *GetAvailableProvidersDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

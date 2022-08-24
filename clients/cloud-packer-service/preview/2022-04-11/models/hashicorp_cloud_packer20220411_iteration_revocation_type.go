@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -18,6 +19,15 @@ import (
 //
 // swagger:model hashicorp.cloud.packer_20220411.Iteration.RevocationType
 type HashicorpCloudPacker20220411IterationRevocationType string
+
+func NewHashicorpCloudPacker20220411IterationRevocationType(value HashicorpCloudPacker20220411IterationRevocationType) *HashicorpCloudPacker20220411IterationRevocationType {
+	return &value
+}
+
+// Pointer returns a pointer to a freshly-allocated HashicorpCloudPacker20220411IterationRevocationType.
+func (m HashicorpCloudPacker20220411IterationRevocationType) Pointer() *HashicorpCloudPacker20220411IterationRevocationType {
+	return &m
+}
 
 const (
 
@@ -63,5 +73,10 @@ func (m HashicorpCloudPacker20220411IterationRevocationType) Validate(formats st
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud packer 20220411 iteration revocation type based on context it is used
+func (m HashicorpCloudPacker20220411IterationRevocationType) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

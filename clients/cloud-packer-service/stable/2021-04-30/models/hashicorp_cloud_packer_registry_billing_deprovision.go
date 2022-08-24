@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -22,7 +24,7 @@ type HashicorpCloudPackerRegistryBillingDeprovision struct {
 	At strfmt.DateTime `json:"at,omitempty"`
 
 	// Reason of why the registry was deactivated.
-	Reason HashicorpCloudPackerRegistryBillingDeprovisionReason `json:"reason,omitempty"`
+	Reason *HashicorpCloudPackerRegistryBillingDeprovisionReason `json:"reason,omitempty"`
 }
 
 // Validate validates this hashicorp cloud packer registry billing deprovision
@@ -44,7 +46,6 @@ func (m *HashicorpCloudPackerRegistryBillingDeprovision) Validate(formats strfmt
 }
 
 func (m *HashicorpCloudPackerRegistryBillingDeprovision) validateAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.At) { // not required
 		return nil
 	}
@@ -57,16 +58,49 @@ func (m *HashicorpCloudPackerRegistryBillingDeprovision) validateAt(formats strf
 }
 
 func (m *HashicorpCloudPackerRegistryBillingDeprovision) validateReason(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Reason) { // not required
 		return nil
 	}
 
-	if err := m.Reason.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("reason")
+	if m.Reason != nil {
+		if err := m.Reason.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("reason")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("reason")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer registry billing deprovision based on the context it is used
+func (m *HashicorpCloudPackerRegistryBillingDeprovision) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateReason(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerRegistryBillingDeprovision) contextValidateReason(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Reason != nil {
+		if err := m.Reason.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("reason")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("reason")
+			}
+			return err
+		}
 	}
 
 	return nil

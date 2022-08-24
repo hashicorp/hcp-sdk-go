@@ -47,7 +47,7 @@ func NewPackerServiceTFCImageValidationRunTaskOK() *PackerServiceTFCImageValidat
 	return &PackerServiceTFCImageValidationRunTaskOK{}
 }
 
-/*PackerServiceTFCImageValidationRunTaskOK handles this case with default header values.
+/* PackerServiceTFCImageValidationRunTaskOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type PackerServiceTFCImageValidationRunTaskOK struct {
 func (o *PackerServiceTFCImageValidationRunTaskOK) Error() string {
 	return fmt.Sprintf("[POST /packer/2021-04-30/terraform-cloud/validation/{api_id}][%d] packerServiceTFCImageValidationRunTaskOK  %+v", 200, o.Payload)
 }
-
 func (o *PackerServiceTFCImageValidationRunTaskOK) GetPayload() models.HashicorpCloudPackerTFCImageValidationRunTaskResponse {
 	return o.Payload
 }
@@ -80,7 +79,7 @@ func NewPackerServiceTFCImageValidationRunTaskDefault(code int) *PackerServiceTF
 	}
 }
 
-/*PackerServiceTFCImageValidationRunTaskDefault handles this case with default header values.
+/* PackerServiceTFCImageValidationRunTaskDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -98,7 +97,6 @@ func (o *PackerServiceTFCImageValidationRunTaskDefault) Code() int {
 func (o *PackerServiceTFCImageValidationRunTaskDefault) Error() string {
 	return fmt.Sprintf("[POST /packer/2021-04-30/terraform-cloud/validation/{api_id}][%d] PackerService_TFCImageValidationRunTask default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *PackerServiceTFCImageValidationRunTaskDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

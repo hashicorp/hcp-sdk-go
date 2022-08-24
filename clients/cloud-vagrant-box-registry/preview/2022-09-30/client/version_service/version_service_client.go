@@ -25,19 +25,22 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateVersion(params *CreateVersionParams, authInfo runtime.ClientAuthInfoWriter) (*CreateVersionOK, error)
+	CreateVersion(params *CreateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVersionOK, error)
 
-	DeleteVersion(params *DeleteVersionParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteVersionOK, error)
+	DeleteVersion(params *DeleteVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVersionOK, error)
 
-	ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListVersionsOK, error)
+	ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVersionsOK, error)
 
-	ReadVersion(params *ReadVersionParams, authInfo runtime.ClientAuthInfoWriter) (*ReadVersionOK, error)
+	ReadVersion(params *ReadVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadVersionOK, error)
 
-	ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.ClientAuthInfoWriter) (*ReleaseVersionOK, error)
+	ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReleaseVersionOK, error)
 
-	RevokeVersion(params *RevokeVersionParams, authInfo runtime.ClientAuthInfoWriter) (*RevokeVersionOK, error)
+	RevokeVersion(params *RevokeVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RevokeVersionOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -45,13 +48,12 @@ type ClientService interface {
 /*
   CreateVersion creates version creates a new box version
 */
-func (a *Client) CreateVersion(params *CreateVersionParams, authInfo runtime.ClientAuthInfoWriter) (*CreateVersionOK, error) {
+func (a *Client) CreateVersion(params *CreateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVersionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateVersionParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "CreateVersion",
 		Method:             "PUT",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions",
@@ -63,7 +65,12 @@ func (a *Client) CreateVersion(params *CreateVersionParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -83,13 +90,12 @@ func (a *Client) CreateVersion(params *CreateVersionParams, authInfo runtime.Cli
   Deleting a Box Version removes all its Providers as well. This
 operation cannot be undone.
 */
-func (a *Client) DeleteVersion(params *DeleteVersionParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteVersionOK, error) {
+func (a *Client) DeleteVersion(params *DeleteVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVersionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteVersionParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "DeleteVersion",
 		Method:             "DELETE",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}",
@@ -101,7 +107,12 @@ func (a *Client) DeleteVersion(params *DeleteVersionParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -118,13 +129,12 @@ func (a *Client) DeleteVersion(params *DeleteVersionParams, authInfo runtime.Cli
 /*
   ListVersions lists version lists all of the versions within a particular box
 */
-func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListVersionsOK, error) {
+func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVersionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListVersionsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ListVersions",
 		Method:             "GET",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions",
@@ -136,7 +146,12 @@ func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -153,13 +168,12 @@ func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.Clien
 /*
   ReadVersion reads version reads a box version
 */
-func (a *Client) ReadVersion(params *ReadVersionParams, authInfo runtime.ClientAuthInfoWriter) (*ReadVersionOK, error) {
+func (a *Client) ReadVersion(params *ReadVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadVersionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewReadVersionParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ReadVersion",
 		Method:             "GET",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}",
@@ -171,7 +185,12 @@ func (a *Client) ReadVersion(params *ReadVersionParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -188,13 +207,12 @@ func (a *Client) ReadVersion(params *ReadVersionParams, authInfo runtime.ClientA
 /*
   ReleaseVersion releases releases the specified version the version must not already be released
 */
-func (a *Client) ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.ClientAuthInfoWriter) (*ReleaseVersionOK, error) {
+func (a *Client) ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReleaseVersionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewReleaseVersionParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ReleaseVersion",
 		Method:             "PUT",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/release",
@@ -206,7 +224,12 @@ func (a *Client) ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -223,13 +246,12 @@ func (a *Client) ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.C
 /*
   RevokeVersion revokes revokes the specified version the version must be actively released
 */
-func (a *Client) RevokeVersion(params *RevokeVersionParams, authInfo runtime.ClientAuthInfoWriter) (*RevokeVersionOK, error) {
+func (a *Client) RevokeVersion(params *RevokeVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RevokeVersionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewRevokeVersionParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "RevokeVersion",
 		Method:             "PUT",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/revoke",
@@ -241,7 +263,12 @@ func (a *Client) RevokeVersion(params *RevokeVersionParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

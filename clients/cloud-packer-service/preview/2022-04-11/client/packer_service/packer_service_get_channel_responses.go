@@ -47,7 +47,7 @@ func NewPackerServiceGetChannelOK() *PackerServiceGetChannelOK {
 	return &PackerServiceGetChannelOK{}
 }
 
-/*PackerServiceGetChannelOK handles this case with default header values.
+/* PackerServiceGetChannelOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type PackerServiceGetChannelOK struct {
 func (o *PackerServiceGetChannelOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceGetChannelOK  %+v", 200, o.Payload)
 }
-
 func (o *PackerServiceGetChannelOK) GetPayload() *models.HashicorpCloudPacker20220411GetChannelResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewPackerServiceGetChannelDefault(code int) *PackerServiceGetChannelDefault
 	}
 }
 
-/*PackerServiceGetChannelDefault handles this case with default header values.
+/* PackerServiceGetChannelDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *PackerServiceGetChannelDefault) Code() int {
 func (o *PackerServiceGetChannelDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_GetChannel default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *PackerServiceGetChannelDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -45,7 +46,6 @@ func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesRespons
 }
 
 func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesResponse) validatePagination(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Pagination) { // not required
 		return nil
 	}
@@ -54,6 +54,8 @@ func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesRespons
 		if err := m.Pagination.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
 			}
 			return err
 		}
@@ -63,7 +65,6 @@ func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesRespons
 }
 
 func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesResponse) validateSecondaries(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Secondaries) { // not required
 		return nil
 	}
@@ -77,6 +78,62 @@ func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesRespons
 			if err := m.Secondaries[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("secondaries" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("secondaries" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 list performance replication secondaries response based on the context it is used
+func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePagination(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSecondaries(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pagination != nil {
+		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesResponse) contextValidateSecondaries(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Secondaries); i++ {
+
+		if m.Secondaries[i] != nil {
+			if err := m.Secondaries[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("secondaries" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("secondaries" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

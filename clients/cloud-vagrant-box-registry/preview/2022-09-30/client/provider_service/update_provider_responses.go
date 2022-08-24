@@ -29,7 +29,6 @@ func (o *UpdateProviderReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -40,25 +39,24 @@ func NewUpdateProviderOK() *UpdateProviderOK {
 	return &UpdateProviderOK{}
 }
 
-/*UpdateProviderOK handles this case with default header values.
+/* UpdateProviderOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
 type UpdateProviderOK struct {
-	Payload *models.HashicorpCloudVagrant20220930UpdateProviderResponse
+	Payload *models.HashicorpCloudVagrantUpdateProviderResponse
 }
 
 func (o *UpdateProviderOK) Error() string {
 	return fmt.Sprintf("[PATCH /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}][%d] updateProviderOK  %+v", 200, o.Payload)
 }
-
-func (o *UpdateProviderOK) GetPayload() *models.HashicorpCloudVagrant20220930UpdateProviderResponse {
+func (o *UpdateProviderOK) GetPayload() *models.HashicorpCloudVagrantUpdateProviderResponse {
 	return o.Payload
 }
 
 func (o *UpdateProviderOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVagrant20220930UpdateProviderResponse)
+	o.Payload = new(models.HashicorpCloudVagrantUpdateProviderResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

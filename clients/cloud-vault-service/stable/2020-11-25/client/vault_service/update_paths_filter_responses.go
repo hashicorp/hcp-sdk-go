@@ -47,7 +47,7 @@ func NewUpdatePathsFilterOK() *UpdatePathsFilterOK {
 	return &UpdatePathsFilterOK{}
 }
 
-/*UpdatePathsFilterOK handles this case with default header values.
+/* UpdatePathsFilterOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type UpdatePathsFilterOK struct {
 func (o *UpdatePathsFilterOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/update][%d] updatePathsFilterOK  %+v", 200, o.Payload)
 }
-
 func (o *UpdatePathsFilterOK) GetPayload() *models.HashicorpCloudVault20201125UpdatePathsFilterResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewUpdatePathsFilterDefault(code int) *UpdatePathsFilterDefault {
 	}
 }
 
-/*UpdatePathsFilterDefault handles this case with default header values.
+/* UpdatePathsFilterDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *UpdatePathsFilterDefault) Code() int {
 func (o *UpdatePathsFilterDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/update][%d] UpdatePathsFilter default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *UpdatePathsFilterDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

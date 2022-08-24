@@ -18,56 +18,70 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewCreateRegistryParams creates a new CreateRegistryParams object
-// with the default values initialized.
+// NewCreateRegistryParams creates a new CreateRegistryParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewCreateRegistryParams() *CreateRegistryParams {
-	var ()
 	return &CreateRegistryParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreateRegistryParamsWithTimeout creates a new CreateRegistryParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewCreateRegistryParamsWithTimeout(timeout time.Duration) *CreateRegistryParams {
-	var ()
 	return &CreateRegistryParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewCreateRegistryParamsWithContext creates a new CreateRegistryParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewCreateRegistryParamsWithContext(ctx context.Context) *CreateRegistryParams {
-	var ()
 	return &CreateRegistryParams{
-
 		Context: ctx,
 	}
 }
 
 // NewCreateRegistryParamsWithHTTPClient creates a new CreateRegistryParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewCreateRegistryParamsWithHTTPClient(client *http.Client) *CreateRegistryParams {
-	var ()
 	return &CreateRegistryParams{
 		HTTPClient: client,
 	}
 }
 
-/*CreateRegistryParams contains all the parameters to send to the API endpoint
-for the create registry operation typically these are written to a http.Request
+/* CreateRegistryParams contains all the parameters to send to the API endpoint
+   for the create registry operation.
+
+   Typically these are written to a http.Request.
 */
 type CreateRegistryParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930CreateRegistryRequest
+	// Body.
+	Body *models.HashicorpCloudVagrantCreateRegistryRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the create registry params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateRegistryParams) WithDefaults() *CreateRegistryParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the create registry params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateRegistryParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create registry params
@@ -104,13 +118,13 @@ func (o *CreateRegistryParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create registry params
-func (o *CreateRegistryParams) WithBody(body *models.HashicorpCloudVagrant20220930CreateRegistryRequest) *CreateRegistryParams {
+func (o *CreateRegistryParams) WithBody(body *models.HashicorpCloudVagrantCreateRegistryRequest) *CreateRegistryParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create registry params
-func (o *CreateRegistryParams) SetBody(body *models.HashicorpCloudVagrant20220930CreateRegistryRequest) {
+func (o *CreateRegistryParams) SetBody(body *models.HashicorpCloudVagrantCreateRegistryRequest) {
 	o.Body = body
 }
 
@@ -121,7 +135,6 @@ func (o *CreateRegistryParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

@@ -47,7 +47,7 @@ func NewListHVNRoutesOK() *ListHVNRoutesOK {
 	return &ListHVNRoutesOK{}
 }
 
-/*ListHVNRoutesOK handles this case with default header values.
+/* ListHVNRoutesOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type ListHVNRoutesOK struct {
 func (o *ListHVNRoutesOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] listHVNRoutesOK  %+v", 200, o.Payload)
 }
-
 func (o *ListHVNRoutesOK) GetPayload() *models.HashicorpCloudNetwork20200907ListHVNRoutesResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewListHVNRoutesDefault(code int) *ListHVNRoutesDefault {
 	}
 }
 
-/*ListHVNRoutesDefault handles this case with default header values.
+/* ListHVNRoutesDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *ListHVNRoutesDefault) Code() int {
 func (o *ListHVNRoutesDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] ListHVNRoutes default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ListHVNRoutesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

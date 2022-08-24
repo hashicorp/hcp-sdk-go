@@ -17,80 +17,98 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewPackerServiceDeleteRegistryParams creates a new PackerServiceDeleteRegistryParams object
-// with the default values initialized.
+// NewPackerServiceDeleteRegistryParams creates a new PackerServiceDeleteRegistryParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceDeleteRegistryParams() *PackerServiceDeleteRegistryParams {
-	var ()
 	return &PackerServiceDeleteRegistryParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceDeleteRegistryParamsWithTimeout creates a new PackerServiceDeleteRegistryParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceDeleteRegistryParamsWithTimeout(timeout time.Duration) *PackerServiceDeleteRegistryParams {
-	var ()
 	return &PackerServiceDeleteRegistryParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceDeleteRegistryParamsWithContext creates a new PackerServiceDeleteRegistryParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceDeleteRegistryParamsWithContext(ctx context.Context) *PackerServiceDeleteRegistryParams {
-	var ()
 	return &PackerServiceDeleteRegistryParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceDeleteRegistryParamsWithHTTPClient creates a new PackerServiceDeleteRegistryParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceDeleteRegistryParamsWithHTTPClient(client *http.Client) *PackerServiceDeleteRegistryParams {
-	var ()
 	return &PackerServiceDeleteRegistryParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceDeleteRegistryParams contains all the parameters to send to the API endpoint
-for the packer service delete registry operation typically these are written to a http.Request
+/* PackerServiceDeleteRegistryParams contains all the parameters to send to the API endpoint
+   for the packer service delete registry operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceDeleteRegistryParams struct {
 
-	/*HardDelete
-	  When set to true, the registry will be deleted from database
-	and recovery will no longer be possible.
+	/* HardDelete.
 
+	     When set to true, the registry will be deleted from database
+	and recovery will no longer be possible.
 	*/
 	HardDelete *bool
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*LocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* LocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
-	/*LocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* LocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service delete registry params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceDeleteRegistryParams) WithDefaults() *PackerServiceDeleteRegistryParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service delete registry params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceDeleteRegistryParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service delete registry params
@@ -193,16 +211,17 @@ func (o *PackerServiceDeleteRegistryParams) WriteToRequest(r runtime.ClientReque
 
 		// query param hard_delete
 		var qrHardDelete bool
+
 		if o.HardDelete != nil {
 			qrHardDelete = *o.HardDelete
 		}
 		qHardDelete := swag.FormatBool(qrHardDelete)
 		if qHardDelete != "" {
+
 			if err := r.SetQueryParam("hard_delete", qHardDelete); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	// path param location.organization_id
@@ -219,32 +238,34 @@ func (o *PackerServiceDeleteRegistryParams) WriteToRequest(r runtime.ClientReque
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
+
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
+
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

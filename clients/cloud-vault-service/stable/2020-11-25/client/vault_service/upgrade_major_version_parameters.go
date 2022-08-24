@@ -18,68 +18,85 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-service/stable/2020-11-25/models"
 )
 
-// NewUpgradeMajorVersionParams creates a new UpgradeMajorVersionParams object
-// with the default values initialized.
+// NewUpgradeMajorVersionParams creates a new UpgradeMajorVersionParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpgradeMajorVersionParams() *UpgradeMajorVersionParams {
-	var ()
 	return &UpgradeMajorVersionParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpgradeMajorVersionParamsWithTimeout creates a new UpgradeMajorVersionParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUpgradeMajorVersionParamsWithTimeout(timeout time.Duration) *UpgradeMajorVersionParams {
-	var ()
 	return &UpgradeMajorVersionParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUpgradeMajorVersionParamsWithContext creates a new UpgradeMajorVersionParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUpgradeMajorVersionParamsWithContext(ctx context.Context) *UpgradeMajorVersionParams {
-	var ()
 	return &UpgradeMajorVersionParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUpgradeMajorVersionParamsWithHTTPClient creates a new UpgradeMajorVersionParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUpgradeMajorVersionParamsWithHTTPClient(client *http.Client) *UpgradeMajorVersionParams {
-	var ()
 	return &UpgradeMajorVersionParams{
 		HTTPClient: client,
 	}
 }
 
-/*UpgradeMajorVersionParams contains all the parameters to send to the API endpoint
-for the upgrade major version operation typically these are written to a http.Request
+/* UpgradeMajorVersionParams contains all the parameters to send to the API endpoint
+   for the upgrade major version operation.
+
+   Typically these are written to a http.Request.
 */
 type UpgradeMajorVersionParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudVault20201125UpgradeMajorVersionRequest
-	/*ClusterID*/
-	ClusterID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	// ClusterID.
+	ClusterID string
+
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the upgrade major version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpgradeMajorVersionParams) WithDefaults() *UpgradeMajorVersionParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the upgrade major version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpgradeMajorVersionParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the upgrade major version params
@@ -166,7 +183,6 @@ func (o *UpgradeMajorVersionParams) WriteToRequest(r runtime.ClientRequest, reg 
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

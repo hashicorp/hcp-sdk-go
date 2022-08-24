@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -45,7 +47,6 @@ func (m *HashicorpCloudConsul20210204ConsulConfig) Validate(formats strfmt.Regis
 }
 
 func (m *HashicorpCloudConsul20210204ConsulConfig) validatePrimary(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Primary) { // not required
 		return nil
 	}
@@ -54,6 +55,38 @@ func (m *HashicorpCloudConsul20210204ConsulConfig) validatePrimary(formats strfm
 		if err := m.Primary.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("primary")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("primary")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud consul 20210204 consul config based on the context it is used
+func (m *HashicorpCloudConsul20210204ConsulConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePrimary(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudConsul20210204ConsulConfig) contextValidatePrimary(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Primary != nil {
+		if err := m.Primary.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("primary")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("primary")
 			}
 			return err
 		}

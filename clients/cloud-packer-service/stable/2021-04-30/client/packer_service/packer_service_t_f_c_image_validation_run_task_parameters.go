@@ -16,64 +16,81 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewPackerServiceTFCImageValidationRunTaskParams creates a new PackerServiceTFCImageValidationRunTaskParams object
-// with the default values initialized.
+// NewPackerServiceTFCImageValidationRunTaskParams creates a new PackerServiceTFCImageValidationRunTaskParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceTFCImageValidationRunTaskParams() *PackerServiceTFCImageValidationRunTaskParams {
-	var ()
 	return &PackerServiceTFCImageValidationRunTaskParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceTFCImageValidationRunTaskParamsWithTimeout creates a new PackerServiceTFCImageValidationRunTaskParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceTFCImageValidationRunTaskParamsWithTimeout(timeout time.Duration) *PackerServiceTFCImageValidationRunTaskParams {
-	var ()
 	return &PackerServiceTFCImageValidationRunTaskParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceTFCImageValidationRunTaskParamsWithContext creates a new PackerServiceTFCImageValidationRunTaskParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceTFCImageValidationRunTaskParamsWithContext(ctx context.Context) *PackerServiceTFCImageValidationRunTaskParams {
-	var ()
 	return &PackerServiceTFCImageValidationRunTaskParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceTFCImageValidationRunTaskParamsWithHTTPClient creates a new PackerServiceTFCImageValidationRunTaskParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceTFCImageValidationRunTaskParamsWithHTTPClient(client *http.Client) *PackerServiceTFCImageValidationRunTaskParams {
-	var ()
 	return &PackerServiceTFCImageValidationRunTaskParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceTFCImageValidationRunTaskParams contains all the parameters to send to the API endpoint
-for the packer service t f c image validation run task operation typically these are written to a http.Request
+/* PackerServiceTFCImageValidationRunTaskParams contains all the parameters to send to the API endpoint
+   for the packer service t f c image validation run task operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceTFCImageValidationRunTaskParams struct {
 
-	/*APIID
-	  UUID of the HCP Packer registry run task API.
+	/* APIID.
 
+	   UUID of the HCP Packer registry run task API.
 	*/
 	APIID string
-	/*Body
-	  The bytes for the JSON payload sent by Terraform Cloud when calling this run task.
 
+	/* Body.
+
+	   The bytes for the JSON payload sent by Terraform Cloud when calling this run task.
+
+	   Format: byte
 	*/
 	Body strfmt.Base64
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service t f c image validation run task params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceTFCImageValidationRunTaskParams) WithDefaults() *PackerServiceTFCImageValidationRunTaskParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service t f c image validation run task params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceTFCImageValidationRunTaskParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service t f c image validation run task params
@@ -143,7 +160,6 @@ func (o *PackerServiceTFCImageValidationRunTaskParams) WriteToRequest(r runtime.
 	if err := r.SetPathParam("api_id", o.APIID); err != nil {
 		return err
 	}
-
 	if err := r.SetBodyParam(o.Body); err != nil {
 		return err
 	}

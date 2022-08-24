@@ -47,7 +47,7 @@ func NewPackerServiceCreateIterationOK() *PackerServiceCreateIterationOK {
 	return &PackerServiceCreateIterationOK{}
 }
 
-/*PackerServiceCreateIterationOK handles this case with default header values.
+/* PackerServiceCreateIterationOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type PackerServiceCreateIterationOK struct {
 func (o *PackerServiceCreateIterationOK) Error() string {
 	return fmt.Sprintf("[POST /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations][%d] packerServiceCreateIterationOK  %+v", 200, o.Payload)
 }
-
 func (o *PackerServiceCreateIterationOK) GetPayload() *models.HashicorpCloudPacker20220411CreateIterationResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewPackerServiceCreateIterationDefault(code int) *PackerServiceCreateIterat
 	}
 }
 
-/*PackerServiceCreateIterationDefault handles this case with default header values.
+/* PackerServiceCreateIterationDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *PackerServiceCreateIterationDefault) Code() int {
 func (o *PackerServiceCreateIterationDefault) Error() string {
 	return fmt.Sprintf("[POST /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations][%d] PackerService_CreateIteration default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *PackerServiceCreateIterationDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

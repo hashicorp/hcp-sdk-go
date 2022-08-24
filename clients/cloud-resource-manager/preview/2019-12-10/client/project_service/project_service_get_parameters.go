@@ -16,59 +16,73 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewProjectServiceGetParams creates a new ProjectServiceGetParams object
-// with the default values initialized.
+// NewProjectServiceGetParams creates a new ProjectServiceGetParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewProjectServiceGetParams() *ProjectServiceGetParams {
-	var ()
 	return &ProjectServiceGetParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewProjectServiceGetParamsWithTimeout creates a new ProjectServiceGetParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewProjectServiceGetParamsWithTimeout(timeout time.Duration) *ProjectServiceGetParams {
-	var ()
 	return &ProjectServiceGetParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewProjectServiceGetParamsWithContext creates a new ProjectServiceGetParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewProjectServiceGetParamsWithContext(ctx context.Context) *ProjectServiceGetParams {
-	var ()
 	return &ProjectServiceGetParams{
-
 		Context: ctx,
 	}
 }
 
 // NewProjectServiceGetParamsWithHTTPClient creates a new ProjectServiceGetParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewProjectServiceGetParamsWithHTTPClient(client *http.Client) *ProjectServiceGetParams {
-	var ()
 	return &ProjectServiceGetParams{
 		HTTPClient: client,
 	}
 }
 
-/*ProjectServiceGetParams contains all the parameters to send to the API endpoint
-for the project service get operation typically these are written to a http.Request
+/* ProjectServiceGetParams contains all the parameters to send to the API endpoint
+   for the project service get operation.
+
+   Typically these are written to a http.Request.
 */
 type ProjectServiceGetParams struct {
 
-	/*ID
-	  ID is the identifier of the organization to retrieve.
+	/* ID.
 
+	   ID is the identifier of the organization to retrieve.
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the project service get params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ProjectServiceGetParams) WithDefaults() *ProjectServiceGetParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the project service get params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ProjectServiceGetParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the project service get params
