@@ -55,6 +55,8 @@ type ClientService interface {
 
 	GetCurrentMilestone(params *GetCurrentMilestoneParams, authInfo runtime.ClientAuthInfoWriter) (*GetCurrentMilestoneOK, error)
 
+	GetLinkedCluster(params *GetLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter) (*GetLinkedClusterOK, error)
+
 	GetLinkedClusterPolicy(params *GetLinkedClusterPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*GetLinkedClusterPolicyOK, error)
 
 	GetReplicationStatus(params *GetReplicationStatusParams, authInfo runtime.ClientAuthInfoWriter) (*GetReplicationStatusOK, error)
@@ -605,6 +607,40 @@ func (a *Client) GetCurrentMilestone(params *GetCurrentMilestoneParams, authInfo
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetCurrentMilestoneDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  GetLinkedCluster get linked cluster API
+*/
+func (a *Client) GetLinkedCluster(params *GetLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter) (*GetLinkedClusterOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetLinkedClusterParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetLinkedCluster",
+		Method:             "GET",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetLinkedClusterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetLinkedClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetLinkedClusterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

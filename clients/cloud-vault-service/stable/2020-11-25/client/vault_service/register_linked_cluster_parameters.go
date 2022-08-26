@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-service/stable/2020-11-25/models"
 )
 
 // NewRegisterLinkedClusterParams creates a new RegisterLinkedClusterParams object
@@ -60,6 +62,8 @@ for the register linked cluster operation typically these are written to a http.
 */
 type RegisterLinkedClusterParams struct {
 
+	/*Body*/
+	Body *models.HashicorpCloudVault20201125RegisterLinkedClusterRequest
 	/*LocationOrganizationID
 	  organization_id is the id of the organization.
 
@@ -109,6 +113,17 @@ func (o *RegisterLinkedClusterParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the register linked cluster params
+func (o *RegisterLinkedClusterParams) WithBody(body *models.HashicorpCloudVault20201125RegisterLinkedClusterRequest) *RegisterLinkedClusterParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the register linked cluster params
+func (o *RegisterLinkedClusterParams) SetBody(body *models.HashicorpCloudVault20201125RegisterLinkedClusterRequest) {
+	o.Body = body
+}
+
 // WithLocationOrganizationID adds the locationOrganizationID to the register linked cluster params
 func (o *RegisterLinkedClusterParams) WithLocationOrganizationID(locationOrganizationID string) *RegisterLinkedClusterParams {
 	o.SetLocationOrganizationID(locationOrganizationID)
@@ -138,6 +153,12 @@ func (o *RegisterLinkedClusterParams) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 	var res []error
+
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
+	}
 
 	// path param location.organization_id
 	if err := r.SetPathParam("location.organization_id", o.LocationOrganizationID); err != nil {
