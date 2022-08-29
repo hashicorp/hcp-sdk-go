@@ -18,7 +18,7 @@ const (
 	defaultAuthURL = "https://auth.idp.hashicorp.com"
 
 	// defaultOAuth2ClientID is the client ID of the production auth application.
-	defaultOAuth2ClientID = "FdZDrkFj8z7LNQBq5sk3K377sgoSKslV"
+	defaultOAuth2ClientID = "21d86262-6f14-4a30-a90f-07e3fde8b23d"
 
 	// defaultPortalURL is the URL of the production portal.
 	defaultPortalURL = "https://portal.cloud.hashicorp.com"
@@ -67,8 +67,8 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		oauth2Config: oauth2.Config{
 			ClientID: defaultOAuth2ClientID,
 			Endpoint: oauth2.Endpoint{
-				AuthURL:  defaultAuthURL + "/authorize",
-				TokenURL: defaultAuthURL + "/oauth/token",
+				AuthURL:  defaultAuthURL + "/oauth2/auth",
+				TokenURL: defaultAuthURL + "/oauth2/token",
 			},
 			RedirectURL: "http://localhost:8443/oidc/callback",
 			Scopes:      []string{"openid", "offline_access"},

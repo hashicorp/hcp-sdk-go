@@ -89,8 +89,8 @@ func WithAuth(authURL string, tlsConfig *tls.Config) HCPConfigOption {
 		config.authTLSConfig = cloneTLSConfig(tlsConfig)
 
 		// Ensure the OAuth2 endpoints are updated with the new auth URL
-		config.oauth2Config.Endpoint.AuthURL = authURL + "/authorize"
-		config.oauth2Config.Endpoint.TokenURL = authURL + "/oauth/token"
+		config.oauth2Config.Endpoint.AuthURL = authURL + "/oauth2/auth"
+		config.oauth2Config.Endpoint.TokenURL = authURL + "/oauth2/token"
 
 		return nil
 	}
