@@ -1,3 +1,16 @@
+## 0.22.0 (August 30, 2022)
+
+BREAKING CHANGES:
+
+:information_source: This breaking change does not impact production HCP.
+
+* Change token endpoint from Auth0 to HCP ([114](https://github.com/hashicorp/hcp-sdk-go/pull/114))
+
+FEATURES:
+
+* Enable browser login when client credentials are unavailable ([112](https://github.com/hashicorp/hcp-sdk-go/pull/112)).
+* Update cloud-operation SDK ([d009766](https://github.com/hashicorp/hcp-sdk-go/commit/d009766c0da3d7a81e23d34dbc4bd1d70d7e7a61)).
+
 ## 0.21.0 (August 19, 2022)
 
 IMPROVEMENTS:
