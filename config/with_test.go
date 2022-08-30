@@ -65,8 +65,8 @@ func TestWith_Auth(t *testing.T) {
 	require.Equal("http://my-auth:1234", config.authURL.String())
 
 	// Ensure OAuth2 config is updated with custom auth URL
-	require.Equal("http://my-auth:1234/authorize", config.oauth2Config.Endpoint.AuthURL)
-	require.Equal("http://my-auth:1234/oauth/token", config.oauth2Config.Endpoint.TokenURL)
+	require.Equal("http://my-auth:1234/oauth2/auth", config.oauth2Config.Endpoint.AuthURL)
+	require.Equal("http://my-auth:1234/oauth2/token", config.oauth2Config.Endpoint.TokenURL)
 
 	// Ensure auth TLS is configured
 	require.NotNil(config.authTLSConfig)
