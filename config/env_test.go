@@ -38,6 +38,8 @@ func TestFromEnv_SimpleValues(t *testing.T) {
 
 	require.NoError(os.Setenv(envVarPortalURL, "http://my-portal:2345"))
 
+	require.NoError(os.Setenv(envVarOAuth2ClientID, "1a2b3c4d"))
+
 	require.NoError(os.Setenv(envVarAPIAddress, "my-api:3456"))
 	require.NoError(os.Setenv(envVarSCADAAddress, "my-scada:4567"))
 
@@ -52,6 +54,11 @@ func TestFromEnv_SimpleValues(t *testing.T) {
 	// Ensure the client credentials are set correctly
 	require.Equal("my-client-id", config.clientCredentialsConfig.ClientID)
 	require.Equal("my-client-secret", config.clientCredentialsConfig.ClientSecret)
+
+	// Ensure the oauth2 config is set correctly
+	require.Equal("1a2b3c4d", config.oauth2Config.ClientID)
+	require.Equal("https://my-auth:1234/oauth2/auth", config.oauth2Config.Endpoint.AuthURL)
+	require.Equal("https://my-auth:1234/oauth2/token", config.oauth2Config.Endpoint.TokenURL)
 
 	// Ensure the portal URL is set correctly
 	require.Equal("http", config.portalURL.Scheme)
@@ -130,6 +137,7 @@ func clearEnv() {
 	os.Unsetenv(envVarAuthURL)
 	os.Unsetenv(envVarClientID)
 	os.Unsetenv(envVarClientSecret)
+	os.Unsetenv(envVarOAuth2ClientID)
 	os.Unsetenv(envVarPortalURL)
 	os.Unsetenv(envVarAPIAddress)
 	os.Unsetenv(envVarAPIHostnameLegacy)

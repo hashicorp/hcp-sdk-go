@@ -51,11 +51,6 @@ func TestNew_Invalid(t *testing.T) {
 		expectedError string
 	}{
 		{
-			name:          "missing credentials",
-			options:       []HCPConfigOption{},
-			expectedError: "the configuration is not valid: client credentials need to be provided",
-		},
-		{
 			name: "empty portal URL",
 			options: []HCPConfigOption{
 				WithClientCredentials("my-client-id", "my-client-secret"),

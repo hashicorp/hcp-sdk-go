@@ -64,6 +64,10 @@ func TestWith_Auth(t *testing.T) {
 	// Ensure that the portal URL has been set
 	require.Equal("http://my-auth:1234", config.authURL.String())
 
+	// Ensure OAuth2 config is updated with custom auth URL
+	require.Equal("http://my-auth:1234/oauth2/auth", config.oauth2Config.Endpoint.AuthURL)
+	require.Equal("http://my-auth:1234/oauth2/token", config.oauth2Config.Endpoint.TokenURL)
+
 	// Ensure auth TLS is configured
 	require.NotNil(config.authTLSConfig)
 }
@@ -77,4 +81,15 @@ func TestWith_Auth_CustomTLSConfig(t *testing.T) {
 
 	// Ensure auth TLS has custom configuration
 	require.True(config.authTLSConfig.InsecureSkipVerify)
+}
+
+func TestWith_OAuth2ClientID(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config := &hcpConfig{}
+	require.NoError(apply(config, WithOAuth2ClientID("1a2b3c4d")))
+
+	// Ensure oauth2 config is configured with custom OAuth2 client ID
+	require.Equal("1a2b3c4d", config.oauth2Config.ClientID)
 }
