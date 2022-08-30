@@ -110,6 +110,17 @@ func (c *hcpConfig) SCADATLSConfig() *tls.Config {
 
 func (c *hcpConfig) validate() error {
 
+	// Ensure both client credentials provided
+	if (c.clientCredentialsConfig.ClientID == "" && c.clientCredentialsConfig.ClientSecret != "") ||
+		(c.clientCredentialsConfig.ClientID != "" && c.clientCredentialsConfig.ClientSecret == "") {
+		return fmt.Errorf("both client ID and secret must be provided")
+	}
+
+	// Ensure at least one auth method configured
+	if c.clientCredentialsConfig.ClientID == "" && c.clientCredentialsConfig.ClientSecret == "" && c.oauth2Config.ClientID == "" {
+		return fmt.Errorf("either client credentials or oauth2 client ID must be provided")
+	}
+
 	// Ensure the auth URL is valid
 	if c.authURL.Host == "" {
 		return fmt.Errorf("the auth URL has to be non-empty")
