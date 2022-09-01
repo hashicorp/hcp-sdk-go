@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -35,7 +37,6 @@ func (m *HashicorpCloudPacker20220411GetRegistryResponse) Validate(formats strfm
 }
 
 func (m *HashicorpCloudPacker20220411GetRegistryResponse) validateRegistry(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Registry) { // not required
 		return nil
 	}
@@ -44,6 +45,38 @@ func (m *HashicorpCloudPacker20220411GetRegistryResponse) validateRegistry(forma
 		if err := m.Registry.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("registry")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("registry")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 get registry response based on the context it is used
+func (m *HashicorpCloudPacker20220411GetRegistryResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateRegistry(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411GetRegistryResponse) contextValidateRegistry(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Registry != nil {
+		if err := m.Registry.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("registry")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("registry")
 			}
 			return err
 		}

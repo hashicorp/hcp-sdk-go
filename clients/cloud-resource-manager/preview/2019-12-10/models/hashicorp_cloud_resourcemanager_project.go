@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -31,7 +33,7 @@ type HashicorpCloudResourcemanagerProject struct {
 	Parent *HashicorpCloudResourcemanagerResourceID `json:"parent,omitempty"`
 
 	// State is the state of the project.
-	State HashicorpCloudResourcemanagerProjectProjectState `json:"state,omitempty"`
+	State *HashicorpCloudResourcemanagerProjectProjectState `json:"state,omitempty"`
 }
 
 // Validate validates this hashicorp cloud resourcemanager project
@@ -57,7 +59,6 @@ func (m *HashicorpCloudResourcemanagerProject) Validate(formats strfmt.Registry)
 }
 
 func (m *HashicorpCloudResourcemanagerProject) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -70,7 +71,6 @@ func (m *HashicorpCloudResourcemanagerProject) validateCreatedAt(formats strfmt.
 }
 
 func (m *HashicorpCloudResourcemanagerProject) validateParent(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Parent) { // not required
 		return nil
 	}
@@ -79,6 +79,8 @@ func (m *HashicorpCloudResourcemanagerProject) validateParent(formats strfmt.Reg
 		if err := m.Parent.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("parent")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("parent")
 			}
 			return err
 		}
@@ -88,16 +90,69 @@ func (m *HashicorpCloudResourcemanagerProject) validateParent(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudResourcemanagerProject) validateState(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
 
-	if err := m.State.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("state")
+	if m.State != nil {
+		if err := m.State.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("state")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud resourcemanager project based on the context it is used
+func (m *HashicorpCloudResourcemanagerProject) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateParent(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudResourcemanagerProject) contextValidateParent(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Parent != nil {
+		if err := m.Parent.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("parent")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("parent")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudResourcemanagerProject) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.State != nil {
+		if err := m.State.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("state")
+			}
+			return err
+		}
 	}
 
 	return nil

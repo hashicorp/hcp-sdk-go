@@ -47,7 +47,7 @@ func NewUpgradeMajorVersionOK() *UpgradeMajorVersionOK {
 	return &UpgradeMajorVersionOK{}
 }
 
-/*UpgradeMajorVersionOK handles this case with default header values.
+/* UpgradeMajorVersionOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type UpgradeMajorVersionOK struct {
 func (o *UpgradeMajorVersionOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] upgradeMajorVersionOK  %+v", 200, o.Payload)
 }
-
 func (o *UpgradeMajorVersionOK) GetPayload() *models.HashicorpCloudVault20201125UpgradeMajorVersionResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewUpgradeMajorVersionDefault(code int) *UpgradeMajorVersionDefault {
 	}
 }
 
-/*UpgradeMajorVersionDefault handles this case with default header values.
+/* UpgradeMajorVersionDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *UpgradeMajorVersionDefault) Code() int {
 func (o *UpgradeMajorVersionDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] UpgradeMajorVersion default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *UpgradeMajorVersionDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

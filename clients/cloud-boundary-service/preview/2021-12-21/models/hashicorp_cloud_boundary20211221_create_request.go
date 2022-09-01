@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -45,7 +47,6 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) Validate(formats strfmt.Re
 }
 
 func (m *HashicorpCloudBoundary20211221CreateRequest) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -54,6 +55,38 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) validateLocation(formats s
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud boundary 20211221 create request based on the context it is used
+func (m *HashicorpCloudBoundary20211221CreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudBoundary20211221CreateRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}

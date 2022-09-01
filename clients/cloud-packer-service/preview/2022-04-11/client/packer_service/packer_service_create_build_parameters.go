@@ -18,76 +18,94 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/preview/2022-04-11/models"
 )
 
-// NewPackerServiceCreateBuildParams creates a new PackerServiceCreateBuildParams object
-// with the default values initialized.
+// NewPackerServiceCreateBuildParams creates a new PackerServiceCreateBuildParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceCreateBuildParams() *PackerServiceCreateBuildParams {
-	var ()
 	return &PackerServiceCreateBuildParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceCreateBuildParamsWithTimeout creates a new PackerServiceCreateBuildParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceCreateBuildParamsWithTimeout(timeout time.Duration) *PackerServiceCreateBuildParams {
-	var ()
 	return &PackerServiceCreateBuildParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceCreateBuildParamsWithContext creates a new PackerServiceCreateBuildParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceCreateBuildParamsWithContext(ctx context.Context) *PackerServiceCreateBuildParams {
-	var ()
 	return &PackerServiceCreateBuildParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceCreateBuildParamsWithHTTPClient creates a new PackerServiceCreateBuildParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceCreateBuildParamsWithHTTPClient(client *http.Client) *PackerServiceCreateBuildParams {
-	var ()
 	return &PackerServiceCreateBuildParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceCreateBuildParams contains all the parameters to send to the API endpoint
-for the packer service create build operation typically these are written to a http.Request
+/* PackerServiceCreateBuildParams contains all the parameters to send to the API endpoint
+   for the packer service create build operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceCreateBuildParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudPacker20220411CreateBuildRequest
-	/*BucketSlug
-	  Human-readable name for the bucket.
 
+	/* BucketSlug.
+
+	   Human-readable name for the bucket.
 	*/
 	BucketSlug string
-	/*IterationID
-	  ULID of the iteration that this build should be associated with.
 
+	/* IterationID.
+
+	   ULID of the iteration that this build should be associated with.
 	*/
 	IterationID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service create build params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceCreateBuildParams) WithDefaults() *PackerServiceCreateBuildParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service create build params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceCreateBuildParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service create build params
@@ -185,7 +203,6 @@ func (o *PackerServiceCreateBuildParams) WriteToRequest(r runtime.ClientRequest,
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

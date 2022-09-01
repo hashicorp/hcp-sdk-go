@@ -29,7 +29,6 @@ func (o *DeactivateRegistryReader) ReadResponse(response runtime.ClientResponse,
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -40,19 +39,18 @@ func NewDeactivateRegistryOK() *DeactivateRegistryOK {
 	return &DeactivateRegistryOK{}
 }
 
-/*DeactivateRegistryOK handles this case with default header values.
+/* DeactivateRegistryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
 type DeactivateRegistryOK struct {
-	Payload models.HashicorpCloudVagrant20220930DeactivateRegistryResponse
+	Payload models.HashicorpCloudVagrantDeactivateRegistryResponse
 }
 
 func (o *DeactivateRegistryOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/deactivate][%d] deactivateRegistryOK  %+v", 200, o.Payload)
 }
-
-func (o *DeactivateRegistryOK) GetPayload() models.HashicorpCloudVagrant20220930DeactivateRegistryResponse {
+func (o *DeactivateRegistryOK) GetPayload() models.HashicorpCloudVagrantDeactivateRegistryResponse {
 	return o.Payload
 }
 

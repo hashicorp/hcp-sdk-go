@@ -18,68 +18,84 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewUpdateBoxParams creates a new UpdateBoxParams object
-// with the default values initialized.
+// NewUpdateBoxParams creates a new UpdateBoxParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdateBoxParams() *UpdateBoxParams {
-	var ()
 	return &UpdateBoxParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateBoxParamsWithTimeout creates a new UpdateBoxParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUpdateBoxParamsWithTimeout(timeout time.Duration) *UpdateBoxParams {
-	var ()
 	return &UpdateBoxParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUpdateBoxParamsWithContext creates a new UpdateBoxParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUpdateBoxParamsWithContext(ctx context.Context) *UpdateBoxParams {
-	var ()
 	return &UpdateBoxParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUpdateBoxParamsWithHTTPClient creates a new UpdateBoxParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUpdateBoxParamsWithHTTPClient(client *http.Client) *UpdateBoxParams {
-	var ()
 	return &UpdateBoxParams{
 		HTTPClient: client,
 	}
 }
 
-/*UpdateBoxParams contains all the parameters to send to the API endpoint
-for the update box operation typically these are written to a http.Request
+/* UpdateBoxParams contains all the parameters to send to the API endpoint
+   for the update box operation.
+
+   Typically these are written to a http.Request.
 */
 type UpdateBoxParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930UpdateBoxRequest
-	/*Box
-	  The name segment of the Box to update. As an example, this field would
-	represent the "vagrant" in "hashicorp/vagrant".
+	// Body.
+	Body *models.HashicorpCloudVagrantUpdateBoxRequest
 
+	/* Box.
+
+	     The name segment of the Box to update. As an example, this field would
+	represent the "vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the update box params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateBoxParams) WithDefaults() *UpdateBoxParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the update box params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateBoxParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update box params
@@ -116,13 +132,13 @@ func (o *UpdateBoxParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the update box params
-func (o *UpdateBoxParams) WithBody(body *models.HashicorpCloudVagrant20220930UpdateBoxRequest) *UpdateBoxParams {
+func (o *UpdateBoxParams) WithBody(body *models.HashicorpCloudVagrantUpdateBoxRequest) *UpdateBoxParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the update box params
-func (o *UpdateBoxParams) SetBody(body *models.HashicorpCloudVagrant20220930UpdateBoxRequest) {
+func (o *UpdateBoxParams) SetBody(body *models.HashicorpCloudVagrantUpdateBoxRequest) {
 	o.Body = body
 }
 
@@ -155,7 +171,6 @@ func (o *UpdateBoxParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

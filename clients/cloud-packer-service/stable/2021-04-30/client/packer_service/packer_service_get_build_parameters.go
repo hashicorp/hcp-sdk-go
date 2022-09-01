@@ -16,79 +16,97 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewPackerServiceGetBuildParams creates a new PackerServiceGetBuildParams object
-// with the default values initialized.
+// NewPackerServiceGetBuildParams creates a new PackerServiceGetBuildParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceGetBuildParams() *PackerServiceGetBuildParams {
-	var ()
 	return &PackerServiceGetBuildParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceGetBuildParamsWithTimeout creates a new PackerServiceGetBuildParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceGetBuildParamsWithTimeout(timeout time.Duration) *PackerServiceGetBuildParams {
-	var ()
 	return &PackerServiceGetBuildParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceGetBuildParamsWithContext creates a new PackerServiceGetBuildParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceGetBuildParamsWithContext(ctx context.Context) *PackerServiceGetBuildParams {
-	var ()
 	return &PackerServiceGetBuildParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceGetBuildParamsWithHTTPClient creates a new PackerServiceGetBuildParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceGetBuildParamsWithHTTPClient(client *http.Client) *PackerServiceGetBuildParams {
-	var ()
 	return &PackerServiceGetBuildParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceGetBuildParams contains all the parameters to send to the API endpoint
-for the packer service get build operation typically these are written to a http.Request
+/* PackerServiceGetBuildParams contains all the parameters to send to the API endpoint
+   for the packer service get build operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceGetBuildParams struct {
 
-	/*BuildID
-	  ULID of the build that should be retrieved.
+	/* BuildID.
 
+	   ULID of the build that should be retrieved.
 	*/
 	BuildID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*LocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* LocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
-	/*LocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* LocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service get build params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceGetBuildParams) WithDefaults() *PackerServiceGetBuildParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service get build params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceGetBuildParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service get build params
@@ -206,32 +224,34 @@ func (o *PackerServiceGetBuildParams) WriteToRequest(r runtime.ClientRequest, re
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
+
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
+
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

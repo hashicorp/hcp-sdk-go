@@ -25,23 +25,26 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CompleteUpload(params *CompleteUploadParams, authInfo runtime.ClientAuthInfoWriter) (*CompleteUploadOK, error)
+	CompleteUpload(params *CompleteUploadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteUploadOK, error)
 
-	CreateProvider(params *CreateProviderParams, authInfo runtime.ClientAuthInfoWriter) (*CreateProviderOK, error)
+	CreateProvider(params *CreateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProviderOK, error)
 
-	DeleteProvider(params *DeleteProviderParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteProviderOK, error)
+	DeleteProvider(params *DeleteProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProviderOK, error)
 
-	DownloadProvider(params *DownloadProviderParams, authInfo runtime.ClientAuthInfoWriter) (*DownloadProviderOK, error)
+	DownloadProvider(params *DownloadProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DownloadProviderOK, error)
 
-	GetProvider(params *GetProviderParams, authInfo runtime.ClientAuthInfoWriter) (*GetProviderOK, error)
+	GetProvider(params *GetProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProviderOK, error)
 
-	ListProviders(params *ListProvidersParams, authInfo runtime.ClientAuthInfoWriter) (*ListProvidersOK, error)
+	ListProviders(params *ListProvidersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProvidersOK, error)
 
-	UpdateProvider(params *UpdateProviderParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateProviderOK, error)
+	UpdateProvider(params *UpdateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProviderOK, error)
 
-	UploadProvider(params *UploadProviderParams, authInfo runtime.ClientAuthInfoWriter) (*UploadProviderOK, error)
+	UploadProvider(params *UploadProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadProviderOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -49,13 +52,12 @@ type ClientService interface {
 /*
   CompleteUpload completes upload signals that the upload for a provider is complete
 */
-func (a *Client) CompleteUpload(params *CompleteUploadParams, authInfo runtime.ClientAuthInfoWriter) (*CompleteUploadOK, error) {
+func (a *Client) CompleteUpload(params *CompleteUploadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteUploadOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCompleteUploadParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "CompleteUpload",
 		Method:             "PUT",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}/complete",
@@ -67,7 +69,12 @@ func (a *Client) CompleteUpload(params *CompleteUploadParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -84,13 +91,12 @@ func (a *Client) CompleteUpload(params *CompleteUploadParams, authInfo runtime.C
 /*
   CreateProvider creates provider creates a provider in the specified version
 */
-func (a *Client) CreateProvider(params *CreateProviderParams, authInfo runtime.ClientAuthInfoWriter) (*CreateProviderOK, error) {
+func (a *Client) CreateProvider(params *CreateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProviderOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateProviderParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "CreateProvider",
 		Method:             "PUT",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers",
@@ -102,7 +108,12 @@ func (a *Client) CreateProvider(params *CreateProviderParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -119,13 +130,12 @@ func (a *Client) CreateProvider(params *CreateProviderParams, authInfo runtime.C
 /*
   DeleteProvider deletes provider deletes a provider note that this deletes any data associated with a hosted provider so use with care
 */
-func (a *Client) DeleteProvider(params *DeleteProviderParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteProviderOK, error) {
+func (a *Client) DeleteProvider(params *DeleteProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProviderOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteProviderParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "DeleteProvider",
 		Method:             "DELETE",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}",
@@ -137,7 +147,12 @@ func (a *Client) DeleteProvider(params *DeleteProviderParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -159,13 +174,12 @@ for download from the object storage. For External Providers, this is
 simply a pass-through to the external download data supplied in the
 External Provider record.
 */
-func (a *Client) DownloadProvider(params *DownloadProviderParams, authInfo runtime.ClientAuthInfoWriter) (*DownloadProviderOK, error) {
+func (a *Client) DownloadProvider(params *DownloadProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DownloadProviderOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDownloadProviderParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "DownloadProvider",
 		Method:             "GET",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}/download",
@@ -177,7 +191,12 @@ func (a *Client) DownloadProvider(params *DownloadProviderParams, authInfo runti
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -194,13 +213,12 @@ func (a *Client) DownloadProvider(params *DownloadProviderParams, authInfo runti
 /*
   GetProvider gets provider fetches a provider for the specified version
 */
-func (a *Client) GetProvider(params *GetProviderParams, authInfo runtime.ClientAuthInfoWriter) (*GetProviderOK, error) {
+func (a *Client) GetProvider(params *GetProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProviderOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetProviderParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "GetProvider",
 		Method:             "GET",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}",
@@ -212,7 +230,12 @@ func (a *Client) GetProvider(params *GetProviderParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -229,13 +252,12 @@ func (a *Client) GetProvider(params *GetProviderParams, authInfo runtime.ClientA
 /*
   ListProviders lists providers lists all providers within a version
 */
-func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.ClientAuthInfoWriter) (*ListProvidersOK, error) {
+func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProvidersOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListProvidersParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ListProviders",
 		Method:             "GET",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers",
@@ -247,7 +269,12 @@ func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.Cli
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -267,13 +294,12 @@ func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.Cli
   Note that you don't use this to upload data to Hosted Providers, to do
 that, use the Upload method.
 */
-func (a *Client) UpdateProvider(params *UpdateProviderParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateProviderOK, error) {
+func (a *Client) UpdateProvider(params *UpdateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProviderOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateProviderParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "UpdateProvider",
 		Method:             "PATCH",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}",
@@ -285,7 +311,12 @@ func (a *Client) UpdateProvider(params *UpdateProviderParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -309,13 +340,12 @@ Overwrite is permitted; old/existing data for a particular Provider will
 be replaced with data from a new successful upload for that same
 Provider.
 */
-func (a *Client) UploadProvider(params *UploadProviderParams, authInfo runtime.ClientAuthInfoWriter) (*UploadProviderOK, error) {
+func (a *Client) UploadProvider(params *UploadProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadProviderOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUploadProviderParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "UploadProvider",
 		Method:             "PUT",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}/upload",
@@ -327,7 +357,12 @@ func (a *Client) UploadProvider(params *UploadProviderParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

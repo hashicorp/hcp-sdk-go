@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -22,6 +23,15 @@ import (
 //
 // swagger:model hashicorp.cloud.vault_20201125.Cluster.PerformanceReplicationPathsFilter.Mode
 type HashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilterMode string
+
+func NewHashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilterMode(value HashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilterMode) *HashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilterMode {
+	return &value
+}
+
+// Pointer returns a pointer to a freshly-allocated HashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilterMode.
+func (m HashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilterMode) Pointer() *HashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilterMode {
+	return &m
+}
 
 const (
 
@@ -67,5 +77,10 @@ func (m HashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilterMode)
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud vault 20201125 cluster performance replication paths filter mode based on context it is used
+func (m HashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilterMode) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

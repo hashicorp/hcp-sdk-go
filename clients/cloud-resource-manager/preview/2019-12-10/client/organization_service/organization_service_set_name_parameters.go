@@ -18,61 +18,76 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/preview/2019-12-10/models"
 )
 
-// NewOrganizationServiceSetNameParams creates a new OrganizationServiceSetNameParams object
-// with the default values initialized.
+// NewOrganizationServiceSetNameParams creates a new OrganizationServiceSetNameParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewOrganizationServiceSetNameParams() *OrganizationServiceSetNameParams {
-	var ()
 	return &OrganizationServiceSetNameParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewOrganizationServiceSetNameParamsWithTimeout creates a new OrganizationServiceSetNameParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewOrganizationServiceSetNameParamsWithTimeout(timeout time.Duration) *OrganizationServiceSetNameParams {
-	var ()
 	return &OrganizationServiceSetNameParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewOrganizationServiceSetNameParamsWithContext creates a new OrganizationServiceSetNameParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewOrganizationServiceSetNameParamsWithContext(ctx context.Context) *OrganizationServiceSetNameParams {
-	var ()
 	return &OrganizationServiceSetNameParams{
-
 		Context: ctx,
 	}
 }
 
 // NewOrganizationServiceSetNameParamsWithHTTPClient creates a new OrganizationServiceSetNameParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewOrganizationServiceSetNameParamsWithHTTPClient(client *http.Client) *OrganizationServiceSetNameParams {
-	var ()
 	return &OrganizationServiceSetNameParams{
 		HTTPClient: client,
 	}
 }
 
-/*OrganizationServiceSetNameParams contains all the parameters to send to the API endpoint
-for the organization service set name operation typically these are written to a http.Request
+/* OrganizationServiceSetNameParams contains all the parameters to send to the API endpoint
+   for the organization service set name operation.
+
+   Typically these are written to a http.Request.
 */
 type OrganizationServiceSetNameParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudResourcemanagerOrganizationSetNameRequest
-	/*ID
-	  ID is the identifier of the organization.
 
+	/* ID.
+
+	   ID is the identifier of the organization.
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the organization service set name params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *OrganizationServiceSetNameParams) WithDefaults() *OrganizationServiceSetNameParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the organization service set name params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *OrganizationServiceSetNameParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the organization service set name params
@@ -137,7 +152,6 @@ func (o *OrganizationServiceSetNameParams) WriteToRequest(r runtime.ClientReques
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

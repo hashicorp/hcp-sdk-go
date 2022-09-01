@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -27,6 +29,11 @@ type HashicorpCloudBoundary20211221Session struct {
 
 // Validate validates this hashicorp cloud boundary 20211221 session
 func (m *HashicorpCloudBoundary20211221Session) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud boundary 20211221 session based on context it is used
+func (m *HashicorpCloudBoundary20211221Session) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

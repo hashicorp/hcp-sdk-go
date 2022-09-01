@@ -18,68 +18,85 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-service/stable/2020-04-20/models"
 )
 
-// NewUnsealParams creates a new UnsealParams object
-// with the default values initialized.
+// NewUnsealParams creates a new UnsealParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUnsealParams() *UnsealParams {
-	var ()
 	return &UnsealParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUnsealParamsWithTimeout creates a new UnsealParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUnsealParamsWithTimeout(timeout time.Duration) *UnsealParams {
-	var ()
 	return &UnsealParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUnsealParamsWithContext creates a new UnsealParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUnsealParamsWithContext(ctx context.Context) *UnsealParams {
-	var ()
 	return &UnsealParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUnsealParamsWithHTTPClient creates a new UnsealParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUnsealParamsWithHTTPClient(client *http.Client) *UnsealParams {
-	var ()
 	return &UnsealParams{
 		HTTPClient: client,
 	}
 }
 
-/*UnsealParams contains all the parameters to send to the API endpoint
-for the unseal operation typically these are written to a http.Request
+/* UnsealParams contains all the parameters to send to the API endpoint
+   for the unseal operation.
+
+   Typically these are written to a http.Request.
 */
 type UnsealParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudVault20200420UnsealRequest
-	/*ClusterID*/
-	ClusterID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	// ClusterID.
+	ClusterID string
+
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the unseal params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UnsealParams) WithDefaults() *UnsealParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the unseal params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UnsealParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the unseal params
@@ -166,7 +183,6 @@ func (o *UnsealParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regist
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

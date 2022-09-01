@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -21,6 +22,15 @@ import (
 //
 // swagger:model hashicorp.cloud.consul_20200826.Version.Status
 type HashicorpCloudConsul20200826VersionStatus string
+
+func NewHashicorpCloudConsul20200826VersionStatus(value HashicorpCloudConsul20200826VersionStatus) *HashicorpCloudConsul20200826VersionStatus {
+	return &value
+}
+
+// Pointer returns a pointer to a freshly-allocated HashicorpCloudConsul20200826VersionStatus.
+func (m HashicorpCloudConsul20200826VersionStatus) Pointer() *HashicorpCloudConsul20200826VersionStatus {
+	return &m
+}
 
 const (
 
@@ -66,5 +76,10 @@ func (m HashicorpCloudConsul20200826VersionStatus) Validate(formats strfmt.Regis
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud consul 20200826 version status based on context it is used
+func (m HashicorpCloudConsul20200826VersionStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

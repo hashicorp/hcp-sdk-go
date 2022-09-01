@@ -16,79 +16,97 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewSessionsParams creates a new SessionsParams object
-// with the default values initialized.
+// NewSessionsParams creates a new SessionsParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewSessionsParams() *SessionsParams {
-	var ()
 	return &SessionsParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewSessionsParamsWithTimeout creates a new SessionsParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewSessionsParamsWithTimeout(timeout time.Duration) *SessionsParams {
-	var ()
 	return &SessionsParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewSessionsParamsWithContext creates a new SessionsParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewSessionsParamsWithContext(ctx context.Context) *SessionsParams {
-	var ()
 	return &SessionsParams{
-
 		Context: ctx,
 	}
 }
 
 // NewSessionsParamsWithHTTPClient creates a new SessionsParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewSessionsParamsWithHTTPClient(client *http.Client) *SessionsParams {
-	var ()
 	return &SessionsParams{
 		HTTPClient: client,
 	}
 }
 
-/*SessionsParams contains all the parameters to send to the API endpoint
-for the sessions operation typically these are written to a http.Request
+/* SessionsParams contains all the parameters to send to the API endpoint
+   for the sessions operation.
+
+   Typically these are written to a http.Request.
 */
 type SessionsParams struct {
 
-	/*ClusterID
-	  cluster_id is the id of the cluster set by user on creation.
+	/* ClusterID.
 
+	   cluster_id is the id of the cluster set by user on creation.
 	*/
 	ClusterID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*LocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* LocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
-	/*LocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* LocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the sessions params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *SessionsParams) WithDefaults() *SessionsParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the sessions params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *SessionsParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the sessions params
@@ -206,32 +224,34 @@ func (o *SessionsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
+
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
+
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -43,7 +45,6 @@ func (m *HashicorpCloudPackerCreateRegistryResponse) Validate(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudPackerCreateRegistryResponse) validateOperation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Operation) { // not required
 		return nil
 	}
@@ -52,6 +53,8 @@ func (m *HashicorpCloudPackerCreateRegistryResponse) validateOperation(formats s
 		if err := m.Operation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("operation")
 			}
 			return err
 		}
@@ -61,7 +64,6 @@ func (m *HashicorpCloudPackerCreateRegistryResponse) validateOperation(formats s
 }
 
 func (m *HashicorpCloudPackerCreateRegistryResponse) validateRegistry(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Registry) { // not required
 		return nil
 	}
@@ -70,6 +72,58 @@ func (m *HashicorpCloudPackerCreateRegistryResponse) validateRegistry(formats st
 		if err := m.Registry.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("registry")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("registry")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer create registry response based on the context it is used
+func (m *HashicorpCloudPackerCreateRegistryResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateOperation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRegistry(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerCreateRegistryResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Operation != nil {
+		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("operation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("operation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerCreateRegistryResponse) contextValidateRegistry(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Registry != nil {
+		if err := m.Registry.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("registry")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("registry")
 			}
 			return err
 		}

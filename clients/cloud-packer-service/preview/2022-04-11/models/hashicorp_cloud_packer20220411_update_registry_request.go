@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -22,7 +24,7 @@ type HashicorpCloudPacker20220411UpdateRegistryRequest struct {
 	Activate bool `json:"activate,omitempty"`
 
 	// Feature tier of the Registry.
-	FeatureTier HashicorpCloudPacker20220411RegistryConfigTier `json:"feature_tier,omitempty"`
+	FeatureTier *HashicorpCloudPacker20220411RegistryConfigTier `json:"feature_tier,omitempty"`
 
 	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
@@ -47,23 +49,25 @@ func (m *HashicorpCloudPacker20220411UpdateRegistryRequest) Validate(formats str
 }
 
 func (m *HashicorpCloudPacker20220411UpdateRegistryRequest) validateFeatureTier(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.FeatureTier) { // not required
 		return nil
 	}
 
-	if err := m.FeatureTier.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("feature_tier")
+	if m.FeatureTier != nil {
+		if err := m.FeatureTier.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("feature_tier")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("feature_tier")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudPacker20220411UpdateRegistryRequest) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -72,6 +76,58 @@ func (m *HashicorpCloudPacker20220411UpdateRegistryRequest) validateLocation(for
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 update registry request based on the context it is used
+func (m *HashicorpCloudPacker20220411UpdateRegistryRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateFeatureTier(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411UpdateRegistryRequest) contextValidateFeatureTier(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.FeatureTier != nil {
+		if err := m.FeatureTier.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("feature_tier")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("feature_tier")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411UpdateRegistryRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}

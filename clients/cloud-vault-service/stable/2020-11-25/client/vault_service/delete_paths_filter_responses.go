@@ -47,7 +47,7 @@ func NewDeletePathsFilterOK() *DeletePathsFilterOK {
 	return &DeletePathsFilterOK{}
 }
 
-/*DeletePathsFilterOK handles this case with default header values.
+/* DeletePathsFilterOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type DeletePathsFilterOK struct {
 func (o *DeletePathsFilterOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] deletePathsFilterOK  %+v", 200, o.Payload)
 }
-
 func (o *DeletePathsFilterOK) GetPayload() *models.HashicorpCloudVault20201125DeletePathsFilterResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewDeletePathsFilterDefault(code int) *DeletePathsFilterDefault {
 	}
 }
 
-/*DeletePathsFilterDefault handles this case with default header values.
+/* DeletePathsFilterDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *DeletePathsFilterDefault) Code() int {
 func (o *DeletePathsFilterDefault) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] DeletePathsFilter default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *DeletePathsFilterDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -16,76 +16,93 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDownloadProviderParams creates a new DownloadProviderParams object
-// with the default values initialized.
+// NewDownloadProviderParams creates a new DownloadProviderParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDownloadProviderParams() *DownloadProviderParams {
-	var ()
 	return &DownloadProviderParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDownloadProviderParamsWithTimeout creates a new DownloadProviderParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewDownloadProviderParamsWithTimeout(timeout time.Duration) *DownloadProviderParams {
-	var ()
 	return &DownloadProviderParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewDownloadProviderParamsWithContext creates a new DownloadProviderParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewDownloadProviderParamsWithContext(ctx context.Context) *DownloadProviderParams {
-	var ()
 	return &DownloadProviderParams{
-
 		Context: ctx,
 	}
 }
 
 // NewDownloadProviderParamsWithHTTPClient creates a new DownloadProviderParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewDownloadProviderParamsWithHTTPClient(client *http.Client) *DownloadProviderParams {
-	var ()
 	return &DownloadProviderParams{
 		HTTPClient: client,
 	}
 }
 
-/*DownloadProviderParams contains all the parameters to send to the API endpoint
-for the download provider operation typically these are written to a http.Request
+/* DownloadProviderParams contains all the parameters to send to the API endpoint
+   for the download provider operation.
+
+   Typically these are written to a http.Request.
 */
 type DownloadProviderParams struct {
 
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	/* Box.
 
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Provider
-	  The name of the Provider.
 
+	/* Provider.
+
+	   The name of the Provider.
 	*/
 	Provider string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
-	/*Version
-	  The name of the Version for the Provider.
 
+	/* Version.
+
+	   The name of the Version for the Provider.
 	*/
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the download provider params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DownloadProviderParams) WithDefaults() *DownloadProviderParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the download provider params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DownloadProviderParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the download provider params

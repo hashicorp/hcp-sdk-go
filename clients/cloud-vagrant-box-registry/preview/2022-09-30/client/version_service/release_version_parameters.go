@@ -18,73 +18,90 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewReleaseVersionParams creates a new ReleaseVersionParams object
-// with the default values initialized.
+// NewReleaseVersionParams creates a new ReleaseVersionParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewReleaseVersionParams() *ReleaseVersionParams {
-	var ()
 	return &ReleaseVersionParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewReleaseVersionParamsWithTimeout creates a new ReleaseVersionParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewReleaseVersionParamsWithTimeout(timeout time.Duration) *ReleaseVersionParams {
-	var ()
 	return &ReleaseVersionParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewReleaseVersionParamsWithContext creates a new ReleaseVersionParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewReleaseVersionParamsWithContext(ctx context.Context) *ReleaseVersionParams {
-	var ()
 	return &ReleaseVersionParams{
-
 		Context: ctx,
 	}
 }
 
 // NewReleaseVersionParamsWithHTTPClient creates a new ReleaseVersionParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewReleaseVersionParamsWithHTTPClient(client *http.Client) *ReleaseVersionParams {
-	var ()
 	return &ReleaseVersionParams{
 		HTTPClient: client,
 	}
 }
 
-/*ReleaseVersionParams contains all the parameters to send to the API endpoint
-for the release version operation typically these are written to a http.Request
+/* ReleaseVersionParams contains all the parameters to send to the API endpoint
+   for the release version operation.
+
+   Typically these are written to a http.Request.
 */
 type ReleaseVersionParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930ReleaseVersionRequest
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	// Body.
+	Body *models.HashicorpCloudVagrantReleaseVersionRequest
 
+	/* Box.
+
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
-	/*Version
-	  The name of the Version to release.
 
+	/* Version.
+
+	   The name of the Version to release.
 	*/
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the release version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ReleaseVersionParams) WithDefaults() *ReleaseVersionParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the release version params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ReleaseVersionParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the release version params
@@ -121,13 +138,13 @@ func (o *ReleaseVersionParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the release version params
-func (o *ReleaseVersionParams) WithBody(body *models.HashicorpCloudVagrant20220930ReleaseVersionRequest) *ReleaseVersionParams {
+func (o *ReleaseVersionParams) WithBody(body *models.HashicorpCloudVagrantReleaseVersionRequest) *ReleaseVersionParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the release version params
-func (o *ReleaseVersionParams) SetBody(body *models.HashicorpCloudVagrant20220930ReleaseVersionRequest) {
+func (o *ReleaseVersionParams) SetBody(body *models.HashicorpCloudVagrantReleaseVersionRequest) {
 	o.Body = body
 }
 
@@ -171,7 +188,6 @@ func (o *ReleaseVersionParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

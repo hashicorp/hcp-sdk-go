@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -21,7 +23,7 @@ type HashicorpCloudVault20201125GetUtilizationResponseValue struct {
 	MaxValue float32 `json:"max_value,omitempty"`
 
 	// unit
-	Unit HashicorpCloudVault20201125GetUtilizationResponseValueUnit `json:"unit,omitempty"`
+	Unit *HashicorpCloudVault20201125GetUtilizationResponseValueUnit `json:"unit,omitempty"`
 
 	// updated at
 	// Format: date-time
@@ -50,29 +52,61 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponseValue) Validate(format
 }
 
 func (m *HashicorpCloudVault20201125GetUtilizationResponseValue) validateUnit(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Unit) { // not required
 		return nil
 	}
 
-	if err := m.Unit.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("unit")
+	if m.Unit != nil {
+		if err := m.Unit.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("unit")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("unit")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudVault20201125GetUtilizationResponseValue) validateUpdatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 get utilization response value based on the context it is used
+func (m *HashicorpCloudVault20201125GetUtilizationResponseValue) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateUnit(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetUtilizationResponseValue) contextValidateUnit(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Unit != nil {
+		if err := m.Unit.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("unit")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("unit")
+			}
+			return err
+		}
 	}
 
 	return nil

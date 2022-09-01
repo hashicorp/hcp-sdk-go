@@ -23,13 +23,16 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
+	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error)
 
-	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
+	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error)
 
-	Wait(params *WaitParams, authInfo runtime.ClientAuthInfoWriter) (*WaitOK, error)
+	Wait(params *WaitParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaitOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -41,13 +44,12 @@ type ClientService interface {
 order to support RBAC checks. We perform RBAC checks early in the request
 lifecycle, before loading the resource targeted by the request.
 */
-func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error) {
+func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Get",
 		Method:             "GET",
 		PathPattern:        "/operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}",
@@ -59,7 +61,12 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -73,19 +80,14 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 }
 
 /*
-  List lists selects a list of operations that match some filters and then returns them in the response
-
-  The supported filters are the Location's organization_id and project_id.
-The project_id supports the special value "-" to allow requesting operations
-that match any project within the organization.
+  List lists selects a list of operations that match some filters and then returns them in the response the supported filters are the location s organization id and project id the project id supports the special value to allow requesting operations that match any project within the organization
 */
-func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
+func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "List",
 		Method:             "GET",
 		PathPattern:        "/operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations",
@@ -97,7 +99,12 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +121,7 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
   Wait waits blocks until an operation is d o n e or a timeout is reached whichever occurs first it then returns the latest state of the operation that it had at the time of the timeout
 
   Note that Wait may return at any time. In most cases, the timeout will
-be respected but it isn't guaranteed. Therefore, clients should always
+be respected but it is not guaranteed. Therefore, clients should always
 check the state of the returned operation. A return from Wait does not
 guarantee the operation is DONE.
 
@@ -122,13 +129,12 @@ The Location's organization and project IDs are included in the path in
 order to support RBAC checks. We perform RBAC checks early in the request
 lifecycle, before loading the resource targeted by the request.
 */
-func (a *Client) Wait(params *WaitParams, authInfo runtime.ClientAuthInfoWriter) (*WaitOK, error) {
+func (a *Client) Wait(params *WaitParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaitOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewWaitParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Wait",
 		Method:             "GET",
 		PathPattern:        "/operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait",
@@ -140,7 +146,12 @@ func (a *Client) Wait(params *WaitParams, authInfo runtime.ClientAuthInfoWriter)
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

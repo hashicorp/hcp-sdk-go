@@ -47,7 +47,7 @@ func NewPackerServiceListBucketAncestryOK() *PackerServiceListBucketAncestryOK {
 	return &PackerServiceListBucketAncestryOK{}
 }
 
-/*PackerServiceListBucketAncestryOK handles this case with default header values.
+/* PackerServiceListBucketAncestryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type PackerServiceListBucketAncestryOK struct {
 func (o *PackerServiceListBucketAncestryOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/ancestry][%d] packerServiceListBucketAncestryOK  %+v", 200, o.Payload)
 }
-
 func (o *PackerServiceListBucketAncestryOK) GetPayload() *models.HashicorpCloudPacker20220411ListBucketAncestryResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewPackerServiceListBucketAncestryDefault(code int) *PackerServiceListBucke
 	}
 }
 
-/*PackerServiceListBucketAncestryDefault handles this case with default header values.
+/* PackerServiceListBucketAncestryDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *PackerServiceListBucketAncestryDefault) Code() int {
 func (o *PackerServiceListBucketAncestryDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/ancestry][%d] PackerService_ListBucketAncestry default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *PackerServiceListBucketAncestryDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

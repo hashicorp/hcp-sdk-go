@@ -18,61 +18,76 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewDeactivateRegistryParams creates a new DeactivateRegistryParams object
-// with the default values initialized.
+// NewDeactivateRegistryParams creates a new DeactivateRegistryParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDeactivateRegistryParams() *DeactivateRegistryParams {
-	var ()
 	return &DeactivateRegistryParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeactivateRegistryParamsWithTimeout creates a new DeactivateRegistryParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewDeactivateRegistryParamsWithTimeout(timeout time.Duration) *DeactivateRegistryParams {
-	var ()
 	return &DeactivateRegistryParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewDeactivateRegistryParamsWithContext creates a new DeactivateRegistryParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewDeactivateRegistryParamsWithContext(ctx context.Context) *DeactivateRegistryParams {
-	var ()
 	return &DeactivateRegistryParams{
-
 		Context: ctx,
 	}
 }
 
 // NewDeactivateRegistryParamsWithHTTPClient creates a new DeactivateRegistryParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewDeactivateRegistryParamsWithHTTPClient(client *http.Client) *DeactivateRegistryParams {
-	var ()
 	return &DeactivateRegistryParams{
 		HTTPClient: client,
 	}
 }
 
-/*DeactivateRegistryParams contains all the parameters to send to the API endpoint
-for the deactivate registry operation typically these are written to a http.Request
+/* DeactivateRegistryParams contains all the parameters to send to the API endpoint
+   for the deactivate registry operation.
+
+   Typically these are written to a http.Request.
 */
 type DeactivateRegistryParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930DeactivateRegistryRequest
-	/*Registry
-	  The name of the Registry to deactivate.
+	// Body.
+	Body *models.HashicorpCloudVagrantDeactivateRegistryRequest
 
+	/* Registry.
+
+	   The name of the Registry to deactivate.
 	*/
 	Registry string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the deactivate registry params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeactivateRegistryParams) WithDefaults() *DeactivateRegistryParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the deactivate registry params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeactivateRegistryParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the deactivate registry params
@@ -109,13 +124,13 @@ func (o *DeactivateRegistryParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the deactivate registry params
-func (o *DeactivateRegistryParams) WithBody(body *models.HashicorpCloudVagrant20220930DeactivateRegistryRequest) *DeactivateRegistryParams {
+func (o *DeactivateRegistryParams) WithBody(body *models.HashicorpCloudVagrantDeactivateRegistryRequest) *DeactivateRegistryParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the deactivate registry params
-func (o *DeactivateRegistryParams) SetBody(body *models.HashicorpCloudVagrant20220930DeactivateRegistryRequest) {
+func (o *DeactivateRegistryParams) SetBody(body *models.HashicorpCloudVagrantDeactivateRegistryRequest) {
 	o.Body = body
 }
 
@@ -137,7 +152,6 @@ func (o *DeactivateRegistryParams) WriteToRequest(r runtime.ClientRequest, reg s
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

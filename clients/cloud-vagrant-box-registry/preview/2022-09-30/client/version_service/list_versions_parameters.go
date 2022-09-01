@@ -17,88 +17,108 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewListVersionsParams creates a new ListVersionsParams object
-// with the default values initialized.
+// NewListVersionsParams creates a new ListVersionsParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewListVersionsParams() *ListVersionsParams {
-	var ()
 	return &ListVersionsParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewListVersionsParamsWithTimeout creates a new ListVersionsParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewListVersionsParamsWithTimeout(timeout time.Duration) *ListVersionsParams {
-	var ()
 	return &ListVersionsParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewListVersionsParamsWithContext creates a new ListVersionsParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewListVersionsParamsWithContext(ctx context.Context) *ListVersionsParams {
-	var ()
 	return &ListVersionsParams{
-
 		Context: ctx,
 	}
 }
 
 // NewListVersionsParamsWithHTTPClient creates a new ListVersionsParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewListVersionsParamsWithHTTPClient(client *http.Client) *ListVersionsParams {
-	var ()
 	return &ListVersionsParams{
 		HTTPClient: client,
 	}
 }
 
-/*ListVersionsParams contains all the parameters to send to the API endpoint
-for the list versions operation typically these are written to a http.Request
+/* ListVersionsParams contains all the parameters to send to the API endpoint
+   for the list versions operation.
+
+   Typically these are written to a http.Request.
 */
 type ListVersionsParams struct {
 
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	/* Box.
 
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*PaginationNextPageToken
-	  Specifies a page token to use to retrieve the next page. Set this to the
+
+	/* PaginationNextPageToken.
+
+	     Specifies a page token to use to retrieve the next page. Set this to the
 	`next_page_token` returned by previous list requests to get the next page of
 	results. If set, `previous_page_token` must not be set.
-
 	*/
 	PaginationNextPageToken *string
-	/*PaginationPageSize
-	  The max number of results per page that should be returned. If the number
+
+	/* PaginationPageSize.
+
+	     The max number of results per page that should be returned. If the number
 	of available results is larger than `page_size`, a `next_page_token` is
 	returned which can be used to get the next page of results in subsequent
 	requests. A value of zero will cause `page_size` to be defaulted.
 
+	     Format: int64
 	*/
 	PaginationPageSize *int64
-	/*PaginationPreviousPageToken
-	  Specifies a page token to use to retrieve the previous page. Set this to
+
+	/* PaginationPreviousPageToken.
+
+	     Specifies a page token to use to retrieve the previous page. Set this to
 	the `previous_page_token` returned by previous list requests to get the
 	previous page of results. If set, `next_page_token` must not be set.
-
 	*/
 	PaginationPreviousPageToken *string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the list versions params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListVersionsParams) WithDefaults() *ListVersionsParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the list versions params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListVersionsParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the list versions params
@@ -206,48 +226,51 @@ func (o *ListVersionsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 		// query param pagination.next_page_token
 		var qrPaginationNextPageToken string
+
 		if o.PaginationNextPageToken != nil {
 			qrPaginationNextPageToken = *o.PaginationNextPageToken
 		}
 		qPaginationNextPageToken := qrPaginationNextPageToken
 		if qPaginationNextPageToken != "" {
+
 			if err := r.SetQueryParam("pagination.next_page_token", qPaginationNextPageToken); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.PaginationPageSize != nil {
 
 		// query param pagination.page_size
 		var qrPaginationPageSize int64
+
 		if o.PaginationPageSize != nil {
 			qrPaginationPageSize = *o.PaginationPageSize
 		}
 		qPaginationPageSize := swag.FormatInt64(qrPaginationPageSize)
 		if qPaginationPageSize != "" {
+
 			if err := r.SetQueryParam("pagination.page_size", qPaginationPageSize); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.PaginationPreviousPageToken != nil {
 
 		// query param pagination.previous_page_token
 		var qrPaginationPreviousPageToken string
+
 		if o.PaginationPreviousPageToken != nil {
 			qrPaginationPreviousPageToken = *o.PaginationPreviousPageToken
 		}
 		qPaginationPreviousPageToken := qrPaginationPreviousPageToken
 		if qPaginationPreviousPageToken != "" {
+
 			if err := r.SetQueryParam("pagination.previous_page_token", qPaginationPreviousPageToken); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	// path param registry

@@ -18,66 +18,82 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/preview/2022-04-11/models"
 )
 
-// NewPackerServiceRegenerateTFCRunTaskHmacKeyParams creates a new PackerServiceRegenerateTFCRunTaskHmacKeyParams object
-// with the default values initialized.
+// NewPackerServiceRegenerateTFCRunTaskHmacKeyParams creates a new PackerServiceRegenerateTFCRunTaskHmacKeyParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceRegenerateTFCRunTaskHmacKeyParams() *PackerServiceRegenerateTFCRunTaskHmacKeyParams {
-	var ()
 	return &PackerServiceRegenerateTFCRunTaskHmacKeyParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceRegenerateTFCRunTaskHmacKeyParamsWithTimeout creates a new PackerServiceRegenerateTFCRunTaskHmacKeyParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceRegenerateTFCRunTaskHmacKeyParamsWithTimeout(timeout time.Duration) *PackerServiceRegenerateTFCRunTaskHmacKeyParams {
-	var ()
 	return &PackerServiceRegenerateTFCRunTaskHmacKeyParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceRegenerateTFCRunTaskHmacKeyParamsWithContext creates a new PackerServiceRegenerateTFCRunTaskHmacKeyParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceRegenerateTFCRunTaskHmacKeyParamsWithContext(ctx context.Context) *PackerServiceRegenerateTFCRunTaskHmacKeyParams {
-	var ()
 	return &PackerServiceRegenerateTFCRunTaskHmacKeyParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceRegenerateTFCRunTaskHmacKeyParamsWithHTTPClient creates a new PackerServiceRegenerateTFCRunTaskHmacKeyParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceRegenerateTFCRunTaskHmacKeyParamsWithHTTPClient(client *http.Client) *PackerServiceRegenerateTFCRunTaskHmacKeyParams {
-	var ()
 	return &PackerServiceRegenerateTFCRunTaskHmacKeyParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceRegenerateTFCRunTaskHmacKeyParams contains all the parameters to send to the API endpoint
-for the packer service regenerate t f c run task hmac key operation typically these are written to a http.Request
+/* PackerServiceRegenerateTFCRunTaskHmacKeyParams contains all the parameters to send to the API endpoint
+   for the packer service regenerate t f c run task hmac key operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceRegenerateTFCRunTaskHmacKeyParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudPacker20220411RegenerateTFCRunTaskHmacKeyRequest
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service regenerate t f c run task hmac key params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyParams) WithDefaults() *PackerServiceRegenerateTFCRunTaskHmacKeyParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service regenerate t f c run task hmac key params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service regenerate t f c run task hmac key params
@@ -153,7 +169,6 @@ func (o *PackerServiceRegenerateTFCRunTaskHmacKeyParams) WriteToRequest(r runtim
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

@@ -18,61 +18,76 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewActivateRegistryParams creates a new ActivateRegistryParams object
-// with the default values initialized.
+// NewActivateRegistryParams creates a new ActivateRegistryParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewActivateRegistryParams() *ActivateRegistryParams {
-	var ()
 	return &ActivateRegistryParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewActivateRegistryParamsWithTimeout creates a new ActivateRegistryParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewActivateRegistryParamsWithTimeout(timeout time.Duration) *ActivateRegistryParams {
-	var ()
 	return &ActivateRegistryParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewActivateRegistryParamsWithContext creates a new ActivateRegistryParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewActivateRegistryParamsWithContext(ctx context.Context) *ActivateRegistryParams {
-	var ()
 	return &ActivateRegistryParams{
-
 		Context: ctx,
 	}
 }
 
 // NewActivateRegistryParamsWithHTTPClient creates a new ActivateRegistryParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewActivateRegistryParamsWithHTTPClient(client *http.Client) *ActivateRegistryParams {
-	var ()
 	return &ActivateRegistryParams{
 		HTTPClient: client,
 	}
 }
 
-/*ActivateRegistryParams contains all the parameters to send to the API endpoint
-for the activate registry operation typically these are written to a http.Request
+/* ActivateRegistryParams contains all the parameters to send to the API endpoint
+   for the activate registry operation.
+
+   Typically these are written to a http.Request.
 */
 type ActivateRegistryParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930ActivateRegistryRequest
-	/*Registry
-	  The name of the Registry to activate.
+	// Body.
+	Body *models.HashicorpCloudVagrantActivateRegistryRequest
 
+	/* Registry.
+
+	   The name of the Registry to activate.
 	*/
 	Registry string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the activate registry params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ActivateRegistryParams) WithDefaults() *ActivateRegistryParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the activate registry params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ActivateRegistryParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the activate registry params
@@ -109,13 +124,13 @@ func (o *ActivateRegistryParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the activate registry params
-func (o *ActivateRegistryParams) WithBody(body *models.HashicorpCloudVagrant20220930ActivateRegistryRequest) *ActivateRegistryParams {
+func (o *ActivateRegistryParams) WithBody(body *models.HashicorpCloudVagrantActivateRegistryRequest) *ActivateRegistryParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the activate registry params
-func (o *ActivateRegistryParams) SetBody(body *models.HashicorpCloudVagrant20220930ActivateRegistryRequest) {
+func (o *ActivateRegistryParams) SetBody(body *models.HashicorpCloudVagrantActivateRegistryRequest) {
 	o.Body = body
 }
 
@@ -137,7 +152,6 @@ func (o *ActivateRegistryParams) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

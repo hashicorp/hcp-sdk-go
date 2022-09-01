@@ -47,7 +47,7 @@ func NewUpdatePublicIpsOK() *UpdatePublicIpsOK {
 	return &UpdatePublicIpsOK{}
 }
 
-/*UpdatePublicIpsOK handles this case with default header values.
+/* UpdatePublicIpsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type UpdatePublicIpsOK struct {
 func (o *UpdatePublicIpsOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] updatePublicIpsOK  %+v", 200, o.Payload)
 }
-
 func (o *UpdatePublicIpsOK) GetPayload() *models.HashicorpCloudVault20200420UpdatePublicIpsResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewUpdatePublicIpsDefault(code int) *UpdatePublicIpsDefault {
 	}
 }
 
-/*UpdatePublicIpsDefault handles this case with default header values.
+/* UpdatePublicIpsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *UpdatePublicIpsDefault) Code() int {
 func (o *UpdatePublicIpsDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] UpdatePublicIps default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *UpdatePublicIpsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

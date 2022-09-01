@@ -19,79 +19,97 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-service/stable/2020-11-25/models"
 )
 
-// NewUpdateParams creates a new UpdateParams object
-// with the default values initialized.
+// NewUpdateParams creates a new UpdateParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdateParams() *UpdateParams {
-	var ()
 	return &UpdateParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateParamsWithTimeout creates a new UpdateParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUpdateParamsWithTimeout(timeout time.Duration) *UpdateParams {
-	var ()
 	return &UpdateParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUpdateParamsWithContext creates a new UpdateParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUpdateParamsWithContext(ctx context.Context) *UpdateParams {
-	var ()
 	return &UpdateParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUpdateParamsWithHTTPClient creates a new UpdateParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUpdateParamsWithHTTPClient(client *http.Client) *UpdateParams {
-	var ()
 	return &UpdateParams{
 		HTTPClient: client,
 	}
 }
 
-/*UpdateParams contains all the parameters to send to the API endpoint
-for the update operation typically these are written to a http.Request
+/* UpdateParams contains all the parameters to send to the API endpoint
+   for the update operation.
+
+   Typically these are written to a http.Request.
 */
 type UpdateParams struct {
 
-	/*Body
-	  cluster is the input cluster resources to be updated.
+	/* Body.
 
+	   cluster is the input cluster resources to be updated.
 	*/
 	Body *models.HashicorpCloudVault20201125InputCluster
-	/*ClusterID
-	  id is ID of the Vault cluster.
 
+	/* ClusterID.
+
+	   id is ID of the Vault cluster.
 	*/
 	ClusterID string
-	/*ClusterLocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* ClusterLocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	ClusterLocationOrganizationID string
-	/*ClusterLocationProjectID
-	  project_id is the projects id.
 
+	/* ClusterLocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	ClusterLocationProjectID string
-	/*UpdateMaskPaths
-	  The set of field mask paths.
 
+	/* UpdateMaskPaths.
+
+	   The set of field mask paths.
 	*/
 	UpdateMaskPaths []string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the update params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateParams) WithDefaults() *UpdateParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the update params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update params
@@ -189,7 +207,6 @@ func (o *UpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regist
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
@@ -211,16 +228,36 @@ func (o *UpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regist
 		return err
 	}
 
-	valuesUpdateMaskPaths := o.UpdateMaskPaths
+	if o.UpdateMaskPaths != nil {
 
-	joinedUpdateMaskPaths := swag.JoinByFormat(valuesUpdateMaskPaths, "multi")
-	// query array param update_mask.paths
-	if err := r.SetQueryParam("update_mask.paths", joinedUpdateMaskPaths...); err != nil {
-		return err
+		// binding items for update_mask.paths
+		joinedUpdateMaskPaths := o.bindParamUpdateMaskPaths(reg)
+
+		// query array param update_mask.paths
+		if err := r.SetQueryParam("update_mask.paths", joinedUpdateMaskPaths...); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamUpdate binds the parameter update_mask.paths
+func (o *UpdateParams) bindParamUpdateMaskPaths(formats strfmt.Registry) []string {
+	updateMaskPathsIR := o.UpdateMaskPaths
+
+	var updateMaskPathsIC []string
+	for _, updateMaskPathsIIR := range updateMaskPathsIR { // explode []string
+
+		updateMaskPathsIIV := updateMaskPathsIIR // string as string
+		updateMaskPathsIC = append(updateMaskPathsIC, updateMaskPathsIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	updateMaskPathsIS := swag.JoinByFormat(updateMaskPathsIC, "multi")
+
+	return updateMaskPathsIS
 }

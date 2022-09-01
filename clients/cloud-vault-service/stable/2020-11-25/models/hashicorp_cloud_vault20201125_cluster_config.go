@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -41,7 +43,7 @@ type HashicorpCloudVault20201125ClusterConfig struct {
 	SnapshotConfig *HashicorpCloudVault20201125SnapshotConfig `json:"snapshot_config,omitempty"`
 
 	// tier
-	Tier HashicorpCloudVault20201125Tier `json:"tier,omitempty"`
+	Tier *HashicorpCloudVault20201125Tier `json:"tier,omitempty"`
 
 	// vault access
 	VaultAccess *HashicorpCloudVault20201125VaultAccess `json:"vault_access,omitempty"`
@@ -101,7 +103,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) Validate(formats strfmt.Regis
 }
 
 func (m *HashicorpCloudVault20201125ClusterConfig) validateAuditConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.AuditConfig) { // not required
 		return nil
 	}
@@ -110,6 +111,8 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateAuditConfig(formats s
 		if err := m.AuditConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("audit_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("audit_config")
 			}
 			return err
 		}
@@ -119,7 +122,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateAuditConfig(formats s
 }
 
 func (m *HashicorpCloudVault20201125ClusterConfig) validateAuditLogExportConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.AuditLogExportConfig) { // not required
 		return nil
 	}
@@ -128,6 +130,8 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateAuditLogExportConfig(
 		if err := m.AuditLogExportConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("audit_log_export_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("audit_log_export_config")
 			}
 			return err
 		}
@@ -137,7 +141,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateAuditLogExportConfig(
 }
 
 func (m *HashicorpCloudVault20201125ClusterConfig) validateCapacityConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CapacityConfig) { // not required
 		return nil
 	}
@@ -146,6 +149,8 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateCapacityConfig(format
 		if err := m.CapacityConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("capacity_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("capacity_config")
 			}
 			return err
 		}
@@ -155,7 +160,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateCapacityConfig(format
 }
 
 func (m *HashicorpCloudVault20201125ClusterConfig) validateMajorVersionUpgradeConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.MajorVersionUpgradeConfig) { // not required
 		return nil
 	}
@@ -164,6 +168,8 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateMajorVersionUpgradeCo
 		if err := m.MajorVersionUpgradeConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("major_version_upgrade_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("major_version_upgrade_config")
 			}
 			return err
 		}
@@ -173,7 +179,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateMajorVersionUpgradeCo
 }
 
 func (m *HashicorpCloudVault20201125ClusterConfig) validateMetricsConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.MetricsConfig) { // not required
 		return nil
 	}
@@ -182,6 +187,8 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateMetricsConfig(formats
 		if err := m.MetricsConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("metrics_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metrics_config")
 			}
 			return err
 		}
@@ -191,7 +198,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateMetricsConfig(formats
 }
 
 func (m *HashicorpCloudVault20201125ClusterConfig) validateNetworkConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.NetworkConfig) { // not required
 		return nil
 	}
@@ -200,6 +206,8 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateNetworkConfig(formats
 		if err := m.NetworkConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("network_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("network_config")
 			}
 			return err
 		}
@@ -209,7 +217,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateNetworkConfig(formats
 }
 
 func (m *HashicorpCloudVault20201125ClusterConfig) validateSnapshotConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.SnapshotConfig) { // not required
 		return nil
 	}
@@ -218,6 +225,8 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateSnapshotConfig(format
 		if err := m.SnapshotConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("snapshot_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("snapshot_config")
 			}
 			return err
 		}
@@ -227,23 +236,25 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateSnapshotConfig(format
 }
 
 func (m *HashicorpCloudVault20201125ClusterConfig) validateTier(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Tier) { // not required
 		return nil
 	}
 
-	if err := m.Tier.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("tier")
+	if m.Tier != nil {
+		if err := m.Tier.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("tier")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("tier")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudVault20201125ClusterConfig) validateVaultAccess(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.VaultAccess) { // not required
 		return nil
 	}
@@ -252,6 +263,8 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateVaultAccess(formats s
 		if err := m.VaultAccess.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("vault_access")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vault_access")
 			}
 			return err
 		}
@@ -261,7 +274,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateVaultAccess(formats s
 }
 
 func (m *HashicorpCloudVault20201125ClusterConfig) validateVaultConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.VaultConfig) { // not required
 		return nil
 	}
@@ -270,6 +282,218 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateVaultConfig(formats s
 		if err := m.VaultConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("vault_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vault_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 cluster config based on the context it is used
+func (m *HashicorpCloudVault20201125ClusterConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAuditConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAuditLogExportConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateCapacityConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMajorVersionUpgradeConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMetricsConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNetworkConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSnapshotConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTier(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVaultAccess(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVaultConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateAuditConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AuditConfig != nil {
+		if err := m.AuditConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("audit_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("audit_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateAuditLogExportConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AuditLogExportConfig != nil {
+		if err := m.AuditLogExportConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("audit_log_export_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("audit_log_export_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateCapacityConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CapacityConfig != nil {
+		if err := m.CapacityConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("capacity_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("capacity_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateMajorVersionUpgradeConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MajorVersionUpgradeConfig != nil {
+		if err := m.MajorVersionUpgradeConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("major_version_upgrade_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("major_version_upgrade_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateMetricsConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MetricsConfig != nil {
+		if err := m.MetricsConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metrics_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metrics_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateNetworkConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.NetworkConfig != nil {
+		if err := m.NetworkConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("network_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("network_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateSnapshotConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SnapshotConfig != nil {
+		if err := m.SnapshotConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("snapshot_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("snapshot_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateTier(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Tier != nil {
+		if err := m.Tier.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("tier")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("tier")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateVaultAccess(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VaultAccess != nil {
+		if err := m.VaultAccess.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vault_access")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vault_access")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateVaultConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VaultConfig != nil {
+		if err := m.VaultConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vault_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vault_config")
 			}
 			return err
 		}

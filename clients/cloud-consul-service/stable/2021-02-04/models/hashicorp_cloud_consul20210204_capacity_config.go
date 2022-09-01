@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -21,7 +23,7 @@ type HashicorpCloudConsul20210204CapacityConfig struct {
 
 	// size is the t-shirt size representation of the VM that this Consul cluster
 	// is provisioned with.
-	Size HashicorpCloudConsul20210204CapacityConfigSize `json:"size,omitempty"`
+	Size *HashicorpCloudConsul20210204CapacityConfigSize `json:"size,omitempty"`
 }
 
 // Validate validates this hashicorp cloud consul 20210204 capacity config
@@ -39,16 +41,49 @@ func (m *HashicorpCloudConsul20210204CapacityConfig) Validate(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudConsul20210204CapacityConfig) validateSize(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Size) { // not required
 		return nil
 	}
 
-	if err := m.Size.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("size")
+	if m.Size != nil {
+		if err := m.Size.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("size")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("size")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud consul 20210204 capacity config based on the context it is used
+func (m *HashicorpCloudConsul20210204CapacityConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSize(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudConsul20210204CapacityConfig) contextValidateSize(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Size != nil {
+		if err := m.Size.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("size")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("size")
+			}
+			return err
+		}
 	}
 
 	return nil

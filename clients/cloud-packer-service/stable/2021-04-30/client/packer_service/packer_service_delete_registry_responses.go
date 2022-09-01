@@ -47,7 +47,7 @@ func NewPackerServiceDeleteRegistryOK() *PackerServiceDeleteRegistryOK {
 	return &PackerServiceDeleteRegistryOK{}
 }
 
-/*PackerServiceDeleteRegistryOK handles this case with default header values.
+/* PackerServiceDeleteRegistryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type PackerServiceDeleteRegistryOK struct {
 func (o *PackerServiceDeleteRegistryOK) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceDeleteRegistryOK  %+v", 200, o.Payload)
 }
-
 func (o *PackerServiceDeleteRegistryOK) GetPayload() *models.HashicorpCloudPackerDeleteRegistryResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewPackerServiceDeleteRegistryDefault(code int) *PackerServiceDeleteRegistr
 	}
 }
 
-/*PackerServiceDeleteRegistryDefault handles this case with default header values.
+/* PackerServiceDeleteRegistryDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *PackerServiceDeleteRegistryDefault) Code() int {
 func (o *PackerServiceDeleteRegistryDefault) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_DeleteRegistry default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *PackerServiceDeleteRegistryDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

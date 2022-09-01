@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -55,7 +57,6 @@ func (m *HashicorpCloudPacker20220411CreateBuildRequest) Validate(formats strfmt
 }
 
 func (m *HashicorpCloudPacker20220411CreateBuildRequest) validateBuild(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Build) { // not required
 		return nil
 	}
@@ -64,6 +65,8 @@ func (m *HashicorpCloudPacker20220411CreateBuildRequest) validateBuild(formats s
 		if err := m.Build.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("build")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("build")
 			}
 			return err
 		}
@@ -73,7 +76,6 @@ func (m *HashicorpCloudPacker20220411CreateBuildRequest) validateBuild(formats s
 }
 
 func (m *HashicorpCloudPacker20220411CreateBuildRequest) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -82,6 +84,58 @@ func (m *HashicorpCloudPacker20220411CreateBuildRequest) validateLocation(format
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 create build request based on the context it is used
+func (m *HashicorpCloudPacker20220411CreateBuildRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateBuild(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411CreateBuildRequest) contextValidateBuild(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Build != nil {
+		if err := m.Build.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("build")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("build")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411CreateBuildRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}

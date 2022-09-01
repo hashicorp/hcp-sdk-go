@@ -47,7 +47,7 @@ func NewGetUtilizationOK() *GetUtilizationOK {
 	return &GetUtilizationOK{}
 }
 
-/*GetUtilizationOK handles this case with default header values.
+/* GetUtilizationOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type GetUtilizationOK struct {
 func (o *GetUtilizationOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] getUtilizationOK  %+v", 200, o.Payload)
 }
-
 func (o *GetUtilizationOK) GetPayload() *models.HashicorpCloudVault20201125GetUtilizationResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewGetUtilizationDefault(code int) *GetUtilizationDefault {
 	}
 }
 
-/*GetUtilizationDefault handles this case with default header values.
+/* GetUtilizationDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *GetUtilizationDefault) Code() int {
 func (o *GetUtilizationDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] GetUtilization default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *GetUtilizationDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -21,7 +23,7 @@ type HashicorpCloudVault20201125ClusterNotification struct {
 	MetaData interface{} `json:"meta_data,omitempty"`
 
 	// topic is the reason for the notification
-	Topic HashicorpCloudVault20201125ClusterNotificationTopic `json:"topic,omitempty"`
+	Topic *HashicorpCloudVault20201125ClusterNotificationTopic `json:"topic,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 cluster notification
@@ -39,16 +41,49 @@ func (m *HashicorpCloudVault20201125ClusterNotification) Validate(formats strfmt
 }
 
 func (m *HashicorpCloudVault20201125ClusterNotification) validateTopic(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Topic) { // not required
 		return nil
 	}
 
-	if err := m.Topic.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("topic")
+	if m.Topic != nil {
+		if err := m.Topic.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("topic")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("topic")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 cluster notification based on the context it is used
+func (m *HashicorpCloudVault20201125ClusterNotification) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateTopic(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterNotification) contextValidateTopic(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Topic != nil {
+		if err := m.Topic.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("topic")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("topic")
+			}
+			return err
+		}
 	}
 
 	return nil

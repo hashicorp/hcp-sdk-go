@@ -18,71 +18,88 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/stable/2021-04-30/models"
 )
 
-// NewPackerServiceUpdateIterationParams creates a new PackerServiceUpdateIterationParams object
-// with the default values initialized.
+// NewPackerServiceUpdateIterationParams creates a new PackerServiceUpdateIterationParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceUpdateIterationParams() *PackerServiceUpdateIterationParams {
-	var ()
 	return &PackerServiceUpdateIterationParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceUpdateIterationParamsWithTimeout creates a new PackerServiceUpdateIterationParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceUpdateIterationParamsWithTimeout(timeout time.Duration) *PackerServiceUpdateIterationParams {
-	var ()
 	return &PackerServiceUpdateIterationParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceUpdateIterationParamsWithContext creates a new PackerServiceUpdateIterationParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceUpdateIterationParamsWithContext(ctx context.Context) *PackerServiceUpdateIterationParams {
-	var ()
 	return &PackerServiceUpdateIterationParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceUpdateIterationParamsWithHTTPClient creates a new PackerServiceUpdateIterationParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceUpdateIterationParamsWithHTTPClient(client *http.Client) *PackerServiceUpdateIterationParams {
-	var ()
 	return &PackerServiceUpdateIterationParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceUpdateIterationParams contains all the parameters to send to the API endpoint
-for the packer service update iteration operation typically these are written to a http.Request
+/* PackerServiceUpdateIterationParams contains all the parameters to send to the API endpoint
+   for the packer service update iteration operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceUpdateIterationParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudPackerUpdateIterationRequest
-	/*IterationID
-	  ULID of the iteration.
 
+	/* IterationID.
+
+	   ULID of the iteration.
 	*/
 	IterationID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service update iteration params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceUpdateIterationParams) WithDefaults() *PackerServiceUpdateIterationParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service update iteration params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceUpdateIterationParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service update iteration params
@@ -169,7 +186,6 @@ func (o *PackerServiceUpdateIterationParams) WriteToRequest(r runtime.ClientRequ
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

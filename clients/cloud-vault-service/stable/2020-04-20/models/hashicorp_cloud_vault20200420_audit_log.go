@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -47,7 +49,7 @@ type HashicorpCloudVault20200420AuditLog struct {
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
 	// state is the current state of the download
-	State HashicorpCloudVault20200420AuditLogState `json:"state,omitempty"`
+	State *HashicorpCloudVault20200420AuditLogState `json:"state,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20200420 audit log
@@ -85,7 +87,6 @@ func (m *HashicorpCloudVault20200420AuditLog) Validate(formats strfmt.Registry) 
 }
 
 func (m *HashicorpCloudVault20200420AuditLog) validateExpiresAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ExpiresAt) { // not required
 		return nil
 	}
@@ -98,7 +99,6 @@ func (m *HashicorpCloudVault20200420AuditLog) validateExpiresAt(formats strfmt.R
 }
 
 func (m *HashicorpCloudVault20200420AuditLog) validateFinishedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.FinishedAt) { // not required
 		return nil
 	}
@@ -111,7 +111,6 @@ func (m *HashicorpCloudVault20200420AuditLog) validateFinishedAt(formats strfmt.
 }
 
 func (m *HashicorpCloudVault20200420AuditLog) validateIntervalEnd(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.IntervalEnd) { // not required
 		return nil
 	}
@@ -124,7 +123,6 @@ func (m *HashicorpCloudVault20200420AuditLog) validateIntervalEnd(formats strfmt
 }
 
 func (m *HashicorpCloudVault20200420AuditLog) validateIntervalStart(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.IntervalStart) { // not required
 		return nil
 	}
@@ -137,7 +135,6 @@ func (m *HashicorpCloudVault20200420AuditLog) validateIntervalStart(formats strf
 }
 
 func (m *HashicorpCloudVault20200420AuditLog) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -146,6 +143,8 @@ func (m *HashicorpCloudVault20200420AuditLog) validateLocation(formats strfmt.Re
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}
@@ -155,16 +154,69 @@ func (m *HashicorpCloudVault20200420AuditLog) validateLocation(formats strfmt.Re
 }
 
 func (m *HashicorpCloudVault20200420AuditLog) validateState(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
 
-	if err := m.State.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("state")
+	if m.State != nil {
+		if err := m.State.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("state")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20200420 audit log based on the context it is used
+func (m *HashicorpCloudVault20200420AuditLog) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20200420AuditLog) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20200420AuditLog) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.State != nil {
+		if err := m.State.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("state")
+			}
+			return err
+		}
 	}
 
 	return nil

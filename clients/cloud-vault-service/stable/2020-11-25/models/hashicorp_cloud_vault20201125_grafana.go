@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -27,6 +29,11 @@ type HashicorpCloudVault20201125Grafana struct {
 
 // Validate validates this hashicorp cloud vault 20201125 grafana
 func (m *HashicorpCloudVault20201125Grafana) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud vault 20201125 grafana based on context it is used
+func (m *HashicorpCloudVault20201125Grafana) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

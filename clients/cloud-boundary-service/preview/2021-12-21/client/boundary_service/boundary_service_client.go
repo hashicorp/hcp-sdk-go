@@ -23,17 +23,20 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error)
+	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error)
 
-	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error)
+	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error)
 
-	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error)
+	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error)
 
-	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error)
+	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error)
 
-	Sessions(params *SessionsParams, authInfo runtime.ClientAuthInfoWriter) (*SessionsOK, error)
+	Sessions(params *SessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SessionsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -41,13 +44,12 @@ type ClientService interface {
 /*
   Create creates creates a new h c p boundary cluster
 */
-func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOK, error) {
+func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Create",
 		Method:             "POST",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters",
@@ -59,7 +61,12 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -75,13 +82,12 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 /*
   Delete deletes deletes the specified h c p boundary cluster
 */
-func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOK, error) {
+func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Delete",
 		Method:             "DELETE",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}",
@@ -93,7 +99,12 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -109,13 +120,12 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 /*
   Get gets returns a single existing h c p boundary cluster
 */
-func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (*GetOK, error) {
+func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Get",
 		Method:             "GET",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}",
@@ -127,7 +137,12 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -143,13 +158,12 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter) (
 /*
   List lists returns all existing h c p boundary clusters
 */
-func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter) (*ListOK, error) {
+func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "List",
 		Method:             "GET",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters",
@@ -161,7 +175,12 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -177,13 +196,12 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter)
 /*
   Sessions sessions returns all session information for existing h c p boundary cluster
 */
-func (a *Client) Sessions(params *SessionsParams, authInfo runtime.ClientAuthInfoWriter) (*SessionsOK, error) {
+func (a *Client) Sessions(params *SessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SessionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSessionsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Sessions",
 		Method:             "GET",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions",
@@ -195,7 +213,12 @@ func (a *Client) Sessions(params *SessionsParams, authInfo runtime.ClientAuthInf
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

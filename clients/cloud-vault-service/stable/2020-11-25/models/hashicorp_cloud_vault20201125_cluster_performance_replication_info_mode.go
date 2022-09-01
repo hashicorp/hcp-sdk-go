@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -22,6 +23,15 @@ import (
 //
 // swagger:model hashicorp.cloud.vault_20201125.Cluster.PerformanceReplicationInfo.Mode
 type HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode string
+
+func NewHashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode(value HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode) *HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode {
+	return &value
+}
+
+// Pointer returns a pointer to a freshly-allocated HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode.
+func (m HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode) Pointer() *HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode {
+	return &m
+}
 
 const (
 
@@ -67,5 +77,10 @@ func (m HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode) Valida
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud vault 20201125 cluster performance replication info mode based on context it is used
+func (m HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

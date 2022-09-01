@@ -29,7 +29,6 @@ func (o *DownloadProviderReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -40,25 +39,24 @@ func NewDownloadProviderOK() *DownloadProviderOK {
 	return &DownloadProviderOK{}
 }
 
-/*DownloadProviderOK handles this case with default header values.
+/* DownloadProviderOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
 type DownloadProviderOK struct {
-	Payload *models.HashicorpCloudVagrant20220930DownloadProviderResponse
+	Payload *models.HashicorpCloudVagrantDownloadProviderResponse
 }
 
 func (o *DownloadProviderOK) Error() string {
 	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}/download][%d] downloadProviderOK  %+v", 200, o.Payload)
 }
-
-func (o *DownloadProviderOK) GetPayload() *models.HashicorpCloudVagrant20220930DownloadProviderResponse {
+func (o *DownloadProviderOK) GetPayload() *models.HashicorpCloudVagrantDownloadProviderResponse {
 	return o.Payload
 }
 
 func (o *DownloadProviderOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVagrant20220930DownloadProviderResponse)
+	o.Payload = new(models.HashicorpCloudVagrantDownloadProviderResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

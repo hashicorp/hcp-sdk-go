@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -66,7 +68,7 @@ type HashicorpCloudPacker20220411IterationforList struct {
 	RevocationMessage string `json:"revocation_message,omitempty"`
 
 	// Revocation type is 'manual' when self revoked or 'inherited' when inherited from a revoked ancestor.
-	RevocationType HashicorpCloudPacker20220411IterationRevocationType `json:"revocation_type,omitempty"`
+	RevocationType *HashicorpCloudPacker20220411IterationRevocationType `json:"revocation_type,omitempty"`
 
 	// Timestamp from when the iteration is revoked an no longer trusted to be secure.
 	// Format: date-time
@@ -108,7 +110,6 @@ func (m *HashicorpCloudPacker20220411IterationforList) Validate(formats strfmt.R
 }
 
 func (m *HashicorpCloudPacker20220411IterationforList) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -121,7 +122,6 @@ func (m *HashicorpCloudPacker20220411IterationforList) validateCreatedAt(formats
 }
 
 func (m *HashicorpCloudPacker20220411IterationforList) validateRevocationInheritedFrom(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.RevocationInheritedFrom) { // not required
 		return nil
 	}
@@ -130,6 +130,8 @@ func (m *HashicorpCloudPacker20220411IterationforList) validateRevocationInherit
 		if err := m.RevocationInheritedFrom.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("revocation_inherited_from")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("revocation_inherited_from")
 			}
 			return err
 		}
@@ -139,23 +141,25 @@ func (m *HashicorpCloudPacker20220411IterationforList) validateRevocationInherit
 }
 
 func (m *HashicorpCloudPacker20220411IterationforList) validateRevocationType(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.RevocationType) { // not required
 		return nil
 	}
 
-	if err := m.RevocationType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("revocation_type")
+	if m.RevocationType != nil {
+		if err := m.RevocationType.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("revocation_type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("revocation_type")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudPacker20220411IterationforList) validateRevokeAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.RevokeAt) { // not required
 		return nil
 	}
@@ -168,13 +172,62 @@ func (m *HashicorpCloudPacker20220411IterationforList) validateRevokeAt(formats 
 }
 
 func (m *HashicorpCloudPacker20220411IterationforList) validateUpdatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 iterationfor list based on the context it is used
+func (m *HashicorpCloudPacker20220411IterationforList) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateRevocationInheritedFrom(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRevocationType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411IterationforList) contextValidateRevocationInheritedFrom(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RevocationInheritedFrom != nil {
+		if err := m.RevocationInheritedFrom.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("revocation_inherited_from")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("revocation_inherited_from")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411IterationforList) contextValidateRevocationType(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RevocationType != nil {
+		if err := m.RevocationType.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("revocation_type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("revocation_type")
+			}
+			return err
+		}
 	}
 
 	return nil

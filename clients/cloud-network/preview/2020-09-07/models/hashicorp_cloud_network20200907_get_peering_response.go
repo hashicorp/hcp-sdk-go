@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -35,7 +37,6 @@ func (m *HashicorpCloudNetwork20200907GetPeeringResponse) Validate(formats strfm
 }
 
 func (m *HashicorpCloudNetwork20200907GetPeeringResponse) validatePeering(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Peering) { // not required
 		return nil
 	}
@@ -44,6 +45,38 @@ func (m *HashicorpCloudNetwork20200907GetPeeringResponse) validatePeering(format
 		if err := m.Peering.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("peering")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("peering")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 get peering response based on the context it is used
+func (m *HashicorpCloudNetwork20200907GetPeeringResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePeering(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907GetPeeringResponse) contextValidatePeering(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Peering != nil {
+		if err := m.Peering.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("peering")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("peering")
 			}
 			return err
 		}

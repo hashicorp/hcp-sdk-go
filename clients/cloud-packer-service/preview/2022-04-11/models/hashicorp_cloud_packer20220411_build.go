@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -61,7 +62,7 @@ type HashicorpCloudPacker20220411Build struct {
 
 	// Status of the build. The status can be RUNNING, DONE, CANCELLED, FAILED,
 	// or UNSET.
-	Status HashicorpCloudPacker20220411BuildStatus `json:"status,omitempty"`
+	Status *HashicorpCloudPacker20220411BuildStatus `json:"status,omitempty"`
 
 	// When the build was most recently updated.
 	// Format: date-time
@@ -99,7 +100,6 @@ func (m *HashicorpCloudPacker20220411Build) Validate(formats strfmt.Registry) er
 }
 
 func (m *HashicorpCloudPacker20220411Build) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -112,7 +112,6 @@ func (m *HashicorpCloudPacker20220411Build) validateCreatedAt(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudPacker20220411Build) validateImages(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Images) { // not required
 		return nil
 	}
@@ -126,6 +125,8 @@ func (m *HashicorpCloudPacker20220411Build) validateImages(formats strfmt.Regist
 			if err := m.Images[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("images" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("images" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -137,7 +138,6 @@ func (m *HashicorpCloudPacker20220411Build) validateImages(formats strfmt.Regist
 }
 
 func (m *HashicorpCloudPacker20220411Build) validateParent(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Parent) { // not required
 		return nil
 	}
@@ -146,6 +146,8 @@ func (m *HashicorpCloudPacker20220411Build) validateParent(formats strfmt.Regist
 		if err := m.Parent.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("parent")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("parent")
 			}
 			return err
 		}
@@ -155,29 +157,105 @@ func (m *HashicorpCloudPacker20220411Build) validateParent(formats strfmt.Regist
 }
 
 func (m *HashicorpCloudPacker20220411Build) validateStatus(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Status) { // not required
 		return nil
 	}
 
-	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("status")
+	if m.Status != nil {
+		if err := m.Status.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudPacker20220411Build) validateUpdatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 build based on the context it is used
+func (m *HashicorpCloudPacker20220411Build) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateImages(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateParent(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411Build) contextValidateImages(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Images); i++ {
+
+		if m.Images[i] != nil {
+			if err := m.Images[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("images" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("images" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411Build) contextValidateParent(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Parent != nil {
+		if err := m.Parent.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("parent")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("parent")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411Build) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Status != nil {
+		if err := m.Status.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status")
+			}
+			return err
+		}
 	}
 
 	return nil

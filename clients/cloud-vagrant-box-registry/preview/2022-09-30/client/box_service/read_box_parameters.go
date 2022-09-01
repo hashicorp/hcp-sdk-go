@@ -16,66 +16,81 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewReadBoxParams creates a new ReadBoxParams object
-// with the default values initialized.
+// NewReadBoxParams creates a new ReadBoxParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewReadBoxParams() *ReadBoxParams {
-	var ()
 	return &ReadBoxParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewReadBoxParamsWithTimeout creates a new ReadBoxParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewReadBoxParamsWithTimeout(timeout time.Duration) *ReadBoxParams {
-	var ()
 	return &ReadBoxParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewReadBoxParamsWithContext creates a new ReadBoxParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewReadBoxParamsWithContext(ctx context.Context) *ReadBoxParams {
-	var ()
 	return &ReadBoxParams{
-
 		Context: ctx,
 	}
 }
 
 // NewReadBoxParamsWithHTTPClient creates a new ReadBoxParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewReadBoxParamsWithHTTPClient(client *http.Client) *ReadBoxParams {
-	var ()
 	return &ReadBoxParams{
 		HTTPClient: client,
 	}
 }
 
-/*ReadBoxParams contains all the parameters to send to the API endpoint
-for the read box operation typically these are written to a http.Request
+/* ReadBoxParams contains all the parameters to send to the API endpoint
+   for the read box operation.
+
+   Typically these are written to a http.Request.
 */
 type ReadBoxParams struct {
 
-	/*Box
-	  The name segment of the Box to look up. As an example, this field would
-	represent the "vagrant" in "hashicorp/vagrant".
+	/* Box.
 
+	     The name segment of the Box to look up. As an example, this field would
+	represent the "vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the read box params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ReadBoxParams) WithDefaults() *ReadBoxParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the read box params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ReadBoxParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the read box params

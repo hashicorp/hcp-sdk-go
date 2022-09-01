@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -48,13 +50,10 @@ import (
 //  Example 4: Pack and unpack a message in Go
 //
 //      foo := &pb.Foo{...}
-//      any, err := anypb.New(foo)
-//      if err != nil {
-//        ...
-//      }
+//      any, err := ptypes.MarshalAny(foo)
 //      ...
 //      foo := &pb.Foo{}
-//      if err := any.UnmarshalTo(foo); err != nil {
+//      if err := ptypes.UnmarshalAny(any, foo); err != nil {
 //        ...
 //      }
 //
@@ -132,6 +131,11 @@ type GoogleProtobufAny struct {
 
 // Validate validates this google protobuf any
 func (m *GoogleProtobufAny) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this google protobuf any based on context it is used
+func (m *GoogleProtobufAny) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

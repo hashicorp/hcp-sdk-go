@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -17,10 +19,10 @@ import (
 type HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow struct {
 
 	// day of week
-	DayOfWeek HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindowDayOfWeek `json:"day_of_week,omitempty"`
+	DayOfWeek *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindowDayOfWeek `json:"day_of_week,omitempty"`
 
 	// time window utc
-	TimeWindowUtc HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindowTimeWindowUTC `json:"time_window_utc,omitempty"`
+	TimeWindowUtc *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindowTimeWindowUTC `json:"time_window_utc,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 major version upgrade config maintenance window
@@ -42,32 +44,88 @@ func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow) 
 }
 
 func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow) validateDayOfWeek(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.DayOfWeek) { // not required
 		return nil
 	}
 
-	if err := m.DayOfWeek.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("day_of_week")
+	if m.DayOfWeek != nil {
+		if err := m.DayOfWeek.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("day_of_week")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("day_of_week")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow) validateTimeWindowUtc(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.TimeWindowUtc) { // not required
 		return nil
 	}
 
-	if err := m.TimeWindowUtc.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("time_window_utc")
+	if m.TimeWindowUtc != nil {
+		if err := m.TimeWindowUtc.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("time_window_utc")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("time_window_utc")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 major version upgrade config maintenance window based on the context it is used
+func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDayOfWeek(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTimeWindowUtc(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow) contextValidateDayOfWeek(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DayOfWeek != nil {
+		if err := m.DayOfWeek.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("day_of_week")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("day_of_week")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow) contextValidateTimeWindowUtc(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TimeWindowUtc != nil {
+		if err := m.TimeWindowUtc.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("time_window_utc")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("time_window_utc")
+			}
+			return err
+		}
 	}
 
 	return nil

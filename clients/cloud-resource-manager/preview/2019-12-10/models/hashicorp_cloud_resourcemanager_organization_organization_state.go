@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -17,6 +18,15 @@ import (
 //
 // swagger:model hashicorp.cloud.resourcemanager.Organization.OrganizationState
 type HashicorpCloudResourcemanagerOrganizationOrganizationState string
+
+func NewHashicorpCloudResourcemanagerOrganizationOrganizationState(value HashicorpCloudResourcemanagerOrganizationOrganizationState) *HashicorpCloudResourcemanagerOrganizationOrganizationState {
+	return &value
+}
+
+// Pointer returns a pointer to a freshly-allocated HashicorpCloudResourcemanagerOrganizationOrganizationState.
+func (m HashicorpCloudResourcemanagerOrganizationOrganizationState) Pointer() *HashicorpCloudResourcemanagerOrganizationOrganizationState {
+	return &m
+}
 
 const (
 
@@ -62,5 +72,10 @@ func (m HashicorpCloudResourcemanagerOrganizationOrganizationState) Validate(for
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud resourcemanager organization organization state based on context it is used
+func (m HashicorpCloudResourcemanagerOrganizationOrganizationState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

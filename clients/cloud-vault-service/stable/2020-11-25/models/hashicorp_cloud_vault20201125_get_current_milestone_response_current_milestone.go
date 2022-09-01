@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -23,6 +24,15 @@ import (
 //
 // swagger:model hashicorp.cloud.vault_20201125.GetCurrentMilestoneResponse.CurrentMilestone
 type HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone string
+
+func NewHashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone(value HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone) *HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone {
+	return &value
+}
+
+// Pointer returns a pointer to a freshly-allocated HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone.
+func (m HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone) Pointer() *HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone {
+	return &m
+}
 
 const (
 
@@ -74,5 +84,10 @@ func (m HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone) 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud vault 20201125 get current milestone response current milestone based on context it is used
+func (m HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

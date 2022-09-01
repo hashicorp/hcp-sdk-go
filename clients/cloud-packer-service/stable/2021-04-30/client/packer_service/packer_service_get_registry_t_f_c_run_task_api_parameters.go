@@ -16,80 +16,98 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewPackerServiceGetRegistryTFCRunTaskAPIParams creates a new PackerServiceGetRegistryTFCRunTaskAPIParams object
-// with the default values initialized.
+// NewPackerServiceGetRegistryTFCRunTaskAPIParams creates a new PackerServiceGetRegistryTFCRunTaskAPIParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceGetRegistryTFCRunTaskAPIParams() *PackerServiceGetRegistryTFCRunTaskAPIParams {
-	var ()
 	return &PackerServiceGetRegistryTFCRunTaskAPIParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceGetRegistryTFCRunTaskAPIParamsWithTimeout creates a new PackerServiceGetRegistryTFCRunTaskAPIParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceGetRegistryTFCRunTaskAPIParamsWithTimeout(timeout time.Duration) *PackerServiceGetRegistryTFCRunTaskAPIParams {
-	var ()
 	return &PackerServiceGetRegistryTFCRunTaskAPIParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceGetRegistryTFCRunTaskAPIParamsWithContext creates a new PackerServiceGetRegistryTFCRunTaskAPIParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceGetRegistryTFCRunTaskAPIParamsWithContext(ctx context.Context) *PackerServiceGetRegistryTFCRunTaskAPIParams {
-	var ()
 	return &PackerServiceGetRegistryTFCRunTaskAPIParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceGetRegistryTFCRunTaskAPIParamsWithHTTPClient creates a new PackerServiceGetRegistryTFCRunTaskAPIParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceGetRegistryTFCRunTaskAPIParamsWithHTTPClient(client *http.Client) *PackerServiceGetRegistryTFCRunTaskAPIParams {
-	var ()
 	return &PackerServiceGetRegistryTFCRunTaskAPIParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceGetRegistryTFCRunTaskAPIParams contains all the parameters to send to the API endpoint
-for the packer service get registry t f c run task API operation typically these are written to a http.Request
+/* PackerServiceGetRegistryTFCRunTaskAPIParams contains all the parameters to send to the API endpoint
+   for the packer service get registry t f c run task API operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceGetRegistryTFCRunTaskAPIParams struct {
 
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
+	/* LocationOrganizationID.
 
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
-	/*LocationRegionProvider
-	  provider is the named cloud provider ("aws", "gcp", "azure").
 
+	/* LocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
 	LocationRegionProvider *string
-	/*LocationRegionRegion
-	  region is the cloud region ("us-west1", "us-east1").
 
+	/* LocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1").
 	*/
 	LocationRegionRegion *string
-	/*TaskType
-	  The HCP Packer Terraform Cloud run task type.
-	Currently, the only existing type is `validation`.
 
+	/* TaskType.
+
+	     The HCP Packer Terraform Cloud run task type.
+	Currently, the only existing type is `validation`.
 	*/
 	TaskType string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service get registry t f c run task API params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceGetRegistryTFCRunTaskAPIParams) WithDefaults() *PackerServiceGetRegistryTFCRunTaskAPIParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service get registry t f c run task API params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceGetRegistryTFCRunTaskAPIParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service get registry t f c run task API params
@@ -202,32 +220,34 @@ func (o *PackerServiceGetRegistryTFCRunTaskAPIParams) WriteToRequest(r runtime.C
 
 		// query param location.region.provider
 		var qrLocationRegionProvider string
+
 		if o.LocationRegionProvider != nil {
 			qrLocationRegionProvider = *o.LocationRegionProvider
 		}
 		qLocationRegionProvider := qrLocationRegionProvider
 		if qLocationRegionProvider != "" {
+
 			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.LocationRegionRegion != nil {
 
 		// query param location.region.region
 		var qrLocationRegionRegion string
+
 		if o.LocationRegionRegion != nil {
 			qrLocationRegionRegion = *o.LocationRegionRegion
 		}
 		qLocationRegionRegion := qrLocationRegionRegion
 		if qLocationRegionRegion != "" {
+
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	// path param task_type

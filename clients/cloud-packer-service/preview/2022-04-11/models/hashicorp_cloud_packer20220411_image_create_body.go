@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -25,6 +27,11 @@ type HashicorpCloudPacker20220411ImageCreateBody struct {
 
 // Validate validates this hashicorp cloud packer 20220411 image create body
 func (m *HashicorpCloudPacker20220411ImageCreateBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud packer 20220411 image create body based on context it is used
+func (m *HashicorpCloudPacker20220411ImageCreateBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -29,7 +29,6 @@ func (o *CreateRegistryReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -40,25 +39,24 @@ func NewCreateRegistryOK() *CreateRegistryOK {
 	return &CreateRegistryOK{}
 }
 
-/*CreateRegistryOK handles this case with default header values.
+/* CreateRegistryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
 type CreateRegistryOK struct {
-	Payload *models.HashicorpCloudVagrant20220930CreateRegistryResponse
+	Payload *models.HashicorpCloudVagrantCreateRegistryResponse
 }
 
 func (o *CreateRegistryOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry][%d] createRegistryOK  %+v", 200, o.Payload)
 }
-
-func (o *CreateRegistryOK) GetPayload() *models.HashicorpCloudVagrant20220930CreateRegistryResponse {
+func (o *CreateRegistryOK) GetPayload() *models.HashicorpCloudVagrantCreateRegistryResponse {
 	return o.Payload
 }
 
 func (o *CreateRegistryOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVagrant20220930CreateRegistryResponse)
+	o.Payload = new(models.HashicorpCloudVagrantCreateRegistryResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -35,7 +37,6 @@ func (m *HashicorpCloudResourcemanagerOrganizationGetResponse) Validate(formats 
 }
 
 func (m *HashicorpCloudResourcemanagerOrganizationGetResponse) validateOrganization(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Organization) { // not required
 		return nil
 	}
@@ -44,6 +45,38 @@ func (m *HashicorpCloudResourcemanagerOrganizationGetResponse) validateOrganizat
 		if err := m.Organization.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("organization")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("organization")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud resourcemanager organization get response based on the context it is used
+func (m *HashicorpCloudResourcemanagerOrganizationGetResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateOrganization(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudResourcemanagerOrganizationGetResponse) contextValidateOrganization(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Organization != nil {
+		if err := m.Organization.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("organization")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("organization")
 			}
 			return err
 		}

@@ -47,7 +47,7 @@ func NewDeregisterLinkedClusterOK() *DeregisterLinkedClusterOK {
 	return &DeregisterLinkedClusterOK{}
 }
 
-/*DeregisterLinkedClusterOK handles this case with default header values.
+/* DeregisterLinkedClusterOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type DeregisterLinkedClusterOK struct {
 func (o *DeregisterLinkedClusterOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{cluster_link.location.organization_id}/projects/{cluster_link.location.project_id}/link/deregister][%d] deregisterLinkedClusterOK  %+v", 200, o.Payload)
 }
-
 func (o *DeregisterLinkedClusterOK) GetPayload() models.HashicorpCloudVault20201125DeregisterLinkedClusterResponse {
 	return o.Payload
 }
@@ -80,7 +79,7 @@ func NewDeregisterLinkedClusterDefault(code int) *DeregisterLinkedClusterDefault
 	}
 }
 
-/*DeregisterLinkedClusterDefault handles this case with default header values.
+/* DeregisterLinkedClusterDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -98,7 +97,6 @@ func (o *DeregisterLinkedClusterDefault) Code() int {
 func (o *DeregisterLinkedClusterDefault) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{cluster_link.location.organization_id}/projects/{cluster_link.location.project_id}/link/deregister][%d] DeregisterLinkedCluster default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *DeregisterLinkedClusterDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -72,7 +74,6 @@ func (m *HashicorpCloudPackerChannel) Validate(formats strfmt.Registry) error {
 }
 
 func (m *HashicorpCloudPackerChannel) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -85,7 +86,6 @@ func (m *HashicorpCloudPackerChannel) validateCreatedAt(formats strfmt.Registry)
 }
 
 func (m *HashicorpCloudPackerChannel) validateIteration(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Iteration) { // not required
 		return nil
 	}
@@ -94,6 +94,8 @@ func (m *HashicorpCloudPackerChannel) validateIteration(formats strfmt.Registry)
 		if err := m.Iteration.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("iteration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("iteration")
 			}
 			return err
 		}
@@ -103,7 +105,6 @@ func (m *HashicorpCloudPackerChannel) validateIteration(formats strfmt.Registry)
 }
 
 func (m *HashicorpCloudPackerChannel) validatePointer(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Pointer) { // not required
 		return nil
 	}
@@ -112,6 +113,8 @@ func (m *HashicorpCloudPackerChannel) validatePointer(formats strfmt.Registry) e
 		if err := m.Pointer.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pointer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pointer")
 			}
 			return err
 		}
@@ -121,13 +124,62 @@ func (m *HashicorpCloudPackerChannel) validatePointer(formats strfmt.Registry) e
 }
 
 func (m *HashicorpCloudPackerChannel) validateUpdatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer channel based on the context it is used
+func (m *HashicorpCloudPackerChannel) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateIteration(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePointer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerChannel) contextValidateIteration(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Iteration != nil {
+		if err := m.Iteration.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("iteration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("iteration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerChannel) contextValidatePointer(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pointer != nil {
+		if err := m.Pointer.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pointer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pointer")
+			}
+			return err
+		}
 	}
 
 	return nil

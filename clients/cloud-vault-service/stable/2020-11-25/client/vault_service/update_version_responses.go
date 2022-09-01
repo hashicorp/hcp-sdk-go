@@ -47,7 +47,7 @@ func NewUpdateVersionOK() *UpdateVersionOK {
 	return &UpdateVersionOK{}
 }
 
-/*UpdateVersionOK handles this case with default header values.
+/* UpdateVersionOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type UpdateVersionOK struct {
 func (o *UpdateVersionOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/{version}][%d] updateVersionOK  %+v", 200, o.Payload)
 }
-
 func (o *UpdateVersionOK) GetPayload() *models.HashicorpCloudVault20201125UpdateVersionResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewUpdateVersionDefault(code int) *UpdateVersionDefault {
 	}
 }
 
-/*UpdateVersionDefault handles this case with default header values.
+/* UpdateVersionDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *UpdateVersionDefault) Code() int {
 func (o *UpdateVersionDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/{version}][%d] UpdateVersion default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *UpdateVersionDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

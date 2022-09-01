@@ -25,19 +25,22 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ActivateRegistry(params *ActivateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*ActivateRegistryOK, error)
+	ActivateRegistry(params *ActivateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ActivateRegistryOK, error)
 
-	CreateRegistry(params *CreateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*CreateRegistryOK, error)
+	CreateRegistry(params *CreateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRegistryOK, error)
 
-	DeactivateRegistry(params *DeactivateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*DeactivateRegistryOK, error)
+	DeactivateRegistry(params *DeactivateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeactivateRegistryOK, error)
 
-	DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteRegistryOK, error)
+	DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteRegistryOK, error)
 
-	ListRegistries(params *ListRegistriesParams, authInfo runtime.ClientAuthInfoWriter) (*ListRegistriesOK, error)
+	ListRegistries(params *ListRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRegistriesOK, error)
 
-	ReadRegistry(params *ReadRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*ReadRegistryOK, error)
+	ReadRegistry(params *ReadRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadRegistryOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -48,13 +51,12 @@ type ClientService interface {
   Activation will re-enable a Registry, allowing requests and
 accruing charges as normal.
 */
-func (a *Client) ActivateRegistry(params *ActivateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*ActivateRegistryOK, error) {
+func (a *Client) ActivateRegistry(params *ActivateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ActivateRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewActivateRegistryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ActivateRegistry",
 		Method:             "PUT",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/activate",
@@ -66,7 +68,12 @@ func (a *Client) ActivateRegistry(params *ActivateRegistryParams, authInfo runti
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -83,13 +90,12 @@ func (a *Client) ActivateRegistry(params *ActivateRegistryParams, authInfo runti
 /*
   CreateRegistry creates registry creates a vagrant box registry at the location specified
 */
-func (a *Client) CreateRegistry(params *CreateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*CreateRegistryOK, error) {
+func (a *Client) CreateRegistry(params *CreateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateRegistryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "CreateRegistry",
 		Method:             "PUT",
 		PathPattern:        "/vagrant/2022-09-30/registry",
@@ -101,7 +107,12 @@ func (a *Client) CreateRegistry(params *CreateRegistryParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -123,13 +134,12 @@ All requests to the Registry will return not-found errors. This
 can be used to temporarily block access to a Registry to prevent
 access-related charges to the Registry.
 */
-func (a *Client) DeactivateRegistry(params *DeactivateRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*DeactivateRegistryOK, error) {
+func (a *Client) DeactivateRegistry(params *DeactivateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeactivateRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeactivateRegistryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "DeactivateRegistry",
 		Method:             "PUT",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/deactivate",
@@ -141,7 +151,12 @@ func (a *Client) DeactivateRegistry(params *DeactivateRegistryParams, authInfo r
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -163,13 +178,12 @@ Provider data, including any Hosted Providers and their
 respective data. This operation is permanent and cannot be
 undone.
 */
-func (a *Client) DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteRegistryOK, error) {
+func (a *Client) DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteRegistryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "DeleteRegistry",
 		Method:             "DELETE",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}",
@@ -181,7 +195,12 @@ func (a *Client) DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -196,15 +215,14 @@ func (a *Client) DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.C
 }
 
 /*
-  ListRegistries lists registries lists available vagrant box registries in a particular project
+  ListRegistries lists registries lists available vagrant box registries the query can be scoped to a particular organization or project
 */
-func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.ClientAuthInfoWriter) (*ListRegistriesOK, error) {
+func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRegistriesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListRegistriesParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ListRegistries",
 		Method:             "GET",
 		PathPattern:        "/vagrant/2022-09-30/registry",
@@ -216,7 +234,12 @@ func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -233,13 +256,12 @@ func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.C
 /*
   ReadRegistry reads registry reads a vagrant box registry by its name
 */
-func (a *Client) ReadRegistry(params *ReadRegistryParams, authInfo runtime.ClientAuthInfoWriter) (*ReadRegistryOK, error) {
+func (a *Client) ReadRegistry(params *ReadRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewReadRegistryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ReadRegistry",
 		Method:             "GET",
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}",
@@ -251,7 +273,12 @@ func (a *Client) ReadRegistry(params *ReadRegistryParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

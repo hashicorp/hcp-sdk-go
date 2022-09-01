@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -50,7 +52,6 @@ func (m *HashicorpCloudPacker20220411ChannelIterationPointer) Validate(formats s
 }
 
 func (m *HashicorpCloudPacker20220411ChannelIterationPointer) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -63,7 +64,6 @@ func (m *HashicorpCloudPacker20220411ChannelIterationPointer) validateCreatedAt(
 }
 
 func (m *HashicorpCloudPacker20220411ChannelIterationPointer) validateIteration(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Iteration) { // not required
 		return nil
 	}
@@ -72,6 +72,38 @@ func (m *HashicorpCloudPacker20220411ChannelIterationPointer) validateIteration(
 		if err := m.Iteration.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("iteration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("iteration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 channel iteration pointer based on the context it is used
+func (m *HashicorpCloudPacker20220411ChannelIterationPointer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateIteration(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411ChannelIterationPointer) contextValidateIteration(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Iteration != nil {
+		if err := m.Iteration.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("iteration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("iteration")
 			}
 			return err
 		}

@@ -18,68 +18,85 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-service/stable/2020-11-25/models"
 )
 
-// NewUpdatePathsFilterParams creates a new UpdatePathsFilterParams object
-// with the default values initialized.
+// NewUpdatePathsFilterParams creates a new UpdatePathsFilterParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdatePathsFilterParams() *UpdatePathsFilterParams {
-	var ()
 	return &UpdatePathsFilterParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdatePathsFilterParamsWithTimeout creates a new UpdatePathsFilterParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUpdatePathsFilterParamsWithTimeout(timeout time.Duration) *UpdatePathsFilterParams {
-	var ()
 	return &UpdatePathsFilterParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUpdatePathsFilterParamsWithContext creates a new UpdatePathsFilterParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUpdatePathsFilterParamsWithContext(ctx context.Context) *UpdatePathsFilterParams {
-	var ()
 	return &UpdatePathsFilterParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUpdatePathsFilterParamsWithHTTPClient creates a new UpdatePathsFilterParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUpdatePathsFilterParamsWithHTTPClient(client *http.Client) *UpdatePathsFilterParams {
-	var ()
 	return &UpdatePathsFilterParams{
 		HTTPClient: client,
 	}
 }
 
-/*UpdatePathsFilterParams contains all the parameters to send to the API endpoint
-for the update paths filter operation typically these are written to a http.Request
+/* UpdatePathsFilterParams contains all the parameters to send to the API endpoint
+   for the update paths filter operation.
+
+   Typically these are written to a http.Request.
 */
 type UpdatePathsFilterParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudVault20201125UpdatePathsFilterRequest
-	/*ClusterID*/
-	ClusterID string
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	// ClusterID.
+	ClusterID string
+
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the update paths filter params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdatePathsFilterParams) WithDefaults() *UpdatePathsFilterParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the update paths filter params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdatePathsFilterParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update paths filter params
@@ -166,7 +183,6 @@ func (o *UpdatePathsFilterParams) WriteToRequest(r runtime.ClientRequest, reg st
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

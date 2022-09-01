@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -49,7 +51,6 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) Validate(formats strfmt
 }
 
 func (m *HashicorpCloudVault20201125ObservabilityConfig) validateDatadog(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Datadog) { // not required
 		return nil
 	}
@@ -58,6 +59,8 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) validateDatadog(formats
 		if err := m.Datadog.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("datadog")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("datadog")
 			}
 			return err
 		}
@@ -67,7 +70,6 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) validateDatadog(formats
 }
 
 func (m *HashicorpCloudVault20201125ObservabilityConfig) validateGrafana(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Grafana) { // not required
 		return nil
 	}
@@ -76,6 +78,8 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) validateGrafana(formats
 		if err := m.Grafana.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("grafana")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("grafana")
 			}
 			return err
 		}
@@ -85,7 +89,6 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) validateGrafana(formats
 }
 
 func (m *HashicorpCloudVault20201125ObservabilityConfig) validateSplunk(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Splunk) { // not required
 		return nil
 	}
@@ -94,6 +97,78 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) validateSplunk(formats 
 		if err := m.Splunk.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("splunk")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("splunk")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 observability config based on the context it is used
+func (m *HashicorpCloudVault20201125ObservabilityConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDatadog(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGrafana(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSplunk(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateDatadog(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Datadog != nil {
+		if err := m.Datadog.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("datadog")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("datadog")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateGrafana(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Grafana != nil {
+		if err := m.Grafana.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("grafana")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("grafana")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateSplunk(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Splunk != nil {
+		if err := m.Splunk.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("splunk")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("splunk")
 			}
 			return err
 		}

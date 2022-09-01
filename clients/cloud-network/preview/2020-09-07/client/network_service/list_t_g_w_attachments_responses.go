@@ -47,7 +47,7 @@ func NewListTGWAttachmentsOK() *ListTGWAttachmentsOK {
 	return &ListTGWAttachmentsOK{}
 }
 
-/*ListTGWAttachmentsOK handles this case with default header values.
+/* ListTGWAttachmentsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type ListTGWAttachmentsOK struct {
 func (o *ListTGWAttachmentsOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] listTGWAttachmentsOK  %+v", 200, o.Payload)
 }
-
 func (o *ListTGWAttachmentsOK) GetPayload() *models.HashicorpCloudNetwork20200907ListTGWAttachmentsResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewListTGWAttachmentsDefault(code int) *ListTGWAttachmentsDefault {
 	}
 }
 
-/*ListTGWAttachmentsDefault handles this case with default header values.
+/* ListTGWAttachmentsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *ListTGWAttachmentsDefault) Code() int {
 func (o *ListTGWAttachmentsDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] ListTGWAttachments default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ListTGWAttachmentsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

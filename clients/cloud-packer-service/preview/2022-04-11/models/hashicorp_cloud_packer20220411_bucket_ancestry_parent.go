@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -51,7 +53,6 @@ func (m *HashicorpCloudPacker20220411BucketAncestryParent) Validate(formats strf
 }
 
 func (m *HashicorpCloudPacker20220411BucketAncestryParent) validateChannelIteration(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ChannelIteration) { // not required
 		return nil
 	}
@@ -60,6 +61,38 @@ func (m *HashicorpCloudPacker20220411BucketAncestryParent) validateChannelIterat
 		if err := m.ChannelIteration.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("channel_iteration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("channel_iteration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 bucket ancestry parent based on the context it is used
+func (m *HashicorpCloudPacker20220411BucketAncestryParent) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateChannelIteration(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411BucketAncestryParent) contextValidateChannelIteration(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ChannelIteration != nil {
+		if err := m.ChannelIteration.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("channel_iteration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("channel_iteration")
 			}
 			return err
 		}

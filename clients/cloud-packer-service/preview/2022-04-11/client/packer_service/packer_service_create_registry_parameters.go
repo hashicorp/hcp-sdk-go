@@ -18,66 +18,82 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/preview/2022-04-11/models"
 )
 
-// NewPackerServiceCreateRegistryParams creates a new PackerServiceCreateRegistryParams object
-// with the default values initialized.
+// NewPackerServiceCreateRegistryParams creates a new PackerServiceCreateRegistryParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPackerServiceCreateRegistryParams() *PackerServiceCreateRegistryParams {
-	var ()
 	return &PackerServiceCreateRegistryParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPackerServiceCreateRegistryParamsWithTimeout creates a new PackerServiceCreateRegistryParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPackerServiceCreateRegistryParamsWithTimeout(timeout time.Duration) *PackerServiceCreateRegistryParams {
-	var ()
 	return &PackerServiceCreateRegistryParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPackerServiceCreateRegistryParamsWithContext creates a new PackerServiceCreateRegistryParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPackerServiceCreateRegistryParamsWithContext(ctx context.Context) *PackerServiceCreateRegistryParams {
-	var ()
 	return &PackerServiceCreateRegistryParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPackerServiceCreateRegistryParamsWithHTTPClient creates a new PackerServiceCreateRegistryParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPackerServiceCreateRegistryParamsWithHTTPClient(client *http.Client) *PackerServiceCreateRegistryParams {
-	var ()
 	return &PackerServiceCreateRegistryParams{
 		HTTPClient: client,
 	}
 }
 
-/*PackerServiceCreateRegistryParams contains all the parameters to send to the API endpoint
-for the packer service create registry operation typically these are written to a http.Request
+/* PackerServiceCreateRegistryParams contains all the parameters to send to the API endpoint
+   for the packer service create registry operation.
+
+   Typically these are written to a http.Request.
 */
 type PackerServiceCreateRegistryParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.HashicorpCloudPacker20220411CreateRegistryRequest
-	/*LocationOrganizationID
-	  organization_id is the id of the organization.
 
+	/* LocationOrganizationID.
+
+	   organization_id is the id of the organization.
 	*/
 	LocationOrganizationID string
-	/*LocationProjectID
-	  project_id is the projects id.
 
+	/* LocationProjectID.
+
+	   project_id is the projects id.
 	*/
 	LocationProjectID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the packer service create registry params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceCreateRegistryParams) WithDefaults() *PackerServiceCreateRegistryParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the packer service create registry params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PackerServiceCreateRegistryParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the packer service create registry params
@@ -153,7 +169,6 @@ func (o *PackerServiceCreateRegistryParams) WriteToRequest(r runtime.ClientReque
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

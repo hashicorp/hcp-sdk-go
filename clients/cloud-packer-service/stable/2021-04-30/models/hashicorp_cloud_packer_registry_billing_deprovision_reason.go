@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -17,6 +18,15 @@ import (
 //
 // swagger:model hashicorp.cloud.packer.RegistryBillingDeprovision.Reason
 type HashicorpCloudPackerRegistryBillingDeprovisionReason string
+
+func NewHashicorpCloudPackerRegistryBillingDeprovisionReason(value HashicorpCloudPackerRegistryBillingDeprovisionReason) *HashicorpCloudPackerRegistryBillingDeprovisionReason {
+	return &value
+}
+
+// Pointer returns a pointer to a freshly-allocated HashicorpCloudPackerRegistryBillingDeprovisionReason.
+func (m HashicorpCloudPackerRegistryBillingDeprovisionReason) Pointer() *HashicorpCloudPackerRegistryBillingDeprovisionReason {
+	return &m
+}
 
 const (
 
@@ -62,5 +72,10 @@ func (m HashicorpCloudPackerRegistryBillingDeprovisionReason) Validate(formats s
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud packer registry billing deprovision reason based on context it is used
+func (m HashicorpCloudPackerRegistryBillingDeprovisionReason) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

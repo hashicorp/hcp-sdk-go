@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -17,10 +19,10 @@ import (
 type HashicorpCloudVault20201125GetReplicationStatusResponse struct {
 
 	// connection status
-	ConnectionStatus HashicorpCloudVault20201125GetReplicationStatusResponseConnectionStatus `json:"connection_status,omitempty"`
+	ConnectionStatus *HashicorpCloudVault20201125GetReplicationStatusResponseConnectionStatus `json:"connection_status,omitempty"`
 
 	// sync progress
-	SyncProgress HashicorpCloudVault20201125GetReplicationStatusResponseSyncProgress `json:"sync_progress,omitempty"`
+	SyncProgress *HashicorpCloudVault20201125GetReplicationStatusResponseSyncProgress `json:"sync_progress,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 get replication status response
@@ -42,32 +44,88 @@ func (m *HashicorpCloudVault20201125GetReplicationStatusResponse) Validate(forma
 }
 
 func (m *HashicorpCloudVault20201125GetReplicationStatusResponse) validateConnectionStatus(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ConnectionStatus) { // not required
 		return nil
 	}
 
-	if err := m.ConnectionStatus.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("connection_status")
+	if m.ConnectionStatus != nil {
+		if err := m.ConnectionStatus.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("connection_status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("connection_status")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *HashicorpCloudVault20201125GetReplicationStatusResponse) validateSyncProgress(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.SyncProgress) { // not required
 		return nil
 	}
 
-	if err := m.SyncProgress.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("sync_progress")
+	if m.SyncProgress != nil {
+		if err := m.SyncProgress.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sync_progress")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sync_progress")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 get replication status response based on the context it is used
+func (m *HashicorpCloudVault20201125GetReplicationStatusResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateConnectionStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSyncProgress(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetReplicationStatusResponse) contextValidateConnectionStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ConnectionStatus != nil {
+		if err := m.ConnectionStatus.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("connection_status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("connection_status")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetReplicationStatusResponse) contextValidateSyncProgress(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SyncProgress != nil {
+		if err := m.SyncProgress.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sync_progress")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sync_progress")
+			}
+			return err
+		}
 	}
 
 	return nil

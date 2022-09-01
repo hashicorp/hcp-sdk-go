@@ -47,7 +47,7 @@ func NewSessionsOK() *SessionsOK {
 	return &SessionsOK{}
 }
 
-/*SessionsOK handles this case with default header values.
+/* SessionsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type SessionsOK struct {
 func (o *SessionsOK) Error() string {
 	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] sessionsOK  %+v", 200, o.Payload)
 }
-
 func (o *SessionsOK) GetPayload() *models.HashicorpCloudBoundary20211221SessionsResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewSessionsDefault(code int) *SessionsDefault {
 	}
 }
 
-/*SessionsDefault handles this case with default header values.
+/* SessionsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *SessionsDefault) Code() int {
 func (o *SessionsDefault) Error() string {
 	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] Sessions default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *SessionsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

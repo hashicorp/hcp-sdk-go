@@ -47,7 +47,7 @@ func NewPackerServiceUpdateRegistryOK() *PackerServiceUpdateRegistryOK {
 	return &PackerServiceUpdateRegistryOK{}
 }
 
-/*PackerServiceUpdateRegistryOK handles this case with default header values.
+/* PackerServiceUpdateRegistryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type PackerServiceUpdateRegistryOK struct {
 func (o *PackerServiceUpdateRegistryOK) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceUpdateRegistryOK  %+v", 200, o.Payload)
 }
-
 func (o *PackerServiceUpdateRegistryOK) GetPayload() *models.HashicorpCloudPackerUpdateRegistryResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewPackerServiceUpdateRegistryDefault(code int) *PackerServiceUpdateRegistr
 	}
 }
 
-/*PackerServiceUpdateRegistryDefault handles this case with default header values.
+/* PackerServiceUpdateRegistryDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *PackerServiceUpdateRegistryDefault) Code() int {
 func (o *PackerServiceUpdateRegistryDefault) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_UpdateRegistry default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *PackerServiceUpdateRegistryDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -18,73 +18,90 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewCreateProviderParams creates a new CreateProviderParams object
-// with the default values initialized.
+// NewCreateProviderParams creates a new CreateProviderParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewCreateProviderParams() *CreateProviderParams {
-	var ()
 	return &CreateProviderParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreateProviderParamsWithTimeout creates a new CreateProviderParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewCreateProviderParamsWithTimeout(timeout time.Duration) *CreateProviderParams {
-	var ()
 	return &CreateProviderParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewCreateProviderParamsWithContext creates a new CreateProviderParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewCreateProviderParamsWithContext(ctx context.Context) *CreateProviderParams {
-	var ()
 	return &CreateProviderParams{
-
 		Context: ctx,
 	}
 }
 
 // NewCreateProviderParamsWithHTTPClient creates a new CreateProviderParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewCreateProviderParamsWithHTTPClient(client *http.Client) *CreateProviderParams {
-	var ()
 	return &CreateProviderParams{
 		HTTPClient: client,
 	}
 }
 
-/*CreateProviderParams contains all the parameters to send to the API endpoint
-for the create provider operation typically these are written to a http.Request
+/* CreateProviderParams contains all the parameters to send to the API endpoint
+   for the create provider operation.
+
+   Typically these are written to a http.Request.
 */
 type CreateProviderParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930CreateProviderRequest
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	// Body.
+	Body *models.HashicorpCloudVagrantCreateProviderRequest
 
+	/* Box.
+
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
-	/*Version
-	  The name of the Version to create the Provider in.
 
+	/* Version.
+
+	   The name of the Version to create the Provider in.
 	*/
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the create provider params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateProviderParams) WithDefaults() *CreateProviderParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the create provider params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateProviderParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create provider params
@@ -121,13 +138,13 @@ func (o *CreateProviderParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create provider params
-func (o *CreateProviderParams) WithBody(body *models.HashicorpCloudVagrant20220930CreateProviderRequest) *CreateProviderParams {
+func (o *CreateProviderParams) WithBody(body *models.HashicorpCloudVagrantCreateProviderRequest) *CreateProviderParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create provider params
-func (o *CreateProviderParams) SetBody(body *models.HashicorpCloudVagrant20220930CreateProviderRequest) {
+func (o *CreateProviderParams) SetBody(body *models.HashicorpCloudVagrantCreateProviderRequest) {
 	o.Body = body
 }
 
@@ -171,7 +188,6 @@ func (o *CreateProviderParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

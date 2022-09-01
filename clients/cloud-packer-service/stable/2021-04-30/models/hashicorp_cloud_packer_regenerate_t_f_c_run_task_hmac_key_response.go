@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -21,6 +23,11 @@ type HashicorpCloudPackerRegenerateTFCRunTaskHmacKeyResponse struct {
 
 // Validate validates this hashicorp cloud packer regenerate t f c run task hmac key response
 func (m *HashicorpCloudPackerRegenerateTFCRunTaskHmacKeyResponse) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud packer regenerate t f c run task hmac key response based on context it is used
+func (m *HashicorpCloudPackerRegenerateTFCRunTaskHmacKeyResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

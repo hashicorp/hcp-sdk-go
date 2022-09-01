@@ -18,78 +18,96 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewUploadProviderParams creates a new UploadProviderParams object
-// with the default values initialized.
+// NewUploadProviderParams creates a new UploadProviderParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUploadProviderParams() *UploadProviderParams {
-	var ()
 	return &UploadProviderParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUploadProviderParamsWithTimeout creates a new UploadProviderParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUploadProviderParamsWithTimeout(timeout time.Duration) *UploadProviderParams {
-	var ()
 	return &UploadProviderParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUploadProviderParamsWithContext creates a new UploadProviderParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUploadProviderParamsWithContext(ctx context.Context) *UploadProviderParams {
-	var ()
 	return &UploadProviderParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUploadProviderParamsWithHTTPClient creates a new UploadProviderParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUploadProviderParamsWithHTTPClient(client *http.Client) *UploadProviderParams {
-	var ()
 	return &UploadProviderParams{
 		HTTPClient: client,
 	}
 }
 
-/*UploadProviderParams contains all the parameters to send to the API endpoint
-for the upload provider operation typically these are written to a http.Request
+/* UploadProviderParams contains all the parameters to send to the API endpoint
+   for the upload provider operation.
+
+   Typically these are written to a http.Request.
 */
 type UploadProviderParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930UploadProviderRequest
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	// Body.
+	Body *models.HashicorpCloudVagrantUploadProviderRequest
 
+	/* Box.
+
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Provider
-	  The name of the Provider.
 
+	/* Provider.
+
+	   The name of the Provider.
 	*/
 	Provider string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
-	/*Version
-	  The name of the Version for the Provider.
 
+	/* Version.
+
+	   The name of the Version for the Provider.
 	*/
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the upload provider params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UploadProviderParams) WithDefaults() *UploadProviderParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the upload provider params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UploadProviderParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the upload provider params
@@ -126,13 +144,13 @@ func (o *UploadProviderParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the upload provider params
-func (o *UploadProviderParams) WithBody(body *models.HashicorpCloudVagrant20220930UploadProviderRequest) *UploadProviderParams {
+func (o *UploadProviderParams) WithBody(body *models.HashicorpCloudVagrantUploadProviderRequest) *UploadProviderParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the upload provider params
-func (o *UploadProviderParams) SetBody(body *models.HashicorpCloudVagrant20220930UploadProviderRequest) {
+func (o *UploadProviderParams) SetBody(body *models.HashicorpCloudVagrantUploadProviderRequest) {
 	o.Body = body
 }
 
@@ -187,7 +205,6 @@ func (o *UploadProviderParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

@@ -47,7 +47,7 @@ func NewGetCurrentMilestoneOK() *GetCurrentMilestoneOK {
 	return &GetCurrentMilestoneOK{}
 }
 
-/*GetCurrentMilestoneOK handles this case with default header values.
+/* GetCurrentMilestoneOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -58,7 +58,6 @@ type GetCurrentMilestoneOK struct {
 func (o *GetCurrentMilestoneOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] getCurrentMilestoneOK  %+v", 200, o.Payload)
 }
-
 func (o *GetCurrentMilestoneOK) GetPayload() *models.HashicorpCloudVault20201125GetCurrentMilestoneResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewGetCurrentMilestoneDefault(code int) *GetCurrentMilestoneDefault {
 	}
 }
 
-/*GetCurrentMilestoneDefault handles this case with default header values.
+/* GetCurrentMilestoneDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -100,7 +99,6 @@ func (o *GetCurrentMilestoneDefault) Code() int {
 func (o *GetCurrentMilestoneDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] GetCurrentMilestone default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *GetCurrentMilestoneDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

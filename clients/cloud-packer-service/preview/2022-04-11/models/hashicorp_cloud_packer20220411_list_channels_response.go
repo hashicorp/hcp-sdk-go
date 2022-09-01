@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -37,7 +38,6 @@ func (m *HashicorpCloudPacker20220411ListChannelsResponse) Validate(formats strf
 }
 
 func (m *HashicorpCloudPacker20220411ListChannelsResponse) validateChannels(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Channels) { // not required
 		return nil
 	}
@@ -51,6 +51,42 @@ func (m *HashicorpCloudPacker20220411ListChannelsResponse) validateChannels(form
 			if err := m.Channels[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("channels" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("channels" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20220411 list channels response based on the context it is used
+func (m *HashicorpCloudPacker20220411ListChannelsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateChannels(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20220411ListChannelsResponse) contextValidateChannels(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Channels); i++ {
+
+		if m.Channels[i] != nil {
+			if err := m.Channels[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("channels" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("channels" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/go-openapi/errors"
@@ -17,6 +18,15 @@ import (
 //
 // swagger:model hashicorp.cloud.vault_20201125.MajorVersionUpgradeConfig.UpgradeType
 type HashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType string
+
+func NewHashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType(value HashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType) *HashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType {
+	return &value
+}
+
+// Pointer returns a pointer to a freshly-allocated HashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType.
+func (m HashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType) Pointer() *HashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType {
+	return &m
+}
 
 const (
 
@@ -65,5 +75,10 @@ func (m HashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType) Validat
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this hashicorp cloud vault 20201125 major version upgrade config upgrade type based on context it is used
+func (m HashicorpCloudVault20201125MajorVersionUpgradeConfigUpgradeType) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

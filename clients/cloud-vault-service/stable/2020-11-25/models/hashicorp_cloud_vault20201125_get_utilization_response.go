@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -56,7 +58,6 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) Validate(formats str
 }
 
 func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateClients(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Clients) { // not required
 		return nil
 	}
@@ -65,6 +66,8 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateClients(form
 		if err := m.Clients.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("clients")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("clients")
 			}
 			return err
 		}
@@ -74,7 +77,6 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateClients(form
 }
 
 func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateDiskUsageBytes(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.DiskUsageBytes) { // not required
 		return nil
 	}
@@ -83,6 +85,8 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateDiskUsageByt
 		if err := m.DiskUsageBytes.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("disk_usage_bytes")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("disk_usage_bytes")
 			}
 			return err
 		}
@@ -92,7 +96,6 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateDiskUsageByt
 }
 
 func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateDistinctEntities(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.DistinctEntities) { // not required
 		return nil
 	}
@@ -101,6 +104,8 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateDistinctEnti
 		if err := m.DistinctEntities.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("distinct_entities")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("distinct_entities")
 			}
 			return err
 		}
@@ -110,7 +115,6 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateDistinctEnti
 }
 
 func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateNonEntityTokens(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.NonEntityTokens) { // not required
 		return nil
 	}
@@ -119,6 +123,98 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateNonEntityTok
 		if err := m.NonEntityTokens.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("non_entity_tokens")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("non_entity_tokens")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 get utilization response based on the context it is used
+func (m *HashicorpCloudVault20201125GetUtilizationResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateClients(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDiskUsageBytes(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDistinctEntities(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNonEntityTokens(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateClients(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Clients != nil {
+		if err := m.Clients.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("clients")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("clients")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateDiskUsageBytes(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DiskUsageBytes != nil {
+		if err := m.DiskUsageBytes.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("disk_usage_bytes")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("disk_usage_bytes")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateDistinctEntities(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DistinctEntities != nil {
+		if err := m.DistinctEntities.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("distinct_entities")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("distinct_entities")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateNonEntityTokens(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.NonEntityTokens != nil {
+		if err := m.NonEntityTokens.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("non_entity_tokens")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("non_entity_tokens")
 			}
 			return err
 		}

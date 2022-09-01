@@ -18,78 +18,96 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
-// NewCompleteUploadParams creates a new CompleteUploadParams object
-// with the default values initialized.
+// NewCompleteUploadParams creates a new CompleteUploadParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewCompleteUploadParams() *CompleteUploadParams {
-	var ()
 	return &CompleteUploadParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCompleteUploadParamsWithTimeout creates a new CompleteUploadParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewCompleteUploadParamsWithTimeout(timeout time.Duration) *CompleteUploadParams {
-	var ()
 	return &CompleteUploadParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewCompleteUploadParamsWithContext creates a new CompleteUploadParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewCompleteUploadParamsWithContext(ctx context.Context) *CompleteUploadParams {
-	var ()
 	return &CompleteUploadParams{
-
 		Context: ctx,
 	}
 }
 
 // NewCompleteUploadParamsWithHTTPClient creates a new CompleteUploadParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewCompleteUploadParamsWithHTTPClient(client *http.Client) *CompleteUploadParams {
-	var ()
 	return &CompleteUploadParams{
 		HTTPClient: client,
 	}
 }
 
-/*CompleteUploadParams contains all the parameters to send to the API endpoint
-for the complete upload operation typically these are written to a http.Request
+/* CompleteUploadParams contains all the parameters to send to the API endpoint
+   for the complete upload operation.
+
+   Typically these are written to a http.Request.
 */
 type CompleteUploadParams struct {
 
-	/*Body*/
-	Body *models.HashicorpCloudVagrant20220930CompleteUploadRequest
-	/*Box
-	  The name segment of the Box. As an example, this field would represent the
-	"vagrant" in "hashicorp/vagrant".
+	// Body.
+	Body *models.HashicorpCloudVagrantCompleteUploadRequest
 
+	/* Box.
+
+	     The name segment of the Box. As an example, this field would represent the
+	"vagrant" in "hashicorp/vagrant".
 	*/
 	Box string
-	/*Provider
-	  The name of the Provider.
 
+	/* Provider.
+
+	   The name of the Provider.
 	*/
 	Provider string
-	/*Registry
-	  The Registry segment of the Box. As an example, this field would represent
-	the "hashicorp" in "hashicorp/vagrant".
 
+	/* Registry.
+
+	     The Registry segment of the Box. As an example, this field would represent
+	the "hashicorp" in "hashicorp/vagrant".
 	*/
 	Registry string
-	/*Version
-	  The name of the Version for the Provider.
 
+	/* Version.
+
+	   The name of the Version for the Provider.
 	*/
 	Version string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the complete upload params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CompleteUploadParams) WithDefaults() *CompleteUploadParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the complete upload params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CompleteUploadParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the complete upload params
@@ -126,13 +144,13 @@ func (o *CompleteUploadParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the complete upload params
-func (o *CompleteUploadParams) WithBody(body *models.HashicorpCloudVagrant20220930CompleteUploadRequest) *CompleteUploadParams {
+func (o *CompleteUploadParams) WithBody(body *models.HashicorpCloudVagrantCompleteUploadRequest) *CompleteUploadParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the complete upload params
-func (o *CompleteUploadParams) SetBody(body *models.HashicorpCloudVagrant20220930CompleteUploadRequest) {
+func (o *CompleteUploadParams) SetBody(body *models.HashicorpCloudVagrantCompleteUploadRequest) {
 	o.Body = body
 }
 
@@ -187,7 +205,6 @@ func (o *CompleteUploadParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

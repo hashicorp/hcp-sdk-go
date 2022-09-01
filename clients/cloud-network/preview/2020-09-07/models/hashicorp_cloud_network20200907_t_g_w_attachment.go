@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -109,7 +111,6 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) Validate(formats strfmt.Reg
 }
 
 func (m *HashicorpCloudNetwork20200907TGWAttachment) validateCreatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -122,7 +123,6 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateCreatedAt(formats s
 }
 
 func (m *HashicorpCloudNetwork20200907TGWAttachment) validateExpiresAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ExpiresAt) { // not required
 		return nil
 	}
@@ -135,7 +135,6 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateExpiresAt(formats s
 }
 
 func (m *HashicorpCloudNetwork20200907TGWAttachment) validateHvn(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Hvn) { // not required
 		return nil
 	}
@@ -144,6 +143,8 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateHvn(formats strfmt.
 		if err := m.Hvn.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hvn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hvn")
 			}
 			return err
 		}
@@ -153,7 +154,6 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateHvn(formats strfmt.
 }
 
 func (m *HashicorpCloudNetwork20200907TGWAttachment) validateLocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -162,6 +162,8 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateLocation(formats st
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}
@@ -171,7 +173,6 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateLocation(formats st
 }
 
 func (m *HashicorpCloudNetwork20200907TGWAttachment) validateProviderData(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ProviderData) { // not required
 		return nil
 	}
@@ -180,6 +181,8 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateProviderData(format
 		if err := m.ProviderData.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("provider_data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("provider_data")
 			}
 			return err
 		}
@@ -189,7 +192,6 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateProviderData(format
 }
 
 func (m *HashicorpCloudNetwork20200907TGWAttachment) validateState(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
@@ -197,6 +199,8 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateState(formats strfm
 	if err := m.State.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("state")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("state")
 		}
 		return err
 	}
@@ -205,12 +209,138 @@ func (m *HashicorpCloudNetwork20200907TGWAttachment) validateState(formats strfm
 }
 
 func (m *HashicorpCloudNetwork20200907TGWAttachment) validateUpdatedAt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud network 20200907 t g w attachment based on the context it is used
+func (m *HashicorpCloudNetwork20200907TGWAttachment) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateCreatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateExpiresAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHvn(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateProviderData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUpdatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907TGWAttachment) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907TGWAttachment) contextValidateExpiresAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "expires_at", "body", strfmt.DateTime(m.ExpiresAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907TGWAttachment) contextValidateHvn(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Hvn != nil {
+		if err := m.Hvn.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hvn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hvn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907TGWAttachment) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907TGWAttachment) contextValidateProviderData(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ProviderData != nil {
+		if err := m.ProviderData.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("provider_data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("provider_data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907TGWAttachment) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.State.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("state")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("state")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907TGWAttachment) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
 		return err
 	}
 
