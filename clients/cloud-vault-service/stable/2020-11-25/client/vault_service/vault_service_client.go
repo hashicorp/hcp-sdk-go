@@ -74,6 +74,8 @@ type ClientService interface {
 
 	ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSnapshotsOK, error)
 
+	Lock(params *LockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LockOK, error)
+
 	RecreateFromSnapshot(params *RecreateFromSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecreateFromSnapshotOK, error)
 
 	RegisterLinkedCluster(params *RegisterLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterLinkedClusterOK, error)
@@ -81,6 +83,8 @@ type ClientService interface {
 	RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSnapshotOK, error)
 
 	Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SealOK, error)
+
+	Unlock(params *UnlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlockOK, error)
 
 	Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnsealOK, error)
 
@@ -978,6 +982,44 @@ func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.Cli
 }
 
 /*
+  Lock lock API
+*/
+func (a *Client) Lock(params *LockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LockOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLockParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "Lock",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/lock",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LockReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LockOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*LockDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
   RecreateFromSnapshot recreate from snapshot API
 */
 func (a *Client) RecreateFromSnapshot(params *RecreateFromSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecreateFromSnapshotOK, error) {
@@ -1126,6 +1168,44 @@ func (a *Client) Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter,
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*SealDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  Unlock unlock API
+*/
+func (a *Client) Unlock(params *UnlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlockOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUnlockParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "Unlock",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unlock",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UnlockReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UnlockOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UnlockDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

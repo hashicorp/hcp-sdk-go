@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -36,6 +37,9 @@ type HashicorpCloudVault20201125LinkedCluster struct {
 	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
+	// node statuses
+	NodeStatuses []*HashicorpCloudVault20201125NodeStatus `json:"node_statuses"`
+
 	// state
 	State *HashicorpCloudVault20201125LinkedClusterState `json:"state,omitempty"`
 }
@@ -49,6 +53,10 @@ func (m *HashicorpCloudVault20201125LinkedCluster) Validate(formats strfmt.Regis
 	}
 
 	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNodeStatuses(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -93,6 +101,32 @@ func (m *HashicorpCloudVault20201125LinkedCluster) validateLocation(formats strf
 	return nil
 }
 
+func (m *HashicorpCloudVault20201125LinkedCluster) validateNodeStatuses(formats strfmt.Registry) error {
+	if swag.IsZero(m.NodeStatuses) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.NodeStatuses); i++ {
+		if swag.IsZero(m.NodeStatuses[i]) { // not required
+			continue
+		}
+
+		if m.NodeStatuses[i] != nil {
+			if err := m.NodeStatuses[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("node_statuses" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("node_statuses" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVault20201125LinkedCluster) validateState(formats strfmt.Registry) error {
 	if swag.IsZero(m.State) { // not required
 		return nil
@@ -120,6 +154,10 @@ func (m *HashicorpCloudVault20201125LinkedCluster) ContextValidate(ctx context.C
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateNodeStatuses(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateState(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -141,6 +179,26 @@ func (m *HashicorpCloudVault20201125LinkedCluster) contextValidateLocation(ctx c
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125LinkedCluster) contextValidateNodeStatuses(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.NodeStatuses); i++ {
+
+		if m.NodeStatuses[i] != nil {
+			if err := m.NodeStatuses[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("node_statuses" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("node_statuses" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
