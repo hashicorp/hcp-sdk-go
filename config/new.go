@@ -27,7 +27,7 @@ const (
 	defaultAPIAddress = "api.cloud.hashicorp.com:443"
 
 	// defaultSCADAAddress is the address of the production SCADA endpoint.
-	defaultSCADAAddress = "scada.internal.hashicorp.cloud:7224"
+	defaultSCADAAddress = "scada.hashicorp.cloud:7224"
 
 	// The audience is the API identifier configured in the auth provider and
 	// must be provided when requesting an access token for the API. The value
