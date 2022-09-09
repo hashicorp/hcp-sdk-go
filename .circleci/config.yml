@@ -15,6 +15,7 @@ jobs:
           go mod download
           go get github.com/golangci/golangci-lint/cmd/golangci-lint
           go get gotest.tools/gotestsum
+          go mod tidy
         name: Get CI dependencies
     - run:
         command: |

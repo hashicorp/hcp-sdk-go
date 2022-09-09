@@ -19,10 +19,10 @@ import (
 // In its final form, the extension looks like this on the generated type definition:
 // "hashicorp.cloud.common.PaginationRequest": {
 // 	"properties": { ... }
-// 	...
-// 	"x-go-type": {
-// 		"import": {
-// 			"package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+//	...
+//	"x-go-type": {
+//		"import": {
+//		"package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
 // 			"alias": "cloud"
 // 		},
 // 		"type": "HashicorpCloudCommonPaginationRequest"
