@@ -52,10 +52,12 @@ func NewGetProviderParamsWithHTTPClient(client *http.Client) *GetProviderParams 
 	}
 }
 
-/* GetProviderParams contains all the parameters to send to the API endpoint
-   for the get provider operation.
+/*
+GetProviderParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get provider operation.
+
+	Typically these are written to a http.Request.
 */
 type GetProviderParams struct {
 

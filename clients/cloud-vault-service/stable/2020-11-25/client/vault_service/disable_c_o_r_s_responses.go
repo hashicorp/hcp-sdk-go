@@ -47,7 +47,8 @@ func NewDisableCORSOK() *DisableCORSOK {
 	return &DisableCORSOK{}
 }
 
-/* DisableCORSOK describes a response with status code 200, with default header values.
+/*
+DisableCORSOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type DisableCORSOK struct {
 	Payload models.HashicorpCloudVault20201125DisableCORSResponse
 }
 
+// IsSuccess returns true when this disable c o r s o k response has a 2xx status code
+func (o *DisableCORSOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this disable c o r s o k response has a 3xx status code
+func (o *DisableCORSOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this disable c o r s o k response has a 4xx status code
+func (o *DisableCORSOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this disable c o r s o k response has a 5xx status code
+func (o *DisableCORSOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this disable c o r s o k response a status code equal to that given
+func (o *DisableCORSOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DisableCORSOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] disableCORSOK  %+v", 200, o.Payload)
 }
+
+func (o *DisableCORSOK) String() string {
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] disableCORSOK  %+v", 200, o.Payload)
+}
+
 func (o *DisableCORSOK) GetPayload() models.HashicorpCloudVault20201125DisableCORSResponse {
 	return o.Payload
 }
@@ -79,7 +110,8 @@ func NewDisableCORSDefault(code int) *DisableCORSDefault {
 	}
 }
 
-/* DisableCORSDefault describes a response with status code -1, with default header values.
+/*
+DisableCORSDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -94,9 +126,39 @@ func (o *DisableCORSDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this disable c o r s default response has a 2xx status code
+func (o *DisableCORSDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this disable c o r s default response has a 3xx status code
+func (o *DisableCORSDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this disable c o r s default response has a 4xx status code
+func (o *DisableCORSDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this disable c o r s default response has a 5xx status code
+func (o *DisableCORSDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this disable c o r s default response a status code equal to that given
+func (o *DisableCORSDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *DisableCORSDefault) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] DisableCORS default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *DisableCORSDefault) String() string {
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] DisableCORS default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *DisableCORSDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -47,7 +47,8 @@ func NewGetUtilizationOK() *GetUtilizationOK {
 	return &GetUtilizationOK{}
 }
 
-/* GetUtilizationOK describes a response with status code 200, with default header values.
+/*
+GetUtilizationOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetUtilizationOK struct {
 	Payload *models.HashicorpCloudVault20201125GetUtilizationResponse
 }
 
+// IsSuccess returns true when this get utilization o k response has a 2xx status code
+func (o *GetUtilizationOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get utilization o k response has a 3xx status code
+func (o *GetUtilizationOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get utilization o k response has a 4xx status code
+func (o *GetUtilizationOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get utilization o k response has a 5xx status code
+func (o *GetUtilizationOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get utilization o k response a status code equal to that given
+func (o *GetUtilizationOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetUtilizationOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] getUtilizationOK  %+v", 200, o.Payload)
 }
+
+func (o *GetUtilizationOK) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] getUtilizationOK  %+v", 200, o.Payload)
+}
+
 func (o *GetUtilizationOK) GetPayload() *models.HashicorpCloudVault20201125GetUtilizationResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetUtilizationDefault(code int) *GetUtilizationDefault {
 	}
 }
 
-/* GetUtilizationDefault describes a response with status code -1, with default header values.
+/*
+GetUtilizationDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetUtilizationDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get utilization default response has a 2xx status code
+func (o *GetUtilizationDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get utilization default response has a 3xx status code
+func (o *GetUtilizationDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get utilization default response has a 4xx status code
+func (o *GetUtilizationDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get utilization default response has a 5xx status code
+func (o *GetUtilizationDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get utilization default response a status code equal to that given
+func (o *GetUtilizationDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetUtilizationDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] GetUtilization default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetUtilizationDefault) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] GetUtilization default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetUtilizationDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -54,10 +54,12 @@ func NewUpdatePublicIpsParamsWithHTTPClient(client *http.Client) *UpdatePublicIp
 	}
 }
 
-/* UpdatePublicIpsParams contains all the parameters to send to the API endpoint
-   for the update public ips operation.
+/*
+UpdatePublicIpsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update public ips operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdatePublicIpsParams struct {
 

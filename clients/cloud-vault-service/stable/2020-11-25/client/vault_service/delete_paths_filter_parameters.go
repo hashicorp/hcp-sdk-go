@@ -52,10 +52,12 @@ func NewDeletePathsFilterParamsWithHTTPClient(client *http.Client) *DeletePathsF
 	}
 }
 
-/* DeletePathsFilterParams contains all the parameters to send to the API endpoint
-   for the delete paths filter operation.
+/*
+DeletePathsFilterParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete paths filter operation.
+
+	Typically these are written to a http.Request.
 */
 type DeletePathsFilterParams struct {
 

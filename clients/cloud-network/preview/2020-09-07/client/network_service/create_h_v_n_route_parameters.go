@@ -54,10 +54,12 @@ func NewCreateHVNRouteParamsWithHTTPClient(client *http.Client) *CreateHVNRouteP
 	}
 }
 
-/* CreateHVNRouteParams contains all the parameters to send to the API endpoint
-   for the create h v n route operation.
+/*
+CreateHVNRouteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create h v n route operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateHVNRouteParams struct {
 

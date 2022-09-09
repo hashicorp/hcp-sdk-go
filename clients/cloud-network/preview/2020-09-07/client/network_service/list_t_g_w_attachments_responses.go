@@ -47,7 +47,8 @@ func NewListTGWAttachmentsOK() *ListTGWAttachmentsOK {
 	return &ListTGWAttachmentsOK{}
 }
 
-/* ListTGWAttachmentsOK describes a response with status code 200, with default header values.
+/*
+ListTGWAttachmentsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type ListTGWAttachmentsOK struct {
 	Payload *models.HashicorpCloudNetwork20200907ListTGWAttachmentsResponse
 }
 
+// IsSuccess returns true when this list t g w attachments o k response has a 2xx status code
+func (o *ListTGWAttachmentsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list t g w attachments o k response has a 3xx status code
+func (o *ListTGWAttachmentsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list t g w attachments o k response has a 4xx status code
+func (o *ListTGWAttachmentsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list t g w attachments o k response has a 5xx status code
+func (o *ListTGWAttachmentsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list t g w attachments o k response a status code equal to that given
+func (o *ListTGWAttachmentsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListTGWAttachmentsOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] listTGWAttachmentsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListTGWAttachmentsOK) String() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] listTGWAttachmentsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListTGWAttachmentsOK) GetPayload() *models.HashicorpCloudNetwork20200907ListTGWAttachmentsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewListTGWAttachmentsDefault(code int) *ListTGWAttachmentsDefault {
 	}
 }
 
-/* ListTGWAttachmentsDefault describes a response with status code -1, with default header values.
+/*
+ListTGWAttachmentsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *ListTGWAttachmentsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list t g w attachments default response has a 2xx status code
+func (o *ListTGWAttachmentsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list t g w attachments default response has a 3xx status code
+func (o *ListTGWAttachmentsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list t g w attachments default response has a 4xx status code
+func (o *ListTGWAttachmentsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list t g w attachments default response has a 5xx status code
+func (o *ListTGWAttachmentsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list t g w attachments default response a status code equal to that given
+func (o *ListTGWAttachmentsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListTGWAttachmentsDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] ListTGWAttachments default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ListTGWAttachmentsDefault) String() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] ListTGWAttachments default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ListTGWAttachmentsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -54,10 +54,12 @@ func NewReleaseVersionParamsWithHTTPClient(client *http.Client) *ReleaseVersionP
 	}
 }
 
-/* ReleaseVersionParams contains all the parameters to send to the API endpoint
-   for the release version operation.
+/*
+ReleaseVersionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the release version operation.
+
+	Typically these are written to a http.Request.
 */
 type ReleaseVersionParams struct {
 

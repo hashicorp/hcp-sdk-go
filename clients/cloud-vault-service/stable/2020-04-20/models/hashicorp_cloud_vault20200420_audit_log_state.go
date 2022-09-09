@@ -16,13 +16,15 @@ import (
 
 // HashicorpCloudVault20200420AuditLogState State is the state of download.
 //
-//  - UNSET: UNSET is a sentinel zero value so that an uninitialized value can be
+//   - UNSET: UNSET is a sentinel zero value so that an uninitialized value can be
+//
 // detected.
-//  - PENDING: PENDING is the initial state before the workflow starts.
-//  - CREATING: CREATING is the state used when the download is being prepared.
-//  - READY: READY is the completed state when the download is ready
-//  - FAILED: FAILED is a failure state in which the download is not created
-//  - EXPIRED: EXPIRED is the state that the download hits when it is no longer
+//   - PENDING: PENDING is the initial state before the workflow starts.
+//   - CREATING: CREATING is the state used when the download is being prepared.
+//   - READY: READY is the completed state when the download is ready
+//   - FAILED: FAILED is a failure state in which the download is not created
+//   - EXPIRED: EXPIRED is the state that the download hits when it is no longer
+//
 // accessible for download
 //
 // swagger:model hashicorp.cloud.vault_20200420.AuditLog.State

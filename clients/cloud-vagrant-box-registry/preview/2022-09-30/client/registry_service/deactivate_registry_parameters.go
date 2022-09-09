@@ -54,10 +54,12 @@ func NewDeactivateRegistryParamsWithHTTPClient(client *http.Client) *DeactivateR
 	}
 }
 
-/* DeactivateRegistryParams contains all the parameters to send to the API endpoint
-   for the deactivate registry operation.
+/*
+DeactivateRegistryParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the deactivate registry operation.
+
+	Typically these are written to a http.Request.
 */
 type DeactivateRegistryParams struct {
 

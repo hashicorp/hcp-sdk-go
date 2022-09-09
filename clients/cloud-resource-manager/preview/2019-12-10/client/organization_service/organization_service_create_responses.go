@@ -47,7 +47,8 @@ func NewOrganizationServiceCreateOK() *OrganizationServiceCreateOK {
 	return &OrganizationServiceCreateOK{}
 }
 
-/* OrganizationServiceCreateOK describes a response with status code 200, with default header values.
+/*
+OrganizationServiceCreateOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type OrganizationServiceCreateOK struct {
 	Payload *models.HashicorpCloudResourcemanagerOrganizationCreateResponse
 }
 
+// IsSuccess returns true when this organization service create o k response has a 2xx status code
+func (o *OrganizationServiceCreateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this organization service create o k response has a 3xx status code
+func (o *OrganizationServiceCreateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this organization service create o k response has a 4xx status code
+func (o *OrganizationServiceCreateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this organization service create o k response has a 5xx status code
+func (o *OrganizationServiceCreateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this organization service create o k response a status code equal to that given
+func (o *OrganizationServiceCreateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *OrganizationServiceCreateOK) Error() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations][%d] organizationServiceCreateOK  %+v", 200, o.Payload)
 }
+
+func (o *OrganizationServiceCreateOK) String() string {
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations][%d] organizationServiceCreateOK  %+v", 200, o.Payload)
+}
+
 func (o *OrganizationServiceCreateOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationCreateResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewOrganizationServiceCreateDefault(code int) *OrganizationServiceCreateDef
 	}
 }
 
-/* OrganizationServiceCreateDefault describes a response with status code -1, with default header values.
+/*
+OrganizationServiceCreateDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *OrganizationServiceCreateDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this organization service create default response has a 2xx status code
+func (o *OrganizationServiceCreateDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this organization service create default response has a 3xx status code
+func (o *OrganizationServiceCreateDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this organization service create default response has a 4xx status code
+func (o *OrganizationServiceCreateDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this organization service create default response has a 5xx status code
+func (o *OrganizationServiceCreateDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this organization service create default response a status code equal to that given
+func (o *OrganizationServiceCreateDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *OrganizationServiceCreateDefault) Error() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations][%d] OrganizationService_Create default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *OrganizationServiceCreateDefault) String() string {
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations][%d] OrganizationService_Create default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *OrganizationServiceCreateDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

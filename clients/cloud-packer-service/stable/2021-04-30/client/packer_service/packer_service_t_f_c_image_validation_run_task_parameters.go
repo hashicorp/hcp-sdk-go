@@ -52,10 +52,12 @@ func NewPackerServiceTFCImageValidationRunTaskParamsWithHTTPClient(client *http.
 	}
 }
 
-/* PackerServiceTFCImageValidationRunTaskParams contains all the parameters to send to the API endpoint
-   for the packer service t f c image validation run task operation.
+/*
+PackerServiceTFCImageValidationRunTaskParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service t f c image validation run task operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceTFCImageValidationRunTaskParams struct {
 

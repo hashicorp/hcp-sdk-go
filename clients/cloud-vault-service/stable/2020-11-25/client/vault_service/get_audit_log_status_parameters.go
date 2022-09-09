@@ -52,10 +52,12 @@ func NewGetAuditLogStatusParamsWithHTTPClient(client *http.Client) *GetAuditLogS
 	}
 }
 
-/* GetAuditLogStatusParams contains all the parameters to send to the API endpoint
-   for the get audit log status operation.
+/*
+GetAuditLogStatusParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get audit log status operation.
+
+	Typically these are written to a http.Request.
 */
 type GetAuditLogStatusParams struct {
 

@@ -54,10 +54,12 @@ func NewRevokeVersionParamsWithHTTPClient(client *http.Client) *RevokeVersionPar
 	}
 }
 
-/* RevokeVersionParams contains all the parameters to send to the API endpoint
-   for the revoke version operation.
+/*
+RevokeVersionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the revoke version operation.
+
+	Typically these are written to a http.Request.
 */
 type RevokeVersionParams struct {
 

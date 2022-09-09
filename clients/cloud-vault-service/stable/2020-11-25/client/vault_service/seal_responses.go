@@ -47,7 +47,8 @@ func NewSealOK() *SealOK {
 	return &SealOK{}
 }
 
-/* SealOK describes a response with status code 200, with default header values.
+/*
+SealOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type SealOK struct {
 	Payload *models.HashicorpCloudVault20201125SealResponse
 }
 
+// IsSuccess returns true when this seal o k response has a 2xx status code
+func (o *SealOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this seal o k response has a 3xx status code
+func (o *SealOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this seal o k response has a 4xx status code
+func (o *SealOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this seal o k response has a 5xx status code
+func (o *SealOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this seal o k response a status code equal to that given
+func (o *SealOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *SealOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] sealOK  %+v", 200, o.Payload)
 }
+
+func (o *SealOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] sealOK  %+v", 200, o.Payload)
+}
+
 func (o *SealOK) GetPayload() *models.HashicorpCloudVault20201125SealResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewSealDefault(code int) *SealDefault {
 	}
 }
 
-/* SealDefault describes a response with status code -1, with default header values.
+/*
+SealDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *SealDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this seal default response has a 2xx status code
+func (o *SealDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this seal default response has a 3xx status code
+func (o *SealDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this seal default response has a 4xx status code
+func (o *SealDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this seal default response has a 5xx status code
+func (o *SealDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this seal default response a status code equal to that given
+func (o *SealDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *SealDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] Seal default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *SealDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] Seal default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *SealDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

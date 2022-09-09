@@ -50,7 +50,7 @@ type ClientService interface {
 }
 
 /*
-  OrganizationServiceCreate creates creates a new organization the owner is set to the identity of the caller an organization can not be owned by a machine account
+OrganizationServiceCreate creates creates a new organization the owner is set to the identity of the caller an organization can not be owned by a machine account
 */
 func (a *Client) OrganizationServiceCreate(params *OrganizationServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -88,7 +88,7 @@ func (a *Client) OrganizationServiceCreate(params *OrganizationServiceCreatePara
 }
 
 /*
-  OrganizationServiceGet gets retrieves the requested organization by ID
+OrganizationServiceGet gets retrieves the requested organization by ID
 */
 func (a *Client) OrganizationServiceGet(params *OrganizationServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetOK, error) {
 	// TODO: Validate the params before sending
@@ -126,7 +126,7 @@ func (a *Client) OrganizationServiceGet(params *OrganizationServiceGetParams, au
 }
 
 /*
-  OrganizationServiceGetIamPolicy gets iam policy retrieves the requested organization s i a m policy
+OrganizationServiceGetIamPolicy gets iam policy retrieves the requested organization s i a m policy
 */
 func (a *Client) OrganizationServiceGetIamPolicy(params *OrganizationServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetIamPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -164,7 +164,7 @@ func (a *Client) OrganizationServiceGetIamPolicy(params *OrganizationServiceGetI
 }
 
 /*
-  OrganizationServiceGetRole gets role returns a role and its mapped permissions
+OrganizationServiceGetRole gets role returns a role and its mapped permissions
 */
 func (a *Client) OrganizationServiceGetRole(params *OrganizationServiceGetRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetRoleOK, error) {
 	// TODO: Validate the params before sending
@@ -202,7 +202,7 @@ func (a *Client) OrganizationServiceGetRole(params *OrganizationServiceGetRolePa
 }
 
 /*
-  OrganizationServiceList lists lists the organizations the caller has access to
+OrganizationServiceList lists lists the organizations the caller has access to
 */
 func (a *Client) OrganizationServiceList(params *OrganizationServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceListOK, error) {
 	// TODO: Validate the params before sending
@@ -240,7 +240,7 @@ func (a *Client) OrganizationServiceList(params *OrganizationServiceListParams, 
 }
 
 /*
-  OrganizationServiceListRoles lists roles returns a list of all user facing roles for an organization
+OrganizationServiceListRoles lists roles returns a list of all user facing roles for an organization
 */
 func (a *Client) OrganizationServiceListRoles(params *OrganizationServiceListRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceListRolesOK, error) {
 	// TODO: Validate the params before sending
@@ -278,7 +278,7 @@ func (a *Client) OrganizationServiceListRoles(params *OrganizationServiceListRol
 }
 
 /*
-  OrganizationServiceSetIamPolicy sets iam policy sets the i a m policy for an organization since this updates the full policy the policy takes an etag argument that should match with the current policy stored in the system this is to avoid concurrent writes erasing each other s data hence the client should always get the current policy that includes the etag modify the policy and then set the policy with the same etag if there is no existing policy the etag must be empty
+OrganizationServiceSetIamPolicy sets iam policy sets the i a m policy for an organization since this updates the full policy the policy takes an etag argument that should match with the current policy stored in the system this is to avoid concurrent writes erasing each other s data hence the client should always get the current policy that includes the etag modify the policy and then set the policy with the same etag if there is no existing policy the etag must be empty
 */
 func (a *Client) OrganizationServiceSetIamPolicy(params *OrganizationServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceSetIamPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -316,7 +316,7 @@ func (a *Client) OrganizationServiceSetIamPolicy(params *OrganizationServiceSetI
 }
 
 /*
-  OrganizationServiceSetName sets name updates the organization s name
+OrganizationServiceSetName sets name updates the organization s name
 */
 func (a *Client) OrganizationServiceSetName(params *OrganizationServiceSetNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceSetNameOK, error) {
 	// TODO: Validate the params before sending
@@ -354,7 +354,7 @@ func (a *Client) OrganizationServiceSetName(params *OrganizationServiceSetNamePa
 }
 
 /*
-  OrganizationServiceTestIamPermissions tests iam permissions returns a subset of the request permissions the calling principal has for the organization
+OrganizationServiceTestIamPermissions tests iam permissions returns a subset of the request permissions the calling principal has for the organization
 */
 func (a *Client) OrganizationServiceTestIamPermissions(params *OrganizationServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceTestIamPermissionsOK, error) {
 	// TODO: Validate the params before sending

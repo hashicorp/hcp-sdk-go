@@ -39,7 +39,8 @@ func NewCreateBoxOK() *CreateBoxOK {
 	return &CreateBoxOK{}
 }
 
-/* CreateBoxOK describes a response with status code 200, with default header values.
+/*
+CreateBoxOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type CreateBoxOK struct {
 	Payload *models.HashicorpCloudVagrantCreateBoxResponse
 }
 
+// IsSuccess returns true when this create box o k response has a 2xx status code
+func (o *CreateBoxOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create box o k response has a 3xx status code
+func (o *CreateBoxOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create box o k response has a 4xx status code
+func (o *CreateBoxOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create box o k response has a 5xx status code
+func (o *CreateBoxOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create box o k response a status code equal to that given
+func (o *CreateBoxOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CreateBoxOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes][%d] createBoxOK  %+v", 200, o.Payload)
 }
+
+func (o *CreateBoxOK) String() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes][%d] createBoxOK  %+v", 200, o.Payload)
+}
+
 func (o *CreateBoxOK) GetPayload() *models.HashicorpCloudVagrantCreateBoxResponse {
 	return o.Payload
 }

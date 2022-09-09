@@ -66,7 +66,7 @@ type ClientService interface {
 }
 
 /*
-  Create creates creates a new h c p consul cluster
+Create creates creates a new h c p consul cluster
 */
 func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
 	// TODO: Validate the params before sending
@@ -104,7 +104,7 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  CreateCustomerMasterACLToken creates customer master ACL token creates a new master ACL token for the customer on the specified cluster external clients will invoke this endpoint to re generate new master tokens
+CreateCustomerMasterACLToken creates customer master ACL token creates a new master ACL token for the customer on the specified cluster external clients will invoke this endpoint to re generate new master tokens
 */
 func (a *Client) CreateCustomerMasterACLToken(params *CreateCustomerMasterACLTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCustomerMasterACLTokenOK, error) {
 	// TODO: Validate the params before sending
@@ -142,7 +142,7 @@ func (a *Client) CreateCustomerMasterACLToken(params *CreateCustomerMasterACLTok
 }
 
 /*
-  CreateSnapshot creates snapshot takes a new snapshot asynchronously
+CreateSnapshot creates snapshot takes a new snapshot asynchronously
 */
 func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -180,7 +180,7 @@ func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.C
 }
 
 /*
-  Delete deletes deletes the specified h c p consul cluster
+Delete deletes deletes the specified h c p consul cluster
 */
 func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -218,7 +218,7 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  DeleteSnapshot deletes snapshot removes the snapshot from storage asynchronously
+DeleteSnapshot deletes snapshot removes the snapshot from storage asynchronously
 */
 func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -256,7 +256,7 @@ func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.C
 }
 
 /*
-  Get gets reads a single h c p consul cluster
+Get gets reads a single h c p consul cluster
 */
 func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error) {
 	// TODO: Validate the params before sending
@@ -294,7 +294,7 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, o
 }
 
 /*
-  GetClientConfig gets client config files returns the config files for a consul agent running in client mode the files are base64 encoded
+GetClientConfig gets client config files returns the config files for a consul agent running in client mode the files are base64 encoded
 */
 func (a *Client) GetClientConfig(params *GetClientConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClientConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -332,7 +332,7 @@ func (a *Client) GetClientConfig(params *GetClientConfigParams, authInfo runtime
 }
 
 /*
-  GetClusterTelemetry gets cluster telemetry retrieves a snapshot of a subset of consul cluster telemetry
+GetClusterTelemetry gets cluster telemetry retrieves a snapshot of a subset of consul cluster telemetry
 */
 func (a *Client) GetClusterTelemetry(params *GetClusterTelemetryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterTelemetryOK, error) {
 	// TODO: Validate the params before sending
@@ -370,7 +370,7 @@ func (a *Client) GetClusterTelemetry(params *GetClusterTelemetryParams, authInfo
 }
 
 /*
-  GetSnapshot gets snapshot retrieves an existing snapshot
+GetSnapshot gets snapshot retrieves an existing snapshot
 */
 func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -408,7 +408,7 @@ func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientA
 }
 
 /*
-  List lists lists all h c p consul clusters
+List lists lists all h c p consul clusters
 */
 func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
 	// TODO: Validate the params before sending
@@ -446,7 +446,7 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
-  ListSnapshots lists snapshots lists snapshots
+ListSnapshots lists snapshots lists snapshots
 */
 func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSnapshotsOK, error) {
 	// TODO: Validate the params before sending
@@ -484,7 +484,7 @@ func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.Cli
 }
 
 /*
-  ListUpgradeVersions lists upgrade versions returns the versions available for this consul cluster to upgrade to
+ListUpgradeVersions lists upgrade versions returns the versions available for this consul cluster to upgrade to
 */
 func (a *Client) ListUpgradeVersions(params *ListUpgradeVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListUpgradeVersionsOK, error) {
 	// TODO: Validate the params before sending
@@ -522,7 +522,7 @@ func (a *Client) ListUpgradeVersions(params *ListUpgradeVersionsParams, authInfo
 }
 
 /*
-  ListVersions lists versions returns the versions available for this org and project
+ListVersions lists versions returns the versions available for this org and project
 */
 func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVersionsOK, error) {
 	// TODO: Validate the params before sending
@@ -560,7 +560,7 @@ func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.Clien
 }
 
 /*
-  ListVersions2 lists versions returns the versions available for this org and project
+ListVersions2 lists versions returns the versions available for this org and project
 */
 func (a *Client) ListVersions2(params *ListVersions2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVersions2OK, error) {
 	// TODO: Validate the params before sending
@@ -598,7 +598,7 @@ func (a *Client) ListVersions2(params *ListVersions2Params, authInfo runtime.Cli
 }
 
 /*
-  RestoreSnapshot restores snapshot restores a snapshot on a given cluster asynchronously
+RestoreSnapshot restores snapshot restores a snapshot on a given cluster asynchronously
 */
 func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -636,7 +636,7 @@ func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime
 }
 
 /*
-  Update updates updates the properties of an existing h c p consul cluster
+Update updates updates the properties of an existing h c p consul cluster
 */
 func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -674,9 +674,9 @@ func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  UpdateSnapshot updates snapshot updates an existing snapshot
+UpdateSnapshot updates snapshot updates an existing snapshot
 
-  Right now only the name can be changed.
+Right now only the name can be changed.
 */
 func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSnapshotOK, error) {
 	// TODO: Validate the params before sending

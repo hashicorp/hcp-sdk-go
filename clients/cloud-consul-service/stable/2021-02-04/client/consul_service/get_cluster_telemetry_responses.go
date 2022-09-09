@@ -47,7 +47,8 @@ func NewGetClusterTelemetryOK() *GetClusterTelemetryOK {
 	return &GetClusterTelemetryOK{}
 }
 
-/* GetClusterTelemetryOK describes a response with status code 200, with default header values.
+/*
+GetClusterTelemetryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetClusterTelemetryOK struct {
 	Payload *models.HashicorpCloudConsul20210204GetClusterTelemetryResponse
 }
 
+// IsSuccess returns true when this get cluster telemetry o k response has a 2xx status code
+func (o *GetClusterTelemetryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get cluster telemetry o k response has a 3xx status code
+func (o *GetClusterTelemetryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get cluster telemetry o k response has a 4xx status code
+func (o *GetClusterTelemetryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get cluster telemetry o k response has a 5xx status code
+func (o *GetClusterTelemetryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get cluster telemetry o k response a status code equal to that given
+func (o *GetClusterTelemetryOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetClusterTelemetryOK) Error() string {
 	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/telemetry][%d] getClusterTelemetryOK  %+v", 200, o.Payload)
 }
+
+func (o *GetClusterTelemetryOK) String() string {
+	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/telemetry][%d] getClusterTelemetryOK  %+v", 200, o.Payload)
+}
+
 func (o *GetClusterTelemetryOK) GetPayload() *models.HashicorpCloudConsul20210204GetClusterTelemetryResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetClusterTelemetryDefault(code int) *GetClusterTelemetryDefault {
 	}
 }
 
-/* GetClusterTelemetryDefault describes a response with status code -1, with default header values.
+/*
+GetClusterTelemetryDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetClusterTelemetryDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get cluster telemetry default response has a 2xx status code
+func (o *GetClusterTelemetryDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get cluster telemetry default response has a 3xx status code
+func (o *GetClusterTelemetryDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get cluster telemetry default response has a 4xx status code
+func (o *GetClusterTelemetryDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get cluster telemetry default response has a 5xx status code
+func (o *GetClusterTelemetryDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get cluster telemetry default response a status code equal to that given
+func (o *GetClusterTelemetryDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetClusterTelemetryDefault) Error() string {
 	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/telemetry][%d] GetClusterTelemetry default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetClusterTelemetryDefault) String() string {
+	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/telemetry][%d] GetClusterTelemetry default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetClusterTelemetryDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

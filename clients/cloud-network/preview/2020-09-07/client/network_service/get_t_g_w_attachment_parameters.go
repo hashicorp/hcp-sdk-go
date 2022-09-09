@@ -52,10 +52,12 @@ func NewGetTGWAttachmentParamsWithHTTPClient(client *http.Client) *GetTGWAttachm
 	}
 }
 
-/* GetTGWAttachmentParams contains all the parameters to send to the API endpoint
-   for the get t g w attachment operation.
+/*
+GetTGWAttachmentParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get t g w attachment operation.
+
+	Typically these are written to a http.Request.
 */
 type GetTGWAttachmentParams struct {
 

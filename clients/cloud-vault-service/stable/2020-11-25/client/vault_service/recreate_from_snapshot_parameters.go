@@ -54,10 +54,12 @@ func NewRecreateFromSnapshotParamsWithHTTPClient(client *http.Client) *RecreateF
 	}
 }
 
-/* RecreateFromSnapshotParams contains all the parameters to send to the API endpoint
-   for the recreate from snapshot operation.
+/*
+RecreateFromSnapshotParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the recreate from snapshot operation.
+
+	Typically these are written to a http.Request.
 */
 type RecreateFromSnapshotParams struct {
 

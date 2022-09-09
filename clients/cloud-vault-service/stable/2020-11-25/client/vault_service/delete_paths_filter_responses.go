@@ -47,7 +47,8 @@ func NewDeletePathsFilterOK() *DeletePathsFilterOK {
 	return &DeletePathsFilterOK{}
 }
 
-/* DeletePathsFilterOK describes a response with status code 200, with default header values.
+/*
+DeletePathsFilterOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type DeletePathsFilterOK struct {
 	Payload *models.HashicorpCloudVault20201125DeletePathsFilterResponse
 }
 
+// IsSuccess returns true when this delete paths filter o k response has a 2xx status code
+func (o *DeletePathsFilterOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete paths filter o k response has a 3xx status code
+func (o *DeletePathsFilterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete paths filter o k response has a 4xx status code
+func (o *DeletePathsFilterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete paths filter o k response has a 5xx status code
+func (o *DeletePathsFilterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete paths filter o k response a status code equal to that given
+func (o *DeletePathsFilterOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DeletePathsFilterOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] deletePathsFilterOK  %+v", 200, o.Payload)
 }
+
+func (o *DeletePathsFilterOK) String() string {
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] deletePathsFilterOK  %+v", 200, o.Payload)
+}
+
 func (o *DeletePathsFilterOK) GetPayload() *models.HashicorpCloudVault20201125DeletePathsFilterResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewDeletePathsFilterDefault(code int) *DeletePathsFilterDefault {
 	}
 }
 
-/* DeletePathsFilterDefault describes a response with status code -1, with default header values.
+/*
+DeletePathsFilterDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *DeletePathsFilterDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this delete paths filter default response has a 2xx status code
+func (o *DeletePathsFilterDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this delete paths filter default response has a 3xx status code
+func (o *DeletePathsFilterDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this delete paths filter default response has a 4xx status code
+func (o *DeletePathsFilterDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this delete paths filter default response has a 5xx status code
+func (o *DeletePathsFilterDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this delete paths filter default response a status code equal to that given
+func (o *DeletePathsFilterDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *DeletePathsFilterDefault) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] DeletePathsFilter default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *DeletePathsFilterDefault) String() string {
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] DeletePathsFilter default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *DeletePathsFilterDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

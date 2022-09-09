@@ -47,7 +47,8 @@ func NewRegisterLinkedClusterOK() *RegisterLinkedClusterOK {
 	return &RegisterLinkedClusterOK{}
 }
 
-/* RegisterLinkedClusterOK describes a response with status code 200, with default header values.
+/*
+RegisterLinkedClusterOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type RegisterLinkedClusterOK struct {
 	Payload *models.HashicorpCloudVault20201125RegisterLinkedClusterResponse
 }
 
+// IsSuccess returns true when this register linked cluster o k response has a 2xx status code
+func (o *RegisterLinkedClusterOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this register linked cluster o k response has a 3xx status code
+func (o *RegisterLinkedClusterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this register linked cluster o k response has a 4xx status code
+func (o *RegisterLinkedClusterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this register linked cluster o k response has a 5xx status code
+func (o *RegisterLinkedClusterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this register linked cluster o k response a status code equal to that given
+func (o *RegisterLinkedClusterOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *RegisterLinkedClusterOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/register][%d] registerLinkedClusterOK  %+v", 200, o.Payload)
 }
+
+func (o *RegisterLinkedClusterOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/register][%d] registerLinkedClusterOK  %+v", 200, o.Payload)
+}
+
 func (o *RegisterLinkedClusterOK) GetPayload() *models.HashicorpCloudVault20201125RegisterLinkedClusterResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewRegisterLinkedClusterDefault(code int) *RegisterLinkedClusterDefault {
 	}
 }
 
-/* RegisterLinkedClusterDefault describes a response with status code -1, with default header values.
+/*
+RegisterLinkedClusterDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *RegisterLinkedClusterDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this register linked cluster default response has a 2xx status code
+func (o *RegisterLinkedClusterDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this register linked cluster default response has a 3xx status code
+func (o *RegisterLinkedClusterDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this register linked cluster default response has a 4xx status code
+func (o *RegisterLinkedClusterDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this register linked cluster default response has a 5xx status code
+func (o *RegisterLinkedClusterDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this register linked cluster default response a status code equal to that given
+func (o *RegisterLinkedClusterDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *RegisterLinkedClusterDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/register][%d] RegisterLinkedCluster default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *RegisterLinkedClusterDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/register][%d] RegisterLinkedCluster default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *RegisterLinkedClusterDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

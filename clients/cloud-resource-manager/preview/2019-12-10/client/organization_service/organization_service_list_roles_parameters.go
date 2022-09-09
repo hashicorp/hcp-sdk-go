@@ -53,10 +53,12 @@ func NewOrganizationServiceListRolesParamsWithHTTPClient(client *http.Client) *O
 	}
 }
 
-/* OrganizationServiceListRolesParams contains all the parameters to send to the API endpoint
-   for the organization service list roles operation.
+/*
+OrganizationServiceListRolesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the organization service list roles operation.
+
+	Typically these are written to a http.Request.
 */
 type OrganizationServiceListRolesParams struct {
 

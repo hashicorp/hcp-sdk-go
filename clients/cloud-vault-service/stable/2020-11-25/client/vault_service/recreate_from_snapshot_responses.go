@@ -47,7 +47,8 @@ func NewRecreateFromSnapshotOK() *RecreateFromSnapshotOK {
 	return &RecreateFromSnapshotOK{}
 }
 
-/* RecreateFromSnapshotOK describes a response with status code 200, with default header values.
+/*
+RecreateFromSnapshotOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type RecreateFromSnapshotOK struct {
 	Payload *models.HashicorpCloudVault20201125RecreateFromSnapshotResponse
 }
 
+// IsSuccess returns true when this recreate from snapshot o k response has a 2xx status code
+func (o *RecreateFromSnapshotOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this recreate from snapshot o k response has a 3xx status code
+func (o *RecreateFromSnapshotOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this recreate from snapshot o k response has a 4xx status code
+func (o *RecreateFromSnapshotOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this recreate from snapshot o k response has a 5xx status code
+func (o *RecreateFromSnapshotOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this recreate from snapshot o k response a status code equal to that given
+func (o *RecreateFromSnapshotOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *RecreateFromSnapshotOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] recreateFromSnapshotOK  %+v", 200, o.Payload)
 }
+
+func (o *RecreateFromSnapshotOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] recreateFromSnapshotOK  %+v", 200, o.Payload)
+}
+
 func (o *RecreateFromSnapshotOK) GetPayload() *models.HashicorpCloudVault20201125RecreateFromSnapshotResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewRecreateFromSnapshotDefault(code int) *RecreateFromSnapshotDefault {
 	}
 }
 
-/* RecreateFromSnapshotDefault describes a response with status code -1, with default header values.
+/*
+RecreateFromSnapshotDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *RecreateFromSnapshotDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this recreate from snapshot default response has a 2xx status code
+func (o *RecreateFromSnapshotDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this recreate from snapshot default response has a 3xx status code
+func (o *RecreateFromSnapshotDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this recreate from snapshot default response has a 4xx status code
+func (o *RecreateFromSnapshotDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this recreate from snapshot default response has a 5xx status code
+func (o *RecreateFromSnapshotDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this recreate from snapshot default response a status code equal to that given
+func (o *RecreateFromSnapshotDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *RecreateFromSnapshotDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] RecreateFromSnapshot default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *RecreateFromSnapshotDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] RecreateFromSnapshot default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *RecreateFromSnapshotDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

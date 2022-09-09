@@ -54,10 +54,12 @@ func NewCreateCustomerMasterACLTokenParamsWithHTTPClient(client *http.Client) *C
 	}
 }
 
-/* CreateCustomerMasterACLTokenParams contains all the parameters to send to the API endpoint
-   for the create customer master ACL token operation.
+/*
+CreateCustomerMasterACLTokenParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create customer master ACL token operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateCustomerMasterACLTokenParams struct {
 

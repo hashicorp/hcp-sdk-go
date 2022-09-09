@@ -39,7 +39,8 @@ func NewCreateVersionOK() *CreateVersionOK {
 	return &CreateVersionOK{}
 }
 
-/* CreateVersionOK describes a response with status code 200, with default header values.
+/*
+CreateVersionOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type CreateVersionOK struct {
 	Payload *models.HashicorpCloudVagrantCreateVersionResponse
 }
 
+// IsSuccess returns true when this create version o k response has a 2xx status code
+func (o *CreateVersionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create version o k response has a 3xx status code
+func (o *CreateVersionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create version o k response has a 4xx status code
+func (o *CreateVersionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create version o k response has a 5xx status code
+func (o *CreateVersionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create version o k response a status code equal to that given
+func (o *CreateVersionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CreateVersionOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions][%d] createVersionOK  %+v", 200, o.Payload)
 }
+
+func (o *CreateVersionOK) String() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions][%d] createVersionOK  %+v", 200, o.Payload)
+}
+
 func (o *CreateVersionOK) GetPayload() *models.HashicorpCloudVagrantCreateVersionResponse {
 	return o.Payload
 }

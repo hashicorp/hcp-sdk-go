@@ -47,7 +47,8 @@ func NewGetReplicationStatusOK() *GetReplicationStatusOK {
 	return &GetReplicationStatusOK{}
 }
 
-/* GetReplicationStatusOK describes a response with status code 200, with default header values.
+/*
+GetReplicationStatusOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetReplicationStatusOK struct {
 	Payload *models.HashicorpCloudVault20201125GetReplicationStatusResponse
 }
 
+// IsSuccess returns true when this get replication status o k response has a 2xx status code
+func (o *GetReplicationStatusOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get replication status o k response has a 3xx status code
+func (o *GetReplicationStatusOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get replication status o k response has a 4xx status code
+func (o *GetReplicationStatusOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get replication status o k response has a 5xx status code
+func (o *GetReplicationStatusOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get replication status o k response a status code equal to that given
+func (o *GetReplicationStatusOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetReplicationStatusOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] getReplicationStatusOK  %+v", 200, o.Payload)
 }
+
+func (o *GetReplicationStatusOK) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] getReplicationStatusOK  %+v", 200, o.Payload)
+}
+
 func (o *GetReplicationStatusOK) GetPayload() *models.HashicorpCloudVault20201125GetReplicationStatusResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetReplicationStatusDefault(code int) *GetReplicationStatusDefault {
 	}
 }
 
-/* GetReplicationStatusDefault describes a response with status code -1, with default header values.
+/*
+GetReplicationStatusDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetReplicationStatusDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get replication status default response has a 2xx status code
+func (o *GetReplicationStatusDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get replication status default response has a 3xx status code
+func (o *GetReplicationStatusDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get replication status default response has a 4xx status code
+func (o *GetReplicationStatusDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get replication status default response has a 5xx status code
+func (o *GetReplicationStatusDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get replication status default response a status code equal to that given
+func (o *GetReplicationStatusDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetReplicationStatusDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] GetReplicationStatus default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetReplicationStatusDefault) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] GetReplicationStatus default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetReplicationStatusDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

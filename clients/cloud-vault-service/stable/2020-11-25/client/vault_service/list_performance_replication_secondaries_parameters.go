@@ -53,10 +53,12 @@ func NewListPerformanceReplicationSecondariesParamsWithHTTPClient(client *http.C
 	}
 }
 
-/* ListPerformanceReplicationSecondariesParams contains all the parameters to send to the API endpoint
-   for the list performance replication secondaries operation.
+/*
+ListPerformanceReplicationSecondariesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list performance replication secondaries operation.
+
+	Typically these are written to a http.Request.
 */
 type ListPerformanceReplicationSecondariesParams struct {
 

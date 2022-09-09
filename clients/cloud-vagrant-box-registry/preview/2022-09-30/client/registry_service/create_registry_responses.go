@@ -39,7 +39,8 @@ func NewCreateRegistryOK() *CreateRegistryOK {
 	return &CreateRegistryOK{}
 }
 
-/* CreateRegistryOK describes a response with status code 200, with default header values.
+/*
+CreateRegistryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type CreateRegistryOK struct {
 	Payload *models.HashicorpCloudVagrantCreateRegistryResponse
 }
 
+// IsSuccess returns true when this create registry o k response has a 2xx status code
+func (o *CreateRegistryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create registry o k response has a 3xx status code
+func (o *CreateRegistryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create registry o k response has a 4xx status code
+func (o *CreateRegistryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create registry o k response has a 5xx status code
+func (o *CreateRegistryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create registry o k response a status code equal to that given
+func (o *CreateRegistryOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CreateRegistryOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry][%d] createRegistryOK  %+v", 200, o.Payload)
 }
+
+func (o *CreateRegistryOK) String() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry][%d] createRegistryOK  %+v", 200, o.Payload)
+}
+
 func (o *CreateRegistryOK) GetPayload() *models.HashicorpCloudVagrantCreateRegistryResponse {
 	return o.Payload
 }

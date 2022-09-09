@@ -39,7 +39,8 @@ func NewListVersionsOK() *ListVersionsOK {
 	return &ListVersionsOK{}
 }
 
-/* ListVersionsOK describes a response with status code 200, with default header values.
+/*
+ListVersionsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type ListVersionsOK struct {
 	Payload *models.HashicorpCloudVagrantListVersionsResponse
 }
 
+// IsSuccess returns true when this list versions o k response has a 2xx status code
+func (o *ListVersionsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list versions o k response has a 3xx status code
+func (o *ListVersionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list versions o k response has a 4xx status code
+func (o *ListVersionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list versions o k response has a 5xx status code
+func (o *ListVersionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list versions o k response a status code equal to that given
+func (o *ListVersionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListVersionsOK) Error() string {
 	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions][%d] listVersionsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListVersionsOK) String() string {
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions][%d] listVersionsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListVersionsOK) GetPayload() *models.HashicorpCloudVagrantListVersionsResponse {
 	return o.Payload
 }

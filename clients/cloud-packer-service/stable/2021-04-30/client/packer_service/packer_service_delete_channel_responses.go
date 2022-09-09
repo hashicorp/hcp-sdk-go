@@ -47,7 +47,8 @@ func NewPackerServiceDeleteChannelOK() *PackerServiceDeleteChannelOK {
 	return &PackerServiceDeleteChannelOK{}
 }
 
-/* PackerServiceDeleteChannelOK describes a response with status code 200, with default header values.
+/*
+PackerServiceDeleteChannelOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceDeleteChannelOK struct {
 	Payload models.HashicorpCloudPackerDeleteChannelResponse
 }
 
+// IsSuccess returns true when this packer service delete channel o k response has a 2xx status code
+func (o *PackerServiceDeleteChannelOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service delete channel o k response has a 3xx status code
+func (o *PackerServiceDeleteChannelOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service delete channel o k response has a 4xx status code
+func (o *PackerServiceDeleteChannelOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service delete channel o k response has a 5xx status code
+func (o *PackerServiceDeleteChannelOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service delete channel o k response a status code equal to that given
+func (o *PackerServiceDeleteChannelOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceDeleteChannelOK) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceDeleteChannelOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceDeleteChannelOK) String() string {
+	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceDeleteChannelOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceDeleteChannelOK) GetPayload() models.HashicorpCloudPackerDeleteChannelResponse {
 	return o.Payload
 }
@@ -79,7 +110,8 @@ func NewPackerServiceDeleteChannelDefault(code int) *PackerServiceDeleteChannelD
 	}
 }
 
-/* PackerServiceDeleteChannelDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceDeleteChannelDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -94,9 +126,39 @@ func (o *PackerServiceDeleteChannelDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service delete channel default response has a 2xx status code
+func (o *PackerServiceDeleteChannelDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service delete channel default response has a 3xx status code
+func (o *PackerServiceDeleteChannelDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service delete channel default response has a 4xx status code
+func (o *PackerServiceDeleteChannelDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service delete channel default response has a 5xx status code
+func (o *PackerServiceDeleteChannelDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service delete channel default response a status code equal to that given
+func (o *PackerServiceDeleteChannelDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceDeleteChannelDefault) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_DeleteChannel default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceDeleteChannelDefault) String() string {
+	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_DeleteChannel default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceDeleteChannelDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

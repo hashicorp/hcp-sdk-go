@@ -54,10 +54,12 @@ func NewUpdateMajorVersionUpgradeConfigParamsWithHTTPClient(client *http.Client)
 	}
 }
 
-/* UpdateMajorVersionUpgradeConfigParams contains all the parameters to send to the API endpoint
-   for the update major version upgrade config operation.
+/*
+UpdateMajorVersionUpgradeConfigParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update major version upgrade config operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateMajorVersionUpgradeConfigParams struct {
 

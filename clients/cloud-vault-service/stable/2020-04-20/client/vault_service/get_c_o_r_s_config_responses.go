@@ -47,7 +47,8 @@ func NewGetCORSConfigOK() *GetCORSConfigOK {
 	return &GetCORSConfigOK{}
 }
 
-/* GetCORSConfigOK describes a response with status code 200, with default header values.
+/*
+GetCORSConfigOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetCORSConfigOK struct {
 	Payload *models.HashicorpCloudVault20200420GetCORSConfigResponse
 }
 
+// IsSuccess returns true when this get c o r s config o k response has a 2xx status code
+func (o *GetCORSConfigOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get c o r s config o k response has a 3xx status code
+func (o *GetCORSConfigOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get c o r s config o k response has a 4xx status code
+func (o *GetCORSConfigOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get c o r s config o k response has a 5xx status code
+func (o *GetCORSConfigOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get c o r s config o k response a status code equal to that given
+func (o *GetCORSConfigOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetCORSConfigOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] getCORSConfigOK  %+v", 200, o.Payload)
 }
+
+func (o *GetCORSConfigOK) String() string {
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] getCORSConfigOK  %+v", 200, o.Payload)
+}
+
 func (o *GetCORSConfigOK) GetPayload() *models.HashicorpCloudVault20200420GetCORSConfigResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetCORSConfigDefault(code int) *GetCORSConfigDefault {
 	}
 }
 
-/* GetCORSConfigDefault describes a response with status code -1, with default header values.
+/*
+GetCORSConfigDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetCORSConfigDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get c o r s config default response has a 2xx status code
+func (o *GetCORSConfigDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get c o r s config default response has a 3xx status code
+func (o *GetCORSConfigDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get c o r s config default response has a 4xx status code
+func (o *GetCORSConfigDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get c o r s config default response has a 5xx status code
+func (o *GetCORSConfigDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get c o r s config default response a status code equal to that given
+func (o *GetCORSConfigDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetCORSConfigDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] GetCORSConfig default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetCORSConfigDefault) String() string {
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] GetCORSConfig default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetCORSConfigDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

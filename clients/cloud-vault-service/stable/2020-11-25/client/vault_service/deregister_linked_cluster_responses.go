@@ -47,7 +47,8 @@ func NewDeregisterLinkedClusterOK() *DeregisterLinkedClusterOK {
 	return &DeregisterLinkedClusterOK{}
 }
 
-/* DeregisterLinkedClusterOK describes a response with status code 200, with default header values.
+/*
+DeregisterLinkedClusterOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type DeregisterLinkedClusterOK struct {
 	Payload models.HashicorpCloudVault20201125DeregisterLinkedClusterResponse
 }
 
+// IsSuccess returns true when this deregister linked cluster o k response has a 2xx status code
+func (o *DeregisterLinkedClusterOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this deregister linked cluster o k response has a 3xx status code
+func (o *DeregisterLinkedClusterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this deregister linked cluster o k response has a 4xx status code
+func (o *DeregisterLinkedClusterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this deregister linked cluster o k response has a 5xx status code
+func (o *DeregisterLinkedClusterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this deregister linked cluster o k response a status code equal to that given
+func (o *DeregisterLinkedClusterOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DeregisterLinkedClusterOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{cluster_link.location.organization_id}/projects/{cluster_link.location.project_id}/link/deregister][%d] deregisterLinkedClusterOK  %+v", 200, o.Payload)
 }
+
+func (o *DeregisterLinkedClusterOK) String() string {
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{cluster_link.location.organization_id}/projects/{cluster_link.location.project_id}/link/deregister][%d] deregisterLinkedClusterOK  %+v", 200, o.Payload)
+}
+
 func (o *DeregisterLinkedClusterOK) GetPayload() models.HashicorpCloudVault20201125DeregisterLinkedClusterResponse {
 	return o.Payload
 }
@@ -79,7 +110,8 @@ func NewDeregisterLinkedClusterDefault(code int) *DeregisterLinkedClusterDefault
 	}
 }
 
-/* DeregisterLinkedClusterDefault describes a response with status code -1, with default header values.
+/*
+DeregisterLinkedClusterDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -94,9 +126,39 @@ func (o *DeregisterLinkedClusterDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this deregister linked cluster default response has a 2xx status code
+func (o *DeregisterLinkedClusterDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this deregister linked cluster default response has a 3xx status code
+func (o *DeregisterLinkedClusterDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this deregister linked cluster default response has a 4xx status code
+func (o *DeregisterLinkedClusterDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this deregister linked cluster default response has a 5xx status code
+func (o *DeregisterLinkedClusterDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this deregister linked cluster default response a status code equal to that given
+func (o *DeregisterLinkedClusterDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *DeregisterLinkedClusterDefault) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{cluster_link.location.organization_id}/projects/{cluster_link.location.project_id}/link/deregister][%d] DeregisterLinkedCluster default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *DeregisterLinkedClusterDefault) String() string {
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{cluster_link.location.organization_id}/projects/{cluster_link.location.project_id}/link/deregister][%d] DeregisterLinkedCluster default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *DeregisterLinkedClusterDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

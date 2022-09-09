@@ -47,7 +47,8 @@ func NewOrganizationServiceTestIamPermissionsOK() *OrganizationServiceTestIamPer
 	return &OrganizationServiceTestIamPermissionsOK{}
 }
 
-/* OrganizationServiceTestIamPermissionsOK describes a response with status code 200, with default header values.
+/*
+OrganizationServiceTestIamPermissionsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type OrganizationServiceTestIamPermissionsOK struct {
 	Payload *models.HashicorpCloudResourcemanagerOrganizationTestIamPermissionsResponse
 }
 
+// IsSuccess returns true when this organization service test iam permissions o k response has a 2xx status code
+func (o *OrganizationServiceTestIamPermissionsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this organization service test iam permissions o k response has a 3xx status code
+func (o *OrganizationServiceTestIamPermissionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this organization service test iam permissions o k response has a 4xx status code
+func (o *OrganizationServiceTestIamPermissionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this organization service test iam permissions o k response has a 5xx status code
+func (o *OrganizationServiceTestIamPermissionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this organization service test iam permissions o k response a status code equal to that given
+func (o *OrganizationServiceTestIamPermissionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *OrganizationServiceTestIamPermissionsOK) Error() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations/{id}/test-iam-permissions][%d] organizationServiceTestIamPermissionsOK  %+v", 200, o.Payload)
 }
+
+func (o *OrganizationServiceTestIamPermissionsOK) String() string {
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations/{id}/test-iam-permissions][%d] organizationServiceTestIamPermissionsOK  %+v", 200, o.Payload)
+}
+
 func (o *OrganizationServiceTestIamPermissionsOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationTestIamPermissionsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewOrganizationServiceTestIamPermissionsDefault(code int) *OrganizationServ
 	}
 }
 
-/* OrganizationServiceTestIamPermissionsDefault describes a response with status code -1, with default header values.
+/*
+OrganizationServiceTestIamPermissionsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *OrganizationServiceTestIamPermissionsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this organization service test iam permissions default response has a 2xx status code
+func (o *OrganizationServiceTestIamPermissionsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this organization service test iam permissions default response has a 3xx status code
+func (o *OrganizationServiceTestIamPermissionsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this organization service test iam permissions default response has a 4xx status code
+func (o *OrganizationServiceTestIamPermissionsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this organization service test iam permissions default response has a 5xx status code
+func (o *OrganizationServiceTestIamPermissionsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this organization service test iam permissions default response a status code equal to that given
+func (o *OrganizationServiceTestIamPermissionsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *OrganizationServiceTestIamPermissionsDefault) Error() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations/{id}/test-iam-permissions][%d] OrganizationService_TestIamPermissions default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *OrganizationServiceTestIamPermissionsDefault) String() string {
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations/{id}/test-iam-permissions][%d] OrganizationService_TestIamPermissions default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *OrganizationServiceTestIamPermissionsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -47,7 +47,8 @@ func NewListHVNRoutesOK() *ListHVNRoutesOK {
 	return &ListHVNRoutesOK{}
 }
 
-/* ListHVNRoutesOK describes a response with status code 200, with default header values.
+/*
+ListHVNRoutesOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type ListHVNRoutesOK struct {
 	Payload *models.HashicorpCloudNetwork20200907ListHVNRoutesResponse
 }
 
+// IsSuccess returns true when this list h v n routes o k response has a 2xx status code
+func (o *ListHVNRoutesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list h v n routes o k response has a 3xx status code
+func (o *ListHVNRoutesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list h v n routes o k response has a 4xx status code
+func (o *ListHVNRoutesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list h v n routes o k response has a 5xx status code
+func (o *ListHVNRoutesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list h v n routes o k response a status code equal to that given
+func (o *ListHVNRoutesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListHVNRoutesOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] listHVNRoutesOK  %+v", 200, o.Payload)
 }
+
+func (o *ListHVNRoutesOK) String() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] listHVNRoutesOK  %+v", 200, o.Payload)
+}
+
 func (o *ListHVNRoutesOK) GetPayload() *models.HashicorpCloudNetwork20200907ListHVNRoutesResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewListHVNRoutesDefault(code int) *ListHVNRoutesDefault {
 	}
 }
 
-/* ListHVNRoutesDefault describes a response with status code -1, with default header values.
+/*
+ListHVNRoutesDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *ListHVNRoutesDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list h v n routes default response has a 2xx status code
+func (o *ListHVNRoutesDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list h v n routes default response has a 3xx status code
+func (o *ListHVNRoutesDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list h v n routes default response has a 4xx status code
+func (o *ListHVNRoutesDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list h v n routes default response has a 5xx status code
+func (o *ListHVNRoutesDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list h v n routes default response a status code equal to that given
+func (o *ListHVNRoutesDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListHVNRoutesDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] ListHVNRoutes default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ListHVNRoutesDefault) String() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] ListHVNRoutes default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ListHVNRoutesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
