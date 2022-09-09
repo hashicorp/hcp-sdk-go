@@ -13,7 +13,7 @@ jobs:
     - run:
         command: |
           go mod download
-          go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.35.2
+          go get github.com/golangci/golangci-lint/cmd/golangci-lint
           go get gotest.tools/gotestsum
         name: Get CI dependencies
     - run:
