@@ -4,7 +4,6 @@ run:
 
 linters:
   enable:
-  - deadcode
   - errcheck
   - govet
   - ineffassign
@@ -14,7 +13,6 @@ linters:
   - misspell
   - unconvert
   - staticcheck
-  - varcheck
   - gosimple
   - stylecheck
   - goimports
