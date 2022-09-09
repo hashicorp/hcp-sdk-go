@@ -47,7 +47,8 @@ func NewUpdateVersionOK() *UpdateVersionOK {
 	return &UpdateVersionOK{}
 }
 
-/* UpdateVersionOK describes a response with status code 200, with default header values.
+/*
+UpdateVersionOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type UpdateVersionOK struct {
 	Payload *models.HashicorpCloudVault20201125UpdateVersionResponse
 }
 
+// IsSuccess returns true when this update version o k response has a 2xx status code
+func (o *UpdateVersionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update version o k response has a 3xx status code
+func (o *UpdateVersionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update version o k response has a 4xx status code
+func (o *UpdateVersionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update version o k response has a 5xx status code
+func (o *UpdateVersionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update version o k response a status code equal to that given
+func (o *UpdateVersionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdateVersionOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/{version}][%d] updateVersionOK  %+v", 200, o.Payload)
 }
+
+func (o *UpdateVersionOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/{version}][%d] updateVersionOK  %+v", 200, o.Payload)
+}
+
 func (o *UpdateVersionOK) GetPayload() *models.HashicorpCloudVault20201125UpdateVersionResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewUpdateVersionDefault(code int) *UpdateVersionDefault {
 	}
 }
 
-/* UpdateVersionDefault describes a response with status code -1, with default header values.
+/*
+UpdateVersionDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *UpdateVersionDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this update version default response has a 2xx status code
+func (o *UpdateVersionDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this update version default response has a 3xx status code
+func (o *UpdateVersionDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this update version default response has a 4xx status code
+func (o *UpdateVersionDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this update version default response has a 5xx status code
+func (o *UpdateVersionDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this update version default response a status code equal to that given
+func (o *UpdateVersionDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UpdateVersionDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/{version}][%d] UpdateVersion default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UpdateVersionDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/{version}][%d] UpdateVersion default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UpdateVersionDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -16,9 +16,9 @@ import (
 
 // HashicorpCloudConsul20200826SnapshotSnapshotType SnapshotType represents the type of a snapshot.
 //
-//  - AUTOMATIC: AUTOMATIC is used for snapshots generated automatically, like a snapshot before update.
-//  - MANUAL: MANUAL is used for snapshots that are initiated by a user's actions.
-//  - SCHEDULED: SCHEDULED is used for snapshots that are generated based on a schedule.
+//   - AUTOMATIC: AUTOMATIC is used for snapshots generated automatically, like a snapshot before update.
+//   - MANUAL: MANUAL is used for snapshots that are initiated by a user's actions.
+//   - SCHEDULED: SCHEDULED is used for snapshots that are generated based on a schedule.
 //
 // swagger:model hashicorp.cloud.consul_20200826.Snapshot.SnapshotType
 type HashicorpCloudConsul20200826SnapshotSnapshotType string

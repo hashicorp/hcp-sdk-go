@@ -54,10 +54,12 @@ func NewUploadProviderParamsWithHTTPClient(client *http.Client) *UploadProviderP
 	}
 }
 
-/* UploadProviderParams contains all the parameters to send to the API endpoint
-   for the upload provider operation.
+/*
+UploadProviderParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the upload provider operation.
+
+	Typically these are written to a http.Request.
 */
 type UploadProviderParams struct {
 

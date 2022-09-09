@@ -39,7 +39,8 @@ func NewGetProviderOK() *GetProviderOK {
 	return &GetProviderOK{}
 }
 
-/* GetProviderOK describes a response with status code 200, with default header values.
+/*
+GetProviderOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type GetProviderOK struct {
 	Payload *models.HashicorpCloudVagrantGetProviderResponse
 }
 
+// IsSuccess returns true when this get provider o k response has a 2xx status code
+func (o *GetProviderOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get provider o k response has a 3xx status code
+func (o *GetProviderOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get provider o k response has a 4xx status code
+func (o *GetProviderOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get provider o k response has a 5xx status code
+func (o *GetProviderOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get provider o k response a status code equal to that given
+func (o *GetProviderOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetProviderOK) Error() string {
 	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}][%d] getProviderOK  %+v", 200, o.Payload)
 }
+
+func (o *GetProviderOK) String() string {
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}][%d] getProviderOK  %+v", 200, o.Payload)
+}
+
 func (o *GetProviderOK) GetPayload() *models.HashicorpCloudVagrantGetProviderResponse {
 	return o.Payload
 }

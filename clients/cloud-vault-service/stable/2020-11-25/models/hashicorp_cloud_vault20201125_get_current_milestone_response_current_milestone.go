@@ -18,9 +18,9 @@ import (
 //
 // - ClusterCreationGenerate: ** CREATE MILESTONES **
 // ClusterCreationGenerate represents the first milestone in cluster creation
-//  - ClusterCreationCreate: ClusterCreationCreate represents the second milestone in cluster creation
-//  - ClusterCreationBootstrap: ClusterCreationBootstrap represents the third milestone in cluster creation
-//  - ClusterCreationValidate: ClusterCreationValidate represents the fourth milestone in cluster creation
+//   - ClusterCreationCreate: ClusterCreationCreate represents the second milestone in cluster creation
+//   - ClusterCreationBootstrap: ClusterCreationBootstrap represents the third milestone in cluster creation
+//   - ClusterCreationValidate: ClusterCreationValidate represents the fourth milestone in cluster creation
 //
 // swagger:model hashicorp.cloud.vault_20201125.GetCurrentMilestoneResponse.CurrentMilestone
 type HashicorpCloudVault20201125GetCurrentMilestoneResponseCurrentMilestone string

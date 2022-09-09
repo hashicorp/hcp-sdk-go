@@ -68,7 +68,7 @@ type ClientService interface {
 }
 
 /*
-  AssociateHVNWithAWSRoute53PrivateHostedZone associates h v n with a w s route53 private hosted zone will associate the h v n s v p c with a user s private hosted zone in a w s route53 this will enable the resolution of records of the private hosted zone from within the v p c
+AssociateHVNWithAWSRoute53PrivateHostedZone associates h v n with a w s route53 private hosted zone will associate the h v n s v p c with a user s private hosted zone in a w s route53 this will enable the resolution of records of the private hosted zone from within the v p c
 */
 func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHVNWithAWSRoute53PrivateHostedZoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AssociateHVNWithAWSRoute53PrivateHostedZoneOK, error) {
 	// TODO: Validate the params before sending
@@ -106,7 +106,7 @@ func (a *Client) AssociateHVNWithAWSRoute53PrivateHostedZone(params *AssociateHV
 }
 
 /*
-  Create creates creates a new h v n
+Create creates creates a new h v n
 */
 func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
 	// TODO: Validate the params before sending
@@ -144,9 +144,9 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  CreateHVNRoute hs v n routes
+CreateHVNRoute hs v n routes
 
-  CreateHVNRoute creates a new HVN Route
+CreateHVNRoute creates a new HVN Route
 */
 func (a *Client) CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHVNRouteOK, error) {
 	// TODO: Validate the params before sending
@@ -184,7 +184,7 @@ func (a *Client) CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.C
 }
 
 /*
-  CreatePeering creates peering creates a new network peering between h v n v p c and target v p c
+CreatePeering creates peering creates a new network peering between h v n v p c and target v p c
 */
 func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePeeringOK, error) {
 	// TODO: Validate the params before sending
@@ -222,7 +222,7 @@ func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.Cli
 }
 
 /*
-  CreateTGWAttachment creates t g w attachment creates a new transit gateway attachment for an h v n
+CreateTGWAttachment creates t g w attachment creates a new transit gateway attachment for an h v n
 */
 func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
@@ -260,7 +260,7 @@ func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo
 }
 
 /*
-  Delete deletes deletes a new h v n
+Delete deletes deletes a new h v n
 */
 func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -298,7 +298,7 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  DeleteHVNRoute deletes h v n route triggers h v n route deletion workflow
+DeleteHVNRoute deletes h v n route triggers h v n route deletion workflow
 */
 func (a *Client) DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteHVNRouteOK, error) {
 	// TODO: Validate the params before sending
@@ -336,7 +336,7 @@ func (a *Client) DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.C
 }
 
 /*
-  DeletePeering deletes peering deletes specified peering and triggers updating network configuration
+DeletePeering deletes peering deletes specified peering and triggers updating network configuration
 */
 func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePeeringOK, error) {
 	// TODO: Validate the params before sending
@@ -374,7 +374,7 @@ func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.Cli
 }
 
 /*
-  DeleteTGWAttachment deletes t g w attachment deletes specified transit gateway attachment and triggers updating network configuration
+DeleteTGWAttachment deletes t g w attachment deletes specified transit gateway attachment and triggers updating network configuration
 */
 func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
@@ -412,7 +412,7 @@ func (a *Client) DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo
 }
 
 /*
-  Get gets reads a single h v n
+Get gets reads a single h v n
 */
 func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error) {
 	// TODO: Validate the params before sending
@@ -450,7 +450,7 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, o
 }
 
 /*
-  GetHVNRoute gets h v n route returns a specific h v n route
+GetHVNRoute gets h v n route returns a specific h v n route
 */
 func (a *Client) GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHVNRouteOK, error) {
 	// TODO: Validate the params before sending
@@ -488,7 +488,7 @@ func (a *Client) GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientA
 }
 
 /*
-  GetPeering gets peering returns information about peering
+GetPeering gets peering returns information about peering
 */
 func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPeeringOK, error) {
 	// TODO: Validate the params before sending
@@ -526,7 +526,7 @@ func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAut
 }
 
 /*
-  GetTGWAttachment gets t g w attachment returns existing t g w attachment
+GetTGWAttachment gets t g w attachment returns existing t g w attachment
 */
 func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTGWAttachmentOK, error) {
 	// TODO: Validate the params before sending
@@ -564,7 +564,7 @@ func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runti
 }
 
 /*
-  List lists lists all h v ns
+List lists lists all h v ns
 */
 func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
 	// TODO: Validate the params before sending
@@ -602,7 +602,7 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
-  ListDependencies lists dependencies lists the dependent services on the given h v n
+ListDependencies lists dependencies lists the dependent services on the given h v n
 */
 func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDependenciesOK, error) {
 	// TODO: Validate the params before sending
@@ -640,7 +640,7 @@ func (a *Client) ListDependencies(params *ListDependenciesParams, authInfo runti
 }
 
 /*
-  ListHVNRoutes lists h v n routes returns a list of routes for an h v n
+ListHVNRoutes lists h v n routes returns a list of routes for an h v n
 */
 func (a *Client) ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListHVNRoutesOK, error) {
 	// TODO: Validate the params before sending
@@ -678,7 +678,7 @@ func (a *Client) ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.Cli
 }
 
 /*
-  ListPeerings lists peerings returns a list of peerings matching the request
+ListPeerings lists peerings returns a list of peerings matching the request
 */
 func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPeeringsOK, error) {
 	// TODO: Validate the params before sending
@@ -716,7 +716,7 @@ func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.Clien
 }
 
 /*
-  ListTGWAttachments lists t g w attachments returns a list of t g w attachments matching the request
+ListTGWAttachments lists t g w attachments returns a list of t g w attachments matching the request
 */
 func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTGWAttachmentsOK, error) {
 	// TODO: Validate the params before sending

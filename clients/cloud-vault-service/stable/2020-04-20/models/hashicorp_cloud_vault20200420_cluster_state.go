@@ -18,23 +18,28 @@ import (
 // represents the abstract Vault cluster itself, not necessarily whether
 // Vault cluster is currently available or not.
 //
-//  - UNSET: UNSET is a sentinel zero value so that an uninitialized value can be
+//   - UNSET: UNSET is a sentinel zero value so that an uninitialized value can be
+//
 // detected.
-//  - PENDING: PENDING is the state the cluster is in while it is waiting to be created.
-//  - CREATING: CREATING is the state the cluster is in while it is being provisioned for
+//   - PENDING: PENDING is the state the cluster is in while it is waiting to be created.
+//   - CREATING: CREATING is the state the cluster is in while it is being provisioned for
+//
 // the first time.
-//  - RUNNING: RUNNING is the steady state while the cluster is running.
-//  - FAILED: FAILED is a failure state in which the cluster is unavailable and may
+//   - RUNNING: RUNNING is the steady state while the cluster is running.
+//   - FAILED: FAILED is a failure state in which the cluster is unavailable and may
+//
 // required an operator restore action to recover.
-//  - UPDATING: UPDATING is the state the cluster is in while undergoing a version
+//   - UPDATING: UPDATING is the state the cluster is in while undergoing a version
+//
 // update.
-//  - RESTORING: RESTORING is the state the cluster is in while restoring from a snapshot.
-//  - DELETING: DELETING is the state the cluster is in while it is being de-provisioned.
-//  - DELETED: DELETED is the state the cluster is in when it has been de-provisioned. At
+//   - RESTORING: RESTORING is the state the cluster is in while restoring from a snapshot.
+//   - DELETING: DELETING is the state the cluster is in while it is being de-provisioned.
+//   - DELETED: DELETED is the state the cluster is in when it has been de-provisioned. At
+//
 // this point, the cluster is eligible for garbage collection.
-//  - SEALING: SEALING is the state the cluster is in when it is about to get sealed.
-//  - SEALED: SEALED is the state the cluster is in while a cluster is sealed.
-//  - UNSEALING: UNSEALING is the state the cluster is in when it is about to get unsealed.
+//   - SEALING: SEALING is the state the cluster is in when it is about to get sealed.
+//   - SEALED: SEALED is the state the cluster is in while a cluster is sealed.
+//   - UNSEALING: UNSEALING is the state the cluster is in when it is about to get unsealed.
 //
 // swagger:model hashicorp.cloud.vault_20200420.Cluster.State
 type HashicorpCloudVault20200420ClusterState string

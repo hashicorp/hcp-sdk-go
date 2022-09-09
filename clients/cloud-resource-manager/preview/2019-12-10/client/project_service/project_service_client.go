@@ -38,7 +38,7 @@ type ClientService interface {
 }
 
 /*
-  ProjectServiceCreate creates creates a new project
+ProjectServiceCreate creates creates a new project
 */
 func (a *Client) ProjectServiceCreate(params *ProjectServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -76,7 +76,7 @@ func (a *Client) ProjectServiceCreate(params *ProjectServiceCreateParams, authIn
 }
 
 /*
-  ProjectServiceGet gets retrieves the requested project by ID
+ProjectServiceGet gets retrieves the requested project by ID
 */
 func (a *Client) ProjectServiceGet(params *ProjectServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceGetOK, error) {
 	// TODO: Validate the params before sending
@@ -114,7 +114,7 @@ func (a *Client) ProjectServiceGet(params *ProjectServiceGetParams, authInfo run
 }
 
 /*
-  ProjectServiceList lists list the projects the caller has access to
+ProjectServiceList lists list the projects the caller has access to
 */
 func (a *Client) ProjectServiceList(params *ProjectServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceListOK, error) {
 	// TODO: Validate the params before sending

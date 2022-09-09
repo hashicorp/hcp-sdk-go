@@ -47,7 +47,8 @@ func NewRestoreSnapshotOK() *RestoreSnapshotOK {
 	return &RestoreSnapshotOK{}
 }
 
-/* RestoreSnapshotOK describes a response with status code 200, with default header values.
+/*
+RestoreSnapshotOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type RestoreSnapshotOK struct {
 	Payload *models.HashicorpCloudVault20200420RestoreSnapshotResponse
 }
 
+// IsSuccess returns true when this restore snapshot o k response has a 2xx status code
+func (o *RestoreSnapshotOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this restore snapshot o k response has a 3xx status code
+func (o *RestoreSnapshotOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this restore snapshot o k response has a 4xx status code
+func (o *RestoreSnapshotOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this restore snapshot o k response has a 5xx status code
+func (o *RestoreSnapshotOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this restore snapshot o k response a status code equal to that given
+func (o *RestoreSnapshotOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *RestoreSnapshotOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/restore][%d] restoreSnapshotOK  %+v", 200, o.Payload)
 }
+
+func (o *RestoreSnapshotOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/restore][%d] restoreSnapshotOK  %+v", 200, o.Payload)
+}
+
 func (o *RestoreSnapshotOK) GetPayload() *models.HashicorpCloudVault20200420RestoreSnapshotResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewRestoreSnapshotDefault(code int) *RestoreSnapshotDefault {
 	}
 }
 
-/* RestoreSnapshotDefault describes a response with status code -1, with default header values.
+/*
+RestoreSnapshotDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *RestoreSnapshotDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this restore snapshot default response has a 2xx status code
+func (o *RestoreSnapshotDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this restore snapshot default response has a 3xx status code
+func (o *RestoreSnapshotDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this restore snapshot default response has a 4xx status code
+func (o *RestoreSnapshotDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this restore snapshot default response has a 5xx status code
+func (o *RestoreSnapshotDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this restore snapshot default response a status code equal to that given
+func (o *RestoreSnapshotDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *RestoreSnapshotDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/restore][%d] RestoreSnapshot default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *RestoreSnapshotDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/restore][%d] RestoreSnapshot default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *RestoreSnapshotDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -52,10 +52,12 @@ func NewGetAdminTokenParamsWithHTTPClient(client *http.Client) *GetAdminTokenPar
 	}
 }
 
-/* GetAdminTokenParams contains all the parameters to send to the API endpoint
-   for the get admin token operation.
+/*
+GetAdminTokenParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get admin token operation.
+
+	Typically these are written to a http.Request.
 */
 type GetAdminTokenParams struct {
 

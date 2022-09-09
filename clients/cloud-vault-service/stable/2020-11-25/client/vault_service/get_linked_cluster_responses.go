@@ -47,7 +47,8 @@ func NewGetLinkedClusterOK() *GetLinkedClusterOK {
 	return &GetLinkedClusterOK{}
 }
 
-/* GetLinkedClusterOK describes a response with status code 200, with default header values.
+/*
+GetLinkedClusterOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetLinkedClusterOK struct {
 	Payload *models.HashicorpCloudVault20201125GetLinkedClusterResponse
 }
 
+// IsSuccess returns true when this get linked cluster o k response has a 2xx status code
+func (o *GetLinkedClusterOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get linked cluster o k response has a 3xx status code
+func (o *GetLinkedClusterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get linked cluster o k response has a 4xx status code
+func (o *GetLinkedClusterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get linked cluster o k response has a 5xx status code
+func (o *GetLinkedClusterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get linked cluster o k response a status code equal to that given
+func (o *GetLinkedClusterOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetLinkedClusterOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}][%d] getLinkedClusterOK  %+v", 200, o.Payload)
 }
+
+func (o *GetLinkedClusterOK) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}][%d] getLinkedClusterOK  %+v", 200, o.Payload)
+}
+
 func (o *GetLinkedClusterOK) GetPayload() *models.HashicorpCloudVault20201125GetLinkedClusterResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetLinkedClusterDefault(code int) *GetLinkedClusterDefault {
 	}
 }
 
-/* GetLinkedClusterDefault describes a response with status code -1, with default header values.
+/*
+GetLinkedClusterDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetLinkedClusterDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get linked cluster default response has a 2xx status code
+func (o *GetLinkedClusterDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get linked cluster default response has a 3xx status code
+func (o *GetLinkedClusterDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get linked cluster default response has a 4xx status code
+func (o *GetLinkedClusterDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get linked cluster default response has a 5xx status code
+func (o *GetLinkedClusterDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get linked cluster default response a status code equal to that given
+func (o *GetLinkedClusterDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetLinkedClusterDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}][%d] GetLinkedCluster default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetLinkedClusterDefault) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}][%d] GetLinkedCluster default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetLinkedClusterDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

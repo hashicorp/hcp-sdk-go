@@ -16,13 +16,13 @@ import (
 
 // HashicorpCloudConsul20200826SnapshotSnapshotState SnapshotState represents the different states a snapshot can be in.
 //
-//  - QUEUED: QUEUED is used for snapshots that haven’t started and are waiting for a cluster operation to finish before starting.
-//  - CREATING: CREATING is used for snapshots that are creating.
-//  - CREATING_FAILED: CREATING_FAILED is used for snapshots that failed creating.
-//  - READY: READY is used for snapshots that are ready to be restored.
-//  - DELETING: DELETING is used for snapshots that are deleting.
-//  - DELETING_FAILED: DELETING_FAILED is used for snapshots that failed deleting.
-//  - RESTORING: RESTORING is used for snapshots that are being restored.
+//   - QUEUED: QUEUED is used for snapshots that haven’t started and are waiting for a cluster operation to finish before starting.
+//   - CREATING: CREATING is used for snapshots that are creating.
+//   - CREATING_FAILED: CREATING_FAILED is used for snapshots that failed creating.
+//   - READY: READY is used for snapshots that are ready to be restored.
+//   - DELETING: DELETING is used for snapshots that are deleting.
+//   - DELETING_FAILED: DELETING_FAILED is used for snapshots that failed deleting.
+//   - RESTORING: RESTORING is used for snapshots that are being restored.
 //
 // Progress can be tracked using cluster operations.
 //

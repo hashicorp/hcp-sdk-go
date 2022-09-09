@@ -52,10 +52,12 @@ func NewGetCurrentMilestoneParamsWithHTTPClient(client *http.Client) *GetCurrent
 	}
 }
 
-/* GetCurrentMilestoneParams contains all the parameters to send to the API endpoint
-   for the get current milestone operation.
+/*
+GetCurrentMilestoneParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get current milestone operation.
+
+	Typically these are written to a http.Request.
 */
 type GetCurrentMilestoneParams struct {
 

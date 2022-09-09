@@ -47,7 +47,8 @@ func NewListVersions2OK() *ListVersions2OK {
 	return &ListVersions2OK{}
 }
 
-/* ListVersions2OK describes a response with status code 200, with default header values.
+/*
+ListVersions2OK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type ListVersions2OK struct {
 	Payload *models.HashicorpCloudConsul20210204ListVersionsResponse
 }
 
+// IsSuccess returns true when this list versions2 o k response has a 2xx status code
+func (o *ListVersions2OK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list versions2 o k response has a 3xx status code
+func (o *ListVersions2OK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list versions2 o k response has a 4xx status code
+func (o *ListVersions2OK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list versions2 o k response has a 5xx status code
+func (o *ListVersions2OK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list versions2 o k response a status code equal to that given
+func (o *ListVersions2OK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListVersions2OK) Error() string {
 	return fmt.Sprintf("[GET /consul/2021-02-04/versions][%d] listVersions2OK  %+v", 200, o.Payload)
 }
+
+func (o *ListVersions2OK) String() string {
+	return fmt.Sprintf("[GET /consul/2021-02-04/versions][%d] listVersions2OK  %+v", 200, o.Payload)
+}
+
 func (o *ListVersions2OK) GetPayload() *models.HashicorpCloudConsul20210204ListVersionsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewListVersions2Default(code int) *ListVersions2Default {
 	}
 }
 
-/* ListVersions2Default describes a response with status code -1, with default header values.
+/*
+ListVersions2Default describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *ListVersions2Default) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list versions2 default response has a 2xx status code
+func (o *ListVersions2Default) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list versions2 default response has a 3xx status code
+func (o *ListVersions2Default) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list versions2 default response has a 4xx status code
+func (o *ListVersions2Default) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list versions2 default response has a 5xx status code
+func (o *ListVersions2Default) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list versions2 default response a status code equal to that given
+func (o *ListVersions2Default) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListVersions2Default) Error() string {
 	return fmt.Sprintf("[GET /consul/2021-02-04/versions][%d] ListVersions2 default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ListVersions2Default) String() string {
+	return fmt.Sprintf("[GET /consul/2021-02-04/versions][%d] ListVersions2 default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ListVersions2Default) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -39,7 +39,8 @@ func NewDeleteVersionOK() *DeleteVersionOK {
 	return &DeleteVersionOK{}
 }
 
-/* DeleteVersionOK describes a response with status code 200, with default header values.
+/*
+DeleteVersionOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type DeleteVersionOK struct {
 	Payload models.HashicorpCloudVagrantDeleteVersionResponse
 }
 
+// IsSuccess returns true when this delete version o k response has a 2xx status code
+func (o *DeleteVersionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete version o k response has a 3xx status code
+func (o *DeleteVersionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete version o k response has a 4xx status code
+func (o *DeleteVersionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete version o k response has a 5xx status code
+func (o *DeleteVersionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete version o k response a status code equal to that given
+func (o *DeleteVersionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DeleteVersionOK) Error() string {
 	return fmt.Sprintf("[DELETE /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}][%d] deleteVersionOK  %+v", 200, o.Payload)
 }
+
+func (o *DeleteVersionOK) String() string {
+	return fmt.Sprintf("[DELETE /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}][%d] deleteVersionOK  %+v", 200, o.Payload)
+}
+
 func (o *DeleteVersionOK) GetPayload() models.HashicorpCloudVagrantDeleteVersionResponse {
 	return o.Payload
 }

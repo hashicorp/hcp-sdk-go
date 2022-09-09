@@ -47,7 +47,8 @@ func NewUnsealOK() *UnsealOK {
 	return &UnsealOK{}
 }
 
-/* UnsealOK describes a response with status code 200, with default header values.
+/*
+UnsealOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type UnsealOK struct {
 	Payload *models.HashicorpCloudVault20200420UnsealResponse
 }
 
+// IsSuccess returns true when this unseal o k response has a 2xx status code
+func (o *UnsealOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this unseal o k response has a 3xx status code
+func (o *UnsealOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this unseal o k response has a 4xx status code
+func (o *UnsealOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this unseal o k response has a 5xx status code
+func (o *UnsealOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this unseal o k response a status code equal to that given
+func (o *UnsealOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UnsealOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] unsealOK  %+v", 200, o.Payload)
 }
+
+func (o *UnsealOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] unsealOK  %+v", 200, o.Payload)
+}
+
 func (o *UnsealOK) GetPayload() *models.HashicorpCloudVault20200420UnsealResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewUnsealDefault(code int) *UnsealDefault {
 	}
 }
 
-/* UnsealDefault describes a response with status code -1, with default header values.
+/*
+UnsealDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *UnsealDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this unseal default response has a 2xx status code
+func (o *UnsealDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this unseal default response has a 3xx status code
+func (o *UnsealDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this unseal default response has a 4xx status code
+func (o *UnsealDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this unseal default response has a 5xx status code
+func (o *UnsealDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this unseal default response a status code equal to that given
+func (o *UnsealDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UnsealDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] Unseal default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UnsealDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] Unseal default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UnsealDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

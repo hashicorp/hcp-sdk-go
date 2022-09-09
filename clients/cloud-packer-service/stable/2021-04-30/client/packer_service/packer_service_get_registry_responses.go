@@ -47,7 +47,8 @@ func NewPackerServiceGetRegistryOK() *PackerServiceGetRegistryOK {
 	return &PackerServiceGetRegistryOK{}
 }
 
-/* PackerServiceGetRegistryOK describes a response with status code 200, with default header values.
+/*
+PackerServiceGetRegistryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceGetRegistryOK struct {
 	Payload *models.HashicorpCloudPackerGetRegistryResponse
 }
 
+// IsSuccess returns true when this packer service get registry o k response has a 2xx status code
+func (o *PackerServiceGetRegistryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service get registry o k response has a 3xx status code
+func (o *PackerServiceGetRegistryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service get registry o k response has a 4xx status code
+func (o *PackerServiceGetRegistryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service get registry o k response has a 5xx status code
+func (o *PackerServiceGetRegistryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service get registry o k response a status code equal to that given
+func (o *PackerServiceGetRegistryOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceGetRegistryOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceGetRegistryOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceGetRegistryOK) String() string {
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceGetRegistryOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceGetRegistryOK) GetPayload() *models.HashicorpCloudPackerGetRegistryResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceGetRegistryDefault(code int) *PackerServiceGetRegistryDefau
 	}
 }
 
-/* PackerServiceGetRegistryDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceGetRegistryDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceGetRegistryDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service get registry default response has a 2xx status code
+func (o *PackerServiceGetRegistryDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service get registry default response has a 3xx status code
+func (o *PackerServiceGetRegistryDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service get registry default response has a 4xx status code
+func (o *PackerServiceGetRegistryDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service get registry default response has a 5xx status code
+func (o *PackerServiceGetRegistryDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service get registry default response a status code equal to that given
+func (o *PackerServiceGetRegistryDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceGetRegistryDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_GetRegistry default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceGetRegistryDefault) String() string {
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_GetRegistry default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceGetRegistryDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

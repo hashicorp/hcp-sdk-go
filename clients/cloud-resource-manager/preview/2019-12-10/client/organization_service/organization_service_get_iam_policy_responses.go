@@ -47,7 +47,8 @@ func NewOrganizationServiceGetIamPolicyOK() *OrganizationServiceGetIamPolicyOK {
 	return &OrganizationServiceGetIamPolicyOK{}
 }
 
-/* OrganizationServiceGetIamPolicyOK describes a response with status code 200, with default header values.
+/*
+OrganizationServiceGetIamPolicyOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type OrganizationServiceGetIamPolicyOK struct {
 	Payload *models.HashicorpCloudResourcemanagerOrganizationGetIamPolicyResponse
 }
 
+// IsSuccess returns true when this organization service get iam policy o k response has a 2xx status code
+func (o *OrganizationServiceGetIamPolicyOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this organization service get iam policy o k response has a 3xx status code
+func (o *OrganizationServiceGetIamPolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this organization service get iam policy o k response has a 4xx status code
+func (o *OrganizationServiceGetIamPolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this organization service get iam policy o k response has a 5xx status code
+func (o *OrganizationServiceGetIamPolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this organization service get iam policy o k response a status code equal to that given
+func (o *OrganizationServiceGetIamPolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *OrganizationServiceGetIamPolicyOK) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceGetIamPolicyOK  %+v", 200, o.Payload)
 }
+
+func (o *OrganizationServiceGetIamPolicyOK) String() string {
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceGetIamPolicyOK  %+v", 200, o.Payload)
+}
+
 func (o *OrganizationServiceGetIamPolicyOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationGetIamPolicyResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewOrganizationServiceGetIamPolicyDefault(code int) *OrganizationServiceGet
 	}
 }
 
-/* OrganizationServiceGetIamPolicyDefault describes a response with status code -1, with default header values.
+/*
+OrganizationServiceGetIamPolicyDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *OrganizationServiceGetIamPolicyDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this organization service get iam policy default response has a 2xx status code
+func (o *OrganizationServiceGetIamPolicyDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this organization service get iam policy default response has a 3xx status code
+func (o *OrganizationServiceGetIamPolicyDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this organization service get iam policy default response has a 4xx status code
+func (o *OrganizationServiceGetIamPolicyDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this organization service get iam policy default response has a 5xx status code
+func (o *OrganizationServiceGetIamPolicyDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this organization service get iam policy default response a status code equal to that given
+func (o *OrganizationServiceGetIamPolicyDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *OrganizationServiceGetIamPolicyDefault) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *OrganizationServiceGetIamPolicyDefault) String() string {
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *OrganizationServiceGetIamPolicyDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

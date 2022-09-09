@@ -47,7 +47,8 @@ func NewPackerServiceRegenerateTFCRunTaskHmacKeyOK() *PackerServiceRegenerateTFC
 	return &PackerServiceRegenerateTFCRunTaskHmacKeyOK{}
 }
 
-/* PackerServiceRegenerateTFCRunTaskHmacKeyOK describes a response with status code 200, with default header values.
+/*
+PackerServiceRegenerateTFCRunTaskHmacKeyOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceRegenerateTFCRunTaskHmacKeyOK struct {
 	Payload *models.HashicorpCloudPacker20220411RegenerateTFCRunTaskHmacKeyResponse
 }
 
+// IsSuccess returns true when this packer service regenerate t f c run task hmac key o k response has a 2xx status code
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service regenerate t f c run task hmac key o k response has a 3xx status code
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service regenerate t f c run task hmac key o k response has a 4xx status code
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service regenerate t f c run task hmac key o k response has a 5xx status code
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service regenerate t f c run task hmac key o k response a status code equal to that given
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] packerServiceRegenerateTFCRunTaskHmacKeyOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) String() string {
+	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] packerServiceRegenerateTFCRunTaskHmacKeyOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) GetPayload() *models.HashicorpCloudPacker20220411RegenerateTFCRunTaskHmacKeyResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceRegenerateTFCRunTaskHmacKeyDefault(code int) *PackerService
 	}
 }
 
-/* PackerServiceRegenerateTFCRunTaskHmacKeyDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceRegenerateTFCRunTaskHmacKeyDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service regenerate t f c run task hmac key default response has a 2xx status code
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service regenerate t f c run task hmac key default response has a 3xx status code
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service regenerate t f c run task hmac key default response has a 4xx status code
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service regenerate t f c run task hmac key default response has a 5xx status code
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service regenerate t f c run task hmac key default response a status code equal to that given
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] PackerService_RegenerateTFCRunTaskHmacKey default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) String() string {
+	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] PackerService_RegenerateTFCRunTaskHmacKey default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

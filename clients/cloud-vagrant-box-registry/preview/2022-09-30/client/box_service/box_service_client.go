@@ -44,7 +44,7 @@ type ClientService interface {
 }
 
 /*
-  CreateBox creates box creates a new vagrant box
+CreateBox creates box creates a new vagrant box
 */
 func (a *Client) CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBoxOK, error) {
 	// TODO: Validate the params before sending
@@ -83,9 +83,10 @@ func (a *Client) CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  DeleteBox deletes box deletes a vagrant box
+	DeleteBox deletes box deletes a vagrant box
 
-  Deleting a Box removes all its Versions and Providers as
+	Deleting a Box removes all its Versions and Providers as
+
 well. This operation cannot be undone.
 */
 func (a *Client) DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBoxOK, error) {
@@ -125,7 +126,7 @@ func (a *Client) DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  ListBoxes lists boxes lists all of the boxes within a particular registry
+ListBoxes lists boxes lists all of the boxes within a particular registry
 */
 func (a *Client) ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBoxesOK, error) {
 	// TODO: Validate the params before sending
@@ -164,7 +165,7 @@ func (a *Client) ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  ReadBox reads box reads a vagrant box
+ReadBox reads box reads a vagrant box
 */
 func (a *Client) ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadBoxOK, error) {
 	// TODO: Validate the params before sending
@@ -203,9 +204,10 @@ func (a *Client) ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-  UpdateBox updates box updates the details of a vagrant box
+	UpdateBox updates box updates the details of a vagrant box
 
-  Note that this only updates details about the Box itself. To
+	Note that this only updates details about the Box itself. To
+
 work with a Box's Versions or Providers, use those respective
 services.
 */

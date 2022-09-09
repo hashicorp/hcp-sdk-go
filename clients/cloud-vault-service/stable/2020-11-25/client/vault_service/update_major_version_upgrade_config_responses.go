@@ -47,7 +47,8 @@ func NewUpdateMajorVersionUpgradeConfigOK() *UpdateMajorVersionUpgradeConfigOK {
 	return &UpdateMajorVersionUpgradeConfigOK{}
 }
 
-/* UpdateMajorVersionUpgradeConfigOK describes a response with status code 200, with default header values.
+/*
+UpdateMajorVersionUpgradeConfigOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type UpdateMajorVersionUpgradeConfigOK struct {
 	Payload models.HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigResponse
 }
 
+// IsSuccess returns true when this update major version upgrade config o k response has a 2xx status code
+func (o *UpdateMajorVersionUpgradeConfigOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update major version upgrade config o k response has a 3xx status code
+func (o *UpdateMajorVersionUpgradeConfigOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update major version upgrade config o k response has a 4xx status code
+func (o *UpdateMajorVersionUpgradeConfigOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update major version upgrade config o k response has a 5xx status code
+func (o *UpdateMajorVersionUpgradeConfigOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update major version upgrade config o k response a status code equal to that given
+func (o *UpdateMajorVersionUpgradeConfigOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdateMajorVersionUpgradeConfigOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version-upgrade-config/update][%d] updateMajorVersionUpgradeConfigOK  %+v", 200, o.Payload)
 }
+
+func (o *UpdateMajorVersionUpgradeConfigOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version-upgrade-config/update][%d] updateMajorVersionUpgradeConfigOK  %+v", 200, o.Payload)
+}
+
 func (o *UpdateMajorVersionUpgradeConfigOK) GetPayload() models.HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigResponse {
 	return o.Payload
 }
@@ -79,7 +110,8 @@ func NewUpdateMajorVersionUpgradeConfigDefault(code int) *UpdateMajorVersionUpgr
 	}
 }
 
-/* UpdateMajorVersionUpgradeConfigDefault describes a response with status code -1, with default header values.
+/*
+UpdateMajorVersionUpgradeConfigDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -94,9 +126,39 @@ func (o *UpdateMajorVersionUpgradeConfigDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this update major version upgrade config default response has a 2xx status code
+func (o *UpdateMajorVersionUpgradeConfigDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this update major version upgrade config default response has a 3xx status code
+func (o *UpdateMajorVersionUpgradeConfigDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this update major version upgrade config default response has a 4xx status code
+func (o *UpdateMajorVersionUpgradeConfigDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this update major version upgrade config default response has a 5xx status code
+func (o *UpdateMajorVersionUpgradeConfigDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this update major version upgrade config default response a status code equal to that given
+func (o *UpdateMajorVersionUpgradeConfigDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UpdateMajorVersionUpgradeConfigDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version-upgrade-config/update][%d] UpdateMajorVersionUpgradeConfig default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UpdateMajorVersionUpgradeConfigDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version-upgrade-config/update][%d] UpdateMajorVersionUpgradeConfig default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UpdateMajorVersionUpgradeConfigDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

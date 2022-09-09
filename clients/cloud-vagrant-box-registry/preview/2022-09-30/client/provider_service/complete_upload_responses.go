@@ -39,7 +39,8 @@ func NewCompleteUploadOK() *CompleteUploadOK {
 	return &CompleteUploadOK{}
 }
 
-/* CompleteUploadOK describes a response with status code 200, with default header values.
+/*
+CompleteUploadOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type CompleteUploadOK struct {
 	Payload models.HashicorpCloudVagrantCompleteUploadResponse
 }
 
+// IsSuccess returns true when this complete upload o k response has a 2xx status code
+func (o *CompleteUploadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this complete upload o k response has a 3xx status code
+func (o *CompleteUploadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this complete upload o k response has a 4xx status code
+func (o *CompleteUploadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this complete upload o k response has a 5xx status code
+func (o *CompleteUploadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this complete upload o k response a status code equal to that given
+func (o *CompleteUploadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CompleteUploadOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}/complete][%d] completeUploadOK  %+v", 200, o.Payload)
 }
+
+func (o *CompleteUploadOK) String() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}/complete][%d] completeUploadOK  %+v", 200, o.Payload)
+}
+
 func (o *CompleteUploadOK) GetPayload() models.HashicorpCloudVagrantCompleteUploadResponse {
 	return o.Payload
 }

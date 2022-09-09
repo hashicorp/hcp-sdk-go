@@ -54,10 +54,12 @@ func NewCreateVersionParamsWithHTTPClient(client *http.Client) *CreateVersionPar
 	}
 }
 
-/* CreateVersionParams contains all the parameters to send to the API endpoint
-   for the create version operation.
+/*
+CreateVersionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create version operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateVersionParams struct {
 

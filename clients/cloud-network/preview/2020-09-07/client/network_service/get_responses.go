@@ -47,7 +47,8 @@ func NewGetOK() *GetOK {
 	return &GetOK{}
 }
 
-/* GetOK describes a response with status code 200, with default header values.
+/*
+GetOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetOK struct {
 	Payload *models.HashicorpCloudNetwork20200907GetResponse
 }
 
+// IsSuccess returns true when this get o k response has a 2xx status code
+func (o *GetOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get o k response has a 3xx status code
+func (o *GetOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get o k response has a 4xx status code
+func (o *GetOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get o k response has a 5xx status code
+func (o *GetOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get o k response a status code equal to that given
+func (o *GetOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] getOK  %+v", 200, o.Payload)
 }
+
+func (o *GetOK) String() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] getOK  %+v", 200, o.Payload)
+}
+
 func (o *GetOK) GetPayload() *models.HashicorpCloudNetwork20200907GetResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetDefault(code int) *GetDefault {
 	}
 }
 
-/* GetDefault describes a response with status code -1, with default header values.
+/*
+GetDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get default response has a 2xx status code
+func (o *GetDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get default response has a 3xx status code
+func (o *GetDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get default response has a 4xx status code
+func (o *GetDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get default response has a 5xx status code
+func (o *GetDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get default response a status code equal to that given
+func (o *GetDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Get default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetDefault) String() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Get default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -19,34 +19,34 @@ import (
 //
 // An organization policy which has a single owner and many contributors.
 //
-// "policy": {
-//   "bindings": [{
-//     "role_id": "roles/owner",
-//     "members": [
-//       {
-//         "member_type": "USER",
-//         "member_id": "f0b6f14c-ff6d-481a-8bd6-f4f0d356bc93"
-//       }
-//     ]
-//   }, {
-//     "role_id": "roles/contributor",
-//     "members": [
-//       {
-//         "member_type": "USER",
-//         "member_id": "b24c10e6-7f2d-4660-a163-f54f52439080"
-//       },
-//       {
-//         "member_type": "USER",
-//         "member_id": "b2becb8c-4947-4a29-94bb-c952b1b67f1e"
-//       },
-//       {
-//         "member_type": "GROUP",
-//         "member_id": "356120ef-3014-404c-b574-c1c9e804663a"
-//       }
-//     ]
-//   }],
-//   "etag": "afd123"
-// }
+//	"policy": {
+//	  "bindings": [{
+//	    "role_id": "roles/owner",
+//	    "members": [
+//	      {
+//	        "member_type": "USER",
+//	        "member_id": "f0b6f14c-ff6d-481a-8bd6-f4f0d356bc93"
+//	      }
+//	    ]
+//	  }, {
+//	    "role_id": "roles/contributor",
+//	    "members": [
+//	      {
+//	        "member_type": "USER",
+//	        "member_id": "b24c10e6-7f2d-4660-a163-f54f52439080"
+//	      },
+//	      {
+//	        "member_type": "USER",
+//	        "member_id": "b2becb8c-4947-4a29-94bb-c952b1b67f1e"
+//	      },
+//	      {
+//	        "member_type": "GROUP",
+//	        "member_id": "356120ef-3014-404c-b574-c1c9e804663a"
+//	      }
+//	    ]
+//	  }],
+//	  "etag": "afd123"
+//	}
 //
 // swagger:model hashicorp.cloud.resourcemanager.Policy
 type HashicorpCloudResourcemanagerPolicy struct {

@@ -54,10 +54,12 @@ func NewUpdatePathsFilterParamsWithHTTPClient(client *http.Client) *UpdatePathsF
 	}
 }
 
-/* UpdatePathsFilterParams contains all the parameters to send to the API endpoint
-   for the update paths filter operation.
+/*
+UpdatePathsFilterParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update paths filter operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdatePathsFilterParams struct {
 

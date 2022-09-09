@@ -47,7 +47,8 @@ func NewGetCurrentMilestoneOK() *GetCurrentMilestoneOK {
 	return &GetCurrentMilestoneOK{}
 }
 
-/* GetCurrentMilestoneOK describes a response with status code 200, with default header values.
+/*
+GetCurrentMilestoneOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetCurrentMilestoneOK struct {
 	Payload *models.HashicorpCloudVault20201125GetCurrentMilestoneResponse
 }
 
+// IsSuccess returns true when this get current milestone o k response has a 2xx status code
+func (o *GetCurrentMilestoneOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get current milestone o k response has a 3xx status code
+func (o *GetCurrentMilestoneOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current milestone o k response has a 4xx status code
+func (o *GetCurrentMilestoneOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get current milestone o k response has a 5xx status code
+func (o *GetCurrentMilestoneOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get current milestone o k response a status code equal to that given
+func (o *GetCurrentMilestoneOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetCurrentMilestoneOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] getCurrentMilestoneOK  %+v", 200, o.Payload)
 }
+
+func (o *GetCurrentMilestoneOK) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] getCurrentMilestoneOK  %+v", 200, o.Payload)
+}
+
 func (o *GetCurrentMilestoneOK) GetPayload() *models.HashicorpCloudVault20201125GetCurrentMilestoneResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetCurrentMilestoneDefault(code int) *GetCurrentMilestoneDefault {
 	}
 }
 
-/* GetCurrentMilestoneDefault describes a response with status code -1, with default header values.
+/*
+GetCurrentMilestoneDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetCurrentMilestoneDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get current milestone default response has a 2xx status code
+func (o *GetCurrentMilestoneDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get current milestone default response has a 3xx status code
+func (o *GetCurrentMilestoneDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get current milestone default response has a 4xx status code
+func (o *GetCurrentMilestoneDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get current milestone default response has a 5xx status code
+func (o *GetCurrentMilestoneDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get current milestone default response a status code equal to that given
+func (o *GetCurrentMilestoneDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetCurrentMilestoneDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] GetCurrentMilestone default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetCurrentMilestoneDefault) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] GetCurrentMilestone default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetCurrentMilestoneDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

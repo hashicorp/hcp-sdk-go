@@ -52,10 +52,12 @@ func NewDeleteHVNRouteParamsWithHTTPClient(client *http.Client) *DeleteHVNRouteP
 	}
 }
 
-/* DeleteHVNRouteParams contains all the parameters to send to the API endpoint
-   for the delete h v n route operation.
+/*
+DeleteHVNRouteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete h v n route operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteHVNRouteParams struct {
 

@@ -54,10 +54,12 @@ func NewPackerServiceUpdateBucketParamsWithHTTPClient(client *http.Client) *Pack
 	}
 }
 
-/* PackerServiceUpdateBucketParams contains all the parameters to send to the API endpoint
-   for the packer service update bucket operation.
+/*
+PackerServiceUpdateBucketParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service update bucket operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceUpdateBucketParams struct {
 

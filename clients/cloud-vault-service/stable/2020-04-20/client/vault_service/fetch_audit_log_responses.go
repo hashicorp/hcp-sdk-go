@@ -47,7 +47,8 @@ func NewFetchAuditLogOK() *FetchAuditLogOK {
 	return &FetchAuditLogOK{}
 }
 
-/* FetchAuditLogOK describes a response with status code 200, with default header values.
+/*
+FetchAuditLogOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type FetchAuditLogOK struct {
 	Payload *models.HashicorpCloudVault20200420FetchAuditLogResponse
 }
 
+// IsSuccess returns true when this fetch audit log o k response has a 2xx status code
+func (o *FetchAuditLogOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this fetch audit log o k response has a 3xx status code
+func (o *FetchAuditLogOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fetch audit log o k response has a 4xx status code
+func (o *FetchAuditLogOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this fetch audit log o k response has a 5xx status code
+func (o *FetchAuditLogOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fetch audit log o k response a status code equal to that given
+func (o *FetchAuditLogOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *FetchAuditLogOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] fetchAuditLogOK  %+v", 200, o.Payload)
 }
+
+func (o *FetchAuditLogOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] fetchAuditLogOK  %+v", 200, o.Payload)
+}
+
 func (o *FetchAuditLogOK) GetPayload() *models.HashicorpCloudVault20200420FetchAuditLogResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewFetchAuditLogDefault(code int) *FetchAuditLogDefault {
 	}
 }
 
-/* FetchAuditLogDefault describes a response with status code -1, with default header values.
+/*
+FetchAuditLogDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *FetchAuditLogDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this fetch audit log default response has a 2xx status code
+func (o *FetchAuditLogDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this fetch audit log default response has a 3xx status code
+func (o *FetchAuditLogDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this fetch audit log default response has a 4xx status code
+func (o *FetchAuditLogDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this fetch audit log default response has a 5xx status code
+func (o *FetchAuditLogDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this fetch audit log default response a status code equal to that given
+func (o *FetchAuditLogDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *FetchAuditLogDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] FetchAuditLog default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *FetchAuditLogDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] FetchAuditLog default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *FetchAuditLogDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

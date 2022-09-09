@@ -53,10 +53,12 @@ func NewResourceServiceListParamsWithHTTPClient(client *http.Client) *ResourceSe
 	}
 }
 
-/* ResourceServiceListParams contains all the parameters to send to the API endpoint
-   for the resource service list operation.
+/*
+ResourceServiceListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the resource service list operation.
+
+	Typically these are written to a http.Request.
 */
 type ResourceServiceListParams struct {
 

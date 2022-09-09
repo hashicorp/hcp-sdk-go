@@ -47,7 +47,8 @@ func NewPackerServiceUpdateBucketOK() *PackerServiceUpdateBucketOK {
 	return &PackerServiceUpdateBucketOK{}
 }
 
-/* PackerServiceUpdateBucketOK describes a response with status code 200, with default header values.
+/*
+PackerServiceUpdateBucketOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceUpdateBucketOK struct {
 	Payload *models.HashicorpCloudPackerUpdateBucketResponse
 }
 
+// IsSuccess returns true when this packer service update bucket o k response has a 2xx status code
+func (o *PackerServiceUpdateBucketOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service update bucket o k response has a 3xx status code
+func (o *PackerServiceUpdateBucketOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service update bucket o k response has a 4xx status code
+func (o *PackerServiceUpdateBucketOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service update bucket o k response has a 5xx status code
+func (o *PackerServiceUpdateBucketOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service update bucket o k response a status code equal to that given
+func (o *PackerServiceUpdateBucketOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceUpdateBucketOK) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}][%d] packerServiceUpdateBucketOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceUpdateBucketOK) String() string {
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}][%d] packerServiceUpdateBucketOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceUpdateBucketOK) GetPayload() *models.HashicorpCloudPackerUpdateBucketResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceUpdateBucketDefault(code int) *PackerServiceUpdateBucketDef
 	}
 }
 
-/* PackerServiceUpdateBucketDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceUpdateBucketDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceUpdateBucketDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service update bucket default response has a 2xx status code
+func (o *PackerServiceUpdateBucketDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service update bucket default response has a 3xx status code
+func (o *PackerServiceUpdateBucketDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service update bucket default response has a 4xx status code
+func (o *PackerServiceUpdateBucketDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service update bucket default response has a 5xx status code
+func (o *PackerServiceUpdateBucketDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service update bucket default response a status code equal to that given
+func (o *PackerServiceUpdateBucketDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceUpdateBucketDefault) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}][%d] PackerService_UpdateBucket default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceUpdateBucketDefault) String() string {
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}][%d] PackerService_UpdateBucket default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceUpdateBucketDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -39,7 +39,8 @@ func NewReadRegistryOK() *ReadRegistryOK {
 	return &ReadRegistryOK{}
 }
 
-/* ReadRegistryOK describes a response with status code 200, with default header values.
+/*
+ReadRegistryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type ReadRegistryOK struct {
 	Payload *models.HashicorpCloudVagrantReadRegistryResponse
 }
 
+// IsSuccess returns true when this read registry o k response has a 2xx status code
+func (o *ReadRegistryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this read registry o k response has a 3xx status code
+func (o *ReadRegistryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this read registry o k response has a 4xx status code
+func (o *ReadRegistryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this read registry o k response has a 5xx status code
+func (o *ReadRegistryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this read registry o k response a status code equal to that given
+func (o *ReadRegistryOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ReadRegistryOK) Error() string {
 	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}][%d] readRegistryOK  %+v", 200, o.Payload)
 }
+
+func (o *ReadRegistryOK) String() string {
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}][%d] readRegistryOK  %+v", 200, o.Payload)
+}
+
 func (o *ReadRegistryOK) GetPayload() *models.HashicorpCloudVagrantReadRegistryResponse {
 	return o.Payload
 }

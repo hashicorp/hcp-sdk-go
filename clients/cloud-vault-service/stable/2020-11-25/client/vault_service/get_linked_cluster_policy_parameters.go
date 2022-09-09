@@ -52,10 +52,12 @@ func NewGetLinkedClusterPolicyParamsWithHTTPClient(client *http.Client) *GetLink
 	}
 }
 
-/* GetLinkedClusterPolicyParams contains all the parameters to send to the API endpoint
-   for the get linked cluster policy operation.
+/*
+GetLinkedClusterPolicyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get linked cluster policy operation.
+
+	Typically these are written to a http.Request.
 */
 type GetLinkedClusterPolicyParams struct {
 

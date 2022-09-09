@@ -54,10 +54,12 @@ func NewUpdateBoxParamsWithHTTPClient(client *http.Client) *UpdateBoxParams {
 	}
 }
 
-/* UpdateBoxParams contains all the parameters to send to the API endpoint
-   for the update box operation.
+/*
+UpdateBoxParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update box operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateBoxParams struct {
 

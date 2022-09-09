@@ -46,7 +46,7 @@ type ClientService interface {
 }
 
 /*
-  CreateVersion creates version creates a new box version
+CreateVersion creates version creates a new box version
 */
 func (a *Client) CreateVersion(params *CreateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVersionOK, error) {
 	// TODO: Validate the params before sending
@@ -85,9 +85,10 @@ func (a *Client) CreateVersion(params *CreateVersionParams, authInfo runtime.Cli
 }
 
 /*
-  DeleteVersion deletes version deletes a box version
+	DeleteVersion deletes version deletes a box version
 
-  Deleting a Box Version removes all its Providers as well. This
+	Deleting a Box Version removes all its Providers as well. This
+
 operation cannot be undone.
 */
 func (a *Client) DeleteVersion(params *DeleteVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVersionOK, error) {
@@ -127,7 +128,7 @@ func (a *Client) DeleteVersion(params *DeleteVersionParams, authInfo runtime.Cli
 }
 
 /*
-  ListVersions lists version lists all of the versions within a particular box
+ListVersions lists version lists all of the versions within a particular box
 */
 func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVersionsOK, error) {
 	// TODO: Validate the params before sending
@@ -166,7 +167,7 @@ func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.Clien
 }
 
 /*
-  ReadVersion reads version reads a box version
+ReadVersion reads version reads a box version
 */
 func (a *Client) ReadVersion(params *ReadVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadVersionOK, error) {
 	// TODO: Validate the params before sending
@@ -205,7 +206,7 @@ func (a *Client) ReadVersion(params *ReadVersionParams, authInfo runtime.ClientA
 }
 
 /*
-  ReleaseVersion releases releases the specified version the version must not already be released
+ReleaseVersion releases releases the specified version the version must not already be released
 */
 func (a *Client) ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReleaseVersionOK, error) {
 	// TODO: Validate the params before sending
@@ -244,7 +245,7 @@ func (a *Client) ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.C
 }
 
 /*
-  RevokeVersion revokes revokes the specified version the version must be actively released
+RevokeVersion revokes revokes the specified version the version must be actively released
 */
 func (a *Client) RevokeVersion(params *RevokeVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RevokeVersionOK, error) {
 	// TODO: Validate the params before sending

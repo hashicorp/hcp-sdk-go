@@ -54,10 +54,12 @@ func NewAssociateHVNWithAWSRoute53PrivateHostedZoneParamsWithHTTPClient(client *
 	}
 }
 
-/* AssociateHVNWithAWSRoute53PrivateHostedZoneParams contains all the parameters to send to the API endpoint
-   for the associate h v n with a w s route53 private hosted zone operation.
+/*
+AssociateHVNWithAWSRoute53PrivateHostedZoneParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the associate h v n with a w s route53 private hosted zone operation.
+
+	Typically these are written to a http.Request.
 */
 type AssociateHVNWithAWSRoute53PrivateHostedZoneParams struct {
 

@@ -47,7 +47,8 @@ func NewDeleteTGWAttachmentOK() *DeleteTGWAttachmentOK {
 	return &DeleteTGWAttachmentOK{}
 }
 
-/* DeleteTGWAttachmentOK describes a response with status code 200, with default header values.
+/*
+DeleteTGWAttachmentOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type DeleteTGWAttachmentOK struct {
 	Payload *models.HashicorpCloudNetwork20200907DeleteTGWAttachmentResponse
 }
 
+// IsSuccess returns true when this delete t g w attachment o k response has a 2xx status code
+func (o *DeleteTGWAttachmentOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete t g w attachment o k response has a 3xx status code
+func (o *DeleteTGWAttachmentOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete t g w attachment o k response has a 4xx status code
+func (o *DeleteTGWAttachmentOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete t g w attachment o k response has a 5xx status code
+func (o *DeleteTGWAttachmentOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete t g w attachment o k response a status code equal to that given
+func (o *DeleteTGWAttachmentOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DeleteTGWAttachmentOK) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] deleteTGWAttachmentOK  %+v", 200, o.Payload)
 }
+
+func (o *DeleteTGWAttachmentOK) String() string {
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] deleteTGWAttachmentOK  %+v", 200, o.Payload)
+}
+
 func (o *DeleteTGWAttachmentOK) GetPayload() *models.HashicorpCloudNetwork20200907DeleteTGWAttachmentResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewDeleteTGWAttachmentDefault(code int) *DeleteTGWAttachmentDefault {
 	}
 }
 
-/* DeleteTGWAttachmentDefault describes a response with status code -1, with default header values.
+/*
+DeleteTGWAttachmentDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *DeleteTGWAttachmentDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this delete t g w attachment default response has a 2xx status code
+func (o *DeleteTGWAttachmentDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this delete t g w attachment default response has a 3xx status code
+func (o *DeleteTGWAttachmentDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this delete t g w attachment default response has a 4xx status code
+func (o *DeleteTGWAttachmentDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this delete t g w attachment default response has a 5xx status code
+func (o *DeleteTGWAttachmentDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this delete t g w attachment default response a status code equal to that given
+func (o *DeleteTGWAttachmentDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *DeleteTGWAttachmentDefault) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] DeleteTGWAttachment default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *DeleteTGWAttachmentDefault) String() string {
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] DeleteTGWAttachment default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *DeleteTGWAttachmentDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

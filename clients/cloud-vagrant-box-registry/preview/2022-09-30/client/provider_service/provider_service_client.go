@@ -50,7 +50,7 @@ type ClientService interface {
 }
 
 /*
-  CompleteUpload completes upload signals that the upload for a provider is complete
+CompleteUpload completes upload signals that the upload for a provider is complete
 */
 func (a *Client) CompleteUpload(params *CompleteUploadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteUploadOK, error) {
 	// TODO: Validate the params before sending
@@ -89,7 +89,7 @@ func (a *Client) CompleteUpload(params *CompleteUploadParams, authInfo runtime.C
 }
 
 /*
-  CreateProvider creates provider creates a provider in the specified version
+CreateProvider creates provider creates a provider in the specified version
 */
 func (a *Client) CreateProvider(params *CreateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProviderOK, error) {
 	// TODO: Validate the params before sending
@@ -128,7 +128,7 @@ func (a *Client) CreateProvider(params *CreateProviderParams, authInfo runtime.C
 }
 
 /*
-  DeleteProvider deletes provider deletes a provider note that this deletes any data associated with a hosted provider so use with care
+DeleteProvider deletes provider deletes a provider note that this deletes any data associated with a hosted provider so use with care
 */
 func (a *Client) DeleteProvider(params *DeleteProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProviderOK, error) {
 	// TODO: Validate the params before sending
@@ -167,9 +167,10 @@ func (a *Client) DeleteProvider(params *DeleteProviderParams, authInfo runtime.C
 }
 
 /*
-  DownloadProvider downloads provider initiates a provider download
+	DownloadProvider downloads provider initiates a provider download
 
-  For Hosted Providers, this is an atomic call that prepares the Provider
+	For Hosted Providers, this is an atomic call that prepares the Provider
+
 for download from the object storage. For External Providers, this is
 simply a pass-through to the external download data supplied in the
 External Provider record.
@@ -211,7 +212,7 @@ func (a *Client) DownloadProvider(params *DownloadProviderParams, authInfo runti
 }
 
 /*
-  GetProvider gets provider fetches a provider for the specified version
+GetProvider gets provider fetches a provider for the specified version
 */
 func (a *Client) GetProvider(params *GetProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProviderOK, error) {
 	// TODO: Validate the params before sending
@@ -250,7 +251,7 @@ func (a *Client) GetProvider(params *GetProviderParams, authInfo runtime.ClientA
 }
 
 /*
-  ListProviders lists providers lists all providers within a version
+ListProviders lists providers lists all providers within a version
 */
 func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProvidersOK, error) {
 	// TODO: Validate the params before sending
@@ -289,9 +290,10 @@ func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.Cli
 }
 
 /*
-  UpdateProvider updates provider updates details about a specified provider
+	UpdateProvider updates provider updates details about a specified provider
 
-  Note that you don't use this to upload data to Hosted Providers, to do
+	Note that you don't use this to upload data to Hosted Providers, to do
+
 that, use the Upload method.
 */
 func (a *Client) UpdateProvider(params *UpdateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProviderOK, error) {
@@ -331,9 +333,10 @@ func (a *Client) UpdateProvider(params *UpdateProviderParams, authInfo runtime.C
 }
 
 /*
-  UploadProvider uploads provider initiates the upload of a hosted provider the service will return details that can be used to upload the data over HTTP after complete the caller should call complete upload
+	UploadProvider uploads provider initiates the upload of a hosted provider the service will return details that can be used to upload the data over HTTP after complete the caller should call complete upload
 
-  Note that a Version needs to be unreleased in order to upload Providers to
+	Note that a Version needs to be unreleased in order to upload Providers to
+
 it.
 
 Overwrite is permitted; old/existing data for a particular Provider will

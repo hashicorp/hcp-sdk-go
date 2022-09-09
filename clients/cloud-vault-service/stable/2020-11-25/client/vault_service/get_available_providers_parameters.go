@@ -52,10 +52,12 @@ func NewGetAvailableProvidersParamsWithHTTPClient(client *http.Client) *GetAvail
 	}
 }
 
-/* GetAvailableProvidersParams contains all the parameters to send to the API endpoint
-   for the get available providers operation.
+/*
+GetAvailableProvidersParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get available providers operation.
+
+	Typically these are written to a http.Request.
 */
 type GetAvailableProvidersParams struct {
 

@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  ActivateRegistry activates registry activates a vagrant box registry at the location specified the registry must already exist and must be currently disabled
+	ActivateRegistry activates registry activates a vagrant box registry at the location specified the registry must already exist and must be currently disabled
 
-  Activation will re-enable a Registry, allowing requests and
+	Activation will re-enable a Registry, allowing requests and
+
 accruing charges as normal.
 */
 func (a *Client) ActivateRegistry(params *ActivateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ActivateRegistryOK, error) {
@@ -88,7 +89,7 @@ func (a *Client) ActivateRegistry(params *ActivateRegistryParams, authInfo runti
 }
 
 /*
-  CreateRegistry creates registry creates a vagrant box registry at the location specified
+CreateRegistry creates registry creates a vagrant box registry at the location specified
 */
 func (a *Client) CreateRegistry(params *CreateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRegistryOK, error) {
 	// TODO: Validate the params before sending
@@ -127,9 +128,10 @@ func (a *Client) CreateRegistry(params *CreateRegistryParams, authInfo runtime.C
 }
 
 /*
-  DeactivateRegistry deactivates registry deactivates a vagrant box registry at the location specified the registry must already exist and must be currently enabled
+	DeactivateRegistry deactivates registry deactivates a vagrant box registry at the location specified the registry must already exist and must be currently enabled
 
-  Deactivation will disable a Registry but not delete its data.
+	Deactivation will disable a Registry but not delete its data.
+
 All requests to the Registry will return not-found errors. This
 can be used to temporarily block access to a Registry to prevent
 access-related charges to the Registry.
@@ -171,9 +173,10 @@ func (a *Client) DeactivateRegistry(params *DeactivateRegistryParams, authInfo r
 }
 
 /*
-  DeleteRegistry deletes registry deletes a vagrant box registry at the location specified
+	DeleteRegistry deletes registry deletes a vagrant box registry at the location specified
 
-  Deletion removes the Registry and all of its Box, Version, and
+	Deletion removes the Registry and all of its Box, Version, and
+
 Provider data, including any Hosted Providers and their
 respective data. This operation is permanent and cannot be
 undone.
@@ -215,7 +218,7 @@ func (a *Client) DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.C
 }
 
 /*
-  ListRegistries lists registries lists available vagrant box registries the query can be scoped to a particular organization or project
+ListRegistries lists registries lists available vagrant box registries the query can be scoped to a particular organization or project
 */
 func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRegistriesOK, error) {
 	// TODO: Validate the params before sending
@@ -254,7 +257,7 @@ func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.C
 }
 
 /*
-  ReadRegistry reads registry reads a vagrant box registry by its name
+ReadRegistry reads registry reads a vagrant box registry by its name
 */
 func (a *Client) ReadRegistry(params *ReadRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadRegistryOK, error) {
 	// TODO: Validate the params before sending

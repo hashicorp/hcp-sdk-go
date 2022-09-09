@@ -53,10 +53,12 @@ func NewListPeeringsParamsWithHTTPClient(client *http.Client) *ListPeeringsParam
 	}
 }
 
-/* ListPeeringsParams contains all the parameters to send to the API endpoint
-   for the list peerings operation.
+/*
+ListPeeringsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list peerings operation.
+
+	Typically these are written to a http.Request.
 */
 type ListPeeringsParams struct {
 

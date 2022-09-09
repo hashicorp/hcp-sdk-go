@@ -47,7 +47,8 @@ func NewPackerServiceListBucketAncestryOK() *PackerServiceListBucketAncestryOK {
 	return &PackerServiceListBucketAncestryOK{}
 }
 
-/* PackerServiceListBucketAncestryOK describes a response with status code 200, with default header values.
+/*
+PackerServiceListBucketAncestryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceListBucketAncestryOK struct {
 	Payload *models.HashicorpCloudPacker20220411ListBucketAncestryResponse
 }
 
+// IsSuccess returns true when this packer service list bucket ancestry o k response has a 2xx status code
+func (o *PackerServiceListBucketAncestryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service list bucket ancestry o k response has a 3xx status code
+func (o *PackerServiceListBucketAncestryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service list bucket ancestry o k response has a 4xx status code
+func (o *PackerServiceListBucketAncestryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service list bucket ancestry o k response has a 5xx status code
+func (o *PackerServiceListBucketAncestryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service list bucket ancestry o k response a status code equal to that given
+func (o *PackerServiceListBucketAncestryOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceListBucketAncestryOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/ancestry][%d] packerServiceListBucketAncestryOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceListBucketAncestryOK) String() string {
+	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/ancestry][%d] packerServiceListBucketAncestryOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceListBucketAncestryOK) GetPayload() *models.HashicorpCloudPacker20220411ListBucketAncestryResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceListBucketAncestryDefault(code int) *PackerServiceListBucke
 	}
 }
 
-/* PackerServiceListBucketAncestryDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceListBucketAncestryDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceListBucketAncestryDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service list bucket ancestry default response has a 2xx status code
+func (o *PackerServiceListBucketAncestryDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service list bucket ancestry default response has a 3xx status code
+func (o *PackerServiceListBucketAncestryDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service list bucket ancestry default response has a 4xx status code
+func (o *PackerServiceListBucketAncestryDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service list bucket ancestry default response has a 5xx status code
+func (o *PackerServiceListBucketAncestryDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service list bucket ancestry default response a status code equal to that given
+func (o *PackerServiceListBucketAncestryDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceListBucketAncestryDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/ancestry][%d] PackerService_ListBucketAncestry default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceListBucketAncestryDefault) String() string {
+	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/ancestry][%d] PackerService_ListBucketAncestry default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceListBucketAncestryDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

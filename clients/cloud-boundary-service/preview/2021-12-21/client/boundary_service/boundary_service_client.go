@@ -42,7 +42,7 @@ type ClientService interface {
 }
 
 /*
-  Create creates creates a new h c p boundary cluster
+Create creates creates a new h c p boundary cluster
 */
 func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
 	// TODO: Validate the params before sending
@@ -80,7 +80,7 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  Delete deletes deletes the specified h c p boundary cluster
+Delete deletes deletes the specified h c p boundary cluster
 */
 func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -118,7 +118,7 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  Get gets returns a single existing h c p boundary cluster
+Get gets returns a single existing h c p boundary cluster
 */
 func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error) {
 	// TODO: Validate the params before sending
@@ -156,7 +156,7 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, o
 }
 
 /*
-  List lists returns all existing h c p boundary clusters
+List lists returns all existing h c p boundary clusters
 */
 func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
 	// TODO: Validate the params before sending
@@ -194,7 +194,7 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
-  Sessions sessions returns all session information for existing h c p boundary cluster
+Sessions sessions returns all session information for existing h c p boundary cluster
 */
 func (a *Client) Sessions(params *SessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SessionsOK, error) {
 	// TODO: Validate the params before sending

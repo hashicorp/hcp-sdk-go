@@ -47,7 +47,8 @@ func NewListPerformanceReplicationSecondariesOK() *ListPerformanceReplicationSec
 	return &ListPerformanceReplicationSecondariesOK{}
 }
 
-/* ListPerformanceReplicationSecondariesOK describes a response with status code 200, with default header values.
+/*
+ListPerformanceReplicationSecondariesOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type ListPerformanceReplicationSecondariesOK struct {
 	Payload *models.HashicorpCloudVault20201125ListPerformanceReplicationSecondariesResponse
 }
 
+// IsSuccess returns true when this list performance replication secondaries o k response has a 2xx status code
+func (o *ListPerformanceReplicationSecondariesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list performance replication secondaries o k response has a 3xx status code
+func (o *ListPerformanceReplicationSecondariesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list performance replication secondaries o k response has a 4xx status code
+func (o *ListPerformanceReplicationSecondariesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list performance replication secondaries o k response has a 5xx status code
+func (o *ListPerformanceReplicationSecondariesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list performance replication secondaries o k response a status code equal to that given
+func (o *ListPerformanceReplicationSecondariesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListPerformanceReplicationSecondariesOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] listPerformanceReplicationSecondariesOK  %+v", 200, o.Payload)
 }
+
+func (o *ListPerformanceReplicationSecondariesOK) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] listPerformanceReplicationSecondariesOK  %+v", 200, o.Payload)
+}
+
 func (o *ListPerformanceReplicationSecondariesOK) GetPayload() *models.HashicorpCloudVault20201125ListPerformanceReplicationSecondariesResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewListPerformanceReplicationSecondariesDefault(code int) *ListPerformanceR
 	}
 }
 
-/* ListPerformanceReplicationSecondariesDefault describes a response with status code -1, with default header values.
+/*
+ListPerformanceReplicationSecondariesDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *ListPerformanceReplicationSecondariesDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list performance replication secondaries default response has a 2xx status code
+func (o *ListPerformanceReplicationSecondariesDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list performance replication secondaries default response has a 3xx status code
+func (o *ListPerformanceReplicationSecondariesDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list performance replication secondaries default response has a 4xx status code
+func (o *ListPerformanceReplicationSecondariesDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list performance replication secondaries default response has a 5xx status code
+func (o *ListPerformanceReplicationSecondariesDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list performance replication secondaries default response a status code equal to that given
+func (o *ListPerformanceReplicationSecondariesDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListPerformanceReplicationSecondariesDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] ListPerformanceReplicationSecondaries default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ListPerformanceReplicationSecondariesDefault) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] ListPerformanceReplicationSecondaries default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ListPerformanceReplicationSecondariesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

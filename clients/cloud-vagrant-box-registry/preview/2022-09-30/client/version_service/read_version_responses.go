@@ -39,7 +39,8 @@ func NewReadVersionOK() *ReadVersionOK {
 	return &ReadVersionOK{}
 }
 
-/* ReadVersionOK describes a response with status code 200, with default header values.
+/*
+ReadVersionOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type ReadVersionOK struct {
 	Payload *models.HashicorpCloudVagrantReadVersionResponse
 }
 
+// IsSuccess returns true when this read version o k response has a 2xx status code
+func (o *ReadVersionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this read version o k response has a 3xx status code
+func (o *ReadVersionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this read version o k response has a 4xx status code
+func (o *ReadVersionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this read version o k response has a 5xx status code
+func (o *ReadVersionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this read version o k response a status code equal to that given
+func (o *ReadVersionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ReadVersionOK) Error() string {
 	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}][%d] readVersionOK  %+v", 200, o.Payload)
 }
+
+func (o *ReadVersionOK) String() string {
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}][%d] readVersionOK  %+v", 200, o.Payload)
+}
+
 func (o *ReadVersionOK) GetPayload() *models.HashicorpCloudVagrantReadVersionResponse {
 	return o.Payload
 }

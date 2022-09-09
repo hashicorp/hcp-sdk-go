@@ -47,7 +47,8 @@ func NewGetTGWAttachmentOK() *GetTGWAttachmentOK {
 	return &GetTGWAttachmentOK{}
 }
 
-/* GetTGWAttachmentOK describes a response with status code 200, with default header values.
+/*
+GetTGWAttachmentOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetTGWAttachmentOK struct {
 	Payload *models.HashicorpCloudNetwork20200907GetTGWAttachmentResponse
 }
 
+// IsSuccess returns true when this get t g w attachment o k response has a 2xx status code
+func (o *GetTGWAttachmentOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get t g w attachment o k response has a 3xx status code
+func (o *GetTGWAttachmentOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get t g w attachment o k response has a 4xx status code
+func (o *GetTGWAttachmentOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get t g w attachment o k response has a 5xx status code
+func (o *GetTGWAttachmentOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get t g w attachment o k response a status code equal to that given
+func (o *GetTGWAttachmentOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetTGWAttachmentOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] getTGWAttachmentOK  %+v", 200, o.Payload)
 }
+
+func (o *GetTGWAttachmentOK) String() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] getTGWAttachmentOK  %+v", 200, o.Payload)
+}
+
 func (o *GetTGWAttachmentOK) GetPayload() *models.HashicorpCloudNetwork20200907GetTGWAttachmentResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetTGWAttachmentDefault(code int) *GetTGWAttachmentDefault {
 	}
 }
 
-/* GetTGWAttachmentDefault describes a response with status code -1, with default header values.
+/*
+GetTGWAttachmentDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetTGWAttachmentDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get t g w attachment default response has a 2xx status code
+func (o *GetTGWAttachmentDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get t g w attachment default response has a 3xx status code
+func (o *GetTGWAttachmentDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get t g w attachment default response has a 4xx status code
+func (o *GetTGWAttachmentDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get t g w attachment default response has a 5xx status code
+func (o *GetTGWAttachmentDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get t g w attachment default response a status code equal to that given
+func (o *GetTGWAttachmentDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetTGWAttachmentDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] GetTGWAttachment default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetTGWAttachmentDefault) String() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] GetTGWAttachment default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetTGWAttachmentDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

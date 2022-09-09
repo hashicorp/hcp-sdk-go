@@ -16,10 +16,10 @@ import (
 
 // HashicorpCloudPacker20220411BuildStatus  - UNSET: UNSET is a sentinel zero value so that an uninitialized value can be
 // detected.
-//  - RUNNING: Running means the `packer build` is currently running.
-//  - DONE: Done means the `packer build` has finished successfully.
-//  - CANCELLED: Cancelled means the `packer build` was cancelled by a user.
-//  - FAILED: Failed means the `packer build` failed and therefore image creation failed.
+//   - RUNNING: Running means the `packer build` is currently running.
+//   - DONE: Done means the `packer build` has finished successfully.
+//   - CANCELLED: Cancelled means the `packer build` was cancelled by a user.
+//   - FAILED: Failed means the `packer build` failed and therefore image creation failed.
 //
 // swagger:model hashicorp.cloud.packer_20220411.BuildStatus
 type HashicorpCloudPacker20220411BuildStatus string

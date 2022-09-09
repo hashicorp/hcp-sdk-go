@@ -52,10 +52,12 @@ func NewDownloadProviderParamsWithHTTPClient(client *http.Client) *DownloadProvi
 	}
 }
 
-/* DownloadProviderParams contains all the parameters to send to the API endpoint
-   for the download provider operation.
+/*
+DownloadProviderParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the download provider operation.
+
+	Typically these are written to a http.Request.
 */
 type DownloadProviderParams struct {
 

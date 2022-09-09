@@ -53,10 +53,12 @@ func NewListHVNRoutesParamsWithHTTPClient(client *http.Client) *ListHVNRoutesPar
 	}
 }
 
-/* ListHVNRoutesParams contains all the parameters to send to the API endpoint
-   for the list h v n routes operation.
+/*
+ListHVNRoutesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list h v n routes operation.
+
+	Typically these are written to a http.Request.
 */
 type ListHVNRoutesParams struct {
 

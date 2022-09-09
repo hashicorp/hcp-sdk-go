@@ -52,10 +52,12 @@ func NewDeletePeeringParamsWithHTTPClient(client *http.Client) *DeletePeeringPar
 	}
 }
 
-/* DeletePeeringParams contains all the parameters to send to the API endpoint
-   for the delete peering operation.
+/*
+DeletePeeringParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete peering operation.
+
+	Typically these are written to a http.Request.
 */
 type DeletePeeringParams struct {
 

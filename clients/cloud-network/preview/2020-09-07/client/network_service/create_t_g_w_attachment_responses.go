@@ -47,7 +47,8 @@ func NewCreateTGWAttachmentOK() *CreateTGWAttachmentOK {
 	return &CreateTGWAttachmentOK{}
 }
 
-/* CreateTGWAttachmentOK describes a response with status code 200, with default header values.
+/*
+CreateTGWAttachmentOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type CreateTGWAttachmentOK struct {
 	Payload *models.HashicorpCloudNetwork20200907CreateTGWAttachmentResponse
 }
 
+// IsSuccess returns true when this create t g w attachment o k response has a 2xx status code
+func (o *CreateTGWAttachmentOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create t g w attachment o k response has a 3xx status code
+func (o *CreateTGWAttachmentOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create t g w attachment o k response has a 4xx status code
+func (o *CreateTGWAttachmentOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create t g w attachment o k response has a 5xx status code
+func (o *CreateTGWAttachmentOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create t g w attachment o k response a status code equal to that given
+func (o *CreateTGWAttachmentOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CreateTGWAttachmentOK) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] createTGWAttachmentOK  %+v", 200, o.Payload)
 }
+
+func (o *CreateTGWAttachmentOK) String() string {
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] createTGWAttachmentOK  %+v", 200, o.Payload)
+}
+
 func (o *CreateTGWAttachmentOK) GetPayload() *models.HashicorpCloudNetwork20200907CreateTGWAttachmentResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewCreateTGWAttachmentDefault(code int) *CreateTGWAttachmentDefault {
 	}
 }
 
-/* CreateTGWAttachmentDefault describes a response with status code -1, with default header values.
+/*
+CreateTGWAttachmentDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *CreateTGWAttachmentDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this create t g w attachment default response has a 2xx status code
+func (o *CreateTGWAttachmentDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this create t g w attachment default response has a 3xx status code
+func (o *CreateTGWAttachmentDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this create t g w attachment default response has a 4xx status code
+func (o *CreateTGWAttachmentDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this create t g w attachment default response has a 5xx status code
+func (o *CreateTGWAttachmentDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this create t g w attachment default response a status code equal to that given
+func (o *CreateTGWAttachmentDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *CreateTGWAttachmentDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] CreateTGWAttachment default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *CreateTGWAttachmentDefault) String() string {
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] CreateTGWAttachment default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *CreateTGWAttachmentDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -47,7 +47,8 @@ func NewPackerServiceGetRegistryTFCRunTaskAPIOK() *PackerServiceGetRegistryTFCRu
 	return &PackerServiceGetRegistryTFCRunTaskAPIOK{}
 }
 
-/* PackerServiceGetRegistryTFCRunTaskAPIOK describes a response with status code 200, with default header values.
+/*
+PackerServiceGetRegistryTFCRunTaskAPIOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceGetRegistryTFCRunTaskAPIOK struct {
 	Payload *models.HashicorpCloudPackerGetRegistryTFCRunTaskAPIResponse
 }
 
+// IsSuccess returns true when this packer service get registry t f c run task Api o k response has a 2xx status code
+func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service get registry t f c run task Api o k response has a 3xx status code
+func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service get registry t f c run task Api o k response has a 4xx status code
+func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service get registry t f c run task Api o k response has a 5xx status code
+func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service get registry t f c run task Api o k response a status code equal to that given
+func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] packerServiceGetRegistryTFCRunTaskApiOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) String() string {
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] packerServiceGetRegistryTFCRunTaskApiOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) GetPayload() *models.HashicorpCloudPackerGetRegistryTFCRunTaskAPIResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceGetRegistryTFCRunTaskAPIDefault(code int) *PackerServiceGet
 	}
 }
 
-/* PackerServiceGetRegistryTFCRunTaskAPIDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceGetRegistryTFCRunTaskAPIDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service get registry t f c run task API default response has a 2xx status code
+func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service get registry t f c run task API default response has a 3xx status code
+func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service get registry t f c run task API default response has a 4xx status code
+func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service get registry t f c run task API default response has a 5xx status code
+func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service get registry t f c run task API default response a status code equal to that given
+func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] PackerService_GetRegistryTFCRunTaskAPI default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) String() string {
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] PackerService_GetRegistryTFCRunTaskAPI default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

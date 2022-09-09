@@ -52,10 +52,12 @@ func NewOrganizationServiceGetIamPolicyParamsWithHTTPClient(client *http.Client)
 	}
 }
 
-/* OrganizationServiceGetIamPolicyParams contains all the parameters to send to the API endpoint
-   for the organization service get iam policy operation.
+/*
+OrganizationServiceGetIamPolicyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the organization service get iam policy operation.
+
+	Typically these are written to a http.Request.
 */
 type OrganizationServiceGetIamPolicyParams struct {
 

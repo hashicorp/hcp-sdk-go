@@ -39,7 +39,8 @@ func NewRevokeVersionOK() *RevokeVersionOK {
 	return &RevokeVersionOK{}
 }
 
-/* RevokeVersionOK describes a response with status code 200, with default header values.
+/*
+RevokeVersionOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type RevokeVersionOK struct {
 	Payload models.HashicorpCloudVagrantRevokeVersionResponse
 }
 
+// IsSuccess returns true when this revoke version o k response has a 2xx status code
+func (o *RevokeVersionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this revoke version o k response has a 3xx status code
+func (o *RevokeVersionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this revoke version o k response has a 4xx status code
+func (o *RevokeVersionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this revoke version o k response has a 5xx status code
+func (o *RevokeVersionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this revoke version o k response a status code equal to that given
+func (o *RevokeVersionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *RevokeVersionOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/revoke][%d] revokeVersionOK  %+v", 200, o.Payload)
 }
+
+func (o *RevokeVersionOK) String() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/revoke][%d] revokeVersionOK  %+v", 200, o.Payload)
+}
+
 func (o *RevokeVersionOK) GetPayload() models.HashicorpCloudVagrantRevokeVersionResponse {
 	return o.Payload
 }

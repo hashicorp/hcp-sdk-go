@@ -47,7 +47,8 @@ func NewUpdatePublicIpsOK() *UpdatePublicIpsOK {
 	return &UpdatePublicIpsOK{}
 }
 
-/* UpdatePublicIpsOK describes a response with status code 200, with default header values.
+/*
+UpdatePublicIpsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type UpdatePublicIpsOK struct {
 	Payload *models.HashicorpCloudVault20201125UpdatePublicIpsResponse
 }
 
+// IsSuccess returns true when this update public ips o k response has a 2xx status code
+func (o *UpdatePublicIpsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update public ips o k response has a 3xx status code
+func (o *UpdatePublicIpsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update public ips o k response has a 4xx status code
+func (o *UpdatePublicIpsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update public ips o k response has a 5xx status code
+func (o *UpdatePublicIpsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update public ips o k response a status code equal to that given
+func (o *UpdatePublicIpsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdatePublicIpsOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] updatePublicIpsOK  %+v", 200, o.Payload)
 }
+
+func (o *UpdatePublicIpsOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] updatePublicIpsOK  %+v", 200, o.Payload)
+}
+
 func (o *UpdatePublicIpsOK) GetPayload() *models.HashicorpCloudVault20201125UpdatePublicIpsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewUpdatePublicIpsDefault(code int) *UpdatePublicIpsDefault {
 	}
 }
 
-/* UpdatePublicIpsDefault describes a response with status code -1, with default header values.
+/*
+UpdatePublicIpsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *UpdatePublicIpsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this update public ips default response has a 2xx status code
+func (o *UpdatePublicIpsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this update public ips default response has a 3xx status code
+func (o *UpdatePublicIpsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this update public ips default response has a 4xx status code
+func (o *UpdatePublicIpsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this update public ips default response has a 5xx status code
+func (o *UpdatePublicIpsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this update public ips default response a status code equal to that given
+func (o *UpdatePublicIpsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UpdatePublicIpsDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] UpdatePublicIps default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UpdatePublicIpsDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] UpdatePublicIps default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UpdatePublicIpsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -16,9 +16,10 @@ import (
 
 // HashicorpCloudConsul20200826VersionStatus  - AVAILABLE: AVAILABLE represents a version that is generally available
 // but no longer the preferred/recommended version.
-//  - RECOMMENDED: RECOMMENDED represents a version that is generally available
+//   - RECOMMENDED: RECOMMENDED represents a version that is generally available
+//
 // and recommended by HashiCorp.
-//  - PREVIEW: PREVIEW represents a version that is not generally available.
+//   - PREVIEW: PREVIEW represents a version that is not generally available.
 //
 // swagger:model hashicorp.cloud.consul_20200826.Version.Status
 type HashicorpCloudConsul20200826VersionStatus string

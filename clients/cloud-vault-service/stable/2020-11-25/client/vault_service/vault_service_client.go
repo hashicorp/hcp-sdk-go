@@ -104,7 +104,7 @@ type ClientService interface {
 }
 
 /*
-  Create create API
+Create create API
 */
 func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
 	// TODO: Validate the params before sending
@@ -142,7 +142,7 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  CreateSnapshot create snapshot API
+CreateSnapshot create snapshot API
 */
 func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -180,7 +180,7 @@ func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.C
 }
 
 /*
-  Delete delete API
+Delete delete API
 */
 func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -218,7 +218,7 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  DeletePathsFilter delete paths filter API
+DeletePathsFilter delete paths filter API
 */
 func (a *Client) DeletePathsFilter(params *DeletePathsFilterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePathsFilterOK, error) {
 	// TODO: Validate the params before sending
@@ -256,7 +256,7 @@ func (a *Client) DeletePathsFilter(params *DeletePathsFilterParams, authInfo run
 }
 
 /*
-  DeleteSnapshot delete snapshot API
+DeleteSnapshot delete snapshot API
 */
 func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -294,7 +294,7 @@ func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.C
 }
 
 /*
-  DeregisterLinkedCluster deregister linked cluster API
+DeregisterLinkedCluster deregister linked cluster API
 */
 func (a *Client) DeregisterLinkedCluster(params *DeregisterLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeregisterLinkedClusterOK, error) {
 	// TODO: Validate the params before sending
@@ -332,7 +332,7 @@ func (a *Client) DeregisterLinkedCluster(params *DeregisterLinkedClusterParams, 
 }
 
 /*
-  DisableCORS disable c o r s API
+DisableCORS disable c o r s API
 */
 func (a *Client) DisableCORS(params *DisableCORSParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DisableCORSOK, error) {
 	// TODO: Validate the params before sending
@@ -370,7 +370,7 @@ func (a *Client) DisableCORS(params *DisableCORSParams, authInfo runtime.ClientA
 }
 
 /*
-  FetchAuditLog fetch audit log API
+FetchAuditLog fetch audit log API
 */
 func (a *Client) FetchAuditLog(params *FetchAuditLogParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FetchAuditLogOK, error) {
 	// TODO: Validate the params before sending
@@ -408,7 +408,7 @@ func (a *Client) FetchAuditLog(params *FetchAuditLogParams, authInfo runtime.Cli
 }
 
 /*
-  Get get API
+Get get API
 */
 func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error) {
 	// TODO: Validate the params before sending
@@ -446,7 +446,7 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, o
 }
 
 /*
-  GetAdminToken get admin token API
+GetAdminToken get admin token API
 */
 func (a *Client) GetAdminToken(params *GetAdminTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAdminTokenOK, error) {
 	// TODO: Validate the params before sending
@@ -484,7 +484,7 @@ func (a *Client) GetAdminToken(params *GetAdminTokenParams, authInfo runtime.Cli
 }
 
 /*
-  GetAuditLogStatus get audit log status API
+GetAuditLogStatus get audit log status API
 */
 func (a *Client) GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuditLogStatusOK, error) {
 	// TODO: Validate the params before sending
@@ -522,7 +522,7 @@ func (a *Client) GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo run
 }
 
 /*
-  GetAvailableProviders get available providers API
+GetAvailableProviders get available providers API
 */
 func (a *Client) GetAvailableProviders(params *GetAvailableProvidersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableProvidersOK, error) {
 	// TODO: Validate the params before sending
@@ -560,7 +560,7 @@ func (a *Client) GetAvailableProviders(params *GetAvailableProvidersParams, auth
 }
 
 /*
-  GetCORSConfig get c o r s config API
+GetCORSConfig get c o r s config API
 */
 func (a *Client) GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCORSConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -598,7 +598,7 @@ func (a *Client) GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.Cli
 }
 
 /*
-  GetClientCounts get client counts API
+GetClientCounts get client counts API
 */
 func (a *Client) GetClientCounts(params *GetClientCountsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClientCountsOK, error) {
 	// TODO: Validate the params before sending
@@ -636,7 +636,7 @@ func (a *Client) GetClientCounts(params *GetClientCountsParams, authInfo runtime
 }
 
 /*
-  GetCurrentMilestone get current milestone API
+GetCurrentMilestone get current milestone API
 */
 func (a *Client) GetCurrentMilestone(params *GetCurrentMilestoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentMilestoneOK, error) {
 	// TODO: Validate the params before sending
@@ -674,7 +674,7 @@ func (a *Client) GetCurrentMilestone(params *GetCurrentMilestoneParams, authInfo
 }
 
 /*
-  GetLinkedCluster get linked cluster API
+GetLinkedCluster get linked cluster API
 */
 func (a *Client) GetLinkedCluster(params *GetLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLinkedClusterOK, error) {
 	// TODO: Validate the params before sending
@@ -712,7 +712,7 @@ func (a *Client) GetLinkedCluster(params *GetLinkedClusterParams, authInfo runti
 }
 
 /*
-  GetLinkedClusterPolicy get linked cluster policy API
+GetLinkedClusterPolicy get linked cluster policy API
 */
 func (a *Client) GetLinkedClusterPolicy(params *GetLinkedClusterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLinkedClusterPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -750,7 +750,7 @@ func (a *Client) GetLinkedClusterPolicy(params *GetLinkedClusterPolicyParams, au
 }
 
 /*
-  GetReplicationStatus get replication status API
+GetReplicationStatus get replication status API
 */
 func (a *Client) GetReplicationStatus(params *GetReplicationStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReplicationStatusOK, error) {
 	// TODO: Validate the params before sending
@@ -788,7 +788,7 @@ func (a *Client) GetReplicationStatus(params *GetReplicationStatusParams, authIn
 }
 
 /*
-  GetSnapshot get snapshot API
+GetSnapshot get snapshot API
 */
 func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -826,7 +826,7 @@ func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientA
 }
 
 /*
-  GetUtilization get utilization API
+GetUtilization get utilization API
 */
 func (a *Client) GetUtilization(params *GetUtilizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUtilizationOK, error) {
 	// TODO: Validate the params before sending
@@ -864,7 +864,7 @@ func (a *Client) GetUtilization(params *GetUtilizationParams, authInfo runtime.C
 }
 
 /*
-  List list API
+List list API
 */
 func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
 	// TODO: Validate the params before sending
@@ -902,7 +902,7 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
-  ListPerformanceReplicationSecondaries list performance replication secondaries API
+ListPerformanceReplicationSecondaries list performance replication secondaries API
 */
 func (a *Client) ListPerformanceReplicationSecondaries(params *ListPerformanceReplicationSecondariesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPerformanceReplicationSecondariesOK, error) {
 	// TODO: Validate the params before sending
@@ -940,7 +940,7 @@ func (a *Client) ListPerformanceReplicationSecondaries(params *ListPerformanceRe
 }
 
 /*
-  ListSnapshots list snapshots API
+ListSnapshots list snapshots API
 */
 func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSnapshotsOK, error) {
 	// TODO: Validate the params before sending
@@ -978,7 +978,7 @@ func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.Cli
 }
 
 /*
-  RecreateFromSnapshot recreate from snapshot API
+RecreateFromSnapshot recreate from snapshot API
 */
 func (a *Client) RecreateFromSnapshot(params *RecreateFromSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecreateFromSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -1016,7 +1016,7 @@ func (a *Client) RecreateFromSnapshot(params *RecreateFromSnapshotParams, authIn
 }
 
 /*
-  RegisterLinkedCluster register linked cluster API
+RegisterLinkedCluster register linked cluster API
 */
 func (a *Client) RegisterLinkedCluster(params *RegisterLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterLinkedClusterOK, error) {
 	// TODO: Validate the params before sending
@@ -1054,7 +1054,7 @@ func (a *Client) RegisterLinkedCluster(params *RegisterLinkedClusterParams, auth
 }
 
 /*
-  RestoreSnapshot restore snapshot API
+RestoreSnapshot restore snapshot API
 */
 func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -1092,7 +1092,7 @@ func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime
 }
 
 /*
-  Seal seal API
+Seal seal API
 */
 func (a *Client) Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SealOK, error) {
 	// TODO: Validate the params before sending
@@ -1130,7 +1130,7 @@ func (a *Client) Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
-  Unseal unseal API
+Unseal unseal API
 */
 func (a *Client) Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnsealOK, error) {
 	// TODO: Validate the params before sending
@@ -1168,7 +1168,7 @@ func (a *Client) Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  Update update API
+Update update API
 */
 func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1206,7 +1206,7 @@ func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  UpdateCORSConfig update c o r s config API
+UpdateCORSConfig update c o r s config API
 */
 func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCORSConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -1244,7 +1244,7 @@ func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runti
 }
 
 /*
-  UpdateMajorVersionUpgradeConfig update major version upgrade config API
+UpdateMajorVersionUpgradeConfig update major version upgrade config API
 */
 func (a *Client) UpdateMajorVersionUpgradeConfig(params *UpdateMajorVersionUpgradeConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMajorVersionUpgradeConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -1282,7 +1282,7 @@ func (a *Client) UpdateMajorVersionUpgradeConfig(params *UpdateMajorVersionUpgra
 }
 
 /*
-  UpdatePathsFilter update paths filter API
+UpdatePathsFilter update paths filter API
 */
 func (a *Client) UpdatePathsFilter(params *UpdatePathsFilterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePathsFilterOK, error) {
 	// TODO: Validate the params before sending
@@ -1320,7 +1320,7 @@ func (a *Client) UpdatePathsFilter(params *UpdatePathsFilterParams, authInfo run
 }
 
 /*
-  UpdatePublicIps update public ips API
+UpdatePublicIps update public ips API
 */
 func (a *Client) UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePublicIpsOK, error) {
 	// TODO: Validate the params before sending
@@ -1358,7 +1358,7 @@ func (a *Client) UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime
 }
 
 /*
-  UpdateSnapshot update snapshot API
+UpdateSnapshot update snapshot API
 */
 func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -1396,7 +1396,7 @@ func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.C
 }
 
 /*
-  UpdateVersion update version API
+UpdateVersion update version API
 */
 func (a *Client) UpdateVersion(params *UpdateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVersionOK, error) {
 	// TODO: Validate the params before sending
@@ -1434,7 +1434,7 @@ func (a *Client) UpdateVersion(params *UpdateVersionParams, authInfo runtime.Cli
 }
 
 /*
-  UpgradeMajorVersion upgrade major version API
+UpgradeMajorVersion upgrade major version API
 */
 func (a *Client) UpgradeMajorVersion(params *UpgradeMajorVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpgradeMajorVersionOK, error) {
 	// TODO: Validate the params before sending

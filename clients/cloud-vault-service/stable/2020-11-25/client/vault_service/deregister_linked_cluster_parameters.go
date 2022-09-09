@@ -52,10 +52,12 @@ func NewDeregisterLinkedClusterParamsWithHTTPClient(client *http.Client) *Deregi
 	}
 }
 
-/* DeregisterLinkedClusterParams contains all the parameters to send to the API endpoint
-   for the deregister linked cluster operation.
+/*
+DeregisterLinkedClusterParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the deregister linked cluster operation.
+
+	Typically these are written to a http.Request.
 */
 type DeregisterLinkedClusterParams struct {
 

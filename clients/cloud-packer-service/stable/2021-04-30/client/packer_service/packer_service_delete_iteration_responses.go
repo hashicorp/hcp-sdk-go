@@ -47,7 +47,8 @@ func NewPackerServiceDeleteIterationOK() *PackerServiceDeleteIterationOK {
 	return &PackerServiceDeleteIterationOK{}
 }
 
-/* PackerServiceDeleteIterationOK describes a response with status code 200, with default header values.
+/*
+PackerServiceDeleteIterationOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceDeleteIterationOK struct {
 	Payload models.HashicorpCloudPackerDeleteIterationResponse
 }
 
+// IsSuccess returns true when this packer service delete iteration o k response has a 2xx status code
+func (o *PackerServiceDeleteIterationOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service delete iteration o k response has a 3xx status code
+func (o *PackerServiceDeleteIterationOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service delete iteration o k response has a 4xx status code
+func (o *PackerServiceDeleteIterationOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service delete iteration o k response has a 5xx status code
+func (o *PackerServiceDeleteIterationOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service delete iteration o k response a status code equal to that given
+func (o *PackerServiceDeleteIterationOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceDeleteIterationOK) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceDeleteIterationOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceDeleteIterationOK) String() string {
+	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceDeleteIterationOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceDeleteIterationOK) GetPayload() models.HashicorpCloudPackerDeleteIterationResponse {
 	return o.Payload
 }
@@ -79,7 +110,8 @@ func NewPackerServiceDeleteIterationDefault(code int) *PackerServiceDeleteIterat
 	}
 }
 
-/* PackerServiceDeleteIterationDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceDeleteIterationDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -94,9 +126,39 @@ func (o *PackerServiceDeleteIterationDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service delete iteration default response has a 2xx status code
+func (o *PackerServiceDeleteIterationDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service delete iteration default response has a 3xx status code
+func (o *PackerServiceDeleteIterationDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service delete iteration default response has a 4xx status code
+func (o *PackerServiceDeleteIterationDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service delete iteration default response has a 5xx status code
+func (o *PackerServiceDeleteIterationDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service delete iteration default response a status code equal to that given
+func (o *PackerServiceDeleteIterationDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceDeleteIterationDefault) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_DeleteIteration default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceDeleteIterationDefault) String() string {
+	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_DeleteIteration default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceDeleteIterationDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

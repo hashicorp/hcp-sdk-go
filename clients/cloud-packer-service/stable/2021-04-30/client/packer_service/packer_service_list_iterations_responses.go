@@ -47,7 +47,8 @@ func NewPackerServiceListIterationsOK() *PackerServiceListIterationsOK {
 	return &PackerServiceListIterationsOK{}
 }
 
-/* PackerServiceListIterationsOK describes a response with status code 200, with default header values.
+/*
+PackerServiceListIterationsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceListIterationsOK struct {
 	Payload *models.HashicorpCloudPackerListIterationsResponse
 }
 
+// IsSuccess returns true when this packer service list iterations o k response has a 2xx status code
+func (o *PackerServiceListIterationsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service list iterations o k response has a 3xx status code
+func (o *PackerServiceListIterationsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service list iterations o k response has a 4xx status code
+func (o *PackerServiceListIterationsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service list iterations o k response has a 5xx status code
+func (o *PackerServiceListIterationsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service list iterations o k response a status code equal to that given
+func (o *PackerServiceListIterationsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceListIterationsOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations][%d] packerServiceListIterationsOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceListIterationsOK) String() string {
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations][%d] packerServiceListIterationsOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceListIterationsOK) GetPayload() *models.HashicorpCloudPackerListIterationsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceListIterationsDefault(code int) *PackerServiceListIteration
 	}
 }
 
-/* PackerServiceListIterationsDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceListIterationsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceListIterationsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service list iterations default response has a 2xx status code
+func (o *PackerServiceListIterationsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service list iterations default response has a 3xx status code
+func (o *PackerServiceListIterationsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service list iterations default response has a 4xx status code
+func (o *PackerServiceListIterationsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service list iterations default response has a 5xx status code
+func (o *PackerServiceListIterationsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service list iterations default response a status code equal to that given
+func (o *PackerServiceListIterationsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceListIterationsDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations][%d] PackerService_ListIterations default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceListIterationsDefault) String() string {
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations][%d] PackerService_ListIterations default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceListIterationsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -54,10 +54,12 @@ func NewPackerServiceUpdateIterationParamsWithHTTPClient(client *http.Client) *P
 	}
 }
 
-/* PackerServiceUpdateIterationParams contains all the parameters to send to the API endpoint
-   for the packer service update iteration operation.
+/*
+PackerServiceUpdateIterationParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service update iteration operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceUpdateIterationParams struct {
 

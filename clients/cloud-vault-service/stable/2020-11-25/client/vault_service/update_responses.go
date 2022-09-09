@@ -47,7 +47,8 @@ func NewUpdateOK() *UpdateOK {
 	return &UpdateOK{}
 }
 
-/* UpdateOK describes a response with status code 200, with default header values.
+/*
+UpdateOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type UpdateOK struct {
 	Payload *models.HashicorpCloudVault20201125UpdateResponse
 }
 
+// IsSuccess returns true when this update o k response has a 2xx status code
+func (o *UpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update o k response has a 3xx status code
+func (o *UpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update o k response has a 4xx status code
+func (o *UpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update o k response has a 5xx status code
+func (o *UpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update o k response a status code equal to that given
+func (o *UpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] updateOK  %+v", 200, o.Payload)
 }
+
+func (o *UpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] updateOK  %+v", 200, o.Payload)
+}
+
 func (o *UpdateOK) GetPayload() *models.HashicorpCloudVault20201125UpdateResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewUpdateDefault(code int) *UpdateDefault {
 	}
 }
 
-/* UpdateDefault describes a response with status code -1, with default header values.
+/*
+UpdateDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *UpdateDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this update default response has a 2xx status code
+func (o *UpdateDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this update default response has a 3xx status code
+func (o *UpdateDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this update default response has a 4xx status code
+func (o *UpdateDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this update default response has a 5xx status code
+func (o *UpdateDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this update default response a status code equal to that given
+func (o *UpdateDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UpdateDefault) Error() string {
 	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] Update default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UpdateDefault) String() string {
+	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] Update default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UpdateDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

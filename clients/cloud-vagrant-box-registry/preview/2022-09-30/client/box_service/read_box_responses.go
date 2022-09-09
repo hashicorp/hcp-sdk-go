@@ -39,7 +39,8 @@ func NewReadBoxOK() *ReadBoxOK {
 	return &ReadBoxOK{}
 }
 
-/* ReadBoxOK describes a response with status code 200, with default header values.
+/*
+ReadBoxOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type ReadBoxOK struct {
 	Payload *models.HashicorpCloudVagrantReadBoxResponse
 }
 
+// IsSuccess returns true when this read box o k response has a 2xx status code
+func (o *ReadBoxOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this read box o k response has a 3xx status code
+func (o *ReadBoxOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this read box o k response has a 4xx status code
+func (o *ReadBoxOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this read box o k response has a 5xx status code
+func (o *ReadBoxOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this read box o k response a status code equal to that given
+func (o *ReadBoxOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ReadBoxOK) Error() string {
 	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] readBoxOK  %+v", 200, o.Payload)
 }
+
+func (o *ReadBoxOK) String() string {
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] readBoxOK  %+v", 200, o.Payload)
+}
+
 func (o *ReadBoxOK) GetPayload() *models.HashicorpCloudVagrantReadBoxResponse {
 	return o.Payload
 }

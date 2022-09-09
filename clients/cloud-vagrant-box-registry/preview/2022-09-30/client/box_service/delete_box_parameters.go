@@ -52,10 +52,12 @@ func NewDeleteBoxParamsWithHTTPClient(client *http.Client) *DeleteBoxParams {
 	}
 }
 
-/* DeleteBoxParams contains all the parameters to send to the API endpoint
-   for the delete box operation.
+/*
+DeleteBoxParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete box operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteBoxParams struct {
 
