@@ -54,10 +54,12 @@ func NewCreateBoxParamsWithHTTPClient(client *http.Client) *CreateBoxParams {
 	}
 }
 
-/* CreateBoxParams contains all the parameters to send to the API endpoint
-   for the create box operation.
+/*
+CreateBoxParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create box operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateBoxParams struct {
 

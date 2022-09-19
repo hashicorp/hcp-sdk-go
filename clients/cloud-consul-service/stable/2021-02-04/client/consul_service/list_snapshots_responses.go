@@ -47,7 +47,8 @@ func NewListSnapshotsOK() *ListSnapshotsOK {
 	return &ListSnapshotsOK{}
 }
 
-/* ListSnapshotsOK describes a response with status code 200, with default header values.
+/*
+ListSnapshotsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type ListSnapshotsOK struct {
 	Payload *models.HashicorpCloudConsul20210204ListSnapshotsResponse
 }
 
+// IsSuccess returns true when this list snapshots o k response has a 2xx status code
+func (o *ListSnapshotsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list snapshots o k response has a 3xx status code
+func (o *ListSnapshotsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list snapshots o k response has a 4xx status code
+func (o *ListSnapshotsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list snapshots o k response has a 5xx status code
+func (o *ListSnapshotsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list snapshots o k response a status code equal to that given
+func (o *ListSnapshotsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListSnapshotsOK) Error() string {
 	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] listSnapshotsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListSnapshotsOK) String() string {
+	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] listSnapshotsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListSnapshotsOK) GetPayload() *models.HashicorpCloudConsul20210204ListSnapshotsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewListSnapshotsDefault(code int) *ListSnapshotsDefault {
 	}
 }
 
-/* ListSnapshotsDefault describes a response with status code -1, with default header values.
+/*
+ListSnapshotsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *ListSnapshotsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list snapshots default response has a 2xx status code
+func (o *ListSnapshotsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list snapshots default response has a 3xx status code
+func (o *ListSnapshotsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list snapshots default response has a 4xx status code
+func (o *ListSnapshotsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list snapshots default response has a 5xx status code
+func (o *ListSnapshotsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list snapshots default response a status code equal to that given
+func (o *ListSnapshotsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListSnapshotsDefault) Error() string {
 	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] ListSnapshots default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ListSnapshotsDefault) String() string {
+	return fmt.Sprintf("[GET /consul/2021-02-04/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] ListSnapshots default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ListSnapshotsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

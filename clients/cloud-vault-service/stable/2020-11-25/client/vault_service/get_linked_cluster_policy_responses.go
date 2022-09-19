@@ -47,7 +47,8 @@ func NewGetLinkedClusterPolicyOK() *GetLinkedClusterPolicyOK {
 	return &GetLinkedClusterPolicyOK{}
 }
 
-/* GetLinkedClusterPolicyOK describes a response with status code 200, with default header values.
+/*
+GetLinkedClusterPolicyOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetLinkedClusterPolicyOK struct {
 	Payload *models.HashicorpCloudVault20201125GetLinkedClusterPolicyResponse
 }
 
+// IsSuccess returns true when this get linked cluster policy o k response has a 2xx status code
+func (o *GetLinkedClusterPolicyOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get linked cluster policy o k response has a 3xx status code
+func (o *GetLinkedClusterPolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get linked cluster policy o k response has a 4xx status code
+func (o *GetLinkedClusterPolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get linked cluster policy o k response has a 5xx status code
+func (o *GetLinkedClusterPolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get linked cluster policy o k response a status code equal to that given
+func (o *GetLinkedClusterPolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetLinkedClusterPolicyOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
 }
+
+func (o *GetLinkedClusterPolicyOK) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
+}
+
 func (o *GetLinkedClusterPolicyOK) GetPayload() *models.HashicorpCloudVault20201125GetLinkedClusterPolicyResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetLinkedClusterPolicyDefault(code int) *GetLinkedClusterPolicyDefault {
 	}
 }
 
-/* GetLinkedClusterPolicyDefault describes a response with status code -1, with default header values.
+/*
+GetLinkedClusterPolicyDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetLinkedClusterPolicyDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get linked cluster policy default response has a 2xx status code
+func (o *GetLinkedClusterPolicyDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get linked cluster policy default response has a 3xx status code
+func (o *GetLinkedClusterPolicyDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get linked cluster policy default response has a 4xx status code
+func (o *GetLinkedClusterPolicyDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get linked cluster policy default response has a 5xx status code
+func (o *GetLinkedClusterPolicyDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get linked cluster policy default response a status code equal to that given
+func (o *GetLinkedClusterPolicyDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetLinkedClusterPolicyDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetLinkedClusterPolicyDefault) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetLinkedClusterPolicyDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

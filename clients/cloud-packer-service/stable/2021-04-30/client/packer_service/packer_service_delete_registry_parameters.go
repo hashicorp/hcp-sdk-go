@@ -53,10 +53,12 @@ func NewPackerServiceDeleteRegistryParamsWithHTTPClient(client *http.Client) *Pa
 	}
 }
 
-/* PackerServiceDeleteRegistryParams contains all the parameters to send to the API endpoint
-   for the packer service delete registry operation.
+/*
+PackerServiceDeleteRegistryParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service delete registry operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceDeleteRegistryParams struct {
 

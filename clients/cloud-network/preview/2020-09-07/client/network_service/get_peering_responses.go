@@ -47,7 +47,8 @@ func NewGetPeeringOK() *GetPeeringOK {
 	return &GetPeeringOK{}
 }
 
-/* GetPeeringOK describes a response with status code 200, with default header values.
+/*
+GetPeeringOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetPeeringOK struct {
 	Payload *models.HashicorpCloudNetwork20200907GetPeeringResponse
 }
 
+// IsSuccess returns true when this get peering o k response has a 2xx status code
+func (o *GetPeeringOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get peering o k response has a 3xx status code
+func (o *GetPeeringOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get peering o k response has a 4xx status code
+func (o *GetPeeringOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get peering o k response has a 5xx status code
+func (o *GetPeeringOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get peering o k response a status code equal to that given
+func (o *GetPeeringOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetPeeringOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] getPeeringOK  %+v", 200, o.Payload)
 }
+
+func (o *GetPeeringOK) String() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] getPeeringOK  %+v", 200, o.Payload)
+}
+
 func (o *GetPeeringOK) GetPayload() *models.HashicorpCloudNetwork20200907GetPeeringResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetPeeringDefault(code int) *GetPeeringDefault {
 	}
 }
 
-/* GetPeeringDefault describes a response with status code -1, with default header values.
+/*
+GetPeeringDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetPeeringDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get peering default response has a 2xx status code
+func (o *GetPeeringDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get peering default response has a 3xx status code
+func (o *GetPeeringDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get peering default response has a 4xx status code
+func (o *GetPeeringDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get peering default response has a 5xx status code
+func (o *GetPeeringDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get peering default response a status code equal to that given
+func (o *GetPeeringDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetPeeringDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] GetPeering default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetPeeringDefault) String() string {
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] GetPeering default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetPeeringDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

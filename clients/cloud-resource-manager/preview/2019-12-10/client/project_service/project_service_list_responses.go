@@ -47,7 +47,8 @@ func NewProjectServiceListOK() *ProjectServiceListOK {
 	return &ProjectServiceListOK{}
 }
 
-/* ProjectServiceListOK describes a response with status code 200, with default header values.
+/*
+ProjectServiceListOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type ProjectServiceListOK struct {
 	Payload *models.HashicorpCloudResourcemanagerProjectListResponse
 }
 
+// IsSuccess returns true when this project service list o k response has a 2xx status code
+func (o *ProjectServiceListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this project service list o k response has a 3xx status code
+func (o *ProjectServiceListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this project service list o k response has a 4xx status code
+func (o *ProjectServiceListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this project service list o k response has a 5xx status code
+func (o *ProjectServiceListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this project service list o k response a status code equal to that given
+func (o *ProjectServiceListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ProjectServiceListOK) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] projectServiceListOK  %+v", 200, o.Payload)
 }
+
+func (o *ProjectServiceListOK) String() string {
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] projectServiceListOK  %+v", 200, o.Payload)
+}
+
 func (o *ProjectServiceListOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectListResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewProjectServiceListDefault(code int) *ProjectServiceListDefault {
 	}
 }
 
-/* ProjectServiceListDefault describes a response with status code -1, with default header values.
+/*
+ProjectServiceListDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *ProjectServiceListDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this project service list default response has a 2xx status code
+func (o *ProjectServiceListDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this project service list default response has a 3xx status code
+func (o *ProjectServiceListDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this project service list default response has a 4xx status code
+func (o *ProjectServiceListDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this project service list default response has a 5xx status code
+func (o *ProjectServiceListDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this project service list default response a status code equal to that given
+func (o *ProjectServiceListDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ProjectServiceListDefault) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] ProjectService_List default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ProjectServiceListDefault) String() string {
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] ProjectService_List default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ProjectServiceListDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

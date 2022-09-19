@@ -39,7 +39,8 @@ func NewUpdateBoxOK() *UpdateBoxOK {
 	return &UpdateBoxOK{}
 }
 
-/* UpdateBoxOK describes a response with status code 200, with default header values.
+/*
+UpdateBoxOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type UpdateBoxOK struct {
 	Payload *models.HashicorpCloudVagrantUpdateBoxResponse
 }
 
+// IsSuccess returns true when this update box o k response has a 2xx status code
+func (o *UpdateBoxOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update box o k response has a 3xx status code
+func (o *UpdateBoxOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update box o k response has a 4xx status code
+func (o *UpdateBoxOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update box o k response has a 5xx status code
+func (o *UpdateBoxOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update box o k response a status code equal to that given
+func (o *UpdateBoxOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdateBoxOK) Error() string {
 	return fmt.Sprintf("[PATCH /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] updateBoxOK  %+v", 200, o.Payload)
 }
+
+func (o *UpdateBoxOK) String() string {
+	return fmt.Sprintf("[PATCH /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] updateBoxOK  %+v", 200, o.Payload)
+}
+
 func (o *UpdateBoxOK) GetPayload() *models.HashicorpCloudVagrantUpdateBoxResponse {
 	return o.Payload
 }

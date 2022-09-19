@@ -47,7 +47,8 @@ func NewPackerServiceListBucketsOK() *PackerServiceListBucketsOK {
 	return &PackerServiceListBucketsOK{}
 }
 
-/* PackerServiceListBucketsOK describes a response with status code 200, with default header values.
+/*
+PackerServiceListBucketsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceListBucketsOK struct {
 	Payload *models.HashicorpCloudPacker20220411ListBucketsResponse
 }
 
+// IsSuccess returns true when this packer service list buckets o k response has a 2xx status code
+func (o *PackerServiceListBucketsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service list buckets o k response has a 3xx status code
+func (o *PackerServiceListBucketsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service list buckets o k response has a 4xx status code
+func (o *PackerServiceListBucketsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service list buckets o k response has a 5xx status code
+func (o *PackerServiceListBucketsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service list buckets o k response a status code equal to that given
+func (o *PackerServiceListBucketsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceListBucketsOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images][%d] packerServiceListBucketsOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceListBucketsOK) String() string {
+	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images][%d] packerServiceListBucketsOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceListBucketsOK) GetPayload() *models.HashicorpCloudPacker20220411ListBucketsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceListBucketsDefault(code int) *PackerServiceListBucketsDefau
 	}
 }
 
-/* PackerServiceListBucketsDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceListBucketsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceListBucketsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service list buckets default response has a 2xx status code
+func (o *PackerServiceListBucketsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service list buckets default response has a 3xx status code
+func (o *PackerServiceListBucketsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service list buckets default response has a 4xx status code
+func (o *PackerServiceListBucketsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service list buckets default response has a 5xx status code
+func (o *PackerServiceListBucketsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service list buckets default response a status code equal to that given
+func (o *PackerServiceListBucketsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceListBucketsDefault) Error() string {
 	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images][%d] PackerService_ListBuckets default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceListBucketsDefault) String() string {
+	return fmt.Sprintf("[GET /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/images][%d] PackerService_ListBuckets default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceListBucketsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -47,7 +47,8 @@ func NewPackerServiceUpdateChannelOK() *PackerServiceUpdateChannelOK {
 	return &PackerServiceUpdateChannelOK{}
 }
 
-/* PackerServiceUpdateChannelOK describes a response with status code 200, with default header values.
+/*
+PackerServiceUpdateChannelOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceUpdateChannelOK struct {
 	Payload *models.HashicorpCloudPackerUpdateChannelResponse
 }
 
+// IsSuccess returns true when this packer service update channel o k response has a 2xx status code
+func (o *PackerServiceUpdateChannelOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service update channel o k response has a 3xx status code
+func (o *PackerServiceUpdateChannelOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service update channel o k response has a 4xx status code
+func (o *PackerServiceUpdateChannelOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service update channel o k response has a 5xx status code
+func (o *PackerServiceUpdateChannelOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service update channel o k response a status code equal to that given
+func (o *PackerServiceUpdateChannelOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceUpdateChannelOK) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceUpdateChannelOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceUpdateChannelOK) String() string {
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceUpdateChannelOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceUpdateChannelOK) GetPayload() *models.HashicorpCloudPackerUpdateChannelResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceUpdateChannelDefault(code int) *PackerServiceUpdateChannelD
 	}
 }
 
-/* PackerServiceUpdateChannelDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceUpdateChannelDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceUpdateChannelDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service update channel default response has a 2xx status code
+func (o *PackerServiceUpdateChannelDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service update channel default response has a 3xx status code
+func (o *PackerServiceUpdateChannelDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service update channel default response has a 4xx status code
+func (o *PackerServiceUpdateChannelDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service update channel default response has a 5xx status code
+func (o *PackerServiceUpdateChannelDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service update channel default response a status code equal to that given
+func (o *PackerServiceUpdateChannelDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceUpdateChannelDefault) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_UpdateChannel default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceUpdateChannelDefault) String() string {
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_UpdateChannel default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceUpdateChannelDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

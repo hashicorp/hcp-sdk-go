@@ -53,10 +53,12 @@ func NewListTGWAttachmentsParamsWithHTTPClient(client *http.Client) *ListTGWAtta
 	}
 }
 
-/* ListTGWAttachmentsParams contains all the parameters to send to the API endpoint
-   for the list t g w attachments operation.
+/*
+ListTGWAttachmentsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list t g w attachments operation.
+
+	Typically these are written to a http.Request.
 */
 type ListTGWAttachmentsParams struct {
 

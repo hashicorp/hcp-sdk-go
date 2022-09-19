@@ -54,10 +54,12 @@ func NewProjectServiceCreateParamsWithHTTPClient(client *http.Client) *ProjectSe
 	}
 }
 
-/* ProjectServiceCreateParams contains all the parameters to send to the API endpoint
-   for the project service create operation.
+/*
+ProjectServiceCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the project service create operation.
+
+	Typically these are written to a http.Request.
 */
 type ProjectServiceCreateParams struct {
 

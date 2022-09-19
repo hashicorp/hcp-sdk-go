@@ -52,10 +52,12 @@ func NewReadBoxParamsWithHTTPClient(client *http.Client) *ReadBoxParams {
 	}
 }
 
-/* ReadBoxParams contains all the parameters to send to the API endpoint
-   for the read box operation.
+/*
+ReadBoxParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the read box operation.
+
+	Typically these are written to a http.Request.
 */
 type ReadBoxParams struct {
 

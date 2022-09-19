@@ -47,7 +47,8 @@ func NewGetSnapshotOK() *GetSnapshotOK {
 	return &GetSnapshotOK{}
 }
 
-/* GetSnapshotOK describes a response with status code 200, with default header values.
+/*
+GetSnapshotOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetSnapshotOK struct {
 	Payload *models.HashicorpCloudVault20200420GetSnapshotResponse
 }
 
+// IsSuccess returns true when this get snapshot o k response has a 2xx status code
+func (o *GetSnapshotOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get snapshot o k response has a 3xx status code
+func (o *GetSnapshotOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get snapshot o k response has a 4xx status code
+func (o *GetSnapshotOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get snapshot o k response has a 5xx status code
+func (o *GetSnapshotOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get snapshot o k response a status code equal to that given
+func (o *GetSnapshotOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetSnapshotOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}][%d] getSnapshotOK  %+v", 200, o.Payload)
 }
+
+func (o *GetSnapshotOK) String() string {
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}][%d] getSnapshotOK  %+v", 200, o.Payload)
+}
+
 func (o *GetSnapshotOK) GetPayload() *models.HashicorpCloudVault20200420GetSnapshotResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetSnapshotDefault(code int) *GetSnapshotDefault {
 	}
 }
 
-/* GetSnapshotDefault describes a response with status code -1, with default header values.
+/*
+GetSnapshotDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetSnapshotDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get snapshot default response has a 2xx status code
+func (o *GetSnapshotDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get snapshot default response has a 3xx status code
+func (o *GetSnapshotDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get snapshot default response has a 4xx status code
+func (o *GetSnapshotDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get snapshot default response has a 5xx status code
+func (o *GetSnapshotDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get snapshot default response a status code equal to that given
+func (o *GetSnapshotDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetSnapshotDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}][%d] GetSnapshot default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetSnapshotDefault) String() string {
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}][%d] GetSnapshot default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetSnapshotDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

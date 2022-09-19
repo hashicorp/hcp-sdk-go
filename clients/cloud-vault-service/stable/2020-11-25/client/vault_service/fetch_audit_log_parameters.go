@@ -54,10 +54,12 @@ func NewFetchAuditLogParamsWithHTTPClient(client *http.Client) *FetchAuditLogPar
 	}
 }
 
-/* FetchAuditLogParams contains all the parameters to send to the API endpoint
-   for the fetch audit log operation.
+/*
+FetchAuditLogParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the fetch audit log operation.
+
+	Typically these are written to a http.Request.
 */
 type FetchAuditLogParams struct {
 

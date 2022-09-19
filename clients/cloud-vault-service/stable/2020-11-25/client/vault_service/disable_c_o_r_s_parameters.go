@@ -52,10 +52,12 @@ func NewDisableCORSParamsWithHTTPClient(client *http.Client) *DisableCORSParams 
 	}
 }
 
-/* DisableCORSParams contains all the parameters to send to the API endpoint
-   for the disable c o r s operation.
+/*
+DisableCORSParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the disable c o r s operation.
+
+	Typically these are written to a http.Request.
 */
 type DisableCORSParams struct {
 

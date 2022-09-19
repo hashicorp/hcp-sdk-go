@@ -52,10 +52,12 @@ func NewPackerServiceGetRegistryParamsWithHTTPClient(client *http.Client) *Packe
 	}
 }
 
-/* PackerServiceGetRegistryParams contains all the parameters to send to the API endpoint
-   for the packer service get registry operation.
+/*
+PackerServiceGetRegistryParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service get registry operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceGetRegistryParams struct {
 

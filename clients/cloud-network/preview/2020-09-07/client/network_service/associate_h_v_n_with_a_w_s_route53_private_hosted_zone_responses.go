@@ -46,7 +46,8 @@ func NewAssociateHVNWithAWSRoute53PrivateHostedZoneOK() *AssociateHVNWithAWSRout
 	return &AssociateHVNWithAWSRoute53PrivateHostedZoneOK{}
 }
 
-/* AssociateHVNWithAWSRoute53PrivateHostedZoneOK describes a response with status code 200, with default header values.
+/*
+AssociateHVNWithAWSRoute53PrivateHostedZoneOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -54,9 +55,39 @@ type AssociateHVNWithAWSRoute53PrivateHostedZoneOK struct {
 	Payload interface{}
 }
 
+// IsSuccess returns true when this associate h v n with a w s route53 private hosted zone o k response has a 2xx status code
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this associate h v n with a w s route53 private hosted zone o k response has a 3xx status code
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this associate h v n with a w s route53 private hosted zone o k response has a 4xx status code
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this associate h v n with a w s route53 private hosted zone o k response has a 5xx status code
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this associate h v n with a w s route53 private hosted zone o k response a status code equal to that given
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] associateHVNWithAWSRoute53PrivateHostedZoneOK  %+v", 200, o.Payload)
 }
+
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) String() string {
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] associateHVNWithAWSRoute53PrivateHostedZoneOK  %+v", 200, o.Payload)
+}
+
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) GetPayload() interface{} {
 	return o.Payload
 }
@@ -78,7 +109,8 @@ func NewAssociateHVNWithAWSRoute53PrivateHostedZoneDefault(code int) *AssociateH
 	}
 }
 
-/* AssociateHVNWithAWSRoute53PrivateHostedZoneDefault describes a response with status code -1, with default header values.
+/*
+AssociateHVNWithAWSRoute53PrivateHostedZoneDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -93,9 +125,39 @@ func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this associate h v n with a w s route53 private hosted zone default response has a 2xx status code
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this associate h v n with a w s route53 private hosted zone default response has a 3xx status code
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this associate h v n with a w s route53 private hosted zone default response has a 4xx status code
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this associate h v n with a w s route53 private hosted zone default response has a 5xx status code
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this associate h v n with a w s route53 private hosted zone default response a status code equal to that given
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] AssociateHVNWithAWSRoute53PrivateHostedZone default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) String() string {
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] AssociateHVNWithAWSRoute53PrivateHostedZone default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

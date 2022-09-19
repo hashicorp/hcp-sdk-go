@@ -52,10 +52,12 @@ func NewReadVersionParamsWithHTTPClient(client *http.Client) *ReadVersionParams 
 	}
 }
 
-/* ReadVersionParams contains all the parameters to send to the API endpoint
-   for the read version operation.
+/*
+ReadVersionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the read version operation.
+
+	Typically these are written to a http.Request.
 */
 type ReadVersionParams struct {
 

@@ -47,7 +47,8 @@ func NewDeleteHVNRouteOK() *DeleteHVNRouteOK {
 	return &DeleteHVNRouteOK{}
 }
 
-/* DeleteHVNRouteOK describes a response with status code 200, with default header values.
+/*
+DeleteHVNRouteOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type DeleteHVNRouteOK struct {
 	Payload *models.HashicorpCloudNetwork20200907DeleteHVNRouteResponse
 }
 
+// IsSuccess returns true when this delete h v n route o k response has a 2xx status code
+func (o *DeleteHVNRouteOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete h v n route o k response has a 3xx status code
+func (o *DeleteHVNRouteOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete h v n route o k response has a 4xx status code
+func (o *DeleteHVNRouteOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete h v n route o k response has a 5xx status code
+func (o *DeleteHVNRouteOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete h v n route o k response a status code equal to that given
+func (o *DeleteHVNRouteOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DeleteHVNRouteOK) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] deleteHVNRouteOK  %+v", 200, o.Payload)
 }
+
+func (o *DeleteHVNRouteOK) String() string {
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] deleteHVNRouteOK  %+v", 200, o.Payload)
+}
+
 func (o *DeleteHVNRouteOK) GetPayload() *models.HashicorpCloudNetwork20200907DeleteHVNRouteResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewDeleteHVNRouteDefault(code int) *DeleteHVNRouteDefault {
 	}
 }
 
-/* DeleteHVNRouteDefault describes a response with status code -1, with default header values.
+/*
+DeleteHVNRouteDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *DeleteHVNRouteDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this delete h v n route default response has a 2xx status code
+func (o *DeleteHVNRouteDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this delete h v n route default response has a 3xx status code
+func (o *DeleteHVNRouteDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this delete h v n route default response has a 4xx status code
+func (o *DeleteHVNRouteDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this delete h v n route default response has a 5xx status code
+func (o *DeleteHVNRouteDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this delete h v n route default response a status code equal to that given
+func (o *DeleteHVNRouteDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *DeleteHVNRouteDefault) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] DeleteHVNRoute default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *DeleteHVNRouteDefault) String() string {
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] DeleteHVNRoute default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *DeleteHVNRouteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

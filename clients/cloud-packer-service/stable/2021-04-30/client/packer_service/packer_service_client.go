@@ -86,7 +86,7 @@ type ClientService interface {
 }
 
 /*
-  PackerServiceCreateBucket creates an image bucket in the h c p packer registry
+PackerServiceCreateBucket creates an image bucket in the h c p packer registry
 */
 func (a *Client) PackerServiceCreateBucket(params *PackerServiceCreateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateBucketOK, error) {
 	// TODO: Validate the params before sending
@@ -124,7 +124,7 @@ func (a *Client) PackerServiceCreateBucket(params *PackerServiceCreateBucketPara
 }
 
 /*
-  PackerServiceCreateBuild creates an image build in the provided image iteration it is called once for each build source in a packer build run the request will error if the build for a given cloud provider already exists
+PackerServiceCreateBuild creates an image build in the provided image iteration it is called once for each build source in a packer build run the request will error if the build for a given cloud provider already exists
 */
 func (a *Client) PackerServiceCreateBuild(params *PackerServiceCreateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -162,7 +162,7 @@ func (a *Client) PackerServiceCreateBuild(params *PackerServiceCreateBuildParams
 }
 
 /*
-  PackerServiceCreateChannel creates a channel either empty or assigned to an iteration
+PackerServiceCreateChannel creates a channel either empty or assigned to an iteration
 */
 func (a *Client) PackerServiceCreateChannel(params *PackerServiceCreateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateChannelOK, error) {
 	// TODO: Validate the params before sending
@@ -200,7 +200,7 @@ func (a *Client) PackerServiceCreateChannel(params *PackerServiceCreateChannelPa
 }
 
 /*
-  PackerServiceCreateIteration creates an empty iteration to be written to this API is called at the beginning of a new packer build and does not create individual builds for the iteration
+PackerServiceCreateIteration creates an empty iteration to be written to this API is called at the beginning of a new packer build and does not create individual builds for the iteration
 */
 func (a *Client) PackerServiceCreateIteration(params *PackerServiceCreateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateIterationOK, error) {
 	// TODO: Validate the params before sending
@@ -238,7 +238,7 @@ func (a *Client) PackerServiceCreateIteration(params *PackerServiceCreateIterati
 }
 
 /*
-  PackerServiceCreateRegistry creates a h c p packer registry and starts billing for it
+PackerServiceCreateRegistry creates a h c p packer registry and starts billing for it
 */
 func (a *Client) PackerServiceCreateRegistry(params *PackerServiceCreateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateRegistryOK, error) {
 	// TODO: Validate the params before sending
@@ -276,7 +276,7 @@ func (a *Client) PackerServiceCreateRegistry(params *PackerServiceCreateRegistry
 }
 
 /*
-  PackerServiceDeleteBucket deletes a bucket and all its information such as iterations and builds
+PackerServiceDeleteBucket deletes a bucket and all its information such as iterations and builds
 */
 func (a *Client) PackerServiceDeleteBucket(params *PackerServiceDeleteBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteBucketOK, error) {
 	// TODO: Validate the params before sending
@@ -314,7 +314,7 @@ func (a *Client) PackerServiceDeleteBucket(params *PackerServiceDeleteBucketPara
 }
 
 /*
-  PackerServiceDeleteBuild deletes a build in the provided iteration
+PackerServiceDeleteBuild deletes a build in the provided iteration
 */
 func (a *Client) PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -352,7 +352,7 @@ func (a *Client) PackerServiceDeleteBuild(params *PackerServiceDeleteBuildParams
 }
 
 /*
-  PackerServiceDeleteChannel deletes a channel
+PackerServiceDeleteChannel deletes a channel
 */
 func (a *Client) PackerServiceDeleteChannel(params *PackerServiceDeleteChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteChannelOK, error) {
 	// TODO: Validate the params before sending
@@ -390,7 +390,7 @@ func (a *Client) PackerServiceDeleteChannel(params *PackerServiceDeleteChannelPa
 }
 
 /*
-  PackerServiceDeleteIteration deletes an iteration and all its information such as its builds
+PackerServiceDeleteIteration deletes an iteration and all its information such as its builds
 */
 func (a *Client) PackerServiceDeleteIteration(params *PackerServiceDeleteIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteIterationOK, error) {
 	// TODO: Validate the params before sending
@@ -428,7 +428,7 @@ func (a *Client) PackerServiceDeleteIteration(params *PackerServiceDeleteIterati
 }
 
 /*
-  PackerServiceDeleteRegistry deactivates an active h c p packer registry deactivating a registry will stop any additional billing for the resource setting the hard delete param to true will delete the registry and any associated resources from the database
+PackerServiceDeleteRegistry deactivates an active h c p packer registry deactivating a registry will stop any additional billing for the resource setting the hard delete param to true will delete the registry and any associated resources from the database
 */
 func (a *Client) PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteRegistryOK, error) {
 	// TODO: Validate the params before sending
@@ -466,7 +466,7 @@ func (a *Client) PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistry
 }
 
 /*
-  PackerServiceGetBucket gets a bucket with its latest completed iteration
+PackerServiceGetBucket gets a bucket with its latest completed iteration
 */
 func (a *Client) PackerServiceGetBucket(params *PackerServiceGetBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetBucketOK, error) {
 	// TODO: Validate the params before sending
@@ -504,7 +504,7 @@ func (a *Client) PackerServiceGetBucket(params *PackerServiceGetBucketParams, au
 }
 
 /*
-  PackerServiceGetBuild gets a build with its list of images
+PackerServiceGetBuild gets a build with its list of images
 */
 func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -542,7 +542,7 @@ func (a *Client) PackerServiceGetBuild(params *PackerServiceGetBuildParams, auth
 }
 
 /*
-  PackerServiceGetChannel gets a channel with the iteration that it is currently assigned if any
+PackerServiceGetChannel gets a channel with the iteration that it is currently assigned if any
 */
 func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetChannelOK, error) {
 	// TODO: Validate the params before sending
@@ -580,7 +580,7 @@ func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, 
 }
 
 /*
-  PackerServiceGetIteration allows the user to get an iteration using one of the following identifiers iteration id incremental version fingerprint these are supplied as a query parameter e g images bucket slug iteration fingerprint fingerprint
+PackerServiceGetIteration allows the user to get an iteration using one of the following identifiers iteration id incremental version fingerprint these are supplied as a query parameter e g images bucket slug iteration fingerprint fingerprint
 */
 func (a *Client) PackerServiceGetIteration(params *PackerServiceGetIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetIterationOK, error) {
 	// TODO: Validate the params before sending
@@ -618,7 +618,7 @@ func (a *Client) PackerServiceGetIteration(params *PackerServiceGetIterationPara
 }
 
 /*
-  PackerServiceGetRegistry gets a h c p packer registry
+PackerServiceGetRegistry gets a h c p packer registry
 */
 func (a *Client) PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryOK, error) {
 	// TODO: Validate the params before sending
@@ -656,7 +656,7 @@ func (a *Client) PackerServiceGetRegistry(params *PackerServiceGetRegistryParams
 }
 
 /*
-  PackerServiceGetRegistryTFCRunTaskAPI gets the h c p packer registry API URL and h m a c key to integrate with terraform cloud as a run task
+PackerServiceGetRegistryTFCRunTaskAPI gets the h c p packer registry API URL and h m a c key to integrate with terraform cloud as a run task
 */
 func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetRegistryTFCRunTaskAPIParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryTFCRunTaskAPIOK, error) {
 	// TODO: Validate the params before sending
@@ -694,7 +694,7 @@ func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetR
 }
 
 /*
-  PackerServiceListBuckets lists every existing bucket in the h c p packer registry and their last completed iteration
+PackerServiceListBuckets lists every existing bucket in the h c p packer registry and their last completed iteration
 */
 func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketsOK, error) {
 	// TODO: Validate the params before sending
@@ -732,7 +732,7 @@ func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams
 }
 
 /*
-  PackerServiceListBuilds lists every existing build and its images for an iteration
+PackerServiceListBuilds lists every existing build and its images for an iteration
 */
 func (a *Client) PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBuildsOK, error) {
 	// TODO: Validate the params before sending
@@ -770,7 +770,7 @@ func (a *Client) PackerServiceListBuilds(params *PackerServiceListBuildsParams, 
 }
 
 /*
-  PackerServiceListChannels lists all channels of a given bucket
+PackerServiceListChannels lists all channels of a given bucket
 */
 func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListChannelsOK, error) {
 	// TODO: Validate the params before sending
@@ -808,7 +808,7 @@ func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsPara
 }
 
 /*
-  PackerServiceListIterations lists every existing iteration of a bucket
+PackerServiceListIterations lists every existing iteration of a bucket
 */
 func (a *Client) PackerServiceListIterations(params *PackerServiceListIterationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListIterationsOK, error) {
 	// TODO: Validate the params before sending
@@ -846,7 +846,7 @@ func (a *Client) PackerServiceListIterations(params *PackerServiceListIterations
 }
 
 /*
-  PackerServiceRegenerateTFCRunTaskHmacKey regenerates the h m a c key used to sign requests from terraform cloud to h c p packer run tasks
+PackerServiceRegenerateTFCRunTaskHmacKey regenerates the h m a c key used to sign requests from terraform cloud to h c p packer run tasks
 */
 func (a *Client) PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceRegenerateTFCRunTaskHmacKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceRegenerateTFCRunTaskHmacKeyOK, error) {
 	// TODO: Validate the params before sending
@@ -884,7 +884,7 @@ func (a *Client) PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceR
 }
 
 /*
-  PackerServiceTFCImageValidationRunTask terraforms cloud run task hook for validating an h c p packer artifact used in the terraform plan to block a terraform apply for artifacts that are in an invalid state such as revoked iterations
+PackerServiceTFCImageValidationRunTask terraforms cloud run task hook for validating an h c p packer artifact used in the terraform plan to block a terraform apply for artifacts that are in an invalid state such as revoked iterations
 */
 func (a *Client) PackerServiceTFCImageValidationRunTask(params *PackerServiceTFCImageValidationRunTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceTFCImageValidationRunTaskOK, error) {
 	// TODO: Validate the params before sending
@@ -922,7 +922,7 @@ func (a *Client) PackerServiceTFCImageValidationRunTask(params *PackerServiceTFC
 }
 
 /*
-  PackerServiceUpdateBucket updates a bucket s information
+PackerServiceUpdateBucket updates a bucket s information
 */
 func (a *Client) PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateBucketOK, error) {
 	// TODO: Validate the params before sending
@@ -960,7 +960,7 @@ func (a *Client) PackerServiceUpdateBucket(params *PackerServiceUpdateBucketPara
 }
 
 /*
-  PackerServiceUpdateBuild updates an image build this may be most often used for modifying the status of a currently running build
+PackerServiceUpdateBuild updates an image build this may be most often used for modifying the status of a currently running build
 */
 func (a *Client) PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -998,7 +998,7 @@ func (a *Client) PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams
 }
 
 /*
-  PackerServiceUpdateChannel updates a channel to clear or point to a new iteration
+PackerServiceUpdateChannel updates a channel to clear or point to a new iteration
 */
 func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateChannelOK, error) {
 	// TODO: Validate the params before sending
@@ -1036,7 +1036,7 @@ func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelPa
 }
 
 /*
-  PackerServiceUpdateIteration this API can be used to revoke restore or complete an iteration revoking can be done at any time to complete or incomplete iterations immediately or in the future depending on the passing timestamp revoked iterations cannot be updated unless restored to make build specific updates for builds within the iteration use the update build endpoint
+PackerServiceUpdateIteration this API can be used to revoke restore or complete an iteration revoking can be done at any time to complete or incomplete iterations immediately or in the future depending on the passing timestamp revoked iterations cannot be updated unless restored to make build specific updates for builds within the iteration use the update build endpoint
 */
 func (a *Client) PackerServiceUpdateIteration(params *PackerServiceUpdateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateIterationOK, error) {
 	// TODO: Validate the params before sending
@@ -1074,7 +1074,7 @@ func (a *Client) PackerServiceUpdateIteration(params *PackerServiceUpdateIterati
 }
 
 /*
-  PackerServiceUpdateRegistry updates the feature tier of an h c p packer registry
+PackerServiceUpdateRegistry updates the feature tier of an h c p packer registry
 */
 func (a *Client) PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateRegistryOK, error) {
 	// TODO: Validate the params before sending

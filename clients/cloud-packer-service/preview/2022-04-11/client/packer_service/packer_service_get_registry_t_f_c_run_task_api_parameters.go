@@ -52,10 +52,12 @@ func NewPackerServiceGetRegistryTFCRunTaskAPIParamsWithHTTPClient(client *http.C
 	}
 }
 
-/* PackerServiceGetRegistryTFCRunTaskAPIParams contains all the parameters to send to the API endpoint
-   for the packer service get registry t f c run task API operation.
+/*
+PackerServiceGetRegistryTFCRunTaskAPIParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service get registry t f c run task API operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceGetRegistryTFCRunTaskAPIParams struct {
 

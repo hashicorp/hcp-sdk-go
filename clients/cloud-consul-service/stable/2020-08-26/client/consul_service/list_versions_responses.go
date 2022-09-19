@@ -47,7 +47,8 @@ func NewListVersionsOK() *ListVersionsOK {
 	return &ListVersionsOK{}
 }
 
-/* ListVersionsOK describes a response with status code 200, with default header values.
+/*
+ListVersionsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type ListVersionsOK struct {
 	Payload *models.HashicorpCloudConsul20200826ListVersionsResponse
 }
 
+// IsSuccess returns true when this list versions o k response has a 2xx status code
+func (o *ListVersionsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list versions o k response has a 3xx status code
+func (o *ListVersionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list versions o k response has a 4xx status code
+func (o *ListVersionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list versions o k response has a 5xx status code
+func (o *ListVersionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list versions o k response a status code equal to that given
+func (o *ListVersionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListVersionsOK) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/versions][%d] listVersionsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListVersionsOK) String() string {
+	return fmt.Sprintf("[GET /consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/versions][%d] listVersionsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListVersionsOK) GetPayload() *models.HashicorpCloudConsul20200826ListVersionsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewListVersionsDefault(code int) *ListVersionsDefault {
 	}
 }
 
-/* ListVersionsDefault describes a response with status code -1, with default header values.
+/*
+ListVersionsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *ListVersionsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list versions default response has a 2xx status code
+func (o *ListVersionsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list versions default response has a 3xx status code
+func (o *ListVersionsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list versions default response has a 4xx status code
+func (o *ListVersionsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list versions default response has a 5xx status code
+func (o *ListVersionsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list versions default response a status code equal to that given
+func (o *ListVersionsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListVersionsDefault) Error() string {
 	return fmt.Sprintf("[GET /consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/versions][%d] ListVersions default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ListVersionsDefault) String() string {
+	return fmt.Sprintf("[GET /consul/2020-08-26/organizations/{location.organization_id}/projects/{location.project_id}/versions][%d] ListVersions default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ListVersionsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

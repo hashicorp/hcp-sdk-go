@@ -52,10 +52,12 @@ func NewPackerServiceDeleteBucketParamsWithHTTPClient(client *http.Client) *Pack
 	}
 }
 
-/* PackerServiceDeleteBucketParams contains all the parameters to send to the API endpoint
-   for the packer service delete bucket operation.
+/*
+PackerServiceDeleteBucketParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service delete bucket operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceDeleteBucketParams struct {
 

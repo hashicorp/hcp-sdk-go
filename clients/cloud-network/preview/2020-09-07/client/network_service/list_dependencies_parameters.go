@@ -53,10 +53,12 @@ func NewListDependenciesParamsWithHTTPClient(client *http.Client) *ListDependenc
 	}
 }
 
-/* ListDependenciesParams contains all the parameters to send to the API endpoint
-   for the list dependencies operation.
+/*
+ListDependenciesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list dependencies operation.
+
+	Typically these are written to a http.Request.
 */
 type ListDependenciesParams struct {
 

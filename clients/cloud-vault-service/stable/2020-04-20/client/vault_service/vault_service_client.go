@@ -70,7 +70,7 @@ type ClientService interface {
 }
 
 /*
-  Create create API
+Create create API
 */
 func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
 	// TODO: Validate the params before sending
@@ -108,7 +108,7 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  CreateSnapshot create snapshot API
+CreateSnapshot create snapshot API
 */
 func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -146,7 +146,7 @@ func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.C
 }
 
 /*
-  Delete delete API
+Delete delete API
 */
 func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -184,7 +184,7 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  DeleteSnapshot delete snapshot API
+DeleteSnapshot delete snapshot API
 */
 func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -222,7 +222,7 @@ func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.C
 }
 
 /*
-  DisableCORS disable c o r s API
+DisableCORS disable c o r s API
 */
 func (a *Client) DisableCORS(params *DisableCORSParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DisableCORSOK, error) {
 	// TODO: Validate the params before sending
@@ -260,7 +260,7 @@ func (a *Client) DisableCORS(params *DisableCORSParams, authInfo runtime.ClientA
 }
 
 /*
-  FetchAuditLog fetch audit log API
+FetchAuditLog fetch audit log API
 */
 func (a *Client) FetchAuditLog(params *FetchAuditLogParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FetchAuditLogOK, error) {
 	// TODO: Validate the params before sending
@@ -298,7 +298,7 @@ func (a *Client) FetchAuditLog(params *FetchAuditLogParams, authInfo runtime.Cli
 }
 
 /*
-  Get get API
+Get get API
 */
 func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error) {
 	// TODO: Validate the params before sending
@@ -336,7 +336,7 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, o
 }
 
 /*
-  GetAdminToken get admin token API
+GetAdminToken get admin token API
 */
 func (a *Client) GetAdminToken(params *GetAdminTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAdminTokenOK, error) {
 	// TODO: Validate the params before sending
@@ -374,7 +374,7 @@ func (a *Client) GetAdminToken(params *GetAdminTokenParams, authInfo runtime.Cli
 }
 
 /*
-  GetAuditLogStatus get audit log status API
+GetAuditLogStatus get audit log status API
 */
 func (a *Client) GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuditLogStatusOK, error) {
 	// TODO: Validate the params before sending
@@ -412,7 +412,7 @@ func (a *Client) GetAuditLogStatus(params *GetAuditLogStatusParams, authInfo run
 }
 
 /*
-  GetCORSConfig get c o r s config API
+GetCORSConfig get c o r s config API
 */
 func (a *Client) GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCORSConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -450,7 +450,7 @@ func (a *Client) GetCORSConfig(params *GetCORSConfigParams, authInfo runtime.Cli
 }
 
 /*
-  GetSnapshot get snapshot API
+GetSnapshot get snapshot API
 */
 func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -488,7 +488,7 @@ func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientA
 }
 
 /*
-  List list API
+List list API
 */
 func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
 	// TODO: Validate the params before sending
@@ -526,7 +526,7 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
-  ListSnapshots list snapshots API
+ListSnapshots list snapshots API
 */
 func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSnapshotsOK, error) {
 	// TODO: Validate the params before sending
@@ -564,7 +564,7 @@ func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.Cli
 }
 
 /*
-  RestoreSnapshot restore snapshot API
+RestoreSnapshot restore snapshot API
 */
 func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -602,7 +602,7 @@ func (a *Client) RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime
 }
 
 /*
-  Seal seal API
+Seal seal API
 */
 func (a *Client) Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SealOK, error) {
 	// TODO: Validate the params before sending
@@ -640,7 +640,7 @@ func (a *Client) Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
-  Unseal unseal API
+Unseal unseal API
 */
 func (a *Client) Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnsealOK, error) {
 	// TODO: Validate the params before sending
@@ -678,7 +678,7 @@ func (a *Client) Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  UpdateCORSConfig update c o r s config API
+UpdateCORSConfig update c o r s config API
 */
 func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCORSConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -716,7 +716,7 @@ func (a *Client) UpdateCORSConfig(params *UpdateCORSConfigParams, authInfo runti
 }
 
 /*
-  UpdatePublicIps update public ips API
+UpdatePublicIps update public ips API
 */
 func (a *Client) UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePublicIpsOK, error) {
 	// TODO: Validate the params before sending
@@ -754,7 +754,7 @@ func (a *Client) UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime
 }
 
 /*
-  UpdateSnapshot update snapshot API
+UpdateSnapshot update snapshot API
 */
 func (a *Client) UpdateSnapshot(params *UpdateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSnapshotOK, error) {
 	// TODO: Validate the params before sending

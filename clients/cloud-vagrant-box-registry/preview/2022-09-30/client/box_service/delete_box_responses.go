@@ -39,7 +39,8 @@ func NewDeleteBoxOK() *DeleteBoxOK {
 	return &DeleteBoxOK{}
 }
 
-/* DeleteBoxOK describes a response with status code 200, with default header values.
+/*
+DeleteBoxOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -47,9 +48,39 @@ type DeleteBoxOK struct {
 	Payload models.HashicorpCloudVagrantDeleteBoxResponse
 }
 
+// IsSuccess returns true when this delete box o k response has a 2xx status code
+func (o *DeleteBoxOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete box o k response has a 3xx status code
+func (o *DeleteBoxOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete box o k response has a 4xx status code
+func (o *DeleteBoxOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete box o k response has a 5xx status code
+func (o *DeleteBoxOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete box o k response a status code equal to that given
+func (o *DeleteBoxOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DeleteBoxOK) Error() string {
 	return fmt.Sprintf("[DELETE /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] deleteBoxOK  %+v", 200, o.Payload)
 }
+
+func (o *DeleteBoxOK) String() string {
+	return fmt.Sprintf("[DELETE /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] deleteBoxOK  %+v", 200, o.Payload)
+}
+
 func (o *DeleteBoxOK) GetPayload() models.HashicorpCloudVagrantDeleteBoxResponse {
 	return o.Payload
 }

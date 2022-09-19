@@ -54,10 +54,12 @@ func NewUnsealParamsWithHTTPClient(client *http.Client) *UnsealParams {
 	}
 }
 
-/* UnsealParams contains all the parameters to send to the API endpoint
-   for the unseal operation.
+/*
+UnsealParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the unseal operation.
+
+	Typically these are written to a http.Request.
 */
 type UnsealParams struct {
 

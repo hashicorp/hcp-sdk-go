@@ -47,7 +47,8 @@ func NewGetClientCountsOK() *GetClientCountsOK {
 	return &GetClientCountsOK{}
 }
 
-/* GetClientCountsOK describes a response with status code 200, with default header values.
+/*
+GetClientCountsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetClientCountsOK struct {
 	Payload *models.HashicorpCloudVault20201125GetClientCountsResponse
 }
 
+// IsSuccess returns true when this get client counts o k response has a 2xx status code
+func (o *GetClientCountsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get client counts o k response has a 3xx status code
+func (o *GetClientCountsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get client counts o k response has a 4xx status code
+func (o *GetClientCountsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get client counts o k response has a 5xx status code
+func (o *GetClientCountsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get client counts o k response a status code equal to that given
+func (o *GetClientCountsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetClientCountsOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] getClientCountsOK  %+v", 200, o.Payload)
 }
+
+func (o *GetClientCountsOK) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] getClientCountsOK  %+v", 200, o.Payload)
+}
+
 func (o *GetClientCountsOK) GetPayload() *models.HashicorpCloudVault20201125GetClientCountsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetClientCountsDefault(code int) *GetClientCountsDefault {
 	}
 }
 
-/* GetClientCountsDefault describes a response with status code -1, with default header values.
+/*
+GetClientCountsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetClientCountsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get client counts default response has a 2xx status code
+func (o *GetClientCountsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get client counts default response has a 3xx status code
+func (o *GetClientCountsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get client counts default response has a 4xx status code
+func (o *GetClientCountsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get client counts default response has a 5xx status code
+func (o *GetClientCountsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get client counts default response a status code equal to that given
+func (o *GetClientCountsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetClientCountsDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] GetClientCounts default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetClientCountsDefault) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] GetClientCounts default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetClientCountsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

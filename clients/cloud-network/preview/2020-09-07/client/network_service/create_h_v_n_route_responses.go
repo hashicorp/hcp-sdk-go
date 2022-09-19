@@ -47,7 +47,8 @@ func NewCreateHVNRouteOK() *CreateHVNRouteOK {
 	return &CreateHVNRouteOK{}
 }
 
-/* CreateHVNRouteOK describes a response with status code 200, with default header values.
+/*
+CreateHVNRouteOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type CreateHVNRouteOK struct {
 	Payload *models.HashicorpCloudNetwork20200907CreateHVNRouteResponse
 }
 
+// IsSuccess returns true when this create h v n route o k response has a 2xx status code
+func (o *CreateHVNRouteOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create h v n route o k response has a 3xx status code
+func (o *CreateHVNRouteOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create h v n route o k response has a 4xx status code
+func (o *CreateHVNRouteOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create h v n route o k response has a 5xx status code
+func (o *CreateHVNRouteOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create h v n route o k response a status code equal to that given
+func (o *CreateHVNRouteOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CreateHVNRouteOK) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] createHVNRouteOK  %+v", 200, o.Payload)
 }
+
+func (o *CreateHVNRouteOK) String() string {
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] createHVNRouteOK  %+v", 200, o.Payload)
+}
+
 func (o *CreateHVNRouteOK) GetPayload() *models.HashicorpCloudNetwork20200907CreateHVNRouteResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewCreateHVNRouteDefault(code int) *CreateHVNRouteDefault {
 	}
 }
 
-/* CreateHVNRouteDefault describes a response with status code -1, with default header values.
+/*
+CreateHVNRouteDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *CreateHVNRouteDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this create h v n route default response has a 2xx status code
+func (o *CreateHVNRouteDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this create h v n route default response has a 3xx status code
+func (o *CreateHVNRouteDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this create h v n route default response has a 4xx status code
+func (o *CreateHVNRouteDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this create h v n route default response has a 5xx status code
+func (o *CreateHVNRouteDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this create h v n route default response a status code equal to that given
+func (o *CreateHVNRouteDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *CreateHVNRouteDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] CreateHVNRoute default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *CreateHVNRouteDefault) String() string {
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] CreateHVNRoute default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *CreateHVNRouteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

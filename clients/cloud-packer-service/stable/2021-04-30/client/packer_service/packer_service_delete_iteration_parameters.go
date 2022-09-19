@@ -52,10 +52,12 @@ func NewPackerServiceDeleteIterationParamsWithHTTPClient(client *http.Client) *P
 	}
 }
 
-/* PackerServiceDeleteIterationParams contains all the parameters to send to the API endpoint
-   for the packer service delete iteration operation.
+/*
+PackerServiceDeleteIterationParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service delete iteration operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceDeleteIterationParams struct {
 

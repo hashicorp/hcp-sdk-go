@@ -47,7 +47,8 @@ func NewPackerServiceDeleteRegistryOK() *PackerServiceDeleteRegistryOK {
 	return &PackerServiceDeleteRegistryOK{}
 }
 
-/* PackerServiceDeleteRegistryOK describes a response with status code 200, with default header values.
+/*
+PackerServiceDeleteRegistryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceDeleteRegistryOK struct {
 	Payload *models.HashicorpCloudPackerDeleteRegistryResponse
 }
 
+// IsSuccess returns true when this packer service delete registry o k response has a 2xx status code
+func (o *PackerServiceDeleteRegistryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service delete registry o k response has a 3xx status code
+func (o *PackerServiceDeleteRegistryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service delete registry o k response has a 4xx status code
+func (o *PackerServiceDeleteRegistryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service delete registry o k response has a 5xx status code
+func (o *PackerServiceDeleteRegistryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service delete registry o k response a status code equal to that given
+func (o *PackerServiceDeleteRegistryOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceDeleteRegistryOK) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceDeleteRegistryOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceDeleteRegistryOK) String() string {
+	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceDeleteRegistryOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceDeleteRegistryOK) GetPayload() *models.HashicorpCloudPackerDeleteRegistryResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceDeleteRegistryDefault(code int) *PackerServiceDeleteRegistr
 	}
 }
 
-/* PackerServiceDeleteRegistryDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceDeleteRegistryDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceDeleteRegistryDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service delete registry default response has a 2xx status code
+func (o *PackerServiceDeleteRegistryDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service delete registry default response has a 3xx status code
+func (o *PackerServiceDeleteRegistryDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service delete registry default response has a 4xx status code
+func (o *PackerServiceDeleteRegistryDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service delete registry default response has a 5xx status code
+func (o *PackerServiceDeleteRegistryDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service delete registry default response a status code equal to that given
+func (o *PackerServiceDeleteRegistryDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceDeleteRegistryDefault) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_DeleteRegistry default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceDeleteRegistryDefault) String() string {
+	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_DeleteRegistry default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceDeleteRegistryDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

@@ -52,10 +52,12 @@ func NewPackerServiceGetChannelParamsWithHTTPClient(client *http.Client) *Packer
 	}
 }
 
-/* PackerServiceGetChannelParams contains all the parameters to send to the API endpoint
-   for the packer service get channel operation.
+/*
+PackerServiceGetChannelParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service get channel operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceGetChannelParams struct {
 

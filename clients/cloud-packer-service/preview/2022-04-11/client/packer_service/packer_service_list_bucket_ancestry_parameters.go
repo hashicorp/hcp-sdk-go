@@ -53,10 +53,12 @@ func NewPackerServiceListBucketAncestryParamsWithHTTPClient(client *http.Client)
 	}
 }
 
-/* PackerServiceListBucketAncestryParams contains all the parameters to send to the API endpoint
-   for the packer service list bucket ancestry operation.
+/*
+PackerServiceListBucketAncestryParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service list bucket ancestry operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceListBucketAncestryParams struct {
 

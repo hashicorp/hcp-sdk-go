@@ -54,10 +54,12 @@ func NewCompleteUploadParamsWithHTTPClient(client *http.Client) *CompleteUploadP
 	}
 }
 
-/* CompleteUploadParams contains all the parameters to send to the API endpoint
-   for the complete upload operation.
+/*
+CompleteUploadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the complete upload operation.
+
+	Typically these are written to a http.Request.
 */
 type CompleteUploadParams struct {
 

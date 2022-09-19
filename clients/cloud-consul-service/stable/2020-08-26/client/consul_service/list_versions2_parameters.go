@@ -52,10 +52,12 @@ func NewListVersions2ParamsWithHTTPClient(client *http.Client) *ListVersions2Par
 	}
 }
 
-/* ListVersions2Params contains all the parameters to send to the API endpoint
-   for the list versions2 operation.
+/*
+ListVersions2Params contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list versions2 operation.
+
+	Typically these are written to a http.Request.
 */
 type ListVersions2Params struct {
 

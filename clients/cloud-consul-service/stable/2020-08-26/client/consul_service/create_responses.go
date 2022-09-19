@@ -47,7 +47,8 @@ func NewCreateOK() *CreateOK {
 	return &CreateOK{}
 }
 
-/* CreateOK describes a response with status code 200, with default header values.
+/*
+CreateOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type CreateOK struct {
 	Payload *models.HashicorpCloudConsul20200826CreateResponse
 }
 
+// IsSuccess returns true when this create o k response has a 2xx status code
+func (o *CreateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create o k response has a 3xx status code
+func (o *CreateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create o k response has a 4xx status code
+func (o *CreateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create o k response has a 5xx status code
+func (o *CreateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create o k response a status code equal to that given
+func (o *CreateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CreateOK) Error() string {
 	return fmt.Sprintf("[POST /consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters][%d] createOK  %+v", 200, o.Payload)
 }
+
+func (o *CreateOK) String() string {
+	return fmt.Sprintf("[POST /consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters][%d] createOK  %+v", 200, o.Payload)
+}
+
 func (o *CreateOK) GetPayload() *models.HashicorpCloudConsul20200826CreateResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewCreateDefault(code int) *CreateDefault {
 	}
 }
 
-/* CreateDefault describes a response with status code -1, with default header values.
+/*
+CreateDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *CreateDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this create default response has a 2xx status code
+func (o *CreateDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this create default response has a 3xx status code
+func (o *CreateDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this create default response has a 4xx status code
+func (o *CreateDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this create default response has a 5xx status code
+func (o *CreateDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this create default response a status code equal to that given
+func (o *CreateDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *CreateDefault) Error() string {
 	return fmt.Sprintf("[POST /consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters][%d] Create default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *CreateDefault) String() string {
+	return fmt.Sprintf("[POST /consul/2020-08-26/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters][%d] Create default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *CreateDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

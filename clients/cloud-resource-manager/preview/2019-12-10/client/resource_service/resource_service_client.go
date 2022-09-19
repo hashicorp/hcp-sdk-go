@@ -34,7 +34,7 @@ type ClientService interface {
 }
 
 /*
-  ResourceServiceList lists lists the resources the caller has access to
+ResourceServiceList lists lists the resources the caller has access to
 */
 func (a *Client) ResourceServiceList(params *ResourceServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceListOK, error) {
 	// TODO: Validate the params before sending

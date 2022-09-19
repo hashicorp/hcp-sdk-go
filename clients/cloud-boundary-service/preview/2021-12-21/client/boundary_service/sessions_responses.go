@@ -47,7 +47,8 @@ func NewSessionsOK() *SessionsOK {
 	return &SessionsOK{}
 }
 
-/* SessionsOK describes a response with status code 200, with default header values.
+/*
+SessionsOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type SessionsOK struct {
 	Payload *models.HashicorpCloudBoundary20211221SessionsResponse
 }
 
+// IsSuccess returns true when this sessions o k response has a 2xx status code
+func (o *SessionsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this sessions o k response has a 3xx status code
+func (o *SessionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this sessions o k response has a 4xx status code
+func (o *SessionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this sessions o k response has a 5xx status code
+func (o *SessionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this sessions o k response a status code equal to that given
+func (o *SessionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *SessionsOK) Error() string {
 	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] sessionsOK  %+v", 200, o.Payload)
 }
+
+func (o *SessionsOK) String() string {
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] sessionsOK  %+v", 200, o.Payload)
+}
+
 func (o *SessionsOK) GetPayload() *models.HashicorpCloudBoundary20211221SessionsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewSessionsDefault(code int) *SessionsDefault {
 	}
 }
 
-/* SessionsDefault describes a response with status code -1, with default header values.
+/*
+SessionsDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *SessionsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this sessions default response has a 2xx status code
+func (o *SessionsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this sessions default response has a 3xx status code
+func (o *SessionsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this sessions default response has a 4xx status code
+func (o *SessionsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this sessions default response has a 5xx status code
+func (o *SessionsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this sessions default response a status code equal to that given
+func (o *SessionsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *SessionsDefault) Error() string {
 	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] Sessions default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *SessionsDefault) String() string {
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] Sessions default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *SessionsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

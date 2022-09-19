@@ -52,10 +52,12 @@ func NewGetCORSConfigParamsWithHTTPClient(client *http.Client) *GetCORSConfigPar
 	}
 }
 
-/* GetCORSConfigParams contains all the parameters to send to the API endpoint
-   for the get c o r s config operation.
+/*
+GetCORSConfigParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get c o r s config operation.
+
+	Typically these are written to a http.Request.
 */
 type GetCORSConfigParams struct {
 

@@ -47,7 +47,8 @@ func NewUpdatePathsFilterOK() *UpdatePathsFilterOK {
 	return &UpdatePathsFilterOK{}
 }
 
-/* UpdatePathsFilterOK describes a response with status code 200, with default header values.
+/*
+UpdatePathsFilterOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type UpdatePathsFilterOK struct {
 	Payload *models.HashicorpCloudVault20201125UpdatePathsFilterResponse
 }
 
+// IsSuccess returns true when this update paths filter o k response has a 2xx status code
+func (o *UpdatePathsFilterOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update paths filter o k response has a 3xx status code
+func (o *UpdatePathsFilterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update paths filter o k response has a 4xx status code
+func (o *UpdatePathsFilterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update paths filter o k response has a 5xx status code
+func (o *UpdatePathsFilterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update paths filter o k response a status code equal to that given
+func (o *UpdatePathsFilterOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdatePathsFilterOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/update][%d] updatePathsFilterOK  %+v", 200, o.Payload)
 }
+
+func (o *UpdatePathsFilterOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/update][%d] updatePathsFilterOK  %+v", 200, o.Payload)
+}
+
 func (o *UpdatePathsFilterOK) GetPayload() *models.HashicorpCloudVault20201125UpdatePathsFilterResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewUpdatePathsFilterDefault(code int) *UpdatePathsFilterDefault {
 	}
 }
 
-/* UpdatePathsFilterDefault describes a response with status code -1, with default header values.
+/*
+UpdatePathsFilterDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *UpdatePathsFilterDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this update paths filter default response has a 2xx status code
+func (o *UpdatePathsFilterDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this update paths filter default response has a 3xx status code
+func (o *UpdatePathsFilterDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this update paths filter default response has a 4xx status code
+func (o *UpdatePathsFilterDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this update paths filter default response has a 5xx status code
+func (o *UpdatePathsFilterDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this update paths filter default response a status code equal to that given
+func (o *UpdatePathsFilterDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UpdatePathsFilterDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/update][%d] UpdatePathsFilter default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UpdatePathsFilterDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/update][%d] UpdatePathsFilter default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UpdatePathsFilterDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

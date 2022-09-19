@@ -18,8 +18,8 @@ import (
 //
 // - CLUSTER_PERFORMANCE_REPLICATION_PATHS_FILTER_MODE_INVALID: PATHS_FILTER_MODE_INVALID is a sentinel zero value so that an uninitialized value can be
 // detected.
-//  - ALLOW: ALLOW allows only the specified paths for replication
-//  - DENY: DENY denies the specified paths for replication
+//   - ALLOW: ALLOW allows only the specified paths for replication
+//   - DENY: DENY denies the specified paths for replication
 //
 // swagger:model hashicorp.cloud.vault_20201125.Cluster.PerformanceReplicationPathsFilter.Mode
 type HashicorpCloudVault20201125ClusterPerformanceReplicationPathsFilterMode string

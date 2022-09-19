@@ -38,9 +38,10 @@ type ClientService interface {
 }
 
 /*
-  Get gets returns the latest state of a specific operation
+	Get gets returns the latest state of a specific operation
 
-  The Location's organization and project IDs are included in the path in
+	The Location's organization and project IDs are included in the path in
+
 order to support RBAC checks. We perform RBAC checks early in the request
 lifecycle, before loading the resource targeted by the request.
 */
@@ -80,7 +81,7 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, o
 }
 
 /*
-  List lists selects a list of operations that match some filters and then returns them in the response the supported filters are the location s organization id and project id the project id supports the special value to allow requesting operations that match any project within the organization
+List lists selects a list of operations that match some filters and then returns them in the response the supported filters are the location s organization id and project id the project id supports the special value to allow requesting operations that match any project within the organization
 */
 func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
 	// TODO: Validate the params before sending
@@ -118,9 +119,10 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
-  Wait waits blocks until an operation is d o n e or a timeout is reached whichever occurs first it then returns the latest state of the operation that it had at the time of the timeout
+	Wait waits blocks until an operation is d o n e or a timeout is reached whichever occurs first it then returns the latest state of the operation that it had at the time of the timeout
 
-  Note that Wait may return at any time. In most cases, the timeout will
+	Note that Wait may return at any time. In most cases, the timeout will
+
 be respected but it is not guaranteed. Therefore, clients should always
 check the state of the returned operation. A return from Wait does not
 guarantee the operation is DONE.

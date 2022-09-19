@@ -47,7 +47,8 @@ func NewGetAvailableProvidersOK() *GetAvailableProvidersOK {
 	return &GetAvailableProvidersOK{}
 }
 
-/* GetAvailableProvidersOK describes a response with status code 200, with default header values.
+/*
+GetAvailableProvidersOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type GetAvailableProvidersOK struct {
 	Payload *models.HashicorpCloudVault20201125GetAvailableProvidersResponse
 }
 
+// IsSuccess returns true when this get available providers o k response has a 2xx status code
+func (o *GetAvailableProvidersOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get available providers o k response has a 3xx status code
+func (o *GetAvailableProvidersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get available providers o k response has a 4xx status code
+func (o *GetAvailableProvidersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get available providers o k response has a 5xx status code
+func (o *GetAvailableProvidersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get available providers o k response a status code equal to that given
+func (o *GetAvailableProvidersOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetAvailableProvidersOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] getAvailableProvidersOK  %+v", 200, o.Payload)
 }
+
+func (o *GetAvailableProvidersOK) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] getAvailableProvidersOK  %+v", 200, o.Payload)
+}
+
 func (o *GetAvailableProvidersOK) GetPayload() *models.HashicorpCloudVault20201125GetAvailableProvidersResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetAvailableProvidersDefault(code int) *GetAvailableProvidersDefault {
 	}
 }
 
-/* GetAvailableProvidersDefault describes a response with status code -1, with default header values.
+/*
+GetAvailableProvidersDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *GetAvailableProvidersDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get available providers default response has a 2xx status code
+func (o *GetAvailableProvidersDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get available providers default response has a 3xx status code
+func (o *GetAvailableProvidersDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get available providers default response has a 4xx status code
+func (o *GetAvailableProvidersDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get available providers default response has a 5xx status code
+func (o *GetAvailableProvidersDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get available providers default response a status code equal to that given
+func (o *GetAvailableProvidersDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetAvailableProvidersDefault) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] GetAvailableProviders default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetAvailableProvidersDefault) String() string {
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] GetAvailableProviders default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetAvailableProvidersDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

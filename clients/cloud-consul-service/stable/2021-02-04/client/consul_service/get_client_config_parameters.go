@@ -53,10 +53,12 @@ func NewGetClientConfigParamsWithHTTPClient(client *http.Client) *GetClientConfi
 	}
 }
 
-/* GetClientConfigParams contains all the parameters to send to the API endpoint
-   for the get client config operation.
+/*
+GetClientConfigParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get client config operation.
+
+	Typically these are written to a http.Request.
 */
 type GetClientConfigParams struct {
 

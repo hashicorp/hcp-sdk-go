@@ -54,10 +54,12 @@ func NewPackerServiceUpdateBuildParamsWithHTTPClient(client *http.Client) *Packe
 	}
 }
 
-/* PackerServiceUpdateBuildParams contains all the parameters to send to the API endpoint
-   for the packer service update build operation.
+/*
+PackerServiceUpdateBuildParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service update build operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceUpdateBuildParams struct {
 

@@ -47,7 +47,8 @@ func NewCreateCustomerMasterACLTokenOK() *CreateCustomerMasterACLTokenOK {
 	return &CreateCustomerMasterACLTokenOK{}
 }
 
-/* CreateCustomerMasterACLTokenOK describes a response with status code 200, with default header values.
+/*
+CreateCustomerMasterACLTokenOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type CreateCustomerMasterACLTokenOK struct {
 	Payload *models.HashicorpCloudConsul20210204CreateCustomerMasterACLTokenResponse
 }
 
+// IsSuccess returns true when this create customer master Acl token o k response has a 2xx status code
+func (o *CreateCustomerMasterACLTokenOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create customer master Acl token o k response has a 3xx status code
+func (o *CreateCustomerMasterACLTokenOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create customer master Acl token o k response has a 4xx status code
+func (o *CreateCustomerMasterACLTokenOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create customer master Acl token o k response has a 5xx status code
+func (o *CreateCustomerMasterACLTokenOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create customer master Acl token o k response a status code equal to that given
+func (o *CreateCustomerMasterACLTokenOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CreateCustomerMasterACLTokenOK) Error() string {
 	return fmt.Sprintf("[POST /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/master-acl-tokens][%d] createCustomerMasterAclTokenOK  %+v", 200, o.Payload)
 }
+
+func (o *CreateCustomerMasterACLTokenOK) String() string {
+	return fmt.Sprintf("[POST /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/master-acl-tokens][%d] createCustomerMasterAclTokenOK  %+v", 200, o.Payload)
+}
+
 func (o *CreateCustomerMasterACLTokenOK) GetPayload() *models.HashicorpCloudConsul20210204CreateCustomerMasterACLTokenResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewCreateCustomerMasterACLTokenDefault(code int) *CreateCustomerMasterACLTo
 	}
 }
 
-/* CreateCustomerMasterACLTokenDefault describes a response with status code -1, with default header values.
+/*
+CreateCustomerMasterACLTokenDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *CreateCustomerMasterACLTokenDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this create customer master ACL token default response has a 2xx status code
+func (o *CreateCustomerMasterACLTokenDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this create customer master ACL token default response has a 3xx status code
+func (o *CreateCustomerMasterACLTokenDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this create customer master ACL token default response has a 4xx status code
+func (o *CreateCustomerMasterACLTokenDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this create customer master ACL token default response has a 5xx status code
+func (o *CreateCustomerMasterACLTokenDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this create customer master ACL token default response a status code equal to that given
+func (o *CreateCustomerMasterACLTokenDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *CreateCustomerMasterACLTokenDefault) Error() string {
 	return fmt.Sprintf("[POST /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/master-acl-tokens][%d] CreateCustomerMasterACLToken default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *CreateCustomerMasterACLTokenDefault) String() string {
+	return fmt.Sprintf("[POST /consul/2021-02-04/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/master-acl-tokens][%d] CreateCustomerMasterACLToken default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *CreateCustomerMasterACLTokenDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

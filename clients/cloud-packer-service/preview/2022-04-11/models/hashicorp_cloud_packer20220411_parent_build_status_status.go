@@ -17,9 +17,11 @@ import (
 // HashicorpCloudPacker20220411ParentBuildStatusStatus  - UNDETERMINED: Status cannot be determined because either a channel wasn't used when
 // building the child build, the configured channel no longer exists
 // in the parent bucket, or the parent is not tracked by HCP Packer.
-//  - UP_TO_DATE: The child build is built from the iteration that is currently
+//   - UP_TO_DATE: The child build is built from the iteration that is currently
+//
 // assigned to the channel that is used in its configuration.
-//  - OUT_OF_DATE: The child build is built from an iteration that is different from
+//   - OUT_OF_DATE: The child build is built from an iteration that is different from
+//
 // the one currently assigned to the channel
 // that is used in its configuration.
 //

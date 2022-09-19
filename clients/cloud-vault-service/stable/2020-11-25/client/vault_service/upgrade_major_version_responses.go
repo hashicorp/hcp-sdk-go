@@ -47,7 +47,8 @@ func NewUpgradeMajorVersionOK() *UpgradeMajorVersionOK {
 	return &UpgradeMajorVersionOK{}
 }
 
-/* UpgradeMajorVersionOK describes a response with status code 200, with default header values.
+/*
+UpgradeMajorVersionOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type UpgradeMajorVersionOK struct {
 	Payload *models.HashicorpCloudVault20201125UpgradeMajorVersionResponse
 }
 
+// IsSuccess returns true when this upgrade major version o k response has a 2xx status code
+func (o *UpgradeMajorVersionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this upgrade major version o k response has a 3xx status code
+func (o *UpgradeMajorVersionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upgrade major version o k response has a 4xx status code
+func (o *UpgradeMajorVersionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this upgrade major version o k response has a 5xx status code
+func (o *UpgradeMajorVersionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upgrade major version o k response a status code equal to that given
+func (o *UpgradeMajorVersionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpgradeMajorVersionOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] upgradeMajorVersionOK  %+v", 200, o.Payload)
 }
+
+func (o *UpgradeMajorVersionOK) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] upgradeMajorVersionOK  %+v", 200, o.Payload)
+}
+
 func (o *UpgradeMajorVersionOK) GetPayload() *models.HashicorpCloudVault20201125UpgradeMajorVersionResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewUpgradeMajorVersionDefault(code int) *UpgradeMajorVersionDefault {
 	}
 }
 
-/* UpgradeMajorVersionDefault describes a response with status code -1, with default header values.
+/*
+UpgradeMajorVersionDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *UpgradeMajorVersionDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this upgrade major version default response has a 2xx status code
+func (o *UpgradeMajorVersionDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this upgrade major version default response has a 3xx status code
+func (o *UpgradeMajorVersionDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this upgrade major version default response has a 4xx status code
+func (o *UpgradeMajorVersionDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this upgrade major version default response has a 5xx status code
+func (o *UpgradeMajorVersionDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this upgrade major version default response a status code equal to that given
+func (o *UpgradeMajorVersionDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UpgradeMajorVersionDefault) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] UpgradeMajorVersion default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UpgradeMajorVersionDefault) String() string {
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] UpgradeMajorVersion default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UpgradeMajorVersionDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

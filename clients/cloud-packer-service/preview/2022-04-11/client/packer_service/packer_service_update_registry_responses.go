@@ -47,7 +47,8 @@ func NewPackerServiceUpdateRegistryOK() *PackerServiceUpdateRegistryOK {
 	return &PackerServiceUpdateRegistryOK{}
 }
 
-/* PackerServiceUpdateRegistryOK describes a response with status code 200, with default header values.
+/*
+PackerServiceUpdateRegistryOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceUpdateRegistryOK struct {
 	Payload *models.HashicorpCloudPacker20220411UpdateRegistryResponse
 }
 
+// IsSuccess returns true when this packer service update registry o k response has a 2xx status code
+func (o *PackerServiceUpdateRegistryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service update registry o k response has a 3xx status code
+func (o *PackerServiceUpdateRegistryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service update registry o k response has a 4xx status code
+func (o *PackerServiceUpdateRegistryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service update registry o k response has a 5xx status code
+func (o *PackerServiceUpdateRegistryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service update registry o k response a status code equal to that given
+func (o *PackerServiceUpdateRegistryOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceUpdateRegistryOK) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceUpdateRegistryOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceUpdateRegistryOK) String() string {
+	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceUpdateRegistryOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceUpdateRegistryOK) GetPayload() *models.HashicorpCloudPacker20220411UpdateRegistryResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceUpdateRegistryDefault(code int) *PackerServiceUpdateRegistr
 	}
 }
 
-/* PackerServiceUpdateRegistryDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceUpdateRegistryDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceUpdateRegistryDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service update registry default response has a 2xx status code
+func (o *PackerServiceUpdateRegistryDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service update registry default response has a 3xx status code
+func (o *PackerServiceUpdateRegistryDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service update registry default response has a 4xx status code
+func (o *PackerServiceUpdateRegistryDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service update registry default response has a 5xx status code
+func (o *PackerServiceUpdateRegistryDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service update registry default response a status code equal to that given
+func (o *PackerServiceUpdateRegistryDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceUpdateRegistryDefault) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_UpdateRegistry default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceUpdateRegistryDefault) String() string {
+	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_UpdateRegistry default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceUpdateRegistryDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

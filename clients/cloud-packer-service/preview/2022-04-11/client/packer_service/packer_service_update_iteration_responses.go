@@ -47,7 +47,8 @@ func NewPackerServiceUpdateIterationOK() *PackerServiceUpdateIterationOK {
 	return &PackerServiceUpdateIterationOK{}
 }
 
-/* PackerServiceUpdateIterationOK describes a response with status code 200, with default header values.
+/*
+PackerServiceUpdateIterationOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type PackerServiceUpdateIterationOK struct {
 	Payload *models.HashicorpCloudPacker20220411UpdateIterationResponse
 }
 
+// IsSuccess returns true when this packer service update iteration o k response has a 2xx status code
+func (o *PackerServiceUpdateIterationOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this packer service update iteration o k response has a 3xx status code
+func (o *PackerServiceUpdateIterationOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this packer service update iteration o k response has a 4xx status code
+func (o *PackerServiceUpdateIterationOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this packer service update iteration o k response has a 5xx status code
+func (o *PackerServiceUpdateIterationOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this packer service update iteration o k response a status code equal to that given
+func (o *PackerServiceUpdateIterationOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PackerServiceUpdateIterationOK) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceUpdateIterationOK  %+v", 200, o.Payload)
 }
+
+func (o *PackerServiceUpdateIterationOK) String() string {
+	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceUpdateIterationOK  %+v", 200, o.Payload)
+}
+
 func (o *PackerServiceUpdateIterationOK) GetPayload() *models.HashicorpCloudPacker20220411UpdateIterationResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewPackerServiceUpdateIterationDefault(code int) *PackerServiceUpdateIterat
 	}
 }
 
-/* PackerServiceUpdateIterationDefault describes a response with status code -1, with default header values.
+/*
+PackerServiceUpdateIterationDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *PackerServiceUpdateIterationDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this packer service update iteration default response has a 2xx status code
+func (o *PackerServiceUpdateIterationDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this packer service update iteration default response has a 3xx status code
+func (o *PackerServiceUpdateIterationDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this packer service update iteration default response has a 4xx status code
+func (o *PackerServiceUpdateIterationDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this packer service update iteration default response has a 5xx status code
+func (o *PackerServiceUpdateIterationDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this packer service update iteration default response a status code equal to that given
+func (o *PackerServiceUpdateIterationDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PackerServiceUpdateIterationDefault) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_UpdateIteration default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PackerServiceUpdateIterationDefault) String() string {
+	return fmt.Sprintf("[PATCH /packer/2022-04-11/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_UpdateIteration default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PackerServiceUpdateIterationDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

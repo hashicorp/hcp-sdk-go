@@ -52,10 +52,12 @@ func NewWaitParamsWithHTTPClient(client *http.Client) *WaitParams {
 	}
 }
 
-/* WaitParams contains all the parameters to send to the API endpoint
-   for the wait operation.
+/*
+WaitParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the wait operation.
+
+	Typically these are written to a http.Request.
 */
 type WaitParams struct {
 

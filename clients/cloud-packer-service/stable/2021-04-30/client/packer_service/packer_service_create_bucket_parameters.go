@@ -54,10 +54,12 @@ func NewPackerServiceCreateBucketParamsWithHTTPClient(client *http.Client) *Pack
 	}
 }
 
-/* PackerServiceCreateBucketParams contains all the parameters to send to the API endpoint
-   for the packer service create bucket operation.
+/*
+PackerServiceCreateBucketParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the packer service create bucket operation.
+
+	Typically these are written to a http.Request.
 */
 type PackerServiceCreateBucketParams struct {
 

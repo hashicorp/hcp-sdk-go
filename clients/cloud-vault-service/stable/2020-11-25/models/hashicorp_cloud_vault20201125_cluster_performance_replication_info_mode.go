@@ -16,10 +16,11 @@ import (
 
 // HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode Mode represents the role type for the Performance Replicated cluster.
 //
-//  - CLUSTER_PERFORMANCE_REPLICATION_INFO_MODE_INVALID: CLUSTER_PERFORMANCE_REPLICATION_INFO_MODE_INVALID is a sentinel zero value so that an uninitialized value can be
+//   - CLUSTER_PERFORMANCE_REPLICATION_INFO_MODE_INVALID: CLUSTER_PERFORMANCE_REPLICATION_INFO_MODE_INVALID is a sentinel zero value so that an uninitialized value can be
+//
 // detected.
-//  - PRIMARY: PRIMARY mode type.
-//  - SECONDARY: SECONDARY mode type.
+//   - PRIMARY: PRIMARY mode type.
+//   - SECONDARY: SECONDARY mode type.
 //
 // swagger:model hashicorp.cloud.vault_20201125.Cluster.PerformanceReplicationInfo.Mode
 type HashicorpCloudVault20201125ClusterPerformanceReplicationInfoMode string

@@ -47,7 +47,8 @@ func NewDeleteOK() *DeleteOK {
 	return &DeleteOK{}
 }
 
-/* DeleteOK describes a response with status code 200, with default header values.
+/*
+DeleteOK describes a response with status code 200, with default header values.
 
 A successful response.
 */
@@ -55,9 +56,39 @@ type DeleteOK struct {
 	Payload *models.HashicorpCloudBoundary20211221DeleteResponse
 }
 
+// IsSuccess returns true when this delete o k response has a 2xx status code
+func (o *DeleteOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete o k response has a 3xx status code
+func (o *DeleteOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete o k response has a 4xx status code
+func (o *DeleteOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete o k response has a 5xx status code
+func (o *DeleteOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete o k response a status code equal to that given
+func (o *DeleteOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DeleteOK) Error() string {
 	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] deleteOK  %+v", 200, o.Payload)
 }
+
+func (o *DeleteOK) String() string {
+	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] deleteOK  %+v", 200, o.Payload)
+}
+
 func (o *DeleteOK) GetPayload() *models.HashicorpCloudBoundary20211221DeleteResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewDeleteDefault(code int) *DeleteDefault {
 	}
 }
 
-/* DeleteDefault describes a response with status code -1, with default header values.
+/*
+DeleteDefault describes a response with status code -1, with default header values.
 
 An unexpected error response.
 */
@@ -96,9 +128,39 @@ func (o *DeleteDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this delete default response has a 2xx status code
+func (o *DeleteDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this delete default response has a 3xx status code
+func (o *DeleteDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this delete default response has a 4xx status code
+func (o *DeleteDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this delete default response has a 5xx status code
+func (o *DeleteDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this delete default response a status code equal to that given
+func (o *DeleteDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *DeleteDefault) Error() string {
 	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] Delete default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *DeleteDefault) String() string {
+	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] Delete default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *DeleteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }

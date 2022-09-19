@@ -52,10 +52,12 @@ func NewListUpgradeVersionsParamsWithHTTPClient(client *http.Client) *ListUpgrad
 	}
 }
 
-/* ListUpgradeVersionsParams contains all the parameters to send to the API endpoint
-   for the list upgrade versions operation.
+/*
+ListUpgradeVersionsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list upgrade versions operation.
+
+	Typically these are written to a http.Request.
 */
 type ListUpgradeVersionsParams struct {
 
