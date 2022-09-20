@@ -1,3 +1,14 @@
+## 0.23.0 (September 20, 2022)
+
+BREAKING CHANGES:
+
+* Update go-swagger from 0.25.0 to 0.30.2 which introduces a breaking change around how pointers are used with a model's enums. More information can be found in the [go-swagger GitHub repo](https://github.com/go-swagger/go-swagger/pull/2680). ([122](https://github.com/hashicorp/hcp-sdk-go/pull/122))
+
+IMPROVEMENTS:
+
+* Use public scada address - scada.hashicorp.cloud ([120](https://github.com/hashicorp/hcp-sdk-go/pull/120))
+* Replace `go get` with `go install` in CI steps in order to support go@1.18 ([123](https://github.com/hashicorp/hcp-sdk-go/pull/123))
+
 ## 0.22.0 (August 30, 2022)
 
 BREAKING CHANGES:
