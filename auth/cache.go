@@ -1,16 +1,26 @@
 package auth
 
+import "time"
+
 // import (
 // 	"encoding/json"
 // 	"fmt"
 // 	"os"
 // )
 
-// type cache struct
-// access token
-// refresh token
-// expiration time
-// max age
+type Cache struct {
+	// AccessToken is the bearer token used to authenticate to HCP.
+	AccessToken string `json:"access_token,omitempty"`
+
+	// RefreshToken is used to get a new access token.
+	RefreshToken string `json:"refresh_token,omitempty"`
+
+	// Expiry is when the access token will expire.
+	Expiry time.Time `json:"expiry,omitempty"`
+
+	// MaxAge is the session limit.
+	MaxAge time.Time `json:"max_age,omitempty"`
+}
 
 // 1. Write to json file in a specific location in home directory (OS-dependent)
 
