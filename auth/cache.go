@@ -1,12 +1,20 @@
 package auth
 
-import "time"
+import (
+	"time"
+)
 
 // import (
 // 	"encoding/json"
 // 	"fmt"
 // 	"os"
 // )
+
+const (
+	MaxAge        = time.Hour * 24
+	directoryName = "hcp"
+	fileName      = "credentials.json"
+)
 
 type Cache struct {
 	// AccessToken is the bearer token used to authenticate to HCP.
@@ -37,10 +45,6 @@ type Cache struct {
 // Getter for refresh_token
 
 // Getter for expiration time
-
-// Constant for max age - 24 hours
-
-// Constant for file name {HOME}"/hcp/credentials.json"
 
 // 3. helpers
 
