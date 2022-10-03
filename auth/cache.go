@@ -2,6 +2,8 @@ package auth
 
 import (
 	"time"
+
+	"golang.org/x/oauth2"
 )
 
 // import (
@@ -30,7 +32,17 @@ type Cache struct {
 	MaxAge time.Time `json:"max_age,omitempty"`
 }
 
-// 1. Write to json file in a specific location in home directory (OS-dependent)
+// Write saves HCP auth data in a common location in the home directory
+func Write(token oauth2.Token) error {
+	// get the user's home directory
+	// check err
+	// check if the hcp/credentials.json exists
+	// create it if it doesn't
+
+	// write access token, refresh_token, expiry, max age to credentials file
+
+	return nil
+}
 
 // Setter for access_token
 
