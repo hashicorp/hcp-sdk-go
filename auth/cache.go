@@ -1,6 +1,10 @@
 package auth
 
 import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
 	"time"
 
 	"golang.org/x/oauth2"
@@ -35,11 +39,28 @@ type Cache struct {
 // Write saves HCP auth data in a common location in the home directory
 func Write(token oauth2.Token) error {
 	// get the user's home directory
+	userHome, err := os.UserHomeDir()
 	// check err
+	if err != nil {
+		return fmt.Errorf("failed to retriever user's home directory path: %v", err)
+	}
 	// check if the hcp/credentials.json exists
-	// create it if it doesn't
+	credentialPath := filepath.Join(userHome, directoryName, fileName)
+	// open file and create if not already existing
+	credentialFile, err := os.OpenFile(credentialPath, os.O_CREATE, 0755)
 
+	if err != nil {
+		return fmt.Errorf("failed to open user credential file: %v", err)
+	}
 	// write access token, refresh_token, expiry, max age to credentials file
+	res1D := &Cache{
+		AccessToken:  token.AccessToken,
+		RefreshToken: token.RefreshToken,
+		Expiry:       token.Expiry,
+		MaxAge:       MaxAge,
+	}
+	res1B, _ := json.Marshal(res1D)
+	fmt.Println(string(res1B))
 
 	return nil
 }
