@@ -33,7 +33,7 @@ type Cache struct {
 	Expiry time.Time `json:"expiry,omitempty"`
 
 	// MaxAge is the session limit.
-	MaxAge time.Time `json:"max_age,omitempty"`
+	MaxAge time.Duration `json:"max_age,omitempty"`
 }
 
 // Write saves HCP auth data in a common location in the home directory
