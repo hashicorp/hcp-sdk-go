@@ -40,27 +40,35 @@ type Cache struct {
 func Write(token oauth2.Token) error {
 	// get the user's home directory
 	userHome, err := os.UserHomeDir()
-	// check err
 	if err != nil {
-		return fmt.Errorf("failed to retriever user's home directory path: %v", err)
+		return fmt.Errorf("failed to retrieve user's home directory path: %v", err)
 	}
-	// check if the hcp/credentials.json exists
-	credentialPath := filepath.Join(userHome, directoryName, fileName)
-	// open file and create if not already existing
-	credentialFile, err := os.OpenFile(credentialPath, os.O_CREATE, 0755)
 
+	// check if the hcp/credentials.json exists and if not, create it
+	credentialDirectory := filepath.Join(userHome, directoryName)
+	credentialPath := filepath.Join(userHome, directoryName, fileName)
+
+	err = os.MkdirAll(credentialDirectory, 0755)
 	if err != nil {
-		return fmt.Errorf("failed to open user credential file: %v", err)
+		return fmt.Errorf("failed to create credential directory: %v", err)
 	}
+
 	// write access token, refresh_token, expiry, max age to credentials file
-	res1D := &Cache{
+	credentials := &Cache{
 		AccessToken:  token.AccessToken,
 		RefreshToken: token.RefreshToken,
 		Expiry:       token.Expiry,
 		MaxAge:       MaxAge,
 	}
-	res1B, _ := json.Marshal(res1D)
-	fmt.Println(string(res1B))
+	credentialsJson, err := json.Marshal(credentials)
+	if err != nil {
+		return fmt.Errorf("failed to marshal the struct to json: %v", err)
+	}
+
+	err = os.WriteFile(credentialPath, credentialsJson, 0660)
+	if err != nil {
+		return fmt.Errorf("failed to write credentials to the cache file: %v", err)
+	}
 
 	return nil
 }
