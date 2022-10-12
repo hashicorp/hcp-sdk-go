@@ -10,16 +10,15 @@ import (
 	"golang.org/x/oauth2"
 )
 
-// import (
-// 	"encoding/json"
-// 	"fmt"
-// 	"os"
-// )
-
 const (
-	MaxAge        = time.Hour * 24
-	directoryName = "hcp"
-	fileName      = "credentials.json"
+	MaxAge = time.Hour * 24
+
+	// TODO: add .config prefix
+	defaultDirectory = "hcp"
+	testDirectory    = "hcptest"
+	fileName         = "credentials.json"
+
+	envVarCacheTestMode = "HCP_CACHE_TEST_MODE"
 )
 
 type Cache struct {
@@ -38,13 +37,22 @@ type Cache struct {
 
 // Write saves HCP auth data in a common location in the home directory
 func Write(token oauth2.Token) error {
+	// TODO: write GetTestDirectory helper
 	// get the user's home directory
 	userHome, err := os.UserHomeDir()
 	if err != nil {
 		return fmt.Errorf("failed to retrieve user's home directory path: %v", err)
 	}
 
-	// check if the hcp/credentials.json exists and if not, create it
+	directoryName := defaultDirectory
+	// If in test mode, create temporary directory.
+	if testMode, ok := os.LookupEnv(envVarCacheTestMode); ok {
+		if testMode == "true" {
+			directoryName = testDirectory
+		}
+	}
+
+	// Check if the directory exists and if not, create it.
 	credentialDirectory := filepath.Join(userHome, directoryName)
 	credentialPath := filepath.Join(userHome, directoryName, fileName)
 
@@ -53,7 +61,7 @@ func Write(token oauth2.Token) error {
 		return fmt.Errorf("failed to create credential directory: %v", err)
 	}
 
-	// write access token, refresh_token, expiry, max age to credentials file
+	// Write access token, refresh_token, expiry, max age to credentials file.
 	credentials := &Cache{
 		AccessToken:  token.AccessToken,
 		RefreshToken: token.RefreshToken,
