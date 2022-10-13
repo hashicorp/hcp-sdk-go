@@ -38,9 +38,7 @@ func TestWrite_NoDirectoryNoFile(t *testing.T) {
 	var cacheFromJSON Cache
 
 	err = json.Unmarshal(rawJSON, &cacheFromJSON)
-	if err != nil {
-		fmt.Println("Failed to unmarshall JSON:", err)
-	}
+	require.NoError(err)
 
 	expectedCache := Cache{
 		AccessToken:  tok.AccessToken,
@@ -53,6 +51,99 @@ func TestWrite_NoDirectoryNoFile(t *testing.T) {
 	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
 	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
 	require.NoError(destroy())
+}
+
+func TestWrite_DirectoryExistsNoFile(t *testing.T) {
+
+	require := requirepkg.New(t)
+	assert := assertpkg.New(t)
+	// DO we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
+
+	credentialDirectory, credentialPath, err := setup()
+	require.NoError(err)
+	require.NotNil(credentialDirectory)
+
+	err = os.MkdirAll(testDirectory, 0755)
+	require.NoError(err)
+
+	now := time.Now()
+	tok := oauth2.Token{
+		AccessToken:  "TopSecret!",
+		RefreshToken: "SoRefreshing:)",
+		Expiry:       now,
+	}
+
+	assert.NoError(Write(tok))
+	assert.DirExists(credentialDirectory)
+	assert.FileExists(credentialPath)
+
+	rawJSON, err := os.ReadFile(credentialPath)
+
+	var cacheFromJSON Cache
+
+	err = json.Unmarshal(rawJSON, &cacheFromJSON)
+	require.NoError(err)
+
+	expectedCache := Cache{
+		AccessToken:  tok.AccessToken,
+		RefreshToken: tok.RefreshToken,
+		Expiry:       tok.Expiry,
+		MaxAge:       MaxAge,
+	}
+	assert.Equal(expectedCache.AccessToken, cacheFromJSON.AccessToken)
+	assert.Equal(expectedCache.RefreshToken, cacheFromJSON.RefreshToken)
+	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
+	require.NoError(destroy())
+
+}
+
+func TestWrite_DirectoryExistsFileExists(t *testing.T) {
+
+	require := requirepkg.New(t)
+	assert := assertpkg.New(t)
+	// DO we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
+
+	credentialDirectory, credentialPath, err := setup()
+	require.NoError(err)
+	require.NotNil(credentialDirectory)
+
+	err = os.MkdirAll(testDirectory, 0755)
+	require.NoError(err)
+
+	//initialize empty file with no contents
+	//create and initialize separate file that already has cache in it and that cache is overwritten rather than appended to
+
+	now := time.Now()
+	tok := oauth2.Token{
+		AccessToken:  "TopSecret!",
+		RefreshToken: "SoRefreshing:)",
+		Expiry:       now,
+	}
+
+	assert.NoError(Write(tok))
+	assert.DirExists(credentialDirectory)
+	assert.FileExists(credentialPath)
+
+	rawJSON, err := os.ReadFile(credentialPath)
+
+	var cacheFromJSON Cache
+
+	err = json.Unmarshal(rawJSON, &cacheFromJSON)
+	require.NoError(err)
+
+	expectedCache := Cache{
+		AccessToken:  tok.AccessToken,
+		RefreshToken: tok.RefreshToken,
+		Expiry:       tok.Expiry,
+		MaxAge:       MaxAge,
+	}
+	assert.Equal(expectedCache.AccessToken, cacheFromJSON.AccessToken)
+	assert.Equal(expectedCache.RefreshToken, cacheFromJSON.RefreshToken)
+	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
+	require.NoError(destroy())
+
 }
 
 func setup() (credentialDirectory, credentialPath string, err error) {
