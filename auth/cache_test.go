@@ -33,13 +33,25 @@ func TestWrite_NoDirectoryNoFile(t *testing.T) {
 	assert.DirExists(credentialDirectory)
 	assert.FileExists(credentialPath)
 
-	// TODO: assert json matches our input token
 	rawJSON, err := os.ReadFile(credentialPath)
 
-	var tokFromJSON oauth2.Token
-	json.Unmarshal([]byte(rawJSON), tokFromJSON)
-	assert.Equal(tok, tokFromJSON)
+	var cacheFromJSON Cache
 
+	err = json.Unmarshal(rawJSON, &cacheFromJSON)
+	if err != nil {
+		fmt.Println("Failed to unmarshall JSON:", err)
+	}
+
+	expectedCache := Cache{
+		AccessToken:  tok.AccessToken,
+		RefreshToken: tok.RefreshToken,
+		Expiry:       tok.Expiry,
+		MaxAge:       MaxAge,
+	}
+	assert.Equal(expectedCache.AccessToken, cacheFromJSON.AccessToken)
+	assert.Equal(expectedCache.RefreshToken, cacheFromJSON.RefreshToken)
+	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
 	require.NoError(destroy())
 }
 
