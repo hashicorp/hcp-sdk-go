@@ -152,6 +152,87 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 	require.NoError(destroy())
 }
 
+func TestRead_DirectoryExistsFileExists_BadFormFailstoRead(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// DO we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
+	credentialDirectory, credentialPath, err := setup()
+	require.NoError(err)
+	require.NotNil(credentialDirectory)
+
+	err = os.MkdirAll(testDirectory, 0755)
+	if err != nil {
+		fmt.Printf("not able to make test directory :%v", err)
+	}
+	require.NoError(err)
+
+	//initialize empty file with no contents
+	//create and initialize separate file that already has cache in it and that cache is overwritten rather than appended to
+
+	type redHerring struct {
+		aField       string
+		anotherField string
+		lastField    string
+	}
+
+	randomData := redHerring{
+		aField:       "TopSecret!",
+		anotherField: "SoRefreshing:)",
+		lastField:    "field",
+	}
+
+	randomDataJSON, err := json.Marshal(randomData)
+
+	fmt.Printf("attempting to write to credentials file")
+
+	//manually write red herring struct to credentials file
+	err = os.WriteFile(credentialPath, randomDataJSON, 0660)
+	require.NoError(err)
+
+	fmt.Printf("wrote to credentials file")
+
+	//attempt to read bad form
+	_, err = Read()
+	require.Error(err)
+
+}
+
+func TestRead_DirectoryExistsFileExists(t *testing.T) {
+	require := requirepkg.New(t)
+	assert := assertpkg.New(t)
+	// DO we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
+
+	credentialDirectory, _, err := setup()
+	require.NoError(err)
+	require.NotNil(credentialDirectory)
+	//write to file cache object
+	now := time.Now()
+	tok := oauth2.Token{
+		AccessToken:  "TopSecret!",
+		RefreshToken: "SoRefreshing:)",
+		Expiry:       now,
+	}
+
+	assert.NoError(Write(tok))
+	//read the cache object written earlier
+	cachePointer, err := Read()
+	require.NoError(err)
+
+	expectedCache := Cache{
+		AccessToken:  tok.AccessToken,
+		RefreshToken: tok.RefreshToken,
+		Expiry:       tok.Expiry,
+		MaxAge:       MaxAge,
+	}
+
+	assert.Equal(expectedCache.AccessToken, cachePointer.AccessToken)
+	assert.Equal(expectedCache.RefreshToken, cachePointer.RefreshToken)
+	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(expectedCache.MaxAge.String(), cachePointer.MaxAge.String())
+	require.NoError(destroy())
+
+}
+
 func setup() (credentialDirectory, credentialPath string, err error) {
 
 	os.Setenv(envVarCacheTestMode, "true")

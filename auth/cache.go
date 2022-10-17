@@ -89,6 +89,39 @@ func Write(token oauth2.Token) error {
 
 // 2. Read from json file in a specific location in home directory (OS-dependent)
 
+func Read() (*Cache, error) {
+	// TODO: write GetTestDirectory helper
+	// get the user's home directory
+
+	userHome, err := os.UserHomeDir()
+	if err != nil {
+		return nil, fmt.Errorf("failed to retrieve user's home directory path: %v", err)
+	}
+
+	directoryName := defaultDirectory
+	// If in test mode, create temporary directory.
+	if testMode, ok := os.LookupEnv(envVarCacheTestMode); ok {
+		if testMode == "true" {
+			directoryName = testDirectory
+		}
+	}
+
+	// determine path of config file to be read
+	credentialPath := filepath.Join(userHome, directoryName, fileName)
+
+	rawJSON, err := os.ReadFile(credentialPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read file from user's credential path: %v", err)
+	}
+
+	cacheFromJSON, err := convertToJson(rawJSON)
+	if err != nil {
+		return nil, fmt.Errorf("Bad format: %v", err)
+	}
+
+	return cacheFromJSON, nil
+}
+
 // Getter for access_token
 
 // Getter for refresh_token
@@ -102,5 +135,15 @@ func Write(token oauth2.Token) error {
 // create directory + file
 
 // tokenToJson
+func convertToJson(rawData []byte) (*Cache, error) {
+
+	var cacheFromJSON Cache
+	err := json.Unmarshal(rawData, &cacheFromJSON)
+	if err != nil {
+		//why aren't we able to return nil on failure to write to cache object? returning empty cache seems unintuitive...
+		return nil, fmt.Errorf("failed to unmarshal the raw data to json: %v", err)
+	}
+	return &cacheFromJSON, nil
+}
 
 // JsonToToken
