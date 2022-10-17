@@ -57,7 +57,7 @@ func TestWrite_DirectoryExistsNoFile(t *testing.T) {
 
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
-	// DO we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
+	// TODO Do we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
 
 	credentialDirectory, credentialPath, err := setup()
 	require.NoError(err)
@@ -95,14 +95,13 @@ func TestWrite_DirectoryExistsNoFile(t *testing.T) {
 	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
 	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
 	require.NoError(destroy())
-
 }
 
 func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
-	// DO we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
+	// TODO we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
 
 	credentialDirectory, credentialPath, err := setup()
 	require.NoError(err)
@@ -111,8 +110,7 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 	err = os.MkdirAll(testDirectory, 0755)
 	require.NoError(err)
 
-	//initialize empty file with no contents
-	//create and initialize separate file that already has cache in it and that cache is overwritten rather than appended to
+	// TODO Should we find a way to use WriteFile instead? It seems there are issues with it when in test mode
 
 	now := time.Now()
 	tok := oauth2.Token{
@@ -122,6 +120,15 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 	}
 
 	assert.NoError(Write(tok))
+
+	tok2 := oauth2.Token{
+		AccessToken:  "AnotherTopSecret!",
+		RefreshToken: "StillSoRefreshing:)",
+		Expiry:       now,
+	}
+
+	assert.NoError(Write(tok2))
+
 	assert.DirExists(credentialDirectory)
 	assert.FileExists(credentialPath)
 
@@ -133,9 +140,9 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 	require.NoError(err)
 
 	expectedCache := Cache{
-		AccessToken:  tok.AccessToken,
-		RefreshToken: tok.RefreshToken,
-		Expiry:       tok.Expiry,
+		AccessToken:  tok2.AccessToken,
+		RefreshToken: tok2.RefreshToken,
+		Expiry:       tok2.Expiry,
 		MaxAge:       MaxAge,
 	}
 	assert.Equal(expectedCache.AccessToken, cacheFromJSON.AccessToken)
@@ -143,7 +150,6 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
 	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
 	require.NoError(destroy())
-
 }
 
 func setup() (credentialDirectory, credentialPath string, err error) {
