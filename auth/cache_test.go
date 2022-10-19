@@ -57,13 +57,12 @@ func TestWrite_DirectoryExistsNoFile(t *testing.T) {
 
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
-	// TODO Do we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
 
 	credentialDirectory, credentialPath, err := setup()
 	require.NoError(err)
 	require.NotNil(credentialDirectory)
 
-	err = os.MkdirAll(testDirectory, 0755)
+	err = os.MkdirAll(testDirectory, directoryPermissions)
 	require.NoError(err)
 
 	now := time.Now()
@@ -101,16 +100,13 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
-	// TODO we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
 
 	credentialDirectory, credentialPath, err := setup()
 	require.NoError(err)
 	require.NotNil(credentialDirectory)
 
-	err = os.MkdirAll(testDirectory, 0755)
+	err = os.MkdirAll(testDirectory, directoryPermissions)
 	require.NoError(err)
-
-	// TODO Should we find a way to use WriteFile instead? It seems there are issues with it when in test mode
 
 	now := time.Now()
 	tok := oauth2.Token{
@@ -155,12 +151,11 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 func TestRead_DirectoryExistsFileExists_BadFormFailstoRead(t *testing.T) {
 	require := requirepkg.New(t)
 
-	// DO we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
 	credentialDirectory, credentialPath, err := setup()
 	require.NoError(err)
 	require.NotNil(credentialDirectory)
 
-	err = os.MkdirAll(testDirectory, 0755)
+	err = os.MkdirAll(credentialDirectory, directoryPermissions)
 	if err != nil {
 		fmt.Printf("not able to make test directory :%v", err)
 	}
@@ -186,7 +181,7 @@ func TestRead_DirectoryExistsFileExists_BadFormFailstoRead(t *testing.T) {
 	fmt.Printf("attempting to write to credentials file")
 
 	//manually write red herring struct to credentials file
-	err = os.WriteFile(credentialPath, randomDataJSON, 0660)
+	err = os.WriteFile(credentialPath, randomDataJSON, directoryPermissions)
 	require.NoError(err)
 
 	fmt.Printf("wrote to credentials file")
@@ -200,7 +195,6 @@ func TestRead_DirectoryExistsFileExists_BadFormFailstoRead(t *testing.T) {
 func TestRead_DirectoryExistsFileExists(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
-	// DO we need 0755 permissions for directory, or is 0660 sufficient? Can we set read/write permissions as a constant?
 
 	credentialDirectory, _, err := setup()
 	require.NoError(err)

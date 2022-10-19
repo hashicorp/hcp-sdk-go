@@ -2,6 +2,7 @@ package auth
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -13,10 +14,10 @@ import (
 const (
 	MaxAge = time.Hour * 24
 
-	// TODO: add .config prefix
-	defaultDirectory = "hcp"
-	testDirectory    = "hcptest"
-	fileName         = "credentials.json"
+	defaultDirectory     = ".config/hcp"
+	testDirectory        = "hcptest"
+	fileName             = "credentials.json"
+	directoryPermissions = 0755
 
 	envVarCacheTestMode = "HCP_CACHE_TEST_MODE"
 )
@@ -56,7 +57,7 @@ func Write(token oauth2.Token) error {
 	credentialDirectory := filepath.Join(userHome, directoryName)
 	credentialPath := filepath.Join(userHome, directoryName, fileName)
 
-	err = os.MkdirAll(credentialDirectory, 0755)
+	err = os.MkdirAll(credentialDirectory, directoryPermissions)
 	if err != nil {
 		return fmt.Errorf("failed to create credential directory: %v", err)
 	}
@@ -73,7 +74,7 @@ func Write(token oauth2.Token) error {
 		return fmt.Errorf("failed to marshal the struct to json: %v", err)
 	}
 
-	err = os.WriteFile(credentialPath, credentialsJson, 0660)
+	err = os.WriteFile(credentialPath, credentialsJson, directoryPermissions)
 	if err != nil {
 		return fmt.Errorf("failed to write credentials to the cache file: %v", err)
 	}
@@ -115,6 +116,7 @@ func Read() (*Cache, error) {
 	}
 
 	cacheFromJSON, err := convertToJson(rawJSON)
+	fmt.Printf("cache from json is:\n %#v\n", cacheFromJSON)
 	if err != nil {
 		return nil, fmt.Errorf("Bad format: %v", err)
 	}
@@ -143,6 +145,11 @@ func convertToJson(rawData []byte) (*Cache, error) {
 		//why aren't we able to return nil on failure to write to cache object? returning empty cache seems unintuitive...
 		return nil, fmt.Errorf("failed to unmarshal the raw data to json: %v", err)
 	}
+
+	if cacheFromJSON.AccessToken == "" || cacheFromJSON.RefreshToken == "" || cacheFromJSON.Expiry.IsZero() || cacheFromJSON.MaxAge == 0 {
+		return nil, errors.New("failed to get cache values")
+	}
+
 	return &cacheFromJSON, nil
 }
 
