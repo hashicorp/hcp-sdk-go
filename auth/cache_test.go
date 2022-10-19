@@ -227,6 +227,24 @@ func TestRead_DirectoryExistsFileExists(t *testing.T) {
 
 }
 
+func TestGetCredentialPaths_ReturnsPaths(t *testing.T) {
+	os.Setenv(envVarCacheTestMode, "true")
+
+	assert := assertpkg.New(t)
+
+	credentialPath, credentialDir, err := getCredentialPaths()
+
+	assert.NoError(err)
+
+	userHome, err := os.UserHomeDir()
+	expectedDirectory := filepath.Join(userHome, testDirectory)
+	expectedPath := filepath.Join(userHome, testDirectory, fileName)
+
+	assert.Equal(expectedDirectory, credentialDir)
+	assert.Equal(expectedPath, credentialPath)
+
+}
+
 func setup() (credentialDirectory, credentialPath string, err error) {
 
 	os.Setenv(envVarCacheTestMode, "true")

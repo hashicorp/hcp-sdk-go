@@ -38,7 +38,6 @@ type Cache struct {
 
 // Write saves HCP auth data in a common location in the home directory
 func Write(token oauth2.Token) error {
-	// TODO: write GetTestDirectory helper
 	// get the user's home directory
 	userHome, err := os.UserHomeDir()
 	if err != nil {
@@ -94,21 +93,7 @@ func Read() (*Cache, error) {
 	// TODO: write GetTestDirectory helper
 	// get the user's home directory
 
-	userHome, err := os.UserHomeDir()
-	if err != nil {
-		return nil, fmt.Errorf("failed to retrieve user's home directory path: %v", err)
-	}
-
-	directoryName := defaultDirectory
-	// If in test mode, create temporary directory.
-	if testMode, ok := os.LookupEnv(envVarCacheTestMode); ok {
-		if testMode == "true" {
-			directoryName = testDirectory
-		}
-	}
-
-	// determine path of config file to be read
-	credentialPath := filepath.Join(userHome, directoryName, fileName)
+	credentialPath, _, err := getCredentialPaths()
 
 	rawJSON, err := os.ReadFile(credentialPath)
 	if err != nil {
@@ -135,6 +120,30 @@ func Read() (*Cache, error) {
 // check if directory exists
 
 // create directory + file
+
+// getDirectory returns the complete credential path and directory.
+func getCredentialPaths() (credentialPath string, credentialDirectory string, err error) {
+	// Get the user's home directory.
+	userHome, err := os.UserHomeDir()
+	if err != nil {
+		return "", "", fmt.Errorf("failed to retrieve user's home directory path: %v", err)
+	}
+
+	directoryName := defaultDirectory
+	// If in test mode, create temporary directory.
+	if testMode, ok := os.LookupEnv(envVarCacheTestMode); ok {
+		if testMode == "true" {
+			directoryName = testDirectory
+		}
+	}
+
+	// Determine absolute path to config file and directory.
+	credentialDirectory = filepath.Join(userHome, directoryName)
+	credentialPath = filepath.Join(userHome, directoryName, fileName)
+
+	return credentialPath, credentialDirectory, nil
+
+}
 
 // tokenToJson
 func convertToJson(rawData []byte) (*Cache, error) {
