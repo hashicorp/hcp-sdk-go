@@ -150,6 +150,7 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 
 func TestRead_DirectoryExistsFileExists_BadFormFailstoRead(t *testing.T) {
 	require := requirepkg.New(t)
+	assert := assertpkg.New(t)
 
 	credentialDirectory, credentialPath, err := setup()
 	require.NoError(err)
@@ -165,13 +166,13 @@ func TestRead_DirectoryExistsFileExists_BadFormFailstoRead(t *testing.T) {
 	//create and initialize separate file that already has cache in it and that cache is overwritten rather than appended to
 
 	type redHerring struct {
-		aField       string
+		AccessToken  string
 		anotherField string
 		lastField    string
 	}
 
 	randomData := redHerring{
-		aField:       "TopSecret!",
+		AccessToken:  "TopSecret!",
 		anotherField: "SoRefreshing:)",
 		lastField:    "field",
 	}
@@ -189,6 +190,7 @@ func TestRead_DirectoryExistsFileExists_BadFormFailstoRead(t *testing.T) {
 	//attempt to read bad form
 	_, err = Read()
 	require.Error(err)
+	assert.EqualError(err, "bad format: failed to get cache access token")
 
 }
 
@@ -243,6 +245,93 @@ func TestGetCredentialPaths_ReturnsPaths(t *testing.T) {
 	assert.Equal(expectedDirectory, credentialDir)
 	assert.Equal(expectedPath, credentialPath)
 
+}
+
+func TestJsonToToken_BadJSONThrowsError(t *testing.T) {
+
+	testCases := []struct {
+		name          string
+		rawJSON       []byte
+		expectedError string
+	}{
+		//TODO: finish test cases
+		{
+			name:          "empty JSON",
+			rawJSON:       []byte("{}"),
+			expectedError: "failed to get cache access token",
+		},
+		{
+			name:          "invalid JSON",
+			rawJSON:       []byte("Any random string"),
+			expectedError: "failed to unmarshal the raw data to json: invalid character 'A' looking for beginning of value",
+		},
+		{
+			name:          "empty values",
+			rawJSON:       []byte(`{ "access_token": "", "refresh_token": "", "expiry": "", "max_age": "" }`),
+			expectedError: "failed to unmarshal the raw data to json: parsing time \"\\\"\\\"\" as \"\\\"2006-01-02T15:04:05Z07:00\\\"\": cannot parse \"\\\"\" as \"2006\"",
+		},
+		//why is the below case passing? With a correct time, should it fail to unmarshall?
+		// {
+		// 	name:          "invalid JSON",
+		// 	rawJSON:       []byte(`{ "access_token": "myaccesstoken", "refresh_token": "", "expiry": "2006-01-02T15:04:05 -07:00:00", "max_age": "86400000000000" }`),
+		// 	expectedError: "failed to unmarshal the raw data to json: parsing time \"\\\"2006-01-02T15:04:05 -07:00:00\\\"\" as \"\\\"2006-01-02T15:04:05Z07:00\\\"\": cannot parse \" -07:00:00\\\"\" as \"Z07:00\"",
+		// },
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.name, func(t *testing.T) {
+			require := requirepkg.New(t)
+
+			_, err := jsonToToken(testCase.rawJSON)
+			require.Error(err)
+			require.EqualError(err, testCase.expectedError)
+		})
+	}
+}
+
+func TestTokenToJson_BadFormThrowsError(t *testing.T) {
+	testCases := []struct {
+		name          string
+		token         oauth2.Token
+		expectedError string
+	}{
+		{
+			name: "no access token",
+			token: oauth2.Token{
+				AccessToken:  "",
+				RefreshToken: "exampleRefreshToken",
+				Expiry:       time.Now(),
+			},
+			expectedError: "access token cannot be empty",
+		},
+		{
+			name: "no refresh token",
+			token: oauth2.Token{
+				AccessToken:  "exampleAccessToken",
+				RefreshToken: "",
+				Expiry:       time.Now(),
+			},
+			expectedError: "refresh token cannot be empty",
+		},
+		{
+			name: "no token expiry",
+			token: oauth2.Token{
+				AccessToken:  "exampleAccessToken",
+				RefreshToken: "exampleRefreshToken",
+				Expiry:       time.Time{},
+			},
+			expectedError: "token expiry cannot be empty",
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.name, func(t *testing.T) {
+			require := requirepkg.New(t)
+
+			_, err := tokenToJSON(&testCase.token)
+			require.EqualError(err, testCase.expectedError)
+		})
+	}
 }
 
 func setup() (credentialDirectory, credentialPath string, err error) {

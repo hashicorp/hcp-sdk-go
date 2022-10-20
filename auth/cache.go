@@ -100,10 +100,9 @@ func Read() (*Cache, error) {
 		return nil, fmt.Errorf("failed to read file from user's credential path: %v", err)
 	}
 
-	cacheFromJSON, err := convertToJson(rawJSON)
-	fmt.Printf("cache from json is:\n %#v\n", cacheFromJSON)
+	cacheFromJSON, err := jsonToToken(rawJSON)
 	if err != nil {
-		return nil, fmt.Errorf("Bad format: %v", err)
+		return nil, fmt.Errorf("bad format: %v", err)
 	}
 
 	return cacheFromJSON, nil
@@ -116,10 +115,6 @@ func Read() (*Cache, error) {
 // Getter for expiration time
 
 // 3. helpers
-
-// check if directory exists
-
-// create directory + file
 
 // getDirectory returns the complete credential path and directory.
 func getCredentialPaths() (credentialPath string, credentialDirectory string, err error) {
@@ -145,21 +140,51 @@ func getCredentialPaths() (credentialPath string, credentialDirectory string, er
 
 }
 
-// tokenToJson
-func convertToJson(rawData []byte) (*Cache, error) {
+// JsonToToken
+func jsonToToken(rawData []byte) (*Cache, error) {
 
 	var cacheFromJSON Cache
 	err := json.Unmarshal(rawData, &cacheFromJSON)
 	if err != nil {
-		//why aren't we able to return nil on failure to write to cache object? returning empty cache seems unintuitive...
 		return nil, fmt.Errorf("failed to unmarshal the raw data to json: %v", err)
 	}
 
-	if cacheFromJSON.AccessToken == "" || cacheFromJSON.RefreshToken == "" || cacheFromJSON.Expiry.IsZero() || cacheFromJSON.MaxAge == 0 {
-		return nil, errors.New("failed to get cache values")
+	if cacheFromJSON.AccessToken == "" {
+		return nil, errors.New("failed to get cache access token")
+	}
+
+	if cacheFromJSON.RefreshToken == "" {
+		return nil, errors.New("failed to get cache refresh token")
 	}
 
 	return &cacheFromJSON, nil
 }
 
-// JsonToToken
+// tokenToJson
+func tokenToJSON(token *oauth2.Token) ([]byte, error) {
+
+	if token.AccessToken == "" {
+		return nil, errors.New("access token cannot be empty")
+	}
+
+	if token.RefreshToken == "" {
+		return nil, errors.New("refresh token cannot be empty")
+	}
+
+	if token.Expiry.IsZero() {
+		return nil, errors.New("token expiry cannot be empty")
+	}
+
+	credentials := &Cache{
+		AccessToken:  token.AccessToken,
+		RefreshToken: token.RefreshToken,
+		Expiry:       token.Expiry,
+		MaxAge:       MaxAge,
+	}
+	credentialsJson, err := json.Marshal(credentials)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal the struct to json: %v", err)
+	}
+
+	return credentialsJson, nil
+}
