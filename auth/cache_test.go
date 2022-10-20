@@ -33,6 +33,7 @@ func TestWrite_NoDirectoryNoFile(t *testing.T) {
 	assert.FileExists(credentialPath)
 
 	rawJSON, err := os.ReadFile(credentialPath)
+	require.NoError(err)
 
 	var cacheFromJSON Cache
 
@@ -75,6 +76,7 @@ func TestWrite_DirectoryExistsNoFile(t *testing.T) {
 	assert.FileExists(credentialPath)
 
 	rawJSON, err := os.ReadFile(credentialPath)
+	require.NoError(err)
 
 	var cacheFromJSON Cache
 
@@ -124,6 +126,7 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 	assert.FileExists(credentialPath)
 
 	rawJSON, err := os.ReadFile(credentialPath)
+	require.NoError(err)
 
 	var cacheFromJSON Cache
 
@@ -170,6 +173,7 @@ func TestRead_InvalidFormat(t *testing.T) {
 	}
 
 	randomDataJSON, err := json.Marshal(randomData)
+	require.NoError(err)
 
 	err = os.WriteFile(credentialPath, randomDataJSON, directoryPermissions)
 	require.NoError(err)
@@ -220,10 +224,10 @@ func TestGetCredentialPaths_ReturnsPaths(t *testing.T) {
 	assert := assertpkg.New(t)
 
 	credentialPath, credentialDir, err := getCredentialPaths()
-
 	assert.NoError(err)
 
 	userHome, err := os.UserHomeDir()
+	assert.NoError(err)
 	expectedDirectory := filepath.Join(userHome, testDirectory)
 	expectedPath := filepath.Join(userHome, testDirectory, fileName)
 
@@ -238,7 +242,6 @@ func TestJsonToToken_BadJSONThrowsError(t *testing.T) {
 		rawJSON       []byte
 		expectedError string
 	}{
-		//TODO: finish test cases
 		{
 			name:          "empty JSON",
 			rawJSON:       []byte("{}"),
@@ -254,12 +257,21 @@ func TestJsonToToken_BadJSONThrowsError(t *testing.T) {
 			rawJSON:       []byte(`{ "access_token": "", "refresh_token": "", "expiry": "", "max_age": "" }`),
 			expectedError: "failed to unmarshal the raw data to json: parsing time \"\\\"\\\"\" as \"\\\"2006-01-02T15:04:05Z07:00\\\"\": cannot parse \"\\\"\" as \"2006\"",
 		},
-		//why is the below case passing? With a correct time, should it fail to unmarshall?
-		// {
-		// 	name:          "invalid JSON",
-		// 	rawJSON:       []byte(`{ "access_token": "myaccesstoken", "refresh_token": "", "expiry": "2006-01-02T15:04:05 -07:00:00", "max_age": "86400000000000" }`),
-		// 	expectedError: "failed to unmarshal the raw data to json: parsing time \"\\\"2006-01-02T15:04:05 -07:00:00\\\"\" as \"\\\"2006-01-02T15:04:05Z07:00\\\"\": cannot parse \" -07:00:00\\\"\" as \"Z07:00\"",
-		// },
+		{
+			name:          "empty access token",
+			rawJSON:       []byte(`{ "access_token": "", "refresh_token": "myrefreshtoken", "expiry": "2022-10-20T17:10:59.273429-04:00", "max_age": 86400000000000 }`),
+			expectedError: "failed to get cache access token",
+		},
+		{
+			name:          "empty refresh token",
+			rawJSON:       []byte(`{ "access_token": "myaccesstoken", "refresh_token": "", "expiry": "2022-10-20T17:10:59.273429-04:00", "max_age": 86400000000000 }`),
+			expectedError: "failed to get cache refresh token",
+		},
+		{
+			name:          "emptyexpiry",
+			rawJSON:       []byte(`{ "access_token": "myaccesstoken", "refresh_token": "myrefreshtoken", "expiry": "", "max_age": 86400000000000 }`),
+			expectedError: "failed to unmarshal the raw data to json: parsing time \"\\\"\\\"\" as \"\\\"2006-01-02T15:04:05Z07:00\\\"\": cannot parse \"\\\"\" as \"2006\"",
+		},
 	}
 
 	for _, testCase := range testCases {
