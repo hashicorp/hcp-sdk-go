@@ -14,7 +14,6 @@ import (
 )
 
 func TestWrite_NoDirectoryNoFile(t *testing.T) {
-
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
@@ -54,7 +53,6 @@ func TestWrite_NoDirectoryNoFile(t *testing.T) {
 }
 
 func TestWrite_DirectoryExistsNoFile(t *testing.T) {
-
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
@@ -97,7 +95,6 @@ func TestWrite_DirectoryExistsNoFile(t *testing.T) {
 }
 
 func TestWrite_DirectoryExistsFileExists(t *testing.T) {
-
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
@@ -114,7 +111,6 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 		RefreshToken: "SoRefreshing:)",
 		Expiry:       now,
 	}
-
 	assert.NoError(Write(tok))
 
 	tok2 := oauth2.Token{
@@ -122,7 +118,6 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 		RefreshToken: "StillSoRefreshing:)",
 		Expiry:       now,
 	}
-
 	assert.NoError(Write(tok2))
 
 	assert.DirExists(credentialDirectory)
@@ -148,7 +143,7 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 	require.NoError(destroy())
 }
 
-func TestRead_DirectoryExistsFileExists_BadFormFailstoRead(t *testing.T) {
+func TestRead_InvalidFormat(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
@@ -161,9 +156,6 @@ func TestRead_DirectoryExistsFileExists_BadFormFailstoRead(t *testing.T) {
 		fmt.Printf("not able to make test directory :%v", err)
 	}
 	require.NoError(err)
-
-	//initialize empty file with no contents
-	//create and initialize separate file that already has cache in it and that cache is overwritten rather than appended to
 
 	type redHerring struct {
 		AccessToken  string
@@ -179,29 +171,23 @@ func TestRead_DirectoryExistsFileExists_BadFormFailstoRead(t *testing.T) {
 
 	randomDataJSON, err := json.Marshal(randomData)
 
-	fmt.Printf("attempting to write to credentials file")
-
-	//manually write red herring struct to credentials file
 	err = os.WriteFile(credentialPath, randomDataJSON, directoryPermissions)
 	require.NoError(err)
 
-	fmt.Printf("wrote to credentials file")
-
-	//attempt to read bad form
 	_, err = Read()
 	require.Error(err)
 	assert.EqualError(err, "bad format: failed to get cache access token")
-
+	require.NoError(destroy())
 }
 
-func TestRead_DirectoryExistsFileExists(t *testing.T) {
+func TestRead_ValidFormat(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
 	credentialDirectory, _, err := setup()
 	require.NoError(err)
 	require.NotNil(credentialDirectory)
-	//write to file cache object
+
 	now := time.Now()
 	tok := oauth2.Token{
 		AccessToken:  "TopSecret!",
@@ -210,7 +196,7 @@ func TestRead_DirectoryExistsFileExists(t *testing.T) {
 	}
 
 	assert.NoError(Write(tok))
-	//read the cache object written earlier
+
 	cachePointer, err := Read()
 	require.NoError(err)
 
@@ -226,7 +212,6 @@ func TestRead_DirectoryExistsFileExists(t *testing.T) {
 	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
 	assert.Equal(expectedCache.MaxAge.String(), cachePointer.MaxAge.String())
 	require.NoError(destroy())
-
 }
 
 func TestGetCredentialPaths_ReturnsPaths(t *testing.T) {
@@ -244,7 +229,6 @@ func TestGetCredentialPaths_ReturnsPaths(t *testing.T) {
 
 	assert.Equal(expectedDirectory, credentialDir)
 	assert.Equal(expectedPath, credentialPath)
-
 }
 
 func TestJsonToToken_BadJSONThrowsError(t *testing.T) {
@@ -289,7 +273,7 @@ func TestJsonToToken_BadJSONThrowsError(t *testing.T) {
 	}
 }
 
-func TestTokenToJson_BadFormThrowsError(t *testing.T) {
+func TestTokenToJson_BadJSONThrowsError(t *testing.T) {
 	testCases := []struct {
 		name          string
 		token         oauth2.Token
@@ -335,10 +319,8 @@ func TestTokenToJson_BadFormThrowsError(t *testing.T) {
 }
 
 func setup() (credentialDirectory, credentialPath string, err error) {
-
 	os.Setenv(envVarCacheTestMode, "true")
 
-	// TODO: replace with GetDirectory helper
 	userHome, err := os.UserHomeDir()
 	if err != nil {
 		return "", "", fmt.Errorf("failed to retrieve test directory: %v", err)
@@ -355,10 +337,8 @@ func setup() (credentialDirectory, credentialPath string, err error) {
 }
 
 func destroy() error {
-
 	os.Unsetenv(envVarCacheTestMode)
 
-	// TODO: replace with GetDirectory helper
 	userHome, err := os.UserHomeDir()
 	if err != nil {
 		return fmt.Errorf("failed to retrieve test directory: %v", err)
