@@ -55,12 +55,13 @@ func Write(token oauth2.Token) error {
 		Expiry:       token.Expiry,
 		MaxAge:       MaxAge,
 	}
-	credentialsJson, err := json.Marshal(credentials)
+
+	credentialsJSON, err := json.Marshal(credentials)
 	if err != nil {
 		return fmt.Errorf("failed to marshal the struct to json: %v", err)
 	}
 
-	err = os.WriteFile(credentialPath, credentialsJson, directoryPermissions)
+	err = os.WriteFile(credentialPath, credentialsJSON, directoryPermissions)
 	if err != nil {
 		return fmt.Errorf("failed to write credentials to the cache file: %v", err)
 	}
@@ -152,10 +153,10 @@ func tokenToJSON(token *oauth2.Token) ([]byte, error) {
 		Expiry:       token.Expiry,
 		MaxAge:       MaxAge,
 	}
-	credentialsJson, err := json.Marshal(credentials)
+	credentialsJSON, err := json.Marshal(credentials)
 	if err != nil {
 		return nil, fmt.Errorf("failed to marshal the struct to json: %v", err)
 	}
 
-	return credentialsJson, nil
+	return credentialsJSON, nil
 }
