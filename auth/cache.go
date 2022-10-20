@@ -36,25 +36,12 @@ type Cache struct {
 	MaxAge time.Duration `json:"max_age,omitempty"`
 }
 
-// Write saves HCP auth data in a common location in the home directory
+// Write saves HCP auth data in a common location in the home directory.
 func Write(token oauth2.Token) error {
-	// get the user's home directory
-	userHome, err := os.UserHomeDir()
+	credentialPath, credentialDirectory, err := getCredentialPaths()
 	if err != nil {
-		return fmt.Errorf("failed to retrieve user's home directory path: %v", err)
+		return fmt.Errorf("failed to retrieve credential path and directory: %v", err)
 	}
-
-	directoryName := defaultDirectory
-	// If in test mode, create temporary directory.
-	if testMode, ok := os.LookupEnv(envVarCacheTestMode); ok {
-		if testMode == "true" {
-			directoryName = testDirectory
-		}
-	}
-
-	// Check if the directory exists and if not, create it.
-	credentialDirectory := filepath.Join(userHome, directoryName)
-	credentialPath := filepath.Join(userHome, directoryName, fileName)
 
 	err = os.MkdirAll(credentialDirectory, directoryPermissions)
 	if err != nil {
@@ -81,19 +68,12 @@ func Write(token oauth2.Token) error {
 	return nil
 }
 
-// Setter for access_token
-
-// Setter for refresh_token
-
-// Setter for expiration time
-
-// 2. Read from json file in a specific location in home directory (OS-dependent)
-
+// Read opens the saved HCP auth data and returns the token.
 func Read() (*Cache, error) {
-	// TODO: write GetTestDirectory helper
-	// get the user's home directory
-
 	credentialPath, _, err := getCredentialPaths()
+	if err != nil {
+		return nil, fmt.Errorf("failed to retrieve credential path and directory: %v", err)
+	}
 
 	rawJSON, err := os.ReadFile(credentialPath)
 	if err != nil {
@@ -108,14 +88,6 @@ func Read() (*Cache, error) {
 	return cacheFromJSON, nil
 }
 
-// Getter for access_token
-
-// Getter for refresh_token
-
-// Getter for expiration time
-
-// 3. helpers
-
 // getDirectory returns the complete credential path and directory.
 func getCredentialPaths() (credentialPath string, credentialDirectory string, err error) {
 	// Get the user's home directory.
@@ -125,7 +97,7 @@ func getCredentialPaths() (credentialPath string, credentialDirectory string, er
 	}
 
 	directoryName := defaultDirectory
-	// If in test mode, create temporary directory.
+	// If in test mode, use test directory.
 	if testMode, ok := os.LookupEnv(envVarCacheTestMode); ok {
 		if testMode == "true" {
 			directoryName = testDirectory
@@ -137,10 +109,9 @@ func getCredentialPaths() (credentialPath string, credentialDirectory string, er
 	credentialPath = filepath.Join(userHome, directoryName, fileName)
 
 	return credentialPath, credentialDirectory, nil
-
 }
 
-// JsonToToken
+// jsonToToken converts the raw JSON into the Cache struct.
 func jsonToToken(rawData []byte) (*Cache, error) {
 
 	var cacheFromJSON Cache
@@ -160,7 +131,7 @@ func jsonToToken(rawData []byte) (*Cache, error) {
 	return &cacheFromJSON, nil
 }
 
-// tokenToJson
+// tokenToJson converts the OAuth2 token to raw JSON.
 func tokenToJSON(token *oauth2.Token) ([]byte, error) {
 
 	if token.AccessToken == "" {
