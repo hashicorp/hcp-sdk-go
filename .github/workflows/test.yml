@@ -35,13 +35,11 @@ jobs:
           go mod tidy
 
       - name: Run Tests
-        run: |
-          make test-ci
+        run: make test-ci
 
       - name: Upload Coverage Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Test Coverage
           path: coverage.html
-
       
