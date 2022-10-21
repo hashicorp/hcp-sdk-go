@@ -81,7 +81,7 @@ func Read() (*Cache, error) {
 		return nil, fmt.Errorf("failed to read file from user's credential path: %v", err)
 	}
 
-	cacheFromJSON, err := jsonToToken(rawJSON)
+	cacheFromJSON, err := jsonToCache(rawJSON)
 	if err != nil {
 		return nil, fmt.Errorf("bad format: %v", err)
 	}
@@ -89,7 +89,7 @@ func Read() (*Cache, error) {
 	return cacheFromJSON, nil
 }
 
-// getDirectory returns the complete credential path and directory.
+// getCredentialPaths returns the complete credential path and directory.
 func getCredentialPaths() (credentialPath string, credentialDirectory string, err error) {
 	// Get the user's home directory.
 	userHome, err := os.UserHomeDir()
@@ -112,8 +112,8 @@ func getCredentialPaths() (credentialPath string, credentialDirectory string, er
 	return credentialPath, credentialDirectory, nil
 }
 
-// jsonToToken converts the raw JSON into the Cache struct.
-func jsonToToken(rawData []byte) (*Cache, error) {
+// jsonToCache converts the raw JSON into the Cache struct.
+func jsonToCache(rawData []byte) (*Cache, error) {
 
 	var cacheFromJSON Cache
 	err := json.Unmarshal(rawData, &cacheFromJSON)

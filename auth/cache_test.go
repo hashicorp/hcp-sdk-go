@@ -13,6 +13,56 @@ import (
 	"golang.org/x/oauth2"
 )
 
+func TestWrite_DirectoryExistsFileExists(t *testing.T) {
+	require := requirepkg.New(t)
+	assert := assertpkg.New(t)
+
+	credentialDirectory, credentialPath, err := setup()
+	require.NoError(err)
+	require.NotNil(credentialDirectory)
+
+	err = os.MkdirAll(testDirectory, directoryPermissions)
+	require.NoError(err)
+
+	now := time.Now()
+	tok := oauth2.Token{
+		AccessToken:  "TopSecret!",
+		RefreshToken: "SoRefreshing:)",
+		Expiry:       now,
+	}
+	assert.NoError(Write(tok))
+
+	tok2 := oauth2.Token{
+		AccessToken:  "AnotherTopSecret!",
+		RefreshToken: "StillSoRefreshing:)",
+		Expiry:       now,
+	}
+	assert.NoError(Write(tok2))
+
+	assert.DirExists(credentialDirectory)
+	assert.FileExists(credentialPath)
+
+	rawJSON, err := os.ReadFile(credentialPath)
+	require.NoError(err)
+
+	var cacheFromJSON Cache
+
+	err = json.Unmarshal(rawJSON, &cacheFromJSON)
+	require.NoError(err)
+
+	expectedCache := Cache{
+		AccessToken:  tok2.AccessToken,
+		RefreshToken: tok2.RefreshToken,
+		Expiry:       tok2.Expiry,
+		MaxAge:       MaxAge,
+	}
+	assert.Equal(expectedCache.AccessToken, cacheFromJSON.AccessToken)
+	assert.Equal(expectedCache.RefreshToken, cacheFromJSON.RefreshToken)
+	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
+	require.NoError(destroy())
+}
+
 func TestWrite_NoDirectoryNoFile(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
@@ -96,16 +146,13 @@ func TestWrite_DirectoryExistsNoFile(t *testing.T) {
 	require.NoError(destroy())
 }
 
-func TestWrite_DirectoryExistsFileExists(t *testing.T) {
+func TestRead_ValidFormat(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
-	credentialDirectory, credentialPath, err := setup()
+	credentialDirectory, _, err := setup()
 	require.NoError(err)
 	require.NotNil(credentialDirectory)
-
-	err = os.MkdirAll(testDirectory, directoryPermissions)
-	require.NoError(err)
 
 	now := time.Now()
 	tok := oauth2.Token{
@@ -113,36 +160,23 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 		RefreshToken: "SoRefreshing:)",
 		Expiry:       now,
 	}
+
 	assert.NoError(Write(tok))
 
-	tok2 := oauth2.Token{
-		AccessToken:  "AnotherTopSecret!",
-		RefreshToken: "StillSoRefreshing:)",
-		Expiry:       now,
-	}
-	assert.NoError(Write(tok2))
-
-	assert.DirExists(credentialDirectory)
-	assert.FileExists(credentialPath)
-
-	rawJSON, err := os.ReadFile(credentialPath)
-	require.NoError(err)
-
-	var cacheFromJSON Cache
-
-	err = json.Unmarshal(rawJSON, &cacheFromJSON)
+	cachePointer, err := Read()
 	require.NoError(err)
 
 	expectedCache := Cache{
-		AccessToken:  tok2.AccessToken,
-		RefreshToken: tok2.RefreshToken,
-		Expiry:       tok2.Expiry,
+		AccessToken:  tok.AccessToken,
+		RefreshToken: tok.RefreshToken,
+		Expiry:       tok.Expiry,
 		MaxAge:       MaxAge,
 	}
-	assert.Equal(expectedCache.AccessToken, cacheFromJSON.AccessToken)
-	assert.Equal(expectedCache.RefreshToken, cacheFromJSON.RefreshToken)
-	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
+
+	assert.Equal(expectedCache.AccessToken, cachePointer.AccessToken)
+	assert.Equal(expectedCache.RefreshToken, cachePointer.RefreshToken)
+	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(expectedCache.MaxAge.String(), cachePointer.MaxAge.String())
 	require.NoError(destroy())
 }
 
@@ -184,41 +218,7 @@ func TestRead_InvalidFormat(t *testing.T) {
 	require.NoError(destroy())
 }
 
-func TestRead_ValidFormat(t *testing.T) {
-	require := requirepkg.New(t)
-	assert := assertpkg.New(t)
-
-	credentialDirectory, _, err := setup()
-	require.NoError(err)
-	require.NotNil(credentialDirectory)
-
-	now := time.Now()
-	tok := oauth2.Token{
-		AccessToken:  "TopSecret!",
-		RefreshToken: "SoRefreshing:)",
-		Expiry:       now,
-	}
-
-	assert.NoError(Write(tok))
-
-	cachePointer, err := Read()
-	require.NoError(err)
-
-	expectedCache := Cache{
-		AccessToken:  tok.AccessToken,
-		RefreshToken: tok.RefreshToken,
-		Expiry:       tok.Expiry,
-		MaxAge:       MaxAge,
-	}
-
-	assert.Equal(expectedCache.AccessToken, cachePointer.AccessToken)
-	assert.Equal(expectedCache.RefreshToken, cachePointer.RefreshToken)
-	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(expectedCache.MaxAge.String(), cachePointer.MaxAge.String())
-	require.NoError(destroy())
-}
-
-func TestGetCredentialPaths_ReturnsPaths(t *testing.T) {
+func TestGetCredentialPaths(t *testing.T) {
 	os.Setenv(envVarCacheTestMode, "true")
 
 	assert := assertpkg.New(t)
@@ -235,7 +235,7 @@ func TestGetCredentialPaths_ReturnsPaths(t *testing.T) {
 	assert.Equal(expectedPath, credentialPath)
 }
 
-func TestJsonToToken_BadJSONThrowsError(t *testing.T) {
+func TestJsonToCache_InvalidFormat(t *testing.T) {
 
 	testCases := []struct {
 		name          string
@@ -278,14 +278,14 @@ func TestJsonToToken_BadJSONThrowsError(t *testing.T) {
 		t.Run(testCase.name, func(t *testing.T) {
 			require := requirepkg.New(t)
 
-			_, err := jsonToToken(testCase.rawJSON)
+			_, err := jsonToCache(testCase.rawJSON)
 			require.Error(err)
 			require.EqualError(err, testCase.expectedError)
 		})
 	}
 }
 
-func TestTokenToJson_BadJSONThrowsError(t *testing.T) {
+func TestTokenToJson_InvalidFormat(t *testing.T) {
 	testCases := []struct {
 		name          string
 		token         oauth2.Token
