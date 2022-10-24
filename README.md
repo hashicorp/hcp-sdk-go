@@ -61,7 +61,14 @@ export HCP_CLIENT_SECRET="service-principal-key-client-secret"
 
 ## Usage
 
-Import the desired version of each service SDK.
+1. Add the SDK to your go.mod.
+
+```go
+require (
+     github.com/hashicorp/hcp-sdk-go {latest release}
+```
+
+2. Import the desired version of each service SDK.
 
 ```bash
 import (
