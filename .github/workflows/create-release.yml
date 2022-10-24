@@ -1,6 +1,7 @@
 name: Create Release
 
 on: 
+  # Run Every Wednesday at 12:00 AM UTC
   schedule:
     - cron: '0 0 * * 3'
   workflow_dispatch:
