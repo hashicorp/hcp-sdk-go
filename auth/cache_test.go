@@ -25,19 +25,21 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 	require.NoError(err)
 
 	now := time.Now()
-	tok := oauth2.Token{
-		AccessToken:  "TopSecret!",
-		RefreshToken: "SoRefreshing:)",
-		Expiry:       now,
+	cache := Cache{
+		AccessToken:       "TopSecret!",
+		RefreshToken:      "SoRefreshing:)",
+		AccessTokenExpiry: now,
+		SessionExpiry:     now,
 	}
-	assert.NoError(Write(tok))
+	assert.NoError(Write(cache))
 
-	tok2 := oauth2.Token{
-		AccessToken:  "AnotherTopSecret!",
-		RefreshToken: "StillSoRefreshing:)",
-		Expiry:       now,
+	cache2 := Cache{
+		AccessToken:       "AnotherTopSecret!",
+		RefreshToken:      "StillSoRefreshing:)",
+		AccessTokenExpiry: now,
+		SessionExpiry:     now,
 	}
-	assert.NoError(Write(tok2))
+	assert.NoError(Write(cache2))
 
 	assert.DirExists(credentialDirectory)
 	assert.FileExists(credentialPath)
@@ -50,16 +52,10 @@ func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 	err = json.Unmarshal(rawJSON, &cacheFromJSON)
 	require.NoError(err)
 
-	expectedCache := Cache{
-		AccessToken:  tok2.AccessToken,
-		RefreshToken: tok2.RefreshToken,
-		Expiry:       tok2.Expiry,
-		MaxAge:       MaxAge,
-	}
-	assert.Equal(expectedCache.AccessToken, cacheFromJSON.AccessToken)
-	assert.Equal(expectedCache.RefreshToken, cacheFromJSON.RefreshToken)
-	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
+	assert.Equal(cache2.AccessToken, cacheFromJSON.AccessToken)
+	assert.Equal(cache2.RefreshToken, cacheFromJSON.RefreshToken)
+	assert.Equal(cache2.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(cache2.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
 	require.NoError(destroy())
 }
 
@@ -72,13 +68,14 @@ func TestWrite_NoDirectoryNoFile(t *testing.T) {
 	require.NotNil(credentialDirectory)
 
 	now := time.Now()
-	tok := oauth2.Token{
-		AccessToken:  "TopSecret!",
-		RefreshToken: "SoRefreshing:)",
-		Expiry:       now,
+	cache := Cache{
+		AccessToken:       "TopSecret!",
+		RefreshToken:      "SoRefreshing:)",
+		AccessTokenExpiry: now,
+		SessionExpiry:     now,
 	}
 
-	assert.NoError(Write(tok))
+	assert.NoError(Write(cache))
 	assert.DirExists(credentialDirectory)
 	assert.FileExists(credentialPath)
 
@@ -90,16 +87,10 @@ func TestWrite_NoDirectoryNoFile(t *testing.T) {
 	err = json.Unmarshal(rawJSON, &cacheFromJSON)
 	require.NoError(err)
 
-	expectedCache := Cache{
-		AccessToken:  tok.AccessToken,
-		RefreshToken: tok.RefreshToken,
-		Expiry:       tok.Expiry,
-		MaxAge:       MaxAge,
-	}
-	assert.Equal(expectedCache.AccessToken, cacheFromJSON.AccessToken)
-	assert.Equal(expectedCache.RefreshToken, cacheFromJSON.RefreshToken)
-	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
+	assert.Equal(cache.AccessToken, cacheFromJSON.AccessToken)
+	assert.Equal(cache.RefreshToken, cacheFromJSON.RefreshToken)
+	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
 	require.NoError(destroy())
 }
 
@@ -115,13 +106,14 @@ func TestWrite_DirectoryExistsNoFile(t *testing.T) {
 	require.NoError(err)
 
 	now := time.Now()
-	tok := oauth2.Token{
-		AccessToken:  "TopSecret!",
-		RefreshToken: "SoRefreshing:)",
-		Expiry:       now,
+	cache := Cache{
+		AccessToken:       "TopSecret!",
+		RefreshToken:      "SoRefreshing:)",
+		AccessTokenExpiry: now,
+		SessionExpiry:     now,
 	}
 
-	assert.NoError(Write(tok))
+	assert.NoError(Write(cache))
 	assert.DirExists(credentialDirectory)
 	assert.FileExists(credentialPath)
 
@@ -133,16 +125,10 @@ func TestWrite_DirectoryExistsNoFile(t *testing.T) {
 	err = json.Unmarshal(rawJSON, &cacheFromJSON)
 	require.NoError(err)
 
-	expectedCache := Cache{
-		AccessToken:  tok.AccessToken,
-		RefreshToken: tok.RefreshToken,
-		Expiry:       tok.Expiry,
-		MaxAge:       MaxAge,
-	}
-	assert.Equal(expectedCache.AccessToken, cacheFromJSON.AccessToken)
-	assert.Equal(expectedCache.RefreshToken, cacheFromJSON.RefreshToken)
-	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(expectedCache.MaxAge.String(), cacheFromJSON.MaxAge.String())
+	assert.Equal(cache.AccessToken, cacheFromJSON.AccessToken)
+	assert.Equal(cache.RefreshToken, cacheFromJSON.RefreshToken)
+	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
 	require.NoError(destroy())
 }
 
@@ -155,28 +141,22 @@ func TestRead_ValidFormat(t *testing.T) {
 	require.NotNil(credentialDirectory)
 
 	now := time.Now()
-	tok := oauth2.Token{
-		AccessToken:  "TopSecret!",
-		RefreshToken: "SoRefreshing:)",
-		Expiry:       now,
+	cache := Cache{
+		AccessToken:       "TopSecret!",
+		RefreshToken:      "SoRefreshing:)",
+		AccessTokenExpiry: now,
+		SessionExpiry:     now,
 	}
 
-	assert.NoError(Write(tok))
+	assert.NoError(Write(cache))
 
 	cachePointer, err := Read()
 	require.NoError(err)
 
-	expectedCache := Cache{
-		AccessToken:  tok.AccessToken,
-		RefreshToken: tok.RefreshToken,
-		Expiry:       tok.Expiry,
-		MaxAge:       MaxAge,
-	}
-
-	assert.Equal(expectedCache.AccessToken, cachePointer.AccessToken)
-	assert.Equal(expectedCache.RefreshToken, cachePointer.RefreshToken)
-	assert.Equal(expectedCache.Expiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(expectedCache.MaxAge.String(), cachePointer.MaxAge.String())
+	assert.Equal(cache.AccessToken, cachePointer.AccessToken)
+	assert.Equal(cache.RefreshToken, cachePointer.RefreshToken)
+	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
 	require.NoError(destroy())
 }
 
@@ -254,22 +234,22 @@ func TestJsonToCache_InvalidFormat(t *testing.T) {
 		},
 		{
 			name:          "empty values",
-			rawJSON:       []byte(`{ "access_token": "", "refresh_token": "", "expiry": "", "max_age": "" }`),
+			rawJSON:       []byte(`{ "access_token": "", "refresh_token": "", "access_token_expiry": "", "session_expiry": "" }`),
 			expectedError: "failed to unmarshal the raw data to json: parsing time \"\\\"\\\"\" as \"\\\"2006-01-02T15:04:05Z07:00\\\"\": cannot parse \"\\\"\" as \"2006\"",
 		},
 		{
 			name:          "empty access token",
-			rawJSON:       []byte(`{ "access_token": "", "refresh_token": "myrefreshtoken", "expiry": "2022-10-20T17:10:59.273429-04:00", "max_age": 86400000000000 }`),
+			rawJSON:       []byte(`{ "access_token": "", "refresh_token": "myrefreshtoken", "access_token_expiry": "2022-10-20T17:10:59.273429-04:00", "session_expiry": "2022-11-20T17:10:59.273429-04:00"}`),
 			expectedError: "failed to get cache access token",
 		},
 		{
 			name:          "empty refresh token",
-			rawJSON:       []byte(`{ "access_token": "myaccesstoken", "refresh_token": "", "expiry": "2022-10-20T17:10:59.273429-04:00", "max_age": 86400000000000 }`),
+			rawJSON:       []byte(`{ "access_token": "myaccesstoken", "refresh_token": "", "access_token_expiry": "2022-10-20T17:10:59.273429-04:00", "session_expiry": "2022-11-20T17:10:59.273429-04:00" }`),
 			expectedError: "failed to get cache refresh token",
 		},
 		{
 			name:          "emptyexpiry",
-			rawJSON:       []byte(`{ "access_token": "myaccesstoken", "refresh_token": "myrefreshtoken", "expiry": "", "max_age": 86400000000000 }`),
+			rawJSON:       []byte(`{ "access_token": "myaccesstoken", "refresh_token": "myrefreshtoken", "access_token_expiry": "", "session_expiry": "2022-11-20T17:10:59.273429-04:00"}`),
 			expectedError: "failed to unmarshal the raw data to json: parsing time \"\\\"\\\"\" as \"\\\"2006-01-02T15:04:05Z07:00\\\"\": cannot parse \"\\\"\" as \"2006\"",
 		},
 	}

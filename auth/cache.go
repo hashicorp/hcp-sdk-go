@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	MaxAge = time.Hour * 24
+	SessionMaxAge = time.Hour * 24
 
 	defaultDirectory     = ".config/hcp"
 	testDirectory        = "hcptest"
@@ -29,15 +29,15 @@ type Cache struct {
 	// RefreshToken is used to get a new access token.
 	RefreshToken string `json:"refresh_token,omitempty"`
 
-	// Expiry is when the access token will expire.
-	Expiry time.Time `json:"expiry,omitempty"`
+	// AccessTokenExpiry is when the access token will expire.
+	AccessTokenExpiry time.Time `json:"access_token_expiry,omitempty"`
 
-	// MaxAge is the session limit.
-	MaxAge time.Duration `json:"max_age,omitempty"`
+	// SessionExpiry is the session limit.
+	SessionExpiry time.Time `json:"session_expiry,omitempty"`
 }
 
 // Write saves HCP auth data in a common location in the home directory.
-func Write(token oauth2.Token) error {
+func Write(cache Cache) error {
 	credentialPath, credentialDirectory, err := getCredentialPaths()
 	if err != nil {
 		return fmt.Errorf("failed to retrieve credential path and directory: %v", err)
@@ -48,20 +48,18 @@ func Write(token oauth2.Token) error {
 		return fmt.Errorf("failed to create credential directory: %v", err)
 	}
 
-	// Write access token, refresh_token, expiry, max age to credentials file.
-	credentials := &Cache{
-		AccessToken:  token.AccessToken,
-		RefreshToken: token.RefreshToken,
-		Expiry:       token.Expiry,
-		MaxAge:       MaxAge,
+	// If provided SessionExpiry greater than SessionMaxAge, throw error.
+	if cache.SessionExpiry.After(time.Now().Add(SessionMaxAge)) {
+		return fmt.Errorf("session expiry greater than 24 hours")
 	}
 
-	credentialsJSON, err := json.Marshal(credentials)
+	// Write access token, refresh_token, access_token_expiry, session_expiry to credentials file.
+	cacheJSON, err := json.Marshal(cache)
 	if err != nil {
 		return fmt.Errorf("failed to marshal the struct to json: %v", err)
 	}
 
-	err = os.WriteFile(credentialPath, credentialsJSON, directoryPermissions)
+	err = os.WriteFile(credentialPath, cacheJSON, directoryPermissions)
 	if err != nil {
 		return fmt.Errorf("failed to write credentials to the cache file: %v", err)
 	}
@@ -148,10 +146,10 @@ func tokenToJSON(token *oauth2.Token) ([]byte, error) {
 	}
 
 	credentials := &Cache{
-		AccessToken:  token.AccessToken,
-		RefreshToken: token.RefreshToken,
-		Expiry:       token.Expiry,
-		MaxAge:       MaxAge,
+		AccessToken:       token.AccessToken,
+		RefreshToken:      token.RefreshToken,
+		AccessTokenExpiry: token.Expiry,
+		SessionExpiry:     time.Now().Add(SessionMaxAge),
 	}
 	credentialsJSON, err := json.Marshal(credentials)
 	if err != nil {
