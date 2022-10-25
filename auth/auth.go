@@ -96,7 +96,17 @@ func GetTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Toke
 			return nil, fmt.Errorf("failed to exchange code for token: %w", err)
 		}
 
-		// TODO: save the token somewhere
+		// Save the token to config file.
+		cache := Cache{
+			AccessToken:       tok.AccessToken,
+			RefreshToken:      tok.RefreshToken,
+			AccessTokenExpiry: tok.Expiry,
+			SessionExpiry:     time.Now().Add(SessionMaxAge),
+		}
+		err = Write(cache)
+		if err != nil {
+			return nil, fmt.Errorf("failed to write token to file: %w", err)
+		}
 
 		return tok, nil
 	case <-sigintCh:

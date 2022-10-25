@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"time"
 
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/hcp-sdk-go/auth"
@@ -113,10 +114,21 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 		// TODO: Right now we fetch a new token on every init of the client. We need to implement a library that will check for existing tokens in a well-known location.
 		// If no token is available or if the available token's max age has exceeded,then we get new token via browser login.
+		cache, _ := auth.Read()
+		//var tok *oauth2.Token
 		var tok *oauth2.Token
-		tok, err := auth.GetTokenFromBrowser(tokenContext, &config.oauth2Config)
-		if err != nil {
-			return nil, fmt.Errorf("failed to get access token: %w", err)
+		if cache.SessionExpiry.Before(time.Now()) {
+			var err error
+			tok, err = auth.GetTokenFromBrowser(tokenContext, &config.oauth2Config)
+			if err != nil {
+				return nil, fmt.Errorf("failed to get access token: %w", err)
+			}
+		} else {
+			tok = &oauth2.Token{
+				AccessToken:  cache.AccessToken,
+				RefreshToken: cache.RefreshToken,
+				Expiry:       cache.AccessTokenExpiry,
+			}
 		}
 
 		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
