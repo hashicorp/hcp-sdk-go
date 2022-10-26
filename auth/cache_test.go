@@ -13,6 +13,37 @@ import (
 	"golang.org/x/oauth2"
 )
 
+func TestWrite_SessionExpiryValid(t *testing.T) {
+
+	require := requirepkg.New(t)
+	cache := Cache{
+		AccessToken:       "coolAccessToken",
+		RefreshToken:      "coolRefreshToken",
+		AccessTokenExpiry: time.Now(),
+		SessionExpiry:     time.Now().Add(SessionMaxAge),
+	}
+
+	err := Write(cache)
+	require.NoError(err)
+
+}
+
+func TestWrite_SessionExpiryInvalid(t *testing.T) {
+
+	require := requirepkg.New(t)
+	cache := Cache{
+		AccessToken:       "coolAccessToken",
+		RefreshToken:      "coolRefreshToken",
+		AccessTokenExpiry: time.Now(),
+		SessionExpiry:     time.Now().Add(time.Hour * 30),
+	}
+
+	err := Write(cache)
+	require.Error(err)
+	require.EqualError(err, "session expiry greater than 24 hours")
+
+}
+
 func TestWrite_DirectoryExistsFileExists(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
