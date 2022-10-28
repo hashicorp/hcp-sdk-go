@@ -13,6 +13,106 @@ import (
 	"golang.org/x/oauth2"
 )
 
+func TestWrite(t *testing.T) {
+
+	require := requirepkg.New(t)
+	assert := assertpkg.New(t)
+
+	testCases := []struct {
+		name      string
+		caseSetup func(string, string) error
+	}{
+		{
+			name:      "No Directory, No File",
+			caseSetup: func(string, string) error { return nil },
+		},
+		{
+			name: "Directory Exists, No File",
+			caseSetup: func(dirPath, credPath string) error {
+				err := os.MkdirAll(dirPath, directoryPermissions)
+				require.NoError(err)
+				return nil
+			},
+		},
+		{
+			name: "Directory Exists, Empty File Exists",
+			caseSetup: func(dirPath, credPath string) error {
+				err := os.MkdirAll(dirPath, directoryPermissions)
+				require.NoError(err)
+
+				file, err := os.Create(credPath)
+				require.NoError(err)
+				require.NotNil(file)
+				return nil
+			},
+		},
+		{
+			name: "Directory Exists, File with Content Exists",
+			caseSetup: func(dirPath, credPath string) error {
+				err := os.MkdirAll(dirPath, directoryPermissions)
+				require.NoError(err)
+
+				now := time.Now()
+				cache := Cache{
+					AccessToken:       "AnotherTopSecret!",
+					RefreshToken:      "StillSoRefreshing:)",
+					AccessTokenExpiry: now,
+					SessionExpiry:     now,
+				}
+				require.NoError(Write(cache))
+				return nil
+			},
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.name, func(t *testing.T) {
+			// Sets up empty directory, no files.
+			credentialDir, credentialPath, err := testSetup()
+			require.NoError(err)
+			require.NotNil(credentialDir)
+			require.NotNil(credentialPath)
+
+			// Runs specifict test case setup.
+			err = testCase.caseSetup(credentialDir, credentialPath)
+			require.NoError(err)
+
+			// Run the test.
+			now := time.Now()
+			cache := Cache{
+				AccessToken:       "TopSecret!",
+				RefreshToken:      "SoRefreshing:)",
+				AccessTokenExpiry: now,
+				SessionExpiry:     now,
+			}
+
+			err = Write(cache)
+
+			// Make assertions.
+			assert.NoError(err)
+			assert.DirExists(credentialDir)
+			assert.FileExists(credentialPath)
+
+			rawJSON, err := os.ReadFile(credentialPath)
+			require.NoError(err)
+
+			var cacheFromJSON Cache
+
+			err = json.Unmarshal(rawJSON, &cacheFromJSON)
+			require.NoError(err)
+
+			assert.Equal(cache.AccessToken, cacheFromJSON.AccessToken)
+			assert.Equal(cache.RefreshToken, cacheFromJSON.RefreshToken)
+			assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
+			assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
+
+			// Cleanup.
+			require.NoError(destroy())
+		})
+	}
+
+}
+
 func TestWrite_SessionExpiryValid(t *testing.T) {
 
 	require := requirepkg.New(t)
@@ -44,132 +144,13 @@ func TestWrite_SessionExpiryInvalid(t *testing.T) {
 
 }
 
-func TestWrite_DirectoryExistsFileExists(t *testing.T) {
-	require := requirepkg.New(t)
-	assert := assertpkg.New(t)
-
-	credentialDirectory, credentialPath, err := setup()
-	require.NoError(err)
-	require.NotNil(credentialDirectory)
-
-	err = os.MkdirAll(testDirectory, directoryPermissions)
-	require.NoError(err)
-
-	now := time.Now()
-	cache := Cache{
-		AccessToken:       "TopSecret!",
-		RefreshToken:      "SoRefreshing:)",
-		AccessTokenExpiry: now,
-		SessionExpiry:     now,
-	}
-	assert.NoError(Write(cache))
-
-	cache2 := Cache{
-		AccessToken:       "AnotherTopSecret!",
-		RefreshToken:      "StillSoRefreshing:)",
-		AccessTokenExpiry: now,
-		SessionExpiry:     now,
-	}
-	assert.NoError(Write(cache2))
-
-	assert.DirExists(credentialDirectory)
-	assert.FileExists(credentialPath)
-
-	rawJSON, err := os.ReadFile(credentialPath)
-	require.NoError(err)
-
-	var cacheFromJSON Cache
-
-	err = json.Unmarshal(rawJSON, &cacheFromJSON)
-	require.NoError(err)
-
-	assert.Equal(cache2.AccessToken, cacheFromJSON.AccessToken)
-	assert.Equal(cache2.RefreshToken, cacheFromJSON.RefreshToken)
-	assert.Equal(cache2.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(cache2.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	require.NoError(destroy())
-}
-
-func TestWrite_NoDirectoryNoFile(t *testing.T) {
-	require := requirepkg.New(t)
-	assert := assertpkg.New(t)
-
-	credentialDirectory, credentialPath, err := setup()
-	require.NoError(err)
-	require.NotNil(credentialDirectory)
-
-	now := time.Now()
-	cache := Cache{
-		AccessToken:       "TopSecret!",
-		RefreshToken:      "SoRefreshing:)",
-		AccessTokenExpiry: now,
-		SessionExpiry:     now,
-	}
-
-	assert.NoError(Write(cache))
-	assert.DirExists(credentialDirectory)
-	assert.FileExists(credentialPath)
-
-	rawJSON, err := os.ReadFile(credentialPath)
-	require.NoError(err)
-
-	var cacheFromJSON Cache
-
-	err = json.Unmarshal(rawJSON, &cacheFromJSON)
-	require.NoError(err)
-
-	assert.Equal(cache.AccessToken, cacheFromJSON.AccessToken)
-	assert.Equal(cache.RefreshToken, cacheFromJSON.RefreshToken)
-	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	require.NoError(destroy())
-}
-
-func TestWrite_DirectoryExistsNoFile(t *testing.T) {
-	require := requirepkg.New(t)
-	assert := assertpkg.New(t)
-
-	credentialDirectory, credentialPath, err := setup()
-	require.NoError(err)
-	require.NotNil(credentialDirectory)
-
-	err = os.MkdirAll(testDirectory, directoryPermissions)
-	require.NoError(err)
-
-	now := time.Now()
-	cache := Cache{
-		AccessToken:       "TopSecret!",
-		RefreshToken:      "SoRefreshing:)",
-		AccessTokenExpiry: now,
-		SessionExpiry:     now,
-	}
-
-	assert.NoError(Write(cache))
-	assert.DirExists(credentialDirectory)
-	assert.FileExists(credentialPath)
-
-	rawJSON, err := os.ReadFile(credentialPath)
-	require.NoError(err)
-
-	var cacheFromJSON Cache
-
-	err = json.Unmarshal(rawJSON, &cacheFromJSON)
-	require.NoError(err)
-
-	assert.Equal(cache.AccessToken, cacheFromJSON.AccessToken)
-	assert.Equal(cache.RefreshToken, cacheFromJSON.RefreshToken)
-	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	require.NoError(destroy())
-}
-
 func TestRead_ValidFormat(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
-	credentialDirectory, _, err := setup()
+	credentialDir, _, err := testSetup()
 	require.NoError(err)
-	require.NotNil(credentialDirectory)
+	require.NotNil(credentialDir)
 
 	now := time.Now()
 	cache := Cache{
@@ -195,11 +176,11 @@ func TestRead_InvalidFormat(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
-	credentialDirectory, credentialPath, err := setup()
+	credentialDir, credentialPath, err := testSetup()
 	require.NoError(err)
-	require.NotNil(credentialDirectory)
+	require.NotNil(credentialDir)
 
-	err = os.MkdirAll(credentialDirectory, directoryPermissions)
+	err = os.MkdirAll(credentialDir, directoryPermissions)
 	if err != nil {
 		fmt.Printf("not able to make test directory :%v", err)
 	}
@@ -341,22 +322,22 @@ func TestTokenToJson_InvalidFormat(t *testing.T) {
 	}
 }
 
-func setup() (credentialDirectory, credentialPath string, err error) {
+func testSetup() (credentialDir, credentialPath string, err error) {
 	os.Setenv(envVarCacheTestMode, "true")
 
 	userHome, err := os.UserHomeDir()
 	if err != nil {
 		return "", "", fmt.Errorf("failed to retrieve test directory: %v", err)
 	}
-	credentialDirectory = filepath.Join(userHome, testDirectory)
-	credentialPath = filepath.Join(credentialDirectory, fileName)
+	credentialDir = filepath.Join(userHome, testDirectory)
+	credentialPath = filepath.Join(credentialDir, fileName)
 
-	err = os.RemoveAll(credentialDirectory)
+	err = os.RemoveAll(credentialDir)
 	if err != nil {
 		return "", "", fmt.Errorf("failed to clean up test directory: %v", err)
 	}
 
-	return credentialDirectory, credentialPath, nil
+	return credentialDir, credentialPath, nil
 }
 
 func destroy() error {
@@ -366,9 +347,9 @@ func destroy() error {
 	if err != nil {
 		return fmt.Errorf("failed to retrieve test directory: %v", err)
 	}
-	credentialDirectory := filepath.Join(userHome, testDirectory)
+	credentialDir := filepath.Join(userHome, testDirectory)
 
-	err = os.RemoveAll(credentialDirectory)
+	err = os.RemoveAll(credentialDir)
 	if err != nil {
 		return fmt.Errorf("failed to clean up test directory: %v", err)
 	}
