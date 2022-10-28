@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
+	"github.com/hashicorp/hcp-sdk-go/auth"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
 )
@@ -79,6 +80,10 @@ type hcpConfig struct {
 	// scadaTLSConfig is the TLS configuration for the SCADA endpoint. It can be
 	// set to nil if TLS should be disabled.
 	scadaTLSConfig *tls.Config
+
+	// getter is responsible for getting an access token fron our identity provider.
+	// A mock can be used in tests.
+	getter auth.Getter
 }
 
 func (c *hcpConfig) Token() (*oauth2.Token, error) {

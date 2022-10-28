@@ -83,6 +83,8 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 		scadaAddress:   defaultSCADAAddress,
 		scadaTLSConfig: &tls.Config{},
+
+		getter: &auth.BrowserGetter{},
 	}
 
 	// Apply all options
@@ -118,11 +120,11 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		cache, _ := auth.Read()
 		//var tok *oauth2.Token
 		var tok *oauth2.Token
+		var err error
 		fmt.Printf("this is the nil token prior to token refresh %v\n", tok)
 		if cache.SessionExpiry.Before(time.Now()) {
-			var err error
-			tok, err = auth.GetTokenFromBrowser(tokenContext, &config.oauth2Config)
-			fmt.Printf("this is the token on expired session %v\n", tok)
+
+			tok, err = config.getter.GetToken(tokenContext, &config.oauth2Config)
 			if err != nil {
 				return nil, fmt.Errorf("failed to get access token: %w", err)
 			}
