@@ -2,6 +2,7 @@ package config
 
 import (
 	"crypto/tls"
+	"fmt"
 	"testing"
 
 	requirepkg "github.com/stretchr/testify/require"
@@ -100,4 +101,19 @@ func TestNew_Invalid(t *testing.T) {
 			require.EqualError(err, testCase.expectedError)
 		})
 	}
+}
+
+func TestNew_NoConfigPassed(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config, err := NewHCPConfig()
+	require.NoError(err)
+
+	// Ensure the values have been set accordingly
+	token, err := config.Token()
+	fmt.Printf("test token is %v\n", token)
+	require.Equal("https://portal.cloud.hashicorp.com", config.PortalURL().String())
+	require.Equal("api.cloud.hashicorp.com:443", config.APIAddress())
+	require.Equal("my-scada:3456", config.SCADAAddress())
 }

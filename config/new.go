@@ -54,6 +54,7 @@ const (
 // environment variables).
 func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 	// Parse default URLs
+	fmt.Printf("Beginning NewHCPConfig function\n")
 	authURL, _ := url.Parse(defaultAuthURL)
 	portalURL, _ := url.Parse(defaultPortalURL)
 
@@ -117,9 +118,11 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		cache, _ := auth.Read()
 		//var tok *oauth2.Token
 		var tok *oauth2.Token
+		fmt.Printf("this is the nil token prior to token refresh %v\n", tok)
 		if cache.SessionExpiry.Before(time.Now()) {
 			var err error
 			tok, err = auth.GetTokenFromBrowser(tokenContext, &config.oauth2Config)
+			fmt.Printf("this is the token on expired session %v\n", tok)
 			if err != nil {
 				return nil, fmt.Errorf("failed to get access token: %w", err)
 			}
@@ -129,9 +132,17 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 				RefreshToken: cache.RefreshToken,
 				Expiry:       cache.AccessTokenExpiry,
 			}
+			fmt.Printf("this is the token on non- expired session %v\n", tok)
 		}
 
 		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
+		token, err := config.Token()
+		if err != nil {
+			return nil, fmt.Errorf("failed to get token from config: %w\n", err)
+		}
+		//TODO: write token returned from tokenSource to config file as Cache struct with same session expiry
+
+		fmt.Printf("token grabbed from config is %v\n", token)
 	}
 
 	if err := config.validate(); err != nil {

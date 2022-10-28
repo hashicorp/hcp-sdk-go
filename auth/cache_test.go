@@ -13,6 +13,46 @@ import (
 	"golang.org/x/oauth2"
 )
 
+func TestRead(t *testing.T) {
+
+	require := requirepkg.New(t)
+	assert := assertpkg.New(t)
+
+	testCases := []struct {
+		name      string
+		caseSetup func(string, string) error
+	}{
+		{
+			name:      "No Directory, No File",
+			caseSetup: func(string, string) error { return nil },
+		},
+		{
+			name: "Directory Exists, No File",
+			caseSetup: func(dirPath, credPath string) error {
+				err := os.MkdirAll(dirPath, directoryPermissions)
+				require.NoError(err)
+				return nil
+			},
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.name, func(t *testing.T) {
+
+			credentialDir, credentialPath, err := testSetup()
+			require.NoError(err)
+			require.NotNil(credentialDir)
+
+			err = os.MkdirAll(credentialDir, directoryPermissions)
+			if err != nil {
+				fmt.Printf("not able to make test directory :%v", err)
+			}
+			require.NoError(err)
+		})
+	}
+
+}
+
 func TestWrite(t *testing.T) {
 
 	require := requirepkg.New(t)
