@@ -126,6 +126,14 @@ func jsonToCache(rawData []byte) (*Cache, error) {
 	if cacheFromJSON.RefreshToken == "" {
 		return nil, errors.New("failed to get cache refresh token")
 	}
+	// TODO Add test cases for these
+	if cacheFromJSON.AccessTokenExpiry.IsZero() {
+		return nil, errors.New("failed to get cache access token expiry")
+	}
+
+	if cacheFromJSON.SessionExpiry.IsZero() {
+		return nil, errors.New("failed to get cache session expiry")
+	}
 
 	return &cacheFromJSON, nil
 }

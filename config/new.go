@@ -3,6 +3,7 @@ package config
 import (
 	"crypto/tls"
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
 	"time"
@@ -105,26 +106,30 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 	// Set access token via configured client credentials.
 	if config.clientCredentialsConfig.ClientID != "" && config.clientCredentialsConfig.ClientSecret != "" {
-		// Set token URL based on auth URL
+		// Set token URL based on auth URL.
 		tokenURL := config.authURL
 		tokenURL.Path = tokenPath
 		config.clientCredentialsConfig.TokenURL = tokenURL.String()
 
-		// Create token source from the client credentials configuration
+		// Create token source from the client credentials configuration.
 		config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
 
 	} else { // Set access token via browser login.
+		// TODO Move all this code to an auth package.
+		// If no token is available or if the available token's max age has exceeded, then we get a new token via browser login.
+		cache, readErr := auth.Read()
+		if readErr != nil {
+			log.Printf("Failed to read cache from file: %s", readErr.Error())
+		}
 
-		// If no token is available or if the available token's max age has exceeded,then we get new token via browser login.
-		//TODO: handle Read error
-		cache, _ := auth.Read()
-		//var tok *oauth2.Token
 		var tok *oauth2.Token
 		var err error
-		fmt.Printf("this is the nil token prior to token refresh %v\n", tok)
+
 		// If sessionExpiry is passed, then reauthenticate with browser login and reassign token.
-		if cache.SessionExpiry.Before(time.Now()) {
+		if readErr != nil || cache.SessionExpiry.Before(time.Now()) {
 			// Login with browser.
+			log.Print("No credentials found, proceeding with browser login.")
+
 			tok, err = config.getter.GetToken(tokenContext, &config.oauth2Config)
 			if err != nil {
 				return nil, fmt.Errorf("failed to get access token: %w", err)
@@ -136,27 +141,22 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 				AccessTokenExpiry: tok.Expiry,
 				SessionExpiry:     time.Now().Add(auth.SessionMaxAge),
 			}
-			//TODO: handle Write error
-			auth.Write(newCache)
-			// Otherwise maintain token values retrieved from config file in earlier login.
-		} else {
+
+			err = auth.Write(newCache)
+			if err != nil {
+				log.Printf("Failed to write cache to file: %s", err.Error())
+			}
+
+		} else { // Otherwise maintain token values retrieved from config file in earlier login.
 			tok = &oauth2.Token{
 				AccessToken:  cache.AccessToken,
 				RefreshToken: cache.RefreshToken,
 				Expiry:       cache.AccessTokenExpiry,
 			}
-			fmt.Printf("this is the token on non- expired session %v\n", tok)
 		}
-		// Update HCPConfig with most current token values
-		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
-		// Grab current token value from
-		// token, err := config.Token()
-		// if err != nil {
-		// 	return nil, fmt.Errorf("failed to get token from config: %w\n", err)
-		// }
-		//TODO: write token returned from tokenSource to config file as Cache struct with same session expiry
 
-		fmt.Printf("token grabbed from config is %v\n", token)
+		// Update HCPConfig with most current token values.
+		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
 	}
 
 	if err := config.validate(); err != nil {
