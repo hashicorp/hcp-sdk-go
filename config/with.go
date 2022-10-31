@@ -112,9 +112,10 @@ func WithOAuth2ClientID(oauth2ClientID string) HCPConfigOption {
 	}
 }
 
-// WithAuthGetter ...
+// WithAuthGetter is an option that can be used to provide a custom Getter struct.
 //
-// TODO
+// An alternative Getter can be provided, if none is provided the default BrowserGetter
+// will be used.
 //
 // This should only be necessary for testing purposes.
 func WithAuthGetter(g auth.Getter) HCPConfigOption {

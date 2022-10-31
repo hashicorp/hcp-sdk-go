@@ -115,19 +115,30 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 	} else { // Set access token via browser login.
 
-		// TODO: Right now we fetch a new token on every init of the client. We need to implement a library that will check for existing tokens in a well-known location.
 		// If no token is available or if the available token's max age has exceeded,then we get new token via browser login.
+		//TODO: handle Read error
 		cache, _ := auth.Read()
 		//var tok *oauth2.Token
 		var tok *oauth2.Token
 		var err error
 		fmt.Printf("this is the nil token prior to token refresh %v\n", tok)
+		// If sessionExpiry is passed, then reauthenticate with browser login and reassign token.
 		if cache.SessionExpiry.Before(time.Now()) {
-
+			// Login with browser.
 			tok, err = config.getter.GetToken(tokenContext, &config.oauth2Config)
 			if err != nil {
 				return nil, fmt.Errorf("failed to get access token: %w", err)
 			}
+
+			newCache := auth.Cache{
+				AccessToken:       tok.AccessToken,
+				RefreshToken:      tok.RefreshToken,
+				AccessTokenExpiry: tok.Expiry,
+				SessionExpiry:     time.Now().Add(auth.SessionMaxAge),
+			}
+			//TODO: handle Write error
+			auth.Write(newCache)
+			// Otherwise maintain token values retrieved from config file in earlier login.
 		} else {
 			tok = &oauth2.Token{
 				AccessToken:  cache.AccessToken,
@@ -136,12 +147,13 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 			}
 			fmt.Printf("this is the token on non- expired session %v\n", tok)
 		}
-
+		// Update HCPConfig with most current token values
 		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
-		token, err := config.Token()
-		if err != nil {
-			return nil, fmt.Errorf("failed to get token from config: %w\n", err)
-		}
+		// Grab current token value from
+		// token, err := config.Token()
+		// if err != nil {
+		// 	return nil, fmt.Errorf("failed to get token from config: %w\n", err)
+		// }
 		//TODO: write token returned from tokenSource to config file as Cache struct with same session expiry
 
 		fmt.Printf("token grabbed from config is %v\n", token)
