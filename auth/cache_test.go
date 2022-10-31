@@ -19,12 +19,15 @@ func TestRead(t *testing.T) {
 	assert := assertpkg.New(t)
 
 	testCases := []struct {
-		name      string
-		caseSetup func(string, string) error
+		name          string
+		caseSetup     func(string, string) error
+		expectedError string
 	}{
 		{
 			name:      "No Directory, No File",
-			caseSetup: func(string, string) error { return nil },
+			caseSetup: func(dirPath, credPath string) error { return nil },
+			//expectedError: "failed to read file from user's credential path: open /Users/jolisabrown/hcptest/credentials.json: no such file or directory",
+			expectedError: "no such file or directory",
 		},
 		{
 			name: "Directory Exists, No File",
@@ -33,24 +36,95 @@ func TestRead(t *testing.T) {
 				require.NoError(err)
 				return nil
 			},
+			expectedError: "no such file or directory",
+		},
+		{
+			name: "Directory Exists, File Not Exists",
+			caseSetup: func(dirPath, credPath string) error {
+				err := os.MkdirAll(dirPath, directoryPermissions)
+				require.NoError(err)
+				return nil
+			},
+			expectedError: "no such file or directory",
+		},
+		{
+			name: "Directory Exists, File with Unexpected Content Exists",
+			caseSetup: func(dirPath, credPath string) error {
+				//define and initialize unexpected struct type
+				type redHerring struct {
+					AccessToken, anotherField, lastField string
+				}
+				var randomData = redHerring{AccessToken: "TopSecret!", anotherField: "SoRefreshing:)", lastField: "field"}
+
+				randomDataJSON, err := json.Marshal(randomData)
+				require.NoError(err)
+
+				//write unexpected struct to config file
+				err = os.MkdirAll(dirPath, directoryPermissions)
+				require.NoError(err)
+				err = os.WriteFile(credPath, randomDataJSON, directoryPermissions)
+				require.NoError(err)
+
+				return nil
+			},
+			expectedError: "bad format: failed to get cache access token",
 		},
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 
-			credentialDir, credentialPath, err := testSetup()
+			credDir, credPath, err := testSetup()
 			require.NoError(err)
-			require.NotNil(credentialDir)
+			require.NotNil(credDir)
 
-			err = os.MkdirAll(credentialDir, directoryPermissions)
-			if err != nil {
-				fmt.Printf("not able to make test directory :%v", err)
-			}
+			// Runs specific test case setup.
+			err = testCase.caseSetup(credDir, credPath)
 			require.NoError(err)
+
+			// Run the test.
+			_, err = Read()
+
+			// Make assertions
+			require.Error(err)
+			type error interface {
+				Error() string
+			}
+			assert.Contains(err, testCase.expectedError)
+			require.NoError(destroy())
+
 		})
+
 	}
 
+}
+
+func TestRead_ValidFormat(t *testing.T) {
+	require := requirepkg.New(t)
+	assert := assertpkg.New(t)
+
+	credentialDir, _, err := testSetup()
+	require.NoError(err)
+	require.NotNil(credentialDir)
+
+	now := time.Now()
+	cache := Cache{
+		AccessToken:       "TopSecret!",
+		RefreshToken:      "SoRefreshing:)",
+		AccessTokenExpiry: now,
+		SessionExpiry:     now,
+	}
+
+	assert.NoError(Write(cache))
+
+	cachePointer, err := Read()
+	require.NoError(err)
+
+	assert.Equal(cache.AccessToken, cachePointer.AccessToken)
+	assert.Equal(cache.RefreshToken, cachePointer.RefreshToken)
+	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	require.NoError(destroy())
 }
 
 func TestWrite(t *testing.T) {
@@ -113,7 +187,7 @@ func TestWrite(t *testing.T) {
 			require.NotNil(credentialDir)
 			require.NotNil(credentialPath)
 
-			// Runs specifict test case setup.
+			// Runs specific test case setup.
 			err = testCase.caseSetup(credentialDir, credentialPath)
 			require.NoError(err)
 
@@ -182,72 +256,6 @@ func TestWrite_SessionExpiryInvalid(t *testing.T) {
 	require.Error(err)
 	require.EqualError(err, "session expiry greater than 24 hours")
 
-}
-
-func TestRead_ValidFormat(t *testing.T) {
-	require := requirepkg.New(t)
-	assert := assertpkg.New(t)
-
-	credentialDir, _, err := testSetup()
-	require.NoError(err)
-	require.NotNil(credentialDir)
-
-	now := time.Now()
-	cache := Cache{
-		AccessToken:       "TopSecret!",
-		RefreshToken:      "SoRefreshing:)",
-		AccessTokenExpiry: now,
-		SessionExpiry:     now,
-	}
-
-	assert.NoError(Write(cache))
-
-	cachePointer, err := Read()
-	require.NoError(err)
-
-	assert.Equal(cache.AccessToken, cachePointer.AccessToken)
-	assert.Equal(cache.RefreshToken, cachePointer.RefreshToken)
-	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	require.NoError(destroy())
-}
-
-func TestRead_InvalidFormat(t *testing.T) {
-	require := requirepkg.New(t)
-	assert := assertpkg.New(t)
-
-	credentialDir, credentialPath, err := testSetup()
-	require.NoError(err)
-	require.NotNil(credentialDir)
-
-	err = os.MkdirAll(credentialDir, directoryPermissions)
-	if err != nil {
-		fmt.Printf("not able to make test directory :%v", err)
-	}
-	require.NoError(err)
-
-	type redHerring struct {
-		AccessToken  string
-		anotherField string
-		lastField    string
-	}
-
-	randomData := redHerring{
-		AccessToken:  "TopSecret!",
-		anotherField: "SoRefreshing:)",
-		lastField:    "field",
-	}
-
-	randomDataJSON, err := json.Marshal(randomData)
-	require.NoError(err)
-
-	err = os.WriteFile(credentialPath, randomDataJSON, directoryPermissions)
-	require.NoError(err)
-
-	_, err = Read()
-	require.Error(err)
-	assert.EqualError(err, "bad format: failed to get cache access token")
-	require.NoError(destroy())
 }
 
 func TestGetCredentialPaths(t *testing.T) {
