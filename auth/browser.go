@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -40,9 +41,56 @@ func (h *callbackEndpoint) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	h.shutdownSignal <- nil
 }
 
-// getToken opens a browser window for the user to log in and handles the OAuth2 flow to obtain a token.
+// GetToken returns an access token obtained from either an existing session or new browser login.
 func (g *BrowserGetter) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
 
+	// Check for existing token in auth cache, if it exists.
+	cache, readErr := Read()
+	if readErr != nil {
+		log.Printf("Failed to read cache from file: %s", readErr.Error())
+	}
+
+	var tok *oauth2.Token
+	var err error
+
+	// Check the session expiry of the retrieved token.
+	// If session expiry has passed, then reauthenticate with browser login and reassign token.
+	if readErr != nil || cache.SessionExpiry.Before(time.Now()) {
+
+		// Login with browser.
+		log.Print("No credentials found, proceeding with browser login.")
+
+		tok, err = getTokenFromBrowser(ctx, conf)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get access token: %w", err)
+		}
+
+		// Update cache with newly obtained token.
+		newCache := Cache{
+			AccessToken:       tok.AccessToken,
+			RefreshToken:      tok.RefreshToken,
+			AccessTokenExpiry: tok.Expiry,
+			SessionExpiry:     time.Now().Add(SessionMaxAge),
+		}
+
+		err = Write(newCache)
+		if err != nil {
+			log.Printf("Failed to write cache to file: %s", err.Error())
+		}
+
+	} else { // Otherwise return existing, unexpired token to continue existing session.
+		tok = &oauth2.Token{
+			AccessToken:  cache.AccessToken,
+			RefreshToken: cache.RefreshToken,
+			Expiry:       cache.AccessTokenExpiry,
+		}
+	}
+
+	return tok, nil
+}
+
+// getTokenFromBrwoser opens a browser window for the user to log in and handles the OAuth2 flow to obtain a token.
+func getTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
 	// Launch a request to Auth0's authorization endpoint.
 	colorstring.Printf("[bold][yellow]The default web browser has been opened at %s. Please continue the login in the web browser.\n", conf.Endpoint.AuthURL)
 

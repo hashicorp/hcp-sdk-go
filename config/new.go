@@ -3,10 +3,8 @@ package config
 import (
 	"crypto/tls"
 	"fmt"
-	"log"
 	"net/http"
 	"net/url"
-	"time"
 
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/hcp-sdk-go/auth"
@@ -76,6 +74,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 			RedirectURL: "http://localhost:8443/oidc/callback",
 			Scopes:      []string{"openid", "offline_access"},
 		},
+		getter: &auth.BrowserGetter{},
 
 		portalURL: portalURL,
 
@@ -84,8 +83,6 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 		scadaAddress:   defaultSCADAAddress,
 		scadaTLSConfig: &tls.Config{},
-
-		getter: &auth.BrowserGetter{},
 	}
 
 	// Apply all options
@@ -114,45 +111,11 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		// Create token source from the client credentials configuration.
 		config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
 
-	} else { // Set access token via browser login.
-		// TODO Move all this code to an auth package.
-		// If no token is available or if the available token's max age has exceeded, then we get a new token via browser login.
-		cache, readErr := auth.Read()
-		if readErr != nil {
-			log.Printf("Failed to read cache from file: %s", readErr.Error())
-		}
+	} else { // Set access token via browser login or use token from existing session.
 
-		var tok *oauth2.Token
-		var err error
-
-		// If sessionExpiry is passed, then reauthenticate with browser login and reassign token.
-		if readErr != nil || cache.SessionExpiry.Before(time.Now()) {
-			// Login with browser.
-			log.Print("No credentials found, proceeding with browser login.")
-
-			tok, err = config.getter.GetToken(tokenContext, &config.oauth2Config)
-			if err != nil {
-				return nil, fmt.Errorf("failed to get access token: %w", err)
-			}
-
-			newCache := auth.Cache{
-				AccessToken:       tok.AccessToken,
-				RefreshToken:      tok.RefreshToken,
-				AccessTokenExpiry: tok.Expiry,
-				SessionExpiry:     time.Now().Add(auth.SessionMaxAge),
-			}
-
-			err = auth.Write(newCache)
-			if err != nil {
-				log.Printf("Failed to write cache to file: %s", err.Error())
-			}
-
-		} else { // Otherwise maintain token values retrieved from config file in earlier login.
-			tok = &oauth2.Token{
-				AccessToken:  cache.AccessToken,
-				RefreshToken: cache.RefreshToken,
-				Expiry:       cache.AccessTokenExpiry,
-			}
+		tok, err := config.getter.GetToken(tokenContext, &config.oauth2Config)
+		if err != nil {
+			return nil, fmt.Errorf("failed to find existing session or set up new: %w", err)
 		}
 
 		// Update HCPConfig with most current token values.
