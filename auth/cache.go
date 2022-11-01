@@ -116,6 +116,9 @@ func jsonToCache(rawData []byte) (*Cache, error) {
 	var cacheFromJSON Cache
 	err := json.Unmarshal(rawData, &cacheFromJSON)
 	if err != nil {
+
+		// This error will catch empty expiry (access token and session) fields, since they fail to unmarshal to Time structs.
+
 		return nil, fmt.Errorf("failed to unmarshal the raw data to json: %v", err)
 	}
 
@@ -125,14 +128,6 @@ func jsonToCache(rawData []byte) (*Cache, error) {
 
 	if cacheFromJSON.RefreshToken == "" {
 		return nil, errors.New("failed to get cache refresh token")
-	}
-	// TODO Add test cases for these
-	if cacheFromJSON.AccessTokenExpiry.IsZero() {
-		return nil, errors.New("failed to get cache access token expiry")
-	}
-
-	if cacheFromJSON.SessionExpiry.IsZero() {
-		return nil, errors.New("failed to get cache session expiry")
 	}
 
 	return &cacheFromJSON, nil

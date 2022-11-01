@@ -312,8 +312,13 @@ func TestJsonToCache_InvalidFormat(t *testing.T) {
 			expectedError: "failed to get cache refresh token",
 		},
 		{
-			name:          "emptyexpiry",
+			name:          "empty access token expiry",
 			rawJSON:       []byte(`{ "access_token": "myaccesstoken", "refresh_token": "myrefreshtoken", "access_token_expiry": "", "session_expiry": "2022-11-20T17:10:59.273429-04:00"}`),
+			expectedError: "failed to unmarshal the raw data to json: parsing time \"\\\"\\\"\" as \"\\\"2006-01-02T15:04:05Z07:00\\\"\": cannot parse \"\\\"\" as \"2006\"",
+		},
+		{
+			name:          "empty session expiry",
+			rawJSON:       []byte(`{ "access_token": "myaccesstoken", "refresh_token": "myrefreshtoken", "access_token_expiry": "2022-11-20T17:10:59.273429-04:00", "session_expiry": ""}`),
 			expectedError: "failed to unmarshal the raw data to json: parsing time \"\\\"\\\"\" as \"\\\"2006-01-02T15:04:05Z07:00\\\"\": cannot parse \"\\\"\" as \"2006\"",
 		},
 	}
