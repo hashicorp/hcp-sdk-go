@@ -17,32 +17,11 @@ import (
 	"golang.org/x/oauth2"
 )
 
-// callbackEndpoint exposes the confiugration for the callback server.
-type callbackEndpoint struct {
-	server         *http.Server
-	code           string
-	shutdownSignal chan error
-}
-
-type BrowserGetter struct {
-}
-
-// callbackEndpoint endpoint ServeHTTP confirms if an Authorization code was received from Auth0.
-func (h *callbackEndpoint) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-
-	code := r.URL.Query().Get("code")
-	if code != "" {
-		h.code = code
-		fmt.Fprintln(w, "Login is successful. You may close the browser and return to the command line.")
-		colorstring.Println("[bold][green]Success!")
-	} else {
-		fmt.Fprintln(w, "Login is not successful. You may close the browser and try again.")
-	}
-	h.shutdownSignal <- nil
-}
+// UserSession implements the auth package's Session interface
+type UserSession struct{}
 
 // GetToken returns an access token obtained from either an existing session or new browser login.
-func (g *BrowserGetter) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
+func (g *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
 
 	// Check for existing token in auth cache, if it exists.
 	cache, readErr := Read()
@@ -165,6 +144,27 @@ func getTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Toke
 	case <-time.After(2 * time.Minute):
 		return nil, errors.New("timed out waiting for response from provider")
 	}
+}
+
+// callbackEndpoint exposes the confiugration for the callback server.
+type callbackEndpoint struct {
+	server         *http.Server
+	code           string
+	shutdownSignal chan error
+}
+
+// callbackEndpoint endpoint ServeHTTP confirms if an Authorization code was received from Auth0.
+func (h *callbackEndpoint) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+
+	code := r.URL.Query().Get("code")
+	if code != "" {
+		h.code = code
+		fmt.Fprintln(w, "Login is successful. You may close the browser and return to the command line.")
+		colorstring.Println("[bold][green]Success!")
+	} else {
+		fmt.Fprintln(w, "Login is not successful. You may close the browser and try again.")
+	}
+	h.shutdownSignal <- nil
 }
 
 // generateRandomString returns a URL-safe, base64 encoded

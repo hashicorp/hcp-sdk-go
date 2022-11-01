@@ -74,7 +74,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 			RedirectURL: "http://localhost:8443/oidc/callback",
 			Scopes:      []string{"openid", "offline_access"},
 		},
-		getter: &auth.BrowserGetter{},
+		session: &auth.UserSession{},
 
 		portalURL: portalURL,
 
@@ -113,7 +113,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 	} else { // Set access token via browser login or use token from existing session.
 
-		tok, err := config.getter.GetToken(tokenContext, &config.oauth2Config)
+		tok, err := config.session.GetToken(tokenContext, &config.oauth2Config)
 		if err != nil {
 			return nil, fmt.Errorf("failed to find existing session or set up new: %w", err)
 		}

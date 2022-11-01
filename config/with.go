@@ -112,15 +112,15 @@ func WithOAuth2ClientID(oauth2ClientID string) HCPConfigOption {
 	}
 }
 
-// WithAuthGetter is an option that can be used to provide a custom Getter struct.
+// WithSession is an option that can be used to provide a custom Session struct.
 //
-// An alternative Getter can be provided, if none is provided the default BrowserGetter
+// A mock Session can be provided, if none is provided the default UserSession
 // will be used.
 //
 // This should only be necessary for testing purposes.
-func WithAuthGetter(g auth.Getter) HCPConfigOption {
+func WithSession(g auth.Session) HCPConfigOption {
 	return func(config *hcpConfig) error {
-		config.getter = g
+		config.session = g
 
 		return nil
 	}

@@ -81,9 +81,9 @@ type hcpConfig struct {
 	// set to nil if TLS should be disabled.
 	scadaTLSConfig *tls.Config
 
-	// getter is responsible for getting an access token fron our identity provider.
+	// session is responsible for getting an access token fron our identity provider.
 	// A mock can be used in tests.
-	getter auth.Getter
+	session auth.Session
 }
 
 func (c *hcpConfig) Token() (*oauth2.Token, error) {

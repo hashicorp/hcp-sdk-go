@@ -6,6 +6,7 @@ import (
 	"golang.org/x/oauth2"
 )
 
-type Getter interface {
+// Session handles managing a user's session.
+type Session interface {
 	GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error)
 }
