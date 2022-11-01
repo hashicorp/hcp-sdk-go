@@ -30,7 +30,7 @@ func TestRead(t *testing.T) {
 			expectedError: "no such file or directory",
 		},
 		{
-			name: "Directory Exists, No File",
+			name: "Directory Exists, File Not Exists",
 			caseSetup: func(dirPath, credPath string) error {
 				err := os.MkdirAll(dirPath, directoryPermissions)
 				require.NoError(err)
@@ -39,13 +39,17 @@ func TestRead(t *testing.T) {
 			expectedError: "no such file or directory",
 		},
 		{
-			name: "Directory Exists, File Not Exists",
+			name: "Directory Exists, Empty File Exists",
 			caseSetup: func(dirPath, credPath string) error {
 				err := os.MkdirAll(dirPath, directoryPermissions)
 				require.NoError(err)
+
+				file, err := os.Create(credPath)
+				require.NoError(err)
+				require.NotNil(file)
 				return nil
 			},
-			expectedError: "no such file or directory",
+			expectedError: "bad format: failed to unmarshal the raw data to json: unexpected end of JSON input",
 		},
 		{
 			name: "Directory Exists, File with Unexpected Content Exists",
@@ -90,7 +94,7 @@ func TestRead(t *testing.T) {
 			type error interface {
 				Error() string
 			}
-			assert.Contains(err, testCase.expectedError)
+			assert.Contains(err.Error(), testCase.expectedError)
 			require.NoError(destroy())
 
 		})
