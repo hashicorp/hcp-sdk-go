@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/hashicorp/hcp-sdk-go/auth"
 	requirepkg "github.com/stretchr/testify/require"
 )
 
@@ -36,13 +37,15 @@ func TestNew_Options(t *testing.T) {
 		WithPortalURL("https://my-portal:1234"),
 		WithAPI("my-api:2345", &tls.Config{}),
 		WithSCADA("my-scada:3456", &tls.Config{}),
+		WithSession(&auth.MockSession{}),
 	)
-	require.NoError(err)
 
+	require.NoError(err)
 	// Ensure the values have been set accordingly
 	require.Equal("https://my-portal:1234", config.PortalURL().String())
 	require.Equal("my-api:2345", config.APIAddress())
 	require.Equal("my-scada:3456", config.SCADAAddress())
+
 }
 
 func TestNew_Invalid(t *testing.T) {
