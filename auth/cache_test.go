@@ -94,6 +94,7 @@ func TestRead(t *testing.T) {
 			type error interface {
 				Error() string
 			}
+			//TODO: consider upgrading testify to use ErrorContains method here
 			assert.Contains(err.Error(), testCase.expectedError)
 			require.NoError(destroy())
 
@@ -379,7 +380,8 @@ func TestTokenToJson_InvalidFormat(t *testing.T) {
 	}
 }
 
-func testSetup() (credentialDir, credentialPath string, err error) {
+//TODO: create testHelpers file to include testsetup and destroy
+func TestSetup() (credentialDir, credentialPath string, err error) {
 	os.Setenv(envVarCacheTestMode, "true")
 
 	userHome, err := os.UserHomeDir()
@@ -397,7 +399,7 @@ func testSetup() (credentialDir, credentialPath string, err error) {
 	return credentialDir, credentialPath, nil
 }
 
-func destroy() error {
+func Destroy() error {
 	os.Unsetenv(envVarCacheTestMode)
 
 	userHome, err := os.UserHomeDir()

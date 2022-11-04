@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/stretchr/testify/mock"
 	"golang.org/x/oauth2"
 )
 
@@ -17,4 +18,8 @@ func (g *MockSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 		Expiry:       time.Now(),
 	}
 	return &tok, nil
+}
+
+type MockBrowser struct {
+	mock.Mock
 }

@@ -21,7 +21,7 @@ import (
 type UserSession struct{}
 
 // GetToken returns an access token obtained from either an existing session or new browser login.
-func (g *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
+func (s *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
 
 	// Check for existing token in auth cache, if it exists.
 	cache, readErr := Read()
@@ -39,7 +39,7 @@ func (g *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 		// Login with browser.
 		log.Print("No credentials found, proceeding with browser login.")
 
-		tok, err = getTokenFromBrowser(ctx, conf)
+		tok, err = s.getTokenFromBrowser(ctx, conf)
 		if err != nil {
 			return nil, fmt.Errorf("failed to get access token: %w", err)
 		}
@@ -69,7 +69,7 @@ func (g *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 }
 
 // getTokenFromBrwoser opens a browser window for the user to log in and handles the OAuth2 flow to obtain a token.
-func getTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
+func (s *UserSession) getTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
 	// Launch a request to Auth0's authorization endpoint.
 	colorstring.Printf("[bold][yellow]The default web browser has been opened at %s. Please continue the login in the web browser.\n", conf.Endpoint.AuthURL)
 
