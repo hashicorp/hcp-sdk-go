@@ -24,9 +24,8 @@ func TestRead(t *testing.T) {
 		expectedError string
 	}{
 		{
-			name:      "No Directory, No File",
-			caseSetup: func(dirPath, credPath string) error { return nil },
-			//expectedError: "failed to read file from user's credential path: open /Users/jolisabrown/hcptest/credentials.json: no such file or directory",
+			name:          "No Directory, No File",
+			caseSetup:     func(dirPath, credPath string) error { return nil },
 			expectedError: "no such file or directory",
 		},
 		{
@@ -78,7 +77,7 @@ func TestRead(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 
-			credDir, credPath, err := testSetup()
+			credDir, credPath, err := Setup(t)
 			require.NoError(err)
 			require.NotNil(credDir)
 
@@ -90,13 +89,11 @@ func TestRead(t *testing.T) {
 			_, err = Read()
 
 			// Make assertions
-			require.Error(err)
-			type error interface {
-				Error() string
-			}
-			//TODO: consider upgrading testify to use ErrorContains method here
-			assert.Contains(err.Error(), testCase.expectedError)
-			require.NoError(destroy())
+			assert.Error(err)
+			assert.ErrorContains(err, testCase.expectedError)
+
+			// Clean up.
+			require.NoError(Destroy(t))
 
 		})
 
@@ -108,7 +105,7 @@ func TestRead_ValidFormat(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
-	credentialDir, _, err := testSetup()
+	credentialDir, _, err := Setup(t)
 	require.NoError(err)
 	require.NotNil(credentialDir)
 
@@ -129,7 +126,8 @@ func TestRead_ValidFormat(t *testing.T) {
 	assert.Equal(cache.RefreshToken, cachePointer.RefreshToken)
 	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
 	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	require.NoError(destroy())
+
+	require.NoError(Destroy(t))
 }
 
 func TestWrite(t *testing.T) {
@@ -187,7 +185,7 @@ func TestWrite(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 			// Sets up empty directory, no files.
-			credentialDir, credentialPath, err := testSetup()
+			credentialDir, credentialPath, err := Setup(t)
 			require.NoError(err)
 			require.NotNil(credentialDir)
 			require.NotNil(credentialPath)
@@ -226,15 +224,17 @@ func TestWrite(t *testing.T) {
 			assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
 
 			// Cleanup.
-			require.NoError(destroy())
+			require.NoError(Destroy(t))
 		})
 	}
 
 }
 
 func TestWrite_SessionExpiryValid(t *testing.T) {
-
 	require := requirepkg.New(t)
+
+	_, _, err := Setup(t)
+
 	cache := Cache{
 		AccessToken:       "coolAccessToken",
 		RefreshToken:      "coolRefreshToken",
@@ -242,14 +242,17 @@ func TestWrite_SessionExpiryValid(t *testing.T) {
 		SessionExpiry:     time.Now().Add(SessionMaxAge),
 	}
 
-	err := Write(cache)
+	err = Write(cache)
 	require.NoError(err)
 
+	require.NoError(Destroy(t))
 }
 
 func TestWrite_SessionExpiryInvalid(t *testing.T) {
-
 	require := requirepkg.New(t)
+
+	_, _, err := Setup(t)
+
 	cache := Cache{
 		AccessToken:       "coolAccessToken",
 		RefreshToken:      "coolRefreshToken",
@@ -257,10 +260,11 @@ func TestWrite_SessionExpiryInvalid(t *testing.T) {
 		SessionExpiry:     time.Now().Add(time.Hour * 30),
 	}
 
-	err := Write(cache)
+	err = Write(cache)
 	require.Error(err)
 	require.EqualError(err, "session expiry greater than 24 hours")
 
+	require.NoError(Destroy(t))
 }
 
 func TestGetCredentialPaths(t *testing.T) {
@@ -381,7 +385,7 @@ func TestTokenToJson_InvalidFormat(t *testing.T) {
 }
 
 //TODO: create testHelpers file to include testsetup and destroy
-func TestSetup() (credentialDir, credentialPath string, err error) {
+func Setup(t *testing.T) (credentialDir, credentialPath string, err error) {
 	os.Setenv(envVarCacheTestMode, "true")
 
 	userHome, err := os.UserHomeDir()
@@ -399,7 +403,7 @@ func TestSetup() (credentialDir, credentialPath string, err error) {
 	return credentialDir, credentialPath, nil
 }
 
-func Destroy() error {
+func Destroy(t *testing.T) error {
 	os.Unsetenv(envVarCacheTestMode)
 
 	userHome, err := os.UserHomeDir()
