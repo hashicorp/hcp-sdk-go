@@ -9,7 +9,7 @@ import (
 
 type MockSession struct{}
 
-// GetToken returns some mock token wiht static data.
+// GetToken returns some mock token with static data.
 func (s *MockSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
 	tok := oauth2.Token{
 		AccessToken:  "SomeAccessToken",

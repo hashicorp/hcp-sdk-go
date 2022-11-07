@@ -115,6 +115,8 @@ func TestNew_NoConfigPassed(t *testing.T) {
 
 	// Ensure the values have been set accordingly
 	token, err := config.Token()
+	require.NoError(err)
+
 	fmt.Printf("test token is %v\n", token)
 	require.Equal("https://portal.cloud.hashicorp.com", config.PortalURL().String())
 	require.Equal("api.cloud.hashicorp.com:443", config.APIAddress())

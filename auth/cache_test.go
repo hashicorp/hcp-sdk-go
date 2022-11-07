@@ -53,7 +53,7 @@ func TestRead(t *testing.T) {
 		{
 			name: "Directory Exists, File with Unexpected Content Exists",
 			caseSetup: func(dirPath, credPath string) error {
-				//define and initialize unexpected struct type
+				// Define and initialize unexpected struct type.
 				type redHerring struct {
 					AccessToken, anotherField, lastField string
 				}
@@ -62,7 +62,7 @@ func TestRead(t *testing.T) {
 				randomDataJSON, err := json.Marshal(randomData)
 				require.NoError(err)
 
-				//write unexpected struct to config file
+				// Write unexpected struct to config file.
 				err = os.MkdirAll(dirPath, directoryPermissions)
 				require.NoError(err)
 				err = os.WriteFile(credPath, randomDataJSON, directoryPermissions)
@@ -86,7 +86,6 @@ func TestRead(t *testing.T) {
 				randomDataJSON, err := json.Marshal(randomData)
 				require.NoError(err)
 
-				//write unexpected struct to config file
 				err = os.MkdirAll(dirPath, directoryPermissions)
 				require.NoError(err)
 				err = os.WriteFile(credPath, randomDataJSON, directoryPermissions)
@@ -258,6 +257,7 @@ func TestWrite_SessionExpiryValid(t *testing.T) {
 	require := requirepkg.New(t)
 
 	_, _, err := Setup(t)
+	require.NoError(err)
 
 	cache := Cache{
 		AccessToken:       "coolAccessToken",
@@ -276,6 +276,7 @@ func TestWrite_SessionExpiryInvalid(t *testing.T) {
 	require := requirepkg.New(t)
 
 	_, _, err := Setup(t)
+	require.NoError(err)
 
 	cache := Cache{
 		AccessToken:       "coolAccessToken",
