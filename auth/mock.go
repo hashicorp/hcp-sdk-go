@@ -11,7 +11,7 @@ import (
 type MockSession struct{}
 
 // GetToken returns some mock token wiht static data.
-func (g *MockSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
+func (s *MockSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
 	tok := oauth2.Token{
 		AccessToken:  "SomeAccessToken",
 		RefreshToken: "SomeRefreshToken",
