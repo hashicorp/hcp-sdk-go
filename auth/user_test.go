@@ -14,7 +14,7 @@ func TestGetToken_ExistingToken(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
-	_, _, err := TestSetup()
+	_, _, err := Setup(t)
 	require.NoError(err)
 	ctx := context.Background()
 	conf := &oauth2.Config{}
@@ -38,11 +38,12 @@ func TestGetToken_ExistingToken(t *testing.T) {
 	assert.Equal(cache.AccessToken, tok.AccessToken)
 	assert.Equal(cache.RefreshToken, tok.RefreshToken)
 	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), tok.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	err = Destroy()
+
+	err = Destroy(t)
 	require.NoError(err)
 }
 
-func TestGetToken_BrowserFlow(t *testing.t) {
+func TestGetToken_BrowserFlow(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
@@ -59,8 +60,8 @@ func TestGetToken_BrowserFlow(t *testing.t) {
 			caseSetup: func() error {
 				now := time.Now()
 				cache := Cache{
-					AccessToken:       "TestAccessToken",
-					RefreshToken:      "TestRefreshToken",
+					AccessToken:       "ExpiredAccessToken",
+					RefreshToken:      "ExpiredRefreshToken",
 					AccessTokenExpiry: now,
 					SessionExpiry:     time.Now().Add(time.Hour * -2),
 				}
@@ -76,7 +77,7 @@ func TestGetToken_BrowserFlow(t *testing.t) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 
-			_, _, err := testSetup()
+			_, _, err := Setup(t)
 			require.NoError(err)
 
 			// Runs specific test case setup.
@@ -85,21 +86,22 @@ func TestGetToken_BrowserFlow(t *testing.t) {
 
 			// Run the test.
 			userSession := UserSession{}
-			//use mock package to implement interface
-			//why do we still need to pass in the correct parameters?
+			userSession.browser = &mockBrowser{}
 
-			userSession.On("getTokenFromBrowser", ctx, conf).Return()
+			ctx := context.Background()
+			conf := oauth2.Config{}
 
-			tok, err := userSession.GetToken(ctx, conf)
+			tok, err := userSession.GetToken(ctx, &conf)
 			require.NoError(err)
+			require.NotNil(tok)
 
-			// Make assertions
+			// Make assertions about token retrieved.
+			assert.Equal("SomeNewAccessToken", tok.AccessToken)
+			assert.Equal("SomeNewRefreshToken", tok.RefreshToken)
+			assert.WithinDuration(time.Now().Add(time.Hour*1), tok.Expiry, 10*time.Second)
 
 			// Cleanup.
-			require.NoError(destroy())
-
+			require.NoError(Destroy(t))
 		})
-
 	}
-
 }
