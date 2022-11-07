@@ -21,7 +21,7 @@ func TestGetToken_ExistingToken(t *testing.T) {
 
 	now := time.Now()
 	cache := Cache{
-		AccessToken:       "TestAccessToken",
+		AccessToken:       "Test.Access.Token",
 		RefreshToken:      "TestRefreshToken",
 		AccessTokenExpiry: now,
 		SessionExpiry:     time.Now().Add(time.Hour * 24),
