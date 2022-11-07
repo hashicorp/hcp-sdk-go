@@ -96,6 +96,8 @@ func GetTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Toke
 			return nil, fmt.Errorf("failed to exchange code for token: %w", err)
 		}
 
+		// TODO: save the token somewhere
+
 		return tok, nil
 	case <-sigintCh:
 		return nil, errors.New("interrupted")
