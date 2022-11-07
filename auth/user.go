@@ -26,10 +26,6 @@ func (s *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 	var tok *oauth2.Token
 	var err error
 
-	// TODO: check that access token/refresh tokens are valid
-	// (ran into issue where my local creds got overwritten)
-	// example: {"access_token":"coolAccessToken","refresh_token":"coolRefreshToken","access_token_expiry":"2022-11-07T12:55:16.015522-05:00","session_expiry":"2022-11-08T12:55:16.015522-05:00"
-
 	// Check the session expiry of the retrieved token.
 	// If session expiry has passed, then reauthenticate with browser login and reassign token.
 	if readErr != nil || cache.SessionExpiry.Before(time.Now()) {

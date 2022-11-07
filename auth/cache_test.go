@@ -72,6 +72,30 @@ func TestRead(t *testing.T) {
 			},
 			expectedError: "bad format: failed to get cache access token",
 		},
+		{
+			name: "Directory Exists, File with Badly Formatted Token",
+			caseSetup: func(dirPath, credPath string) error {
+
+				var randomData = Cache{
+					AccessToken:       "TopSecret!",
+					RefreshToken:      "SoRefreshing:)",
+					AccessTokenExpiry: time.Now(),
+					SessionExpiry:     time.Now(),
+				}
+
+				randomDataJSON, err := json.Marshal(randomData)
+				require.NoError(err)
+
+				//write unexpected struct to config file
+				err = os.MkdirAll(dirPath, directoryPermissions)
+				require.NoError(err)
+				err = os.WriteFile(credPath, randomDataJSON, directoryPermissions)
+				require.NoError(err)
+
+				return nil
+			},
+			expectedError: "bad format: access token is not a valid JWT",
+		},
 	}
 
 	for _, testCase := range testCases {
@@ -111,7 +135,7 @@ func TestRead_ValidFormat(t *testing.T) {
 
 	now := time.Now()
 	cache := Cache{
-		AccessToken:       "TopSecret!",
+		AccessToken:       "some.valid.jwt",
 		RefreshToken:      "SoRefreshing:)",
 		AccessTokenExpiry: now,
 		SessionExpiry:     now,

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"time"
 
 	"golang.org/x/oauth2"
@@ -82,6 +83,19 @@ func Read() (*Cache, error) {
 	cacheFromJSON, err := jsonToCache(rawJSON)
 	if err != nil {
 		return nil, fmt.Errorf("bad format: %v", err)
+	}
+
+	// Regular expression to check if the AccessToken matches JWT format
+	didMatch, err := regexp.MatchString(`(^[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*$)`, cacheFromJSON.AccessToken)
+	if !didMatch || err != nil {
+		errorToDisplay := ""
+		if err != nil {
+			errorToDisplay = err.Error()
+		} else {
+			errorToDisplay = "access token is not a valid JWT"
+		}
+
+		return nil, fmt.Errorf("bad format: %s", errorToDisplay)
 	}
 
 	return cacheFromJSON, nil
