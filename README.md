@@ -70,3 +70,32 @@ import (
 ```
 
 See `cmd/hcp-sdk-go-client` for a complete example.
+
+## Contributing
+
+### Changelogs
+
+This repo requires that a chagnelog file be added in all pull requests. The name of the file must follow `[PR #].txt` and must reside in the `.changelog` directory. The contents must have the following formatting:
+
+~~~
+```release-note:TYPE
+ENTRY
+```
+~~~
+
+Where `TYPE` is the type of release note entry this is. This is one of either: `breaking-change`, `security`, `feature`, `improvement`, `deprecation`, `bug`.
+
+`ENTRY` is the body of the changelog entry, and should describe the changes that were made. This is used as free-text input and will be returned to you as it is entered when generating the changelog.
+
+Sometimes PRs have multiple changelog entries associated with them. In this case, use multiple blocks.
+
+~~~
+```release-note:deprecation
+Deprecated the `foo` interface, please use the `bar` interface instead.
+```
+
+```release-note:improvement
+Added the `bar` interface.
+```
+~~~
+
