@@ -2,7 +2,6 @@ package config
 
 import (
 	"crypto/tls"
-	"fmt"
 	"testing"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
@@ -106,19 +105,20 @@ func TestNew_Invalid(t *testing.T) {
 	}
 }
 
-func TestNew_NoConfigPassed(t *testing.T) {
-	require := requirepkg.New(t)
+// TODO: uncomment these tests when we've set up a CI test user to login via browser (HCE-606)
+// func TestNew_NoConfigPassed(t *testing.T) {
+// 	require := requirepkg.New(t)
 
-	// Exercise
-	config, err := NewHCPConfig()
-	require.NoError(err)
+// 	// Exercise
+// 	config, err := NewHCPConfig()
+// 	require.NoError(err)
 
-	// Ensure the values have been set accordingly
-	token, err := config.Token()
-	require.NoError(err)
+// 	// Ensure the values have been set accordingly
+// 	token, err := config.Token()
+// 	require.NoError(err)
+// 	require.NotNil(token)
 
-	fmt.Printf("test token is %v\n", token)
-	require.Equal("https://portal.cloud.hashicorp.com", config.PortalURL().String())
-	require.Equal("api.cloud.hashicorp.com:443", config.APIAddress())
-	require.Equal("my-scada:3456", config.SCADAAddress())
-}
+// 	require.Equal(defaultPortalURL, config.PortalURL().String())
+// 	require.Equal(defaultAPIAddress, config.APIAddress())
+// 	require.Equal(defaultSCADAAddress, config.SCADAAddress())
+// }
