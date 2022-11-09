@@ -15,6 +15,7 @@ on:
 
 jobs:
   changelog-check:
+    name: Changelog Check
     # Ignore this check if there is a `pr/no-changelog` label
     if: |
         !contains(github.event.pull_request.labels.*.name, 'pr/no-changelog')
