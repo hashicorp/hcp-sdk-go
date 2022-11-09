@@ -1,0 +1,11 @@
+```release-note:improvement
+Run tests in GitHub Actions instead of Circle CI.
+```
+
+```release-note:improvement
+Upload test coverage artifacts to GitHub Actions job run.
+```
+
+```release-note:improvement
+Set up up auto releaser with test gating.
+```
