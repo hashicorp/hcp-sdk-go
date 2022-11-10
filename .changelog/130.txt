@@ -1,0 +1,7 @@
+```release-note:improvement
+Remove redundant caching in Release Workflow
+```
+
+```release-note:improvement
+Add reminder to add changelog entry in PR template
+```
