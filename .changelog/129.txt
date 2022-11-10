@@ -1,0 +1,11 @@
+```release-note:improvement
+Refactor auth package to support Session interface
+```
+
+```release-note:improvement
+Expand test coverage for browser login
+```
+
+```release-note:feature
+Enable user session refresh on browser login
+```
