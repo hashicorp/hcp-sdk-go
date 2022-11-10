@@ -1,3 +1,5 @@
+<!-- Remember to include an entry in the .changelog directory for this PR! More info can be found in the README. -->
+
 ### :hammer_and_wrench: Description
 
 <!-- What code changed, and why? If an existing service SDK was updated, what functionality was added? If a new 

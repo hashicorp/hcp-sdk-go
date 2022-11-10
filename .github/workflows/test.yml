@@ -17,16 +17,7 @@ jobs:
         with:
           cache: true
           go-version-file: 'go.mod'
-
-      - name: Cache Go Dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
+          cache-dependency-path: go.sum
 
       - name: Install Dependencies
         run: |
