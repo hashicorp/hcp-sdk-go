@@ -1,3 +1,13 @@
+## v0.24.0 (November 10, 2022)
+
+IMPROVEMENTS:
+
+* Add reminder to add changelog entry in PR template [[GH-130](https://github.com/hashicorp/hcp-sdk-go/pull/130)]
+* Remove redundant caching in Release Workflow [[GH-130](https://github.com/hashicorp/hcp-sdk-go/pull/130)]
+* Run tests in GitHub Actions instead of Circle CI. [[GH-128](https://github.com/hashicorp/hcp-sdk-go/pull/128)]
+* Set up up auto releaser with test gating. [[GH-128](https://github.com/hashicorp/hcp-sdk-go/pull/128)]
+* Upload test coverage artifacts to GitHub Actions job run. [[GH-128](https://github.com/hashicorp/hcp-sdk-go/pull/128)]
+* Use force push with lease on workflow [[GH-131](https://github.com/hashicorp/hcp-sdk-go/pull/131)]
 ## 0.23.0 (September 20, 2022)
 
 BREAKING CHANGES:
