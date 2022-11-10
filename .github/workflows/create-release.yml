@@ -88,7 +88,7 @@ jobs:
               echo "Pushing new tag to remote"
               git config -l
               git push --tags
-              git push
+              git push --force-with-lease
               echo "Generating Release Notes"
               sed -n -e "1{/# v /d;}" -e "2{/^$/d;}" -e "/# v$(git describe --abbrev=0 --exclude="$(git describe --abbrev=0 --match='v*.*.*' --tags)" --match='v*.*.*' --tags | tr -d v)/q;p" CHANGELOG.md > release-notes.txt
               echo "Creating New Release: ${NEW_VERSION}"
