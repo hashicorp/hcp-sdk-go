@@ -4,6 +4,8 @@ import (
 	"crypto/tls"
 	"fmt"
 	"net/url"
+
+	"github.com/hashicorp/hcp-sdk-go/auth"
 )
 
 // WithClientCredentials credentials is an option that can be used to set
@@ -105,6 +107,20 @@ func WithAuth(authURL string, tlsConfig *tls.Config) HCPConfigOption {
 func WithOAuth2ClientID(oauth2ClientID string) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.oauth2Config.ClientID = oauth2ClientID
+
+		return nil
+	}
+}
+
+// WithSession is an option that can be used to provide a custom Session struct.
+//
+// A mock Session can be provided, if none is provided the default UserSession
+// will be used.
+//
+// This should only be necessary for testing purposes.
+func WithSession(s auth.Session) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.session = s
 
 		return nil
 	}

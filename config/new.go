@@ -52,7 +52,7 @@ const (
 // WithCredentials or by using FromEnv and providing the client credentials via
 // environment variables).
 func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
-	// Parse default URLs
+	// Parse default URLsG
 	authURL, _ := url.Parse(defaultAuthURL)
 	portalURL, _ := url.Parse(defaultPortalURL)
 
@@ -73,6 +73,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 			RedirectURL: "http://localhost:8443/oidc/callback",
 			Scopes:      []string{"openid", "offline_access"},
 		},
+		session: &auth.UserSession{},
 
 		portalURL: portalURL,
 
@@ -101,24 +102,22 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 	// Set access token via configured client credentials.
 	if config.clientCredentialsConfig.ClientID != "" && config.clientCredentialsConfig.ClientSecret != "" {
-		// Set token URL based on auth URL
+		// Set token URL based on auth URL.
 		tokenURL := config.authURL
 		tokenURL.Path = tokenPath
 		config.clientCredentialsConfig.TokenURL = tokenURL.String()
 
-		// Create token source from the client credentials configuration
+		// Create token source from the client credentials configuration.
 		config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
 
-	} else { // Set access token via browser login.
+	} else { // Set access token via browser login or use token from existing session.
 
-		// TODO: Right now we fetch a new token on every init of the client. We need to implement a library that will check for existing tokens in a well-known location.
-		// If no token is available or if the available token's max age has exceeded,then we get new token via browser login.
-		var tok *oauth2.Token
-		tok, err := auth.GetTokenFromBrowser(tokenContext, &config.oauth2Config)
+		tok, err := config.session.GetToken(tokenContext, &config.oauth2Config)
 		if err != nil {
-			return nil, fmt.Errorf("failed to get access token: %w", err)
+			return nil, fmt.Errorf("failed to find existing session or set up new: %w", err)
 		}
 
+		// Update HCPConfig with most current token values.
 		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
 	}
 

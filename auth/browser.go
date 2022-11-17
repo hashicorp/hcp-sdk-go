@@ -16,30 +16,16 @@ import (
 	"golang.org/x/oauth2"
 )
 
-// callbackEndpoint exposes the confiugration for the callback server.
-type callbackEndpoint struct {
-	server         *http.Server
-	code           string
-	shutdownSignal chan error
+// Browser implements the browser handler for the OAuth2 login flow.
+type Browser interface {
+	GetTokenFromBrowser(context.Context, *oauth2.Config) (*oauth2.Token, error)
 }
 
-// callbackEndpoint endpoint ServeHTTP confirms if an Authorization code was received from Auth0.
-func (h *callbackEndpoint) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+// oauthBrowser implements the Browser interface using the real OAuth2 login flow.
+type oauthBrowser struct{}
 
-	code := r.URL.Query().Get("code")
-	if code != "" {
-		h.code = code
-		fmt.Fprintln(w, "Login is successful. You may close the browser and return to the command line.")
-		colorstring.Println("[bold][green]Success!")
-	} else {
-		fmt.Fprintln(w, "Login is not successful. You may close the browser and try again.")
-	}
-	h.shutdownSignal <- nil
-}
-
-// getTokenFromBrowser opens a browser window for the user to log in and handles the OAuth2 flow to obtain a token.
-func GetTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
-
+// GetTokenFromBrowser opens a browser window for the user to log in and handles the OAuth2 flow to obtain a token.
+func (b *oauthBrowser) GetTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
 	// Launch a request to Auth0's authorization endpoint.
 	colorstring.Printf("[bold][yellow]The default web browser has been opened at %s. Please continue the login in the web browser.\n", conf.Endpoint.AuthURL)
 
@@ -96,7 +82,17 @@ func GetTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Toke
 			return nil, fmt.Errorf("failed to exchange code for token: %w", err)
 		}
 
-		// TODO: save the token somewhere
+		// Save the token to config file.
+		cache := Cache{
+			AccessToken:       tok.AccessToken,
+			RefreshToken:      tok.RefreshToken,
+			AccessTokenExpiry: tok.Expiry,
+			SessionExpiry:     time.Now().Add(SessionMaxAge),
+		}
+		err = Write(cache)
+		if err != nil {
+			return nil, fmt.Errorf("failed to write token to file: %w", err)
+		}
 
 		return tok, nil
 	case <-sigintCh:
@@ -104,6 +100,27 @@ func GetTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Toke
 	case <-time.After(2 * time.Minute):
 		return nil, errors.New("timed out waiting for response from provider")
 	}
+}
+
+// callbackEndpoint exposes the confiugration for the callback server.
+type callbackEndpoint struct {
+	server         *http.Server
+	code           string
+	shutdownSignal chan error
+}
+
+// callbackEndpoint endpoint ServeHTTP confirms if an Authorization code was received from Auth0.
+func (h *callbackEndpoint) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+
+	code := r.URL.Query().Get("code")
+	if code != "" {
+		h.code = code
+		fmt.Fprintln(w, "Login is successful. You may close the browser and return to the command line.")
+		colorstring.Println("[bold][green]Success!")
+	} else {
+		fmt.Fprintln(w, "Login is not successful. You may close the browser and try again.")
+	}
+	h.shutdownSignal <- nil
 }
 
 // generateRandomString returns a URL-safe, base64 encoded

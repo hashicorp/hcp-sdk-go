@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"testing"
 
+	"github.com/hashicorp/hcp-sdk-go/auth"
 	requirepkg "github.com/stretchr/testify/require"
 )
 
@@ -36,12 +37,28 @@ func TestNew_Options(t *testing.T) {
 		WithAPI("my-api:2345", &tls.Config{}),
 		WithSCADA("my-scada:3456", &tls.Config{}),
 	)
-	require.NoError(err)
 
+	require.NoError(err)
 	// Ensure the values have been set accordingly
 	require.Equal("https://my-portal:1234", config.PortalURL().String())
 	require.Equal("my-api:2345", config.APIAddress())
 	require.Equal("my-scada:3456", config.SCADAAddress())
+}
+
+func TestNew_MockSession(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config, err := NewHCPConfig(
+		WithSession(&auth.MockSession{}),
+	)
+
+	require.NoError(err)
+	// Ensure the values have been set accordingly
+	tok, err := config.Token()
+	require.NoError(err)
+	require.Equal("SomeAccessToken", tok.AccessToken)
+	require.Equal("SomeRefreshToken", tok.RefreshToken)
 }
 
 func TestNew_Invalid(t *testing.T) {
@@ -101,3 +118,21 @@ func TestNew_Invalid(t *testing.T) {
 		})
 	}
 }
+
+// TODO: uncomment these tests when we've set up a CI test user to login via browser (HCE-606)
+// func TestNew_NoConfigPassed(t *testing.T) {
+// 	require := requirepkg.New(t)
+
+// 	// Exercise
+// 	config, err := NewHCPConfig()
+// 	require.NoError(err)
+
+// 	// Ensure the values have been set accordingly
+// 	token, err := config.Token()
+// 	require.NoError(err)
+// 	require.NotNil(token)
+
+// 	require.Equal(defaultPortalURL, config.PortalURL().String())
+// 	require.Equal(defaultAPIAddress, config.APIAddress())
+// 	require.Equal(defaultSCADAAddress, config.SCADAAddress())
+// }

@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"testing"
 
+	"github.com/hashicorp/hcp-sdk-go/auth"
 	requirepkg "github.com/stretchr/testify/require"
 )
 
@@ -92,4 +93,15 @@ func TestWith_OAuth2ClientID(t *testing.T) {
 
 	// Ensure oauth2 config is configured with custom OAuth2 client ID
 	require.Equal("1a2b3c4d", config.oauth2Config.ClientID)
+}
+
+func TestWith_Session(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config := &hcpConfig{}
+	require.NoError(apply(config, WithSession(&auth.MockSession{})))
+
+	// Ensure Sessions is an empty MockSession object
+	require.Equal(&auth.MockSession{}, config.session)
 }
