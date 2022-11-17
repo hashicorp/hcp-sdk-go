@@ -52,8 +52,7 @@ const (
 // WithCredentials or by using FromEnv and providing the client credentials via
 // environment variables).
 func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
-	// Parse default URLs
-	fmt.Printf("Beginning NewHCPConfig function\n")
+	// Parse default URLsG
 	authURL, _ := url.Parse(defaultAuthURL)
 	portalURL, _ := url.Parse(defaultPortalURL)
 
