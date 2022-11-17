@@ -130,9 +130,6 @@ func jsonToCache(rawData []byte) (*Cache, error) {
 	var cacheFromJSON Cache
 	err := json.Unmarshal(rawData, &cacheFromJSON)
 	if err != nil {
-
-		// This error will catch empty expiry (access token and session) fields, since they fail to unmarshal to Time structs.
-
 		return nil, fmt.Errorf("failed to unmarshal the raw data to json: %v", err)
 	}
 
