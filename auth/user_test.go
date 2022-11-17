@@ -14,7 +14,7 @@ func TestGetToken_ExistingToken(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
-	_, _, err := Setup(t)
+	_, _, err := CacheSetup(t)
 	require.NoError(err)
 	ctx := context.Background()
 	conf := &oauth2.Config{}
@@ -77,7 +77,7 @@ func TestGetToken_BrowserFlow(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 
-			_, _, err := Setup(t)
+			_, _, err := CacheSetup(t)
 			require.NoError(err)
 
 			// Runs specific test case setup.

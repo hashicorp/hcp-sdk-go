@@ -17,7 +17,7 @@ func TestRead_ValidFormat(t *testing.T) {
 	require := requirepkg.New(t)
 	assert := assertpkg.New(t)
 
-	credentialDir, _, err := Setup(t)
+	credentialDir, _, err := CacheSetup(t)
 	require.NoError(err)
 	require.NotNil(credentialDir)
 
@@ -129,7 +129,7 @@ func TestRead(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 
-			credDir, credPath, err := Setup(t)
+			credDir, credPath, err := CacheSetup(t)
 			require.NoError(err)
 			require.NotNil(credDir)
 
@@ -150,7 +150,6 @@ func TestRead(t *testing.T) {
 		})
 
 	}
-
 }
 
 func TestWrite(t *testing.T) {
@@ -208,7 +207,7 @@ func TestWrite(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 			// Sets up empty directory, no files.
-			credentialDir, credentialPath, err := Setup(t)
+			credentialDir, credentialPath, err := CacheSetup(t)
 			require.NoError(err)
 			require.NotNil(credentialDir)
 			require.NotNil(credentialPath)
@@ -250,13 +249,12 @@ func TestWrite(t *testing.T) {
 			require.NoError(CacheDestroy(t))
 		})
 	}
-
 }
 
 func TestWrite_SessionExpiryValid(t *testing.T) {
 	require := requirepkg.New(t)
 
-	_, _, err := Setup(t)
+	_, _, err := CacheSetup(t)
 	require.NoError(err)
 
 	cache := Cache{
@@ -275,7 +273,7 @@ func TestWrite_SessionExpiryValid(t *testing.T) {
 func TestWrite_SessionExpiryInvalid(t *testing.T) {
 	require := requirepkg.New(t)
 
-	_, _, err := Setup(t)
+	_, _, err := CacheSetup(t)
 	require.NoError(err)
 
 	cache := Cache{
@@ -410,7 +408,7 @@ func TestTokenToJson_InvalidFormat(t *testing.T) {
 }
 
 //TODO: create testHelpers file to include testsetup and destroy
-func Setup(t *testing.T) (credentialDir, credentialPath string, err error) {
+func CacheSetup(t *testing.T) (credentialDir, credentialPath string, err error) {
 	os.Setenv(envVarCacheTestMode, "true")
 
 	userHome, err := os.UserHomeDir()
