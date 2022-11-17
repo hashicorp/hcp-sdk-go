@@ -163,6 +163,23 @@ func TestWrite(t *testing.T) {
 		caseSetup func(string, string) error
 	}{
 		{
+			name: "Directory Exists, File with Content Exists",
+			caseSetup: func(dirPath, credPath string) error {
+				err := os.MkdirAll(dirPath, directoryPermissions)
+				require.NoError(err)
+
+				now := time.Now()
+				cache := Cache{
+					AccessToken:       "AnotherTopSecret!",
+					RefreshToken:      "StillSoRefreshing:)",
+					AccessTokenExpiry: now,
+					SessionExpiry:     now,
+				}
+				require.NoError(Write(cache))
+				return nil
+			},
+		},
+		{
 			name:      "No Directory, No File",
 			caseSetup: func(string, string) error { return nil },
 		},
@@ -183,23 +200,6 @@ func TestWrite(t *testing.T) {
 				file, err := os.Create(credPath)
 				require.NoError(err)
 				require.NotNil(file)
-				return nil
-			},
-		},
-		{
-			name: "Directory Exists, File with Content Exists",
-			caseSetup: func(dirPath, credPath string) error {
-				err := os.MkdirAll(dirPath, directoryPermissions)
-				require.NoError(err)
-
-				now := time.Now()
-				cache := Cache{
-					AccessToken:       "AnotherTopSecret!",
-					RefreshToken:      "StillSoRefreshing:)",
-					AccessTokenExpiry: now,
-					SessionExpiry:     now,
-				}
-				require.NoError(Write(cache))
 				return nil
 			},
 		},
