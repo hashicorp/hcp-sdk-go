@@ -24,6 +24,7 @@ jobs:
         with:
           cache: true
           go-version-file: 'go.mod'
+          cache-dependency-path: go.sum
 
       - name: Configure Git
         env:
@@ -33,16 +34,6 @@ jobs:
             git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
             git config user.name "hashicorp-cloud"
             git config user.email "hashicorp-cloud@hashicorp.com"
-
-      - name: Cache Go Dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
 
       - name: Install Go Binaries
         env:
@@ -97,7 +88,7 @@ jobs:
               echo "Pushing new tag to remote"
               git config -l
               git push --tags
-              git push
+              git push --force-with-lease
               echo "Generating Release Notes"
               sed -n -e "1{/# v /d;}" -e "2{/^$/d;}" -e "/# v$(git describe --abbrev=0 --exclude="$(git describe --abbrev=0 --match='v*.*.*' --tags)" --match='v*.*.*' --tags | tr -d v)/q;p" CHANGELOG.md > release-notes.txt
               echo "Creating New Release: ${NEW_VERSION}"
