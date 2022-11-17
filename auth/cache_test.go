@@ -39,7 +39,7 @@ func TestRead_ValidFormat(t *testing.T) {
 	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
 	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
 
-	require.NoError(Destroy(t))
+	require.NoError(CacheDestroy(t))
 }
 
 func TestRead(t *testing.T) {
@@ -145,7 +145,7 @@ func TestRead(t *testing.T) {
 			assert.ErrorContains(err, testCase.expectedError)
 
 			// Clean up.
-			require.NoError(Destroy(t))
+			require.NoError(CacheDestroy(t))
 
 		})
 
@@ -247,7 +247,7 @@ func TestWrite(t *testing.T) {
 			assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cacheFromJSON.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
 
 			// Cleanup.
-			require.NoError(Destroy(t))
+			require.NoError(CacheDestroy(t))
 		})
 	}
 
@@ -269,7 +269,7 @@ func TestWrite_SessionExpiryValid(t *testing.T) {
 	err = Write(cache)
 	require.NoError(err)
 
-	require.NoError(Destroy(t))
+	require.NoError(CacheDestroy(t))
 }
 
 func TestWrite_SessionExpiryInvalid(t *testing.T) {
@@ -289,7 +289,7 @@ func TestWrite_SessionExpiryInvalid(t *testing.T) {
 	require.Error(err)
 	require.EqualError(err, "session expiry greater than 24 hours")
 
-	require.NoError(Destroy(t))
+	require.NoError(CacheDestroy(t))
 }
 
 func TestGetCredentialPaths(t *testing.T) {
@@ -428,7 +428,7 @@ func Setup(t *testing.T) (credentialDir, credentialPath string, err error) {
 	return credentialDir, credentialPath, nil
 }
 
-func Destroy(t *testing.T) error {
+func CacheDestroy(t *testing.T) error {
 	os.Unsetenv(envVarCacheTestMode)
 
 	userHome, err := os.UserHomeDir()

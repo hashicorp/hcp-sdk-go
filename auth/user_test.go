@@ -39,7 +39,7 @@ func TestGetToken_ExistingToken(t *testing.T) {
 	assert.Equal(cache.RefreshToken, tok.RefreshToken)
 	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), tok.Expiry.Format("2006-01-02T15:04:05 -07:00:00"))
 
-	err = Destroy(t)
+	err = CacheDestroy(t)
 	require.NoError(err)
 }
 
@@ -101,7 +101,7 @@ func TestGetToken_BrowserFlow(t *testing.T) {
 			assert.WithinDuration(time.Now().Add(time.Hour*1), tok.Expiry, 10*time.Second)
 
 			// Cleanup.
-			require.NoError(Destroy(t))
+			require.NoError(CacheDestroy(t))
 		})
 	}
 }
