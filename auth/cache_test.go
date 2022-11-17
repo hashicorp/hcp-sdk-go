@@ -13,6 +13,35 @@ import (
 	"golang.org/x/oauth2"
 )
 
+func TestRead_ValidFormat(t *testing.T) {
+	require := requirepkg.New(t)
+	assert := assertpkg.New(t)
+
+	credentialDir, _, err := Setup(t)
+	require.NoError(err)
+	require.NotNil(credentialDir)
+
+	now := time.Now()
+	cache := Cache{
+		AccessToken:       "some.valid.jwt",
+		RefreshToken:      "SoRefreshing:)",
+		AccessTokenExpiry: now,
+		SessionExpiry:     now,
+	}
+
+	assert.NoError(Write(cache))
+
+	cachePointer, err := Read()
+	require.NoError(err)
+
+	assert.Equal(cache.AccessToken, cachePointer.AccessToken)
+	assert.Equal(cache.RefreshToken, cachePointer.RefreshToken)
+	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
+	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
+
+	require.NoError(Destroy(t))
+}
+
 func TestRead(t *testing.T) {
 
 	require := requirepkg.New(t)
@@ -122,35 +151,6 @@ func TestRead(t *testing.T) {
 
 	}
 
-}
-
-func TestRead_ValidFormat(t *testing.T) {
-	require := requirepkg.New(t)
-	assert := assertpkg.New(t)
-
-	credentialDir, _, err := Setup(t)
-	require.NoError(err)
-	require.NotNil(credentialDir)
-
-	now := time.Now()
-	cache := Cache{
-		AccessToken:       "some.valid.jwt",
-		RefreshToken:      "SoRefreshing:)",
-		AccessTokenExpiry: now,
-		SessionExpiry:     now,
-	}
-
-	assert.NoError(Write(cache))
-
-	cachePointer, err := Read()
-	require.NoError(err)
-
-	assert.Equal(cache.AccessToken, cachePointer.AccessToken)
-	assert.Equal(cache.RefreshToken, cachePointer.RefreshToken)
-	assert.Equal(cache.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.AccessTokenExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-	assert.Equal(cache.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"), cachePointer.SessionExpiry.Format("2006-01-02T15:04:05 -07:00:00"))
-
-	require.NoError(Destroy(t))
 }
 
 func TestWrite(t *testing.T) {
