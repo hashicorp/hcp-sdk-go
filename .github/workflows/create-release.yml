@@ -26,15 +26,6 @@ jobs:
           go-version-file: 'go.mod'
           cache-dependency-path: go.sum
 
-      - name: Configure Git
-        env:
-          TOKEN: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
-        run: |
-            git config --global advice.detachedHead false
-            git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
-            git config user.name "hashicorp-cloud"
-            git config user.email "hashicorp-cloud@hashicorp.com"
-
       - name: Install Go Binaries
         env:
           GOPRIVATE: 'github.com/hashicorp/*'
@@ -79,6 +70,8 @@ jobs:
               echo -e "## ${NEW_VERSION} (${DATE})\n${CHANGELOG}" > CHANGELOG.md
               cat OLD-CHANGELOG.md >> CHANGELOG.md
               rm -f OLD-CHANGELOG.md
+              git config user.name "HashiCorp Cloud Services"
+              git config user.email "${{ secrets.HCP_SERVICE_ACCOUNT_EMAIL }}"
               git add CHANGELOG.md
               git commit -m 'updated CHANGELOG.md'
               echo "creating a new git tag"
