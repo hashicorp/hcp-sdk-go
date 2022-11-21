@@ -1,0 +1,3 @@
+```release-note:improvement
+Skip browser login test during CI.
+```
