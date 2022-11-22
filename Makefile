@@ -29,7 +29,7 @@ go/lint:
 # Run the test and generate an html coverage file.
 .PHONY: test-ci
 test-ci: go/lint
-	go test -coverprofile=coverage.out ./...
+	go test -coverprofile=coverage.out -short ./...
 	go tool cover -html=coverage.out -o coverage.html
 
 # args passed to sdk/update
