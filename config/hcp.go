@@ -84,6 +84,13 @@ type hcpConfig struct {
 	// session is responsible for getting an access token fron our identity provider.
 	// A mock can be used in tests.
 	session auth.Session
+
+	//TODO: should we be initializing the individual variables on the Config instance or instead a Profile interface instance/UserProfile struct?
+	hcpOrganizationID string
+
+	hcpProjectID string
+
+	hcpEnvironment string
 }
 
 func (c *hcpConfig) Token() (*oauth2.Token, error) {

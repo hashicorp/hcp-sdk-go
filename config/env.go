@@ -29,6 +29,19 @@ const (
 	envVarSCADAAddress = "HCP_SCADA_ADDRESS"
 
 	envVarSCADATLS = "HCP_SCADA_TLS"
+
+	envVarHCPOrganizationID = "HCP_ORGANIZATION_ID"
+
+	envVarHCPProjectID = "HCP_PROJECT_ID"
+
+	envVarHCPEnvironment = "HCP_ENVIRONMENT"
+
+	// TODO: How would we allow our mock to mimic profile lookup without corrupting actual user profile values?
+	//envVarHCPOrganizationID_TEST = "HCP_ORGANIZATION_ID_TEST"
+
+	//envVarHCPOrganizationID_TEST = "HCP_ORGANIZATION_ID_TEST"
+
+	//envVarHCPOrganizationID_TEST = "HCP_ORGANIZATION_ID_TEST"
 )
 
 const (
@@ -52,6 +65,18 @@ const (
 // It will not fail if no or only part of the variables are present.
 func FromEnv() HCPConfigOption {
 	return func(config *hcpConfig) error {
+		// Read user profile information from the environment, the values will only be
+		// used if both are provided.
+		hcpOrganizationID, hcpOrganizationIDOK := os.LookupEnv(envVarHCPOrganizationID)
+		hcpProjectID, hcpProjectIDOK := os.LookupEnv(envVarHCPProjectID)
+		hcpEnvironment, hcpEnvironmentOK := os.LookupEnv(envVarHCPEnvironment)
+
+		if hcpOrganizationIDOK && hcpProjectIDOK && hcpEnvironmentOK {
+			if err := apply(config, WithProfile(hcpOrganizationID, hcpProjectID, hcpEnvironment)); err != nil {
+				return fmt.Errorf("failed to set client credentials from environment variables (%s, %s): %w", envVarClientID, envVarClientSecret, err)
+			}
+		}
+
 		// Read client credentials from the environment, the values will only be
 		// used if both are provided.
 		clientID, clientIDOK := os.LookupEnv(envVarClientID)

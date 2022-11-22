@@ -125,3 +125,13 @@ func WithSession(s auth.Session) HCPConfigOption {
 		return nil
 	}
 }
+
+func WithProfile(projectId, organizationID, hcpEnvironment string) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.hcpOrganizationID = organizationID
+		config.hcpProjectID = projectId
+		config.hcpEnvironment = hcpEnvironment
+
+		return nil
+	}
+}
