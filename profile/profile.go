@@ -64,7 +64,7 @@ func (p *UserProfile) GetEnvironment() string {
 func (p *UserProfile) SetOrganizationID(id string) error {
 	err := os.Setenv(envVarHCPOrganizationID, id)
 	if err != nil {
-		return fmt.Errorf("Unable to set %s: %v", envVarHCPOrganizationID, err)
+		return fmt.Errorf("unable to set %s: %v", envVarHCPOrganizationID, err)
 	}
 	p.hcpOrganizationID = id
 	return nil
@@ -73,7 +73,7 @@ func (p *UserProfile) SetOrganizationID(id string) error {
 func (p *UserProfile) SetProjectID(id string) error {
 	err := os.Setenv(envVarHCPProjectID, id)
 	if err != nil {
-		return fmt.Errorf("Unable to set %s: %v", envVarHCPProjectID, err)
+		return fmt.Errorf("unable to set %s: %v", envVarHCPProjectID, err)
 	}
 	p.hcpProjectID = id
 	return nil
@@ -82,7 +82,7 @@ func (p *UserProfile) SetProjectID(id string) error {
 func (p *UserProfile) SetEnvironment(env string) error {
 	err := os.Setenv(envVarHCPEnvironment, env)
 	if err != nil {
-		return fmt.Errorf("Unable to set %s: %v", envVarHCPEnvironment, err)
+		return fmt.Errorf("unable to set %s: %v", envVarHCPEnvironment, err)
 	}
 	p.hcpEnvironment = env
 	return nil

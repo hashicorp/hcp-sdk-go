@@ -45,8 +45,6 @@ type HCPConfig interface {
 	// TLS will be enabled by default but may be disabled for development
 	// purposes.
 	SCADATLSConfig() *tls.Config
-
-	//Profile() profile.UserProfile
 }
 
 type hcpConfig struct {
