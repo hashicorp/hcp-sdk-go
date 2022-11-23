@@ -8,22 +8,22 @@ import (
 type Profile interface {
 
 	// getOrganizationID() retrieves a user's organization ID.
-	getOrganizationID() (string, error)
+	GetOrganizationID() string
 
 	// getProjectID() retrieves the user's project ID.
-	getProjectID() (string, error)
+	GetProjectID() string
 
 	// getEnvironment() retrieves the application's development environment.
-	getEnvironment() (string, error)
+	GetEnvironment() string
 
 	// setOrganizationID() sets a user's organization ID.
-	setOrganizationID(string) error
+	SetOrganizationID(string) error
 
 	// setProjectID() sets the user's project ID.
-	setProjectID(string) error
+	SetProjectID(string) error
 
 	// setEnvironment() sets the application's development environment.
-	setEnvironment(string) error
+	SetEnvironment(string) error
 }
 
 const (
@@ -34,6 +34,7 @@ const (
 	envVarHCPEnvironment = "HCP_ENVIRONMENT"
 )
 
+// UserProfile implements the Profile interface.
 type UserProfile struct {
 
 	// hcpOrganizationID is the user's organization ID.
