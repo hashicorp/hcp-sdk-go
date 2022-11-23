@@ -126,11 +126,14 @@ func WithSession(s auth.Session) HCPConfigOption {
 	}
 }
 
-func WithProfile(projectId, organizationID, hcpEnvironment string) HCPConfigOption {
+// WithProfile is an option that can be used to provide a custom Profile struct.
+//
+// This should only be necessary for development purposes.
+func WithProfile(organizationID, projectId, hcpEnvironment string) HCPConfigOption {
 	return func(config *hcpConfig) error {
-		config.hcpOrganizationID = organizationID
-		config.hcpProjectID = projectId
-		config.hcpEnvironment = hcpEnvironment
+		config.profile.SetOrganizationID(organizationID)
+		config.profile.SetProjectID(projectId)
+		config.profile.SetEnvironment(hcpEnvironment)
 
 		return nil
 	}

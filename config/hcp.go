@@ -6,6 +6,7 @@ import (
 	"net/url"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/profile"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
 )
@@ -44,6 +45,8 @@ type HCPConfig interface {
 	// TLS will be enabled by default but may be disabled for development
 	// purposes.
 	SCADATLSConfig() *tls.Config
+
+	//Profile() profile.UserProfile
 }
 
 type hcpConfig struct {
@@ -85,12 +88,8 @@ type hcpConfig struct {
 	// A mock can be used in tests.
 	session auth.Session
 
-	//TODO: should we be initializing the individual variables on the Config instance or instead a Profile interface instance/UserProfile struct?
-	hcpOrganizationID string
-
-	hcpProjectID string
-
-	hcpEnvironment string
+	// profile is user's the org id, project id, and application environment
+	profile profile.UserProfile
 }
 
 func (c *hcpConfig) Token() (*oauth2.Token, error) {
@@ -155,6 +154,11 @@ func (c *hcpConfig) validate() error {
 	// Ensure an SCADA address is valid
 	if c.scadaAddress == "" {
 		return fmt.Errorf("the SCADA address has to be non-empty")
+	}
+
+	// Ensure Profile is valid
+	if c.profile.GetOrganizationID() == "" || c.profile.GetProjectID() == "" {
+		return fmt.Errorf("organization ID and project ID must be non-empty")
 	}
 
 	return nil

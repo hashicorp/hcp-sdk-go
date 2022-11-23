@@ -35,13 +35,6 @@ const (
 	envVarHCPProjectID = "HCP_PROJECT_ID"
 
 	envVarHCPEnvironment = "HCP_ENVIRONMENT"
-
-	// TODO: How would we allow our mock to mimic profile lookup without corrupting actual user profile values?
-	//envVarHCPOrganizationID_TEST = "HCP_ORGANIZATION_ID_TEST"
-
-	//envVarHCPOrganizationID_TEST = "HCP_ORGANIZATION_ID_TEST"
-
-	//envVarHCPOrganizationID_TEST = "HCP_ORGANIZATION_ID_TEST"
 )
 
 const (

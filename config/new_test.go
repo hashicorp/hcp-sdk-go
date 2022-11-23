@@ -36,6 +36,7 @@ func TestNew_Options(t *testing.T) {
 		WithPortalURL("https://my-portal:1234"),
 		WithAPI("my-api:2345", &tls.Config{}),
 		WithSCADA("my-scada:3456", &tls.Config{}),
+		WithProfile("org-id-234", "proj-id-2345", "dev-env"),
 	)
 
 	require.NoError(err)

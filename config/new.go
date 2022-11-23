@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/profile"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
@@ -74,6 +75,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 			Scopes:      []string{"openid", "offline_access"},
 		},
 		session: &auth.UserSession{},
+		profile: profile.UserProfile{},
 
 		portalURL: portalURL,
 

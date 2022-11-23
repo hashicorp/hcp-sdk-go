@@ -105,3 +105,16 @@ func TestWith_Session(t *testing.T) {
 	// Ensure Sessions is an empty MockSession object
 	require.Equal(&auth.MockSession{}, config.session)
 }
+
+func TestWith_Profile(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config := &hcpConfig{}
+	require.NoError(apply(config, WithProfile("org-id-234", "project-id-2345", "dev-env")))
+
+	// Ensure config Profile fields match expected values
+	require.Equal("org-id-234", config.profile.GetOrganizationID())
+	require.Equal("project-id-2345", config.profile.GetProjectID())
+	require.Equal("dev-env", config.profile.GetEnvironment())
+}
