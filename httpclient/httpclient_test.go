@@ -23,6 +23,7 @@ func TestNew(t *testing.T) {
 	token := "90d64460d14870c08c81352a05dedd3465940a7c"
 	clientID := "CLIENT_ID"
 	clientSecret := "CLIENT_SECRET"
+	environment := "dev"
 
 	orgID := "test-org"
 	projID := "test-project"
@@ -122,6 +123,7 @@ func TestNew(t *testing.T) {
 			config.WithClientCredentials(clientID, clientSecret),
 			config.WithAuth(ts.URL, tlsConfig),
 			config.WithAPI(serverURL.Host, tlsConfig),
+			config.WithProfile(orgID, projID, environment),
 		)
 		require.NoError(t, err)
 

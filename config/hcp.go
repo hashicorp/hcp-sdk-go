@@ -154,11 +154,6 @@ func (c *hcpConfig) validate() error {
 		return fmt.Errorf("the SCADA address has to be non-empty")
 	}
 
-	// Ensure Profile is valid
-	if c.profile.GetOrganizationID() == "" || c.profile.GetProjectID() == "" {
-		return fmt.Errorf("organization ID and project ID must be non-empty")
-	}
-
 	return nil
 }
 
