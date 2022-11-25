@@ -143,6 +143,15 @@ func loadSharedDefinitions(sharedPath, svcPath string) (map[string]bool, error) 
 	return sharedDefs, nil
 }
 
+// sharedDefNameReplaces is used for replacing with specific values those that
+// are incompatible with `strcase.ToCamel`
+//
+// For example, google.rpc.Status, when fed into ToCamel, yields GoogleRpcStatus,
+// which is not the name of the structure, but GoogleRPCStatus
+var sharedDefNameReplaces = map[string]string{
+	"google.rpc.Status": "GoogleRPCStatus",
+}
+
 // addSharedExtensions loops over each shared type definition in a service spec and adds the type that it should reuse.
 // Without adding the type reuse extension, separate copies of each shared type definition are generated alongside the service-specific type definitions.
 func addSharedExtension(apiSpec *spec.Swagger, sharedDefs map[string]bool) (*spec.Swagger, error) {
@@ -154,9 +163,12 @@ func addSharedExtension(apiSpec *spec.Swagger, sharedDefs map[string]bool) (*spe
 			continue
 		}
 
-		// The shared definition name gets transformed into a camelcased Go type.
-		// example: hashicorp.cloud.common.PaginationRequest -> HashicorpCloudCommonPaginationRequest
-		genTypeName := strcase.ToCamel(sharedDefName)
+		genTypeName := sharedDefNameReplaces[sharedDefName]
+		if genTypeName == "" {
+			// Unless for some exceptions, the shared definition name gets transformed into a camelcased Go type.
+			// example: hashicorp.cloud.common.PaginationRequest -> HashicorpCloudCommonPaginationRequest
+			genTypeName = strcase.ToCamel(sharedDefName)
+		}
 
 		// This struct contains all the data, like which package to import, needed for the SDK client generator to ensure the service reuses
 		// the generated shared type, rather than a service-specific duplicate of that shared type.
