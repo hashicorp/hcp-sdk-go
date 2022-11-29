@@ -15,6 +15,7 @@ import (
 
 	consul "github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/stable/2021-02-04/client/consul_service"
 	"github.com/hashicorp/hcp-sdk-go/config"
+	"github.com/hashicorp/hcp-sdk-go/profile"
 )
 
 func TestNew(t *testing.T) {
@@ -23,7 +24,6 @@ func TestNew(t *testing.T) {
 	token := "90d64460d14870c08c81352a05dedd3465940a7c"
 	clientID := "CLIENT_ID"
 	clientSecret := "CLIENT_SECRET"
-	environment := "dev"
 
 	orgID := "test-org"
 	projID := "test-project"
@@ -123,7 +123,7 @@ func TestNew(t *testing.T) {
 			config.WithClientCredentials(clientID, clientSecret),
 			config.WithAuth(ts.URL, tlsConfig),
 			config.WithAPI(serverURL.Host, tlsConfig),
-			config.WithProfile(orgID, projID, environment),
+			config.WithProfile(&profile.UserProfile{OrganizationID: orgID, ProjectID: projID}),
 		)
 		require.NoError(t, err)
 

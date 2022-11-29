@@ -6,6 +6,7 @@ import (
 	"net/url"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/profile"
 )
 
 // WithClientCredentials credentials is an option that can be used to set
@@ -126,23 +127,12 @@ func WithSession(s auth.Session) HCPConfigOption {
 	}
 }
 
-// WithProfile is an option that can be used to provide a custom Profile struct.
+// WithProfile is an option that can be used to provide a custom UserProfile struct.
 //
 // This should only be necessary for development purposes.
-func WithProfile(organizationID, projectID, hcpEnvironment string) HCPConfigOption {
+func WithProfile(p *profile.UserProfile) HCPConfigOption {
 	return func(config *hcpConfig) error {
-		err := config.profile.SetOrganizationID(organizationID)
-		if err != nil {
-			return err
-		}
-		err = config.profile.SetProjectID(projectID)
-		if err != nil {
-			return err
-		}
-		err = config.profile.SetEnvironment(hcpEnvironment)
-		if err != nil {
-			return err
-		}
+		config.profile = p
 
 		return nil
 	}

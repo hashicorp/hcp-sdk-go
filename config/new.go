@@ -75,7 +75,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 			Scopes:      []string{"openid", "offline_access"},
 		},
 		session: &auth.UserSession{},
-		profile: profile.UserProfile{},
+		profile: &profile.UserProfile{},
 
 		portalURL: portalURL,
 

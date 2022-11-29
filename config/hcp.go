@@ -87,7 +87,11 @@ type hcpConfig struct {
 	session auth.Session
 
 	// profile is user's the org id, project id, and application environment
-	profile profile.UserProfile
+	profile *profile.UserProfile
+}
+
+func (c *hcpConfig) Profile() *profile.UserProfile {
+	return c.profile
 }
 
 func (c *hcpConfig) Token() (*oauth2.Token, error) {

@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/hashicorp/hcp-sdk-go/profile"
 )
 
 // The following constants contain the names of environment variables that can
@@ -33,8 +35,6 @@ const (
 	envVarHCPOrganizationID = "HCP_ORGANIZATION_ID"
 
 	envVarHCPProjectID = "HCP_PROJECT_ID"
-
-	envVarHCPEnvironment = "HCP_ENVIRONMENT"
 )
 
 const (
@@ -58,17 +58,6 @@ const (
 // It will not fail if no or only part of the variables are present.
 func FromEnv() HCPConfigOption {
 	return func(config *hcpConfig) error {
-		// Read user profile information from the environment, the values will only be
-		// used if both are provided.
-		hcpOrganizationID, hcpOrganizationIDOK := os.LookupEnv(envVarHCPOrganizationID)
-		hcpProjectID, hcpProjectIDOK := os.LookupEnv(envVarHCPProjectID)
-		hcpEnvironment, hcpEnvironmentOK := os.LookupEnv(envVarHCPEnvironment)
-
-		if hcpOrganizationIDOK && hcpProjectIDOK && hcpEnvironmentOK {
-			if err := apply(config, WithProfile(hcpOrganizationID, hcpProjectID, hcpEnvironment)); err != nil {
-				return fmt.Errorf("failed to set client credentials from environment variables (%s, %s): %w", envVarClientID, envVarClientSecret, err)
-			}
-		}
 
 		// Read client credentials from the environment, the values will only be
 		// used if both are provided.
@@ -140,6 +129,18 @@ func FromEnv() HCPConfigOption {
 				return fmt.Errorf("failed to configure TLS basd on environment variable %s: %w", envVarSCADATLS, err)
 			}
 			config.scadaTLSConfig = scadaTLSConfig
+		}
+
+		// Read user profile information from the environment, the values will only be
+		// used if both fields are provided.
+		hcpOrganizationID, hcpOrganizationIDOK := os.LookupEnv(envVarHCPOrganizationID)
+		hcpProjectID, hcpProjectIDOK := os.LookupEnv(envVarHCPProjectID)
+
+		if hcpOrganizationIDOK && hcpProjectIDOK {
+			userProfile := profile.UserProfile{OrganizationID: hcpOrganizationID, ProjectID: hcpProjectID}
+			if err := apply(config, WithProfile(&userProfile)); err != nil {
+				return fmt.Errorf("failed to set profile fields from environment variables (%s, %s): %w", envVarHCPOrganizationID, envVarHCPProjectID, err)
+			}
 		}
 
 		return nil

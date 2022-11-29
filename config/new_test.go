@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/profile"
 	requirepkg "github.com/stretchr/testify/require"
 )
 
@@ -36,7 +37,8 @@ func TestNew_Options(t *testing.T) {
 		WithPortalURL("https://my-portal:1234"),
 		WithAPI("my-api:2345", &tls.Config{}),
 		WithSCADA("my-scada:3456", &tls.Config{}),
-		WithProfile("org-id-234", "proj-id-2345", "dev-env"),
+		// considering that some fields now are optional...should that mean I should be passing in the Profile struct instance directly here (empty or otherwise)?
+		WithProfile(&profile.UserProfile{}),
 	)
 
 	require.NoError(err)
