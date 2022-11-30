@@ -1,3 +1,8 @@
+## v0.26.0 (November 30, 2022)
+
+BUG FIXES:
+
+* Added exception for google.rpc.status when generating code since it was mistakenly rendered as `GoogleRpcStatus` instead of `GoogleRPCStatus` [[GH-138](https://github.com/hashicorp/hcp-sdk-go/pull/138)]
 ## v0.25.0 (November 23, 2022)
 
 FEATURES:
