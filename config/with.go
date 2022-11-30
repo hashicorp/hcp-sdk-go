@@ -128,12 +128,9 @@ func WithSession(s auth.Session) HCPConfigOption {
 }
 
 // WithProfile is an option that can be used to provide a custom UserProfile struct.
-//
-// This should only be necessary for development purposes.
 func WithProfile(p *profile.UserProfile) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.profile = p
-
 		return nil
 	}
 }

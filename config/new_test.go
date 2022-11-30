@@ -37,15 +37,16 @@ func TestNew_Options(t *testing.T) {
 		WithPortalURL("https://my-portal:1234"),
 		WithAPI("my-api:2345", &tls.Config{}),
 		WithSCADA("my-scada:3456", &tls.Config{}),
-		// considering that some fields now are optional...should that mean I should be passing in the Profile struct instance directly here (empty or otherwise)?
-		WithProfile(&profile.UserProfile{}),
+		WithProfile(&profile.UserProfile{OrganizationID: "org-id-123", ProjectID: "proj-id-123"}),
 	)
-
+	//profile := config.Profile()
 	require.NoError(err)
 	// Ensure the values have been set accordingly
 	require.Equal("https://my-portal:1234", config.PortalURL().String())
 	require.Equal("my-api:2345", config.APIAddress())
 	require.Equal("my-scada:3456", config.SCADAAddress())
+	require.Equal("org-id-123", config.Profile().OrganizationID)
+	require.Equal("proj-id-123", config.Profile().ProjectID)
 }
 
 func TestNew_MockSession(t *testing.T) {

@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/profile"
 	requirepkg "github.com/stretchr/testify/require"
 )
 
@@ -104,4 +105,18 @@ func TestWith_Session(t *testing.T) {
 
 	// Ensure Sessions is an empty MockSession object
 	require.Equal(&auth.MockSession{}, config.session)
+}
+
+func TestWith_Profile(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config := &hcpConfig{}
+	profile := &profile.UserProfile{OrganizationID: "org-id-1234", ProjectID: "project-id-1234"}
+	require.NoError(apply(config, WithProfile(profile)))
+
+	//Ensure UserProfile fields match configured values
+	require.Equal("org-id-1234", config.Profile().OrganizationID)
+	require.Equal("project-id-1234", config.Profile().ProjectID)
+
 }

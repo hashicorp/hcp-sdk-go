@@ -13,6 +13,10 @@ import (
 
 // HCPConfig provides configuration values that are useful to interact with HCP.
 type HCPConfig interface {
+
+	//Profile will return the user's configured profile information
+	Profile() *profile.UserProfile
+
 	// TokenSource will return a token that can be used to authenticate to HCP.
 	oauth2.TokenSource
 
@@ -86,7 +90,7 @@ type hcpConfig struct {
 	// A mock can be used in tests.
 	session auth.Session
 
-	// profile is user's the org id, project id, and application environment
+	// profile is user's the organization id and project id
 	profile *profile.UserProfile
 }
 

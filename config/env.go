@@ -139,7 +139,7 @@ func FromEnv() HCPConfigOption {
 		if hcpOrganizationIDOK && hcpProjectIDOK {
 			userProfile := profile.UserProfile{OrganizationID: hcpOrganizationID, ProjectID: hcpProjectID}
 			if err := apply(config, WithProfile(&userProfile)); err != nil {
-				return fmt.Errorf("failed to set profile fields from environment variables (%s, %s): %w", envVarHCPOrganizationID, envVarHCPProjectID, err)
+				return fmt.Errorf("failed to configure profile fields based on environment variables (%s, %s): %w", envVarHCPOrganizationID, envVarHCPProjectID, err)
 			}
 		}
 
