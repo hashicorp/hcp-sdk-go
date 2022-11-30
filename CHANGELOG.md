@@ -1,3 +1,5 @@
+## v0.26.0 (November 30, 2022)
+
 ## v0.25.0 (November 23, 2022)
 
 FEATURES:
