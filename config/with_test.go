@@ -115,7 +115,7 @@ func TestWith_Profile(t *testing.T) {
 	profile := &profile.UserProfile{OrganizationID: "org-id-1234", ProjectID: "project-id-1234"}
 	require.NoError(apply(config, WithProfile(profile)))
 
-	//Ensure UserProfile fields match configured values
+	// Ensure UserProfile fields match configured values
 	require.Equal("org-id-1234", config.Profile().OrganizationID)
 	require.Equal("project-id-1234", config.Profile().ProjectID)
 

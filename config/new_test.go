@@ -39,7 +39,7 @@ func TestNew_Options(t *testing.T) {
 		WithSCADA("my-scada:3456", &tls.Config{}),
 		WithProfile(&profile.UserProfile{OrganizationID: "org-id-123", ProjectID: "proj-id-123"}),
 	)
-	//profile := config.Profile()
+
 	require.NoError(err)
 	// Ensure the values have been set accordingly
 	require.Equal("https://my-portal:1234", config.PortalURL().String())
