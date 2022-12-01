@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/stable/2021-04-30/models"
 )
 
 // NewPackerServiceUpdateIterationParams creates a new PackerServiceUpdateIterationParams object,
@@ -64,7 +62,7 @@ PackerServiceUpdateIterationParams contains all the parameters to send to the AP
 type PackerServiceUpdateIterationParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudPackerUpdateIterationRequest
+	Body PackerServiceUpdateIterationBody
 
 	/* IterationID.
 
@@ -138,13 +136,13 @@ func (o *PackerServiceUpdateIterationParams) SetHTTPClient(client *http.Client) 
 }
 
 // WithBody adds the body to the packer service update iteration params
-func (o *PackerServiceUpdateIterationParams) WithBody(body *models.HashicorpCloudPackerUpdateIterationRequest) *PackerServiceUpdateIterationParams {
+func (o *PackerServiceUpdateIterationParams) WithBody(body PackerServiceUpdateIterationBody) *PackerServiceUpdateIterationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the packer service update iteration params
-func (o *PackerServiceUpdateIterationParams) SetBody(body *models.HashicorpCloudPackerUpdateIterationRequest) {
+func (o *PackerServiceUpdateIterationParams) SetBody(body PackerServiceUpdateIterationBody) {
 	o.Body = body
 }
 
@@ -188,10 +186,8 @@ func (o *PackerServiceUpdateIterationParams) WriteToRequest(r runtime.ClientRequ
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param iteration_id

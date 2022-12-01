@@ -118,7 +118,7 @@ An unexpected error response.
 type PackerServiceDeleteBuildDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the packer service delete build default response
@@ -159,13 +159,13 @@ func (o *PackerServiceDeleteBuildDefault) String() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}][%d] PackerService_DeleteBuild default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *PackerServiceDeleteBuildDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *PackerServiceDeleteBuildDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *PackerServiceDeleteBuildDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

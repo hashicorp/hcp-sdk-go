@@ -13,19 +13,18 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudPacker20220411BucketAncestry The ancestral relation between two buckets composed by a parent and a
-// child.
+// HashicorpCloudPacker20220411BucketAncestry The parent-child relationship between two image buckets.
 //
 // swagger:model hashicorp.cloud.packer_20220411.BucketAncestry
 type HashicorpCloudPacker20220411BucketAncestry struct {
 
-	// The child bucket and the iteration that relates to the parent.
+	// The child image bucket and the iteration in that image bucket that relates to the parent.
 	Child *HashicorpCloudPacker20220411BucketAncestryChild `json:"child,omitempty"`
 
-	// The parent bucket and the iteration that relates to the child.
+	// The parent image bucket and iteration that relates to the child image bucket's latest iteration.
 	Parent *HashicorpCloudPacker20220411BucketAncestryParent `json:"parent,omitempty"`
 
-	// The status of the relation between the parent and child buckets.
+	// The status of the relationship between the parent and child buckets.
 	Status *HashicorpCloudPacker20220411BucketAncestryStatus `json:"status,omitempty"`
 }
 

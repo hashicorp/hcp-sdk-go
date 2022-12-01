@@ -49,15 +49,11 @@ type HashicorpCloudPacker20220411Build struct {
 	// post-processor, this UUID will match the UUID present there.
 	PackerRunUUID string `json:"packer_run_uuid,omitempty"`
 
-	// The parent image used as source for this build.
-	Parent *HashicorpCloudPacker20220411ParentBuildStatus `json:"parent,omitempty"`
-
-	// Unique identifier of the HCP Packer registry build used as the source
-	// for this build. Used for tracking dependencies for build pipelines.
+	// Unique identifier of the HCP Packer registry build that Packer uses  as the source
+	// for this build. HCP Packer uses this to track dependencies for build pipelines.
 	SourceBuildUlid string `json:"source_build_ulid,omitempty"`
 
-	// The ID or URL of the remote cloud source image. Used for tracking image
-	// dependencies for build pipelines.
+	// The ID or URL of the remote cloud source image that HCP Packer uses to track image dependencies for build pipelines.
 	SourceImageID string `json:"source_image_id,omitempty"`
 
 	// Status of the build. The status can be RUNNING, DONE, CANCELLED, FAILED,
@@ -78,10 +74,6 @@ func (m *HashicorpCloudPacker20220411Build) Validate(formats strfmt.Registry) er
 	}
 
 	if err := m.validateImages(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateParent(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -137,25 +129,6 @@ func (m *HashicorpCloudPacker20220411Build) validateImages(formats strfmt.Regist
 	return nil
 }
 
-func (m *HashicorpCloudPacker20220411Build) validateParent(formats strfmt.Registry) error {
-	if swag.IsZero(m.Parent) { // not required
-		return nil
-	}
-
-	if m.Parent != nil {
-		if err := m.Parent.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("parent")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("parent")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *HashicorpCloudPacker20220411Build) validateStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.Status) { // not required
 		return nil
@@ -195,10 +168,6 @@ func (m *HashicorpCloudPacker20220411Build) ContextValidate(ctx context.Context,
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateParent(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -224,22 +193,6 @@ func (m *HashicorpCloudPacker20220411Build) contextValidateImages(ctx context.Co
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudPacker20220411Build) contextValidateParent(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Parent != nil {
-		if err := m.Parent.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("parent")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("parent")
-			}
-			return err
-		}
 	}
 
 	return nil

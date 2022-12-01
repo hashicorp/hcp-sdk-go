@@ -15,7 +15,7 @@ import (
 )
 
 // HashicorpCloudPacker20220411IterationRevocationType  - MANUAL: This iteration was revoked manually.
-//   - INHERITED: This iteration was revoked automatically through multi-level revocation and therefore is inherited.
+//   - INHERITED: This iteration inherited a revocation from an upstream ancestor and was revoked automatically.
 //
 // swagger:model hashicorp.cloud.packer_20220411.Iteration.RevocationType
 type HashicorpCloudPacker20220411IterationRevocationType string

@@ -45,6 +45,10 @@ type HashicorpCloudPacker20220411Iteration struct {
 	// `HCP_PACKER_BUILD_FINGERPRINT`.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
+	// If true, this iteration has children iterations. Knowing if an iteration has descendants can help
+	// taking decisions such as persist revocation to all its descendants or not.
+	HasDescendants bool `json:"has_descendants,omitempty"`
+
 	// Universally Unique Lexicographically Sortable Identifier (ULID) of the iteration.
 	ID string `json:"id,omitempty"`
 
@@ -54,20 +58,21 @@ type HashicorpCloudPacker20220411Iteration struct {
 
 	// The unique identifier of the iteration that was used as a source
 	// for this iteration, if this iteration was built on a base layer.
-	// Deprecated: refer to 'parent' for source image information.
+	// Deprecated: refer to build specific source_build_ulid.
 	IterationAncestorID string `json:"iteration_ancestor_id,omitempty"`
 
 	// Who revoked this iteration. For human authors (e.g. HCP Portal) this will be an email address.
 	// For machine authors using service principals, this is the customer-chosen name for this service principal.
 	RevocationAuthor string `json:"revocation_author,omitempty"`
 
-	// The ancestor iteration from whom this iteration inherited the revocation state.
+	// The ancestor iteration from whom this iteration inherited the revocation.
 	RevocationInheritedFrom *HashicorpCloudPacker20220411RevokedAncestor `json:"revocation_inherited_from,omitempty"`
 
 	// A short explanation of why this iteration was revoked.
 	RevocationMessage string `json:"revocation_message,omitempty"`
 
-	// Revocation type is 'manual' when self revoked or 'inherited' when inherited from a revoked ancestor.
+	// Revocation type is 'manual' when the iteration is revoked directly  or 'inherited' when the iteration inherits
+	// a revocation from an upstream ancestor.
 	RevocationType *HashicorpCloudPacker20220411IterationRevocationType `json:"revocation_type,omitempty"`
 
 	// Timestamp from when the iteration is revoked an no longer trusted to be secure.

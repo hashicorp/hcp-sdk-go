@@ -6,11 +6,14 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/stable/2021-04-30/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -120,7 +123,7 @@ An unexpected error response.
 type PackerServiceUpdateBucketDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the packer service update bucket default response
@@ -161,18 +164,210 @@ func (o *PackerServiceUpdateBucketDefault) String() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}][%d] PackerService_UpdateBucket default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *PackerServiceUpdateBucketDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *PackerServiceUpdateBucketDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *PackerServiceUpdateBucketDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
+	return nil
+}
+
+/*
+PackerServiceUpdateBucketBody packer service update bucket body
+swagger:model PackerServiceUpdateBucketBody
+*/
+type PackerServiceUpdateBucketBody struct {
+
+	// A short description of what this bucket's images are for.
+	Description string `json:"description,omitempty"`
+
+	// A key:value map for custom, user-settable metadata about your bucket.
+	Labels map[string]string `json:"labels,omitempty"`
+
+	// location
+	Location *PackerServiceUpdateBucketParamsBodyLocation `json:"location,omitempty"`
+
+	// A list of the cloud providers or other platforms that are included in the latest complete iteration. e.g aws, gcp, or azure.
+	Platforms []string `json:"platforms"`
+}
+
+// Validate validates this packer service update bucket body
+func (o *PackerServiceUpdateBucketBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateBucketBody) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(o.Location) { // not required
+		return nil
+	}
+
+	if o.Location != nil {
+		if err := o.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this packer service update bucket body based on the context it is used
+func (o *PackerServiceUpdateBucketBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateBucketBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Location != nil {
+		if err := o.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *PackerServiceUpdateBucketBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *PackerServiceUpdateBucketBody) UnmarshalBinary(b []byte) error {
+	var res PackerServiceUpdateBucketBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+PackerServiceUpdateBucketParamsBodyLocation Location represents a target for an operation in HCP.
+swagger:model PackerServiceUpdateBucketParamsBodyLocation
+*/
+type PackerServiceUpdateBucketParamsBodyLocation struct {
+
+	// region is the region that the resource is located in. It is
+	// optional if the object being referenced is a global object.
+	Region *cloud.HashicorpCloudLocationRegion `json:"region,omitempty"`
+}
+
+// Validate validates this packer service update bucket params body location
+func (o *PackerServiceUpdateBucketParamsBodyLocation) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateRegion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateBucketParamsBodyLocation) validateRegion(formats strfmt.Registry) error {
+	if swag.IsZero(o.Region) { // not required
+		return nil
+	}
+
+	if o.Region != nil {
+		if err := o.Region.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this packer service update bucket params body location based on the context it is used
+func (o *PackerServiceUpdateBucketParamsBodyLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateRegion(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateBucketParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Region != nil {
+		if err := o.Region.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *PackerServiceUpdateBucketParamsBodyLocation) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *PackerServiceUpdateBucketParamsBodyLocation) UnmarshalBinary(b []byte) error {
+	var res PackerServiceUpdateBucketParamsBodyLocation
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

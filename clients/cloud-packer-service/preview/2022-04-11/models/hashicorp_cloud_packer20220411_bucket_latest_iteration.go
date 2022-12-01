@@ -55,7 +55,7 @@ type HashicorpCloudPacker20220411BucketLatestIteration struct {
 
 	// The unique identifier of the iteration that was used as a source
 	// for this iteration, if this iteration was built on a base layer.
-	// Deprecated: refer to 'parent' for source image information.
+	// Deprecated: refer to build specific source_build_ulid.
 	IterationAncestorID string `json:"iteration_ancestor_id,omitempty"`
 
 	// Who revoked this iteration. For human authors (e.g. HCP Portal) this will be an email address.

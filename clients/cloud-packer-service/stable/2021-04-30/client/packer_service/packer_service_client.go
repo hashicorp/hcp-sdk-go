@@ -70,8 +70,6 @@ type ClientService interface {
 
 	PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceRegenerateTFCRunTaskHmacKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceRegenerateTFCRunTaskHmacKeyOK, error)
 
-	PackerServiceTFCImageValidationRunTask(params *PackerServiceTFCImageValidationRunTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceTFCImageValidationRunTaskOK, error)
-
 	PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateBucketOK, error)
 
 	PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateBuildOK, error)
@@ -880,44 +878,6 @@ func (a *Client) PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceR
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PackerServiceRegenerateTFCRunTaskHmacKeyDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-PackerServiceTFCImageValidationRunTask terraforms cloud run task hook for validating an h c p packer artifact used in the terraform plan to block a terraform apply for artifacts that are in an invalid state such as revoked iterations
-*/
-func (a *Client) PackerServiceTFCImageValidationRunTask(params *PackerServiceTFCImageValidationRunTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceTFCImageValidationRunTaskOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPackerServiceTFCImageValidationRunTaskParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PackerService_TFCImageValidationRunTask",
-		Method:             "POST",
-		PathPattern:        "/packer/2021-04-30/terraform-cloud/validation/{api_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PackerServiceTFCImageValidationRunTaskReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PackerServiceTFCImageValidationRunTaskOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*PackerServiceTFCImageValidationRunTaskDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

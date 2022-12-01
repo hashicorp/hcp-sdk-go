@@ -21,11 +21,10 @@ type HashicorpCloudPacker20220411BucketAncestryParent struct {
 	// The parent bucket slug.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// The channel associated with this relationship.
+	// The image channel associated with this relationship.
 	Channel string `json:"channel,omitempty"`
 
-	// The iteration that is currently assigned to the channel associated
-	// with this relationship.
+	// The iteration currently assigned to the channel associated with the ancestry relationship.
 	ChannelIteration *HashicorpCloudPacker20220411BucketAncestryParentChannelIteration `json:"channel_iteration,omitempty"`
 
 	// The parent iteration fingerprint.

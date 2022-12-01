@@ -18,11 +18,11 @@ import (
 // swagger:model hashicorp.cloud.packer_20220411.BucketChildren
 type HashicorpCloudPacker20220411BucketChildren struct {
 
-	// The URL for the Bucket's descendants endpoint that takes to the next level of the ancestry tree listing all
-	// child buckets.
+	// The URL to retrieve the list of ancestry relationships between this image bucket and its direct children.
 	Href string `json:"href,omitempty"`
 
-	// The children's overall status. If at least one children is out of date, the overall status will be 'OUT_OF_DATE'.
+	// The overall ancestry status for all child iterations.
+	// If at least one child is out of date, HCP Packer reports the overall status as 'OUT_OF_DATE'.
 	Status *HashicorpCloudPacker20220411BucketAncestryStatus `json:"status,omitempty"`
 }
 

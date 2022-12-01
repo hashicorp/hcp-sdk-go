@@ -17,13 +17,13 @@ import (
 // swagger:model hashicorp.cloud.packer_20220411.BucketAncestry.Parent.ChannelIteration
 type HashicorpCloudPacker20220411BucketAncestryParentChannelIteration struct {
 
-	// The assigned iteration fingerprint.
+	// The currently assigned iteration's build fingerprint.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
-	// The assigned iteration ULID.
+	// The currently assigned iteration's ULID.
 	ID string `json:"id,omitempty"`
 
-	// The assigned iteration incremental version.
+	// The currently assigned iteration's incremental version.
 	IncrementalVersion int32 `json:"incremental_version,omitempty"`
 }
 

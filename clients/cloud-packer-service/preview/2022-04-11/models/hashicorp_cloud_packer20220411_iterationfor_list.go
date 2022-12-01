@@ -45,6 +45,10 @@ type HashicorpCloudPacker20220411IterationforList struct {
 	// `HCP_PACKER_BUILD_FINGERPRINT`.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
+	// If true, this iteration has children iterations. Knowing if an iteration has descendants can help
+	// taking decisions such as persist revocation to all its descendants or not.
+	HasDescendants bool `json:"has_descendants,omitempty"`
+
 	// Universally Unique Lexicographically Sortable Identifier (ULID) of the iteration.
 	ID string `json:"id,omitempty"`
 
@@ -54,7 +58,7 @@ type HashicorpCloudPacker20220411IterationforList struct {
 
 	// The unique identifier of the iteration that was used as a source
 	// for this iteration, if this iteration was built on a base layer.
-	// Deprecated: refer to 'parent' for source image information.
+	// Deprecated: Deprecated: refer to build specific source_build_ulid.
 	IterationAncestorID string `json:"iteration_ancestor_id,omitempty"`
 
 	// Who revoked this iteration. For human authors (e.g. HCP Portal) this will be an email address.

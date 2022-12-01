@@ -6,11 +6,14 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/stable/2021-04-30/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -120,7 +123,7 @@ An unexpected error response.
 type PackerServiceUpdateChannelDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the packer service update channel default response
@@ -161,18 +164,214 @@ func (o *PackerServiceUpdateChannelDefault) String() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_UpdateChannel default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *PackerServiceUpdateChannelDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *PackerServiceUpdateChannelDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *PackerServiceUpdateChannelDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
+	return nil
+}
+
+/*
+PackerServiceUpdateChannelBody packer service update channel body
+swagger:model PackerServiceUpdateChannelBody
+*/
+type PackerServiceUpdateChannelBody struct {
+
+	// Fingerprint of the iteration. The fingerprint is set by Packer when you
+	// call `packer build`. It will most often correspond to a git commit sha,
+	// but can be manually overridden by setting the environment variable
+	// `HCP_PACKER_BUILD_FINGERPRINT`.
+	Fingerprint string `json:"fingerprint,omitempty"`
+
+	// The human-readable version number assigned to this iteration.
+	IncrementalVersion int32 `json:"incremental_version,omitempty"`
+
+	// ULID of the iteration. This was created and set by the
+	// HCP Packer registry when the iteration was created.
+	IterationID string `json:"iteration_id,omitempty"`
+
+	// location
+	Location *PackerServiceUpdateChannelParamsBodyLocation `json:"location,omitempty"`
+}
+
+// Validate validates this packer service update channel body
+func (o *PackerServiceUpdateChannelBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateChannelBody) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(o.Location) { // not required
+		return nil
+	}
+
+	if o.Location != nil {
+		if err := o.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this packer service update channel body based on the context it is used
+func (o *PackerServiceUpdateChannelBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateChannelBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Location != nil {
+		if err := o.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *PackerServiceUpdateChannelBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *PackerServiceUpdateChannelBody) UnmarshalBinary(b []byte) error {
+	var res PackerServiceUpdateChannelBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+PackerServiceUpdateChannelParamsBodyLocation Location represents a target for an operation in HCP.
+swagger:model PackerServiceUpdateChannelParamsBodyLocation
+*/
+type PackerServiceUpdateChannelParamsBodyLocation struct {
+
+	// region is the region that the resource is located in. It is
+	// optional if the object being referenced is a global object.
+	Region *cloud.HashicorpCloudLocationRegion `json:"region,omitempty"`
+}
+
+// Validate validates this packer service update channel params body location
+func (o *PackerServiceUpdateChannelParamsBodyLocation) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateRegion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateChannelParamsBodyLocation) validateRegion(formats strfmt.Registry) error {
+	if swag.IsZero(o.Region) { // not required
+		return nil
+	}
+
+	if o.Region != nil {
+		if err := o.Region.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this packer service update channel params body location based on the context it is used
+func (o *PackerServiceUpdateChannelParamsBodyLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateRegion(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateChannelParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Region != nil {
+		if err := o.Region.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *PackerServiceUpdateChannelParamsBodyLocation) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *PackerServiceUpdateChannelParamsBodyLocation) UnmarshalBinary(b []byte) error {
+	var res PackerServiceUpdateChannelParamsBodyLocation
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

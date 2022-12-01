@@ -70,11 +70,33 @@ type PackerServiceListBucketAncestryParams struct {
 
 	/* Channel.
 
-	     The channel of the bucket used to filter children.
-	All listed children were built from iterations when assigned to this channel.
-	By default, an unspecified channel will list all children based on any iteration of this bucket.
+	     An image channel in the image bucket associated with the request. This property filters the results to children whose parent iteration  was assigned to this channel when the children were built.
+	If not specified, the endpoint returns all children built from any iteration in this image bucket.
 	*/
 	Channel *string
+
+	/* Fingerprint.
+
+	     Fingerprint of an iteration that HCP Packer uses to list that iteration's parents.
+	All parents are the parent images Packer used to build this iteration. If not specified, the endpoint returns the parents of the image bucket's latest iteration.
+	*/
+	Fingerprint *string
+
+	/* IncrementalVersion.
+
+	     The human-readable version number of an iteration that HCP Packer uses to list that iteration's parents.
+	All parents are the parent images Packer used to build this iteration. If not specified, the endpoint returns the parents of the image bucket's latest iteration.
+
+	     Format: int32
+	*/
+	IncrementalVersion *int32
+
+	/* IterationID.
+
+	     ULID of the iteration that HCP Packer uses to list that iteration's parents.
+	All parents are the parent images Packer used to build this iteration. If not specified, the endpoint returns the parents of the image bucket's latest iteration.
+	*/
+	IterationID *string
 
 	/* LocationOrganizationID.
 
@@ -129,9 +151,9 @@ type PackerServiceListBucketAncestryParams struct {
 
 	/* Type.
 
-	     The type of ancestry relations to list. Type 'parents' will list all the ancestral relations where this bucket is a child.
-	Type 'children' will list all the ancestral relations where this bucket is a parent.
-	By default, an unspecified type will list the ancestral relations where this bucket is either a parent or a child.
+	     The type of ancestry relations to list. Type 'parents' lists all the direct source images for this image bucket.
+	Type 'children' lists all of the child images built directly from this image bucket.
+	If not specified, defaults to listing both parent and child relationships for the image bucket.
 	*/
 	Type *string
 
@@ -208,6 +230,39 @@ func (o *PackerServiceListBucketAncestryParams) WithChannel(channel *string) *Pa
 // SetChannel adds the channel to the packer service list bucket ancestry params
 func (o *PackerServiceListBucketAncestryParams) SetChannel(channel *string) {
 	o.Channel = channel
+}
+
+// WithFingerprint adds the fingerprint to the packer service list bucket ancestry params
+func (o *PackerServiceListBucketAncestryParams) WithFingerprint(fingerprint *string) *PackerServiceListBucketAncestryParams {
+	o.SetFingerprint(fingerprint)
+	return o
+}
+
+// SetFingerprint adds the fingerprint to the packer service list bucket ancestry params
+func (o *PackerServiceListBucketAncestryParams) SetFingerprint(fingerprint *string) {
+	o.Fingerprint = fingerprint
+}
+
+// WithIncrementalVersion adds the incrementalVersion to the packer service list bucket ancestry params
+func (o *PackerServiceListBucketAncestryParams) WithIncrementalVersion(incrementalVersion *int32) *PackerServiceListBucketAncestryParams {
+	o.SetIncrementalVersion(incrementalVersion)
+	return o
+}
+
+// SetIncrementalVersion adds the incrementalVersion to the packer service list bucket ancestry params
+func (o *PackerServiceListBucketAncestryParams) SetIncrementalVersion(incrementalVersion *int32) {
+	o.IncrementalVersion = incrementalVersion
+}
+
+// WithIterationID adds the iterationID to the packer service list bucket ancestry params
+func (o *PackerServiceListBucketAncestryParams) WithIterationID(iterationID *string) *PackerServiceListBucketAncestryParams {
+	o.SetIterationID(iterationID)
+	return o
+}
+
+// SetIterationID adds the iterationId to the packer service list bucket ancestry params
+func (o *PackerServiceListBucketAncestryParams) SetIterationID(iterationID *string) {
+	o.IterationID = iterationID
 }
 
 // WithLocationOrganizationID adds the locationOrganizationID to the packer service list bucket ancestry params
@@ -323,6 +378,57 @@ func (o *PackerServiceListBucketAncestryParams) WriteToRequest(r runtime.ClientR
 		if qChannel != "" {
 
 			if err := r.SetQueryParam("channel", qChannel); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Fingerprint != nil {
+
+		// query param fingerprint
+		var qrFingerprint string
+
+		if o.Fingerprint != nil {
+			qrFingerprint = *o.Fingerprint
+		}
+		qFingerprint := qrFingerprint
+		if qFingerprint != "" {
+
+			if err := r.SetQueryParam("fingerprint", qFingerprint); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.IncrementalVersion != nil {
+
+		// query param incremental_version
+		var qrIncrementalVersion int32
+
+		if o.IncrementalVersion != nil {
+			qrIncrementalVersion = *o.IncrementalVersion
+		}
+		qIncrementalVersion := swag.FormatInt32(qrIncrementalVersion)
+		if qIncrementalVersion != "" {
+
+			if err := r.SetQueryParam("incremental_version", qIncrementalVersion); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.IterationID != nil {
+
+		// query param iteration_id
+		var qrIterationID string
+
+		if o.IterationID != nil {
+			qrIterationID = *o.IterationID
+		}
+		qIterationID := qrIterationID
+		if qIterationID != "" {
+
+			if err := r.SetQueryParam("iteration_id", qIterationID); err != nil {
 				return err
 			}
 		}

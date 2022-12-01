@@ -120,7 +120,7 @@ An unexpected error response.
 type PackerServiceListIterationsDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the packer service list iterations default response
@@ -161,13 +161,13 @@ func (o *PackerServiceListIterationsDefault) String() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations][%d] PackerService_ListIterations default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *PackerServiceListIterationsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *PackerServiceListIterationsDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *PackerServiceListIterationsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

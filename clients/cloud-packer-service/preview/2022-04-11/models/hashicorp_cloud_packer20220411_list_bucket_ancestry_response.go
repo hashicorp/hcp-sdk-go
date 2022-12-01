@@ -26,7 +26,7 @@ type HashicorpCloudPacker20220411ListBucketAncestryResponse struct {
 	// relations
 	Relations []*HashicorpCloudPacker20220411BucketAncestry `json:"relations"`
 
-	// The total count of relations.
+	// The total number of ancestral relationships returned for the specified image bucket. These can be parent or child images.
 	TotalCount int32 `json:"total_count,omitempty"`
 }
 

@@ -20,8 +20,8 @@ import (
 // swagger:model hashicorp.cloud.packer_20220411.Bucket
 type HashicorpCloudPacker20220411Bucket struct {
 
-	// The information about this bucket's children. Children are the image buckets that used any iteration of this bucket
-	// as the base image of their latest complete iteration.
+	// Information about this image bucket's children. Children are image buckets that used any iteration of this bucket
+	// as the base image for their latest complete iteration.
 	Children *HashicorpCloudPacker20220411BucketChildren `json:"children,omitempty"`
 
 	// When the bucket was created.
@@ -49,8 +49,8 @@ type HashicorpCloudPacker20220411Bucket struct {
 	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// The information about this bucket's parents. Parents are the base images used to build the latest complete iteration
-	// of this bucket.
+	// Information about this image bucket's parents. Parents are the base images Packer used to build the latest complete iteration
+	// in this image bucket.
 	Parents *HashicorpCloudPacker20220411BucketParents `json:"parents,omitempty"`
 
 	// A list of the cloud providers or other platforms that are included in the latest complete iteration. e.g aws, gcp, or azure.

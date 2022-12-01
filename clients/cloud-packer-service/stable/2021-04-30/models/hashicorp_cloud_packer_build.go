@@ -53,8 +53,7 @@ type HashicorpCloudPackerBuild struct {
 	// for this build. Used for tracking dependencies for build pipelines.
 	SourceBuildUlid string `json:"source_build_ulid,omitempty"`
 
-	// The ID or URL of the remote cloud source image. Used for tracking image
-	// dependencies for build pipelines.
+	// The ID or URL of the remote cloud source image that HCP Packer uses to track image dependencies for build pipelines.
 	SourceImageID string `json:"source_image_id,omitempty"`
 
 	// Status of the build. The status can be RUNNING, DONE, CANCELLED, FAILED,

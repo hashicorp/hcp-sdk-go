@@ -17,19 +17,19 @@ import (
 // swagger:model hashicorp.cloud.packer_20220411.RevokedAncestor
 type HashicorpCloudPacker20220411RevokedAncestor struct {
 
-	// The ancestor bucket slug.
+	// The revoked ancestor bucket slug.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// The URL to get the iteration's revoked ancestor.
+	// The URL to get the revoked ancestor.
 	Href string `json:"href,omitempty"`
 
-	// The ancestor iteration fingerprint.
+	// The revoked ancestor iteration fingerprint.
 	IterationFingerprint string `json:"iteration_fingerprint,omitempty"`
 
-	// The ancestor iteration ULID.
+	// The revoked ancestor iteration ULID.
 	IterationID string `json:"iteration_id,omitempty"`
 
-	// The ancestor iteration incremental version.
+	// The revoked ancestor iteration incremental version.
 	IterationIncrementalVersion int32 `json:"iteration_incremental_version,omitempty"`
 }
 

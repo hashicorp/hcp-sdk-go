@@ -696,7 +696,7 @@ func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetR
 }
 
 /*
-PackerServiceListBucketAncestry packer service list bucket ancestry API
+PackerServiceListBucketAncestry lists the ancestry relationships for an image bucket this includes direct source images parents and downstream images built directly from the image bucket children
 */
 func (a *Client) PackerServiceListBucketAncestry(params *PackerServiceListBucketAncestryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketAncestryOK, error) {
 	// TODO: Validate the params before sending

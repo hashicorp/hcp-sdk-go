@@ -6,11 +6,15 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/stable/2021-04-30/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -120,7 +124,7 @@ An unexpected error response.
 type PackerServiceUpdateIterationDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the packer service update iteration default response
@@ -161,18 +165,250 @@ func (o *PackerServiceUpdateIterationDefault) String() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_UpdateIteration default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *PackerServiceUpdateIterationDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *PackerServiceUpdateIterationDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *PackerServiceUpdateIterationDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
+	return nil
+}
+
+/*
+PackerServiceUpdateIterationBody packer service update iteration body
+swagger:model PackerServiceUpdateIterationBody
+*/
+type PackerServiceUpdateIterationBody struct {
+
+	// Human-readable name for the bucket.
+	BucketSlug string `json:"bucket_slug,omitempty"`
+
+	// Set to "true" when all builds associated with this iteration have
+	// successfully completed and uploaded metadata to the registry. When
+	// "complete" is true, this iteration is considered ready to use, and can
+	// have channels assigned to it.
+	Complete bool `json:"complete,omitempty"`
+
+	// location
+	Location *PackerServiceUpdateIterationParamsBodyLocation `json:"location,omitempty"`
+
+	// When set to true, will make a previously revoked iteration valid again.
+	Restore bool `json:"restore,omitempty"`
+
+	// Optional field to provide the reason for why this iteration is being revoked.
+	RevocationMessage string `json:"revocation_message,omitempty"`
+
+	// revoke_at accepts strings in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt)
+	// format to represent the revocation timestamp. To instantly revoke the iteration, provide the current timestamp.
+	// The revoke_at timestamp will always be recorded in UTC (Coordinated Universal Time).
+	// This option is equivalent to the 'revoke_in' option and therefore only one of them should be set when updating
+	// the iteration.
+	// Format: date-time
+	RevokeAt strfmt.DateTime `json:"revoke_at,omitempty"`
+
+	// revoke_in accepts a signed sequence of decimal numbers with a unit suffix to represent the duration
+	// to the revocation date, such as '30d' or '2h45m'.
+	// Valid time units are 's', 'm', 'h', and 'd' as for seconds, minutes, hours, and days.
+	// To instantly revoke the iteration, provide the duration of zero seconds ("0s").
+	// The revoke_in duration will be used to calculate the iteration revocation timestamp,
+	// which will be recorded as UTC (Coordinated Universal Time).
+	// This option is equivalent to the 'revoke_at' option and therefore only one of them should be set when updating
+	// the iteration.
+	RevokeIn string `json:"revoke_in,omitempty"`
+}
+
+// Validate validates this packer service update iteration body
+func (o *PackerServiceUpdateIterationBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateRevokeAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateIterationBody) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(o.Location) { // not required
+		return nil
+	}
+
+	if o.Location != nil {
+		if err := o.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *PackerServiceUpdateIterationBody) validateRevokeAt(formats strfmt.Registry) error {
+	if swag.IsZero(o.RevokeAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("body"+"."+"revoke_at", "body", "date-time", o.RevokeAt.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this packer service update iteration body based on the context it is used
+func (o *PackerServiceUpdateIterationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateIterationBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Location != nil {
+		if err := o.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *PackerServiceUpdateIterationBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *PackerServiceUpdateIterationBody) UnmarshalBinary(b []byte) error {
+	var res PackerServiceUpdateIterationBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+PackerServiceUpdateIterationParamsBodyLocation Location represents a target for an operation in HCP.
+swagger:model PackerServiceUpdateIterationParamsBodyLocation
+*/
+type PackerServiceUpdateIterationParamsBodyLocation struct {
+
+	// region is the region that the resource is located in. It is
+	// optional if the object being referenced is a global object.
+	Region *cloud.HashicorpCloudLocationRegion `json:"region,omitempty"`
+}
+
+// Validate validates this packer service update iteration params body location
+func (o *PackerServiceUpdateIterationParamsBodyLocation) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateRegion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateIterationParamsBodyLocation) validateRegion(formats strfmt.Registry) error {
+	if swag.IsZero(o.Region) { // not required
+		return nil
+	}
+
+	if o.Region != nil {
+		if err := o.Region.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this packer service update iteration params body location based on the context it is used
+func (o *PackerServiceUpdateIterationParamsBodyLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateRegion(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *PackerServiceUpdateIterationParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Region != nil {
+		if err := o.Region.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *PackerServiceUpdateIterationParamsBodyLocation) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *PackerServiceUpdateIterationParamsBodyLocation) UnmarshalBinary(b []byte) error {
+	var res PackerServiceUpdateIterationParamsBodyLocation
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

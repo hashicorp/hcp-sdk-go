@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/stable/2021-04-30/models"
 )
 
 // NewPackerServiceCreateRegistryParams creates a new PackerServiceCreateRegistryParams object,
@@ -64,7 +62,7 @@ PackerServiceCreateRegistryParams contains all the parameters to send to the API
 type PackerServiceCreateRegistryParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudPackerCreateRegistryRequest
+	Body PackerServiceCreateRegistryBody
 
 	/* LocationOrganizationID.
 
@@ -132,13 +130,13 @@ func (o *PackerServiceCreateRegistryParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the packer service create registry params
-func (o *PackerServiceCreateRegistryParams) WithBody(body *models.HashicorpCloudPackerCreateRegistryRequest) *PackerServiceCreateRegistryParams {
+func (o *PackerServiceCreateRegistryParams) WithBody(body PackerServiceCreateRegistryBody) *PackerServiceCreateRegistryParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the packer service create registry params
-func (o *PackerServiceCreateRegistryParams) SetBody(body *models.HashicorpCloudPackerCreateRegistryRequest) {
+func (o *PackerServiceCreateRegistryParams) SetBody(body PackerServiceCreateRegistryBody) {
 	o.Body = body
 }
 
@@ -171,10 +169,8 @@ func (o *PackerServiceCreateRegistryParams) WriteToRequest(r runtime.ClientReque
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param location.organization_id

@@ -17,16 +17,16 @@ import (
 // swagger:model hashicorp.cloud.packer_20220411.BucketAncestry.Child
 type HashicorpCloudPacker20220411BucketAncestryChild struct {
 
-	// The child bucket slug.
+	// The child image bucket's slug.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// The child iteration fingerprint.
+	// The child iteration's build fingerprint.
 	IterationFingerprint string `json:"iteration_fingerprint,omitempty"`
 
-	// The child iteration ULID.
+	// The child iteration's ULID.
 	IterationID string `json:"iteration_id,omitempty"`
 
-	// The child iteration incremental version.
+	// The child iteration's incremental version.
 	IterationIncrementalVersion int32 `json:"iteration_incremental_version,omitempty"`
 }
 

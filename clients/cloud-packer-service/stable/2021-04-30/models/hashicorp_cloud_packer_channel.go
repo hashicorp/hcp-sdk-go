@@ -35,6 +35,9 @@ type HashicorpCloudPackerChannel struct {
 	// The iteration the channel is pointing to.
 	Iteration *HashicorpCloudPackerIteration `json:"iteration,omitempty"`
 
+	// If the channel is managed by HCP Packer (such as the latest channel).
+	Managed bool `json:"managed,omitempty"`
+
 	// A pointer to the iteration currently associated with this channel.
 	// Deprecated: look at the Channel.iteration instead.
 	Pointer *HashicorpCloudPackerChannelIterationPointer `json:"pointer,omitempty"`

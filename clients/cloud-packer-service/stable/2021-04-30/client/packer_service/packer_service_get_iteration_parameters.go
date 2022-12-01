@@ -105,13 +105,13 @@ type PackerServiceGetIterationParams struct {
 
 	/* LocationRegionProvider.
 
-	   provider is the named cloud provider ("aws", "gcp", "azure").
+	   provider is the named cloud provider ("aws", "gcp", "azure")
 	*/
 	LocationRegionProvider *string
 
 	/* LocationRegionRegion.
 
-	   region is the cloud region ("us-west1", "us-east1").
+	   region is the cloud region ("us-west1", "us-east1")
 	*/
 	LocationRegionRegion *string
 

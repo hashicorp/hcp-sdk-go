@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/stable/2021-04-30/models"
 )
 
 // NewPackerServiceCreateIterationParams creates a new PackerServiceCreateIterationParams object,
@@ -64,7 +62,7 @@ PackerServiceCreateIterationParams contains all the parameters to send to the AP
 type PackerServiceCreateIterationParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudPackerCreateIterationRequest
+	Body PackerServiceCreateIterationBody
 
 	/* BucketSlug.
 
@@ -138,13 +136,13 @@ func (o *PackerServiceCreateIterationParams) SetHTTPClient(client *http.Client) 
 }
 
 // WithBody adds the body to the packer service create iteration params
-func (o *PackerServiceCreateIterationParams) WithBody(body *models.HashicorpCloudPackerCreateIterationRequest) *PackerServiceCreateIterationParams {
+func (o *PackerServiceCreateIterationParams) WithBody(body PackerServiceCreateIterationBody) *PackerServiceCreateIterationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the packer service create iteration params
-func (o *PackerServiceCreateIterationParams) SetBody(body *models.HashicorpCloudPackerCreateIterationRequest) {
+func (o *PackerServiceCreateIterationParams) SetBody(body PackerServiceCreateIterationBody) {
 	o.Body = body
 }
 
@@ -188,10 +186,8 @@ func (o *PackerServiceCreateIterationParams) WriteToRequest(r runtime.ClientRequ
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param bucket_slug

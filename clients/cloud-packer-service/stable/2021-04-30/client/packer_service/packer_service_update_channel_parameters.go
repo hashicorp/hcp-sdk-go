@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/stable/2021-04-30/models"
 )
 
 // NewPackerServiceUpdateChannelParams creates a new PackerServiceUpdateChannelParams object,
@@ -64,7 +62,7 @@ PackerServiceUpdateChannelParams contains all the parameters to send to the API 
 type PackerServiceUpdateChannelParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudPackerUpdateChannelRequest
+	Body PackerServiceUpdateChannelBody
 
 	/* BucketSlug.
 
@@ -144,13 +142,13 @@ func (o *PackerServiceUpdateChannelParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the packer service update channel params
-func (o *PackerServiceUpdateChannelParams) WithBody(body *models.HashicorpCloudPackerUpdateChannelRequest) *PackerServiceUpdateChannelParams {
+func (o *PackerServiceUpdateChannelParams) WithBody(body PackerServiceUpdateChannelBody) *PackerServiceUpdateChannelParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the packer service update channel params
-func (o *PackerServiceUpdateChannelParams) SetBody(body *models.HashicorpCloudPackerUpdateChannelRequest) {
+func (o *PackerServiceUpdateChannelParams) SetBody(body PackerServiceUpdateChannelBody) {
 	o.Body = body
 }
 
@@ -205,10 +203,8 @@ func (o *PackerServiceUpdateChannelParams) WriteToRequest(r runtime.ClientReques
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param bucket_slug

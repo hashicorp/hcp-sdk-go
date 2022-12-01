@@ -68,6 +68,9 @@ type HashicorpCloudPackerIteration struct {
 	// Format: date-time
 	RevokeAt strfmt.DateTime `json:"revoke_at,omitempty"`
 
+	// The type of Packer configuration template used to build this iteration.
+	TemplateType *HashicorpCloudPackerIterationTemplateType `json:"template_type,omitempty"`
+
 	// When the iteration was last updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
@@ -86,6 +89,10 @@ func (m *HashicorpCloudPackerIteration) Validate(formats strfmt.Registry) error 
 	}
 
 	if err := m.validateRevokeAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTemplateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -149,6 +156,25 @@ func (m *HashicorpCloudPackerIteration) validateRevokeAt(formats strfmt.Registry
 	return nil
 }
 
+func (m *HashicorpCloudPackerIteration) validateTemplateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.TemplateType) { // not required
+		return nil
+	}
+
+	if m.TemplateType != nil {
+		if err := m.TemplateType.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("template_type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("template_type")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudPackerIteration) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -166,6 +192,10 @@ func (m *HashicorpCloudPackerIteration) ContextValidate(ctx context.Context, for
 	var res []error
 
 	if err := m.contextValidateBuilds(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTemplateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -190,6 +220,22 @@ func (m *HashicorpCloudPackerIteration) contextValidateBuilds(ctx context.Contex
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerIteration) contextValidateTemplateType(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TemplateType != nil {
+		if err := m.TemplateType.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("template_type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("template_type")
+			}
+			return err
+		}
 	}
 
 	return nil

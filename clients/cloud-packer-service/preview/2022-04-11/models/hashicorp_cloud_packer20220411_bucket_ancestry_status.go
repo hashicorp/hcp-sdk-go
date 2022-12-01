@@ -14,16 +14,11 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudPacker20220411BucketAncestryStatus  - UNDETERMINED: Status cannot be determined because either a channel wasn't used when
-// building the child iteration, the configured channel no longer exists
-// in the parent bucket, or the parent is not tracked by HCP Packer.
-//   - UP_TO_DATE: The child iteration is built from the iteration that is currently
-//
-// assigned to the channel that is used in its configuration.
-//   - OUT_OF_DATE: The child iteration is built from an iteration that is different from
-//
-// the one currently assigned to the channel
-// that is used in its configuration.
+// HashicorpCloudPacker20220411BucketAncestryStatus  - UNDETERMINED: HCP Packer cannot determine whether the child image is out of date.
+// This status occurs when the parent iteration was not assigned to an image channel when Packer built the image,
+// the image channel no longer exists in the image bucket, or HCP Packer is not tracking the parent.
+//   - UP_TO_DATE: The child image is built from the iteration currently assigned to the image channel.
+//   - OUT_OF_DATE: The child image is built from a different iteration than the one currently assigned to the image channel.
 //
 // swagger:model hashicorp.cloud.packer_20220411.BucketAncestry.Status
 type HashicorpCloudPacker20220411BucketAncestryStatus string

@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-packer-service/stable/2021-04-30/models"
 )
 
 // NewPackerServiceRegenerateTFCRunTaskHmacKeyParams creates a new PackerServiceRegenerateTFCRunTaskHmacKeyParams object,
@@ -64,7 +62,7 @@ PackerServiceRegenerateTFCRunTaskHmacKeyParams contains all the parameters to se
 type PackerServiceRegenerateTFCRunTaskHmacKeyParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudPackerRegenerateTFCRunTaskHmacKeyRequest
+	Body PackerServiceRegenerateTFCRunTaskHmacKeyBody
 
 	/* LocationOrganizationID.
 
@@ -132,13 +130,13 @@ func (o *PackerServiceRegenerateTFCRunTaskHmacKeyParams) SetHTTPClient(client *h
 }
 
 // WithBody adds the body to the packer service regenerate t f c run task hmac key params
-func (o *PackerServiceRegenerateTFCRunTaskHmacKeyParams) WithBody(body *models.HashicorpCloudPackerRegenerateTFCRunTaskHmacKeyRequest) *PackerServiceRegenerateTFCRunTaskHmacKeyParams {
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyParams) WithBody(body PackerServiceRegenerateTFCRunTaskHmacKeyBody) *PackerServiceRegenerateTFCRunTaskHmacKeyParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the packer service regenerate t f c run task hmac key params
-func (o *PackerServiceRegenerateTFCRunTaskHmacKeyParams) SetBody(body *models.HashicorpCloudPackerRegenerateTFCRunTaskHmacKeyRequest) {
+func (o *PackerServiceRegenerateTFCRunTaskHmacKeyParams) SetBody(body PackerServiceRegenerateTFCRunTaskHmacKeyBody) {
 	o.Body = body
 }
 
@@ -171,10 +169,8 @@ func (o *PackerServiceRegenerateTFCRunTaskHmacKeyParams) WriteToRequest(r runtim
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param location.organization_id
