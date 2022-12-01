@@ -6,12 +6,17 @@ import (
 	"net/url"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/profile"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
 )
 
 // HCPConfig provides configuration values that are useful to interact with HCP.
 type HCPConfig interface {
+
+	// Profile will return the user's configured profile information
+	Profile() *profile.UserProfile
+
 	// TokenSource will return a token that can be used to authenticate to HCP.
 	oauth2.TokenSource
 
@@ -84,6 +89,13 @@ type hcpConfig struct {
 	// session is responsible for getting an access token fron our identity provider.
 	// A mock can be used in tests.
 	session auth.Session
+
+	// profile is the user's organization id and project id
+	profile *profile.UserProfile
+}
+
+func (c *hcpConfig) Profile() *profile.UserProfile {
+	return c.profile
 }
 
 func (c *hcpConfig) Token() (*oauth2.Token, error) {

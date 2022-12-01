@@ -1,0 +1,3 @@
+```release-note:feature
+Allow users to save profile information via environment variables
+```

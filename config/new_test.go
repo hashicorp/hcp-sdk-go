@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/profile"
 	requirepkg "github.com/stretchr/testify/require"
 )
 
@@ -36,6 +37,7 @@ func TestNew_Options(t *testing.T) {
 		WithPortalURL("https://my-portal:1234"),
 		WithAPI("my-api:2345", &tls.Config{}),
 		WithSCADA("my-scada:3456", &tls.Config{}),
+		WithProfile(&profile.UserProfile{OrganizationID: "org-id-123", ProjectID: "proj-id-123"}),
 	)
 
 	require.NoError(err)
@@ -43,6 +45,8 @@ func TestNew_Options(t *testing.T) {
 	require.Equal("https://my-portal:1234", config.PortalURL().String())
 	require.Equal("my-api:2345", config.APIAddress())
 	require.Equal("my-scada:3456", config.SCADAAddress())
+	require.Equal("org-id-123", config.Profile().OrganizationID)
+	require.Equal("proj-id-123", config.Profile().ProjectID)
 }
 
 func TestNew_MockSession(t *testing.T) {
