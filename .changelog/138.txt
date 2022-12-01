@@ -1,0 +1,3 @@
+```release-note:bug
+Added exception for google.rpc.status when generating code since it was mistakenly rendered as `GoogleRpcStatus` instead of `GoogleRPCStatus`
+```

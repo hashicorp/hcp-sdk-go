@@ -1,3 +1,20 @@
+## v0.26.0 (November 30, 2022)
+
+BUG FIXES:
+
+* Added exception for google.rpc.status when generating code since it was mistakenly rendered as `GoogleRpcStatus` instead of `GoogleRPCStatus` [[GH-138](https://github.com/hashicorp/hcp-sdk-go/pull/138)]
+## v0.25.0 (November 23, 2022)
+
+FEATURES:
+
+* Enable user session refresh on browser login [[GH-129](https://github.com/hashicorp/hcp-sdk-go/pull/129)]
+
+IMPROVEMENTS:
+
+* Bump github.com/go-openapi/strfmt from 0.20.0 to 0.21.3 (https://github.com/hashicorp/hcp-sdk-go/pull/132) [[GH-132](https://github.com/hashicorp/hcp-sdk-go/pull/132)]
+* Expand test coverage for browser login [[GH-129](https://github.com/hashicorp/hcp-sdk-go/pull/129)]
+* Refactor auth package to support Session interface [[GH-129](https://github.com/hashicorp/hcp-sdk-go/pull/129)]
+* Skip browser login test during CI. [[GH-135](https://github.com/hashicorp/hcp-sdk-go/pull/135)]
 ## v0.24.0 (November 10, 2022)
 
 IMPROVEMENTS:

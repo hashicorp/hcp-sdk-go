@@ -123,20 +123,23 @@ func TestNew_Invalid(t *testing.T) {
 	}
 }
 
-// TODO: uncomment these tests when we've set up a CI test user to login via browser (HCE-606)
-// func TestNew_NoConfigPassed(t *testing.T) {
-// 	require := requirepkg.New(t)
+// This test will open your default browser and ask you to login with HCP.
+func TestNew_NoConfigPassed(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode (CI).")
+	}
+	require := requirepkg.New(t)
 
-// 	// Exercise
-// 	config, err := NewHCPConfig()
-// 	require.NoError(err)
+	// Exercise
+	config, err := NewHCPConfig()
+	require.NoError(err)
 
-// 	// Ensure the values have been set accordingly
-// 	token, err := config.Token()
-// 	require.NoError(err)
-// 	require.NotNil(token)
+	// Ensure the values have been set accordingly
+	token, err := config.Token()
+	require.NoError(err)
+	require.NotNil(token)
 
-// 	require.Equal(defaultPortalURL, config.PortalURL().String())
-// 	require.Equal(defaultAPIAddress, config.APIAddress())
-// 	require.Equal(defaultSCADAAddress, config.SCADAAddress())
-// }
+	require.Equal(defaultPortalURL, config.PortalURL().String())
+	require.Equal(defaultAPIAddress, config.APIAddress())
+	require.Equal(defaultSCADAAddress, config.SCADAAddress())
+}

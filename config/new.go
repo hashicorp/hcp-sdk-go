@@ -19,7 +19,7 @@ const (
 	defaultAuthURL = "https://auth.idp.hashicorp.com"
 
 	// defaultOAuth2ClientID is the client ID of the production auth application.
-	defaultOAuth2ClientID = "21d86262-6f14-4a30-a90f-07e3fde8b23d"
+	defaultOAuth2ClientID = "4edd6521-6eb9-4d78-9039-7ce8569d667c"
 
 	// defaultPortalURL is the URL of the production portal.
 	defaultPortalURL = "https://portal.cloud.hashicorp.com"
