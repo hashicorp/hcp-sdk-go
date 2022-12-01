@@ -2,7 +2,7 @@ module github.com/hashicorp/hcp-sdk-go
 
 go 1.18
 
-retract v0.26.0
+retract v0.26.0 // Pushed accidentally
 
 require (
 	github.com/go-openapi/errors v0.20.3
