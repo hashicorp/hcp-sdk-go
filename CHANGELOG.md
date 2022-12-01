@@ -1,3 +1,12 @@
+## v0.27.0 (December 01, 2022)
+
+FEATURES:
+
+* Allow users to save profile information via environment variables [[GH-137](https://github.com/hashicorp/hcp-sdk-go/pull/137)]
+
+BUG FIXES:
+
+* Remove v0.26.0 from pkg.go.dev [[GH-139](https://github.com/hashicorp/hcp-sdk-go/pull/139)]
 ## v0.26.0 (November 30, 2022)
 
 BUG FIXES:
