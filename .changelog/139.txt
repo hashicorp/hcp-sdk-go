@@ -1,0 +1,3 @@
+```release-note:bug
+Remove v0.26.0 from pkg.go.dev
+```
