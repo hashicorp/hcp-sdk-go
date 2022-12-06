@@ -61,6 +61,23 @@ func (rt *roundTripperWithSourceChannel) RoundTrip(req *http.Request) (*http.Res
 	return rt.OriginalRoundTripper.RoundTrip(req)
 }
 
+type roundTripperWithProfile struct {
+	OriginalRoundTripper http.RoundTripper
+	OrganizationID       string
+	ProjectID            string
+}
+
+func (rt *roundTripperWithProfile) RoundTrip(req *http.Request) (*http.Response, error) {
+	fmt.Printf("REQUEST URL BEFORE: %v", req.URL.Path)
+	url := req.URL.Path
+	strings.Replace(url, "organizations//", fmt.Sprintf("organizations/%s/", rt.OrganizationID), 1)
+	strings.Replace(url, "projects//", fmt.Sprintf("projects/%s/", rt.ProjectID), 1)
+	// TODO check that source channel didn't get overwritten
+	req.URL.Path = url
+	fmt.Printf("REQUEST URL AFTER: %v", req.URL.Path)
+	return rt.OriginalRoundTripper.RoundTrip(req)
+}
+
 // New creates a client with the right base path to connect to any HCP API
 func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 	// Populate default values where possible.
@@ -82,6 +99,15 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 		// Use custom transport in order to set the source channel header when it is present.
 		sourceChannel := fmt.Sprintf("%s hcp-go-sdk/%s", cfg.SourceChannel, version.Version)
 		transport = &roundTripperWithSourceChannel{OriginalRoundTripper: transport, SourceChannel: sourceChannel}
+	}
+
+	if cfg.Profile().OrganizationID != "" || cfg.Profile().ProjectID != "" {
+		// Use custom transport in order to set the organization and project IDs if missing
+		transport = &roundTripperWithProfile{
+			OriginalRoundTripper: transport,
+			OrganizationID:       cfg.Profile().OrganizationID,
+			ProjectID:            cfg.Profile().ProjectID,
+		}
 	}
 
 	// Set the scheme based on the TLS configuration.

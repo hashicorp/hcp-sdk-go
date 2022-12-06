@@ -155,7 +155,7 @@ func TestNew(t *testing.T) {
 
 }
 
-//Must have integration environment set and client credentials
+// Must have integration environment set and client credentials
 func TestProfileIntegration(t *testing.T) {
 	// Create a config that calls the test server
 
