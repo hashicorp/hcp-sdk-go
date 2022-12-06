@@ -119,7 +119,7 @@ func WithOAuth2ClientID(oauth2ClientID string) HCPConfigOption {
 // will be used.
 //
 // This should only be necessary for testing purposes.
-func WithSession(s auth.Session) HCPConfigOption {
+func WithSession(s *auth.Session) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.session = s
 

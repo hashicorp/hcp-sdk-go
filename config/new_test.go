@@ -53,8 +53,10 @@ func TestNew_MockSession(t *testing.T) {
 	require := requirepkg.New(t)
 
 	// Exercise
+	var mock auth.Session
+	mock = &auth.MockSession{}
 	config, err := NewHCPConfig(
-		WithSession(&auth.MockSession{}),
+		WithSession(&mock),
 	)
 
 	require.NoError(err)

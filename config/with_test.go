@@ -100,8 +100,10 @@ func TestWith_Session(t *testing.T) {
 	require := requirepkg.New(t)
 
 	// Exercise
+	var mock auth.Session
+	mock = &auth.MockSession{}
 	config := &hcpConfig{}
-	require.NoError(apply(config, WithSession(&auth.MockSession{})))
+	require.NoError(apply(config, WithSession(&mock)))
 
 	// Ensure Sessions is an empty MockSession object
 	require.Equal(&auth.MockSession{}, config.session)

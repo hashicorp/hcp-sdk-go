@@ -88,7 +88,7 @@ type hcpConfig struct {
 
 	// session is responsible for getting an access token fron our identity provider.
 	// A mock can be used in tests.
-	session auth.Session
+	session *auth.Session
 
 	// profile is the user's organization id and project id
 	profile *profile.UserProfile
