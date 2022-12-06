@@ -68,13 +68,12 @@ type roundTripperWithProfile struct {
 }
 
 func (rt *roundTripperWithProfile) RoundTrip(req *http.Request) (*http.Response, error) {
-	fmt.Printf("REQUEST URL BEFORE: %v", req.URL.Path)
-	url := req.URL.Path
-	strings.Replace(url, "organizations//", fmt.Sprintf("organizations/%s/", rt.OrganizationID), 1)
-	strings.Replace(url, "projects//", fmt.Sprintf("projects/%s/", rt.ProjectID), 1)
+	path := req.URL.Path
+	path = strings.Replace(path, "organizations//", fmt.Sprintf("organizations/%s/", rt.OrganizationID), 1)
+	path = strings.Replace(path, "projects//", fmt.Sprintf("projects/%s/", rt.ProjectID), 1)
+	req.URL.Path = path
+
 	// TODO check that source channel didn't get overwritten
-	req.URL.Path = url
-	fmt.Printf("REQUEST URL AFTER: %v", req.URL.Path)
 	return rt.OriginalRoundTripper.RoundTrip(req)
 }
 
