@@ -1,3 +1,9 @@
+## v0.28.0 (December 07, 2022)
+BREAKING CHANGES:
+
+* The cloud-packer service was updated to grpc_gateway v2, this changes the payloads for the requests in some routes, as they are now embedded within the request rather than referenced from it.
+For example, the body for UpdateBucket was previously a *models.HashicorpCloudPackerUpdateBucketRequest, now it is a packer_service.PackerServiceUpdateBucketBody.
+Some attributes which were duplicated in the body now are only in the parent structure, for example &models.HashicorpCloudPackerUpdateBucketRequest used to contain BucketSlug, already present in the parent structure, this is not the case anymore. [[GH-140](https://github.com/hashicorp/hcp-sdk-go/pull/140)]
 ## v0.27.0 (December 01, 2022)
 
 FEATURES:
