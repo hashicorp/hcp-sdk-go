@@ -106,7 +106,7 @@ func TestWith_Session(t *testing.T) {
 	require.NoError(apply(config, WithSession(&mock)))
 
 	// Ensure Sessions is an empty MockSession object
-	require.Equal(&auth.MockSession{}, config.session)
+	require.EqualValues(config.session, &auth.MockSession{})
 }
 
 func TestWith_Profile(t *testing.T) {

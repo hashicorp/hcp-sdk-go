@@ -1,0 +1,3 @@
+```release-note:improvement
+Allow session information to be stored as pointer
+```
