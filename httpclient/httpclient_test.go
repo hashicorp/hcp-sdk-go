@@ -155,21 +155,20 @@ func TestNew(t *testing.T) {
 
 }
 
-// Must have integration environment set and client credentials
+// Defaults to production environment and client credentials
 func TestProfileIntegration(t *testing.T) {
 	// Create a config that calls the test server
 
 	hcpConfig, err := config.NewHCPConfig(
 		config.WithClientCredentials(os.Getenv("HCP_CLIENT_ID"), os.Getenv("HCP_CLIENT_SECRET")),
 		config.WithProfile(&profile.UserProfile{OrganizationID: os.Getenv("HCP_ORGANIZATION_ID"), ProjectID: os.Getenv("HCP_PROJECT_ID")}),
-		config.WithAuth(os.Getenv("HCP_AUTH_URL"), nil),
-		config.WithAPI(os.Getenv("HCP_API_HOST"), nil),
 	)
 
 	cl, err := New(Config{
 		HCPConfig: hcpConfig,
 	})
 	require.NoError(t, err)
+
 	consulClient := consul.New(cl, nil)
 	listParams := consul.NewListParams()
 	_, err = consulClient.List(listParams, nil)
