@@ -163,6 +163,7 @@ func TestProfileIntegration(t *testing.T) {
 		config.WithClientCredentials(os.Getenv("HCP_CLIENT_ID"), os.Getenv("HCP_CLIENT_SECRET")),
 		config.WithProfile(&profile.UserProfile{OrganizationID: os.Getenv("HCP_ORGANIZATION_ID"), ProjectID: os.Getenv("HCP_PROJECT_ID")}),
 	)
+	require.NoError(t, err)
 
 	cl, err := New(Config{
 		HCPConfig: hcpConfig,
