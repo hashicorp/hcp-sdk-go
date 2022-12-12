@@ -157,8 +157,11 @@ func TestNew(t *testing.T) {
 
 // Defaults to production environment and client credentials
 func TestProfileIntegration(t *testing.T) {
-	// Create a config that calls the test server
+	if testing.Short() {
+		t.Skip("skipping test in short mode (CI).")
+	}
 
+	// Create a config that calls the test server
 	hcpConfig, err := config.NewHCPConfig(
 		config.WithClientCredentials(os.Getenv("HCP_CLIENT_ID"), os.Getenv("HCP_CLIENT_SECRET")),
 		config.WithProfile(&profile.UserProfile{OrganizationID: os.Getenv("HCP_ORGANIZATION_ID"), ProjectID: os.Getenv("HCP_PROJECT_ID")}),
