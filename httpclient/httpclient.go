@@ -51,23 +51,16 @@ type Config struct {
 	// Deprecated: HCPConfig should be used instead
 	Client *http.Client
 }
-type roundTripperWithSourceChannel struct {
+
+type roundTripperWithMiddleware struct {
 	OriginalRoundTripper http.RoundTripper
 	SourceChannel        string
-}
-
-func (rt *roundTripperWithSourceChannel) RoundTrip(req *http.Request) (*http.Response, error) {
-	req.Header.Set("X-HCP-Source-Channel", rt.SourceChannel)
-	return rt.OriginalRoundTripper.RoundTrip(req)
-}
-
-type roundTripperWithProfile struct {
-	OriginalRoundTripper http.RoundTripper
 	OrganizationID       string
 	ProjectID            string
 }
 
-func (rt *roundTripperWithProfile) RoundTrip(req *http.Request) (*http.Response, error) {
+func (rt *roundTripperWithMiddleware) RoundTrip(req *http.Request) (*http.Response, error) {
+	req.Header.Set("X-HCP-Source-Channel", rt.SourceChannel)
 	path := req.URL.Path
 	path = strings.Replace(path, "organizations//", fmt.Sprintf("organizations/%s/", rt.OrganizationID), 1)
 	path = strings.Replace(path, "projects//", fmt.Sprintf("projects/%s/", rt.ProjectID), 1)
@@ -97,12 +90,12 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 	if cfg.SourceChannel != "" {
 		// Use custom transport in order to set the source channel header when it is present.
 		sourceChannel := fmt.Sprintf("%s hcp-go-sdk/%s", cfg.SourceChannel, version.Version)
-		transport = &roundTripperWithSourceChannel{OriginalRoundTripper: transport, SourceChannel: sourceChannel}
+		transport = &roundTripperWithMiddleware{OriginalRoundTripper: transport, SourceChannel: sourceChannel}
 	}
 
-	if cfg.Profile().OrganizationID != "" || cfg.Profile().ProjectID != "" {
+	if cfg.Profile().OrganizationID != "" && cfg.Profile().ProjectID != "" {
 		// Use custom transport in order to set the organization and project IDs if missing
-		transport = &roundTripperWithProfile{
+		transport = &roundTripperWithMiddleware{
 			OriginalRoundTripper: transport,
 			OrganizationID:       cfg.Profile().OrganizationID,
 			ProjectID:            cfg.Profile().ProjectID,
