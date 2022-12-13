@@ -54,54 +54,43 @@ type Config struct {
 
 // HCPConfigOption are functions that modify the hcpConfig struct. They can be
 // passed to NewHCPConfig.
-type MiddlewareOption = func(req *http.Request) error
+type MiddlewareFunc = func(req *http.Request) error
 
 type roundTripperWithMiddleware struct {
 	OriginalRoundTripper http.RoundTripper
-
-	MiddlewareFunctions []MiddlewareOption
+	SourceChannel        MiddlewareFunc
+	Profile              MiddlewareFunc
 }
 
-func (rt *roundTripperWithMiddleware) withSourceChannel(sourceChannel string, req *http.Request) MiddlewareOption {
-
+func withSourceChannel(sourceChannel string) MiddlewareFunc {
 	return func(req *http.Request) error {
 		req.Header.Set("X-HCP-Source-Channel", sourceChannel)
 		return nil
 	}
-
 }
 
-func (rt *roundTripperWithMiddleware) updateProjAndOrgID(req *http.Request) error {
-	if rt.OrganizationID != "" && rt.ProjectID != "" {
+func withProfile(orgID, projID string) MiddlewareFunc {
+	return func(req *http.Request) error {
 		path := req.URL.Path
-		fmt.Printf("url request path is %v: ", path)
-		path = strings.Replace(path, "organizations//", fmt.Sprintf("organizations/%s/", rt.OrganizationID), 1)
-		path = strings.Replace(path, "projects//", fmt.Sprintf("projects/%s/", rt.ProjectID), 1)
-		req.URL.Path = path
-	}
-
-	return nil
-}
-
-func addMiddlewareToRequest(req *http.Request, sourceChannel string, orgID string, projID string) (*http.Request, error) {
-	if sourceChannel != "" {
-		req.Header.Set("X-HCP-Source-Channel", sourceChannel)
-	}
-	if orgID != "" && projID != "" {
-		path := req.URL.Path
-		fmt.Printf("url request path is %v: ", path)
 		path = strings.Replace(path, "organizations//", fmt.Sprintf("organizations/%s/", orgID), 1)
 		path = strings.Replace(path, "projects//", fmt.Sprintf("projects/%s/", projID), 1)
 		req.URL.Path = path
+		return nil
 	}
-	return req, nil
 }
 
 func (rt *roundTripperWithMiddleware) RoundTrip(req *http.Request) (*http.Response, error) {
-	request, _ := addMiddlewareToRequest(req, rt.SourceChannel, rt.OrganizationID, rt.ProjectID)
 
-	// TODO check that source channel didn't get overwritten
-	return rt.OriginalRoundTripper.RoundTrip(request)
+	// Panics if middleware func not set
+	if rt.SourceChannel != nil {
+		rt.SourceChannel(req)
+	}
+
+	if rt.Profile != nil {
+		rt.Profile(req)
+	}
+
+	return rt.OriginalRoundTripper.RoundTrip(req)
 }
 
 // New creates a client with the right base path to connect to any HCP API
@@ -120,22 +109,38 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 		Base:   tlsTransport,
 		Source: cfg,
 	}
-	transport = &roundTripperWithMiddleware{OriginalRoundTripper: transport}
+
 	if cfg.SourceChannel != "" {
 		// Use custom transport in order to set the source channel header when it is present.
-		sourceChannel := fmt.Sprintf("%s hcp-go-sdk/%s", cfg.SourceChannel, version.Version)
+		sc := fmt.Sprintf("%s hcp-go-sdk/%s", cfg.SourceChannel, version.Version)
 
-		transport.MiddlewareFunctions = append(transport.MiddlewareFunctions, withSourceChannel())
-		//transport = &roundTripperWithMiddleware{OriginalRoundTripper: transport, SourceChannel: sourceChannel}
+		// TODO: cleanup these comments, just for learning
+		// 1. Original implementation: With sourceChannel in struct state
+		// transport = &roundTripperWithMiddleware{OriginalRoundTripper: transport, SourceChannel: sourceChannel}
 
+		// 2. With sourceChannel function in struct state's function array
+		// transport.MiddlewareFuncs = append(transport.MiddlewareFuncs, transport.withSourceChannel(sc))
+		// can't append MiddlewareFuncs - transport is still considered an HTTP transport
+
+		// 3. this works, but would be overwritten when we do the same thing in profile conditional branch
+		// transport = &roundTripperWithMiddleware{
+		// 	OriginalRoundTripper: transport,
+		// 	MiddlewareFuncs:      []]MiddlewareFunc{
+		// 	withSourceChannel(sc),
+		// },
+		// }
+
+		transport = &roundTripperWithMiddleware{
+			OriginalRoundTripper: transport,
+			SourceChannel:        withSourceChannel(sc),
+		}
 	}
 
 	if cfg.Profile().OrganizationID != "" && cfg.Profile().ProjectID != "" {
-		// Use custom transport in order to set the organization and project IDs if missing
+		// Use custom transport in order to set the organization and project IDs if set in user profile.
 		transport = &roundTripperWithMiddleware{
 			OriginalRoundTripper: transport,
-			OrganizationID:       cfg.Profile().OrganizationID,
-			ProjectID:            cfg.Profile().ProjectID,
+			Profile:              withProfile(cfg.Profile().OrganizationID, cfg.Profile().ProjectID),
 		}
 	}
 
