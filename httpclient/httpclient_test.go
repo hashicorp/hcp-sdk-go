@@ -12,6 +12,7 @@ import (
 	"sync/atomic"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	consul "github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/stable/2021-02-04/client/consul_service"
@@ -188,6 +189,12 @@ func TestNew(t *testing.T) {
 
 }
 
+// TODO: merge the tests below into TestMiddleware with table-driven tests with different HCP client configs
+// one with no profile, no source channel
+// one with profile
+// one with source channel
+// one with profile and source channel
+
 // Defaults to production environment and client credentials
 func TestProfileIntegration(t *testing.T) {
 	if testing.Short() {
@@ -209,7 +216,7 @@ func TestProfileIntegration(t *testing.T) {
 	consulClient := consul.New(cl, nil)
 	listParams := consul.NewListParams()
 	_, err = consulClient.List(listParams, nil)
-	require.Error(t, err)
+	require.NoError(t, err)
 
 }
 
@@ -222,15 +229,23 @@ func TestSourceChannelIntegration(t *testing.T) {
 	request, err := http.NewRequest("GET", "api.cloud.hashicorp.com/consul/2021-02-04/organizations//projects//clusters", httptest.NewRecorder().Body)
 	require.NoError(t, err)
 
+	require.Equal(t, request.Header.Get("X-HCP-Source-Channel"), "")
+
 	expectedSourceChannel := "source_channel_foo"
-	request, err = addMiddlewareToRequest(request, expectedSourceChannel, "", "")
+	// TODO: since this is an integration test, we shouldn't be calling this function directly. Instead, we want to see that,
+	// if the HCP client is configured with source channel and profile, the request is properly mutated.
+
+	// request, err = addMiddlewareToRequest(request, expectedSourceChannel, "", "")
 	require.NoError(t, err)
 	expectedOrgID := "org_id_77"
 	expectedProjID := "proj_id_123"
+	assert.Equal(t, request.Header.Get("X-HCP-Source-Channel"), expectedSourceChannel)
+	assert.NotContains(t, request.URL.Path, expectedOrgID)
+	assert.NotContains(t, request.URL.Path, expectedProjID)
 
-	request, err = addMiddlewareToRequest(request, "", expectedOrgID, expectedProjID)
+	// request, err = addMiddlewareToRequest(request, "", expectedOrgID, expectedProjID)
 	require.NoError(t, err)
-	require.Equal(t, request.Header.Get("X-HCP-Source-Channel"), expectedSourceChannel)
-	require.Contains(t, request.URL.Path, expectedOrgID)
-	require.Contains(t, request.URL.Path, expectedProjID)
+	assert.Contains(t, request.URL.Path, expectedOrgID)
+	assert.Contains(t, request.URL.Path, expectedProjID)
+	assert.Equal(t, request.Header.Get("X-HCP-Source-Channel"), expectedSourceChannel)
 }
