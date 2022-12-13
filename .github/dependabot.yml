@@ -11,8 +11,12 @@ updates:
     schedule:
       # Check for updates to GitHub Actions every weekday
       interval: "daily"
+    labels:
+      - "pr/no-changelog"
 
   - package-ecosystem: "gomod" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    labels:
+      - "pr/no-changelog"
