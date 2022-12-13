@@ -105,6 +105,39 @@ func TestNew(t *testing.T) {
 		require.Equal(t, uint32(2), atomic.LoadUint32(&numRequests))
 	})
 
+	t.Run("legacy configuration, no source channel", func(t *testing.T) {
+		numRequests = 0
+
+		cfg := Config{
+			HostPath:     ts.URL,
+			AuthURL:      ts.URL,
+			ClientID:     clientID,
+			ClientSecret: clientSecret,
+			// Override the base http.Client so that we trust the test server's TLS
+			Client: ts.Client(),
+		}
+
+		// The test's important assertions occur in the test server handler above.
+		// When an http client is initialized, it tries to obtain an access token using the configured token URL (from an auth provider), client ID, and client secret.
+		// The token request embedded in this client initializer hits the mock auth provider handler above ('/oauth/token').
+		cl, err := New(cfg)
+		require.NoError(t, err)
+
+		consulClient := consul.New(cl, nil)
+		listParams := consul.NewListParams()
+		listParams.LocationOrganizationID = orgID
+		listParams.LocationProjectID = projID
+
+		// This SDK request hits the mock Consul List API handler above ('/consul/2021-02-04/organizations...').
+		// The handler verifies that the expected bearer token is provided.
+		_, err = consulClient.List(listParams, nil)
+		require.NoError(t, err)
+
+		// Make sure we actually handled both the auth and the GET request and didn't
+		// just skip all the assertions!
+		require.Equal(t, uint32(2), atomic.LoadUint32(&numRequests))
+	})
+
 	t.Run("HCPConfig", func(t *testing.T) {
 		numRequests = 0
 
@@ -176,6 +209,28 @@ func TestProfileIntegration(t *testing.T) {
 	consulClient := consul.New(cl, nil)
 	listParams := consul.NewListParams()
 	_, err = consulClient.List(listParams, nil)
+	require.Error(t, err)
+
+}
+
+// Defaults to production environment and client credentials
+func TestSourceChannelIntegration(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode (CI).")
+	}
+
+	request, err := http.NewRequest("GET", "api.cloud.hashicorp.com/consul/2021-02-04/organizations//projects//clusters", httptest.NewRecorder().Body)
 	require.NoError(t, err)
 
+	expectedSourceChannel := "source_channel_foo"
+	request, err = addMiddlewareToRequest(request, expectedSourceChannel, "", "")
+	require.NoError(t, err)
+	expectedOrgID := "org_id_77"
+	expectedProjID := "proj_id_123"
+
+	request, err = addMiddlewareToRequest(request, "", expectedOrgID, expectedProjID)
+	require.NoError(t, err)
+	require.Equal(t, request.Header.Get("X-HCP-Source-Channel"), expectedSourceChannel)
+	require.Contains(t, request.URL.Path, expectedOrgID)
+	require.Contains(t, request.URL.Path, expectedProjID)
 }

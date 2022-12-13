@@ -59,15 +59,25 @@ type roundTripperWithMiddleware struct {
 	ProjectID            string
 }
 
+func addMiddlewareToRequest(req *http.Request, sourceChannel string, orgID string, projID string) (*http.Request, error) {
+	if sourceChannel != "" {
+		req.Header.Set("X-HCP-Source-Channel", sourceChannel)
+	}
+	if orgID != "" && projID != "" {
+		path := req.URL.Path
+		fmt.Printf("url request path is %v: ", path)
+		path = strings.Replace(path, "organizations//", fmt.Sprintf("organizations/%s/", orgID), 1)
+		path = strings.Replace(path, "projects//", fmt.Sprintf("projects/%s/", projID), 1)
+		req.URL.Path = path
+	}
+	return req, nil
+}
+
 func (rt *roundTripperWithMiddleware) RoundTrip(req *http.Request) (*http.Response, error) {
-	req.Header.Set("X-HCP-Source-Channel", rt.SourceChannel)
-	path := req.URL.Path
-	path = strings.Replace(path, "organizations//", fmt.Sprintf("organizations/%s/", rt.OrganizationID), 1)
-	path = strings.Replace(path, "projects//", fmt.Sprintf("projects/%s/", rt.ProjectID), 1)
-	req.URL.Path = path
+	request, _ := addMiddlewareToRequest(req, rt.SourceChannel, rt.OrganizationID, rt.ProjectID)
 
 	// TODO check that source channel didn't get overwritten
-	return rt.OriginalRoundTripper.RoundTrip(req)
+	return rt.OriginalRoundTripper.RoundTrip(request)
 }
 
 // New creates a client with the right base path to connect to any HCP API
@@ -87,20 +97,20 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 		Source: cfg,
 	}
 
-	if cfg.SourceChannel != "" {
-		// Use custom transport in order to set the source channel header when it is present.
-		sourceChannel := fmt.Sprintf("%s hcp-go-sdk/%s", cfg.SourceChannel, version.Version)
-		transport = &roundTripperWithMiddleware{OriginalRoundTripper: transport, SourceChannel: sourceChannel}
-	}
+	//if cfg.SourceChannel != "" {
+	// Use custom transport in order to set the source channel header when it is present.
+	sourceChannel := fmt.Sprintf("%s hcp-go-sdk/%s", cfg.SourceChannel, version.Version)
+	transport = &roundTripperWithMiddleware{OriginalRoundTripper: transport, SourceChannel: sourceChannel}
+	//}
 
-	if cfg.Profile().OrganizationID != "" && cfg.Profile().ProjectID != "" {
-		// Use custom transport in order to set the organization and project IDs if missing
-		transport = &roundTripperWithMiddleware{
-			OriginalRoundTripper: transport,
-			OrganizationID:       cfg.Profile().OrganizationID,
-			ProjectID:            cfg.Profile().ProjectID,
-		}
+	//if cfg.Profile().OrganizationID != "" && cfg.Profile().ProjectID != "" {
+	// Use custom transport in order to set the organization and project IDs if missing
+	transport = &roundTripperWithMiddleware{
+		OriginalRoundTripper: transport,
+		OrganizationID:       cfg.Profile().OrganizationID,
+		ProjectID:            cfg.Profile().ProjectID,
 	}
+	//}
 
 	// Set the scheme based on the TLS configuration.
 	scheme := "https"
