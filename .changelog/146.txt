@@ -1,0 +1,3 @@
+```release-note:improvement
+Bump github.com/go-openapi/swag from 0.19.14 to 0.22.3
+```
