@@ -58,8 +58,7 @@ type MiddlewareFunc = func(req *http.Request) error
 
 type roundTripperWithMiddleware struct {
 	OriginalRoundTripper http.RoundTripper
-	SourceChannel        MiddlewareFunc
-	Profile              MiddlewareFunc
+	MiddlewareFuncs      []MiddlewareFunc
 }
 
 func withSourceChannel(sourceChannel string) MiddlewareFunc {
@@ -81,13 +80,12 @@ func withProfile(orgID, projID string) MiddlewareFunc {
 
 func (rt *roundTripperWithMiddleware) RoundTrip(req *http.Request) (*http.Response, error) {
 
-	// Panics if middleware func not set
-	if rt.SourceChannel != nil {
-		rt.SourceChannel(req)
-	}
-
-	if rt.Profile != nil {
-		rt.Profile(req)
+	for _, mw := range rt.MiddlewareFuncs {
+		if err := mw(req); err != nil {
+			// Failure to apply middleware should not fail the request
+			fmt.Printf("failed to apply middleware: %#v", mw(req))
+			continue
+		}
 	}
 
 	return rt.OriginalRoundTripper.RoundTrip(req)
@@ -110,38 +108,23 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 		Source: cfg,
 	}
 
+	var mwFuncs []MiddlewareFunc
+
 	if cfg.SourceChannel != "" {
 		// Use custom transport in order to set the source channel header when it is present.
 		sc := fmt.Sprintf("%s hcp-go-sdk/%s", cfg.SourceChannel, version.Version)
 
-		// TODO: cleanup these comments, just for learning
-		// 1. Original implementation: With sourceChannel in struct state
-		// transport = &roundTripperWithMiddleware{OriginalRoundTripper: transport, SourceChannel: sourceChannel}
-
-		// 2. With sourceChannel function in struct state's function array
-		// transport.MiddlewareFuncs = append(transport.MiddlewareFuncs, transport.withSourceChannel(sc))
-		// can't append MiddlewareFuncs - transport is still considered an HTTP transport
-
-		// 3. this works, but would be overwritten when we do the same thing in profile conditional branch
-		// transport = &roundTripperWithMiddleware{
-		// 	OriginalRoundTripper: transport,
-		// 	MiddlewareFuncs:      []]MiddlewareFunc{
-		// 	withSourceChannel(sc),
-		// },
-		// }
-
-		transport = &roundTripperWithMiddleware{
-			OriginalRoundTripper: transport,
-			SourceChannel:        withSourceChannel(sc),
-		}
+		mwFuncs = append(mwFuncs, withSourceChannel(sc))
 	}
 
 	if cfg.Profile().OrganizationID != "" && cfg.Profile().ProjectID != "" {
-		// Use custom transport in order to set the organization and project IDs if set in user profile.
-		transport = &roundTripperWithMiddleware{
-			OriginalRoundTripper: transport,
-			Profile:              withProfile(cfg.Profile().OrganizationID, cfg.Profile().ProjectID),
-		}
+
+		mwFuncs = append(mwFuncs, withProfile(cfg.Profile().OrganizationID, cfg.Profile().ProjectID))
+	}
+
+	transport = &roundTripperWithMiddleware{
+		OriginalRoundTripper: transport,
+		MiddlewareFuncs:      mwFuncs,
 	}
 
 	// Set the scheme based on the TLS configuration.
