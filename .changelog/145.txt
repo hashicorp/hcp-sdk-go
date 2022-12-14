@@ -1,0 +1,3 @@
+```release-note:improvement
+Bump github.com/iancoleman/strcase from 0.1.3 to 0.2.0
+```
