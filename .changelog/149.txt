@@ -1,0 +1,3 @@
+```release-note:improvement
+Bump github.com/go-openapi/loads from 0.20.2 to 0.21.2
+```
