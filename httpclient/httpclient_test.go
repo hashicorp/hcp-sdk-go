@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
-	"os"
 	"sync/atomic"
 	"testing"
 
@@ -189,62 +188,40 @@ func TestNew(t *testing.T) {
 
 }
 
-// TODO: merge the tests below into TestMiddleware with table-driven tests with different HCP client configs
-// one with no profile, no source channel
-// one with profile
-// one with source channel
-// one with profile and source channel
+func TestMiddleware(t *testing.T) {
 
-// Defaults to production environment and client credentials
-func TestProfileIntegration(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping test in short mode (CI).")
-	}
-
-	// Create a config that calls the test server
-	hcpConfig, err := config.NewHCPConfig(
-		config.WithClientCredentials(os.Getenv("HCP_CLIENT_ID"), os.Getenv("HCP_CLIENT_SECRET")),
-		config.WithProfile(&profile.UserProfile{OrganizationID: os.Getenv("HCP_ORGANIZATION_ID"), ProjectID: os.Getenv("HCP_PROJECT_ID")}),
-	)
-	require.NoError(t, err)
-
-	cl, err := New(Config{
-		HCPConfig: hcpConfig,
-	})
-	require.NoError(t, err)
-
-	consulClient := consul.New(cl, nil)
-	listParams := consul.NewListParams()
-	_, err = consulClient.List(listParams, nil)
-	require.NoError(t, err)
-
-}
-
-// Defaults to production environment and client credentials
-func TestSourceChannelIntegration(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping test in short mode (CI).")
-	}
-
+	// Start with a plain request.
 	request, err := http.NewRequest("GET", "api.cloud.hashicorp.com/consul/2021-02-04/organizations//projects//clusters", httptest.NewRecorder().Body)
 	require.NoError(t, err)
 
+	// Prepare header is unset.
 	require.Equal(t, request.Header.Get("X-HCP-Source-Channel"), "")
 
+	// Prepare middleware function.
 	expectedSourceChannel := "source_channel_foo"
-	// TODO: since this is an integration test, we shouldn't be calling this function directly. Instead, we want to see that,
-	// if the HCP client is configured with source channel and profile, the request is properly mutated.
+	sourceChannelMiddleware := withSourceChannel(expectedSourceChannel)
 
-	// request, err = addMiddlewareToRequest(request, expectedSourceChannel, "", "")
+	// Apply middleware function.
+	err = sourceChannelMiddleware(request)
 	require.NoError(t, err)
+
+	// Assert request is modified as expected.
+	assert.Equal(t, request.Header.Get("X-HCP-Source-Channel"), expectedSourceChannel)
+
+	// Assert path is unmodified.
 	expectedOrgID := "org_id_77"
 	expectedProjID := "proj_id_123"
-	assert.Equal(t, request.Header.Get("X-HCP-Source-Channel"), expectedSourceChannel)
 	assert.NotContains(t, request.URL.Path, expectedOrgID)
 	assert.NotContains(t, request.URL.Path, expectedProjID)
 
-	// request, err = addMiddlewareToRequest(request, "", expectedOrgID, expectedProjID)
+	// Prepare middleware function.
+	profileMiddleware := withProfile(expectedOrgID, expectedProjID)
+
+	// Apply middleware function.
+	err = profileMiddleware(request)
 	require.NoError(t, err)
+
+	// Assert request is modified as expected.
 	assert.Contains(t, request.URL.Path, expectedOrgID)
 	assert.Contains(t, request.URL.Path, expectedProjID)
 	assert.Equal(t, request.Header.Get("X-HCP-Source-Channel"), expectedSourceChannel)
