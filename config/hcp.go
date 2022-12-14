@@ -138,6 +138,12 @@ func (c *hcpConfig) validate() error {
 		return fmt.Errorf("either client credentials or oauth2 client ID must be provided")
 	}
 
+	// Ensure profile contains both org ID and project ID
+	if (c.profile.OrganizationID == "" && c.profile.ProjectID != "") ||
+		(c.profile.OrganizationID != "" && c.profile.ProjectID == "") {
+		return fmt.Errorf("when setting a user profile, both organization ID and project ID must be provided")
+	}
+
 	// Ensure the auth URL is valid
 	if c.authURL.Host == "" {
 		return fmt.Errorf("the auth URL has to be non-empty")
