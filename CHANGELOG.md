@@ -1,3 +1,8 @@
+## v0.29.0 (December 14, 2022)
+
+IMPROVEMENTS:
+
+* Enable automatic changelog creation for dependabot PRs. [[GH-150](https://github.com/hashicorp/hcp-sdk-go/pull/150)]
 ## v0.28.0 (December 07, 2022)
 BREAKING CHANGES:
 
