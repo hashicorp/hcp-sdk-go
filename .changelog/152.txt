@@ -1,0 +1,3 @@
+```release-note:improvement
+Remove `create-pull-request` third party action in favour of plain git commands.
+```
