@@ -52,12 +52,12 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/hcp-sdk-go
           git config user.name "HashiCorp Cloud Services"
-          git config user.email "59096967+hashicorp-cloud@users.noreply.github.com"
+          git config user.email "${{ secrets.HCP_SERVICE_ACCOUNT_EMAIL }}"
           service_branch_exists="$(git ls-remote --heads origin auto-update-cloud-shared-sdk)"
           [[ -n $service_branch_exists ]] && git push origin --delete auto-update-cloud-shared-sdk
           git checkout -b auto-update-cloud-shared-sdk
           git add clients/cloud-shared/*
-          git commit -m "Update Cloud API SDK"
+          git commit -m "Update cloud-shared SDK"
           git push --set-upstream origin auto-update-cloud-shared-sdk    
           
       - name: Open PR
@@ -66,7 +66,7 @@ jobs:
           gh pr create --title "$PR_TITLE" --body "$PR_BODY" -H "$PR_SOURCE" -B "$PR_TARGET"
         env:
           PR_TITLE: "[auto] Update Shared SDK"
-          PR_BODY: "This is an auto-generated PR created as part of the public SDK pipeline to update Cloud API."
+          PR_BODY: "This is an auto-generated PR created as part of the public SDK pipeline to update cloud-shared clients."
           PR_SOURCE: "auto-update-cloud-shared-sdk"
           PR_TARGET: "main"
           GITHUB_TOKEN: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }} 
