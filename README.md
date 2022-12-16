@@ -78,6 +78,20 @@ export HCP_CLIENT_SECRET="service-principal-key-client-secret"
 
 See `cmd/hcp-sdk-go-client` for a complete example.
 
+## Libraries
+
+In addition to the generated product clients, the HCP Go SDK provides a few libraries useful for interacting with HCP.
+
+### Cache
+
+The Cache interface lives under the `auth` package. It handles writing the user credentials obtained during browser login to the common location `/.config/hcp/credentials.json` in the home directory. The Cache has `Read` and `Write` methods that can be used to get and set stored HCP credentials.
+
+Generally the contents of the Cache should be Read to get the latest, unexpired credentials. Without care, overwriting user credentials may cause unexpected authentication failures.
+
+### Profile
+
+An HCP Organization ID and Project ID are required to call most HCP APIs. They can be set to the environment variables `HCP_ORGANIZATION_ID` and `HCP_PROJECT_ID`. The HCP Go SDK will read them from the environment and save them in its state as the user's Profile. The Profile Project and Organization IDs will be applied as default values to any request missing them.
+
 ## Contributing
 
 ### Changelogs
