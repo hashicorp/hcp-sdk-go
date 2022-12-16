@@ -95,7 +95,6 @@ An HCP Organization ID and Project ID are required to call most HCP APIs. They c
 
 ## Contributing
 
-
 ### Changelogs
 
 This repo requires that a chagnelog file be added in all pull requests. The name of the file must follow `[PR #].txt` and must reside in the `.changelog` directory. The contents must have the following formatting:
