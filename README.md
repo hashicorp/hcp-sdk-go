@@ -63,18 +63,18 @@ export HCP_CLIENT_SECRET="service-principal-key-client-secret"
 
 1. Add the SDK to your go.mod.
 
-```go
-require (
-     github.com/hashicorp/hcp-sdk-go {latest release}
-```
+    ```go
+    require (
+        github.com/hashicorp/hcp-sdk-go {latest release}
+    ```
 
-2. Import the desired version of each service SDK.
+1. Import the desired version of each service SDK.
 
-```bash
-import (
-    network "github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/client/network_service"
-)
-```
+    ```bash
+    import (
+        network "github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/client/network_service"
+    )
+    ```
 
 See `cmd/hcp-sdk-go-client` for a complete example.
 
@@ -84,11 +84,11 @@ See `cmd/hcp-sdk-go-client` for a complete example.
 
 This repo requires that a chagnelog file be added in all pull requests. The name of the file must follow `[PR #].txt` and must reside in the `.changelog` directory. The contents must have the following formatting:
 
-~~~
-```release-note:TYPE
-ENTRY
+```text
+    ```release-note:TYPE
+    ENTRY
+    ```
 ```
-~~~
 
 Where `TYPE` is the type of release note entry this is. This is one of either: `breaking-change`, `security`, `feature`, `improvement`, `deprecation`, `bug`.
 
@@ -96,13 +96,12 @@ Where `TYPE` is the type of release note entry this is. This is one of either: `
 
 Sometimes PRs have multiple changelog entries associated with them. In this case, use multiple blocks.
 
-~~~
-```release-note:deprecation
-Deprecated the `foo` interface, please use the `bar` interface instead.
-```
+```text
+    ```release-note:deprecation
+    Deprecated the `foo` interface, please use the `bar` interface instead.
+    ```
 
-```release-note:improvement
-Added the `bar` interface.
+    ```release-note:improvement
+    Added the `bar` interface.
+    ```
 ```
-~~~
-
