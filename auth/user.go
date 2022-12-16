@@ -4,10 +4,14 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"golang.org/x/oauth2"
 )
+
+// Intended for internal development only.
+const envVarAccessToken = "HCP_ACCESS_TOKEN"
 
 // UserSession implements the auth package's Session interface
 type UserSession struct {
@@ -16,6 +20,14 @@ type UserSession struct {
 
 // GetToken returns an access token obtained from either an existing session or new browser login.
 func (s *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
+
+	// Check for token set in environmental variable. Intended for internal development only.
+	accessToken, accessTokenOK := os.LookupEnv(envVarAccessToken)
+	if accessTokenOK {
+		return &oauth2.Token{
+			AccessToken: accessToken,
+		}, nil
+	}
 
 	// Check for existing token in auth cache, if it exists.
 	cache, readErr := Read()
