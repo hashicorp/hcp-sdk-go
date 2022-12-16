@@ -1,5 +1,5 @@
 ```release-note:improvement
-Add middleware package
+Add middleware support to httpclient package
 ```
 
 ```release-note:improvement
