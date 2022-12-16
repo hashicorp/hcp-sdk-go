@@ -80,7 +80,7 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 
 	if cfg.Profile().OrganizationID != "" && cfg.Profile().ProjectID != "" {
 
-		opts = append(opts, withProfile(cfg.Profile().OrganizationID, cfg.Profile().ProjectID))
+		opts = append(opts, withOrgAndProjectIDs(cfg.Profile().OrganizationID, cfg.Profile().ProjectID))
 	}
 
 	transport = &roundTripperWithMiddleware{

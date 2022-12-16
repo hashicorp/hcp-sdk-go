@@ -182,7 +182,7 @@ func TestMiddleware(t *testing.T) {
 	assert.NotContains(t, request.URL.Path, expectedProjID)
 
 	// Prepare middleware function.
-	profileMiddleware := withProfile(expectedOrgID, expectedProjID)
+	profileMiddleware := withOrgAndProjectIDs(expectedOrgID, expectedProjID)
 
 	// Apply middleware function.
 	err = profileMiddleware(request)

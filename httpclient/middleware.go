@@ -24,7 +24,7 @@ func withSourceChannel(sourceChannel string) MiddlewareOption {
 }
 
 // withProfile takes the user profile's org ID and project ID and sets them in the request path if needed.
-func withProfile(orgID, projID string) MiddlewareOption {
+func withOrgAndProjectIDs(orgID, projID string) MiddlewareOption {
 	return func(req *http.Request) error {
 		path := req.URL.Path
 		path = strings.Replace(path, "organizations//", fmt.Sprintf("organizations/%s/", orgID), 1)
