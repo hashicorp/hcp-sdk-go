@@ -52,45 +52,6 @@ type Config struct {
 	Client *http.Client
 }
 
-// HCPConfigOption are functions that modify the hcpConfig struct. They can be
-// passed to NewHCPConfig.
-type MiddlewareFunc = func(req *http.Request) error
-
-type roundTripperWithMiddleware struct {
-	OriginalRoundTripper http.RoundTripper
-	MiddlewareFuncs      []MiddlewareFunc
-}
-
-func withSourceChannel(sourceChannel string) MiddlewareFunc {
-	return func(req *http.Request) error {
-		req.Header.Set("X-HCP-Source-Channel", sourceChannel)
-		return nil
-	}
-}
-
-func withProfile(orgID, projID string) MiddlewareFunc {
-	return func(req *http.Request) error {
-		path := req.URL.Path
-		path = strings.Replace(path, "organizations//", fmt.Sprintf("organizations/%s/", orgID), 1)
-		path = strings.Replace(path, "projects//", fmt.Sprintf("projects/%s/", projID), 1)
-		req.URL.Path = path
-		return nil
-	}
-}
-
-func (rt *roundTripperWithMiddleware) RoundTrip(req *http.Request) (*http.Response, error) {
-
-	for _, mw := range rt.MiddlewareFuncs {
-		if err := mw(req); err != nil {
-			// Failure to apply middleware should not fail the request
-			fmt.Printf("failed to apply middleware: %#v", mw(req))
-			continue
-		}
-	}
-
-	return rt.OriginalRoundTripper.RoundTrip(req)
-}
-
 // New creates a client with the right base path to connect to any HCP API
 func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 	// Populate default values where possible.
@@ -108,23 +69,23 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 		Source: cfg,
 	}
 
-	var mwFuncs []MiddlewareFunc
+	var opts []MiddlewareOption
 
 	if cfg.SourceChannel != "" {
 		// Use custom transport in order to set the source channel header when it is present.
 		sc := fmt.Sprintf("%s hcp-go-sdk/%s", cfg.SourceChannel, version.Version)
 
-		mwFuncs = append(mwFuncs, withSourceChannel(sc))
+		opts = append(opts, withSourceChannel(sc))
 	}
 
 	if cfg.Profile().OrganizationID != "" && cfg.Profile().ProjectID != "" {
 
-		mwFuncs = append(mwFuncs, withProfile(cfg.Profile().OrganizationID, cfg.Profile().ProjectID))
+		opts = append(opts, withProfile(cfg.Profile().OrganizationID, cfg.Profile().ProjectID))
 	}
 
 	transport = &roundTripperWithMiddleware{
 		OriginalRoundTripper: transport,
-		MiddlewareFuncs:      mwFuncs,
+		MiddlewareOptions:    opts,
 	}
 
 	// Set the scheme based on the TLS configuration.
