@@ -1,3 +1,7 @@
 ```release-note:improvement
-Insert middleware to allow organization and project id on requests 
+Add middleware package
+```
+
+```release-note:improvement
+Add middleware that gets org ID and project ID from user profile and sets on request
 ```
