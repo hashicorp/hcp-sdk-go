@@ -1,0 +1,7 @@
+```release-note:improvement
+Add middleware support to httpclient package
+```
+
+```release-note:improvement
+Add middleware that gets org ID and project ID from user profile and sets on request
+```

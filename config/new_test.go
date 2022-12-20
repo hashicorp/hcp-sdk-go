@@ -111,6 +111,26 @@ func TestNew_Invalid(t *testing.T) {
 			},
 			expectedError: "the configuration is not valid: the SCADA address has to be non-empty",
 		},
+		{
+			name: "empty project ID with populated org ID",
+			options: []HCPConfigOption{
+				WithClientCredentials("my-client-id", "my-client-secret"),
+				WithProfile(&profile.UserProfile{
+					OrganizationID: "abc123",
+				}),
+			},
+			expectedError: "the configuration is not valid: when setting a user profile, both organization ID and project ID must be provided",
+		},
+		{
+			name: "empty org ID with populated project ID",
+			options: []HCPConfigOption{
+				WithClientCredentials("my-client-id", "my-client-secret"),
+				WithProfile(&profile.UserProfile{
+					ProjectID: "abc123",
+				}),
+			},
+			expectedError: "the configuration is not valid: when setting a user profile, both organization ID and project ID must be provided",
+		},
 	}
 
 	for _, testCase := range testCases {

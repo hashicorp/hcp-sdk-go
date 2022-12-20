@@ -51,15 +51,6 @@ type Config struct {
 	// Deprecated: HCPConfig should be used instead
 	Client *http.Client
 }
-type roundTripperWithSourceChannel struct {
-	OriginalRoundTripper http.RoundTripper
-	SourceChannel        string
-}
-
-func (rt *roundTripperWithSourceChannel) RoundTrip(req *http.Request) (*http.Response, error) {
-	req.Header.Set("X-HCP-Source-Channel", rt.SourceChannel)
-	return rt.OriginalRoundTripper.RoundTrip(req)
-}
 
 // New creates a client with the right base path to connect to any HCP API
 func New(cfg Config) (runtime *httptransport.Runtime, err error) {
@@ -78,10 +69,23 @@ func New(cfg Config) (runtime *httptransport.Runtime, err error) {
 		Source: cfg,
 	}
 
+	var opts []MiddlewareOption
+
 	if cfg.SourceChannel != "" {
 		// Use custom transport in order to set the source channel header when it is present.
-		sourceChannel := fmt.Sprintf("%s hcp-go-sdk/%s", cfg.SourceChannel, version.Version)
-		transport = &roundTripperWithSourceChannel{OriginalRoundTripper: transport, SourceChannel: sourceChannel}
+		sc := fmt.Sprintf("%s hcp-go-sdk/%s", cfg.SourceChannel, version.Version)
+
+		opts = append(opts, withSourceChannel(sc))
+	}
+
+	if cfg.Profile().OrganizationID != "" && cfg.Profile().ProjectID != "" {
+
+		opts = append(opts, withOrgAndProjectIDs(cfg.Profile().OrganizationID, cfg.Profile().ProjectID))
+	}
+
+	transport = &roundTripperWithMiddleware{
+		OriginalRoundTripper: transport,
+		MiddlewareOptions:    opts,
 	}
 
 	// Set the scheme based on the TLS configuration.

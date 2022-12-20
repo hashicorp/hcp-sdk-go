@@ -11,6 +11,7 @@ import (
 	"sync/atomic"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	consul "github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/stable/2021-02-04/client/consul_service"
@@ -151,4 +152,44 @@ func TestNew(t *testing.T) {
 		// just skip all the assertions!
 		require.Equal(t, uint32(2), atomic.LoadUint32(&numRequests))
 	})
+
+}
+
+func TestMiddleware(t *testing.T) {
+
+	// Start with a plain request.
+	request, err := http.NewRequest("GET", "api.cloud.hashicorp.com/consul/2021-02-04/organizations//projects//clusters", httptest.NewRecorder().Body)
+	require.NoError(t, err)
+
+	// Prepare header is unset.
+	require.Equal(t, request.Header.Get("X-HCP-Source-Channel"), "")
+
+	// Prepare middleware function.
+	expectedSourceChannel := "source_channel_foo"
+	sourceChannelMiddleware := withSourceChannel(expectedSourceChannel)
+
+	// Apply middleware function.
+	err = sourceChannelMiddleware(request)
+	require.NoError(t, err)
+
+	// Assert request is modified as expected.
+	assert.Equal(t, request.Header.Get("X-HCP-Source-Channel"), expectedSourceChannel)
+
+	// Assert path is unmodified.
+	expectedOrgID := "org_id_77"
+	expectedProjID := "proj_id_123"
+	assert.NotContains(t, request.URL.Path, expectedOrgID)
+	assert.NotContains(t, request.URL.Path, expectedProjID)
+
+	// Prepare middleware function.
+	profileMiddleware := withOrgAndProjectIDs(expectedOrgID, expectedProjID)
+
+	// Apply middleware function.
+	err = profileMiddleware(request)
+	require.NoError(t, err)
+
+	// Assert request is modified as expected.
+	assert.Contains(t, request.URL.Path, expectedOrgID)
+	assert.Contains(t, request.URL.Path, expectedProjID)
+	assert.Equal(t, request.Header.Get("X-HCP-Source-Channel"), expectedSourceChannel)
 }
