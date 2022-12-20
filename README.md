@@ -38,6 +38,15 @@ User session is ideal for getting started or one-off usage. It also works for lo
 
 To obtain user credentials, the client credential environment variables `HCP_CLIENT_ID` and `HCP_CLIENT_SECRET` must be unset. When no client credentials are detected, the HCP Go client will prompt the user with a browser login window. Once authenticated, the user session stays refreshed without intervention until it expires after 24 hours.
 
+### User Profile
+
+An HCP Organization ID and Project ID are required to call most HCP APIs. They can be set to the environment variables `HCP_ORGANIZATION_ID` and `HCP_PROJECT_ID`, as in the example below. The HCP Go SDK will read them from the environment and save them in its state as the user's Profile. The Profile Project and Organization IDs will be applied as default values to any request missing them.
+
+```bash
+HCP_PROJECT_ID="33xyz..."
+HCP_ORGANIZATION_ID="22abc..."
+```
+
 ## Usage
 
 1. Add the SDK to your go.mod.
@@ -88,10 +97,6 @@ In addition to the generated product clients, the HCP Go SDK provides a few libr
 The Cache interface lives under the `auth` package. It handles writing the user credentials obtained during browser login to the common location `/.config/hcp/credentials.json` in the home directory. The Cache has `Read` and `Write` methods that can be used to get and set stored HCP credentials.
 
 Generally the contents of the Cache should be Read to get the latest, unexpired credentials. Without care, overwriting user credentials may cause unexpected authentication failures.
-
-### Profile
-
-An HCP Organization ID and Project ID are required to call most HCP APIs. They can be set to the environment variables `HCP_ORGANIZATION_ID` and `HCP_PROJECT_ID`. The HCP Go SDK will read them from the environment and save them in its state as the user's Profile. The Profile Project and Organization IDs will be applied as default values to any request missing them.
 
 ## Contributing
 
