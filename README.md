@@ -2,7 +2,71 @@
 
 This SDK provides versioned Go packages for using HashiCorp Cloud Platform services. This is a *preview* version and may undergo breaking changes.
 
-## SDK Release Cycle
+## Installation
+
+Fetch and install the package:
+
+```bash
+go get github.com/hashicorp/hcp-sdk-go
+```
+
+## Authentication
+
+There are currently two ways the HCP Go SDK can authenticate against HCP:
+
+- Client credentials
+- User session, obtained through browser login window
+
+### Client Credentials
+
+Client credentials are recommended for CI and local development with the SDK or any tool consuming it.
+
+Follow the guidance in the [HCP Terraform Provider's auth guide](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/guides/auth#service-principal-credentials) to create a service principal and a service principal key with client credentials.
+
+When client credentials are set, they are always used by the HCP Go client, regardless of an existing user session.
+
+The method of authentication is determined by environment variables.
+
+```bash
+HCP_CLIENT_ID="..."
+HCP_CLIENT_SECRET="..."
+```
+
+### User Session
+
+User session is ideal for getting started or one-off usage. It also works for local development, but will periodically prompt for re-authentication.
+
+To obtain user credentials, the client credential environment variables `HCP_CLIENT_ID` and `HCP_CLIENT_SECRET` must be unset. When no client credentials are detected, the HCP Go client will prompt the user with a browser login window. Once authenticated, the user session stays refreshed without intervention until it expires after 24 hours.
+
+### User Profile
+
+An HCP Organization ID and Project ID are required to call most HCP APIs. They can be set to the environment variables `HCP_ORGANIZATION_ID` and `HCP_PROJECT_ID`, as in the example below. The HCP Go SDK will read them from the environment and save them in its state as the user's Profile. The Profile Project and Organization IDs will be applied as default values to any request missing them.
+
+```bash
+HCP_PROJECT_ID="33xyz..."
+HCP_ORGANIZATION_ID="22abc..."
+```
+
+## Usage
+
+1. Add the SDK to your go.mod.
+
+    ```go
+    require (
+        github.com/hashicorp/hcp-sdk-go {latest release}
+    ```
+
+1. Import the desired version of each service SDK.
+
+    ```bash
+    import (
+        network "github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/client/network_service"
+    )
+    ```
+
+See `cmd/hcp-sdk-go-client` for a complete example.
+
+### SDK Release Cycle
 
 HCP aims to strike a balance between the public SDK consumer's need for a stable SDK interface, and the developer's need to iterate on new features. To this end, we use SDK versions composed of a dated version (`2021-02-04`) and stage (`preview` or `stable`) to allow consumers the flexibility to pin to specific versions or try out new new features.
 
@@ -10,7 +74,7 @@ Preview SDK versions allow consumers to try out features in beta, but may underg
 
 Stable SDK versions present a guaranteed contract to downstream consumers and **will not undergo breaking changes.** Major new features are added to the latest stable version after vetting with a preview version. Any breaking change to a stable SDK version will require a new preview version, which will ultimately be promoted to the next stable version.
 
-### Steps
+#### Steps
 
 ![SDK Release Cycle Diagram](/images/sdk-release-cycle-diagram.png)
 
@@ -24,59 +88,15 @@ Stable SDK versions present a guaranteed contract to downstream consumers and **
 
 1. **Any subsequent breaking change starts the cycle all over again.**
 
-## Installation
+## Libraries
 
-Fetch and install the package:
+In addition to the generated product clients, the HCP Go SDK provides a few libraries useful for interacting with HCP.
 
-```bash
-go get github.com/hashicorp/hcp-sdk-go
-```
+### Cache
 
-## Authentication
+The Cache interface lives under the `auth` package. It handles writing the user credentials obtained during browser login to the common location `/.config/hcp/credentials.json` in the home directory. The Cache has `Read` and `Write` methods that can be used to get and set stored HCP credentials.
 
-The `client_id` and `client_secret` must come from a service principal key. *Note:* The `client_secret` can only be obtained on creation of the service principal key; it is not stored anywhere after that.
-
-The service principal must be authorized to access the API. Initially, it has no permissions, so the IAM policy must be updated to grant it permissions.
-
-Follow these steps to create service principal with the `contributor` role and a service principal key.
-
-### 1. Create a service principal
-
-Once you have registered and logged into the HCP portal, navigate to the Access Control (IAM) page. Select the Service Principals tab and create a new service principal. Give it the role Contributor, since it will be writing resources.
-
-### 2. Create a service principal key
-
-Once the service principal is created, navigate to its detail page by selecting its name in the list. Create a new service principal key.
-
-**Note:** Save the client ID and secret returned on successful key creation. The client secret will not be available after creation.
-
-### 3. Configure the SDK with client credentials
-
-Set the client ID and secret as the environment variables HCP_CLIENT_ID and HCP_CLIENT_SECRET.
-
-```bash
-export HCP_CLIENT_ID="service-principal-key-client-id"
-export HCP_CLIENT_SECRET="service-principal-key-client-secret"
-```
-
-## Usage
-
-1. Add the SDK to your go.mod.
-
-```go
-require (
-     github.com/hashicorp/hcp-sdk-go {latest release}
-```
-
-2. Import the desired version of each service SDK.
-
-```bash
-import (
-    network "github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/client/network_service"
-)
-```
-
-See `cmd/hcp-sdk-go-client` for a complete example.
+Generally the contents of the Cache should be Read to get the latest, unexpired credentials. Without care, overwriting user credentials may cause unexpected authentication failures.
 
 ## Contributing
 
@@ -84,11 +104,11 @@ See `cmd/hcp-sdk-go-client` for a complete example.
 
 This repo requires that a chagnelog file be added in all pull requests. The name of the file must follow `[PR #].txt` and must reside in the `.changelog` directory. The contents must have the following formatting:
 
-~~~
-```release-note:TYPE
-ENTRY
+```text
+    ```release-note:TYPE
+    ENTRY
+    ```
 ```
-~~~
 
 Where `TYPE` is the type of release note entry this is. This is one of either: `breaking-change`, `security`, `feature`, `improvement`, `deprecation`, `bug`.
 
@@ -96,13 +116,12 @@ Where `TYPE` is the type of release note entry this is. This is one of either: `
 
 Sometimes PRs have multiple changelog entries associated with them. In this case, use multiple blocks.
 
-~~~
-```release-note:deprecation
-Deprecated the `foo` interface, please use the `bar` interface instead.
-```
+```text
+    ```release-note:deprecation
+    Deprecated the `foo` interface, please use the `bar` interface instead.
+    ```
 
-```release-note:improvement
-Added the `bar` interface.
+    ```release-note:improvement
+    Added the `bar` interface.
+    ```
 ```
-~~~
-
