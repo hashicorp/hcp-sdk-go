@@ -36,7 +36,7 @@ jobs:
           cp -a internal/clients temp/clients
           cp -a internal/docs temp/docs
           cp internal/README.md temp/README.md
-          cp internal/catalog-info.yml temp/catalog-info.yml
+          cp internal/catalog-info.yaml temp/catalog-info.yaml
           cp internal/mkdocs.yml temp/mkdocs.yml
 
           rm -r internal
