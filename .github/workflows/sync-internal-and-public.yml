@@ -31,14 +31,14 @@ jobs:
           ls -al public
           
           # Copy important files from internal repo
-          cp -a internal/.git temp/.git
+          sudo cp -a internal/.git temp/.git
           cp -a internal/.github temp/.github
           cp -a internal/clients temp/clients
           cp -a internal/docs temp/docs
           cp internal/README.md temp/README.md
 
           cp -a public/. internal
-          cp -a temp/. internal
+          sudo cp -a temp/. internal
 
           cd internal
           git status
