@@ -7,13 +7,6 @@ jobs:
     name: Sync Internal and Public Repos
     runs-on: ubuntu-latest
     steps:
-      - name: Configure Git
-        env:
-          TOKEN: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
-        run: |
-            git config user.name "hashicorp-cloud"
-            git config user.email "hashicorp-cloud@hashicorp.com"
-
       - name: Checkout Public Repo
         uses: actions/checkout@v3
         with:
@@ -53,6 +46,8 @@ jobs:
       - name: Create Branch
         run: |
           cd internal
+          git config user.name "HashiCorp Cloud Services"
+          git config user.email "${{ secrets.HCP_SERVICE_ACCOUNT_EMAIL }}"
           sync_branch_exists="$(git ls-remote --heads origin sync-public-and-internal-sdk)"
           [[ -n $sync_branch_exists ]] && git push origin --delete sync-public-and-internal-sdk
           git checkout -b sync-public-and-internal-sdk
