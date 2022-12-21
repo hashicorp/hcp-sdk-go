@@ -1,6 +1,6 @@
 name: Sync Internal and Public Repos
 
-on: workflow_dispatch
+on: pull_request
 
 jobs:
   sync-repos:
@@ -27,7 +27,7 @@ jobs:
           mkdir temp
 
           # Remove files from public repo
-          rm -r public/.git public/.github public/.changelog public/clients public/docs public/README.md
+          rm -r public/.git public/.changelog public/.github public/clients public/docs public/README.md
           ls -al public
           
           # Copy important files from internal repo
@@ -37,6 +37,10 @@ jobs:
           cp -a internal/docs temp/docs
           cp internal/README.md temp/README.md
 
+          rm -r internal
+          mkdir internal
+
+          # Sync public with internal
           cp -a public/. internal
           sudo cp -a temp/. internal
 
