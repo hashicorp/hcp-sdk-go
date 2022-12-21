@@ -1,3 +1,18 @@
+## v0.30.0 (December 21, 2022)
+
+IMPROVEMENTS:
+
+* Add middleware support to httpclient package [[GH-142](https://github.com/hashicorp/hcp-sdk-go/pull/142)]
+* Add middleware that gets org ID and project ID from user profile and sets on request [[GH-142](https://github.com/hashicorp/hcp-sdk-go/pull/142)]
+* Add new Libraries section to README. [[GH-155](https://github.com/hashicorp/hcp-sdk-go/pull/155)]
+* Bump github.com/go-openapi/loads from 0.20.2 to 0.21.2 [[GH-149](https://github.com/hashicorp/hcp-sdk-go/pull/149)]
+* Bump github.com/go-openapi/runtime from 0.19.24 to 0.25.0 [[GH-148](https://github.com/hashicorp/hcp-sdk-go/pull/148)]
+* Bump github.com/go-openapi/spec from 0.20.3 to 0.20.7 [[GH-147](https://github.com/hashicorp/hcp-sdk-go/pull/147)]
+* Bump github.com/go-openapi/swag from 0.19.14 to 0.22.3 [[GH-146](https://github.com/hashicorp/hcp-sdk-go/pull/146)]
+* Bump github.com/go-openapi/validate from 0.21.0 to 0.22.0 [[GH-153](https://github.com/hashicorp/hcp-sdk-go/pull/153)]
+* Bump github.com/hashicorp/go-cleanhttp from 0.5.1 to 0.5.2 [[GH-144](https://github.com/hashicorp/hcp-sdk-go/pull/144)]
+* Bump github.com/iancoleman/strcase from 0.1.3 to 0.2.0 [[GH-145](https://github.com/hashicorp/hcp-sdk-go/pull/145)]
+* Remove `create-pull-request` third party action in favour of plain git commands. [[GH-152](https://github.com/hashicorp/hcp-sdk-go/pull/152)]
 ## v0.29.0 (December 14, 2022)
 
 IMPROVEMENTS:
