@@ -51,7 +51,7 @@ jobs:
           sync_branch_exists="$(git ls-remote --heads origin sync-public-and-internal-sdk)"
           [[ -n $sync_branch_exists ]] && git push origin --delete sync-public-and-internal-sdk
           git checkout -b sync-public-and-internal-sdk
-          git add -a
+          git add -A
           git commit -m "Sync with public SDK"
           git push --set-upstream origin sync-public-and-internal-sdk
       
