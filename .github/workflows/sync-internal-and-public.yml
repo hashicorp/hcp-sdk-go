@@ -7,6 +7,7 @@ on:
 jobs:
   sync-repos:
     name: Sync Internal and Public Repos
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Public Repo
         uses: actions/checkout@v3
