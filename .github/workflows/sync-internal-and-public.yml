@@ -1,0 +1,29 @@
+name: Sync Internal and Public Repos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync-repos:
+    name: Sync Internal and Public Repos
+    steps:
+      - name: Checkout Public Repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
+          path: public
+
+      - name: Checkout Internal Repo
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
+          repository: hashicorp/hcp-sdk-go-internal
+          path: internal
+
+      - name: Test Checkouts
+        run: |
+          ls
+          cd ..
+          ls
+
