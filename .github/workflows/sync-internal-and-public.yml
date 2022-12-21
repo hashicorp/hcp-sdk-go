@@ -25,7 +25,10 @@ jobs:
 
       - name: Test Checkouts
         run: |
+          echo "-- Current Directory"
           ls
+          echo "-- Change Directory Out"
           cd ..
+          echo "-- List"
           ls
 
