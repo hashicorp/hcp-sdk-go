@@ -1,6 +1,7 @@
 name: Sync Internal and Public Repos
 
 on:
+  pull_request:
   workflow_dispatch:
   workflow_run:
     workflows: ["Create Release"]
@@ -32,7 +33,7 @@ jobs:
           mkdir temp
 
           # Remove files from public repo
-          rm -r public/.git public/.changelog public/.github public/clients public/docs public/README.md public/scripts/gen-go-service-sdk.sh
+          rm -r public/.git public/.changelog public/.github public/clients public/docs public/README.md public/scripts
           ls -al public
           
           # Copy important files from internal repo
@@ -40,6 +41,7 @@ jobs:
           cp -a internal/.github temp/.github
           cp -a internal/clients temp/clients
           cp -a internal/docs temp/docs
+          cp -a internal/scripts temp/scripts
           cp internal/README.md temp/README.md
           cp internal/catalog-info.yaml temp/catalog-info.yaml
           cp internal/mkdocs.yml temp/mkdocs.yml
