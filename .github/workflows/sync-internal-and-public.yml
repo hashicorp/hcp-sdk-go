@@ -72,7 +72,7 @@ jobs:
           gh pr create --title "$PR_TITLE" --body "$PR_BODY" -H "$PR_SOURCE" -B "$PR_TARGET"
         env:
           PR_TITLE: "[auto] Sync with Public SDK"
-          PR_BODY: "This is an auto-generated PR created as part of the public SDK pipeline to update the internal SDK."
+          PR_BODY: "This is an auto-generated PR updating the internal SDK with the latest changes from the open source SDK. Client changes are excluded."
           PR_SOURCE: "sync-public-and-internal-sdk"
           PR_TARGET: "main"
           GITHUB_TOKEN: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
