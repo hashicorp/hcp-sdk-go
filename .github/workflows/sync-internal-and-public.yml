@@ -35,7 +35,7 @@ jobs:
           rm -r public/.git public/.changelog public/.github public/clients public/docs public/README.md public/scripts
           ls -al public
           
-          # Copy important files from internal repo
+          # Copy files that should not be changed in internal repo
           sudo cp -a internal/.git temp/.git
           cp -a internal/.github temp/.github
           cp -a internal/clients temp/clients
