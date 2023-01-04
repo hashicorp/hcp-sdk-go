@@ -44,7 +44,6 @@ jobs:
           cp internal/README.md temp/README.md
           cp internal/catalog-info.yaml temp/catalog-info.yaml
           cp internal/mkdocs.yml temp/mkdocs.yml
-          cp internal/scripts/gen-go-service-sdk.sh temp/scripts/gen-go-service-sdk.sh
 
           rm -r internal
           mkdir internal
