@@ -1,7 +1,6 @@
 name: Sync Internal and Public Repos
 
 on:
-  pull_request:
   workflow_dispatch:
   workflow_run:
     workflows: ["Create Release"]
