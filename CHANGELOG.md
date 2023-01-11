@@ -1,3 +1,8 @@
+## v0.31.0 (January 11, 2023)
+
+FEATURES:
+
+* Automatically sync the public and internal repos. [[GH-157](https://github.com/hashicorp/hcp-sdk-go/pull/157)]
 ## v0.30.0 (December 21, 2022)
 
 IMPROVEMENTS:
