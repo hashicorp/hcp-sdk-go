@@ -1,0 +1,3 @@
+```release-note:bug
+Update action to read go version from repo go.mod
+```
