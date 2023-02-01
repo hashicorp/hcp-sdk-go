@@ -1,3 +1,13 @@
+## v0.32.0 (February 01, 2023)
+
+IMPROVEMENTS:
+
+* Bump github.com/go-openapi/spec from 0.20.7 to 0.20.8 [[GH-160](https://github.com/hashicorp/hcp-sdk-go/pull/160)]
+* Bump github.com/go-openapi/validate from 0.22.0 to 0.22.1 [[GH-159](https://github.com/hashicorp/hcp-sdk-go/pull/159)]
+
+BUG FIXES:
+
+* Update action to read go version from repo go.mod [[GH-161](https://github.com/hashicorp/hcp-sdk-go/pull/161)]
 ## v0.31.0 (January 11, 2023)
 
 FEATURES:
