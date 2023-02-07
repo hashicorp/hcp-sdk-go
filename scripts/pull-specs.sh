@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 set -euo pipefail
 
 # This script fetches the latest public API specs for a given HCP service ($1) 
