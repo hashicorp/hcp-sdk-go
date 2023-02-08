@@ -32,9 +32,12 @@ type Resource struct {
 }
 
 // String encodes the resource identifier in the following canonical format:
-//     "organization/<Organization UUID>/project/<Project UUID>/<Type>/<ID>"
+//
+//	"organization/<Organization UUID>/project/<Project UUID>/<Type>/<ID>"
+//
 // Example:
-//     "organization/ccbdd191-5dc3-4a73-9e05-6ac30ca67992/project/36019e0d-ed59-4df6-9990-05bb7fc793b6/hashicorp.consul.linked-cluster/prod-on-prem"
+//
+//	"organization/ccbdd191-5dc3-4a73-9e05-6ac30ca67992/project/36019e0d-ed59-4df6-9990-05bb7fc793b6/hashicorp.consul.linked-cluster/prod-on-prem"
 func (r Resource) String() string {
 	return strings.Join([]string{
 		tokenOrganization, r.Organization,
@@ -130,6 +133,7 @@ func (r *Resource) UnmarshalJSON(bytes []byte) error {
 // Must is a helper function that wraps a call to a function returning (Resource, error) such as FromLink or FromString
 // and panics if the error is non-nil. It is intended for use in variable
 // initializations such as
+//
 //	var packageResource = resource.Must(resource.FromString("..."))
 func Must(r Resource, err error) Resource {
 	if err != nil {
