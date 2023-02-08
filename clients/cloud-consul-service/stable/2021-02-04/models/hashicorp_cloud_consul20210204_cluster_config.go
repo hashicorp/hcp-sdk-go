@@ -19,10 +19,11 @@ import (
 // swagger:model hashicorp.cloud.consul_20210204.ClusterConfig
 type HashicorpCloudConsul20210204ClusterConfig struct {
 
-	// auto_hvn_to_hvn_peering is only used together with the field consul_config.primary when
-	// creating secondary clusters in a federation. Enable auto_hvn_to_hvn_peering if the
-	// secondary HVN should be peered automatically to every other cluster's HVN in the federation.
-	// If left disabled, the peering has to be done manually.
+	// auto_hvn_to_hvn_peering is only used together with the field
+	// consul_config.primary when creating secondary clusters in a federation.
+	// Enable auto_hvn_to_hvn_peering if the secondary HVN should be peered
+	// automatically to every other cluster's HVN in the federation. If left
+	// disabled, the peering has to be done manually.
 	AutoHvnToHvnPeering bool `json:"auto_hvn_to_hvn_peering,omitempty"`
 
 	// capacity_config contains the configuration for the cluster size settings.
@@ -32,20 +33,20 @@ type HashicorpCloudConsul20210204ClusterConfig struct {
 	// cluster’s configuration.
 	ConsulConfig *HashicorpCloudConsul20210204ConsulConfig `json:"consul_config,omitempty"`
 
-	// maintenance_config contains the configuration for maintenance events such as
-	// auto upgrades.
+	// maintenance_config contains the configuration for maintenance events such
+	// as auto upgrades.
 	MaintenanceConfig HashicorpCloudConsul20210204MaintenanceConfig `json:"maintenance_config,omitempty"`
 
 	// NetworkConfig contains the network to launch the Consul cluster into.
 	NetworkConfig *HashicorpCloudConsul20210204NetworkConfig `json:"network_config,omitempty"`
 
-	// primary is readonly and contains a link to the primary consul cluster in a federation.
-	// If this link points to itself, this cluster is the primary of a federation.
-	// If the link points to another cluster, this cluster is a secondary in a federation.
-	// Use consul_config.primary to federate clusters. The difference between these two fields
-	// is that this field is present on primaries and secondaries. Whereas consul_config.primary
-	// is only present on secondaries.
-	// Output only.
+	// primary is readonly and contains a link to the primary consul cluster in a
+	// federation. If this link points to itself, this cluster is the primary of a
+	// federation. If the link points to another cluster, this cluster is a
+	// secondary in a federation. Use consul_config.primary to federate clusters.
+	// The difference between these two fields is that this field is present on
+	// primaries and secondaries. Whereas consul_config.primary is only present on
+	// secondaries. Output only.
 	// Read Only: true
 	Primary *cloud.HashicorpCloudLocationLink `json:"primary,omitempty"`
 
