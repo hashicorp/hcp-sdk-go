@@ -11,6 +11,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/go-openapi/loads"
@@ -137,7 +138,10 @@ func loadSharedDefinitions(sharedPath, svcPath string) (map[string]bool, error) 
 
 	for _, def := range doc.Analyzer.AllDefinitions() {
 		if def.TopLevel {
-			if !strings.HasPrefix(def.Name, "hashicorp.cloud") {
+			// depending on which plugin used for swagger, some package info may not be available
+			// any types missing package information are skipped
+			fqnSwaggerFormat, _ := regexp.MatchString("\\w+\\.\\w+\\.", def.Name)
+			if fqnSwaggerFormat && !strings.HasPrefix(def.Name, "hashicorp.cloud") {
 				sharedDefs[def.Name] = true
 			}
 		}
