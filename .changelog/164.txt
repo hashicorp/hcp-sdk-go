@@ -1,0 +1,3 @@
+    ```release-note:feature
+    Updates to cloud-consul-service which introduces a new IP Allowlisting feature to consul clusters and a new PREMIUM cluster config tier.
+    ```
