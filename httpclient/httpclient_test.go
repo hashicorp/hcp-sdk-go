@@ -7,7 +7,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -45,7 +45,7 @@ func TestNew(t *testing.T) {
 		// This handler mocks responses from the auth provider.
 		case tokenPath:
 			// Before returning the access token, verify request payload includes expected params.
-			body, err := ioutil.ReadAll(r.Body)
+			body, err := io.ReadAll(r.Body)
 			defer r.Body.Close()
 			require.NoError(t, err)
 

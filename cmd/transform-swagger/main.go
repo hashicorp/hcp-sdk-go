@@ -21,17 +21,19 @@ import (
 
 // XGoType contains the fields of the go-swagger extension x-go-type
 // In its final form, the extension looks like this on the generated type definition:
-// "hashicorp.cloud.common.PaginationRequest": {
-// 	"properties": { ... }
-//	...
-//	"x-go-type": {
-//		"import": {
-//		"package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
-// 			"alias": "cloud"
-// 		},
-// 		"type": "HashicorpCloudCommonPaginationRequest"
-// 	}
-// }
+//
+//	"hashicorp.cloud.common.PaginationRequest": {
+//		"properties": { ... }
+//		...
+//		"x-go-type": {
+//			"import": {
+//			"package": "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models",
+//				"alias": "cloud"
+//			},
+//			"type": "HashicorpCloudCommonPaginationRequest"
+//		}
+//	}
+//
 // ref: https://goswagger.io/use/models/schemas.html#types-reusability
 type XGoType struct {
 	Import Import `json:"import"`
@@ -94,7 +96,7 @@ func main() {
 
 	// Overwrite original spec with the transformed spec.
 	log.Printf("Overwriting spec %q", svcPath)
-	err = ioutil.WriteFile(svcPath, json, os.ModePerm)
+	err = os.WriteFile(svcPath, json, os.ModePerm)
 	if err != nil {
 		log.Fatalf("failed to overwrite spec at path %q: %v", svcPath, err)
 	}
@@ -136,11 +138,16 @@ func loadSharedDefinitions(sharedPath, svcPath string) (map[string]bool, error) 
 		return nil, fmt.Errorf("failed to load spec at path %q: %w", svcPath, err)
 	}
 
+	re := regexp.MustCompile(`\w+\.\w+\.`)
+	if err != nil {
+		return nil, fmt.Errorf("failed to compile regex for shared definitions: %w", err)
+	}
+
 	for _, def := range doc.Analyzer.AllDefinitions() {
 		if def.TopLevel {
 			// depending on which plugin used for swagger, some package info may not be available
 			// any types missing package information are skipped
-			fqnSwaggerFormat, _ := regexp.MatchString("\\w+\\.\\w+\\.", def.Name)
+			fqnSwaggerFormat := re.MatchString(def.Name)
 			if fqnSwaggerFormat && !strings.HasPrefix(def.Name, "hashicorp.cloud") {
 				sharedDefs[def.Name] = true
 			}

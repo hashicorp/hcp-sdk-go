@@ -410,7 +410,7 @@ func TestTokenToJson_InvalidFormat(t *testing.T) {
 	}
 }
 
-//TODO: create testHelpers file to include testsetup and destroy
+// TODO: create testHelpers file to include testsetup and destroy
 func CacheSetup(t *testing.T) (credentialDir, credentialPath string, err error) {
 	os.Setenv(envVarCacheTestMode, "true")
 
