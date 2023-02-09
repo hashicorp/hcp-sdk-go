@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -18,6 +19,9 @@ import (
 //
 // swagger:model hashicorp.cloud.consul_20210204.NetworkConfig
 type HashicorpCloudConsul20210204NetworkConfig struct {
+
+	// A list of IP addresses used to restrict access to a cluster.
+	IPAllowlist []*HashicorpCloudConsul20210204CidrRange `json:"ip_allowlist"`
 
 	// network is the link of the HVN to launch the Consul cluster in.
 	// The network cannot be updated once the cluster is created.
@@ -32,6 +36,10 @@ type HashicorpCloudConsul20210204NetworkConfig struct {
 func (m *HashicorpCloudConsul20210204NetworkConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateIPAllowlist(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateNetwork(formats); err != nil {
 		res = append(res, err)
 	}
@@ -39,6 +47,32 @@ func (m *HashicorpCloudConsul20210204NetworkConfig) Validate(formats strfmt.Regi
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudConsul20210204NetworkConfig) validateIPAllowlist(formats strfmt.Registry) error {
+	if swag.IsZero(m.IPAllowlist) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.IPAllowlist); i++ {
+		if swag.IsZero(m.IPAllowlist[i]) { // not required
+			continue
+		}
+
+		if m.IPAllowlist[i] != nil {
+			if err := m.IPAllowlist[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("ip_allowlist" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("ip_allowlist" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -65,6 +99,10 @@ func (m *HashicorpCloudConsul20210204NetworkConfig) validateNetwork(formats strf
 func (m *HashicorpCloudConsul20210204NetworkConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateIPAllowlist(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateNetwork(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -72,6 +110,26 @@ func (m *HashicorpCloudConsul20210204NetworkConfig) ContextValidate(ctx context.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudConsul20210204NetworkConfig) contextValidateIPAllowlist(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.IPAllowlist); i++ {
+
+		if m.IPAllowlist[i] != nil {
+			if err := m.IPAllowlist[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("ip_allowlist" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("ip_allowlist" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

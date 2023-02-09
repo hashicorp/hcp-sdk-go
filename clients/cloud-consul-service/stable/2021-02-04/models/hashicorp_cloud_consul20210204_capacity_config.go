@@ -13,7 +13,8 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudConsul20210204CapacityConfig CapacityConfig configures capacity settings like number of nodes and vm sizes.
+// HashicorpCloudConsul20210204CapacityConfig CapacityConfig configures capacity settings like number of nodes and vm
+// sizes.
 //
 // swagger:model hashicorp.cloud.consul_20210204.CapacityConfig
 type HashicorpCloudConsul20210204CapacityConfig struct {

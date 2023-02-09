@@ -14,9 +14,9 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudConsul20210204CapacityConfigSize Size represents the different VM sizes a Consul cluster can be provisioned with.
-// These are bucketed as "t-shirt" sizes which each correspond to a specific
-// instance type depending on the cloud provider.
+// HashicorpCloudConsul20210204CapacityConfigSize Size represents the different VM sizes a Consul cluster can be provisioned
+// with. These are bucketed as "t-shirt" sizes which each correspond to a
+// specific instance type depending on the cloud provider.
 //
 // swagger:model hashicorp.cloud.consul_20210204.CapacityConfig.Size
 type HashicorpCloudConsul20210204CapacityConfigSize string
