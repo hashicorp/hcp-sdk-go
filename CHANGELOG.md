@@ -1,6 +1,16 @@
 ## v0.34.0 (February 10, 2023)
 
+IMPROVEMENTS:
+
+- [Update cloud-consul-service SDK](https://github.com/hashicorp/hcp-sdk-go/commit/25b608253197bd5642dbd62af7f8062d1e9e86c3)
+ - [fix linting errors](https://github.com/hashicorp/hcp-sdk-go/commit/c9c7d254d30e8ed9a39a99a438f20b77c79e1d8d)
+- [Update cloud-vault-link-service SDK](https://github.com/hashicorp/hcp-sdk-go/commit/587b65ed57fe8542a387b03056e570c35dc25133)
+
 ## v0.33.0 (February 08, 2023)
+
+IMPROVEMENTS:
+
+- [Update cloud-operation SDK](https://github.com/hashicorp/hcp-sdk-go/commit/8ece4c5ddd56f73bc731e3d5b2591f377d37457d)
 
 ## v0.32.0 (February 01, 2023)
 
