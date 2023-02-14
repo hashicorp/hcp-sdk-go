@@ -18,10 +18,10 @@ import (
 type HashicorpCloudVaultLink20221107RaftQuorumStatus struct {
 
 	// is healthy
-	IsHealthy bool `json:"isHealthy,omitempty"`
+	IsHealthy bool `json:"is_healthy,omitempty"`
 
 	// quorum number
-	QuorumNumber int32 `json:"quorumNumber,omitempty"`
+	QuorumNumber int32 `json:"quorum_number,omitempty"`
 
 	// warning
 	Warning string `json:"warning,omitempty"`

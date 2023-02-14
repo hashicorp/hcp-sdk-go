@@ -18,17 +18,17 @@ import (
 // swagger:model hashicorp.cloud.vault_link_20221107.RotateLinkedClusterCredentialsResponse
 type HashicorpCloudVaultLink20221107RotateLinkedClusterCredentialsResponse struct {
 
-	// client Id
-	ClientID string `json:"clientId,omitempty"`
+	// client id
+	ClientID string `json:"client_id,omitempty"`
 
 	// client secret
-	ClientSecret string `json:"clientSecret,omitempty"`
+	ClientSecret string `json:"client_secret,omitempty"`
 
 	// cluster
 	Cluster *HashicorpCloudVaultLink20221107LinkedCluster `json:"cluster,omitempty"`
 
-	// resource Id
-	ResourceID string `json:"resourceId,omitempty"`
+	// resource id
+	ResourceID string `json:"resource_id,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault link 20221107 rotate linked cluster credentials response

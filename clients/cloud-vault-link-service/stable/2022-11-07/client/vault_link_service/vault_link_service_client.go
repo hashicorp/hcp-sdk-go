@@ -50,7 +50,7 @@ func (a *Client) GetLinkedCluster(params *GetLinkedClusterParams, authInfo runti
 	op := &runtime.ClientOperation{
 		ID:                 "GetLinkedCluster",
 		Method:             "GET",
-		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}",
+		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/link/clusters/{clusterId}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -88,7 +88,7 @@ func (a *Client) GetLinkedClusterPolicy(params *GetLinkedClusterPolicyParams, au
 	op := &runtime.ClientOperation{
 		ID:                 "GetLinkedClusterPolicy",
 		Method:             "GET",
-		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/policy",
+		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/link/policy",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -126,7 +126,7 @@ func (a *Client) RevokeLinkedClusterCredentials(params *RevokeLinkedClusterCrede
 	op := &runtime.ClientOperation{
 		ID:                 "RevokeLinkedClusterCredentials",
 		Method:             "DELETE",
-		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/revoke-credentials/{cluster_id}",
+		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/revoke-credentials/{clusterId}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -164,7 +164,7 @@ func (a *Client) RotateLinkedClusterCredentials(params *RotateLinkedClusterCrede
 	op := &runtime.ClientOperation{
 		ID:                 "RotateLinkedClusterCredentials",
 		Method:             "POST",
-		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/rotate-credentials/{cluster_id}",
+		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/rotate-credentials/{clusterId}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

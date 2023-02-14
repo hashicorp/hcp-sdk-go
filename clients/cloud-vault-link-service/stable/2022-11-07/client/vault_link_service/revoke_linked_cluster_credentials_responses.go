@@ -12,8 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-link-service/preview/2022-11-07/models"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-link-service/stable/2022-11-07/models"
 )
 
 // RevokeLinkedClusterCredentialsReader is a Reader for the RevokeLinkedClusterCredentials structure.
@@ -53,7 +52,7 @@ RevokeLinkedClusterCredentialsOK describes a response with status code 200, with
 A successful response.
 */
 type RevokeLinkedClusterCredentialsOK struct {
-	Payload models.HashicorpCloudVaultLink20221107RevokeLinkedClusterCredentialsResponse
+	Payload models.VaultLink20221107RevokeLinkedClusterCredentialsResponse
 }
 
 // IsSuccess returns true when this revoke linked cluster credentials o k response has a 2xx status code
@@ -82,14 +81,14 @@ func (o *RevokeLinkedClusterCredentialsOK) IsCode(code int) bool {
 }
 
 func (o *RevokeLinkedClusterCredentialsOK) Error() string {
-	return fmt.Sprintf("[DELETE /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/revoke-credentials/{cluster_id}][%d] revokeLinkedClusterCredentialsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/revoke-credentials/{clusterId}][%d] revokeLinkedClusterCredentialsOK  %+v", 200, o.Payload)
 }
 
 func (o *RevokeLinkedClusterCredentialsOK) String() string {
-	return fmt.Sprintf("[DELETE /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/revoke-credentials/{cluster_id}][%d] revokeLinkedClusterCredentialsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/revoke-credentials/{clusterId}][%d] revokeLinkedClusterCredentialsOK  %+v", 200, o.Payload)
 }
 
-func (o *RevokeLinkedClusterCredentialsOK) GetPayload() models.HashicorpCloudVaultLink20221107RevokeLinkedClusterCredentialsResponse {
+func (o *RevokeLinkedClusterCredentialsOK) GetPayload() models.VaultLink20221107RevokeLinkedClusterCredentialsResponse {
 	return o.Payload
 }
 
@@ -118,7 +117,7 @@ An unexpected error response.
 type RevokeLinkedClusterCredentialsDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *models.RPCStatus
 }
 
 // Code gets the status code for the revoke linked cluster credentials default response
@@ -152,20 +151,20 @@ func (o *RevokeLinkedClusterCredentialsDefault) IsCode(code int) bool {
 }
 
 func (o *RevokeLinkedClusterCredentialsDefault) Error() string {
-	return fmt.Sprintf("[DELETE /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/revoke-credentials/{cluster_id}][%d] RevokeLinkedClusterCredentials default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/revoke-credentials/{clusterId}][%d] RevokeLinkedClusterCredentials default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *RevokeLinkedClusterCredentialsDefault) String() string {
-	return fmt.Sprintf("[DELETE /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/revoke-credentials/{cluster_id}][%d] RevokeLinkedClusterCredentials default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/revoke-credentials/{clusterId}][%d] RevokeLinkedClusterCredentials default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *RevokeLinkedClusterCredentialsDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *RevokeLinkedClusterCredentialsDefault) GetPayload() *models.RPCStatus {
 	return o.Payload
 }
 
 func (o *RevokeLinkedClusterCredentialsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(models.RPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -206,7 +206,7 @@ func (o *GetLinkedClusterPolicyParams) WriteToRequest(r runtime.ClientRequest, r
 
 	if o.ClusterID != nil {
 
-		// query param cluster_id
+		// query param clusterId
 		var qrClusterID string
 
 		if o.ClusterID != nil {
@@ -215,19 +215,19 @@ func (o *GetLinkedClusterPolicyParams) WriteToRequest(r runtime.ClientRequest, r
 		qClusterID := qrClusterID
 		if qClusterID != "" {
 
-			if err := r.SetQueryParam("cluster_id", qClusterID); err != nil {
+			if err := r.SetQueryParam("clusterId", qClusterID); err != nil {
 				return err
 			}
 		}
 	}
 
-	// path param location.organization_id
-	if err := r.SetPathParam("location.organization_id", o.LocationOrganizationID); err != nil {
+	// path param location.organizationId
+	if err := r.SetPathParam("location.organizationId", o.LocationOrganizationID); err != nil {
 		return err
 	}
 
-	// path param location.project_id
-	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
+	// path param location.projectId
+	if err := r.SetPathParam("location.projectId", o.LocationProjectID); err != nil {
 		return err
 	}
 

@@ -12,8 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-link-service/preview/2022-11-07/models"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-link-service/stable/2022-11-07/models"
 )
 
 // GetLinkedClusterReader is a Reader for the GetLinkedCluster structure.
@@ -53,7 +52,7 @@ GetLinkedClusterOK describes a response with status code 200, with default heade
 A successful response.
 */
 type GetLinkedClusterOK struct {
-	Payload *models.HashicorpCloudVaultLink20221107GetLinkedClusterResponse
+	Payload *models.VaultLink20221107GetLinkedClusterResponse
 }
 
 // IsSuccess returns true when this get linked cluster o k response has a 2xx status code
@@ -82,20 +81,20 @@ func (o *GetLinkedClusterOK) IsCode(code int) bool {
 }
 
 func (o *GetLinkedClusterOK) Error() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}][%d] getLinkedClusterOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/link/clusters/{clusterId}][%d] getLinkedClusterOK  %+v", 200, o.Payload)
 }
 
 func (o *GetLinkedClusterOK) String() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}][%d] getLinkedClusterOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/link/clusters/{clusterId}][%d] getLinkedClusterOK  %+v", 200, o.Payload)
 }
 
-func (o *GetLinkedClusterOK) GetPayload() *models.HashicorpCloudVaultLink20221107GetLinkedClusterResponse {
+func (o *GetLinkedClusterOK) GetPayload() *models.VaultLink20221107GetLinkedClusterResponse {
 	return o.Payload
 }
 
 func (o *GetLinkedClusterOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVaultLink20221107GetLinkedClusterResponse)
+	o.Payload = new(models.VaultLink20221107GetLinkedClusterResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -120,7 +119,7 @@ An unexpected error response.
 type GetLinkedClusterDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *models.RPCStatus
 }
 
 // Code gets the status code for the get linked cluster default response
@@ -154,20 +153,20 @@ func (o *GetLinkedClusterDefault) IsCode(code int) bool {
 }
 
 func (o *GetLinkedClusterDefault) Error() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}][%d] GetLinkedCluster default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/link/clusters/{clusterId}][%d] GetLinkedCluster default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetLinkedClusterDefault) String() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}][%d] GetLinkedCluster default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/link/clusters/{clusterId}][%d] GetLinkedCluster default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *GetLinkedClusterDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *GetLinkedClusterDefault) GetPayload() *models.RPCStatus {
 	return o.Payload
 }
 
 func (o *GetLinkedClusterDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(models.RPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

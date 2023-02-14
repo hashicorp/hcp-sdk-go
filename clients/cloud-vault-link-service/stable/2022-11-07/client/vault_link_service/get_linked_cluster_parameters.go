@@ -204,18 +204,18 @@ func (o *GetLinkedClusterParams) WriteToRequest(r runtime.ClientRequest, reg str
 	}
 	var res []error
 
-	// path param cluster_id
-	if err := r.SetPathParam("cluster_id", o.ClusterID); err != nil {
+	// path param clusterId
+	if err := r.SetPathParam("clusterId", o.ClusterID); err != nil {
 		return err
 	}
 
-	// path param location.organization_id
-	if err := r.SetPathParam("location.organization_id", o.LocationOrganizationID); err != nil {
+	// path param location.organizationId
+	if err := r.SetPathParam("location.organizationId", o.LocationOrganizationID); err != nil {
 		return err
 	}
 
-	// path param location.project_id
-	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
+	// path param location.projectId
+	if err := r.SetPathParam("location.projectId", o.LocationProjectID); err != nil {
 		return err
 	}
 

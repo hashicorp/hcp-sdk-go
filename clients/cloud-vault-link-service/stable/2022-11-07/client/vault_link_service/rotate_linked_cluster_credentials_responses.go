@@ -12,8 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-link-service/preview/2022-11-07/models"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-link-service/stable/2022-11-07/models"
 )
 
 // RotateLinkedClusterCredentialsReader is a Reader for the RotateLinkedClusterCredentials structure.
@@ -53,7 +52,7 @@ RotateLinkedClusterCredentialsOK describes a response with status code 200, with
 A successful response.
 */
 type RotateLinkedClusterCredentialsOK struct {
-	Payload *models.HashicorpCloudVaultLink20221107RotateLinkedClusterCredentialsResponse
+	Payload *models.VaultLink20221107RotateLinkedClusterCredentialsResponse
 }
 
 // IsSuccess returns true when this rotate linked cluster credentials o k response has a 2xx status code
@@ -82,20 +81,20 @@ func (o *RotateLinkedClusterCredentialsOK) IsCode(code int) bool {
 }
 
 func (o *RotateLinkedClusterCredentialsOK) Error() string {
-	return fmt.Sprintf("[POST /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/rotate-credentials/{cluster_id}][%d] rotateLinkedClusterCredentialsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/rotate-credentials/{clusterId}][%d] rotateLinkedClusterCredentialsOK  %+v", 200, o.Payload)
 }
 
 func (o *RotateLinkedClusterCredentialsOK) String() string {
-	return fmt.Sprintf("[POST /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/rotate-credentials/{cluster_id}][%d] rotateLinkedClusterCredentialsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/rotate-credentials/{clusterId}][%d] rotateLinkedClusterCredentialsOK  %+v", 200, o.Payload)
 }
 
-func (o *RotateLinkedClusterCredentialsOK) GetPayload() *models.HashicorpCloudVaultLink20221107RotateLinkedClusterCredentialsResponse {
+func (o *RotateLinkedClusterCredentialsOK) GetPayload() *models.VaultLink20221107RotateLinkedClusterCredentialsResponse {
 	return o.Payload
 }
 
 func (o *RotateLinkedClusterCredentialsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVaultLink20221107RotateLinkedClusterCredentialsResponse)
+	o.Payload = new(models.VaultLink20221107RotateLinkedClusterCredentialsResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -120,7 +119,7 @@ An unexpected error response.
 type RotateLinkedClusterCredentialsDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *models.RPCStatus
 }
 
 // Code gets the status code for the rotate linked cluster credentials default response
@@ -154,20 +153,20 @@ func (o *RotateLinkedClusterCredentialsDefault) IsCode(code int) bool {
 }
 
 func (o *RotateLinkedClusterCredentialsDefault) Error() string {
-	return fmt.Sprintf("[POST /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/rotate-credentials/{cluster_id}][%d] RotateLinkedClusterCredentials default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/rotate-credentials/{clusterId}][%d] RotateLinkedClusterCredentials default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *RotateLinkedClusterCredentialsDefault) String() string {
-	return fmt.Sprintf("[POST /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/rotate-credentials/{cluster_id}][%d] RotateLinkedClusterCredentials default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/rotate-credentials/{clusterId}][%d] RotateLinkedClusterCredentials default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *RotateLinkedClusterCredentialsDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *RotateLinkedClusterCredentialsDefault) GetPayload() *models.RPCStatus {
 	return o.Payload
 }
 
 func (o *RotateLinkedClusterCredentialsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(models.RPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

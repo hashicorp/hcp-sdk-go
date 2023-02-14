@@ -12,8 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-link-service/preview/2022-11-07/models"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-link-service/stable/2022-11-07/models"
 )
 
 // GetLinkedClusterPolicyReader is a Reader for the GetLinkedClusterPolicy structure.
@@ -53,7 +52,7 @@ GetLinkedClusterPolicyOK describes a response with status code 200, with default
 A successful response.
 */
 type GetLinkedClusterPolicyOK struct {
-	Payload *models.HashicorpCloudVaultLink20221107GetLinkedClusterPolicyResponse
+	Payload *models.VaultLink20221107GetLinkedClusterPolicyResponse
 }
 
 // IsSuccess returns true when this get linked cluster policy o k response has a 2xx status code
@@ -82,20 +81,20 @@ func (o *GetLinkedClusterPolicyOK) IsCode(code int) bool {
 }
 
 func (o *GetLinkedClusterPolicyOK) Error() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/link/policy][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
 }
 
 func (o *GetLinkedClusterPolicyOK) String() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/link/policy][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
 }
 
-func (o *GetLinkedClusterPolicyOK) GetPayload() *models.HashicorpCloudVaultLink20221107GetLinkedClusterPolicyResponse {
+func (o *GetLinkedClusterPolicyOK) GetPayload() *models.VaultLink20221107GetLinkedClusterPolicyResponse {
 	return o.Payload
 }
 
 func (o *GetLinkedClusterPolicyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVaultLink20221107GetLinkedClusterPolicyResponse)
+	o.Payload = new(models.VaultLink20221107GetLinkedClusterPolicyResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -120,7 +119,7 @@ An unexpected error response.
 type GetLinkedClusterPolicyDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *models.RPCStatus
 }
 
 // Code gets the status code for the get linked cluster policy default response
@@ -154,20 +153,20 @@ func (o *GetLinkedClusterPolicyDefault) IsCode(code int) bool {
 }
 
 func (o *GetLinkedClusterPolicyDefault) Error() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/link/policy][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetLinkedClusterPolicyDefault) String() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organizationId}/projects/{location.projectId}/link/policy][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *GetLinkedClusterPolicyDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *GetLinkedClusterPolicyDefault) GetPayload() *models.RPCStatus {
 	return o.Payload
 }
 
 func (o *GetLinkedClusterPolicyDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(models.RPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
