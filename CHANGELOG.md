@@ -1,3 +1,5 @@
+## v0.35.0 (February 15, 2023)
+
 ## v0.34.0 (February 10, 2023)
 
 IMPROVEMENTS:
