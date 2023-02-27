@@ -16,13 +16,13 @@ jobs:
         run: echo "SERVICE_BRANCH=auto-update-${{ github.event.inputs.service }}-sdk" >> $GITHUB_ENV
 
       - name: Checkout hcp-sdk-go
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: main
           path: hcp-sdk-go
 
       - name: Checkout cloud-api
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: hashicorp/cloud-api
           ref: auto-update-${{ github.event.inputs.service }}-specs
