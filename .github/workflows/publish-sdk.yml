@@ -30,7 +30,7 @@ jobs:
           path: cloud-api
 
       - name: Install go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version-file: 'go.mod'
 
