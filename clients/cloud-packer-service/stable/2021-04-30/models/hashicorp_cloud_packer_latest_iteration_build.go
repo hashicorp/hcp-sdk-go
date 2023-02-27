@@ -15,10 +15,11 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudPackerBuild hashicorp cloud packer build
+// HashicorpCloudPackerLatestIterationBuild A simplified Build used in BucketLatestIteration to represent the builds of a bucket's latest iteration.
+// This build representation does not contain ancestry information to avoid repetition.
 //
-// swagger:model hashicorp.cloud.packer.Build
-type HashicorpCloudPackerBuild struct {
+// swagger:model hashicorp.cloud.packer.LatestIterationBuild
+type HashicorpCloudPackerLatestIterationBuild struct {
 
 	// The cloud provider that this build produced artifacts for.
 	// For example, AWS, GCP, or Azure.
@@ -49,11 +50,12 @@ type HashicorpCloudPackerBuild struct {
 	// post-processor, this UUID will match the UUID present there.
 	PackerRunUUID string `json:"packer_run_uuid,omitempty"`
 
-	// Unique identifier of the HCP Packer registry build that Packer uses  as the source
-	// for this build. HCP Packer uses this to track dependencies for build pipelines.
+	// Unique identifier of the HCP Packer registry build used as the source
+	// for this build. Used for tracking dependencies for build pipelines.
 	SourceBuildUlid string `json:"source_build_ulid,omitempty"`
 
-	// The ID or URL of the remote cloud source image that HCP Packer uses to track image dependencies for build pipelines.
+	// The ID or URL of the remote cloud source image. Used for tracking image
+	// dependencies for build pipelines.
 	SourceImageID string `json:"source_image_id,omitempty"`
 
 	// Status of the build. The status can be RUNNING, DONE, CANCELLED, FAILED,
@@ -65,8 +67,8 @@ type HashicorpCloudPackerBuild struct {
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }
 
-// Validate validates this hashicorp cloud packer build
-func (m *HashicorpCloudPackerBuild) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud packer latest iteration build
+func (m *HashicorpCloudPackerLatestIterationBuild) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedAt(formats); err != nil {
@@ -91,7 +93,7 @@ func (m *HashicorpCloudPackerBuild) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *HashicorpCloudPackerBuild) validateCreatedAt(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerLatestIterationBuild) validateCreatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -103,7 +105,7 @@ func (m *HashicorpCloudPackerBuild) validateCreatedAt(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *HashicorpCloudPackerBuild) validateImages(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerLatestIterationBuild) validateImages(formats strfmt.Registry) error {
 	if swag.IsZero(m.Images) { // not required
 		return nil
 	}
@@ -129,7 +131,7 @@ func (m *HashicorpCloudPackerBuild) validateImages(formats strfmt.Registry) erro
 	return nil
 }
 
-func (m *HashicorpCloudPackerBuild) validateStatus(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerLatestIterationBuild) validateStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.Status) { // not required
 		return nil
 	}
@@ -148,7 +150,7 @@ func (m *HashicorpCloudPackerBuild) validateStatus(formats strfmt.Registry) erro
 	return nil
 }
 
-func (m *HashicorpCloudPackerBuild) validateUpdatedAt(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerLatestIterationBuild) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
@@ -160,8 +162,8 @@ func (m *HashicorpCloudPackerBuild) validateUpdatedAt(formats strfmt.Registry) e
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud packer build based on the context it is used
-func (m *HashicorpCloudPackerBuild) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud packer latest iteration build based on the context it is used
+func (m *HashicorpCloudPackerLatestIterationBuild) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateImages(ctx, formats); err != nil {
@@ -178,7 +180,7 @@ func (m *HashicorpCloudPackerBuild) ContextValidate(ctx context.Context, formats
 	return nil
 }
 
-func (m *HashicorpCloudPackerBuild) contextValidateImages(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerLatestIterationBuild) contextValidateImages(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Images); i++ {
 
@@ -198,7 +200,7 @@ func (m *HashicorpCloudPackerBuild) contextValidateImages(ctx context.Context, f
 	return nil
 }
 
-func (m *HashicorpCloudPackerBuild) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerLatestIterationBuild) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
@@ -215,7 +217,7 @@ func (m *HashicorpCloudPackerBuild) contextValidateStatus(ctx context.Context, f
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudPackerBuild) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudPackerLatestIterationBuild) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -223,8 +225,8 @@ func (m *HashicorpCloudPackerBuild) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudPackerBuild) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudPackerBuild
+func (m *HashicorpCloudPackerLatestIterationBuild) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudPackerLatestIterationBuild
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

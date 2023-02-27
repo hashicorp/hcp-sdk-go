@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -14,20 +15,20 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudPackerIterationforList The list endpoint does not return build information.
+// HashicorpCloudPackerBucketLatestIteration A simplified Iteration used in Bucket to represent a bucket's latest iteration.
+// This iteration representation does not contain ancestry information to avoid repetition.
 //
-// swagger:model hashicorp.cloud.packer.IterationforList
-type HashicorpCloudPackerIterationforList struct {
+// swagger:model hashicorp.cloud.packer.BucketLatestIteration
+type HashicorpCloudPackerBucketLatestIteration struct {
 
-	// Who created the iteration.
+	// The name of the person who created this iteration.
 	AuthorID string `json:"author_id,omitempty"`
 
-	// Human-readable name for the bucket.
+	// Human-readable name for the bucket that this iteration is associated with.
 	BucketSlug string `json:"bucket_slug,omitempty"`
 
-	// Maps the build component type to its status enum, for displaying build
-	// status in the iterations view.
-	BuildStatuses map[string]string `json:"build_statuses,omitempty"`
+	// A list of all the builds associated with this iteration.
+	Builds []*HashicorpCloudPackerLatestIterationBuild `json:"builds"`
 
 	// If true, all builds associated with this iteration have successfully
 	// completed and uploaded metadata to the registry. When "complete" is true,
@@ -45,10 +46,6 @@ type HashicorpCloudPackerIterationforList struct {
 	// `HCP_PACKER_BUILD_FINGERPRINT`.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
-	// If true, this iteration has children iterations. Knowing if an iteration has descendants can help
-	// taking decisions such as persist revocation to all its descendants or not.
-	HasDescendants bool `json:"has_descendants,omitempty"`
-
 	// Universally Unique Lexicographically Sortable Identifier (ULID) of the iteration.
 	ID string `json:"id,omitempty"`
 
@@ -58,7 +55,7 @@ type HashicorpCloudPackerIterationforList struct {
 
 	// The unique identifier of the iteration that was used as a source
 	// for this iteration, if this iteration was built on a base layer.
-	// Deprecated: Deprecated: refer to build specific source_build_ulid.
+	// Deprecated: refer to build specific source_build_ulid.
 	IterationAncestorID string `json:"iteration_ancestor_id,omitempty"`
 
 	// Who revoked this iteration. For human authors (e.g. HCP Portal) this will be an email address.
@@ -78,14 +75,18 @@ type HashicorpCloudPackerIterationforList struct {
 	// Format: date-time
 	RevokeAt strfmt.DateTime `json:"revoke_at,omitempty"`
 
-	// When the iteration was most recently updated.
+	// When the iteration was last updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }
 
-// Validate validates this hashicorp cloud packer iterationfor list
-func (m *HashicorpCloudPackerIterationforList) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud packer bucket latest iteration
+func (m *HashicorpCloudPackerBucketLatestIteration) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateBuilds(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateCreatedAt(formats); err != nil {
 		res = append(res, err)
@@ -113,7 +114,33 @@ func (m *HashicorpCloudPackerIterationforList) Validate(formats strfmt.Registry)
 	return nil
 }
 
-func (m *HashicorpCloudPackerIterationforList) validateCreatedAt(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerBucketLatestIteration) validateBuilds(formats strfmt.Registry) error {
+	if swag.IsZero(m.Builds) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Builds); i++ {
+		if swag.IsZero(m.Builds[i]) { // not required
+			continue
+		}
+
+		if m.Builds[i] != nil {
+			if err := m.Builds[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("builds" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("builds" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerBucketLatestIteration) validateCreatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -125,7 +152,7 @@ func (m *HashicorpCloudPackerIterationforList) validateCreatedAt(formats strfmt.
 	return nil
 }
 
-func (m *HashicorpCloudPackerIterationforList) validateRevocationInheritedFrom(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerBucketLatestIteration) validateRevocationInheritedFrom(formats strfmt.Registry) error {
 	if swag.IsZero(m.RevocationInheritedFrom) { // not required
 		return nil
 	}
@@ -144,7 +171,7 @@ func (m *HashicorpCloudPackerIterationforList) validateRevocationInheritedFrom(f
 	return nil
 }
 
-func (m *HashicorpCloudPackerIterationforList) validateRevocationType(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerBucketLatestIteration) validateRevocationType(formats strfmt.Registry) error {
 	if swag.IsZero(m.RevocationType) { // not required
 		return nil
 	}
@@ -163,7 +190,7 @@ func (m *HashicorpCloudPackerIterationforList) validateRevocationType(formats st
 	return nil
 }
 
-func (m *HashicorpCloudPackerIterationforList) validateRevokeAt(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerBucketLatestIteration) validateRevokeAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.RevokeAt) { // not required
 		return nil
 	}
@@ -175,7 +202,7 @@ func (m *HashicorpCloudPackerIterationforList) validateRevokeAt(formats strfmt.R
 	return nil
 }
 
-func (m *HashicorpCloudPackerIterationforList) validateUpdatedAt(formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerBucketLatestIteration) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
 	}
@@ -187,9 +214,13 @@ func (m *HashicorpCloudPackerIterationforList) validateUpdatedAt(formats strfmt.
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud packer iterationfor list based on the context it is used
-func (m *HashicorpCloudPackerIterationforList) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud packer bucket latest iteration based on the context it is used
+func (m *HashicorpCloudPackerBucketLatestIteration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.contextValidateBuilds(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateRevocationInheritedFrom(ctx, formats); err != nil {
 		res = append(res, err)
@@ -205,7 +236,27 @@ func (m *HashicorpCloudPackerIterationforList) ContextValidate(ctx context.Conte
 	return nil
 }
 
-func (m *HashicorpCloudPackerIterationforList) contextValidateRevocationInheritedFrom(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerBucketLatestIteration) contextValidateBuilds(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Builds); i++ {
+
+		if m.Builds[i] != nil {
+			if err := m.Builds[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("builds" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("builds" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerBucketLatestIteration) contextValidateRevocationInheritedFrom(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RevocationInheritedFrom != nil {
 		if err := m.RevocationInheritedFrom.ContextValidate(ctx, formats); err != nil {
@@ -221,7 +272,7 @@ func (m *HashicorpCloudPackerIterationforList) contextValidateRevocationInherite
 	return nil
 }
 
-func (m *HashicorpCloudPackerIterationforList) contextValidateRevocationType(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudPackerBucketLatestIteration) contextValidateRevocationType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RevocationType != nil {
 		if err := m.RevocationType.ContextValidate(ctx, formats); err != nil {
@@ -238,7 +289,7 @@ func (m *HashicorpCloudPackerIterationforList) contextValidateRevocationType(ctx
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudPackerIterationforList) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudPackerBucketLatestIteration) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -246,8 +297,8 @@ func (m *HashicorpCloudPackerIterationforList) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudPackerIterationforList) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudPackerIterationforList
+func (m *HashicorpCloudPackerBucketLatestIteration) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudPackerBucketLatestIteration
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -195,7 +195,7 @@ type PackerServiceCreateIterationBody struct {
 	// location
 	Location *PackerServiceCreateIterationParamsBodyLocation `json:"location,omitempty"`
 
-	// Type of template used to build iteration.
+	// The type of Packer configuration template used to build this iteration.
 	TemplateType *models.HashicorpCloudPackerIterationTemplateType `json:"template_type,omitempty"`
 }
 

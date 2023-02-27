@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudPackerUpdateIterationResponse hashicorp cloud packer update iteration response
@@ -20,6 +21,10 @@ type HashicorpCloudPackerUpdateIterationResponse struct {
 
 	// Information about the updated iteration.
 	Iteration *HashicorpCloudPackerIteration `json:"iteration,omitempty"`
+
+	// When revoking, use this operation to follow the asynchronous process of revoking
+	// all the iteration's descendants.
+	Operation *cloud.HashicorpCloudOperationOperation `json:"operation,omitempty"`
 }
 
 // Validate validates this hashicorp cloud packer update iteration response
@@ -27,6 +32,10 @@ func (m *HashicorpCloudPackerUpdateIterationResponse) Validate(formats strfmt.Re
 	var res []error
 
 	if err := m.validateIteration(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOperation(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -55,11 +64,34 @@ func (m *HashicorpCloudPackerUpdateIterationResponse) validateIteration(formats 
 	return nil
 }
 
+func (m *HashicorpCloudPackerUpdateIterationResponse) validateOperation(formats strfmt.Registry) error {
+	if swag.IsZero(m.Operation) { // not required
+		return nil
+	}
+
+	if m.Operation != nil {
+		if err := m.Operation.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("operation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("operation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud packer update iteration response based on the context it is used
 func (m *HashicorpCloudPackerUpdateIterationResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateIteration(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateOperation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -77,6 +109,22 @@ func (m *HashicorpCloudPackerUpdateIterationResponse) contextValidateIteration(c
 				return ve.ValidateName("iteration")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("iteration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerUpdateIterationResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Operation != nil {
+		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("operation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("operation")
 			}
 			return err
 		}

@@ -222,6 +222,9 @@ type PackerServiceUpdateIterationBody struct {
 	// This option is equivalent to the 'revoke_at' option and therefore only one of them should be set when updating
 	// the iteration.
 	RevokeIn string `json:"revoke_in,omitempty"`
+
+	// When set to true, the iteration's descendants won't inherit its revocation status.
+	SkipDescendantsRevocation bool `json:"skip_descendants_revocation,omitempty"`
 }
 
 // Validate validates this packer service update iteration body

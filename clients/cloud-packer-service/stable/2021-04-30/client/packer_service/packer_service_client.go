@@ -60,6 +60,8 @@ type ClientService interface {
 
 	PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetRegistryTFCRunTaskAPIParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryTFCRunTaskAPIOK, error)
 
+	PackerServiceListBucketAncestry(params *PackerServiceListBucketAncestryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketAncestryOK, error)
+
 	PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketsOK, error)
 
 	PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBuildsOK, error)
@@ -692,6 +694,44 @@ func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetR
 }
 
 /*
+PackerServiceListBucketAncestry lists the ancestry relationships for an image bucket this includes direct source images parents and downstream images built directly from the image bucket children
+*/
+func (a *Client) PackerServiceListBucketAncestry(params *PackerServiceListBucketAncestryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketAncestryOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceListBucketAncestryParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_ListBucketAncestry",
+		Method:             "GET",
+		PathPattern:        "/packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/ancestry",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceListBucketAncestryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceListBucketAncestryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceListBucketAncestryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 PackerServiceListBuckets lists every existing bucket in the h c p packer registry and their last completed iteration
 */
 func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketsOK, error) {
@@ -996,7 +1036,7 @@ func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelPa
 }
 
 /*
-PackerServiceUpdateIteration this API can be used to revoke restore or complete an iteration revoking can be done at any time to complete or incomplete iterations immediately or in the future depending on the passing timestamp revoked iterations cannot be updated unless restored to make build specific updates for builds within the iteration use the update build endpoint
+PackerServiceUpdateIteration this API can be used to revoke restore or complete an iteration revoking can be done at any time to complete or incomplete iterations immediately or in the future depending on the passing timestamp when an iteration is revoked all its descendants will automatically get revoked unless skip descendants revocation is set descendants will get revoked asynchronously to the request revoked iterations cannot be updated unless restored to make build specific updates for builds within the iteration use the update build endpoint
 */
 func (a *Client) PackerServiceUpdateIteration(params *PackerServiceUpdateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateIterationOK, error) {
 	// TODO: Validate the params before sending

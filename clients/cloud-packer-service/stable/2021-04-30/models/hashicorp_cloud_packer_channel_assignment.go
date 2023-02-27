@@ -22,14 +22,8 @@ type HashicorpCloudPackerChannelAssignment struct {
 	// The user who assigned this iteration.
 	AuthorID string `json:"author_id,omitempty"`
 
-	// The assigned iteration fingerprint.
-	IterationFingerprint string `json:"iteration_fingerprint,omitempty"`
-
-	// The assigned iteration ULID.
-	IterationID string `json:"iteration_id,omitempty"`
-
-	// The assigned iteration incremental version.
-	IterationIncrementalVersion int32 `json:"iteration_incremental_version,omitempty"`
+	// The assigned iteration.
+	Iteration *HashicorpCloudPackerChannelAssignmentIteration `json:"iteration,omitempty"`
 
 	// When the promotion happened.
 	// Format: date-time
@@ -40,6 +34,10 @@ type HashicorpCloudPackerChannelAssignment struct {
 func (m *HashicorpCloudPackerChannelAssignment) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateIteration(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePromotedAt(formats); err != nil {
 		res = append(res, err)
 	}
@@ -47,6 +45,25 @@ func (m *HashicorpCloudPackerChannelAssignment) Validate(formats strfmt.Registry
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerChannelAssignment) validateIteration(formats strfmt.Registry) error {
+	if swag.IsZero(m.Iteration) { // not required
+		return nil
+	}
+
+	if m.Iteration != nil {
+		if err := m.Iteration.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("iteration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("iteration")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -62,8 +79,33 @@ func (m *HashicorpCloudPackerChannelAssignment) validatePromotedAt(formats strfm
 	return nil
 }
 
-// ContextValidate validates this hashicorp cloud packer channel assignment based on context it is used
+// ContextValidate validate this hashicorp cloud packer channel assignment based on the context it is used
 func (m *HashicorpCloudPackerChannelAssignment) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateIteration(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerChannelAssignment) contextValidateIteration(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Iteration != nil {
+		if err := m.Iteration.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("iteration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("iteration")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

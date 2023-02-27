@@ -20,6 +20,10 @@ import (
 // swagger:model hashicorp.cloud.packer.Bucket
 type HashicorpCloudPackerBucket struct {
 
+	// Information about this image bucket's children. Children are image buckets that used any iteration of this bucket
+	// as the base image for their latest complete iteration.
+	Children *HashicorpCloudPackerBucketChildren `json:"children,omitempty"`
+
 	// When the bucket was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
@@ -37,13 +41,17 @@ type HashicorpCloudPackerBucket struct {
 	Labels map[string]string `json:"labels,omitempty"`
 
 	// The bucket's most recent iteration. This iteration may be complete or not.
-	LatestIteration *HashicorpCloudPackerIteration `json:"latest_iteration,omitempty"`
+	LatestIteration *HashicorpCloudPackerBucketLatestIteration `json:"latest_iteration,omitempty"`
 
 	// The human-readable version of the most recent completed iteration in this bucket.
 	LatestVersion int32 `json:"latest_version,omitempty"`
 
 	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+
+	// Information about this image bucket's parents. Parents are the base images Packer used to build the latest complete iteration
+	// in this image bucket.
+	Parents *HashicorpCloudPackerBucketParents `json:"parents,omitempty"`
 
 	// A list of the cloud providers or other platforms that are included in the latest complete iteration. e.g aws, gcp, or azure.
 	Platforms []string `json:"platforms"`
@@ -60,6 +68,10 @@ type HashicorpCloudPackerBucket struct {
 func (m *HashicorpCloudPackerBucket) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateChildren(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreatedAt(formats); err != nil {
 		res = append(res, err)
 	}
@@ -72,6 +84,10 @@ func (m *HashicorpCloudPackerBucket) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateParents(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateUpdatedAt(formats); err != nil {
 		res = append(res, err)
 	}
@@ -79,6 +95,25 @@ func (m *HashicorpCloudPackerBucket) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerBucket) validateChildren(formats strfmt.Registry) error {
+	if swag.IsZero(m.Children) { // not required
+		return nil
+	}
+
+	if m.Children != nil {
+		if err := m.Children.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("children")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("children")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -132,6 +167,25 @@ func (m *HashicorpCloudPackerBucket) validateLocation(formats strfmt.Registry) e
 	return nil
 }
 
+func (m *HashicorpCloudPackerBucket) validateParents(formats strfmt.Registry) error {
+	if swag.IsZero(m.Parents) { // not required
+		return nil
+	}
+
+	if m.Parents != nil {
+		if err := m.Parents.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("parents")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("parents")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudPackerBucket) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -148,6 +202,10 @@ func (m *HashicorpCloudPackerBucket) validateUpdatedAt(formats strfmt.Registry) 
 func (m *HashicorpCloudPackerBucket) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateChildren(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLatestIteration(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -156,9 +214,29 @@ func (m *HashicorpCloudPackerBucket) ContextValidate(ctx context.Context, format
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateParents(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudPackerBucket) contextValidateChildren(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Children != nil {
+		if err := m.Children.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("children")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("children")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -186,6 +264,22 @@ func (m *HashicorpCloudPackerBucket) contextValidateLocation(ctx context.Context
 				return ve.ValidateName("location")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPackerBucket) contextValidateParents(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Parents != nil {
+		if err := m.Parents.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("parents")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("parents")
 			}
 			return err
 		}

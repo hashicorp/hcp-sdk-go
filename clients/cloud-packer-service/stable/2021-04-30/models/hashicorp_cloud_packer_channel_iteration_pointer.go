@@ -17,6 +17,7 @@ import (
 // HashicorpCloudPackerChannelIterationPointer A Channel Pointer is a special object that tracks channel
 // history by storing both which iteration the channel points to and also when
 // the channel was updated to point at said iteration.
+// Deprecated: The iteration object is directly embed to Channel.
 //
 // swagger:model hashicorp.cloud.packer.ChannelIterationPointer
 type HashicorpCloudPackerChannelIterationPointer struct {
