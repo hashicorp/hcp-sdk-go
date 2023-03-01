@@ -1,3 +1,8 @@
+## v0.36.0 (March 01, 2023)
+
+IMPROVEMENTS:
+
+* Bump golang.org/x/net from 0.5.0 to 0.7.0 [[GH-170](https://github.com/hashicorp/hcp-sdk-go/pull/170)]
 ## v0.35.0 (February 15, 2023)
 
 ## v0.34.0 (February 10, 2023)
