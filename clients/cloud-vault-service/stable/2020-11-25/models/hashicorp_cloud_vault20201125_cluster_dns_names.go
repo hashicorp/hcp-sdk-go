@@ -22,6 +22,8 @@ type HashicorpCloudVault20201125ClusterDNSNames struct {
 
 	// public is the DNS name pointing to the cluster's public IP addresses.
 	Public string `json:"public,omitempty"`
+
+	Proxy string `json:"proxy,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 cluster DNS names
