@@ -14,29 +14,21 @@ import (
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudBoundary20211221CreateRequest CreateRequest is a request to create a single HCP Boundary cluster.
+// HashicorpCloudBoundary20211221UpdateRequest UpdateRequest is the request for updating HCP Boundary.
 //
-// swagger:model hashicorp.cloud.boundary_20211221.CreateRequest
-type HashicorpCloudBoundary20211221CreateRequest struct {
-
-	// boundary_release is the boundary version to deploy
-	BoundaryRelease string `json:"boundary_release,omitempty"`
+// swagger:model hashicorp.cloud.boundary_20211221.UpdateRequest
+type HashicorpCloudBoundary20211221UpdateRequest struct {
 
 	// cluster_id is the id of the cluster set by user on creation.
 	ClusterID string `json:"cluster_id,omitempty"`
 
-	// location is the location of the cluster.
+	// Location specifies the project to list from. If region is not specified,
+	// all regions are returned.
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
-
-	// password is the initial password to use to setup initial login
-	Password string `json:"password,omitempty"`
-
-	// username is the admin username to setup for initial login
-	Username string `json:"username,omitempty"`
 }
 
-// Validate validates this hashicorp cloud boundary 20211221 create request
-func (m *HashicorpCloudBoundary20211221CreateRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud boundary 20211221 update request
+func (m *HashicorpCloudBoundary20211221UpdateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateLocation(formats); err != nil {
@@ -49,7 +41,7 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) Validate(formats strfmt.Re
 	return nil
 }
 
-func (m *HashicorpCloudBoundary20211221CreateRequest) validateLocation(formats strfmt.Registry) error {
+func (m *HashicorpCloudBoundary20211221UpdateRequest) validateLocation(formats strfmt.Registry) error {
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -68,8 +60,8 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) validateLocation(formats s
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud boundary 20211221 create request based on the context it is used
-func (m *HashicorpCloudBoundary20211221CreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud boundary 20211221 update request based on the context it is used
+func (m *HashicorpCloudBoundary20211221UpdateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
@@ -82,7 +74,7 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) ContextValidate(ctx contex
 	return nil
 }
 
-func (m *HashicorpCloudBoundary20211221CreateRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudBoundary20211221UpdateRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
@@ -99,7 +91,7 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) contextValidateLocation(ct
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudBoundary20211221CreateRequest) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudBoundary20211221UpdateRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -107,8 +99,8 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) MarshalBinary() ([]byte, e
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudBoundary20211221CreateRequest) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudBoundary20211221CreateRequest
+func (m *HashicorpCloudBoundary20211221UpdateRequest) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudBoundary20211221UpdateRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

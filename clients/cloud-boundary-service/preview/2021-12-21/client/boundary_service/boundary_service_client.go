@@ -36,7 +36,13 @@ type ClientService interface {
 
 	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error)
 
+	MaintenanceWindowGet(params *MaintenanceWindowGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MaintenanceWindowGetOK, error)
+
+	MaintenanceWindowUpdate(params *MaintenanceWindowUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MaintenanceWindowUpdateOK, error)
+
 	Sessions(params *SessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SessionsOK, error)
+
+	Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -194,6 +200,82 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
+MaintenanceWindowGet maintenances window get is used to fetch the type of maintenance for the given cluster maintenance can either be automatic or scheduled if scheduled the response returns the window set by the user
+*/
+func (a *Client) MaintenanceWindowGet(params *MaintenanceWindowGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MaintenanceWindowGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewMaintenanceWindowGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "MaintenanceWindowGet",
+		Method:             "GET",
+		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &MaintenanceWindowGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*MaintenanceWindowGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*MaintenanceWindowGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+MaintenanceWindowUpdate maintenances window update sets maintenance window for update version
+*/
+func (a *Client) MaintenanceWindowUpdate(params *MaintenanceWindowUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MaintenanceWindowUpdateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewMaintenanceWindowUpdateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "MaintenanceWindowUpdate",
+		Method:             "POST",
+		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &MaintenanceWindowUpdateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*MaintenanceWindowUpdateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*MaintenanceWindowUpdateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 Sessions sessions returns all session information for existing h c p boundary cluster
 */
 func (a *Client) Sessions(params *SessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SessionsOK, error) {
@@ -228,6 +310,44 @@ func (a *Client) Sessions(params *SessionsParams, authInfo runtime.ClientAuthInf
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*SessionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+Update updates triggers checks if update for the specific cluster is needed and forces an update
+*/
+func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "Update",
+		Method:             "POST",
+		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
