@@ -60,7 +60,7 @@ HCP_ORGANIZATION_ID="22abc..."
 
     ```bash
     import (
-        network "github.com/hashicorp/hcp-sdk-go/clients/cloud-network/preview/2020-09-07/client/network_service"
+        network "github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/client/network_service"
     )
     ```
 
