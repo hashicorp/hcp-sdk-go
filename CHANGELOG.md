@@ -1,5 +1,20 @@
 ## v0.37.0 (March 14, 2023)
 
+IMPROVEMENTS:
+
+* [Bump golang.org/x/oauth2 from 0.0.0-20201109201403-9fd604954f58 to 0.6.0](https://github.com/hashicorp/hcp-sdk-go/commit/e2804f559f9bd140cb5fc690075dfc441aa4b33a) 
+* [Bump github.com/stretchr/testify from 1.8.1 to 1.8.2](https://github.com/hashicorp/hcp-sdk-go/commit/e95aaacf3b1968029f11fe2e1759721a1fac48df)
+* [Bump golang.org/x/net from 0.7.0 to 0.8.0](https://github.com/hashicorp/hcp-sdk-go/commit/a78fdfd568526d90031e132659d1b1fb2dc8dcee) 
+* [change owner to ept pod](https://github.com/hashicorp/hcp-sdk-go/commit/a62bbbb15477bff967ed3c627689f2d208dcd681)
+* [Update cloud-shared SDK](https://github.com/hashicorp/hcp-sdk-go/commit/c920f189788e4880873dab25789a10579346822b)
+* [HCE-823: consolidate API pipeline actions/scripts](https://github.com/hashicorp/hcp-sdk-go/commit/8144158603dcc22241b2a3fdb916d91cc20ffe78) 
+
+BREAKING CHANGES:
+
+* [Update cloud-resource-manager SDK: bump to stable](https://github.com/hashicorp/hcp-sdk-go/commit/0d9e3b043319dff265d09e4235a3f2988b3df277)
+* [Update cloud-network SDK: bump to stable](https://github.com/hashicorp/hcp-sdk-go/commit/27684221c6d89b2af255c87b1bd58dd5091ca573)
+* [Update cloud-boundary-service SDK: bump to stable](https://github.com/hashicorp/hcp-sdk-go/commit/c43b104c25a48c805d0a6f57b502693bb0880c2f)
+
 ## v0.36.0 (March 01, 2023)
 
 IMPROVEMENTS:
