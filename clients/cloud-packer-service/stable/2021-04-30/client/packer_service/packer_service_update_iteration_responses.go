@@ -223,6 +223,9 @@ type PackerServiceUpdateIterationBody struct {
 	// the iteration.
 	RevokeIn string `json:"revoke_in,omitempty"`
 
+	// When set to true, any user created channels will be rolled back to the last valid iteration they were assigned to.
+	RollbackChannels bool `json:"rollback_channels,omitempty"`
+
 	// When set to true, the iteration's descendants won't inherit its revocation status.
 	SkipDescendantsRevocation bool `json:"skip_descendants_revocation,omitempty"`
 }

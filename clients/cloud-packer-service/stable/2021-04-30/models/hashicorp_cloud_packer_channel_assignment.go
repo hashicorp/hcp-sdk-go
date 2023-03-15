@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudPackerChannelAssignment hashicorp cloud packer channel assignment
+// HashicorpCloudPackerChannelAssignment A channel assignment history entry. It contains information about when an iteration was assigned to a channel, and the user who did the assignment.
 //
 // swagger:model hashicorp.cloud.packer.ChannelAssignment
 type HashicorpCloudPackerChannelAssignment struct {
@@ -25,7 +25,7 @@ type HashicorpCloudPackerChannelAssignment struct {
 	// The assigned iteration.
 	Iteration *HashicorpCloudPackerChannelAssignmentIteration `json:"iteration,omitempty"`
 
-	// When the promotion happened.
+	// When the iteration assigment happened.
 	// Format: date-time
 	PromotedAt strfmt.DateTime `json:"promoted_at,omitempty"`
 }

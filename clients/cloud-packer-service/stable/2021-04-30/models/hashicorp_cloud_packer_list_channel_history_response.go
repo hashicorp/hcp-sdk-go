@@ -20,7 +20,7 @@ import (
 // swagger:model hashicorp.cloud.packer.ListChannelHistoryResponse
 type HashicorpCloudPackerListChannelHistoryResponse struct {
 
-	// count
+	// The total amount of channel assignments that are listed
 	Count int32 `json:"count,omitempty"`
 
 	// history

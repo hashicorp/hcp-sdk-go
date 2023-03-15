@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewPackerServiceDeleteIterationParams creates a new PackerServiceDeleteIterationParams object,
@@ -97,6 +98,12 @@ type PackerServiceDeleteIterationParams struct {
 	   region is the cloud region ("us-west1", "us-east1")
 	*/
 	LocationRegionRegion *string
+
+	/* RollbackChannels.
+
+	   When set to true, any user created channels will be rolled back to the last valid iteration they were assigned to.
+	*/
+	RollbackChannels *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -217,6 +224,17 @@ func (o *PackerServiceDeleteIterationParams) SetLocationRegionRegion(locationReg
 	o.LocationRegionRegion = locationRegionRegion
 }
 
+// WithRollbackChannels adds the rollbackChannels to the packer service delete iteration params
+func (o *PackerServiceDeleteIterationParams) WithRollbackChannels(rollbackChannels *bool) *PackerServiceDeleteIterationParams {
+	o.SetRollbackChannels(rollbackChannels)
+	return o
+}
+
+// SetRollbackChannels adds the rollbackChannels to the packer service delete iteration params
+func (o *PackerServiceDeleteIterationParams) SetRollbackChannels(rollbackChannels *bool) {
+	o.RollbackChannels = rollbackChannels
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *PackerServiceDeleteIterationParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -286,6 +304,23 @@ func (o *PackerServiceDeleteIterationParams) WriteToRequest(r runtime.ClientRequ
 		if qLocationRegionRegion != "" {
 
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.RollbackChannels != nil {
+
+		// query param rollback_channels
+		var qrRollbackChannels bool
+
+		if o.RollbackChannels != nil {
+			qrRollbackChannels = *o.RollbackChannels
+		}
+		qRollbackChannels := swag.FormatBool(qrRollbackChannels)
+		if qRollbackChannels != "" {
+
+			if err := r.SetQueryParam("rollback_channels", qRollbackChannels); err != nil {
 				return err
 			}
 		}
