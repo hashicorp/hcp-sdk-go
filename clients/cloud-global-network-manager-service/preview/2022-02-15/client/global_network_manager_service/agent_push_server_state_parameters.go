@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-global-network-manager-service/preview/2022-02-15/models"
 )
 
 // NewAgentPushServerStateParams creates a new AgentPushServerStateParams object,
@@ -64,7 +62,7 @@ AgentPushServerStateParams contains all the parameters to send to the API endpoi
 type AgentPushServerStateParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudGlobalNetworkManager20220215AgentPushServerStateRequest
+	Body AgentPushServerStateBody
 
 	/* ID.
 
@@ -138,13 +136,13 @@ func (o *AgentPushServerStateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the agent push server state params
-func (o *AgentPushServerStateParams) WithBody(body *models.HashicorpCloudGlobalNetworkManager20220215AgentPushServerStateRequest) *AgentPushServerStateParams {
+func (o *AgentPushServerStateParams) WithBody(body AgentPushServerStateBody) *AgentPushServerStateParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the agent push server state params
-func (o *AgentPushServerStateParams) SetBody(body *models.HashicorpCloudGlobalNetworkManager20220215AgentPushServerStateRequest) {
+func (o *AgentPushServerStateParams) SetBody(body AgentPushServerStateBody) {
 	o.Body = body
 }
 
@@ -188,10 +186,8 @@ func (o *AgentPushServerStateParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param id

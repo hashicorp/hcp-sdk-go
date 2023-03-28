@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewListClustersParams creates a new ListClustersParams object,
@@ -75,19 +76,46 @@ type ListClustersParams struct {
 
 	/* LocationRegionProvider.
 
-	   provider is the named cloud provider ("aws", "gcp", "azure").
+	   provider is the named cloud provider ("aws", "gcp", "azure")
 	*/
 	LocationRegionProvider *string
 
 	/* LocationRegionRegion.
 
-	   region is the cloud region ("us-west1", "us-east1").
+	   region is the cloud region ("us-west1", "us-east1")
 	*/
 	LocationRegionRegion *string
 
+	/* PaginationNextPageToken.
+
+	     Specifies a page token to use to retrieve the next page. Set this to the
+	`next_page_token` returned by previous list requests to get the next page of
+	results. If set, `previous_page_token` must not be set.
+	*/
+	PaginationNextPageToken *string
+
+	/* PaginationPageSize.
+
+	     The max number of results per page that should be returned. If the number
+	of available results is larger than `page_size`, a `next_page_token` is
+	returned which can be used to get the next page of results in subsequent
+	requests. A value of zero will cause `page_size` to be defaulted.
+
+	     Format: int64
+	*/
+	PaginationPageSize *int64
+
+	/* PaginationPreviousPageToken.
+
+	     Specifies a page token to use to retrieve the previous page. Set this to
+	the `previous_page_token` returned by previous list requests to get the
+	previous page of results. If set, `next_page_token` must not be set.
+	*/
+	PaginationPreviousPageToken *string
+
 	/* Type.
 
-	    type is the type of clusters to limit the response to.
+	    type is the type of clusters to limit the response to
 
 	- TYPE_UNSPECIFIED: unspecified type to filter on. If this is seen, default to self-managed clusters
 	- TYPE_ALL: all cluster types
@@ -206,6 +234,39 @@ func (o *ListClustersParams) SetLocationRegionRegion(locationRegionRegion *strin
 	o.LocationRegionRegion = locationRegionRegion
 }
 
+// WithPaginationNextPageToken adds the paginationNextPageToken to the list clusters params
+func (o *ListClustersParams) WithPaginationNextPageToken(paginationNextPageToken *string) *ListClustersParams {
+	o.SetPaginationNextPageToken(paginationNextPageToken)
+	return o
+}
+
+// SetPaginationNextPageToken adds the paginationNextPageToken to the list clusters params
+func (o *ListClustersParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
+	o.PaginationNextPageToken = paginationNextPageToken
+}
+
+// WithPaginationPageSize adds the paginationPageSize to the list clusters params
+func (o *ListClustersParams) WithPaginationPageSize(paginationPageSize *int64) *ListClustersParams {
+	o.SetPaginationPageSize(paginationPageSize)
+	return o
+}
+
+// SetPaginationPageSize adds the paginationPageSize to the list clusters params
+func (o *ListClustersParams) SetPaginationPageSize(paginationPageSize *int64) {
+	o.PaginationPageSize = paginationPageSize
+}
+
+// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the list clusters params
+func (o *ListClustersParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *ListClustersParams {
+	o.SetPaginationPreviousPageToken(paginationPreviousPageToken)
+	return o
+}
+
+// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the list clusters params
+func (o *ListClustersParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
+	o.PaginationPreviousPageToken = paginationPreviousPageToken
+}
+
 // WithType adds the typeVar to the list clusters params
 func (o *ListClustersParams) WithType(typeVar *string) *ListClustersParams {
 	o.SetType(typeVar)
@@ -264,6 +325,57 @@ func (o *ListClustersParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if qLocationRegionRegion != "" {
 
 			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationNextPageToken != nil {
+
+		// query param pagination.next_page_token
+		var qrPaginationNextPageToken string
+
+		if o.PaginationNextPageToken != nil {
+			qrPaginationNextPageToken = *o.PaginationNextPageToken
+		}
+		qPaginationNextPageToken := qrPaginationNextPageToken
+		if qPaginationNextPageToken != "" {
+
+			if err := r.SetQueryParam("pagination.next_page_token", qPaginationNextPageToken); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationPageSize != nil {
+
+		// query param pagination.page_size
+		var qrPaginationPageSize int64
+
+		if o.PaginationPageSize != nil {
+			qrPaginationPageSize = *o.PaginationPageSize
+		}
+		qPaginationPageSize := swag.FormatInt64(qrPaginationPageSize)
+		if qPaginationPageSize != "" {
+
+			if err := r.SetQueryParam("pagination.page_size", qPaginationPageSize); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationPreviousPageToken != nil {
+
+		// query param pagination.previous_page_token
+		var qrPaginationPreviousPageToken string
+
+		if o.PaginationPreviousPageToken != nil {
+			qrPaginationPreviousPageToken = *o.PaginationPreviousPageToken
+		}
+		qPaginationPreviousPageToken := qrPaginationPreviousPageToken
+		if qPaginationPreviousPageToken != "" {
+
+			if err := r.SetQueryParam("pagination.previous_page_token", qPaginationPreviousPageToken); err != nil {
 				return err
 			}
 		}

@@ -120,7 +120,7 @@ An unexpected error response.
 type ListClusterServersDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the list cluster servers default response
@@ -161,13 +161,13 @@ func (o *ListClusterServersDefault) String() string {
 	return fmt.Sprintf("[GET /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/servers][%d] ListClusterServers default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListClusterServersDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *ListClusterServersDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *ListClusterServersDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

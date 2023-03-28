@@ -62,29 +62,43 @@ GetServiceSummariesParams contains all the parameters to send to the API endpoin
 */
 type GetServiceSummariesParams struct {
 
-	/* FilterCluster.
+	/* FilterClusters.
 
-	   cluster matches summaries on the cluster name.
+	   clusters matches summaries on the cluster name
 	*/
-	FilterCluster []string
+	FilterClusters []string
 
-	/* FilterNamePrefix.
+	/* FilterKinds.
 
-	   name_prefix matches summaries on the prefix of the service's name.
+	    kinds matches service kind. If empty, this defaults to all kinds
+
+	- KIND_UNSPECIFIED: The default, unspecified service kind. Kind unknown.
+	- KIND_TYPICAL: A typical, classic Consul service.
+	- KIND_CONNECT_PROXY: A Connect proxy instance.
+	- KIND_MESH_GATEWAY: A mesh gateway service instance.
+	- KIND_TERMINATING_GATEWAY: A terminating gateway service instance.
+	- KIND_INGRESS_GATEWAY: An ingress gateway service instance.
+	- KIND_DESTINATION: A Destination  for the Connect feature.
 	*/
-	FilterNamePrefix *string
+	FilterKinds []string
 
-	/* FilterNamespace.
+	/* FilterNameSubstr.
 
-	   namespace matches summaries on the namespace name.
+	   name_substr matches summaries that contain a case-insensitive substring in their service name
 	*/
-	FilterNamespace []string
+	FilterNameSubstr *string
 
-	/* FilterPartition.
+	/* FilterNamespaces.
 
-	   partition matches summaries on the partition name.
+	   namespaces matches summaries on the namespace name
 	*/
-	FilterPartition []string
+	FilterNamespaces []string
+
+	/* FilterPartitions.
+
+	   partitions matches summaries on the partition name
+	*/
+	FilterPartitions []string
 
 	/* LocationOrganizationID.
 
@@ -100,13 +114,13 @@ type GetServiceSummariesParams struct {
 
 	/* LocationRegionProvider.
 
-	   provider is the named cloud provider ("aws", "gcp", "azure").
+	   provider is the named cloud provider ("aws", "gcp", "azure")
 	*/
 	LocationRegionProvider *string
 
 	/* LocationRegionRegion.
 
-	   region is the cloud region ("us-west1", "us-east1").
+	   region is the cloud region ("us-west1", "us-east1")
 	*/
 	LocationRegionRegion *string
 
@@ -190,48 +204,59 @@ func (o *GetServiceSummariesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithFilterCluster adds the filterCluster to the get service summaries params
-func (o *GetServiceSummariesParams) WithFilterCluster(filterCluster []string) *GetServiceSummariesParams {
-	o.SetFilterCluster(filterCluster)
+// WithFilterClusters adds the filterClusters to the get service summaries params
+func (o *GetServiceSummariesParams) WithFilterClusters(filterClusters []string) *GetServiceSummariesParams {
+	o.SetFilterClusters(filterClusters)
 	return o
 }
 
-// SetFilterCluster adds the filterCluster to the get service summaries params
-func (o *GetServiceSummariesParams) SetFilterCluster(filterCluster []string) {
-	o.FilterCluster = filterCluster
+// SetFilterClusters adds the filterClusters to the get service summaries params
+func (o *GetServiceSummariesParams) SetFilterClusters(filterClusters []string) {
+	o.FilterClusters = filterClusters
 }
 
-// WithFilterNamePrefix adds the filterNamePrefix to the get service summaries params
-func (o *GetServiceSummariesParams) WithFilterNamePrefix(filterNamePrefix *string) *GetServiceSummariesParams {
-	o.SetFilterNamePrefix(filterNamePrefix)
+// WithFilterKinds adds the filterKinds to the get service summaries params
+func (o *GetServiceSummariesParams) WithFilterKinds(filterKinds []string) *GetServiceSummariesParams {
+	o.SetFilterKinds(filterKinds)
 	return o
 }
 
-// SetFilterNamePrefix adds the filterNamePrefix to the get service summaries params
-func (o *GetServiceSummariesParams) SetFilterNamePrefix(filterNamePrefix *string) {
-	o.FilterNamePrefix = filterNamePrefix
+// SetFilterKinds adds the filterKinds to the get service summaries params
+func (o *GetServiceSummariesParams) SetFilterKinds(filterKinds []string) {
+	o.FilterKinds = filterKinds
 }
 
-// WithFilterNamespace adds the filterNamespace to the get service summaries params
-func (o *GetServiceSummariesParams) WithFilterNamespace(filterNamespace []string) *GetServiceSummariesParams {
-	o.SetFilterNamespace(filterNamespace)
+// WithFilterNameSubstr adds the filterNameSubstr to the get service summaries params
+func (o *GetServiceSummariesParams) WithFilterNameSubstr(filterNameSubstr *string) *GetServiceSummariesParams {
+	o.SetFilterNameSubstr(filterNameSubstr)
 	return o
 }
 
-// SetFilterNamespace adds the filterNamespace to the get service summaries params
-func (o *GetServiceSummariesParams) SetFilterNamespace(filterNamespace []string) {
-	o.FilterNamespace = filterNamespace
+// SetFilterNameSubstr adds the filterNameSubstr to the get service summaries params
+func (o *GetServiceSummariesParams) SetFilterNameSubstr(filterNameSubstr *string) {
+	o.FilterNameSubstr = filterNameSubstr
 }
 
-// WithFilterPartition adds the filterPartition to the get service summaries params
-func (o *GetServiceSummariesParams) WithFilterPartition(filterPartition []string) *GetServiceSummariesParams {
-	o.SetFilterPartition(filterPartition)
+// WithFilterNamespaces adds the filterNamespaces to the get service summaries params
+func (o *GetServiceSummariesParams) WithFilterNamespaces(filterNamespaces []string) *GetServiceSummariesParams {
+	o.SetFilterNamespaces(filterNamespaces)
 	return o
 }
 
-// SetFilterPartition adds the filterPartition to the get service summaries params
-func (o *GetServiceSummariesParams) SetFilterPartition(filterPartition []string) {
-	o.FilterPartition = filterPartition
+// SetFilterNamespaces adds the filterNamespaces to the get service summaries params
+func (o *GetServiceSummariesParams) SetFilterNamespaces(filterNamespaces []string) {
+	o.FilterNamespaces = filterNamespaces
+}
+
+// WithFilterPartitions adds the filterPartitions to the get service summaries params
+func (o *GetServiceSummariesParams) WithFilterPartitions(filterPartitions []string) *GetServiceSummariesParams {
+	o.SetFilterPartitions(filterPartitions)
+	return o
+}
+
+// SetFilterPartitions adds the filterPartitions to the get service summaries params
+func (o *GetServiceSummariesParams) SetFilterPartitions(filterPartitions []string) {
+	o.FilterPartitions = filterPartitions
 }
 
 // WithLocationOrganizationID adds the locationOrganizationID to the get service summaries params
@@ -319,52 +344,63 @@ func (o *GetServiceSummariesParams) WriteToRequest(r runtime.ClientRequest, reg 
 	}
 	var res []error
 
-	if o.FilterCluster != nil {
+	if o.FilterClusters != nil {
 
-		// binding items for filter.cluster
-		joinedFilterCluster := o.bindParamFilterCluster(reg)
+		// binding items for filter.clusters
+		joinedFilterClusters := o.bindParamFilterClusters(reg)
 
-		// query array param filter.cluster
-		if err := r.SetQueryParam("filter.cluster", joinedFilterCluster...); err != nil {
+		// query array param filter.clusters
+		if err := r.SetQueryParam("filter.clusters", joinedFilterClusters...); err != nil {
 			return err
 		}
 	}
 
-	if o.FilterNamePrefix != nil {
+	if o.FilterKinds != nil {
 
-		// query param filter.name_prefix
-		var qrFilterNamePrefix string
+		// binding items for filter.kinds
+		joinedFilterKinds := o.bindParamFilterKinds(reg)
 
-		if o.FilterNamePrefix != nil {
-			qrFilterNamePrefix = *o.FilterNamePrefix
+		// query array param filter.kinds
+		if err := r.SetQueryParam("filter.kinds", joinedFilterKinds...); err != nil {
+			return err
 		}
-		qFilterNamePrefix := qrFilterNamePrefix
-		if qFilterNamePrefix != "" {
+	}
 
-			if err := r.SetQueryParam("filter.name_prefix", qFilterNamePrefix); err != nil {
+	if o.FilterNameSubstr != nil {
+
+		// query param filter.name_substr
+		var qrFilterNameSubstr string
+
+		if o.FilterNameSubstr != nil {
+			qrFilterNameSubstr = *o.FilterNameSubstr
+		}
+		qFilterNameSubstr := qrFilterNameSubstr
+		if qFilterNameSubstr != "" {
+
+			if err := r.SetQueryParam("filter.name_substr", qFilterNameSubstr); err != nil {
 				return err
 			}
 		}
 	}
 
-	if o.FilterNamespace != nil {
+	if o.FilterNamespaces != nil {
 
-		// binding items for filter.namespace
-		joinedFilterNamespace := o.bindParamFilterNamespace(reg)
+		// binding items for filter.namespaces
+		joinedFilterNamespaces := o.bindParamFilterNamespaces(reg)
 
-		// query array param filter.namespace
-		if err := r.SetQueryParam("filter.namespace", joinedFilterNamespace...); err != nil {
+		// query array param filter.namespaces
+		if err := r.SetQueryParam("filter.namespaces", joinedFilterNamespaces...); err != nil {
 			return err
 		}
 	}
 
-	if o.FilterPartition != nil {
+	if o.FilterPartitions != nil {
 
-		// binding items for filter.partition
-		joinedFilterPartition := o.bindParamFilterPartition(reg)
+		// binding items for filter.partitions
+		joinedFilterPartitions := o.bindParamFilterPartitions(reg)
 
-		// query array param filter.partition
-		if err := r.SetQueryParam("filter.partition", joinedFilterPartition...); err != nil {
+		// query array param filter.partitions
+		if err := r.SetQueryParam("filter.partitions", joinedFilterPartitions...); err != nil {
 			return err
 		}
 	}
@@ -470,53 +506,70 @@ func (o *GetServiceSummariesParams) WriteToRequest(r runtime.ClientRequest, reg 
 	return nil
 }
 
-// bindParamGetServiceSummaries binds the parameter filter.cluster
-func (o *GetServiceSummariesParams) bindParamFilterCluster(formats strfmt.Registry) []string {
-	filterClusterIR := o.FilterCluster
+// bindParamGetServiceSummaries binds the parameter filter.clusters
+func (o *GetServiceSummariesParams) bindParamFilterClusters(formats strfmt.Registry) []string {
+	filterClustersIR := o.FilterClusters
 
-	var filterClusterIC []string
-	for _, filterClusterIIR := range filterClusterIR { // explode []string
+	var filterClustersIC []string
+	for _, filterClustersIIR := range filterClustersIR { // explode []string
 
-		filterClusterIIV := filterClusterIIR // string as string
-		filterClusterIC = append(filterClusterIC, filterClusterIIV)
+		filterClustersIIV := filterClustersIIR // string as string
+		filterClustersIC = append(filterClustersIC, filterClustersIIV)
 	}
 
 	// items.CollectionFormat: "multi"
-	filterClusterIS := swag.JoinByFormat(filterClusterIC, "multi")
+	filterClustersIS := swag.JoinByFormat(filterClustersIC, "multi")
 
-	return filterClusterIS
+	return filterClustersIS
 }
 
-// bindParamGetServiceSummaries binds the parameter filter.namespace
-func (o *GetServiceSummariesParams) bindParamFilterNamespace(formats strfmt.Registry) []string {
-	filterNamespaceIR := o.FilterNamespace
+// bindParamGetServiceSummaries binds the parameter filter.kinds
+func (o *GetServiceSummariesParams) bindParamFilterKinds(formats strfmt.Registry) []string {
+	filterKindsIR := o.FilterKinds
 
-	var filterNamespaceIC []string
-	for _, filterNamespaceIIR := range filterNamespaceIR { // explode []string
+	var filterKindsIC []string
+	for _, filterKindsIIR := range filterKindsIR { // explode []string
 
-		filterNamespaceIIV := filterNamespaceIIR // string as string
-		filterNamespaceIC = append(filterNamespaceIC, filterNamespaceIIV)
+		filterKindsIIV := filterKindsIIR // string as string
+		filterKindsIC = append(filterKindsIC, filterKindsIIV)
 	}
 
 	// items.CollectionFormat: "multi"
-	filterNamespaceIS := swag.JoinByFormat(filterNamespaceIC, "multi")
+	filterKindsIS := swag.JoinByFormat(filterKindsIC, "multi")
 
-	return filterNamespaceIS
+	return filterKindsIS
 }
 
-// bindParamGetServiceSummaries binds the parameter filter.partition
-func (o *GetServiceSummariesParams) bindParamFilterPartition(formats strfmt.Registry) []string {
-	filterPartitionIR := o.FilterPartition
+// bindParamGetServiceSummaries binds the parameter filter.namespaces
+func (o *GetServiceSummariesParams) bindParamFilterNamespaces(formats strfmt.Registry) []string {
+	filterNamespacesIR := o.FilterNamespaces
 
-	var filterPartitionIC []string
-	for _, filterPartitionIIR := range filterPartitionIR { // explode []string
+	var filterNamespacesIC []string
+	for _, filterNamespacesIIR := range filterNamespacesIR { // explode []string
 
-		filterPartitionIIV := filterPartitionIIR // string as string
-		filterPartitionIC = append(filterPartitionIC, filterPartitionIIV)
+		filterNamespacesIIV := filterNamespacesIIR // string as string
+		filterNamespacesIC = append(filterNamespacesIC, filterNamespacesIIV)
 	}
 
 	// items.CollectionFormat: "multi"
-	filterPartitionIS := swag.JoinByFormat(filterPartitionIC, "multi")
+	filterNamespacesIS := swag.JoinByFormat(filterNamespacesIC, "multi")
 
-	return filterPartitionIS
+	return filterNamespacesIS
+}
+
+// bindParamGetServiceSummaries binds the parameter filter.partitions
+func (o *GetServiceSummariesParams) bindParamFilterPartitions(formats strfmt.Registry) []string {
+	filterPartitionsIR := o.FilterPartitions
+
+	var filterPartitionsIC []string
+	for _, filterPartitionsIIR := range filterPartitionsIR { // explode []string
+
+		filterPartitionsIIV := filterPartitionsIIR // string as string
+		filterPartitionsIC = append(filterPartitionsIC, filterPartitionsIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	filterPartitionsIS := swag.JoinByFormat(filterPartitionsIC, "multi")
+
+	return filterPartitionsIS
 }

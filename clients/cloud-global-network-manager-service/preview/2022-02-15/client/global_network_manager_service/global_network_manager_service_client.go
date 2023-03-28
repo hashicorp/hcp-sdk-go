@@ -34,9 +34,15 @@ type ClientService interface {
 
 	AgentPushServerState(params *AgentPushServerStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentPushServerStateOK, error)
 
+	AgentTelemetryConfig(params *AgentTelemetryConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentTelemetryConfigOK, error)
+
 	CreateCluster(params *CreateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterOK, error)
 
+	CreatePeeringConnections(params *CreatePeeringConnectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePeeringConnectionsOK, error)
+
 	DeleteCluster(params *DeleteClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClusterOK, error)
+
+	DeletePeeringConnection(params *DeletePeeringConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePeeringConnectionOK, error)
 
 	GetAggregateServiceSummary(params *GetAggregateServiceSummaryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAggregateServiceSummaryOK, error)
 
@@ -48,9 +54,19 @@ type ClientService interface {
 
 	GetServiceSummaries(params *GetServiceSummariesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceSummariesOK, error)
 
+	ListClusterPartitions(params *ListClusterPartitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterPartitionsOK, error)
+
 	ListClusterServers(params *ListClusterServersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterServersOK, error)
 
 	ListClusters(params *ListClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersOK, error)
+
+	ListClustersWithAcceptorEligibility(params *ListClustersWithAcceptorEligibilityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersWithAcceptorEligibilityOK, error)
+
+	ListClustersWithDialerEligibility(params *ListClustersWithDialerEligibilityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersWithDialerEligibilityOK, error)
+
+	ListConsulVersions(params *ListConsulVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConsulVersionsOK, error)
+
+	ListPeersByClusterPartition(params *ListPeersByClusterPartitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPeersByClusterPartitionOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -170,6 +186,44 @@ func (a *Client) AgentPushServerState(params *AgentPushServerStateParams, authIn
 }
 
 /*
+AgentTelemetryConfig agent telemetry config API
+*/
+func (a *Client) AgentTelemetryConfig(params *AgentTelemetryConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentTelemetryConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAgentTelemetryConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "AgentTelemetryConfig",
+		Method:             "GET",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &AgentTelemetryConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AgentTelemetryConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*AgentTelemetryConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateCluster create cluster API
 */
 func (a *Client) CreateCluster(params *CreateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterOK, error) {
@@ -204,6 +258,44 @@ func (a *Client) CreateCluster(params *CreateClusterParams, authInfo runtime.Cli
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreatePeeringConnections create peering connections API
+*/
+func (a *Client) CreatePeeringConnections(params *CreatePeeringConnectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePeeringConnectionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreatePeeringConnectionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreatePeeringConnections",
+		Method:             "POST",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/peering_connections",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreatePeeringConnectionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreatePeeringConnectionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreatePeeringConnectionsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -246,7 +338,45 @@ func (a *Client) DeleteCluster(params *DeleteClusterParams, authInfo runtime.Cli
 }
 
 /*
-GetAggregateServiceSummary get aggregate service summary API
+DeletePeeringConnection delete peering connection API
+*/
+func (a *Client) DeletePeeringConnection(params *DeletePeeringConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePeeringConnectionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeletePeeringConnectionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeletePeeringConnection",
+		Method:             "DELETE",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/peering_connections/{peering_connection_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeletePeeringConnectionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeletePeeringConnectionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeletePeeringConnectionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetAggregateServiceSummary gets aggregate service sumamry returns a summary of all the service instances callers should use the response s aggregate service summary by kind field that keys service summaries by service kind
 */
 func (a *Client) GetAggregateServiceSummary(params *GetAggregateServiceSummaryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAggregateServiceSummaryOK, error) {
 	// TODO: Validate the params before sending
@@ -436,6 +566,44 @@ func (a *Client) GetServiceSummaries(params *GetServiceSummariesParams, authInfo
 }
 
 /*
+ListClusterPartitions lists cluster partitions returns the list of consul admin partitions for a given cluster
+*/
+func (a *Client) ListClusterPartitions(params *ListClusterPartitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterPartitionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListClusterPartitionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListClusterPartitions",
+		Method:             "GET",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/partitions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListClusterPartitionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListClusterPartitionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListClusterPartitionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ListClusterServers list cluster servers API
 */
 func (a *Client) ListClusterServers(params *ListClusterServersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterServersOK, error) {
@@ -508,6 +676,158 @@ func (a *Client) ListClusters(params *ListClustersParams, authInfo runtime.Clien
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListClustersDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListClustersWithAcceptorEligibility lists clusters with acceptor eligibility returns the list of clusters along with whether they are eligible to be the acceptor in a peering connection
+*/
+func (a *Client) ListClustersWithAcceptorEligibility(params *ListClustersWithAcceptorEligibilityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersWithAcceptorEligibilityOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListClustersWithAcceptorEligibilityParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListClustersWithAcceptorEligibility",
+		Method:             "GET",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters_with_acceptor_eligibility",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListClustersWithAcceptorEligibilityReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListClustersWithAcceptorEligibilityOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListClustersWithAcceptorEligibilityDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListClustersWithDialerEligibility lists clusters with dialer eligibility returns the list of clusters along with whether they are eligible to be the dialer in a peering connection
+*/
+func (a *Client) ListClustersWithDialerEligibility(params *ListClustersWithDialerEligibilityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersWithDialerEligibilityOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListClustersWithDialerEligibilityParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListClustersWithDialerEligibility",
+		Method:             "GET",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters_with_dialer_eligibility",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListClustersWithDialerEligibilityReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListClustersWithDialerEligibilityOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListClustersWithDialerEligibilityDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListConsulVersions list consul versions API
+*/
+func (a *Client) ListConsulVersions(params *ListConsulVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConsulVersionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListConsulVersionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListConsulVersions",
+		Method:             "GET",
+		PathPattern:        "/global-network-manager/2022-02-15/list_consul_versions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListConsulVersionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListConsulVersionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListConsulVersionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListPeersByClusterPartition lists peers by cluster partition returns the list of cluster partitions each containing their respective lists of cluster peers if a cluster id is supplied this endpoint returns the list of cluster partitions only for the specified cluster
+*/
+func (a *Client) ListPeersByClusterPartition(params *ListPeersByClusterPartitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPeersByClusterPartitionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListPeersByClusterPartitionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListPeersByClusterPartition",
+		Method:             "GET",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/peers_by_cluster_partition",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListPeersByClusterPartitionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListPeersByClusterPartitionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListPeersByClusterPartitionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

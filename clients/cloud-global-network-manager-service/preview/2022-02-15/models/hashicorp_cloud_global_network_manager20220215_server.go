@@ -19,6 +19,9 @@ import (
 // swagger:model hashicorp.cloud.global_network_manager_20220215.Server
 type HashicorpCloudGlobalNetworkManager20220215Server struct {
 
+	// failure_tolerance is the number of nodes remaining that could fail before the cluster loses stability
+	FailureTolerance int32 `json:"failure_tolerance,omitempty"`
+
 	// gossip_port is the Consul serf port
 	GossipPort int32 `json:"gossip_port,omitempty"`
 

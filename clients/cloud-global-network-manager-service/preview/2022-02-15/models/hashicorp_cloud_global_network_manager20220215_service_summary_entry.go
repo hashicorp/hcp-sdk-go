@@ -25,6 +25,9 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry struct {
 	// critical
 	Critical int32 `json:"critical,omitempty"`
 
+	// kind of service
+	Kind *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind `json:"kind,omitempty"`
+
 	// namespace of the service
 	Namespace string `json:"namespace,omitempty"`
 
@@ -37,7 +40,7 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry struct {
 	// total
 	Total int32 `json:"total,omitempty"`
 
-	// updated at
+	// updated_at is the last time the service entry was updated in the DB
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 
@@ -49,6 +52,10 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry struct {
 func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateKind(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateUpdatedAt(formats); err != nil {
 		res = append(res, err)
 	}
@@ -56,6 +63,25 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry) Validate
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry) validateKind(formats strfmt.Registry) error {
+	if swag.IsZero(m.Kind) { // not required
+		return nil
+	}
+
+	if m.Kind != nil {
+		if err := m.Kind.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("kind")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("kind")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -71,8 +97,33 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry) validate
 	return nil
 }
 
-// ContextValidate validates this hashicorp cloud global network manager 20220215 service summary entry based on context it is used
+// ContextValidate validate this hashicorp cloud global network manager 20220215 service summary entry based on the context it is used
 func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateKind(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry) contextValidateKind(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Kind != nil {
+		if err := m.Kind.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("kind")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("kind")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

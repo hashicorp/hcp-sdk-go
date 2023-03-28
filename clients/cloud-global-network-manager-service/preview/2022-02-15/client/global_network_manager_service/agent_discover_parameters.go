@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-global-network-manager-service/preview/2022-02-15/models"
 )
 
 // NewAgentDiscoverParams creates a new AgentDiscoverParams object,
@@ -64,7 +62,7 @@ AgentDiscoverParams contains all the parameters to send to the API endpoint
 type AgentDiscoverParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudGlobalNetworkManager20220215AgentDiscoverRequest
+	Body AgentDiscoverBody
 
 	/* ID.
 
@@ -138,13 +136,13 @@ func (o *AgentDiscoverParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the agent discover params
-func (o *AgentDiscoverParams) WithBody(body *models.HashicorpCloudGlobalNetworkManager20220215AgentDiscoverRequest) *AgentDiscoverParams {
+func (o *AgentDiscoverParams) WithBody(body AgentDiscoverBody) *AgentDiscoverParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the agent discover params
-func (o *AgentDiscoverParams) SetBody(body *models.HashicorpCloudGlobalNetworkManager20220215AgentDiscoverRequest) {
+func (o *AgentDiscoverParams) SetBody(body AgentDiscoverBody) {
 	o.Body = body
 }
 
@@ -188,10 +186,8 @@ func (o *AgentDiscoverParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param id

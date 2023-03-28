@@ -7,7 +7,9 @@ package models
 
 import (
 	"context"
+	"strconv"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -17,26 +19,93 @@ import (
 // swagger:model hashicorp.cloud.global_network_manager_20220215.GetServiceSummariesRequest.Filter
 type HashicorpCloudGlobalNetworkManager20220215GetServiceSummariesRequestFilter struct {
 
-	// cluster matches summaries on the cluster name
-	Cluster []string `json:"cluster"`
+	// clusters matches summaries on the cluster name
+	Clusters []string `json:"clusters"`
 
-	// name_prefix matches summaries on the prefix of the service's name
-	NamePrefix string `json:"name_prefix,omitempty"`
+	// kinds matches service kind. If empty, this defaults to all kinds
+	Kinds []*HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind `json:"kinds"`
 
-	// namespace matches summaries on the namespace name
-	Namespace []string `json:"namespace"`
+	// name_substr matches summaries that contain a case-insensitive substring in their service name
+	NameSubstr string `json:"name_substr,omitempty"`
 
-	// partition matches summaries on the partition name
-	Partition []string `json:"partition"`
+	// namespaces matches summaries on the namespace name
+	Namespaces []string `json:"namespaces"`
+
+	// partitions matches summaries on the partition name
+	Partitions []string `json:"partitions"`
 }
 
 // Validate validates this hashicorp cloud global network manager 20220215 get service summaries request filter
 func (m *HashicorpCloudGlobalNetworkManager20220215GetServiceSummariesRequestFilter) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateKinds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this hashicorp cloud global network manager 20220215 get service summaries request filter based on context it is used
+func (m *HashicorpCloudGlobalNetworkManager20220215GetServiceSummariesRequestFilter) validateKinds(formats strfmt.Registry) error {
+	if swag.IsZero(m.Kinds) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Kinds); i++ {
+		if swag.IsZero(m.Kinds[i]) { // not required
+			continue
+		}
+
+		if m.Kinds[i] != nil {
+			if err := m.Kinds[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("kinds" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("kinds" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud global network manager 20220215 get service summaries request filter based on the context it is used
 func (m *HashicorpCloudGlobalNetworkManager20220215GetServiceSummariesRequestFilter) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateKinds(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215GetServiceSummariesRequestFilter) contextValidateKinds(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Kinds); i++ {
+
+		if m.Kinds[i] != nil {
+			if err := m.Kinds[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("kinds" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("kinds" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

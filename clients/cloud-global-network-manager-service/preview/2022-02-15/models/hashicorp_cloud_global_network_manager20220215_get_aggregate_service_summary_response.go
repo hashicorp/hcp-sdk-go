@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
@@ -18,6 +19,9 @@ import (
 //
 // swagger:model hashicorp.cloud.global_network_manager_20220215.GetAggregateServiceSummaryResponse
 type HashicorpCloudGlobalNetworkManager20220215GetAggregateServiceSummaryResponse struct {
+
+	// aggregate_service_summary_by_kind breaks down service instance health by Service Kind.
+	AggregateServiceSummaryByKind map[string]HashicorpCloudGlobalNetworkManager20220215AggregateServiceSummary `json:"aggregate_service_summary_by_kind,omitempty"`
 
 	// critical service instances
 	CriticalServiceInstances int32 `json:"critical_service_instances,omitempty"`
@@ -31,7 +35,8 @@ type HashicorpCloudGlobalNetworkManager20220215GetAggregateServiceSummaryRespons
 	// total service instances
 	TotalServiceInstances int32 `json:"total_service_instances,omitempty"`
 
-	// total services
+	// TODO: remove these fields in favor of just returning aggregate_service_summary_by_kind.
+	// aggregate_service_summary_by_kind can be reduced to total fields (which this is currently).
 	TotalServices int32 `json:"total_services,omitempty"`
 
 	// warning service instances
@@ -42,6 +47,10 @@ type HashicorpCloudGlobalNetworkManager20220215GetAggregateServiceSummaryRespons
 func (m *HashicorpCloudGlobalNetworkManager20220215GetAggregateServiceSummaryResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAggregateServiceSummaryByKind(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLocation(formats); err != nil {
 		res = append(res, err)
 	}
@@ -49,6 +58,32 @@ func (m *HashicorpCloudGlobalNetworkManager20220215GetAggregateServiceSummaryRes
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215GetAggregateServiceSummaryResponse) validateAggregateServiceSummaryByKind(formats strfmt.Registry) error {
+	if swag.IsZero(m.AggregateServiceSummaryByKind) { // not required
+		return nil
+	}
+
+	for k := range m.AggregateServiceSummaryByKind {
+
+		if err := validate.Required("aggregate_service_summary_by_kind"+"."+k, "body", m.AggregateServiceSummaryByKind[k]); err != nil {
+			return err
+		}
+		if val, ok := m.AggregateServiceSummaryByKind[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("aggregate_service_summary_by_kind" + "." + k)
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("aggregate_service_summary_by_kind" + "." + k)
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -75,6 +110,10 @@ func (m *HashicorpCloudGlobalNetworkManager20220215GetAggregateServiceSummaryRes
 func (m *HashicorpCloudGlobalNetworkManager20220215GetAggregateServiceSummaryResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAggregateServiceSummaryByKind(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -82,6 +121,21 @@ func (m *HashicorpCloudGlobalNetworkManager20220215GetAggregateServiceSummaryRes
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215GetAggregateServiceSummaryResponse) contextValidateAggregateServiceSummaryByKind(ctx context.Context, formats strfmt.Registry) error {
+
+	for k := range m.AggregateServiceSummaryByKind {
+
+		if val, ok := m.AggregateServiceSummaryByKind[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

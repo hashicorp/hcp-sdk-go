@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetAggregateServiceSummaryParams creates a new GetAggregateServiceSummaryParams object,
@@ -61,6 +62,12 @@ GetAggregateServiceSummaryParams contains all the parameters to send to the API 
 */
 type GetAggregateServiceSummaryParams struct {
 
+	/* FilterClusters.
+
+	   filters summaries to the provided cluster names. If empty, all are included
+	*/
+	FilterClusters []string
+
 	/* LocationOrganizationID.
 
 	   organization_id is the id of the organization.
@@ -75,13 +82,13 @@ type GetAggregateServiceSummaryParams struct {
 
 	/* LocationRegionProvider.
 
-	   provider is the named cloud provider ("aws", "gcp", "azure").
+	   provider is the named cloud provider ("aws", "gcp", "azure")
 	*/
 	LocationRegionProvider *string
 
 	/* LocationRegionRegion.
 
-	   region is the cloud region ("us-west1", "us-east1").
+	   region is the cloud region ("us-west1", "us-east1")
 	*/
 	LocationRegionRegion *string
 
@@ -138,6 +145,17 @@ func (o *GetAggregateServiceSummaryParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithFilterClusters adds the filterClusters to the get aggregate service summary params
+func (o *GetAggregateServiceSummaryParams) WithFilterClusters(filterClusters []string) *GetAggregateServiceSummaryParams {
+	o.SetFilterClusters(filterClusters)
+	return o
+}
+
+// SetFilterClusters adds the filterClusters to the get aggregate service summary params
+func (o *GetAggregateServiceSummaryParams) SetFilterClusters(filterClusters []string) {
+	o.FilterClusters = filterClusters
+}
+
 // WithLocationOrganizationID adds the locationOrganizationID to the get aggregate service summary params
 func (o *GetAggregateServiceSummaryParams) WithLocationOrganizationID(locationOrganizationID string) *GetAggregateServiceSummaryParams {
 	o.SetLocationOrganizationID(locationOrganizationID)
@@ -190,6 +208,17 @@ func (o *GetAggregateServiceSummaryParams) WriteToRequest(r runtime.ClientReques
 	}
 	var res []error
 
+	if o.FilterClusters != nil {
+
+		// binding items for filter.clusters
+		joinedFilterClusters := o.bindParamFilterClusters(reg)
+
+		// query array param filter.clusters
+		if err := r.SetQueryParam("filter.clusters", joinedFilterClusters...); err != nil {
+			return err
+		}
+	}
+
 	// path param location.organization_id
 	if err := r.SetPathParam("location.organization_id", o.LocationOrganizationID); err != nil {
 		return err
@@ -238,4 +267,21 @@ func (o *GetAggregateServiceSummaryParams) WriteToRequest(r runtime.ClientReques
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamGetAggregateServiceSummary binds the parameter filter.clusters
+func (o *GetAggregateServiceSummaryParams) bindParamFilterClusters(formats strfmt.Registry) []string {
+	filterClustersIR := o.FilterClusters
+
+	var filterClustersIC []string
+	for _, filterClustersIIR := range filterClustersIR { // explode []string
+
+		filterClustersIIV := filterClustersIIR // string as string
+		filterClustersIC = append(filterClustersIC, filterClustersIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	filterClustersIS := swag.JoinByFormat(filterClustersIC, "multi")
+
+	return filterClustersIS
 }

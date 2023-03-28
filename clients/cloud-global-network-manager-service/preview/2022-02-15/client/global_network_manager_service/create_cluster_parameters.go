@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-global-network-manager-service/preview/2022-02-15/models"
 )
 
 // NewCreateClusterParams creates a new CreateClusterParams object,
@@ -64,7 +62,7 @@ CreateClusterParams contains all the parameters to send to the API endpoint
 type CreateClusterParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudGlobalNetworkManager20220215CreateClusterRequest
+	Body CreateClusterBody
 
 	/* LocationOrganizationID.
 
@@ -132,13 +130,13 @@ func (o *CreateClusterParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create cluster params
-func (o *CreateClusterParams) WithBody(body *models.HashicorpCloudGlobalNetworkManager20220215CreateClusterRequest) *CreateClusterParams {
+func (o *CreateClusterParams) WithBody(body CreateClusterBody) *CreateClusterParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create cluster params
-func (o *CreateClusterParams) SetBody(body *models.HashicorpCloudGlobalNetworkManager20220215CreateClusterRequest) {
+func (o *CreateClusterParams) SetBody(body CreateClusterBody) {
 	o.Body = body
 }
 
@@ -171,10 +169,8 @@ func (o *CreateClusterParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param location.organization_id

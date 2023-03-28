@@ -19,7 +19,7 @@ import (
 // swagger:model hashicorp.cloud.global_network_manager_20220215.AgentDiscoverResponse
 type HashicorpCloudGlobalNetworkManager20220215AgentDiscoverResponse struct {
 
-	// Server is the configuration and TLS status of each consul server in a cluster
+	// servers is the configuration and TLS status of each consul server in a cluster
 	Servers []*HashicorpCloudGlobalNetworkManager20220215Server `json:"servers"`
 }
 

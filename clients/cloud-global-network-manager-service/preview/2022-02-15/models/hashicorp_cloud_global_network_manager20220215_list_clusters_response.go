@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudGlobalNetworkManager20220215ListClustersResponse hashicorp cloud global network manager 20220215 list clusters response
@@ -21,6 +22,9 @@ type HashicorpCloudGlobalNetworkManager20220215ListClustersResponse struct {
 
 	// clusters
 	Clusters []*HashicorpCloudGlobalNetworkManager20220215Cluster `json:"clusters"`
+
+	// pagination response containing the page tokens for future requests
+	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 
 // Validate validates this hashicorp cloud global network manager 20220215 list clusters response
@@ -28,6 +32,10 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ListClustersResponse) Validat
 	var res []error
 
 	if err := m.validateClusters(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePagination(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -63,11 +71,34 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ListClustersResponse) validat
 	return nil
 }
 
+func (m *HashicorpCloudGlobalNetworkManager20220215ListClustersResponse) validatePagination(formats strfmt.Registry) error {
+	if swag.IsZero(m.Pagination) { // not required
+		return nil
+	}
+
+	if m.Pagination != nil {
+		if err := m.Pagination.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud global network manager 20220215 list clusters response based on the context it is used
 func (m *HashicorpCloudGlobalNetworkManager20220215ListClustersResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateClusters(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePagination(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -92,6 +123,22 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ListClustersResponse) context
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215ListClustersResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pagination != nil {
+		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
 	}
 
 	return nil
