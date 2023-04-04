@@ -30,6 +30,9 @@ type HashicorpCloudGlobalNetworkManager20220215ClusterBootstrap struct {
 	// id is the name of the cluster
 	ID string `json:"id,omitempty"`
 
+	// management_token is the management token for this cluster.
+	ManagementToken string `json:"management_token,omitempty"`
+
 	// server_tls is the public key, private key and certificate_authorities for bootstrapping consul RPC TLS.
 	ServerTLS *HashicorpCloudGlobalNetworkManager20220215ServerTLS `json:"server_tls,omitempty"`
 }

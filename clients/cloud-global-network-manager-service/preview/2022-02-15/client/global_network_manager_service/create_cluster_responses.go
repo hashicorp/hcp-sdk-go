@@ -186,11 +186,17 @@ swagger:model CreateClusterBody
 */
 type CreateClusterBody struct {
 
+	// existing_cluster indicates whether or not the cluster existed before creation (for linking)
+	ExistingCluster bool `json:"existing_cluster,omitempty"`
+
 	// id is the user settable GNM cluster name
 	ID string `json:"id,omitempty"`
 
 	// location
 	Location *CreateClusterParamsBodyLocation `json:"location,omitempty"`
+
+	// source is the runtime type for the cluster
+	Source *models.HashicorpCloudGlobalNetworkManager20220215ClusterSource `json:"source,omitempty"`
 }
 
 // Validate validates this create cluster body
@@ -198,6 +204,10 @@ func (o *CreateClusterBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := o.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateSource(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -226,11 +236,34 @@ func (o *CreateClusterBody) validateLocation(formats strfmt.Registry) error {
 	return nil
 }
 
+func (o *CreateClusterBody) validateSource(formats strfmt.Registry) error {
+	if swag.IsZero(o.Source) { // not required
+		return nil
+	}
+
+	if o.Source != nil {
+		if err := o.Source.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "source")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "source")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this create cluster body based on the context it is used
 func (o *CreateClusterBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := o.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSource(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -248,6 +281,22 @@ func (o *CreateClusterBody) contextValidateLocation(ctx context.Context, formats
 				return ve.ValidateName("body" + "." + "location")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateClusterBody) contextValidateSource(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Source != nil {
+		if err := o.Source.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "source")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "source")
 			}
 			return err
 		}

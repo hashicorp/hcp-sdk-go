@@ -38,6 +38,9 @@ const (
 
 	// HashicorpCloudGlobalNetworkManager20220215ClusterSourceSOURCEHCP captures enum value "SOURCE_HCP"
 	HashicorpCloudGlobalNetworkManager20220215ClusterSourceSOURCEHCP HashicorpCloudGlobalNetworkManager20220215ClusterSource = "SOURCE_HCP"
+
+	// HashicorpCloudGlobalNetworkManager20220215ClusterSourceSOURCEVM captures enum value "SOURCE_VM"
+	HashicorpCloudGlobalNetworkManager20220215ClusterSourceSOURCEVM HashicorpCloudGlobalNetworkManager20220215ClusterSource = "SOURCE_VM"
 )
 
 // for schema
@@ -45,7 +48,7 @@ var hashicorpCloudGlobalNetworkManager20220215ClusterSourceEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudGlobalNetworkManager20220215ClusterSource
-	if err := json.Unmarshal([]byte(`["SOURCE_UNSPECIFIED","SOURCE_KUBERNETES","SOURCE_HCP"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["SOURCE_UNSPECIFIED","SOURCE_KUBERNETES","SOURCE_HCP","SOURCE_VM"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
