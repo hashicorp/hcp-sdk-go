@@ -1,0 +1,3 @@
+```release-note:bug
+Fixed issue of not regenerating auth token when AccessToken expires
+```
