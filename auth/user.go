@@ -5,6 +5,7 @@ package auth
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"time"
@@ -12,9 +13,15 @@ import (
 	"golang.org/x/oauth2"
 )
 
+var (
+	// ErrorNoValidAuthFound is returned if no local auth methods were found and the invoker created the config with the option WithoutBrowserLogin
+	ErrorNoValidAuthFound = errors.New("there were no valid auth methods found")
+)
+
 // UserSession implements the auth package's Session interface
 type UserSession struct {
-	browser Browser
+	browser        Browser
+	NoBrowserLogin bool
 }
 
 // GetToken returns an access token obtained from either an existing session or new browser login.
@@ -32,6 +39,10 @@ func (s *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 	// Check the session expiry of the retrieved token.
 	// If session expiry has passed, then reauthenticate with browser login and reassign token.
 	if readErr != nil || cache.SessionExpiry.Before(time.Now()) {
+
+		if s.NoBrowserLogin {
+			return nil, ErrorNoValidAuthFound
+		}
 
 		// Login with browser.
 		log.Print("No credentials found, proceeding with browser login.")

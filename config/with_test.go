@@ -123,3 +123,14 @@ func TestWith_Profile(t *testing.T) {
 	require.Equal("project-id-1234", config.Profile().ProjectID)
 
 }
+
+func TestWithout_BrowserLogin(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config := &hcpConfig{}
+	require.NoError(apply(config, WithoutBrowserLogin()))
+
+	// Ensure flag is set
+	require.True(config.noBrowserLogin)
+}

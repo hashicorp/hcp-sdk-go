@@ -137,3 +137,12 @@ func WithProfile(p *profile.UserProfile) HCPConfigOption {
 		return nil
 	}
 }
+
+// WithoutBrowserLogin disables the automatic opening of the browser login if no valid auth method is found
+// instead force the return of a typed error for users to catch
+func WithoutBrowserLogin() HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.noBrowserLogin = true
+		return nil
+	}
+}
