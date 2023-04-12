@@ -131,6 +131,6 @@ func TestWithout_BrowserLogin(t *testing.T) {
 	config := &hcpConfig{}
 	require.NoError(apply(config, WithoutBrowserLogin()))
 
-	// Ensure flag is set
-	require.True(config.noBrowserLogin)
+	// Ensure  browser login is disabled
+	require.Equal(NoOathClient, config.oauth2Config.ClientID)
 }

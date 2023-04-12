@@ -14,6 +14,10 @@ import (
 	"golang.org/x/oauth2/clientcredentials"
 )
 
+const (
+	NoOathClient = "N/A"
+)
+
 // HCPConfig provides configuration values that are useful to interact with HCP.
 type HCPConfig interface {
 
@@ -95,9 +99,6 @@ type hcpConfig struct {
 
 	// profile is the user's organization id and project id
 	profile *profile.UserProfile
-
-	// noBrowserLogin is an option to not automatically open browser login in no valid auth method is found.
-	noBrowserLogin bool
 }
 
 func (c *hcpConfig) Profile() *profile.UserProfile {
