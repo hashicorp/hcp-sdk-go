@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	NoOathClient = "N/A"
+	NoOAuth2Client = "N/A"
 )
 
 // HCPConfig provides configuration values that are useful to interact with HCP.
