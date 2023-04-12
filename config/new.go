@@ -121,7 +121,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		// Create token source from the client credentials configuration.
 		config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
 
-	} else if config.oauth2Config.ClientID != NoOathClient { // Set access token via browser login or use token from existing session.
+	} else if config.oauth2Config.ClientID != NoOAuth2Client { // Set access token via browser login or use token from existing session.
 
 		tok, err := config.session.GetToken(tokenContext, &config.oauth2Config)
 		if err != nil {

@@ -132,5 +132,5 @@ func TestWithout_BrowserLogin(t *testing.T) {
 	require.NoError(apply(config, WithoutBrowserLogin()))
 
 	// Ensure  browser login is disabled
-	require.Equal(NoOathClient, config.oauth2Config.ClientID)
+	require.Equal(NoOAuth2Client, config.oauth2Config.ClientID)
 }
