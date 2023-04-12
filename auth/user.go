@@ -14,7 +14,7 @@ import (
 
 // UserSession implements the auth package's Session interface
 type UserSession struct {
-	browser        Browser
+	browser Browser
 }
 
 // GetToken returns an access token obtained from either an existing session or new browser login.
