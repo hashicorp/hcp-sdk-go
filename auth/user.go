@@ -29,9 +29,9 @@ func (s *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 	var tok *oauth2.Token
 	var err error
 
-	// Check the session expiry of the retrieved token.
-	// If session expiry has passed, then reauthenticate with browser login and reassign token.
-	if readErr != nil || cache.SessionExpiry.Before(time.Now()) {
+	// Check the expiry of the retrieved token.
+	// If session expiry or the AccessTokenExpiry has passed, then reauthenticate with browser login and reassign token.
+	if readErr != nil || cache.SessionExpiry.Before(time.Now()) || cache.AccessTokenExpiry.Before(time.Now()) {
 
 		// Login with browser.
 		log.Print("No credentials found, proceeding with browser login.")
