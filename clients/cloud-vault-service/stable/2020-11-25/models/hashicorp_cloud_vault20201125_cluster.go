@@ -13,7 +13,6 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20201125Cluster Cluster represents a single Vault cluster.
@@ -41,7 +40,7 @@ type HashicorpCloudVault20201125Cluster struct {
 	ID string `json:"id,omitempty"`
 
 	// location is the location of the cluster.
-	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
 
 	// notifications is the list of notifications currently valid for the cluster.
 	Notifications []*HashicorpCloudVault20201125ClusterNotification `json:"notifications"`
