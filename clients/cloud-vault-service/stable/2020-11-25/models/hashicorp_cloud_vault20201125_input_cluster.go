@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20201125InputCluster hashicorp cloud vault 20201125 input cluster
@@ -26,7 +25,7 @@ type HashicorpCloudVault20201125InputCluster struct {
 	ID string `json:"id,omitempty"`
 
 	// location is the location of the cluster.
-	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
 
 	// performance_replication_paths_filter is the information about what paths should be
 	// filtered for a performance replication secondary.
@@ -34,7 +33,7 @@ type HashicorpCloudVault20201125InputCluster struct {
 
 	// performance_replication_primary_cluster holds the link information of the
 	// primary cluster under performance replication.
-	PerformanceReplicationPrimaryCluster *cloud.HashicorpCloudLocationLink `json:"performance_replication_primary_cluster,omitempty"`
+	PerformanceReplicationPrimaryCluster *HashicorpCloudInternalLocationLink `json:"performance_replication_primary_cluster,omitempty"`
 
 	// template_input refers to the template used to create the cluster that will be applied during bootstrap time.
 	TemplateInput *HashicorpCloudVault20201125InputClusterTemplateInput `json:"template_input,omitempty"`
