@@ -142,7 +142,7 @@ func WithProfile(p *profile.UserProfile) HCPConfigOption {
 // instead force the return of a typed error for users to catch
 func WithoutBrowserLogin() HCPConfigOption {
 	return func(config *hcpConfig) error {
-		config.oauth2Config.ClientID = NoOAuth2Client
+		config.noBrowserLogin = true
 		return nil
 	}
 }

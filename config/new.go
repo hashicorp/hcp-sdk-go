@@ -102,6 +102,12 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		}
 	}
 
+	if config.noBrowserLogin {
+		config.session = &auth.UserSession{
+			NoBrowserLogin: true,
+		}
+	}
+
 	// Set up a token context with the custom auth TLS config
 	tokenTransport := cleanhttp.DefaultPooledTransport()
 	tokenTransport.TLSClientConfig = config.authTLSConfig
@@ -121,7 +127,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		// Create token source from the client credentials configuration.
 		config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
 
-	} else if config.oauth2Config.ClientID != NoOAuth2Client { // Set access token via browser login or use token from existing session.
+	} else { // Set access token via browser login or use token from existing session.
 
 		tok, err := config.session.GetToken(tokenContext, &config.oauth2Config)
 		if err != nil {
@@ -130,9 +136,6 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 		// Update HCPConfig with most current token values.
 		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
-	} else {
-		// if the WithoutBrowserLogin option is passed in and there is no valid login already present return typed error
-		return nil, ErrorNoValidAuthFound
 	}
 
 	if err := config.validate(); err != nil {
