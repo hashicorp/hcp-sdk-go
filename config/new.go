@@ -5,6 +5,7 @@ package config
 
 import (
 	"crypto/tls"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -15,6 +16,11 @@ import (
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
+)
+
+var (
+	// ErrorNoValidAuthFound is returned if no local auth methods were found and the invoker created the config with the option WithoutBrowserLogin
+	ErrorNoValidAuthFound = errors.New("there were no valid auth methods found")
 )
 
 const (
@@ -96,13 +102,6 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		}
 	}
 
-	// fail out with a typed error if invoker specified WithoutBrowserLogin
-	if config.noBrowserLogin {
-		config.session = &auth.UserSession{
-			NoBrowserLogin: true,
-		}
-	}
-
 	// Set up a token context with the custom auth TLS config
 	tokenTransport := cleanhttp.DefaultPooledTransport()
 	tokenTransport.TLSClientConfig = config.authTLSConfig
@@ -122,7 +121,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		// Create token source from the client credentials configuration.
 		config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
 
-	} else { // Set access token via browser login or use token from existing session.
+	} else if config.oauth2Config.ClientID != NoOAuth2Client { // Set access token via browser login or use token from existing session.
 
 		tok, err := config.session.GetToken(tokenContext, &config.oauth2Config)
 		if err != nil {
@@ -131,6 +130,9 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 		// Update HCPConfig with most current token values.
 		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
+	} else {
+		// if the WithoutBrowserLogin option is passed in and there is no valid login already present return typed error
+		return nil, ErrorNoValidAuthFound
 	}
 
 	if err := config.validate(); err != nil {
