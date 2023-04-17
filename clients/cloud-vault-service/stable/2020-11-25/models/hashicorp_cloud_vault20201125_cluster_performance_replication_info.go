@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20201125ClusterPerformanceReplicationInfo PerformanceReplicationInfo holds Performance Replication information
@@ -28,7 +29,7 @@ type HashicorpCloudVault20201125ClusterPerformanceReplicationInfo struct {
 	// primary_cluster_link holds the link information of the
 	// primary cluster to which the current cluster is replicated to. This field
 	// only applies when the cluster is a Secondary under Cluster Performance Replication.
-	PrimaryClusterLink *HashicorpCloudInternalLocationLink `json:"primary_cluster_link,omitempty"`
+	PrimaryClusterLink *cloud.HashicorpCloudLocationLink `json:"primary_cluster_link,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 cluster performance replication info

@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20201125CreateSnapshotRequest hashicorp cloud vault 20201125 create snapshot request
@@ -22,7 +23,7 @@ type HashicorpCloudVault20201125CreateSnapshotRequest struct {
 	Name string `json:"name,omitempty"`
 
 	// resource specifies the link to the resource to snapshot
-	Resource *HashicorpCloudInternalLocationLink `json:"resource,omitempty"`
+	Resource *cloud.HashicorpCloudLocationLink `json:"resource,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 create snapshot request

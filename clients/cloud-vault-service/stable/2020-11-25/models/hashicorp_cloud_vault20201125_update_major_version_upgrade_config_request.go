@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigRequest hashicorp cloud vault 20201125 update major version upgrade config request
@@ -22,7 +23,7 @@ type HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigRequest struct {
 	ClusterID string `json:"cluster_id,omitempty"`
 
 	// location
-	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
 	// maintenance window
 	MaintenanceWindow *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow `json:"maintenance_window,omitempty"`

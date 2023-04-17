@@ -61,32 +61,57 @@ DeregisterLinkedClusterParams contains all the parameters to send to the API end
 */
 type DeregisterLinkedClusterParams struct {
 
-	// ClusterID.
-	ClusterID string
+	/* ClusterLinkDescription.
 
-	/* LocationOrganizationID.
+	     description is a human-friendly description for this link. This is
+	used primarily for informational purposes such as error messages.
+	*/
+	ClusterLinkDescription *string
+
+	/* ClusterLinkID.
+
+	   id is the identifier for this resource.
+	*/
+	ClusterLinkID *string
+
+	/* ClusterLinkLocationOrganizationID.
 
 	   organization_id is the id of the organization.
 	*/
-	LocationOrganizationID string
+	ClusterLinkLocationOrganizationID string
 
-	/* LocationProjectID.
+	/* ClusterLinkLocationProjectID.
 
 	   project_id is the projects id.
 	*/
-	LocationProjectID string
+	ClusterLinkLocationProjectID string
 
-	/* LocationRegionProvider.
+	/* ClusterLinkLocationRegionProvider.
 
 	   provider is the named cloud provider ("aws", "gcp", "azure").
 	*/
-	LocationRegionProvider *string
+	ClusterLinkLocationRegionProvider *string
 
-	/* LocationRegionRegion.
+	/* ClusterLinkLocationRegionRegion.
 
 	   region is the cloud region ("us-west1", "us-east1").
 	*/
-	LocationRegionRegion *string
+	ClusterLinkLocationRegionRegion *string
+
+	/* ClusterLinkType.
+
+	     type is the unique type of the resource. Each service publishes a
+	unique set of types. The type value is recommended to be formatted
+	in "<org>.<type>" such as "hashicorp.hvn". This is to prevent conflicts
+	in the future, but any string value will work.
+	*/
+	ClusterLinkType *string
+
+	/* ClusterLinkUUID.
+
+	   uuid is the unique UUID for this resource.
+	*/
+	ClusterLinkUUID *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -141,59 +166,92 @@ func (o *DeregisterLinkedClusterParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithClusterID adds the clusterID to the deregister linked cluster params
-func (o *DeregisterLinkedClusterParams) WithClusterID(clusterID string) *DeregisterLinkedClusterParams {
-	o.SetClusterID(clusterID)
+// WithClusterLinkDescription adds the clusterLinkDescription to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) WithClusterLinkDescription(clusterLinkDescription *string) *DeregisterLinkedClusterParams {
+	o.SetClusterLinkDescription(clusterLinkDescription)
 	return o
 }
 
-// SetClusterID adds the clusterId to the deregister linked cluster params
-func (o *DeregisterLinkedClusterParams) SetClusterID(clusterID string) {
-	o.ClusterID = clusterID
+// SetClusterLinkDescription adds the clusterLinkDescription to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) SetClusterLinkDescription(clusterLinkDescription *string) {
+	o.ClusterLinkDescription = clusterLinkDescription
 }
 
-// WithLocationOrganizationID adds the locationOrganizationID to the deregister linked cluster params
-func (o *DeregisterLinkedClusterParams) WithLocationOrganizationID(locationOrganizationID string) *DeregisterLinkedClusterParams {
-	o.SetLocationOrganizationID(locationOrganizationID)
+// WithClusterLinkID adds the clusterLinkID to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) WithClusterLinkID(clusterLinkID *string) *DeregisterLinkedClusterParams {
+	o.SetClusterLinkID(clusterLinkID)
 	return o
 }
 
-// SetLocationOrganizationID adds the locationOrganizationId to the deregister linked cluster params
-func (o *DeregisterLinkedClusterParams) SetLocationOrganizationID(locationOrganizationID string) {
-	o.LocationOrganizationID = locationOrganizationID
+// SetClusterLinkID adds the clusterLinkId to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) SetClusterLinkID(clusterLinkID *string) {
+	o.ClusterLinkID = clusterLinkID
 }
 
-// WithLocationProjectID adds the locationProjectID to the deregister linked cluster params
-func (o *DeregisterLinkedClusterParams) WithLocationProjectID(locationProjectID string) *DeregisterLinkedClusterParams {
-	o.SetLocationProjectID(locationProjectID)
+// WithClusterLinkLocationOrganizationID adds the clusterLinkLocationOrganizationID to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) WithClusterLinkLocationOrganizationID(clusterLinkLocationOrganizationID string) *DeregisterLinkedClusterParams {
+	o.SetClusterLinkLocationOrganizationID(clusterLinkLocationOrganizationID)
 	return o
 }
 
-// SetLocationProjectID adds the locationProjectId to the deregister linked cluster params
-func (o *DeregisterLinkedClusterParams) SetLocationProjectID(locationProjectID string) {
-	o.LocationProjectID = locationProjectID
+// SetClusterLinkLocationOrganizationID adds the clusterLinkLocationOrganizationId to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) SetClusterLinkLocationOrganizationID(clusterLinkLocationOrganizationID string) {
+	o.ClusterLinkLocationOrganizationID = clusterLinkLocationOrganizationID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the deregister linked cluster params
-func (o *DeregisterLinkedClusterParams) WithLocationRegionProvider(locationRegionProvider *string) *DeregisterLinkedClusterParams {
-	o.SetLocationRegionProvider(locationRegionProvider)
+// WithClusterLinkLocationProjectID adds the clusterLinkLocationProjectID to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) WithClusterLinkLocationProjectID(clusterLinkLocationProjectID string) *DeregisterLinkedClusterParams {
+	o.SetClusterLinkLocationProjectID(clusterLinkLocationProjectID)
 	return o
 }
 
-// SetLocationRegionProvider adds the locationRegionProvider to the deregister linked cluster params
-func (o *DeregisterLinkedClusterParams) SetLocationRegionProvider(locationRegionProvider *string) {
-	o.LocationRegionProvider = locationRegionProvider
+// SetClusterLinkLocationProjectID adds the clusterLinkLocationProjectId to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) SetClusterLinkLocationProjectID(clusterLinkLocationProjectID string) {
+	o.ClusterLinkLocationProjectID = clusterLinkLocationProjectID
 }
 
-// WithLocationRegionRegion adds the locationRegionRegion to the deregister linked cluster params
-func (o *DeregisterLinkedClusterParams) WithLocationRegionRegion(locationRegionRegion *string) *DeregisterLinkedClusterParams {
-	o.SetLocationRegionRegion(locationRegionRegion)
+// WithClusterLinkLocationRegionProvider adds the clusterLinkLocationRegionProvider to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) WithClusterLinkLocationRegionProvider(clusterLinkLocationRegionProvider *string) *DeregisterLinkedClusterParams {
+	o.SetClusterLinkLocationRegionProvider(clusterLinkLocationRegionProvider)
 	return o
 }
 
-// SetLocationRegionRegion adds the locationRegionRegion to the deregister linked cluster params
-func (o *DeregisterLinkedClusterParams) SetLocationRegionRegion(locationRegionRegion *string) {
-	o.LocationRegionRegion = locationRegionRegion
+// SetClusterLinkLocationRegionProvider adds the clusterLinkLocationRegionProvider to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) SetClusterLinkLocationRegionProvider(clusterLinkLocationRegionProvider *string) {
+	o.ClusterLinkLocationRegionProvider = clusterLinkLocationRegionProvider
+}
+
+// WithClusterLinkLocationRegionRegion adds the clusterLinkLocationRegionRegion to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) WithClusterLinkLocationRegionRegion(clusterLinkLocationRegionRegion *string) *DeregisterLinkedClusterParams {
+	o.SetClusterLinkLocationRegionRegion(clusterLinkLocationRegionRegion)
+	return o
+}
+
+// SetClusterLinkLocationRegionRegion adds the clusterLinkLocationRegionRegion to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) SetClusterLinkLocationRegionRegion(clusterLinkLocationRegionRegion *string) {
+	o.ClusterLinkLocationRegionRegion = clusterLinkLocationRegionRegion
+}
+
+// WithClusterLinkType adds the clusterLinkType to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) WithClusterLinkType(clusterLinkType *string) *DeregisterLinkedClusterParams {
+	o.SetClusterLinkType(clusterLinkType)
+	return o
+}
+
+// SetClusterLinkType adds the clusterLinkType to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) SetClusterLinkType(clusterLinkType *string) {
+	o.ClusterLinkType = clusterLinkType
+}
+
+// WithClusterLinkUUID adds the clusterLinkUUID to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) WithClusterLinkUUID(clusterLinkUUID *string) *DeregisterLinkedClusterParams {
+	o.SetClusterLinkUUID(clusterLinkUUID)
+	return o
+}
+
+// SetClusterLinkUUID adds the clusterLinkUuid to the deregister linked cluster params
+func (o *DeregisterLinkedClusterParams) SetClusterLinkUUID(clusterLinkUUID *string) {
+	o.ClusterLinkUUID = clusterLinkUUID
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -204,50 +262,113 @@ func (o *DeregisterLinkedClusterParams) WriteToRequest(r runtime.ClientRequest, 
 	}
 	var res []error
 
-	// path param cluster_id
-	if err := r.SetPathParam("cluster_id", o.ClusterID); err != nil {
-		return err
-	}
+	if o.ClusterLinkDescription != nil {
 
-	// path param location.organization_id
-	if err := r.SetPathParam("location.organization_id", o.LocationOrganizationID); err != nil {
-		return err
-	}
+		// query param cluster_link.description
+		var qrClusterLinkDescription string
 
-	// path param location.project_id
-	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
-		return err
-	}
-
-	if o.LocationRegionProvider != nil {
-
-		// query param location.region.provider
-		var qrLocationRegionProvider string
-
-		if o.LocationRegionProvider != nil {
-			qrLocationRegionProvider = *o.LocationRegionProvider
+		if o.ClusterLinkDescription != nil {
+			qrClusterLinkDescription = *o.ClusterLinkDescription
 		}
-		qLocationRegionProvider := qrLocationRegionProvider
-		if qLocationRegionProvider != "" {
+		qClusterLinkDescription := qrClusterLinkDescription
+		if qClusterLinkDescription != "" {
 
-			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
+			if err := r.SetQueryParam("cluster_link.description", qClusterLinkDescription); err != nil {
 				return err
 			}
 		}
 	}
 
-	if o.LocationRegionRegion != nil {
+	if o.ClusterLinkID != nil {
 
-		// query param location.region.region
-		var qrLocationRegionRegion string
+		// query param cluster_link.id
+		var qrClusterLinkID string
 
-		if o.LocationRegionRegion != nil {
-			qrLocationRegionRegion = *o.LocationRegionRegion
+		if o.ClusterLinkID != nil {
+			qrClusterLinkID = *o.ClusterLinkID
 		}
-		qLocationRegionRegion := qrLocationRegionRegion
-		if qLocationRegionRegion != "" {
+		qClusterLinkID := qrClusterLinkID
+		if qClusterLinkID != "" {
 
-			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
+			if err := r.SetQueryParam("cluster_link.id", qClusterLinkID); err != nil {
+				return err
+			}
+		}
+	}
+
+	// path param cluster_link.location.organization_id
+	if err := r.SetPathParam("cluster_link.location.organization_id", o.ClusterLinkLocationOrganizationID); err != nil {
+		return err
+	}
+
+	// path param cluster_link.location.project_id
+	if err := r.SetPathParam("cluster_link.location.project_id", o.ClusterLinkLocationProjectID); err != nil {
+		return err
+	}
+
+	if o.ClusterLinkLocationRegionProvider != nil {
+
+		// query param cluster_link.location.region.provider
+		var qrClusterLinkLocationRegionProvider string
+
+		if o.ClusterLinkLocationRegionProvider != nil {
+			qrClusterLinkLocationRegionProvider = *o.ClusterLinkLocationRegionProvider
+		}
+		qClusterLinkLocationRegionProvider := qrClusterLinkLocationRegionProvider
+		if qClusterLinkLocationRegionProvider != "" {
+
+			if err := r.SetQueryParam("cluster_link.location.region.provider", qClusterLinkLocationRegionProvider); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ClusterLinkLocationRegionRegion != nil {
+
+		// query param cluster_link.location.region.region
+		var qrClusterLinkLocationRegionRegion string
+
+		if o.ClusterLinkLocationRegionRegion != nil {
+			qrClusterLinkLocationRegionRegion = *o.ClusterLinkLocationRegionRegion
+		}
+		qClusterLinkLocationRegionRegion := qrClusterLinkLocationRegionRegion
+		if qClusterLinkLocationRegionRegion != "" {
+
+			if err := r.SetQueryParam("cluster_link.location.region.region", qClusterLinkLocationRegionRegion); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ClusterLinkType != nil {
+
+		// query param cluster_link.type
+		var qrClusterLinkType string
+
+		if o.ClusterLinkType != nil {
+			qrClusterLinkType = *o.ClusterLinkType
+		}
+		qClusterLinkType := qrClusterLinkType
+		if qClusterLinkType != "" {
+
+			if err := r.SetQueryParam("cluster_link.type", qClusterLinkType); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ClusterLinkUUID != nil {
+
+		// query param cluster_link.uuid
+		var qrClusterLinkUUID string
+
+		if o.ClusterLinkUUID != nil {
+			qrClusterLinkUUID = *o.ClusterLinkUUID
+		}
+		qClusterLinkUUID := qrClusterLinkUUID
+		if qClusterLinkUUID != "" {
+
+			if err := r.SetQueryParam("cluster_link.uuid", qClusterLinkUUID); err != nil {
 				return err
 			}
 		}

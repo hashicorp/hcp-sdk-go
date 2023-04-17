@@ -98,20 +98,9 @@ type ListSnapshotsParams struct {
 
 	/* ResourceID.
 
-	     id is the ID of the resource. This may be a slug ID or a UUID depending on
-	the resource, and as such has no guarantee that it is globally unique. If a
-	globally unique identifier for the resource is required, refer to
-	internal_id.
+	   id is the identifier for this resource.
 	*/
 	ResourceID *string
-
-	/* ResourceInternalID.
-
-	     internal_id is a globally unique identifier for the resource. In the case
-	that a resource has a user specifiable identifier, the internal_id will
-	differ.
-	*/
-	ResourceInternalID *string
 
 	/* ResourceLocationOrganizationID.
 
@@ -148,7 +137,7 @@ type ListSnapshotsParams struct {
 
 	/* ResourceUUID.
 
-	   uuid is being deprecated in favor of the id field.
+	   uuid is the unique UUID for this resource.
 	*/
 	ResourceUUID *string
 
@@ -258,17 +247,6 @@ func (o *ListSnapshotsParams) WithResourceID(resourceID *string) *ListSnapshotsP
 // SetResourceID adds the resourceId to the list snapshots params
 func (o *ListSnapshotsParams) SetResourceID(resourceID *string) {
 	o.ResourceID = resourceID
-}
-
-// WithResourceInternalID adds the resourceInternalID to the list snapshots params
-func (o *ListSnapshotsParams) WithResourceInternalID(resourceInternalID *string) *ListSnapshotsParams {
-	o.SetResourceInternalID(resourceInternalID)
-	return o
-}
-
-// SetResourceInternalID adds the resourceInternalId to the list snapshots params
-func (o *ListSnapshotsParams) SetResourceInternalID(resourceInternalID *string) {
-	o.ResourceInternalID = resourceInternalID
 }
 
 // WithResourceLocationOrganizationID adds the resourceLocationOrganizationID to the list snapshots params
@@ -425,23 +403,6 @@ func (o *ListSnapshotsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qResourceID != "" {
 
 			if err := r.SetQueryParam("resource.id", qResourceID); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.ResourceInternalID != nil {
-
-		// query param resource.internal_id
-		var qrResourceInternalID string
-
-		if o.ResourceInternalID != nil {
-			qrResourceInternalID = *o.ResourceInternalID
-		}
-		qResourceInternalID := qrResourceInternalID
-		if qResourceInternalID != "" {
-
-			if err := r.SetQueryParam("resource.internal_id", qResourceInternalID); err != nil {
 				return err
 			}
 		}

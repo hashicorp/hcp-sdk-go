@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20201125RecreateFromSnapshotRequest hashicorp cloud vault 20201125 recreate from snapshot request
@@ -22,7 +23,7 @@ type HashicorpCloudVault20201125RecreateFromSnapshotRequest struct {
 	ClusterID string `json:"cluster_id,omitempty"`
 
 	// location
-	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 recreate from snapshot request

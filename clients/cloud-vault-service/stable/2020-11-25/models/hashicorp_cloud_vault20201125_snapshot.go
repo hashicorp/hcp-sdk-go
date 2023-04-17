@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20201125Snapshot Snapshot is our representation needed to back-up a Vault cluster.
@@ -26,11 +27,8 @@ type HashicorpCloudVault20201125Snapshot struct {
 	// Format: date-time
 	FinishedAt strfmt.DateTime `json:"finished_at,omitempty"`
 
-	// if the snapshot is for a locked cluster
-	IsLocked bool `json:"is_locked,omitempty"`
-
 	// location is the location of the Snapshot.
-	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
 	// Name of the snapshot
 	Name string `json:"name,omitempty"`

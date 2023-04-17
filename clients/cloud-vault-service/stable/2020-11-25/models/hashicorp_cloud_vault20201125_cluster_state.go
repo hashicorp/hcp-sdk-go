@@ -34,13 +34,13 @@ import (
 // update.
 //   - RESTORING: RESTORING is the state the cluster is in while restoring from a snapshot.
 //   - DELETING: DELETING is the state the cluster is in while it is being de-provisioned.
+//   - DELETED: DELETED is the state the cluster is in when it has been de-provisioned. At
+//
+// this point, the cluster is eligible for garbage collection.
 //   - SEALING: SEALING is the state the cluster is in when it is about to get sealed.
 //   - SEALED: SEALED is the state the cluster is in while a cluster is sealed.
 //   - UNSEALING: UNSEALING is the state the cluster is in when it is about to get unsealed.
 //   - CLUSTER_SCALING: CLUSTER_SCALING is the state the cluster is in when it is under an up or down scaling operation to a new tier_size state.
-//   - LOCKING: LOCKING is the state the cluster is in when it is about to get locked.
-//   - LOCKED: LOCKED is the state the cluster is in while a cluster is locked.
-//   - UNLOCKING: UNLOCKING is the state the cluster is in when it is about to get unlocked.
 //
 // swagger:model hashicorp.cloud.vault_20201125.Cluster.State
 type HashicorpCloudVault20201125ClusterState string
@@ -80,6 +80,9 @@ const (
 	// HashicorpCloudVault20201125ClusterStateDELETING captures enum value "DELETING"
 	HashicorpCloudVault20201125ClusterStateDELETING HashicorpCloudVault20201125ClusterState = "DELETING"
 
+	// HashicorpCloudVault20201125ClusterStateDELETED captures enum value "DELETED"
+	HashicorpCloudVault20201125ClusterStateDELETED HashicorpCloudVault20201125ClusterState = "DELETED"
+
 	// HashicorpCloudVault20201125ClusterStateSEALING captures enum value "SEALING"
 	HashicorpCloudVault20201125ClusterStateSEALING HashicorpCloudVault20201125ClusterState = "SEALING"
 
@@ -91,15 +94,6 @@ const (
 
 	// HashicorpCloudVault20201125ClusterStateCLUSTERSCALING captures enum value "CLUSTER_SCALING"
 	HashicorpCloudVault20201125ClusterStateCLUSTERSCALING HashicorpCloudVault20201125ClusterState = "CLUSTER_SCALING"
-
-	// HashicorpCloudVault20201125ClusterStateLOCKING captures enum value "LOCKING"
-	HashicorpCloudVault20201125ClusterStateLOCKING HashicorpCloudVault20201125ClusterState = "LOCKING"
-
-	// HashicorpCloudVault20201125ClusterStateLOCKED captures enum value "LOCKED"
-	HashicorpCloudVault20201125ClusterStateLOCKED HashicorpCloudVault20201125ClusterState = "LOCKED"
-
-	// HashicorpCloudVault20201125ClusterStateUNLOCKING captures enum value "UNLOCKING"
-	HashicorpCloudVault20201125ClusterStateUNLOCKING HashicorpCloudVault20201125ClusterState = "UNLOCKING"
 )
 
 // for schema
@@ -107,7 +101,7 @@ var hashicorpCloudVault20201125ClusterStateEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVault20201125ClusterState
-	if err := json.Unmarshal([]byte(`["CLUSTER_STATE_INVALID","PENDING","CREATING","RUNNING","FAILED","UPDATING","RESTORING","DELETING","SEALING","SEALED","UNSEALING","CLUSTER_SCALING","LOCKING","LOCKED","UNLOCKING"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["CLUSTER_STATE_INVALID","PENDING","CREATING","RUNNING","FAILED","UPDATING","RESTORING","DELETING","DELETED","SEALING","SEALED","UNSEALING","CLUSTER_SCALING"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

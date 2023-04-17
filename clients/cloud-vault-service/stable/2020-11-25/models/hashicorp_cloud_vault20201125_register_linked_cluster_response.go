@@ -23,9 +23,6 @@ type HashicorpCloudVault20201125RegisterLinkedClusterResponse struct {
 	// client secret
 	ClientSecret string `json:"client_secret,omitempty"`
 
-	// cluster id
-	ClusterID string `json:"cluster_id,omitempty"`
-
 	// resource id
 	ResourceID string `json:"resource_id,omitempty"`
 }

@@ -53,7 +53,7 @@ DeregisterLinkedClusterOK describes a response with status code 200, with defaul
 A successful response.
 */
 type DeregisterLinkedClusterOK struct {
-	Payload *models.HashicorpCloudVault20201125DeregisterLinkedClusterResponse
+	Payload models.HashicorpCloudVault20201125DeregisterLinkedClusterResponse
 }
 
 // IsSuccess returns true when this deregister linked cluster o k response has a 2xx status code
@@ -82,23 +82,21 @@ func (o *DeregisterLinkedClusterOK) IsCode(code int) bool {
 }
 
 func (o *DeregisterLinkedClusterOK) Error() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/deregister/{cluster_id}][%d] deregisterLinkedClusterOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{cluster_link.location.organization_id}/projects/{cluster_link.location.project_id}/link/deregister][%d] deregisterLinkedClusterOK  %+v", 200, o.Payload)
 }
 
 func (o *DeregisterLinkedClusterOK) String() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/deregister/{cluster_id}][%d] deregisterLinkedClusterOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{cluster_link.location.organization_id}/projects/{cluster_link.location.project_id}/link/deregister][%d] deregisterLinkedClusterOK  %+v", 200, o.Payload)
 }
 
-func (o *DeregisterLinkedClusterOK) GetPayload() *models.HashicorpCloudVault20201125DeregisterLinkedClusterResponse {
+func (o *DeregisterLinkedClusterOK) GetPayload() models.HashicorpCloudVault20201125DeregisterLinkedClusterResponse {
 	return o.Payload
 }
 
 func (o *DeregisterLinkedClusterOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVault20201125DeregisterLinkedClusterResponse)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -154,11 +152,11 @@ func (o *DeregisterLinkedClusterDefault) IsCode(code int) bool {
 }
 
 func (o *DeregisterLinkedClusterDefault) Error() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/deregister/{cluster_id}][%d] DeregisterLinkedCluster default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{cluster_link.location.organization_id}/projects/{cluster_link.location.project_id}/link/deregister][%d] DeregisterLinkedCluster default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *DeregisterLinkedClusterDefault) String() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/deregister/{cluster_id}][%d] DeregisterLinkedCluster default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{cluster_link.location.organization_id}/projects/{cluster_link.location.project_id}/link/deregister][%d] DeregisterLinkedCluster default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *DeregisterLinkedClusterDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
