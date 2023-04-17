@@ -40,6 +40,8 @@ func (s *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 	// If session expiry or the AccessTokenExpiry has passed, then reauthenticate with browser login and reassign token.
 	if readErr != nil || cache.SessionExpiry.Before(time.Now()) || cache.AccessTokenExpiry.Before(time.Now()) {
 
+		// This is a configuration option set by WithoutBrowserLogin to provide control over when or if the browser is opened
+		// In the case of no valid current login information is found on the system via ClientID:ClientSecret pairing or a previous valid browser login
 		if s.NoBrowserLogin {
 			return nil, ErrorNoLocalCredsFound
 		}

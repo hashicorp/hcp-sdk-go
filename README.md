@@ -38,6 +38,8 @@ User session is ideal for getting started or one-off usage. It also works for lo
 
 To obtain user credentials, the client credential environment variables `HCP_CLIENT_ID` and `HCP_CLIENT_SECRET` must be unset. When no client credentials are detected, the HCP Go client will prompt the user with a browser login window. Once authenticated, the user session stays refreshed without intervention until it expires after 24 hours.
 
+If you have a use-case with the SDK to leverage the browser login as a feature but want to control if the browser is opened, or even to understand if the system already has a valid token present. You can pass in the option func of `WithoutBrowserLogin()` to your `NewHCPConfig()`. This will use either use the provided `ClientID`:`ClientSecret` combo or a valid token that has been previously written to the system. If neither option exists then `auth.ErrorNoLocalCredsFound` is returned to indicate that the user is not yet logged in.
+
 ### User Profile
 
 An HCP Organization ID and Project ID are required to call most HCP APIs. They can be set to the environment variables `HCP_ORGANIZATION_ID` and `HCP_PROJECT_ID`, as in the example below. The HCP Go SDK will read them from the environment and save them in its state as the user's Profile. The Profile Project and Organization IDs will be applied as default values to any request missing them.
