@@ -96,7 +96,7 @@ type hcpConfig struct {
 	// profile is the user's organization id and project id
 	profile *profile.UserProfile
 
-	// noBrowserLogin is an option to not automatically open browser login in no valid auth method is found.
+	// noBrowserLogin is an option to prevent automatic browser login when no local credentials are found.
 	noBrowserLogin bool
 }
 
