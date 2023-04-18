@@ -5,7 +5,6 @@ package config
 
 import (
 	"crypto/tls"
-	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -16,11 +15,6 @@ import (
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
-)
-
-var (
-	// ErrorNoValidAuthFound is returned if no local auth methods were found and the invoker created the config with the option WithoutBrowserLogin
-	ErrorNoValidAuthFound = errors.New("there were no valid auth methods found")
 )
 
 const (
