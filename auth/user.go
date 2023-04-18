@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	// ErrorNoLocalCredsFound is returned if no local auth methods were found and the invoker created the config with the option WithoutBrowserLogin
+	// ErrorNoLocalCredsFound is returned if no client or user credentials were found and the invoker created the config with the option WithoutBrowserLogin
 	ErrorNoLocalCredsFound = errors.New("there were no credentials found present on the machine")
 )
 
