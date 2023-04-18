@@ -41,7 +41,7 @@ func (s *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 	if readErr != nil || cache.SessionExpiry.Before(time.Now()) || cache.AccessTokenExpiry.Before(time.Now()) {
 
 		// This is a configuration option set by WithoutBrowserLogin to provide control over when or if the browser is opened
-		// In the case of no valid current login information is found on the system via ClientID:ClientSecret pairing or a previous valid browser login
+		// When the flag is true and no valid credentials are found on the system via ClientID:ClientSecret pairing or a previous unexpired browser login, the client returns an error instead of automatically opening a browser
 		if s.NoBrowserLogin {
 			return nil, ErrorNoLocalCredsFound
 		}
