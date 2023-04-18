@@ -5,6 +5,7 @@ package auth
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"time"
@@ -12,9 +13,15 @@ import (
 	"golang.org/x/oauth2"
 )
 
+var (
+	// ErrorNoLocalCredsFound is returned if no client or user credentials were found and the invoker created the config with the option WithoutBrowserLogin
+	ErrorNoLocalCredsFound = errors.New("there were no credentials found present on the machine")
+)
+
 // UserSession implements the auth package's Session interface
 type UserSession struct {
-	browser Browser
+	browser        Browser
+	NoBrowserLogin bool
 }
 
 // GetToken returns an access token obtained from either an existing session or new browser login.
@@ -32,6 +39,12 @@ func (s *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 	// Check the expiry of the retrieved token.
 	// If session expiry or the AccessTokenExpiry has passed, then reauthenticate with browser login and reassign token.
 	if readErr != nil || cache.SessionExpiry.Before(time.Now()) || cache.AccessTokenExpiry.Before(time.Now()) {
+
+		// This is a configuration option set by WithoutBrowserLogin to provide control over when or if the browser is opened
+		// When the flag is true and no valid credentials are found on the system via ClientID:ClientSecret pairing or a previous unexpired browser login, the client returns an error instead of automatically opening a browser
+		if s.NoBrowserLogin {
+			return nil, ErrorNoLocalCredsFound
+		}
 
 		// Login with browser.
 		log.Print("No credentials found, proceeding with browser login.")

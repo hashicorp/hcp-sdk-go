@@ -96,6 +96,12 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		}
 	}
 
+	if config.noBrowserLogin {
+		config.session = &auth.UserSession{
+			NoBrowserLogin: true,
+		}
+	}
+
 	// Set up a token context with the custom auth TLS config
 	tokenTransport := cleanhttp.DefaultPooledTransport()
 	tokenTransport.TLSClientConfig = config.authTLSConfig

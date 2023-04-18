@@ -95,6 +95,9 @@ type hcpConfig struct {
 
 	// profile is the user's organization id and project id
 	profile *profile.UserProfile
+
+	// noBrowserLogin is an option to prevent automatic browser login when no local credentials are found.
+	noBrowserLogin bool
 }
 
 func (c *hcpConfig) Profile() *profile.UserProfile {

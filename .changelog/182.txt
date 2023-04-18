@@ -1,0 +1,3 @@
+```release-note:improvement
+Added option to NewHCPConfig to fail rather than auto login with web browser
+```
