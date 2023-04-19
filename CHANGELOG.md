@@ -1,3 +1,12 @@
+## v0.42.0 (April 19, 2023)
+
+IMPROVEMENTS:
+
+* Added option to NewHCPConfig to fail rather than auto login with web browser [[GH-182](https://github.com/hashicorp/hcp-sdk-go/pull/182)]
+
+BUG FIXES:
+
+* Fixed issue of not regenerating auth token when AccessToken expires [[GH-181](https://github.com/hashicorp/hcp-sdk-go/pull/181)]
 ## v0.41.0 (April 05, 2023)
 
 ## v0.40.0 (March 29, 2023)
