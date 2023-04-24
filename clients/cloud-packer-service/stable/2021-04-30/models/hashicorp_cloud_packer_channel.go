@@ -42,6 +42,9 @@ type HashicorpCloudPackerChannel struct {
 	// Deprecated: look at the Channel.iteration instead.
 	Pointer *HashicorpCloudPackerChannelIterationPointer `json:"pointer,omitempty"`
 
+	// Whether this channel's access is restricted to users of the organization with permission to create and manage resources.
+	Restricted bool `json:"restricted,omitempty"`
+
 	// Human-readable name for the channel.
 	Slug string `json:"slug,omitempty"`
 

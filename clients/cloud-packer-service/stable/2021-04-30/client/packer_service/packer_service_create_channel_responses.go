@@ -201,6 +201,9 @@ type PackerServiceCreateChannelBody struct {
 	// location
 	Location *PackerServiceCreateChannelParamsBodyLocation `json:"location,omitempty"`
 
+	// When set, will set the channel access in HCP Packer registry. The channel is unrestricted by default;
+	Restriction *models.HashicorpCloudPackerCreateChannelRequestRestriction `json:"restriction,omitempty"`
+
 	// Human-readable name for the channel.
 	Slug string `json:"slug,omitempty"`
 }
@@ -210,6 +213,10 @@ func (o *PackerServiceCreateChannelBody) Validate(formats strfmt.Registry) error
 	var res []error
 
 	if err := o.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateRestriction(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -238,11 +245,34 @@ func (o *PackerServiceCreateChannelBody) validateLocation(formats strfmt.Registr
 	return nil
 }
 
+func (o *PackerServiceCreateChannelBody) validateRestriction(formats strfmt.Registry) error {
+	if swag.IsZero(o.Restriction) { // not required
+		return nil
+	}
+
+	if o.Restriction != nil {
+		if err := o.Restriction.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "restriction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "restriction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this packer service create channel body based on the context it is used
 func (o *PackerServiceCreateChannelBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := o.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRestriction(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -260,6 +290,22 @@ func (o *PackerServiceCreateChannelBody) contextValidateLocation(ctx context.Con
 				return ve.ValidateName("body" + "." + "location")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *PackerServiceCreateChannelBody) contextValidateRestriction(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Restriction != nil {
+		if err := o.Restriction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "restriction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "restriction")
 			}
 			return err
 		}
