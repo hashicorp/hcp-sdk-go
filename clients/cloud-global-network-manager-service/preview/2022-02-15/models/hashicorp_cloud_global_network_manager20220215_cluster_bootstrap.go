@@ -21,7 +21,7 @@ type HashicorpCloudGlobalNetworkManager20220215ClusterBootstrap struct {
 	// bootstrap_expect is the number of consul servers that is expected to join a quorum
 	BootstrapExpect int32 `json:"bootstrap_expect,omitempty"`
 
-	// consul_config is the embedded consul configuration.
+	// consul_config is the embedded consul configuration. It will always return valid JSON.
 	ConsulConfig string `json:"consul_config,omitempty"`
 
 	// gossip_key is the consul gossip key for bootstrapping the configuration. Should we move this into a Secrets message?

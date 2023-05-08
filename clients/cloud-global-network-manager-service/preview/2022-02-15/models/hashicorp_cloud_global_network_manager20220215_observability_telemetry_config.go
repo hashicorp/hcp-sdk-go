@@ -13,10 +13,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudGlobalNetworkManager20220215TelemetryConfig hashicorp cloud global network manager 20220215 telemetry config
+// HashicorpCloudGlobalNetworkManager20220215ObservabilityTelemetryConfig hashicorp cloud global network manager 20220215 observability telemetry config
 //
-// swagger:model hashicorp.cloud.global_network_manager_20220215.TelemetryConfig
-type HashicorpCloudGlobalNetworkManager20220215TelemetryConfig struct {
+// swagger:model hashicorp.cloud.global_network_manager_20220215.observability.TelemetryConfig
+type HashicorpCloudGlobalNetworkManager20220215ObservabilityTelemetryConfig struct {
 
 	// Endpoint is the URL to use when exporting telemetry via OTLP
 	Endpoint string `json:"endpoint,omitempty"`
@@ -25,11 +25,11 @@ type HashicorpCloudGlobalNetworkManager20220215TelemetryConfig struct {
 	Labels map[string]string `json:"labels,omitempty"`
 
 	// Metrics is the configuration specific to metric data
-	Metrics *HashicorpCloudGlobalNetworkManager20220215TelemetryMetricsConfig `json:"metrics,omitempty"`
+	Metrics *HashicorpCloudGlobalNetworkManager20220215ObservabilityTelemetryMetricsConfig `json:"metrics,omitempty"`
 }
 
-// Validate validates this hashicorp cloud global network manager 20220215 telemetry config
-func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud global network manager 20220215 observability telemetry config
+func (m *HashicorpCloudGlobalNetworkManager20220215ObservabilityTelemetryConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateMetrics(formats); err != nil {
@@ -42,7 +42,7 @@ func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) Validate(for
 	return nil
 }
 
-func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) validateMetrics(formats strfmt.Registry) error {
+func (m *HashicorpCloudGlobalNetworkManager20220215ObservabilityTelemetryConfig) validateMetrics(formats strfmt.Registry) error {
 	if swag.IsZero(m.Metrics) { // not required
 		return nil
 	}
@@ -61,8 +61,8 @@ func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) validateMetr
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud global network manager 20220215 telemetry config based on the context it is used
-func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud global network manager 20220215 observability telemetry config based on the context it is used
+func (m *HashicorpCloudGlobalNetworkManager20220215ObservabilityTelemetryConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateMetrics(ctx, formats); err != nil {
@@ -75,7 +75,7 @@ func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) ContextValid
 	return nil
 }
 
-func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) contextValidateMetrics(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudGlobalNetworkManager20220215ObservabilityTelemetryConfig) contextValidateMetrics(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Metrics != nil {
 		if err := m.Metrics.ContextValidate(ctx, formats); err != nil {
@@ -92,7 +92,7 @@ func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) contextValid
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudGlobalNetworkManager20220215ObservabilityTelemetryConfig) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -100,8 +100,8 @@ func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) MarshalBinar
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudGlobalNetworkManager20220215TelemetryConfig) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudGlobalNetworkManager20220215TelemetryConfig
+func (m *HashicorpCloudGlobalNetworkManager20220215ObservabilityTelemetryConfig) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudGlobalNetworkManager20220215ObservabilityTelemetryConfig
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

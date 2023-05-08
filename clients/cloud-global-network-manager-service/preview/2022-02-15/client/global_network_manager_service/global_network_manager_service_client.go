@@ -34,8 +34,6 @@ type ClientService interface {
 
 	AgentPushServerState(params *AgentPushServerStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentPushServerStateOK, error)
 
-	AgentTelemetryConfig(params *AgentTelemetryConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentTelemetryConfigOK, error)
-
 	CreateCluster(params *CreateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterOK, error)
 
 	CreatePeeringConnections(params *CreatePeeringConnectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePeeringConnectionsOK, error)
@@ -182,44 +180,6 @@ func (a *Client) AgentPushServerState(params *AgentPushServerStateParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*AgentPushServerStateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-AgentTelemetryConfig agent telemetry config API
-*/
-func (a *Client) AgentTelemetryConfig(params *AgentTelemetryConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentTelemetryConfigOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewAgentTelemetryConfigParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "AgentTelemetryConfig",
-		Method:             "GET",
-		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &AgentTelemetryConfigReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*AgentTelemetryConfigOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*AgentTelemetryConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
