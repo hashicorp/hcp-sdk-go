@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // HashicorpCloudBoundary20211221MaintenanceWindow MaintenanceWindow is the time window in which upgrades will occur
@@ -22,13 +21,11 @@ type HashicorpCloudBoundary20211221MaintenanceWindow struct {
 	// day_of_week is the one of 7 days in a week
 	DayOfWeek *HashicorpCloudBoundary20211221MaintenanceWindowDayOfWeek `json:"day_of_week,omitempty"`
 
-	// end is the last hour of the window
-	// Format: date-time
-	End strfmt.DateTime `json:"end,omitempty"`
+	// end is the last hour of the window in UTC (exclusive)
+	End int32 `json:"end,omitempty"`
 
-	// start is the start hour of the window
-	// Format: date-time
-	Start strfmt.DateTime `json:"start,omitempty"`
+	// start is the start hour of the window in UTC
+	Start int32 `json:"start,omitempty"`
 }
 
 // Validate validates this hashicorp cloud boundary 20211221 maintenance window
@@ -36,14 +33,6 @@ func (m *HashicorpCloudBoundary20211221MaintenanceWindow) Validate(formats strfm
 	var res []error
 
 	if err := m.validateDayOfWeek(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEnd(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateStart(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -67,30 +56,6 @@ func (m *HashicorpCloudBoundary20211221MaintenanceWindow) validateDayOfWeek(form
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudBoundary20211221MaintenanceWindow) validateEnd(formats strfmt.Registry) error {
-	if swag.IsZero(m.End) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("end", "body", "date-time", m.End.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudBoundary20211221MaintenanceWindow) validateStart(formats strfmt.Registry) error {
-	if swag.IsZero(m.Start) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("start", "body", "date-time", m.Start.String(), formats); err != nil {
-		return err
 	}
 
 	return nil
