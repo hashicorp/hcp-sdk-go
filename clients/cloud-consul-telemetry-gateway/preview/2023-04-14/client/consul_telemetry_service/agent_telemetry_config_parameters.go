@@ -61,6 +61,9 @@ AgentTelemetryConfigParams contains all the parameters to send to the API endpoi
 */
 type AgentTelemetryConfigParams struct {
 
+	// Body.
+	Body AgentTelemetryConfigBody
+
 	// ClusterID.
 	ClusterID string
 
@@ -75,18 +78,6 @@ type AgentTelemetryConfigParams struct {
 	   project_id is the projects id.
 	*/
 	LocationProjectID string
-
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure")
-	*/
-	LocationRegionProvider *string
-
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1")
-	*/
-	LocationRegionRegion *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -141,6 +132,17 @@ func (o *AgentTelemetryConfigParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the agent telemetry config params
+func (o *AgentTelemetryConfigParams) WithBody(body AgentTelemetryConfigBody) *AgentTelemetryConfigParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the agent telemetry config params
+func (o *AgentTelemetryConfigParams) SetBody(body AgentTelemetryConfigBody) {
+	o.Body = body
+}
+
 // WithClusterID adds the clusterID to the agent telemetry config params
 func (o *AgentTelemetryConfigParams) WithClusterID(clusterID string) *AgentTelemetryConfigParams {
 	o.SetClusterID(clusterID)
@@ -174,28 +176,6 @@ func (o *AgentTelemetryConfigParams) SetLocationProjectID(locationProjectID stri
 	o.LocationProjectID = locationProjectID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the agent telemetry config params
-func (o *AgentTelemetryConfigParams) WithLocationRegionProvider(locationRegionProvider *string) *AgentTelemetryConfigParams {
-	o.SetLocationRegionProvider(locationRegionProvider)
-	return o
-}
-
-// SetLocationRegionProvider adds the locationRegionProvider to the agent telemetry config params
-func (o *AgentTelemetryConfigParams) SetLocationRegionProvider(locationRegionProvider *string) {
-	o.LocationRegionProvider = locationRegionProvider
-}
-
-// WithLocationRegionRegion adds the locationRegionRegion to the agent telemetry config params
-func (o *AgentTelemetryConfigParams) WithLocationRegionRegion(locationRegionRegion *string) *AgentTelemetryConfigParams {
-	o.SetLocationRegionRegion(locationRegionRegion)
-	return o
-}
-
-// SetLocationRegionRegion adds the locationRegionRegion to the agent telemetry config params
-func (o *AgentTelemetryConfigParams) SetLocationRegionRegion(locationRegionRegion *string) {
-	o.LocationRegionRegion = locationRegionRegion
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *AgentTelemetryConfigParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -203,6 +183,9 @@ func (o *AgentTelemetryConfigParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
+	}
 
 	// path param cluster_id
 	if err := r.SetPathParam("cluster_id", o.ClusterID); err != nil {
@@ -217,40 +200,6 @@ func (o *AgentTelemetryConfigParams) WriteToRequest(r runtime.ClientRequest, reg
 	// path param location.project_id
 	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
 		return err
-	}
-
-	if o.LocationRegionProvider != nil {
-
-		// query param location.region.provider
-		var qrLocationRegionProvider string
-
-		if o.LocationRegionProvider != nil {
-			qrLocationRegionProvider = *o.LocationRegionProvider
-		}
-		qLocationRegionProvider := qrLocationRegionProvider
-		if qLocationRegionProvider != "" {
-
-			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.LocationRegionRegion != nil {
-
-		// query param location.region.region
-		var qrLocationRegionRegion string
-
-		if o.LocationRegionRegion != nil {
-			qrLocationRegionRegion = *o.LocationRegionRegion
-		}
-		qLocationRegionRegion := qrLocationRegionRegion
-		if qLocationRegionRegion != "" {
-
-			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
-				return err
-			}
-		}
 	}
 
 	if len(res) > 0 {

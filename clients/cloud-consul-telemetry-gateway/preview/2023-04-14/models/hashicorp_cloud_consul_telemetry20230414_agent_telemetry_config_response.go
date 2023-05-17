@@ -13,17 +13,17 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse hashicorp cloud consul telmetry 20230414 agent telemetry config response
+// HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse hashicorp cloud consul telemetry 20230414 agent telemetry config response
 //
-// swagger:model hashicorp.cloud.consul_telmetry_20230414.AgentTelemetryConfigResponse
-type HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse struct {
+// swagger:model hashicorp.cloud.consul_telemetry_20230414.AgentTelemetryConfigResponse
+type HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse struct {
 
 	// telemetry config
-	TelemetryConfig *HashicorpCloudConsulTelmetry20230414TelemetryConfig `json:"telemetry_config,omitempty"`
+	TelemetryConfig *HashicorpCloudConsulTelemetry20230414TelemetryConfig `json:"telemetry_config,omitempty"`
 }
 
-// Validate validates this hashicorp cloud consul telmetry 20230414 agent telemetry config response
-func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud consul telemetry 20230414 agent telemetry config response
+func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateTelemetryConfig(formats); err != nil {
@@ -36,7 +36,7 @@ func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) Valid
 	return nil
 }
 
-func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) validateTelemetryConfig(formats strfmt.Registry) error {
+func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) validateTelemetryConfig(formats strfmt.Registry) error {
 	if swag.IsZero(m.TelemetryConfig) { // not required
 		return nil
 	}
@@ -55,8 +55,8 @@ func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) valid
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud consul telmetry 20230414 agent telemetry config response based on the context it is used
-func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud consul telemetry 20230414 agent telemetry config response based on the context it is used
+func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateTelemetryConfig(ctx, formats); err != nil {
@@ -69,7 +69,7 @@ func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) Conte
 	return nil
 }
 
-func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) contextValidateTelemetryConfig(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) contextValidateTelemetryConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TelemetryConfig != nil {
 		if err := m.TelemetryConfig.ContextValidate(ctx, formats); err != nil {
@@ -86,7 +86,7 @@ func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) conte
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -94,8 +94,8 @@ func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) Marsh
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse
+func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

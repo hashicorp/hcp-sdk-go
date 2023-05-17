@@ -6,11 +6,14 @@ package consul_telemetry_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-telemetry-gateway/preview/2023-04-14/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -53,7 +56,7 @@ AgentTelemetryConfigOK describes a response with status code 200, with default h
 A successful response.
 */
 type AgentTelemetryConfigOK struct {
-	Payload *models.HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse
+	Payload *models.HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse
 }
 
 // IsSuccess returns true when this agent telemetry config o k response has a 2xx status code
@@ -82,20 +85,20 @@ func (o *AgentTelemetryConfigOK) IsCode(code int) bool {
 }
 
 func (o *AgentTelemetryConfigOK) Error() string {
-	return fmt.Sprintf("[GET /ctgw/2023-04-14/observability/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config][%d] agentTelemetryConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /ctgw/2023-04-14/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config][%d] agentTelemetryConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *AgentTelemetryConfigOK) String() string {
-	return fmt.Sprintf("[GET /ctgw/2023-04-14/observability/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config][%d] agentTelemetryConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /ctgw/2023-04-14/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config][%d] agentTelemetryConfigOK  %+v", 200, o.Payload)
 }
 
-func (o *AgentTelemetryConfigOK) GetPayload() *models.HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse {
+func (o *AgentTelemetryConfigOK) GetPayload() *models.HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse {
 	return o.Payload
 }
 
 func (o *AgentTelemetryConfigOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudConsulTelmetry20230414AgentTelemetryConfigResponse)
+	o.Payload = new(models.HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -154,11 +157,11 @@ func (o *AgentTelemetryConfigDefault) IsCode(code int) bool {
 }
 
 func (o *AgentTelemetryConfigDefault) Error() string {
-	return fmt.Sprintf("[GET /ctgw/2023-04-14/observability/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config][%d] AgentTelemetryConfig default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /ctgw/2023-04-14/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config][%d] AgentTelemetryConfig default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *AgentTelemetryConfigDefault) String() string {
-	return fmt.Sprintf("[GET /ctgw/2023-04-14/observability/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config][%d] AgentTelemetryConfig default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /ctgw/2023-04-14/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config][%d] AgentTelemetryConfig default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *AgentTelemetryConfigDefault) GetPayload() *cloud.GoogleRPCStatus {
@@ -174,5 +177,188 @@ func (o *AgentTelemetryConfigDefault) readResponse(response runtime.ClientRespon
 		return err
 	}
 
+	return nil
+}
+
+/*
+AgentTelemetryConfigBody agent telemetry config body
+swagger:model AgentTelemetryConfigBody
+*/
+type AgentTelemetryConfigBody struct {
+
+	// location
+	Location *AgentTelemetryConfigParamsBodyLocation `json:"location,omitempty"`
+}
+
+// Validate validates this agent telemetry config body
+func (o *AgentTelemetryConfigBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AgentTelemetryConfigBody) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(o.Location) { // not required
+		return nil
+	}
+
+	if o.Location != nil {
+		if err := o.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this agent telemetry config body based on the context it is used
+func (o *AgentTelemetryConfigBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AgentTelemetryConfigBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Location != nil {
+		if err := o.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *AgentTelemetryConfigBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *AgentTelemetryConfigBody) UnmarshalBinary(b []byte) error {
+	var res AgentTelemetryConfigBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+AgentTelemetryConfigParamsBodyLocation Location represents a target for an operation in HCP.
+swagger:model AgentTelemetryConfigParamsBodyLocation
+*/
+type AgentTelemetryConfigParamsBodyLocation struct {
+
+	// region is the region that the resource is located in. It is
+	// optional if the object being referenced is a global object.
+	Region *cloud.HashicorpCloudLocationRegion `json:"region,omitempty"`
+}
+
+// Validate validates this agent telemetry config params body location
+func (o *AgentTelemetryConfigParamsBodyLocation) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateRegion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AgentTelemetryConfigParamsBodyLocation) validateRegion(formats strfmt.Registry) error {
+	if swag.IsZero(o.Region) { // not required
+		return nil
+	}
+
+	if o.Region != nil {
+		if err := o.Region.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this agent telemetry config params body location based on the context it is used
+func (o *AgentTelemetryConfigParamsBodyLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateRegion(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AgentTelemetryConfigParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Region != nil {
+		if err := o.Region.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *AgentTelemetryConfigParamsBodyLocation) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *AgentTelemetryConfigParamsBodyLocation) UnmarshalBinary(b []byte) error {
+	var res AgentTelemetryConfigParamsBodyLocation
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }
