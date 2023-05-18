@@ -28,6 +28,9 @@ type HashicorpCloudGlobalNetworkManager20220215Cluster struct {
 	// consul version of the cluster
 	ConsulVersion string `json:"consul_version,omitempty"`
 
+	// whether this is an existing self-managed cluster
+	ExistingCluster bool `json:"existing_cluster,omitempty"`
+
 	// whether this Consul cluster is managed by HCP
 	HcpManaged bool `json:"hcp_managed,omitempty"`
 
