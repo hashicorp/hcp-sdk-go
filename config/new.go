@@ -99,7 +99,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 	}
 
 	if config.suppressLogging {
-		log.SetOutput(ioutil.Discard)
+		log.SetOutput(io.Discard)
 	}
 
 	if config.noBrowserLogin {
