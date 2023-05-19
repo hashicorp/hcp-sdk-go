@@ -6,6 +6,8 @@ package config
 import (
 	"crypto/tls"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 
@@ -94,6 +96,10 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		if err := opt(config); err != nil {
 			return nil, fmt.Errorf("failed to apply configuration option: %w", err)
 		}
+	}
+
+	if config.suppressLogging {
+		log.SetOutput(ioutil.Discard)
 	}
 
 	if config.noBrowserLogin {
