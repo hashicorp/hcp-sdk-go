@@ -1,0 +1,4 @@
+
+```release-note:improvement
+Added option to NewHCPConfig to disable logging from the SDK
+```
