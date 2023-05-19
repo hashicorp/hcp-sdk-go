@@ -1,0 +1,3 @@
+```release-note:improvement
+Added env var option (HCP_AUTH_TLS) to either disable or set to insecure the auth call for mocking.
+```
