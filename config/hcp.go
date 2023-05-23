@@ -98,6 +98,9 @@ type hcpConfig struct {
 
 	// noBrowserLogin is an option to prevent automatic browser login when no local credentials are found.
 	noBrowserLogin bool
+
+	// suppressLogging is an option to prevent this SDK from printing anything
+	suppressLogging bool
 }
 
 func (c *hcpConfig) Profile() *profile.UserProfile {
