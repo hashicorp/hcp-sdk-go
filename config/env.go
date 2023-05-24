@@ -31,6 +31,8 @@ const (
 
 	envVarAPITLS = "HCP_API_TLS"
 
+	envVarAuthTLS = "HCP_AUTH_TLS"
+
 	envVarSCADAAddress = "HCP_SCADA_ADDRESS"
 
 	envVarSCADATLS = "HCP_SCADA_TLS"
@@ -115,9 +117,18 @@ func FromEnv() HCPConfigOption {
 		if apiTLSSetting, ok := os.LookupEnv(envVarAPITLS); ok {
 			apiTLSConfig, err := tlsConfigForSetting(apiTLSSetting)
 			if err != nil {
-				return fmt.Errorf("failed to configure TLS basd on environment variable %s: %w", envVarAPITLS, err)
+				return fmt.Errorf("failed to configure TLS based on environment variable %s: %w", envVarAPITLS, err)
 			}
 			config.apiTLSConfig = apiTLSConfig
+		}
+
+		// Read Auth TLS setting from environment
+		if authTLSSetting, ok := os.LookupEnv(envVarAuthTLS); ok {
+			authTLSConfig, err := tlsConfigForSetting(authTLSSetting)
+			if err != nil {
+				return fmt.Errorf("failed to configure TLS based on environment variable %s: %w", envVarAuthTLS, err)
+			}
+			config.authTLSConfig = authTLSConfig
 		}
 
 		// Read SCADA address from environment
@@ -129,7 +140,7 @@ func FromEnv() HCPConfigOption {
 		if scadaTLSSetting, ok := os.LookupEnv(envVarSCADATLS); ok {
 			scadaTLSConfig, err := tlsConfigForSetting(scadaTLSSetting)
 			if err != nil {
-				return fmt.Errorf("failed to configure TLS basd on environment variable %s: %w", envVarSCADATLS, err)
+				return fmt.Errorf("failed to configure TLS based on environment variable %s: %w", envVarSCADATLS, err)
 			}
 			config.scadaTLSConfig = scadaTLSConfig
 		}
