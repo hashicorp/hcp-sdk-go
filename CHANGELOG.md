@@ -1,3 +1,8 @@
+## v0.48.0 (May 24, 2023)
+
+IMPROVEMENTS:
+
+* Added env var option (HCP_AUTH_TLS) to either disable or set to insecure the auth call for mocking. [[GH-190](https://github.com/hashicorp/hcp-sdk-go/pull/190)]
 ## v0.47.0 (May 24, 2023)
 
 IMPROVEMENTS:
