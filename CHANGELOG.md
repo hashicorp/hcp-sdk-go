@@ -1,3 +1,8 @@
+## v0.47.0 (May 24, 2023)
+
+IMPROVEMENTS:
+
+* Added option to NewHCPConfig to disable logging from the SDK [[GH-192](https://github.com/hashicorp/hcp-sdk-go/pull/192)]
 ## v0.46.0 (May 17, 2023)
 
 ## v0.45.0 (May 10, 2023)
