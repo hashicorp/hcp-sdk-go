@@ -186,10 +186,9 @@ swagger:model PackerServiceCreateChannelBody
 */
 type PackerServiceCreateChannelBody struct {
 
-	// Fingerprint of the iteration. The fingerprint is set by Packer when you
-	// call `packer build`. It will most often correspond to a git commit sha,
-	// but can be manually overridden by setting the environment variable
-	// `HCP_PACKER_BUILD_FINGERPRINT`.
+	// Fingerprint of the iteration set by Packer when you call `packer build`.
+	// Refer to the Packer documentation for more information on how this value is set.
+	// The fingerprint can be used as an identifier for the iteration.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
 	// The human-readable version number assigned to this iteration.
