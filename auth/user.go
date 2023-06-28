@@ -39,8 +39,8 @@ func (s *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 
 	// Check the expiry of the retrieved token.
 	switch {
-	// If the file wasn't found, there is no refresh function, or the session is
-	// fully expired then reauthenticate with browser login and rewrite token.
+	// If the file wasn't found or the session is fully expired then
+	// reauthenticate with browser login and rewrite token.
 	case readErr != nil, cache.SessionExpiry.Before(time.Now()):
 
 		return s.doBrowserLogin(ctx, conf)
