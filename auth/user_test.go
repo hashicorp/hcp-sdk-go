@@ -63,10 +63,29 @@ func TestGetToken_BrowserFlow(t *testing.T) {
 			caseSetup: func() error {
 				now := time.Now()
 				cache := Cache{
-					AccessToken:       "ExpiredAccessToken",
+					// Cache read expects the access token to look JWT-like
+					AccessToken:       "Expired.Access.Token",
 					RefreshToken:      "ExpiredRefreshToken",
 					AccessTokenExpiry: now,
 					SessionExpiry:     time.Now().Add(time.Hour * -2),
+				}
+
+				err := Write(cache)
+				require.NoError(err)
+
+				return nil
+			},
+		},
+		{
+			name: "Error Refreshing Token",
+			caseSetup: func() error {
+				now := time.Now()
+				cache := Cache{
+					// Cache read expects the access token to look JWT-like
+					AccessToken:       "Expired.Access.Token",
+					RefreshToken:      "ExpiredRefreshToken",
+					AccessTokenExpiry: now,
+					SessionExpiry:     time.Now().Add(time.Hour),
 				}
 
 				err := Write(cache)
@@ -90,6 +109,9 @@ func TestGetToken_BrowserFlow(t *testing.T) {
 			// Run the test.
 			userSession := UserSession{}
 			userSession.browser = &mockBrowser{}
+			userSession.refreshTokenSourceFunc = func(ctx context.Context, config *oauth2.Config, token *oauth2.Token) oauth2.TokenSource {
+				return &mockRefreshTokenSource{err: true}
+			}
 
 			ctx := context.Background()
 			conf := oauth2.Config{}
@@ -99,8 +121,71 @@ func TestGetToken_BrowserFlow(t *testing.T) {
 			require.NotNil(tok)
 
 			// Make assertions about token retrieved.
-			assert.Equal("SomeNewAccessToken", tok.AccessToken)
-			assert.Equal("SomeNewRefreshToken", tok.RefreshToken)
+			assert.Equal("New.Access.Token", tok.AccessToken)
+			assert.Equal("NewRefreshToken", tok.RefreshToken)
+			assert.WithinDuration(time.Now().Add(time.Hour*1), tok.Expiry, 10*time.Second)
+
+			// Cleanup.
+			require.NoError(CacheDestroy(t))
+		})
+	}
+}
+
+func TestGetToken_RefreshFlow(t *testing.T) {
+	require := requirepkg.New(t)
+	assert := assertpkg.New(t)
+
+	testCases := []struct {
+		name      string
+		caseSetup func() error
+	}{
+		{
+			name: "Refresh Token",
+			caseSetup: func() error {
+				now := time.Now()
+				cache := Cache{
+					// Cache read expects the access token to look JWT-like
+					AccessToken:       "Expired.Access.Token",
+					RefreshToken:      "ActiveRefreshToken",
+					AccessTokenExpiry: now,
+					SessionExpiry:     time.Now().Add(time.Hour),
+				}
+
+				err := Write(cache)
+				require.NoError(err)
+
+				return nil
+			},
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.name, func(t *testing.T) {
+
+			_, _, err := CacheSetup(t)
+			require.NoError(err)
+
+			// Runs specific test case setup.
+			err = testCase.caseSetup()
+			require.NoError(err)
+
+			// Run the test.
+			userSession := UserSession{}
+			userSession.browser = &mockBrowser{}
+			userSession.refreshTokenSourceFunc = func(ctx context.Context, config *oauth2.Config, token *oauth2.Token) oauth2.TokenSource {
+				return &mockRefreshTokenSource{}
+			}
+
+			ctx := context.Background()
+			conf := oauth2.Config{}
+
+			tok, err := userSession.GetToken(ctx, &conf)
+			require.NoError(err)
+			require.NotNil(tok)
+
+			// Make assertions about token retrieved.
+			assert.Equal("Refreshed.Access.Token", tok.AccessToken)
+			assert.Equal("RefreshedRefreshToken", tok.RefreshToken)
 			assert.WithinDuration(time.Now().Add(time.Hour*1), tok.Expiry, 10*time.Second)
 
 			// Cleanup.
