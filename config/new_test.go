@@ -64,7 +64,7 @@ func TestNew_MockSession(t *testing.T) {
 	// Ensure the values have been set accordingly
 	tok, err := config.Token()
 	require.NoError(err)
-	require.Equal("SomeAccessToken", tok.AccessToken)
+	require.Equal("Some.Access.Token", tok.AccessToken)
 	require.Equal("SomeRefreshToken", tok.RefreshToken)
 }
 

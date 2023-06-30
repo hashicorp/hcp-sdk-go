@@ -1,0 +1,3 @@
+```release-note:improvement
+Use refresh tokens if the session is still valid
+```
