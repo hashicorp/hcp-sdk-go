@@ -1,3 +1,8 @@
+## v0.51.0 (July 05, 2023)
+
+IMPROVEMENTS:
+
+* Use refresh tokens if the session is still valid [[GH-196](https://github.com/hashicorp/hcp-sdk-go/pull/196)]
 ## v0.50.0 (June 14, 2023)
 
 ## v0.49.0 (June 07, 2023)
