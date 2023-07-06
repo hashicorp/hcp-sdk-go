@@ -28,6 +28,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	AddPlugin(params *AddPluginParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddPluginOK, error)
+
 	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error)
 
 	CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSnapshotOK, error)
@@ -35,6 +37,8 @@ type ClientService interface {
 	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error)
 
 	DeletePathsFilter(params *DeletePathsFilterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePathsFilterOK, error)
+
+	DeletePlugin(params *DeletePluginParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePluginOK, error)
 
 	DeleteSentinelPolicy(params *DeleteSentinelPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSentinelPolicyOK, error)
 
@@ -113,6 +117,44 @@ type ClientService interface {
 	UpgradeMajorVersion(params *UpgradeMajorVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpgradeMajorVersionOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+AddPlugin add plugin API
+*/
+func (a *Client) AddPlugin(params *AddPluginParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddPluginOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAddPluginParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "AddPlugin",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/add",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &AddPluginReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AddPluginOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*AddPluginDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -264,6 +306,44 @@ func (a *Client) DeletePathsFilter(params *DeletePathsFilterParams, authInfo run
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeletePathsFilterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeletePlugin delete plugin API
+*/
+func (a *Client) DeletePlugin(params *DeletePluginParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePluginOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeletePluginParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeletePlugin",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/delete",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeletePluginReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeletePluginOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeletePluginDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

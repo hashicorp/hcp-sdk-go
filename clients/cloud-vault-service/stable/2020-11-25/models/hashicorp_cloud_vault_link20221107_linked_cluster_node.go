@@ -11,16 +11,21 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudVault20201125LinkedClusterNode hashicorp cloud vault 20201125 linked cluster node
+// HashicorpCloudVaultLink20221107LinkedClusterNode hashicorp cloud vault link 20221107 linked cluster node
 //
-// swagger:model hashicorp.cloud.vault_20201125.LinkedClusterNode
-type HashicorpCloudVault20201125LinkedClusterNode struct {
+// swagger:model hashicorp.cloud.vault_link_20221107.LinkedClusterNode
+type HashicorpCloudVaultLink20221107LinkedClusterNode struct {
 
 	// alternative_versions is a list of versions that should also be considered for
 	// an update as they might come with additional improvements and features.
 	AlternativeVersions []string `json:"alternative_versions"`
+
+	// current report
+	// Format: date-time
+	CurrentReport strfmt.DateTime `json:"current_report,omitempty"`
 
 	// current_version is the node's current version in semantic version format.
 	CurrentVersion string `json:"current_version,omitempty"`
@@ -28,17 +33,27 @@ type HashicorpCloudVault20201125LinkedClusterNode struct {
 	// has_security_flaw will be true if the current version has a security flaw.
 	HasSecurityFlaws bool `json:"has_security_flaws,omitempty"`
 
-	// hostname is the hostname of the node.
+	// hostname
 	Hostname string `json:"hostname,omitempty"`
 
-	// leader_status is the leader status of the node.
-	LeaderStatus *HashicorpCloudVault20201125LinkedClusterNodeLeaderStatus `json:"leader_status,omitempty"`
+	// internal id
+	InternalID string `json:"internal_id,omitempty"`
 
-	// listener_addresses is a list of listener addresses for the node.
+	// last reported at
+	// Format: date-time
+	LastReportedAt strfmt.DateTime `json:"last_reported_at,omitempty"`
+
+	// leader status
+	LeaderStatus *HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatus `json:"leader_status,omitempty"`
+
+	// linked cluster internal id
+	LinkedClusterInternalID string `json:"linked_cluster_internal_id,omitempty"`
+
+	// listener addresses
 	ListenerAddresses []string `json:"listener_addresses"`
 
-	// log_level is the log level of the node.
-	LogLevel *HashicorpCloudVault20201125LinkedClusterNodeLogLevel `json:"log_level,omitempty"`
+	// log level
+	LogLevel *HashicorpCloudVaultLink20221107LinkedClusterNodeLogLevel `json:"log_level,omitempty"`
 
 	// node_binary_architecture is the lower-case architecture of the client binary
 	// (e.g. amd64, arm, ...).
@@ -61,8 +76,8 @@ type HashicorpCloudVault20201125LinkedClusterNode struct {
 	// node_sealed indicates if the node is sealed.
 	NodeSealed bool `json:"node_sealed,omitempty"`
 
-	// node_state is the HCP state of the node (linking, linked, unliking, or unlinked).
-	NodeState *HashicorpCloudVault20201125LinkedClusterNodeState `json:"node_state,omitempty"`
+	// node state
+	NodeState *HashicorpCloudVaultLink20221107LinkedClusterNodeState `json:"node_state,omitempty"`
 
 	// node_type indicates the node type.
 	NodeType string `json:"node_type,omitempty"`
@@ -72,19 +87,27 @@ type HashicorpCloudVault20201125LinkedClusterNode struct {
 
 	// status is the status of the current version. The status may help to
 	// determine the urgency of the update.
-	Status *HashicorpCloudVault20201125LinkedClusterNodeVersionStatus `json:"status,omitempty"`
+	Status *HashicorpCloudVaultLink20221107LinkedClusterNodeVersionStatus `json:"status,omitempty"`
 
 	// status_version is the version of the status message format. To ensure
 	// that the version is not omitted by accident the initial version is 1.
 	StatusVersion int64 `json:"status_version,omitempty"`
 
-	// storage_type is the storage type of the node.
+	// storage type
 	StorageType string `json:"storage_type,omitempty"`
 }
 
-// Validate validates this hashicorp cloud vault 20201125 linked cluster node
-func (m *HashicorpCloudVault20201125LinkedClusterNode) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud vault link 20221107 linked cluster node
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateCurrentReport(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLastReportedAt(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateLeaderStatus(formats); err != nil {
 		res = append(res, err)
@@ -108,7 +131,31 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) Validate(formats strfmt.R
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedClusterNode) validateLeaderStatus(formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) validateCurrentReport(formats strfmt.Registry) error {
+	if swag.IsZero(m.CurrentReport) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("current_report", "body", "date-time", m.CurrentReport.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) validateLastReportedAt(formats strfmt.Registry) error {
+	if swag.IsZero(m.LastReportedAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("last_reported_at", "body", "date-time", m.LastReportedAt.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) validateLeaderStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.LeaderStatus) { // not required
 		return nil
 	}
@@ -127,7 +174,7 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) validateLeaderStatus(form
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedClusterNode) validateLogLevel(formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) validateLogLevel(formats strfmt.Registry) error {
 	if swag.IsZero(m.LogLevel) { // not required
 		return nil
 	}
@@ -146,7 +193,7 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) validateLogLevel(formats 
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedClusterNode) validateNodeState(formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) validateNodeState(formats strfmt.Registry) error {
 	if swag.IsZero(m.NodeState) { // not required
 		return nil
 	}
@@ -165,7 +212,7 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) validateNodeState(formats
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedClusterNode) validateStatus(formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) validateStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.Status) { // not required
 		return nil
 	}
@@ -184,8 +231,8 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) validateStatus(formats st
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud vault 20201125 linked cluster node based on the context it is used
-func (m *HashicorpCloudVault20201125LinkedClusterNode) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud vault link 20221107 linked cluster node based on the context it is used
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateLeaderStatus(ctx, formats); err != nil {
@@ -210,7 +257,7 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) ContextValidate(ctx conte
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedClusterNode) contextValidateLeaderStatus(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateLeaderStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LeaderStatus != nil {
 		if err := m.LeaderStatus.ContextValidate(ctx, formats); err != nil {
@@ -226,7 +273,7 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) contextValidateLeaderStat
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedClusterNode) contextValidateLogLevel(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateLogLevel(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LogLevel != nil {
 		if err := m.LogLevel.ContextValidate(ctx, formats); err != nil {
@@ -242,7 +289,7 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) contextValidateLogLevel(c
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedClusterNode) contextValidateNodeState(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateNodeState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.NodeState != nil {
 		if err := m.NodeState.ContextValidate(ctx, formats); err != nil {
@@ -258,7 +305,7 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) contextValidateNodeState(
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedClusterNode) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
@@ -275,7 +322,7 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) contextValidateStatus(ctx
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudVault20201125LinkedClusterNode) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -283,8 +330,8 @@ func (m *HashicorpCloudVault20201125LinkedClusterNode) MarshalBinary() ([]byte, 
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudVault20201125LinkedClusterNode) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudVault20201125LinkedClusterNode
+func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudVaultLink20221107LinkedClusterNode
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

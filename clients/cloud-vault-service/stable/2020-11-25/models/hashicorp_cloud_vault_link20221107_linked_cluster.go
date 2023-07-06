@@ -13,22 +13,27 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudVault20201125LinkedCluster hashicorp cloud vault 20201125 linked cluster
+// HashicorpCloudVaultLink20221107LinkedCluster hashicorp cloud vault link 20221107 linked cluster
 //
-// swagger:model hashicorp.cloud.vault_20201125.LinkedCluster
-type HashicorpCloudVault20201125LinkedCluster struct {
+// swagger:model hashicorp.cloud.vault_link_20221107.LinkedCluster
+type HashicorpCloudVaultLink20221107LinkedCluster struct {
 
 	// autopilot enabled
 	AutopilotEnabled bool `json:"autopilot_enabled,omitempty"`
 
-	// cluster name
+	// This is the self-managed cluster name and it differs from the HCP's internal id and HCP's slug id because
+	// it is configured directly in the self-managed cluster.
 	ClusterName string `json:"cluster_name,omitempty"`
 
 	// created at
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+
+	// credentials revoked
+	CredentialsRevoked bool `json:"credentials_revoked,omitempty"`
 
 	// current version
 	CurrentVersion string `json:"current_version,omitempty"`
@@ -52,23 +57,23 @@ type HashicorpCloudVault20201125LinkedCluster struct {
 	LinkedAt strfmt.DateTime `json:"linked_at,omitempty"`
 
 	// location
-	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
-	// this will be later changed/replaced by "nodes."
-	NodeStatuses []*HashicorpCloudVault20201125LinkedClusterNode `json:"node_statuses"`
+	// node statuses
+	NodeStatuses []*HashicorpCloudVaultLink20221107LinkedClusterNode `json:"node_statuses"`
 
 	// raft quorum status
-	RaftQuorumStatus *HashicorpCloudVault20201125RaftQuorumStatus `json:"raft_quorum_status,omitempty"`
+	RaftQuorumStatus *HashicorpCloudVaultLink20221107RaftQuorumStatus `json:"raft_quorum_status,omitempty"`
 
 	// state
-	State *HashicorpCloudVault20201125LinkedClusterState `json:"state,omitempty"`
+	State *HashicorpCloudVaultLink20221107LinkedClusterState `json:"state,omitempty"`
 
 	// storage type
 	StorageType string `json:"storage_type,omitempty"`
 }
 
-// Validate validates this hashicorp cloud vault 20201125 linked cluster
-func (m *HashicorpCloudVault20201125LinkedCluster) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud vault link 20221107 linked cluster
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedAt(formats); err != nil {
@@ -101,7 +106,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) Validate(formats strfmt.Regis
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedCluster) validateCreatedAt(formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) validateCreatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
 	}
@@ -113,7 +118,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) validateCreatedAt(formats str
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedCluster) validateLinkedAt(formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) validateLinkedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.LinkedAt) { // not required
 		return nil
 	}
@@ -125,7 +130,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) validateLinkedAt(formats strf
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedCluster) validateLocation(formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) validateLocation(formats strfmt.Registry) error {
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -144,7 +149,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) validateLocation(formats strf
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedCluster) validateNodeStatuses(formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) validateNodeStatuses(formats strfmt.Registry) error {
 	if swag.IsZero(m.NodeStatuses) { // not required
 		return nil
 	}
@@ -170,7 +175,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) validateNodeStatuses(formats 
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedCluster) validateRaftQuorumStatus(formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) validateRaftQuorumStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.RaftQuorumStatus) { // not required
 		return nil
 	}
@@ -189,7 +194,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) validateRaftQuorumStatus(form
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedCluster) validateState(formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) validateState(formats strfmt.Registry) error {
 	if swag.IsZero(m.State) { // not required
 		return nil
 	}
@@ -208,8 +213,8 @@ func (m *HashicorpCloudVault20201125LinkedCluster) validateState(formats strfmt.
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud vault 20201125 linked cluster based on the context it is used
-func (m *HashicorpCloudVault20201125LinkedCluster) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud vault link 20221107 linked cluster based on the context it is used
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
@@ -234,7 +239,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) ContextValidate(ctx context.C
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedCluster) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
@@ -250,7 +255,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) contextValidateLocation(ctx c
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedCluster) contextValidateNodeStatuses(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) contextValidateNodeStatuses(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.NodeStatuses); i++ {
 
@@ -270,7 +275,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) contextValidateNodeStatuses(c
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedCluster) contextValidateRaftQuorumStatus(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) contextValidateRaftQuorumStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RaftQuorumStatus != nil {
 		if err := m.RaftQuorumStatus.ContextValidate(ctx, formats); err != nil {
@@ -286,7 +291,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) contextValidateRaftQuorumStat
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125LinkedCluster) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
@@ -303,7 +308,7 @@ func (m *HashicorpCloudVault20201125LinkedCluster) contextValidateState(ctx cont
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudVault20201125LinkedCluster) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -311,8 +316,8 @@ func (m *HashicorpCloudVault20201125LinkedCluster) MarshalBinary() ([]byte, erro
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudVault20201125LinkedCluster) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudVault20201125LinkedCluster
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudVaultLink20221107LinkedCluster
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

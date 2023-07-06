@@ -18,6 +18,9 @@ import (
 // swagger:model hashicorp.cloud.vault_20201125.ObservabilityConfig
 type HashicorpCloudVault20201125ObservabilityConfig struct {
 
+	// cloudwatch
+	Cloudwatch *HashicorpCloudVault20201125CloudWatch `json:"cloudwatch,omitempty"`
+
 	// datadog
 	Datadog *HashicorpCloudVault20201125Datadog `json:"datadog,omitempty"`
 
@@ -31,6 +34,10 @@ type HashicorpCloudVault20201125ObservabilityConfig struct {
 // Validate validates this hashicorp cloud vault 20201125 observability config
 func (m *HashicorpCloudVault20201125ObservabilityConfig) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateCloudwatch(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateDatadog(formats); err != nil {
 		res = append(res, err)
@@ -47,6 +54,25 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) Validate(formats strfmt
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ObservabilityConfig) validateCloudwatch(formats strfmt.Registry) error {
+	if swag.IsZero(m.Cloudwatch) { // not required
+		return nil
+	}
+
+	if m.Cloudwatch != nil {
+		if err := m.Cloudwatch.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cloudwatch")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cloudwatch")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -111,6 +137,10 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) validateSplunk(formats 
 func (m *HashicorpCloudVault20201125ObservabilityConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateCloudwatch(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateDatadog(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -126,6 +156,22 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) ContextValidate(ctx con
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateCloudwatch(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Cloudwatch != nil {
+		if err := m.Cloudwatch.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cloudwatch")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cloudwatch")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

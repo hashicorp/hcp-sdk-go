@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -16,6 +17,9 @@ import (
 //
 // swagger:model hashicorp.cloud.vault_20201125.InputNetworkConfig
 type HashicorpCloudVault20201125InputNetworkConfig struct {
+
+	// http_proxy_option specifies whether HTTP Proxy should be enabled or disabled.
+	HTTPProxyOption *HashicorpCloudVault20201125HTTPProxyOption `json:"http_proxy_option,omitempty"`
 
 	// network_id is the ID of the network the Vault cluster belongs to.
 	NetworkID string `json:"network_id,omitempty"`
@@ -26,11 +30,64 @@ type HashicorpCloudVault20201125InputNetworkConfig struct {
 
 // Validate validates this hashicorp cloud vault 20201125 input network config
 func (m *HashicorpCloudVault20201125InputNetworkConfig) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateHTTPProxyOption(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this hashicorp cloud vault 20201125 input network config based on context it is used
+func (m *HashicorpCloudVault20201125InputNetworkConfig) validateHTTPProxyOption(formats strfmt.Registry) error {
+	if swag.IsZero(m.HTTPProxyOption) { // not required
+		return nil
+	}
+
+	if m.HTTPProxyOption != nil {
+		if err := m.HTTPProxyOption.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("http_proxy_option")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("http_proxy_option")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud vault 20201125 input network config based on the context it is used
 func (m *HashicorpCloudVault20201125InputNetworkConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateHTTPProxyOption(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputNetworkConfig) contextValidateHTTPProxyOption(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HTTPProxyOption != nil {
+		if err := m.HTTPProxyOption.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("http_proxy_option")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("http_proxy_option")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

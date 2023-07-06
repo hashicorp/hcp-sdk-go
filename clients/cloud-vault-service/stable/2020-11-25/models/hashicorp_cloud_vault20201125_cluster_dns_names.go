@@ -20,6 +20,9 @@ type HashicorpCloudVault20201125ClusterDNSNames struct {
 	// private is the DNS name pointing to the cluster's private IP addresses.
 	Private string `json:"private,omitempty"`
 
+	// proxy is the DNS name for proxied access to the cluster.
+	Proxy string `json:"proxy,omitempty"`
+
 	// public is the DNS name pointing to the cluster's public IP addresses.
 	Public string `json:"public,omitempty"`
 }
