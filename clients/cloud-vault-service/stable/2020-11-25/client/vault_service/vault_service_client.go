@@ -86,6 +86,8 @@ type ClientService interface {
 
 	Lock(params *LockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LockOK, error)
 
+	PluginRegistrationStatus(params *PluginRegistrationStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PluginRegistrationStatusOK, error)
+
 	RecreateFromSnapshot(params *RecreateFromSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecreateFromSnapshotOK, error)
 
 	RegisterLinkedCluster(params *RegisterLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterLinkedClusterOK, error)
@@ -1218,6 +1220,44 @@ func (a *Client) Lock(params *LockParams, authInfo runtime.ClientAuthInfoWriter,
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*LockDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PluginRegistrationStatus plugin registration status API
+*/
+func (a *Client) PluginRegistrationStatus(params *PluginRegistrationStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PluginRegistrationStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPluginRegistrationStatusParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PluginRegistrationStatus",
+		Method:             "GET",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/registration-status",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PluginRegistrationStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PluginRegistrationStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PluginRegistrationStatusDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

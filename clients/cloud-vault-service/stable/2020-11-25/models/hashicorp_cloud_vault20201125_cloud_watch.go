@@ -20,11 +20,20 @@ type HashicorpCloudVault20201125CloudWatch struct {
 	// access key id
 	AccessKeyID string `json:"access_key_id,omitempty"`
 
+	// used for CW logs
+	GroupName string `json:"group_name,omitempty"`
+
+	// used for CW metrics
+	Namespace string `json:"namespace,omitempty"`
+
 	// region
 	Region string `json:"region,omitempty"`
 
 	// secret access key
 	SecretAccessKey string `json:"secret_access_key,omitempty"`
+
+	// stream name
+	StreamName string `json:"stream_name,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 cloud watch

@@ -24,6 +24,9 @@ type HashicorpCloudVault20201125ObservabilityConfig struct {
 	// datadog
 	Datadog *HashicorpCloudVault20201125Datadog `json:"datadog,omitempty"`
 
+	// elasticsearch
+	Elasticsearch *HashicorpCloudVault20201125Elasticsearch `json:"elasticsearch,omitempty"`
+
 	// grafana
 	Grafana *HashicorpCloudVault20201125Grafana `json:"grafana,omitempty"`
 
@@ -40,6 +43,10 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) Validate(formats strfmt
 	}
 
 	if err := m.validateDatadog(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateElasticsearch(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -87,6 +94,25 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) validateDatadog(formats
 				return ve.ValidateName("datadog")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("datadog")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ObservabilityConfig) validateElasticsearch(formats strfmt.Registry) error {
+	if swag.IsZero(m.Elasticsearch) { // not required
+		return nil
+	}
+
+	if m.Elasticsearch != nil {
+		if err := m.Elasticsearch.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("elasticsearch")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("elasticsearch")
 			}
 			return err
 		}
@@ -145,6 +171,10 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) ContextValidate(ctx con
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateElasticsearch(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGrafana(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -183,6 +213,22 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateDatadog(
 				return ve.ValidateName("datadog")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("datadog")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateElasticsearch(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Elasticsearch != nil {
+		if err := m.Elasticsearch.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("elasticsearch")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("elasticsearch")
 			}
 			return err
 		}
