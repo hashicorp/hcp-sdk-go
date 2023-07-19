@@ -201,6 +201,15 @@ type QueryRangeBatchBody struct {
 	// query is the set of QueryRangeTypes (QRT) to query for. Between 1 and 10 queries can be issued in one batch.
 	Query []*models.HashicorpCloudConsulTelemetry20230414QRT `json:"query"`
 
+	// service_name is an optional filter for service-level queries. Required for service-specific queries.
+	ServiceName string `json:"service_name,omitempty"`
+
+	// service_namespace is an optional filter for service-level queries. Required for service-specific queries.
+	ServiceNamespace string `json:"service_namespace,omitempty"`
+
+	// service_partition is an optional filter for service-level queries. Required for service-specific queries.
+	ServicePartition string `json:"service_partition,omitempty"`
+
 	// start
 	// Format: date-time
 	Start strfmt.DateTime `json:"start,omitempty"`
