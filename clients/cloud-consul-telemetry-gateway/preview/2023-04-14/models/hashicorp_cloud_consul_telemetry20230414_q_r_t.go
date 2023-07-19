@@ -14,7 +14,83 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudConsulTelemetry20230414QRT hashicorp cloud consul telemetry 20230414 q r t
+// HashicorpCloudConsulTelemetry20230414QRT  - QRT_SERVERS_HEARTBEAT: The P90 heartbeat from the leader to followers within each time interval.
+//   - QRT_SERVERS_LEADER_ELECTIONS: The count of leadership elections in the prior day.
+//   - QRT_SERVERS_HAS_LEADER: Whether the cluster has a leader.
+//   - QRT_SERVERS_MAX_HEARTBEAT: The p90 heartbeat latency in the last day -- the max latency of a leader contacting a follower.
+//   - QRT_SERVERS_LEADER_WRITE_LOAD_HIGH: The max raft transaction rate over the last day.
+//   - QRT_SERVERS_LEADER_WRITE_LOAD_MEDIAN: The p50 raft transaction rate over the last day.
+//   - QRT_SERVERS_LEADER_WRITE_LOAD_LOW: The minimum raft transaction rate over the last day.
+//   - QRT_SERVERS_LEADER_WRITE_LATENCY_HIGH: The p95 leader commit latency over the prior day.
+//   - QRT_SERVERS_LEADER_WRITE_LATENCY_MEDIAN: The p90 leader commit latency over the prior day.
+//   - QRT_SERVERS_LEADER_WRITE_LATENCY_LOW: The p50 leader commit latency over the prior day.
+//   - QRT_SERVERS_MEMORY_UTILIZATION_HIGH: The maximum server memory utilization over the prior day.
+//   - QRT_SERVERS_MEMORY_UTILIZATION_MEDIAN: The median average server memory utilization over the prior day.
+//   - QRT_SERVERS_MEMORY_UTILIZATION_LOW: The minimum server memory utilization over the prior day.
+//   - QRT_SERVERS_CPU_UTILIZATION_HIGH: The maximum server cpu utilization of any individual cpu over the prior day.
+//   - QRT_SERVERS_CPU_UTILIZATION_MEDIAN: The p50 average cpu utilization of any individual cpu over the prior day.
+//   - QRT_SERVERS_CPU_UTILIZATION_LOW: The minimum server cpu utilization of any individual cpu over the prior day.
+//   - QRT_SERVERS_IO_WAIT_TIME_HIGH: The maximum cpu io wait time of any individual cpu over the prior day.
+//   - QRT_SERVERS_IO_WAIT_TIME_MEDIAN: The p50 average cpu io wait time of any individual cpu over the prior day.
+//   - QRT_SERVERS_IO_WAIT_TIME_LOW: The minimum cpu io wait time of any individual cpu over the prior day.
+//   - QRT_SERVERS_TRANSACTIONS: Raft applies per second per server.
+//   - QRT_SERVERS_LATENCY: The average p50 Raft apply latency over the past day.
+//   - QRT_SERVERS_FOLLOWER_REPLICATIONS: The total rate of Raft replications from leader to followers. This is summed over peers.
+//   - QRT_SERVERS_MEMORY_UTILIZATION: The median percentage memory usage for each server each interval.
+//   - QRT_SERVERS_CPU_UTILIZATION: The median percentage cpu usage for each server each interval.
+//   - QRT_SERVERS_IO_WAIT_TIME: The median percentage io wait time for each server each interval.
+//   - QRT_ENVOY_SERVER_PHYSICAL_MEMORY_TOTAL_CAPACITY: Total memory capacity of Envoy servers.
+//   - QRT_ENVOY_SERVER_STATES_LIVE: The count of live Envoy servers.
+//   - QRT_ENVOY_SERVER_STATES_PREINITIALIZING: The count of currently pre-initializing Envoy servers.
+//   - QRT_ENVOY_SERVER_STATES_INITIALIZING: The count of currently initializing Envoy servers.
+//   - QRT_ENVOY_SERVER_STATES_DRAINING: The count of currently draining Envoy servers.
+//   - QRT_ENVOY_PROXY_COUNT_CONNECTED: The count of Envoy servers connected to Consul.
+//   - QRT_ENVOY_PROXY_COUNT_DISCONNECTED: The count of Envoy servers not connected to Consul.
+//   - QRT_ENVOY_REQUEST_RATE_1XX: The ratio of requests in the mesh that return 1XX.
+//   - QRT_ENVOY_REQUEST_RATE_2XX: The ratio of requests in the mesh that return 2XX.
+//   - QRT_ENVOY_REQUEST_RATE_3XX: The ratio of requests in the mesh that return 3XX.
+//   - QRT_ENVOY_REQUEST_RATE_4XX: The ratio of requests in the mesh that return 4XX.
+//   - QRT_ENVOY_REQUEST_RATE_5XX: The ratio of requests in the mesh that return 5XX.
+//   - QRT_ENVOY_REQUEST_SUCCESS_RATE: The success rate of Envoy requests: 2XX / (2XX + 5XX).
+//   - QRT_ENVOY_CONNECTION_RATE: New Envoy connections per second.
+//   - QRT_ENVOY_TOTAL_ACTIVE_CONNECTIONS: The total count of active Envoy connections.
+//   - QRT_SERVERS_LATEST_HEARTBEAT: The latency of a leader contacting a follower.
+//
+// This is same as QRT_QRT_SERVERS_HEARTBEAT except it queries the
+// consul_raft_leader_lastContact metric directly so will (likely) retrieve newer samples
+// than are generated via QRT_QRT_SERVERS_HEARTBEAT's recording rule.
+//   - QRT_COLLECTOR_IS_DEPLOYED: Whether the cluster has a deployed Consul Telemetry Collector. It queries a metric that
+//
+// the collector emits about its own Prometheus receiver: https://opentelemetry.io/docs/collector/management/.
+// We receive these metrics whether or not intentions are configured which is useful for the UI. The UI will show
+// a "here's how to configure your intentions" snippet if we get collector resource metrics but no service metrics.
+// This will return no data if no collector is deployed -- or the collector is deployed but unable to push metrics
+// (eg its SP is bad/stale).
+//   - QRT_SERVERS_FOLLOWER_REPLICATION_MS: The P50 latency of Raft append log operations from the leader to followers.
+//   - QRT_SERVERS_REQUEST_RATE: The per second rate of requests to each server.
+//   - QRT_SERVERS_REQUEST_P50_MS: The P50 latencies of HTTP requests to the Consul servers.
+//   - QRT_SERVERS_REQUEST_P90_MS: The P90 latencies of HTTP requests to the Consul servers.
+//   - QRT_SERVERS_REQUEST_P95_MS: The P95 latencies of HTTP requests to the Consul servers.
+//   - QRT_SERVERS_REQUEST_SUCCESS_RATE: The rate of successful requests to all Consul servers in the cluster.
+//   - QRT_SERVERS_BLOCKING_QUERIES_TOTAL: The sum of blocking queries across all servers in the cluster.
+//   - QRT_SERVERS_RPC_CONNECTION_RATE: The rate of RPC connections to all the servers in the cluster.
+//   - QRT_SERVERS_GRPC_CONNECTION_RATE: The rate of gRPC connections to all the servers in the cluster.
+//   - QRT_SERVERS_XDS_STREAMS_TOTAL: The count of xDS streams active at a given time.
+//   - QRT_SERVERS_PEERINGS_TOTAL: The count of Consul cluster peerings active at a given time.
+//   - QRT_ENVOY_SERVICE_REQUEST_RATE: The per second rate of requests to a service.
+//   - QRT_ENVOY_SERVICE_REQUEST_TIMEOUT_RATE: The per second rate of requests to a service that time out.
+//   - QRT_ENVOY_SERVICE_HTTP_RESPONSE_1XX_RATE: The percentage rate of 1XX status response codes from the service.
+//   - QRT_ENVOY_SERVICE_HTTP_RESPONSE_2XX_RATE: The percentage rate of 2XX status response codes from the service.
+//   - QRT_ENVOY_SERVICE_HTTP_RESPONSE_3XX_RATE: The percentage rate of 3XX status response codes from the service.
+//   - QRT_ENVOY_SERVICE_HTTP_RESPONSE_4XX_RATE: The percentage rate of 4XX status response codes from the service.
+//   - QRT_ENVOY_SERVICE_HTTP_RESPONSE_5XX_RATE: The percentage rate of 5XX status response codes from the service.
+//   - QRT_ENVOY_SERVICE_REQUEST_P50_MS: The P50 request latency to a service.
+//   - QRT_ENVOY_SERVICE_REQUEST_RX_BYTES_RATE: The per second rate of bytes received by service.
+//   - QRT_ENVOY_SERVICE_REQUEST_TX_BYTES_RATE: The per second rate of bytes transmitted from service.
+//   - QRT_ENVOY_SERVICE_CONNECTIONS_TOTAL_RATE: The per second rate of connections to a service.
+//   - QRT_ENVOY_SERVICE_CONNECTIONS_SUCCESSFUL_RATE: The per second rate of successful connections to a service.
+//   - QRT_ENVOY_SERVICE_CONNECTIONS_FAILED_RATE: The per second rate of failed connections to a service.
+//   - QRT_ENVOY_SERVICE_CONNECTIONS_SUCCESS_PERCENTAGE_RATE: The percentage rate of successful connection requests to a service.
 //
 // swagger:model hashicorp.cloud.consul_telemetry_20230414.QRT
 type HashicorpCloudConsulTelemetry20230414QRT string
@@ -155,6 +231,84 @@ const (
 
 	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSLATESTHEARTBEAT captures enum value "QRT_SERVERS_LATEST_HEARTBEAT"
 	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSLATESTHEARTBEAT HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_LATEST_HEARTBEAT"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTCOLLECTORISDEPLOYED captures enum value "QRT_COLLECTOR_IS_DEPLOYED"
+	HashicorpCloudConsulTelemetry20230414QRTQRTCOLLECTORISDEPLOYED HashicorpCloudConsulTelemetry20230414QRT = "QRT_COLLECTOR_IS_DEPLOYED"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSFOLLOWERREPLICATIONMS captures enum value "QRT_SERVERS_FOLLOWER_REPLICATION_MS"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSFOLLOWERREPLICATIONMS HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_FOLLOWER_REPLICATION_MS"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSREQUESTRATE captures enum value "QRT_SERVERS_REQUEST_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSREQUESTRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_REQUEST_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSREQUESTP50MS captures enum value "QRT_SERVERS_REQUEST_P50_MS"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSREQUESTP50MS HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_REQUEST_P50_MS"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSREQUESTP90MS captures enum value "QRT_SERVERS_REQUEST_P90_MS"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSREQUESTP90MS HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_REQUEST_P90_MS"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSREQUESTP95MS captures enum value "QRT_SERVERS_REQUEST_P95_MS"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSREQUESTP95MS HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_REQUEST_P95_MS"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSREQUESTSUCCESSRATE captures enum value "QRT_SERVERS_REQUEST_SUCCESS_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSREQUESTSUCCESSRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_REQUEST_SUCCESS_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSBLOCKINGQUERIESTOTAL captures enum value "QRT_SERVERS_BLOCKING_QUERIES_TOTAL"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSBLOCKINGQUERIESTOTAL HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_BLOCKING_QUERIES_TOTAL"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSRPCCONNECTIONRATE captures enum value "QRT_SERVERS_RPC_CONNECTION_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSRPCCONNECTIONRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_RPC_CONNECTION_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSGRPCCONNECTIONRATE captures enum value "QRT_SERVERS_GRPC_CONNECTION_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSGRPCCONNECTIONRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_GRPC_CONNECTION_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSXDSSTREAMSTOTAL captures enum value "QRT_SERVERS_XDS_STREAMS_TOTAL"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSXDSSTREAMSTOTAL HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_XDS_STREAMS_TOTAL"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSPEERINGSTOTAL captures enum value "QRT_SERVERS_PEERINGS_TOTAL"
+	HashicorpCloudConsulTelemetry20230414QRTQRTSERVERSPEERINGSTOTAL HashicorpCloudConsulTelemetry20230414QRT = "QRT_SERVERS_PEERINGS_TOTAL"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEREQUESTRATE captures enum value "QRT_ENVOY_SERVICE_REQUEST_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEREQUESTRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_REQUEST_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEREQUESTTIMEOUTRATE captures enum value "QRT_ENVOY_SERVICE_REQUEST_TIMEOUT_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEREQUESTTIMEOUTRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_REQUEST_TIMEOUT_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEHTTPRESPONSE1XXRATE captures enum value "QRT_ENVOY_SERVICE_HTTP_RESPONSE_1XX_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEHTTPRESPONSE1XXRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_HTTP_RESPONSE_1XX_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEHTTPRESPONSE2XXRATE captures enum value "QRT_ENVOY_SERVICE_HTTP_RESPONSE_2XX_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEHTTPRESPONSE2XXRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_HTTP_RESPONSE_2XX_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEHTTPRESPONSE3XXRATE captures enum value "QRT_ENVOY_SERVICE_HTTP_RESPONSE_3XX_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEHTTPRESPONSE3XXRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_HTTP_RESPONSE_3XX_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEHTTPRESPONSE4XXRATE captures enum value "QRT_ENVOY_SERVICE_HTTP_RESPONSE_4XX_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEHTTPRESPONSE4XXRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_HTTP_RESPONSE_4XX_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEHTTPRESPONSE5XXRATE captures enum value "QRT_ENVOY_SERVICE_HTTP_RESPONSE_5XX_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEHTTPRESPONSE5XXRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_HTTP_RESPONSE_5XX_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEREQUESTP50MS captures enum value "QRT_ENVOY_SERVICE_REQUEST_P50_MS"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEREQUESTP50MS HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_REQUEST_P50_MS"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEREQUESTRXBYTESRATE captures enum value "QRT_ENVOY_SERVICE_REQUEST_RX_BYTES_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEREQUESTRXBYTESRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_REQUEST_RX_BYTES_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEREQUESTTXBYTESRATE captures enum value "QRT_ENVOY_SERVICE_REQUEST_TX_BYTES_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICEREQUESTTXBYTESRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_REQUEST_TX_BYTES_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICECONNECTIONSTOTALRATE captures enum value "QRT_ENVOY_SERVICE_CONNECTIONS_TOTAL_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICECONNECTIONSTOTALRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_CONNECTIONS_TOTAL_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICECONNECTIONSSUCCESSFULRATE captures enum value "QRT_ENVOY_SERVICE_CONNECTIONS_SUCCESSFUL_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICECONNECTIONSSUCCESSFULRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_CONNECTIONS_SUCCESSFUL_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICECONNECTIONSFAILEDRATE captures enum value "QRT_ENVOY_SERVICE_CONNECTIONS_FAILED_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICECONNECTIONSFAILEDRATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_CONNECTIONS_FAILED_RATE"
+
+	// HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICECONNECTIONSSUCCESSPERCENTAGERATE captures enum value "QRT_ENVOY_SERVICE_CONNECTIONS_SUCCESS_PERCENTAGE_RATE"
+	HashicorpCloudConsulTelemetry20230414QRTQRTENVOYSERVICECONNECTIONSSUCCESSPERCENTAGERATE HashicorpCloudConsulTelemetry20230414QRT = "QRT_ENVOY_SERVICE_CONNECTIONS_SUCCESS_PERCENTAGE_RATE"
 )
 
 // for schema
@@ -162,7 +316,7 @@ var hashicorpCloudConsulTelemetry20230414QRTEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudConsulTelemetry20230414QRT
-	if err := json.Unmarshal([]byte(`["QRT_UNSPECIFIED","QRT_SERVERS_HEARTBEAT","QRT_SERVERS_LEADER_ELECTIONS","QRT_SERVERS_HAS_LEADER","QRT_SERVERS_MAX_HEARTBEAT","QRT_SERVERS_LEADER_WRITE_LOAD_HIGH","QRT_SERVERS_LEADER_WRITE_LOAD_MEDIAN","QRT_SERVERS_LEADER_WRITE_LOAD_LOW","QRT_SERVERS_LEADER_WRITE_LATENCY_HIGH","QRT_SERVERS_LEADER_WRITE_LATENCY_MEDIAN","QRT_SERVERS_LEADER_WRITE_LATENCY_LOW","QRT_SERVERS_MEMORY_UTILIZATION_HIGH","QRT_SERVERS_MEMORY_UTILIZATION_MEDIAN","QRT_SERVERS_MEMORY_UTILIZATION_LOW","QRT_SERVERS_CPU_UTILIZATION_HIGH","QRT_SERVERS_CPU_UTILIZATION_MEDIAN","QRT_SERVERS_CPU_UTILIZATION_LOW","QRT_SERVERS_IO_WAIT_TIME_HIGH","QRT_SERVERS_IO_WAIT_TIME_MEDIAN","QRT_SERVERS_IO_WAIT_TIME_LOW","QRT_SERVERS_TRANSACTIONS","QRT_SERVERS_LATENCY","QRT_SERVERS_FOLLOWER_REPLICATIONS","QRT_SERVERS_MEMORY_UTILIZATION","QRT_SERVERS_CPU_UTILIZATION","QRT_SERVERS_IO_WAIT_TIME","QRT_ENVOY_SERVER_PHYSICAL_MEMORY_TOTAL_CAPACITY","QRT_ENVOY_SERVER_STATES_LIVE","QRT_ENVOY_SERVER_STATES_PREINITIALIZING","QRT_ENVOY_SERVER_STATES_INITIALIZING","QRT_ENVOY_SERVER_STATES_DRAINING","QRT_ENVOY_PROXY_COUNT_CONNECTED","QRT_ENVOY_PROXY_COUNT_DISCONNECTED","QRT_ENVOY_REQUEST_RATE_1XX","QRT_ENVOY_REQUEST_RATE_2XX","QRT_ENVOY_REQUEST_RATE_3XX","QRT_ENVOY_REQUEST_RATE_4XX","QRT_ENVOY_REQUEST_RATE_5XX","QRT_ENVOY_REQUEST_SUCCESS_RATE","QRT_ENVOY_CONNECTION_RATE","QRT_ENVOY_TOTAL_ACTIVE_CONNECTIONS","QRT_SERVERS_LATEST_HEARTBEAT"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["QRT_UNSPECIFIED","QRT_SERVERS_HEARTBEAT","QRT_SERVERS_LEADER_ELECTIONS","QRT_SERVERS_HAS_LEADER","QRT_SERVERS_MAX_HEARTBEAT","QRT_SERVERS_LEADER_WRITE_LOAD_HIGH","QRT_SERVERS_LEADER_WRITE_LOAD_MEDIAN","QRT_SERVERS_LEADER_WRITE_LOAD_LOW","QRT_SERVERS_LEADER_WRITE_LATENCY_HIGH","QRT_SERVERS_LEADER_WRITE_LATENCY_MEDIAN","QRT_SERVERS_LEADER_WRITE_LATENCY_LOW","QRT_SERVERS_MEMORY_UTILIZATION_HIGH","QRT_SERVERS_MEMORY_UTILIZATION_MEDIAN","QRT_SERVERS_MEMORY_UTILIZATION_LOW","QRT_SERVERS_CPU_UTILIZATION_HIGH","QRT_SERVERS_CPU_UTILIZATION_MEDIAN","QRT_SERVERS_CPU_UTILIZATION_LOW","QRT_SERVERS_IO_WAIT_TIME_HIGH","QRT_SERVERS_IO_WAIT_TIME_MEDIAN","QRT_SERVERS_IO_WAIT_TIME_LOW","QRT_SERVERS_TRANSACTIONS","QRT_SERVERS_LATENCY","QRT_SERVERS_FOLLOWER_REPLICATIONS","QRT_SERVERS_MEMORY_UTILIZATION","QRT_SERVERS_CPU_UTILIZATION","QRT_SERVERS_IO_WAIT_TIME","QRT_ENVOY_SERVER_PHYSICAL_MEMORY_TOTAL_CAPACITY","QRT_ENVOY_SERVER_STATES_LIVE","QRT_ENVOY_SERVER_STATES_PREINITIALIZING","QRT_ENVOY_SERVER_STATES_INITIALIZING","QRT_ENVOY_SERVER_STATES_DRAINING","QRT_ENVOY_PROXY_COUNT_CONNECTED","QRT_ENVOY_PROXY_COUNT_DISCONNECTED","QRT_ENVOY_REQUEST_RATE_1XX","QRT_ENVOY_REQUEST_RATE_2XX","QRT_ENVOY_REQUEST_RATE_3XX","QRT_ENVOY_REQUEST_RATE_4XX","QRT_ENVOY_REQUEST_RATE_5XX","QRT_ENVOY_REQUEST_SUCCESS_RATE","QRT_ENVOY_CONNECTION_RATE","QRT_ENVOY_TOTAL_ACTIVE_CONNECTIONS","QRT_SERVERS_LATEST_HEARTBEAT","QRT_COLLECTOR_IS_DEPLOYED","QRT_SERVERS_FOLLOWER_REPLICATION_MS","QRT_SERVERS_REQUEST_RATE","QRT_SERVERS_REQUEST_P50_MS","QRT_SERVERS_REQUEST_P90_MS","QRT_SERVERS_REQUEST_P95_MS","QRT_SERVERS_REQUEST_SUCCESS_RATE","QRT_SERVERS_BLOCKING_QUERIES_TOTAL","QRT_SERVERS_RPC_CONNECTION_RATE","QRT_SERVERS_GRPC_CONNECTION_RATE","QRT_SERVERS_XDS_STREAMS_TOTAL","QRT_SERVERS_PEERINGS_TOTAL","QRT_ENVOY_SERVICE_REQUEST_RATE","QRT_ENVOY_SERVICE_REQUEST_TIMEOUT_RATE","QRT_ENVOY_SERVICE_HTTP_RESPONSE_1XX_RATE","QRT_ENVOY_SERVICE_HTTP_RESPONSE_2XX_RATE","QRT_ENVOY_SERVICE_HTTP_RESPONSE_3XX_RATE","QRT_ENVOY_SERVICE_HTTP_RESPONSE_4XX_RATE","QRT_ENVOY_SERVICE_HTTP_RESPONSE_5XX_RATE","QRT_ENVOY_SERVICE_REQUEST_P50_MS","QRT_ENVOY_SERVICE_REQUEST_RX_BYTES_RATE","QRT_ENVOY_SERVICE_REQUEST_TX_BYTES_RATE","QRT_ENVOY_SERVICE_CONNECTIONS_TOTAL_RATE","QRT_ENVOY_SERVICE_CONNECTIONS_SUCCESSFUL_RATE","QRT_ENVOY_SERVICE_CONNECTIONS_FAILED_RATE","QRT_ENVOY_SERVICE_CONNECTIONS_SUCCESS_PERCENTAGE_RATE"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

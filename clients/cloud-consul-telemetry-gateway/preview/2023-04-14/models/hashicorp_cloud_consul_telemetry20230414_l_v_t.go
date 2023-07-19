@@ -35,6 +35,9 @@ const (
 
 	// HashicorpCloudConsulTelemetry20230414LVTLVTSERVERIDS captures enum value "LVT_SERVER_IDS"
 	HashicorpCloudConsulTelemetry20230414LVTLVTSERVERIDS HashicorpCloudConsulTelemetry20230414LVT = "LVT_SERVER_IDS"
+
+	// HashicorpCloudConsulTelemetry20230414LVTLVTSERVERNODENAMES captures enum value "LVT_SERVER_NODE_NAMES"
+	HashicorpCloudConsulTelemetry20230414LVTLVTSERVERNODENAMES HashicorpCloudConsulTelemetry20230414LVT = "LVT_SERVER_NODE_NAMES"
 )
 
 // for schema
@@ -42,7 +45,7 @@ var hashicorpCloudConsulTelemetry20230414LVTEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudConsulTelemetry20230414LVT
-	if err := json.Unmarshal([]byte(`["LVT_UNSPECIFIED","LVT_SERVER_IDS"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["LVT_UNSPECIFIED","LVT_SERVER_IDS","LVT_SERVER_NODE_NAMES"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

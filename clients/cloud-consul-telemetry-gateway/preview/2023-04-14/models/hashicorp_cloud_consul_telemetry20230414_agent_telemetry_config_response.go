@@ -18,6 +18,9 @@ import (
 // swagger:model hashicorp.cloud.consul_telemetry_20230414.AgentTelemetryConfigResponse
 type HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse struct {
 
+	// refresh config
+	RefreshConfig *HashicorpCloudConsulTelemetry20230414RefreshConfig `json:"refresh_config,omitempty"`
+
 	// telemetry config
 	TelemetryConfig *HashicorpCloudConsulTelemetry20230414TelemetryConfig `json:"telemetry_config,omitempty"`
 }
@@ -26,6 +29,10 @@ type HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse struct {
 func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateRefreshConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTelemetryConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -33,6 +40,25 @@ func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) Vali
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) validateRefreshConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.RefreshConfig) { // not required
+		return nil
+	}
+
+	if m.RefreshConfig != nil {
+		if err := m.RefreshConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refresh_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refresh_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -59,6 +85,10 @@ func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) vali
 func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateRefreshConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTelemetryConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -66,6 +96,22 @@ func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) Cont
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) contextValidateRefreshConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RefreshConfig != nil {
+		if err := m.RefreshConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refresh_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refresh_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

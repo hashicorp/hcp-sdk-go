@@ -32,8 +32,6 @@ type ClientService interface {
 
 	GetLabelValues(params *GetLabelValuesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLabelValuesOK, error)
 
-	QueryRange(params *QueryRangeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*QueryRangeOK, error)
-
 	QueryRangeBatch(params *QueryRangeBatchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*QueryRangeBatchOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -112,44 +110,6 @@ func (a *Client) GetLabelValues(params *GetLabelValuesParams, authInfo runtime.C
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetLabelValuesDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-QueryRange queries range implementing https prometheus io docs prometheus latest querying api range queries
-*/
-func (a *Client) QueryRange(params *QueryRangeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*QueryRangeOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewQueryRangeParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "QueryRange",
-		Method:             "POST",
-		PathPattern:        "/ctgw/2023-04-14/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/query_range",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &QueryRangeReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*QueryRangeOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*QueryRangeDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

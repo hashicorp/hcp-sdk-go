@@ -198,7 +198,7 @@ type QueryRangeBatchBody struct {
 	// location
 	Location *QueryRangeBatchParamsBodyLocation `json:"location,omitempty"`
 
-	// query
+	// query is the set of QueryRangeTypes (QRT) to query for. Between 1 and 10 queries can be issued in one batch.
 	Query []*models.HashicorpCloudConsulTelemetry20230414QRT `json:"query"`
 
 	// start
