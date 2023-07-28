@@ -201,6 +201,22 @@ type PackerServiceUpdateChannelBody struct {
 	// location
 	Location *PackerServiceUpdateChannelParamsBodyLocation `json:"location,omitempty"`
 
+	// When set, the service will only update the channel with attributes listed in the mask.
+	// For an empty mask list, all attributes will be updated according to their given value.
+	//
+	// One or more of the iteration identifiers can be listed when updating the channel assignment.
+	// In this case, if paths for multiple iteration identifiers are present in the mask, the
+	// values of the equivalent fields must belong to the same iteration.
+	// NOTE: This is different from the behavior without a mask or with an empty mask, where the
+	// first non-zero identifier (in the order iterationId, fingerprint, incrementalVersion) is the
+	// only identifier used, and others are ignored.
+	//
+	// Examples of usage:
+	// * "incrementalVersion,iterationId,fingerprint"
+	// * "restriction"
+	// * "restriction,iterationId"
+	Mask string `json:"mask,omitempty"`
+
 	// When set, will set the channel access in HCP Packer registry. The channel is unrestricted by default;
 	Restriction *models.HashicorpCloudPackerUpdateChannelRequestRestriction `json:"restriction,omitempty"`
 }
