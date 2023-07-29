@@ -91,13 +91,6 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		scadaTLSConfig: &tls.Config{},
 	}
 
-	// Apply all options
-	for _, opt := range opts {
-		if err := opt(config); err != nil {
-			return nil, fmt.Errorf("failed to apply configuration option: %w", err)
-		}
-	}
-
 	if config.suppressLogging {
 		log.SetOutput(io.Discard)
 	}
@@ -105,6 +98,13 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 	if config.noBrowserLogin {
 		config.session = &auth.UserSession{
 			NoBrowserLogin: true,
+		}
+	}
+
+	// Apply all options
+	for _, opt := range opts {
+		if err := opt(config); err != nil {
+			return nil, fmt.Errorf("failed to apply configuration option: %w", err)
 		}
 	}
 
@@ -117,25 +117,28 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		&http.Client{Transport: tokenTransport},
 	)
 
-	// Set access token via configured client credentials.
-	if config.clientCredentialsConfig.ClientID != "" && config.clientCredentialsConfig.ClientSecret != "" {
-		// Set token URL based on auth URL.
-		tokenURL := config.authURL
-		tokenURL.Path = tokenPath
-		config.clientCredentialsConfig.TokenURL = tokenURL.String()
+	// Configure the token source if it hasn't been set by the provided options
+	if config.tokenSource == nil {
+		// Set access token via configured client credentials.
+		if config.clientCredentialsConfig.ClientID != "" && config.clientCredentialsConfig.ClientSecret != "" {
+			// Set token URL based on auth URL.
+			tokenURL := config.authURL
+			tokenURL.Path = tokenPath
+			config.clientCredentialsConfig.TokenURL = tokenURL.String()
 
-		// Create token source from the client credentials configuration.
-		config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
+			// Create token source from the client credentials configuration.
+			config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
 
-	} else { // Set access token via browser login or use token from existing session.
+		} else { // Set access token via browser login or use token from existing session.
 
-		tok, err := config.session.GetToken(tokenContext, &config.oauth2Config)
-		if err != nil {
-			return nil, fmt.Errorf("failed to find existing session or set up new: %w", err)
+			tok, err := config.session.GetToken(tokenContext, &config.oauth2Config)
+			if err != nil {
+				return nil, fmt.Errorf("failed to find existing session or set up new: %w", err)
+			}
+
+			// Update HCPConfig with most current token values.
+			config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
 		}
-
-		// Update HCPConfig with most current token values.
-		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
 	}
 
 	if err := config.validate(); err != nil {

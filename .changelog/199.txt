@@ -1,0 +1,3 @@
+```release-note:feature
+SDK can authenticate using Workload Identity Federation.
+```
