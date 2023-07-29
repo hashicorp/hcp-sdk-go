@@ -26,8 +26,8 @@ func (ec *EnvironmentVariableCredentialSource) Validate() error {
 }
 
 // token retrieves the token from the environment variable
-func (e *EnvironmentVariableCredentialSource) token() (string, error) {
-	value, ok := os.LookupEnv(e.Var)
+func (ec *EnvironmentVariableCredentialSource) token() (string, error) {
+	value, ok := os.LookupEnv(ec.Var)
 	if !ok {
 		return "", fmt.Errorf("environment variable not found")
 	}
@@ -35,5 +35,5 @@ func (e *EnvironmentVariableCredentialSource) token() (string, error) {
 		return "", fmt.Errorf("environment variable value is empty")
 	}
 
-	return e.CredentialFormat.get([]byte(value))
+	return ec.CredentialFormat.get([]byte(value))
 }

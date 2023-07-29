@@ -29,10 +29,10 @@ func (fc *FileCredentialSource) Validate() error {
 }
 
 // token retrieves the token from the specified file
-func (f *FileCredentialSource) token() (string, error) {
-	credFile, err := os.Open(f.Path)
+func (fc *FileCredentialSource) token() (string, error) {
+	credFile, err := os.Open(fc.Path)
 	if err != nil {
-		return "", fmt.Errorf("failed to open credential file %q", f.Path)
+		return "", fmt.Errorf("failed to open credential file %q", fc.Path)
 	}
 	defer credFile.Close()
 
@@ -47,5 +47,5 @@ func (f *FileCredentialSource) token() (string, error) {
 	}
 
 	value := bytes.TrimSpace(credBytes)
-	return f.CredentialFormat.get(value)
+	return fc.CredentialFormat.get(value)
 }

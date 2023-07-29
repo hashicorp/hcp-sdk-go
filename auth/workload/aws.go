@@ -24,16 +24,16 @@ const (
 	// Environment Variable Reference:
 	// https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
 
-	// awsEnvRegion is the region to send requests to. It takes precendence of
+	// awsEnvRegion is the region to send requests to. It takes precedence of
 	// default region.
 	awsEnvRegion = "AWS_REGION"
 
 	// awsEnvDefaultRegion is where requests will be sent to by default, if not
-	// overriden.
+	// overridden.
 	awsEnvDefaultRegion = "AWS_DEFAULT_REGION"
 
-	// awsEnvAccessKeyId stores the AWS access key.
-	awsEnvAccessKeyId = "AWS_ACCESS_KEY_ID"
+	// awsEnvAccessKeyID stores the AWS access key.
+	awsEnvAccessKeyID = "AWS_ACCESS_KEY_ID"
 
 	// awsEnvSecretAccessKeyId stores the secret key associated with the access key.
 	awsEnvSecretAccessKey = "AWS_SECRET_ACCESS_KEY"
@@ -56,11 +56,11 @@ const (
 	// https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-metadata-v2-how-it-works.html
 	awsSessionTokenURL = "http://169.254.169.254/latest/api/token"
 
-	// awsIMDSv2SessionTtlHeader is used to configure the session token TTL.
-	awsIMDSv2SessionTtlHeader = "X-aws-ec2-metadata-token-ttl-seconds"
+	// awsIMDSv2SessionTTLHeader is used to configure the session token TTL.
+	awsIMDSv2SessionTTLHeader = "X-aws-ec2-metadata-token-ttl-seconds"
 
-	// awsIMDSv2SessionTtl is the session ttl we request.
-	awsIMDSv2SessionTtl = "300"
+	// awsIMDSv2SessionTTL is the session ttl we request.
+	awsIMDSv2SessionTTL = "300"
 
 	// awsIMDSv2SessionTokenHeader is used to pass the short lived session
 	// token to an IMDSv2 endpoint.
@@ -272,7 +272,7 @@ func (s *awsRequestSigner) sourceEnvVars() {
 	}
 
 	// Try to get the AWS credentials
-	accessKey, accessKeyOk := os.LookupEnv(awsEnvAccessKeyId)
+	accessKey, accessKeyOk := os.LookupEnv(awsEnvAccessKeyID)
 	secretKey, secretKeyOk := os.LookupEnv(awsEnvSecretAccessKey)
 	sessionToken := os.Getenv(awsEnvSessionToken)
 	if accessKeyOk && secretKeyOk {
@@ -290,7 +290,7 @@ func (s *awsRequestSigner) getSessionToken(ctx context.Context) error {
 	}
 
 	// Configure the requested token TTL
-	req.Header.Add(awsIMDSv2SessionTtlHeader, awsIMDSv2SessionTtl)
+	req.Header.Add(awsIMDSv2SessionTTLHeader, awsIMDSv2SessionTTL)
 
 	resp, err := s.client.Do(req)
 	if err != nil {

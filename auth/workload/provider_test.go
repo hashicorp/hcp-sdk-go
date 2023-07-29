@@ -13,11 +13,6 @@ import (
 )
 
 func TestProvider_New(t *testing.T) {
-	type fields struct {
-		URL              string
-		Headers          map[string]string
-		CredentialFormat CredentialFormat
-	}
 	tests := []struct {
 		name   string
 		ipc    *IdentityProviderConfig

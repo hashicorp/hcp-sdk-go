@@ -49,10 +49,6 @@ func TestEnvironmentVariableCredentialSource_Validate(t *testing.T) {
 }
 
 func TestEnvironmentVariableCredentialSource_token(t *testing.T) {
-	type fields struct {
-		Var              string
-		CredentialFormat CredentialFormat
-	}
 	tests := []struct {
 		name        string
 		ec          *EnvironmentVariableCredentialSource

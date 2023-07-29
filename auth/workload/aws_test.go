@@ -214,7 +214,7 @@ func TestAWSCredentialSource_getCallerID(t *testing.T) {
 				t.Setenv(awsEnvRegion, tt.region)
 			}
 			if tt.env.accessKeyID {
-				t.Setenv(awsEnvAccessKeyId, tt.accessKeyID)
+				t.Setenv(awsEnvAccessKeyID, tt.accessKeyID)
 			}
 			if tt.env.secretAccessKey {
 				t.Setenv(awsEnvSecretAccessKey, tt.secretAccessKey)
@@ -287,17 +287,18 @@ func (aws *testAwsServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	validateSessionTTL := func(r *http.Request) {
 		if aws.imdsv2SessionToken != "" {
-			headerValue := r.Header.Get(awsIMDSv2SessionTtlHeader)
-			if headerValue != awsIMDSv2SessionTtl {
-				aws.t.Errorf("%q = \n%q\n want \n%q", awsIMDSv2SessionTtlHeader, headerValue, awsIMDSv2SessionTtl)
+			headerValue := r.Header.Get(awsIMDSv2SessionTTLHeader)
+			if headerValue != awsIMDSv2SessionTTL {
+				aws.t.Errorf("%q = \n%q\n want \n%q", awsIMDSv2SessionTTLHeader, headerValue, awsIMDSv2SessionTTL)
 			}
 		}
 	}
 
+	var err error
 	switch p := r.URL.Path; p {
 	case "/latest/meta-data/iam/security-credentials":
 		validateSessionToken(r)
-		w.Write([]byte(aws.rolename))
+		_, err = w.Write([]byte(aws.rolename))
 	case fmt.Sprintf("/latest/meta-data/iam/security-credentials/%s", aws.rolename):
 		validateSessionToken(r)
 
@@ -314,12 +315,16 @@ func (aws *testAwsServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 
 		jsonCredentials, _ := json.Marshal(creds)
-		w.Write(jsonCredentials)
+		_, err = w.Write(jsonCredentials)
 	case "/latest/meta-data/placement/region":
 		validateSessionToken(r)
-		w.Write([]byte(aws.region))
+		_, err = w.Write([]byte(aws.region))
 	case "/latest/api/token":
 		validateSessionTTL(r)
-		w.Write([]byte(aws.imdsv2SessionToken))
+		_, err = w.Write([]byte(aws.imdsv2SessionToken))
+	}
+
+	if err != nil {
+		aws.t.Fatalf("unexpected error: %v", err)
 	}
 }

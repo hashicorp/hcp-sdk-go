@@ -59,11 +59,6 @@ func TestURLCredentialSource_Validate(t *testing.T) {
 }
 
 func TestURLCredentialSource_token(t *testing.T) {
-	type fields struct {
-		URL              string
-		Headers          map[string]string
-		CredentialFormat CredentialFormat
-	}
 	tests := []struct {
 		name     string
 		uc       *URLCredentialSource
@@ -137,7 +132,8 @@ func TestURLCredentialSource_token(t *testing.T) {
 
 			// Create an HTTP test server
 			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				w.Write([]byte(tt.respBody))
+				_, err := w.Write([]byte(tt.respBody))
+				require.NoError(err)
 			}))
 			defer ts.Close()
 
