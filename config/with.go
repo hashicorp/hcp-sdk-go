@@ -116,7 +116,8 @@ func WithAuth(authURL string, tlsConfig *tls.Config) HCPConfigOption {
 	}
 }
 
-// WithOAuth2ClientID credentials is an option that can be used to provide a custom OAuth2 Client ID.
+// WithOAuth2ClientID credentials is an option that can be used to provide a
+// custom OAuth2 Client ID.
 //
 // An alternative OAuth2 ClientID can be provided, if none is provided the
 // default OAuth2 Client ID will be used.
@@ -152,8 +153,9 @@ func WithProfile(p *profile.UserProfile) HCPConfigOption {
 	}
 }
 
-// WithoutBrowserLogin disables the automatic opening of the browser login if no valid auth method is found
-// instead force the return of a typed error for users to catch.
+// WithoutBrowserLogin disables the automatic opening of the browser login if no
+// valid auth method is found instead force the return of a typed error for
+// users to catch.
 func WithoutBrowserLogin() HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.noBrowserLogin = true
@@ -161,11 +163,31 @@ func WithoutBrowserLogin() HCPConfigOption {
 	}
 }
 
-// WithoutLogging disables this SDK from printing of any kind, this is necessary since there is not a consistent logger
-// that is used throughout the project so a log level option is not sufficient.
+// WithoutLogging disables this SDK from printing of any kind, this is necessary
+// since there is not a consistent logger that is used throughout the project so
+// a log level option is not sufficient.
 func WithoutLogging() HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.suppressLogging = true
 		return nil
+	}
+}
+
+// WithCredentialFile sets the given credential file to be used as an
+// authentication source.
+func WithCredentialFile(cf *auth.CredentialFile) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.credentialFile = cf
+		return config.credentialFile.Validate()
+	}
+}
+
+// WithCredentialFilePath will search for a credential file at the given path to
+// be used as an authentication source.
+func WithCredentialFilePath(p string) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		cf, err := auth.ReadCredentialFile(p)
+		config.credentialFile = cf
+		return err
 	}
 }

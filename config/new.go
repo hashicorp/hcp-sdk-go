@@ -13,6 +13,7 @@ import (
 
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"github.com/hashicorp/hcp-sdk-go/profile"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
@@ -108,37 +109,9 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		}
 	}
 
-	// Set up a token context with the custom auth TLS config
-	tokenTransport := cleanhttp.DefaultPooledTransport()
-	tokenTransport.TLSClientConfig = config.authTLSConfig
-	tokenContext := context.WithValue(
-		context.Background(),
-		oauth2.HTTPClient,
-		&http.Client{Transport: tokenTransport},
-	)
-
-	// Configure the token source if it hasn't been set by the provided options
-	if config.tokenSource == nil {
-		// Set access token via configured client credentials.
-		if config.clientCredentialsConfig.ClientID != "" && config.clientCredentialsConfig.ClientSecret != "" {
-			// Set token URL based on auth URL.
-			tokenURL := config.authURL
-			tokenURL.Path = tokenPath
-			config.clientCredentialsConfig.TokenURL = tokenURL.String()
-
-			// Create token source from the client credentials configuration.
-			config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
-
-		} else { // Set access token via browser login or use token from existing session.
-
-			tok, err := config.session.GetToken(tokenContext, &config.oauth2Config)
-			if err != nil {
-				return nil, fmt.Errorf("failed to find existing session or set up new: %w", err)
-			}
-
-			// Update HCPConfig with most current token values.
-			config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
-		}
+	// Configure the token source
+	if err := config.setTokenSource(); err != nil {
+		return nil, err
 	}
 
 	if err := config.validate(); err != nil {
@@ -146,4 +119,87 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 	}
 
 	return config, nil
+}
+
+// setTokenSource sets the token source. If the token source has been explictely
+// set, it is a no-op. Otherwise the order of precedence is:
+//
+// 1. Configured client credentials (either explicit or through environment
+// variables).
+// 2. Via credential file (sourced first via environment variable and then
+// default file location).
+// 3. Interactive session.
+func (c *hcpConfig) setTokenSource() error {
+	// token source is already explicitely configured.
+	if c.tokenSource != nil {
+		return nil
+	}
+
+	// Set up a token context with the custom auth TLS config
+	tokenTransport := cleanhttp.DefaultPooledTransport()
+	tokenTransport.TLSClientConfig = c.authTLSConfig
+	ctx := context.WithValue(
+		context.Background(),
+		oauth2.HTTPClient,
+		&http.Client{Transport: tokenTransport},
+	)
+
+	// Set access token via configured client credentials.
+	if c.clientCredentialsConfig.ClientID != "" && c.clientCredentialsConfig.ClientSecret != "" {
+		c.configureClientCredentialTokenSource(ctx, c.clientCredentialsConfig.ClientID, c.clientCredentialsConfig.ClientSecret)
+		return nil
+	}
+
+	// If we haven't been given an explicit credential file to use, try to load
+	// the credential file from the environment or default location.
+	if c.credentialFile == nil {
+		credFile, err := auth.GetDefaultCredentialFile()
+		if err != nil {
+			return err
+		}
+		c.credentialFile = credFile
+	}
+
+	// If we found a credential file use it as a credential source
+	if c.credentialFile != nil {
+		if c.credentialFile.Scheme == auth.CredentialFileSchemeServicePrincipal {
+			c.configureClientCredentialTokenSource(ctx, c.credentialFile.Oauth.ClientID, c.credentialFile.Oauth.SecretID)
+			return nil
+		} else if c.credentialFile.Scheme == auth.CredentialFileSchemeWorkload {
+			w, err := workload.New(c.credentialFile.Workload)
+			if err != nil {
+				return err
+			}
+
+			// Set the API info
+			w.SetAPI(c)
+
+			// Use the workload provider as the token source
+			c.tokenSource = w
+		}
+
+		return nil
+	}
+
+	// Set access token via browser login or use token from existing session.
+	tok, err := c.session.GetToken(ctx, &c.oauth2Config)
+	if err != nil {
+		return fmt.Errorf("failed to find existing session or set up new: %w", err)
+	}
+
+	// Update HCPConfig with most current token values.
+	c.tokenSource = c.oauth2Config.TokenSource(ctx, tok)
+	return nil
+}
+
+// configureClientCredentialTokenSource configures the credential source to use
+// the passed client credentials.
+func (c *hcpConfig) configureClientCredentialTokenSource(ctx context.Context, clientID, secretID string) {
+	// Set token URL based on auth URL.
+	tokenURL := c.authURL
+	tokenURL.Path = tokenPath
+	c.clientCredentialsConfig.TokenURL = tokenURL.String()
+
+	// Create token source from the client credentials configuration.
+	c.tokenSource = c.clientCredentialsConfig.TokenSource(ctx)
 }
