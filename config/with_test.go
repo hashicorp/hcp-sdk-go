@@ -12,7 +12,6 @@ import (
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/profile"
-	"github.com/stretchr/testify/require"
 	requirepkg "github.com/stretchr/testify/require"
 )
 
@@ -192,6 +191,6 @@ func TestWith_CredentialFilePath(t *testing.T) {
 	t.Run("not found", func(t *testing.T) {
 		// Exercise
 		config := &hcpConfig{}
-		require.Error(t, apply(config, WithCredentialFilePath(fmt.Sprintf("random-%d", rand.Int()))))
+		requirepkg.Error(t, apply(config, WithCredentialFilePath(fmt.Sprintf("random-%d", rand.Int()))))
 	})
 }

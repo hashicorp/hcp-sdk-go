@@ -130,7 +130,7 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 // default file location).
 // 3. Interactive session.
 func (c *hcpConfig) setTokenSource() error {
-	// token source is already explicitely configured.
+	// token source is already explicitly configured.
 	if c.tokenSource != nil {
 		return nil
 	}
