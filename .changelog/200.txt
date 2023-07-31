@@ -1,0 +1,4 @@
+```release-note:feature
+SDK can authenticate using a credential file. The credential file can specify
+service principal credentials or workload identity provided credentials.
+```

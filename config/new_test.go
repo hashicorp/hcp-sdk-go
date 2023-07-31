@@ -5,9 +5,11 @@ package config
 
 import (
 	"crypto/tls"
+	"io/ioutil"
 	"testing"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"github.com/hashicorp/hcp-sdk-go/profile"
 	requirepkg "github.com/stretchr/testify/require"
 )
@@ -165,4 +167,33 @@ func TestNew_NoConfigPassed(t *testing.T) {
 	require.Equal(defaultPortalURL, config.PortalURL().String())
 	require.Equal(defaultAPIAddress, config.APIAddress())
 	require.Equal(defaultSCADAAddress, config.SCADAAddress())
+}
+
+func TestNew_CredentialFile(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Write the cred file
+	cf := &auth.CredentialFile{
+		ProjectID: "123",
+		Scheme:    auth.CredentialFileSchemeWorkload,
+		Workload: &workload.IdentityProviderConfig{
+			ProviderResourceName: "iam/test",
+			AWS:                  &workload.AWSCredentialSource{},
+		},
+	}
+
+	f, err := ioutil.TempFile("", "")
+	require.NoError(err)
+	require.NoError(auth.WriteCredentialFile(f.Name(), cf))
+
+	// Exercise
+	t.Setenv(auth.EnvHCPCredFile, f.Name())
+	config, err := NewHCPConfig()
+	require.NoError(err)
+
+	rawConfig, ok := config.(*hcpConfig)
+	require.True(ok)
+
+	_, ok = rawConfig.tokenSource.(*workload.Provider)
+	require.True(ok)
 }

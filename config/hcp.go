@@ -101,6 +101,9 @@ type hcpConfig struct {
 
 	// suppressLogging is an option to prevent this SDK from printing anything
 	suppressLogging bool
+
+	// credentialFile is the credential file to use.
+	credentialFile *auth.CredentialFile
 }
 
 func (c *hcpConfig) Profile() *profile.UserProfile {
