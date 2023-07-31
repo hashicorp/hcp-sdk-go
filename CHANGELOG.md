@@ -1,3 +1,10 @@
+## v0.57.0 (July 31, 2023)
+
+FEATURES:
+
+* SDK can authenticate using Workload Identity Federation. [[GH-199](https://github.com/hashicorp/hcp-sdk-go/pull/199)]
+* SDK can authenticate using a credential file. The credential file can specify
+service principal credentials or workload identity provided credentials. [[GH-200](https://github.com/hashicorp/hcp-sdk-go/pull/200)]
 ## v0.56.0 (July 28, 2023)
 
 ## v0.55.0 (July 26, 2023)
