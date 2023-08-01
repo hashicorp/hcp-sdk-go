@@ -13,7 +13,7 @@ import (
 type FileCredentialSource struct {
 	// Path sources the external credential by reading the value from the
 	// specified file path.
-	Path string `json:"path"`
+	Path string `json:"path,omitempty"`
 
 	// CredentialFormat configures how the credentials are extracted from the file.
 	CredentialFormat

@@ -104,7 +104,7 @@ const (
 // identity of the AWS workload.
 type AWSCredentialSource struct {
 	// IMDSv2 indicates that IMDSv2 endpoint should be used.
-	IMDSv2 bool `json:"imds_v2"`
+	IMDSv2 bool `json:"imds_v2,omitempty"`
 
 	// client is the http client used to make requests
 	client *http.Client

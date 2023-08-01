@@ -22,21 +22,21 @@ import (
 type IdentityProviderConfig struct {
 	// ProviderResourceName is the resource name of the workload identity
 	// provider to exchange the access_token with.
-	ProviderResourceName string `json:"provider_resource_name"`
+	ProviderResourceName string `json:"provider_resource_name,omitempty"`
 
 	// File sources the subject credential from a file.
-	File *FileCredentialSource `json:"file"`
+	File *FileCredentialSource `json:"file,omitempty"`
 
 	// EnvironmentVariable sources the subject credential from an environment
 	// variable.
-	EnvironmentVariable *EnvironmentVariableCredentialSource `json:"env"`
+	EnvironmentVariable *EnvironmentVariableCredentialSource `json:"env,omitempty"`
 
 	// URL sources the subject credential by making a HTTP request to the
 	// provided URL.
-	URL *URLCredentialSource `json:"url"`
+	URL *URLCredentialSource `json:"url,omitempty"`
 
 	// AWS uses the IMDS endpoint to retrieve the AWS Caller Identity.
-	AWS *AWSCredentialSource `json:"aws"`
+	AWS *AWSCredentialSource `json:"aws,omitempty"`
 }
 
 // Validate validates the config.

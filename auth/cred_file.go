@@ -40,26 +40,26 @@ var (
 // supports various authentication schemes, such as service principal
 type CredentialFile struct {
 	// ProjectID captures the project ID of the service principal. It may be blank.
-	ProjectID string `json:"project_id"`
+	ProjectID string `json:"project_id,omitempty"`
 
 	// Scheme is the authentication scheme. It may be one of: service_principal_creds, workload.
-	Scheme string `json:"scheme"`
+	Scheme string `json:"scheme,omitempty"`
 
 	// Workload configures the workload identity provider to exchange tokens
 	// with.
-	Workload *workload.IdentityProviderConfig `json:"workload"`
+	Workload *workload.IdentityProviderConfig `json:"workload,omitempty"`
 
 	// Oauth configures authentication via Oauth.
-	Oauth *OauthConfig `json:"oauth"`
+	Oauth *OauthConfig `json:"oauth,omitempty"`
 }
 
 // OauthConfig configures authentication based on OAuth credentials.
 type OauthConfig struct {
 	// ClientID is the client id of an HCP Service Principal
-	ClientID string `json:"client_id"`
+	ClientID string `json:"client_id,omitempty"`
 
 	// SecretID is the secret id of an HCP Service Principal
-	SecretID string `json:"secret_id"`
+	SecretID string `json:"secret_id,omitempty"`
 }
 
 // Validate validates the CredentialFile
