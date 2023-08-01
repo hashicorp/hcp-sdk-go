@@ -1,0 +1,3 @@
+```release-note:improvement
+Credential file omits not set fields when encoded as JSON.
+```
