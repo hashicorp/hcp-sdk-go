@@ -15,6 +15,7 @@ import (
 	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // OrganizationServiceTestIamPermissionsReader is a Reader for the OrganizationServiceTestIamPermissions structure.
@@ -54,7 +55,7 @@ OrganizationServiceTestIamPermissionsOK describes a response with status code 20
 A successful response.
 */
 type OrganizationServiceTestIamPermissionsOK struct {
-	Payload *models.ResourcemanagerOrganizationTestIamPermissionsResponse
+	Payload *models.HashicorpCloudResourcemanagerOrganizationTestIamPermissionsResponse
 }
 
 // IsSuccess returns true when this organization service test iam permissions o k response has a 2xx status code
@@ -90,13 +91,13 @@ func (o *OrganizationServiceTestIamPermissionsOK) String() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations/{id}/test-iam-permissions][%d] organizationServiceTestIamPermissionsOK  %+v", 200, o.Payload)
 }
 
-func (o *OrganizationServiceTestIamPermissionsOK) GetPayload() *models.ResourcemanagerOrganizationTestIamPermissionsResponse {
+func (o *OrganizationServiceTestIamPermissionsOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationTestIamPermissionsResponse {
 	return o.Payload
 }
 
 func (o *OrganizationServiceTestIamPermissionsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResourcemanagerOrganizationTestIamPermissionsResponse)
+	o.Payload = new(models.HashicorpCloudResourcemanagerOrganizationTestIamPermissionsResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -121,7 +122,7 @@ An unexpected error response.
 type OrganizationServiceTestIamPermissionsDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the organization service test iam permissions default response
@@ -162,13 +163,13 @@ func (o *OrganizationServiceTestIamPermissionsDefault) String() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations/{id}/test-iam-permissions][%d] OrganizationService_TestIamPermissions default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *OrganizationServiceTestIamPermissionsDefault) GetPayload() *models.RPCStatus {
+func (o *OrganizationServiceTestIamPermissionsDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *OrganizationServiceTestIamPermissionsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // ProjectServiceListReader is a Reader for the ProjectServiceList structure.
@@ -52,7 +53,7 @@ ProjectServiceListOK describes a response with status code 200, with default hea
 A successful response.
 */
 type ProjectServiceListOK struct {
-	Payload *models.ResourcemanagerProjectListResponse
+	Payload *models.HashicorpCloudResourcemanagerProjectListResponse
 }
 
 // IsSuccess returns true when this project service list o k response has a 2xx status code
@@ -88,13 +89,13 @@ func (o *ProjectServiceListOK) String() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] projectServiceListOK  %+v", 200, o.Payload)
 }
 
-func (o *ProjectServiceListOK) GetPayload() *models.ResourcemanagerProjectListResponse {
+func (o *ProjectServiceListOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectListResponse {
 	return o.Payload
 }
 
 func (o *ProjectServiceListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResourcemanagerProjectListResponse)
+	o.Payload = new(models.HashicorpCloudResourcemanagerProjectListResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -119,7 +120,7 @@ An unexpected error response.
 type ProjectServiceListDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the project service list default response
@@ -160,13 +161,13 @@ func (o *ProjectServiceListDefault) String() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] ProjectService_List default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ProjectServiceListDefault) GetPayload() *models.RPCStatus {
+func (o *ProjectServiceListDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *ProjectServiceListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

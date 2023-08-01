@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // OrganizationServiceCreateReader is a Reader for the OrganizationServiceCreate structure.
@@ -52,7 +53,7 @@ OrganizationServiceCreateOK describes a response with status code 200, with defa
 A successful response.
 */
 type OrganizationServiceCreateOK struct {
-	Payload *models.ResourcemanagerOrganizationCreateResponse
+	Payload *models.HashicorpCloudResourcemanagerOrganizationCreateResponse
 }
 
 // IsSuccess returns true when this organization service create o k response has a 2xx status code
@@ -88,13 +89,13 @@ func (o *OrganizationServiceCreateOK) String() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations][%d] organizationServiceCreateOK  %+v", 200, o.Payload)
 }
 
-func (o *OrganizationServiceCreateOK) GetPayload() *models.ResourcemanagerOrganizationCreateResponse {
+func (o *OrganizationServiceCreateOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationCreateResponse {
 	return o.Payload
 }
 
 func (o *OrganizationServiceCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResourcemanagerOrganizationCreateResponse)
+	o.Payload = new(models.HashicorpCloudResourcemanagerOrganizationCreateResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -119,7 +120,7 @@ An unexpected error response.
 type OrganizationServiceCreateDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the organization service create default response
@@ -160,13 +161,13 @@ func (o *OrganizationServiceCreateDefault) String() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/organizations][%d] OrganizationService_Create default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *OrganizationServiceCreateDefault) GetPayload() *models.RPCStatus {
+func (o *OrganizationServiceCreateDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *OrganizationServiceCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

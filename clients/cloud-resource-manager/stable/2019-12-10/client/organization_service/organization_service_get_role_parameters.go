@@ -161,8 +161,8 @@ func (o *OrganizationServiceGetRoleParams) WriteToRequest(r runtime.ClientReques
 		return err
 	}
 
-	// path param roleId
-	if err := r.SetPathParam("roleId", o.RoleID); err != nil {
+	// path param role_id
+	if err := r.SetPathParam("role_id", o.RoleID); err != nil {
 		return err
 	}
 

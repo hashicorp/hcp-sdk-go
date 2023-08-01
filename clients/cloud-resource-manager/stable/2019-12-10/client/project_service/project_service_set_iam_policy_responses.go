@@ -16,6 +16,7 @@ import (
 	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // ProjectServiceSetIamPolicyReader is a Reader for the ProjectServiceSetIamPolicy structure.
@@ -55,7 +56,7 @@ ProjectServiceSetIamPolicyOK describes a response with status code 200, with def
 A successful response.
 */
 type ProjectServiceSetIamPolicyOK struct {
-	Payload *models.ResourcemanagerProjectSetIamPolicyResponse
+	Payload *models.HashicorpCloudResourcemanagerProjectSetIamPolicyResponse
 }
 
 // IsSuccess returns true when this project service set iam policy o k response has a 2xx status code
@@ -91,13 +92,13 @@ func (o *ProjectServiceSetIamPolicyOK) String() string {
 	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceSetIamPolicyOK  %+v", 200, o.Payload)
 }
 
-func (o *ProjectServiceSetIamPolicyOK) GetPayload() *models.ResourcemanagerProjectSetIamPolicyResponse {
+func (o *ProjectServiceSetIamPolicyOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectSetIamPolicyResponse {
 	return o.Payload
 }
 
 func (o *ProjectServiceSetIamPolicyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResourcemanagerProjectSetIamPolicyResponse)
+	o.Payload = new(models.HashicorpCloudResourcemanagerProjectSetIamPolicyResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -122,7 +123,7 @@ An unexpected error response.
 type ProjectServiceSetIamPolicyDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the project service set iam policy default response
@@ -163,13 +164,13 @@ func (o *ProjectServiceSetIamPolicyDefault) String() string {
 	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] ProjectService_SetIamPolicy default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ProjectServiceSetIamPolicyDefault) GetPayload() *models.RPCStatus {
+func (o *ProjectServiceSetIamPolicyDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *ProjectServiceSetIamPolicyDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -188,7 +189,7 @@ type ProjectServiceSetIamPolicyBody struct {
 	// Policy is the IAM policy to be updated for the project. The policy
 	// will be completely replaced and therefore Policy.Etag must be specified
 	// in order to prevent concurrent updates.
-	Policy *models.ResourcemanagerPolicy `json:"policy,omitempty"`
+	Policy *models.HashicorpCloudResourcemanagerPolicy `json:"policy,omitempty"`
 }
 
 // Validate validates this project service set iam policy body
