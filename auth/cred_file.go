@@ -125,7 +125,7 @@ func ReadCredentialFile(path string) (*CredentialFile, error) {
 // to look for an override. If no credential file is found, a nil value will be
 // returned with no error set.
 func GetDefaultCredentialFile() (*CredentialFile, error) {
-	p, err := getCredentialFilePath()
+	p, err := GetCredentialFilePath()
 	if err != nil {
 		return nil, fmt.Errorf("failed to find credential file: %v", err)
 	}
@@ -140,10 +140,10 @@ func GetDefaultCredentialFile() (*CredentialFile, error) {
 	return cf, err
 }
 
-// getCredentialFilePath returns the credential file path, first looking for an
+// GetCredentialFilePath returns the credential file path, first looking for an
 // overriding environment variable and then falling back to the default file
 // location.
-func getCredentialFilePath() (string, error) {
+func GetCredentialFilePath() (string, error) {
 	if testDefaultHCPCredFilePath != "" {
 		return testDefaultHCPCredFilePath, nil
 	}
@@ -165,7 +165,7 @@ func getCredentialFilePath() (string, error) {
 // WriteDefaultCredentialFile writes the credential file to the default
 // credential file location or to the value of EnvHCPCredFile if set.
 func WriteDefaultCredentialFile(cf *CredentialFile) error {
-	p, err := getCredentialFilePath()
+	p, err := GetCredentialFilePath()
 	if err != nil {
 		return err
 	}

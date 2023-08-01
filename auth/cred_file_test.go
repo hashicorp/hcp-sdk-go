@@ -216,14 +216,14 @@ func Test_getCredentialFilePath(t *testing.T) {
 		r := require.New(t)
 		cf := "test-path"
 		t.Setenv(EnvHCPCredFile, cf)
-		p, err := getCredentialFilePath()
+		p, err := GetCredentialFilePath()
 		r.NoError(err)
 		r.Equal(cf, p)
 	})
 
 	t.Run("without  env", func(t *testing.T) {
 		r := require.New(t)
-		p, err := getCredentialFilePath()
+		p, err := GetCredentialFilePath()
 		r.NoError(err)
 		r.Contains(p, CredentialFileName)
 	})
