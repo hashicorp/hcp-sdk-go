@@ -40,26 +40,26 @@ var (
 // supports various authentication schemes, such as service principal
 type CredentialFile struct {
 	// ProjectID captures the project ID of the service principal. It may be blank.
-	ProjectID string `json:"project_id"`
+	ProjectID string `json:"project_id,omitempty"`
 
 	// Scheme is the authentication scheme. It may be one of: service_principal_creds, workload.
-	Scheme string `json:"scheme"`
+	Scheme string `json:"scheme,omitempty"`
 
 	// Workload configures the workload identity provider to exchange tokens
 	// with.
-	Workload *workload.IdentityProviderConfig `json:"workload"`
+	Workload *workload.IdentityProviderConfig `json:"workload,omitempty"`
 
 	// Oauth configures authentication via Oauth.
-	Oauth *OauthConfig `json:"oauth"`
+	Oauth *OauthConfig `json:"oauth,omitempty"`
 }
 
 // OauthConfig configures authentication based on OAuth credentials.
 type OauthConfig struct {
 	// ClientID is the client id of an HCP Service Principal
-	ClientID string `json:"client_id"`
+	ClientID string `json:"client_id,omitempty"`
 
 	// SecretID is the secret id of an HCP Service Principal
-	SecretID string `json:"secret_id"`
+	SecretID string `json:"secret_id,omitempty"`
 }
 
 // Validate validates the CredentialFile
@@ -125,7 +125,7 @@ func ReadCredentialFile(path string) (*CredentialFile, error) {
 // to look for an override. If no credential file is found, a nil value will be
 // returned with no error set.
 func GetDefaultCredentialFile() (*CredentialFile, error) {
-	p, err := getCredentialFilePath()
+	p, err := GetCredentialFilePath()
 	if err != nil {
 		return nil, fmt.Errorf("failed to find credential file: %v", err)
 	}
@@ -140,10 +140,10 @@ func GetDefaultCredentialFile() (*CredentialFile, error) {
 	return cf, err
 }
 
-// getCredentialFilePath returns the credential file path, first looking for an
+// GetCredentialFilePath returns the credential file path, first looking for an
 // overriding environment variable and then falling back to the default file
 // location.
-func getCredentialFilePath() (string, error) {
+func GetCredentialFilePath() (string, error) {
 	if testDefaultHCPCredFilePath != "" {
 		return testDefaultHCPCredFilePath, nil
 	}
@@ -165,7 +165,7 @@ func getCredentialFilePath() (string, error) {
 // WriteDefaultCredentialFile writes the credential file to the default
 // credential file location or to the value of EnvHCPCredFile if set.
 func WriteDefaultCredentialFile(cf *CredentialFile) error {
-	p, err := getCredentialFilePath()
+	p, err := GetCredentialFilePath()
 	if err != nil {
 		return err
 	}

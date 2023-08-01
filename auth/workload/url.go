@@ -16,10 +16,10 @@ import (
 // given URL.
 type URLCredentialSource struct {
 	// URL reads the credentials by invoking the given URL with the headers.
-	URL string `json:"url"`
+	URL string `json:"url,omitempty"`
 
 	// Headers are included when invoking the given URL.
-	Headers map[string]string `json:"headers"`
+	Headers map[string]string `json:"headers,omitempty"`
 
 	// CredentialFormat configures how the credentials are extracted from the HTTP
 	// response body.

@@ -9,7 +9,7 @@ import (
 // specified environment variable.
 type EnvironmentVariableCredentialSource struct {
 	// Var sources the external credential value from the given environment variable.
-	Var string `json:"var"`
+	Var string `json:"var,omitempty"`
 
 	// CredentialFormat configures how the credentials are extracted from the environment
 	// variable value.

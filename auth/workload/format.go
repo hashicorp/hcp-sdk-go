@@ -21,11 +21,11 @@ const (
 // extracting a particular field from a JSON response.
 type CredentialFormat struct {
 	// Type is either "text" or "json". When not provided "text" type is assumed.
-	Type string `json:"format_type"`
+	Type string `json:"format_type,omitempty"`
 
 	// SubjectCredentialPointer is a JSON pointer that indicates how to access
 	// the subject credential.
-	SubjectCredentialPointer string `json:"subject_cred_pointer"`
+	SubjectCredentialPointer string `json:"subject_cred_pointer,omitempty"`
 }
 
 // Validate validates the format configuration.
