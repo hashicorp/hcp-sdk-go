@@ -1,3 +1,8 @@
+## v0.58.0 (August 01, 2023)
+
+IMPROVEMENTS:
+
+* Credential file omits not set fields when encoded as JSON. [[GH-202](https://github.com/hashicorp/hcp-sdk-go/pull/202)]
 ## v0.57.0 (July 31, 2023)
 
 FEATURES:
