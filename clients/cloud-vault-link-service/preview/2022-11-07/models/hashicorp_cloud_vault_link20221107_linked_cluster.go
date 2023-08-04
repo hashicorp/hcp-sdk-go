@@ -28,6 +28,13 @@ type HashicorpCloudVaultLink20221107LinkedCluster struct {
 	// it is configured directly in the self-managed cluster.
 	ClusterName string `json:"cluster_name,omitempty"`
 
+	// created at
+	// Format: date-time
+	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+
+	// credentials revoked
+	CredentialsRevoked bool `json:"credentials_revoked,omitempty"`
+
 	// current version
 	CurrentVersion string `json:"current_version,omitempty"`
 
@@ -40,7 +47,9 @@ type HashicorpCloudVaultLink20221107LinkedCluster struct {
 	// internal id
 	InternalID string `json:"internal_id,omitempty"`
 
-	// is sealed
+	// we don't support this since we cannot determine when a cluster is completely sealed
+	// due to not having access to the total number of nodes in a cluster when all connected nodes
+	// are sealed, including the active one.
 	IsSealed bool `json:"is_sealed,omitempty"`
 
 	// linked at
@@ -67,6 +76,10 @@ type HashicorpCloudVaultLink20221107LinkedCluster struct {
 func (m *HashicorpCloudVaultLink20221107LinkedCluster) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLinkedAt(formats); err != nil {
 		res = append(res, err)
 	}
@@ -90,6 +103,18 @@ func (m *HashicorpCloudVaultLink20221107LinkedCluster) Validate(formats strfmt.R
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVaultLink20221107LinkedCluster) validateCreatedAt(formats strfmt.Registry) error {
+	if swag.IsZero(m.CreatedAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
+		return err
+	}
+
 	return nil
 }
 

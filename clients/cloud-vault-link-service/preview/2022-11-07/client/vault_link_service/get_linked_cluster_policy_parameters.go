@@ -62,7 +62,7 @@ GetLinkedClusterPolicyParams contains all the parameters to send to the API endp
 type GetLinkedClusterPolicyParams struct {
 
 	// ClusterID.
-	ClusterID *string
+	ClusterID string
 
 	/* LocationOrganizationID.
 
@@ -78,13 +78,13 @@ type GetLinkedClusterPolicyParams struct {
 
 	/* LocationRegionProvider.
 
-	   provider is the named cloud provider ("aws", "gcp", "azure").
+	   provider is the named cloud provider ("aws", "gcp", "azure")
 	*/
 	LocationRegionProvider *string
 
 	/* LocationRegionRegion.
 
-	   region is the cloud region ("us-west1", "us-east1").
+	   region is the cloud region ("us-west1", "us-east1")
 	*/
 	LocationRegionRegion *string
 
@@ -142,13 +142,13 @@ func (o *GetLinkedClusterPolicyParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithClusterID adds the clusterID to the get linked cluster policy params
-func (o *GetLinkedClusterPolicyParams) WithClusterID(clusterID *string) *GetLinkedClusterPolicyParams {
+func (o *GetLinkedClusterPolicyParams) WithClusterID(clusterID string) *GetLinkedClusterPolicyParams {
 	o.SetClusterID(clusterID)
 	return o
 }
 
 // SetClusterID adds the clusterId to the get linked cluster policy params
-func (o *GetLinkedClusterPolicyParams) SetClusterID(clusterID *string) {
+func (o *GetLinkedClusterPolicyParams) SetClusterID(clusterID string) {
 	o.ClusterID = clusterID
 }
 
@@ -204,21 +204,9 @@ func (o *GetLinkedClusterPolicyParams) WriteToRequest(r runtime.ClientRequest, r
 	}
 	var res []error
 
-	if o.ClusterID != nil {
-
-		// query param cluster_id
-		var qrClusterID string
-
-		if o.ClusterID != nil {
-			qrClusterID = *o.ClusterID
-		}
-		qClusterID := qrClusterID
-		if qClusterID != "" {
-
-			if err := r.SetQueryParam("cluster_id", qClusterID); err != nil {
-				return err
-			}
-		}
+	// path param cluster_id
+	if err := r.SetPathParam("cluster_id", o.ClusterID); err != nil {
+		return err
 	}
 
 	// path param location.organization_id

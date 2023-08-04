@@ -14,7 +14,8 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatus hashicorp cloud vault link 20221107 linked cluster node leader status
+// HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatus - LEADER: Deprecated values
+//   - ACTIVE: Valid values
 //
 // swagger:model hashicorp.cloud.vault_link_20221107.LinkedClusterNode.LeaderStatus
 type HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatus string
@@ -38,6 +39,15 @@ const (
 
 	// HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatusFOLLOWER captures enum value "FOLLOWER"
 	HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatusFOLLOWER HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatus = "FOLLOWER"
+
+	// HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatusACTIVE captures enum value "ACTIVE"
+	HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatusACTIVE HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatus = "ACTIVE"
+
+	// HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatusSTANDBY captures enum value "STANDBY"
+	HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatusSTANDBY HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatus = "STANDBY"
+
+	// HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatusPERFSTANDBY captures enum value "PERF_STANDBY"
+	HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatusPERFSTANDBY HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatus = "PERF_STANDBY"
 )
 
 // for schema
@@ -45,7 +55,7 @@ var hashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatusEnum []interface
 
 func init() {
 	var res []HashicorpCloudVaultLink20221107LinkedClusterNodeLeaderStatus
-	if err := json.Unmarshal([]byte(`["LEADER_STATUS_CLUSTER_STATE_INVALID","LEADER","FOLLOWER"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["LEADER_STATUS_CLUSTER_STATE_INVALID","LEADER","FOLLOWER","ACTIVE","STANDBY","PERF_STANDBY"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

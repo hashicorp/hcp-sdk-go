@@ -65,9 +65,13 @@ type HashicorpCloudVaultLink20221107LinkedClusterNode struct {
 	// node_initialized indicates if the node has been initialized.
 	NodeInitialized bool `json:"node_initialized,omitempty"`
 
-	// node_os is the lower-case name of the operating system the client is
-	// running on (e.g. linux, windows).
+	// node_os is the lower-case name of the operating system platform the client is
+	// running on (e.g. ubuntu).
 	NodeOs string `json:"node_os,omitempty"`
+
+	// node_os_version is the lower-case name of the operating system platform version the client is
+	// running on (e.g. 22.04).
+	NodeOsVersion string `json:"node_os_version,omitempty"`
 
 	// node_sealed indicates if the node is sealed.
 	NodeSealed bool `json:"node_sealed,omitempty"`

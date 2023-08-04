@@ -39,9 +39,6 @@ const (
 	// HashicorpCloudVaultLink20221107LinkedClusterStateLINKED captures enum value "LINKED"
 	HashicorpCloudVaultLink20221107LinkedClusterStateLINKED HashicorpCloudVaultLink20221107LinkedClusterState = "LINKED"
 
-	// HashicorpCloudVaultLink20221107LinkedClusterStateSEALED captures enum value "SEALED"
-	HashicorpCloudVaultLink20221107LinkedClusterStateSEALED HashicorpCloudVaultLink20221107LinkedClusterState = "SEALED"
-
 	// HashicorpCloudVaultLink20221107LinkedClusterStateUNLINKING captures enum value "UNLINKING"
 	HashicorpCloudVaultLink20221107LinkedClusterStateUNLINKING HashicorpCloudVaultLink20221107LinkedClusterState = "UNLINKING"
 
@@ -54,7 +51,7 @@ var hashicorpCloudVaultLink20221107LinkedClusterStateEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVaultLink20221107LinkedClusterState
-	if err := json.Unmarshal([]byte(`["LINKED_CLUSTER_STATE_INVALID","LINKING","LINKED","SEALED","UNLINKING","UNLINKED"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["LINKED_CLUSTER_STATE_INVALID","LINKING","LINKED","UNLINKING","UNLINKED"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

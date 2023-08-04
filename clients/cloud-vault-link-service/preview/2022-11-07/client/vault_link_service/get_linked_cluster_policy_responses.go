@@ -82,11 +82,11 @@ func (o *GetLinkedClusterPolicyOK) IsCode(code int) bool {
 }
 
 func (o *GetLinkedClusterPolicyOK) Error() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/policy/{cluster_id}][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
 }
 
 func (o *GetLinkedClusterPolicyOK) String() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/policy/{cluster_id}][%d] getLinkedClusterPolicyOK  %+v", 200, o.Payload)
 }
 
 func (o *GetLinkedClusterPolicyOK) GetPayload() *models.HashicorpCloudVaultLink20221107GetLinkedClusterPolicyResponse {
@@ -154,11 +154,11 @@ func (o *GetLinkedClusterPolicyDefault) IsCode(code int) bool {
 }
 
 func (o *GetLinkedClusterPolicyDefault) Error() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/policy/{cluster_id}][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetLinkedClusterPolicyDefault) String() string {
-	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/policy][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/policy/{cluster_id}][%d] GetLinkedClusterPolicy default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetLinkedClusterPolicyDefault) GetPayload() *cloud.GoogleRPCStatus {
