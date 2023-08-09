@@ -1,3 +1,5 @@
+## v0.59.0 (August 09, 2023)
+
 ## v0.58.0 (August 01, 2023)
 
 IMPROVEMENTS:
