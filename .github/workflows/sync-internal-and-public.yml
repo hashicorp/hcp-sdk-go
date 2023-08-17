@@ -41,7 +41,9 @@ jobs:
           cp -a internal/clients temp/clients
           cp -a internal/docs temp/docs
           cp -a internal/scripts temp/scripts
-          cp -a internal/cmd/transform-swagger temp/cmd/transform-swagger
+          mkdir temp/cmd
+          mkdir temp/cmd/transform-swagger
+          cp -a internal/cmd/transform-swagger/* temp/cmd/transform-swagger/
           cp internal/README.md temp/README.md
           cp internal/catalog-info.yaml temp/catalog-info.yaml
           cp internal/mkdocs.yml temp/mkdocs.yml
