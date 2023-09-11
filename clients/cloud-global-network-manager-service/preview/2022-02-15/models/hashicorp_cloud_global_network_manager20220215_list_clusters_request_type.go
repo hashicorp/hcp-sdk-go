@@ -16,7 +16,7 @@ import (
 
 // HashicorpCloudGlobalNetworkManager20220215ListClustersRequestType Type limits responses to the specified cluster type
 //
-// - TYPE_UNSPECIFIED: unspecified type to filter on. If this is seen, default to self-managed clusters
+// - TYPE_UNSPECIFIED: unspecified type to filter on. If this error appears, default to self-managed clusters
 //   - TYPE_ALL: all cluster types
 //   - TYPE_SELF: self-managed clusters
 //   - TYPE_HCP: HCP-managed clusters

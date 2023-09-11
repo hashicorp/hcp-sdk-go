@@ -63,7 +63,7 @@ type AgentBootstrapConfigParams struct {
 
 	/* ConsulVersion.
 
-	   consul version of the cluster
+	   Consul version of the cluster
 	*/
 	ConsulVersion *string
 

@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-global-network-manager-service/preview/2022-02-15/client/global_network_manager_service"
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-global-network-manager-service/preview/2022-02-15/client/observability_service"
 )
 
 // Default cloud global network manager service HTTP client.
@@ -57,7 +56,6 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudGloba
 	cli := new(CloudGlobalNetworkManagerService)
 	cli.Transport = transport
 	cli.GlobalNetworkManagerService = global_network_manager_service.New(transport, formats)
-	cli.ObservabilityService = observability_service.New(transport, formats)
 	return cli
 }
 
@@ -104,8 +102,6 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type CloudGlobalNetworkManagerService struct {
 	GlobalNetworkManagerService global_network_manager_service.ClientService
 
-	ObservabilityService observability_service.ClientService
-
 	Transport runtime.ClientTransport
 }
 
@@ -113,5 +109,4 @@ type CloudGlobalNetworkManagerService struct {
 func (c *CloudGlobalNetworkManagerService) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.GlobalNetworkManagerService.SetTransport(transport)
-	c.ObservabilityService.SetTransport(transport)
 }

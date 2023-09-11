@@ -45,6 +45,9 @@ const (
 
 	// HashicorpCloudGlobalNetworkManager20220215PeeringConnectionStatusPEERINGFAILING captures enum value "PEERING_FAILING"
 	HashicorpCloudGlobalNetworkManager20220215PeeringConnectionStatusPEERINGFAILING HashicorpCloudGlobalNetworkManager20220215PeeringConnectionStatus = "PEERING_FAILING"
+
+	// HashicorpCloudGlobalNetworkManager20220215PeeringConnectionStatusPEERINGUNSYNCED captures enum value "PEERING_UNSYNCED"
+	HashicorpCloudGlobalNetworkManager20220215PeeringConnectionStatusPEERINGUNSYNCED HashicorpCloudGlobalNetworkManager20220215PeeringConnectionStatus = "PEERING_UNSYNCED"
 )
 
 // for schema
@@ -52,7 +55,7 @@ var hashicorpCloudGlobalNetworkManager20220215PeeringConnectionStatusEnum []inte
 
 func init() {
 	var res []HashicorpCloudGlobalNetworkManager20220215PeeringConnectionStatus
-	if err := json.Unmarshal([]byte(`["PEERING_UNDEFINED","PEERING_CONNECTING","PEERING_ACTIVE","PEERING_DELETING","PEERING_FAILING"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["PEERING_UNDEFINED","PEERING_CONNECTING","PEERING_ACTIVE","PEERING_DELETING","PEERING_FAILING","PEERING_UNSYNCED"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

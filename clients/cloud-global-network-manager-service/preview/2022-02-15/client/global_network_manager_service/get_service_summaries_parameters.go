@@ -79,6 +79,7 @@ type GetServiceSummariesParams struct {
 	- KIND_TERMINATING_GATEWAY: A terminating gateway service instance.
 	- KIND_INGRESS_GATEWAY: An ingress gateway service instance.
 	- KIND_DESTINATION: A Destination  for the Connect feature.
+	- KIND_API_GATEWAY: An API gateway service instance
 	*/
 	FilterKinds []string
 
@@ -126,7 +127,7 @@ type GetServiceSummariesParams struct {
 
 	/* PaginationNextPageToken.
 
-	     Specifies a page token to use to retrieve the next page. Set this to the
+	     Specifies a page token to use to retrieve the next page. Set this parameter to the
 	`next_page_token` returned by previous list requests to get the next page of
 	results. If set, `previous_page_token` must not be set.
 	*/
@@ -134,10 +135,10 @@ type GetServiceSummariesParams struct {
 
 	/* PaginationPageSize.
 
-	     The max number of results per page that should be returned. If the number
+	     The maximum number of results per page to return. If the number
 	of available results is larger than `page_size`, a `next_page_token` is
-	returned which can be used to get the next page of results in subsequent
-	requests. A value of zero will cause `page_size` to be defaulted.
+	returned, which you can use to get the next page of results in subsequent
+	requests. A value of zero causes `page_size` to be defaulted.
 
 	     Format: int64
 	*/
@@ -145,7 +146,7 @@ type GetServiceSummariesParams struct {
 
 	/* PaginationPreviousPageToken.
 
-	     Specifies a page token to use to retrieve the previous page. Set this to
+	     Specifies a page token to use to retrieve the previous page. Set parameter this to
 	the `previous_page_token` returned by previous list requests to get the
 	previous page of results. If set, `next_page_token` must not be set.
 	*/

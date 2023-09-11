@@ -22,6 +22,9 @@ type HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers struct {
 	// cluster_id is the user settable GNM cluster name.
 	ClusterID string `json:"cluster_id,omitempty"`
 
+	// licensing is the Consul licensing information
+	Licensing *HashicorpCloudGlobalNetworkManager20220215Licensing `json:"licensing,omitempty"`
+
 	// partition_name is the name of the admin partition on the cluster
 	PartitionName string `json:"partition_name,omitempty"`
 
@@ -33,6 +36,10 @@ type HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers struct {
 func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateLicensing(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePeers(formats); err != nil {
 		res = append(res, err)
 	}
@@ -40,6 +47,25 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers) Valida
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers) validateLicensing(formats strfmt.Registry) error {
+	if swag.IsZero(m.Licensing) { // not required
+		return nil
+	}
+
+	if m.Licensing != nil {
+		if err := m.Licensing.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("licensing")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("licensing")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -73,6 +99,10 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers) valida
 func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateLicensing(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidatePeers(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -80,6 +110,22 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers) Contex
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers) contextValidateLicensing(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Licensing != nil {
+		if err := m.Licensing.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("licensing")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("licensing")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

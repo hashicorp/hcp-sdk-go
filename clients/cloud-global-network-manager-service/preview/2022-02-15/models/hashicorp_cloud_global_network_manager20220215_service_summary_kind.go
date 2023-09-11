@@ -24,6 +24,7 @@ import (
 //   - KIND_TERMINATING_GATEWAY: A terminating gateway service instance.
 //   - KIND_INGRESS_GATEWAY: An ingress gateway service instance.
 //   - KIND_DESTINATION: A Destination  for the Connect feature.
+//   - KIND_API_GATEWAY: An API gateway service instance
 //
 // swagger:model hashicorp.cloud.global_network_manager_20220215.ServiceSummary.Kind
 type HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind string
@@ -59,6 +60,9 @@ const (
 
 	// HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKindKINDDESTINATION captures enum value "KIND_DESTINATION"
 	HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKindKINDDESTINATION HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind = "KIND_DESTINATION"
+
+	// HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKindKINDAPIGATEWAY captures enum value "KIND_API_GATEWAY"
+	HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKindKINDAPIGATEWAY HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind = "KIND_API_GATEWAY"
 )
 
 // for schema
@@ -66,7 +70,7 @@ var hashicorpCloudGlobalNetworkManager20220215ServiceSummaryKindEnum []interface
 
 func init() {
 	var res []HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind
-	if err := json.Unmarshal([]byte(`["KIND_UNSPECIFIED","KIND_TYPICAL","KIND_CONNECT_PROXY","KIND_MESH_GATEWAY","KIND_TERMINATING_GATEWAY","KIND_INGRESS_GATEWAY","KIND_DESTINATION"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["KIND_UNSPECIFIED","KIND_TYPICAL","KIND_CONNECT_PROXY","KIND_MESH_GATEWAY","KIND_TERMINATING_GATEWAY","KIND_INGRESS_GATEWAY","KIND_DESTINATION","KIND_API_GATEWAY"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
