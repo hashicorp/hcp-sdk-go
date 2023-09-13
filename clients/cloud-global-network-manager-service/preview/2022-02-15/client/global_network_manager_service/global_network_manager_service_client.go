@@ -52,6 +52,8 @@ type ClientService interface {
 
 	GetClusterSecrets(params *GetClusterSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterSecretsOK, error)
 
+	GetObservabilitySecret(params *GetObservabilitySecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetObservabilitySecretOK, error)
+
 	GetService(params *GetServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceOK, error)
 
 	GetServiceSummaries(params *GetServiceSummariesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceSummariesOK, error)
@@ -534,6 +536,44 @@ func (a *Client) GetClusterSecrets(params *GetClusterSecretsParams, authInfo run
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetClusterSecretsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetObservabilitySecret get observability secret API
+*/
+func (a *Client) GetObservabilitySecret(params *GetObservabilitySecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetObservabilitySecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetObservabilitySecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetObservabilitySecret",
+		Method:             "GET",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/credentials/observability",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetObservabilitySecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetObservabilitySecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetObservabilitySecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
