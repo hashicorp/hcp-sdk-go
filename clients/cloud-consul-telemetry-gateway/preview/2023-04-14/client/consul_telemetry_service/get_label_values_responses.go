@@ -187,6 +187,12 @@ swagger:model GetLabelValuesBody
 */
 type GetLabelValuesBody struct {
 
+	// cluster_internal_id is the internal UUID of the cluster. This is used, instead of the public id,
+	// to separate metrics per cluster. There could be two clusters in the same organization with the same public id,
+	// or a two clusters with the same name in the same project, one created after the other is deleted. In either
+	// scenario, we do not want to show the other cluster's metrics.
+	ClusterInternalID string `json:"cluster_internal_id,omitempty"`
+
 	// end
 	// Format: date-time
 	End strfmt.DateTime `json:"end,omitempty"`
