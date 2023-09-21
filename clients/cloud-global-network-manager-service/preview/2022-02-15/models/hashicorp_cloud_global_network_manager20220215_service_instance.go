@@ -20,7 +20,7 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceInstance struct {
 	// Service-specific IP address or hostname. If no value is specified, the IP address of the agent node is used by default.
 	Address string `json:"address,omitempty"`
 
-	// Which Consul cluster the service is registered on
+	// The unique identifier of the Consul cluster the service is registered with
 	ClusterID string `json:"cluster_id,omitempty"`
 
 	// V2 resource id for parent cluster
@@ -29,7 +29,7 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceInstance struct {
 	// V2 resource name for parent cluster
 	ClusterResourceName string `json:"cluster_resource_name,omitempty"`
 
-	// True if the service is connected to a envoy mesh proxy.
+	// True if the service is connected to an Envoy mesh proxy.
 	ConnectedWithProxy bool `json:"connected_with_proxy,omitempty"`
 
 	// external source
@@ -47,7 +47,7 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceInstance struct {
 	// Service name
 	Name string `json:"name,omitempty"`
 
-	// namespace of the service
+	// Namespace where the service is deployed.
 	Namespace string `json:"namespace,omitempty"`
 
 	// Which Consul node the service is registered on
@@ -62,7 +62,7 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceInstance struct {
 	// node checks warning
 	NodeChecksWarning int32 `json:"node_checks_warning,omitempty"`
 
-	// partition of the service
+	// Partition where the service is deployed.
 	Partition string `json:"partition,omitempty"`
 
 	// Port number of the service

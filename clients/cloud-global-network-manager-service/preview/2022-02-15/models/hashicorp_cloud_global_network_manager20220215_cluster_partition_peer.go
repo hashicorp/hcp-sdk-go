@@ -39,6 +39,9 @@ type HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer struct {
 	// peer_cluster_location is the location of the peer GNM cluster
 	PeerClusterLocation *cloud.HashicorpCloudLocationLocation `json:"peer_cluster_location,omitempty"`
 
+	// peer_licensing is the Consul licensing information of the peer GNM cluster
+	PeerLicensing *HashicorpCloudGlobalNetworkManager20220215Licensing `json:"peer_licensing,omitempty"`
+
 	// peer_name is the name of the peer
 	PeerName string `json:"peer_name,omitempty"`
 
@@ -71,6 +74,10 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) Validat
 	}
 
 	if err := m.validatePeerClusterLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePeerLicensing(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -134,6 +141,25 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) validat
 				return ve.ValidateName("peer_cluster_location")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("peer_cluster_location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) validatePeerLicensing(formats strfmt.Registry) error {
+	if swag.IsZero(m.PeerLicensing) { // not required
+		return nil
+	}
+
+	if m.PeerLicensing != nil {
+		if err := m.PeerLicensing.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("peer_licensing")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("peer_licensing")
 			}
 			return err
 		}
@@ -211,6 +237,10 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) Context
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePeerLicensing(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidatePeeringConnectionLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -253,6 +283,22 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) context
 				return ve.ValidateName("peer_cluster_location")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("peer_cluster_location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) contextValidatePeerLicensing(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PeerLicensing != nil {
+		if err := m.PeerLicensing.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("peer_licensing")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("peer_licensing")
 			}
 			return err
 		}

@@ -20,7 +20,7 @@ import (
 // swagger:model hashicorp.cloud.global_network_manager_20220215.PeeringConnection
 type HashicorpCloudGlobalNetworkManager20220215PeeringConnection struct {
 
-	// created_at is the timestamp of when the peering_connection was created.
+	// `created_at` is the timestamp of when the peering_connection was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
@@ -37,7 +37,7 @@ type HashicorpCloudGlobalNetworkManager20220215PeeringConnection struct {
 	// peering_connection_id is slug ID of the peering connection
 	PeeringConnectionID string `json:"peering_connection_id,omitempty"`
 
-	// updated_at is the timestamp of when the peering_connection was last updated.
+	// `updated_at` is the timestamp of when the peering_connection was last updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }

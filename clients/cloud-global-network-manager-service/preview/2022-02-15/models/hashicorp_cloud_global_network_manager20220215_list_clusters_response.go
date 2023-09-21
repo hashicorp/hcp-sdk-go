@@ -23,7 +23,7 @@ type HashicorpCloudGlobalNetworkManager20220215ListClustersResponse struct {
 	// clusters
 	Clusters []*HashicorpCloudGlobalNetworkManager20220215Cluster `json:"clusters"`
 
-	// pagination response containing the page tokens for future requests
+	// Pagination response containing the page tokens for future requests
 	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 

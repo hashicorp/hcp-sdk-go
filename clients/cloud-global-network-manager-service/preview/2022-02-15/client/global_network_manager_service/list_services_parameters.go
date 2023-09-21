@@ -64,37 +64,37 @@ type ListServicesParams struct {
 
 	/* ClusterIds.
 
-	   Query param Filter: cluster_id of the service.
+	   Query param filter: `cluster_id` of the service.
 	*/
 	ClusterIds []string
 
 	/* ExternalSources.
 
-	   Query param Filter: external_sources. If any of a service's external sources overlap with the external sources specified, the service will not be filtered out.
+	   Query param filter: `external_sources`. Returns a service when service's external sources overlap with the external sources specified.
 	*/
 	ExternalSources []string
 
 	/* InMesh.
 
-	   Query param Filter: whether the service is in the service mesh or not. Possible values: true or false.
+	   Query param filter: whether the service is in the service mesh or not. Possible values: `true` or `false`.
 	*/
 	InMesh *bool
 
 	/* Kind.
 
-	   Query param Filter: kind of the service. This can be combination of typical, connect-proxy, destination, api_gateway, ingress_gateway, terminating_gateway, mesh_gateway
+	   Query param filter: `kind` of the service. This can be combination of `typical`, `connect-proxy`, `destination`, `api_gateway`, `ingress_gateway`, `terminating_gateway`, `mesh_gateway`
 	*/
 	Kind []string
 
 	/* MtlsMode.
 
-	   Query param Filter: mTLS mode of the service. Possible value: permissive, strict.
+	   Query param filter: mTLS mode of the service. Possible value: `permissive`, `strict`.
 	*/
-	MtlsMode *string
+	MtlsMode []string
 
 	/* Namespace.
 
-	   Query param Filter: namespace of the service
+	   Query param filter: `namespace` of the service.
 	*/
 	Namespace *string
 
@@ -125,7 +125,7 @@ type ListServicesParams struct {
 
 	/* PaginationPreviousPageToken.
 
-	     Specifies a page token to use to retrieve the previous page. Set parameter this to
+	     Specifies a page token to use to retrieve the previous page. Set this parameter to
 	the `previous_page_token` returned by previous list requests to get the
 	previous page of results. If set, `next_page_token` must not be set.
 	*/
@@ -133,7 +133,7 @@ type ListServicesParams struct {
 
 	/* Partition.
 
-	   Query param Filter: partition of the service
+	   Query param filter: `partition` of the service.
 	*/
 	Partition *string
 
@@ -145,13 +145,13 @@ type ListServicesParams struct {
 
 	/* Query.
 
-	   Search query to filter by. Searches across service name, cluster_id, partition, namespace, sameness_group, tags
+	   Search query to filter by. Searches across service `name`, `cluster_id`, `partition`, `namespace`, `sameness_group`, `tags`
 	*/
 	Query *string
 
 	/* Status.
 
-	   Query param Filter: status of the service. This can be combination of passing, warning, critical, none
+	   Query param filter: `status` of the service. This can be combination of `passing`, `warning`, `critical`, `none`.
 	*/
 	Status []string
 
@@ -253,13 +253,13 @@ func (o *ListServicesParams) SetKind(kind []string) {
 }
 
 // WithMtlsMode adds the mtlsMode to the list services params
-func (o *ListServicesParams) WithMtlsMode(mtlsMode *string) *ListServicesParams {
+func (o *ListServicesParams) WithMtlsMode(mtlsMode []string) *ListServicesParams {
 	o.SetMtlsMode(mtlsMode)
 	return o
 }
 
 // SetMtlsMode adds the mtlsMode to the list services params
-func (o *ListServicesParams) SetMtlsMode(mtlsMode *string) {
+func (o *ListServicesParams) SetMtlsMode(mtlsMode []string) {
 	o.MtlsMode = mtlsMode
 }
 
@@ -422,18 +422,12 @@ func (o *ListServicesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 	if o.MtlsMode != nil {
 
-		// query param mtls_mode
-		var qrMtlsMode string
+		// binding items for mtls_mode
+		joinedMtlsMode := o.bindParamMtlsMode(reg)
 
-		if o.MtlsMode != nil {
-			qrMtlsMode = *o.MtlsMode
-		}
-		qMtlsMode := qrMtlsMode
-		if qMtlsMode != "" {
-
-			if err := r.SetQueryParam("mtls_mode", qMtlsMode); err != nil {
-				return err
-			}
+		// query array param mtls_mode
+		if err := r.SetQueryParam("mtls_mode", joinedMtlsMode...); err != nil {
+			return err
 		}
 	}
 
@@ -621,6 +615,23 @@ func (o *ListServicesParams) bindParamKind(formats strfmt.Registry) []string {
 	kindIS := swag.JoinByFormat(kindIC, "multi")
 
 	return kindIS
+}
+
+// bindParamListServices binds the parameter mtls_mode
+func (o *ListServicesParams) bindParamMtlsMode(formats strfmt.Registry) []string {
+	mtlsModeIR := o.MtlsMode
+
+	var mtlsModeIC []string
+	for _, mtlsModeIIR := range mtlsModeIR { // explode []string
+
+		mtlsModeIIV := mtlsModeIIR // string as string
+		mtlsModeIC = append(mtlsModeIC, mtlsModeIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	mtlsModeIS := swag.JoinByFormat(mtlsModeIC, "multi")
+
+	return mtlsModeIS
 }
 
 // bindParamListServices binds the parameter order_by

@@ -89,7 +89,7 @@ type ListServiceInstancesParams struct {
 
 	/* PaginationPreviousPageToken.
 
-	     Specifies a page token to use to retrieve the previous page. Set parameter this to
+	     Specifies a page token to use to retrieve the previous page. Set this parameter to
 	the `previous_page_token` returned by previous list requests to get the
 	previous page of results. If set, `next_page_token` must not be set.
 	*/
@@ -100,7 +100,7 @@ type ListServiceInstancesParams struct {
 
 	/* Query.
 
-	   Search query to filter by. Searches across id and tags.
+	   Search query to filter by. Searches across `id` and `tags`.
 	*/
 	Query *string
 
@@ -109,7 +109,7 @@ type ListServiceInstancesParams struct {
 
 	/* Status.
 
-	   Query param Filter: status of the service. This can be combination of passing, warning, critical, none
+	   Query param filter: `status` of the service. This can be combination of `passing`, `warning`, `critical`, `none`
 	*/
 	Status []string
 

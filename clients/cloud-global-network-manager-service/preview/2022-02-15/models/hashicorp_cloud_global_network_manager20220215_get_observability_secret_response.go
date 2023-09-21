@@ -29,6 +29,9 @@ type HashicorpCloudGlobalNetworkManager20220215GetObservabilitySecretResponse st
 	// location is the location of the cluster to update with an optional provider
 	// and region
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+
+	// resource_link_url is the location.Link encoded as a url including the organization, project, type and ID
+	ResourceLinkURL string `json:"resource_link_url,omitempty"`
 }
 
 // Validate validates this hashicorp cloud global network manager 20220215 get observability secret response

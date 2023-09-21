@@ -28,10 +28,10 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry struct {
 	// kind of service
 	Kind *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind `json:"kind,omitempty"`
 
-	// namespace of the service
+	// Namespace where the service is deployed.
 	Namespace string `json:"namespace,omitempty"`
 
-	// partition of the service
+	// Partition where the service is deployed.
 	Partition string `json:"partition,omitempty"`
 
 	// passing

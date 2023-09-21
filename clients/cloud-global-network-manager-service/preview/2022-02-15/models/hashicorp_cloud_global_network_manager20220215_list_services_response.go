@@ -23,7 +23,7 @@ type HashicorpCloudGlobalNetworkManager20220215ListServicesResponse struct {
 	// data
 	Data []*HashicorpCloudGlobalNetworkManager20220215Service `json:"data"`
 
-	// pagination response containing the page tokens for future requests
+	// Pagination response containing the page tokens for future requests
 	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 

@@ -107,7 +107,7 @@ type ListClustersParams struct {
 
 	/* PaginationPreviousPageToken.
 
-	     Specifies a page token to use to retrieve the previous page. Set parameter this to
+	     Specifies a page token to use to retrieve the previous page. Set this parameter to
 	the `previous_page_token` returned by previous list requests to get the
 	previous page of results. If set, `next_page_token` must not be set.
 	*/
@@ -115,7 +115,7 @@ type ListClustersParams struct {
 
 	/* Type.
 
-	    type is the type of clusters to limit the response to
+	    The type of clusters to limit the response to
 
 	- TYPE_UNSPECIFIED: unspecified type to filter on. If this error appears, default to self-managed clusters
 	- TYPE_ALL: all cluster types

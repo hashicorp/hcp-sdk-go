@@ -32,7 +32,7 @@ type HashicorpCloudGlobalNetworkManager20220215Cluster struct {
 	// Consul version of the cluster
 	ConsulVersion string `json:"consul_version,omitempty"`
 
-	// created_at is the timestamp of when the cluster was first created.
+	// `created_at` is the timestamp of when the cluster was first created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
@@ -60,7 +60,7 @@ type HashicorpCloudGlobalNetworkManager20220215Cluster struct {
 	// source of the cluster
 	Source *HashicorpCloudGlobalNetworkManager20220215ClusterSource `json:"source,omitempty"`
 
-	// current state of the cluster
+	// Current state of the cluster.
 	State *HashicorpCloudGlobalNetworkManager20220215ClusterState `json:"state,omitempty"`
 }
 

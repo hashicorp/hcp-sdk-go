@@ -27,7 +27,7 @@ type HashicorpCloudGlobalNetworkManager20220215Service struct {
 	// checks warning
 	ChecksWarning int32 `json:"checks_warning,omitempty"`
 
-	// Which Consul cluster the service is registered on
+	// The unique identifier of the Consul cluster the service is registered with
 	ClusterID string `json:"cluster_id,omitempty"`
 
 	// V2 resource id for parent cluster
@@ -36,19 +36,19 @@ type HashicorpCloudGlobalNetworkManager20220215Service struct {
 	// V2 resource name for parent cluster
 	ClusterResourceName string `json:"cluster_resource_name,omitempty"`
 
-	// True if the service is “connect native”, aka it doesn’t use an Envoy proxy.
+	// True if the service is “connect native”, meaning that it does not use an Envoy proxy.
 	ConnectNative bool `json:"connect_native,omitempty"`
 
 	// True if the service is connected to a gateway.
 	ConnectedWithGateway bool `json:"connected_with_gateway,omitempty"`
 
-	// True if the service is connected to a envoy mesh proxy.
+	// True if the service is connected to an Envoy mesh proxy.
 	ConnectedWithProxy bool `json:"connected_with_proxy,omitempty"`
 
 	// Union of all the external sources on the service instances.
 	ExternalSources []string `json:"external_sources"`
 
-	// Only applies for “gateway” type services
+	// Only applies for `gateway` type services
 	GatewayConfig *HashicorpCloudGlobalNetworkManager20220215ServiceGatewayConfig `json:"gateway_config,omitempty"`
 
 	// instance count
@@ -63,13 +63,13 @@ type HashicorpCloudGlobalNetworkManager20220215Service struct {
 	// Possible values: "", "strict", "permissive"
 	MtlsMode string `json:"mtls_mode,omitempty"`
 
-	// Name of the service
+	// Name of the service.
 	Name string `json:"name,omitempty"`
 
-	// namespace of the service
+	// Namespace where the service is deployed.
 	Namespace string `json:"namespace,omitempty"`
 
-	// partition of the service
+	// Partition where the service is deployed.
 	Partition string `json:"partition,omitempty"`
 
 	// A name defined at the admin partition level to help determine if two services are the same.

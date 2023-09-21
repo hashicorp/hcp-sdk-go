@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind Kind is the kind of the service that was registered in the Catalog.
+// HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind Kind is the `kind` of the service that was registered in the Catalog.
 // https://developer.hashicorp.com/consul/api-docs/agent/service#kind
 //
 // - KIND_UNSPECIFIED: The default, unspecified service kind. Kind unknown.
