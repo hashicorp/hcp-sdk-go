@@ -36,6 +36,9 @@ type HashicorpCloudIamServicePrincipal struct {
 	// project_id is the UUID identifier of the HCP project that this
 	// project service principal belongs to.
 	ProjectID string `json:"project_id,omitempty"`
+
+	// resource_name is the resource name for this service principal.
+	ResourceName string `json:"resource_name,omitempty"`
 }
 
 // Validate validates this hashicorp cloud iam service principal

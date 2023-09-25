@@ -18,14 +18,9 @@ import (
 // swagger:model hashicorp.cloud.iam.CreateServicePrincipalKeyRequest
 type HashicorpCloudIamCreateServicePrincipalKeyRequest struct {
 
-	// organization_id is the unique identifier (UUID) of the organization under
-	// which the service principal key should be created.
-	// It must be the organization of the provided service principal.
-	OrganizationID string `json:"organization_id,omitempty"`
-
-	// principal_id is the ID of the service principal for which the new service
-	// principal key should be created.
-	PrincipalID string `json:"principal_id,omitempty"`
+	// parent_resource_name is the resource name of the service principal to
+	// generate a key for.
+	ParentResourceName string `json:"parent_resource_name,omitempty"`
 }
 
 // Validate validates this hashicorp cloud iam create service principal key request

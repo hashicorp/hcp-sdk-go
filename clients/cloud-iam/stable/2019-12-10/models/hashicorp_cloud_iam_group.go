@@ -26,6 +26,13 @@ type HashicorpCloudIamGroup struct {
 	// description is a description of the group.
 	Description string `json:"description,omitempty"`
 
+	// display_name is the user-specified display name of the group.
+	DisplayName string `json:"display_name,omitempty"`
+
+	// member_count is the count of members in the group.
+	// We use Int32Value to make sure we return nil instead of 0 if we don't have a member count
+	MemberCount int32 `json:"member_count,omitempty"`
+
 	// resource_id is the principal ID of the group.
 	ResourceID string `json:"resource_id,omitempty"`
 

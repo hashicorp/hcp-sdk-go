@@ -28,34 +28,34 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateAuthConnection(params *CreateAuthConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAuthConnectionOK, error)
+	AuthConfigServiceCreateAuthConnection(params *AuthConfigServiceCreateAuthConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthConfigServiceCreateAuthConnectionOK, error)
 
-	DeleteAuthConnectionFromOrganization(params *DeleteAuthConnectionFromOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAuthConnectionFromOrganizationOK, error)
+	AuthConfigServiceDeleteAuthConnectionFromOrganization(params *AuthConfigServiceDeleteAuthConnectionFromOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthConfigServiceDeleteAuthConnectionFromOrganizationOK, error)
 
-	EditAuthConnection(params *EditAuthConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditAuthConnectionOK, error)
+	AuthConfigServiceEditAuthConnection(params *AuthConfigServiceEditAuthConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthConfigServiceEditAuthConnectionOK, error)
 
-	GetAuthConnections(params *GetAuthConnectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuthConnectionsOK, error)
+	AuthConfigServiceGetAuthConnections(params *AuthConfigServiceGetAuthConnectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthConfigServiceGetAuthConnectionsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateAuthConnection creates auth connection creates an auth connection
+AuthConfigServiceCreateAuthConnection creates auth connection creates an auth connection
 */
-func (a *Client) CreateAuthConnection(params *CreateAuthConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAuthConnectionOK, error) {
+func (a *Client) AuthConfigServiceCreateAuthConnection(params *AuthConfigServiceCreateAuthConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthConfigServiceCreateAuthConnectionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateAuthConnectionParams()
+		params = NewAuthConfigServiceCreateAuthConnectionParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateAuthConnection",
+		ID:                 "AuthConfigService_CreateAuthConnection",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/auth_connections",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateAuthConnectionReader{formats: a.formats},
+		Reader:             &AuthConfigServiceCreateAuthConnectionReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -68,32 +68,32 @@ func (a *Client) CreateAuthConnection(params *CreateAuthConnectionParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateAuthConnectionOK)
+	success, ok := result.(*AuthConfigServiceCreateAuthConnectionOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateAuthConnectionDefault)
+	unexpectedSuccess := result.(*AuthConfigServiceCreateAuthConnectionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteAuthConnectionFromOrganization deletes auth connection from organization permanently deletes a persisted auth connection
+AuthConfigServiceDeleteAuthConnectionFromOrganization deletes auth connection from organization permanently deletes a persisted auth connection
 */
-func (a *Client) DeleteAuthConnectionFromOrganization(params *DeleteAuthConnectionFromOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAuthConnectionFromOrganizationOK, error) {
+func (a *Client) AuthConfigServiceDeleteAuthConnectionFromOrganization(params *AuthConfigServiceDeleteAuthConnectionFromOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthConfigServiceDeleteAuthConnectionFromOrganizationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteAuthConnectionFromOrganizationParams()
+		params = NewAuthConfigServiceDeleteAuthConnectionFromOrganizationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteAuthConnectionFromOrganization",
+		ID:                 "AuthConfigService_DeleteAuthConnectionFromOrganization",
 		Method:             "DELETE",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/auth_connections",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteAuthConnectionFromOrganizationReader{formats: a.formats},
+		Reader:             &AuthConfigServiceDeleteAuthConnectionFromOrganizationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -106,32 +106,32 @@ func (a *Client) DeleteAuthConnectionFromOrganization(params *DeleteAuthConnecti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteAuthConnectionFromOrganizationOK)
+	success, ok := result.(*AuthConfigServiceDeleteAuthConnectionFromOrganizationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteAuthConnectionFromOrganizationDefault)
+	unexpectedSuccess := result.(*AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-EditAuthConnection edits auth connection edits an existing auth connection
+AuthConfigServiceEditAuthConnection edits auth connection edits an existing auth connection
 */
-func (a *Client) EditAuthConnection(params *EditAuthConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditAuthConnectionOK, error) {
+func (a *Client) AuthConfigServiceEditAuthConnection(params *AuthConfigServiceEditAuthConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthConfigServiceEditAuthConnectionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEditAuthConnectionParams()
+		params = NewAuthConfigServiceEditAuthConnectionParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EditAuthConnection",
+		ID:                 "AuthConfigService_EditAuthConnection",
 		Method:             "PATCH",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/auth_connections",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &EditAuthConnectionReader{formats: a.formats},
+		Reader:             &AuthConfigServiceEditAuthConnectionReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -144,32 +144,32 @@ func (a *Client) EditAuthConnection(params *EditAuthConnectionParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EditAuthConnectionOK)
+	success, ok := result.(*AuthConfigServiceEditAuthConnectionOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*EditAuthConnectionDefault)
+	unexpectedSuccess := result.(*AuthConfigServiceEditAuthConnectionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetAuthConnections get auth connections API
+AuthConfigServiceGetAuthConnections auth config service get auth connections API
 */
-func (a *Client) GetAuthConnections(params *GetAuthConnectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuthConnectionsOK, error) {
+func (a *Client) AuthConfigServiceGetAuthConnections(params *AuthConfigServiceGetAuthConnectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthConfigServiceGetAuthConnectionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAuthConnectionsParams()
+		params = NewAuthConfigServiceGetAuthConnectionsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetAuthConnections",
+		ID:                 "AuthConfigService_GetAuthConnections",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/auth_connections",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAuthConnectionsReader{formats: a.formats},
+		Reader:             &AuthConfigServiceGetAuthConnectionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -182,12 +182,12 @@ func (a *Client) GetAuthConnections(params *GetAuthConnectionsParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAuthConnectionsOK)
+	success, ok := result.(*AuthConfigServiceGetAuthConnectionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetAuthConnectionsDefault)
+	unexpectedSuccess := result.(*AuthConfigServiceGetAuthConnectionsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

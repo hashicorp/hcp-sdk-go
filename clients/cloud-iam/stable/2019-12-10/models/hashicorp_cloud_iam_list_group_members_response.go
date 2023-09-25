@@ -20,6 +20,9 @@ import (
 // swagger:model hashicorp.cloud.iam.ListGroupMembersResponse
 type HashicorpCloudIamListGroupMembersResponse struct {
 
+	// group is the group the members belong to.
+	Group *HashicorpCloudIamGroup `json:"group,omitempty"`
+
 	// members is a list of the member principals in the group.
 	Members []*HashicorpCloudIamGroupMember `json:"members"`
 
@@ -30,6 +33,10 @@ type HashicorpCloudIamListGroupMembersResponse struct {
 // Validate validates this hashicorp cloud iam list group members response
 func (m *HashicorpCloudIamListGroupMembersResponse) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateGroup(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateMembers(formats); err != nil {
 		res = append(res, err)
@@ -42,6 +49,25 @@ func (m *HashicorpCloudIamListGroupMembersResponse) Validate(formats strfmt.Regi
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudIamListGroupMembersResponse) validateGroup(formats strfmt.Registry) error {
+	if swag.IsZero(m.Group) { // not required
+		return nil
+	}
+
+	if m.Group != nil {
+		if err := m.Group.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("group")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -94,6 +120,10 @@ func (m *HashicorpCloudIamListGroupMembersResponse) validatePagination(formats s
 func (m *HashicorpCloudIamListGroupMembersResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateGroup(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateMembers(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -105,6 +135,22 @@ func (m *HashicorpCloudIamListGroupMembersResponse) ContextValidate(ctx context.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudIamListGroupMembersResponse) contextValidateGroup(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Group != nil {
+		if err := m.Group.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("group")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

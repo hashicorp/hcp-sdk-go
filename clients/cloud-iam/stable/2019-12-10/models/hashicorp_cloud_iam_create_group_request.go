@@ -23,7 +23,7 @@ type HashicorpCloudIamCreateGroupRequest struct {
 	// member_principal_ids is a list of the ids of the principals that should belong to this group.
 	MemberPrincipalIds []string `json:"member_principal_ids"`
 
-	// name is the name of the group.
+	// name is the name part of the group resource_name.
 	Name string `json:"name,omitempty"`
 
 	// parent_resource is the parent resource of the group.

@@ -27,7 +27,7 @@ type HashicorpCloudIamGroupMember struct {
 	// name is the name of the principal.
 	Name string `json:"name,omitempty"`
 
-	// principal_type is the type of principal (user, service principal etc.) of the group member.
+	// principal_type is the type of principal (user etc.) of the group member.
 	PrincipalType *HashicorpCloudIamGroupMemberPrincipalType `json:"principal_type,omitempty"`
 }
 

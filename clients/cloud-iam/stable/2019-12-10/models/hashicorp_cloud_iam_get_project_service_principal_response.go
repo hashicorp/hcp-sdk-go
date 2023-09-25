@@ -14,8 +14,8 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudIamGetProjectServicePrincipalResponse GetServicePrincipalResponse is the response message for fetching a service principal
-// on project level.
+// HashicorpCloudIamGetProjectServicePrincipalResponse GetProjectServicePrincipalResponse is the response message for fetching a
+// service principal on project level.
 //
 // swagger:model hashicorp.cloud.iam.GetProjectServicePrincipalResponse
 type HashicorpCloudIamGetProjectServicePrincipalResponse struct {

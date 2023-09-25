@@ -28,40 +28,160 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateGroup(params *CreateGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGroupOK, error)
+	GroupsServiceCountGroupsForPrincipals(params *GroupsServiceCountGroupsForPrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCountGroupsForPrincipalsOK, error)
 
-	DeleteGroup(params *DeleteGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGroupOK, error)
+	GroupsServiceCountMembersForGroups(params *GroupsServiceCountMembersForGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCountMembersForGroupsOK, error)
 
-	GetGroup(params *GetGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGroupOK, error)
+	GroupsServiceCountOrganizationGroups(params *GroupsServiceCountOrganizationGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCountOrganizationGroupsOK, error)
 
-	ListGroupMembers(params *ListGroupMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGroupMembersOK, error)
+	GroupsServiceCreateGroup(params *GroupsServiceCreateGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCreateGroupOK, error)
 
-	ListGroups(params *ListGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGroupsOK, error)
+	GroupsServiceDeleteGroup(params *GroupsServiceDeleteGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceDeleteGroupOK, error)
 
-	UpdateGroup(params *UpdateGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGroupOK, error)
+	GroupsServiceGetGroup(params *GroupsServiceGetGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceGetGroupOK, error)
 
-	UpdateGroupMembers(params *UpdateGroupMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGroupMembersOK, error)
+	GroupsServiceListGroupMembers(params *GroupsServiceListGroupMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceListGroupMembersOK, error)
+
+	GroupsServiceListGroups(params *GroupsServiceListGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceListGroupsOK, error)
+
+	GroupsServiceUpdateGroup(params *GroupsServiceUpdateGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceUpdateGroupOK, error)
+
+	GroupsServiceUpdateGroupMembers(params *GroupsServiceUpdateGroupMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceUpdateGroupMembersOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateGroup creates group creates a group
+GroupsServiceCountGroupsForPrincipals counts groups for principals will count the number of groups a principal is in for a list of principals
 */
-func (a *Client) CreateGroup(params *CreateGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGroupOK, error) {
+func (a *Client) GroupsServiceCountGroupsForPrincipals(params *GroupsServiceCountGroupsForPrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCountGroupsForPrincipalsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateGroupParams()
+		params = NewGroupsServiceCountGroupsForPrincipalsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateGroup",
+		ID:                 "GroupsService_CountGroupsForPrincipals",
+		Method:             "GET",
+		PathPattern:        "/iam/2019-12-10/iam/{parent_resource_name}/groups/count-for-principals",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GroupsServiceCountGroupsForPrincipalsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GroupsServiceCountGroupsForPrincipalsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GroupsServiceCountGroupsForPrincipalsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GroupsServiceCountMembersForGroups counts members for groups returns the count of members per group
+*/
+func (a *Client) GroupsServiceCountMembersForGroups(params *GroupsServiceCountMembersForGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCountMembersForGroupsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGroupsServiceCountMembersForGroupsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GroupsService_CountMembersForGroups",
+		Method:             "GET",
+		PathPattern:        "/iam/2019-12-10/iam/{parent_resource_name}/groups/count-members-for-groups",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GroupsServiceCountMembersForGroupsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GroupsServiceCountMembersForGroupsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GroupsServiceCountMembersForGroupsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GroupsServiceCountOrganizationGroups counts organization groups returns the count of groups for an organization
+*/
+func (a *Client) GroupsServiceCountOrganizationGroups(params *GroupsServiceCountOrganizationGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCountOrganizationGroupsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGroupsServiceCountOrganizationGroupsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GroupsService_CountOrganizationGroups",
+		Method:             "GET",
+		PathPattern:        "/iam/2019-12-10/iam/{parent_resource_name}/groups/count",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GroupsServiceCountOrganizationGroupsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GroupsServiceCountOrganizationGroupsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GroupsServiceCountOrganizationGroupsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GroupsServiceCreateGroup creates group creates a group
+*/
+func (a *Client) GroupsServiceCreateGroup(params *GroupsServiceCreateGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCreateGroupOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGroupsServiceCreateGroupParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GroupsService_CreateGroup",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/iam/{parent_resource_name}/groups",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateGroupReader{formats: a.formats},
+		Reader:             &GroupsServiceCreateGroupReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -74,32 +194,32 @@ func (a *Client) CreateGroup(params *CreateGroupParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateGroupOK)
+	success, ok := result.(*GroupsServiceCreateGroupOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateGroupDefault)
+	unexpectedSuccess := result.(*GroupsServiceCreateGroupDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteGroup deletes group deletes a group
+GroupsServiceDeleteGroup deletes group deletes a group
 */
-func (a *Client) DeleteGroup(params *DeleteGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGroupOK, error) {
+func (a *Client) GroupsServiceDeleteGroup(params *GroupsServiceDeleteGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceDeleteGroupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteGroupParams()
+		params = NewGroupsServiceDeleteGroupParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteGroup",
+		ID:                 "GroupsService_DeleteGroup",
 		Method:             "DELETE",
 		PathPattern:        "/iam/2019-12-10/{resource_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteGroupReader{formats: a.formats},
+		Reader:             &GroupsServiceDeleteGroupReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -112,32 +232,32 @@ func (a *Client) DeleteGroup(params *DeleteGroupParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteGroupOK)
+	success, ok := result.(*GroupsServiceDeleteGroupOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteGroupDefault)
+	unexpectedSuccess := result.(*GroupsServiceDeleteGroupDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetGroup gets group gets a group using the organization ID and group name
+GroupsServiceGetGroup gets group gets a group using the organization ID and group name
 */
-func (a *Client) GetGroup(params *GetGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGroupOK, error) {
+func (a *Client) GroupsServiceGetGroup(params *GroupsServiceGetGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceGetGroupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetGroupParams()
+		params = NewGroupsServiceGetGroupParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetGroup",
+		ID:                 "GroupsService_GetGroup",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/{resource_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetGroupReader{formats: a.formats},
+		Reader:             &GroupsServiceGetGroupReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -150,32 +270,32 @@ func (a *Client) GetGroup(params *GetGroupParams, authInfo runtime.ClientAuthInf
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetGroupOK)
+	success, ok := result.(*GroupsServiceGetGroupOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetGroupDefault)
+	unexpectedSuccess := result.(*GroupsServiceGetGroupDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListGroupMembers lists group members retrieves a list of member principals
+GroupsServiceListGroupMembers lists group members retrieves a list of member principals
 */
-func (a *Client) ListGroupMembers(params *ListGroupMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGroupMembersOK, error) {
+func (a *Client) GroupsServiceListGroupMembers(params *GroupsServiceListGroupMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceListGroupMembersOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListGroupMembersParams()
+		params = NewGroupsServiceListGroupMembersParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ListGroupMembers",
+		ID:                 "GroupsService_ListGroupMembers",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/{resource_name}/members",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListGroupMembersReader{formats: a.formats},
+		Reader:             &GroupsServiceListGroupMembersReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -188,32 +308,32 @@ func (a *Client) ListGroupMembers(params *ListGroupMembersParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListGroupMembersOK)
+	success, ok := result.(*GroupsServiceListGroupMembersOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListGroupMembersDefault)
+	unexpectedSuccess := result.(*GroupsServiceListGroupMembersDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListGroups lists groups lists the groups in an organization that match the optional filters
+GroupsServiceListGroups lists groups lists the groups in an organization that match the optional filters
 */
-func (a *Client) ListGroups(params *ListGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGroupsOK, error) {
+func (a *Client) GroupsServiceListGroups(params *GroupsServiceListGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceListGroupsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListGroupsParams()
+		params = NewGroupsServiceListGroupsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ListGroups",
+		ID:                 "GroupsService_ListGroups",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/iam/{parent_resource_name}/groups",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListGroupsReader{formats: a.formats},
+		Reader:             &GroupsServiceListGroupsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -226,32 +346,32 @@ func (a *Client) ListGroups(params *ListGroupsParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListGroupsOK)
+	success, ok := result.(*GroupsServiceListGroupsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListGroupsDefault)
+	unexpectedSuccess := result.(*GroupsServiceListGroupsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-UpdateGroup updates group updates a group s modifiable field
+GroupsServiceUpdateGroup updates group updates a group s modifiable field
 */
-func (a *Client) UpdateGroup(params *UpdateGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGroupOK, error) {
+func (a *Client) GroupsServiceUpdateGroup(params *GroupsServiceUpdateGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceUpdateGroupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateGroupParams()
+		params = NewGroupsServiceUpdateGroupParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "UpdateGroup",
+		ID:                 "GroupsService_UpdateGroup",
 		Method:             "PUT",
 		PathPattern:        "/iam/2019-12-10/{resource_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateGroupReader{formats: a.formats},
+		Reader:             &GroupsServiceUpdateGroupReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -264,32 +384,32 @@ func (a *Client) UpdateGroup(params *UpdateGroupParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateGroupOK)
+	success, ok := result.(*GroupsServiceUpdateGroupOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdateGroupDefault)
+	unexpectedSuccess := result.(*GroupsServiceUpdateGroupDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-UpdateGroupMembers updates group members updates the principal memberships of a group
+GroupsServiceUpdateGroupMembers updates group members updates the principal memberships of a group
 */
-func (a *Client) UpdateGroupMembers(params *UpdateGroupMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGroupMembersOK, error) {
+func (a *Client) GroupsServiceUpdateGroupMembers(params *GroupsServiceUpdateGroupMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceUpdateGroupMembersOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateGroupMembersParams()
+		params = NewGroupsServiceUpdateGroupMembersParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "UpdateGroupMembers",
+		ID:                 "GroupsService_UpdateGroupMembers",
 		Method:             "PUT",
 		PathPattern:        "/iam/2019-12-10/{resource_name}/members",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateGroupMembersReader{formats: a.formats},
+		Reader:             &GroupsServiceUpdateGroupMembersReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -302,12 +422,12 @@ func (a *Client) UpdateGroupMembers(params *UpdateGroupMembersParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateGroupMembersOK)
+	success, ok := result.(*GroupsServiceUpdateGroupMembersOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdateGroupMembersDefault)
+	unexpectedSuccess := result.(*GroupsServiceUpdateGroupMembersDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

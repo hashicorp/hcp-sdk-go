@@ -28,46 +28,46 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateUserPrincipal(params *CreateUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUserPrincipalOK, error)
+	IamServiceCreateUserPrincipal(params *IamServiceCreateUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceCreateUserPrincipalOK, error)
 
-	DeleteOrganizationMembership(params *DeleteOrganizationMembershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationMembershipOK, error)
+	IamServiceDeleteOrganizationMembership(params *IamServiceDeleteOrganizationMembershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceDeleteOrganizationMembershipOK, error)
 
-	GetCurrentUserPrincipal(params *GetCurrentUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserPrincipalOK, error)
+	IamServiceGetCurrentUserPrincipal(params *IamServiceGetCurrentUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetCurrentUserPrincipalOK, error)
 
-	GetOrganizationAuthMetadata(params *GetOrganizationAuthMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationAuthMetadataOK, error)
+	IamServiceGetOrganizationAuthMetadata(params *IamServiceGetOrganizationAuthMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetOrganizationAuthMetadataOK, error)
 
-	GetUserPrincipalByIDInOrganization(params *GetUserPrincipalByIDInOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserPrincipalByIDInOrganizationOK, error)
+	IamServiceGetUserPrincipalByIDInOrganization(params *IamServiceGetUserPrincipalByIDInOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetUserPrincipalByIDInOrganizationOK, error)
 
-	GetUserPrincipalsByIDsInOrganization(params *GetUserPrincipalsByIDsInOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserPrincipalsByIDsInOrganizationOK, error)
+	IamServiceGetUserPrincipalsByIDsInOrganization(params *IamServiceGetUserPrincipalsByIDsInOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetUserPrincipalsByIDsInOrganizationOK, error)
 
-	ListUserPrincipalsByOrganization(params *ListUserPrincipalsByOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListUserPrincipalsByOrganizationOK, error)
+	IamServiceListUserPrincipalsByOrganization(params *IamServiceListUserPrincipalsByOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceListUserPrincipalsByOrganizationOK, error)
 
-	Ping(params *PingParams, opts ...ClientOption) (*PingOK, error)
+	IamServicePing(params *IamServicePingParams, opts ...ClientOption) (*IamServicePingOK, error)
 
-	SearchPrincipals(params *SearchPrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchPrincipalsOK, error)
+	IamServiceSearchPrincipals(params *IamServiceSearchPrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceSearchPrincipalsOK, error)
 
-	UpdateWebConsolePreferences(params *UpdateWebConsolePreferencesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWebConsolePreferencesOK, error)
+	IamServiceUpdateWebConsolePreferences(params *IamServiceUpdateWebConsolePreferencesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceUpdateWebConsolePreferencesOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateUserPrincipal creates user principal creates a new user principal
+IamServiceCreateUserPrincipal creates user principal creates a new user principal
 */
-func (a *Client) CreateUserPrincipal(params *CreateUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUserPrincipalOK, error) {
+func (a *Client) IamServiceCreateUserPrincipal(params *IamServiceCreateUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceCreateUserPrincipalOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateUserPrincipalParams()
+		params = NewIamServiceCreateUserPrincipalParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateUserPrincipal",
+		ID:                 "IamService_CreateUserPrincipal",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/user-principals",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateUserPrincipalReader{formats: a.formats},
+		Reader:             &IamServiceCreateUserPrincipalReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -80,32 +80,32 @@ func (a *Client) CreateUserPrincipal(params *CreateUserPrincipalParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateUserPrincipalOK)
+	success, ok := result.(*IamServiceCreateUserPrincipalOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateUserPrincipalDefault)
+	unexpectedSuccess := result.(*IamServiceCreateUserPrincipalDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteOrganizationMembership deletes organization membership deletes a user principal s organization membership
+IamServiceDeleteOrganizationMembership deletes organization membership deletes a user principal s organization membership
 */
-func (a *Client) DeleteOrganizationMembership(params *DeleteOrganizationMembershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationMembershipOK, error) {
+func (a *Client) IamServiceDeleteOrganizationMembership(params *IamServiceDeleteOrganizationMembershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceDeleteOrganizationMembershipOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteOrganizationMembershipParams()
+		params = NewIamServiceDeleteOrganizationMembershipParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteOrganizationMembership",
+		ID:                 "IamService_DeleteOrganizationMembership",
 		Method:             "DELETE",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/user-principals/{user_principal_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteOrganizationMembershipReader{formats: a.formats},
+		Reader:             &IamServiceDeleteOrganizationMembershipReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -118,32 +118,32 @@ func (a *Client) DeleteOrganizationMembership(params *DeleteOrganizationMembersh
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteOrganizationMembershipOK)
+	success, ok := result.(*IamServiceDeleteOrganizationMembershipOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteOrganizationMembershipDefault)
+	unexpectedSuccess := result.(*IamServiceDeleteOrganizationMembershipDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetCurrentUserPrincipal gets current user principal retrieves information about the current user principal this endpoint it meant to be used by external clients over an HTTP API it supports retrieving the basic user principal data useful for any client and optionally the user preferences for the h c p web portal j s application
+IamServiceGetCurrentUserPrincipal gets current user principal retrieves information about the current user principal this endpoint it meant to be used by external clients over an HTTP API it supports retrieving the basic user principal data useful for any client and optionally the user preferences for the h c p web portal j s application
 */
-func (a *Client) GetCurrentUserPrincipal(params *GetCurrentUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserPrincipalOK, error) {
+func (a *Client) IamServiceGetCurrentUserPrincipal(params *IamServiceGetCurrentUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetCurrentUserPrincipalOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetCurrentUserPrincipalParams()
+		params = NewIamServiceGetCurrentUserPrincipalParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetCurrentUserPrincipal",
+		ID:                 "IamService_GetCurrentUserPrincipal",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/me",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetCurrentUserPrincipalReader{formats: a.formats},
+		Reader:             &IamServiceGetCurrentUserPrincipalReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -156,32 +156,32 @@ func (a *Client) GetCurrentUserPrincipal(params *GetCurrentUserPrincipalParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetCurrentUserPrincipalOK)
+	success, ok := result.(*IamServiceGetCurrentUserPrincipalOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetCurrentUserPrincipalDefault)
+	unexpectedSuccess := result.(*IamServiceGetCurrentUserPrincipalDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetOrganizationAuthMetadata gets organization auth metadata returns metadata about the organization s configured authentication methods
+IamServiceGetOrganizationAuthMetadata gets organization auth metadata returns metadata about the organization s configured authentication methods
 */
-func (a *Client) GetOrganizationAuthMetadata(params *GetOrganizationAuthMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationAuthMetadataOK, error) {
+func (a *Client) IamServiceGetOrganizationAuthMetadata(params *IamServiceGetOrganizationAuthMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetOrganizationAuthMetadataOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetOrganizationAuthMetadataParams()
+		params = NewIamServiceGetOrganizationAuthMetadataParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetOrganizationAuthMetadata",
+		ID:                 "IamService_GetOrganizationAuthMetadata",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/auth-metadata",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetOrganizationAuthMetadataReader{formats: a.formats},
+		Reader:             &IamServiceGetOrganizationAuthMetadataReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -194,32 +194,32 @@ func (a *Client) GetOrganizationAuthMetadata(params *GetOrganizationAuthMetadata
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetOrganizationAuthMetadataOK)
+	success, ok := result.(*IamServiceGetOrganizationAuthMetadataOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetOrganizationAuthMetadataDefault)
+	unexpectedSuccess := result.(*IamServiceGetOrganizationAuthMetadataDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetUserPrincipalByIDInOrganization gets user principal retrieves a user principal
+IamServiceGetUserPrincipalByIDInOrganization gets user principal retrieves a user principal
 */
-func (a *Client) GetUserPrincipalByIDInOrganization(params *GetUserPrincipalByIDInOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserPrincipalByIDInOrganizationOK, error) {
+func (a *Client) IamServiceGetUserPrincipalByIDInOrganization(params *IamServiceGetUserPrincipalByIDInOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetUserPrincipalByIDInOrganizationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetUserPrincipalByIDInOrganizationParams()
+		params = NewIamServiceGetUserPrincipalByIDInOrganizationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetUserPrincipalByIdInOrganization",
+		ID:                 "IamService_GetUserPrincipalByIdInOrganization",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/user-principals/{user_principal_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetUserPrincipalByIDInOrganizationReader{formats: a.formats},
+		Reader:             &IamServiceGetUserPrincipalByIDInOrganizationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -232,32 +232,32 @@ func (a *Client) GetUserPrincipalByIDInOrganization(params *GetUserPrincipalByID
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetUserPrincipalByIDInOrganizationOK)
+	success, ok := result.(*IamServiceGetUserPrincipalByIDInOrganizationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetUserPrincipalByIDInOrganizationDefault)
+	unexpectedSuccess := result.(*IamServiceGetUserPrincipalByIDInOrganizationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetUserPrincipalsByIDsInOrganization gets user principals by i ds in organization is a batch method to fetch users by ID for a given organization if some of the requested users don t exist or aren t members of the given organization then they will be omitted in response we re using p o s t because g e t has a length limitation for URL which is given that user id is UUID would limit us to fetching up to 48 users at a time which is less than ideal
+IamServiceGetUserPrincipalsByIDsInOrganization gets user principals by i ds in organization is a batch method to fetch users by ID for a given organization if some of the requested users don t exist or aren t members of the given organization then they will be omitted in response we re using p o s t because g e t has a length limitation for URL which is given that user id is UUID would limit us to fetching up to 48 users at a time which is less than ideal
 */
-func (a *Client) GetUserPrincipalsByIDsInOrganization(params *GetUserPrincipalsByIDsInOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserPrincipalsByIDsInOrganizationOK, error) {
+func (a *Client) IamServiceGetUserPrincipalsByIDsInOrganization(params *IamServiceGetUserPrincipalsByIDsInOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetUserPrincipalsByIDsInOrganizationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetUserPrincipalsByIDsInOrganizationParams()
+		params = NewIamServiceGetUserPrincipalsByIDsInOrganizationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetUserPrincipalsByIDsInOrganization",
+		ID:                 "IamService_GetUserPrincipalsByIDsInOrganization",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetUserPrincipalsByIDsInOrganizationReader{formats: a.formats},
+		Reader:             &IamServiceGetUserPrincipalsByIDsInOrganizationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -270,32 +270,32 @@ func (a *Client) GetUserPrincipalsByIDsInOrganization(params *GetUserPrincipalsB
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetUserPrincipalsByIDsInOrganizationOK)
+	success, ok := result.(*IamServiceGetUserPrincipalsByIDsInOrganizationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetUserPrincipalsByIDsInOrganizationDefault)
+	unexpectedSuccess := result.(*IamServiceGetUserPrincipalsByIDsInOrganizationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListUserPrincipalsByOrganization lists user principals by organization returns a list of principals that are members of an organization
+IamServiceListUserPrincipalsByOrganization lists user principals by organization returns a list of principals that are members of an organization
 */
-func (a *Client) ListUserPrincipalsByOrganization(params *ListUserPrincipalsByOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListUserPrincipalsByOrganizationOK, error) {
+func (a *Client) IamServiceListUserPrincipalsByOrganization(params *IamServiceListUserPrincipalsByOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceListUserPrincipalsByOrganizationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListUserPrincipalsByOrganizationParams()
+		params = NewIamServiceListUserPrincipalsByOrganizationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ListUserPrincipalsByOrganization",
+		ID:                 "IamService_ListUserPrincipalsByOrganization",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/user-principals",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListUserPrincipalsByOrganizationReader{formats: a.formats},
+		Reader:             &IamServiceListUserPrincipalsByOrganizationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -308,32 +308,32 @@ func (a *Client) ListUserPrincipalsByOrganization(params *ListUserPrincipalsByOr
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListUserPrincipalsByOrganizationOK)
+	success, ok := result.(*IamServiceListUserPrincipalsByOrganizationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListUserPrincipalsByOrganizationDefault)
+	unexpectedSuccess := result.(*IamServiceListUserPrincipalsByOrganizationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Ping pings pings the healthcheck endpoint exposed for HTTP healthchecks via datadog synthetic monitoring
+IamServicePing pings pings the healthcheck endpoint exposed for HTTP healthchecks via datadog synthetic monitoring
 */
-func (a *Client) Ping(params *PingParams, opts ...ClientOption) (*PingOK, error) {
+func (a *Client) IamServicePing(params *IamServicePingParams, opts ...ClientOption) (*IamServicePingOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPingParams()
+		params = NewIamServicePingParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "Ping",
+		ID:                 "IamService_Ping",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/ping",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &PingReader{formats: a.formats},
+		Reader:             &IamServicePingReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -345,32 +345,32 @@ func (a *Client) Ping(params *PingParams, opts ...ClientOption) (*PingOK, error)
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PingOK)
+	success, ok := result.(*IamServicePingOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*PingDefault)
+	unexpectedSuccess := result.(*IamServicePingDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-SearchPrincipals searches principals returns principal details for principals within the supplied organization optional filters may be specified to filter the result set
+IamServiceSearchPrincipals searches principals returns principal details for principals within the supplied organization optional filters may be specified to filter the result set
 */
-func (a *Client) SearchPrincipals(params *SearchPrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchPrincipalsOK, error) {
+func (a *Client) IamServiceSearchPrincipals(params *IamServiceSearchPrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceSearchPrincipalsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSearchPrincipalsParams()
+		params = NewIamServiceSearchPrincipalsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "SearchPrincipals",
+		ID:                 "IamService_SearchPrincipals",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/principals/search",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SearchPrincipalsReader{formats: a.formats},
+		Reader:             &IamServiceSearchPrincipalsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -383,32 +383,32 @@ func (a *Client) SearchPrincipals(params *SearchPrincipalsParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*SearchPrincipalsOK)
+	success, ok := result.(*IamServiceSearchPrincipalsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*SearchPrincipalsDefault)
+	unexpectedSuccess := result.(*IamServiceSearchPrincipalsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-UpdateWebConsolePreferences updates web console preferences updates a user principal s web portal fka web console preferences
+IamServiceUpdateWebConsolePreferences updates web console preferences updates a user principal s web portal fka web console preferences
 */
-func (a *Client) UpdateWebConsolePreferences(params *UpdateWebConsolePreferencesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWebConsolePreferencesOK, error) {
+func (a *Client) IamServiceUpdateWebConsolePreferences(params *IamServiceUpdateWebConsolePreferencesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceUpdateWebConsolePreferencesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateWebConsolePreferencesParams()
+		params = NewIamServiceUpdateWebConsolePreferencesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "UpdateWebConsolePreferences",
+		ID:                 "IamService_UpdateWebConsolePreferences",
 		Method:             "PUT",
 		PathPattern:        "/iam/2019-12-10/me/web-portal-preferences",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateWebConsolePreferencesReader{formats: a.formats},
+		Reader:             &IamServiceUpdateWebConsolePreferencesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -421,12 +421,12 @@ func (a *Client) UpdateWebConsolePreferences(params *UpdateWebConsolePreferences
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateWebConsolePreferencesOK)
+	success, ok := result.(*IamServiceUpdateWebConsolePreferencesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdateWebConsolePreferencesDefault)
+	unexpectedSuccess := result.(*IamServiceUpdateWebConsolePreferencesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

@@ -28,44 +28,44 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateSSOConfiguration(params *CreateSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSSOConfigurationOK, error)
+	SSOManagementServiceCreateSSOConfiguration(params *SSOManagementServiceCreateSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceCreateSSOConfigurationOK, error)
 
-	DeleteSSOConfiguration(params *DeleteSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSSOConfigurationOK, error)
+	SSOManagementServiceDeleteSSOConfiguration(params *SSOManagementServiceDeleteSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceDeleteSSOConfigurationOK, error)
 
-	GetPreconfigurationData(params *GetPreconfigurationDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPreconfigurationDataOK, error)
+	SSOManagementServiceGetPreconfigurationData(params *SSOManagementServiceGetPreconfigurationDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceGetPreconfigurationDataOK, error)
 
-	GetSSOConfiguration(params *GetSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSSOConfigurationOK, error)
+	SSOManagementServiceGetSSOConfiguration(params *SSOManagementServiceGetSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceGetSSOConfigurationOK, error)
 
-	GetSSOType(params *GetSSOTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSSOTypeOK, error)
+	SSOManagementServiceGetSSOType(params *SSOManagementServiceGetSSOTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceGetSSOTypeOK, error)
 
-	ListSSOConfigurations(params *ListSSOConfigurationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSSOConfigurationsOK, error)
+	SSOManagementServiceListSSOConfigurations(params *SSOManagementServiceListSSOConfigurationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceListSSOConfigurationsOK, error)
 
-	UpdateSSOConfiguration(params *UpdateSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSSOConfigurationOK, error)
+	SSOManagementServiceUpdateSSOConfiguration(params *SSOManagementServiceUpdateSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceUpdateSSOConfigurationOK, error)
 
-	VerifyDomainOwnership(params *VerifyDomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VerifyDomainOwnershipOK, error)
+	SSOManagementServiceVerifyDomainOwnership(params *SSOManagementServiceVerifyDomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceVerifyDomainOwnershipOK, error)
 
-	VerifySSODomainOwnership(params *VerifySSODomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VerifySSODomainOwnershipOK, error)
+	SSOManagementServiceVerifySSODomainOwnership(params *SSOManagementServiceVerifySSODomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceVerifySSODomainOwnershipOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateSSOConfiguration creates s s o configuration creates a new s s o configuration for an organization
+SSOManagementServiceCreateSSOConfiguration creates s s o configuration creates a new s s o configuration for an organization
 */
-func (a *Client) CreateSSOConfiguration(params *CreateSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSSOConfigurationOK, error) {
+func (a *Client) SSOManagementServiceCreateSSOConfiguration(params *SSOManagementServiceCreateSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceCreateSSOConfigurationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateSSOConfigurationParams()
+		params = NewSSOManagementServiceCreateSSOConfigurationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateSSOConfiguration",
+		ID:                 "SSOManagementService_CreateSSOConfiguration",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/sso-configurations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateSSOConfigurationReader{formats: a.formats},
+		Reader:             &SSOManagementServiceCreateSSOConfigurationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -78,32 +78,32 @@ func (a *Client) CreateSSOConfiguration(params *CreateSSOConfigurationParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateSSOConfigurationOK)
+	success, ok := result.(*SSOManagementServiceCreateSSOConfigurationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateSSOConfigurationDefault)
+	unexpectedSuccess := result.(*SSOManagementServiceCreateSSOConfigurationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteSSOConfiguration deletes s s o configuration deletes an existing s s o configuration
+SSOManagementServiceDeleteSSOConfiguration deletes s s o configuration deletes an existing s s o configuration
 */
-func (a *Client) DeleteSSOConfiguration(params *DeleteSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSSOConfigurationOK, error) {
+func (a *Client) SSOManagementServiceDeleteSSOConfiguration(params *SSOManagementServiceDeleteSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceDeleteSSOConfigurationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteSSOConfigurationParams()
+		params = NewSSOManagementServiceDeleteSSOConfigurationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteSSOConfiguration",
+		ID:                 "SSOManagementService_DeleteSSOConfiguration",
 		Method:             "DELETE",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteSSOConfigurationReader{formats: a.formats},
+		Reader:             &SSOManagementServiceDeleteSSOConfigurationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -116,32 +116,32 @@ func (a *Client) DeleteSSOConfiguration(params *DeleteSSOConfigurationParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteSSOConfigurationOK)
+	success, ok := result.(*SSOManagementServiceDeleteSSOConfigurationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteSSOConfigurationDefault)
+	unexpectedSuccess := result.(*SSOManagementServiceDeleteSSOConfigurationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetPreconfigurationData gets preconfiguration data returns data needed prior to an s s o configuration being created
+SSOManagementServiceGetPreconfigurationData gets preconfiguration data returns data needed prior to an s s o configuration being created
 */
-func (a *Client) GetPreconfigurationData(params *GetPreconfigurationDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPreconfigurationDataOK, error) {
+func (a *Client) SSOManagementServiceGetPreconfigurationData(params *SSOManagementServiceGetPreconfigurationDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceGetPreconfigurationDataOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetPreconfigurationDataParams()
+		params = NewSSOManagementServiceGetPreconfigurationDataParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPreconfigurationData",
+		ID:                 "SSOManagementService_GetPreconfigurationData",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/sso-preconfiguration-data",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetPreconfigurationDataReader{formats: a.formats},
+		Reader:             &SSOManagementServiceGetPreconfigurationDataReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -154,32 +154,32 @@ func (a *Client) GetPreconfigurationData(params *GetPreconfigurationDataParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetPreconfigurationDataOK)
+	success, ok := result.(*SSOManagementServiceGetPreconfigurationDataOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetPreconfigurationDataDefault)
+	unexpectedSuccess := result.(*SSOManagementServiceGetPreconfigurationDataDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetSSOConfiguration gets s s o configuration retrieves a specific s s o configuration for an organization
+SSOManagementServiceGetSSOConfiguration gets s s o configuration retrieves a specific s s o configuration for an organization
 */
-func (a *Client) GetSSOConfiguration(params *GetSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSSOConfigurationOK, error) {
+func (a *Client) SSOManagementServiceGetSSOConfiguration(params *SSOManagementServiceGetSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceGetSSOConfigurationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetSSOConfigurationParams()
+		params = NewSSOManagementServiceGetSSOConfigurationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetSSOConfiguration",
+		ID:                 "SSOManagementService_GetSSOConfiguration",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetSSOConfigurationReader{formats: a.formats},
+		Reader:             &SSOManagementServiceGetSSOConfigurationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -192,32 +192,32 @@ func (a *Client) GetSSOConfiguration(params *GetSSOConfigurationParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetSSOConfigurationOK)
+	success, ok := result.(*SSOManagementServiceGetSSOConfigurationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetSSOConfigurationDefault)
+	unexpectedSuccess := result.(*SSOManagementServiceGetSSOConfigurationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetSSOType gets s s o type returns the type of s s o that is configured for an organization
+SSOManagementServiceGetSSOType gets s s o type returns the type of s s o that is configured for an organization
 */
-func (a *Client) GetSSOType(params *GetSSOTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSSOTypeOK, error) {
+func (a *Client) SSOManagementServiceGetSSOType(params *SSOManagementServiceGetSSOTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceGetSSOTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetSSOTypeParams()
+		params = NewSSOManagementServiceGetSSOTypeParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetSSOType",
+		ID:                 "SSOManagementService_GetSSOType",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/sso-type",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetSSOTypeReader{formats: a.formats},
+		Reader:             &SSOManagementServiceGetSSOTypeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -230,32 +230,32 @@ func (a *Client) GetSSOType(params *GetSSOTypeParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetSSOTypeOK)
+	success, ok := result.(*SSOManagementServiceGetSSOTypeOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetSSOTypeDefault)
+	unexpectedSuccess := result.(*SSOManagementServiceGetSSOTypeDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListSSOConfigurations lists s s o configurations retrieves the s s o configurations for an organization
+SSOManagementServiceListSSOConfigurations lists s s o configurations retrieves the s s o configurations for an organization
 */
-func (a *Client) ListSSOConfigurations(params *ListSSOConfigurationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSSOConfigurationsOK, error) {
+func (a *Client) SSOManagementServiceListSSOConfigurations(params *SSOManagementServiceListSSOConfigurationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceListSSOConfigurationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListSSOConfigurationsParams()
+		params = NewSSOManagementServiceListSSOConfigurationsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ListSSOConfigurations",
+		ID:                 "SSOManagementService_ListSSOConfigurations",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/sso-configurations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListSSOConfigurationsReader{formats: a.formats},
+		Reader:             &SSOManagementServiceListSSOConfigurationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -268,32 +268,32 @@ func (a *Client) ListSSOConfigurations(params *ListSSOConfigurationsParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListSSOConfigurationsOK)
+	success, ok := result.(*SSOManagementServiceListSSOConfigurationsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListSSOConfigurationsDefault)
+	unexpectedSuccess := result.(*SSOManagementServiceListSSOConfigurationsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-UpdateSSOConfiguration updates s s o configuration updates an existing s s o configuration
+SSOManagementServiceUpdateSSOConfiguration updates s s o configuration updates an existing s s o configuration
 */
-func (a *Client) UpdateSSOConfiguration(params *UpdateSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSSOConfigurationOK, error) {
+func (a *Client) SSOManagementServiceUpdateSSOConfiguration(params *SSOManagementServiceUpdateSSOConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceUpdateSSOConfigurationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateSSOConfigurationParams()
+		params = NewSSOManagementServiceUpdateSSOConfigurationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "UpdateSSOConfiguration",
+		ID:                 "SSOManagementService_UpdateSSOConfiguration",
 		Method:             "PUT",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateSSOConfigurationReader{formats: a.formats},
+		Reader:             &SSOManagementServiceUpdateSSOConfigurationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -306,36 +306,36 @@ func (a *Client) UpdateSSOConfiguration(params *UpdateSSOConfigurationParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateSSOConfigurationOK)
+	success, ok := result.(*SSOManagementServiceUpdateSSOConfigurationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdateSSOConfigurationDefault)
+	unexpectedSuccess := result.(*SSOManagementServiceUpdateSSOConfigurationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-	VerifyDomainOwnership verifies domain ownership checks whether the organization has proven their ownership control of the given domain by adding the required t x t record
+	SSOManagementServiceVerifyDomainOwnership verifies domain ownership checks whether the organization has proven their ownership control of the given domain by adding the required t x t record
 
 	It is intended to be used to provide early feedback to the user; we check
 
 ownership "for real" in CreateSSOConfiguration and UpdateSSOConfiguration.
 */
-func (a *Client) VerifyDomainOwnership(params *VerifyDomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VerifyDomainOwnershipOK, error) {
+func (a *Client) SSOManagementServiceVerifyDomainOwnership(params *SSOManagementServiceVerifyDomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceVerifyDomainOwnershipOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewVerifyDomainOwnershipParams()
+		params = NewSSOManagementServiceVerifyDomainOwnershipParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "VerifyDomainOwnership",
+		ID:                 "SSOManagementService_VerifyDomainOwnership",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/verify-domain-ownership",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &VerifyDomainOwnershipReader{formats: a.formats},
+		Reader:             &SSOManagementServiceVerifyDomainOwnershipReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -348,17 +348,17 @@ func (a *Client) VerifyDomainOwnership(params *VerifyDomainOwnershipParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*VerifyDomainOwnershipOK)
+	success, ok := result.(*SSOManagementServiceVerifyDomainOwnershipOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*VerifyDomainOwnershipDefault)
+	unexpectedSuccess := result.(*SSOManagementServiceVerifyDomainOwnershipDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-	VerifySSODomainOwnership verifies s s o domain ownership checks whether the organization has proven their ownership control of the given domain by adding the required t x t record
+	SSOManagementServiceVerifySSODomainOwnership verifies s s o domain ownership checks whether the organization has proven their ownership control of the given domain by adding the required t x t record
 
 	This endpoint differs from the one above because it is intended to be used for HashiCorp
 
@@ -366,20 +366,20 @@ SSO domain ownership verification and not Auth0 SAML SSO.
 It is intended to be used to provide early feedback to the user; we check
 domain ownership in cloud-idp.
 */
-func (a *Client) VerifySSODomainOwnership(params *VerifySSODomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VerifySSODomainOwnershipOK, error) {
+func (a *Client) SSOManagementServiceVerifySSODomainOwnership(params *SSOManagementServiceVerifySSODomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceVerifySSODomainOwnershipOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewVerifySSODomainOwnershipParams()
+		params = NewSSOManagementServiceVerifySSODomainOwnershipParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "VerifySSODomainOwnership",
+		ID:                 "SSOManagementService_VerifySSODomainOwnership",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/verify-sso-domain-ownership",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &VerifySSODomainOwnershipReader{formats: a.formats},
+		Reader:             &SSOManagementServiceVerifySSODomainOwnershipReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -392,12 +392,12 @@ func (a *Client) VerifySSODomainOwnership(params *VerifySSODomainOwnershipParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*VerifySSODomainOwnershipOK)
+	success, ok := result.(*SSOManagementServiceVerifySSODomainOwnershipOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*VerifySSODomainOwnershipDefault)
+	unexpectedSuccess := result.(*SSOManagementServiceVerifySSODomainOwnershipDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

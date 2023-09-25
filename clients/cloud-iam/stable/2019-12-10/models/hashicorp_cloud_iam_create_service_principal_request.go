@@ -21,9 +21,10 @@ type HashicorpCloudIamCreateServicePrincipalRequest struct {
 	// name is the customer-chosen name for this service principal.
 	Name string `json:"name,omitempty"`
 
-	// organization_id is the unique identifier (UUID) of the organization under
-	// which the service principal should be created.
-	OrganizationID string `json:"organization_id,omitempty"`
+	// parent_resource_name is the resource name of the project or organization
+	// at which the service principal should be created (e.g.
+	// "project/<project_id>" or "organization/<organization_id>")
+	ParentResourceName string `json:"parent_resource_name,omitempty"`
 }
 
 // Validate validates this hashicorp cloud iam create service principal request

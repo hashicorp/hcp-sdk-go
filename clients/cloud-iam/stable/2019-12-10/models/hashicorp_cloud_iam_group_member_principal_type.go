@@ -35,9 +35,6 @@ const (
 
 	// HashicorpCloudIamGroupMemberPrincipalTypeGROUPMEMBERPRINCIPALTYPEUSER captures enum value "GROUP_MEMBER_PRINCIPAL_TYPE_USER"
 	HashicorpCloudIamGroupMemberPrincipalTypeGROUPMEMBERPRINCIPALTYPEUSER HashicorpCloudIamGroupMemberPrincipalType = "GROUP_MEMBER_PRINCIPAL_TYPE_USER"
-
-	// HashicorpCloudIamGroupMemberPrincipalTypeGROUPMEMBERPRINCIPALTYPESERVICEPRINCIPAL captures enum value "GROUP_MEMBER_PRINCIPAL_TYPE_SERVICE_PRINCIPAL"
-	HashicorpCloudIamGroupMemberPrincipalTypeGROUPMEMBERPRINCIPALTYPESERVICEPRINCIPAL HashicorpCloudIamGroupMemberPrincipalType = "GROUP_MEMBER_PRINCIPAL_TYPE_SERVICE_PRINCIPAL"
 )
 
 // for schema
@@ -45,7 +42,7 @@ var hashicorpCloudIamGroupMemberPrincipalTypeEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudIamGroupMemberPrincipalType
-	if err := json.Unmarshal([]byte(`["GROUP_MEMBER_PRINCIPAL_TYPE_UNSPECIFIED","GROUP_MEMBER_PRINCIPAL_TYPE_USER","GROUP_MEMBER_PRINCIPAL_TYPE_SERVICE_PRINCIPAL"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["GROUP_MEMBER_PRINCIPAL_TYPE_UNSPECIFIED","GROUP_MEMBER_PRINCIPAL_TYPE_USER"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

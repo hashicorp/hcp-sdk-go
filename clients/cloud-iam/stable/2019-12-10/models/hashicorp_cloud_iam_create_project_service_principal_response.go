@@ -13,8 +13,8 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudIamCreateProjectServicePrincipalResponse CreateServicePrincipalResponse is the response message returned after creating
-// a service principal on project level.
+// HashicorpCloudIamCreateProjectServicePrincipalResponse CreateProjectServicePrincipalResponse is the response message returned after
+// creating a service principal on project level.
 //
 // swagger:model hashicorp.cloud.iam.CreateProjectServicePrincipalResponse
 type HashicorpCloudIamCreateProjectServicePrincipalResponse struct {

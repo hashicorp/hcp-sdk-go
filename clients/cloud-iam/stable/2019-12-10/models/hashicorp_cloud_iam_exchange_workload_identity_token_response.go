@@ -23,7 +23,7 @@ type HashicorpCloudIamExchangeWorkloadIdentityTokenResponse struct {
 	AccessToken string `json:"access_token,omitempty"`
 
 	// expires_in is the number of seconds the returned access token expires in.
-	ExpiresIn string `json:"expires_in,omitempty"`
+	ExpiresIn int32 `json:"expires_in,omitempty"`
 }
 
 // Validate validates this hashicorp cloud iam exchange workload identity token response

@@ -28,62 +28,68 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateOrganizationServicePrincipal(params *CreateOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrganizationServicePrincipalOK, error)
+	ServicePrincipalsServiceCreateOrganizationServicePrincipal(params *ServicePrincipalsServiceCreateOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateOrganizationServicePrincipalOK, error)
 
-	CreateOrganizationServicePrincipalKey(params *CreateOrganizationServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrganizationServicePrincipalKeyOK, error)
+	ServicePrincipalsServiceCreateOrganizationServicePrincipalKey(params *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK, error)
 
-	CreateProjectServicePrincipal(params *CreateProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectServicePrincipalOK, error)
+	ServicePrincipalsServiceCreateProjectServicePrincipal(params *ServicePrincipalsServiceCreateProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateProjectServicePrincipalOK, error)
 
-	CreateProjectServicePrincipalKey(params *CreateProjectServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectServicePrincipalKeyOK, error)
+	ServicePrincipalsServiceCreateProjectServicePrincipalKey(params *ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateProjectServicePrincipalKeyOK, error)
 
-	CreateWorkloadIdentityProvider(params *CreateWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkloadIdentityProviderOK, error)
+	ServicePrincipalsServiceCreateServicePrincipal2(params *ServicePrincipalsServiceCreateServicePrincipal2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateServicePrincipal2OK, error)
 
-	DeleteOrganizationServicePrincipal(params *DeleteOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationServicePrincipalOK, error)
+	ServicePrincipalsServiceCreateServicePrincipalKey2(params *ServicePrincipalsServiceCreateServicePrincipalKey2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateServicePrincipalKey2OK, error)
 
-	DeleteOrganizationServicePrincipalKey(params *DeleteOrganizationServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationServicePrincipalKeyOK, error)
+	ServicePrincipalsServiceCreateWorkloadIdentityProvider(params *ServicePrincipalsServiceCreateWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateWorkloadIdentityProviderOK, error)
 
-	DeleteProjectServicePrincipal(params *DeleteProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectServicePrincipalOK, error)
+	ServicePrincipalsServiceDeleteOrganizationServicePrincipal(params *ServicePrincipalsServiceDeleteOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceDeleteOrganizationServicePrincipalOK, error)
 
-	DeleteProjectServicePrincipalKey(params *DeleteProjectServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectServicePrincipalKeyOK, error)
+	ServicePrincipalsServiceDeleteOrganizationServicePrincipalKey(params *ServicePrincipalsServiceDeleteOrganizationServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceDeleteOrganizationServicePrincipalKeyOK, error)
 
-	DeleteWorkloadIdentityProvider(params *DeleteWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteWorkloadIdentityProviderOK, error)
+	ServicePrincipalsServiceDeleteProjectServicePrincipal(params *ServicePrincipalsServiceDeleteProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceDeleteProjectServicePrincipalOK, error)
 
-	ExchangeWorkloadIdentityToken(params *ExchangeWorkloadIdentityTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ExchangeWorkloadIdentityTokenOK, error)
+	ServicePrincipalsServiceDeleteProjectServicePrincipalKey(params *ServicePrincipalsServiceDeleteProjectServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceDeleteProjectServicePrincipalKeyOK, error)
 
-	GetOrganizationServicePrincipal(params *GetOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationServicePrincipalOK, error)
+	ServicePrincipalsServiceDeleteWorkloadIdentityProvider(params *ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceDeleteWorkloadIdentityProviderOK, error)
 
-	GetProjectServicePrincipal(params *GetProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectServicePrincipalOK, error)
+	ServicePrincipalsServiceExchangeWorkloadIdentityToken(params *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceExchangeWorkloadIdentityTokenOK, error)
 
-	GetWorkloadIdentityProvider(params *GetWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkloadIdentityProviderOK, error)
+	ServicePrincipalsServiceGetOrganizationServicePrincipal(params *ServicePrincipalsServiceGetOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceGetOrganizationServicePrincipalOK, error)
 
-	ListOrganizationServicePrincipals(params *ListOrganizationServicePrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOrganizationServicePrincipalsOK, error)
+	ServicePrincipalsServiceGetProjectServicePrincipal(params *ServicePrincipalsServiceGetProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceGetProjectServicePrincipalOK, error)
 
-	ListProjectServicePrincipals(params *ListProjectServicePrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProjectServicePrincipalsOK, error)
+	ServicePrincipalsServiceGetWorkloadIdentityProvider(params *ServicePrincipalsServiceGetWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceGetWorkloadIdentityProviderOK, error)
 
-	ListWorkloadIdentityProvider(params *ListWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListWorkloadIdentityProviderOK, error)
+	ServicePrincipalsServiceListOrganizationServicePrincipals(params *ServicePrincipalsServiceListOrganizationServicePrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceListOrganizationServicePrincipalsOK, error)
 
-	UpdateWorkloadIdentityProvider(params *UpdateWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWorkloadIdentityProviderOK, error)
+	ServicePrincipalsServiceListProjectServicePrincipals(params *ServicePrincipalsServiceListProjectServicePrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceListProjectServicePrincipalsOK, error)
+
+	ServicePrincipalsServiceListServicePrincipals2(params *ServicePrincipalsServiceListServicePrincipals2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceListServicePrincipals2OK, error)
+
+	ServicePrincipalsServiceListWorkloadIdentityProvider(params *ServicePrincipalsServiceListWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceListWorkloadIdentityProviderOK, error)
+
+	ServicePrincipalsServiceUpdateWorkloadIdentityProvider(params *ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceUpdateWorkloadIdentityProviderOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateOrganizationServicePrincipal creates organization service principal creates a new service principal on organization level
+ServicePrincipalsServiceCreateOrganizationServicePrincipal creates organization service principal creates a new service principal on organization level
 */
-func (a *Client) CreateOrganizationServicePrincipal(params *CreateOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrganizationServicePrincipalOK, error) {
+func (a *Client) ServicePrincipalsServiceCreateOrganizationServicePrincipal(params *ServicePrincipalsServiceCreateOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateOrganizationServicePrincipalOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateOrganizationServicePrincipalParams()
+		params = NewServicePrincipalsServiceCreateOrganizationServicePrincipalParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateOrganizationServicePrincipal",
+		ID:                 "ServicePrincipalsService_CreateOrganizationServicePrincipal",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/service-principals",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateOrganizationServicePrincipalReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceCreateOrganizationServicePrincipalReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -96,32 +102,32 @@ func (a *Client) CreateOrganizationServicePrincipal(params *CreateOrganizationSe
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateOrganizationServicePrincipalOK)
+	success, ok := result.(*ServicePrincipalsServiceCreateOrganizationServicePrincipalOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateOrganizationServicePrincipalDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceCreateOrganizationServicePrincipalDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-CreateOrganizationServicePrincipalKey creates organization service principal key creates a new service principal key for a service principal on organization level
+ServicePrincipalsServiceCreateOrganizationServicePrincipalKey creates organization service principal key creates a new service principal key for a service principal on organization level
 */
-func (a *Client) CreateOrganizationServicePrincipalKey(params *CreateOrganizationServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrganizationServicePrincipalKeyOK, error) {
+func (a *Client) ServicePrincipalsServiceCreateOrganizationServicePrincipalKey(params *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateOrganizationServicePrincipalKeyParams()
+		params = NewServicePrincipalsServiceCreateOrganizationServicePrincipalKeyParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateOrganizationServicePrincipalKey",
+		ID:                 "ServicePrincipalsService_CreateOrganizationServicePrincipalKey",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/service-principal-keys",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateOrganizationServicePrincipalKeyReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -134,32 +140,32 @@ func (a *Client) CreateOrganizationServicePrincipalKey(params *CreateOrganizatio
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateOrganizationServicePrincipalKeyOK)
+	success, ok := result.(*ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateOrganizationServicePrincipalKeyDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-CreateProjectServicePrincipal creates project service principal creates a new service principal on project level
+ServicePrincipalsServiceCreateProjectServicePrincipal creates project service principal creates a new service principal on project level
 */
-func (a *Client) CreateProjectServicePrincipal(params *CreateProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectServicePrincipalOK, error) {
+func (a *Client) ServicePrincipalsServiceCreateProjectServicePrincipal(params *ServicePrincipalsServiceCreateProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateProjectServicePrincipalOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateProjectServicePrincipalParams()
+		params = NewServicePrincipalsServiceCreateProjectServicePrincipalParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateProjectServicePrincipal",
+		ID:                 "ServicePrincipalsService_CreateProjectServicePrincipal",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateProjectServicePrincipalReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceCreateProjectServicePrincipalReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -172,32 +178,32 @@ func (a *Client) CreateProjectServicePrincipal(params *CreateProjectServicePrinc
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateProjectServicePrincipalOK)
+	success, ok := result.(*ServicePrincipalsServiceCreateProjectServicePrincipalOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateProjectServicePrincipalDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceCreateProjectServicePrincipalDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-CreateProjectServicePrincipalKey creates project service principal key creates a new service principal key for a service principal on project level
+ServicePrincipalsServiceCreateProjectServicePrincipalKey creates project service principal key creates a new service principal key for a service principal on project level
 */
-func (a *Client) CreateProjectServicePrincipalKey(params *CreateProjectServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectServicePrincipalKeyOK, error) {
+func (a *Client) ServicePrincipalsServiceCreateProjectServicePrincipalKey(params *ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateProjectServicePrincipalKeyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateProjectServicePrincipalKeyParams()
+		params = NewServicePrincipalsServiceCreateProjectServicePrincipalKeyParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateProjectServicePrincipalKey",
+		ID:                 "ServicePrincipalsService_CreateProjectServicePrincipalKey",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principal-keys",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateProjectServicePrincipalKeyReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceCreateProjectServicePrincipalKeyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -210,32 +216,108 @@ func (a *Client) CreateProjectServicePrincipalKey(params *CreateProjectServicePr
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateProjectServicePrincipalKeyOK)
+	success, ok := result.(*ServicePrincipalsServiceCreateProjectServicePrincipalKeyOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateProjectServicePrincipalKeyDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceCreateProjectServicePrincipalKeyDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-CreateWorkloadIdentityProvider creates workload identity provider creates a workload identity provider nested under a service principal
+ServicePrincipalsServiceCreateServicePrincipal2 creates service principal creates a new service principal
 */
-func (a *Client) CreateWorkloadIdentityProvider(params *CreateWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkloadIdentityProviderOK, error) {
+func (a *Client) ServicePrincipalsServiceCreateServicePrincipal2(params *ServicePrincipalsServiceCreateServicePrincipal2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateServicePrincipal2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateWorkloadIdentityProviderParams()
+		params = NewServicePrincipalsServiceCreateServicePrincipal2Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateWorkloadIdentityProvider",
+		ID:                 "ServicePrincipalsService_CreateServicePrincipal2",
+		Method:             "POST",
+		PathPattern:        "/2019-12-10/iam/{parent_resource_name}/service-principals",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ServicePrincipalsServiceCreateServicePrincipal2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ServicePrincipalsServiceCreateServicePrincipal2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ServicePrincipalsServiceCreateServicePrincipal2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ServicePrincipalsServiceCreateServicePrincipalKey2 creates service principal key creates a new service principal key for a service principal
+*/
+func (a *Client) ServicePrincipalsServiceCreateServicePrincipalKey2(params *ServicePrincipalsServiceCreateServicePrincipalKey2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateServicePrincipalKey2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewServicePrincipalsServiceCreateServicePrincipalKey2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ServicePrincipalsService_CreateServicePrincipalKey2",
+		Method:             "POST",
+		PathPattern:        "/2019-12-10/{parent_resource_name}/keys",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ServicePrincipalsServiceCreateServicePrincipalKey2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ServicePrincipalsServiceCreateServicePrincipalKey2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ServicePrincipalsServiceCreateServicePrincipalKey2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ServicePrincipalsServiceCreateWorkloadIdentityProvider creates workload identity provider creates a workload identity provider nested under a service principal
+*/
+func (a *Client) ServicePrincipalsServiceCreateWorkloadIdentityProvider(params *ServicePrincipalsServiceCreateWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceCreateWorkloadIdentityProviderOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewServicePrincipalsServiceCreateWorkloadIdentityProviderParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ServicePrincipalsService_CreateWorkloadIdentityProvider",
 		Method:             "POST",
 		PathPattern:        "/2019-12-10/{parent_resource_name}/workload-identity-providers",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateWorkloadIdentityProviderReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceCreateWorkloadIdentityProviderReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -248,32 +330,32 @@ func (a *Client) CreateWorkloadIdentityProvider(params *CreateWorkloadIdentityPr
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateWorkloadIdentityProviderOK)
+	success, ok := result.(*ServicePrincipalsServiceCreateWorkloadIdentityProviderOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateWorkloadIdentityProviderDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteOrganizationServicePrincipal deletes organization service principal deletes a service principal on organization level
+ServicePrincipalsServiceDeleteOrganizationServicePrincipal deletes organization service principal deletes a service principal on organization level
 */
-func (a *Client) DeleteOrganizationServicePrincipal(params *DeleteOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationServicePrincipalOK, error) {
+func (a *Client) ServicePrincipalsServiceDeleteOrganizationServicePrincipal(params *ServicePrincipalsServiceDeleteOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceDeleteOrganizationServicePrincipalOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteOrganizationServicePrincipalParams()
+		params = NewServicePrincipalsServiceDeleteOrganizationServicePrincipalParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteOrganizationServicePrincipal",
+		ID:                 "ServicePrincipalsService_DeleteOrganizationServicePrincipal",
 		Method:             "DELETE",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/service-principals/{principal_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteOrganizationServicePrincipalReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceDeleteOrganizationServicePrincipalReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -286,32 +368,32 @@ func (a *Client) DeleteOrganizationServicePrincipal(params *DeleteOrganizationSe
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteOrganizationServicePrincipalOK)
+	success, ok := result.(*ServicePrincipalsServiceDeleteOrganizationServicePrincipalOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteOrganizationServicePrincipalDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceDeleteOrganizationServicePrincipalDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteOrganizationServicePrincipalKey deletes organization service principal key deletes a service principal key for a service principal on organization level
+ServicePrincipalsServiceDeleteOrganizationServicePrincipalKey deletes organization service principal key deletes a service principal key for a service principal on organization level
 */
-func (a *Client) DeleteOrganizationServicePrincipalKey(params *DeleteOrganizationServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationServicePrincipalKeyOK, error) {
+func (a *Client) ServicePrincipalsServiceDeleteOrganizationServicePrincipalKey(params *ServicePrincipalsServiceDeleteOrganizationServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceDeleteOrganizationServicePrincipalKeyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteOrganizationServicePrincipalKeyParams()
+		params = NewServicePrincipalsServiceDeleteOrganizationServicePrincipalKeyParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteOrganizationServicePrincipalKey",
+		ID:                 "ServicePrincipalsService_DeleteOrganizationServicePrincipalKey",
 		Method:             "DELETE",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/service-principal-keys/{client_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteOrganizationServicePrincipalKeyReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceDeleteOrganizationServicePrincipalKeyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -324,32 +406,32 @@ func (a *Client) DeleteOrganizationServicePrincipalKey(params *DeleteOrganizatio
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteOrganizationServicePrincipalKeyOK)
+	success, ok := result.(*ServicePrincipalsServiceDeleteOrganizationServicePrincipalKeyOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteOrganizationServicePrincipalKeyDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceDeleteOrganizationServicePrincipalKeyDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteProjectServicePrincipal deletes service principal deletes a service principal on project level
+ServicePrincipalsServiceDeleteProjectServicePrincipal deletes service principal deletes a service principal on project level
 */
-func (a *Client) DeleteProjectServicePrincipal(params *DeleteProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectServicePrincipalOK, error) {
+func (a *Client) ServicePrincipalsServiceDeleteProjectServicePrincipal(params *ServicePrincipalsServiceDeleteProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceDeleteProjectServicePrincipalOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteProjectServicePrincipalParams()
+		params = NewServicePrincipalsServiceDeleteProjectServicePrincipalParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteProjectServicePrincipal",
+		ID:                 "ServicePrincipalsService_DeleteProjectServicePrincipal",
 		Method:             "DELETE",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals/{principal_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteProjectServicePrincipalReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceDeleteProjectServicePrincipalReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -362,32 +444,32 @@ func (a *Client) DeleteProjectServicePrincipal(params *DeleteProjectServicePrinc
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteProjectServicePrincipalOK)
+	success, ok := result.(*ServicePrincipalsServiceDeleteProjectServicePrincipalOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteProjectServicePrincipalDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceDeleteProjectServicePrincipalDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteProjectServicePrincipalKey deletes project service principal key deletes a service principal key for a service principal on project level
+ServicePrincipalsServiceDeleteProjectServicePrincipalKey deletes project service principal key deletes a service principal key for a service principal on project level
 */
-func (a *Client) DeleteProjectServicePrincipalKey(params *DeleteProjectServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectServicePrincipalKeyOK, error) {
+func (a *Client) ServicePrincipalsServiceDeleteProjectServicePrincipalKey(params *ServicePrincipalsServiceDeleteProjectServicePrincipalKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceDeleteProjectServicePrincipalKeyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteProjectServicePrincipalKeyParams()
+		params = NewServicePrincipalsServiceDeleteProjectServicePrincipalKeyParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteProjectServicePrincipalKey",
+		ID:                 "ServicePrincipalsService_DeleteProjectServicePrincipalKey",
 		Method:             "DELETE",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principal-keys/{client_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteProjectServicePrincipalKeyReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceDeleteProjectServicePrincipalKeyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -400,32 +482,32 @@ func (a *Client) DeleteProjectServicePrincipalKey(params *DeleteProjectServicePr
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteProjectServicePrincipalKeyOK)
+	success, ok := result.(*ServicePrincipalsServiceDeleteProjectServicePrincipalKeyOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteProjectServicePrincipalKeyDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceDeleteProjectServicePrincipalKeyDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteWorkloadIdentityProvider deletes workload identity provider deletes a workload identity provider
+ServicePrincipalsServiceDeleteWorkloadIdentityProvider deletes workload identity provider deletes a workload identity provider
 */
-func (a *Client) DeleteWorkloadIdentityProvider(params *DeleteWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteWorkloadIdentityProviderOK, error) {
+func (a *Client) ServicePrincipalsServiceDeleteWorkloadIdentityProvider(params *ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceDeleteWorkloadIdentityProviderOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteWorkloadIdentityProviderParams()
+		params = NewServicePrincipalsServiceDeleteWorkloadIdentityProviderParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteWorkloadIdentityProvider",
+		ID:                 "ServicePrincipalsService_DeleteWorkloadIdentityProvider",
 		Method:             "DELETE",
 		PathPattern:        "/2019-12-10/{resource_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteWorkloadIdentityProviderReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceDeleteWorkloadIdentityProviderReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -438,32 +520,32 @@ func (a *Client) DeleteWorkloadIdentityProvider(params *DeleteWorkloadIdentityPr
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteWorkloadIdentityProviderOK)
+	success, ok := result.(*ServicePrincipalsServiceDeleteWorkloadIdentityProviderOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteWorkloadIdentityProviderDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceDeleteWorkloadIdentityProviderDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ExchangeWorkloadIdentityToken exchanges workload identity token exchanges an external workload identity token for an access token whose subject is that of the service principal the identity federation is nested under
+ServicePrincipalsServiceExchangeWorkloadIdentityToken exchanges workload identity token exchanges an external workload identity token for an access token whose subject is that of the service principal the identity federation is nested under
 */
-func (a *Client) ExchangeWorkloadIdentityToken(params *ExchangeWorkloadIdentityTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ExchangeWorkloadIdentityTokenOK, error) {
+func (a *Client) ServicePrincipalsServiceExchangeWorkloadIdentityToken(params *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceExchangeWorkloadIdentityTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewExchangeWorkloadIdentityTokenParams()
+		params = NewServicePrincipalsServiceExchangeWorkloadIdentityTokenParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ExchangeWorkloadIdentityToken",
+		ID:                 "ServicePrincipalsService_ExchangeWorkloadIdentityToken",
 		Method:             "POST",
 		PathPattern:        "/2019-12-10/{resource_name}/exchange-token",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ExchangeWorkloadIdentityTokenReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceExchangeWorkloadIdentityTokenReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -476,32 +558,32 @@ func (a *Client) ExchangeWorkloadIdentityToken(params *ExchangeWorkloadIdentityT
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ExchangeWorkloadIdentityTokenOK)
+	success, ok := result.(*ServicePrincipalsServiceExchangeWorkloadIdentityTokenOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ExchangeWorkloadIdentityTokenDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceExchangeWorkloadIdentityTokenDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetOrganizationServicePrincipal gets organization service principal retrieves a service principal on organization level
+ServicePrincipalsServiceGetOrganizationServicePrincipal gets organization service principal retrieves a service principal on organization level
 */
-func (a *Client) GetOrganizationServicePrincipal(params *GetOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationServicePrincipalOK, error) {
+func (a *Client) ServicePrincipalsServiceGetOrganizationServicePrincipal(params *ServicePrincipalsServiceGetOrganizationServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceGetOrganizationServicePrincipalOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetOrganizationServicePrincipalParams()
+		params = NewServicePrincipalsServiceGetOrganizationServicePrincipalParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetOrganizationServicePrincipal",
+		ID:                 "ServicePrincipalsService_GetOrganizationServicePrincipal",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/service-principals/{principal_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetOrganizationServicePrincipalReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceGetOrganizationServicePrincipalReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -514,32 +596,32 @@ func (a *Client) GetOrganizationServicePrincipal(params *GetOrganizationServiceP
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetOrganizationServicePrincipalOK)
+	success, ok := result.(*ServicePrincipalsServiceGetOrganizationServicePrincipalOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetOrganizationServicePrincipalDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceGetOrganizationServicePrincipalDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetProjectServicePrincipal gets project service principal retrieves a service principal on project level
+ServicePrincipalsServiceGetProjectServicePrincipal gets project service principal retrieves a service principal on project level
 */
-func (a *Client) GetProjectServicePrincipal(params *GetProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectServicePrincipalOK, error) {
+func (a *Client) ServicePrincipalsServiceGetProjectServicePrincipal(params *ServicePrincipalsServiceGetProjectServicePrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceGetProjectServicePrincipalOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetProjectServicePrincipalParams()
+		params = NewServicePrincipalsServiceGetProjectServicePrincipalParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetProjectServicePrincipal",
+		ID:                 "ServicePrincipalsService_GetProjectServicePrincipal",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals/{principal_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetProjectServicePrincipalReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceGetProjectServicePrincipalReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -552,32 +634,32 @@ func (a *Client) GetProjectServicePrincipal(params *GetProjectServicePrincipalPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetProjectServicePrincipalOK)
+	success, ok := result.(*ServicePrincipalsServiceGetProjectServicePrincipalOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetProjectServicePrincipalDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceGetProjectServicePrincipalDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetWorkloadIdentityProvider gets workload identity provider retrieves a workload identity provider
+ServicePrincipalsServiceGetWorkloadIdentityProvider gets workload identity provider retrieves a workload identity provider
 */
-func (a *Client) GetWorkloadIdentityProvider(params *GetWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkloadIdentityProviderOK, error) {
+func (a *Client) ServicePrincipalsServiceGetWorkloadIdentityProvider(params *ServicePrincipalsServiceGetWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceGetWorkloadIdentityProviderOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetWorkloadIdentityProviderParams()
+		params = NewServicePrincipalsServiceGetWorkloadIdentityProviderParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetWorkloadIdentityProvider",
+		ID:                 "ServicePrincipalsService_GetWorkloadIdentityProvider",
 		Method:             "GET",
 		PathPattern:        "/2019-12-10/{resource_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetWorkloadIdentityProviderReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceGetWorkloadIdentityProviderReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -590,32 +672,32 @@ func (a *Client) GetWorkloadIdentityProvider(params *GetWorkloadIdentityProvider
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetWorkloadIdentityProviderOK)
+	success, ok := result.(*ServicePrincipalsServiceGetWorkloadIdentityProviderOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetWorkloadIdentityProviderDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceGetWorkloadIdentityProviderDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListOrganizationServicePrincipals lists project service principals lists service principals in an organization
+ServicePrincipalsServiceListOrganizationServicePrincipals lists project service principals lists service principals in an organization
 */
-func (a *Client) ListOrganizationServicePrincipals(params *ListOrganizationServicePrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOrganizationServicePrincipalsOK, error) {
+func (a *Client) ServicePrincipalsServiceListOrganizationServicePrincipals(params *ServicePrincipalsServiceListOrganizationServicePrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceListOrganizationServicePrincipalsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListOrganizationServicePrincipalsParams()
+		params = NewServicePrincipalsServiceListOrganizationServicePrincipalsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ListOrganizationServicePrincipals",
+		ID:                 "ServicePrincipalsService_ListOrganizationServicePrincipals",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/service-principals",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListOrganizationServicePrincipalsReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceListOrganizationServicePrincipalsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -628,32 +710,32 @@ func (a *Client) ListOrganizationServicePrincipals(params *ListOrganizationServi
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListOrganizationServicePrincipalsOK)
+	success, ok := result.(*ServicePrincipalsServiceListOrganizationServicePrincipalsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListOrganizationServicePrincipalsDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceListOrganizationServicePrincipalsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListProjectServicePrincipals lists project service principals lists service principals in a project
+ServicePrincipalsServiceListProjectServicePrincipals lists project service principals lists service principals in a project
 */
-func (a *Client) ListProjectServicePrincipals(params *ListProjectServicePrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProjectServicePrincipalsOK, error) {
+func (a *Client) ServicePrincipalsServiceListProjectServicePrincipals(params *ServicePrincipalsServiceListProjectServicePrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceListProjectServicePrincipalsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListProjectServicePrincipalsParams()
+		params = NewServicePrincipalsServiceListProjectServicePrincipalsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ListProjectServicePrincipals",
+		ID:                 "ServicePrincipalsService_ListProjectServicePrincipals",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListProjectServicePrincipalsReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceListProjectServicePrincipalsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -666,32 +748,70 @@ func (a *Client) ListProjectServicePrincipals(params *ListProjectServicePrincipa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListProjectServicePrincipalsOK)
+	success, ok := result.(*ServicePrincipalsServiceListProjectServicePrincipalsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListProjectServicePrincipalsDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceListProjectServicePrincipalsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListWorkloadIdentityProvider lists workload identity provider lists workload identity providers under a service principal
+ServicePrincipalsServiceListServicePrincipals2 lists service principals lists service principals at a given scope
 */
-func (a *Client) ListWorkloadIdentityProvider(params *ListWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListWorkloadIdentityProviderOK, error) {
+func (a *Client) ServicePrincipalsServiceListServicePrincipals2(params *ServicePrincipalsServiceListServicePrincipals2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceListServicePrincipals2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListWorkloadIdentityProviderParams()
+		params = NewServicePrincipalsServiceListServicePrincipals2Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ListWorkloadIdentityProvider",
+		ID:                 "ServicePrincipalsService_ListServicePrincipals2",
+		Method:             "GET",
+		PathPattern:        "/2019-12-10/iam/{parent_resource_name}/service-principals",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ServicePrincipalsServiceListServicePrincipals2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ServicePrincipalsServiceListServicePrincipals2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ServicePrincipalsServiceListServicePrincipals2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ServicePrincipalsServiceListWorkloadIdentityProvider lists workload identity provider lists workload identity providers under a service principal
+*/
+func (a *Client) ServicePrincipalsServiceListWorkloadIdentityProvider(params *ServicePrincipalsServiceListWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceListWorkloadIdentityProviderOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewServicePrincipalsServiceListWorkloadIdentityProviderParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ServicePrincipalsService_ListWorkloadIdentityProvider",
 		Method:             "GET",
 		PathPattern:        "/2019-12-10/{parent_resource_name}/workload-identity-providers",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListWorkloadIdentityProviderReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceListWorkloadIdentityProviderReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -704,32 +824,32 @@ func (a *Client) ListWorkloadIdentityProvider(params *ListWorkloadIdentityProvid
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListWorkloadIdentityProviderOK)
+	success, ok := result.(*ServicePrincipalsServiceListWorkloadIdentityProviderOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListWorkloadIdentityProviderDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceListWorkloadIdentityProviderDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-UpdateWorkloadIdentityProvider updates workload identity provider updates a workload identity provider
+ServicePrincipalsServiceUpdateWorkloadIdentityProvider updates workload identity provider updates a workload identity provider
 */
-func (a *Client) UpdateWorkloadIdentityProvider(params *UpdateWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWorkloadIdentityProviderOK, error) {
+func (a *Client) ServicePrincipalsServiceUpdateWorkloadIdentityProvider(params *ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServicePrincipalsServiceUpdateWorkloadIdentityProviderOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateWorkloadIdentityProviderParams()
+		params = NewServicePrincipalsServiceUpdateWorkloadIdentityProviderParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "UpdateWorkloadIdentityProvider",
+		ID:                 "ServicePrincipalsService_UpdateWorkloadIdentityProvider",
 		Method:             "PATCH",
 		PathPattern:        "/2019-12-10/{provider.resource_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateWorkloadIdentityProviderReader{formats: a.formats},
+		Reader:             &ServicePrincipalsServiceUpdateWorkloadIdentityProviderReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -742,12 +862,12 @@ func (a *Client) UpdateWorkloadIdentityProvider(params *UpdateWorkloadIdentityPr
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateWorkloadIdentityProviderOK)
+	success, ok := result.(*ServicePrincipalsServiceUpdateWorkloadIdentityProviderOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdateWorkloadIdentityProviderDefault)
+	unexpectedSuccess := result.(*ServicePrincipalsServiceUpdateWorkloadIdentityProviderDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

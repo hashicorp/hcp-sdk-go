@@ -28,36 +28,36 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AcceptOrganizationInvitation(params *AcceptOrganizationInvitationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AcceptOrganizationInvitationOK, error)
+	InvitationsServiceAcceptOrganizationInvitation(params *InvitationsServiceAcceptOrganizationInvitationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InvitationsServiceAcceptOrganizationInvitationOK, error)
 
-	CreateOrganizationInvitations(params *CreateOrganizationInvitationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrganizationInvitationsOK, error)
+	InvitationsServiceCreateOrganizationInvitations(params *InvitationsServiceCreateOrganizationInvitationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InvitationsServiceCreateOrganizationInvitationsOK, error)
 
-	DeleteOrganizationInvitation(params *DeleteOrganizationInvitationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationInvitationOK, error)
+	InvitationsServiceDeleteOrganizationInvitation(params *InvitationsServiceDeleteOrganizationInvitationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InvitationsServiceDeleteOrganizationInvitationOK, error)
 
-	GetOrganizationNameByInvitationToken(params *GetOrganizationNameByInvitationTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationNameByInvitationTokenOK, error)
+	InvitationsServiceGetOrganizationNameByInvitationToken(params *InvitationsServiceGetOrganizationNameByInvitationTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InvitationsServiceGetOrganizationNameByInvitationTokenOK, error)
 
-	ListOrganizationInvitations(params *ListOrganizationInvitationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOrganizationInvitationsOK, error)
+	InvitationsServiceListOrganizationInvitations(params *InvitationsServiceListOrganizationInvitationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InvitationsServiceListOrganizationInvitationsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-AcceptOrganizationInvitation accepts organization invitation accepts an organization invitation expects an invitation token in the body
+InvitationsServiceAcceptOrganizationInvitation accepts organization invitation accepts an organization invitation expects an invitation token in the body
 */
-func (a *Client) AcceptOrganizationInvitation(params *AcceptOrganizationInvitationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AcceptOrganizationInvitationOK, error) {
+func (a *Client) InvitationsServiceAcceptOrganizationInvitation(params *InvitationsServiceAcceptOrganizationInvitationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InvitationsServiceAcceptOrganizationInvitationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAcceptOrganizationInvitationParams()
+		params = NewInvitationsServiceAcceptOrganizationInvitationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "AcceptOrganizationInvitation",
+		ID:                 "InvitationsService_AcceptOrganizationInvitation",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/accept-invitation",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AcceptOrganizationInvitationReader{formats: a.formats},
+		Reader:             &InvitationsServiceAcceptOrganizationInvitationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -70,32 +70,32 @@ func (a *Client) AcceptOrganizationInvitation(params *AcceptOrganizationInvitati
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*AcceptOrganizationInvitationOK)
+	success, ok := result.(*InvitationsServiceAcceptOrganizationInvitationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*AcceptOrganizationInvitationDefault)
+	unexpectedSuccess := result.(*InvitationsServiceAcceptOrganizationInvitationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-CreateOrganizationInvitations creates organization invitations creates one or more organization invitations
+InvitationsServiceCreateOrganizationInvitations creates organization invitations creates one or more organization invitations
 */
-func (a *Client) CreateOrganizationInvitations(params *CreateOrganizationInvitationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrganizationInvitationsOK, error) {
+func (a *Client) InvitationsServiceCreateOrganizationInvitations(params *InvitationsServiceCreateOrganizationInvitationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InvitationsServiceCreateOrganizationInvitationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateOrganizationInvitationsParams()
+		params = NewInvitationsServiceCreateOrganizationInvitationsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateOrganizationInvitations",
+		ID:                 "InvitationsService_CreateOrganizationInvitations",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/invitations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateOrganizationInvitationsReader{formats: a.formats},
+		Reader:             &InvitationsServiceCreateOrganizationInvitationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -108,32 +108,32 @@ func (a *Client) CreateOrganizationInvitations(params *CreateOrganizationInvitat
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateOrganizationInvitationsOK)
+	success, ok := result.(*InvitationsServiceCreateOrganizationInvitationsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateOrganizationInvitationsDefault)
+	unexpectedSuccess := result.(*InvitationsServiceCreateOrganizationInvitationsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteOrganizationInvitation deletes organization invitation creates an organization invitation
+InvitationsServiceDeleteOrganizationInvitation deletes organization invitation creates an organization invitation
 */
-func (a *Client) DeleteOrganizationInvitation(params *DeleteOrganizationInvitationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationInvitationOK, error) {
+func (a *Client) InvitationsServiceDeleteOrganizationInvitation(params *InvitationsServiceDeleteOrganizationInvitationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InvitationsServiceDeleteOrganizationInvitationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteOrganizationInvitationParams()
+		params = NewInvitationsServiceDeleteOrganizationInvitationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteOrganizationInvitation",
+		ID:                 "InvitationsService_DeleteOrganizationInvitation",
 		Method:             "DELETE",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/invitations/{invitation_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteOrganizationInvitationReader{formats: a.formats},
+		Reader:             &InvitationsServiceDeleteOrganizationInvitationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -146,32 +146,32 @@ func (a *Client) DeleteOrganizationInvitation(params *DeleteOrganizationInvitati
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteOrganizationInvitationOK)
+	success, ok := result.(*InvitationsServiceDeleteOrganizationInvitationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteOrganizationInvitationDefault)
+	unexpectedSuccess := result.(*InvitationsServiceDeleteOrganizationInvitationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetOrganizationNameByInvitationToken gets organization name by invitation token returns the organization name for the invitation associated with the invitation token provided
+InvitationsServiceGetOrganizationNameByInvitationToken gets organization name by invitation token returns the organization name for the invitation associated with the invitation token provided
 */
-func (a *Client) GetOrganizationNameByInvitationToken(params *GetOrganizationNameByInvitationTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationNameByInvitationTokenOK, error) {
+func (a *Client) InvitationsServiceGetOrganizationNameByInvitationToken(params *InvitationsServiceGetOrganizationNameByInvitationTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InvitationsServiceGetOrganizationNameByInvitationTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetOrganizationNameByInvitationTokenParams()
+		params = NewInvitationsServiceGetOrganizationNameByInvitationTokenParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetOrganizationNameByInvitationToken",
+		ID:                 "InvitationsService_GetOrganizationNameByInvitationToken",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/invitations/{invitation_token}/organization",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetOrganizationNameByInvitationTokenReader{formats: a.formats},
+		Reader:             &InvitationsServiceGetOrganizationNameByInvitationTokenReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -184,32 +184,32 @@ func (a *Client) GetOrganizationNameByInvitationToken(params *GetOrganizationNam
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetOrganizationNameByInvitationTokenOK)
+	success, ok := result.(*InvitationsServiceGetOrganizationNameByInvitationTokenOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetOrganizationNameByInvitationTokenDefault)
+	unexpectedSuccess := result.(*InvitationsServiceGetOrganizationNameByInvitationTokenDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListOrganizationInvitations lists organization invitations returns a list of organization invitations
+InvitationsServiceListOrganizationInvitations lists organization invitations returns a list of organization invitations
 */
-func (a *Client) ListOrganizationInvitations(params *ListOrganizationInvitationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOrganizationInvitationsOK, error) {
+func (a *Client) InvitationsServiceListOrganizationInvitations(params *InvitationsServiceListOrganizationInvitationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InvitationsServiceListOrganizationInvitationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListOrganizationInvitationsParams()
+		params = NewInvitationsServiceListOrganizationInvitationsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ListOrganizationInvitations",
+		ID:                 "InvitationsService_ListOrganizationInvitations",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/invitations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListOrganizationInvitationsReader{formats: a.formats},
+		Reader:             &InvitationsServiceListOrganizationInvitationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -222,12 +222,12 @@ func (a *Client) ListOrganizationInvitations(params *ListOrganizationInvitations
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListOrganizationInvitationsOK)
+	success, ok := result.(*InvitationsServiceListOrganizationInvitationsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListOrganizationInvitationsDefault)
+	unexpectedSuccess := result.(*InvitationsServiceListOrganizationInvitationsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

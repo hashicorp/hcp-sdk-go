@@ -28,38 +28,38 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ConfirmMFAEnrollment(params *ConfirmMFAEnrollmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfirmMFAEnrollmentOK, error)
+	ProfileServiceConfirmMFAEnrollment(params *ProfileServiceConfirmMFAEnrollmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceConfirmMFAEnrollmentOK, error)
 
-	DisableMFA(params *DisableMFAParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DisableMFAOK, error)
+	ProfileServiceDisableMFA(params *ProfileServiceDisableMFAParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceDisableMFAOK, error)
 
-	EnableMFA(params *EnableMFAParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EnableMFAOK, error)
+	ProfileServiceEnableMFA(params *ProfileServiceEnableMFAParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceEnableMFAOK, error)
 
-	GetMFAStatus(params *GetMFAStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMFAStatusOK, error)
+	ProfileServiceGetMFAStatus(params *ProfileServiceGetMFAStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceGetMFAStatusOK, error)
 
-	ResetPassword(params *ResetPasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetPasswordOK, error)
+	ProfileServiceResetPassword(params *ProfileServiceResetPasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceResetPasswordOK, error)
 
-	SendVerificationEmail(params *SendVerificationEmailParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SendVerificationEmailOK, error)
+	ProfileServiceSendVerificationEmail(params *ProfileServiceSendVerificationEmailParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceSendVerificationEmailOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-ConfirmMFAEnrollment confirms m f a enrollment is used to perform the first authentication with a newly setup m f a t o t p which then confirms the user s setup and activates the new m f a enrollment
+ProfileServiceConfirmMFAEnrollment confirms m f a enrollment is used to perform the first authentication with a newly setup m f a t o t p which then confirms the user s setup and activates the new m f a enrollment
 */
-func (a *Client) ConfirmMFAEnrollment(params *ConfirmMFAEnrollmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfirmMFAEnrollmentOK, error) {
+func (a *Client) ProfileServiceConfirmMFAEnrollment(params *ProfileServiceConfirmMFAEnrollmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceConfirmMFAEnrollmentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConfirmMFAEnrollmentParams()
+		params = NewProfileServiceConfirmMFAEnrollmentParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ConfirmMFAEnrollment",
+		ID:                 "ProfileService_ConfirmMFAEnrollment",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/me/confirm-mfa-enrollment",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConfirmMFAEnrollmentReader{formats: a.formats},
+		Reader:             &ProfileServiceConfirmMFAEnrollmentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -72,32 +72,32 @@ func (a *Client) ConfirmMFAEnrollment(params *ConfirmMFAEnrollmentParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ConfirmMFAEnrollmentOK)
+	success, ok := result.(*ProfileServiceConfirmMFAEnrollmentOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ConfirmMFAEnrollmentDefault)
+	unexpectedSuccess := result.(*ProfileServiceConfirmMFAEnrollmentDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DisableMFA disable m f a API
+ProfileServiceDisableMFA profile service disable m f a API
 */
-func (a *Client) DisableMFA(params *DisableMFAParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DisableMFAOK, error) {
+func (a *Client) ProfileServiceDisableMFA(params *ProfileServiceDisableMFAParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceDisableMFAOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDisableMFAParams()
+		params = NewProfileServiceDisableMFAParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DisableMFA",
+		ID:                 "ProfileService_DisableMFA",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/me/disable-mfa",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DisableMFAReader{formats: a.formats},
+		Reader:             &ProfileServiceDisableMFAReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -110,32 +110,32 @@ func (a *Client) DisableMFA(params *DisableMFAParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DisableMFAOK)
+	success, ok := result.(*ProfileServiceDisableMFAOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DisableMFADefault)
+	unexpectedSuccess := result.(*ProfileServiceDisableMFADefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-EnableMFA enables m f a triggers the process of enabling m f a for a given user
+ProfileServiceEnableMFA enables m f a triggers the process of enabling m f a for a given user
 */
-func (a *Client) EnableMFA(params *EnableMFAParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EnableMFAOK, error) {
+func (a *Client) ProfileServiceEnableMFA(params *ProfileServiceEnableMFAParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceEnableMFAOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEnableMFAParams()
+		params = NewProfileServiceEnableMFAParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EnableMFA",
+		ID:                 "ProfileService_EnableMFA",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/me/enable-mfa",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &EnableMFAReader{formats: a.formats},
+		Reader:             &ProfileServiceEnableMFAReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -148,32 +148,32 @@ func (a *Client) EnableMFA(params *EnableMFAParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EnableMFAOK)
+	success, ok := result.(*ProfileServiceEnableMFAOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*EnableMFADefault)
+	unexpectedSuccess := result.(*ProfileServiceEnableMFADefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetMFAStatus gets m f a status returns the m f a status of the current user
+ProfileServiceGetMFAStatus gets m f a status returns the m f a status of the current user
 */
-func (a *Client) GetMFAStatus(params *GetMFAStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMFAStatusOK, error) {
+func (a *Client) ProfileServiceGetMFAStatus(params *ProfileServiceGetMFAStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceGetMFAStatusOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetMFAStatusParams()
+		params = NewProfileServiceGetMFAStatusParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetMFAStatus",
+		ID:                 "ProfileService_GetMFAStatus",
 		Method:             "GET",
 		PathPattern:        "/iam/2019-12-10/me/mfa-status",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetMFAStatusReader{formats: a.formats},
+		Reader:             &ProfileServiceGetMFAStatusReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -186,32 +186,32 @@ func (a *Client) GetMFAStatus(params *GetMFAStatusParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetMFAStatusOK)
+	success, ok := result.(*ProfileServiceGetMFAStatusOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetMFAStatusDefault)
+	unexpectedSuccess := result.(*ProfileServiceGetMFAStatusDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ResetPassword resets password resets a password for an email password user
+ProfileServiceResetPassword resets password resets a password for an email password user
 */
-func (a *Client) ResetPassword(params *ResetPasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetPasswordOK, error) {
+func (a *Client) ProfileServiceResetPassword(params *ProfileServiceResetPasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceResetPasswordOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewResetPasswordParams()
+		params = NewProfileServiceResetPasswordParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ResetPassword",
+		ID:                 "ProfileService_ResetPassword",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/me/reset-password",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ResetPasswordReader{formats: a.formats},
+		Reader:             &ProfileServiceResetPasswordReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -224,32 +224,32 @@ func (a *Client) ResetPassword(params *ResetPasswordParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ResetPasswordOK)
+	success, ok := result.(*ProfileServiceResetPasswordOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ResetPasswordDefault)
+	unexpectedSuccess := result.(*ProfileServiceResetPasswordDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-SendVerificationEmail sends verification email triggers a new verification email to be sent to calling user s email address
+ProfileServiceSendVerificationEmail sends verification email triggers a new verification email to be sent to calling user s email address
 */
-func (a *Client) SendVerificationEmail(params *SendVerificationEmailParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SendVerificationEmailOK, error) {
+func (a *Client) ProfileServiceSendVerificationEmail(params *ProfileServiceSendVerificationEmailParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProfileServiceSendVerificationEmailOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSendVerificationEmailParams()
+		params = NewProfileServiceSendVerificationEmailParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "SendVerificationEmail",
+		ID:                 "ProfileService_SendVerificationEmail",
 		Method:             "POST",
 		PathPattern:        "/iam/2019-12-10/me/send-verification-email",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SendVerificationEmailReader{formats: a.formats},
+		Reader:             &ProfileServiceSendVerificationEmailReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -262,12 +262,12 @@ func (a *Client) SendVerificationEmail(params *SendVerificationEmailParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*SendVerificationEmailOK)
+	success, ok := result.(*ProfileServiceSendVerificationEmailOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*SendVerificationEmailDefault)
+	unexpectedSuccess := result.(*ProfileServiceSendVerificationEmailDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

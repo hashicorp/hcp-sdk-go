@@ -26,6 +26,9 @@ type HashicorpCloudIamServicePrincipalKey struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
+	// resource_name is the resource name for this service principal key.
+	ResourceName string `json:"resource_name,omitempty"`
+
 	// state is the state of the key.
 	State *HashicorpCloudIamServicePrincipalKeyState `json:"state,omitempty"`
 }
