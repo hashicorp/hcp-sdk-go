@@ -20,9 +20,6 @@ type Secrets20230613AwsSmConnectionDetailsRequest struct {
 	// access key id
 	AccessKeyID string `json:"access_key_id,omitempty"`
 
-	// external id
-	ExternalID string `json:"external_id,omitempty"`
-
 	// region
 	Region string `json:"region,omitempty"`
 

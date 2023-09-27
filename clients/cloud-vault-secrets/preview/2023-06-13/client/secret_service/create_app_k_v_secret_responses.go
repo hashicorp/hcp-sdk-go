@@ -282,7 +282,8 @@ swagger:model CreateAppKVSecretParamsBodyLocation
 */
 type CreateAppKVSecretParamsBodyLocation struct {
 
-	// region
+	// region is the region that the resource is located in. It is
+	// optional if the object being referenced is a global object.
 	Region *models.LocationRegion `json:"region,omitempty"`
 }
 

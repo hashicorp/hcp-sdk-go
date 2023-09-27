@@ -17,9 +17,6 @@ import (
 // swagger:model secrets_20230613GhRepoConnectionDetailsRequest
 type Secrets20230613GhRepoConnectionDetailsRequest struct {
 
-	// installation id
-	InstallationID string `json:"installation_id,omitempty"`
-
 	// owner
 	Owner string `json:"owner,omitempty"`
 

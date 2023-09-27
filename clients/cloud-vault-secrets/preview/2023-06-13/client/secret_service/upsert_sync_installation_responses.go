@@ -185,12 +185,6 @@ swagger:model UpsertSyncInstallationBody
 */
 type UpsertSyncInstallationBody struct {
 
-	// aws external id
-	AwsExternalID string `json:"aws_external_id,omitempty"`
-
-	// gh installation id
-	GhInstallationID string `json:"gh_installation_id,omitempty"`
-
 	// location
 	Location *UpsertSyncInstallationParamsBodyLocation `json:"location,omitempty"`
 
@@ -285,7 +279,8 @@ swagger:model UpsertSyncInstallationParamsBodyLocation
 */
 type UpsertSyncInstallationParamsBodyLocation struct {
 
-	// region
+	// region is the region that the resource is located in. It is
+	// optional if the object being referenced is a global object.
 	Region *models.LocationRegion `json:"region,omitempty"`
 }
 

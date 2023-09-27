@@ -29,6 +29,9 @@ type Secrets20230613SyncInstallation struct {
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// vercel oauth
+	VercelOauth *Secrets20230613VercelOAuthMetadata `json:"vercel_oauth,omitempty"`
 }
 
 // Validate validates this secrets 20230613 sync installation
@@ -44,6 +47,10 @@ func (m *Secrets20230613SyncInstallation) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVercelOauth(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -110,6 +117,25 @@ func (m *Secrets20230613SyncInstallation) validateLocation(formats strfmt.Regist
 	return nil
 }
 
+func (m *Secrets20230613SyncInstallation) validateVercelOauth(formats strfmt.Registry) error {
+	if swag.IsZero(m.VercelOauth) { // not required
+		return nil
+	}
+
+	if m.VercelOauth != nil {
+		if err := m.VercelOauth.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vercel_oauth")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vercel_oauth")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this secrets 20230613 sync installation based on the context it is used
 func (m *Secrets20230613SyncInstallation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -123,6 +149,10 @@ func (m *Secrets20230613SyncInstallation) ContextValidate(ctx context.Context, f
 	}
 
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVercelOauth(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -172,6 +202,22 @@ func (m *Secrets20230613SyncInstallation) contextValidateLocation(ctx context.Co
 				return ve.ValidateName("location")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20230613SyncInstallation) contextValidateVercelOauth(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VercelOauth != nil {
+		if err := m.VercelOauth.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vercel_oauth")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vercel_oauth")
 			}
 			return err
 		}

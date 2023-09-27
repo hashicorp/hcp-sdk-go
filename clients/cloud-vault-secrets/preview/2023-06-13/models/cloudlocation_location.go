@@ -24,7 +24,8 @@ type CloudlocationLocation struct {
 	// project_id is the projects id.
 	ProjectID string `json:"project_id,omitempty"`
 
-	// region
+	// region is the region that the resource is located in. It is
+	// optional if the object being referenced is a global object.
 	Region *LocationRegion `json:"region,omitempty"`
 }
 

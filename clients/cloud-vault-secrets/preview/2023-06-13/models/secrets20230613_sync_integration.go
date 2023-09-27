@@ -47,6 +47,9 @@ type Secrets20230613SyncIntegration struct {
 
 	// updated by
 	UpdatedBy *Secrets20230613Principal `json:"updated_by,omitempty"`
+
+	// vercel project connection details
+	VercelProjectConnectionDetails *Secrets20230613VercelProjectConnectionDetailsResponse `json:"vercel_project_connection_details,omitempty"`
 }
 
 // Validate validates this secrets 20230613 sync integration
@@ -78,6 +81,10 @@ func (m *Secrets20230613SyncIntegration) Validate(formats strfmt.Registry) error
 	}
 
 	if err := m.validateUpdatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVercelProjectConnectionDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -206,6 +213,25 @@ func (m *Secrets20230613SyncIntegration) validateUpdatedBy(formats strfmt.Regist
 	return nil
 }
 
+func (m *Secrets20230613SyncIntegration) validateVercelProjectConnectionDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.VercelProjectConnectionDetails) { // not required
+		return nil
+	}
+
+	if m.VercelProjectConnectionDetails != nil {
+		if err := m.VercelProjectConnectionDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vercel_project_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vercel_project_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this secrets 20230613 sync integration based on the context it is used
 func (m *Secrets20230613SyncIntegration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -227,6 +253,10 @@ func (m *Secrets20230613SyncIntegration) ContextValidate(ctx context.Context, fo
 	}
 
 	if err := m.contextValidateUpdatedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVercelProjectConnectionDetails(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -308,6 +338,22 @@ func (m *Secrets20230613SyncIntegration) contextValidateUpdatedBy(ctx context.Co
 				return ve.ValidateName("updated_by")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("updated_by")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20230613SyncIntegration) contextValidateVercelProjectConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VercelProjectConnectionDetails != nil {
+		if err := m.VercelProjectConnectionDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vercel_project_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vercel_project_connection_details")
 			}
 			return err
 		}

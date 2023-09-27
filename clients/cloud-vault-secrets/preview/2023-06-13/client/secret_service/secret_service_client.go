@@ -28,6 +28,10 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	CompleteGitHubInstall(params *CompleteGitHubInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteGitHubInstallOK, error)
+
+	CompleteVercelInstallation(params *CompleteVercelInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteVercelInstallationOK, error)
+
 	CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppOK, error)
 
 	CreateAppKVSecret(params *CreateAppKVSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppKVSecretOK, error)
@@ -36,9 +40,13 @@ type ClientService interface {
 
 	CreateGhRepoSyncIntegration(params *CreateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGhRepoSyncIntegrationOK, error)
 
+	CreateVercelProjectSyncIntegration(params *CreateVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVercelProjectSyncIntegrationOK, error)
+
 	DeleteApp(params *DeleteAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppOK, error)
 
 	DeleteAppSecret(params *DeleteAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppSecretOK, error)
+
+	DeleteAppSecretVersion(params *DeleteAppSecretVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppSecretVersionOK, error)
 
 	DeleteSyncInstallation(params *DeleteSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSyncInstallationOK, error)
 
@@ -52,9 +60,17 @@ type ClientService interface {
 
 	GetAppSecretVersion(params *GetAppSecretVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSecretVersionOK, error)
 
+	GetGitHubInstallLinks(params *GetGitHubInstallLinksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubInstallLinksOK, error)
+
 	GetSyncInstallation(params *GetSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSyncInstallationOK, error)
 
 	GetSyncIntegration(params *GetSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSyncIntegrationOK, error)
+
+	GetUsage(params *GetUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsageOK, error)
+
+	GetUsage2(params *GetUsage2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsage2OK, error)
+
+	GetVercelInstallationLink(params *GetVercelInstallationLinkParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVercelInstallationLinkOK, error)
 
 	ListAppSecretVersions(params *ListAppSecretVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAppSecretVersionsOK, error)
 
@@ -72,11 +88,15 @@ type ClientService interface {
 
 	OpenAppSecrets(params *OpenAppSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretsOK, error)
 
+	SetTier(params *SetTierParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetTierOK, error)
+
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
 
 	UpdateAwsSmSyncIntegration(params *UpdateAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsSmSyncIntegrationOK, error)
 
 	UpdateGhRepoSyncIntegration(params *UpdateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGhRepoSyncIntegrationOK, error)
+
+	UpdateVercelProjectSyncIntegration(params *UpdateVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVercelProjectSyncIntegrationOK, error)
 
 	UpsertAwsSmSyncIntegration(params *UpsertAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertAwsSmSyncIntegrationOK, error)
 
@@ -84,7 +104,85 @@ type ClientService interface {
 
 	UpsertSyncInstallation(params *UpsertSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertSyncInstallationOK, error)
 
+	UpsertVercelProjectSyncIntegration(params *UpsertVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertVercelProjectSyncIntegrationOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+CompleteGitHubInstall complete git hub install API
+*/
+func (a *Client) CompleteGitHubInstall(params *CompleteGitHubInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteGitHubInstallOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCompleteGitHubInstallParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CompleteGitHubInstall",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-06-13/sync/github/callback",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CompleteGitHubInstallReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CompleteGitHubInstallOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CompleteGitHubInstallDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CompleteVercelInstallation complete vercel installation API
+*/
+func (a *Client) CompleteVercelInstallation(params *CompleteVercelInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteVercelInstallationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCompleteVercelInstallationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CompleteVercelInstallation",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-06-13/sync/vercel/callback",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CompleteVercelInstallationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CompleteVercelInstallationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CompleteVercelInstallationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -240,6 +338,44 @@ func (a *Client) CreateGhRepoSyncIntegration(params *CreateGhRepoSyncIntegration
 }
 
 /*
+CreateVercelProjectSyncIntegration create vercel project sync integration API
+*/
+func (a *Client) CreateVercelProjectSyncIntegration(params *CreateVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVercelProjectSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateVercelProjectSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateVercelProjectSyncIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateVercelProjectSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateVercelProjectSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateVercelProjectSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 DeleteApp delete app API
 */
 func (a *Client) DeleteApp(params *DeleteAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppOK, error) {
@@ -312,6 +448,44 @@ func (a *Client) DeleteAppSecret(params *DeleteAppSecretParams, authInfo runtime
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteAppSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteAppSecretVersion delete app secret version API
+*/
+func (a *Client) DeleteAppSecretVersion(params *DeleteAppSecretVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppSecretVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteAppSecretVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteAppSecretVersion",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteAppSecretVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteAppSecretVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteAppSecretVersionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -544,6 +718,44 @@ func (a *Client) GetAppSecretVersion(params *GetAppSecretVersionParams, authInfo
 }
 
 /*
+GetGitHubInstallLinks get git hub install links API
+*/
+func (a *Client) GetGitHubInstallLinks(params *GetGitHubInstallLinksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubInstallLinksOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetGitHubInstallLinksParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetGitHubInstallLinks",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/links",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetGitHubInstallLinksReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetGitHubInstallLinksOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetGitHubInstallLinksDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetSyncInstallation get sync installation API
 */
 func (a *Client) GetSyncInstallation(params *GetSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSyncInstallationOK, error) {
@@ -616,6 +828,120 @@ func (a *Client) GetSyncIntegration(params *GetSyncIntegrationParams, authInfo r
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetUsage get usage API
+*/
+func (a *Client) GetUsage(params *GetUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsageOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetUsageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetUsage",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetUsageOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetUsageDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetUsage2 get usage2 API
+*/
+func (a *Client) GetUsage2(params *GetUsage2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsage2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetUsage2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetUsage2",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-06-13/organizations/{location.organization_id}/usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetUsage2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetUsage2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetUsage2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetVercelInstallationLink get vercel installation link API
+*/
+func (a *Client) GetVercelInstallationLink(params *GetVercelInstallationLinkParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVercelInstallationLinkOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetVercelInstallationLinkParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetVercelInstallationLink",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel/link",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetVercelInstallationLinkReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetVercelInstallationLinkOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetVercelInstallationLinkDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -772,7 +1098,7 @@ func (a *Client) ListOpenAppSecretVersions(params *ListOpenAppSecretVersionsPara
 }
 
 /*
-ListSyncIntegrations writes operations use type specific endpoints to avoid overloads but the read endpoints are generic and the specific type is part of the responses
+ListSyncIntegrations list sync integrations API
 */
 func (a *Client) ListSyncIntegrations(params *ListSyncIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSyncIntegrationsOK, error) {
 	// TODO: Validate the params before sending
@@ -924,6 +1250,44 @@ func (a *Client) OpenAppSecrets(params *OpenAppSecretsParams, authInfo runtime.C
 }
 
 /*
+SetTier set tier API
+*/
+func (a *Client) SetTier(params *SetTierParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetTierOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSetTierParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "SetTier",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-06-13/organizations/{location.organization_id}/billing/tier",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &SetTierReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SetTierOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SetTierDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 UpdateApp update app API
 */
 func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error) {
@@ -1038,6 +1402,44 @@ func (a *Client) UpdateGhRepoSyncIntegration(params *UpdateGhRepoSyncIntegration
 }
 
 /*
+UpdateVercelProjectSyncIntegration update vercel project sync integration API
+*/
+func (a *Client) UpdateVercelProjectSyncIntegration(params *UpdateVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVercelProjectSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateVercelProjectSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateVercelProjectSyncIntegration",
+		Method:             "PATCH",
+		PathPattern:        "/secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateVercelProjectSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateVercelProjectSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateVercelProjectSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 UpsertAwsSmSyncIntegration upsert aws sm sync integration API
 */
 func (a *Client) UpsertAwsSmSyncIntegration(params *UpsertAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertAwsSmSyncIntegrationOK, error) {
@@ -1148,6 +1550,44 @@ func (a *Client) UpsertSyncInstallation(params *UpsertSyncInstallationParams, au
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpsertSyncInstallationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpsertVercelProjectSyncIntegration upsert vercel project sync integration API
+*/
+func (a *Client) UpsertVercelProjectSyncIntegration(params *UpsertVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertVercelProjectSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpsertVercelProjectSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpsertVercelProjectSyncIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpsertVercelProjectSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpsertVercelProjectSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpsertVercelProjectSyncIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
