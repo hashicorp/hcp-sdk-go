@@ -32,6 +32,8 @@ type ClientService interface {
 
 	IamServiceDeleteOrganizationMembership(params *IamServiceDeleteOrganizationMembershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceDeleteOrganizationMembershipOK, error)
 
+	IamServiceGetCallerIdentity(params *IamServiceGetCallerIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetCallerIdentityOK, error)
+
 	IamServiceGetCurrentUserPrincipal(params *IamServiceGetCurrentUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetCurrentUserPrincipalOK, error)
 
 	IamServiceGetOrganizationAuthMetadata(params *IamServiceGetOrganizationAuthMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetOrganizationAuthMetadataOK, error)
@@ -124,6 +126,44 @@ func (a *Client) IamServiceDeleteOrganizationMembership(params *IamServiceDelete
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*IamServiceDeleteOrganizationMembershipDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+IamServiceGetCallerIdentity gets caller identity returns the identity of the current caller
+*/
+func (a *Client) IamServiceGetCallerIdentity(params *IamServiceGetCallerIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetCallerIdentityOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewIamServiceGetCallerIdentityParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "IamService_GetCallerIdentity",
+		Method:             "GET",
+		PathPattern:        "/iam/2019-12-10/caller-identity",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &IamServiceGetCallerIdentityReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*IamServiceGetCallerIdentityOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*IamServiceGetCallerIdentityDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
