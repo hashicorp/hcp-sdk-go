@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -21,6 +22,9 @@ type HashicorpCloudVault20201125InputNetworkConfig struct {
 	// http_proxy_option specifies whether HTTP Proxy should be enabled or disabled.
 	HTTPProxyOption *HashicorpCloudVault20201125HTTPProxyOption `json:"http_proxy_option,omitempty"`
 
+	// A list of IP addresses used to restrict access to a cluster.
+	IPAllowlist []*HashicorpCloudVault20201125CidrRange `json:"ip_allowlist"`
+
 	// network_id is the ID of the network the Vault cluster belongs to.
 	NetworkID string `json:"network_id,omitempty"`
 
@@ -33,6 +37,10 @@ func (m *HashicorpCloudVault20201125InputNetworkConfig) Validate(formats strfmt.
 	var res []error
 
 	if err := m.validateHTTPProxyOption(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIPAllowlist(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -61,11 +69,41 @@ func (m *HashicorpCloudVault20201125InputNetworkConfig) validateHTTPProxyOption(
 	return nil
 }
 
+func (m *HashicorpCloudVault20201125InputNetworkConfig) validateIPAllowlist(formats strfmt.Registry) error {
+	if swag.IsZero(m.IPAllowlist) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.IPAllowlist); i++ {
+		if swag.IsZero(m.IPAllowlist[i]) { // not required
+			continue
+		}
+
+		if m.IPAllowlist[i] != nil {
+			if err := m.IPAllowlist[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("ip_allowlist" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("ip_allowlist" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud vault 20201125 input network config based on the context it is used
 func (m *HashicorpCloudVault20201125InputNetworkConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateHTTPProxyOption(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateIPAllowlist(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -86,6 +124,26 @@ func (m *HashicorpCloudVault20201125InputNetworkConfig) contextValidateHTTPProxy
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputNetworkConfig) contextValidateIPAllowlist(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.IPAllowlist); i++ {
+
+		if m.IPAllowlist[i] != nil {
+			if err := m.IPAllowlist[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("ip_allowlist" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("ip_allowlist" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

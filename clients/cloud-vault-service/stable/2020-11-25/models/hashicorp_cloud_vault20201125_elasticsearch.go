@@ -23,6 +23,9 @@ type HashicorpCloudVault20201125Elasticsearch struct {
 	// endpoint
 	Endpoint string `json:"endpoint,omitempty"`
 
+	// namespace
+	Namespace string `json:"namespace,omitempty"`
+
 	// password
 	Password string `json:"password,omitempty"`
 
