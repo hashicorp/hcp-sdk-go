@@ -30,6 +30,9 @@ func (m Secrets20230613Tier) Pointer() *Secrets20230613Tier {
 
 const (
 
+	// Secrets20230613TierUNKNOWN captures enum value "UNKNOWN"
+	Secrets20230613TierUNKNOWN Secrets20230613Tier = "UNKNOWN"
+
 	// Secrets20230613TierFREE captures enum value "FREE"
 	Secrets20230613TierFREE Secrets20230613Tier = "FREE"
 
@@ -42,7 +45,7 @@ var secrets20230613TierEnum []interface{}
 
 func init() {
 	var res []Secrets20230613Tier
-	if err := json.Unmarshal([]byte(`["FREE","STANDARD"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["UNKNOWN","FREE","STANDARD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
