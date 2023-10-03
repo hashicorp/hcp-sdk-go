@@ -28,6 +28,9 @@ type Secrets20230613VercelOAuthMetadata struct {
 	// projects
 	Projects []*Secrets20230613VercelProject `json:"projects"`
 
+	// user or team display name
+	UserOrTeamDisplayName string `json:"user_or_team_display_name,omitempty"`
+
 	// user or team id
 	UserOrTeamID string `json:"user_or_team_id,omitempty"`
 
