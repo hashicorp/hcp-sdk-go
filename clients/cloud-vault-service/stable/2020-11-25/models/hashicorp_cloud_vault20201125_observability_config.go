@@ -30,6 +30,12 @@ type HashicorpCloudVault20201125ObservabilityConfig struct {
 	// grafana
 	Grafana *HashicorpCloudVault20201125Grafana `json:"grafana,omitempty"`
 
+	// http
+	HTTP *HashicorpCloudVault20201125HTTP `json:"http,omitempty"`
+
+	// newrelic
+	Newrelic *HashicorpCloudVault20201125NewRelic `json:"newrelic,omitempty"`
+
 	// splunk
 	Splunk *HashicorpCloudVault20201125Splunk `json:"splunk,omitempty"`
 }
@@ -51,6 +57,14 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) Validate(formats strfmt
 	}
 
 	if err := m.validateGrafana(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHTTP(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNewrelic(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -140,6 +154,44 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) validateGrafana(formats
 	return nil
 }
 
+func (m *HashicorpCloudVault20201125ObservabilityConfig) validateHTTP(formats strfmt.Registry) error {
+	if swag.IsZero(m.HTTP) { // not required
+		return nil
+	}
+
+	if m.HTTP != nil {
+		if err := m.HTTP.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("http")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("http")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ObservabilityConfig) validateNewrelic(formats strfmt.Registry) error {
+	if swag.IsZero(m.Newrelic) { // not required
+		return nil
+	}
+
+	if m.Newrelic != nil {
+		if err := m.Newrelic.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("newrelic")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("newrelic")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVault20201125ObservabilityConfig) validateSplunk(formats strfmt.Registry) error {
 	if swag.IsZero(m.Splunk) { // not required
 		return nil
@@ -176,6 +228,14 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) ContextValidate(ctx con
 	}
 
 	if err := m.contextValidateGrafana(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHTTP(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNewrelic(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -245,6 +305,38 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateGrafana(
 				return ve.ValidateName("grafana")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("grafana")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateHTTP(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HTTP != nil {
+		if err := m.HTTP.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("http")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("http")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateNewrelic(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Newrelic != nil {
+		if err := m.Newrelic.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("newrelic")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("newrelic")
 			}
 			return err
 		}
