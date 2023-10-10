@@ -23,6 +23,7 @@ import (
 //   - TOKEN_INVALID_REASON_NO_POLICIES: Token is invalid because no policies are applied to it
 //   - TOKEN_INVALID_REASON_MULTIPLE_POLICIES: Token is invalid because it has more than one policy applied to it
 //   - TOKEN_INVALID_REASON_INCORRECT_POLICY: Token is invalid because it does not have the expected policy applied to it
+//   - TOKEN_INVALID_REASON_ACLS_NOT_BOOTSTRAPPED: Token is invalid because the ACL system has not been bootstrapped
 //
 // swagger:model hashicorp.cloud.global_network_manager_20220215.TokenInvalidReason
 type HashicorpCloudGlobalNetworkManager20220215TokenInvalidReason string
@@ -52,6 +53,9 @@ const (
 
 	// HashicorpCloudGlobalNetworkManager20220215TokenInvalidReasonTOKENINVALIDREASONINCORRECTPOLICY captures enum value "TOKEN_INVALID_REASON_INCORRECT_POLICY"
 	HashicorpCloudGlobalNetworkManager20220215TokenInvalidReasonTOKENINVALIDREASONINCORRECTPOLICY HashicorpCloudGlobalNetworkManager20220215TokenInvalidReason = "TOKEN_INVALID_REASON_INCORRECT_POLICY"
+
+	// HashicorpCloudGlobalNetworkManager20220215TokenInvalidReasonTOKENINVALIDREASONACLSNOTBOOTSTRAPPED captures enum value "TOKEN_INVALID_REASON_ACLS_NOT_BOOTSTRAPPED"
+	HashicorpCloudGlobalNetworkManager20220215TokenInvalidReasonTOKENINVALIDREASONACLSNOTBOOTSTRAPPED HashicorpCloudGlobalNetworkManager20220215TokenInvalidReason = "TOKEN_INVALID_REASON_ACLS_NOT_BOOTSTRAPPED"
 )
 
 // for schema
@@ -59,7 +63,7 @@ var hashicorpCloudGlobalNetworkManager20220215TokenInvalidReasonEnum []interface
 
 func init() {
 	var res []HashicorpCloudGlobalNetworkManager20220215TokenInvalidReason
-	if err := json.Unmarshal([]byte(`["TOKEN_INVALID_REASON_UNSPECIFIED","TOKEN_INVALID_REASON_DOES_NOT_EXIST","TOKEN_INVALID_REASON_NO_POLICIES","TOKEN_INVALID_REASON_MULTIPLE_POLICIES","TOKEN_INVALID_REASON_INCORRECT_POLICY"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["TOKEN_INVALID_REASON_UNSPECIFIED","TOKEN_INVALID_REASON_DOES_NOT_EXIST","TOKEN_INVALID_REASON_NO_POLICIES","TOKEN_INVALID_REASON_MULTIPLE_POLICIES","TOKEN_INVALID_REASON_INCORRECT_POLICY","TOKEN_INVALID_REASON_ACLS_NOT_BOOTSTRAPPED"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

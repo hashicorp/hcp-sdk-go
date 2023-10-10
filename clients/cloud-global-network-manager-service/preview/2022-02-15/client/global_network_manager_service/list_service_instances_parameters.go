@@ -68,6 +68,13 @@ type ListServiceInstancesParams struct {
 	// Namespace.
 	Namespace *string
 
+	/* OrderBy.
+
+	     Sorts the services based on a field. Allowed fields: id, health.
+	The value needs to be of the format `<Field Name> {asc/desc}` Eg: `id`, `id asc`, `health desc`.
+	*/
+	OrderBy []string
+
 	/* PaginationNextPageToken.
 
 	     Specifies a page token to use to retrieve the next page. Set this parameter to the
@@ -188,6 +195,17 @@ func (o *ListServiceInstancesParams) SetNamespace(namespace *string) {
 	o.Namespace = namespace
 }
 
+// WithOrderBy adds the orderBy to the list service instances params
+func (o *ListServiceInstancesParams) WithOrderBy(orderBy []string) *ListServiceInstancesParams {
+	o.SetOrderBy(orderBy)
+	return o
+}
+
+// SetOrderBy adds the orderBy to the list service instances params
+func (o *ListServiceInstancesParams) SetOrderBy(orderBy []string) {
+	o.OrderBy = orderBy
+}
+
 // WithPaginationNextPageToken adds the paginationNextPageToken to the list service instances params
 func (o *ListServiceInstancesParams) WithPaginationNextPageToken(paginationNextPageToken *string) *ListServiceInstancesParams {
 	o.SetPaginationNextPageToken(paginationNextPageToken)
@@ -292,6 +310,17 @@ func (o *ListServiceInstancesParams) WriteToRequest(r runtime.ClientRequest, reg
 			if err := r.SetQueryParam("namespace", qNamespace); err != nil {
 				return err
 			}
+		}
+	}
+
+	if o.OrderBy != nil {
+
+		// binding items for order_by
+		joinedOrderBy := o.bindParamOrderBy(reg)
+
+		// query array param order_by
+		if err := r.SetQueryParam("order_by", joinedOrderBy...); err != nil {
+			return err
 		}
 	}
 
@@ -400,6 +429,23 @@ func (o *ListServiceInstancesParams) WriteToRequest(r runtime.ClientRequest, reg
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamListServiceInstances binds the parameter order_by
+func (o *ListServiceInstancesParams) bindParamOrderBy(formats strfmt.Registry) []string {
+	orderByIR := o.OrderBy
+
+	var orderByIC []string
+	for _, orderByIIR := range orderByIR { // explode []string
+
+		orderByIIV := orderByIIR // string as string
+		orderByIC = append(orderByIC, orderByIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	orderByIS := swag.JoinByFormat(orderByIC, "multi")
+
+	return orderByIS
 }
 
 // bindParamListServiceInstances binds the parameter status
