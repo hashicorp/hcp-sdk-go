@@ -6,11 +6,15 @@ package invitations_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
+	"strconv"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +85,11 @@ func (o *InvitationsServiceCreateOrganizationInvitationsOK) IsCode(code int) boo
 	return code == 200
 }
 
+// Code gets the status code for the invitations service create organization invitations o k response
+func (o *InvitationsServiceCreateOrganizationInvitationsOK) Code() int {
+	return 200
+}
+
 func (o *InvitationsServiceCreateOrganizationInvitationsOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/invitations][%d] invitationsServiceCreateOrganizationInvitationsOK  %+v", 200, o.Payload)
 }
@@ -121,11 +130,6 @@ type InvitationsServiceCreateOrganizationInvitationsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the invitations service create organization invitations default response
-func (o *InvitationsServiceCreateOrganizationInvitationsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this invitations service create organization invitations default response has a 2xx status code
 func (o *InvitationsServiceCreateOrganizationInvitationsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +155,11 @@ func (o *InvitationsServiceCreateOrganizationInvitationsDefault) IsCode(code int
 	return o._statusCode == code
 }
 
+// Code gets the status code for the invitations service create organization invitations default response
+func (o *InvitationsServiceCreateOrganizationInvitationsDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *InvitationsServiceCreateOrganizationInvitationsDefault) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/invitations][%d] InvitationsService_CreateOrganizationInvitations default  %+v", o._statusCode, o.Payload)
 }
@@ -172,5 +181,113 @@ func (o *InvitationsServiceCreateOrganizationInvitationsDefault) readResponse(re
 		return err
 	}
 
+	return nil
+}
+
+/*
+InvitationsServiceCreateOrganizationInvitationsBody CreateOrganizationInvitationsRequest is a request to create an organization invitation.
+// Inviting multiple people at the same time is supported.
+swagger:model InvitationsServiceCreateOrganizationInvitationsBody
+*/
+type InvitationsServiceCreateOrganizationInvitationsBody struct {
+
+	// invitations is a list of the data for the invitations that should be created.
+	Invitations []*models.HashicorpCloudIamNewOrganizationInvitation `json:"invitations"`
+}
+
+// Validate validates this invitations service create organization invitations body
+func (o *InvitationsServiceCreateOrganizationInvitationsBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateInvitations(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *InvitationsServiceCreateOrganizationInvitationsBody) validateInvitations(formats strfmt.Registry) error {
+	if swag.IsZero(o.Invitations) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(o.Invitations); i++ {
+		if swag.IsZero(o.Invitations[i]) { // not required
+			continue
+		}
+
+		if o.Invitations[i] != nil {
+			if err := o.Invitations[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("body" + "." + "invitations" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("body" + "." + "invitations" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this invitations service create organization invitations body based on the context it is used
+func (o *InvitationsServiceCreateOrganizationInvitationsBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateInvitations(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *InvitationsServiceCreateOrganizationInvitationsBody) contextValidateInvitations(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Invitations); i++ {
+
+		if o.Invitations[i] != nil {
+
+			if swag.IsZero(o.Invitations[i]) { // not required
+				return nil
+			}
+
+			if err := o.Invitations[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("body" + "." + "invitations" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("body" + "." + "invitations" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *InvitationsServiceCreateOrganizationInvitationsBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *InvitationsServiceCreateOrganizationInvitationsBody) UnmarshalBinary(b []byte) error {
+	var res InvitationsServiceCreateOrganizationInvitationsBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewServicePrincipalsServiceCreateServicePrincipal2Params creates a new ServicePrincipalsServiceCreateServicePrincipal2Params object,
@@ -64,15 +62,15 @@ ServicePrincipalsServiceCreateServicePrincipal2Params contains all the parameter
 type ServicePrincipalsServiceCreateServicePrincipal2Params struct {
 
 	// Body.
-	Body *models.HashicorpCloudIamCreateServicePrincipalRequest
+	Body ServicePrincipalsServiceCreateServicePrincipal2Body
 
-	/* ParentResourceName.
+	/* ParentResourceName1.
 
 	     parent_resource_name is the resource name of the project or organization
 	at which the service principal should be created (e.g.
 	"project/<project_id>" or "organization/<organization_id>")
 	*/
-	ParentResourceName string
+	ParentResourceName1 string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -128,25 +126,25 @@ func (o *ServicePrincipalsServiceCreateServicePrincipal2Params) SetHTTPClient(cl
 }
 
 // WithBody adds the body to the service principals service create service principal2 params
-func (o *ServicePrincipalsServiceCreateServicePrincipal2Params) WithBody(body *models.HashicorpCloudIamCreateServicePrincipalRequest) *ServicePrincipalsServiceCreateServicePrincipal2Params {
+func (o *ServicePrincipalsServiceCreateServicePrincipal2Params) WithBody(body ServicePrincipalsServiceCreateServicePrincipal2Body) *ServicePrincipalsServiceCreateServicePrincipal2Params {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the service principals service create service principal2 params
-func (o *ServicePrincipalsServiceCreateServicePrincipal2Params) SetBody(body *models.HashicorpCloudIamCreateServicePrincipalRequest) {
+func (o *ServicePrincipalsServiceCreateServicePrincipal2Params) SetBody(body ServicePrincipalsServiceCreateServicePrincipal2Body) {
 	o.Body = body
 }
 
-// WithParentResourceName adds the parentResourceName to the service principals service create service principal2 params
-func (o *ServicePrincipalsServiceCreateServicePrincipal2Params) WithParentResourceName(parentResourceName string) *ServicePrincipalsServiceCreateServicePrincipal2Params {
-	o.SetParentResourceName(parentResourceName)
+// WithParentResourceName1 adds the parentResourceName1 to the service principals service create service principal2 params
+func (o *ServicePrincipalsServiceCreateServicePrincipal2Params) WithParentResourceName1(parentResourceName1 string) *ServicePrincipalsServiceCreateServicePrincipal2Params {
+	o.SetParentResourceName1(parentResourceName1)
 	return o
 }
 
-// SetParentResourceName adds the parentResourceName to the service principals service create service principal2 params
-func (o *ServicePrincipalsServiceCreateServicePrincipal2Params) SetParentResourceName(parentResourceName string) {
-	o.ParentResourceName = parentResourceName
+// SetParentResourceName1 adds the parentResourceName1 to the service principals service create service principal2 params
+func (o *ServicePrincipalsServiceCreateServicePrincipal2Params) SetParentResourceName1(parentResourceName1 string) {
+	o.ParentResourceName1 = parentResourceName1
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -156,14 +154,12 @@ func (o *ServicePrincipalsServiceCreateServicePrincipal2Params) WriteToRequest(r
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
-	// path param parent_resource_name
-	if err := r.SetPathParam("parent_resource_name", o.ParentResourceName); err != nil {
+	// path param parent_resource_name_1
+	if err := r.SetPathParam("parent_resource_name_1", o.ParentResourceName1); err != nil {
 		return err
 	}
 

@@ -81,6 +81,11 @@ func (o *GroupsServiceGetGroupOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the groups service get group o k response
+func (o *GroupsServiceGetGroupOK) Code() int {
+	return 200
+}
+
 func (o *GroupsServiceGetGroupOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/{resource_name}][%d] groupsServiceGetGroupOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GroupsServiceGetGroupDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the groups service get group default response
-func (o *GroupsServiceGetGroupDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this groups service get group default response has a 2xx status code
 func (o *GroupsServiceGetGroupDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GroupsServiceGetGroupDefault) IsServerError() bool {
 // IsCode returns true when this groups service get group default response a status code equal to that given
 func (o *GroupsServiceGetGroupDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the groups service get group default response
+func (o *GroupsServiceGetGroupDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GroupsServiceGetGroupDefault) Error() string {

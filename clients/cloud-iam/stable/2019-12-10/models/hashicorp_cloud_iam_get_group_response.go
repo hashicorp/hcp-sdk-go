@@ -72,6 +72,11 @@ func (m *HashicorpCloudIamGetGroupResponse) ContextValidate(ctx context.Context,
 func (m *HashicorpCloudIamGetGroupResponse) contextValidateGroup(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Group != nil {
+
+		if swag.IsZero(m.Group) { // not required
+			return nil
+		}
+
 		if err := m.Group.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("group")

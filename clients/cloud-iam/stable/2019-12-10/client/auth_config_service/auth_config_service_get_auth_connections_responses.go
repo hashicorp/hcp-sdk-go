@@ -81,6 +81,11 @@ func (o *AuthConfigServiceGetAuthConnectionsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the auth config service get auth connections o k response
+func (o *AuthConfigServiceGetAuthConnectionsOK) Code() int {
+	return 200
+}
+
 func (o *AuthConfigServiceGetAuthConnectionsOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceGetAuthConnectionsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type AuthConfigServiceGetAuthConnectionsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the auth config service get auth connections default response
-func (o *AuthConfigServiceGetAuthConnectionsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this auth config service get auth connections default response has a 2xx status code
 func (o *AuthConfigServiceGetAuthConnectionsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *AuthConfigServiceGetAuthConnectionsDefault) IsServerError() bool {
 // IsCode returns true when this auth config service get auth connections default response a status code equal to that given
 func (o *AuthConfigServiceGetAuthConnectionsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the auth config service get auth connections default response
+func (o *AuthConfigServiceGetAuthConnectionsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *AuthConfigServiceGetAuthConnectionsDefault) Error() string {

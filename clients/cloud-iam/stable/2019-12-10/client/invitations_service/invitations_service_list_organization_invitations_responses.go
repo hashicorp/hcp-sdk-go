@@ -81,6 +81,11 @@ func (o *InvitationsServiceListOrganizationInvitationsOK) IsCode(code int) bool 
 	return code == 200
 }
 
+// Code gets the status code for the invitations service list organization invitations o k response
+func (o *InvitationsServiceListOrganizationInvitationsOK) Code() int {
+	return 200
+}
+
 func (o *InvitationsServiceListOrganizationInvitationsOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/invitations][%d] invitationsServiceListOrganizationInvitationsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type InvitationsServiceListOrganizationInvitationsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the invitations service list organization invitations default response
-func (o *InvitationsServiceListOrganizationInvitationsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this invitations service list organization invitations default response has a 2xx status code
 func (o *InvitationsServiceListOrganizationInvitationsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *InvitationsServiceListOrganizationInvitationsDefault) IsServerError() b
 // IsCode returns true when this invitations service list organization invitations default response a status code equal to that given
 func (o *InvitationsServiceListOrganizationInvitationsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the invitations service list organization invitations default response
+func (o *InvitationsServiceListOrganizationInvitationsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *InvitationsServiceListOrganizationInvitationsDefault) Error() string {

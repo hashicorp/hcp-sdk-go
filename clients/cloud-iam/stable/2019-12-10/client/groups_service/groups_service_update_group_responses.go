@@ -6,12 +6,16 @@ package groups_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
@@ -80,6 +84,11 @@ func (o *GroupsServiceUpdateGroupOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the groups service update group o k response
+func (o *GroupsServiceUpdateGroupOK) Code() int {
+	return 200
+}
+
 func (o *GroupsServiceUpdateGroupOK) Error() string {
 	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}][%d] groupsServiceUpdateGroupOK  %+v", 200, o.Payload)
 }
@@ -120,11 +129,6 @@ type GroupsServiceUpdateGroupDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the groups service update group default response
-func (o *GroupsServiceUpdateGroupDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this groups service update group default response has a 2xx status code
 func (o *GroupsServiceUpdateGroupDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,6 +154,11 @@ func (o *GroupsServiceUpdateGroupDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the groups service update group default response
+func (o *GroupsServiceUpdateGroupDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *GroupsServiceUpdateGroupDefault) Error() string {
 	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}][%d] GroupsService_UpdateGroup default  %+v", o._statusCode, o.Payload)
 }
@@ -171,5 +180,104 @@ func (o *GroupsServiceUpdateGroupDefault) readResponse(response runtime.ClientRe
 		return err
 	}
 
+	return nil
+}
+
+/*
+GroupsServiceUpdateGroupBody groups service update group body
+swagger:model GroupsServiceUpdateGroupBody
+*/
+type GroupsServiceUpdateGroupBody struct {
+
+	// group is the group being updated.
+	Group *models.HashicorpCloudIamGroup `json:"group,omitempty"`
+
+	// update_mask is the list of group fields being updated.
+	UpdateMask string `json:"update_mask,omitempty"`
+}
+
+// Validate validates this groups service update group body
+func (o *GroupsServiceUpdateGroupBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateGroup(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GroupsServiceUpdateGroupBody) validateGroup(formats strfmt.Registry) error {
+	if swag.IsZero(o.Group) { // not required
+		return nil
+	}
+
+	if o.Group != nil {
+		if err := o.Group.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "group")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this groups service update group body based on the context it is used
+func (o *GroupsServiceUpdateGroupBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateGroup(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GroupsServiceUpdateGroupBody) contextValidateGroup(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Group != nil {
+
+		if swag.IsZero(o.Group) { // not required
+			return nil
+		}
+
+		if err := o.Group.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "group")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *GroupsServiceUpdateGroupBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *GroupsServiceUpdateGroupBody) UnmarshalBinary(b []byte) error {
+	var res GroupsServiceUpdateGroupBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

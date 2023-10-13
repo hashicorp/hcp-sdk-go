@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewIamServiceGetUserPrincipalsByIDsInOrganizationParams creates a new IamServiceGetUserPrincipalsByIDsInOrganizationParams object,
@@ -64,7 +62,7 @@ IamServiceGetUserPrincipalsByIDsInOrganizationParams contains all the parameters
 type IamServiceGetUserPrincipalsByIDsInOrganizationParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudIamGetUserPrincipalsByIDsInOrganizationRequest
+	Body IamServiceGetUserPrincipalsByIDsInOrganizationBody
 
 	/* OrganizationID.
 
@@ -126,13 +124,13 @@ func (o *IamServiceGetUserPrincipalsByIDsInOrganizationParams) SetHTTPClient(cli
 }
 
 // WithBody adds the body to the iam service get user principals by i ds in organization params
-func (o *IamServiceGetUserPrincipalsByIDsInOrganizationParams) WithBody(body *models.HashicorpCloudIamGetUserPrincipalsByIDsInOrganizationRequest) *IamServiceGetUserPrincipalsByIDsInOrganizationParams {
+func (o *IamServiceGetUserPrincipalsByIDsInOrganizationParams) WithBody(body IamServiceGetUserPrincipalsByIDsInOrganizationBody) *IamServiceGetUserPrincipalsByIDsInOrganizationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the iam service get user principals by i ds in organization params
-func (o *IamServiceGetUserPrincipalsByIDsInOrganizationParams) SetBody(body *models.HashicorpCloudIamGetUserPrincipalsByIDsInOrganizationRequest) {
+func (o *IamServiceGetUserPrincipalsByIDsInOrganizationParams) SetBody(body IamServiceGetUserPrincipalsByIDsInOrganizationBody) {
 	o.Body = body
 }
 
@@ -154,10 +152,8 @@ func (o *IamServiceGetUserPrincipalsByIDsInOrganizationParams) WriteToRequest(r 
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param organization_id

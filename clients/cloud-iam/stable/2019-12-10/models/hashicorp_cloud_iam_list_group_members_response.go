@@ -141,6 +141,11 @@ func (m *HashicorpCloudIamListGroupMembersResponse) ContextValidate(ctx context.
 func (m *HashicorpCloudIamListGroupMembersResponse) contextValidateGroup(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Group != nil {
+
+		if swag.IsZero(m.Group) { // not required
+			return nil
+		}
+
 		if err := m.Group.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("group")
@@ -159,6 +164,11 @@ func (m *HashicorpCloudIamListGroupMembersResponse) contextValidateMembers(ctx c
 	for i := 0; i < len(m.Members); i++ {
 
 		if m.Members[i] != nil {
+
+			if swag.IsZero(m.Members[i]) { // not required
+				return nil
+			}
+
 			if err := m.Members[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("members" + "." + strconv.Itoa(i))
@@ -177,6 +187,11 @@ func (m *HashicorpCloudIamListGroupMembersResponse) contextValidateMembers(ctx c
 func (m *HashicorpCloudIamListGroupMembersResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")

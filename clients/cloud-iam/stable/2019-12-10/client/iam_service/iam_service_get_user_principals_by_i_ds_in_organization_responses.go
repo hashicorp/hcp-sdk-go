@@ -6,11 +6,13 @@ package iam_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +83,11 @@ func (o *IamServiceGetUserPrincipalsByIDsInOrganizationOK) IsCode(code int) bool
 	return code == 200
 }
 
+// Code gets the status code for the iam service get user principals by i ds in organization o k response
+func (o *IamServiceGetUserPrincipalsByIDsInOrganizationOK) Code() int {
+	return 200
+}
+
 func (o *IamServiceGetUserPrincipalsByIDsInOrganizationOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch][%d] iamServiceGetUserPrincipalsByIDsInOrganizationOK  %+v", 200, o.Payload)
 }
@@ -123,11 +130,6 @@ type IamServiceGetUserPrincipalsByIDsInOrganizationDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the iam service get user principals by i ds in organization default response
-func (o *IamServiceGetUserPrincipalsByIDsInOrganizationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this iam service get user principals by i ds in organization default response has a 2xx status code
 func (o *IamServiceGetUserPrincipalsByIDsInOrganizationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +155,11 @@ func (o *IamServiceGetUserPrincipalsByIDsInOrganizationDefault) IsCode(code int)
 	return o._statusCode == code
 }
 
+// Code gets the status code for the iam service get user principals by i ds in organization default response
+func (o *IamServiceGetUserPrincipalsByIDsInOrganizationDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *IamServiceGetUserPrincipalsByIDsInOrganizationDefault) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch][%d] IamService_GetUserPrincipalsByIDsInOrganization default  %+v", o._statusCode, o.Payload)
 }
@@ -174,5 +181,43 @@ func (o *IamServiceGetUserPrincipalsByIDsInOrganizationDefault) readResponse(res
 		return err
 	}
 
+	return nil
+}
+
+/*
+IamServiceGetUserPrincipalsByIDsInOrganizationBody GetUserPrincipalsByIDsInOrganizationRequest is a request for users by ID in a given organization
+swagger:model IamServiceGetUserPrincipalsByIDsInOrganizationBody
+*/
+type IamServiceGetUserPrincipalsByIDsInOrganizationBody struct {
+
+	// ids is a list of user IDs to look up
+	Ids []string `json:"ids"`
+}
+
+// Validate validates this iam service get user principals by i ds in organization body
+func (o *IamServiceGetUserPrincipalsByIDsInOrganizationBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this iam service get user principals by i ds in organization body based on context it is used
+func (o *IamServiceGetUserPrincipalsByIDsInOrganizationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *IamServiceGetUserPrincipalsByIDsInOrganizationBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *IamServiceGetUserPrincipalsByIDsInOrganizationBody) UnmarshalBinary(b []byte) error {
+	var res IamServiceGetUserPrincipalsByIDsInOrganizationBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

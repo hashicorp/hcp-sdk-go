@@ -81,6 +81,11 @@ func (o *ProfileServiceEnableMFAOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the profile service enable m f a o k response
+func (o *ProfileServiceEnableMFAOK) Code() int {
+	return 200
+}
+
 func (o *ProfileServiceEnableMFAOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/me/enable-mfa][%d] profileServiceEnableMFAOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ProfileServiceEnableMFADefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the profile service enable m f a default response
-func (o *ProfileServiceEnableMFADefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this profile service enable m f a default response has a 2xx status code
 func (o *ProfileServiceEnableMFADefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ProfileServiceEnableMFADefault) IsServerError() bool {
 // IsCode returns true when this profile service enable m f a default response a status code equal to that given
 func (o *ProfileServiceEnableMFADefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the profile service enable m f a default response
+func (o *ProfileServiceEnableMFADefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProfileServiceEnableMFADefault) Error() string {

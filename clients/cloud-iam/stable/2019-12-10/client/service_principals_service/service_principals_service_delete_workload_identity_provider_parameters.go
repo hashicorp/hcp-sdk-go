@@ -61,12 +61,12 @@ ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams contains all the pa
 */
 type ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams struct {
 
-	/* ResourceName.
+	/* ResourceName4.
 
 	     resource_name is the resource name of the workload identity provider to
 	delete.
 	*/
-	ResourceName string
+	ResourceName4 string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,15 +121,15 @@ func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams) SetHTTPCl
 	o.HTTPClient = client
 }
 
-// WithResourceName adds the resourceName to the service principals service delete workload identity provider params
-func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams) WithResourceName(resourceName string) *ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams {
-	o.SetResourceName(resourceName)
+// WithResourceName4 adds the resourceName4 to the service principals service delete workload identity provider params
+func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams) WithResourceName4(resourceName4 string) *ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams {
+	o.SetResourceName4(resourceName4)
 	return o
 }
 
-// SetResourceName adds the resourceName to the service principals service delete workload identity provider params
-func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams) SetResourceName(resourceName string) {
-	o.ResourceName = resourceName
+// SetResourceName4 adds the resourceName4 to the service principals service delete workload identity provider params
+func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams) SetResourceName4(resourceName4 string) {
+	o.ResourceName4 = resourceName4
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -140,8 +140,8 @@ func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderParams) WriteToRe
 	}
 	var res []error
 
-	// path param resource_name
-	if err := r.SetPathParam("resource_name", o.ResourceName); err != nil {
+	// path param resource_name_4
+	if err := r.SetPathParam("resource_name_4", o.ResourceName4); err != nil {
 		return err
 	}
 

@@ -93,6 +93,11 @@ func (m *HashicorpCloudIamSearchPrincipalsFilter) contextValidatePrincipalTypes(
 	for i := 0; i < len(m.PrincipalTypes); i++ {
 
 		if m.PrincipalTypes[i] != nil {
+
+			if swag.IsZero(m.PrincipalTypes[i]) { // not required
+				return nil
+			}
+
 			if err := m.PrincipalTypes[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("principal_types" + "." + strconv.Itoa(i))

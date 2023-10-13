@@ -81,6 +81,11 @@ func (o *IamServiceGetCurrentUserPrincipalOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the iam service get current user principal o k response
+func (o *IamServiceGetCurrentUserPrincipalOK) Code() int {
+	return 200
+}
+
 func (o *IamServiceGetCurrentUserPrincipalOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/me][%d] iamServiceGetCurrentUserPrincipalOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type IamServiceGetCurrentUserPrincipalDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the iam service get current user principal default response
-func (o *IamServiceGetCurrentUserPrincipalDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this iam service get current user principal default response has a 2xx status code
 func (o *IamServiceGetCurrentUserPrincipalDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *IamServiceGetCurrentUserPrincipalDefault) IsServerError() bool {
 // IsCode returns true when this iam service get current user principal default response a status code equal to that given
 func (o *IamServiceGetCurrentUserPrincipalDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the iam service get current user principal default response
+func (o *IamServiceGetCurrentUserPrincipalDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *IamServiceGetCurrentUserPrincipalDefault) Error() string {

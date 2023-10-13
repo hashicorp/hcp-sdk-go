@@ -81,6 +81,11 @@ func (o *IamServiceDeleteOrganizationMembershipOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the iam service delete organization membership o k response
+func (o *IamServiceDeleteOrganizationMembershipOK) Code() int {
+	return 200
+}
+
 func (o *IamServiceDeleteOrganizationMembershipOK) Error() string {
 	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/user-principals/{user_principal_id}][%d] iamServiceDeleteOrganizationMembershipOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type IamServiceDeleteOrganizationMembershipDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the iam service delete organization membership default response
-func (o *IamServiceDeleteOrganizationMembershipDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this iam service delete organization membership default response has a 2xx status code
 func (o *IamServiceDeleteOrganizationMembershipDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *IamServiceDeleteOrganizationMembershipDefault) IsServerError() bool {
 // IsCode returns true when this iam service delete organization membership default response a status code equal to that given
 func (o *IamServiceDeleteOrganizationMembershipDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the iam service delete organization membership default response
+func (o *IamServiceDeleteOrganizationMembershipDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *IamServiceDeleteOrganizationMembershipDefault) Error() string {

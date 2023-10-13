@@ -81,6 +81,11 @@ func (o *ProfileServiceResetPasswordOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the profile service reset password o k response
+func (o *ProfileServiceResetPasswordOK) Code() int {
+	return 200
+}
+
 func (o *ProfileServiceResetPasswordOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/me/reset-password][%d] profileServiceResetPasswordOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type ProfileServiceResetPasswordDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the profile service reset password default response
-func (o *ProfileServiceResetPasswordDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this profile service reset password default response has a 2xx status code
 func (o *ProfileServiceResetPasswordDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *ProfileServiceResetPasswordDefault) IsServerError() bool {
 // IsCode returns true when this profile service reset password default response a status code equal to that given
 func (o *ProfileServiceResetPasswordDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the profile service reset password default response
+func (o *ProfileServiceResetPasswordDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProfileServiceResetPasswordDefault) Error() string {

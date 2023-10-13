@@ -63,20 +63,20 @@ ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams contains all the par
 */
 type ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams struct {
 
-	/* Body.
-
-	     token is the external identity token. This represents the identity of a
-	workload and for token exchange to occur must be valid given the provider's
-	configuration and conditional_access statatement.
-	*/
-	Body *models.HashicorpCloudIamExchangeWorkloadIdentityTokenRequestToken
-
 	/* ResourceName.
 
 	     resource_name is the resource_name of the workload identity provider to
 	exchange against.
 	*/
 	ResourceName string
+
+	/* Token.
+
+	     token is the external identity token. This represents the identity of a
+	workload and for token exchange to occur must be valid given the provider's
+	configuration and conditional_access statatement.
+	*/
+	Token *models.HashicorpCloudIamExchangeWorkloadIdentityTokenRequestToken
 
 	timeout    time.Duration
 	Context    context.Context
@@ -131,17 +131,6 @@ func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams) SetHTTPCli
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the service principals service exchange workload identity token params
-func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams) WithBody(body *models.HashicorpCloudIamExchangeWorkloadIdentityTokenRequestToken) *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams {
-	o.SetBody(body)
-	return o
-}
-
-// SetBody adds the body to the service principals service exchange workload identity token params
-func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams) SetBody(body *models.HashicorpCloudIamExchangeWorkloadIdentityTokenRequestToken) {
-	o.Body = body
-}
-
 // WithResourceName adds the resourceName to the service principals service exchange workload identity token params
 func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams) WithResourceName(resourceName string) *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams {
 	o.SetResourceName(resourceName)
@@ -153,6 +142,17 @@ func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams) SetResourc
 	o.ResourceName = resourceName
 }
 
+// WithToken adds the token to the service principals service exchange workload identity token params
+func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams) WithToken(token *models.HashicorpCloudIamExchangeWorkloadIdentityTokenRequestToken) *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams {
+	o.SetToken(token)
+	return o
+}
+
+// SetToken adds the token to the service principals service exchange workload identity token params
+func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams) SetToken(token *models.HashicorpCloudIamExchangeWorkloadIdentityTokenRequestToken) {
+	o.Token = token
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -160,15 +160,15 @@ func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenParams) WriteToReq
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
-	}
 
 	// path param resource_name
 	if err := r.SetPathParam("resource_name", o.ResourceName); err != nil {
 		return err
+	}
+	if o.Token != nil {
+		if err := r.SetBodyParam(o.Token); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {

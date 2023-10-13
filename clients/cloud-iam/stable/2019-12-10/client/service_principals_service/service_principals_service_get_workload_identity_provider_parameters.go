@@ -61,12 +61,12 @@ ServicePrincipalsServiceGetWorkloadIdentityProviderParams contains all the param
 */
 type ServicePrincipalsServiceGetWorkloadIdentityProviderParams struct {
 
-	/* ResourceName.
+	/* ResourceName2.
 
 	     resource_name is the resource name of the workload identity provider to
 	retrieve.
 	*/
-	ResourceName string
+	ResourceName2 string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,15 +121,15 @@ func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderParams) SetHTTPClien
 	o.HTTPClient = client
 }
 
-// WithResourceName adds the resourceName to the service principals service get workload identity provider params
-func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderParams) WithResourceName(resourceName string) *ServicePrincipalsServiceGetWorkloadIdentityProviderParams {
-	o.SetResourceName(resourceName)
+// WithResourceName2 adds the resourceName2 to the service principals service get workload identity provider params
+func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderParams) WithResourceName2(resourceName2 string) *ServicePrincipalsServiceGetWorkloadIdentityProviderParams {
+	o.SetResourceName2(resourceName2)
 	return o
 }
 
-// SetResourceName adds the resourceName to the service principals service get workload identity provider params
-func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderParams) SetResourceName(resourceName string) {
-	o.ResourceName = resourceName
+// SetResourceName2 adds the resourceName2 to the service principals service get workload identity provider params
+func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderParams) SetResourceName2(resourceName2 string) {
+	o.ResourceName2 = resourceName2
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -140,8 +140,8 @@ func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderParams) WriteToReque
 	}
 	var res []error
 
-	// path param resource_name
-	if err := r.SetPathParam("resource_name", o.ResourceName); err != nil {
+	// path param resource_name_2
+	if err := r.SetPathParam("resource_name_2", o.ResourceName2); err != nil {
 		return err
 	}
 

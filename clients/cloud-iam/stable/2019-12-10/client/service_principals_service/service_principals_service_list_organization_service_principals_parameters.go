@@ -66,7 +66,7 @@ type ServicePrincipalsServiceListOrganizationServicePrincipalsParams struct {
 
 	     include defines which service principals in the hirarchical level
 	below an organization should be included in the returned list.
-	Allowed values: UNSET, ALL, PROJECTS.
+	Allowed values: UNSET, ALL, PROJECTS
 
 	 - UNSET: UNSET is the default value.
 	UNSET will only include service principals at organization level.

@@ -81,6 +81,11 @@ func (o *ProfileServiceConfirmMFAEnrollmentOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the profile service confirm m f a enrollment o k response
+func (o *ProfileServiceConfirmMFAEnrollmentOK) Code() int {
+	return 200
+}
+
 func (o *ProfileServiceConfirmMFAEnrollmentOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/me/confirm-mfa-enrollment][%d] profileServiceConfirmMFAEnrollmentOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type ProfileServiceConfirmMFAEnrollmentDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the profile service confirm m f a enrollment default response
-func (o *ProfileServiceConfirmMFAEnrollmentDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this profile service confirm m f a enrollment default response has a 2xx status code
 func (o *ProfileServiceConfirmMFAEnrollmentDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *ProfileServiceConfirmMFAEnrollmentDefault) IsServerError() bool {
 // IsCode returns true when this profile service confirm m f a enrollment default response a status code equal to that given
 func (o *ProfileServiceConfirmMFAEnrollmentDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the profile service confirm m f a enrollment default response
+func (o *ProfileServiceConfirmMFAEnrollmentDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProfileServiceConfirmMFAEnrollmentDefault) Error() string {

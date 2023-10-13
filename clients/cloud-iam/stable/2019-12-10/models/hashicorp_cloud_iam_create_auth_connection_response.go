@@ -72,6 +72,11 @@ func (m *HashicorpCloudIamCreateAuthConnectionResponse) ContextValidate(ctx cont
 func (m *HashicorpCloudIamCreateAuthConnectionResponse) contextValidateAuthConnection(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AuthConnection != nil {
+
+		if swag.IsZero(m.AuthConnection) { // not required
+			return nil
+		}
+
 		if err := m.AuthConnection.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("auth_connection")

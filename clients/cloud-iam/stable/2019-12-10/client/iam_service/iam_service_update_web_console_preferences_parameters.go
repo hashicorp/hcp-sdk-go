@@ -63,7 +63,10 @@ IamServiceUpdateWebConsolePreferencesParams contains all the parameters to send 
 */
 type IamServiceUpdateWebConsolePreferencesParams struct {
 
-	// Body.
+	/* Body.
+
+	   UpdateWebConsolePreferencesRequest is the request to update a user principal's web portal preferences on the IAM service.
+	*/
 	Body *models.HashicorpCloudIamUpdateWebConsolePreferencesRequest
 
 	timeout    time.Duration

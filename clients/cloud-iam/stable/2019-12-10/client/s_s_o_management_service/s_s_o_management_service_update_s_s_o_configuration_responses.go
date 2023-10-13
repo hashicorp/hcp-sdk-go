@@ -6,11 +6,14 @@ package s_s_o_management_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +84,11 @@ func (o *SSOManagementServiceUpdateSSOConfigurationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the s s o management service update s s o configuration o k response
+func (o *SSOManagementServiceUpdateSSOConfigurationOK) Code() int {
+	return 200
+}
+
 func (o *SSOManagementServiceUpdateSSOConfigurationOK) Error() string {
 	return fmt.Sprintf("[PUT /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceUpdateSSOConfigurationOK  %+v", 200, o.Payload)
 }
@@ -121,11 +129,6 @@ type SSOManagementServiceUpdateSSOConfigurationDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the s s o management service update s s o configuration default response
-func (o *SSOManagementServiceUpdateSSOConfigurationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this s s o management service update s s o configuration default response has a 2xx status code
 func (o *SSOManagementServiceUpdateSSOConfigurationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +154,11 @@ func (o *SSOManagementServiceUpdateSSOConfigurationDefault) IsCode(code int) boo
 	return o._statusCode == code
 }
 
+// Code gets the status code for the s s o management service update s s o configuration default response
+func (o *SSOManagementServiceUpdateSSOConfigurationDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *SSOManagementServiceUpdateSSOConfigurationDefault) Error() string {
 	return fmt.Sprintf("[PUT /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_UpdateSSOConfiguration default  %+v", o._statusCode, o.Payload)
 }
@@ -172,5 +180,101 @@ func (o *SSOManagementServiceUpdateSSOConfigurationDefault) readResponse(respons
 		return err
 	}
 
+	return nil
+}
+
+/*
+SSOManagementServiceUpdateSSOConfigurationBody s s o management service update s s o configuration body
+swagger:model SSOManagementServiceUpdateSSOConfigurationBody
+*/
+type SSOManagementServiceUpdateSSOConfigurationBody struct {
+
+	// SsoConfig has the SSO configuration for this organization.
+	Config *models.HashicorpCloudIamSSOConfig `json:"config,omitempty"`
+}
+
+// Validate validates this s s o management service update s s o configuration body
+func (o *SSOManagementServiceUpdateSSOConfigurationBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *SSOManagementServiceUpdateSSOConfigurationBody) validateConfig(formats strfmt.Registry) error {
+	if swag.IsZero(o.Config) { // not required
+		return nil
+	}
+
+	if o.Config != nil {
+		if err := o.Config.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this s s o management service update s s o configuration body based on the context it is used
+func (o *SSOManagementServiceUpdateSSOConfigurationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *SSOManagementServiceUpdateSSOConfigurationBody) contextValidateConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Config != nil {
+
+		if swag.IsZero(o.Config) { // not required
+			return nil
+		}
+
+		if err := o.Config.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *SSOManagementServiceUpdateSSOConfigurationBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *SSOManagementServiceUpdateSSOConfigurationBody) UnmarshalBinary(b []byte) error {
+	var res SSOManagementServiceUpdateSSOConfigurationBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

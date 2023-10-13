@@ -6,11 +6,13 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,12 +83,17 @@ func (o *ServicePrincipalsServiceCreateServicePrincipal2OK) IsCode(code int) boo
 	return code == 200
 }
 
+// Code gets the status code for the service principals service create service principal2 o k response
+func (o *ServicePrincipalsServiceCreateServicePrincipal2OK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceCreateServicePrincipal2OK) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] servicePrincipalsServiceCreateServicePrincipal2OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] servicePrincipalsServiceCreateServicePrincipal2OK  %+v", 200, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipal2OK) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] servicePrincipalsServiceCreateServicePrincipal2OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] servicePrincipalsServiceCreateServicePrincipal2OK  %+v", 200, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipal2OK) GetPayload() *models.HashicorpCloudIamCreateServicePrincipalResponse {
@@ -123,11 +130,6 @@ type ServicePrincipalsServiceCreateServicePrincipal2Default struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service create service principal2 default response
-func (o *ServicePrincipalsServiceCreateServicePrincipal2Default) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service create service principal2 default response has a 2xx status code
 func (o *ServicePrincipalsServiceCreateServicePrincipal2Default) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,12 +155,17 @@ func (o *ServicePrincipalsServiceCreateServicePrincipal2Default) IsCode(code int
 	return o._statusCode == code
 }
 
+// Code gets the status code for the service principals service create service principal2 default response
+func (o *ServicePrincipalsServiceCreateServicePrincipal2Default) Code() int {
+	return o._statusCode
+}
+
 func (o *ServicePrincipalsServiceCreateServicePrincipal2Default) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] ServicePrincipalsService_CreateServicePrincipal2 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] ServicePrincipalsService_CreateServicePrincipal2 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipal2Default) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] ServicePrincipalsService_CreateServicePrincipal2 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] ServicePrincipalsService_CreateServicePrincipal2 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipal2Default) GetPayload() *cloud.GoogleRPCStatus {
@@ -174,5 +181,44 @@ func (o *ServicePrincipalsServiceCreateServicePrincipal2Default) readResponse(re
 		return err
 	}
 
+	return nil
+}
+
+/*
+ServicePrincipalsServiceCreateServicePrincipal2Body CreateServicePrincipalRequest is the request message used when creating a
+// service principal.
+swagger:model ServicePrincipalsServiceCreateServicePrincipal2Body
+*/
+type ServicePrincipalsServiceCreateServicePrincipal2Body struct {
+
+	// name is the customer-chosen name for this service principal.
+	Name string `json:"name,omitempty"`
+}
+
+// Validate validates this service principals service create service principal2 body
+func (o *ServicePrincipalsServiceCreateServicePrincipal2Body) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this service principals service create service principal2 body based on context it is used
+func (o *ServicePrincipalsServiceCreateServicePrincipal2Body) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *ServicePrincipalsServiceCreateServicePrincipal2Body) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *ServicePrincipalsServiceCreateServicePrincipal2Body) UnmarshalBinary(b []byte) error {
+	var res ServicePrincipalsServiceCreateServicePrincipal2Body
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

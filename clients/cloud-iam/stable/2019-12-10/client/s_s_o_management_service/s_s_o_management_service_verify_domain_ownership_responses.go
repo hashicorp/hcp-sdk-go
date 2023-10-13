@@ -6,11 +6,13 @@ package s_s_o_management_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +83,11 @@ func (o *SSOManagementServiceVerifyDomainOwnershipOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the s s o management service verify domain ownership o k response
+func (o *SSOManagementServiceVerifyDomainOwnershipOK) Code() int {
+	return 200
+}
+
 func (o *SSOManagementServiceVerifyDomainOwnershipOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/verify-domain-ownership][%d] sSOManagementServiceVerifyDomainOwnershipOK  %+v", 200, o.Payload)
 }
@@ -123,11 +130,6 @@ type SSOManagementServiceVerifyDomainOwnershipDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the s s o management service verify domain ownership default response
-func (o *SSOManagementServiceVerifyDomainOwnershipDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this s s o management service verify domain ownership default response has a 2xx status code
 func (o *SSOManagementServiceVerifyDomainOwnershipDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +155,11 @@ func (o *SSOManagementServiceVerifyDomainOwnershipDefault) IsCode(code int) bool
 	return o._statusCode == code
 }
 
+// Code gets the status code for the s s o management service verify domain ownership default response
+func (o *SSOManagementServiceVerifyDomainOwnershipDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *SSOManagementServiceVerifyDomainOwnershipDefault) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/verify-domain-ownership][%d] SSOManagementService_VerifyDomainOwnership default  %+v", o._statusCode, o.Payload)
 }
@@ -174,5 +181,44 @@ func (o *SSOManagementServiceVerifyDomainOwnershipDefault) readResponse(response
 		return err
 	}
 
+	return nil
+}
+
+/*
+SSOManagementServiceVerifyDomainOwnershipBody VerifyDomainOwnershipRequest is the request to verify an organization's
+// ownership/control of a domain.
+swagger:model SSOManagementServiceVerifyDomainOwnershipBody
+*/
+type SSOManagementServiceVerifyDomainOwnershipBody struct {
+
+	// domain is the domain for which ownership will be verified.
+	Domain string `json:"domain,omitempty"`
+}
+
+// Validate validates this s s o management service verify domain ownership body
+func (o *SSOManagementServiceVerifyDomainOwnershipBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this s s o management service verify domain ownership body based on context it is used
+func (o *SSOManagementServiceVerifyDomainOwnershipBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *SSOManagementServiceVerifyDomainOwnershipBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *SSOManagementServiceVerifyDomainOwnershipBody) UnmarshalBinary(b []byte) error {
+	var res SSOManagementServiceVerifyDomainOwnershipBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

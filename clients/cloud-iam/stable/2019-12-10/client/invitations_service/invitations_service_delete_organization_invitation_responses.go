@@ -81,6 +81,11 @@ func (o *InvitationsServiceDeleteOrganizationInvitationOK) IsCode(code int) bool
 	return code == 200
 }
 
+// Code gets the status code for the invitations service delete organization invitation o k response
+func (o *InvitationsServiceDeleteOrganizationInvitationOK) Code() int {
+	return 200
+}
+
 func (o *InvitationsServiceDeleteOrganizationInvitationOK) Error() string {
 	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/invitations/{invitation_id}][%d] invitationsServiceDeleteOrganizationInvitationOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type InvitationsServiceDeleteOrganizationInvitationDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the invitations service delete organization invitation default response
-func (o *InvitationsServiceDeleteOrganizationInvitationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this invitations service delete organization invitation default response has a 2xx status code
 func (o *InvitationsServiceDeleteOrganizationInvitationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *InvitationsServiceDeleteOrganizationInvitationDefault) IsServerError() 
 // IsCode returns true when this invitations service delete organization invitation default response a status code equal to that given
 func (o *InvitationsServiceDeleteOrganizationInvitationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the invitations service delete organization invitation default response
+func (o *InvitationsServiceDeleteOrganizationInvitationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *InvitationsServiceDeleteOrganizationInvitationDefault) Error() string {

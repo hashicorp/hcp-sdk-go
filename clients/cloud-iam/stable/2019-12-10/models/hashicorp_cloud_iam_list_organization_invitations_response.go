@@ -113,6 +113,11 @@ func (m *HashicorpCloudIamListOrganizationInvitationsResponse) contextValidateIn
 	for i := 0; i < len(m.Invitations); i++ {
 
 		if m.Invitations[i] != nil {
+
+			if swag.IsZero(m.Invitations[i]) { // not required
+				return nil
+			}
+
 			if err := m.Invitations[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("invitations" + "." + strconv.Itoa(i))
@@ -131,6 +136,11 @@ func (m *HashicorpCloudIamListOrganizationInvitationsResponse) contextValidateIn
 func (m *HashicorpCloudIamListOrganizationInvitationsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")

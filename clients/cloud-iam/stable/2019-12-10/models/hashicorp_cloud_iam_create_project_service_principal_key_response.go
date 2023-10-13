@@ -81,6 +81,11 @@ func (m *HashicorpCloudIamCreateProjectServicePrincipalKeyResponse) ContextValid
 func (m *HashicorpCloudIamCreateProjectServicePrincipalKeyResponse) contextValidateKey(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Key != nil {
+
+		if swag.IsZero(m.Key) { // not required
+			return nil
+		}
+
 		if err := m.Key.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("key")

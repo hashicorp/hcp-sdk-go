@@ -89,13 +89,13 @@ type ServicePrincipalsServiceListServicePrincipals2Params struct {
 	*/
 	PaginationPreviousPageToken *string
 
-	/* ParentResourceName.
+	/* ParentResourceName1.
 
 	     parent_resource_name is the resource name of the project or organization
 	at which the service principal should be listed (e.g.
 	"project/<project_id>" or "organization/<organization_id>")
 	*/
-	ParentResourceName string
+	ParentResourceName1 string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -183,15 +183,15 @@ func (o *ServicePrincipalsServiceListServicePrincipals2Params) SetPaginationPrev
 	o.PaginationPreviousPageToken = paginationPreviousPageToken
 }
 
-// WithParentResourceName adds the parentResourceName to the service principals service list service principals2 params
-func (o *ServicePrincipalsServiceListServicePrincipals2Params) WithParentResourceName(parentResourceName string) *ServicePrincipalsServiceListServicePrincipals2Params {
-	o.SetParentResourceName(parentResourceName)
+// WithParentResourceName1 adds the parentResourceName1 to the service principals service list service principals2 params
+func (o *ServicePrincipalsServiceListServicePrincipals2Params) WithParentResourceName1(parentResourceName1 string) *ServicePrincipalsServiceListServicePrincipals2Params {
+	o.SetParentResourceName1(parentResourceName1)
 	return o
 }
 
-// SetParentResourceName adds the parentResourceName to the service principals service list service principals2 params
-func (o *ServicePrincipalsServiceListServicePrincipals2Params) SetParentResourceName(parentResourceName string) {
-	o.ParentResourceName = parentResourceName
+// SetParentResourceName1 adds the parentResourceName1 to the service principals service list service principals2 params
+func (o *ServicePrincipalsServiceListServicePrincipals2Params) SetParentResourceName1(parentResourceName1 string) {
+	o.ParentResourceName1 = parentResourceName1
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -253,8 +253,8 @@ func (o *ServicePrincipalsServiceListServicePrincipals2Params) WriteToRequest(r 
 		}
 	}
 
-	// path param parent_resource_name
-	if err := r.SetPathParam("parent_resource_name", o.ParentResourceName); err != nil {
+	// path param parent_resource_name_1
+	if err := r.SetPathParam("parent_resource_name_1", o.ParentResourceName1); err != nil {
 		return err
 	}
 

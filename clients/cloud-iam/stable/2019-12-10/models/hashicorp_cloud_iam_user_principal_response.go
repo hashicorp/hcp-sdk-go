@@ -72,6 +72,11 @@ func (m *HashicorpCloudIamUserPrincipalResponse) ContextValidate(ctx context.Con
 func (m *HashicorpCloudIamUserPrincipalResponse) contextValidateUserPrincipal(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UserPrincipal != nil {
+
+		if swag.IsZero(m.UserPrincipal) { // not required
+			return nil
+		}
+
 		if err := m.UserPrincipal.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("user_principal")

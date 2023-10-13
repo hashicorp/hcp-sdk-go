@@ -6,11 +6,13 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +83,11 @@ func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyOK) IsCode(code
 	return code == 200
 }
 
+// Code gets the status code for the service principals service create project service principal key o k response
+func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyOK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principal-keys][%d] servicePrincipalsServiceCreateProjectServicePrincipalKeyOK  %+v", 200, o.Payload)
 }
@@ -123,11 +130,6 @@ type ServicePrincipalsServiceCreateProjectServicePrincipalKeyDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service create project service principal key default response
-func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service create project service principal key default response has a 2xx status code
 func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +155,11 @@ func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyDefault) IsCode
 	return o._statusCode == code
 }
 
+// Code gets the status code for the service principals service create project service principal key default response
+func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyDefault) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principal-keys][%d] ServicePrincipalsService_CreateProjectServicePrincipalKey default  %+v", o._statusCode, o.Payload)
 }
@@ -174,5 +181,45 @@ func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyDefault) readRe
 		return err
 	}
 
+	return nil
+}
+
+/*
+ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody CreateProjectServicePrincipalKeyRequest is the request message used when creating a
+// service principal key for a service principal on project level.
+swagger:model ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody
+*/
+type ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody struct {
+
+	// principal_id is the ID of the service principal for which the new service
+	// principal key should be created.
+	PrincipalID string `json:"principal_id,omitempty"`
+}
+
+// Validate validates this service principals service create project service principal key body
+func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this service principals service create project service principal key body based on context it is used
+func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody) UnmarshalBinary(b []byte) error {
+	var res ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

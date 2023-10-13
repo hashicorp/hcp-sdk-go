@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewSSOManagementServiceUpdateSSOConfigurationParams creates a new SSOManagementServiceUpdateSSOConfigurationParams object,
@@ -64,7 +62,7 @@ SSOManagementServiceUpdateSSOConfigurationParams contains all the parameters to 
 type SSOManagementServiceUpdateSSOConfigurationParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudIamUpdateSSOConfigurationRequest
+	Body SSOManagementServiceUpdateSSOConfigurationBody
 
 	/* OrganizationID.
 
@@ -136,13 +134,13 @@ func (o *SSOManagementServiceUpdateSSOConfigurationParams) SetHTTPClient(client 
 }
 
 // WithBody adds the body to the s s o management service update s s o configuration params
-func (o *SSOManagementServiceUpdateSSOConfigurationParams) WithBody(body *models.HashicorpCloudIamUpdateSSOConfigurationRequest) *SSOManagementServiceUpdateSSOConfigurationParams {
+func (o *SSOManagementServiceUpdateSSOConfigurationParams) WithBody(body SSOManagementServiceUpdateSSOConfigurationBody) *SSOManagementServiceUpdateSSOConfigurationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the s s o management service update s s o configuration params
-func (o *SSOManagementServiceUpdateSSOConfigurationParams) SetBody(body *models.HashicorpCloudIamUpdateSSOConfigurationRequest) {
+func (o *SSOManagementServiceUpdateSSOConfigurationParams) SetBody(body SSOManagementServiceUpdateSSOConfigurationBody) {
 	o.Body = body
 }
 
@@ -175,10 +173,8 @@ func (o *SSOManagementServiceUpdateSSOConfigurationParams) WriteToRequest(r runt
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param organization_id

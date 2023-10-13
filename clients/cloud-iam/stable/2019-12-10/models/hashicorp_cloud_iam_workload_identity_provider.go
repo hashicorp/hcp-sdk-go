@@ -164,6 +164,11 @@ func (m *HashicorpCloudIamWorkloadIdentityProvider) ContextValidate(ctx context.
 func (m *HashicorpCloudIamWorkloadIdentityProvider) contextValidateAwsConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AwsConfig != nil {
+
+		if swag.IsZero(m.AwsConfig) { // not required
+			return nil
+		}
+
 		if err := m.AwsConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_config")
@@ -180,6 +185,11 @@ func (m *HashicorpCloudIamWorkloadIdentityProvider) contextValidateAwsConfig(ctx
 func (m *HashicorpCloudIamWorkloadIdentityProvider) contextValidateOidcConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OidcConfig != nil {
+
+		if swag.IsZero(m.OidcConfig) { // not required
+			return nil
+		}
+
 		if err := m.OidcConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("oidc_config")

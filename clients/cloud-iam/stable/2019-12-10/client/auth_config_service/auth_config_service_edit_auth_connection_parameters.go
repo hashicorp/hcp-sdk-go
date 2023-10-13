@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewAuthConfigServiceEditAuthConnectionParams creates a new AuthConfigServiceEditAuthConnectionParams object,
@@ -64,7 +62,7 @@ AuthConfigServiceEditAuthConnectionParams contains all the parameters to send to
 type AuthConfigServiceEditAuthConnectionParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudIamEditAuthConnectionRequest
+	Body AuthConfigServiceEditAuthConnectionBody
 
 	/* OrganizationID.
 
@@ -126,13 +124,13 @@ func (o *AuthConfigServiceEditAuthConnectionParams) SetHTTPClient(client *http.C
 }
 
 // WithBody adds the body to the auth config service edit auth connection params
-func (o *AuthConfigServiceEditAuthConnectionParams) WithBody(body *models.HashicorpCloudIamEditAuthConnectionRequest) *AuthConfigServiceEditAuthConnectionParams {
+func (o *AuthConfigServiceEditAuthConnectionParams) WithBody(body AuthConfigServiceEditAuthConnectionBody) *AuthConfigServiceEditAuthConnectionParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the auth config service edit auth connection params
-func (o *AuthConfigServiceEditAuthConnectionParams) SetBody(body *models.HashicorpCloudIamEditAuthConnectionRequest) {
+func (o *AuthConfigServiceEditAuthConnectionParams) SetBody(body AuthConfigServiceEditAuthConnectionBody) {
 	o.Body = body
 }
 
@@ -154,10 +152,8 @@ func (o *AuthConfigServiceEditAuthConnectionParams) WriteToRequest(r runtime.Cli
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param organization_id

@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewGroupsServiceCreateGroupParams creates a new GroupsServiceCreateGroupParams object,
@@ -64,7 +62,7 @@ GroupsServiceCreateGroupParams contains all the parameters to send to the API en
 type GroupsServiceCreateGroupParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudIamCreateGroupRequest
+	Body GroupsServiceCreateGroupBody
 
 	/* ParentResourceName.
 
@@ -127,13 +125,13 @@ func (o *GroupsServiceCreateGroupParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the groups service create group params
-func (o *GroupsServiceCreateGroupParams) WithBody(body *models.HashicorpCloudIamCreateGroupRequest) *GroupsServiceCreateGroupParams {
+func (o *GroupsServiceCreateGroupParams) WithBody(body GroupsServiceCreateGroupBody) *GroupsServiceCreateGroupParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the groups service create group params
-func (o *GroupsServiceCreateGroupParams) SetBody(body *models.HashicorpCloudIamCreateGroupRequest) {
+func (o *GroupsServiceCreateGroupParams) SetBody(body GroupsServiceCreateGroupBody) {
 	o.Body = body
 }
 
@@ -155,10 +153,8 @@ func (o *GroupsServiceCreateGroupParams) WriteToRequest(r runtime.ClientRequest,
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param parent_resource_name

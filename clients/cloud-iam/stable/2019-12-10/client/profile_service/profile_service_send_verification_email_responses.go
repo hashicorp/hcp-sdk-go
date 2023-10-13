@@ -81,6 +81,11 @@ func (o *ProfileServiceSendVerificationEmailOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the profile service send verification email o k response
+func (o *ProfileServiceSendVerificationEmailOK) Code() int {
+	return 200
+}
+
 func (o *ProfileServiceSendVerificationEmailOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/me/send-verification-email][%d] profileServiceSendVerificationEmailOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type ProfileServiceSendVerificationEmailDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the profile service send verification email default response
-func (o *ProfileServiceSendVerificationEmailDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this profile service send verification email default response has a 2xx status code
 func (o *ProfileServiceSendVerificationEmailDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *ProfileServiceSendVerificationEmailDefault) IsServerError() bool {
 // IsCode returns true when this profile service send verification email default response a status code equal to that given
 func (o *ProfileServiceSendVerificationEmailDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the profile service send verification email default response
+func (o *ProfileServiceSendVerificationEmailDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProfileServiceSendVerificationEmailDefault) Error() string {

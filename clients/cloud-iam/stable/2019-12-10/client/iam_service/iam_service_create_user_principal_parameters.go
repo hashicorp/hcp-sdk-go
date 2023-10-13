@@ -63,7 +63,10 @@ IamServiceCreateUserPrincipalParams contains all the parameters to send to the A
 */
 type IamServiceCreateUserPrincipalParams struct {
 
-	// Body.
+	/* Body.
+
+	   CreateUserPrincipalRequest is the request to create a user principal on the IAM service.
+	*/
 	Body *models.HashicorpCloudIamCreateUserPrincipalRequest
 
 	timeout    time.Duration

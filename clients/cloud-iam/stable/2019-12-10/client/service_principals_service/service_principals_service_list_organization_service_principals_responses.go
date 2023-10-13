@@ -81,6 +81,11 @@ func (o *ServicePrincipalsServiceListOrganizationServicePrincipalsOK) IsCode(cod
 	return code == 200
 }
 
+// Code gets the status code for the service principals service list organization service principals o k response
+func (o *ServicePrincipalsServiceListOrganizationServicePrincipalsOK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceListOrganizationServicePrincipalsOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/service-principals][%d] servicePrincipalsServiceListOrganizationServicePrincipalsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ServicePrincipalsServiceListOrganizationServicePrincipalsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service list organization service principals default response
-func (o *ServicePrincipalsServiceListOrganizationServicePrincipalsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service list organization service principals default response has a 2xx status code
 func (o *ServicePrincipalsServiceListOrganizationServicePrincipalsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ServicePrincipalsServiceListOrganizationServicePrincipalsDefault) IsSer
 // IsCode returns true when this service principals service list organization service principals default response a status code equal to that given
 func (o *ServicePrincipalsServiceListOrganizationServicePrincipalsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the service principals service list organization service principals default response
+func (o *ServicePrincipalsServiceListOrganizationServicePrincipalsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ServicePrincipalsServiceListOrganizationServicePrincipalsDefault) Error() string {

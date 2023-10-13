@@ -169,6 +169,11 @@ func (m *HashicorpCloudIamPrincipal) ContextValidate(ctx context.Context, format
 func (m *HashicorpCloudIamPrincipal) contextValidateGroup(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Group != nil {
+
+		if swag.IsZero(m.Group) { // not required
+			return nil
+		}
+
 		if err := m.Group.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("group")
@@ -185,6 +190,11 @@ func (m *HashicorpCloudIamPrincipal) contextValidateGroup(ctx context.Context, f
 func (m *HashicorpCloudIamPrincipal) contextValidateService(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Service != nil {
+
+		if swag.IsZero(m.Service) { // not required
+			return nil
+		}
+
 		if err := m.Service.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("service")
@@ -201,6 +211,11 @@ func (m *HashicorpCloudIamPrincipal) contextValidateService(ctx context.Context,
 func (m *HashicorpCloudIamPrincipal) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Type != nil {
+
+		if swag.IsZero(m.Type) { // not required
+			return nil
+		}
+
 		if err := m.Type.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("type")
@@ -217,6 +232,11 @@ func (m *HashicorpCloudIamPrincipal) contextValidateType(ctx context.Context, fo
 func (m *HashicorpCloudIamPrincipal) contextValidateUser(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.User != nil {
+
+		if swag.IsZero(m.User) { // not required
+			return nil
+		}
+
 		if err := m.User.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("user")

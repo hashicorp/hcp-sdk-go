@@ -112,6 +112,11 @@ func (m *HashicorpCloudIamListServicePrincipalsResponse) ContextValidate(ctx con
 func (m *HashicorpCloudIamListServicePrincipalsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
@@ -130,6 +135,11 @@ func (m *HashicorpCloudIamListServicePrincipalsResponse) contextValidateServiceP
 	for i := 0; i < len(m.ServicePrincipals); i++ {
 
 		if m.ServicePrincipals[i] != nil {
+
+			if swag.IsZero(m.ServicePrincipals[i]) { // not required
+				return nil
+			}
+
 			if err := m.ServicePrincipals[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("service_principals" + "." + strconv.Itoa(i))

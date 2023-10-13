@@ -143,6 +143,11 @@ func (m *HashicorpCloudIamSSOConfig) ContextValidate(ctx context.Context, format
 func (m *HashicorpCloudIamSSOConfig) contextValidateSaml(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Saml != nil {
+
+		if swag.IsZero(m.Saml) { // not required
+			return nil
+		}
+
 		if err := m.Saml.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("saml")
@@ -159,6 +164,11 @@ func (m *HashicorpCloudIamSSOConfig) contextValidateSaml(ctx context.Context, fo
 func (m *HashicorpCloudIamSSOConfig) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Type != nil {
+
+		if swag.IsZero(m.Type) { // not required
+			return nil
+		}
+
 		if err := m.Type.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("type")

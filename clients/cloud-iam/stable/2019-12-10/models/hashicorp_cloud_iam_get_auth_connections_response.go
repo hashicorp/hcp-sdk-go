@@ -82,6 +82,11 @@ func (m *HashicorpCloudIamGetAuthConnectionsResponse) contextValidateAuthConnect
 	for i := 0; i < len(m.AuthConnections); i++ {
 
 		if m.AuthConnections[i] != nil {
+
+			if swag.IsZero(m.AuthConnections[i]) { // not required
+				return nil
+			}
+
 			if err := m.AuthConnections[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("auth_connections" + "." + strconv.Itoa(i))

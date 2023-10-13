@@ -73,6 +73,11 @@ func (m *HashicorpCloudIamCreateWorkloadIdentityProviderResponse) ContextValidat
 func (m *HashicorpCloudIamCreateWorkloadIdentityProviderResponse) contextValidateProvider(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Provider != nil {
+
+		if swag.IsZero(m.Provider) { // not required
+			return nil
+		}
+
 		if err := m.Provider.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("provider")

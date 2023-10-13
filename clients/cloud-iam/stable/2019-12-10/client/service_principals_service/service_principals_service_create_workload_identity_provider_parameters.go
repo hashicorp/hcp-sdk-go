@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewServicePrincipalsServiceCreateWorkloadIdentityProviderParams creates a new ServicePrincipalsServiceCreateWorkloadIdentityProviderParams object,
@@ -64,7 +62,7 @@ ServicePrincipalsServiceCreateWorkloadIdentityProviderParams contains all the pa
 type ServicePrincipalsServiceCreateWorkloadIdentityProviderParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudIamCreateWorkloadIdentityProviderRequest
+	Body ServicePrincipalsServiceCreateWorkloadIdentityProviderBody
 
 	/* ParentResourceName.
 
@@ -127,13 +125,13 @@ func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderParams) SetHTTPCl
 }
 
 // WithBody adds the body to the service principals service create workload identity provider params
-func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderParams) WithBody(body *models.HashicorpCloudIamCreateWorkloadIdentityProviderRequest) *ServicePrincipalsServiceCreateWorkloadIdentityProviderParams {
+func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderParams) WithBody(body ServicePrincipalsServiceCreateWorkloadIdentityProviderBody) *ServicePrincipalsServiceCreateWorkloadIdentityProviderParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the service principals service create workload identity provider params
-func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderParams) SetBody(body *models.HashicorpCloudIamCreateWorkloadIdentityProviderRequest) {
+func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderParams) SetBody(body ServicePrincipalsServiceCreateWorkloadIdentityProviderBody) {
 	o.Body = body
 }
 
@@ -155,10 +153,8 @@ func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderParams) WriteToRe
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param parent_resource_name

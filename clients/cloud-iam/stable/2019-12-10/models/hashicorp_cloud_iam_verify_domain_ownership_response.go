@@ -80,6 +80,11 @@ func (m *HashicorpCloudIamVerifyDomainOwnershipResponse) ContextValidate(ctx con
 func (m *HashicorpCloudIamVerifyDomainOwnershipResponse) contextValidateReason(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Reason != nil {
+
+		if swag.IsZero(m.Reason) { // not required
+			return nil
+		}
+
 		if err := m.Reason.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("reason")

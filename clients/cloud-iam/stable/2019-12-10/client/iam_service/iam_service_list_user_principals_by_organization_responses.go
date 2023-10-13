@@ -81,6 +81,11 @@ func (o *IamServiceListUserPrincipalsByOrganizationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the iam service list user principals by organization o k response
+func (o *IamServiceListUserPrincipalsByOrganizationOK) Code() int {
+	return 200
+}
+
 func (o *IamServiceListUserPrincipalsByOrganizationOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/user-principals][%d] iamServiceListUserPrincipalsByOrganizationOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type IamServiceListUserPrincipalsByOrganizationDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the iam service list user principals by organization default response
-func (o *IamServiceListUserPrincipalsByOrganizationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this iam service list user principals by organization default response has a 2xx status code
 func (o *IamServiceListUserPrincipalsByOrganizationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *IamServiceListUserPrincipalsByOrganizationDefault) IsServerError() bool
 // IsCode returns true when this iam service list user principals by organization default response a status code equal to that given
 func (o *IamServiceListUserPrincipalsByOrganizationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the iam service list user principals by organization default response
+func (o *IamServiceListUserPrincipalsByOrganizationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *IamServiceListUserPrincipalsByOrganizationDefault) Error() string {

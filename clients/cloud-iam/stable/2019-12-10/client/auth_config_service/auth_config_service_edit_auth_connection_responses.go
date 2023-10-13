@@ -6,11 +6,13 @@ package auth_config_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
@@ -80,6 +82,11 @@ func (o *AuthConfigServiceEditAuthConnectionOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the auth config service edit auth connection o k response
+func (o *AuthConfigServiceEditAuthConnectionOK) Code() int {
+	return 200
+}
+
 func (o *AuthConfigServiceEditAuthConnectionOK) Error() string {
 	return fmt.Sprintf("[PATCH /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceEditAuthConnectionOK  %+v", 200, o.Payload)
 }
@@ -120,11 +127,6 @@ type AuthConfigServiceEditAuthConnectionDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the auth config service edit auth connection default response
-func (o *AuthConfigServiceEditAuthConnectionDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this auth config service edit auth connection default response has a 2xx status code
 func (o *AuthConfigServiceEditAuthConnectionDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,6 +152,11 @@ func (o *AuthConfigServiceEditAuthConnectionDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the auth config service edit auth connection default response
+func (o *AuthConfigServiceEditAuthConnectionDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *AuthConfigServiceEditAuthConnectionDefault) Error() string {
 	return fmt.Sprintf("[PATCH /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_EditAuthConnection default  %+v", o._statusCode, o.Payload)
 }
@@ -171,5 +178,55 @@ func (o *AuthConfigServiceEditAuthConnectionDefault) readResponse(response runti
 		return err
 	}
 
+	return nil
+}
+
+/*
+AuthConfigServiceEditAuthConnectionBody auth config service edit auth connection body
+swagger:model AuthConfigServiceEditAuthConnectionBody
+*/
+type AuthConfigServiceEditAuthConnectionBody struct {
+
+	// client_id is the ID of the client for the connection.
+	ClientID string `json:"client_id,omitempty"`
+
+	// client_secret is the secret for the client above.
+	ClientSecret string `json:"client_secret,omitempty"`
+
+	// email_domain associated with the connection.
+	EmailDomain string `json:"email_domain,omitempty"`
+
+	// issuer is the URL of the identity provider.
+	Issuer string `json:"issuer,omitempty"`
+
+	// update mask
+	UpdateMask string `json:"update_mask,omitempty"`
+}
+
+// Validate validates this auth config service edit auth connection body
+func (o *AuthConfigServiceEditAuthConnectionBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this auth config service edit auth connection body based on context it is used
+func (o *AuthConfigServiceEditAuthConnectionBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *AuthConfigServiceEditAuthConnectionBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *AuthConfigServiceEditAuthConnectionBody) UnmarshalBinary(b []byte) error {
+	var res AuthConfigServiceEditAuthConnectionBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

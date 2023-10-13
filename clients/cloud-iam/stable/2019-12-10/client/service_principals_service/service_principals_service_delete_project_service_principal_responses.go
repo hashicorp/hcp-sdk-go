@@ -81,6 +81,11 @@ func (o *ServicePrincipalsServiceDeleteProjectServicePrincipalOK) IsCode(code in
 	return code == 200
 }
 
+// Code gets the status code for the service principals service delete project service principal o k response
+func (o *ServicePrincipalsServiceDeleteProjectServicePrincipalOK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceDeleteProjectServicePrincipalOK) Error() string {
 	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals/{principal_id}][%d] servicePrincipalsServiceDeleteProjectServicePrincipalOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type ServicePrincipalsServiceDeleteProjectServicePrincipalDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service delete project service principal default response
-func (o *ServicePrincipalsServiceDeleteProjectServicePrincipalDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service delete project service principal default response has a 2xx status code
 func (o *ServicePrincipalsServiceDeleteProjectServicePrincipalDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *ServicePrincipalsServiceDeleteProjectServicePrincipalDefault) IsServerE
 // IsCode returns true when this service principals service delete project service principal default response a status code equal to that given
 func (o *ServicePrincipalsServiceDeleteProjectServicePrincipalDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the service principals service delete project service principal default response
+func (o *ServicePrincipalsServiceDeleteProjectServicePrincipalDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ServicePrincipalsServiceDeleteProjectServicePrincipalDefault) Error() string {

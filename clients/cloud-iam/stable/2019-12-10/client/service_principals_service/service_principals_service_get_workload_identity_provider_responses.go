@@ -81,12 +81,17 @@ func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderOK) IsCode(code int)
 	return code == 200
 }
 
+// Code gets the status code for the service principals service get workload identity provider o k response
+func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderOK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderOK) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/{resource_name}][%d] servicePrincipalsServiceGetWorkloadIdentityProviderOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{resource_name_2}][%d] servicePrincipalsServiceGetWorkloadIdentityProviderOK  %+v", 200, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderOK) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/{resource_name}][%d] servicePrincipalsServiceGetWorkloadIdentityProviderOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{resource_name_2}][%d] servicePrincipalsServiceGetWorkloadIdentityProviderOK  %+v", 200, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderOK) GetPayload() *models.HashicorpCloudIamGetWorkloadIdentityProviderResponse {
@@ -123,11 +128,6 @@ type ServicePrincipalsServiceGetWorkloadIdentityProviderDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service get workload identity provider default response
-func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service get workload identity provider default response has a 2xx status code
 func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,12 +153,17 @@ func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderDefault) IsCode(code
 	return o._statusCode == code
 }
 
+// Code gets the status code for the service principals service get workload identity provider default response
+func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderDefault) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/{resource_name}][%d] ServicePrincipalsService_GetWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{resource_name_2}][%d] ServicePrincipalsService_GetWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderDefault) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/{resource_name}][%d] ServicePrincipalsService_GetWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{resource_name_2}][%d] ServicePrincipalsService_GetWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceGetWorkloadIdentityProviderDefault) GetPayload() *cloud.GoogleRPCStatus {

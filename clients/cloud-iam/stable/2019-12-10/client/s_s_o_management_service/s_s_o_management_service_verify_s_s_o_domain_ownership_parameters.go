@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewSSOManagementServiceVerifySSODomainOwnershipParams creates a new SSOManagementServiceVerifySSODomainOwnershipParams object,
@@ -64,7 +62,7 @@ SSOManagementServiceVerifySSODomainOwnershipParams contains all the parameters t
 type SSOManagementServiceVerifySSODomainOwnershipParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudIamVerifyDomainOwnershipRequest
+	Body SSOManagementServiceVerifySSODomainOwnershipBody
 
 	/* OrganizationID.
 
@@ -127,13 +125,13 @@ func (o *SSOManagementServiceVerifySSODomainOwnershipParams) SetHTTPClient(clien
 }
 
 // WithBody adds the body to the s s o management service verify s s o domain ownership params
-func (o *SSOManagementServiceVerifySSODomainOwnershipParams) WithBody(body *models.HashicorpCloudIamVerifyDomainOwnershipRequest) *SSOManagementServiceVerifySSODomainOwnershipParams {
+func (o *SSOManagementServiceVerifySSODomainOwnershipParams) WithBody(body SSOManagementServiceVerifySSODomainOwnershipBody) *SSOManagementServiceVerifySSODomainOwnershipParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the s s o management service verify s s o domain ownership params
-func (o *SSOManagementServiceVerifySSODomainOwnershipParams) SetBody(body *models.HashicorpCloudIamVerifyDomainOwnershipRequest) {
+func (o *SSOManagementServiceVerifySSODomainOwnershipParams) SetBody(body SSOManagementServiceVerifySSODomainOwnershipBody) {
 	o.Body = body
 }
 
@@ -155,10 +153,8 @@ func (o *SSOManagementServiceVerifySSODomainOwnershipParams) WriteToRequest(r ru
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param organization_id

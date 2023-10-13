@@ -81,6 +81,11 @@ func (o *IamServiceBatchGetPrincipalsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the iam service batch get principals o k response
+func (o *IamServiceBatchGetPrincipalsOK) Code() int {
+	return 200
+}
+
 func (o *IamServiceBatchGetPrincipalsOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/principals][%d] iamServiceBatchGetPrincipalsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type IamServiceBatchGetPrincipalsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the iam service batch get principals default response
-func (o *IamServiceBatchGetPrincipalsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this iam service batch get principals default response has a 2xx status code
 func (o *IamServiceBatchGetPrincipalsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *IamServiceBatchGetPrincipalsDefault) IsServerError() bool {
 // IsCode returns true when this iam service batch get principals default response a status code equal to that given
 func (o *IamServiceBatchGetPrincipalsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the iam service batch get principals default response
+func (o *IamServiceBatchGetPrincipalsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *IamServiceBatchGetPrincipalsDefault) Error() string {

@@ -113,6 +113,11 @@ func (m *HashicorpCloudIamListSSOConfigurationsResponse) contextValidateConfigur
 	for i := 0; i < len(m.Configurations); i++ {
 
 		if m.Configurations[i] != nil {
+
+			if swag.IsZero(m.Configurations[i]) { // not required
+				return nil
+			}
+
 			if err := m.Configurations[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("configurations" + "." + strconv.Itoa(i))
@@ -131,6 +136,11 @@ func (m *HashicorpCloudIamListSSOConfigurationsResponse) contextValidateConfigur
 func (m *HashicorpCloudIamListSSOConfigurationsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")

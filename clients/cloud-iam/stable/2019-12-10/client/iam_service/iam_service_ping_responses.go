@@ -81,6 +81,11 @@ func (o *IamServicePingOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the iam service ping o k response
+func (o *IamServicePingOK) Code() int {
+	return 200
+}
+
 func (o *IamServicePingOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/ping][%d] iamServicePingOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type IamServicePingDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the iam service ping default response
-func (o *IamServicePingDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this iam service ping default response has a 2xx status code
 func (o *IamServicePingDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *IamServicePingDefault) IsServerError() bool {
 // IsCode returns true when this iam service ping default response a status code equal to that given
 func (o *IamServicePingDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the iam service ping default response
+func (o *IamServicePingDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *IamServicePingDefault) Error() string {

@@ -82,6 +82,11 @@ func (m *HashicorpCloudIamGetUserPrincipalsByIDsInOrganizationResponse) contextV
 	for i := 0; i < len(m.UserPrincipals); i++ {
 
 		if m.UserPrincipals[i] != nil {
+
+			if swag.IsZero(m.UserPrincipals[i]) { // not required
+				return nil
+			}
+
 			if err := m.UserPrincipals[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("user_principals" + "." + strconv.Itoa(i))

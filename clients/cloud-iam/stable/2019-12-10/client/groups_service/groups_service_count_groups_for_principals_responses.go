@@ -81,6 +81,11 @@ func (o *GroupsServiceCountGroupsForPrincipalsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the groups service count groups for principals o k response
+func (o *GroupsServiceCountGroupsForPrincipalsOK) Code() int {
+	return 200
+}
+
 func (o *GroupsServiceCountGroupsForPrincipalsOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count-for-principals][%d] groupsServiceCountGroupsForPrincipalsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GroupsServiceCountGroupsForPrincipalsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the groups service count groups for principals default response
-func (o *GroupsServiceCountGroupsForPrincipalsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this groups service count groups for principals default response has a 2xx status code
 func (o *GroupsServiceCountGroupsForPrincipalsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GroupsServiceCountGroupsForPrincipalsDefault) IsServerError() bool {
 // IsCode returns true when this groups service count groups for principals default response a status code equal to that given
 func (o *GroupsServiceCountGroupsForPrincipalsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the groups service count groups for principals default response
+func (o *GroupsServiceCountGroupsForPrincipalsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GroupsServiceCountGroupsForPrincipalsDefault) Error() string {

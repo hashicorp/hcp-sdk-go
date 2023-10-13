@@ -124,6 +124,11 @@ func (m *HashicorpCloudIamUserPrincipal) ContextValidate(ctx context.Context, fo
 func (m *HashicorpCloudIamUserPrincipal) contextValidateIdentityType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.IdentityType != nil {
+
+		if swag.IsZero(m.IdentityType) { // not required
+			return nil
+		}
+
 		if err := m.IdentityType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("identity_type")
@@ -142,6 +147,11 @@ func (m *HashicorpCloudIamUserPrincipal) contextValidateIdentityTypes(ctx contex
 	for i := 0; i < len(m.IdentityTypes); i++ {
 
 		if m.IdentityTypes[i] != nil {
+
+			if swag.IsZero(m.IdentityTypes[i]) { // not required
+				return nil
+			}
+
 			if err := m.IdentityTypes[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("identity_types" + "." + strconv.Itoa(i))

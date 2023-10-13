@@ -118,6 +118,11 @@ func (m *HashicorpCloudIamGetProjectServicePrincipalResponse) contextValidateKey
 	for i := 0; i < len(m.Keys); i++ {
 
 		if m.Keys[i] != nil {
+
+			if swag.IsZero(m.Keys[i]) { // not required
+				return nil
+			}
+
 			if err := m.Keys[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("keys" + "." + strconv.Itoa(i))
@@ -136,6 +141,11 @@ func (m *HashicorpCloudIamGetProjectServicePrincipalResponse) contextValidateKey
 func (m *HashicorpCloudIamGetProjectServicePrincipalResponse) contextValidateServicePrincipal(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ServicePrincipal != nil {
+
+		if swag.IsZero(m.ServicePrincipal) { // not required
+			return nil
+		}
+
 		if err := m.ServicePrincipal.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("service_principal")

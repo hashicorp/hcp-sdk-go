@@ -82,6 +82,11 @@ func (m *HashicorpCloudIamCountGroupsForPrincipalsResponse) contextValidatePrinc
 	for i := 0; i < len(m.PrincipalsCounts); i++ {
 
 		if m.PrincipalsCounts[i] != nil {
+
+			if swag.IsZero(m.PrincipalsCounts[i]) { // not required
+				return nil
+			}
+
 			if err := m.PrincipalsCounts[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("principals_counts" + "." + strconv.Itoa(i))

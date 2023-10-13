@@ -82,6 +82,11 @@ func (m *HashicorpCloudIamCountMembersForGroupsResponse) contextValidateGroupsCo
 	for i := 0; i < len(m.GroupsCounts); i++ {
 
 		if m.GroupsCounts[i] != nil {
+
+			if swag.IsZero(m.GroupsCounts[i]) { // not required
+				return nil
+			}
+
 			if err := m.GroupsCounts[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("groups_counts" + "." + strconv.Itoa(i))

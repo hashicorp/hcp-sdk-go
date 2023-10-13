@@ -6,11 +6,13 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +83,11 @@ func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK) IsCode
 	return code == 200
 }
 
+// Code gets the status code for the service principals service create organization service principal key o k response
+func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/service-principal-keys][%d] servicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK  %+v", 200, o.Payload)
 }
@@ -123,11 +130,6 @@ type ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault struct
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service create organization service principal key default response
-func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service create organization service principal key default response has a 2xx status code
 func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +155,11 @@ func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault) I
 	return o._statusCode == code
 }
 
+// Code gets the status code for the service principals service create organization service principal key default response
+func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/service-principal-keys][%d] ServicePrincipalsService_CreateOrganizationServicePrincipalKey default  %+v", o._statusCode, o.Payload)
 }
@@ -174,5 +181,45 @@ func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault) r
 		return err
 	}
 
+	return nil
+}
+
+/*
+ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyBody CreateOrganizationServicePrincipalKeyRequest is the request message used when creating a
+// service principal key for a principal on organization level.
+swagger:model ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyBody
+*/
+type ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyBody struct {
+
+	// principal_id is the ID of the service principal for which the new service
+	// principal key should be created.
+	PrincipalID string `json:"principal_id,omitempty"`
+}
+
+// Validate validates this service principals service create organization service principal key body
+func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this service principals service create organization service principal key body based on context it is used
+func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyBody) UnmarshalBinary(b []byte) error {
+	var res ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

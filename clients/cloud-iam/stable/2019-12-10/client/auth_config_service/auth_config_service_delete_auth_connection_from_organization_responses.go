@@ -80,6 +80,11 @@ func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationOK) IsCode(code in
 	return code == 200
 }
 
+// Code gets the status code for the auth config service delete auth connection from organization o k response
+func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationOK) Code() int {
+	return 200
+}
+
 func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationOK) Error() string {
 	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceDeleteAuthConnectionFromOrganizationOK  %+v", 200, o.Payload)
 }
@@ -120,11 +125,6 @@ type AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the auth config service delete auth connection from organization default response
-func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this auth config service delete auth connection from organization default response has a 2xx status code
 func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -148,6 +148,11 @@ func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault) IsServerE
 // IsCode returns true when this auth config service delete auth connection from organization default response a status code equal to that given
 func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the auth config service delete auth connection from organization default response
+func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault) Error() string {

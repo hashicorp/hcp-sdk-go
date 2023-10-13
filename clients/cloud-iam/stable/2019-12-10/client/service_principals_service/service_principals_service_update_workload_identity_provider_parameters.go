@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewServicePrincipalsServiceUpdateWorkloadIdentityProviderParams creates a new ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams object,
@@ -63,11 +61,11 @@ ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams contains all the pa
 */
 type ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams struct {
 
-	/* Body.
+	/* Provider.
 
 	   provider is the workload identity provider to update.
 	*/
-	Body *models.HashicorpCloudIamWorkloadIdentityProvider
+	Provider ServicePrincipalsServiceUpdateWorkloadIdentityProviderBody
 
 	/* ProviderResourceName.
 
@@ -135,15 +133,15 @@ func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams) SetHTTPCl
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the service principals service update workload identity provider params
-func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams) WithBody(body *models.HashicorpCloudIamWorkloadIdentityProvider) *ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams {
-	o.SetBody(body)
+// WithProvider adds the provider to the service principals service update workload identity provider params
+func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams) WithProvider(provider ServicePrincipalsServiceUpdateWorkloadIdentityProviderBody) *ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams {
+	o.SetProvider(provider)
 	return o
 }
 
-// SetBody adds the body to the service principals service update workload identity provider params
-func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams) SetBody(body *models.HashicorpCloudIamWorkloadIdentityProvider) {
-	o.Body = body
+// SetProvider adds the provider to the service principals service update workload identity provider params
+func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams) SetProvider(provider ServicePrincipalsServiceUpdateWorkloadIdentityProviderBody) {
+	o.Provider = provider
 }
 
 // WithProviderResourceName adds the providerResourceName to the service principals service update workload identity provider params
@@ -175,10 +173,8 @@ func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderParams) WriteToRe
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Provider); err != nil {
+		return err
 	}
 
 	// path param provider.resource_name

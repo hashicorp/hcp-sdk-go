@@ -6,11 +6,14 @@ package iam_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +84,11 @@ func (o *IamServiceSearchPrincipalsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the iam service search principals o k response
+func (o *IamServiceSearchPrincipalsOK) Code() int {
+	return 200
+}
+
 func (o *IamServiceSearchPrincipalsOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/principals/search][%d] iamServiceSearchPrincipalsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +131,6 @@ type IamServiceSearchPrincipalsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the iam service search principals default response
-func (o *IamServiceSearchPrincipalsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this iam service search principals default response has a 2xx status code
 func (o *IamServiceSearchPrincipalsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +156,11 @@ func (o *IamServiceSearchPrincipalsDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the iam service search principals default response
+func (o *IamServiceSearchPrincipalsDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *IamServiceSearchPrincipalsDefault) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/principals/search][%d] IamService_SearchPrincipals default  %+v", o._statusCode, o.Payload)
 }
@@ -174,5 +182,152 @@ func (o *IamServiceSearchPrincipalsDefault) readResponse(response runtime.Client
 		return err
 	}
 
+	return nil
+}
+
+/*
+IamServiceSearchPrincipalsBody SearchPrincipalsRequest is the request to the SearchPrincipals rpc.
+swagger:model IamServiceSearchPrincipalsBody
+*/
+type IamServiceSearchPrincipalsBody struct {
+
+	// filter contains optional fields to filter the search results down.
+	Filter *models.HashicorpCloudIamSearchPrincipalsFilter `json:"filter,omitempty"`
+
+	// pagination contains page data.
+	Pagination *cloud.HashicorpCloudCommonPaginationRequest `json:"pagination,omitempty"`
+}
+
+// Validate validates this iam service search principals body
+func (o *IamServiceSearchPrincipalsBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateFilter(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validatePagination(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *IamServiceSearchPrincipalsBody) validateFilter(formats strfmt.Registry) error {
+	if swag.IsZero(o.Filter) { // not required
+		return nil
+	}
+
+	if o.Filter != nil {
+		if err := o.Filter.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "filter")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "filter")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *IamServiceSearchPrincipalsBody) validatePagination(formats strfmt.Registry) error {
+	if swag.IsZero(o.Pagination) { // not required
+		return nil
+	}
+
+	if o.Pagination != nil {
+		if err := o.Pagination.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "pagination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this iam service search principals body based on the context it is used
+func (o *IamServiceSearchPrincipalsBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateFilter(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePagination(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *IamServiceSearchPrincipalsBody) contextValidateFilter(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Filter != nil {
+
+		if swag.IsZero(o.Filter) { // not required
+			return nil
+		}
+
+		if err := o.Filter.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "filter")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "filter")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *IamServiceSearchPrincipalsBody) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Pagination != nil {
+
+		if swag.IsZero(o.Pagination) { // not required
+			return nil
+		}
+
+		if err := o.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "pagination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *IamServiceSearchPrincipalsBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *IamServiceSearchPrincipalsBody) UnmarshalBinary(b []byte) error {
+	var res IamServiceSearchPrincipalsBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

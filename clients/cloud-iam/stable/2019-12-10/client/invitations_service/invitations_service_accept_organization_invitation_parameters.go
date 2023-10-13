@@ -63,7 +63,10 @@ InvitationsServiceAcceptOrganizationInvitationParams contains all the parameters
 */
 type InvitationsServiceAcceptOrganizationInvitationParams struct {
 
-	// Body.
+	/* Body.
+
+	   AcceptOrganizationInvitationRequest is a request to accept an organization invitation.
+	*/
 	Body *models.HashicorpCloudIamAcceptOrganizationInvitationRequest
 
 	timeout    time.Duration

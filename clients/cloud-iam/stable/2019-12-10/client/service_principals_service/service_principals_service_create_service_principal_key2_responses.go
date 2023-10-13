@@ -81,12 +81,17 @@ func (o *ServicePrincipalsServiceCreateServicePrincipalKey2OK) IsCode(code int) 
 	return code == 200
 }
 
+// Code gets the status code for the service principals service create service principal key2 o k response
+func (o *ServicePrincipalsServiceCreateServicePrincipalKey2OK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2OK) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/keys][%d] servicePrincipalsServiceCreateServicePrincipalKey2OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] servicePrincipalsServiceCreateServicePrincipalKey2OK  %+v", 200, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2OK) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/keys][%d] servicePrincipalsServiceCreateServicePrincipalKey2OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] servicePrincipalsServiceCreateServicePrincipalKey2OK  %+v", 200, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2OK) GetPayload() *models.HashicorpCloudIamCreateServicePrincipalKeyResponse {
@@ -123,11 +128,6 @@ type ServicePrincipalsServiceCreateServicePrincipalKey2Default struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service create service principal key2 default response
-func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service create service principal key2 default response has a 2xx status code
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,12 +153,17 @@ func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) IsCode(code 
 	return o._statusCode == code
 }
 
+// Code gets the status code for the service principals service create service principal key2 default response
+func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) Code() int {
+	return o._statusCode
+}
+
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/keys][%d] ServicePrincipalsService_CreateServicePrincipalKey2 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] ServicePrincipalsService_CreateServicePrincipalKey2 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/keys][%d] ServicePrincipalsService_CreateServicePrincipalKey2 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] ServicePrincipalsService_CreateServicePrincipalKey2 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) GetPayload() *cloud.GoogleRPCStatus {

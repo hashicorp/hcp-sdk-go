@@ -6,11 +6,13 @@ package auth_config_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +83,11 @@ func (o *AuthConfigServiceCreateAuthConnectionOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the auth config service create auth connection o k response
+func (o *AuthConfigServiceCreateAuthConnectionOK) Code() int {
+	return 200
+}
+
 func (o *AuthConfigServiceCreateAuthConnectionOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceCreateAuthConnectionOK  %+v", 200, o.Payload)
 }
@@ -123,11 +130,6 @@ type AuthConfigServiceCreateAuthConnectionDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the auth config service create auth connection default response
-func (o *AuthConfigServiceCreateAuthConnectionDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this auth config service create auth connection default response has a 2xx status code
 func (o *AuthConfigServiceCreateAuthConnectionDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +155,11 @@ func (o *AuthConfigServiceCreateAuthConnectionDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the auth config service create auth connection default response
+func (o *AuthConfigServiceCreateAuthConnectionDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *AuthConfigServiceCreateAuthConnectionDefault) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_CreateAuthConnection default  %+v", o._statusCode, o.Payload)
 }
@@ -174,5 +181,52 @@ func (o *AuthConfigServiceCreateAuthConnectionDefault) readResponse(response run
 		return err
 	}
 
+	return nil
+}
+
+/*
+AuthConfigServiceCreateAuthConnectionBody CreateAuthConnectionRequest creates an AuthConnection.
+swagger:model AuthConfigServiceCreateAuthConnectionBody
+*/
+type AuthConfigServiceCreateAuthConnectionBody struct {
+
+	// client_id is the ID of the client for the connection.
+	ClientID string `json:"client_id,omitempty"`
+
+	// client_secret is the secret for the client above.
+	ClientSecret string `json:"client_secret,omitempty"`
+
+	// email_domain associated with the of the connection.
+	EmailDomain string `json:"email_domain,omitempty"`
+
+	// issuer is the URL of the identity provider.
+	Issuer string `json:"issuer,omitempty"`
+}
+
+// Validate validates this auth config service create auth connection body
+func (o *AuthConfigServiceCreateAuthConnectionBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this auth config service create auth connection body based on context it is used
+func (o *AuthConfigServiceCreateAuthConnectionBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *AuthConfigServiceCreateAuthConnectionBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *AuthConfigServiceCreateAuthConnectionBody) UnmarshalBinary(b []byte) error {
+	var res AuthConfigServiceCreateAuthConnectionBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

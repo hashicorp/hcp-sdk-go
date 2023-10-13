@@ -7,5 +7,7 @@ package models
 
 // HashicorpCloudIamCreateOrganizationInvitationsResponse CreateOrganizationInvitationsResponse is a response for a created organization invitation.
 //
+// TODO: add list of the invitations that have been created.
+//
 // swagger:model hashicorp.cloud.iam.CreateOrganizationInvitationsResponse
 type HashicorpCloudIamCreateOrganizationInvitationsResponse interface{}

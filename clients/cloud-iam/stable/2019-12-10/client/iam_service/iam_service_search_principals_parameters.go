@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewIamServiceSearchPrincipalsParams creates a new IamServiceSearchPrincipalsParams object,
@@ -64,7 +62,7 @@ IamServiceSearchPrincipalsParams contains all the parameters to send to the API 
 type IamServiceSearchPrincipalsParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudIamSearchPrincipalsRequest
+	Body IamServiceSearchPrincipalsBody
 
 	/* OrganizationID.
 
@@ -127,13 +125,13 @@ func (o *IamServiceSearchPrincipalsParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the iam service search principals params
-func (o *IamServiceSearchPrincipalsParams) WithBody(body *models.HashicorpCloudIamSearchPrincipalsRequest) *IamServiceSearchPrincipalsParams {
+func (o *IamServiceSearchPrincipalsParams) WithBody(body IamServiceSearchPrincipalsBody) *IamServiceSearchPrincipalsParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the iam service search principals params
-func (o *IamServiceSearchPrincipalsParams) SetBody(body *models.HashicorpCloudIamSearchPrincipalsRequest) {
+func (o *IamServiceSearchPrincipalsParams) SetBody(body IamServiceSearchPrincipalsBody) {
 	o.Body = body
 }
 
@@ -155,10 +153,8 @@ func (o *IamServiceSearchPrincipalsParams) WriteToRequest(r runtime.ClientReques
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param organization_id

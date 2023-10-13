@@ -6,11 +6,13 @@ package groups_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +83,11 @@ func (o *GroupsServiceCreateGroupOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the groups service create group o k response
+func (o *GroupsServiceCreateGroupOK) Code() int {
+	return 200
+}
+
 func (o *GroupsServiceCreateGroupOK) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] groupsServiceCreateGroupOK  %+v", 200, o.Payload)
 }
@@ -123,11 +130,6 @@ type GroupsServiceCreateGroupDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the groups service create group default response
-func (o *GroupsServiceCreateGroupDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this groups service create group default response has a 2xx status code
 func (o *GroupsServiceCreateGroupDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +155,11 @@ func (o *GroupsServiceCreateGroupDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the groups service create group default response
+func (o *GroupsServiceCreateGroupDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *GroupsServiceCreateGroupDefault) Error() string {
 	return fmt.Sprintf("[POST /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] GroupsService_CreateGroup default  %+v", o._statusCode, o.Payload)
 }
@@ -174,5 +181,49 @@ func (o *GroupsServiceCreateGroupDefault) readResponse(response runtime.ClientRe
 		return err
 	}
 
+	return nil
+}
+
+/*
+GroupsServiceCreateGroupBody groups service create group body
+swagger:model GroupsServiceCreateGroupBody
+*/
+type GroupsServiceCreateGroupBody struct {
+
+	// description is a description of the group.
+	Description string `json:"description,omitempty"`
+
+	// member_principal_ids is a list of the ids of the principals that should belong to this group.
+	MemberPrincipalIds []string `json:"member_principal_ids"`
+
+	// name is the name part of the group resource_name.
+	Name string `json:"name,omitempty"`
+}
+
+// Validate validates this groups service create group body
+func (o *GroupsServiceCreateGroupBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this groups service create group body based on context it is used
+func (o *GroupsServiceCreateGroupBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *GroupsServiceCreateGroupBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *GroupsServiceCreateGroupBody) UnmarshalBinary(b []byte) error {
+	var res GroupsServiceCreateGroupBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

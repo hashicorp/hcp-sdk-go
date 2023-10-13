@@ -81,6 +81,11 @@ func (o *SSOManagementServiceDeleteSSOConfigurationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the s s o management service delete s s o configuration o k response
+func (o *SSOManagementServiceDeleteSSOConfigurationOK) Code() int {
+	return 200
+}
+
 func (o *SSOManagementServiceDeleteSSOConfigurationOK) Error() string {
 	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceDeleteSSOConfigurationOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type SSOManagementServiceDeleteSSOConfigurationDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the s s o management service delete s s o configuration default response
-func (o *SSOManagementServiceDeleteSSOConfigurationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this s s o management service delete s s o configuration default response has a 2xx status code
 func (o *SSOManagementServiceDeleteSSOConfigurationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *SSOManagementServiceDeleteSSOConfigurationDefault) IsServerError() bool
 // IsCode returns true when this s s o management service delete s s o configuration default response a status code equal to that given
 func (o *SSOManagementServiceDeleteSSOConfigurationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the s s o management service delete s s o configuration default response
+func (o *SSOManagementServiceDeleteSSOConfigurationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *SSOManagementServiceDeleteSSOConfigurationDefault) Error() string {

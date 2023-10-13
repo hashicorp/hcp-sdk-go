@@ -81,12 +81,17 @@ func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderOK) IsCode(code i
 	return code == 200
 }
 
+// Code gets the status code for the service principals service delete workload identity provider o k response
+func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderOK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderOK) Error() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name}][%d] servicePrincipalsServiceDeleteWorkloadIdentityProviderOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_4}][%d] servicePrincipalsServiceDeleteWorkloadIdentityProviderOK  %+v", 200, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderOK) String() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name}][%d] servicePrincipalsServiceDeleteWorkloadIdentityProviderOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_4}][%d] servicePrincipalsServiceDeleteWorkloadIdentityProviderOK  %+v", 200, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderOK) GetPayload() *models.HashicorpCloudIamDeleteWorkloadIdentityProviderResponse {
@@ -123,11 +128,6 @@ type ServicePrincipalsServiceDeleteWorkloadIdentityProviderDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service delete workload identity provider default response
-func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service delete workload identity provider default response has a 2xx status code
 func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,12 +153,17 @@ func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderDefault) IsCode(c
 	return o._statusCode == code
 }
 
+// Code gets the status code for the service principals service delete workload identity provider default response
+func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderDefault) Error() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name}][%d] ServicePrincipalsService_DeleteWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_4}][%d] ServicePrincipalsService_DeleteWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderDefault) String() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name}][%d] ServicePrincipalsService_DeleteWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_4}][%d] ServicePrincipalsService_DeleteWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteWorkloadIdentityProviderDefault) GetPayload() *cloud.GoogleRPCStatus {

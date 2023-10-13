@@ -72,6 +72,11 @@ func (m *HashicorpCloudIamAcceptOrganizationInvitationResponse) ContextValidate(
 func (m *HashicorpCloudIamAcceptOrganizationInvitationResponse) contextValidateInvitation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Invitation != nil {
+
+		if swag.IsZero(m.Invitation) { // not required
+			return nil
+		}
+
 		if err := m.Invitation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("invitation")

@@ -111,6 +111,11 @@ func (m *HashicorpCloudIamSearchPrincipalsResponse) ContextValidate(ctx context.
 func (m *HashicorpCloudIamSearchPrincipalsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
@@ -129,6 +134,11 @@ func (m *HashicorpCloudIamSearchPrincipalsResponse) contextValidatePrincipals(ct
 	for i := 0; i < len(m.Principals); i++ {
 
 		if m.Principals[i] != nil {
+
+			if swag.IsZero(m.Principals[i]) { // not required
+				return nil
+			}
+
 			if err := m.Principals[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("principals" + "." + strconv.Itoa(i))

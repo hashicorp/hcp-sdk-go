@@ -6,11 +6,14 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +84,11 @@ func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderOK) IsCode(code i
 	return code == 200
 }
 
+// Code gets the status code for the service principals service create workload identity provider o k response
+func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderOK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderOK) Error() string {
 	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] servicePrincipalsServiceCreateWorkloadIdentityProviderOK  %+v", 200, o.Payload)
 }
@@ -123,11 +131,6 @@ type ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service create workload identity provider default response
-func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service create workload identity provider default response has a 2xx status code
 func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +156,11 @@ func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault) IsCode(c
 	return o._statusCode == code
 }
 
+// Code gets the status code for the service principals service create workload identity provider default response
+func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault) Error() string {
 	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] ServicePrincipalsService_CreateWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
 }
@@ -174,5 +182,105 @@ func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault) readResp
 		return err
 	}
 
+	return nil
+}
+
+/*
+ServicePrincipalsServiceCreateWorkloadIdentityProviderBody CreateWorkloadIdentityProviderRequest is the request message used when
+// creating a workload identity provider.
+swagger:model ServicePrincipalsServiceCreateWorkloadIdentityProviderBody
+*/
+type ServicePrincipalsServiceCreateWorkloadIdentityProviderBody struct {
+
+	// name is the name of the workload identity provider to be created.
+	Name string `json:"name,omitempty"`
+
+	// provider is the workload identity provider to create.
+	Provider *models.HashicorpCloudIamWorkloadIdentityProvider `json:"provider,omitempty"`
+}
+
+// Validate validates this service principals service create workload identity provider body
+func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateProvider(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderBody) validateProvider(formats strfmt.Registry) error {
+	if swag.IsZero(o.Provider) { // not required
+		return nil
+	}
+
+	if o.Provider != nil {
+		if err := o.Provider.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "provider")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "provider")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this service principals service create workload identity provider body based on the context it is used
+func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateProvider(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderBody) contextValidateProvider(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Provider != nil {
+
+		if swag.IsZero(o.Provider) { // not required
+			return nil
+		}
+
+		if err := o.Provider.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "provider")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "provider")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderBody) UnmarshalBinary(b []byte) error {
+	var res ServicePrincipalsServiceCreateWorkloadIdentityProviderBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

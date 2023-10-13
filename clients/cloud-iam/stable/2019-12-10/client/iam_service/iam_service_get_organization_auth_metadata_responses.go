@@ -81,6 +81,11 @@ func (o *IamServiceGetOrganizationAuthMetadataOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the iam service get organization auth metadata o k response
+func (o *IamServiceGetOrganizationAuthMetadataOK) Code() int {
+	return 200
+}
+
 func (o *IamServiceGetOrganizationAuthMetadataOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth-metadata][%d] iamServiceGetOrganizationAuthMetadataOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type IamServiceGetOrganizationAuthMetadataDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the iam service get organization auth metadata default response
-func (o *IamServiceGetOrganizationAuthMetadataDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this iam service get organization auth metadata default response has a 2xx status code
 func (o *IamServiceGetOrganizationAuthMetadataDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *IamServiceGetOrganizationAuthMetadataDefault) IsServerError() bool {
 // IsCode returns true when this iam service get organization auth metadata default response a status code equal to that given
 func (o *IamServiceGetOrganizationAuthMetadataDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the iam service get organization auth metadata default response
+func (o *IamServiceGetOrganizationAuthMetadataDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *IamServiceGetOrganizationAuthMetadataDefault) Error() string {

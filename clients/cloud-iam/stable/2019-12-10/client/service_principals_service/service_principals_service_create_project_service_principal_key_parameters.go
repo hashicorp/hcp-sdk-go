@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewServicePrincipalsServiceCreateProjectServicePrincipalKeyParams creates a new ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams object,
@@ -64,7 +62,7 @@ ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams contains all the 
 type ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudIamCreateProjectServicePrincipalKeyRequest
+	Body ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody
 
 	/* OrganizationID.
 
@@ -136,13 +134,13 @@ func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams) SetHTTP
 }
 
 // WithBody adds the body to the service principals service create project service principal key params
-func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams) WithBody(body *models.HashicorpCloudIamCreateProjectServicePrincipalKeyRequest) *ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams {
+func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams) WithBody(body ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody) *ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the service principals service create project service principal key params
-func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams) SetBody(body *models.HashicorpCloudIamCreateProjectServicePrincipalKeyRequest) {
+func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams) SetBody(body ServicePrincipalsServiceCreateProjectServicePrincipalKeyBody) {
 	o.Body = body
 }
 
@@ -175,10 +173,8 @@ func (o *ServicePrincipalsServiceCreateProjectServicePrincipalKeyParams) WriteTo
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param organization_id

@@ -82,6 +82,11 @@ func (m *HashicorpCloudIamSearchPrincipalsResult) ContextValidate(ctx context.Co
 func (m *HashicorpCloudIamSearchPrincipalsResult) contextValidatePrincipalType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PrincipalType != nil {
+
+		if swag.IsZero(m.PrincipalType) { // not required
+			return nil
+		}
+
 		if err := m.PrincipalType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("principal_type")

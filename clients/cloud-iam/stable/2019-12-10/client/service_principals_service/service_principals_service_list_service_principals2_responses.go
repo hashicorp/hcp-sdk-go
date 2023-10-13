@@ -81,12 +81,17 @@ func (o *ServicePrincipalsServiceListServicePrincipals2OK) IsCode(code int) bool
 	return code == 200
 }
 
+// Code gets the status code for the service principals service list service principals2 o k response
+func (o *ServicePrincipalsServiceListServicePrincipals2OK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceListServicePrincipals2OK) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name}/service-principals][%d] servicePrincipalsServiceListServicePrincipals2OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] servicePrincipalsServiceListServicePrincipals2OK  %+v", 200, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceListServicePrincipals2OK) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name}/service-principals][%d] servicePrincipalsServiceListServicePrincipals2OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] servicePrincipalsServiceListServicePrincipals2OK  %+v", 200, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceListServicePrincipals2OK) GetPayload() *models.HashicorpCloudIamListServicePrincipalsResponse {
@@ -123,11 +128,6 @@ type ServicePrincipalsServiceListServicePrincipals2Default struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service list service principals2 default response
-func (o *ServicePrincipalsServiceListServicePrincipals2Default) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service list service principals2 default response has a 2xx status code
 func (o *ServicePrincipalsServiceListServicePrincipals2Default) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,12 +153,17 @@ func (o *ServicePrincipalsServiceListServicePrincipals2Default) IsCode(code int)
 	return o._statusCode == code
 }
 
+// Code gets the status code for the service principals service list service principals2 default response
+func (o *ServicePrincipalsServiceListServicePrincipals2Default) Code() int {
+	return o._statusCode
+}
+
 func (o *ServicePrincipalsServiceListServicePrincipals2Default) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name}/service-principals][%d] ServicePrincipalsService_ListServicePrincipals2 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] ServicePrincipalsService_ListServicePrincipals2 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceListServicePrincipals2Default) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name}/service-principals][%d] ServicePrincipalsService_ListServicePrincipals2 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] ServicePrincipalsService_ListServicePrincipals2 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ServicePrincipalsServiceListServicePrincipals2Default) GetPayload() *cloud.GoogleRPCStatus {

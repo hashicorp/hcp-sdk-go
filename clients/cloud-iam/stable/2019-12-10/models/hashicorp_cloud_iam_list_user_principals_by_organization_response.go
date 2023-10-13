@@ -112,6 +112,11 @@ func (m *HashicorpCloudIamListUserPrincipalsByOrganizationResponse) ContextValid
 func (m *HashicorpCloudIamListUserPrincipalsByOrganizationResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
@@ -130,6 +135,11 @@ func (m *HashicorpCloudIamListUserPrincipalsByOrganizationResponse) contextValid
 	for i := 0; i < len(m.UserPrincipals); i++ {
 
 		if m.UserPrincipals[i] != nil {
+
+			if swag.IsZero(m.UserPrincipals[i]) { // not required
+				return nil
+			}
+
 			if err := m.UserPrincipals[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("user_principals" + "." + strconv.Itoa(i))

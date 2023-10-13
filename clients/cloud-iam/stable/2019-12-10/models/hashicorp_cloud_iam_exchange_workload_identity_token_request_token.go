@@ -79,6 +79,11 @@ func (m *HashicorpCloudIamExchangeWorkloadIdentityTokenRequestToken) ContextVali
 func (m *HashicorpCloudIamExchangeWorkloadIdentityTokenRequestToken) contextValidateAwsGetCallerIDToken(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AwsGetCallerIDToken != nil {
+
+		if swag.IsZero(m.AwsGetCallerIDToken) { // not required
+			return nil
+		}
+
 		if err := m.AwsGetCallerIDToken.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_get_caller_id_token")

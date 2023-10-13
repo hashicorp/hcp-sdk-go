@@ -81,6 +81,11 @@ func (o *SSOManagementServiceListSSOConfigurationsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the s s o management service list s s o configurations o k response
+func (o *SSOManagementServiceListSSOConfigurationsOK) Code() int {
+	return 200
+}
+
 func (o *SSOManagementServiceListSSOConfigurationsOK) Error() string {
 	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-configurations][%d] sSOManagementServiceListSSOConfigurationsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type SSOManagementServiceListSSOConfigurationsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the s s o management service list s s o configurations default response
-func (o *SSOManagementServiceListSSOConfigurationsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this s s o management service list s s o configurations default response has a 2xx status code
 func (o *SSOManagementServiceListSSOConfigurationsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *SSOManagementServiceListSSOConfigurationsDefault) IsServerError() bool 
 // IsCode returns true when this s s o management service list s s o configurations default response a status code equal to that given
 func (o *SSOManagementServiceListSSOConfigurationsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the s s o management service list s s o configurations default response
+func (o *SSOManagementServiceListSSOConfigurationsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *SSOManagementServiceListSSOConfigurationsDefault) Error() string {

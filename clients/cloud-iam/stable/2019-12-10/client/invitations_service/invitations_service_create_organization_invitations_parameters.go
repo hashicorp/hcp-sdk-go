@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 )
 
 // NewInvitationsServiceCreateOrganizationInvitationsParams creates a new InvitationsServiceCreateOrganizationInvitationsParams object,
@@ -64,7 +62,7 @@ InvitationsServiceCreateOrganizationInvitationsParams contains all the parameter
 type InvitationsServiceCreateOrganizationInvitationsParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudIamCreateOrganizationInvitationsRequest
+	Body InvitationsServiceCreateOrganizationInvitationsBody
 
 	/* OrganizationID.
 
@@ -127,13 +125,13 @@ func (o *InvitationsServiceCreateOrganizationInvitationsParams) SetHTTPClient(cl
 }
 
 // WithBody adds the body to the invitations service create organization invitations params
-func (o *InvitationsServiceCreateOrganizationInvitationsParams) WithBody(body *models.HashicorpCloudIamCreateOrganizationInvitationsRequest) *InvitationsServiceCreateOrganizationInvitationsParams {
+func (o *InvitationsServiceCreateOrganizationInvitationsParams) WithBody(body InvitationsServiceCreateOrganizationInvitationsBody) *InvitationsServiceCreateOrganizationInvitationsParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the invitations service create organization invitations params
-func (o *InvitationsServiceCreateOrganizationInvitationsParams) SetBody(body *models.HashicorpCloudIamCreateOrganizationInvitationsRequest) {
+func (o *InvitationsServiceCreateOrganizationInvitationsParams) SetBody(body InvitationsServiceCreateOrganizationInvitationsBody) {
 	o.Body = body
 }
 
@@ -155,10 +153,8 @@ func (o *InvitationsServiceCreateOrganizationInvitationsParams) WriteToRequest(r
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param organization_id

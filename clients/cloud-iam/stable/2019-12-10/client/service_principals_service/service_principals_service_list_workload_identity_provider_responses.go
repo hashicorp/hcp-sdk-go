@@ -81,6 +81,11 @@ func (o *ServicePrincipalsServiceListWorkloadIdentityProviderOK) IsCode(code int
 	return code == 200
 }
 
+// Code gets the status code for the service principals service list workload identity provider o k response
+func (o *ServicePrincipalsServiceListWorkloadIdentityProviderOK) Code() int {
+	return 200
+}
+
 func (o *ServicePrincipalsServiceListWorkloadIdentityProviderOK) Error() string {
 	return fmt.Sprintf("[GET /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] servicePrincipalsServiceListWorkloadIdentityProviderOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ServicePrincipalsServiceListWorkloadIdentityProviderDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the service principals service list workload identity provider default response
-func (o *ServicePrincipalsServiceListWorkloadIdentityProviderDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this service principals service list workload identity provider default response has a 2xx status code
 func (o *ServicePrincipalsServiceListWorkloadIdentityProviderDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ServicePrincipalsServiceListWorkloadIdentityProviderDefault) IsServerEr
 // IsCode returns true when this service principals service list workload identity provider default response a status code equal to that given
 func (o *ServicePrincipalsServiceListWorkloadIdentityProviderDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the service principals service list workload identity provider default response
+func (o *ServicePrincipalsServiceListWorkloadIdentityProviderDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ServicePrincipalsServiceListWorkloadIdentityProviderDefault) Error() string {
