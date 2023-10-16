@@ -140,9 +140,9 @@ func jsonToCache(rawData []byte) (*Cache, error) {
 		return nil, errors.New("failed to get cache access token")
 	}
 
-	if cacheFromJSON.RefreshToken == "" {
-		return nil, errors.New("failed to get cache refresh token")
-	}
+	//if cacheFromJSON.RefreshToken == "" {
+	//	return nil, errors.New("failed to get cache refresh token")
+	//}
 
 	return &cacheFromJSON, nil
 }

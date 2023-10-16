@@ -10,6 +10,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"time"
 
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/hcp-sdk-go/auth"
@@ -146,8 +147,7 @@ func (c *hcpConfig) setTokenSource() error {
 
 	// Set access token via configured client credentials.
 	if c.clientCredentialsConfig.ClientID != "" && c.clientCredentialsConfig.ClientSecret != "" {
-		c.configureClientCredentialTokenSource(ctx, c.clientCredentialsConfig.ClientID, c.clientCredentialsConfig.ClientSecret)
-		return nil
+		return c.configureClientCredentialTokenSource(ctx, c.clientCredentialsConfig.ClientID, c.clientCredentialsConfig.ClientSecret)
 	}
 
 	// If we haven't been given an explicit credential file to use, try to load
@@ -163,8 +163,7 @@ func (c *hcpConfig) setTokenSource() error {
 	// If we found a credential file use it as a credential source
 	if c.credentialFile != nil {
 		if c.credentialFile.Scheme == auth.CredentialFileSchemeServicePrincipal {
-			c.configureClientCredentialTokenSource(ctx, c.credentialFile.Oauth.ClientID, c.credentialFile.Oauth.SecretID)
-			return nil
+			return c.configureClientCredentialTokenSource(ctx, c.credentialFile.Oauth.ClientID, c.credentialFile.Oauth.SecretID)
 		} else if c.credentialFile.Scheme == auth.CredentialFileSchemeWorkload {
 			w, err := workload.New(c.credentialFile.Workload)
 			if err != nil {
@@ -194,7 +193,7 @@ func (c *hcpConfig) setTokenSource() error {
 
 // configureClientCredentialTokenSource configures the credential source to use
 // the passed client credentials.
-func (c *hcpConfig) configureClientCredentialTokenSource(ctx context.Context, clientID, secretID string) {
+func (c *hcpConfig) configureClientCredentialTokenSource(ctx context.Context, clientID, secretID string) error {
 	// Set token URL based on auth URL.
 	tokenURL := c.authURL
 	tokenURL.Path = tokenPath
@@ -202,4 +201,25 @@ func (c *hcpConfig) configureClientCredentialTokenSource(ctx context.Context, cl
 
 	// Create token source from the client credentials configuration.
 	c.tokenSource = c.clientCredentialsConfig.TokenSource(ctx)
+
+	tk, err := c.tokenSource.Token()
+	if err != nil {
+		return err
+	}
+
+	// Update cache with newly obtained token. Use the new token details,
+	// but keep the same session expiry.
+	newCache := auth.Cache{
+		AccessToken:       tk.AccessToken,
+		RefreshToken:      tk.RefreshToken,
+		AccessTokenExpiry: tk.Expiry,
+		SessionExpiry:     time.Now().Add(auth.SessionMaxAge),
+	}
+
+	err = auth.Write(newCache)
+	if err != nil {
+		return fmt.Errorf("failed to write cache to file: %s", err.Error())
+	}
+
+	return nil
 }
