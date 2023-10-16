@@ -72,6 +72,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215GetTrialResponse) ContextVali
 func (m *HashicorpCloudGlobalNetworkManager20220215GetTrialResponse) contextValidateTrial(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Trial != nil {
+
+		if swag.IsZero(m.Trial) { // not required
+			return nil
+		}
+
 		if err := m.Trial.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("trial")

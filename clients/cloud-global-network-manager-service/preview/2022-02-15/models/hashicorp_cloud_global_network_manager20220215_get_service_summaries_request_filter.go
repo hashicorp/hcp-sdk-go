@@ -94,6 +94,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215GetServiceSummariesRequestFil
 	for i := 0; i < len(m.Kinds); i++ {
 
 		if m.Kinds[i] != nil {
+
+			if swag.IsZero(m.Kinds[i]) { // not required
+				return nil
+			}
+
 			if err := m.Kinds[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("kinds" + "." + strconv.Itoa(i))

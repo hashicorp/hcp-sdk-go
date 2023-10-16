@@ -81,6 +81,11 @@ func (o *GetAggregateServiceSummaryOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get aggregate service summary o k response
+func (o *GetAggregateServiceSummaryOK) Code() int {
+	return 200
+}
+
 func (o *GetAggregateServiceSummaryOK) Error() string {
 	return fmt.Sprintf("[GET /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/aggregate_service_summary][%d] getAggregateServiceSummaryOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetAggregateServiceSummaryDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the get aggregate service summary default response
-func (o *GetAggregateServiceSummaryDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get aggregate service summary default response has a 2xx status code
 func (o *GetAggregateServiceSummaryDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetAggregateServiceSummaryDefault) IsServerError() bool {
 // IsCode returns true when this get aggregate service summary default response a status code equal to that given
 func (o *GetAggregateServiceSummaryDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get aggregate service summary default response
+func (o *GetAggregateServiceSummaryDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetAggregateServiceSummaryDefault) Error() string {

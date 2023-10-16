@@ -10,7 +10,10 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-global-network-manager-service/preview/2023-10-10/client/consul_cloud_manager_service"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-global-network-manager-service/preview/2023-10-10/client/clusters"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-global-network-manager-service/preview/2023-10-10/client/nodes"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-global-network-manager-service/preview/2023-10-10/client/service_instances"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-global-network-manager-service/preview/2023-10-10/client/services"
 )
 
 // Default cloud global network manager service HTTP client.
@@ -55,7 +58,10 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudGloba
 
 	cli := new(CloudGlobalNetworkManagerService)
 	cli.Transport = transport
-	cli.ConsulCloudManagerService = consul_cloud_manager_service.New(transport, formats)
+	cli.Clusters = clusters.New(transport, formats)
+	cli.Nodes = nodes.New(transport, formats)
+	cli.ServiceInstances = service_instances.New(transport, formats)
+	cli.Services = services.New(transport, formats)
 	return cli
 }
 
@@ -100,7 +106,13 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // CloudGlobalNetworkManagerService is a client for cloud global network manager service
 type CloudGlobalNetworkManagerService struct {
-	ConsulCloudManagerService consul_cloud_manager_service.ClientService
+	Clusters clusters.ClientService
+
+	Nodes nodes.ClientService
+
+	ServiceInstances service_instances.ClientService
+
+	Services services.ClientService
 
 	Transport runtime.ClientTransport
 }
@@ -108,5 +120,8 @@ type CloudGlobalNetworkManagerService struct {
 // SetTransport changes the transport on the client and all its subresources
 func (c *CloudGlobalNetworkManagerService) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
-	c.ConsulCloudManagerService.SetTransport(transport)
+	c.Clusters.SetTransport(transport)
+	c.Nodes.SetTransport(transport)
+	c.ServiceInstances.SetTransport(transport)
+	c.Services.SetTransport(transport)
 }

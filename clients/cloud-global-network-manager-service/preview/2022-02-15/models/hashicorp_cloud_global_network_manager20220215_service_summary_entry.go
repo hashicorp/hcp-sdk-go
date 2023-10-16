@@ -114,6 +114,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry) ContextV
 func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry) contextValidateKind(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Kind != nil {
+
+		if swag.IsZero(m.Kind) { // not required
+			return nil
+		}
+
 		if err := m.Kind.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("kind")

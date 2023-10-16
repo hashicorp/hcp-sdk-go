@@ -87,6 +87,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterBootstrap) ContextVali
 func (m *HashicorpCloudGlobalNetworkManager20220215ClusterBootstrap) contextValidateServerTLS(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ServerTLS != nil {
+
+		if swag.IsZero(m.ServerTLS) { // not required
+			return nil
+		}
+
 		if err := m.ServerTLS.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("server_tls")

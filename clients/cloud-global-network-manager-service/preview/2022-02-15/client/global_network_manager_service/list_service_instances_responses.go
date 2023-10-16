@@ -81,6 +81,11 @@ func (o *ListServiceInstancesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list service instances o k response
+func (o *ListServiceInstancesOK) Code() int {
+	return 200
+}
+
 func (o *ListServiceInstancesOK) Error() string {
 	return fmt.Sprintf("[GET /2022-02-15/global-network-manager/{cluster_resource_name}/service/{service_name}/instances][%d] listServiceInstancesOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ListServiceInstancesDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the list service instances default response
-func (o *ListServiceInstancesDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list service instances default response has a 2xx status code
 func (o *ListServiceInstancesDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ListServiceInstancesDefault) IsServerError() bool {
 // IsCode returns true when this list service instances default response a status code equal to that given
 func (o *ListServiceInstancesDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list service instances default response
+func (o *ListServiceInstancesDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListServiceInstancesDefault) Error() string {

@@ -81,6 +81,11 @@ func (o *ListClustersWithDialerEligibilityOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list clusters with dialer eligibility o k response
+func (o *ListClustersWithDialerEligibilityOK) Code() int {
+	return 200
+}
+
 func (o *ListClustersWithDialerEligibilityOK) Error() string {
 	return fmt.Sprintf("[GET /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters_with_dialer_eligibility][%d] listClustersWithDialerEligibilityOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ListClustersWithDialerEligibilityDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the list clusters with dialer eligibility default response
-func (o *ListClustersWithDialerEligibilityDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list clusters with dialer eligibility default response has a 2xx status code
 func (o *ListClustersWithDialerEligibilityDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ListClustersWithDialerEligibilityDefault) IsServerError() bool {
 // IsCode returns true when this list clusters with dialer eligibility default response a status code equal to that given
 func (o *ListClustersWithDialerEligibilityDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list clusters with dialer eligibility default response
+func (o *ListClustersWithDialerEligibilityDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListClustersWithDialerEligibilityDefault) Error() string {

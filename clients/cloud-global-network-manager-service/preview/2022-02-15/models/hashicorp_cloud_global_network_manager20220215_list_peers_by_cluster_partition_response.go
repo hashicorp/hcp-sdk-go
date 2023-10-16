@@ -82,6 +82,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ListPeersByClusterPartitionRe
 	for i := 0; i < len(m.ClusterPartitionPeers); i++ {
 
 		if m.ClusterPartitionPeers[i] != nil {
+
+			if swag.IsZero(m.ClusterPartitionPeers[i]) { // not required
+				return nil
+			}
+
 			if err := m.ClusterPartitionPeers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("cluster_partition_peers" + "." + strconv.Itoa(i))

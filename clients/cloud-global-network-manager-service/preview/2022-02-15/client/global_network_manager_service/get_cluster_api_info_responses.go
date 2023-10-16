@@ -81,6 +81,11 @@ func (o *GetClusterAPIInfoOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get cluster Api info o k response
+func (o *GetClusterAPIInfoOK) Code() int {
+	return 200
+}
+
 func (o *GetClusterAPIInfoOK) Error() string {
 	return fmt.Sprintf("[GET /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/api_information][%d] getClusterApiInfoOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetClusterAPIInfoDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the get cluster API info default response
-func (o *GetClusterAPIInfoDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get cluster API info default response has a 2xx status code
 func (o *GetClusterAPIInfoDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetClusterAPIInfoDefault) IsServerError() bool {
 // IsCode returns true when this get cluster API info default response a status code equal to that given
 func (o *GetClusterAPIInfoDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get cluster API info default response
+func (o *GetClusterAPIInfoDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetClusterAPIInfoDefault) Error() string {

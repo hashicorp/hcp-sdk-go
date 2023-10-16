@@ -97,6 +97,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummary) contextValida
 	for i := 0; i < len(m.Summaries); i++ {
 
 		if m.Summaries[i] != nil {
+
+			if swag.IsZero(m.Summaries[i]) { // not required
+				return nil
+			}
+
 			if err := m.Summaries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("summaries" + "." + strconv.Itoa(i))

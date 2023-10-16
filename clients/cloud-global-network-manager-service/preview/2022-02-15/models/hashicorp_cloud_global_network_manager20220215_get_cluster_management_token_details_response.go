@@ -123,6 +123,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215GetClusterManagementTokenDeta
 	for i := 0; i < len(m.InvalidReasons); i++ {
 
 		if m.InvalidReasons[i] != nil {
+
+			if swag.IsZero(m.InvalidReasons[i]) { // not required
+				return nil
+			}
+
 			if err := m.InvalidReasons[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("invalid_reasons" + "." + strconv.Itoa(i))
@@ -141,6 +146,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215GetClusterManagementTokenDeta
 func (m *HashicorpCloudGlobalNetworkManager20220215GetClusterManagementTokenDetailsResponse) contextValidateValidityStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ValidityStatus != nil {
+
+		if swag.IsZero(m.ValidityStatus) { // not required
+			return nil
+		}
+
 		if err := m.ValidityStatus.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("validity_status")

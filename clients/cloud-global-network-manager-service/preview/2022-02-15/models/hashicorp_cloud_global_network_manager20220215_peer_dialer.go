@@ -113,6 +113,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215PeerDialer) ContextValidate(c
 func (m *HashicorpCloudGlobalNetworkManager20220215PeerDialer) contextValidateCluster(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cluster != nil {
+
+		if swag.IsZero(m.Cluster) { // not required
+			return nil
+		}
+
 		if err := m.Cluster.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cluster")
@@ -129,6 +134,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215PeerDialer) contextValidateCl
 func (m *HashicorpCloudGlobalNetworkManager20220215PeerDialer) contextValidateNetworkConnectivity(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.NetworkConnectivity != nil {
+
+		if swag.IsZero(m.NetworkConnectivity) { // not required
+			return nil
+		}
+
 		if err := m.NetworkConnectivity.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("network_connectivity")

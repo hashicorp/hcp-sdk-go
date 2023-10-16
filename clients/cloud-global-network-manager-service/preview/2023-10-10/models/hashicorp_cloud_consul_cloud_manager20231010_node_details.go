@@ -96,6 +96,11 @@ func (m *HashicorpCloudConsulCloudManager20231010NodeDetails) ContextValidate(ct
 func (m *HashicorpCloudConsulCloudManager20231010NodeDetails) contextValidateServiceData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ServiceData != nil {
+
+		if swag.IsZero(m.ServiceData) { // not required
+			return nil
+		}
+
 		if err := m.ServiceData.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("service_data")

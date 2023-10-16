@@ -81,6 +81,11 @@ func (o *GetClusterManagementTokenDetailsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get cluster management token details o k response
+func (o *GetClusterManagementTokenDetailsOK) Code() int {
+	return 200
+}
+
 func (o *GetClusterManagementTokenDetailsOK) Error() string {
 	return fmt.Sprintf("[GET /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/management_token_details][%d] getClusterManagementTokenDetailsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetClusterManagementTokenDetailsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the get cluster management token details default response
-func (o *GetClusterManagementTokenDetailsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get cluster management token details default response has a 2xx status code
 func (o *GetClusterManagementTokenDetailsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetClusterManagementTokenDetailsDefault) IsServerError() bool {
 // IsCode returns true when this get cluster management token details default response a status code equal to that given
 func (o *GetClusterManagementTokenDetailsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get cluster management token details default response
+func (o *GetClusterManagementTokenDetailsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetClusterManagementTokenDetailsDefault) Error() string {

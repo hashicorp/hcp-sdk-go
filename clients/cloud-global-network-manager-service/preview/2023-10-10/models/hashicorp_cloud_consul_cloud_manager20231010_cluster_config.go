@@ -192,6 +192,11 @@ func (m *HashicorpCloudConsulCloudManager20231010ClusterConfig) ContextValidate(
 func (m *HashicorpCloudConsulCloudManager20231010ClusterConfig) contextValidateConsulConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ConsulConfig != nil {
+
+		if swag.IsZero(m.ConsulConfig) { // not required
+			return nil
+		}
+
 		if err := m.ConsulConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("consul_config")
@@ -208,6 +213,11 @@ func (m *HashicorpCloudConsulCloudManager20231010ClusterConfig) contextValidateC
 func (m *HashicorpCloudConsulCloudManager20231010ClusterConfig) contextValidateDNSNames(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DNSNames != nil {
+
+		if swag.IsZero(m.DNSNames) { // not required
+			return nil
+		}
+
 		if err := m.DNSNames.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dns_names")
@@ -224,6 +234,11 @@ func (m *HashicorpCloudConsulCloudManager20231010ClusterConfig) contextValidateD
 func (m *HashicorpCloudConsulCloudManager20231010ClusterConfig) contextValidateNetworkConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.NetworkConfig != nil {
+
+		if swag.IsZero(m.NetworkConfig) { // not required
+			return nil
+		}
+
 		if err := m.NetworkConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("network_config")
@@ -240,6 +255,11 @@ func (m *HashicorpCloudConsulCloudManager20231010ClusterConfig) contextValidateN
 func (m *HashicorpCloudConsulCloudManager20231010ClusterConfig) contextValidateSize(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Size != nil {
+
+		if swag.IsZero(m.Size) { // not required
+			return nil
+		}
+
 		if err := m.Size.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("size")
@@ -256,6 +276,11 @@ func (m *HashicorpCloudConsulCloudManager20231010ClusterConfig) contextValidateS
 func (m *HashicorpCloudConsulCloudManager20231010ClusterConfig) contextValidateTier(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tier != nil {
+
+		if swag.IsZero(m.Tier) { // not required
+			return nil
+		}
+
 		if err := m.Tier.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tier")

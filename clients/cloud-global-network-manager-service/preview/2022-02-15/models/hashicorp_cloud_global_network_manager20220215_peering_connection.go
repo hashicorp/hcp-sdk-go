@@ -178,6 +178,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215PeeringConnection) ContextVal
 func (m *HashicorpCloudGlobalNetworkManager20220215PeeringConnection) contextValidateDisplayError(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DisplayError != nil {
+
+		if swag.IsZero(m.DisplayError) { // not required
+			return nil
+		}
+
 		if err := m.DisplayError.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("display_error")
@@ -194,6 +199,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215PeeringConnection) contextVal
 func (m *HashicorpCloudGlobalNetworkManager20220215PeeringConnection) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -210,6 +220,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215PeeringConnection) contextVal
 func (m *HashicorpCloudGlobalNetworkManager20220215PeeringConnection) contextValidateNetworkConnectivity(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.NetworkConnectivity != nil {
+
+		if swag.IsZero(m.NetworkConnectivity) { // not required
+			return nil
+		}
+
 		if err := m.NetworkConnectivity.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("network_connectivity")

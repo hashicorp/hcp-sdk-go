@@ -84,6 +84,11 @@ func (o *UpdateClusterOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update cluster o k response
+func (o *UpdateClusterOK) Code() int {
+	return 200
+}
+
 func (o *UpdateClusterOK) Error() string {
 	return fmt.Sprintf("[PATCH /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}][%d] updateClusterOK  %+v", 200, o.Payload)
 }
@@ -124,11 +129,6 @@ type UpdateClusterDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the update cluster default response
-func (o *UpdateClusterDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this update cluster default response has a 2xx status code
 func (o *UpdateClusterDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -152,6 +152,11 @@ func (o *UpdateClusterDefault) IsServerError() bool {
 // IsCode returns true when this update cluster default response a status code equal to that given
 func (o *UpdateClusterDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the update cluster default response
+func (o *UpdateClusterDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UpdateClusterDefault) Error() string {
@@ -281,6 +286,11 @@ func (o *UpdateClusterBody) ContextValidate(ctx context.Context, formats strfmt.
 func (o *UpdateClusterBody) contextValidateConsulAccessLevel(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.ConsulAccessLevel != nil {
+
+		if swag.IsZero(o.ConsulAccessLevel) { // not required
+			return nil
+		}
+
 		if err := o.ConsulAccessLevel.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "consul_access_level")
@@ -297,6 +307,11 @@ func (o *UpdateClusterBody) contextValidateConsulAccessLevel(ctx context.Context
 func (o *UpdateClusterBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -390,6 +405,11 @@ func (o *UpdateClusterParamsBodyLocation) ContextValidate(ctx context.Context, f
 func (o *UpdateClusterParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

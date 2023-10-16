@@ -72,6 +72,11 @@ func (m *HashicorpCloudConsulCloudManager20231010GetNodeResponse) ContextValidat
 func (m *HashicorpCloudConsulCloudManager20231010GetNodeResponse) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
+
+		if swag.IsZero(m.Data) { // not required
+			return nil
+		}
+
 		if err := m.Data.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("data")

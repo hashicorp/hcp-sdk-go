@@ -81,6 +81,11 @@ func (o *DeletePeeringConnectionOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete peering connection o k response
+func (o *DeletePeeringConnectionOK) Code() int {
+	return 200
+}
+
 func (o *DeletePeeringConnectionOK) Error() string {
 	return fmt.Sprintf("[DELETE /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/peering_connections/{peering_connection_id}][%d] deletePeeringConnectionOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type DeletePeeringConnectionDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the delete peering connection default response
-func (o *DeletePeeringConnectionDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this delete peering connection default response has a 2xx status code
 func (o *DeletePeeringConnectionDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *DeletePeeringConnectionDefault) IsServerError() bool {
 // IsCode returns true when this delete peering connection default response a status code equal to that given
 func (o *DeletePeeringConnectionDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the delete peering connection default response
+func (o *DeletePeeringConnectionDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DeletePeeringConnectionDefault) Error() string {

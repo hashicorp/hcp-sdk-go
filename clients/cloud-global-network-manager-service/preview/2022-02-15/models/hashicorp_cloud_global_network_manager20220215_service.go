@@ -159,6 +159,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Service) ContextValidate(ctx 
 func (m *HashicorpCloudGlobalNetworkManager20220215Service) contextValidateGatewayConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GatewayConfig != nil {
+
+		if swag.IsZero(m.GatewayConfig) { // not required
+			return nil
+		}
+
 		if err := m.GatewayConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gateway_config")
@@ -175,6 +180,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Service) contextValidateGatew
 func (m *HashicorpCloudGlobalNetworkManager20220215Service) contextValidateSamenessGroup(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SamenessGroup != nil {
+
+		if swag.IsZero(m.SamenessGroup) { // not required
+			return nil
+		}
+
 		if err := m.SamenessGroup.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("sameness_group")

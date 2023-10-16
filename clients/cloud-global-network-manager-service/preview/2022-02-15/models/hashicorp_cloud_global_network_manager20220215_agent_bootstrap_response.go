@@ -102,6 +102,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215AgentBootstrapResponse) Conte
 func (m *HashicorpCloudGlobalNetworkManager20220215AgentBootstrapResponse) contextValidateBootstrap(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Bootstrap != nil {
+
+		if swag.IsZero(m.Bootstrap) { // not required
+			return nil
+		}
+
 		if err := m.Bootstrap.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("bootstrap")
@@ -118,6 +123,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215AgentBootstrapResponse) conte
 func (m *HashicorpCloudGlobalNetworkManager20220215AgentBootstrapResponse) contextValidateCluster(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cluster != nil {
+
+		if swag.IsZero(m.Cluster) { // not required
+			return nil
+		}
+
 		if err := m.Cluster.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cluster")

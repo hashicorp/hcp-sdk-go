@@ -81,6 +81,11 @@ func (o *GetObservabilitySecretOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get observability secret o k response
+func (o *GetObservabilitySecretOK) Code() int {
+	return 200
+}
+
 func (o *GetObservabilitySecretOK) Error() string {
 	return fmt.Sprintf("[GET /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/credentials/observability][%d] getObservabilitySecretOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetObservabilitySecretDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the get observability secret default response
-func (o *GetObservabilitySecretDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get observability secret default response has a 2xx status code
 func (o *GetObservabilitySecretDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetObservabilitySecretDefault) IsServerError() bool {
 // IsCode returns true when this get observability secret default response a status code equal to that given
 func (o *GetObservabilitySecretDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get observability secret default response
+func (o *GetObservabilitySecretDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetObservabilitySecretDefault) Error() string {

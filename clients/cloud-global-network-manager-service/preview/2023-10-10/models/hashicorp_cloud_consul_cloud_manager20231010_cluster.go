@@ -156,6 +156,11 @@ func (m *HashicorpCloudConsulCloudManager20231010Cluster) ContextValidate(ctx co
 func (m *HashicorpCloudConsulCloudManager20231010Cluster) contextValidateConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Config != nil {
+
+		if swag.IsZero(m.Config) { // not required
+			return nil
+		}
+
 		if err := m.Config.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("config")
@@ -172,6 +177,11 @@ func (m *HashicorpCloudConsulCloudManager20231010Cluster) contextValidateConfig(
 func (m *HashicorpCloudConsulCloudManager20231010Cluster) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
+
+		if swag.IsZero(m.Meta) { // not required
+			return nil
+		}
+
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("meta")
@@ -188,6 +198,11 @@ func (m *HashicorpCloudConsulCloudManager20231010Cluster) contextValidateMeta(ct
 func (m *HashicorpCloudConsulCloudManager20231010Cluster) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Region != nil {
+
+		if swag.IsZero(m.Region) { // not required
+			return nil
+		}
+
 		if err := m.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("region")

@@ -120,6 +120,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215GetObservabilitySecretRespons
 	for i := 0; i < len(m.Keys); i++ {
 
 		if m.Keys[i] != nil {
+
+			if swag.IsZero(m.Keys[i]) { // not required
+				return nil
+			}
+
 			if err := m.Keys[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("keys" + "." + strconv.Itoa(i))
@@ -138,6 +143,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215GetObservabilitySecretRespons
 func (m *HashicorpCloudGlobalNetworkManager20220215GetObservabilitySecretResponse) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")

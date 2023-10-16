@@ -114,6 +114,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ListClusterServersResponse) C
 func (m *HashicorpCloudGlobalNetworkManager20220215ListClusterServersResponse) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -132,6 +137,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ListClusterServersResponse) c
 	for i := 0; i < len(m.Server); i++ {
 
 		if m.Server[i] != nil {
+
+			if swag.IsZero(m.Server[i]) { // not required
+				return nil
+			}
+
 			if err := m.Server[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("server" + "." + strconv.Itoa(i))

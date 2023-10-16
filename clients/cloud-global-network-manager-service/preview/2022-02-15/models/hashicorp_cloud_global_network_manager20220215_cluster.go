@@ -238,6 +238,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) ContextValidate(ctx 
 func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateConsulAccessLevel(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ConsulAccessLevel != nil {
+
+		if swag.IsZero(m.ConsulAccessLevel) { // not required
+			return nil
+		}
+
 		if err := m.ConsulAccessLevel.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("consul_access_level")
@@ -254,6 +259,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateConsu
 func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateLicensing(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Licensing != nil {
+
+		if swag.IsZero(m.Licensing) { // not required
+			return nil
+		}
+
 		if err := m.Licensing.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("licensing")
@@ -270,6 +280,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateLicen
 func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -286,6 +301,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateLocat
 func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateSource(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Source != nil {
+
+		if swag.IsZero(m.Source) { // not required
+			return nil
+		}
+
 		if err := m.Source.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("source")
@@ -302,6 +322,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateSourc
 func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")

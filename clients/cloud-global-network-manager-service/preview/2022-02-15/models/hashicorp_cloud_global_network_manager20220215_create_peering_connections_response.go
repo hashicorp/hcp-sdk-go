@@ -82,6 +82,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215CreatePeeringConnectionsRespo
 	for i := 0; i < len(m.PeeringConnections); i++ {
 
 		if m.PeeringConnections[i] != nil {
+
+			if swag.IsZero(m.PeeringConnections[i]) { // not required
+				return nil
+			}
+
 			if err := m.PeeringConnections[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("peering_connections" + "." + strconv.Itoa(i))

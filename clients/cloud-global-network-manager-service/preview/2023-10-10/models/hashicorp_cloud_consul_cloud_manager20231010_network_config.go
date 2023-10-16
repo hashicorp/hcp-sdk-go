@@ -92,6 +92,11 @@ func (m *HashicorpCloudConsulCloudManager20231010NetworkConfig) contextValidateI
 	for i := 0; i < len(m.IPAllowlist); i++ {
 
 		if m.IPAllowlist[i] != nil {
+
+			if swag.IsZero(m.IPAllowlist[i]) { // not required
+				return nil
+			}
+
 			if err := m.IPAllowlist[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ip_allowlist" + "." + strconv.Itoa(i))

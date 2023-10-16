@@ -116,6 +116,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers) Contex
 func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers) contextValidateLicensing(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Licensing != nil {
+
+		if swag.IsZero(m.Licensing) { // not required
+			return nil
+		}
+
 		if err := m.Licensing.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("licensing")
@@ -134,6 +139,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeers) contex
 	for i := 0; i < len(m.Peers); i++ {
 
 		if m.Peers[i] != nil {
+
+			if swag.IsZero(m.Peers[i]) { // not required
+				return nil
+			}
+
 			if err := m.Peers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("peers" + "." + strconv.Itoa(i))
