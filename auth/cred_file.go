@@ -31,7 +31,7 @@ const (
 )
 
 var (
-	// testDefaultHCPCredFilePath is the the default HCP Credential File location during
+	// testDefaultHCPCredFilePath is the default HCP Credential File location during
 	// tests. The test should set its value.
 	testDefaultHCPCredFilePath = ""
 )

@@ -144,9 +144,15 @@ func (c *hcpConfig) setTokenSource() error {
 		&http.Client{Transport: tokenTransport},
 	)
 
+	// Set client credentials token URL based on auth URL.
+	tokenURL := c.authURL
+	tokenURL.Path = tokenPath
+	c.clientCredentialsConfig.TokenURL = tokenURL.String()
+
 	// Set access token via configured client credentials.
 	if c.clientCredentialsConfig.ClientID != "" && c.clientCredentialsConfig.ClientSecret != "" {
-		c.configureClientCredentialTokenSource(ctx, c.clientCredentialsConfig.ClientID, c.clientCredentialsConfig.ClientSecret)
+		// Create token source from the client credentials configuration.
+		c.tokenSource = c.clientCredentialsConfig.TokenSource(ctx)
 		return nil
 	}
 
@@ -163,7 +169,12 @@ func (c *hcpConfig) setTokenSource() error {
 	// If we found a credential file use it as a credential source
 	if c.credentialFile != nil {
 		if c.credentialFile.Scheme == auth.CredentialFileSchemeServicePrincipal {
-			c.configureClientCredentialTokenSource(ctx, c.credentialFile.Oauth.ClientID, c.credentialFile.Oauth.SecretID)
+			// Set credentials on client credentials configuration
+			c.clientCredentialsConfig.ClientID = c.credentialFile.Oauth.ClientID
+			c.clientCredentialsConfig.ClientSecret = c.credentialFile.Oauth.SecretID
+
+			// Create token source from the client credentials configuration.
+			c.tokenSource = c.clientCredentialsConfig.TokenSource(ctx)
 			return nil
 		} else if c.credentialFile.Scheme == auth.CredentialFileSchemeWorkload {
 			w, err := workload.New(c.credentialFile.Workload)
@@ -190,16 +201,4 @@ func (c *hcpConfig) setTokenSource() error {
 	// Update HCPConfig with most current token values.
 	c.tokenSource = c.oauth2Config.TokenSource(ctx, tok)
 	return nil
-}
-
-// configureClientCredentialTokenSource configures the credential source to use
-// the passed client credentials.
-func (c *hcpConfig) configureClientCredentialTokenSource(ctx context.Context, clientID, secretID string) {
-	// Set token URL based on auth URL.
-	tokenURL := c.authURL
-	tokenURL.Path = tokenPath
-	c.clientCredentialsConfig.TokenURL = tokenURL.String()
-
-	// Create token source from the client credentials configuration.
-	c.tokenSource = c.clientCredentialsConfig.TokenSource(ctx)
 }
