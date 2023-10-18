@@ -36,6 +36,10 @@ type HashicorpCloudIamUserPrincipal struct {
 	// identity_types is an array of the identity types for this user.
 	IdentityTypes []*HashicorpCloudIamUserPrincipalIdentityType `json:"identity_types"`
 
+	// scim_synchronized denotes the user principal was synchronized from a
+	// customer's IdP using SCIM.
+	ScimSynchronized bool `json:"scim_synchronized,omitempty"`
+
 	// subject is the user ID from the authenticating IDP (e.g. Hydra).
 	Subject string `json:"subject,omitempty"`
 }

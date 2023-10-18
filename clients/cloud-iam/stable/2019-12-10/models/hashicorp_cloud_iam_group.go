@@ -39,6 +39,9 @@ type HashicorpCloudIamGroup struct {
 	// resource_name is the name of the group.
 	ResourceName string `json:"resource_name,omitempty"`
 
+	// scim_synchronized denotes the group was synchronized from an upstream IdP using SCIM.
+	ScimSynchronized bool `json:"scim_synchronized,omitempty"`
+
 	// updated_at is when the group was last updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
