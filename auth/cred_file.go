@@ -58,8 +58,8 @@ type OauthConfig struct {
 	// ClientID is the client id of an HCP Service Principal
 	ClientID string `json:"client_id,omitempty"`
 
-	// SecretID is the secret id of an HCP Service Principal
-	SecretID string `json:"secret_id,omitempty"`
+	// ClientSecret is the client secret of an HCP Service Principal
+	ClientSecret string `json:"client_secret,omitempty"`
 }
 
 // Validate validates the CredentialFile
@@ -97,8 +97,8 @@ func (c *CredentialFile) Validate() error {
 
 // Validate validates the OauthConfig
 func (o *OauthConfig) Validate() error {
-	if o.ClientID == "" || o.SecretID == "" {
-		return fmt.Errorf("both client_id and secret_id must be set")
+	if o.ClientID == "" || o.ClientSecret == "" {
+		return fmt.Errorf("both client_id and client_secret must be set")
 	}
 
 	return nil

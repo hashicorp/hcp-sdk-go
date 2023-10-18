@@ -25,8 +25,8 @@ func TestCredentialFile_Validate(t *testing.T) {
 				ProjectID: "123",
 				Scheme:    CredentialFileSchemeServicePrincipal,
 				Oauth: &OauthConfig{
-					ClientID: "abc",
-					SecretID: "def",
+					ClientID:     "abc",
+					ClientSecret: "def",
 				},
 			},
 			errStr: "",
@@ -61,11 +61,11 @@ func TestCredentialFile_Validate(t *testing.T) {
 				ProjectID: "123",
 				Scheme:    CredentialFileSchemeServicePrincipal,
 				Oauth: &OauthConfig{
-					ClientID: "abc",
-					SecretID: "",
+					ClientID:     "abc",
+					ClientSecret: "",
 				},
 			},
-			errStr: "oauth: both client_id and secret_id must be set",
+			errStr: "oauth: both client_id and client_secret must be set",
 		},
 		{
 			name: "invalid workload",
@@ -88,8 +88,8 @@ func TestCredentialFile_Validate(t *testing.T) {
 					AWS:                  &workload.AWSCredentialSource{},
 				},
 				Oauth: &OauthConfig{
-					ClientID: "abc",
-					SecretID: "def",
+					ClientID:     "abc",
+					ClientSecret: "def",
 				},
 			},
 			errStr: "only one of oauth or workload may be set",
@@ -113,8 +113,8 @@ func TestReadCredentialFile(t *testing.T) {
 		cf := &CredentialFile{
 			Scheme: CredentialFileSchemeServicePrincipal,
 			Oauth: &OauthConfig{
-				ClientID: "abc",
-				SecretID: "123",
+				ClientID:     "abc",
+				ClientSecret: "123",
 			},
 		}
 
@@ -147,7 +147,7 @@ func TestReadCredentialFile(t *testing.T) {
 		r.NoError(WriteCredentialFile(f.Name(), cf))
 
 		_, err = ReadCredentialFile(f.Name())
-		r.ErrorContains(err, "oauth: both client_id and secret_id must be set")
+		r.ErrorContains(err, "oauth: both client_id and client_secret must be set")
 	})
 
 	t.Run("bad format", func(t *testing.T) {
@@ -173,8 +173,8 @@ func TestGetDefaultCredentialFile(t *testing.T) {
 		cf := &CredentialFile{
 			Scheme: CredentialFileSchemeServicePrincipal,
 			Oauth: &OauthConfig{
-				ClientID: "abc",
-				SecretID: "123",
+				ClientID:     "abc",
+				ClientSecret: "123",
 			},
 		}
 
@@ -194,8 +194,8 @@ func TestGetDefaultCredentialFile(t *testing.T) {
 		cf := &CredentialFile{
 			Scheme: CredentialFileSchemeServicePrincipal,
 			Oauth: &OauthConfig{
-				ClientID: "abc",
-				SecretID: "123",
+				ClientID:     "abc",
+				ClientSecret: "123",
 			},
 		}
 
@@ -234,8 +234,8 @@ func Test_WriteCredentialFile(t *testing.T) {
 	cf := &CredentialFile{
 		Scheme: CredentialFileSchemeServicePrincipal,
 		Oauth: &OauthConfig{
-			ClientID: "abc",
-			SecretID: "123",
+			ClientID:     "abc",
+			ClientSecret: "123",
 		},
 	}
 
