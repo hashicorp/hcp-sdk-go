@@ -153,8 +153,8 @@ func TestWith_CredentialFile(t *testing.T) {
 		ProjectID: "123",
 		Scheme:    auth.CredentialFileSchemeServicePrincipal,
 		Oauth: &auth.OauthConfig{
-			ClientID: "123",
-			SecretID: "456",
+			ClientID:     "123",
+			ClientSecret: "456",
 		},
 	}
 	require.NoError(apply(config, WithCredentialFile(cf)))
@@ -172,8 +172,8 @@ func TestWith_CredentialFilePath(t *testing.T) {
 			ProjectID: "123",
 			Scheme:    auth.CredentialFileSchemeServicePrincipal,
 			Oauth: &auth.OauthConfig{
-				ClientID: "123",
-				SecretID: "456",
+				ClientID:     "123",
+				ClientSecret: "456",
 			},
 		}
 		f, err := ioutil.TempFile("", "")

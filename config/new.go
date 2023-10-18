@@ -171,7 +171,7 @@ func (c *hcpConfig) setTokenSource() error {
 		if c.credentialFile.Scheme == auth.CredentialFileSchemeServicePrincipal {
 			// Set credentials on client credentials configuration
 			c.clientCredentialsConfig.ClientID = c.credentialFile.Oauth.ClientID
-			c.clientCredentialsConfig.ClientSecret = c.credentialFile.Oauth.SecretID
+			c.clientCredentialsConfig.ClientSecret = c.credentialFile.Oauth.ClientSecret
 
 			// Create token source from the client credentials configuration.
 			c.tokenSource = c.clientCredentialsConfig.TokenSource(ctx)
