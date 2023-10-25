@@ -6,6 +6,7 @@ package config
 import (
 	"crypto/tls"
 	"fmt"
+	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"net/url"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
@@ -105,6 +106,9 @@ type hcpConfig struct {
 
 	// credentialFile is the credential file to use.
 	credentialFile *auth.CredentialFile
+
+	// workloadProviderConfig is the config of the workload identity provider to use for authentication.
+	workloadProviderConfig *workload.IdentityProviderConfig
 }
 
 func (c *hcpConfig) Profile() *profile.UserProfile {
