@@ -126,11 +126,6 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 // default file location).
 // 3. Interactive session.
 func (c *hcpConfig) setTokenSource() error {
-	// token source is already explicitly configured.
-	if c.tokenSource != nil {
-		return nil
-	}
-
 	// Set up a token context with the custom auth TLS config
 	tokenTransport := cleanhttp.DefaultPooledTransport()
 	tokenTransport.TLSClientConfig = c.authTLSConfig
@@ -156,6 +151,17 @@ func (c *hcpConfig) setTokenSource() error {
 		clientCredentials.ClientSecret = c.clientSecret
 
 		c.tokenSource = clientCredentials.TokenSource(ctx)
+		return nil
+	}
+
+	// Use workload provider config if it was provided
+	if c.workloadProviderConfig != nil {
+		provider, err := workload.New(c.workloadProviderConfig)
+		if err != nil {
+			return err
+		}
+		provider.SetAPI(c)
+		c.tokenSource =	oauth2.ReuseTokenSource(nil, provider)
 		return nil
 	}
 

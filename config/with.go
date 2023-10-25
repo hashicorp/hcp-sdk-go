@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"github.com/hashicorp/hcp-sdk-go/profile"
-	"golang.org/x/oauth2"
 )
 
 // WithClientCredentials credentials is an option that can be used to set
@@ -28,11 +27,10 @@ func WithClientCredentials(clientID, clientSecret string) HCPConfigOption {
 // WithWorkloadIdentity exchanges a workload identity provider credentials for
 // an HCP Service Principal token. The Workload Identity Provider can be AWS or
 // any OIDC based identity provider.
-func WithWorkloadIdentity(provider *workload.Provider) HCPConfigOption {
+func WithWorkloadIdentity(providerConfig *workload.IdentityProviderConfig) HCPConfigOption {
 	return func(config *hcpConfig) error {
-		// Store the provider as the token source
-		config.tokenSource = oauth2.ReuseTokenSource(nil, provider)
-		provider.SetAPI(config)
+		config.workloadProviderConfig = providerConfig
+
 		return nil
 	}
 }
