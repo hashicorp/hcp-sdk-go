@@ -129,20 +129,6 @@ func WithOAuth2ClientID(oauth2ClientID string) HCPConfigOption {
 	}
 }
 
-// WithSession is an option that can be used to provide a custom Session struct.
-//
-// A mock Session can be provided, if none is provided the default UserSession
-// will be used.
-//
-// This should only be necessary for testing purposes.
-func WithSession(s auth.Session) HCPConfigOption {
-	return func(config *hcpConfig) error {
-		config.session = s
-
-		return nil
-	}
-}
-
 // WithProfile is an option that can be used to provide a custom UserProfile struct.
 func WithProfile(p *profile.UserProfile) HCPConfigOption {
 	return func(config *hcpConfig) error {

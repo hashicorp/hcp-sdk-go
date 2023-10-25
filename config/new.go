@@ -78,7 +78,6 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 			RedirectURL: "http://localhost:8443/oidc/callback",
 			Scopes:      []string{"openid", "offline_access"},
 		},
-		session: &auth.UserSession{},
 		profile: &profile.UserProfile{},
 
 		portalURL: portalURL,
@@ -92,12 +91,6 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 	if config.suppressLogging {
 		log.SetOutput(io.Discard)
-	}
-
-	if config.noBrowserLogin {
-		config.session = &auth.UserSession{
-			NoBrowserLogin: true,
-		}
 	}
 
 	// Apply all options
