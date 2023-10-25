@@ -11,18 +11,6 @@ import (
 	"golang.org/x/oauth2"
 )
 
-type MockSession struct{}
-
-// GetToken returns some mock token with static data.
-func (s *MockSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
-	tok := oauth2.Token{
-		AccessToken:  "Some.Access.Token",
-		RefreshToken: "SomeRefreshToken",
-		Expiry:       time.Now().Add(time.Hour * 1),
-	}
-	return &tok, nil
-}
-
 // mockBrowser provides a mocked response of the OAuth2 login flow.
 type mockBrowser struct{}
 

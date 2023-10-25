@@ -54,22 +54,6 @@ func TestNew_Options(t *testing.T) {
 	require.Equal("proj-id-123", config.Profile().ProjectID)
 }
 
-func TestNew_MockSession(t *testing.T) {
-	require := requirepkg.New(t)
-
-	// Exercise
-	config, err := NewHCPConfig(
-		WithSession(&auth.MockSession{}),
-	)
-
-	require.NoError(err)
-	// Ensure the values have been set accordingly
-	tok, err := config.Token()
-	require.NoError(err)
-	require.Equal("Some.Access.Token", tok.AccessToken)
-	require.Equal("SomeRefreshToken", tok.RefreshToken)
-}
-
 func TestNew_Invalid(t *testing.T) {
 	testCases := []struct {
 		name          string

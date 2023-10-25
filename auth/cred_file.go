@@ -28,6 +28,9 @@ const (
 	// that indicates workload identity credentials should be used to
 	// authenticate to HCP.
 	CredentialFileSchemeWorkload = "workload"
+
+	defaultDirectory     = ".config/hcp"
+	directoryPermissions = 0755
 )
 
 var (

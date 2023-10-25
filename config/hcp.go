@@ -91,10 +91,6 @@ type hcpConfig struct {
 	// set to nil if TLS should be disabled.
 	scadaTLSConfig *tls.Config
 
-	// session is responsible for getting an access token from our identity provider.
-	// A mock can be used in tests.
-	session auth.Session
-
 	// profile is the user's organization id and project id
 	profile *profile.UserProfile
 

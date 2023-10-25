@@ -102,17 +102,6 @@ func TestWith_OAuth2ClientID(t *testing.T) {
 	require.Equal("1a2b3c4d", config.oauth2Config.ClientID)
 }
 
-func TestWith_Session(t *testing.T) {
-	require := requirepkg.New(t)
-
-	// Exercise
-	config := &hcpConfig{}
-	require.NoError(apply(config, WithSession(&auth.MockSession{})))
-
-	// Ensure Sessions is an empty MockSession object
-	require.Equal(&auth.MockSession{}, config.session)
-}
-
 func TestWith_Profile(t *testing.T) {
 	require := requirepkg.New(t)
 
