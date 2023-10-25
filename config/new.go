@@ -65,10 +65,6 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 	// Prepare basic config with default values.
 	config := &hcpConfig{
-		clientCredentialsConfig: clientcredentials.Config{
-			EndpointParams: url.Values{"audience": {aud}},
-		},
-
 		authURL:       authURL,
 		authTLSConfig: &tls.Config{},
 		oauth2Config: oauth2.Config{
@@ -147,12 +143,19 @@ func (c *hcpConfig) setTokenSource() error {
 	// Set client credentials token URL based on auth URL.
 	tokenURL := c.authURL
 	tokenURL.Path = tokenPath
-	c.clientCredentialsConfig.TokenURL = tokenURL.String()
+
+	clientCredentials := clientcredentials.Config{
+		EndpointParams: url.Values{"audience": {aud}},
+		TokenURL:       tokenURL.String(),
+	}
 
 	// Set access token via configured client credentials.
-	if c.clientCredentialsConfig.ClientID != "" && c.clientCredentialsConfig.ClientSecret != "" {
-		// Create token source from the client credentials configuration.
-		c.tokenSource = c.clientCredentialsConfig.TokenSource(ctx)
+	if c.clientID != "" && c.clientSecret != "" {
+		// Create token source for client secrets
+		clientCredentials.ClientID = c.clientID
+		clientCredentials.ClientSecret = c.clientSecret
+
+		c.tokenSource = clientCredentials.TokenSource(ctx)
 		return nil
 	}
 
@@ -170,11 +173,11 @@ func (c *hcpConfig) setTokenSource() error {
 	if c.credentialFile != nil {
 		if c.credentialFile.Scheme == auth.CredentialFileSchemeServicePrincipal {
 			// Set credentials on client credentials configuration
-			c.clientCredentialsConfig.ClientID = c.credentialFile.Oauth.ClientID
-			c.clientCredentialsConfig.ClientSecret = c.credentialFile.Oauth.ClientSecret
+			clientCredentials.ClientID = c.credentialFile.Oauth.ClientID
+			clientCredentials.ClientSecret = c.credentialFile.Oauth.ClientSecret
 
 			// Create token source from the client credentials configuration.
-			c.tokenSource = c.clientCredentialsConfig.TokenSource(ctx)
+			c.tokenSource = clientCredentials.TokenSource(ctx)
 			return nil
 		} else if c.credentialFile.Scheme == auth.CredentialFileSchemeWorkload {
 			w, err := workload.New(c.credentialFile.Workload)
