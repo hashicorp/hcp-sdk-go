@@ -6,18 +6,20 @@ package config
 import (
 	"crypto/tls"
 	"fmt"
-	"io"
-	"log"
-	"net/http"
-	"net/url"
-
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/auth/tokencache"
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"github.com/hashicorp/hcp-sdk-go/profile"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
+	"io"
+	"log"
+	"net/http"
+	"net/url"
+	"os"
+	"path"
 )
 
 const (
@@ -144,13 +146,26 @@ func (c *hcpConfig) setTokenSource() error {
 		TokenURL:       tokenURL.String(),
 	}
 
+	// Get the credential cache path
+	// TODO: make this configurable
+	userHome, err := os.UserHomeDir()
+	if err != nil {
+		return fmt.Errorf("failed to retrieve user's home directory path: %v", err)
+	}
+
+	cacheFile := path.Join(userHome, ".config/hcp/creds-cache.json")
+
 	// Set access token via configured client credentials.
 	if c.clientID != "" && c.clientSecret != "" {
 		// Create token source for client secrets
 		clientCredentials.ClientID = c.clientID
 		clientCredentials.ClientSecret = c.clientSecret
 
-		c.tokenSource = clientCredentials.TokenSource(ctx)
+		c.tokenSource = tokencache.NewServicePrincipalTokenSource(
+			cacheFile,
+			c.clientID,
+			clientCredentials.TokenSource(ctx),
+		)
 		return nil
 	}
 
@@ -161,7 +176,11 @@ func (c *hcpConfig) setTokenSource() error {
 			return err
 		}
 		provider.SetAPI(c)
-		c.tokenSource =	oauth2.ReuseTokenSource(nil, provider)
+		c.tokenSource = tokencache.NewWorkloadTokenSource(
+			cacheFile,
+			c.workloadProviderConfig.ProviderResourceName,
+			oauth2.ReuseTokenSource(nil, provider),
+		)
 		return nil
 	}
 
@@ -183,7 +202,12 @@ func (c *hcpConfig) setTokenSource() error {
 			clientCredentials.ClientSecret = c.credentialFile.Oauth.ClientSecret
 
 			// Create token source from the client credentials configuration.
-			c.tokenSource = clientCredentials.TokenSource(ctx)
+			c.tokenSource = tokencache.NewServicePrincipalTokenSource(
+				cacheFile,
+				c.credentialFile.Oauth.ClientID,
+				clientCredentials.TokenSource(ctx),
+			)
+
 			return nil
 		} else if c.credentialFile.Scheme == auth.CredentialFileSchemeWorkload {
 			w, err := workload.New(c.credentialFile.Workload)
@@ -195,19 +219,27 @@ func (c *hcpConfig) setTokenSource() error {
 			w.SetAPI(c)
 
 			// Use the workload provider as the token source
-			c.tokenSource = w
+			c.tokenSource = tokencache.NewWorkloadTokenSource(
+				cacheFile,
+				c.credentialFile.Workload.ProviderResourceName,
+				w,
+			)
 		}
 
 		return nil
 	}
 
-	// Set access token via browser login or use token from existing session.
-	tok, err := c.session.GetToken(ctx, &c.oauth2Config)
-	if err != nil {
-		return fmt.Errorf("failed to find existing session or set up new: %w", err)
+	var loginTokenSource oauth2.TokenSource
+	if !c.noBrowserLogin {
+		loginTokenSource = auth.NewBrowserLogin(&c.oauth2Config)
 	}
 
-	// Update HCPConfig with most current token values.
-	c.tokenSource = c.oauth2Config.TokenSource(ctx, tok)
+	c.tokenSource = tokencache.NewLoginTokenSource(
+		cacheFile,
+		// TODO: allow to configure forced login
+		false,
+		loginTokenSource,
+		&c.oauth2Config,
+	)
 	return nil
 }

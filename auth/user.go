@@ -69,20 +69,6 @@ func (s *UserSession) GetToken(ctx context.Context, conf *oauth2.Config) (*oauth
 			return s.doBrowserLogin(ctx, conf)
 		}
 
-		// Update cache with newly obtained token. Use the new token details,
-		// but keep the same session expiry.
-		newCache := Cache{
-			AccessToken:       refreshed.AccessToken,
-			RefreshToken:      refreshed.RefreshToken,
-			AccessTokenExpiry: refreshed.Expiry,
-			SessionExpiry:     cache.SessionExpiry,
-		}
-
-		err = Write(newCache)
-		if err != nil {
-			log.Printf("Failed to write cache to file: %s", err.Error())
-		}
-
 		return refreshed, nil
 
 	// Otherwise return existing, unexpired token to continue existing session.
