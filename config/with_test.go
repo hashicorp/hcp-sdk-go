@@ -23,8 +23,8 @@ func TestWith_ClientCredentials(t *testing.T) {
 	require.NoError(apply(config, WithClientCredentials("my-client-id", "my-client-secret")))
 
 	// Ensure that the client credentials have been set
-	require.Equal("my-client-id", config.clientCredentialsConfig.ClientID)
-	require.Equal("my-client-secret", config.clientCredentialsConfig.ClientSecret)
+	require.Equal("my-client-id", config.clientID)
+	require.Equal("my-client-secret", config.clientSecret)
 }
 
 func TestWith_API(t *testing.T) {

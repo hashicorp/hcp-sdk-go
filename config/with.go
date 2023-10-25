@@ -18,8 +18,8 @@ import (
 // HCP client credentials on the configuration.
 func WithClientCredentials(clientID, clientSecret string) HCPConfigOption {
 	return func(config *hcpConfig) error {
-		config.clientCredentialsConfig.ClientID = clientID
-		config.clientCredentialsConfig.ClientSecret = clientSecret
+		config.clientID = clientID
+		config.clientSecret = clientSecret
 
 		return nil
 	}

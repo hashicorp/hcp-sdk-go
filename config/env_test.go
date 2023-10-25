@@ -55,8 +55,8 @@ func TestFromEnv_SimpleValues(t *testing.T) {
 	require.Equal("my-auth:1234", config.authURL.Host)
 
 	// Ensure the client credentials are set correctly
-	require.Equal("my-client-id", config.clientCredentialsConfig.ClientID)
-	require.Equal("my-client-secret", config.clientCredentialsConfig.ClientSecret)
+	require.Equal("my-client-id", config.clientID)
+	require.Equal("my-client-secret", config.clientSecret)
 
 	// Ensure the oauth2 config is set correctly
 	require.Equal("1a2b3c4d", config.oauth2Config.ClientID)
