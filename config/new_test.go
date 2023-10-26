@@ -153,7 +153,7 @@ func TestNew_NoConfigPassed(t *testing.T) {
 	require.Equal(defaultSCADAAddress, config.SCADAAddress())
 }
 
-func TestNew_CredentialFile(t *testing.T) {
+func TestNew_CredentialFile_Workload(t *testing.T) {
 	require := requirepkg.New(t)
 
 	// Write the cred file
@@ -178,6 +178,44 @@ func TestNew_CredentialFile(t *testing.T) {
 	rawConfig, ok := config.(*hcpConfig)
 	require.True(ok)
 
-	_, ok = rawConfig.tokenSource.(*workload.Provider)
+	tokenSource, tokenSourceType, sourceIdentifier, err := rawConfig.getTokenSource()
+	require.NoError(err)
+
+	_, ok = tokenSource.(*workload.Provider)
 	require.True(ok)
+	require.Equal(sourceTypeWorkload, tokenSourceType)
+	require.Equal("iam/test", sourceIdentifier)
+}
+
+func TestNew_CredentialFile_ServicePrincipal(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Write the cred file
+	cf := &auth.CredentialFile{
+		ProjectID: "123",
+		Scheme:    auth.CredentialFileSchemeServicePrincipal,
+		Oauth: &auth.OauthConfig{
+			ClientID:     "client-id",
+			ClientSecret: "client-secret",
+		},
+	}
+
+	f, err := ioutil.TempFile("", "")
+	require.NoError(err)
+	require.NoError(auth.WriteCredentialFile(f.Name(), cf))
+
+	// Exercise
+	t.Setenv(auth.EnvHCPCredFile, f.Name())
+	config, err := NewHCPConfig()
+	require.NoError(err)
+
+	rawConfig, ok := config.(*hcpConfig)
+	require.True(ok)
+
+	tokenSource, tokenSourceType, sourceIdentifier, err := rawConfig.getTokenSource()
+	require.NoError(err)
+
+	require.NotNil(tokenSource)
+	require.Equal(sourceTypeServicePrincipal, tokenSourceType)
+	require.Equal("client-id", sourceIdentifier)
 }

@@ -112,15 +112,62 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 	return config, nil
 }
 
-// setTokenSource sets the token source. If the token source has been explictely
-// set, it is a no-op. Otherwise the order of precedence is:
+type sourceType = string
+
+var (
+	sourceTypeLogin            = sourceType("login")
+	sourceTypeServicePrincipal = sourceType("service-principal")
+	sourceTypeWorkload         = sourceType("workload")
+)
+
+func (c *hcpConfig) setTokenSource() error {
+	// Get the credential cache path
+	// TODO: make this configurable
+	userHome, err := os.UserHomeDir()
+	if err != nil {
+		return fmt.Errorf("failed to retrieve user's home directory path: %v", err)
+	}
+
+	cacheFile := path.Join(userHome, ".config/hcp/creds-cache.json")
+
+	tokenSource, sourceType, sourceIdentifier, err := c.getTokenSource()
+	if err != nil {
+		return err
+	}
+
+	switch sourceType {
+	case sourceTypeLogin:
+		c.tokenSource = tokencache.NewLoginTokenSource(
+			cacheFile,
+			c.forceLogin,
+			tokenSource,
+			&c.oauth2Config,
+		)
+	case sourceTypeServicePrincipal:
+		c.tokenSource = tokencache.NewServicePrincipalTokenSource(
+			cacheFile,
+			sourceIdentifier,
+			tokenSource,
+		)
+	case sourceTypeWorkload:
+		c.tokenSource = tokencache.NewWorkloadTokenSource(
+			cacheFile,
+			sourceIdentifier,
+			tokenSource,
+		)
+	}
+
+	return nil
+}
+
+// sgetTokenSource gets the token source. The order of precedence is:
 //
 // 1. Configured client credentials (either explicit or through environment
 // variables).
 // 2. Via credential file (sourced first via environment variable and then
 // default file location).
 // 3. Interactive session.
-func (c *hcpConfig) setTokenSource() error {
+func (c *hcpConfig) getTokenSource() (oauth2.TokenSource, sourceType, string, error) {
 	// Set up a token context with the custom auth TLS config
 	tokenTransport := cleanhttp.DefaultPooledTransport()
 	tokenTransport.TLSClientConfig = c.authTLSConfig
@@ -139,42 +186,23 @@ func (c *hcpConfig) setTokenSource() error {
 		TokenURL:       tokenURL.String(),
 	}
 
-	// Get the credential cache path
-	// TODO: make this configurable
-	userHome, err := os.UserHomeDir()
-	if err != nil {
-		return fmt.Errorf("failed to retrieve user's home directory path: %v", err)
-	}
-
-	cacheFile := path.Join(userHome, ".config/hcp/creds-cache.json")
-
 	// Set access token via configured client credentials.
 	if c.clientID != "" && c.clientSecret != "" {
 		// Create token source for client secrets
 		clientCredentials.ClientID = c.clientID
 		clientCredentials.ClientSecret = c.clientSecret
 
-		c.tokenSource = tokencache.NewServicePrincipalTokenSource(
-			cacheFile,
-			c.clientID,
-			clientCredentials.TokenSource(ctx),
-		)
-		return nil
+		return clientCredentials.TokenSource(ctx), sourceTypeServicePrincipal, clientCredentials.ClientID, nil
 	}
 
 	// Use workload provider config if it was provided
 	if c.workloadProviderConfig != nil {
 		provider, err := workload.New(c.workloadProviderConfig)
 		if err != nil {
-			return err
+			return nil, "", "", err
 		}
 		provider.SetAPI(c)
-		c.tokenSource = tokencache.NewWorkloadTokenSource(
-			cacheFile,
-			c.workloadProviderConfig.ProviderResourceName,
-			oauth2.ReuseTokenSource(nil, provider),
-		)
-		return nil
+		return oauth2.ReuseTokenSource(nil, provider), sourceTypeWorkload, c.workloadProviderConfig.ProviderResourceName, nil
 	}
 
 	// If we haven't been given an explicit credential file to use, try to load
@@ -182,7 +210,7 @@ func (c *hcpConfig) setTokenSource() error {
 	if c.credentialFile == nil {
 		credFile, err := auth.GetDefaultCredentialFile()
 		if err != nil {
-			return err
+			return nil, "", "", err
 		}
 		c.credentialFile = credFile
 	}
@@ -195,31 +223,19 @@ func (c *hcpConfig) setTokenSource() error {
 			clientCredentials.ClientSecret = c.credentialFile.Oauth.ClientSecret
 
 			// Create token source from the client credentials configuration.
-			c.tokenSource = tokencache.NewServicePrincipalTokenSource(
-				cacheFile,
-				c.credentialFile.Oauth.ClientID,
-				clientCredentials.TokenSource(ctx),
-			)
-
-			return nil
+			return clientCredentials.TokenSource(ctx), sourceTypeServicePrincipal, clientCredentials.ClientID, nil
 		} else if c.credentialFile.Scheme == auth.CredentialFileSchemeWorkload {
 			w, err := workload.New(c.credentialFile.Workload)
 			if err != nil {
-				return err
+				return nil, "", "", err
 			}
 
 			// Set the API info
 			w.SetAPI(c)
 
 			// Use the workload provider as the token source
-			c.tokenSource = tokencache.NewWorkloadTokenSource(
-				cacheFile,
-				c.credentialFile.Workload.ProviderResourceName,
-				w,
-			)
+			return w, sourceTypeWorkload, c.credentialFile.Workload.ProviderResourceName, nil
 		}
-
-		return nil
 	}
 
 	var loginTokenSource oauth2.TokenSource
@@ -227,12 +243,5 @@ func (c *hcpConfig) setTokenSource() error {
 		loginTokenSource = auth.NewBrowserLogin(&c.oauth2Config)
 	}
 
-	c.tokenSource = tokencache.NewLoginTokenSource(
-		cacheFile,
-		// TODO: allow to configure forced login
-		false,
-		loginTokenSource,
-		&c.oauth2Config,
-	)
-	return nil
+	return loginTokenSource, sourceTypeLogin, "", nil
 }
