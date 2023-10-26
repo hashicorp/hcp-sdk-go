@@ -145,6 +145,14 @@ func WithoutBrowserLogin() HCPConfigOption {
 	}
 }
 
+// WithForceLogin will invalidate any cached login credentials and trigger a login.
+func WithForceLogin() HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.forceLogin = true
+		return nil
+	}
+}
+
 // WithoutLogging disables this SDK from printing of any kind, this is necessary
 // since there is not a consistent logger that is used throughout the project so
 // a log level option is not sufficient.
