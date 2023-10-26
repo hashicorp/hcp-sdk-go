@@ -2,8 +2,9 @@ package tokencache
 
 import (
 	"fmt"
-	"golang.org/x/oauth2"
 	"log"
+
+	"golang.org/x/oauth2"
 )
 
 const sourceTypeWorkload = sourceType("workload")
