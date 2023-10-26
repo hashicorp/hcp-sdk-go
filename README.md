@@ -38,7 +38,7 @@ User session is ideal for getting started or one-off usage. It also works for lo
 
 To obtain user credentials, the client credential environment variables `HCP_CLIENT_ID` and `HCP_CLIENT_SECRET` must be unset. When no client credentials are detected, the HCP Go client will prompt the user with a browser login window. Once authenticated, the user session stays refreshed without intervention until it expires after 24 hours.
 
-If you have a use-case with the SDK to leverage the browser login as a feature but want to control if the browser is opened, or even to understand if the system already has a valid token present, you can pass in the option func of `WithoutBrowserLogin()` to your `NewHCPConfig()`. This will use either the provided `ClientID`:`ClientSecret` combo or a valid token that has been previously written to the system. If neither option exists, then `auth.ErrorNoLocalCredsFound` is returned to indicate that the user is not yet logged in.
+If you have a use-case with the SDK to leverage the browser login as a feature but want to control if the browser is opened you can pass in the option func of `WithoutBrowserLogin()` to your `NewHCPConfig()`.
 
 ### User Profile
 
