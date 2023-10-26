@@ -71,6 +71,24 @@ func (c *cache) write(cacheFile string) error {
 	return nil
 }
 
+// removeExpiredTokens will remove any expired service principal or workload tokens that don't have a refresh
+// token and are expired. This function should be called to garbage collect old tokens.
+func (c *cache) removeExpiredTokens() {
+	// Remove expired service principal tokens
+	for identifier, entry := range c.ServicePrincipals {
+		if entry.RefreshToken == "" && entry.AccessTokenExpiry.Before(time.Now()) {
+			delete(c.ServicePrincipals, identifier)
+		}
+	}
+
+	// Remove expired workload tokens
+	for identifier, entry := range c.Workloads {
+		if entry.RefreshToken == "" && entry.AccessTokenExpiry.Before(time.Now()) {
+			delete(c.Workloads, identifier)
+		}
+	}
+}
+
 // cacheEntry represents an individual set of cached tokens.
 type cacheEntry struct {
 	// AccessToken is the bearer token used to authenticate to HCP.
