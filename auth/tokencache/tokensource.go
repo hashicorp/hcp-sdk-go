@@ -3,9 +3,10 @@ package tokencache
 import (
 	"context"
 	"fmt"
-	"golang.org/x/oauth2"
 	"log"
 	"time"
+
+	"golang.org/x/oauth2"
 )
 
 // sourceType identities the type of token source.

@@ -3,16 +3,17 @@ package config
 import (
 	"context"
 	"fmt"
+	"net/http"
+	"net/url"
+	"os"
+	"path"
+
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/auth/tokencache"
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
-	"net/http"
-	"net/url"
-	"os"
-	"path"
 )
 
 type sourceType = string

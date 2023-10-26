@@ -6,8 +6,9 @@ package config
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"net/url"
+
+	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/profile"

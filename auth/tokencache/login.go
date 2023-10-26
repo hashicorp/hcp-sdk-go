@@ -2,8 +2,9 @@ package tokencache
 
 import (
 	"fmt"
-	"golang.org/x/oauth2"
 	"log"
+
+	"golang.org/x/oauth2"
 )
 
 // NewLoginTokenSource will create a token source that caches login tokens. Only one login token will be cached at a

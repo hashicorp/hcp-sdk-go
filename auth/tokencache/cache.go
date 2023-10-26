@@ -3,10 +3,11 @@ package tokencache
 import (
 	"encoding/json"
 	"fmt"
-	"golang.org/x/oauth2"
 	"os"
 	"path"
 	"time"
+
+	"golang.org/x/oauth2"
 )
 
 // cache is used to (un-)marshal the cached tokens from/to JSON.
@@ -32,13 +33,13 @@ func readCache(cacheFile string) (*cache, error) {
 	}
 
 	// Read the cache information from the file, if it exists
-	cacheJson, err := os.ReadFile(cacheFile)
+	cacheJSON, err := os.ReadFile(cacheFile)
 	if err != nil {
 		return cachedTokens, fmt.Errorf("failed to read credentials cache from %q: %w", cacheFile, err)
 	}
 
 	// Unmarshal the cached credentials
-	if err = json.Unmarshal(cacheJson, cachedTokens); err != nil {
+	if err = json.Unmarshal(cacheJSON, cachedTokens); err != nil {
 		return cachedTokens, fmt.Errorf("failed to unmarshal cached credentials: %w", err)
 	}
 
@@ -51,7 +52,7 @@ func readCache(cacheFile string) (*cache, error) {
 // future (e.g. by -re-reading the content before writing, locking the file or writing cache information to multiple files).
 func (c *cache) write(cacheFile string) error {
 	// Marshal the new tokens
-	cacheJson, err := json.Marshal(c)
+	cacheJSON, err := json.Marshal(c)
 	if err != nil {
 		return fmt.Errorf("failed to marshal cached tokens: %w", err)
 	}
@@ -63,7 +64,7 @@ func (c *cache) write(cacheFile string) error {
 	}
 
 	// Write the file
-	err = os.WriteFile(cacheFile, cacheJson, os.FileMode(0600))
+	err = os.WriteFile(cacheFile, cacheJSON, os.FileMode(0600))
 	if err != nil {
 		return fmt.Errorf("failed to write cached credentials to file: %w", err)
 	}

@@ -3,12 +3,13 @@ package tokencache
 import (
 	"context"
 	"fmt"
-	requirepkg "github.com/stretchr/testify/require"
-	"golang.org/x/oauth2"
 	"os"
 	"path"
 	"testing"
 	"time"
+
+	requirepkg "github.com/stretchr/testify/require"
+	"golang.org/x/oauth2"
 )
 
 type testTokenSource struct {

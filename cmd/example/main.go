@@ -5,9 +5,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/hashicorp/hcp-sdk-go/config"
 	"log"
 	"os"
+
+	"github.com/hashicorp/hcp-sdk-go/config"
 
 	consul "github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/stable/2021-02-04/client/consul_service"
 	network "github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/client/network_service"

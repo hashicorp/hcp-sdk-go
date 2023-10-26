@@ -1,11 +1,12 @@
 package config
 
 import (
+	"io/ioutil"
+	"testing"
+
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	requirepkg "github.com/stretchr/testify/require"
-	"io/ioutil"
-	"testing"
 )
 
 func TestTokenSource_GetTokenSource_WithClientCredentials(t *testing.T) {

@@ -6,11 +6,12 @@ package config
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/hashicorp/hcp-sdk-go/profile"
-	"golang.org/x/oauth2"
 	"io"
 	"log"
 	"net/url"
+
+	"github.com/hashicorp/hcp-sdk-go/profile"
+	"golang.org/x/oauth2"
 )
 
 const (

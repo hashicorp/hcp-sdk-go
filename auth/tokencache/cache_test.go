@@ -1,9 +1,10 @@
 package tokencache
 
 import (
-	"github.com/stretchr/testify/require"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestCache_ExpiredTokenRemoval(t *testing.T) {
