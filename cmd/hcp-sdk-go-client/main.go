@@ -5,6 +5,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/hashicorp/hcp-sdk-go/config"
 	"log"
 	"os"
 
@@ -14,9 +15,21 @@ import (
 )
 
 func main() {
+	// Construct HCP config
+	hcpConfig, err := config.NewHCPConfig(
+		config.FromEnv(),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Construct HTTP client config
+	httpclientConfig := httpclient.Config{
+		HCPConfig: hcpConfig,
+	}
 
 	// Initialize SDK http client
-	cl, err := httpclient.New(httpclient.Config{})
+	cl, err := httpclient.New(httpclientConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
