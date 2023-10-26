@@ -32,6 +32,9 @@ func (source *cachingTokenSource) Token() (*oauth2.Token, error) {
 		log.Println(err)
 	}
 
+	// Garbage collect expired tokens
+	cachedTokens.removeExpiredTokens()
+
 	// Handle login tokens
 	if source.login {
 		return source.loginToken(cachedTokens)
