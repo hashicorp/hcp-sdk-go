@@ -66,7 +66,7 @@ HCP_ORGANIZATION_ID="22abc..."
     )
     ```
 
-See `cmd/hcp-sdk-go-client` for a complete example.
+See `cmd/example` for a complete example.
 
 ### SDK Release Cycle
 
