@@ -132,6 +132,11 @@ func New(c *IdentityProviderConfig) (*Provider, error) {
 	return p, nil
 }
 
+// ResourceName returns the resource name of the provider.
+func (p *Provider) ResourceName() string {
+	return p.wipResourceName
+}
+
 // SetAPI configures the HCP API to use. This will be called by the
 // WithWorkloadIdentity helper.
 func (p *Provider) SetAPI(info hcpAPIInfo) {
