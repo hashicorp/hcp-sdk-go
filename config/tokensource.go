@@ -31,6 +31,11 @@ var (
 )
 
 func (c *hcpConfig) setTokenSource() error {
+	// Check if a custom token source has been provided
+	if c.tokenSource != nil {
+		return nil
+	}
+
 	// Get the credential cache path
 	// TODO: make this configurable
 	userHome, err := os.UserHomeDir()

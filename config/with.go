@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"github.com/hashicorp/hcp-sdk-go/profile"
+	"golang.org/x/oauth2"
 )
 
 // WithClientCredentials credentials is an option that can be used to set
@@ -133,6 +134,15 @@ func WithOAuth2ClientID(oauth2ClientID string) HCPConfigOption {
 func WithProfile(p *profile.UserProfile) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.profile = p
+		return nil
+	}
+}
+
+// WithTokenSource can be used to set a token source. This should only be necessary for testing.
+// Tokens from a custom token source will not be cached.
+func WithTokenSource(tokenSource oauth2.TokenSource) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.tokenSource = tokenSource
 		return nil
 	}
 }
