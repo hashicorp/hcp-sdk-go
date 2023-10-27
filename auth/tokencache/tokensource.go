@@ -13,6 +13,10 @@ const (
 	// refreshTimeout is the duration waited to receive a refresh token, before a new token is fetched.
 	// If the refresh takes longer than 5 seconds it is probably quicker to just fetch a new token (if possible).
 	refreshTimeout = 5 * time.Second
+
+	// minTTL is the minimum time that a cached token has to be valid for in order to be returned. 15 seconds should be
+	// sufficient for most calls that make use of a returned token.
+	minTTL = 15 * time.Second
 )
 
 // sourceType identities the type of token source.
@@ -67,8 +71,8 @@ func (source *cachingTokenSource) getValidToken(hitEntry *cacheEntry) (*oauth2.T
 		token = hitEntry.token()
 	}
 
-	// Return the access token if it is still valid
-	if token != nil && token.Expiry.After(time.Now()) {
+	// Return the access token if it is still valid for at least minTTL
+	if token != nil && token.Expiry.After(time.Now().Add(minTTL)) {
 		return token, nil
 	}
 
