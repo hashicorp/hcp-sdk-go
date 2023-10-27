@@ -43,6 +43,7 @@ func (source *cachingTokenSource) Token() (*oauth2.Token, error) {
 
 	// Garbage collect expired tokens
 	cachedTokens.removeExpiredTokens()
+	_ = cachedTokens.write(source.cacheFile)
 
 	// Handle the different source types
 	switch source.sourceType {
