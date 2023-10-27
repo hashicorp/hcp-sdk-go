@@ -71,7 +71,7 @@ func TestCachingTokenSource_Login_WithoutOauthConfig(t *testing.T) {
 	require.NoError(err)
 
 	// Compile the credential cache path
-	cacheFile := path.Join(testDirectory, ".config/hcp/credentials.json")
+	cacheFile := path.Join(testDirectory, ".config/hcp/creds-cache.json")
 
 	// Ensure the tests files are cleaned up
 	defer os.RemoveAll(cacheFile)
@@ -148,7 +148,7 @@ func TestCachingTokenSource_Login_WithOauthConfig(t *testing.T) {
 	require.NoError(err)
 
 	// Compile the credential cache path
-	cacheFile := path.Join(testDirectory, ".config/hcp/credentials.json")
+	cacheFile := path.Join(testDirectory, ".config/hcp/creds-cache.json")
 
 	// Ensure the tests files are cleaned up
 	defer os.RemoveAll(cacheFile)
@@ -211,7 +211,7 @@ func TestCachingTokenSource_ServicePrincipals(t *testing.T) {
 	require.NoError(err)
 
 	// Compile the credential cache path
-	cacheFile := path.Join(testDirectory, ".config/hcp/credentials.json")
+	cacheFile := path.Join(testDirectory, ".config/hcp/creds-cache.json")
 
 	// Ensure the tests files are cleaned up
 	defer os.RemoveAll(cacheFile)
@@ -281,7 +281,7 @@ func TestCachingTokenSource_Workloads(t *testing.T) {
 	require.NoError(err)
 
 	// Compile the credential cache path
-	cacheFile := path.Join(testDirectory, ".config/hcp/credentials.json")
+	cacheFile := path.Join(testDirectory, ".config/hcp/creds-cache.json")
 
 	// Ensure the tests files are cleaned up
 	defer os.RemoveAll(cacheFile)
