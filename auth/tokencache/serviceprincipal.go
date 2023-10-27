@@ -18,7 +18,6 @@ func NewServicePrincipalTokenSource(
 ) oauth2.TokenSource {
 	return &cachingTokenSource{
 		cacheFile:        cacheFile,
-		login:            false,
 		sourceIdentifier: clientID,
 		sourceType:       sourceTypeServicePrincipal,
 		oauthTokenSource: oauthTokenSource,

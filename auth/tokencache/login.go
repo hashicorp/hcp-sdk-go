@@ -7,6 +7,8 @@ import (
 	"golang.org/x/oauth2"
 )
 
+const sourceTypeLogin = sourceType("login")
+
 // NewLoginTokenSource will create a token source that caches login tokens. Only one login token will be cached at a
 // time.
 //
@@ -22,7 +24,7 @@ func NewLoginTokenSource(
 ) oauth2.TokenSource {
 	return &cachingTokenSource{
 		cacheFile:        cacheFile,
-		login:            true,
+		sourceType:       sourceTypeLogin,
 		forceLogin:       forceLogin,
 		oauthTokenSource: oauthTokenSource,
 		oauthConfig:      oauthConfig,
