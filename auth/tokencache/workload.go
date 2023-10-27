@@ -18,7 +18,6 @@ func NewWorkloadTokenSource(
 ) oauth2.TokenSource {
 	return &cachingTokenSource{
 		cacheFile:        cacheFile,
-		login:            false,
 		sourceIdentifier: providerResourceName,
 		sourceType:       sourceTypeWorkload,
 		oauthTokenSource: oauthTokenSource,

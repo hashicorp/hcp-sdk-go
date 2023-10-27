@@ -25,7 +25,6 @@ type sourceType = string
 // cachingTokenSource acts as a read-through cache for token information received from token sources and oauth configurations.
 type cachingTokenSource struct {
 	cacheFile        string
-	login            bool
 	forceLogin       bool
 	sourceType       sourceType
 	sourceIdentifier string
@@ -45,17 +44,14 @@ func (source *cachingTokenSource) Token() (*oauth2.Token, error) {
 	// Garbage collect expired tokens
 	cachedTokens.removeExpiredTokens()
 
-	// Handle login tokens
-	if source.login {
-		return source.loginToken(cachedTokens)
-	}
-
-	// Handle non-login tokens
+	// Handle the different source types
 	switch source.sourceType {
 	case sourceTypeServicePrincipal:
 		return source.servicePrincipalToken(cachedTokens)
 	case sourceTypeWorkload:
 		return source.workloadToken(cachedTokens)
+	case sourceTypeLogin:
+		return source.loginToken(cachedTokens)
 	default:
 		return nil, fmt.Errorf("invalid source type: %q", source.sourceType)
 	}
