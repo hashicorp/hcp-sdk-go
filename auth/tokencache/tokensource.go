@@ -52,6 +52,10 @@ func (source *cachingTokenSource) Token() (*oauth2.Token, error) {
 	}
 }
 
+// evaluate will perform the following steps:
+// 1. check if the cached token is still valid and return it if this is the case
+// 2. try to refresh the cached token using the provided oauth config
+// 3. fetch a new token from the provided token source
 func (source *cachingTokenSource) evaluate(hitEntry *cacheEntry) (*oauth2.Token, error) {
 	var token *oauth2.Token
 	if hitEntry != nil {
@@ -63,20 +67,22 @@ func (source *cachingTokenSource) evaluate(hitEntry *cacheEntry) (*oauth2.Token,
 		return token, nil
 	}
 
-	if source.oauthConfig != nil {
-		// Try to refresh the token if an oauth2.Config was provided
-		ctx, cancel := context.WithTimeout(context.Background(), source.fetchTimeout)
-		defer cancel()
+	// Try to refresh the token if it has a RefreshToken and an oauth config was provided
+	if token != nil && token.RefreshToken != "" && source.oauthConfig != nil {
+		ctx := context.Background()
+		//ctx, cancel := context.WithTimeout(context.Background(), source.fetchTimeout)
+		//defer cancel()
 
 		token, err := source.oauthConfig.TokenSource(ctx, token).Token()
 		if err == nil {
 			return token, err
 		}
 
-		// Try to fetch the token if an error occurred
+		// Fall through to fetch a new token
 		log.Printf("failed to refresh the token: %s\n", err)
 	}
 
+	// Fetch a new token
 	if source.oauthTokenSource != nil {
 		// Try to get a new token
 		return source.oauthTokenSource.Token()

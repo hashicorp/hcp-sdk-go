@@ -70,7 +70,7 @@ func (c *hcpConfig) setTokenSource() error {
 	return nil
 }
 
-// sgetTokenSource gets the token source. The order of precedence is:
+// getTokenSource gets the token source. The order of precedence is:
 //
 // 1. Configured client credentials (either explicit or through environment
 // variables).
