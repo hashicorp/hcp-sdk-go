@@ -96,9 +96,7 @@ In addition to the generated product clients, the HCP Go SDK provides a few libr
 
 ### Cache
 
-The Cache interface lives under the `auth` package. It handles writing the user credentials obtained during browser login to the common location `/.config/hcp/credentials.json` in the home directory. The Cache has `Read` and `Write` methods that can be used to get and set stored HCP credentials.
-
-Generally the contents of the Cache should be Read to get the latest, unexpired credentials. Without care, overwriting user credentials may cause unexpected authentication failures.
+The Cache interface lives under the `tokencache` package. It handles writing the user, service-principal and workload identity provider tokens to the common location `/.config/hcp/creds-cache.json` in the home directory. The cached values are automatically read and written when a caching token source is used.
 
 ## Contributing
 
