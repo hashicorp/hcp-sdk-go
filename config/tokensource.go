@@ -12,8 +12,14 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/auth/tokencache"
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
+	"github.com/hashicorp/hcp-sdk-go/config/files"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
+)
+
+const (
+	// cacheFileName is the name of the cache file within the configuration folder.
+	cacheFileName = "creds-cache.json"
 )
 
 type sourceType = string
@@ -32,7 +38,7 @@ func (c *hcpConfig) setTokenSource() error {
 		return fmt.Errorf("failed to retrieve user's home directory path: %v", err)
 	}
 
-	cacheFile := path.Join(userHome, ".config/hcp/creds-cache.json")
+	cacheFile := path.Join(userHome, files.DefaultDirectory, cacheFileName)
 
 	tokenSource, sourceType, sourceIdentifier, err := c.getTokenSource()
 	if err != nil {
