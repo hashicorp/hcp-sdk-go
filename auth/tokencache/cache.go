@@ -81,6 +81,9 @@ func (c *cache) write(cacheFile string) error {
 
 // removeExpiredTokens will remove any expired service principal or workload tokens that don't have a refresh
 // token and are expired. This function should be called to garbage collect old tokens.
+//
+// Expired tokens will only get removed from the in-memory version of the cache, the result still has to explicitly get
+// persisted to disc by calling write().
 func (c *cache) removeExpiredTokens() {
 	// Remove expired service principal tokens
 	for identifier, entry := range c.ServicePrincipals {
