@@ -37,7 +37,7 @@ func (source *testTokenSource) Token() (*oauth2.Token, error) {
 	return &oauth2.Token{
 		AccessToken:  fmt.Sprintf("access-token-%s%d", source.label, source.tokenCounter),
 		RefreshToken: fmt.Sprintf("refresh-token-%s%d", source.label, source.tokenCounter),
-		Expiry:       time.Now().Add(2 * time.Second),
+		Expiry:       time.Now().Add(minTTL + 2*time.Second),
 	}, err
 }
 
