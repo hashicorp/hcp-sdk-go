@@ -158,7 +158,6 @@ func TestCachingTokenSource_Login_WithOauthConfig(t *testing.T) {
 
 	// Create a test config
 	configTokenSource := NewTestTokenSource("b")
-	configTokenSource.FailNextWith(fmt.Errorf("no refresh token available"))
 	config := NewTestOauth2Config(configTokenSource)
 
 	// Create the caching token source for interactive logins
@@ -182,15 +181,26 @@ func TestCachingTokenSource_Login_WithOauthConfig(t *testing.T) {
 	// Wait for token to expire
 	time.Sleep(2 * time.Second)
 
-	// Fetch the token a third time. It should be read from the configured token source and get cached.
+	// Fetch the token a third time. It should be refreshed using the configured oauth config and get cached.
 	token, err = subject.Token()
 	require.NoError(err)
-	require.Equal("access-token-b2", token.AccessToken)
+	require.Equal("access-token-b1", token.AccessToken)
 
 	// Fetch the token a fourth time. It should be returned from cache.
 	token, err = subject.Token()
 	require.NoError(err)
-	require.Equal("access-token-b2", token.AccessToken)
+	require.Equal("access-token-b1", token.AccessToken)
+
+	// Wait for token to expire again
+	time.Sleep(2 * time.Second)
+
+	// Expect refresh to fail
+	configTokenSource.FailNextWith(fmt.Errorf("no refresh token available"))
+
+	// Fetch the token again and expect it to be fetched from the configured token source.
+	token, err = subject.Token()
+	require.NoError(err)
+	require.Equal("access-token-a2", token.AccessToken)
 }
 
 func TestCachingTokenSource_ServicePrincipals(t *testing.T) {
