@@ -7,6 +7,7 @@ import (
 	"path"
 	"time"
 
+	"github.com/hashicorp/hcp-sdk-go/config/files"
 	"golang.org/x/oauth2"
 )
 
@@ -58,13 +59,13 @@ func (c *cache) write(cacheFile string) error {
 	}
 
 	// Create the directory if it doesn't exist yet
-	err = os.MkdirAll(path.Dir(cacheFile), os.FileMode(0700))
+	err = os.MkdirAll(path.Dir(cacheFile), files.FolderMode)
 	if err != nil {
 		return fmt.Errorf("failed to create credential cache directory, %w", err)
 	}
 
 	// Write the file
-	err = os.WriteFile(cacheFile, cacheJSON, os.FileMode(0600))
+	err = os.WriteFile(cacheFile, cacheJSON, files.FileMode)
 	if err != nil {
 		return fmt.Errorf("failed to write cached credentials to file: %w", err)
 	}

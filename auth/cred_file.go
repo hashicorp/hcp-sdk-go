@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
+	"github.com/hashicorp/hcp-sdk-go/config/files"
 )
 
 const (
@@ -28,9 +29,6 @@ const (
 	// that indicates workload identity credentials should be used to
 	// authenticate to HCP.
 	CredentialFileSchemeWorkload = "workload"
-
-	defaultDirectory     = ".config/hcp"
-	directoryPermissions = 0755
 )
 
 var (
@@ -161,7 +159,7 @@ func GetCredentialFilePath() (string, error) {
 		return "", fmt.Errorf("failed to retrieve user's home directory path: %v", err)
 	}
 
-	p := filepath.Join(userHome, defaultDirectory, CredentialFileName)
+	p := filepath.Join(userHome, files.DefaultDirectory, CredentialFileName)
 	return p, nil
 }
 
@@ -183,5 +181,5 @@ func WriteCredentialFile(path string, cf *CredentialFile) error {
 		return err
 	}
 
-	return ioutil.WriteFile(path, data, directoryPermissions)
+	return ioutil.WriteFile(path, data, files.FileMode)
 }
