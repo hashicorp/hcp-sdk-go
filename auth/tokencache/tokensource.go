@@ -9,6 +9,12 @@ import (
 	"golang.org/x/oauth2"
 )
 
+const (
+	// refreshTimeout is the duration waited to receive a refresh token, before a new token is fetched.
+	// If the refresh takes longer than 5 seconds it is probably quicker to just fetch a new token (if possible).
+	refreshTimeout = 5 * time.Second
+)
+
 // sourceType identities the type of token source.
 type sourceType = string
 
@@ -21,7 +27,6 @@ type cachingTokenSource struct {
 	sourceIdentifier string
 	oauthTokenSource oauth2.TokenSource
 	oauthConfig      oAuth2Config
-	fetchTimeout     time.Duration
 }
 
 // Token implements the oauth2.TokenSource interface. It will read cached tokens from a file and based on their validity
@@ -69,9 +74,8 @@ func (source *cachingTokenSource) getValidToken(hitEntry *cacheEntry) (*oauth2.T
 
 	// Try to refresh the token if it has a RefreshToken and an oauth config was provided
 	if token != nil && token.RefreshToken != "" && source.oauthConfig != nil {
-		ctx := context.Background()
-		//ctx, cancel := context.WithTimeout(context.Background(), source.fetchTimeout)
-		//defer cancel()
+		ctx, cancel := context.WithTimeout(context.Background(), refreshTimeout)
+		defer cancel()
 
 		token, err := source.oauthConfig.TokenSource(ctx, token).Token()
 		if err == nil {
