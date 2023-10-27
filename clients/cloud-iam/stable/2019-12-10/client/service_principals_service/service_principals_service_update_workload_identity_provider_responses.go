@@ -202,7 +202,7 @@ type ServicePrincipalsServiceUpdateWorkloadIdentityProviderBody struct {
 
 	// created_at is when the workload identity provider was created.
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// description is an optional description for the workload identity provider.
 	Description string `json:"description,omitempty"`
@@ -220,7 +220,7 @@ type ServicePrincipalsServiceUpdateWorkloadIdentityProviderBody struct {
 
 	// updated_at is when the workload identity provider was last updated.
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 }
 
 // Validate validates this service principals service update workload identity provider body
