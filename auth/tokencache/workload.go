@@ -33,7 +33,7 @@ func (source *cachingTokenSource) workloadToken(cachedTokens *cache) (*oauth2.To
 	}
 
 	// Check the token for validity, try to refresh it and otherwise get a new token
-	token, err := source.evaluate(hitEntry)
+	token, err := source.getValidToken(hitEntry)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get new token: %w", err)
 	}

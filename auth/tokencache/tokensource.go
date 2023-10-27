@@ -52,11 +52,11 @@ func (source *cachingTokenSource) Token() (*oauth2.Token, error) {
 	}
 }
 
-// evaluate will perform the following steps:
+// getValidToken will perform the following steps:
 // 1. check if the cached token is still valid and return it if this is the case
 // 2. try to refresh the cached token using the provided oauth config
 // 3. fetch a new token from the provided token source
-func (source *cachingTokenSource) evaluate(hitEntry *cacheEntry) (*oauth2.Token, error) {
+func (source *cachingTokenSource) getValidToken(hitEntry *cacheEntry) (*oauth2.Token, error) {
 	var token *oauth2.Token
 	if hitEntry != nil {
 		token = hitEntry.token()
