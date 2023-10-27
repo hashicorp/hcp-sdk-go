@@ -2,6 +2,7 @@ package tokencache
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"path"
@@ -36,6 +37,11 @@ func readCache(cacheFile string) (*cache, error) {
 	// Read the cache information from the file, if it exists
 	cacheJSON, err := os.ReadFile(cacheFile)
 	if err != nil {
+		// If the file does not exist just return an empty cache
+		if errors.Is(err, os.ErrNotExist) {
+			return cachedTokens, nil
+		}
+
 		return cachedTokens, fmt.Errorf("failed to read credentials cache from %q: %w", cacheFile, err)
 	}
 
