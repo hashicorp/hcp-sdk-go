@@ -19,9 +19,22 @@ import (
 	"golang.org/x/oauth2"
 )
 
-// Browser implements the browser handler for the OAuth2 login flow.
-type Browser interface {
-	GetTokenFromBrowser(context.Context, *oauth2.Config) (*oauth2.Token, error)
+// browserLogin implements an oauth2.TokenSource for interactive browser logins.
+type browserLogin struct {
+	oauthConfig *oauth2.Config
+}
+
+// NewBrowserLogin will return an oauth2.TokenSource that will return a Token from an interactive browser login.
+func NewBrowserLogin(oauthConfig *oauth2.Config) *browserLogin {
+	return &browserLogin{
+		oauthConfig: oauthConfig,
+	}
+}
+
+// Token will return an oauth2.Token retrieved from an interactive browser login.
+func (b *browserLogin) Token() (*oauth2.Token, error) {
+	browser := &oauthBrowser{}
+	return browser.GetTokenFromBrowser(context.Background(), b.oauthConfig)
 }
 
 // oauthBrowser implements the Browser interface using the real OAuth2 login flow.
@@ -125,22 +138,4 @@ func generateRandomString(n int) string {
 	}
 
 	return base64.RawURLEncoding.EncodeToString(b)
-}
-
-// browserLogin implements an oauth2.TokenSource for interactive browser logins.
-type browserLogin struct {
-	oauthConfig *oauth2.Config
-}
-
-// NewBrowserLogin will return an oauth2.TokenSource that will return a Token from an interactive browser login.
-func NewBrowserLogin(oauthConfig *oauth2.Config) *browserLogin {
-	return &browserLogin{
-		oauthConfig: oauthConfig,
-	}
-}
-
-// Token will return an oauth2.Token retrieved from an interactive browser login.
-func (b *browserLogin) Token() (*oauth2.Token, error) {
-	browser := &oauthBrowser{}
-	return browser.GetTokenFromBrowser(context.Background(), b.oauthConfig)
 }
