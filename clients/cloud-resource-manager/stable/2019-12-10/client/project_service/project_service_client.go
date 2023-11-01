@@ -36,6 +36,8 @@ type ClientService interface {
 
 	ProjectServiceGetIamPolicy(params *ProjectServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceGetIamPolicyOK, error)
 
+	ProjectServiceGetProjectsCount(params *ProjectServiceGetProjectsCountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceGetProjectsCountOK, error)
+
 	ProjectServiceList(params *ProjectServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceListOK, error)
 
 	ProjectServiceSetDescription(params *ProjectServiceSetDescriptionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceSetDescriptionOK, error)
@@ -43,6 +45,8 @@ type ClientService interface {
 	ProjectServiceSetIamPolicy(params *ProjectServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceSetIamPolicyOK, error)
 
 	ProjectServiceSetName(params *ProjectServiceSetNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceSetNameOK, error)
+
+	ProjectServiceTestIamPermissions(params *ProjectServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceTestIamPermissionsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -200,6 +204,44 @@ func (a *Client) ProjectServiceGetIamPolicy(params *ProjectServiceGetIamPolicyPa
 }
 
 /*
+ProjectServiceGetProjectsCount gets projects count returns the count of projects within a parent scope
+*/
+func (a *Client) ProjectServiceGetProjectsCount(params *ProjectServiceGetProjectsCountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceGetProjectsCountOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewProjectServiceGetProjectsCountParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ProjectService_GetProjectsCount",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/projects/count",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ProjectServiceGetProjectsCountReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ProjectServiceGetProjectsCountOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ProjectServiceGetProjectsCountDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ProjectServiceList lists list the projects the caller has access to
 */
 func (a *Client) ProjectServiceList(params *ProjectServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceListOK, error) {
@@ -348,6 +390,44 @@ func (a *Client) ProjectServiceSetName(params *ProjectServiceSetNameParams, auth
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ProjectServiceSetNameDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ProjectServiceTestIamPermissions tests iam permissions returns a subset of the request permissions the calling principal has for the project
+*/
+func (a *Client) ProjectServiceTestIamPermissions(params *ProjectServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceTestIamPermissionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewProjectServiceTestIamPermissionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ProjectService_TestIamPermissions",
+		Method:             "POST",
+		PathPattern:        "/resource-manager/2019-12-10/projects/{id}/test-iam-permissions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ProjectServiceTestIamPermissionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ProjectServiceTestIamPermissionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ProjectServiceTestIamPermissionsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

@@ -19,7 +19,7 @@ import (
 type HashicorpCloudVault20201125GetLinkedClusterResponse struct {
 
 	// cluster
-	Cluster *HashicorpCloudVault20201125LinkedCluster `json:"cluster,omitempty"`
+	Cluster *HashicorpCloudVaultLink20221107LinkedCluster `json:"cluster,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 get linked cluster response

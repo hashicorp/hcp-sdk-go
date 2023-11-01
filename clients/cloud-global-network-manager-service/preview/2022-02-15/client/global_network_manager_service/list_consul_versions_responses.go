@@ -81,6 +81,11 @@ func (o *ListConsulVersionsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list consul versions o k response
+func (o *ListConsulVersionsOK) Code() int {
+	return 200
+}
+
 func (o *ListConsulVersionsOK) Error() string {
 	return fmt.Sprintf("[GET /global-network-manager/2022-02-15/list_consul_versions][%d] listConsulVersionsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ListConsulVersionsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the list consul versions default response
-func (o *ListConsulVersionsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list consul versions default response has a 2xx status code
 func (o *ListConsulVersionsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ListConsulVersionsDefault) IsServerError() bool {
 // IsCode returns true when this list consul versions default response a status code equal to that given
 func (o *ListConsulVersionsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list consul versions default response
+func (o *ListConsulVersionsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListConsulVersionsDefault) Error() string {

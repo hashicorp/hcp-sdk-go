@@ -61,6 +61,12 @@ AgentBootstrapConfigParams contains all the parameters to send to the API endpoi
 */
 type AgentBootstrapConfigParams struct {
 
+	/* ConsulVersion.
+
+	   Consul version of the cluster
+	*/
+	ConsulVersion *string
+
 	// ID.
 	ID string
 
@@ -141,6 +147,17 @@ func (o *AgentBootstrapConfigParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithConsulVersion adds the consulVersion to the agent bootstrap config params
+func (o *AgentBootstrapConfigParams) WithConsulVersion(consulVersion *string) *AgentBootstrapConfigParams {
+	o.SetConsulVersion(consulVersion)
+	return o
+}
+
+// SetConsulVersion adds the consulVersion to the agent bootstrap config params
+func (o *AgentBootstrapConfigParams) SetConsulVersion(consulVersion *string) {
+	o.ConsulVersion = consulVersion
+}
+
 // WithID adds the id to the agent bootstrap config params
 func (o *AgentBootstrapConfigParams) WithID(id string) *AgentBootstrapConfigParams {
 	o.SetID(id)
@@ -203,6 +220,23 @@ func (o *AgentBootstrapConfigParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
+
+	if o.ConsulVersion != nil {
+
+		// query param consul_version
+		var qrConsulVersion string
+
+		if o.ConsulVersion != nil {
+			qrConsulVersion = *o.ConsulVersion
+		}
+		qConsulVersion := qrConsulVersion
+		if qConsulVersion != "" {
+
+			if err := r.SetQueryParam("consul_version", qConsulVersion); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param id
 	if err := r.SetPathParam("id", o.ID); err != nil {

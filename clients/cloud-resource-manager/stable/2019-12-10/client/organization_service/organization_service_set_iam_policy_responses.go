@@ -16,6 +16,7 @@ import (
 	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // OrganizationServiceSetIamPolicyReader is a Reader for the OrganizationServiceSetIamPolicy structure.
@@ -55,7 +56,7 @@ OrganizationServiceSetIamPolicyOK describes a response with status code 200, wit
 A successful response.
 */
 type OrganizationServiceSetIamPolicyOK struct {
-	Payload *models.ResourcemanagerOrganizationSetIamPolicyResponse
+	Payload *models.HashicorpCloudResourcemanagerOrganizationSetIamPolicyResponse
 }
 
 // IsSuccess returns true when this organization service set iam policy o k response has a 2xx status code
@@ -91,13 +92,13 @@ func (o *OrganizationServiceSetIamPolicyOK) String() string {
 	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceSetIamPolicyOK  %+v", 200, o.Payload)
 }
 
-func (o *OrganizationServiceSetIamPolicyOK) GetPayload() *models.ResourcemanagerOrganizationSetIamPolicyResponse {
+func (o *OrganizationServiceSetIamPolicyOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationSetIamPolicyResponse {
 	return o.Payload
 }
 
 func (o *OrganizationServiceSetIamPolicyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResourcemanagerOrganizationSetIamPolicyResponse)
+	o.Payload = new(models.HashicorpCloudResourcemanagerOrganizationSetIamPolicyResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -122,7 +123,7 @@ An unexpected error response.
 type OrganizationServiceSetIamPolicyDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the organization service set iam policy default response
@@ -163,13 +164,13 @@ func (o *OrganizationServiceSetIamPolicyDefault) String() string {
 	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_SetIamPolicy default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *OrganizationServiceSetIamPolicyDefault) GetPayload() *models.RPCStatus {
+func (o *OrganizationServiceSetIamPolicyDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *OrganizationServiceSetIamPolicyDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -188,7 +189,7 @@ type OrganizationServiceSetIamPolicyBody struct {
 	// Policy is the updated IAM policy for the organization. The policy
 	// will be completely replaced and therefore Policy.Etag must be specified
 	// in order to prevent concurrent updates.
-	Policy *models.ResourcemanagerPolicy `json:"policy,omitempty"`
+	Policy *models.HashicorpCloudResourcemanagerPolicy `json:"policy,omitempty"`
 }
 
 // Validate validates this organization service set iam policy body

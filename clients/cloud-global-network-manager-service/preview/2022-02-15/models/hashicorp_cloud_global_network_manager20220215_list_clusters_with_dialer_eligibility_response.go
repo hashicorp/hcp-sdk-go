@@ -82,6 +82,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ListClustersWithDialerEligibi
 	for i := 0; i < len(m.Clusters); i++ {
 
 		if m.Clusters[i] != nil {
+
+			if swag.IsZero(m.Clusters[i]) { // not required
+				return nil
+			}
+
 			if err := m.Clusters[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("clusters" + "." + strconv.Itoa(i))

@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // OrganizationServiceGetIamPolicyReader is a Reader for the OrganizationServiceGetIamPolicy structure.
@@ -52,7 +53,7 @@ OrganizationServiceGetIamPolicyOK describes a response with status code 200, wit
 A successful response.
 */
 type OrganizationServiceGetIamPolicyOK struct {
-	Payload *models.ResourcemanagerOrganizationGetIamPolicyResponse
+	Payload *models.HashicorpCloudResourcemanagerOrganizationGetIamPolicyResponse
 }
 
 // IsSuccess returns true when this organization service get iam policy o k response has a 2xx status code
@@ -88,13 +89,13 @@ func (o *OrganizationServiceGetIamPolicyOK) String() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceGetIamPolicyOK  %+v", 200, o.Payload)
 }
 
-func (o *OrganizationServiceGetIamPolicyOK) GetPayload() *models.ResourcemanagerOrganizationGetIamPolicyResponse {
+func (o *OrganizationServiceGetIamPolicyOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationGetIamPolicyResponse {
 	return o.Payload
 }
 
 func (o *OrganizationServiceGetIamPolicyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResourcemanagerOrganizationGetIamPolicyResponse)
+	o.Payload = new(models.HashicorpCloudResourcemanagerOrganizationGetIamPolicyResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -119,7 +120,7 @@ An unexpected error response.
 type OrganizationServiceGetIamPolicyDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the organization service get iam policy default response
@@ -160,13 +161,13 @@ func (o *OrganizationServiceGetIamPolicyDefault) String() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *OrganizationServiceGetIamPolicyDefault) GetPayload() *models.RPCStatus {
+func (o *OrganizationServiceGetIamPolicyDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *OrganizationServiceGetIamPolicyDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

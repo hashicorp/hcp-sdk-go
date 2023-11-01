@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // OrganizationServiceGetRoleReader is a Reader for the OrganizationServiceGetRole structure.
@@ -52,7 +53,7 @@ OrganizationServiceGetRoleOK describes a response with status code 200, with def
 A successful response.
 */
 type OrganizationServiceGetRoleOK struct {
-	Payload *models.ResourcemanagerOrganizationGetRoleResponse
+	Payload *models.HashicorpCloudResourcemanagerOrganizationGetRoleResponse
 }
 
 // IsSuccess returns true when this organization service get role o k response has a 2xx status code
@@ -81,20 +82,20 @@ func (o *OrganizationServiceGetRoleOK) IsCode(code int) bool {
 }
 
 func (o *OrganizationServiceGetRoleOK) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/{roleId}][%d] organizationServiceGetRoleOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/{role_id}][%d] organizationServiceGetRoleOK  %+v", 200, o.Payload)
 }
 
 func (o *OrganizationServiceGetRoleOK) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/{roleId}][%d] organizationServiceGetRoleOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/{role_id}][%d] organizationServiceGetRoleOK  %+v", 200, o.Payload)
 }
 
-func (o *OrganizationServiceGetRoleOK) GetPayload() *models.ResourcemanagerOrganizationGetRoleResponse {
+func (o *OrganizationServiceGetRoleOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationGetRoleResponse {
 	return o.Payload
 }
 
 func (o *OrganizationServiceGetRoleOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResourcemanagerOrganizationGetRoleResponse)
+	o.Payload = new(models.HashicorpCloudResourcemanagerOrganizationGetRoleResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -119,7 +120,7 @@ An unexpected error response.
 type OrganizationServiceGetRoleDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the organization service get role default response
@@ -153,20 +154,20 @@ func (o *OrganizationServiceGetRoleDefault) IsCode(code int) bool {
 }
 
 func (o *OrganizationServiceGetRoleDefault) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/{roleId}][%d] OrganizationService_GetRole default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/{role_id}][%d] OrganizationService_GetRole default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *OrganizationServiceGetRoleDefault) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/{roleId}][%d] OrganizationService_GetRole default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/{role_id}][%d] OrganizationService_GetRole default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *OrganizationServiceGetRoleDefault) GetPayload() *models.RPCStatus {
+func (o *OrganizationServiceGetRoleDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *OrganizationServiceGetRoleDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

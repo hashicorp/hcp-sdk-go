@@ -64,7 +64,7 @@ ProjectServiceCreateParams contains all the parameters to send to the API endpoi
 type ProjectServiceCreateParams struct {
 
 	// Body.
-	Body *models.ResourcemanagerProjectCreateRequest
+	Body *models.HashicorpCloudResourcemanagerProjectCreateRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,13 +120,13 @@ func (o *ProjectServiceCreateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the project service create params
-func (o *ProjectServiceCreateParams) WithBody(body *models.ResourcemanagerProjectCreateRequest) *ProjectServiceCreateParams {
+func (o *ProjectServiceCreateParams) WithBody(body *models.HashicorpCloudResourcemanagerProjectCreateRequest) *ProjectServiceCreateParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the project service create params
-func (o *ProjectServiceCreateParams) SetBody(body *models.ResourcemanagerProjectCreateRequest) {
+func (o *ProjectServiceCreateParams) SetBody(body *models.HashicorpCloudResourcemanagerProjectCreateRequest) {
 	o.Body = body
 }
 

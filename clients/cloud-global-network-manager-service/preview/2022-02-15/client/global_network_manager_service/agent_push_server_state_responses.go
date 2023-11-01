@@ -84,6 +84,11 @@ func (o *AgentPushServerStateOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the agent push server state o k response
+func (o *AgentPushServerStateOK) Code() int {
+	return 200
+}
+
 func (o *AgentPushServerStateOK) Error() string {
 	return fmt.Sprintf("[POST /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/agent/server-state][%d] agentPushServerStateOK  %+v", 200, o.Payload)
 }
@@ -124,11 +129,6 @@ type AgentPushServerStateDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the agent push server state default response
-func (o *AgentPushServerStateDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this agent push server state default response has a 2xx status code
 func (o *AgentPushServerStateDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -152,6 +152,11 @@ func (o *AgentPushServerStateDefault) IsServerError() bool {
 // IsCode returns true when this agent push server state default response a status code equal to that given
 func (o *AgentPushServerStateDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the agent push server state default response
+func (o *AgentPushServerStateDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *AgentPushServerStateDefault) Error() string {
@@ -268,6 +273,11 @@ func (o *AgentPushServerStateBody) ContextValidate(ctx context.Context, formats 
 func (o *AgentPushServerStateBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -284,6 +294,11 @@ func (o *AgentPushServerStateBody) contextValidateLocation(ctx context.Context, 
 func (o *AgentPushServerStateBody) contextValidateServerState(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.ServerState != nil {
+
+		if swag.IsZero(o.ServerState) { // not required
+			return nil
+		}
+
 		if err := o.ServerState.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "server_state")
@@ -376,6 +391,11 @@ func (o *AgentPushServerStateParamsBodyLocation) ContextValidate(ctx context.Con
 func (o *AgentPushServerStateParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

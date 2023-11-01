@@ -39,6 +39,9 @@ type HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer struct {
 	// peer_cluster_location is the location of the peer GNM cluster
 	PeerClusterLocation *cloud.HashicorpCloudLocationLocation `json:"peer_cluster_location,omitempty"`
 
+	// peer_licensing is the Consul licensing information of the peer GNM cluster
+	PeerLicensing *HashicorpCloudGlobalNetworkManager20220215Licensing `json:"peer_licensing,omitempty"`
+
 	// peer_name is the name of the peer
 	PeerName string `json:"peer_name,omitempty"`
 
@@ -51,7 +54,10 @@ type HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer struct {
 	// peering_connection_location is the location of the GNM peering connections
 	PeeringConnectionLocation *cloud.HashicorpCloudLocationLocation `json:"peering_connection_location,omitempty"`
 
-	// status is the overall status of the peering connection
+	// peering_connection_status is the overall status of the peering connection
+	PeeringConnectionStatus *HashicorpCloudGlobalNetworkManager20220215PeeringConnectionStatus `json:"peering_connection_status,omitempty"`
+
+	// peering_status is the state of this individual peer
 	PeeringStatus *HashicorpCloudGlobalNetworkManager20220215PeerState `json:"peering_status,omitempty"`
 }
 
@@ -71,7 +77,15 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) Validat
 		res = append(res, err)
 	}
 
+	if err := m.validatePeerLicensing(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePeeringConnectionLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePeeringConnectionStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -135,6 +149,25 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) validat
 	return nil
 }
 
+func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) validatePeerLicensing(formats strfmt.Registry) error {
+	if swag.IsZero(m.PeerLicensing) { // not required
+		return nil
+	}
+
+	if m.PeerLicensing != nil {
+		if err := m.PeerLicensing.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("peer_licensing")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("peer_licensing")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) validatePeeringConnectionLocation(formats strfmt.Registry) error {
 	if swag.IsZero(m.PeeringConnectionLocation) { // not required
 		return nil
@@ -146,6 +179,25 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) validat
 				return ve.ValidateName("peering_connection_location")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("peering_connection_location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) validatePeeringConnectionStatus(formats strfmt.Registry) error {
+	if swag.IsZero(m.PeeringConnectionStatus) { // not required
+		return nil
+	}
+
+	if m.PeeringConnectionStatus != nil {
+		if err := m.PeeringConnectionStatus.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("peering_connection_status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("peering_connection_status")
 			}
 			return err
 		}
@@ -185,7 +237,15 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) Context
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePeerLicensing(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidatePeeringConnectionLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePeeringConnectionStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -202,6 +262,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) Context
 func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) contextValidateDisplayError(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DisplayError != nil {
+
+		if swag.IsZero(m.DisplayError) { // not required
+			return nil
+		}
+
 		if err := m.DisplayError.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("display_error")
@@ -218,6 +283,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) context
 func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) contextValidatePeerClusterLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PeerClusterLocation != nil {
+
+		if swag.IsZero(m.PeerClusterLocation) { // not required
+			return nil
+		}
+
 		if err := m.PeerClusterLocation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("peer_cluster_location")
@@ -231,9 +301,35 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) context
 	return nil
 }
 
+func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) contextValidatePeerLicensing(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PeerLicensing != nil {
+
+		if swag.IsZero(m.PeerLicensing) { // not required
+			return nil
+		}
+
+		if err := m.PeerLicensing.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("peer_licensing")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("peer_licensing")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) contextValidatePeeringConnectionLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PeeringConnectionLocation != nil {
+
+		if swag.IsZero(m.PeeringConnectionLocation) { // not required
+			return nil
+		}
+
 		if err := m.PeeringConnectionLocation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("peering_connection_location")
@@ -247,9 +343,35 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) context
 	return nil
 }
 
+func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) contextValidatePeeringConnectionStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PeeringConnectionStatus != nil {
+
+		if swag.IsZero(m.PeeringConnectionStatus) { // not required
+			return nil
+		}
+
+		if err := m.PeeringConnectionStatus.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("peering_connection_status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("peering_connection_status")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudGlobalNetworkManager20220215ClusterPartitionPeer) contextValidatePeeringStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PeeringStatus != nil {
+
+		if swag.IsZero(m.PeeringStatus) { // not required
+			return nil
+		}
+
 		if err := m.PeeringStatus.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("peering_status")

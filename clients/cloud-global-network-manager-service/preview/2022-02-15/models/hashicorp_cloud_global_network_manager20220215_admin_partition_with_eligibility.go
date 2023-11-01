@@ -89,6 +89,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215AdminPartitionWithEligibility
 	for i := 0; i < len(m.IneligibilityReasons); i++ {
 
 		if m.IneligibilityReasons[i] != nil {
+
+			if swag.IsZero(m.IneligibilityReasons[i]) { // not required
+				return nil
+			}
+
 			if err := m.IneligibilityReasons[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ineligibility_reasons" + "." + strconv.Itoa(i))

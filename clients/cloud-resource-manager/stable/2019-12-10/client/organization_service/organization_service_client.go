@@ -174,7 +174,7 @@ func (a *Client) OrganizationServiceGetRole(params *OrganizationServiceGetRolePa
 	op := &runtime.ClientOperation{
 		ID:                 "OrganizationService_GetRole",
 		Method:             "GET",
-		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/{roleId}",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/{role_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

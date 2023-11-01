@@ -55,8 +55,8 @@ func TestFromEnv_SimpleValues(t *testing.T) {
 	require.Equal("my-auth:1234", config.authURL.Host)
 
 	// Ensure the client credentials are set correctly
-	require.Equal("my-client-id", config.clientCredentialsConfig.ClientID)
-	require.Equal("my-client-secret", config.clientCredentialsConfig.ClientSecret)
+	require.Equal("my-client-id", config.clientID)
+	require.Equal("my-client-secret", config.clientSecret)
 
 	// Ensure the oauth2 config is set correctly
 	require.Equal("1a2b3c4d", config.oauth2Config.ClientID)
@@ -102,17 +102,20 @@ func TestFromEnv_TLSConfig_Plain(t *testing.T) {
 	// Prepare the environment
 	require.NoError(os.Setenv(envVarAPITLS, tlsSettingDisabled))
 	require.NoError(os.Setenv(envVarSCADATLS, tlsSettingDisabled))
+	require.NoError(os.Setenv(envVarAuthTLS, tlsSettingDisabled))
 
 	// Exercise
 	config := &hcpConfig{
 		apiTLSConfig:   &tls.Config{},
 		scadaTLSConfig: &tls.Config{},
+		authTLSConfig:  &tls.Config{},
 	}
 	require.NoError(apply(config, FromEnv()))
 
 	// Ensure the TLS configuration has been reset
 	require.Nil(config.apiTLSConfig)
 	require.Nil(config.scadaTLSConfig)
+	require.Nil(config.authTLSConfig)
 }
 
 func TestFromEnv_TLSConfig_Insecure(t *testing.T) {
@@ -125,6 +128,7 @@ func TestFromEnv_TLSConfig_Insecure(t *testing.T) {
 	// Prepare the environment
 	require.NoError(os.Setenv(envVarAPITLS, tlsSettingInsecure))
 	require.NoError(os.Setenv(envVarSCADATLS, tlsSettingInsecure))
+	require.NoError(os.Setenv(envVarAuthTLS, tlsSettingInsecure))
 
 	// Exercise
 	config := &hcpConfig{}
@@ -133,6 +137,7 @@ func TestFromEnv_TLSConfig_Insecure(t *testing.T) {
 	// Ensure the TLS configuration is set to insecure
 	require.True(config.apiTLSConfig.InsecureSkipVerify)
 	require.True(config.scadaTLSConfig.InsecureSkipVerify)
+	require.True(config.authTLSConfig.InsecureSkipVerify)
 }
 
 // clearEnv will unset any environment variables that FromEnv might read.

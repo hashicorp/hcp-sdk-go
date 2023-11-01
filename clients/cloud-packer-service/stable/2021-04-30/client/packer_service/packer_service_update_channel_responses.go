@@ -186,10 +186,9 @@ swagger:model PackerServiceUpdateChannelBody
 */
 type PackerServiceUpdateChannelBody struct {
 
-	// Fingerprint of the iteration. The fingerprint is set by Packer when you
-	// call `packer build`. It will most often correspond to a git commit sha,
-	// but can be manually overridden by setting the environment variable
-	// `HCP_PACKER_BUILD_FINGERPRINT`.
+	// Fingerprint of the iteration set by Packer when you call `packer build`.
+	// Refer to the Packer documentation for more information on how this value is set.
+	// The fingerprint can be used as an identifier for the iteration.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
 	// The human-readable version number assigned to this iteration.
@@ -201,6 +200,25 @@ type PackerServiceUpdateChannelBody struct {
 
 	// location
 	Location *PackerServiceUpdateChannelParamsBodyLocation `json:"location,omitempty"`
+
+	// When set, the service will only update the channel with attributes listed in the mask.
+	// For an empty mask list, all attributes will be updated according to their given value.
+	//
+	// One or more of the iteration identifiers can be listed when updating the channel assignment.
+	// In this case, if paths for multiple iteration identifiers are present in the mask, the
+	// values of the equivalent fields must belong to the same iteration.
+	// NOTE: This is different from the behavior without a mask or with an empty mask, where the
+	// first non-zero identifier (in the order iterationId, fingerprint, incrementalVersion) is the
+	// only identifier used, and others are ignored.
+	//
+	// Examples of usage:
+	// * "incrementalVersion,iterationId,fingerprint"
+	// * "restriction"
+	// * "restriction,iterationId"
+	Mask string `json:"mask,omitempty"`
+
+	// When set, will set the channel access in HCP Packer registry. The channel is unrestricted by default;
+	Restriction *models.HashicorpCloudPackerUpdateChannelRequestRestriction `json:"restriction,omitempty"`
 }
 
 // Validate validates this packer service update channel body
@@ -208,6 +226,10 @@ func (o *PackerServiceUpdateChannelBody) Validate(formats strfmt.Registry) error
 	var res []error
 
 	if err := o.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateRestriction(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -236,11 +258,34 @@ func (o *PackerServiceUpdateChannelBody) validateLocation(formats strfmt.Registr
 	return nil
 }
 
+func (o *PackerServiceUpdateChannelBody) validateRestriction(formats strfmt.Registry) error {
+	if swag.IsZero(o.Restriction) { // not required
+		return nil
+	}
+
+	if o.Restriction != nil {
+		if err := o.Restriction.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "restriction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "restriction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this packer service update channel body based on the context it is used
 func (o *PackerServiceUpdateChannelBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := o.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRestriction(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -258,6 +303,22 @@ func (o *PackerServiceUpdateChannelBody) contextValidateLocation(ctx context.Con
 				return ve.ValidateName("body" + "." + "location")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("body" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *PackerServiceUpdateChannelBody) contextValidateRestriction(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Restriction != nil {
+		if err := o.Restriction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "restriction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "restriction")
 			}
 			return err
 		}

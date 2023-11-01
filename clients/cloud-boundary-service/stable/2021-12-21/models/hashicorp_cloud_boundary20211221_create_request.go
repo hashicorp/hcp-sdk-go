@@ -28,6 +28,9 @@ type HashicorpCloudBoundary20211221CreateRequest struct {
 	// location is the location of the cluster.
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
+	// marketing_sku is the marketing sku of the cluster [standard, plus]
+	MarketingSku *HashicorpCloudBoundary20211221ClusterMarketingSKU `json:"marketing_sku,omitempty"`
+
 	// password is the initial password to use to setup initial login
 	Password string `json:"password,omitempty"`
 
@@ -40,6 +43,10 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) Validate(formats strfmt.Re
 	var res []error
 
 	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMarketingSku(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -68,11 +75,34 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) validateLocation(formats s
 	return nil
 }
 
+func (m *HashicorpCloudBoundary20211221CreateRequest) validateMarketingSku(formats strfmt.Registry) error {
+	if swag.IsZero(m.MarketingSku) { // not required
+		return nil
+	}
+
+	if m.MarketingSku != nil {
+		if err := m.MarketingSku.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("marketing_sku")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("marketing_sku")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud boundary 20211221 create request based on the context it is used
 func (m *HashicorpCloudBoundary20211221CreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMarketingSku(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -90,6 +120,22 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) contextValidateLocation(ct
 				return ve.ValidateName("location")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudBoundary20211221CreateRequest) contextValidateMarketingSku(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MarketingSku != nil {
+		if err := m.MarketingSku.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("marketing_sku")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("marketing_sku")
 			}
 			return err
 		}

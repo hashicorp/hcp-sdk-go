@@ -18,8 +18,14 @@ import (
 // swagger:model hashicorp.cloud.global_network_manager_20220215.ServerState
 type HashicorpCloudGlobalNetworkManager20220215ServerState struct {
 
+	// acl
+	ACL *HashicorpCloudGlobalNetworkManager20220215ACLInfo `json:"acl,omitempty"`
+
 	// autopilot
 	Autopilot *HashicorpCloudGlobalNetworkManager20220215AutoPilotInfo `json:"autopilot,omitempty"`
+
+	// datacenter
+	Datacenter string `json:"datacenter,omitempty"`
 
 	// gossip port
 	GossipPort int32 `json:"gossip_port,omitempty"`
@@ -53,6 +59,10 @@ type HashicorpCloudGlobalNetworkManager20220215ServerState struct {
 func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateACL(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAutopilot(formats); err != nil {
 		res = append(res, err)
 	}
@@ -68,6 +78,25 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) Validate(formats
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) validateACL(formats strfmt.Registry) error {
+	if swag.IsZero(m.ACL) { // not required
+		return nil
+	}
+
+	if m.ACL != nil {
+		if err := m.ACL.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("acl")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("acl")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -132,6 +161,10 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) validateTLS(form
 func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateACL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAutopilot(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -150,9 +183,35 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) ContextValidate(
 	return nil
 }
 
+func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) contextValidateACL(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ACL != nil {
+
+		if swag.IsZero(m.ACL) { // not required
+			return nil
+		}
+
+		if err := m.ACL.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("acl")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("acl")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) contextValidateAutopilot(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Autopilot != nil {
+
+		if swag.IsZero(m.Autopilot) { // not required
+			return nil
+		}
+
 		if err := m.Autopilot.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("autopilot")
@@ -169,6 +228,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) contextValidateA
 func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) contextValidateRaft(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Raft != nil {
+
+		if swag.IsZero(m.Raft) { // not required
+			return nil
+		}
+
 		if err := m.Raft.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("raft")
@@ -185,6 +249,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) contextValidateR
 func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) contextValidateTLS(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TLS != nil {
+
+		if swag.IsZero(m.TLS) { // not required
+			return nil
+		}
+
 		if err := m.TLS.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tls")

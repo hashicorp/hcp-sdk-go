@@ -64,7 +64,7 @@ OrganizationServiceCreateParams contains all the parameters to send to the API e
 type OrganizationServiceCreateParams struct {
 
 	// Body.
-	Body *models.ResourcemanagerOrganizationCreateRequest
+	Body *models.HashicorpCloudResourcemanagerOrganizationCreateRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,13 +120,13 @@ func (o *OrganizationServiceCreateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the organization service create params
-func (o *OrganizationServiceCreateParams) WithBody(body *models.ResourcemanagerOrganizationCreateRequest) *OrganizationServiceCreateParams {
+func (o *OrganizationServiceCreateParams) WithBody(body *models.HashicorpCloudResourcemanagerOrganizationCreateRequest) *OrganizationServiceCreateParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the organization service create params
-func (o *OrganizationServiceCreateParams) SetBody(body *models.ResourcemanagerOrganizationCreateRequest) {
+func (o *OrganizationServiceCreateParams) SetBody(body *models.HashicorpCloudResourcemanagerOrganizationCreateRequest) {
 	o.Body = body
 }
 

@@ -85,6 +85,11 @@ func (o *CreatePeeringConnectionsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the create peering connections o k response
+func (o *CreatePeeringConnectionsOK) Code() int {
+	return 200
+}
+
 func (o *CreatePeeringConnectionsOK) Error() string {
 	return fmt.Sprintf("[POST /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/peering_connections][%d] createPeeringConnectionsOK  %+v", 200, o.Payload)
 }
@@ -127,11 +132,6 @@ type CreatePeeringConnectionsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the create peering connections default response
-func (o *CreatePeeringConnectionsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this create peering connections default response has a 2xx status code
 func (o *CreatePeeringConnectionsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -155,6 +155,11 @@ func (o *CreatePeeringConnectionsDefault) IsServerError() bool {
 // IsCode returns true when this create peering connections default response a status code equal to that given
 func (o *CreatePeeringConnectionsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the create peering connections default response
+func (o *CreatePeeringConnectionsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *CreatePeeringConnectionsDefault) Error() string {
@@ -313,6 +318,11 @@ func (o *CreatePeeringConnectionsBody) ContextValidate(ctx context.Context, form
 func (o *CreatePeeringConnectionsBody) contextValidateAcceptor(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Acceptor != nil {
+
+		if swag.IsZero(o.Acceptor) { // not required
+			return nil
+		}
+
 		if err := o.Acceptor.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "acceptor")
@@ -331,6 +341,11 @@ func (o *CreatePeeringConnectionsBody) contextValidateDialers(ctx context.Contex
 	for i := 0; i < len(o.Dialers); i++ {
 
 		if o.Dialers[i] != nil {
+
+			if swag.IsZero(o.Dialers[i]) { // not required
+				return nil
+			}
+
 			if err := o.Dialers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("body" + "." + "dialers" + "." + strconv.Itoa(i))
@@ -349,6 +364,11 @@ func (o *CreatePeeringConnectionsBody) contextValidateDialers(ctx context.Contex
 func (o *CreatePeeringConnectionsBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -441,6 +461,11 @@ func (o *CreatePeeringConnectionsParamsBodyLocation) ContextValidate(ctx context
 func (o *CreatePeeringConnectionsParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

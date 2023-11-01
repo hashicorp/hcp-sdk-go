@@ -19,7 +19,7 @@ import (
 type HashicorpCloudVault20201125ListAllClustersResponseVaultCluster struct {
 
 	// linked cluster
-	LinkedCluster *HashicorpCloudVault20201125LinkedCluster `json:"linked_cluster,omitempty"`
+	LinkedCluster *HashicorpCloudVaultLink20221107LinkedCluster `json:"linked_cluster,omitempty"`
 
 	// managed cluster
 	ManagedCluster *HashicorpCloudVault20201125Cluster `json:"managed_cluster,omitempty"`

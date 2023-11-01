@@ -28,15 +28,99 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	AuthenticateUserToCluster(params *AuthenticateUserToClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthenticateUserToClusterOK, error)
+
+	EnableDR(params *EnableDRParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EnableDROK, error)
+
 	GetLinkedCluster(params *GetLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLinkedClusterOK, error)
 
 	GetLinkedClusterPolicy(params *GetLinkedClusterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLinkedClusterPolicyOK, error)
+
+	GetVaultPolicies(params *GetVaultPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVaultPoliciesOK, error)
+
+	InspectRouter(params *InspectRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InspectRouterOK, error)
 
 	RevokeLinkedClusterCredentials(params *RevokeLinkedClusterCredentialsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RevokeLinkedClusterCredentialsOK, error)
 
 	RotateLinkedClusterCredentials(params *RotateLinkedClusterCredentialsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RotateLinkedClusterCredentialsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+AuthenticateUserToCluster authenticate user to cluster API
+*/
+func (a *Client) AuthenticateUserToCluster(params *AuthenticateUserToClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthenticateUserToClusterOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAuthenticateUserToClusterParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "AuthenticateUserToCluster",
+		Method:             "POST",
+		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/authenticate-user/{cluster_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &AuthenticateUserToClusterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AuthenticateUserToClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*AuthenticateUserToClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+EnableDR this is a p o c method and should not be used in production
+*/
+func (a *Client) EnableDR(params *EnableDRParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EnableDROK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEnableDRParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EnableDR",
+		Method:             "POST",
+		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/{cluster_id}/enable-dr",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &EnableDRReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EnableDROK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*EnableDRDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -88,7 +172,7 @@ func (a *Client) GetLinkedClusterPolicy(params *GetLinkedClusterPolicyParams, au
 	op := &runtime.ClientOperation{
 		ID:                 "GetLinkedClusterPolicy",
 		Method:             "GET",
-		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/policy",
+		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/policy/{cluster_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -112,6 +196,82 @@ func (a *Client) GetLinkedClusterPolicy(params *GetLinkedClusterPolicyParams, au
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetLinkedClusterPolicyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetVaultPolicies this is a p o c method and should not be used in production
+*/
+func (a *Client) GetVaultPolicies(params *GetVaultPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVaultPoliciesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetVaultPoliciesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetVaultPolicies",
+		Method:             "GET",
+		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/{cluster_id}/policies",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetVaultPoliciesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetVaultPoliciesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetVaultPoliciesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+InspectRouter this is a p o c method and should not be used in production
+*/
+func (a *Client) InspectRouter(params *InspectRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InspectRouterOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewInspectRouterParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "InspectRouter",
+		Method:             "GET",
+		PathPattern:        "/vault-link/2022-11-07/organizations/{location.organization_id}/projects/{location.project_id}/{cluster_id}/inspect-router",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &InspectRouterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*InspectRouterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*InspectRouterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

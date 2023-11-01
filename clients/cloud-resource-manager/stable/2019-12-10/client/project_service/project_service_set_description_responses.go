@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // ProjectServiceSetDescriptionReader is a Reader for the ProjectServiceSetDescription structure.
@@ -119,7 +119,7 @@ An unexpected error response.
 type ProjectServiceSetDescriptionDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the project service set description default response
@@ -160,13 +160,13 @@ func (o *ProjectServiceSetDescriptionDefault) String() string {
 	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/description][%d] ProjectService_SetDescription default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ProjectServiceSetDescriptionDefault) GetPayload() *models.RPCStatus {
+func (o *ProjectServiceSetDescriptionDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *ProjectServiceSetDescriptionDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

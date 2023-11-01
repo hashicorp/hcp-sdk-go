@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
@@ -25,14 +26,27 @@ type HashicorpCloudGlobalNetworkManager20220215Cluster struct {
 	// bootstrap expect
 	BootstrapExpect int32 `json:"bootstrap_expect,omitempty"`
 
-	// consul version of the cluster
+	// consul_access_level is the level of access CCM has to the Consul cluster
+	ConsulAccessLevel *HashicorpCloudGlobalNetworkManager20220215ClusterConsulAccessLevel `json:"consul_access_level,omitempty"`
+
+	// Consul version of the cluster
 	ConsulVersion string `json:"consul_version,omitempty"`
+
+	// `created_at` is the timestamp of when the cluster was first created.
+	// Format: date-time
+	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+
+	// whether this is an existing self-managed cluster
+	ExistingCluster bool `json:"existing_cluster,omitempty"`
 
 	// whether this Consul cluster is managed by HCP
 	HcpManaged bool `json:"hcp_managed,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// licensing is the Consul licensing information
+	Licensing *HashicorpCloudGlobalNetworkManager20220215Licensing `json:"licensing,omitempty"`
 
 	// location
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
@@ -46,13 +60,25 @@ type HashicorpCloudGlobalNetworkManager20220215Cluster struct {
 	// source of the cluster
 	Source *HashicorpCloudGlobalNetworkManager20220215ClusterSource `json:"source,omitempty"`
 
-	// current state of the cluster
+	// Current state of the cluster.
 	State *HashicorpCloudGlobalNetworkManager20220215ClusterState `json:"state,omitempty"`
 }
 
 // Validate validates this hashicorp cloud global network manager 20220215 cluster
 func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateConsulAccessLevel(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLicensing(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateLocation(formats); err != nil {
 		res = append(res, err)
@@ -69,6 +95,56 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) Validate(formats str
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) validateConsulAccessLevel(formats strfmt.Registry) error {
+	if swag.IsZero(m.ConsulAccessLevel) { // not required
+		return nil
+	}
+
+	if m.ConsulAccessLevel != nil {
+		if err := m.ConsulAccessLevel.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("consul_access_level")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("consul_access_level")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) validateCreatedAt(formats strfmt.Registry) error {
+	if swag.IsZero(m.CreatedAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) validateLicensing(formats strfmt.Registry) error {
+	if swag.IsZero(m.Licensing) { // not required
+		return nil
+	}
+
+	if m.Licensing != nil {
+		if err := m.Licensing.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("licensing")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("licensing")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -133,6 +209,14 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) validateState(format
 func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateConsulAccessLevel(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLicensing(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -151,9 +235,56 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) ContextValidate(ctx 
 	return nil
 }
 
+func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateConsulAccessLevel(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ConsulAccessLevel != nil {
+
+		if swag.IsZero(m.ConsulAccessLevel) { // not required
+			return nil
+		}
+
+		if err := m.ConsulAccessLevel.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("consul_access_level")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("consul_access_level")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateLicensing(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Licensing != nil {
+
+		if swag.IsZero(m.Licensing) { // not required
+			return nil
+		}
+
+		if err := m.Licensing.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("licensing")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("licensing")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -170,6 +301,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateLocat
 func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateSource(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Source != nil {
+
+		if swag.IsZero(m.Source) { // not required
+			return nil
+		}
+
 		if err := m.Source.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("source")
@@ -186,6 +322,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateSourc
 func (m *HashicorpCloudGlobalNetworkManager20220215Cluster) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")

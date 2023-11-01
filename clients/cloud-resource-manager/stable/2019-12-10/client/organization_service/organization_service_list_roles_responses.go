@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // OrganizationServiceListRolesReader is a Reader for the OrganizationServiceListRoles structure.
@@ -52,7 +53,7 @@ OrganizationServiceListRolesOK describes a response with status code 200, with d
 A successful response.
 */
 type OrganizationServiceListRolesOK struct {
-	Payload *models.ResourcemanagerOrganizationListRolesResponse
+	Payload *models.HashicorpCloudResourcemanagerOrganizationListRolesResponse
 }
 
 // IsSuccess returns true when this organization service list roles o k response has a 2xx status code
@@ -88,13 +89,13 @@ func (o *OrganizationServiceListRolesOK) String() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/roles][%d] organizationServiceListRolesOK  %+v", 200, o.Payload)
 }
 
-func (o *OrganizationServiceListRolesOK) GetPayload() *models.ResourcemanagerOrganizationListRolesResponse {
+func (o *OrganizationServiceListRolesOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationListRolesResponse {
 	return o.Payload
 }
 
 func (o *OrganizationServiceListRolesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResourcemanagerOrganizationListRolesResponse)
+	o.Payload = new(models.HashicorpCloudResourcemanagerOrganizationListRolesResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -119,7 +120,7 @@ An unexpected error response.
 type OrganizationServiceListRolesDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the organization service list roles default response
@@ -160,13 +161,13 @@ func (o *OrganizationServiceListRolesDefault) String() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/roles][%d] OrganizationService_ListRoles default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *OrganizationServiceListRolesDefault) GetPayload() *models.RPCStatus {
+func (o *OrganizationServiceListRolesDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *OrganizationServiceListRolesDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

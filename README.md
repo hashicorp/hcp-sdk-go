@@ -38,7 +38,7 @@ User session is ideal for getting started or one-off usage. It also works for lo
 
 To obtain user credentials, the client credential environment variables `HCP_CLIENT_ID` and `HCP_CLIENT_SECRET` must be unset. When no client credentials are detected, the HCP Go client will prompt the user with a browser login window. Once authenticated, the user session stays refreshed without intervention until it expires after 24 hours.
 
-If you have a use-case with the SDK to leverage the browser login as a feature but want to control if the browser is opened, or even to understand if the system already has a valid token present, you can pass in the option func of `WithoutBrowserLogin()` to your `NewHCPConfig()`. This will use either the provided `ClientID`:`ClientSecret` combo or a valid token that has been previously written to the system. If neither option exists, then `auth.ErrorNoLocalCredsFound` is returned to indicate that the user is not yet logged in.
+If you have a use-case with the SDK to leverage the browser login as a feature but want to control if the browser is opened you can pass in the option func of `WithoutBrowserLogin()` to your `NewHCPConfig()`.
 
 ### User Profile
 
@@ -66,7 +66,7 @@ HCP_ORGANIZATION_ID="22abc..."
     )
     ```
 
-See `cmd/hcp-sdk-go-client` for a complete example.
+See `cmd/example` for a complete example.
 
 ### SDK Release Cycle
 
@@ -96,9 +96,7 @@ In addition to the generated product clients, the HCP Go SDK provides a few libr
 
 ### Cache
 
-The Cache interface lives under the `auth` package. It handles writing the user credentials obtained during browser login to the common location `/.config/hcp/credentials.json` in the home directory. The Cache has `Read` and `Write` methods that can be used to get and set stored HCP credentials.
-
-Generally the contents of the Cache should be Read to get the latest, unexpired credentials. Without care, overwriting user credentials may cause unexpected authentication failures.
+The Cache interface lives under the `tokencache` package. It handles writing the user, service-principal and workload identity provider tokens to the common location `/.config/hcp/creds-cache.json` in the home directory. The cached values are automatically read and written when a caching token source is used.
 
 ## Contributing
 

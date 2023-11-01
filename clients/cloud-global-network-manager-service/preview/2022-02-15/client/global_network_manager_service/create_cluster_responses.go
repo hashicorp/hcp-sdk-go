@@ -84,6 +84,11 @@ func (o *CreateClusterOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the create cluster o k response
+func (o *CreateClusterOK) Code() int {
+	return 200
+}
+
 func (o *CreateClusterOK) Error() string {
 	return fmt.Sprintf("[POST /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters][%d] createClusterOK  %+v", 200, o.Payload)
 }
@@ -126,11 +131,6 @@ type CreateClusterDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the create cluster default response
-func (o *CreateClusterDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this create cluster default response has a 2xx status code
 func (o *CreateClusterDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -154,6 +154,11 @@ func (o *CreateClusterDefault) IsServerError() bool {
 // IsCode returns true when this create cluster default response a status code equal to that given
 func (o *CreateClusterDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the create cluster default response
+func (o *CreateClusterDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *CreateClusterDefault) Error() string {
@@ -186,6 +191,12 @@ swagger:model CreateClusterBody
 */
 type CreateClusterBody struct {
 
+	// consul_access_level is an optional field to configure the access level that
+	// CCM will have to manage the Consul cluster. When unspecified, it will
+	// default to a value depending on how other request parameters; most likely
+	// GLOBAL_READ_WRITE, since GLOBAL_READ_ONLY needs to be specifically indicated
+	ConsulAccessLevel *models.HashicorpCloudGlobalNetworkManager20220215ClusterConsulAccessLevel `json:"consul_access_level,omitempty"`
+
 	// existing_cluster indicates whether or not the cluster existed before creation (for linking)
 	ExistingCluster bool `json:"existing_cluster,omitempty"`
 
@@ -195,6 +206,11 @@ type CreateClusterBody struct {
 	// location
 	Location *CreateClusterParamsBodyLocation `json:"location,omitempty"`
 
+	// management_token is an optional field to set a user-submitted management
+	// token that CCM will use manage the Consul cluster. When empty, we will
+	// auto-generate a management token for the cluster
+	ManagementToken string `json:"management_token,omitempty"`
+
 	// source is the runtime type for the cluster
 	Source *models.HashicorpCloudGlobalNetworkManager20220215ClusterSource `json:"source,omitempty"`
 }
@@ -202,6 +218,10 @@ type CreateClusterBody struct {
 // Validate validates this create cluster body
 func (o *CreateClusterBody) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := o.validateConsulAccessLevel(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := o.validateLocation(formats); err != nil {
 		res = append(res, err)
@@ -214,6 +234,25 @@ func (o *CreateClusterBody) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (o *CreateClusterBody) validateConsulAccessLevel(formats strfmt.Registry) error {
+	if swag.IsZero(o.ConsulAccessLevel) { // not required
+		return nil
+	}
+
+	if o.ConsulAccessLevel != nil {
+		if err := o.ConsulAccessLevel.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "consul_access_level")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "consul_access_level")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -259,6 +298,10 @@ func (o *CreateClusterBody) validateSource(formats strfmt.Registry) error {
 func (o *CreateClusterBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := o.contextValidateConsulAccessLevel(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := o.contextValidateLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -273,9 +316,35 @@ func (o *CreateClusterBody) ContextValidate(ctx context.Context, formats strfmt.
 	return nil
 }
 
+func (o *CreateClusterBody) contextValidateConsulAccessLevel(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ConsulAccessLevel != nil {
+
+		if swag.IsZero(o.ConsulAccessLevel) { // not required
+			return nil
+		}
+
+		if err := o.ConsulAccessLevel.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "consul_access_level")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "consul_access_level")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (o *CreateClusterBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -292,6 +361,11 @@ func (o *CreateClusterBody) contextValidateLocation(ctx context.Context, formats
 func (o *CreateClusterBody) contextValidateSource(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Source != nil {
+
+		if swag.IsZero(o.Source) { // not required
+			return nil
+		}
+
 		if err := o.Source.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "source")
@@ -384,6 +458,11 @@ func (o *CreateClusterParamsBodyLocation) ContextValidate(ctx context.Context, f
 func (o *CreateClusterParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

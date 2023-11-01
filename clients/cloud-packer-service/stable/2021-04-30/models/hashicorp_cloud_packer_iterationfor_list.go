@@ -40,9 +40,7 @@ type HashicorpCloudPackerIterationforList struct {
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
 	// Fingerprint of the iteration. The fingerprint is set by Packer when you
-	// call `packer build`. It will most often correspond to a git commit sha,
-	// but can be manually overridden by setting the environment variable
-	// `HCP_PACKER_BUILD_FINGERPRINT`.
+	// call `packer build`.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
 	// If true, this iteration has children iterations. Knowing if an iteration has descendants can help

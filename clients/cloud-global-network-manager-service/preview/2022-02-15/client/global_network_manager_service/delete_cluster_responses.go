@@ -81,6 +81,11 @@ func (o *DeleteClusterOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete cluster o k response
+func (o *DeleteClusterOK) Code() int {
+	return 200
+}
+
 func (o *DeleteClusterOK) Error() string {
 	return fmt.Sprintf("[DELETE /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}][%d] deleteClusterOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type DeleteClusterDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the delete cluster default response
-func (o *DeleteClusterDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this delete cluster default response has a 2xx status code
 func (o *DeleteClusterDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *DeleteClusterDefault) IsServerError() bool {
 // IsCode returns true when this delete cluster default response a status code equal to that given
 func (o *DeleteClusterDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the delete cluster default response
+func (o *DeleteClusterDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DeleteClusterDefault) Error() string {

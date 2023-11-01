@@ -9,15 +9,28 @@ import (
 	"net/url"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"github.com/hashicorp/hcp-sdk-go/profile"
+	"golang.org/x/oauth2"
 )
 
 // WithClientCredentials credentials is an option that can be used to set
 // HCP client credentials on the configuration.
 func WithClientCredentials(clientID, clientSecret string) HCPConfigOption {
 	return func(config *hcpConfig) error {
-		config.clientCredentialsConfig.ClientID = clientID
-		config.clientCredentialsConfig.ClientSecret = clientSecret
+		config.clientID = clientID
+		config.clientSecret = clientSecret
+
+		return nil
+	}
+}
+
+// WithWorkloadIdentity exchanges a workload identity provider credentials for
+// an HCP Service Principal token. The Workload Identity Provider can be AWS or
+// any OIDC based identity provider.
+func WithWorkloadIdentity(providerConfig *workload.IdentityProviderConfig) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.workloadProviderConfig = providerConfig
 
 		return nil
 	}
@@ -102,7 +115,8 @@ func WithAuth(authURL string, tlsConfig *tls.Config) HCPConfigOption {
 	}
 }
 
-// WithOAuth2ClientID credentials is an option that can be used to provide a custom OAuth2 Client ID.
+// WithOAuth2ClientID credentials is an option that can be used to provide a
+// custom OAuth2 Client ID.
 //
 // An alternative OAuth2 ClientID can be provided, if none is provided the
 // default OAuth2 Client ID will be used.
@@ -116,20 +130,6 @@ func WithOAuth2ClientID(oauth2ClientID string) HCPConfigOption {
 	}
 }
 
-// WithSession is an option that can be used to provide a custom Session struct.
-//
-// A mock Session can be provided, if none is provided the default UserSession
-// will be used.
-//
-// This should only be necessary for testing purposes.
-func WithSession(s auth.Session) HCPConfigOption {
-	return func(config *hcpConfig) error {
-		config.session = s
-
-		return nil
-	}
-}
-
 // WithProfile is an option that can be used to provide a custom UserProfile struct.
 func WithProfile(p *profile.UserProfile) HCPConfigOption {
 	return func(config *hcpConfig) error {
@@ -138,11 +138,56 @@ func WithProfile(p *profile.UserProfile) HCPConfigOption {
 	}
 }
 
-// WithoutBrowserLogin disables the automatic opening of the browser login if no valid auth method is found
-// instead force the return of a typed error for users to catch
+// WithTokenSource can be used to set a token source. This should only be necessary for testing.
+// Tokens from a custom token source will not be cached.
+func WithTokenSource(tokenSource oauth2.TokenSource) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.tokenSource = tokenSource
+		return nil
+	}
+}
+
+// WithoutBrowserLogin disables the automatic opening of the browser login.
 func WithoutBrowserLogin() HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.noBrowserLogin = true
 		return nil
+	}
+}
+
+// WithForceLogin will invalidate any cached login credentials and trigger a login.
+func WithForceLogin() HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.forceLogin = true
+		return nil
+	}
+}
+
+// WithoutLogging disables this SDK from printing of any kind, this is necessary
+// since there is not a consistent logger that is used throughout the project so
+// a log level option is not sufficient.
+func WithoutLogging() HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.suppressLogging = true
+		return nil
+	}
+}
+
+// WithCredentialFile sets the given credential file to be used as an
+// authentication source.
+func WithCredentialFile(cf *auth.CredentialFile) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.credentialFile = cf
+		return config.credentialFile.Validate()
+	}
+}
+
+// WithCredentialFilePath will search for a credential file at the given path to
+// be used as an authentication source.
+func WithCredentialFilePath(p string) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		cf, err := auth.ReadCredentialFile(p)
+		config.credentialFile = cf
+		return err
 	}
 }

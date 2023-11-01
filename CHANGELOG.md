@@ -1,3 +1,87 @@
+## v0.71.0 (November 01, 2023)
+
+IMPROVEMENTS:
+
+* All credentials (login, service-principal and workload identity provider) are now cached.
+
+The cache file has moved to `creds-cache.json` to not interfere with applications that rely on the previous cache file
+structure.
+
+It is further now possible to enforce an interactive login (via a configuration flag), which can be used to implement a
+`cli login` functionality. [[GH-205](https://github.com/hashicorp/hcp-sdk-go/pull/205)]
+## v0.70.0 (October 18, 2023)
+
+## v0.69.0 (October 18, 2023)
+
+## v0.68.0 (October 13, 2023)
+
+## v0.67.0 (October 11, 2023)
+
+## v0.66.0 (October 09, 2023)
+
+## v0.65.0 (October 04, 2023)
+
+## v0.64.0 (September 27, 2023)
+
+## v0.63.0 (September 20, 2023)
+
+## v0.62.0 (September 13, 2023)
+
+## v0.61.0 (August 28, 2023)
+
+## v0.60.0 (August 23, 2023)
+
+## v0.59.0 (August 09, 2023)
+
+## v0.58.0 (August 01, 2023)
+
+IMPROVEMENTS:
+
+* Credential file omits not set fields when encoded as JSON. [[GH-202](https://github.com/hashicorp/hcp-sdk-go/pull/202)]
+## v0.57.0 (July 31, 2023)
+
+FEATURES:
+
+* SDK can authenticate using Workload Identity Federation. [[GH-199](https://github.com/hashicorp/hcp-sdk-go/pull/199)]
+* SDK can authenticate using a credential file. The credential file can specify
+service principal credentials or workload identity provided credentials. [[GH-200](https://github.com/hashicorp/hcp-sdk-go/pull/200)]
+## v0.56.0 (July 28, 2023)
+
+## v0.55.0 (July 26, 2023)
+
+## v0.54.0 (July 19, 2023)
+
+## v0.53.0 (July 19, 2023)
+
+## v0.52.0 (July 12, 2023)
+
+## v0.51.0 (July 05, 2023)
+
+IMPROVEMENTS:
+
+* Use refresh tokens if the session is still valid [[GH-196](https://github.com/hashicorp/hcp-sdk-go/pull/196)]
+## v0.50.0 (June 14, 2023)
+
+## v0.49.0 (June 07, 2023)
+
+## v0.48.0 (May 24, 2023)
+
+IMPROVEMENTS:
+
+* Added env var option (HCP_AUTH_TLS) to either disable or set to insecure the auth call for mocking. [[GH-190](https://github.com/hashicorp/hcp-sdk-go/pull/190)]
+## v0.47.0 (May 24, 2023)
+
+IMPROVEMENTS:
+
+* Added option to NewHCPConfig to disable logging from the SDK [[GH-192](https://github.com/hashicorp/hcp-sdk-go/pull/192)]
+## v0.46.0 (May 17, 2023)
+
+## v0.45.0 (May 10, 2023)
+
+## v0.44.0 (May 03, 2023)
+
+## v0.43.0 (April 26, 2023)
+
 ## v0.42.0 (April 19, 2023)
 
 IMPROVEMENTS:

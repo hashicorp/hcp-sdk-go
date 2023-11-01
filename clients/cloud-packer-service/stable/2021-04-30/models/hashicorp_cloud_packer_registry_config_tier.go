@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudPackerRegistryConfigTier hashicorp cloud packer registry config tier
+// HashicorpCloudPackerRegistryConfigTier - PRIVATE_BETA: Deprecated
 //
 // swagger:model hashicorp.cloud.packer.RegistryConfig.Tier
 type HashicorpCloudPackerRegistryConfigTier string

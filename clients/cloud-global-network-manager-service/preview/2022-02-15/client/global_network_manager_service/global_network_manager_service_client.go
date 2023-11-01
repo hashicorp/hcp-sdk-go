@@ -34,8 +34,6 @@ type ClientService interface {
 
 	AgentPushServerState(params *AgentPushServerStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentPushServerStateOK, error)
 
-	AgentTelemetryConfig(params *AgentTelemetryConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentTelemetryConfigOK, error)
-
 	CreateCluster(params *CreateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterOK, error)
 
 	CreatePeeringConnections(params *CreatePeeringConnectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePeeringConnectionsOK, error)
@@ -50,9 +48,17 @@ type ClientService interface {
 
 	GetClusterAPIInfo(params *GetClusterAPIInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterAPIInfoOK, error)
 
+	GetClusterManagementTokenDetails(params *GetClusterManagementTokenDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterManagementTokenDetailsOK, error)
+
 	GetClusterSecrets(params *GetClusterSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterSecretsOK, error)
 
+	GetObservabilitySecret(params *GetObservabilitySecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetObservabilitySecretOK, error)
+
+	GetService(params *GetServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceOK, error)
+
 	GetServiceSummaries(params *GetServiceSummariesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceSummariesOK, error)
+
+	GetTrial(params *GetTrialParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTrialOK, error)
 
 	ListClusterPartitions(params *ListClusterPartitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterPartitionsOK, error)
 
@@ -67,6 +73,12 @@ type ClientService interface {
 	ListConsulVersions(params *ListConsulVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConsulVersionsOK, error)
 
 	ListPeersByClusterPartition(params *ListPeersByClusterPartitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPeersByClusterPartitionOK, error)
+
+	ListServiceInstances(params *ListServiceInstancesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceInstancesOK, error)
+
+	ListServices(params *ListServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicesOK, error)
+
+	UpdateCluster(params *UpdateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateClusterOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -182,44 +194,6 @@ func (a *Client) AgentPushServerState(params *AgentPushServerStateParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*AgentPushServerStateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-AgentTelemetryConfig agent telemetry config API
-*/
-func (a *Client) AgentTelemetryConfig(params *AgentTelemetryConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentTelemetryConfigOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewAgentTelemetryConfigParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "AgentTelemetryConfig",
-		Method:             "GET",
-		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &AgentTelemetryConfigReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*AgentTelemetryConfigOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*AgentTelemetryConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -490,6 +464,44 @@ func (a *Client) GetClusterAPIInfo(params *GetClusterAPIInfoParams, authInfo run
 }
 
 /*
+GetClusterManagementTokenDetails get cluster management token details API
+*/
+func (a *Client) GetClusterManagementTokenDetails(params *GetClusterManagementTokenDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterManagementTokenDetailsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetClusterManagementTokenDetailsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetClusterManagementTokenDetails",
+		Method:             "GET",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/management_token_details",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetClusterManagementTokenDetailsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetClusterManagementTokenDetailsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetClusterManagementTokenDetailsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetClusterSecrets get cluster secrets API
 */
 func (a *Client) GetClusterSecrets(params *GetClusterSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterSecretsOK, error) {
@@ -528,6 +540,82 @@ func (a *Client) GetClusterSecrets(params *GetClusterSecretsParams, authInfo run
 }
 
 /*
+GetObservabilitySecret get observability secret API
+*/
+func (a *Client) GetObservabilitySecret(params *GetObservabilitySecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetObservabilitySecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetObservabilitySecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetObservabilitySecret",
+		Method:             "GET",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/credentials/observability",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetObservabilitySecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetObservabilitySecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetObservabilitySecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetService get service API
+*/
+func (a *Client) GetService(params *GetServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetService",
+		Method:             "GET",
+		PathPattern:        "/2022-02-15/global-network-manager/{cluster_resource_name}/service/{service_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetServiceDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetServiceSummaries get service summaries API
 */
 func (a *Client) GetServiceSummaries(params *GetServiceSummariesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceSummariesOK, error) {
@@ -562,6 +650,44 @@ func (a *Client) GetServiceSummaries(params *GetServiceSummariesParams, authInfo
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetServiceSummariesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetTrial get trial API
+*/
+func (a *Client) GetTrial(params *GetTrialParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTrialOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTrialParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetTrial",
+		Method:             "GET",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{organization_id}/trial",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTrialReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTrialOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetTrialDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -828,6 +954,120 @@ func (a *Client) ListPeersByClusterPartition(params *ListPeersByClusterPartition
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListPeersByClusterPartitionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListServiceInstances list service instances API
+*/
+func (a *Client) ListServiceInstances(params *ListServiceInstancesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceInstancesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListServiceInstancesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListServiceInstances",
+		Method:             "GET",
+		PathPattern:        "/2022-02-15/global-network-manager/{cluster_resource_name}/service/{service_name}/instances",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListServiceInstancesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListServiceInstancesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListServiceInstancesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListServices lists services returns a list of services for all clusters within an h c p project
+*/
+func (a *Client) ListServices(params *ListServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListServicesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListServices",
+		Method:             "GET",
+		PathPattern:        "/2022-02-15/global-network-manager/{project_resource_name}/services",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListServicesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListServicesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListServicesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateCluster update cluster API
+*/
+func (a *Client) UpdateCluster(params *UpdateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateClusterOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateClusterParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateCluster",
+		Method:             "PATCH",
+		PathPattern:        "/global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateClusterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateClusterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

@@ -15,6 +15,7 @@ import (
 	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // OrganizationServiceSetNameReader is a Reader for the OrganizationServiceSetName structure.
@@ -54,7 +55,7 @@ OrganizationServiceSetNameOK describes a response with status code 200, with def
 A successful response.
 */
 type OrganizationServiceSetNameOK struct {
-	Payload *models.ResourcemanagerOrganizationSetNameResponse
+	Payload *models.HashicorpCloudResourcemanagerOrganizationSetNameResponse
 }
 
 // IsSuccess returns true when this organization service set name o k response has a 2xx status code
@@ -90,13 +91,13 @@ func (o *OrganizationServiceSetNameOK) String() string {
 	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/name][%d] organizationServiceSetNameOK  %+v", 200, o.Payload)
 }
 
-func (o *OrganizationServiceSetNameOK) GetPayload() *models.ResourcemanagerOrganizationSetNameResponse {
+func (o *OrganizationServiceSetNameOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationSetNameResponse {
 	return o.Payload
 }
 
 func (o *OrganizationServiceSetNameOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResourcemanagerOrganizationSetNameResponse)
+	o.Payload = new(models.HashicorpCloudResourcemanagerOrganizationSetNameResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -121,7 +122,7 @@ An unexpected error response.
 type OrganizationServiceSetNameDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the organization service set name default response
@@ -162,13 +163,13 @@ func (o *OrganizationServiceSetNameDefault) String() string {
 	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/name][%d] OrganizationService_SetName default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *OrganizationServiceSetNameDefault) GetPayload() *models.RPCStatus {
+func (o *OrganizationServiceSetNameDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *OrganizationServiceSetNameDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -84,6 +84,11 @@ func (o *AgentDiscoverOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the agent discover o k response
+func (o *AgentDiscoverOK) Code() int {
+	return 200
+}
+
 func (o *AgentDiscoverOK) Error() string {
 	return fmt.Sprintf("[POST /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{id}/agent/discover][%d] agentDiscoverOK  %+v", 200, o.Payload)
 }
@@ -126,11 +131,6 @@ type AgentDiscoverDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the agent discover default response
-func (o *AgentDiscoverDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this agent discover default response has a 2xx status code
 func (o *AgentDiscoverDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -154,6 +154,11 @@ func (o *AgentDiscoverDefault) IsServerError() bool {
 // IsCode returns true when this agent discover default response a status code equal to that given
 func (o *AgentDiscoverDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the agent discover default response
+func (o *AgentDiscoverDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *AgentDiscoverDefault) Error() string {
@@ -240,6 +245,11 @@ func (o *AgentDiscoverBody) ContextValidate(ctx context.Context, formats strfmt.
 func (o *AgentDiscoverBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -332,6 +342,11 @@ func (o *AgentDiscoverParamsBodyLocation) ContextValidate(ctx context.Context, f
 func (o *AgentDiscoverParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

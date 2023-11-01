@@ -191,6 +191,8 @@ type PackerServiceUpdateRegistryBody struct {
 	Activate bool `json:"activate,omitempty"`
 
 	// Feature tier of the Registry.
+	// When trying to update a registry to the deprecated PRIVATE_BETA tier, HCP Packer will
+	// automatically update to STANDARD.
 	FeatureTier *models.HashicorpCloudPackerRegistryConfigTier `json:"feature_tier,omitempty"`
 
 	// location

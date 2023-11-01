@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Public Repo
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
         with:
           fetch-depth: 0
           token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
           path: public
 
       - name: Checkout Internal Repo
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
         with:
           token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
           repository: hashicorp/hcp-sdk-go-internal
@@ -41,7 +41,8 @@ jobs:
           cp -a internal/clients temp/clients
           cp -a internal/docs temp/docs
           cp -a internal/scripts temp/scripts
-          cp -a internal/cmd/transform-swagger temp/cmd/transform-swagger
+          mkdir -p temp/cmd/transform-swagger
+          cp -a internal/cmd/transform-swagger/* temp/cmd/transform-swagger/
           cp internal/README.md temp/README.md
           cp internal/catalog-info.yaml temp/catalog-info.yaml
           cp internal/mkdocs.yml temp/mkdocs.yml

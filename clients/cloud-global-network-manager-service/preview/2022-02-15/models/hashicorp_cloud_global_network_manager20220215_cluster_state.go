@@ -14,7 +14,15 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudGlobalNetworkManager20220215ClusterState hashicorp cloud global network manager 20220215 cluster state
+// HashicorpCloudGlobalNetworkManager20220215ClusterState  - STATE_UPDATING: UPDATING should remain the default and generically used state.
+// If no custom status required, people should stick with UPDATING
+// rather than proliferating UPDATING_* without an explicit need
+//   - STATE_UPDATING_TOKEN: UPDATING_TOKEN is an edge-case of UPDATING intended to be used so
+//
+// that frontend can display a custom status for it.
+//   - STATE_UPDATING_ACCESS_LEVEL: STATE_UPDATING_ACCESS_LEVEL is an edge-case of UPDATING intended to be
+//
+// used so that frontend can display a custom status for it.
 //
 // swagger:model hashicorp.cloud.global_network_manager_20220215.Cluster.State
 type HashicorpCloudGlobalNetworkManager20220215ClusterState string
@@ -56,6 +64,21 @@ const (
 
 	// HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEDELETED captures enum value "STATE_DELETED"
 	HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEDELETED HashicorpCloudGlobalNetworkManager20220215ClusterState = "STATE_DELETED"
+
+	// HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEDISCONNECTED captures enum value "STATE_DISCONNECTED"
+	HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEDISCONNECTED HashicorpCloudGlobalNetworkManager20220215ClusterState = "STATE_DISCONNECTED"
+
+	// HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEUPDATINGTOKEN captures enum value "STATE_UPDATING_TOKEN"
+	HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEUPDATINGTOKEN HashicorpCloudGlobalNetworkManager20220215ClusterState = "STATE_UPDATING_TOKEN"
+
+	// HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEPENDINGINVALIDTOKEN captures enum value "STATE_PENDING_INVALID_TOKEN"
+	HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEPENDINGINVALIDTOKEN HashicorpCloudGlobalNetworkManager20220215ClusterState = "STATE_PENDING_INVALID_TOKEN"
+
+	// HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEDISCONNECTEDINVALIDTOKEN captures enum value "STATE_DISCONNECTED_INVALID_TOKEN"
+	HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEDISCONNECTEDINVALIDTOKEN HashicorpCloudGlobalNetworkManager20220215ClusterState = "STATE_DISCONNECTED_INVALID_TOKEN"
+
+	// HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEUPDATINGACCESSLEVEL captures enum value "STATE_UPDATING_ACCESS_LEVEL"
+	HashicorpCloudGlobalNetworkManager20220215ClusterStateSTATEUPDATINGACCESSLEVEL HashicorpCloudGlobalNetworkManager20220215ClusterState = "STATE_UPDATING_ACCESS_LEVEL"
 )
 
 // for schema
@@ -63,7 +86,7 @@ var hashicorpCloudGlobalNetworkManager20220215ClusterStateEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudGlobalNetworkManager20220215ClusterState
-	if err := json.Unmarshal([]byte(`["STATE_UNSPECIFIED","STATE_PENDING","STATE_CREATING","STATE_RUNNING","STATE_FAILED","STATE_UPDATING","STATE_RESTORING","STATE_DELETING","STATE_DELETED"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["STATE_UNSPECIFIED","STATE_PENDING","STATE_CREATING","STATE_RUNNING","STATE_FAILED","STATE_UPDATING","STATE_RESTORING","STATE_DELETING","STATE_DELETED","STATE_DISCONNECTED","STATE_UPDATING_TOKEN","STATE_PENDING_INVALID_TOKEN","STATE_DISCONNECTED_INVALID_TOKEN","STATE_UPDATING_ACCESS_LEVEL"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

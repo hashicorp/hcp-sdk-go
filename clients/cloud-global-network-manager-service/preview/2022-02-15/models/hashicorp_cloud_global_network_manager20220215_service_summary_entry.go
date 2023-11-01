@@ -28,10 +28,10 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry struct {
 	// kind of service
 	Kind *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind `json:"kind,omitempty"`
 
-	// namespace of the service
+	// Namespace where the service is deployed.
 	Namespace string `json:"namespace,omitempty"`
 
-	// partition of the service
+	// Partition where the service is deployed.
 	Partition string `json:"partition,omitempty"`
 
 	// passing
@@ -114,6 +114,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry) ContextV
 func (m *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry) contextValidateKind(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Kind != nil {
+
+		if swag.IsZero(m.Kind) { // not required
+			return nil
+		}
+
 		if err := m.Kind.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("kind")

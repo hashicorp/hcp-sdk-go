@@ -81,6 +81,11 @@ func (o *ListPeersByClusterPartitionOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list peers by cluster partition o k response
+func (o *ListPeersByClusterPartitionOK) Code() int {
+	return 200
+}
+
 func (o *ListPeersByClusterPartitionOK) Error() string {
 	return fmt.Sprintf("[GET /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/peers_by_cluster_partition][%d] listPeersByClusterPartitionOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ListPeersByClusterPartitionDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the list peers by cluster partition default response
-func (o *ListPeersByClusterPartitionDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list peers by cluster partition default response has a 2xx status code
 func (o *ListPeersByClusterPartitionDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ListPeersByClusterPartitionDefault) IsServerError() bool {
 // IsCode returns true when this list peers by cluster partition default response a status code equal to that given
 func (o *ListPeersByClusterPartitionDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list peers by cluster partition default response
+func (o *ListPeersByClusterPartitionDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListPeersByClusterPartitionDefault) Error() string {

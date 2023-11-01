@@ -78,6 +78,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215CreateClusterResponse) Contex
 func (m *HashicorpCloudGlobalNetworkManager20220215CreateClusterResponse) contextValidateCluster(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cluster != nil {
+
+		if swag.IsZero(m.Cluster) { // not required
+			return nil
+		}
+
 		if err := m.Cluster.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cluster")

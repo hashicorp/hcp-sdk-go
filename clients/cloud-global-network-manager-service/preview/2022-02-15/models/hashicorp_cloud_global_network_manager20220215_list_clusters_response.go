@@ -23,7 +23,7 @@ type HashicorpCloudGlobalNetworkManager20220215ListClustersResponse struct {
 	// clusters
 	Clusters []*HashicorpCloudGlobalNetworkManager20220215Cluster `json:"clusters"`
 
-	// pagination response containing the page tokens for future requests
+	// Pagination response containing the page tokens for future requests
 	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 
@@ -113,6 +113,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ListClustersResponse) context
 	for i := 0; i < len(m.Clusters); i++ {
 
 		if m.Clusters[i] != nil {
+
+			if swag.IsZero(m.Clusters[i]) { // not required
+				return nil
+			}
+
 			if err := m.Clusters[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("clusters" + "." + strconv.Itoa(i))
@@ -131,6 +136,11 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ListClustersResponse) context
 func (m *HashicorpCloudGlobalNetworkManager20220215ListClustersResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")

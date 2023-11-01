@@ -7,7 +7,6 @@ import (
 	"crypto/tls"
 	"testing"
 
-	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/profile"
 	requirepkg "github.com/stretchr/testify/require"
 )
@@ -50,22 +49,6 @@ func TestNew_Options(t *testing.T) {
 	require.Equal("my-scada:3456", config.SCADAAddress())
 	require.Equal("org-id-123", config.Profile().OrganizationID)
 	require.Equal("proj-id-123", config.Profile().ProjectID)
-}
-
-func TestNew_MockSession(t *testing.T) {
-	require := requirepkg.New(t)
-
-	// Exercise
-	config, err := NewHCPConfig(
-		WithSession(&auth.MockSession{}),
-	)
-
-	require.NoError(err)
-	// Ensure the values have been set accordingly
-	tok, err := config.Token()
-	require.NoError(err)
-	require.Equal("SomeAccessToken", tok.AccessToken)
-	require.Equal("SomeRefreshToken", tok.RefreshToken)
 }
 
 func TestNew_Invalid(t *testing.T) {

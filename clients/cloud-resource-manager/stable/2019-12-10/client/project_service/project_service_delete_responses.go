@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // ProjectServiceDeleteReader is a Reader for the ProjectServiceDelete structure.
@@ -52,7 +53,7 @@ ProjectServiceDeleteOK describes a response with status code 200, with default h
 A successful response.
 */
 type ProjectServiceDeleteOK struct {
-	Payload *models.ResourcemanagerProjectDeleteResponse
+	Payload *models.HashicorpCloudResourcemanagerProjectDeleteResponse
 }
 
 // IsSuccess returns true when this project service delete o k response has a 2xx status code
@@ -88,13 +89,13 @@ func (o *ProjectServiceDeleteOK) String() string {
 	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] projectServiceDeleteOK  %+v", 200, o.Payload)
 }
 
-func (o *ProjectServiceDeleteOK) GetPayload() *models.ResourcemanagerProjectDeleteResponse {
+func (o *ProjectServiceDeleteOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectDeleteResponse {
 	return o.Payload
 }
 
 func (o *ProjectServiceDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResourcemanagerProjectDeleteResponse)
+	o.Payload = new(models.HashicorpCloudResourcemanagerProjectDeleteResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -119,7 +120,7 @@ An unexpected error response.
 type ProjectServiceDeleteDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *cloud.GoogleRPCStatus
 }
 
 // Code gets the status code for the project service delete default response
@@ -160,13 +161,13 @@ func (o *ProjectServiceDeleteDefault) String() string {
 	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] ProjectService_Delete default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ProjectServiceDeleteDefault) GetPayload() *models.RPCStatus {
+func (o *ProjectServiceDeleteDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *ProjectServiceDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

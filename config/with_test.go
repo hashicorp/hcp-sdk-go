@@ -5,6 +5,9 @@ package config
 
 import (
 	"crypto/tls"
+	"fmt"
+	"io/ioutil"
+	"math/rand"
 	"testing"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
@@ -20,8 +23,8 @@ func TestWith_ClientCredentials(t *testing.T) {
 	require.NoError(apply(config, WithClientCredentials("my-client-id", "my-client-secret")))
 
 	// Ensure that the client credentials have been set
-	require.Equal("my-client-id", config.clientCredentialsConfig.ClientID)
-	require.Equal("my-client-secret", config.clientCredentialsConfig.ClientSecret)
+	require.Equal("my-client-id", config.clientID)
+	require.Equal("my-client-secret", config.clientSecret)
 }
 
 func TestWith_API(t *testing.T) {
@@ -99,17 +102,6 @@ func TestWith_OAuth2ClientID(t *testing.T) {
 	require.Equal("1a2b3c4d", config.oauth2Config.ClientID)
 }
 
-func TestWith_Session(t *testing.T) {
-	require := requirepkg.New(t)
-
-	// Exercise
-	config := &hcpConfig{}
-	require.NoError(apply(config, WithSession(&auth.MockSession{})))
-
-	// Ensure Sessions is an empty MockSession object
-	require.Equal(&auth.MockSession{}, config.session)
-}
-
 func TestWith_Profile(t *testing.T) {
 	require := requirepkg.New(t)
 
@@ -133,4 +125,61 @@ func TestWithout_BrowserLogin(t *testing.T) {
 
 	// Ensure  browser login is disabled
 	require.True(config.noBrowserLogin)
+}
+
+func TestWith_CredentialFile(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise with an invalid credential file
+	config := &hcpConfig{}
+	cf := &auth.CredentialFile{
+		ProjectID: "123",
+	}
+	require.Error(apply(config, WithCredentialFile(cf)))
+
+	// Exercise with a valid credential file
+	cf = &auth.CredentialFile{
+		ProjectID: "123",
+		Scheme:    auth.CredentialFileSchemeServicePrincipal,
+		Oauth: &auth.OauthConfig{
+			ClientID:     "123",
+			ClientSecret: "456",
+		},
+	}
+	require.NoError(apply(config, WithCredentialFile(cf)))
+
+	// Ensure the cred file is set
+	require.Equal(cf, config.credentialFile)
+}
+
+func TestWith_CredentialFilePath(t *testing.T) {
+	t.Run("found", func(t *testing.T) {
+		require := requirepkg.New(t)
+
+		// Write the cred file
+		cf := &auth.CredentialFile{
+			ProjectID: "123",
+			Scheme:    auth.CredentialFileSchemeServicePrincipal,
+			Oauth: &auth.OauthConfig{
+				ClientID:     "123",
+				ClientSecret: "456",
+			},
+		}
+		f, err := ioutil.TempFile("", "")
+		require.NoError(err)
+		require.NoError(auth.WriteCredentialFile(f.Name(), cf))
+
+		// Exercise
+		config := &hcpConfig{}
+		require.NoError(apply(config, WithCredentialFilePath(f.Name())))
+
+		// Ensure the cred file is set
+		require.Equal(cf, config.credentialFile)
+	})
+
+	t.Run("not found", func(t *testing.T) {
+		// Exercise
+		config := &hcpConfig{}
+		requirepkg.Error(t, apply(config, WithCredentialFilePath(fmt.Sprintf("random-%d", rand.Int()))))
+	})
 }

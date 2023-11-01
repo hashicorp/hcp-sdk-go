@@ -19,9 +19,7 @@ import (
 type HashicorpCloudPackerChannelAssignmentIteration struct {
 
 	// Fingerprint of the iteration. The fingerprint is set by Packer when you
-	// call `packer build`. It will most often correspond to a git commit sha,
-	// but can be manually overridden by setting the environment variable
-	// `HCP_PACKER_BUILD_FINGERPRINT`.
+	// call `packer build`.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
 	// Universally Unique Lexicographically Sortable Identifier (ULID) of the iteration.

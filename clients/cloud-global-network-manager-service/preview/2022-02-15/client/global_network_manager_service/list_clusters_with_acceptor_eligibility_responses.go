@@ -81,6 +81,11 @@ func (o *ListClustersWithAcceptorEligibilityOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list clusters with acceptor eligibility o k response
+func (o *ListClustersWithAcceptorEligibilityOK) Code() int {
+	return 200
+}
+
 func (o *ListClustersWithAcceptorEligibilityOK) Error() string {
 	return fmt.Sprintf("[GET /global-network-manager/2022-02-15/organizations/{location.organization_id}/projects/{location.project_id}/clusters_with_acceptor_eligibility][%d] listClustersWithAcceptorEligibilityOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ListClustersWithAcceptorEligibilityDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the list clusters with acceptor eligibility default response
-func (o *ListClustersWithAcceptorEligibilityDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list clusters with acceptor eligibility default response has a 2xx status code
 func (o *ListClustersWithAcceptorEligibilityDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ListClustersWithAcceptorEligibilityDefault) IsServerError() bool {
 // IsCode returns true when this list clusters with acceptor eligibility default response a status code equal to that given
 func (o *ListClustersWithAcceptorEligibilityDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list clusters with acceptor eligibility default response
+func (o *ListClustersWithAcceptorEligibilityDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListClustersWithAcceptorEligibilityDefault) Error() string {

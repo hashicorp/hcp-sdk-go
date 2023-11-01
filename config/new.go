@@ -6,15 +6,12 @@ package config
 import (
 	"crypto/tls"
 	"fmt"
-	"net/http"
+	"io"
+	"log"
 	"net/url"
 
-	"github.com/hashicorp/go-cleanhttp"
-	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/profile"
-	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/clientcredentials"
 )
 
 const (
@@ -62,10 +59,6 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 
 	// Prepare basic config with default values.
 	config := &hcpConfig{
-		clientCredentialsConfig: clientcredentials.Config{
-			EndpointParams: url.Values{"audience": {aud}},
-		},
-
 		authURL:       authURL,
 		authTLSConfig: &tls.Config{},
 		oauth2Config: oauth2.Config{
@@ -77,7 +70,6 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 			RedirectURL: "http://localhost:8443/oidc/callback",
 			Scopes:      []string{"openid", "offline_access"},
 		},
-		session: &auth.UserSession{},
 		profile: &profile.UserProfile{},
 
 		portalURL: portalURL,
@@ -89,6 +81,10 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		scadaTLSConfig: &tls.Config{},
 	}
 
+	if config.suppressLogging {
+		log.SetOutput(io.Discard)
+	}
+
 	// Apply all options
 	for _, opt := range opts {
 		if err := opt(config); err != nil {
@@ -96,40 +92,9 @@ func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 		}
 	}
 
-	if config.noBrowserLogin {
-		config.session = &auth.UserSession{
-			NoBrowserLogin: true,
-		}
-	}
-
-	// Set up a token context with the custom auth TLS config
-	tokenTransport := cleanhttp.DefaultPooledTransport()
-	tokenTransport.TLSClientConfig = config.authTLSConfig
-	tokenContext := context.WithValue(
-		context.Background(),
-		oauth2.HTTPClient,
-		&http.Client{Transport: tokenTransport},
-	)
-
-	// Set access token via configured client credentials.
-	if config.clientCredentialsConfig.ClientID != "" && config.clientCredentialsConfig.ClientSecret != "" {
-		// Set token URL based on auth URL.
-		tokenURL := config.authURL
-		tokenURL.Path = tokenPath
-		config.clientCredentialsConfig.TokenURL = tokenURL.String()
-
-		// Create token source from the client credentials configuration.
-		config.tokenSource = config.clientCredentialsConfig.TokenSource(tokenContext)
-
-	} else { // Set access token via browser login or use token from existing session.
-
-		tok, err := config.session.GetToken(tokenContext, &config.oauth2Config)
-		if err != nil {
-			return nil, fmt.Errorf("failed to find existing session or set up new: %w", err)
-		}
-
-		// Update HCPConfig with most current token values.
-		config.tokenSource = config.oauth2Config.TokenSource(tokenContext, tok)
+	// Configure the token source
+	if err := config.setTokenSource(); err != nil {
+		return nil, err
 	}
 
 	if err := config.validate(); err != nil {

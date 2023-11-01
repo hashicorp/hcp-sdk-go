@@ -8,10 +8,11 @@ import (
 	"fmt"
 	"net/url"
 
+	"github.com/hashicorp/hcp-sdk-go/auth/workload"
+
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/profile"
 	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/clientcredentials"
 )
 
 // HCPConfig provides configuration values that are useful to interact with HCP.
@@ -55,9 +56,11 @@ type HCPConfig interface {
 }
 
 type hcpConfig struct {
-	// clientCredentialsConfig is the configuration that will be used to create
-	// the token source.
-	clientCredentialsConfig clientcredentials.Config
+	// clientID is the service principal client ID that will be used to create a token source.
+	clientID string
+
+	// clientSecret is the service principal client secret that will be used to create a token source.
+	clientSecret string
 
 	// oauth2Config is the configuration that will be used to create
 	// a browser-initiated token source when client credentials are not provided.
@@ -89,15 +92,23 @@ type hcpConfig struct {
 	// set to nil if TLS should be disabled.
 	scadaTLSConfig *tls.Config
 
-	// session is responsible for getting an access token fron our identity provider.
-	// A mock can be used in tests.
-	session auth.Session
-
 	// profile is the user's organization id and project id
 	profile *profile.UserProfile
 
 	// noBrowserLogin is an option to prevent automatic browser login when no local credentials are found.
 	noBrowserLogin bool
+
+	// forceLogin can be set to fetch new tokens instead of reusing the
+	forceLogin bool
+
+	// suppressLogging is an option to prevent this SDK from printing anything
+	suppressLogging bool
+
+	// credentialFile is the credential file to use.
+	credentialFile *auth.CredentialFile
+
+	// workloadProviderConfig is the config of the workload identity provider to use for authentication.
+	workloadProviderConfig *workload.IdentityProviderConfig
 }
 
 func (c *hcpConfig) Profile() *profile.UserProfile {
@@ -134,13 +145,13 @@ func (c *hcpConfig) SCADATLSConfig() *tls.Config {
 func (c *hcpConfig) validate() error {
 
 	// Ensure both client credentials provided
-	if (c.clientCredentialsConfig.ClientID == "" && c.clientCredentialsConfig.ClientSecret != "") ||
-		(c.clientCredentialsConfig.ClientID != "" && c.clientCredentialsConfig.ClientSecret == "") {
+	if (c.clientID == "" && c.clientSecret != "") ||
+		(c.clientID != "" && c.clientSecret == "") {
 		return fmt.Errorf("both client ID and secret must be provided")
 	}
 
 	// Ensure at least one auth method configured
-	if c.clientCredentialsConfig.ClientID == "" && c.clientCredentialsConfig.ClientSecret == "" && c.oauth2Config.ClientID == "" {
+	if c.clientID == "" && c.clientSecret == "" && c.oauth2Config.ClientID == "" {
 		return fmt.Errorf("either client credentials or oauth2 client ID must be provided")
 	}
 
