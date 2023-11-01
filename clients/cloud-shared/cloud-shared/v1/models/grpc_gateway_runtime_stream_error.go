@@ -14,26 +14,29 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GrpcGatewayRuntimeError grpc gateway runtime error
+// GrpcGatewayRuntimeStreamError grpc gateway runtime stream error
 //
-// swagger:model grpc.gateway.runtime.Error
-type GrpcGatewayRuntimeError struct {
-
-	// code
-	Code int32 `json:"code,omitempty"`
+// swagger:model grpc.gateway.runtime.StreamError
+type GrpcGatewayRuntimeStreamError struct {
 
 	// details
 	Details []*GoogleProtobufAny `json:"details"`
 
-	// error
-	Error string `json:"error,omitempty"`
+	// grpc code
+	GrpcCode int32 `json:"grpc_code,omitempty"`
+
+	// http code
+	HTTPCode int32 `json:"http_code,omitempty"`
+
+	// http status
+	HTTPStatus string `json:"http_status,omitempty"`
 
 	// message
 	Message string `json:"message,omitempty"`
 }
 
-// Validate validates this grpc gateway runtime error
-func (m *GrpcGatewayRuntimeError) Validate(formats strfmt.Registry) error {
+// Validate validates this grpc gateway runtime stream error
+func (m *GrpcGatewayRuntimeStreamError) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateDetails(formats); err != nil {
@@ -46,7 +49,7 @@ func (m *GrpcGatewayRuntimeError) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *GrpcGatewayRuntimeError) validateDetails(formats strfmt.Registry) error {
+func (m *GrpcGatewayRuntimeStreamError) validateDetails(formats strfmt.Registry) error {
 	if swag.IsZero(m.Details) { // not required
 		return nil
 	}
@@ -72,8 +75,8 @@ func (m *GrpcGatewayRuntimeError) validateDetails(formats strfmt.Registry) error
 	return nil
 }
 
-// ContextValidate validate this grpc gateway runtime error based on the context it is used
-func (m *GrpcGatewayRuntimeError) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this grpc gateway runtime stream error based on the context it is used
+func (m *GrpcGatewayRuntimeStreamError) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateDetails(ctx, formats); err != nil {
@@ -86,7 +89,7 @@ func (m *GrpcGatewayRuntimeError) ContextValidate(ctx context.Context, formats s
 	return nil
 }
 
-func (m *GrpcGatewayRuntimeError) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+func (m *GrpcGatewayRuntimeStreamError) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Details); i++ {
 
@@ -112,7 +115,7 @@ func (m *GrpcGatewayRuntimeError) contextValidateDetails(ctx context.Context, fo
 }
 
 // MarshalBinary interface implementation
-func (m *GrpcGatewayRuntimeError) MarshalBinary() ([]byte, error) {
+func (m *GrpcGatewayRuntimeStreamError) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -120,8 +123,8 @@ func (m *GrpcGatewayRuntimeError) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *GrpcGatewayRuntimeError) UnmarshalBinary(b []byte) error {
-	var res GrpcGatewayRuntimeError
+func (m *GrpcGatewayRuntimeStreamError) UnmarshalBinary(b []byte) error {
+	var res GrpcGatewayRuntimeStreamError
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
