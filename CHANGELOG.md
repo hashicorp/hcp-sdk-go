@@ -1,3 +1,14 @@
+## v0.71.0 (November 01, 2023)
+
+IMPROVEMENTS:
+
+* All credentials (login, service-principal and workload identity provider) are now cached.
+
+The cache file has moved to `creds-cache.json` to not interfere with applications that rely on the previous cache file
+structure.
+
+It is further now possible to enforce an interactive login (via a configuration flag), which can be used to implement a
+`cli login` functionality. [[GH-205](https://github.com/hashicorp/hcp-sdk-go/pull/205)]
 ## v0.70.0 (October 18, 2023)
 
 ## v0.69.0 (October 18, 2023)
