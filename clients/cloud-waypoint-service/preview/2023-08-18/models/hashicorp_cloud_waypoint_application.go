@@ -31,6 +31,9 @@ type HashicorpCloudWaypointApplication struct {
 	// operate the application. This may be populated from a application template.
 	// Format: byte
 	ReadmeMarkdown strfmt.Base64 `json:"readme_markdown,omitempty"`
+
+	// template name
+	TemplateName string `json:"template_name,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint application
