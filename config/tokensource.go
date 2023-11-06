@@ -45,12 +45,7 @@ func (c *hcpConfig) setTokenSource() error {
 
 	switch sourceType {
 	case sourceTypeLogin:
-		c.tokenSource = tokencache.NewLoginTokenSource(
-			cacheFile,
-			c.forceLogin,
-			tokenSource,
-			&c.oauth2Config,
-		)
+		c.tokenSource = tokencache.NewLoginTokenSource(cacheFile, tokenSource, &c.oauth2Config)
 	case sourceTypeServicePrincipal:
 		c.tokenSource = tokencache.NewServicePrincipalTokenSource(
 			cacheFile,

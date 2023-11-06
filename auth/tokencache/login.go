@@ -16,19 +16,14 @@ const sourceTypeLogin = sourceType("login")
 // time.
 //
 // The tokens will be cached under `login` in the cache file.
-//
-// If forceLogin is set the existing cached token will be invalidated and a new token will be retrieved from the
-// token source.
 func NewLoginTokenSource(
 	cacheFile string,
-	forceLogin bool,
 	oauthTokenSource oauth2.TokenSource,
 	oauthConfig oAuth2Config,
 ) oauth2.TokenSource {
 	return &cachingTokenSource{
 		cacheFile:        cacheFile,
 		sourceType:       sourceTypeLogin,
-		forceLogin:       forceLogin,
 		oauthTokenSource: oauthTokenSource,
 		oauthConfig:      oauthConfig,
 	}
@@ -36,14 +31,6 @@ func NewLoginTokenSource(
 
 func (source *cachingTokenSource) loginToken(cachedTokens *cache) (*oauth2.Token, error) {
 	var hitEntry *cacheEntry
-
-	// Invalidate login cache if a login should be enforced
-	if source.forceLogin {
-		cachedTokens.Login = nil
-
-		// Only force the login once per instance
-		source.forceLogin = false
-	}
 
 	// First check if credentials exist in the `login` field
 	if cachedTokens.Login != nil {
