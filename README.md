@@ -40,6 +40,15 @@ To obtain user credentials, the client credential environment variables `HCP_CLI
 
 If you have a use-case with the SDK to leverage the browser login as a feature but want to control if the browser is opened you can pass in the option func of `WithoutBrowserLogin()` to your `NewHCPConfig()`.
 
+The current session can be discarded by calling `hcpConfig.Logout()`.
+
+`cli login` functionality, i.e. a forced login, can be implemented by allowing browser login and calling:
+
+```
+err := hcpConfig.Logout() // Discard the currently cached credentials (if any)
+_, err = hcpConfig.Token() // Fetching a token will trigger a login 
+```
+
 ### User Profile
 
 An HCP Organization ID and Project ID are required to call most HCP APIs. They can be set to the environment variables `HCP_ORGANIZATION_ID` and `HCP_PROJECT_ID`, as in the example below. The HCP Go SDK will read them from the environment and save them in its state as the user's Profile. The Profile Project and Organization IDs will be applied as default values to any request missing them.
