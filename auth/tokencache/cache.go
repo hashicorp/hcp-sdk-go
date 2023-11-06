@@ -62,7 +62,7 @@ func readCache(cacheFile string) (*cache, error) {
 // future (e.g. by -re-reading the content before writing, locking the file or writing cache information to multiple files).
 func (c *cache) write(cacheFile string) error {
 	// Marshal the new tokens
-	cacheJSON, err := json.Marshal(c)
+	cacheJSON, err := json.MarshalIndent(c, "", "    ")
 	if err != nil {
 		return fmt.Errorf("failed to marshal cached tokens: %w", err)
 	}
