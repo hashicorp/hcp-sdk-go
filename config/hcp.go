@@ -8,7 +8,9 @@ import (
 	"fmt"
 	"net/url"
 
+	"github.com/hashicorp/hcp-sdk-go/auth/tokencache"
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
+	"github.com/hashicorp/hcp-sdk-go/config/files"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/profile"
@@ -23,6 +25,9 @@ type HCPConfig interface {
 
 	// TokenSource will return a token that can be used to authenticate to HCP.
 	oauth2.TokenSource
+
+	// Logout will discard the currently cached login credentials
+	Logout() error
 
 	// PortalURL will return the URL of the portal.
 	//
@@ -117,6 +122,22 @@ func (c *hcpConfig) Profile() *profile.UserProfile {
 
 func (c *hcpConfig) Token() (*oauth2.Token, error) {
 	return c.tokenSource.Token()
+}
+
+// Logout will log out the user by clearing the currently cached login tokens.
+func (c *hcpConfig) Logout() error {
+	// Get cache file path
+	cacheFile, err := files.TokenCacheFile()
+	if err != nil {
+		return fmt.Errorf("failed to get token cache file: %w", err)
+	}
+
+	// Clear login token cache
+	if err = tokencache.ClearLoginCache(cacheFile); err != nil {
+		return fmt.Errorf("failed to clear cached login token: %w", err)
+	}
+
+	return nil
 }
 
 func (c *hcpConfig) PortalURL() *url.URL {
