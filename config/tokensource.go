@@ -5,11 +5,8 @@ package config
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"net/url"
-	"os"
-	"path"
 
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/hcp-sdk-go/auth"
@@ -18,11 +15,6 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/config/files"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
-)
-
-const (
-	// cacheFileName is the name of the cache file within the configuration folder.
-	cacheFileName = "creds-cache.json"
 )
 
 type sourceType = string
@@ -41,12 +33,10 @@ func (c *hcpConfig) setTokenSource() error {
 
 	// Get the credential cache path
 	// TODO: make this configurable
-	userHome, err := os.UserHomeDir()
+	cacheFile, err := files.TokenCacheFile()
 	if err != nil {
-		return fmt.Errorf("failed to retrieve user's home directory path: %v", err)
+		return err
 	}
-
-	cacheFile := path.Join(userHome, files.DefaultDirectory, cacheFileName)
 
 	tokenSource, sourceType, sourceIdentifier, err := c.getTokenSource()
 	if err != nil {
