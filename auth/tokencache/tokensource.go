@@ -28,7 +28,6 @@ type sourceType = string
 // cachingTokenSource acts as a read-through cache for token information received from token sources and oauth configurations.
 type cachingTokenSource struct {
 	cacheFile        string
-	forceLogin       bool
 	sourceType       sourceType
 	sourceIdentifier string
 	oauthTokenSource oauth2.TokenSource

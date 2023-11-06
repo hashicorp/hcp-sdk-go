@@ -27,12 +27,7 @@ func TestCachingTokenSource_Login_WithoutOauthConfig(t *testing.T) {
 	tokenSource := NewTestTokenSource("")
 
 	// Create the caching token source for logins
-	subject := NewLoginTokenSource(
-		cacheFile,
-		false,
-		tokenSource,
-		nil,
-	)
+	subject := NewLoginTokenSource(cacheFile, tokenSource, nil)
 
 	// Fetch the token once. It should get cached.
 	token, err := subject.Token()
@@ -58,33 +53,11 @@ func TestCachingTokenSource_Login_WithoutOauthConfig(t *testing.T) {
 	require.Equal("access-token-2", token.AccessToken)
 
 	// Create a new token source with the same file and expect it to return the cached value
-	subject = NewLoginTokenSource(
-		cacheFile,
-		false,
-		tokenSource,
-		nil,
-	)
+	subject = NewLoginTokenSource(cacheFile, tokenSource, nil)
 
 	token, err = subject.Token()
 	require.NoError(err)
 	require.Equal("access-token-2", token.AccessToken)
-
-	// Create a new token source with force login enabled and expect it to return a new token
-	subject = NewLoginTokenSource(
-		cacheFile,
-		true,
-		tokenSource,
-		nil,
-	)
-
-	token, err = subject.Token()
-	require.NoError(err)
-	require.Equal("access-token-3", token.AccessToken)
-
-	// Fetch the token another time to verify that force login is only executed once.
-	token, err = subject.Token()
-	require.NoError(err)
-	require.Equal("access-token-3", token.AccessToken)
 }
 
 func TestCachingTokenSource_Login_WithOauthConfig(t *testing.T) {
@@ -108,12 +81,7 @@ func TestCachingTokenSource_Login_WithOauthConfig(t *testing.T) {
 	config := NewTestOauth2Config(configTokenSource)
 
 	// Create the caching token source for interactive logins
-	subject := NewLoginTokenSource(
-		cacheFile,
-		false,
-		tokenSource,
-		config,
-	)
+	subject := NewLoginTokenSource(cacheFile, tokenSource, config)
 
 	// Fetch the token once. It should get cached.
 	token, err := subject.Token()
