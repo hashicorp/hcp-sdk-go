@@ -18,14 +18,14 @@ import (
 // cache is used to (un-)marshal the cached tokens from/to JSON.
 type cache struct {
 	// Login contains the cached tokens for the interactive login session
-	Login *cacheEntry `json:"login"`
+	Login *cacheEntry `json:"login,omitempty"`
 
 	// ServicePrincipals contains cached tokens for service principals. The key is the service principal key's client_id.
-	ServicePrincipals map[string]cacheEntry `json:"service-principals"`
+	ServicePrincipals map[string]cacheEntry `json:"service-principals,omitempty"`
 
 	// Workloads contains cached tokens for workload identity providers. The key is the workload identity provider's
 	// resource name.
-	Workloads map[string]cacheEntry `json:"workloads"`
+	Workloads map[string]cacheEntry `json:"workloads,omitempty"`
 }
 
 // readCache will read the cached tokens from a file. If an error occurs it will return an error and an empty cache
