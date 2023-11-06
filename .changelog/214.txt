@@ -1,0 +1,5 @@
+```release-note:improvement
+Adds a hcpConfig.Logout() method. Logout could previously be implemented by invalidating the cache. This now isn't possible anymore as the cache is not exported.
+
+This change further removes the recently introduced forceLogin configuration value, as force login can easily be implemented by invoking hcpConfig.Logout() followed by hcpConfig.Token() without the need for a special configuration setting.
+```
