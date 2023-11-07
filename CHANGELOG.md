@@ -1,3 +1,10 @@
+## v0.72.0 (November 07, 2023)
+
+IMPROVEMENTS:
+
+* Adds a hcpConfig.Logout() method. Logout could previously be implemented by invalidating the cache. This now isn't possible anymore as the cache is not exported.
+
+This change further removes the recently introduced forceLogin configuration value, as force login can easily be implemented by invoking hcpConfig.Logout() followed by hcpConfig.Token() without the need for a special configuration setting. [[GH-214](https://github.com/hashicorp/hcp-sdk-go/pull/214)]
 ## v0.71.0 (November 01, 2023)
 
 IMPROVEMENTS:
