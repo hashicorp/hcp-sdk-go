@@ -38,7 +38,7 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceInstance struct {
 	// Service instance ID
 	ID string `json:"id,omitempty"`
 
-	// Kind of service
+	// `Kind` of service
 	Kind string `json:"kind,omitempty"`
 
 	// meta
@@ -50,7 +50,7 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceInstance struct {
 	// Namespace where the service is deployed.
 	Namespace string `json:"namespace,omitempty"`
 
-	// Which Consul node the service is registered on
+	// Consul node the service is registered on
 	Node string `json:"node,omitempty"`
 
 	// node checks critical

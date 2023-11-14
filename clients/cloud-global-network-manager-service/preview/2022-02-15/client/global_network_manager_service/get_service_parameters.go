@@ -61,16 +61,28 @@ GetServiceParams contains all the parameters to send to the API endpoint
 */
 type GetServiceParams struct {
 
-	// ClusterResourceName.
+	/* ClusterResourceName.
+
+	   Cluster Resource Name will be of the form `consul/project/<project_id>/cluster/<cluster_id>`
+	*/
 	ClusterResourceName string
 
-	// Namespace.
+	/* Namespace.
+
+	   Query param filter: `namespace` of the service.
+	*/
 	Namespace *string
 
-	// Partition.
+	/* Partition.
+
+	   Query param filter: `partition` of the service.
+	*/
 	Partition *string
 
-	// ServiceName.
+	/* ServiceName.
+
+	   The `name` of the service.
+	*/
 	ServiceName string
 
 	timeout    time.Duration

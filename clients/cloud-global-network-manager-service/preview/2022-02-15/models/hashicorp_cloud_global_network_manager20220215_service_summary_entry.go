@@ -25,7 +25,7 @@ type HashicorpCloudGlobalNetworkManager20220215ServiceSummaryEntry struct {
 	// critical
 	Critical int32 `json:"critical,omitempty"`
 
-	// kind of service
+	// `kind` of service
 	Kind *HashicorpCloudGlobalNetworkManager20220215ServiceSummaryKind `json:"kind,omitempty"`
 
 	// Namespace where the service is deployed.

@@ -62,16 +62,22 @@ ListServiceInstancesParams contains all the parameters to send to the API endpoi
 */
 type ListServiceInstancesParams struct {
 
-	// ClusterResourceName.
+	/* ClusterResourceName.
+
+	   Cluster resource name will be of the form `consul/project/<project_id>/cluster/<cluster_id>`
+	*/
 	ClusterResourceName string
 
-	// Namespace.
+	/* Namespace.
+
+	   Query param filter: `namespace` of the service.
+	*/
 	Namespace *string
 
 	/* OrderBy.
 
 	     Sorts the services based on a field. Allowed fields: id, health.
-	The value needs to be of the format `<Field Name> {asc/desc}` Eg: `id`, `id asc`, `health desc`.
+	The value needs to be of the format `<Field Name> {asc/desc}` For example: `id`, `id asc`, `health desc`.
 	*/
 	OrderBy []string
 
@@ -102,7 +108,10 @@ type ListServiceInstancesParams struct {
 	*/
 	PaginationPreviousPageToken *string
 
-	// Partition.
+	/* Partition.
+
+	   Query param filter: `partition` of the service.
+	*/
 	Partition *string
 
 	/* Query.
@@ -111,12 +120,15 @@ type ListServiceInstancesParams struct {
 	*/
 	Query *string
 
-	// ServiceName.
+	/* ServiceName.
+
+	   Unique identifier for the service instance.
+	*/
 	ServiceName string
 
 	/* Status.
 
-	   Query param filter: `status` of the service. This can be combination of `passing`, `warning`, `critical`, `none`
+	   Query param filter: `status` of the service. This can be combination of `passing`, `warning`, `critical`, `none`.
 	*/
 	Status []string
 

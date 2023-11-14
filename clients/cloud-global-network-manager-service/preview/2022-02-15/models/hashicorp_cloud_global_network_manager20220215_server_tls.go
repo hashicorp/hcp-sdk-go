@@ -12,7 +12,8 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudGlobalNetworkManager20220215ServerTLS hashicorp cloud global network manager 20220215 server TLS
+// HashicorpCloudGlobalNetworkManager20220215ServerTLS ServerTLS describe TLS materials that are used to push certificates down to
+// Consul.
 //
 // swagger:model hashicorp.cloud.global_network_manager_20220215.ServerTLS
 type HashicorpCloudGlobalNetworkManager20220215ServerTLS struct {

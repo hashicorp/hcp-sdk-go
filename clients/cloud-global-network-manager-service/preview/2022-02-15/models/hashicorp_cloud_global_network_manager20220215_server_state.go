@@ -48,7 +48,11 @@ type HashicorpCloudGlobalNetworkManager20220215ServerState struct {
 	// scada status
 	ScadaStatus string `json:"scada_status,omitempty"`
 
-	// tls
+	// server_tls contains information about the TLS certificates on the Consul
+	// server.
+	ServerTLS *HashicorpCloudGlobalNetworkManager20220215ServerTLSMetadata `json:"server_tls,omitempty"`
+
+	// Deprecated: use server_tls.internal_rpc instead.
 	TLS *HashicorpCloudGlobalNetworkManager20220215TLSInfo `json:"tls,omitempty"`
 
 	// version
@@ -68,6 +72,10 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) Validate(formats
 	}
 
 	if err := m.validateRaft(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateServerTLS(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -138,6 +146,25 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) validateRaft(for
 	return nil
 }
 
+func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) validateServerTLS(formats strfmt.Registry) error {
+	if swag.IsZero(m.ServerTLS) { // not required
+		return nil
+	}
+
+	if m.ServerTLS != nil {
+		if err := m.ServerTLS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("server_tls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("server_tls")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) validateTLS(formats strfmt.Registry) error {
 	if swag.IsZero(m.TLS) { // not required
 		return nil
@@ -170,6 +197,10 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) ContextValidate(
 	}
 
 	if err := m.contextValidateRaft(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateServerTLS(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -238,6 +269,27 @@ func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) contextValidateR
 				return ve.ValidateName("raft")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("raft")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215ServerState) contextValidateServerTLS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ServerTLS != nil {
+
+		if swag.IsZero(m.ServerTLS) { // not required
+			return nil
+		}
+
+		if err := m.ServerTLS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("server_tls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("server_tls")
 			}
 			return err
 		}

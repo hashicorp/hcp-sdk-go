@@ -64,6 +64,8 @@ type ClientService interface {
 
 	ListClusterServers(params *ListClusterServersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterServersOK, error)
 
+	ListClusterServices(params *ListClusterServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterServicesOK, error)
+
 	ListClusters(params *ListClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersOK, error)
 
 	ListClustersWithAcceptorEligibility(params *ListClustersWithAcceptorEligibilityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersWithAcceptorEligibilityOK, error)
@@ -764,6 +766,44 @@ func (a *Client) ListClusterServers(params *ListClusterServersParams, authInfo r
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListClusterServersDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListClusterServices list cluster services API
+*/
+func (a *Client) ListClusterServices(params *ListClusterServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterServicesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListClusterServicesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListClusterServices",
+		Method:             "GET",
+		PathPattern:        "/2022-02-15/global-network-manager/{cluster_resource_name}/services",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListClusterServicesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListClusterServicesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListClusterServicesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

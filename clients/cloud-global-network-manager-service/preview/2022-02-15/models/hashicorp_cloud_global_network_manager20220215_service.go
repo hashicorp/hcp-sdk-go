@@ -54,7 +54,7 @@ type HashicorpCloudGlobalNetworkManager20220215Service struct {
 	// instance count
 	InstanceCount int32 `json:"instance_count,omitempty"`
 
-	// Kind of service
+	// `Kind` of service
 	// Possible values: "", "typical", "connect-proxy", "mesh-gateway", "terminating-gateway", "ingress-gateway"
 	// "destination", "api-gateway"
 	Kind string `json:"kind,omitempty"`
@@ -75,7 +75,7 @@ type HashicorpCloudGlobalNetworkManager20220215Service struct {
 	// A name defined at the admin partition level to help determine if two services are the same.
 	SamenessGroup *HashicorpCloudGlobalNetworkManager20220215ServiceSamenessGroup `json:"sameness_group,omitempty"`
 
-	// Each instance of a service can have its own tags. At the service level, we return a set of all tags of all service instances.
+	// Each instance of a service can have its own tags. At the service level, returns a set of all tags of all service instances.
 	Tags []string `json:"tags"`
 
 	// Determines whether service traffic is forced to pass through the sidecar proxy.
