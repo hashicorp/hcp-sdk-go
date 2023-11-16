@@ -1,3 +1,6 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package tokencache
 
 // ClearLoginCache will clear the login entry in the passed cache file. This can be used to "logout" principal.
