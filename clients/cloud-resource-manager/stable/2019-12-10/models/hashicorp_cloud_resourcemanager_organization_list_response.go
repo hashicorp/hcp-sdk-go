@@ -113,6 +113,11 @@ func (m *HashicorpCloudResourcemanagerOrganizationListResponse) contextValidateO
 	for i := 0; i < len(m.Organizations); i++ {
 
 		if m.Organizations[i] != nil {
+
+			if swag.IsZero(m.Organizations[i]) { // not required
+				return nil
+			}
+
 			if err := m.Organizations[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("organizations" + "." + strconv.Itoa(i))
@@ -131,6 +136,11 @@ func (m *HashicorpCloudResourcemanagerOrganizationListResponse) contextValidateO
 func (m *HashicorpCloudResourcemanagerOrganizationListResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")

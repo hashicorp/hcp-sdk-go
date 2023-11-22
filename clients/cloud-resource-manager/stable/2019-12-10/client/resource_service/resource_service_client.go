@@ -28,9 +28,53 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	ResourceServiceGetIamPolicy(params *ResourceServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceGetIamPolicyOK, error)
+
 	ResourceServiceList(params *ResourceServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceListOK, error)
 
+	ResourceServiceSetIamPolicy(params *ResourceServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceSetIamPolicyOK, error)
+
+	ResourceServiceTestIamPermissions(params *ResourceServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceTestIamPermissionsOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+ResourceServiceGetIamPolicy gets iam policy gets the i a m policy for a resource
+*/
+func (a *Client) ResourceServiceGetIamPolicy(params *ResourceServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceGetIamPolicyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewResourceServiceGetIamPolicyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ResourceService_GetIamPolicy",
+		Method:             "GET",
+		PathPattern:        "/2019-12-10/resource-manager/resources/iam-policy",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ResourceServiceGetIamPolicyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ResourceServiceGetIamPolicyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ResourceServiceGetIamPolicyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -68,6 +112,82 @@ func (a *Client) ResourceServiceList(params *ResourceServiceListParams, authInfo
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ResourceServiceListDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ResourceServiceSetIamPolicy sets iam policy sets the i a m policy for a resource since this updates the full policy the policy takes an etag argument that should match with the current policy stored in the system this is to avoid concurrent writes erasing each other s data hence the client should always get the current policy that includes the etag modify the policy and then set the policy with the same etag if there is no existing policy the etag must be empty
+*/
+func (a *Client) ResourceServiceSetIamPolicy(params *ResourceServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceSetIamPolicyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewResourceServiceSetIamPolicyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ResourceService_SetIamPolicy",
+		Method:             "PUT",
+		PathPattern:        "/2019-12-10/resource-manager/resources/iam-policy",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ResourceServiceSetIamPolicyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ResourceServiceSetIamPolicyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ResourceServiceSetIamPolicyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ResourceServiceTestIamPermissions tests iam permissions returns a subset of the request permissions the calling principal has on the resource
+*/
+func (a *Client) ResourceServiceTestIamPermissions(params *ResourceServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceTestIamPermissionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewResourceServiceTestIamPermissionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ResourceService_TestIamPermissions",
+		Method:             "POST",
+		PathPattern:        "/resource-manager/2019-12-10/resources/test-iam-permissions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ResourceServiceTestIamPermissionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ResourceServiceTestIamPermissionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ResourceServiceTestIamPermissionsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

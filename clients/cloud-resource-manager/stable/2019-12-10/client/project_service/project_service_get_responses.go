@@ -81,6 +81,11 @@ func (o *ProjectServiceGetOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the project service get o k response
+func (o *ProjectServiceGetOK) Code() int {
+	return 200
+}
+
 func (o *ProjectServiceGetOK) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}][%d] projectServiceGetOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ProjectServiceGetDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the project service get default response
-func (o *ProjectServiceGetDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this project service get default response has a 2xx status code
 func (o *ProjectServiceGetDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ProjectServiceGetDefault) IsServerError() bool {
 // IsCode returns true when this project service get default response a status code equal to that given
 func (o *ProjectServiceGetDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the project service get default response
+func (o *ProjectServiceGetDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProjectServiceGetDefault) Error() string {

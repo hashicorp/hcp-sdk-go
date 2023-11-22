@@ -132,6 +132,11 @@ func (m *HashicorpCloudResourcemanagerOrganization) ContextValidate(ctx context.
 func (m *HashicorpCloudResourcemanagerOrganization) contextValidateOwner(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Owner != nil {
+
+		if swag.IsZero(m.Owner) { // not required
+			return nil
+		}
+
 		if err := m.Owner.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("owner")
@@ -148,6 +153,11 @@ func (m *HashicorpCloudResourcemanagerOrganization) contextValidateOwner(ctx con
 func (m *HashicorpCloudResourcemanagerOrganization) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")

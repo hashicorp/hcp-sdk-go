@@ -83,6 +83,11 @@ func (o *ProjectServiceTestIamPermissionsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the project service test iam permissions o k response
+func (o *ProjectServiceTestIamPermissionsOK) Code() int {
+	return 200
+}
+
 func (o *ProjectServiceTestIamPermissionsOK) Error() string {
 	return fmt.Sprintf("[POST /resource-manager/2019-12-10/projects/{id}/test-iam-permissions][%d] projectServiceTestIamPermissionsOK  %+v", 200, o.Payload)
 }
@@ -125,11 +130,6 @@ type ProjectServiceTestIamPermissionsDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the project service test iam permissions default response
-func (o *ProjectServiceTestIamPermissionsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this project service test iam permissions default response has a 2xx status code
 func (o *ProjectServiceTestIamPermissionsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +153,11 @@ func (o *ProjectServiceTestIamPermissionsDefault) IsServerError() bool {
 // IsCode returns true when this project service test iam permissions default response a status code equal to that given
 func (o *ProjectServiceTestIamPermissionsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the project service test iam permissions default response
+func (o *ProjectServiceTestIamPermissionsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProjectServiceTestIamPermissionsDefault) Error() string {

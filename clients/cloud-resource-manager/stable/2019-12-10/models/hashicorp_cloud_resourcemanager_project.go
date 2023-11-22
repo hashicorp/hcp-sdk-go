@@ -132,6 +132,11 @@ func (m *HashicorpCloudResourcemanagerProject) ContextValidate(ctx context.Conte
 func (m *HashicorpCloudResourcemanagerProject) contextValidateParent(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Parent != nil {
+
+		if swag.IsZero(m.Parent) { // not required
+			return nil
+		}
+
 		if err := m.Parent.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("parent")
@@ -148,6 +153,11 @@ func (m *HashicorpCloudResourcemanagerProject) contextValidateParent(ctx context
 func (m *HashicorpCloudResourcemanagerProject) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")

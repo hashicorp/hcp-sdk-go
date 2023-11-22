@@ -13,17 +13,17 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudResourcemanagerProjectGetIamPolicyResponse ProjectGetIamPolicyResponse see ProjectService.GetIamPolicy
+// HashicorpCloudResourcemanagerResourceGetIamPolicyResponse ResourceGetIamPolicyRequest see ResourceService.GetIamPolicy
 //
-// swagger:model hashicorp.cloud.resourcemanager.ProjectGetIamPolicyResponse
-type HashicorpCloudResourcemanagerProjectGetIamPolicyResponse struct {
+// swagger:model hashicorp.cloud.resourcemanager.ResourceGetIamPolicyResponse
+type HashicorpCloudResourcemanagerResourceGetIamPolicyResponse struct {
 
-	// Policy is the system managed IAM policy for the project.
+	// Policy is the system managed IAM policy for the resource.
 	Policy *HashicorpCloudResourcemanagerPolicy `json:"policy,omitempty"`
 }
 
-// Validate validates this hashicorp cloud resourcemanager project get iam policy response
-func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud resourcemanager resource get iam policy response
+func (m *HashicorpCloudResourcemanagerResourceGetIamPolicyResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validatePolicy(formats); err != nil {
@@ -36,7 +36,7 @@ func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) Validate(form
 	return nil
 }
 
-func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) validatePolicy(formats strfmt.Registry) error {
+func (m *HashicorpCloudResourcemanagerResourceGetIamPolicyResponse) validatePolicy(formats strfmt.Registry) error {
 	if swag.IsZero(m.Policy) { // not required
 		return nil
 	}
@@ -55,8 +55,8 @@ func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) validatePolic
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud resourcemanager project get iam policy response based on the context it is used
-func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud resourcemanager resource get iam policy response based on the context it is used
+func (m *HashicorpCloudResourcemanagerResourceGetIamPolicyResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidatePolicy(ctx, formats); err != nil {
@@ -69,7 +69,7 @@ func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) ContextValida
 	return nil
 }
 
-func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) contextValidatePolicy(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudResourcemanagerResourceGetIamPolicyResponse) contextValidatePolicy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Policy != nil {
 
@@ -91,7 +91,7 @@ func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) contextValida
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudResourcemanagerResourceGetIamPolicyResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -99,8 +99,8 @@ func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) MarshalBinary
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudResourcemanagerProjectGetIamPolicyResponse) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudResourcemanagerProjectGetIamPolicyResponse
+func (m *HashicorpCloudResourcemanagerResourceGetIamPolicyResponse) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudResourcemanagerResourceGetIamPolicyResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

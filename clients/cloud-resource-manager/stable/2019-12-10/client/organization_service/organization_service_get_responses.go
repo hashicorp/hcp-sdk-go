@@ -81,6 +81,11 @@ func (o *OrganizationServiceGetOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the organization service get o k response
+func (o *OrganizationServiceGetOK) Code() int {
+	return 200
+}
+
 func (o *OrganizationServiceGetOK) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}][%d] organizationServiceGetOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type OrganizationServiceGetDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the organization service get default response
-func (o *OrganizationServiceGetDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this organization service get default response has a 2xx status code
 func (o *OrganizationServiceGetDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *OrganizationServiceGetDefault) IsServerError() bool {
 // IsCode returns true when this organization service get default response a status code equal to that given
 func (o *OrganizationServiceGetDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the organization service get default response
+func (o *OrganizationServiceGetDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *OrganizationServiceGetDefault) Error() string {

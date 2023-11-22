@@ -17,7 +17,7 @@ import (
 // swagger:model hashicorp.cloud.resourcemanager.OrganizationOwner
 type HashicorpCloudResourcemanagerOrganizationOwner struct {
 
-	// User is the email of the user who is the owner.
+	// User is the user principal id of the owner.
 	User string `json:"user,omitempty"`
 }
 

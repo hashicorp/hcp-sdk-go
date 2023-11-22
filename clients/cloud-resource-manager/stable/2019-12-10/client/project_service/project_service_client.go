@@ -128,7 +128,7 @@ func (a *Client) ProjectServiceDelete(params *ProjectServiceDeleteParams, authIn
 }
 
 /*
-ProjectServiceGet gets retrieves the requested project by ID
+ProjectServiceGet gets retrieves the requested project by ID a not found status will be returned for projects in the d e l e t e d state
 */
 func (a *Client) ProjectServiceGet(params *ProjectServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceGetOK, error) {
 	// TODO: Validate the params before sending

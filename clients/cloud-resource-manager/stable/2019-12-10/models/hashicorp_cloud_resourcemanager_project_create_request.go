@@ -78,6 +78,11 @@ func (m *HashicorpCloudResourcemanagerProjectCreateRequest) ContextValidate(ctx 
 func (m *HashicorpCloudResourcemanagerProjectCreateRequest) contextValidateParent(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Parent != nil {
+
+		if swag.IsZero(m.Parent) { // not required
+			return nil
+		}
+
 		if err := m.Parent.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("parent")

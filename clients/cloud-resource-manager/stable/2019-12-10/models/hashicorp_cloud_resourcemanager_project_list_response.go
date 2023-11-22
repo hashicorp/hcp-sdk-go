@@ -111,6 +111,11 @@ func (m *HashicorpCloudResourcemanagerProjectListResponse) ContextValidate(ctx c
 func (m *HashicorpCloudResourcemanagerProjectListResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
@@ -129,6 +134,11 @@ func (m *HashicorpCloudResourcemanagerProjectListResponse) contextValidateProjec
 	for i := 0; i < len(m.Projects); i++ {
 
 		if m.Projects[i] != nil {
+
+			if swag.IsZero(m.Projects[i]) { // not required
+				return nil
+			}
+
 			if err := m.Projects[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("projects" + "." + strconv.Itoa(i))

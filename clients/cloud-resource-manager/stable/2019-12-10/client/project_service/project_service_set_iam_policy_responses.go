@@ -84,6 +84,11 @@ func (o *ProjectServiceSetIamPolicyOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the project service set iam policy o k response
+func (o *ProjectServiceSetIamPolicyOK) Code() int {
+	return 200
+}
+
 func (o *ProjectServiceSetIamPolicyOK) Error() string {
 	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceSetIamPolicyOK  %+v", 200, o.Payload)
 }
@@ -126,11 +131,6 @@ type ProjectServiceSetIamPolicyDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the project service set iam policy default response
-func (o *ProjectServiceSetIamPolicyDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this project service set iam policy default response has a 2xx status code
 func (o *ProjectServiceSetIamPolicyDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -154,6 +154,11 @@ func (o *ProjectServiceSetIamPolicyDefault) IsServerError() bool {
 // IsCode returns true when this project service set iam policy default response a status code equal to that given
 func (o *ProjectServiceSetIamPolicyDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the project service set iam policy default response
+func (o *ProjectServiceSetIamPolicyDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProjectServiceSetIamPolicyDefault) Error() string {
@@ -242,6 +247,11 @@ func (o *ProjectServiceSetIamPolicyBody) ContextValidate(ctx context.Context, fo
 func (o *ProjectServiceSetIamPolicyBody) contextValidatePolicy(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Policy != nil {
+
+		if swag.IsZero(o.Policy) { // not required
+			return nil
+		}
+
 		if err := o.Policy.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "policy")

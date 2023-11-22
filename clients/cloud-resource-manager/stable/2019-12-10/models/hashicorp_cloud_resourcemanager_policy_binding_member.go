@@ -75,6 +75,11 @@ func (m *HashicorpCloudResourcemanagerPolicyBindingMember) ContextValidate(ctx c
 func (m *HashicorpCloudResourcemanagerPolicyBindingMember) contextValidateMemberType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MemberType != nil {
+
+		if swag.IsZero(m.MemberType) { // not required
+			return nil
+		}
+
 		if err := m.MemberType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("member_type")

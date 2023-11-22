@@ -81,6 +81,11 @@ func (o *ProjectServiceGetIamPolicyOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the project service get iam policy o k response
+func (o *ProjectServiceGetIamPolicyOK) Code() int {
+	return 200
+}
+
 func (o *ProjectServiceGetIamPolicyOK) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceGetIamPolicyOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ProjectServiceGetIamPolicyDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the project service get iam policy default response
-func (o *ProjectServiceGetIamPolicyDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this project service get iam policy default response has a 2xx status code
 func (o *ProjectServiceGetIamPolicyDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ProjectServiceGetIamPolicyDefault) IsServerError() bool {
 // IsCode returns true when this project service get iam policy default response a status code equal to that given
 func (o *ProjectServiceGetIamPolicyDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the project service get iam policy default response
+func (o *ProjectServiceGetIamPolicyDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProjectServiceGetIamPolicyDefault) Error() string {

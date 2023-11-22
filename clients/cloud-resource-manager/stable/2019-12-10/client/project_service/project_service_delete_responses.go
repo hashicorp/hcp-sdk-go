@@ -81,6 +81,11 @@ func (o *ProjectServiceDeleteOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the project service delete o k response
+func (o *ProjectServiceDeleteOK) Code() int {
+	return 200
+}
+
 func (o *ProjectServiceDeleteOK) Error() string {
 	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] projectServiceDeleteOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ProjectServiceDeleteDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the project service delete default response
-func (o *ProjectServiceDeleteDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this project service delete default response has a 2xx status code
 func (o *ProjectServiceDeleteDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ProjectServiceDeleteDefault) IsServerError() bool {
 // IsCode returns true when this project service delete default response a status code equal to that given
 func (o *ProjectServiceDeleteDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the project service delete default response
+func (o *ProjectServiceDeleteDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProjectServiceDeleteDefault) Error() string {

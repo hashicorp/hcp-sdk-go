@@ -72,6 +72,11 @@ func (m *HashicorpCloudResourcemanagerOrganizationGetIamPolicyResponse) ContextV
 func (m *HashicorpCloudResourcemanagerOrganizationGetIamPolicyResponse) contextValidatePolicy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Policy != nil {
+
+		if swag.IsZero(m.Policy) { // not required
+			return nil
+		}
+
 		if err := m.Policy.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("policy")

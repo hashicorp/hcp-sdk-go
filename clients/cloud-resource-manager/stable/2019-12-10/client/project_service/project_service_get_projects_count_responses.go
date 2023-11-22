@@ -81,6 +81,11 @@ func (o *ProjectServiceGetProjectsCountOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the project service get projects count o k response
+func (o *ProjectServiceGetProjectsCountOK) Code() int {
+	return 200
+}
+
 func (o *ProjectServiceGetProjectsCountOK) Error() string {
 	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/count][%d] projectServiceGetProjectsCountOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ProjectServiceGetProjectsCountDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the project service get projects count default response
-func (o *ProjectServiceGetProjectsCountDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this project service get projects count default response has a 2xx status code
 func (o *ProjectServiceGetProjectsCountDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ProjectServiceGetProjectsCountDefault) IsServerError() bool {
 // IsCode returns true when this project service get projects count default response a status code equal to that given
 func (o *ProjectServiceGetProjectsCountDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the project service get projects count default response
+func (o *ProjectServiceGetProjectsCountDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProjectServiceGetProjectsCountDefault) Error() string {

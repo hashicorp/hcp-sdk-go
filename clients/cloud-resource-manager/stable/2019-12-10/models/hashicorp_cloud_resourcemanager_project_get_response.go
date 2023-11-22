@@ -72,6 +72,11 @@ func (m *HashicorpCloudResourcemanagerProjectGetResponse) ContextValidate(ctx co
 func (m *HashicorpCloudResourcemanagerProjectGetResponse) contextValidateProject(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Project != nil {
+
+		if swag.IsZero(m.Project) { // not required
+			return nil
+		}
+
 		if err := m.Project.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("project")
