@@ -81,6 +81,11 @@ func (o *GetCurrentMilestoneOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get current milestone o k response
+func (o *GetCurrentMilestoneOK) Code() int {
+	return 200
+}
+
 func (o *GetCurrentMilestoneOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] getCurrentMilestoneOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetCurrentMilestoneDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the get current milestone default response
-func (o *GetCurrentMilestoneDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get current milestone default response has a 2xx status code
 func (o *GetCurrentMilestoneDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetCurrentMilestoneDefault) IsServerError() bool {
 // IsCode returns true when this get current milestone default response a status code equal to that given
 func (o *GetCurrentMilestoneDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get current milestone default response
+func (o *GetCurrentMilestoneDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetCurrentMilestoneDefault) Error() string {

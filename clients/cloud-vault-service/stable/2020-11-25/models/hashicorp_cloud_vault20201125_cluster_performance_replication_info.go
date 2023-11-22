@@ -135,6 +135,11 @@ func (m *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo) ContextVa
 func (m *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo) contextValidateMode(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Mode != nil {
+
+		if swag.IsZero(m.Mode) { // not required
+			return nil
+		}
+
 		if err := m.Mode.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("mode")
@@ -151,6 +156,11 @@ func (m *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo) contextVa
 func (m *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo) contextValidatePathsFilter(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PathsFilter != nil {
+
+		if swag.IsZero(m.PathsFilter) { // not required
+			return nil
+		}
+
 		if err := m.PathsFilter.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("paths_filter")
@@ -167,6 +177,11 @@ func (m *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo) contextVa
 func (m *HashicorpCloudVault20201125ClusterPerformanceReplicationInfo) contextValidatePrimaryClusterLink(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PrimaryClusterLink != nil {
+
+		if swag.IsZero(m.PrimaryClusterLink) { // not required
+			return nil
+		}
+
 		if err := m.PrimaryClusterLink.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("primary_cluster_link")

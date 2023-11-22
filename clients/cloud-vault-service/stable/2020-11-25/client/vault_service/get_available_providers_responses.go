@@ -81,6 +81,11 @@ func (o *GetAvailableProvidersOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get available providers o k response
+func (o *GetAvailableProvidersOK) Code() int {
+	return 200
+}
+
 func (o *GetAvailableProvidersOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] getAvailableProvidersOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetAvailableProvidersDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the get available providers default response
-func (o *GetAvailableProvidersDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get available providers default response has a 2xx status code
 func (o *GetAvailableProvidersDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetAvailableProvidersDefault) IsServerError() bool {
 // IsCode returns true when this get available providers default response a status code equal to that given
 func (o *GetAvailableProvidersDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get available providers default response
+func (o *GetAvailableProvidersDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetAvailableProvidersDefault) Error() string {

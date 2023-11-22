@@ -81,6 +81,11 @@ func (o *ListAllClustersOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list all clusters o k response
+func (o *ListAllClustersOK) Code() int {
+	return 200
+}
+
 func (o *ListAllClustersOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/vault-clusters][%d] listAllClustersOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ListAllClustersDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the list all clusters default response
-func (o *ListAllClustersDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list all clusters default response has a 2xx status code
 func (o *ListAllClustersDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ListAllClustersDefault) IsServerError() bool {
 // IsCode returns true when this list all clusters default response a status code equal to that given
 func (o *ListAllClustersDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list all clusters default response
+func (o *ListAllClustersDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListAllClustersDefault) Error() string {

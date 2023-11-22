@@ -81,6 +81,11 @@ func (o *ListOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list o k response
+func (o *ListOK) Code() int {
+	return 200
+}
+
 func (o *ListOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters][%d] listOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ListDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the list default response
-func (o *ListDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list default response has a 2xx status code
 func (o *ListDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ListDefault) IsServerError() bool {
 // IsCode returns true when this list default response a status code equal to that given
 func (o *ListDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list default response
+func (o *ListDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListDefault) Error() string {

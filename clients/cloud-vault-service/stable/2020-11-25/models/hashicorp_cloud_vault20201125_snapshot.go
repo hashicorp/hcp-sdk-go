@@ -188,6 +188,11 @@ func (m *HashicorpCloudVault20201125Snapshot) ContextValidate(ctx context.Contex
 func (m *HashicorpCloudVault20201125Snapshot) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -204,6 +209,11 @@ func (m *HashicorpCloudVault20201125Snapshot) contextValidateLocation(ctx contex
 func (m *HashicorpCloudVault20201125Snapshot) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")
@@ -220,6 +230,11 @@ func (m *HashicorpCloudVault20201125Snapshot) contextValidateState(ctx context.C
 func (m *HashicorpCloudVault20201125Snapshot) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Type != nil {
+
+		if swag.IsZero(m.Type) { // not required
+			return nil
+		}
+
 		if err := m.Type.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("type")

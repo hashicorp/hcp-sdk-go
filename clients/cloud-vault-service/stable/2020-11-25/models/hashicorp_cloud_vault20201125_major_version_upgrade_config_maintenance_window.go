@@ -102,6 +102,11 @@ func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow) 
 func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow) contextValidateDayOfWeek(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DayOfWeek != nil {
+
+		if swag.IsZero(m.DayOfWeek) { // not required
+			return nil
+		}
+
 		if err := m.DayOfWeek.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("day_of_week")
@@ -118,6 +123,11 @@ func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow) 
 func (m *HashicorpCloudVault20201125MajorVersionUpgradeConfigMaintenanceWindow) contextValidateTimeWindowUtc(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TimeWindowUtc != nil {
+
+		if swag.IsZero(m.TimeWindowUtc) { // not required
+			return nil
+		}
+
 		if err := m.TimeWindowUtc.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("time_window_utc")

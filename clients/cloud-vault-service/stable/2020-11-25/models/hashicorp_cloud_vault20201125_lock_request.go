@@ -75,6 +75,11 @@ func (m *HashicorpCloudVault20201125LockRequest) ContextValidate(ctx context.Con
 func (m *HashicorpCloudVault20201125LockRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")

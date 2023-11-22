@@ -102,6 +102,11 @@ func (m *HashicorpCloudVault20201125ListAllClustersResponseVaultCluster) Context
 func (m *HashicorpCloudVault20201125ListAllClustersResponseVaultCluster) contextValidateLinkedCluster(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LinkedCluster != nil {
+
+		if swag.IsZero(m.LinkedCluster) { // not required
+			return nil
+		}
+
 		if err := m.LinkedCluster.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("linked_cluster")
@@ -118,6 +123,11 @@ func (m *HashicorpCloudVault20201125ListAllClustersResponseVaultCluster) context
 func (m *HashicorpCloudVault20201125ListAllClustersResponseVaultCluster) contextValidateManagedCluster(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ManagedCluster != nil {
+
+		if swag.IsZero(m.ManagedCluster) { // not required
+			return nil
+		}
+
 		if err := m.ManagedCluster.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("managed_cluster")

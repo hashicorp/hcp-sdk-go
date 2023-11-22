@@ -81,6 +81,11 @@ func (o *GetClientCountsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get client counts o k response
+func (o *GetClientCountsOK) Code() int {
+	return 200
+}
+
 func (o *GetClientCountsOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] getClientCountsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetClientCountsDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the get client counts default response
-func (o *GetClientCountsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get client counts default response has a 2xx status code
 func (o *GetClientCountsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetClientCountsDefault) IsServerError() bool {
 // IsCode returns true when this get client counts default response a status code equal to that given
 func (o *GetClientCountsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get client counts default response
+func (o *GetClientCountsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetClientCountsDefault) Error() string {

@@ -111,6 +111,11 @@ func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesRespons
 func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
@@ -129,6 +134,11 @@ func (m *HashicorpCloudVault20201125ListPerformanceReplicationSecondariesRespons
 	for i := 0; i < len(m.Secondaries); i++ {
 
 		if m.Secondaries[i] != nil {
+
+			if swag.IsZero(m.Secondaries[i]) { // not required
+				return nil
+			}
+
 			if err := m.Secondaries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("secondaries" + "." + strconv.Itoa(i))

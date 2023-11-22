@@ -81,6 +81,11 @@ func (o *DeregisterLinkedClusterOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the deregister linked cluster o k response
+func (o *DeregisterLinkedClusterOK) Code() int {
+	return 200
+}
+
 func (o *DeregisterLinkedClusterOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/deregister/{cluster_id}][%d] deregisterLinkedClusterOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type DeregisterLinkedClusterDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the deregister linked cluster default response
-func (o *DeregisterLinkedClusterDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this deregister linked cluster default response has a 2xx status code
 func (o *DeregisterLinkedClusterDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *DeregisterLinkedClusterDefault) IsServerError() bool {
 // IsCode returns true when this deregister linked cluster default response a status code equal to that given
 func (o *DeregisterLinkedClusterDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the deregister linked cluster default response
+func (o *DeregisterLinkedClusterDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DeregisterLinkedClusterDefault) Error() string {

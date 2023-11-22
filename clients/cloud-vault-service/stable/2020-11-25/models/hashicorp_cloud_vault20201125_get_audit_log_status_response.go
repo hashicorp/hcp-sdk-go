@@ -72,6 +72,11 @@ func (m *HashicorpCloudVault20201125GetAuditLogStatusResponse) ContextValidate(c
 func (m *HashicorpCloudVault20201125GetAuditLogStatusResponse) contextValidateLog(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Log != nil {
+
+		if swag.IsZero(m.Log) { // not required
+			return nil
+		}
+
 		if err := m.Log.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("log")

@@ -81,6 +81,11 @@ func (o *GetAdminTokenOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get admin token o k response
+func (o *GetAdminTokenOK) Code() int {
+	return 200
+}
+
 func (o *GetAdminTokenOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] getAdminTokenOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetAdminTokenDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the get admin token default response
-func (o *GetAdminTokenDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get admin token default response has a 2xx status code
 func (o *GetAdminTokenDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetAdminTokenDefault) IsServerError() bool {
 // IsCode returns true when this get admin token default response a status code equal to that given
 func (o *GetAdminTokenDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get admin token default response
+func (o *GetAdminTokenDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetAdminTokenDefault) Error() string {

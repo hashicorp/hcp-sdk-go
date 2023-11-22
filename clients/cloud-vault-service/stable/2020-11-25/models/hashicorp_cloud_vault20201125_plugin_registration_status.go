@@ -111,6 +111,11 @@ func (m *HashicorpCloudVault20201125PluginRegistrationStatus) ContextValidate(ct
 func (m *HashicorpCloudVault20201125PluginRegistrationStatus) contextValidateOptIn(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OptIn != nil {
+
+		if swag.IsZero(m.OptIn) { // not required
+			return nil
+		}
+
 		if err := m.OptIn.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("opt_in")
@@ -127,6 +132,11 @@ func (m *HashicorpCloudVault20201125PluginRegistrationStatus) contextValidateOpt
 func (m *HashicorpCloudVault20201125PluginRegistrationStatus) contextValidatePluginType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PluginType != nil {
+
+		if swag.IsZero(m.PluginType) { // not required
+			return nil
+		}
+
 		if err := m.PluginType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("plugin_type")

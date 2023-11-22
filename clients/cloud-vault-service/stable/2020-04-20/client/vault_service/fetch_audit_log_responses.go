@@ -81,6 +81,11 @@ func (o *FetchAuditLogOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the fetch audit log o k response
+func (o *FetchAuditLogOK) Code() int {
+	return 200
+}
+
 func (o *FetchAuditLogOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] fetchAuditLogOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type FetchAuditLogDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the fetch audit log default response
-func (o *FetchAuditLogDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this fetch audit log default response has a 2xx status code
 func (o *FetchAuditLogDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *FetchAuditLogDefault) IsServerError() bool {
 // IsCode returns true when this fetch audit log default response a status code equal to that given
 func (o *FetchAuditLogDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the fetch audit log default response
+func (o *FetchAuditLogDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *FetchAuditLogDefault) Error() string {

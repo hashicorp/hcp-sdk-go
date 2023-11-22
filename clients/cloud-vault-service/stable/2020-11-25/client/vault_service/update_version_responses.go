@@ -81,6 +81,11 @@ func (o *UpdateVersionOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update version o k response
+func (o *UpdateVersionOK) Code() int {
+	return 200
+}
+
 func (o *UpdateVersionOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/{version}][%d] updateVersionOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type UpdateVersionDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the update version default response
-func (o *UpdateVersionDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this update version default response has a 2xx status code
 func (o *UpdateVersionDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *UpdateVersionDefault) IsServerError() bool {
 // IsCode returns true when this update version default response a status code equal to that given
 func (o *UpdateVersionDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the update version default response
+func (o *UpdateVersionDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UpdateVersionDefault) Error() string {

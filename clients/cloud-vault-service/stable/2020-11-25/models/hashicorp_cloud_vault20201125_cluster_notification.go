@@ -76,6 +76,11 @@ func (m *HashicorpCloudVault20201125ClusterNotification) ContextValidate(ctx con
 func (m *HashicorpCloudVault20201125ClusterNotification) contextValidateTopic(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Topic != nil {
+
+		if swag.IsZero(m.Topic) { // not required
+			return nil
+		}
+
 		if err := m.Topic.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("topic")

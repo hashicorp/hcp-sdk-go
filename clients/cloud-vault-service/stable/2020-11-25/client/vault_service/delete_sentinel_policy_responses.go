@@ -81,6 +81,11 @@ func (o *DeleteSentinelPolicyOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete sentinel policy o k response
+func (o *DeleteSentinelPolicyOK) Code() int {
+	return 200
+}
+
 func (o *DeleteSentinelPolicyOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sentinel/policy/delete][%d] deleteSentinelPolicyOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type DeleteSentinelPolicyDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the delete sentinel policy default response
-func (o *DeleteSentinelPolicyDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this delete sentinel policy default response has a 2xx status code
 func (o *DeleteSentinelPolicyDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *DeleteSentinelPolicyDefault) IsServerError() bool {
 // IsCode returns true when this delete sentinel policy default response a status code equal to that given
 func (o *DeleteSentinelPolicyDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the delete sentinel policy default response
+func (o *DeleteSentinelPolicyDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DeleteSentinelPolicyDefault) Error() string {

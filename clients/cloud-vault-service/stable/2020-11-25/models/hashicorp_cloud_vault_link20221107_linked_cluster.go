@@ -242,6 +242,11 @@ func (m *HashicorpCloudVaultLink20221107LinkedCluster) ContextValidate(ctx conte
 func (m *HashicorpCloudVaultLink20221107LinkedCluster) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -260,6 +265,11 @@ func (m *HashicorpCloudVaultLink20221107LinkedCluster) contextValidateNodeStatus
 	for i := 0; i < len(m.NodeStatuses); i++ {
 
 		if m.NodeStatuses[i] != nil {
+
+			if swag.IsZero(m.NodeStatuses[i]) { // not required
+				return nil
+			}
+
 			if err := m.NodeStatuses[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("node_statuses" + "." + strconv.Itoa(i))
@@ -278,6 +288,11 @@ func (m *HashicorpCloudVaultLink20221107LinkedCluster) contextValidateNodeStatus
 func (m *HashicorpCloudVaultLink20221107LinkedCluster) contextValidateRaftQuorumStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RaftQuorumStatus != nil {
+
+		if swag.IsZero(m.RaftQuorumStatus) { // not required
+			return nil
+		}
+
 		if err := m.RaftQuorumStatus.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("raft_quorum_status")
@@ -294,6 +309,11 @@ func (m *HashicorpCloudVaultLink20221107LinkedCluster) contextValidateRaftQuorum
 func (m *HashicorpCloudVaultLink20221107LinkedCluster) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")

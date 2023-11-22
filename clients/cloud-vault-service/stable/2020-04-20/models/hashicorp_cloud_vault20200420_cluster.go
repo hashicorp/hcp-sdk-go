@@ -190,6 +190,11 @@ func (m *HashicorpCloudVault20200420Cluster) ContextValidate(ctx context.Context
 func (m *HashicorpCloudVault20200420Cluster) contextValidateConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Config != nil {
+
+		if swag.IsZero(m.Config) { // not required
+			return nil
+		}
+
 		if err := m.Config.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("config")
@@ -206,6 +211,11 @@ func (m *HashicorpCloudVault20200420Cluster) contextValidateConfig(ctx context.C
 func (m *HashicorpCloudVault20200420Cluster) contextValidateDNSNames(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DNSNames != nil {
+
+		if swag.IsZero(m.DNSNames) { // not required
+			return nil
+		}
+
 		if err := m.DNSNames.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dns_names")
@@ -222,6 +232,11 @@ func (m *HashicorpCloudVault20200420Cluster) contextValidateDNSNames(ctx context
 func (m *HashicorpCloudVault20200420Cluster) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -238,6 +253,11 @@ func (m *HashicorpCloudVault20200420Cluster) contextValidateLocation(ctx context
 func (m *HashicorpCloudVault20200420Cluster) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")

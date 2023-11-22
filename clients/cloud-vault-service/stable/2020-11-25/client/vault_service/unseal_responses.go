@@ -81,6 +81,11 @@ func (o *UnsealOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the unseal o k response
+func (o *UnsealOK) Code() int {
+	return 200
+}
+
 func (o *UnsealOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] unsealOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type UnsealDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the unseal default response
-func (o *UnsealDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this unseal default response has a 2xx status code
 func (o *UnsealDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *UnsealDefault) IsServerError() bool {
 // IsCode returns true when this unseal default response a status code equal to that given
 func (o *UnsealDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the unseal default response
+func (o *UnsealDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UnsealDefault) Error() string {

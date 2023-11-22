@@ -81,6 +81,11 @@ func (o *GetLinkedClusterOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get linked cluster o k response
+func (o *GetLinkedClusterOK) Code() int {
+	return 200
+}
+
 func (o *GetLinkedClusterOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}][%d] getLinkedClusterOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetLinkedClusterDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the get linked cluster default response
-func (o *GetLinkedClusterDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get linked cluster default response has a 2xx status code
 func (o *GetLinkedClusterDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetLinkedClusterDefault) IsServerError() bool {
 // IsCode returns true when this get linked cluster default response a status code equal to that given
 func (o *GetLinkedClusterDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get linked cluster default response
+func (o *GetLinkedClusterDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetLinkedClusterDefault) Error() string {

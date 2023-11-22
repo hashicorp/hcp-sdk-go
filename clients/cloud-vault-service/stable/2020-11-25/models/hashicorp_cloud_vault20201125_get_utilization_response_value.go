@@ -99,6 +99,11 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponseValue) ContextValidate
 func (m *HashicorpCloudVault20201125GetUtilizationResponseValue) contextValidateUnit(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Unit != nil {
+
+		if swag.IsZero(m.Unit) { // not required
+			return nil
+		}
+
 		if err := m.Unit.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("unit")

@@ -81,6 +81,11 @@ func (o *UpdatePublicIpsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update public ips o k response
+func (o *UpdatePublicIpsOK) Code() int {
+	return 200
+}
+
 func (o *UpdatePublicIpsOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] updatePublicIpsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type UpdatePublicIpsDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the update public ips default response
-func (o *UpdatePublicIpsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this update public ips default response has a 2xx status code
 func (o *UpdatePublicIpsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *UpdatePublicIpsDefault) IsServerError() bool {
 // IsCode returns true when this update public ips default response a status code equal to that given
 func (o *UpdatePublicIpsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the update public ips default response
+func (o *UpdatePublicIpsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UpdatePublicIpsDefault) Error() string {

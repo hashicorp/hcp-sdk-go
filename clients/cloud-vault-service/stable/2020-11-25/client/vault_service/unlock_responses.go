@@ -81,6 +81,11 @@ func (o *UnlockOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the unlock o k response
+func (o *UnlockOK) Code() int {
+	return 200
+}
+
 func (o *UnlockOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unlock][%d] unlockOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type UnlockDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the unlock default response
-func (o *UnlockDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this unlock default response has a 2xx status code
 func (o *UnlockDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *UnlockDefault) IsServerError() bool {
 // IsCode returns true when this unlock default response a status code equal to that given
 func (o *UnlockDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the unlock default response
+func (o *UnlockDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UnlockDefault) Error() string {

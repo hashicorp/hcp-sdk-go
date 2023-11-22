@@ -81,6 +81,11 @@ func (o *CreateOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the create o k response
+func (o *CreateOK) Code() int {
+	return 200
+}
+
 func (o *CreateOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters][%d] createOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type CreateDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the create default response
-func (o *CreateDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this create default response has a 2xx status code
 func (o *CreateDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *CreateDefault) IsServerError() bool {
 // IsCode returns true when this create default response a status code equal to that given
 func (o *CreateDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the create default response
+func (o *CreateDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *CreateDefault) Error() string {

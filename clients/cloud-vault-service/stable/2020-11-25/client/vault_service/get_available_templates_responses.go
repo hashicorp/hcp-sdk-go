@@ -81,6 +81,11 @@ func (o *GetAvailableTemplatesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get available templates o k response
+func (o *GetAvailableTemplatesOK) Code() int {
+	return 200
+}
+
 func (o *GetAvailableTemplatesOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/templates][%d] getAvailableTemplatesOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetAvailableTemplatesDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the get available templates default response
-func (o *GetAvailableTemplatesDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get available templates default response has a 2xx status code
 func (o *GetAvailableTemplatesDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetAvailableTemplatesDefault) IsServerError() bool {
 // IsCode returns true when this get available templates default response a status code equal to that given
 func (o *GetAvailableTemplatesDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get available templates default response
+func (o *GetAvailableTemplatesDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetAvailableTemplatesDefault) Error() string {

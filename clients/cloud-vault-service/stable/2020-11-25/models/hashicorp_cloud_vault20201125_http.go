@@ -150,6 +150,11 @@ func (m *HashicorpCloudVault20201125HTTP) ContextValidate(ctx context.Context, f
 func (m *HashicorpCloudVault20201125HTTP) contextValidateBasic(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Basic != nil {
+
+		if swag.IsZero(m.Basic) { // not required
+			return nil
+		}
+
 		if err := m.Basic.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("basic")
@@ -166,6 +171,11 @@ func (m *HashicorpCloudVault20201125HTTP) contextValidateBasic(ctx context.Conte
 func (m *HashicorpCloudVault20201125HTTP) contextValidateBearer(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Bearer != nil {
+
+		if swag.IsZero(m.Bearer) { // not required
+			return nil
+		}
+
 		if err := m.Bearer.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("bearer")
@@ -182,6 +192,11 @@ func (m *HashicorpCloudVault20201125HTTP) contextValidateBearer(ctx context.Cont
 func (m *HashicorpCloudVault20201125HTTP) contextValidateCodec(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Codec != nil {
+
+		if swag.IsZero(m.Codec) { // not required
+			return nil
+		}
+
 		if err := m.Codec.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("codec")

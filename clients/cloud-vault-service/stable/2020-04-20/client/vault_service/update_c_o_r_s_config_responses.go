@@ -81,6 +81,11 @@ func (o *UpdateCORSConfigOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update c o r s config o k response
+func (o *UpdateCORSConfigOK) Code() int {
+	return 200
+}
+
 func (o *UpdateCORSConfigOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-cors-config][%d] updateCORSConfigOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type UpdateCORSConfigDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the update c o r s config default response
-func (o *UpdateCORSConfigDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this update c o r s config default response has a 2xx status code
 func (o *UpdateCORSConfigDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *UpdateCORSConfigDefault) IsServerError() bool {
 // IsCode returns true when this update c o r s config default response a status code equal to that given
 func (o *UpdateCORSConfigDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the update c o r s config default response
+func (o *UpdateCORSConfigDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UpdateCORSConfigDefault) Error() string {

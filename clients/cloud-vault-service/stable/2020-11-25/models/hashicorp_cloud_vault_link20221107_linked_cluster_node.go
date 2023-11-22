@@ -260,6 +260,11 @@ func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) ContextValidate(ctx c
 func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateLeaderStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LeaderStatus != nil {
+
+		if swag.IsZero(m.LeaderStatus) { // not required
+			return nil
+		}
+
 		if err := m.LeaderStatus.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("leader_status")
@@ -276,6 +281,11 @@ func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateLeader
 func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateLogLevel(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LogLevel != nil {
+
+		if swag.IsZero(m.LogLevel) { // not required
+			return nil
+		}
+
 		if err := m.LogLevel.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("log_level")
@@ -292,6 +302,11 @@ func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateLogLev
 func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateNodeState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.NodeState != nil {
+
+		if swag.IsZero(m.NodeState) { // not required
+			return nil
+		}
+
 		if err := m.NodeState.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("node_state")
@@ -308,6 +323,11 @@ func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateNodeSt
 func (m *HashicorpCloudVaultLink20221107LinkedClusterNode) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
+
+		if swag.IsZero(m.Status) { // not required
+			return nil
+		}
+
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")

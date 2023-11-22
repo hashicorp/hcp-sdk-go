@@ -116,6 +116,11 @@ func (m *HashicorpCloudVault20201125InputNetworkConfig) ContextValidate(ctx cont
 func (m *HashicorpCloudVault20201125InputNetworkConfig) contextValidateHTTPProxyOption(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HTTPProxyOption != nil {
+
+		if swag.IsZero(m.HTTPProxyOption) { // not required
+			return nil
+		}
+
 		if err := m.HTTPProxyOption.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("http_proxy_option")
@@ -134,6 +139,11 @@ func (m *HashicorpCloudVault20201125InputNetworkConfig) contextValidateIPAllowli
 	for i := 0; i < len(m.IPAllowlist); i++ {
 
 		if m.IPAllowlist[i] != nil {
+
+			if swag.IsZero(m.IPAllowlist[i]) { // not required
+				return nil
+			}
+
 			if err := m.IPAllowlist[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ip_allowlist" + "." + strconv.Itoa(i))

@@ -81,6 +81,11 @@ func (o *ListPerformanceReplicationSecondariesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list performance replication secondaries o k response
+func (o *ListPerformanceReplicationSecondariesOK) Code() int {
+	return 200
+}
+
 func (o *ListPerformanceReplicationSecondariesOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] listPerformanceReplicationSecondariesOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ListPerformanceReplicationSecondariesDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the list performance replication secondaries default response
-func (o *ListPerformanceReplicationSecondariesDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list performance replication secondaries default response has a 2xx status code
 func (o *ListPerformanceReplicationSecondariesDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ListPerformanceReplicationSecondariesDefault) IsServerError() bool {
 // IsCode returns true when this list performance replication secondaries default response a status code equal to that given
 func (o *ListPerformanceReplicationSecondariesDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list performance replication secondaries default response
+func (o *ListPerformanceReplicationSecondariesDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListPerformanceReplicationSecondariesDefault) Error() string {

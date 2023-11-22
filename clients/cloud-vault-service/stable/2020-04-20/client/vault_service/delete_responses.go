@@ -81,6 +81,11 @@ func (o *DeleteOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete o k response
+func (o *DeleteOK) Code() int {
+	return 200
+}
+
 func (o *DeleteOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] deleteOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type DeleteDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the delete default response
-func (o *DeleteDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this delete default response has a 2xx status code
 func (o *DeleteDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *DeleteDefault) IsServerError() bool {
 // IsCode returns true when this delete default response a status code equal to that given
 func (o *DeleteDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the delete default response
+func (o *DeleteDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DeleteDefault) Error() string {

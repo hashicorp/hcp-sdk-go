@@ -102,6 +102,11 @@ func (m *HashicorpCloudVault20201125GetReplicationStatusResponse) ContextValidat
 func (m *HashicorpCloudVault20201125GetReplicationStatusResponse) contextValidateConnectionStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ConnectionStatus != nil {
+
+		if swag.IsZero(m.ConnectionStatus) { // not required
+			return nil
+		}
+
 		if err := m.ConnectionStatus.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("connection_status")
@@ -118,6 +123,11 @@ func (m *HashicorpCloudVault20201125GetReplicationStatusResponse) contextValidat
 func (m *HashicorpCloudVault20201125GetReplicationStatusResponse) contextValidateSyncProgress(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SyncProgress != nil {
+
+		if swag.IsZero(m.SyncProgress) { // not required
+			return nil
+		}
+
 		if err := m.SyncProgress.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("sync_progress")

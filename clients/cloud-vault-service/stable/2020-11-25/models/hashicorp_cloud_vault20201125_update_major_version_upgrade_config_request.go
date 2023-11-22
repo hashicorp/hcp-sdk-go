@@ -135,6 +135,11 @@ func (m *HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigRequest) Cont
 func (m *HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -151,6 +156,11 @@ func (m *HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigRequest) cont
 func (m *HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigRequest) contextValidateMaintenanceWindow(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MaintenanceWindow != nil {
+
+		if swag.IsZero(m.MaintenanceWindow) { // not required
+			return nil
+		}
+
 		if err := m.MaintenanceWindow.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("maintenance_window")
@@ -167,6 +177,11 @@ func (m *HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigRequest) cont
 func (m *HashicorpCloudVault20201125UpdateMajorVersionUpgradeConfigRequest) contextValidateUpgradeType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UpgradeType != nil {
+
+		if swag.IsZero(m.UpgradeType) { // not required
+			return nil
+		}
+
 		if err := m.UpgradeType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("upgrade_type")

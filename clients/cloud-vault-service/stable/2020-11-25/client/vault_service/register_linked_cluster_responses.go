@@ -81,6 +81,11 @@ func (o *RegisterLinkedClusterOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the register linked cluster o k response
+func (o *RegisterLinkedClusterOK) Code() int {
+	return 200
+}
+
 func (o *RegisterLinkedClusterOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/register][%d] registerLinkedClusterOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type RegisterLinkedClusterDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the register linked cluster default response
-func (o *RegisterLinkedClusterDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this register linked cluster default response has a 2xx status code
 func (o *RegisterLinkedClusterDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *RegisterLinkedClusterDefault) IsServerError() bool {
 // IsCode returns true when this register linked cluster default response a status code equal to that given
 func (o *RegisterLinkedClusterDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the register linked cluster default response
+func (o *RegisterLinkedClusterDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *RegisterLinkedClusterDefault) Error() string {

@@ -193,6 +193,11 @@ func (m *HashicorpCloudVault20200420AuditLog) ContextValidate(ctx context.Contex
 func (m *HashicorpCloudVault20200420AuditLog) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -209,6 +214,11 @@ func (m *HashicorpCloudVault20200420AuditLog) contextValidateLocation(ctx contex
 func (m *HashicorpCloudVault20200420AuditLog) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")

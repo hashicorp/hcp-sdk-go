@@ -162,6 +162,11 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) ContextValidate(ctx 
 func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateClients(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Clients != nil {
+
+		if swag.IsZero(m.Clients) { // not required
+			return nil
+		}
+
 		if err := m.Clients.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("clients")
@@ -178,6 +183,11 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateClien
 func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateDiskUsageBytes(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DiskUsageBytes != nil {
+
+		if swag.IsZero(m.DiskUsageBytes) { // not required
+			return nil
+		}
+
 		if err := m.DiskUsageBytes.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("disk_usage_bytes")
@@ -194,6 +204,11 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateDiskU
 func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateDistinctEntities(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DistinctEntities != nil {
+
+		if swag.IsZero(m.DistinctEntities) { // not required
+			return nil
+		}
+
 		if err := m.DistinctEntities.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("distinct_entities")
@@ -210,6 +225,11 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateDisti
 func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateNonEntityTokens(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.NonEntityTokens != nil {
+
+		if swag.IsZero(m.NonEntityTokens) { // not required
+			return nil
+		}
+
 		if err := m.NonEntityTokens.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("non_entity_tokens")

@@ -113,6 +113,11 @@ func (m *HashicorpCloudVault20201125GetCurrentMilestoneResponse) ContextValidate
 func (m *HashicorpCloudVault20201125GetCurrentMilestoneResponse) contextValidateCurrentMilestone(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CurrentMilestone != nil {
+
+		if swag.IsZero(m.CurrentMilestone) { // not required
+			return nil
+		}
+
 		if err := m.CurrentMilestone.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("current_milestone")

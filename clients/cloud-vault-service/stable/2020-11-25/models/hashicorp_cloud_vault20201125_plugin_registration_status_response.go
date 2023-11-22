@@ -82,6 +82,11 @@ func (m *HashicorpCloudVault20201125PluginRegistrationStatusResponse) contextVal
 	for i := 0; i < len(m.Plugins); i++ {
 
 		if m.Plugins[i] != nil {
+
+			if swag.IsZero(m.Plugins[i]) { // not required
+				return nil
+			}
+
 			if err := m.Plugins[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("plugins" + "." + strconv.Itoa(i))

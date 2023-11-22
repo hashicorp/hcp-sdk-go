@@ -81,6 +81,11 @@ func (o *ListSnapshotsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list snapshots o k response
+func (o *ListSnapshotsOK) Code() int {
+	return 200
+}
+
 func (o *ListSnapshotsOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] listSnapshotsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ListSnapshotsDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the list snapshots default response
-func (o *ListSnapshotsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list snapshots default response has a 2xx status code
 func (o *ListSnapshotsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ListSnapshotsDefault) IsServerError() bool {
 // IsCode returns true when this list snapshots default response a status code equal to that given
 func (o *ListSnapshotsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list snapshots default response
+func (o *ListSnapshotsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListSnapshotsDefault) Error() string {

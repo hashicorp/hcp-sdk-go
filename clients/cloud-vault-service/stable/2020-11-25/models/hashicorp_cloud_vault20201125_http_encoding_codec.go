@@ -33,14 +33,8 @@ const (
 	// HashicorpCloudVault20201125HTTPEncodingCodecJSON captures enum value "JSON"
 	HashicorpCloudVault20201125HTTPEncodingCodecJSON HashicorpCloudVault20201125HTTPEncodingCodec = "JSON"
 
-	// HashicorpCloudVault20201125HTTPEncodingCodecCSV captures enum value "CSV"
-	HashicorpCloudVault20201125HTTPEncodingCodecCSV HashicorpCloudVault20201125HTTPEncodingCodec = "CSV"
-
-	// HashicorpCloudVault20201125HTTPEncodingCodecRAWMESSAGE captures enum value "RAW_MESSAGE"
-	HashicorpCloudVault20201125HTTPEncodingCodecRAWMESSAGE HashicorpCloudVault20201125HTTPEncodingCodec = "RAW_MESSAGE"
-
-	// HashicorpCloudVault20201125HTTPEncodingCodecTEXT captures enum value "TEXT"
-	HashicorpCloudVault20201125HTTPEncodingCodecTEXT HashicorpCloudVault20201125HTTPEncodingCodec = "TEXT"
+	// HashicorpCloudVault20201125HTTPEncodingCodecNDJSON captures enum value "NDJSON"
+	HashicorpCloudVault20201125HTTPEncodingCodecNDJSON HashicorpCloudVault20201125HTTPEncodingCodec = "NDJSON"
 )
 
 // for schema
@@ -48,7 +42,7 @@ var hashicorpCloudVault20201125HttpEncodingCodecEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVault20201125HTTPEncodingCodec
-	if err := json.Unmarshal([]byte(`["JSON","CSV","RAW_MESSAGE","TEXT"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["JSON","NDJSON"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -72,6 +72,11 @@ func (m *HashicorpCloudVault20201125ClusterCreationMetadata) ContextValidate(ctx
 func (m *HashicorpCloudVault20201125ClusterCreationMetadata) contextValidateTemplateOutput(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TemplateOutput != nil {
+
+		if swag.IsZero(m.TemplateOutput) { // not required
+			return nil
+		}
+
 		if err := m.TemplateOutput.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("template_output")

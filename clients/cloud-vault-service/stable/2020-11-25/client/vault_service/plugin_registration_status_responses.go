@@ -81,6 +81,11 @@ func (o *PluginRegistrationStatusOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the plugin registration status o k response
+func (o *PluginRegistrationStatusOK) Code() int {
+	return 200
+}
+
 func (o *PluginRegistrationStatusOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/registration-status][%d] pluginRegistrationStatusOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type PluginRegistrationStatusDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the plugin registration status default response
-func (o *PluginRegistrationStatusDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this plugin registration status default response has a 2xx status code
 func (o *PluginRegistrationStatusDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *PluginRegistrationStatusDefault) IsServerError() bool {
 // IsCode returns true when this plugin registration status default response a status code equal to that given
 func (o *PluginRegistrationStatusDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the plugin registration status default response
+func (o *PluginRegistrationStatusDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *PluginRegistrationStatusDefault) Error() string {

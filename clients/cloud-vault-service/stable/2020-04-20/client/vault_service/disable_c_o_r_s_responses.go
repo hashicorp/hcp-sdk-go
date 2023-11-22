@@ -81,6 +81,11 @@ func (o *DisableCORSOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the disable c o r s o k response
+func (o *DisableCORSOK) Code() int {
+	return 200
+}
+
 func (o *DisableCORSOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] disableCORSOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type DisableCORSDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the disable c o r s default response
-func (o *DisableCORSDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this disable c o r s default response has a 2xx status code
 func (o *DisableCORSDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *DisableCORSDefault) IsServerError() bool {
 // IsCode returns true when this disable c o r s default response a status code equal to that given
 func (o *DisableCORSDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the disable c o r s default response
+func (o *DisableCORSDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DisableCORSDefault) Error() string {

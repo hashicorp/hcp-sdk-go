@@ -81,6 +81,11 @@ func (o *GetAuditLogStatusOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get audit log status o k response
+func (o *GetAuditLogStatusOK) Code() int {
+	return 200
+}
+
 func (o *GetAuditLogStatusOK) Error() string {
 	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] getAuditLogStatusOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetAuditLogStatusDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the get audit log status default response
-func (o *GetAuditLogStatusDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get audit log status default response has a 2xx status code
 func (o *GetAuditLogStatusDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetAuditLogStatusDefault) IsServerError() bool {
 // IsCode returns true when this get audit log status default response a status code equal to that given
 func (o *GetAuditLogStatusDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get audit log status default response
+func (o *GetAuditLogStatusDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetAuditLogStatusDefault) Error() string {

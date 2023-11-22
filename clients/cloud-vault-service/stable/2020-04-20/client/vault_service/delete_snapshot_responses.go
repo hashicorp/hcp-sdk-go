@@ -81,6 +81,11 @@ func (o *DeleteSnapshotOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete snapshot o k response
+func (o *DeleteSnapshotOK) Code() int {
+	return 200
+}
+
 func (o *DeleteSnapshotOK) Error() string {
 	return fmt.Sprintf("[DELETE /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/snapshots/{snapshot_id}][%d] deleteSnapshotOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type DeleteSnapshotDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the delete snapshot default response
-func (o *DeleteSnapshotDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this delete snapshot default response has a 2xx status code
 func (o *DeleteSnapshotDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *DeleteSnapshotDefault) IsServerError() bool {
 // IsCode returns true when this delete snapshot default response a status code equal to that given
 func (o *DeleteSnapshotDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the delete snapshot default response
+func (o *DeleteSnapshotDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DeleteSnapshotDefault) Error() string {

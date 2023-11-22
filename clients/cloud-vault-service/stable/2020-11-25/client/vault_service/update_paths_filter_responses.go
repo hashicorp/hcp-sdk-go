@@ -81,6 +81,11 @@ func (o *UpdatePathsFilterOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update paths filter o k response
+func (o *UpdatePathsFilterOK) Code() int {
+	return 200
+}
+
 func (o *UpdatePathsFilterOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/update][%d] updatePathsFilterOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type UpdatePathsFilterDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the update paths filter default response
-func (o *UpdatePathsFilterDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this update paths filter default response has a 2xx status code
 func (o *UpdatePathsFilterDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *UpdatePathsFilterDefault) IsServerError() bool {
 // IsCode returns true when this update paths filter default response a status code equal to that given
 func (o *UpdatePathsFilterDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the update paths filter default response
+func (o *UpdatePathsFilterDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UpdatePathsFilterDefault) Error() string {

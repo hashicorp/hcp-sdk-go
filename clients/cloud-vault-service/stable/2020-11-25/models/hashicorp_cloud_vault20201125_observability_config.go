@@ -252,6 +252,11 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) ContextValidate(ctx con
 func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateCloudwatch(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cloudwatch != nil {
+
+		if swag.IsZero(m.Cloudwatch) { // not required
+			return nil
+		}
+
 		if err := m.Cloudwatch.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cloudwatch")
@@ -268,6 +273,11 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateCloudwat
 func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateDatadog(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Datadog != nil {
+
+		if swag.IsZero(m.Datadog) { // not required
+			return nil
+		}
+
 		if err := m.Datadog.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("datadog")
@@ -284,6 +294,11 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateDatadog(
 func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateElasticsearch(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Elasticsearch != nil {
+
+		if swag.IsZero(m.Elasticsearch) { // not required
+			return nil
+		}
+
 		if err := m.Elasticsearch.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("elasticsearch")
@@ -300,6 +315,11 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateElastics
 func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateGrafana(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Grafana != nil {
+
+		if swag.IsZero(m.Grafana) { // not required
+			return nil
+		}
+
 		if err := m.Grafana.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("grafana")
@@ -316,6 +336,11 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateGrafana(
 func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateHTTP(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HTTP != nil {
+
+		if swag.IsZero(m.HTTP) { // not required
+			return nil
+		}
+
 		if err := m.HTTP.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("http")
@@ -332,6 +357,11 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateHTTP(ctx
 func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateNewrelic(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Newrelic != nil {
+
+		if swag.IsZero(m.Newrelic) { // not required
+			return nil
+		}
+
 		if err := m.Newrelic.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("newrelic")
@@ -348,6 +378,11 @@ func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateNewrelic
 func (m *HashicorpCloudVault20201125ObservabilityConfig) contextValidateSplunk(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Splunk != nil {
+
+		if swag.IsZero(m.Splunk) { // not required
+			return nil
+		}
+
 		if err := m.Splunk.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("splunk")

@@ -81,6 +81,11 @@ func (o *SealOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the seal o k response
+func (o *SealOK) Code() int {
+	return 200
+}
+
 func (o *SealOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] sealOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type SealDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the seal default response
-func (o *SealDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this seal default response has a 2xx status code
 func (o *SealDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *SealDefault) IsServerError() bool {
 // IsCode returns true when this seal default response a status code equal to that given
 func (o *SealDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the seal default response
+func (o *SealDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *SealDefault) Error() string {

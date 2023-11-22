@@ -197,6 +197,11 @@ func (m *HashicorpCloudVault20201125InputCluster) ContextValidate(ctx context.Co
 func (m *HashicorpCloudVault20201125InputCluster) contextValidateConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Config != nil {
+
+		if swag.IsZero(m.Config) { // not required
+			return nil
+		}
+
 		if err := m.Config.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("config")
@@ -213,6 +218,11 @@ func (m *HashicorpCloudVault20201125InputCluster) contextValidateConfig(ctx cont
 func (m *HashicorpCloudVault20201125InputCluster) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -229,6 +239,11 @@ func (m *HashicorpCloudVault20201125InputCluster) contextValidateLocation(ctx co
 func (m *HashicorpCloudVault20201125InputCluster) contextValidatePerformanceReplicationPathsFilter(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PerformanceReplicationPathsFilter != nil {
+
+		if swag.IsZero(m.PerformanceReplicationPathsFilter) { // not required
+			return nil
+		}
+
 		if err := m.PerformanceReplicationPathsFilter.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("performance_replication_paths_filter")
@@ -245,6 +260,11 @@ func (m *HashicorpCloudVault20201125InputCluster) contextValidatePerformanceRepl
 func (m *HashicorpCloudVault20201125InputCluster) contextValidatePerformanceReplicationPrimaryCluster(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PerformanceReplicationPrimaryCluster != nil {
+
+		if swag.IsZero(m.PerformanceReplicationPrimaryCluster) { // not required
+			return nil
+		}
+
 		if err := m.PerformanceReplicationPrimaryCluster.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("performance_replication_primary_cluster")
@@ -261,6 +281,11 @@ func (m *HashicorpCloudVault20201125InputCluster) contextValidatePerformanceRepl
 func (m *HashicorpCloudVault20201125InputCluster) contextValidateTemplateInput(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TemplateInput != nil {
+
+		if swag.IsZero(m.TemplateInput) { // not required
+			return nil
+		}
+
 		if err := m.TemplateInput.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("template_input")

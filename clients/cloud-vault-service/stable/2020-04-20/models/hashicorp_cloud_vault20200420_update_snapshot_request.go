@@ -105,6 +105,11 @@ func (m *HashicorpCloudVault20200420UpdateSnapshotRequest) ContextValidate(ctx c
 func (m *HashicorpCloudVault20200420UpdateSnapshotRequest) contextValidateMask(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Mask != nil {
+
+		if swag.IsZero(m.Mask) { // not required
+			return nil
+		}
+
 		if err := m.Mask.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("mask")
@@ -121,6 +126,11 @@ func (m *HashicorpCloudVault20200420UpdateSnapshotRequest) contextValidateMask(c
 func (m *HashicorpCloudVault20200420UpdateSnapshotRequest) contextValidateSnapshot(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Snapshot != nil {
+
+		if swag.IsZero(m.Snapshot) { // not required
+			return nil
+		}
+
 		if err := m.Snapshot.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("snapshot")

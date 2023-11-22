@@ -81,6 +81,11 @@ func (o *UpgradeMajorVersionOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the upgrade major version o k response
+func (o *UpgradeMajorVersionOK) Code() int {
+	return 200
+}
+
 func (o *UpgradeMajorVersionOK) Error() string {
 	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] upgradeMajorVersionOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type UpgradeMajorVersionDefault struct {
 	Payload *cloud.GrpcGatewayRuntimeError
 }
 
-// Code gets the status code for the upgrade major version default response
-func (o *UpgradeMajorVersionDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this upgrade major version default response has a 2xx status code
 func (o *UpgradeMajorVersionDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *UpgradeMajorVersionDefault) IsServerError() bool {
 // IsCode returns true when this upgrade major version default response a status code equal to that given
 func (o *UpgradeMajorVersionDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the upgrade major version default response
+func (o *UpgradeMajorVersionDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UpgradeMajorVersionDefault) Error() string {
