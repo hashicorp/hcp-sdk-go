@@ -72,6 +72,11 @@ func (m *HashicorpCloudNetwork20200907GetResponse) ContextValidate(ctx context.C
 func (m *HashicorpCloudNetwork20200907GetResponse) contextValidateNetwork(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Network != nil {
+
+		if swag.IsZero(m.Network) { // not required
+			return nil
+		}
+
 		if err := m.Network.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("network")

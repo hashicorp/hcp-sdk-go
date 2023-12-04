@@ -20,6 +20,9 @@ import (
 // swagger:model hashicorp.cloud.network_20200907.HVNRoute
 type HashicorpCloudNetwork20200907HVNRoute struct {
 
+	// azure route
+	AzureRoute *HashicorpCloudNetwork20200907AzureRoute `json:"azure_route,omitempty"`
+
 	// created_at is a timestamp when HVN Route was originally created
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
@@ -45,6 +48,10 @@ type HashicorpCloudNetwork20200907HVNRoute struct {
 func (m *HashicorpCloudNetwork20200907HVNRoute) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAzureRoute(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreatedAt(formats); err != nil {
 		res = append(res, err)
 	}
@@ -64,6 +71,25 @@ func (m *HashicorpCloudNetwork20200907HVNRoute) Validate(formats strfmt.Registry
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907HVNRoute) validateAzureRoute(formats strfmt.Registry) error {
+	if swag.IsZero(m.AzureRoute) { // not required
+		return nil
+	}
+
+	if m.AzureRoute != nil {
+		if err := m.AzureRoute.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_route")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_route")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -140,6 +166,10 @@ func (m *HashicorpCloudNetwork20200907HVNRoute) validateTarget(formats strfmt.Re
 func (m *HashicorpCloudNetwork20200907HVNRoute) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAzureRoute(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateHvn(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -158,9 +188,35 @@ func (m *HashicorpCloudNetwork20200907HVNRoute) ContextValidate(ctx context.Cont
 	return nil
 }
 
+func (m *HashicorpCloudNetwork20200907HVNRoute) contextValidateAzureRoute(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AzureRoute != nil {
+
+		if swag.IsZero(m.AzureRoute) { // not required
+			return nil
+		}
+
+		if err := m.AzureRoute.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_route")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_route")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudNetwork20200907HVNRoute) contextValidateHvn(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Hvn != nil {
+
+		if swag.IsZero(m.Hvn) { // not required
+			return nil
+		}
+
 		if err := m.Hvn.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hvn")
@@ -177,6 +233,11 @@ func (m *HashicorpCloudNetwork20200907HVNRoute) contextValidateHvn(ctx context.C
 func (m *HashicorpCloudNetwork20200907HVNRoute) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")
@@ -193,6 +254,11 @@ func (m *HashicorpCloudNetwork20200907HVNRoute) contextValidateState(ctx context
 func (m *HashicorpCloudNetwork20200907HVNRoute) contextValidateTarget(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Target != nil {
+
+		if swag.IsZero(m.Target) { // not required
+			return nil
+		}
+
 		if err := m.Target.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("target")

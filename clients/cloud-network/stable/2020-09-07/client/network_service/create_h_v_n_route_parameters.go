@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/models"
 )
 
 // NewCreateHVNRouteParams creates a new CreateHVNRouteParams object,
@@ -64,7 +62,7 @@ CreateHVNRouteParams contains all the parameters to send to the API endpoint
 type CreateHVNRouteParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudNetwork20200907CreateHVNRouteRequest
+	Body CreateHVNRouteBody
 
 	/* HvnID.
 
@@ -138,13 +136,13 @@ func (o *CreateHVNRouteParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create h v n route params
-func (o *CreateHVNRouteParams) WithBody(body *models.HashicorpCloudNetwork20200907CreateHVNRouteRequest) *CreateHVNRouteParams {
+func (o *CreateHVNRouteParams) WithBody(body CreateHVNRouteBody) *CreateHVNRouteParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create h v n route params
-func (o *CreateHVNRouteParams) SetBody(body *models.HashicorpCloudNetwork20200907CreateHVNRouteRequest) {
+func (o *CreateHVNRouteParams) SetBody(body CreateHVNRouteBody) {
 	o.Body = body
 }
 
@@ -188,10 +186,8 @@ func (o *CreateHVNRouteParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param hvn.id

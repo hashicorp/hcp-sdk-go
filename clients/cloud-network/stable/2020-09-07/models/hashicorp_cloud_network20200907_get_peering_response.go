@@ -72,6 +72,11 @@ func (m *HashicorpCloudNetwork20200907GetPeeringResponse) ContextValidate(ctx co
 func (m *HashicorpCloudNetwork20200907GetPeeringResponse) contextValidatePeering(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Peering != nil {
+
+		if swag.IsZero(m.Peering) { // not required
+			return nil
+		}
+
 		if err := m.Peering.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("peering")

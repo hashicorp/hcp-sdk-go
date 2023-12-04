@@ -6,11 +6,14 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +84,11 @@ func (o *CreateTGWAttachmentOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the create t g w attachment o k response
+func (o *CreateTGWAttachmentOK) Code() int {
+	return 200
+}
+
 func (o *CreateTGWAttachmentOK) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] createTGWAttachmentOK  %+v", 200, o.Payload)
 }
@@ -120,12 +128,7 @@ An unexpected error response.
 type CreateTGWAttachmentDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
-}
-
-// Code gets the status code for the create t g w attachment default response
-func (o *CreateTGWAttachmentDefault) Code() int {
-	return o._statusCode
+	Payload *cloud.GoogleRPCStatus
 }
 
 // IsSuccess returns true when this create t g w attachment default response has a 2xx status code
@@ -153,6 +156,11 @@ func (o *CreateTGWAttachmentDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the create t g w attachment default response
+func (o *CreateTGWAttachmentDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *CreateTGWAttachmentDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] CreateTGWAttachment default  %+v", o._statusCode, o.Payload)
 }
@@ -161,18 +169,383 @@ func (o *CreateTGWAttachmentDefault) String() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] CreateTGWAttachment default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateTGWAttachmentDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *CreateTGWAttachmentDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *CreateTGWAttachmentDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
+	return nil
+}
+
+/*
+CreateTGWAttachmentBody create t g w attachment body
+swagger:model CreateTGWAttachmentBody
+*/
+type CreateTGWAttachmentBody struct {
+
+	// cidrs is a list of destination CIDRs this TGW attachment will be routing to through the
+	// transit gateway.
+	Cidrs []string `json:"cidrs"`
+
+	// hvn
+	Hvn *CreateTGWAttachmentParamsBodyHvn `json:"hvn,omitempty"`
+
+	// id is the user-set transit gateway attachment slug ID, optional for now, if not present we will use internal-id.
+	ID string `json:"id,omitempty"`
+
+	// provider_data is the provider specific data to create a TGW Attachment.
+	// For AWS it includes the transit gateway ID and the resource share ARN.
+	ProviderData *models.HashicorpCloudNetwork20200907CreateTGWAttachmentRequestProviderData `json:"provider_data,omitempty"`
+}
+
+// Validate validates this create t g w attachment body
+func (o *CreateTGWAttachmentBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateHvn(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateProviderData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateTGWAttachmentBody) validateHvn(formats strfmt.Registry) error {
+	if swag.IsZero(o.Hvn) { // not required
+		return nil
+	}
+
+	if o.Hvn != nil {
+		if err := o.Hvn.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateTGWAttachmentBody) validateProviderData(formats strfmt.Registry) error {
+	if swag.IsZero(o.ProviderData) { // not required
+		return nil
+	}
+
+	if o.ProviderData != nil {
+		if err := o.ProviderData.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "provider_data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "provider_data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create t g w attachment body based on the context it is used
+func (o *CreateTGWAttachmentBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateHvn(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProviderData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateTGWAttachmentBody) contextValidateHvn(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Hvn != nil {
+
+		if swag.IsZero(o.Hvn) { // not required
+			return nil
+		}
+
+		if err := o.Hvn.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateTGWAttachmentBody) contextValidateProviderData(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProviderData != nil {
+
+		if swag.IsZero(o.ProviderData) { // not required
+			return nil
+		}
+
+		if err := o.ProviderData.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "provider_data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "provider_data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateTGWAttachmentBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateTGWAttachmentBody) UnmarshalBinary(b []byte) error {
+	var res CreateTGWAttachmentBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+CreateTGWAttachmentParamsBodyHvn HVN is a link to the HVN the TGW Attachment belongs to.
+//
+// HVN is a link to the HVN the TGW Attachment belongs to.
+swagger:model CreateTGWAttachmentParamsBodyHvn
+*/
+type CreateTGWAttachmentParamsBodyHvn struct {
+
+	// description is a human-friendly description for this link. This is
+	// used primarily for informational purposes such as error messages.
+	Description string `json:"description,omitempty"`
+
+	// location
+	Location *CreateTGWAttachmentParamsBodyHvnLocation `json:"location,omitempty"`
+
+	// type is the unique type of the resource. Each service publishes a
+	// unique set of types. The type value is recommended to be formatted
+	// in "<org>.<type>" such as "hashicorp.hvn". This is to prevent conflicts
+	// in the future, but any string value will work.
+	Type string `json:"type,omitempty"`
+
+	// uuid is the unique UUID for this resource.
+	UUID string `json:"uuid,omitempty"`
+}
+
+// Validate validates this create t g w attachment params body hvn
+func (o *CreateTGWAttachmentParamsBodyHvn) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateTGWAttachmentParamsBodyHvn) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(o.Location) { // not required
+		return nil
+	}
+
+	if o.Location != nil {
+		if err := o.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create t g w attachment params body hvn based on the context it is used
+func (o *CreateTGWAttachmentParamsBodyHvn) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateTGWAttachmentParamsBodyHvn) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
+		if err := o.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateTGWAttachmentParamsBodyHvn) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateTGWAttachmentParamsBodyHvn) UnmarshalBinary(b []byte) error {
+	var res CreateTGWAttachmentParamsBodyHvn
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+CreateTGWAttachmentParamsBodyHvnLocation location is the location where this resource is.
+//
+// location is the location where this resource is.
+swagger:model CreateTGWAttachmentParamsBodyHvnLocation
+*/
+type CreateTGWAttachmentParamsBodyHvnLocation struct {
+
+	// region is the region that the resource is located in. It is
+	// optional if the object being referenced is a global object.
+	Region *cloud.HashicorpCloudLocationRegion `json:"region,omitempty"`
+}
+
+// Validate validates this create t g w attachment params body hvn location
+func (o *CreateTGWAttachmentParamsBodyHvnLocation) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateRegion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateTGWAttachmentParamsBodyHvnLocation) validateRegion(formats strfmt.Registry) error {
+	if swag.IsZero(o.Region) { // not required
+		return nil
+	}
+
+	if o.Region != nil {
+		if err := o.Region.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create t g w attachment params body hvn location based on the context it is used
+func (o *CreateTGWAttachmentParamsBodyHvnLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateRegion(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateTGWAttachmentParamsBodyHvnLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
+		if err := o.Region.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateTGWAttachmentParamsBodyHvnLocation) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateTGWAttachmentParamsBodyHvnLocation) UnmarshalBinary(b []byte) error {
+	var res CreateTGWAttachmentParamsBodyHvnLocation
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

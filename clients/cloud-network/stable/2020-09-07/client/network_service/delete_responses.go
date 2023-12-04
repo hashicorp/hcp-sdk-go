@@ -81,6 +81,11 @@ func (o *DeleteOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete o k response
+func (o *DeleteOK) Code() int {
+	return 200
+}
+
 func (o *DeleteOK) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] deleteOK  %+v", 200, o.Payload)
 }
@@ -120,12 +125,7 @@ An unexpected error response.
 type DeleteDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
-}
-
-// Code gets the status code for the delete default response
-func (o *DeleteDefault) Code() int {
-	return o._statusCode
+	Payload *cloud.GoogleRPCStatus
 }
 
 // IsSuccess returns true when this delete default response has a 2xx status code
@@ -153,6 +153,11 @@ func (o *DeleteDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the delete default response
+func (o *DeleteDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *DeleteDefault) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Delete default  %+v", o._statusCode, o.Payload)
 }
@@ -161,13 +166,13 @@ func (o *DeleteDefault) String() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Delete default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *DeleteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *DeleteDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *DeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

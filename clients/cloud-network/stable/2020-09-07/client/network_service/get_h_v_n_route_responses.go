@@ -81,6 +81,11 @@ func (o *GetHVNRouteOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get h v n route o k response
+func (o *GetHVNRouteOK) Code() int {
+	return 200
+}
+
 func (o *GetHVNRouteOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] getHVNRouteOK  %+v", 200, o.Payload)
 }
@@ -120,12 +125,7 @@ An unexpected error response.
 type GetHVNRouteDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
-}
-
-// Code gets the status code for the get h v n route default response
-func (o *GetHVNRouteDefault) Code() int {
-	return o._statusCode
+	Payload *cloud.GoogleRPCStatus
 }
 
 // IsSuccess returns true when this get h v n route default response has a 2xx status code
@@ -153,6 +153,11 @@ func (o *GetHVNRouteDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the get h v n route default response
+func (o *GetHVNRouteDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *GetHVNRouteDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] GetHVNRoute default  %+v", o._statusCode, o.Payload)
 }
@@ -161,13 +166,13 @@ func (o *GetHVNRouteDefault) String() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] GetHVNRoute default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *GetHVNRouteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *GetHVNRouteDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *GetHVNRouteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -89,13 +89,13 @@ type ListTGWAttachmentsParams struct {
 
 	/* HvnLocationRegionProvider.
 
-	   provider is the named cloud provider ("aws", "gcp", "azure").
+	   provider is the named cloud provider ("aws", "gcp", "azure")
 	*/
 	HvnLocationRegionProvider *string
 
 	/* HvnLocationRegionRegion.
 
-	   region is the cloud region ("us-west1", "us-east1").
+	   region is the cloud region ("us-west1", "us-east1")
 	*/
 	HvnLocationRegionRegion *string
 
@@ -144,7 +144,7 @@ type ListTGWAttachmentsParams struct {
 	/* States.
 
 	     States is an optional parameter to list only TGW Attachments in a certain states
-	if not specified all TGW Attachments will be returned.
+	if not specified all TGW Attachments will be returned
 	*/
 	States []string
 

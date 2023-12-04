@@ -103,6 +103,11 @@ func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) ContextValida
 func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Operation != nil {
+
+		if swag.IsZero(m.Operation) { // not required
+			return nil
+		}
+
 		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operation")
@@ -119,6 +124,11 @@ func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) contextValida
 func (m *HashicorpCloudNetwork20200907CreateTGWAttachmentResponse) contextValidateTgwAttachment(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TgwAttachment != nil {
+
+		if swag.IsZero(m.TgwAttachment) { // not required
+			return nil
+		}
+
 		if err := m.TgwAttachment.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tgw_attachment")

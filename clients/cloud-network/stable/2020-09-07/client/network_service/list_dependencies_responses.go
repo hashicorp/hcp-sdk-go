@@ -81,6 +81,11 @@ func (o *ListDependenciesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list dependencies o k response
+func (o *ListDependenciesOK) Code() int {
+	return 200
+}
+
 func (o *ListDependenciesOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] listDependenciesOK  %+v", 200, o.Payload)
 }
@@ -120,12 +125,7 @@ An unexpected error response.
 type ListDependenciesDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
-}
-
-// Code gets the status code for the list dependencies default response
-func (o *ListDependenciesDefault) Code() int {
-	return o._statusCode
+	Payload *cloud.GoogleRPCStatus
 }
 
 // IsSuccess returns true when this list dependencies default response has a 2xx status code
@@ -153,6 +153,11 @@ func (o *ListDependenciesDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the list dependencies default response
+func (o *ListDependenciesDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ListDependenciesDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] ListDependencies default  %+v", o._statusCode, o.Payload)
 }
@@ -161,13 +166,13 @@ func (o *ListDependenciesDefault) String() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] ListDependencies default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListDependenciesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *ListDependenciesDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *ListDependenciesDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

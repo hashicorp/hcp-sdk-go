@@ -96,13 +96,13 @@ type ListHVNRoutesParams struct {
 
 	/* HvnLocationRegionProvider.
 
-	   provider is the named cloud provider ("aws", "gcp", "azure").
+	   provider is the named cloud provider ("aws", "gcp", "azure")
 	*/
 	HvnLocationRegionProvider *string
 
 	/* HvnLocationRegionRegion.
 
-	   region is the cloud region ("us-west1", "us-east1").
+	   region is the cloud region ("us-west1", "us-east1")
 	*/
 	HvnLocationRegionRegion *string
 

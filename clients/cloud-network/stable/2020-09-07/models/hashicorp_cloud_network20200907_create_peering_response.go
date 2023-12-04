@@ -103,6 +103,11 @@ func (m *HashicorpCloudNetwork20200907CreatePeeringResponse) ContextValidate(ctx
 func (m *HashicorpCloudNetwork20200907CreatePeeringResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Operation != nil {
+
+		if swag.IsZero(m.Operation) { // not required
+			return nil
+		}
+
 		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operation")
@@ -119,6 +124,11 @@ func (m *HashicorpCloudNetwork20200907CreatePeeringResponse) contextValidateOper
 func (m *HashicorpCloudNetwork20200907CreatePeeringResponse) contextValidatePeering(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Peering != nil {
+
+		if swag.IsZero(m.Peering) { // not required
+			return nil
+		}
+
 		if err := m.Peering.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("peering")

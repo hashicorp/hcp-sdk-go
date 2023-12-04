@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/models"
 )
 
 // NewCreatePeeringParams creates a new CreatePeeringParams object,
@@ -64,7 +62,7 @@ CreatePeeringParams contains all the parameters to send to the API endpoint
 type CreatePeeringParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudNetwork20200907CreatePeeringRequest
+	Body CreatePeeringBody
 
 	/* PeeringHvnID.
 
@@ -138,13 +136,13 @@ func (o *CreatePeeringParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create peering params
-func (o *CreatePeeringParams) WithBody(body *models.HashicorpCloudNetwork20200907CreatePeeringRequest) *CreatePeeringParams {
+func (o *CreatePeeringParams) WithBody(body CreatePeeringBody) *CreatePeeringParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create peering params
-func (o *CreatePeeringParams) SetBody(body *models.HashicorpCloudNetwork20200907CreatePeeringRequest) {
+func (o *CreatePeeringParams) SetBody(body CreatePeeringBody) {
 	o.Body = body
 }
 
@@ -188,10 +186,8 @@ func (o *CreatePeeringParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param peering.hvn.id

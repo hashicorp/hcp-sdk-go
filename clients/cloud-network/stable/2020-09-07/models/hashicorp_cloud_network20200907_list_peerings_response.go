@@ -111,6 +111,11 @@ func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) ContextValidate(ctx 
 func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
@@ -129,6 +134,11 @@ func (m *HashicorpCloudNetwork20200907ListPeeringsResponse) contextValidatePeeri
 	for i := 0; i < len(m.Peerings); i++ {
 
 		if m.Peerings[i] != nil {
+
+			if swag.IsZero(m.Peerings[i]) { // not required
+				return nil
+			}
+
 			if err := m.Peerings[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("peerings" + "." + strconv.Itoa(i))

@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/models"
 )
 
 // NewCreateTokenParams creates a new CreateTokenParams object,
@@ -64,7 +62,7 @@ CreateTokenParams contains all the parameters to send to the API endpoint
 type CreateTokenParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudNetwork20200907CreateTokenRequest
+	Body CreateTokenBody
 
 	/* ID.
 
@@ -138,13 +136,13 @@ func (o *CreateTokenParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create token params
-func (o *CreateTokenParams) WithBody(body *models.HashicorpCloudNetwork20200907CreateTokenRequest) *CreateTokenParams {
+func (o *CreateTokenParams) WithBody(body CreateTokenBody) *CreateTokenParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create token params
-func (o *CreateTokenParams) SetBody(body *models.HashicorpCloudNetwork20200907CreateTokenRequest) {
+func (o *CreateTokenParams) SetBody(body CreateTokenBody) {
 	o.Body = body
 }
 
@@ -188,10 +186,8 @@ func (o *CreateTokenParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param id

@@ -6,11 +6,14 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -81,6 +84,11 @@ func (o *CreateHVNRouteOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the create h v n route o k response
+func (o *CreateHVNRouteOK) Code() int {
+	return 200
+}
+
 func (o *CreateHVNRouteOK) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] createHVNRouteOK  %+v", 200, o.Payload)
 }
@@ -120,12 +128,7 @@ An unexpected error response.
 type CreateHVNRouteDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
-}
-
-// Code gets the status code for the create h v n route default response
-func (o *CreateHVNRouteDefault) Code() int {
-	return o._statusCode
+	Payload *cloud.GoogleRPCStatus
 }
 
 // IsSuccess returns true when this create h v n route default response has a 2xx status code
@@ -153,6 +156,11 @@ func (o *CreateHVNRouteDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the create h v n route default response
+func (o *CreateHVNRouteDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *CreateHVNRouteDefault) Error() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] CreateHVNRoute default  %+v", o._statusCode, o.Payload)
 }
@@ -161,18 +169,430 @@ func (o *CreateHVNRouteDefault) String() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] CreateHVNRoute default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateHVNRouteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *CreateHVNRouteDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *CreateHVNRouteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
+	return nil
+}
+
+/*
+CreateHVNRouteBody create h v n route body
+swagger:model CreateHVNRouteBody
+*/
+type CreateHVNRouteBody struct {
+
+	// azure_route contains specific configuration about the azure route
+	AzureRoute *models.HashicorpCloudNetwork20200907AzureRoute `json:"azure_route,omitempty"`
+
+	// destination is a destination CIDR for this HVN Route
+	Destination string `json:"destination,omitempty"`
+
+	// hvn
+	Hvn *CreateHVNRouteParamsBodyHvn `json:"hvn,omitempty"`
+
+	// id is a user generated id for the route
+	ID string `json:"id,omitempty"`
+
+	// target is a target for this HVN Route
+	Target *models.HashicorpCloudNetwork20200907HVNRouteTarget `json:"target,omitempty"`
+}
+
+// Validate validates this create h v n route body
+func (o *CreateHVNRouteBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateAzureRoute(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateHvn(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateTarget(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateHVNRouteBody) validateAzureRoute(formats strfmt.Registry) error {
+	if swag.IsZero(o.AzureRoute) { // not required
+		return nil
+	}
+
+	if o.AzureRoute != nil {
+		if err := o.AzureRoute.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "azure_route")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "azure_route")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateHVNRouteBody) validateHvn(formats strfmt.Registry) error {
+	if swag.IsZero(o.Hvn) { // not required
+		return nil
+	}
+
+	if o.Hvn != nil {
+		if err := o.Hvn.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateHVNRouteBody) validateTarget(formats strfmt.Registry) error {
+	if swag.IsZero(o.Target) { // not required
+		return nil
+	}
+
+	if o.Target != nil {
+		if err := o.Target.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "target")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "target")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create h v n route body based on the context it is used
+func (o *CreateHVNRouteBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAzureRoute(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateHvn(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateTarget(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateHVNRouteBody) contextValidateAzureRoute(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AzureRoute != nil {
+
+		if swag.IsZero(o.AzureRoute) { // not required
+			return nil
+		}
+
+		if err := o.AzureRoute.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "azure_route")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "azure_route")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateHVNRouteBody) contextValidateHvn(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Hvn != nil {
+
+		if swag.IsZero(o.Hvn) { // not required
+			return nil
+		}
+
+		if err := o.Hvn.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateHVNRouteBody) contextValidateTarget(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Target != nil {
+
+		if swag.IsZero(o.Target) { // not required
+			return nil
+		}
+
+		if err := o.Target.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "target")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "target")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateHVNRouteBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateHVNRouteBody) UnmarshalBinary(b []byte) error {
+	var res CreateHVNRouteBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+CreateHVNRouteParamsBodyHvn hvn is the HVN where a route being created
+swagger:model CreateHVNRouteParamsBodyHvn
+*/
+type CreateHVNRouteParamsBodyHvn struct {
+
+	// description is a human-friendly description for this link. This is
+	// used primarily for informational purposes such as error messages.
+	Description string `json:"description,omitempty"`
+
+	// location
+	Location *CreateHVNRouteParamsBodyHvnLocation `json:"location,omitempty"`
+
+	// type is the unique type of the resource. Each service publishes a
+	// unique set of types. The type value is recommended to be formatted
+	// in "<org>.<type>" such as "hashicorp.hvn". This is to prevent conflicts
+	// in the future, but any string value will work.
+	Type string `json:"type,omitempty"`
+
+	// uuid is the unique UUID for this resource.
+	UUID string `json:"uuid,omitempty"`
+}
+
+// Validate validates this create h v n route params body hvn
+func (o *CreateHVNRouteParamsBodyHvn) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateHVNRouteParamsBodyHvn) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(o.Location) { // not required
+		return nil
+	}
+
+	if o.Location != nil {
+		if err := o.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create h v n route params body hvn based on the context it is used
+func (o *CreateHVNRouteParamsBodyHvn) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateHVNRouteParamsBodyHvn) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
+		if err := o.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateHVNRouteParamsBodyHvn) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateHVNRouteParamsBodyHvn) UnmarshalBinary(b []byte) error {
+	var res CreateHVNRouteParamsBodyHvn
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+CreateHVNRouteParamsBodyHvnLocation location is the location where this resource is.
+//
+// location is the location where this resource is.
+swagger:model CreateHVNRouteParamsBodyHvnLocation
+*/
+type CreateHVNRouteParamsBodyHvnLocation struct {
+
+	// region is the region that the resource is located in. It is
+	// optional if the object being referenced is a global object.
+	Region *cloud.HashicorpCloudLocationRegion `json:"region,omitempty"`
+}
+
+// Validate validates this create h v n route params body hvn location
+func (o *CreateHVNRouteParamsBodyHvnLocation) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateRegion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateHVNRouteParamsBodyHvnLocation) validateRegion(formats strfmt.Registry) error {
+	if swag.IsZero(o.Region) { // not required
+		return nil
+	}
+
+	if o.Region != nil {
+		if err := o.Region.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create h v n route params body hvn location based on the context it is used
+func (o *CreateHVNRouteParamsBodyHvnLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateRegion(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateHVNRouteParamsBodyHvnLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
+		if err := o.Region.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "hvn" + "." + "location" + "." + "region")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "hvn" + "." + "location" + "." + "region")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateHVNRouteParamsBodyHvnLocation) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateHVNRouteParamsBodyHvnLocation) UnmarshalBinary(b []byte) error {
+	var res CreateHVNRouteParamsBodyHvnLocation
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }
