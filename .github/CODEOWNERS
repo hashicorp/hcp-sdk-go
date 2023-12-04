@@ -16,4 +16,4 @@
 /clients/cloud-network/ @hashicorp/cloud-platform-systems
 
 # The Operation clients are owned by Dataplane
-/clients/cloud-operation/ @hashicorp/cloud-dataplane
+/clients/cloud-operation/ @hashicorp/cloud-foundations
