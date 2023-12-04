@@ -1,0 +1,3 @@
+```release-note:improvement
+Update the CODEOWNERS for cloud-network and cloud-resource-manager
+```
