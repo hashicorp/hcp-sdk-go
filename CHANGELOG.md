@@ -1,3 +1,8 @@
+## v0.76.0 (December 04, 2023)
+
+IMPROVEMENTS:
+
+* Update the CODEOWNERS for cloud-network and cloud-resource-manager [[GH-221](https://github.com/hashicorp/hcp-sdk-go/pull/221)]
 ## v0.75.0 (November 29, 2023)
 
 ## v0.74.0 (November 22, 2023)
