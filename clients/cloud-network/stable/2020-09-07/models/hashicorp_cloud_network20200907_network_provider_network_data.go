@@ -75,11 +75,6 @@ func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) ContextValidat
 func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) contextValidateAwsNetworkData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AwsNetworkData != nil {
-
-		if swag.IsZero(m.AwsNetworkData) { // not required
-			return nil
-		}
-
 		if err := m.AwsNetworkData.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_network_data")

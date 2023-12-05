@@ -13,17 +13,17 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudNetwork20200907GetResponse hashicorp cloud network 20200907 get response
+// HashicorpCloudNetwork20200907CreateRequest hashicorp cloud network 20200907 create request
 //
-// swagger:model hashicorp.cloud.network_20200907.GetResponse
-type HashicorpCloudNetwork20200907GetResponse struct {
+// swagger:model hashicorp.cloud.network_20200907.CreateRequest
+type HashicorpCloudNetwork20200907CreateRequest struct {
 
-	// network is the retrieved network.
+	// network is the network object to be created.
 	Network *HashicorpCloudNetwork20200907Network `json:"network,omitempty"`
 }
 
-// Validate validates this hashicorp cloud network 20200907 get response
-func (m *HashicorpCloudNetwork20200907GetResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud network 20200907 create request
+func (m *HashicorpCloudNetwork20200907CreateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateNetwork(formats); err != nil {
@@ -36,7 +36,7 @@ func (m *HashicorpCloudNetwork20200907GetResponse) Validate(formats strfmt.Regis
 	return nil
 }
 
-func (m *HashicorpCloudNetwork20200907GetResponse) validateNetwork(formats strfmt.Registry) error {
+func (m *HashicorpCloudNetwork20200907CreateRequest) validateNetwork(formats strfmt.Registry) error {
 	if swag.IsZero(m.Network) { // not required
 		return nil
 	}
@@ -55,8 +55,8 @@ func (m *HashicorpCloudNetwork20200907GetResponse) validateNetwork(formats strfm
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud network 20200907 get response based on the context it is used
-func (m *HashicorpCloudNetwork20200907GetResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud network 20200907 create request based on the context it is used
+func (m *HashicorpCloudNetwork20200907CreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateNetwork(ctx, formats); err != nil {
@@ -69,7 +69,7 @@ func (m *HashicorpCloudNetwork20200907GetResponse) ContextValidate(ctx context.C
 	return nil
 }
 
-func (m *HashicorpCloudNetwork20200907GetResponse) contextValidateNetwork(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudNetwork20200907CreateRequest) contextValidateNetwork(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Network != nil {
 		if err := m.Network.ContextValidate(ctx, formats); err != nil {
@@ -86,7 +86,7 @@ func (m *HashicorpCloudNetwork20200907GetResponse) contextValidateNetwork(ctx co
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudNetwork20200907GetResponse) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudNetwork20200907CreateRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -94,8 +94,8 @@ func (m *HashicorpCloudNetwork20200907GetResponse) MarshalBinary() ([]byte, erro
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudNetwork20200907GetResponse) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudNetwork20200907GetResponse
+func (m *HashicorpCloudNetwork20200907CreateRequest) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudNetwork20200907CreateRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

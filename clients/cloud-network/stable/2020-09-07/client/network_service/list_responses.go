@@ -81,11 +81,6 @@ func (o *ListOK) IsCode(code int) bool {
 	return code == 200
 }
 
-// Code gets the status code for the list o k response
-func (o *ListOK) Code() int {
-	return 200
-}
-
 func (o *ListOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] listOK  %+v", 200, o.Payload)
 }
@@ -125,7 +120,12 @@ An unexpected error response.
 type ListDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the list default response
+func (o *ListDefault) Code() int {
+	return o._statusCode
 }
 
 // IsSuccess returns true when this list default response has a 2xx status code
@@ -153,11 +153,6 @@ func (o *ListDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
-// Code gets the status code for the list default response
-func (o *ListDefault) Code() int {
-	return o._statusCode
-}
-
 func (o *ListDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] List default  %+v", o._statusCode, o.Payload)
 }
@@ -166,13 +161,13 @@ func (o *ListDefault) String() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] List default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *ListDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *ListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

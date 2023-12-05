@@ -72,11 +72,6 @@ func (m *HashicorpCloudNetwork20200907GetHVNRouteResponse) ContextValidate(ctx c
 func (m *HashicorpCloudNetwork20200907GetHVNRouteResponse) contextValidateRoute(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Route != nil {
-
-		if swag.IsZero(m.Route) { // not required
-			return nil
-		}
-
 		if err := m.Route.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("route")

@@ -72,11 +72,6 @@ func (m *HashicorpCloudNetwork20200907GetTGWAttachmentResponse) ContextValidate(
 func (m *HashicorpCloudNetwork20200907GetTGWAttachmentResponse) contextValidateTgwAttachment(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TgwAttachment != nil {
-
-		if swag.IsZero(m.TgwAttachment) { // not required
-			return nil
-		}
-
 		if err := m.TgwAttachment.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tgw_attachment")

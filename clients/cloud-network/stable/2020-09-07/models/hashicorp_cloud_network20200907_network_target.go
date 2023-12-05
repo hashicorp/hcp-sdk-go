@@ -73,11 +73,6 @@ func (m *HashicorpCloudNetwork20200907NetworkTarget) ContextValidate(ctx context
 func (m *HashicorpCloudNetwork20200907NetworkTarget) contextValidateHvn(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Hvn != nil {
-
-		if swag.IsZero(m.Hvn) { // not required
-			return nil
-		}
-
 		if err := m.Hvn.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hvn")

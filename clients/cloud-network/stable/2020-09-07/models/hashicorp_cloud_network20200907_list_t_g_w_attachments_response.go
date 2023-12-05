@@ -111,11 +111,6 @@ func (m *HashicorpCloudNetwork20200907ListTGWAttachmentsResponse) ContextValidat
 func (m *HashicorpCloudNetwork20200907ListTGWAttachmentsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
-
-		if swag.IsZero(m.Pagination) { // not required
-			return nil
-		}
-
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
@@ -134,11 +129,6 @@ func (m *HashicorpCloudNetwork20200907ListTGWAttachmentsResponse) contextValidat
 	for i := 0; i < len(m.TgwAttachments); i++ {
 
 		if m.TgwAttachments[i] != nil {
-
-			if swag.IsZero(m.TgwAttachments[i]) { // not required
-				return nil
-			}
-
 			if err := m.TgwAttachments[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tgw_attachments" + "." + strconv.Itoa(i))

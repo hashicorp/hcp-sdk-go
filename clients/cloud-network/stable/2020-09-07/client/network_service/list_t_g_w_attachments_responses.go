@@ -81,11 +81,6 @@ func (o *ListTGWAttachmentsOK) IsCode(code int) bool {
 	return code == 200
 }
 
-// Code gets the status code for the list t g w attachments o k response
-func (o *ListTGWAttachmentsOK) Code() int {
-	return 200
-}
-
 func (o *ListTGWAttachmentsOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] listTGWAttachmentsOK  %+v", 200, o.Payload)
 }
@@ -125,7 +120,12 @@ An unexpected error response.
 type ListTGWAttachmentsDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the list t g w attachments default response
+func (o *ListTGWAttachmentsDefault) Code() int {
+	return o._statusCode
 }
 
 // IsSuccess returns true when this list t g w attachments default response has a 2xx status code
@@ -153,11 +153,6 @@ func (o *ListTGWAttachmentsDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
-// Code gets the status code for the list t g w attachments default response
-func (o *ListTGWAttachmentsDefault) Code() int {
-	return o._statusCode
-}
-
 func (o *ListTGWAttachmentsDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] ListTGWAttachments default  %+v", o._statusCode, o.Payload)
 }
@@ -166,13 +161,13 @@ func (o *ListTGWAttachmentsDefault) String() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] ListTGWAttachments default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListTGWAttachmentsDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *ListTGWAttachmentsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *ListTGWAttachmentsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

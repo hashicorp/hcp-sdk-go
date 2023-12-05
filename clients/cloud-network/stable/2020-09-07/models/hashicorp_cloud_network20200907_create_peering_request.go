@@ -13,17 +13,17 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudNetwork20200907GetPeeringResponse GetPeeringResponse is a response type for GetPeering endpoint
+// HashicorpCloudNetwork20200907CreatePeeringRequest CreatePeeringRequest is a request type for CreatePeering endpoint
 //
-// swagger:model hashicorp.cloud.network_20200907.GetPeeringResponse
-type HashicorpCloudNetwork20200907GetPeeringResponse struct {
+// swagger:model hashicorp.cloud.network_20200907.CreatePeeringRequest
+type HashicorpCloudNetwork20200907CreatePeeringRequest struct {
 
-	// Peering is the requested peering
+	// peering is the peering to be created.
 	Peering *HashicorpCloudNetwork20200907Peering `json:"peering,omitempty"`
 }
 
-// Validate validates this hashicorp cloud network 20200907 get peering response
-func (m *HashicorpCloudNetwork20200907GetPeeringResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud network 20200907 create peering request
+func (m *HashicorpCloudNetwork20200907CreatePeeringRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validatePeering(formats); err != nil {
@@ -36,7 +36,7 @@ func (m *HashicorpCloudNetwork20200907GetPeeringResponse) Validate(formats strfm
 	return nil
 }
 
-func (m *HashicorpCloudNetwork20200907GetPeeringResponse) validatePeering(formats strfmt.Registry) error {
+func (m *HashicorpCloudNetwork20200907CreatePeeringRequest) validatePeering(formats strfmt.Registry) error {
 	if swag.IsZero(m.Peering) { // not required
 		return nil
 	}
@@ -55,8 +55,8 @@ func (m *HashicorpCloudNetwork20200907GetPeeringResponse) validatePeering(format
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud network 20200907 get peering response based on the context it is used
-func (m *HashicorpCloudNetwork20200907GetPeeringResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud network 20200907 create peering request based on the context it is used
+func (m *HashicorpCloudNetwork20200907CreatePeeringRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidatePeering(ctx, formats); err != nil {
@@ -69,7 +69,7 @@ func (m *HashicorpCloudNetwork20200907GetPeeringResponse) ContextValidate(ctx co
 	return nil
 }
 
-func (m *HashicorpCloudNetwork20200907GetPeeringResponse) contextValidatePeering(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudNetwork20200907CreatePeeringRequest) contextValidatePeering(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Peering != nil {
 		if err := m.Peering.ContextValidate(ctx, formats); err != nil {
@@ -86,7 +86,7 @@ func (m *HashicorpCloudNetwork20200907GetPeeringResponse) contextValidatePeering
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudNetwork20200907GetPeeringResponse) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudNetwork20200907CreatePeeringRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -94,8 +94,8 @@ func (m *HashicorpCloudNetwork20200907GetPeeringResponse) MarshalBinary() ([]byt
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudNetwork20200907GetPeeringResponse) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudNetwork20200907GetPeeringResponse
+func (m *HashicorpCloudNetwork20200907CreatePeeringRequest) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudNetwork20200907CreatePeeringRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -184,11 +184,6 @@ func (m *HashicorpCloudNetwork20200907Network) contextValidateCreatedAt(ctx cont
 func (m *HashicorpCloudNetwork20200907Network) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
-
-		if swag.IsZero(m.Location) { // not required
-			return nil
-		}
-
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -205,11 +200,6 @@ func (m *HashicorpCloudNetwork20200907Network) contextValidateLocation(ctx conte
 func (m *HashicorpCloudNetwork20200907Network) contextValidateProviderNetworkData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ProviderNetworkData != nil {
-
-		if swag.IsZero(m.ProviderNetworkData) { // not required
-			return nil
-		}
-
 		if err := m.ProviderNetworkData.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("provider_network_data")
@@ -226,11 +216,6 @@ func (m *HashicorpCloudNetwork20200907Network) contextValidateProviderNetworkDat
 func (m *HashicorpCloudNetwork20200907Network) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
-
-		if swag.IsZero(m.State) { // not required
-			return nil
-		}
-
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")

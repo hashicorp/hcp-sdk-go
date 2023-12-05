@@ -81,11 +81,6 @@ func (o *DeleteTGWAttachmentOK) IsCode(code int) bool {
 	return code == 200
 }
 
-// Code gets the status code for the delete t g w attachment o k response
-func (o *DeleteTGWAttachmentOK) Code() int {
-	return 200
-}
-
 func (o *DeleteTGWAttachmentOK) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] deleteTGWAttachmentOK  %+v", 200, o.Payload)
 }
@@ -125,7 +120,12 @@ An unexpected error response.
 type DeleteTGWAttachmentDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the delete t g w attachment default response
+func (o *DeleteTGWAttachmentDefault) Code() int {
+	return o._statusCode
 }
 
 // IsSuccess returns true when this delete t g w attachment default response has a 2xx status code
@@ -153,11 +153,6 @@ func (o *DeleteTGWAttachmentDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
-// Code gets the status code for the delete t g w attachment default response
-func (o *DeleteTGWAttachmentDefault) Code() int {
-	return o._statusCode
-}
-
 func (o *DeleteTGWAttachmentDefault) Error() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] DeleteTGWAttachment default  %+v", o._statusCode, o.Payload)
 }
@@ -166,13 +161,13 @@ func (o *DeleteTGWAttachmentDefault) String() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] DeleteTGWAttachment default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *DeleteTGWAttachmentDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *DeleteTGWAttachmentDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *DeleteTGWAttachmentDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

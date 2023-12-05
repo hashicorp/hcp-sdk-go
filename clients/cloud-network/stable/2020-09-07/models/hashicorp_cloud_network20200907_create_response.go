@@ -103,11 +103,6 @@ func (m *HashicorpCloudNetwork20200907CreateResponse) ContextValidate(ctx contex
 func (m *HashicorpCloudNetwork20200907CreateResponse) contextValidateNetwork(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Network != nil {
-
-		if swag.IsZero(m.Network) { // not required
-			return nil
-		}
-
 		if err := m.Network.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("network")
@@ -124,11 +119,6 @@ func (m *HashicorpCloudNetwork20200907CreateResponse) contextValidateNetwork(ctx
 func (m *HashicorpCloudNetwork20200907CreateResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Operation != nil {
-
-		if swag.IsZero(m.Operation) { // not required
-			return nil
-		}
-
 		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operation")

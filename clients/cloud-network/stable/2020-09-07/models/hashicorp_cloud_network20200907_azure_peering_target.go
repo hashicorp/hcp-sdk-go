@@ -17,10 +17,6 @@ import (
 // swagger:model hashicorp.cloud.network_20200907.Azure.PeeringTarget
 type HashicorpCloudNetwork20200907AzurePeeringTarget struct {
 
-	// allow_forwarded_traffic affects whether the forwarded traffic originating
-	// from the peered VNET is allowed in the HVN.
-	AllowForwardedTraffic bool `json:"allow_forwarded_traffic,omitempty"`
-
 	// application_id is the ID of the Active Directory application
 	// registered for a single peering request.
 	ApplicationID string `json:"application_id,omitempty"`
@@ -38,12 +34,6 @@ type HashicorpCloudNetwork20200907AzurePeeringTarget struct {
 
 	// tenant_id is the ID of the customer tenant where the VNet is located.
 	TenantID string `json:"tenant_id,omitempty"`
-
-	// use_remote_gateways affects whether the HVN should use the gateway of the peereed VNET.
-	// If the flag is set to true, and allowGatewayTransit on remote VNET is also true,
-	// the HVN will use gateways of remote virtual network for transit. Only one peering
-	// can have this flag set to true.
-	UseRemoteGateways bool `json:"use_remote_gateways,omitempty"`
 
 	// vnet_name is the name of the VNet.
 	VnetName string `json:"vnet_name,omitempty"`

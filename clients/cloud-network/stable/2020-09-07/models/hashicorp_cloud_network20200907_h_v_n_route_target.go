@@ -74,11 +74,6 @@ func (m *HashicorpCloudNetwork20200907HVNRouteTarget) ContextValidate(ctx contex
 func (m *HashicorpCloudNetwork20200907HVNRouteTarget) contextValidateHvnConnection(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HvnConnection != nil {
-
-		if swag.IsZero(m.HvnConnection) { // not required
-			return nil
-		}
-
 		if err := m.HvnConnection.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hvn_connection")

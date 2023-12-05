@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/models"
 )
 
 // NewCreateParams creates a new CreateParams object,
@@ -62,7 +64,7 @@ CreateParams contains all the parameters to send to the API endpoint
 type CreateParams struct {
 
 	// Body.
-	Body CreateBody
+	Body *models.HashicorpCloudNetwork20200907CreateRequest
 
 	/* NetworkLocationOrganizationID.
 
@@ -130,13 +132,13 @@ func (o *CreateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create params
-func (o *CreateParams) WithBody(body CreateBody) *CreateParams {
+func (o *CreateParams) WithBody(body *models.HashicorpCloudNetwork20200907CreateRequest) *CreateParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create params
-func (o *CreateParams) SetBody(body CreateBody) {
+func (o *CreateParams) SetBody(body *models.HashicorpCloudNetwork20200907CreateRequest) {
 	o.Body = body
 }
 
@@ -169,8 +171,10 @@ func (o *CreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regist
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param network.location.organization_id

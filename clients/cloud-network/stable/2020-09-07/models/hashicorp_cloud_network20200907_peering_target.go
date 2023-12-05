@@ -132,11 +132,6 @@ func (m *HashicorpCloudNetwork20200907PeeringTarget) ContextValidate(ctx context
 func (m *HashicorpCloudNetwork20200907PeeringTarget) contextValidateAwsTarget(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AwsTarget != nil {
-
-		if swag.IsZero(m.AwsTarget) { // not required
-			return nil
-		}
-
 		if err := m.AwsTarget.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_target")
@@ -153,11 +148,6 @@ func (m *HashicorpCloudNetwork20200907PeeringTarget) contextValidateAwsTarget(ct
 func (m *HashicorpCloudNetwork20200907PeeringTarget) contextValidateAzureTarget(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AzureTarget != nil {
-
-		if swag.IsZero(m.AzureTarget) { // not required
-			return nil
-		}
-
 		if err := m.AzureTarget.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("azure_target")
@@ -174,11 +164,6 @@ func (m *HashicorpCloudNetwork20200907PeeringTarget) contextValidateAzureTarget(
 func (m *HashicorpCloudNetwork20200907PeeringTarget) contextValidateHvnTarget(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HvnTarget != nil {
-
-		if swag.IsZero(m.HvnTarget) { // not required
-			return nil
-		}
-
 		if err := m.HvnTarget.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hvn_target")

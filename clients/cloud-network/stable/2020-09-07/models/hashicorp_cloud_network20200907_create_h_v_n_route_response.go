@@ -103,11 +103,6 @@ func (m *HashicorpCloudNetwork20200907CreateHVNRouteResponse) ContextValidate(ct
 func (m *HashicorpCloudNetwork20200907CreateHVNRouteResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Operation != nil {
-
-		if swag.IsZero(m.Operation) { // not required
-			return nil
-		}
-
 		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operation")
@@ -124,11 +119,6 @@ func (m *HashicorpCloudNetwork20200907CreateHVNRouteResponse) contextValidateOpe
 func (m *HashicorpCloudNetwork20200907CreateHVNRouteResponse) contextValidateRoute(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Route != nil {
-
-		if swag.IsZero(m.Route) { // not required
-			return nil
-		}
-
 		if err := m.Route.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("route")

@@ -111,11 +111,6 @@ func (m *HashicorpCloudNetwork20200907ListHVNRoutesResponse) ContextValidate(ctx
 func (m *HashicorpCloudNetwork20200907ListHVNRoutesResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
-
-		if swag.IsZero(m.Pagination) { // not required
-			return nil
-		}
-
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
@@ -134,11 +129,6 @@ func (m *HashicorpCloudNetwork20200907ListHVNRoutesResponse) contextValidateRout
 	for i := 0; i < len(m.Routes); i++ {
 
 		if m.Routes[i] != nil {
-
-			if swag.IsZero(m.Routes[i]) { // not required
-				return nil
-			}
-
 			if err := m.Routes[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("routes" + "." + strconv.Itoa(i))

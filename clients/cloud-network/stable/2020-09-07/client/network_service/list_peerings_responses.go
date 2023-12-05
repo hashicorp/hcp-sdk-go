@@ -81,11 +81,6 @@ func (o *ListPeeringsOK) IsCode(code int) bool {
 	return code == 200
 }
 
-// Code gets the status code for the list peerings o k response
-func (o *ListPeeringsOK) Code() int {
-	return 200
-}
-
 func (o *ListPeeringsOK) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] listPeeringsOK  %+v", 200, o.Payload)
 }
@@ -125,7 +120,12 @@ An unexpected error response.
 type ListPeeringsDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
+}
+
+// Code gets the status code for the list peerings default response
+func (o *ListPeeringsDefault) Code() int {
+	return o._statusCode
 }
 
 // IsSuccess returns true when this list peerings default response has a 2xx status code
@@ -153,11 +153,6 @@ func (o *ListPeeringsDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
-// Code gets the status code for the list peerings default response
-func (o *ListPeeringsDefault) Code() int {
-	return o._statusCode
-}
-
 func (o *ListPeeringsDefault) Error() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] ListPeerings default  %+v", o._statusCode, o.Payload)
 }
@@ -166,13 +161,13 @@ func (o *ListPeeringsDefault) String() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] ListPeerings default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListPeeringsDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *ListPeeringsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *ListPeeringsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

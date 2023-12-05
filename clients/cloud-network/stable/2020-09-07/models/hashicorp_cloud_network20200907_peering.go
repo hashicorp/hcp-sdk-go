@@ -260,11 +260,6 @@ func (m *HashicorpCloudNetwork20200907Peering) contextValidateExpiresAt(ctx cont
 func (m *HashicorpCloudNetwork20200907Peering) contextValidateHvn(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Hvn != nil {
-
-		if swag.IsZero(m.Hvn) { // not required
-			return nil
-		}
-
 		if err := m.Hvn.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hvn")
@@ -299,11 +294,6 @@ func (m *HashicorpCloudNetwork20200907Peering) contextValidateSourceChannel(ctx 
 func (m *HashicorpCloudNetwork20200907Peering) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.State != nil {
-
-		if swag.IsZero(m.State) { // not required
-			return nil
-		}
-
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("state")
@@ -320,11 +310,6 @@ func (m *HashicorpCloudNetwork20200907Peering) contextValidateState(ctx context.
 func (m *HashicorpCloudNetwork20200907Peering) contextValidateTarget(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Target != nil {
-
-		if swag.IsZero(m.Target) { // not required
-			return nil
-		}
-
 		if err := m.Target.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("target")

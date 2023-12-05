@@ -73,11 +73,6 @@ func (m *HashicorpCloudNetwork20200907TGWAttachmentProviderData) ContextValidate
 func (m *HashicorpCloudNetwork20200907TGWAttachmentProviderData) contextValidateAwsData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AwsData != nil {
-
-		if swag.IsZero(m.AwsData) { // not required
-			return nil
-		}
-
 		if err := m.AwsData.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_data")
