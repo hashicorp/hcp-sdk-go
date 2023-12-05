@@ -125,7 +125,7 @@ An unexpected error response.
 type DeletePeeringDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // IsSuccess returns true when this delete peering default response has a 2xx status code
@@ -166,13 +166,13 @@ func (o *DeletePeeringDefault) String() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] DeletePeering default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *DeletePeeringDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *DeletePeeringDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *DeletePeeringDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

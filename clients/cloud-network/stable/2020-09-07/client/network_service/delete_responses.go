@@ -125,7 +125,7 @@ An unexpected error response.
 type DeleteDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // IsSuccess returns true when this delete default response has a 2xx status code
@@ -166,13 +166,13 @@ func (o *DeleteDefault) String() string {
 	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Delete default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *DeleteDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *DeleteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *DeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

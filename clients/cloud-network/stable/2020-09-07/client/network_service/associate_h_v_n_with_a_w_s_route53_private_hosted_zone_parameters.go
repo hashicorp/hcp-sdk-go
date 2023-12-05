@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/models"
 )
 
 // NewAssociateHVNWithAWSRoute53PrivateHostedZoneParams creates a new AssociateHVNWithAWSRoute53PrivateHostedZoneParams object,
@@ -62,7 +64,7 @@ AssociateHVNWithAWSRoute53PrivateHostedZoneParams contains all the parameters to
 type AssociateHVNWithAWSRoute53PrivateHostedZoneParams struct {
 
 	// Body.
-	Body AssociateHVNWithAWSRoute53PrivateHostedZoneBody
+	Body *models.HashicorpCloudNetwork20200907AssociateHVNWithAWSRoute53PrivateHostedZoneRequest
 
 	/* HvnID.
 
@@ -136,13 +138,13 @@ func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParams) SetHTTPClient(client
 }
 
 // WithBody adds the body to the associate h v n with a w s route53 private hosted zone params
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParams) WithBody(body AssociateHVNWithAWSRoute53PrivateHostedZoneBody) *AssociateHVNWithAWSRoute53PrivateHostedZoneParams {
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParams) WithBody(body *models.HashicorpCloudNetwork20200907AssociateHVNWithAWSRoute53PrivateHostedZoneRequest) *AssociateHVNWithAWSRoute53PrivateHostedZoneParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the associate h v n with a w s route53 private hosted zone params
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParams) SetBody(body AssociateHVNWithAWSRoute53PrivateHostedZoneBody) {
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParams) SetBody(body *models.HashicorpCloudNetwork20200907AssociateHVNWithAWSRoute53PrivateHostedZoneRequest) {
 	o.Body = body
 }
 
@@ -186,8 +188,10 @@ func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParams) WriteToRequest(r run
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param hvn_id

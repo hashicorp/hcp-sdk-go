@@ -125,7 +125,7 @@ An unexpected error response.
 type GetDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // IsSuccess returns true when this get default response has a 2xx status code
@@ -166,13 +166,13 @@ func (o *GetDefault) String() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Get default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *GetDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *GetDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *GetDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

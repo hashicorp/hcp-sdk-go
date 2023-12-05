@@ -125,7 +125,7 @@ An unexpected error response.
 type ListHVNRoutesDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // IsSuccess returns true when this list h v n routes default response has a 2xx status code
@@ -166,13 +166,13 @@ func (o *ListHVNRoutesDefault) String() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] ListHVNRoutes default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListHVNRoutesDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *ListHVNRoutesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *ListHVNRoutesDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

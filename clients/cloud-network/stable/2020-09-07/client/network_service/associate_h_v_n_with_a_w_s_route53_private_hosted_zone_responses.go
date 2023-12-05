@@ -6,14 +6,11 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
@@ -125,7 +122,7 @@ An unexpected error response.
 type AssociateHVNWithAWSRoute53PrivateHostedZoneDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // IsSuccess returns true when this associate h v n with a w s route53 private hosted zone default response has a 2xx status code
@@ -166,216 +163,18 @@ func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) String() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] AssociateHVNWithAWSRoute53PrivateHostedZone default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-AssociateHVNWithAWSRoute53PrivateHostedZoneBody See NetworkService.AssociateHVNWithAWSRoute53PrivateHostedZone for more details.
-swagger:model AssociateHVNWithAWSRoute53PrivateHostedZoneBody
-*/
-type AssociateHVNWithAWSRoute53PrivateHostedZoneBody struct {
-
-	// hosted_zone_id is the ID of the hosted zone in the external AWS account.
-	HostedZoneID string `json:"hosted_zone_id,omitempty"`
-
-	// location
-	Location *AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation `json:"location,omitempty"`
-}
-
-// Validate validates this associate h v n with a w s route53 private hosted zone body
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateLocation(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneBody) validateLocation(formats strfmt.Registry) error {
-	if swag.IsZero(o.Location) { // not required
-		return nil
-	}
-
-	if o.Location != nil {
-		if err := o.Location.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this associate h v n with a w s route53 private hosted zone body based on the context it is used
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateLocation(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Location != nil {
-
-		if swag.IsZero(o.Location) { // not required
-			return nil
-		}
-
-		if err := o.Location.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneBody) UnmarshalBinary(b []byte) error {
-	var res AssociateHVNWithAWSRoute53PrivateHostedZoneBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*
-AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation location is the location of the HVN.
-//
-// location is the location of the HVN.
-swagger:model AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation
-*/
-type AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation struct {
-
-	// region is the region that the resource is located in. It is
-	// optional if the object being referenced is a global object.
-	Region *cloud.HashicorpCloudLocationRegion `json:"region,omitempty"`
-}
-
-// Validate validates this associate h v n with a w s route53 private hosted zone params body location
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateRegion(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation) validateRegion(formats strfmt.Registry) error {
-	if swag.IsZero(o.Region) { // not required
-		return nil
-	}
-
-	if o.Region != nil {
-		if err := o.Region.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location" + "." + "region")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location" + "." + "region")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this associate h v n with a w s route53 private hosted zone params body location based on the context it is used
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateRegion(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Region != nil {
-
-		if swag.IsZero(o.Region) { // not required
-			return nil
-		}
-
-		if err := o.Region.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location" + "." + "region")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location" + "." + "region")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation) UnmarshalBinary(b []byte) error {
-	var res AssociateHVNWithAWSRoute53PrivateHostedZoneParamsBodyLocation
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

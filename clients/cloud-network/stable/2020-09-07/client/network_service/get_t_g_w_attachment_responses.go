@@ -125,7 +125,7 @@ An unexpected error response.
 type GetTGWAttachmentDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // IsSuccess returns true when this get t g w attachment default response has a 2xx status code
@@ -166,13 +166,13 @@ func (o *GetTGWAttachmentDefault) String() string {
 	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments/{id}][%d] GetTGWAttachment default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *GetTGWAttachmentDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *GetTGWAttachmentDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *GetTGWAttachmentDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

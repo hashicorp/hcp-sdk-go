@@ -6,14 +6,11 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -128,7 +125,7 @@ An unexpected error response.
 type CreateTokenDefault struct {
 	_statusCode int
 
-	Payload *cloud.GoogleRPCStatus
+	Payload *cloud.GrpcGatewayRuntimeError
 }
 
 // IsSuccess returns true when this create token default response has a 2xx status code
@@ -169,213 +166,18 @@ func (o *CreateTokenDefault) String() string {
 	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/tokens][%d] CreateToken default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateTokenDefault) GetPayload() *cloud.GoogleRPCStatus {
+func (o *CreateTokenDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
 	return o.Payload
 }
 
 func (o *CreateTokenDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GoogleRPCStatus)
+	o.Payload = new(cloud.GrpcGatewayRuntimeError)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-CreateTokenBody CreateTokenRequest is a request type for the CreateToken endpoint.
-swagger:model CreateTokenBody
-*/
-type CreateTokenBody struct {
-
-	// location
-	Location *CreateTokenParamsBodyLocation `json:"location,omitempty"`
-}
-
-// Validate validates this create token body
-func (o *CreateTokenBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateLocation(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateTokenBody) validateLocation(formats strfmt.Registry) error {
-	if swag.IsZero(o.Location) { // not required
-		return nil
-	}
-
-	if o.Location != nil {
-		if err := o.Location.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this create token body based on the context it is used
-func (o *CreateTokenBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateLocation(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateTokenBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Location != nil {
-
-		if swag.IsZero(o.Location) { // not required
-			return nil
-		}
-
-		if err := o.Location.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *CreateTokenBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *CreateTokenBody) UnmarshalBinary(b []byte) error {
-	var res CreateTokenBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*
-CreateTokenParamsBodyLocation location is the location of the HVN.
-//
-// location is the location of the HVN.
-swagger:model CreateTokenParamsBodyLocation
-*/
-type CreateTokenParamsBodyLocation struct {
-
-	// region is the region that the resource is located in. It is
-	// optional if the object being referenced is a global object.
-	Region *cloud.HashicorpCloudLocationRegion `json:"region,omitempty"`
-}
-
-// Validate validates this create token params body location
-func (o *CreateTokenParamsBodyLocation) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateRegion(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateTokenParamsBodyLocation) validateRegion(formats strfmt.Registry) error {
-	if swag.IsZero(o.Region) { // not required
-		return nil
-	}
-
-	if o.Region != nil {
-		if err := o.Region.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location" + "." + "region")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location" + "." + "region")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this create token params body location based on the context it is used
-func (o *CreateTokenParamsBodyLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateRegion(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateTokenParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Region != nil {
-
-		if swag.IsZero(o.Region) { // not required
-			return nil
-		}
-
-		if err := o.Region.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location" + "." + "region")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location" + "." + "region")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *CreateTokenParamsBodyLocation) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *CreateTokenParamsBodyLocation) UnmarshalBinary(b []byte) error {
-	var res CreateTokenParamsBodyLocation
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

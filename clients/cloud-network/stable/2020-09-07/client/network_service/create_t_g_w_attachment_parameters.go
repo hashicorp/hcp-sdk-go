@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/models"
 )
 
 // NewCreateTGWAttachmentParams creates a new CreateTGWAttachmentParams object,
@@ -62,7 +64,7 @@ CreateTGWAttachmentParams contains all the parameters to send to the API endpoin
 type CreateTGWAttachmentParams struct {
 
 	// Body.
-	Body CreateTGWAttachmentBody
+	Body *models.HashicorpCloudNetwork20200907CreateTGWAttachmentRequest
 
 	/* HvnID.
 
@@ -136,13 +138,13 @@ func (o *CreateTGWAttachmentParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create t g w attachment params
-func (o *CreateTGWAttachmentParams) WithBody(body CreateTGWAttachmentBody) *CreateTGWAttachmentParams {
+func (o *CreateTGWAttachmentParams) WithBody(body *models.HashicorpCloudNetwork20200907CreateTGWAttachmentRequest) *CreateTGWAttachmentParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create t g w attachment params
-func (o *CreateTGWAttachmentParams) SetBody(body CreateTGWAttachmentBody) {
+func (o *CreateTGWAttachmentParams) SetBody(body *models.HashicorpCloudNetwork20200907CreateTGWAttachmentRequest) {
 	o.Body = body
 }
 
@@ -186,8 +188,10 @@ func (o *CreateTGWAttachmentParams) WriteToRequest(r runtime.ClientRequest, reg 
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param hvn.id
