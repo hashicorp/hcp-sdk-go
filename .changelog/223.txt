@@ -1,0 +1,3 @@
+```release-note:bug
+Mark v0.76.0 as retracted due to backward incompatible cloud-network models and clients introduced by swagger mis-configuration.
+```
