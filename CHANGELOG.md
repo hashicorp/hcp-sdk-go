@@ -1,3 +1,8 @@
+## v0.77.0 (December 05, 2023)
+
+BUG FIXES:
+
+* Mark v0.76.0 as retracted due to backward incompatible cloud-network models and clients introduced by swagger mis-configuration. [[GH-223](https://github.com/hashicorp/hcp-sdk-go/pull/223)]
 ## v0.76.0 (December 04, 2023)
 
 IMPROVEMENTS:
