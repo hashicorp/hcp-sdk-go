@@ -4,6 +4,8 @@ go 1.18
 
 retract v0.26.0 // Pushed accidentally
 
+retract v0.76.0 // Backward-incompatible cloud-network client/models
+
 require (
 	github.com/go-openapi/errors v0.20.4
 	github.com/go-openapi/runtime v0.26.0
