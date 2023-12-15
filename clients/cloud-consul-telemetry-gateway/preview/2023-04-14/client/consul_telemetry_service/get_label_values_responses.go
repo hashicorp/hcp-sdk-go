@@ -85,6 +85,11 @@ func (o *GetLabelValuesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get label values o k response
+func (o *GetLabelValuesOK) Code() int {
+	return 200
+}
+
 func (o *GetLabelValuesOK) Error() string {
 	return fmt.Sprintf("[POST /ctgw/2023-04-14/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/label/values][%d] getLabelValuesOK  %+v", 200, o.Payload)
 }
@@ -127,11 +132,6 @@ type GetLabelValuesDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the get label values default response
-func (o *GetLabelValuesDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get label values default response has a 2xx status code
 func (o *GetLabelValuesDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -155,6 +155,11 @@ func (o *GetLabelValuesDefault) IsServerError() bool {
 // IsCode returns true when this get label values default response a status code equal to that given
 func (o *GetLabelValuesDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get label values default response
+func (o *GetLabelValuesDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetLabelValuesDefault) Error() string {
@@ -317,6 +322,11 @@ func (o *GetLabelValuesBody) ContextValidate(ctx context.Context, formats strfmt
 func (o *GetLabelValuesBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -333,6 +343,11 @@ func (o *GetLabelValuesBody) contextValidateLocation(ctx context.Context, format
 func (o *GetLabelValuesBody) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Type != nil {
+
+		if swag.IsZero(o.Type) { // not required
+			return nil
+		}
+
 		if err := o.Type.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "type")
@@ -425,6 +440,11 @@ func (o *GetLabelValuesParamsBodyLocation) ContextValidate(ctx context.Context, 
 func (o *GetLabelValuesParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

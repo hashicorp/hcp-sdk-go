@@ -86,6 +86,11 @@ func (o *QueryRangeBatchOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the query range batch o k response
+func (o *QueryRangeBatchOK) Code() int {
+	return 200
+}
+
 func (o *QueryRangeBatchOK) Error() string {
 	return fmt.Sprintf("[POST /ctgw/2023-04-14/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/query_range_batch][%d] queryRangeBatchOK  %+v", 200, o.Payload)
 }
@@ -128,11 +133,6 @@ type QueryRangeBatchDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the query range batch default response
-func (o *QueryRangeBatchDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this query range batch default response has a 2xx status code
 func (o *QueryRangeBatchDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -156,6 +156,11 @@ func (o *QueryRangeBatchDefault) IsServerError() bool {
 // IsCode returns true when this query range batch default response a status code equal to that given
 func (o *QueryRangeBatchDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the query range batch default response
+func (o *QueryRangeBatchDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *QueryRangeBatchDefault) Error() string {
@@ -340,6 +345,11 @@ func (o *QueryRangeBatchBody) ContextValidate(ctx context.Context, formats strfm
 func (o *QueryRangeBatchBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -358,6 +368,11 @@ func (o *QueryRangeBatchBody) contextValidateQuery(ctx context.Context, formats 
 	for i := 0; i < len(o.Query); i++ {
 
 		if o.Query[i] != nil {
+
+			if swag.IsZero(o.Query[i]) { // not required
+				return nil
+			}
+
 			if err := o.Query[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("body" + "." + "query" + "." + strconv.Itoa(i))
@@ -452,6 +467,11 @@ func (o *QueryRangeBatchParamsBodyLocation) ContextValidate(ctx context.Context,
 func (o *QueryRangeBatchParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

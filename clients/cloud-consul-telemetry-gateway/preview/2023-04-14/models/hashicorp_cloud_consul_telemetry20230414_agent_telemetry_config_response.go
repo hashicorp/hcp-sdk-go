@@ -102,6 +102,11 @@ func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) Cont
 func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) contextValidateRefreshConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RefreshConfig != nil {
+
+		if swag.IsZero(m.RefreshConfig) { // not required
+			return nil
+		}
+
 		if err := m.RefreshConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refresh_config")
@@ -118,6 +123,11 @@ func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) cont
 func (m *HashicorpCloudConsulTelemetry20230414AgentTelemetryConfigResponse) contextValidateTelemetryConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TelemetryConfig != nil {
+
+		if swag.IsZero(m.TelemetryConfig) { // not required
+			return nil
+		}
+
 		if err := m.TelemetryConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("telemetry_config")

@@ -78,6 +78,11 @@ func (m *HashicorpCloudConsulTelemetry20230414TelemetryConfig) ContextValidate(c
 func (m *HashicorpCloudConsulTelemetry20230414TelemetryConfig) contextValidateMetrics(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Metrics != nil {
+
+		if swag.IsZero(m.Metrics) { // not required
+			return nil
+		}
+
 		if err := m.Metrics.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("metrics")

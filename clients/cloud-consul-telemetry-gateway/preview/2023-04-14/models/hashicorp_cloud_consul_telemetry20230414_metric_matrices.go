@@ -82,6 +82,11 @@ func (m *HashicorpCloudConsulTelemetry20230414MetricMatrices) contextValidateMat
 	for i := 0; i < len(m.Matrices); i++ {
 
 		if m.Matrices[i] != nil {
+
+			if swag.IsZero(m.Matrices[i]) { // not required
+				return nil
+			}
+
 			if err := m.Matrices[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("matrices" + "." + strconv.Itoa(i))

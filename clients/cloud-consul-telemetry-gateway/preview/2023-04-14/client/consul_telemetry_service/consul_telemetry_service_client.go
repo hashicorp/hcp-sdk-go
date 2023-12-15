@@ -32,6 +32,8 @@ type ClientService interface {
 
 	GetLabelValues(params *GetLabelValuesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLabelValuesOK, error)
 
+	GetServiceTopology(params *GetServiceTopologyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceTopologyOK, error)
+
 	QueryRangeBatch(params *QueryRangeBatchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*QueryRangeBatchOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -110,6 +112,44 @@ func (a *Client) GetLabelValues(params *GetLabelValuesParams, authInfo runtime.C
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetLabelValuesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetServiceTopology creates a service topology graph based on recent metrics from the mesh
+*/
+func (a *Client) GetServiceTopology(params *GetServiceTopologyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceTopologyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetServiceTopologyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetServiceTopology",
+		Method:             "GET",
+		PathPattern:        "/ctgw/2023-04-14/organizations/{location.organization_id}/projects/{location.project_id}/topologies/service",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetServiceTopologyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetServiceTopologyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetServiceTopologyDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

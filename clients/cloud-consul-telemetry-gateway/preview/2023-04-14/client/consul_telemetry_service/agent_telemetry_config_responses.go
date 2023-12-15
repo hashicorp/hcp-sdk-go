@@ -84,6 +84,11 @@ func (o *AgentTelemetryConfigOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the agent telemetry config o k response
+func (o *AgentTelemetryConfigOK) Code() int {
+	return 200
+}
+
 func (o *AgentTelemetryConfigOK) Error() string {
 	return fmt.Sprintf("[POST /ctgw/2023-04-14/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/agent/telemetry_config][%d] agentTelemetryConfigOK  %+v", 200, o.Payload)
 }
@@ -126,11 +131,6 @@ type AgentTelemetryConfigDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the agent telemetry config default response
-func (o *AgentTelemetryConfigDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this agent telemetry config default response has a 2xx status code
 func (o *AgentTelemetryConfigDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -154,6 +154,11 @@ func (o *AgentTelemetryConfigDefault) IsServerError() bool {
 // IsCode returns true when this agent telemetry config default response a status code equal to that given
 func (o *AgentTelemetryConfigDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the agent telemetry config default response
+func (o *AgentTelemetryConfigDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *AgentTelemetryConfigDefault) Error() string {
@@ -240,6 +245,11 @@ func (o *AgentTelemetryConfigBody) ContextValidate(ctx context.Context, formats 
 func (o *AgentTelemetryConfigBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -332,6 +342,11 @@ func (o *AgentTelemetryConfigParamsBodyLocation) ContextValidate(ctx context.Con
 func (o *AgentTelemetryConfigParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")
