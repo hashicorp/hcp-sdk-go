@@ -7,9 +7,9 @@ retract v0.26.0 // Pushed accidentally
 retract v0.76.0 // Backward-incompatible cloud-network client/models
 
 require (
-	github.com/go-openapi/errors v0.20.4
+	github.com/go-openapi/errors v0.21.0
 	github.com/go-openapi/runtime v0.26.0
-	github.com/go-openapi/strfmt v0.21.7
+	github.com/go-openapi/strfmt v0.21.10
 	github.com/go-openapi/swag v0.22.5
 	github.com/go-openapi/validate v0.22.2
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
@@ -38,7 +38,7 @@ require (
 	github.com/oklog/ulid v1.3.1 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	go.mongodb.org/mongo-driver v1.12.0 // indirect
+	go.mongodb.org/mongo-driver v1.13.1 // indirect
 	go.opentelemetry.io/otel v1.14.0 // indirect
 	go.opentelemetry.io/otel/trace v1.14.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
