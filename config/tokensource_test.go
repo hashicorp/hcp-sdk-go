@@ -4,7 +4,7 @@
 package config
 
 import (
-	"io/ioutil"
+	"os"
 	"testing"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
@@ -64,7 +64,7 @@ func TestTokenSource_GetTokenSource_CredentialFile_Workload(t *testing.T) {
 		},
 	}
 
-	f, err := ioutil.TempFile("", "")
+	f, err := os.CreateTemp("", "")
 	require.NoError(err)
 	require.NoError(auth.WriteCredentialFile(f.Name(), cf))
 
@@ -98,7 +98,7 @@ func TestTokenSource_GetTokenSource_CredentialFile_ServicePrincipal(t *testing.T
 		},
 	}
 
-	f, err := ioutil.TempFile("", "")
+	f, err := os.CreateTemp("", "")
 	require.NoError(err)
 	require.NoError(auth.WriteCredentialFile(f.Name(), cf))
 

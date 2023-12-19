@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"math/rand"
+	"os"
 	"testing"
 
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
@@ -121,7 +121,7 @@ func TestReadCredentialFile(t *testing.T) {
 			},
 		}
 
-		f, err := ioutil.TempFile("", "")
+		f, err := os.CreateTemp("", "")
 		r.NoError(err)
 		r.NoError(WriteCredentialFile(f.Name(), cf))
 
@@ -145,7 +145,7 @@ func TestReadCredentialFile(t *testing.T) {
 			},
 		}
 
-		f, err := ioutil.TempFile("", "")
+		f, err := os.CreateTemp("", "")
 		r.NoError(err)
 		r.NoError(WriteCredentialFile(f.Name(), cf))
 
@@ -158,7 +158,7 @@ func TestReadCredentialFile(t *testing.T) {
 		data, err := json.Marshal("hello, world!")
 		r.NoError(err)
 
-		f, err := ioutil.TempFile("", "")
+		f, err := os.CreateTemp("", "")
 		r.NoError(err)
 
 		_, err = io.Copy(f, bytes.NewBuffer(data))
@@ -181,7 +181,7 @@ func TestGetDefaultCredentialFile(t *testing.T) {
 			},
 		}
 
-		f, err := ioutil.TempFile("", "")
+		f, err := os.CreateTemp("", "")
 		r.NoError(err)
 		r.NoError(WriteCredentialFile(f.Name(), cf))
 
@@ -202,7 +202,7 @@ func TestGetDefaultCredentialFile(t *testing.T) {
 			},
 		}
 
-		f, err := ioutil.TempFile("", "")
+		f, err := os.CreateTemp("", "")
 		r.NoError(err)
 		r.NoError(WriteCredentialFile(f.Name(), cf))
 
@@ -242,7 +242,7 @@ func Test_WriteCredentialFile(t *testing.T) {
 		},
 	}
 
-	f, err := ioutil.TempFile("", "")
+	f, err := os.CreateTemp("", "")
 	r.NoError(err)
 	r.NoError(WriteCredentialFile(f.Name(), cf))
 

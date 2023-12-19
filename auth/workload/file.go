@@ -7,7 +7,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 )
 
@@ -40,7 +39,7 @@ func (fc *FileCredentialSource) token() (string, error) {
 	defer credFile.Close()
 
 	// Read the file but limit the size we read to a MB
-	credBytes, err := ioutil.ReadAll(io.LimitReader(credFile, 1<<20))
+	credBytes, err := io.ReadAll(io.LimitReader(credFile, 1<<20))
 	if err != nil {
 		return "", fmt.Errorf("failed to read credential file: %v", err)
 	}

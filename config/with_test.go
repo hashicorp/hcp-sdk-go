@@ -6,8 +6,8 @@ package config
 import (
 	"crypto/tls"
 	"fmt"
-	"io/ioutil"
 	"math/rand"
+	"os"
 	"testing"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
@@ -165,7 +165,7 @@ func TestWith_CredentialFilePath(t *testing.T) {
 				ClientSecret: "456",
 			},
 		}
-		f, err := ioutil.TempFile("", "")
+		f, err := os.CreateTemp("", "")
 		require.NoError(err)
 		require.NoError(auth.WriteCredentialFile(f.Name(), cf))
 

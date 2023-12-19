@@ -28,7 +28,7 @@ jobs:
       - name: Install Dependencies
         run: |
           go mod download
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.49.0
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
           go mod tidy
 
       - name: Run Tests

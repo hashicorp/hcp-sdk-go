@@ -45,7 +45,7 @@ func WithWorkloadIdentity(providerConfig *workload.IdentityProviderConfig) HCPCo
 func WithAPI(address string, tlsConfig *tls.Config) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.apiAddress = address
-		config.apiTLSConfig = cloneTLSConfig(tlsConfig)
+		config.apiTLSConfig = tlsConfig.Clone()
 
 		return nil
 	}
@@ -60,7 +60,7 @@ func WithAPI(address string, tlsConfig *tls.Config) HCPConfigOption {
 func WithSCADA(address string, tlsConfig *tls.Config) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.scadaAddress = address
-		config.scadaTLSConfig = cloneTLSConfig(tlsConfig)
+		config.scadaTLSConfig = tlsConfig.Clone()
 
 		return nil
 	}
@@ -105,7 +105,7 @@ func WithAuth(authURL string, tlsConfig *tls.Config) HCPConfigOption {
 		}
 
 		config.authURL = parsedAuthURL
-		config.authTLSConfig = cloneTLSConfig(tlsConfig)
+		config.authTLSConfig = tlsConfig.Clone()
 
 		// Ensure the OAuth2 endpoints are updated with the new auth URL
 		config.oauth2Config.Endpoint.AuthURL = authURL + "/oauth2/auth"
