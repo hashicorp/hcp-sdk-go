@@ -1,6 +1,6 @@
 module github.com/hashicorp/hcp-sdk-go
 
-go 1.18
+go 1.20
 
 retract v0.26.0 // Pushed accidentally
 
