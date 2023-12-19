@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 
@@ -184,5 +183,5 @@ func WriteCredentialFile(path string, cf *CredentialFile) error {
 		return err
 	}
 
-	return ioutil.WriteFile(path, data, files.FileMode)
+	return os.WriteFile(path, data, files.FileMode)
 }

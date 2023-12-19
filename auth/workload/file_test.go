@@ -5,7 +5,7 @@ package workload
 
 import (
 	"io"
-	"io/ioutil"
+	"os"
 	"strings"
 	"testing"
 
@@ -127,7 +127,7 @@ func TestFileCredentialSource_token(t *testing.T) {
 			require := require.New(t)
 
 			// Create a temp file with the given value
-			f, err := ioutil.TempFile("", "file_cred_source")
+			f, err := os.CreateTemp("", "file_cred_source")
 			require.NoError(err)
 			_, err = io.Copy(f, strings.NewReader(tt.fileContent))
 			require.NoError(err)

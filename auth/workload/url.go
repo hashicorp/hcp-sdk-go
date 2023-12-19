@@ -7,7 +7,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"time"
@@ -70,7 +69,7 @@ func (uc *URLCredentialSource) token() (string, error) {
 	defer resp.Body.Close()
 
 	// Read the response
-	respBody, err := ioutil.ReadAll(io.LimitReader(resp.Body, 1<<20))
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
 	if err != nil {
 		return "", fmt.Errorf("failed reading body in subject token response: %v", err)
 	}

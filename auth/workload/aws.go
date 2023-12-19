@@ -12,7 +12,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path"
@@ -301,7 +300,7 @@ func (s *awsRequestSigner) getSessionToken(ctx context.Context) error {
 	}
 	defer resp.Body.Close()
 
-	respBody, err := ioutil.ReadAll(io.LimitReader(resp.Body, 1<<20))
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
 	if err != nil {
 		return fmt.Errorf("failed reading AWS session token response from metadata endpoint: %v", err)
 	}
@@ -338,7 +337,7 @@ func (s *awsRequestSigner) getRegion(ctx context.Context) error {
 	}
 	defer resp.Body.Close()
 
-	respBody, err := ioutil.ReadAll(io.LimitReader(resp.Body, 1<<20))
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
 	if err != nil {
 		return fmt.Errorf("failed reading AWS region response from metadata endpoint: %v", err)
 
@@ -380,7 +379,7 @@ func (s *awsRequestSigner) getCredentials(ctx context.Context) error {
 	}
 	defer resp.Body.Close()
 
-	respBody, err := ioutil.ReadAll(io.LimitReader(resp.Body, 1<<20))
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
 	if err != nil {
 		return fmt.Errorf("failed reading AWS security credential response from metadata endpoint: %v", err)
 
@@ -414,7 +413,7 @@ func (s *awsRequestSigner) getRoleName(ctx context.Context) (string, error) {
 	}
 	defer resp.Body.Close()
 
-	respBody, err := ioutil.ReadAll(io.LimitReader(resp.Body, 1<<20))
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
 	if err != nil {
 		return "", fmt.Errorf("failed reading AWS security credential response from metadata endpoint: %v", err)
 
@@ -512,7 +511,7 @@ func requestDataHash(req *http.Request) (string, error) {
 		}
 		defer requestBody.Close()
 
-		requestData, err = ioutil.ReadAll(io.LimitReader(requestBody, 1<<20))
+		requestData, err = io.ReadAll(io.LimitReader(requestBody, 1<<20))
 		if err != nil {
 			return "", err
 		}
