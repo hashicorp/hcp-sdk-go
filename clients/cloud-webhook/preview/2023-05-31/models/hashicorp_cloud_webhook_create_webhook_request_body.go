@@ -25,6 +25,12 @@ type HashicorpCloudWebhookCreateWebhookRequestBody struct {
 	// The webhook description. Useful for providing a summary of the webhook.
 	Description string `json:"description,omitempty"`
 
+	// When set to 'true', a verification request will be sent and the webhook created enabled and only if the verification succeeds.
+	// When set to 'false', the webhook configuration won't be verified and the webhook created disabled.
+	// When left unset, a verification request will be sent and the webhook will be created enabled if it succeeds,
+	// or disabled if it fails.
+	Enabled *bool `json:"enabled,omitempty"`
+
 	// The webhook name.
 	Name string `json:"name,omitempty"`
 
