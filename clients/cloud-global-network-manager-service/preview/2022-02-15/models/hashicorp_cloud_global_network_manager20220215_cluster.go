@@ -42,6 +42,9 @@ type HashicorpCloudGlobalNetworkManager20220215Cluster struct {
 	// whether this Consul cluster is managed by HCP
 	HcpManaged bool `json:"hcp_managed,omitempty"`
 
+	// hcp portal url
+	HcpPortalURL string `json:"hcp_portal_url,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 

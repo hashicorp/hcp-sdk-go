@@ -43,10 +43,15 @@ type HashicorpCloudGlobalNetworkManager20220215Server struct {
 	// scada_status is the scada provider client's current status
 	ScadaStatus string `json:"scada_status,omitempty"`
 
+	// server_tls contains information about TLS certificates on the server.
+	ServerTLS *HashicorpCloudGlobalNetworkManager20220215ServerTLSMetadata `json:"server_tls,omitempty"`
+
 	// tls_enabled is true if consul RPCs are encrypted
+	// Deprecated: Use server_tls.internal_rpc.enabled instead.
 	TLSEnabled bool `json:"tls_enabled,omitempty"`
 
 	// tls_expiry is the date and time that Consul's TLS certificate expires
+	// Deprecated: Use server_tls.internal_rpc.cert_expiry instead.
 	// Format: date-time
 	TLSExpiry strfmt.DateTime `json:"tls_expiry,omitempty"`
 
@@ -58,6 +63,10 @@ type HashicorpCloudGlobalNetworkManager20220215Server struct {
 func (m *HashicorpCloudGlobalNetworkManager20220215Server) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateServerTLS(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTLSExpiry(formats); err != nil {
 		res = append(res, err)
 	}
@@ -65,6 +74,25 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Server) Validate(formats strf
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215Server) validateServerTLS(formats strfmt.Registry) error {
+	if swag.IsZero(m.ServerTLS) { // not required
+		return nil
+	}
+
+	if m.ServerTLS != nil {
+		if err := m.ServerTLS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("server_tls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("server_tls")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -80,8 +108,38 @@ func (m *HashicorpCloudGlobalNetworkManager20220215Server) validateTLSExpiry(for
 	return nil
 }
 
-// ContextValidate validates this hashicorp cloud global network manager 20220215 server based on context it is used
+// ContextValidate validate this hashicorp cloud global network manager 20220215 server based on the context it is used
 func (m *HashicorpCloudGlobalNetworkManager20220215Server) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateServerTLS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudGlobalNetworkManager20220215Server) contextValidateServerTLS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ServerTLS != nil {
+
+		if swag.IsZero(m.ServerTLS) { // not required
+			return nil
+		}
+
+		if err := m.ServerTLS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("server_tls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("server_tls")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
