@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudWaypointListApplicationsResponse hashicorp cloud waypoint list applications response
@@ -23,7 +24,10 @@ type HashicorpCloudWaypointListApplicationsResponse struct {
 	Applications []*HashicorpCloudWaypointApplication `json:"applications"`
 
 	// pagination
-	Pagination *HashicorpCloudWaypointPaginationResponse `json:"pagination,omitempty"`
+	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
+
+	// Will return -1 if request has a with_total_count = false or is with_total_count parameter is omitted.
+	TotalCount string `json:"total_count,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint list applications response

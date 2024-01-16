@@ -26,7 +26,7 @@ type HashicorpCloudWaypointListApplicationTemplatesResponse struct {
 	// pagination
 	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 
-	// total count
+	// Will return -1 if request has a with_total_count = false or is with_total_count parameter is omitted.
 	TotalCount string `json:"total_count,omitempty"`
 }
 

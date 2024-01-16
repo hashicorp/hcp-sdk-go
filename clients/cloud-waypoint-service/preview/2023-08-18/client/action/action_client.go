@@ -58,7 +58,7 @@ func (a *Client) ActionCreateActionConfig(params *ActionCreateActionConfigParams
 	op := &runtime.ClientOperation{
 		ID:                 "Action_CreateActionConfig",
 		Method:             "POST",
-		PathPattern:        "/waypoint/2022-02-03/namespace/{namespace_id}/actionconfig",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace_id}/actionconfig",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -96,7 +96,7 @@ func (a *Client) ActionDeleteActionConfig(params *ActionDeleteActionConfigParams
 	op := &runtime.ClientOperation{
 		ID:                 "Action_DeleteActionConfig",
 		Method:             "DELETE",
-		PathPattern:        "/waypoint/2022-02-03/namespace/{namespace_id}/actionconfig",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace_id}/actionconfig",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -134,7 +134,7 @@ func (a *Client) ActionGetActionConfig(params *ActionGetActionConfigParams, auth
 	op := &runtime.ClientOperation{
 		ID:                 "Action_GetActionConfig",
 		Method:             "GET",
-		PathPattern:        "/waypoint/2022-02-03/namespace/{namespace_id}/actionconfig",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace_id}/actionconfig",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -172,7 +172,7 @@ func (a *Client) ActionListActionConfigs(params *ActionListActionConfigsParams, 
 	op := &runtime.ClientOperation{
 		ID:                 "Action_ListActionConfigs",
 		Method:             "GET",
-		PathPattern:        "/waypoint/2022-02-03/namespace/{namespace_id}/actionconfigs",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace_id}/actionconfigs",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -210,7 +210,7 @@ func (a *Client) ActionListActionRuns(params *ActionListActionRunsParams, authIn
 	op := &runtime.ClientOperation{
 		ID:                 "Action_ListActionRuns",
 		Method:             "GET",
-		PathPattern:        "/waypoint/2022-02-03/namespace/{namespace_id}/actionruns",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace_id}/actionruns",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -248,7 +248,7 @@ func (a *Client) ActionRunAction(params *ActionRunActionParams, authInfo runtime
 	op := &runtime.ClientOperation{
 		ID:                 "Action_RunAction",
 		Method:             "PUT",
-		PathPattern:        "/waypoint/2022-02-03/namespace/{namespace_id}/action",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace_id}/action",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -286,7 +286,7 @@ func (a *Client) ActionSendStatusLog(params *ActionSendStatusLogParams, authInfo
 	op := &runtime.ClientOperation{
 		ID:                 "Action_SendStatusLog",
 		Method:             "POST",
-		PathPattern:        "/waypoint/2022-02-03/namespace/{namespace_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -324,7 +324,7 @@ func (a *Client) ActionUpdateActionConfig(params *ActionUpdateActionConfigParams
 	op := &runtime.ClientOperation{
 		ID:                 "Action_UpdateActionConfig",
 		Method:             "PATCH",
-		PathPattern:        "/waypoint/2022-02-03/namespace/{namespace_id}/actionconfig",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace_id}/actionconfig",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

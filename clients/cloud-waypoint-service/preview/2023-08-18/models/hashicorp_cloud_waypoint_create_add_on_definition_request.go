@@ -22,6 +22,9 @@ type HashicorpCloudWaypointCreateAddOnDefinitionRequest struct {
 	// Longer description of the Add-on
 	Description string `json:"description,omitempty"`
 
+	// A list of descriptive labels for an Add-on
+	Labels []string `json:"labels"`
+
 	// Name of the Add-on definition
 	Name string `json:"name,omitempty"`
 
@@ -34,9 +37,6 @@ type HashicorpCloudWaypointCreateAddOnDefinitionRequest struct {
 
 	// Short description of the Add-on
 	Summary string `json:"summary,omitempty"`
-
-	// A list of descriptive tags for an Add-on
-	Tags []string `json:"tags"`
 
 	// Terraform No Code module used for provisioning the Add-on
 	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`

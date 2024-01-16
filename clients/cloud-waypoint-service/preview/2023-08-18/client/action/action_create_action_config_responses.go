@@ -87,11 +87,11 @@ func (o *ActionCreateActionConfigOK) Code() int {
 }
 
 func (o *ActionCreateActionConfigOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] actionCreateActionConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] actionCreateActionConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *ActionCreateActionConfigOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] actionCreateActionConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] actionCreateActionConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *ActionCreateActionConfigOK) GetPayload() *models.HashicorpCloudWaypointActionsdriverCreateActionConfigResponse {
@@ -159,11 +159,11 @@ func (o *ActionCreateActionConfigDefault) Code() int {
 }
 
 func (o *ActionCreateActionConfigDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] Action_CreateActionConfig default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] Action_CreateActionConfig default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ActionCreateActionConfigDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] Action_CreateActionConfig default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] Action_CreateActionConfig default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ActionCreateActionConfigDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

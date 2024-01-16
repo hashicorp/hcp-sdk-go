@@ -86,11 +86,11 @@ func (o *ActionDeleteActionConfigOK) Code() int {
 }
 
 func (o *ActionDeleteActionConfigOK) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] actionDeleteActionConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] actionDeleteActionConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *ActionDeleteActionConfigOK) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] actionDeleteActionConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] actionDeleteActionConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *ActionDeleteActionConfigOK) GetPayload() interface{} {
@@ -156,11 +156,11 @@ func (o *ActionDeleteActionConfigDefault) Code() int {
 }
 
 func (o *ActionDeleteActionConfigDefault) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] Action_DeleteActionConfig default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] Action_DeleteActionConfig default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ActionDeleteActionConfigDefault) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] Action_DeleteActionConfig default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] Action_DeleteActionConfig default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ActionDeleteActionConfigDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

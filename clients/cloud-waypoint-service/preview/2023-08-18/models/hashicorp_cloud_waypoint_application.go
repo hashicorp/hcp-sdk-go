@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -18,7 +19,10 @@ import (
 // swagger:model hashicorp.cloud.waypoint.Application
 type HashicorpCloudWaypointApplication struct {
 
-	// application template
+	// An application can have 0-Many action configs
+	ActionCfgRef []*HashicorpCloudWaypointActionsdriverActionCfgRef `json:"action_cfg_ref"`
+
+	// The reference of the template this application was generated from
 	ApplicationTemplate *HashicorpCloudWaypointRefApplicationTemplate `json:"application_template,omitempty"`
 
 	// id
@@ -32,7 +36,10 @@ type HashicorpCloudWaypointApplication struct {
 	// Format: byte
 	ReadmeMarkdown strfmt.Base64 `json:"readme_markdown,omitempty"`
 
-	// template name
+	// tags
+	Tags []*HashicorpCloudWaypointTag `json:"tags"`
+
+	// The name of the template this application was generated from
 	TemplateName string `json:"template_name,omitempty"`
 }
 
@@ -40,13 +47,47 @@ type HashicorpCloudWaypointApplication struct {
 func (m *HashicorpCloudWaypointApplication) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateActionCfgRef(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateApplicationTemplate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTags(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplication) validateActionCfgRef(formats strfmt.Registry) error {
+	if swag.IsZero(m.ActionCfgRef) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ActionCfgRef); i++ {
+		if swag.IsZero(m.ActionCfgRef[i]) { // not required
+			continue
+		}
+
+		if m.ActionCfgRef[i] != nil {
+			if err := m.ActionCfgRef[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("action_cfg_ref" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("action_cfg_ref" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -69,17 +110,76 @@ func (m *HashicorpCloudWaypointApplication) validateApplicationTemplate(formats 
 	return nil
 }
 
+func (m *HashicorpCloudWaypointApplication) validateTags(formats strfmt.Registry) error {
+	if swag.IsZero(m.Tags) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Tags); i++ {
+		if swag.IsZero(m.Tags[i]) { // not required
+			continue
+		}
+
+		if m.Tags[i] != nil {
+			if err := m.Tags[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("tags" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tags" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint application based on the context it is used
 func (m *HashicorpCloudWaypointApplication) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateActionCfgRef(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateApplicationTemplate(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTags(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplication) contextValidateActionCfgRef(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ActionCfgRef); i++ {
+
+		if m.ActionCfgRef[i] != nil {
+
+			if swag.IsZero(m.ActionCfgRef[i]) { // not required
+				return nil
+			}
+
+			if err := m.ActionCfgRef[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("action_cfg_ref" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("action_cfg_ref" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -99,6 +199,31 @@ func (m *HashicorpCloudWaypointApplication) contextValidateApplicationTemplate(c
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplication) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Tags); i++ {
+
+		if m.Tags[i] != nil {
+
+			if swag.IsZero(m.Tags[i]) { // not required
+				return nil
+			}
+
+			if err := m.Tags[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("tags" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tags" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

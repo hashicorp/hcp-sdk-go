@@ -87,11 +87,11 @@ func (o *ActionSendStatusLogOK) Code() int {
 }
 
 func (o *ActionSendStatusLogOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2022-02-03/namespace/{namespace_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] actionSendStatusLogOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] actionSendStatusLogOK  %+v", 200, o.Payload)
 }
 
 func (o *ActionSendStatusLogOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2022-02-03/namespace/{namespace_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] actionSendStatusLogOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] actionSendStatusLogOK  %+v", 200, o.Payload)
 }
 
 func (o *ActionSendStatusLogOK) GetPayload() models.HashicorpCloudWaypointActionsdriverSendStatusLogResponse {
@@ -157,11 +157,11 @@ func (o *ActionSendStatusLogDefault) Code() int {
 }
 
 func (o *ActionSendStatusLogDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2022-02-03/namespace/{namespace_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] Action_SendStatusLog default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] Action_SendStatusLog default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ActionSendStatusLogDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2022-02-03/namespace/{namespace_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] Action_SendStatusLog default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] Action_SendStatusLog default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ActionSendStatusLogDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

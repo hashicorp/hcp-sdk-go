@@ -92,6 +92,12 @@ type WaypointServiceListApplicationTemplatesParams struct {
 	*/
 	PaginationPreviousPageToken *string
 
+	/* WithTotalCount.
+
+	   If set to false or not provided, response will not include a total_count value.
+	*/
+	WithTotalCount *bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -189,6 +195,17 @@ func (o *WaypointServiceListApplicationTemplatesParams) SetPaginationPreviousPag
 	o.PaginationPreviousPageToken = paginationPreviousPageToken
 }
 
+// WithWithTotalCount adds the withTotalCount to the waypoint service list application templates params
+func (o *WaypointServiceListApplicationTemplatesParams) WithWithTotalCount(withTotalCount *bool) *WaypointServiceListApplicationTemplatesParams {
+	o.SetWithTotalCount(withTotalCount)
+	return o
+}
+
+// SetWithTotalCount adds the withTotalCount to the waypoint service list application templates params
+func (o *WaypointServiceListApplicationTemplatesParams) SetWithTotalCount(withTotalCount *bool) {
+	o.WithTotalCount = withTotalCount
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *WaypointServiceListApplicationTemplatesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -248,6 +265,23 @@ func (o *WaypointServiceListApplicationTemplatesParams) WriteToRequest(r runtime
 		if qPaginationPreviousPageToken != "" {
 
 			if err := r.SetQueryParam("pagination.previous_page_token", qPaginationPreviousPageToken); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.WithTotalCount != nil {
+
+		// query param with_total_count
+		var qrWithTotalCount bool
+
+		if o.WithTotalCount != nil {
+			qrWithTotalCount = *o.WithTotalCount
+		}
+		qWithTotalCount := swag.FormatBool(qrWithTotalCount)
+		if qWithTotalCount != "" {
+
+			if err := r.SetQueryParam("with_total_count", qWithTotalCount); err != nil {
 				return err
 			}
 		}

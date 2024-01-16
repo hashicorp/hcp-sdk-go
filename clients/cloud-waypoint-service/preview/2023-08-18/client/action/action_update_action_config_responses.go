@@ -87,11 +87,11 @@ func (o *ActionUpdateActionConfigOK) Code() int {
 }
 
 func (o *ActionUpdateActionConfigOK) Error() string {
-	return fmt.Sprintf("[PATCH /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] actionUpdateActionConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] actionUpdateActionConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *ActionUpdateActionConfigOK) String() string {
-	return fmt.Sprintf("[PATCH /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] actionUpdateActionConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] actionUpdateActionConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *ActionUpdateActionConfigOK) GetPayload() *models.HashicorpCloudWaypointActionsdriverUpdateActionConfigResponse {
@@ -159,11 +159,11 @@ func (o *ActionUpdateActionConfigDefault) Code() int {
 }
 
 func (o *ActionUpdateActionConfigDefault) Error() string {
-	return fmt.Sprintf("[PATCH /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] Action_UpdateActionConfig default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] Action_UpdateActionConfig default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ActionUpdateActionConfigDefault) String() string {
-	return fmt.Sprintf("[PATCH /waypoint/2022-02-03/namespace/{namespace_id}/actionconfig][%d] Action_UpdateActionConfig default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace_id}/actionconfig][%d] Action_UpdateActionConfig default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ActionUpdateActionConfigDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

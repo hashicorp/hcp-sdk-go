@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -42,6 +43,9 @@ type HashicorpCloudWaypointAddOn struct {
 	// Unique identifier of the Add-on
 	ID string `json:"id,omitempty"`
 
+	// A list of descriptive labels for an Add-on
+	Labels []string `json:"labels"`
+
 	// Name of the Add-on
 	Name string `json:"name,omitempty"`
 
@@ -56,8 +60,8 @@ type HashicorpCloudWaypointAddOn struct {
 	// Short description of the Add-on
 	Summary string `json:"summary,omitempty"`
 
-	// A list of descriptive tags for an Add-on
-	Tags []string `json:"tags"`
+	// kv tags
+	Tags []*HashicorpCloudWaypointTag `json:"tags"`
 
 	// Terraform No Code module used for provisioning the Add-on
 	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
@@ -80,6 +84,10 @@ func (m *HashicorpCloudWaypointAddOn) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTags(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -162,6 +170,32 @@ func (m *HashicorpCloudWaypointAddOn) validateStatus(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *HashicorpCloudWaypointAddOn) validateTags(formats strfmt.Registry) error {
+	if swag.IsZero(m.Tags) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Tags); i++ {
+		if swag.IsZero(m.Tags[i]) { // not required
+			continue
+		}
+
+		if m.Tags[i] != nil {
+			if err := m.Tags[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("tags" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tags" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudWaypointAddOn) validateTerraformNocodeModule(formats strfmt.Registry) error {
 	if swag.IsZero(m.TerraformNocodeModule) { // not required
 		return nil
@@ -194,6 +228,10 @@ func (m *HashicorpCloudWaypointAddOn) ContextValidate(ctx context.Context, forma
 	}
 
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTags(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -265,6 +303,31 @@ func (m *HashicorpCloudWaypointAddOn) contextValidateStatus(ctx context.Context,
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointAddOn) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Tags); i++ {
+
+		if m.Tags[i] != nil {
+
+			if swag.IsZero(m.Tags[i]) { // not required
+				return nil
+			}
+
+			if err := m.Tags[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("tags" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tags" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

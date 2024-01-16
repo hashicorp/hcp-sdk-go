@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudWaypointCreateNamespaceResponse hashicorp cloud waypoint create namespace response
@@ -21,9 +20,6 @@ type HashicorpCloudWaypointCreateNamespaceResponse struct {
 
 	// namespace
 	Namespace *HashicorpCloudWaypointNamespace `json:"namespace,omitempty"`
-
-	// operation
-	Operation *cloud.HashicorpCloudOperationOperation `json:"operation,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint create namespace response
@@ -31,10 +27,6 @@ func (m *HashicorpCloudWaypointCreateNamespaceResponse) Validate(formats strfmt.
 	var res []error
 
 	if err := m.validateNamespace(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateOperation(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -63,34 +55,11 @@ func (m *HashicorpCloudWaypointCreateNamespaceResponse) validateNamespace(format
 	return nil
 }
 
-func (m *HashicorpCloudWaypointCreateNamespaceResponse) validateOperation(formats strfmt.Registry) error {
-	if swag.IsZero(m.Operation) { // not required
-		return nil
-	}
-
-	if m.Operation != nil {
-		if err := m.Operation.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("operation")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("operation")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this hashicorp cloud waypoint create namespace response based on the context it is used
 func (m *HashicorpCloudWaypointCreateNamespaceResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateNamespace(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateOperation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -113,27 +82,6 @@ func (m *HashicorpCloudWaypointCreateNamespaceResponse) contextValidateNamespace
 				return ve.ValidateName("namespace")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("namespace")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudWaypointCreateNamespaceResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Operation != nil {
-
-		if swag.IsZero(m.Operation) { // not required
-			return nil
-		}
-
-		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("operation")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("operation")
 			}
 			return err
 		}

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -25,6 +26,9 @@ type HashicorpCloudWaypointApplicationTemplate struct {
 	// Unique ID of the ApplicationTemplate
 	ID string `json:"id,omitempty"`
 
+	// A list of descriptive strings that can be applied to the ApplicationTemplate.
+	Labels []string `json:"labels"`
+
 	// Unique name of the ApplicationTemplate
 	Name string `json:"name,omitempty"`
 
@@ -41,8 +45,13 @@ type HashicorpCloudWaypointApplicationTemplate struct {
 	// multiple templates
 	Summary string `json:"summary,omitempty"`
 
-	// A list of descriptive strings that can be applied to the ApplicationTemplate.
-	Tags []string `json:"tags"`
+	// kv tags
+	// see infrastructure.proto
+	Tags []*HashicorpCloudWaypointTag `json:"tags"`
+
+	// The information on meta data on the Terraform Cloud workspace that was
+	// created when this project was created from a template.
+	TerraformCloudWorkspaceDetails *HashicorpCloudWaypointTerraformCloudWorkspaceDetails `json:"terraform_cloud_workspace_details,omitempty"`
 
 	// The Terraform No-Code Module which should be used to provision
 	// infrastructure that is used by the application created from a ApplicationTemplate.
@@ -53,6 +62,14 @@ type HashicorpCloudWaypointApplicationTemplate struct {
 func (m *HashicorpCloudWaypointApplicationTemplate) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateTags(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTerraformCloudWorkspaceDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTerraformNocodeModule(formats); err != nil {
 		res = append(res, err)
 	}
@@ -60,6 +77,51 @@ func (m *HashicorpCloudWaypointApplicationTemplate) Validate(formats strfmt.Regi
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplicationTemplate) validateTags(formats strfmt.Registry) error {
+	if swag.IsZero(m.Tags) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Tags); i++ {
+		if swag.IsZero(m.Tags[i]) { // not required
+			continue
+		}
+
+		if m.Tags[i] != nil {
+			if err := m.Tags[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("tags" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tags" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplicationTemplate) validateTerraformCloudWorkspaceDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.TerraformCloudWorkspaceDetails) { // not required
+		return nil
+	}
+
+	if m.TerraformCloudWorkspaceDetails != nil {
+		if err := m.TerraformCloudWorkspaceDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("terraform_cloud_workspace_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("terraform_cloud_workspace_details")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -86,6 +148,14 @@ func (m *HashicorpCloudWaypointApplicationTemplate) validateTerraformNocodeModul
 func (m *HashicorpCloudWaypointApplicationTemplate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateTags(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTerraformCloudWorkspaceDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTerraformNocodeModule(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -93,6 +163,52 @@ func (m *HashicorpCloudWaypointApplicationTemplate) ContextValidate(ctx context.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplicationTemplate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Tags); i++ {
+
+		if m.Tags[i] != nil {
+
+			if swag.IsZero(m.Tags[i]) { // not required
+				return nil
+			}
+
+			if err := m.Tags[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("tags" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tags" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplicationTemplate) contextValidateTerraformCloudWorkspaceDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TerraformCloudWorkspaceDetails != nil {
+
+		if swag.IsZero(m.TerraformCloudWorkspaceDetails) { // not required
+			return nil
+		}
+
+		if err := m.TerraformCloudWorkspaceDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("terraform_cloud_workspace_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("terraform_cloud_workspace_details")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
