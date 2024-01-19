@@ -81,6 +81,11 @@ func (o *PackerServiceGetBucketOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the packer service get bucket o k response
+func (o *PackerServiceGetBucketOK) Code() int {
+	return 200
+}
+
 func (o *PackerServiceGetBucketOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}][%d] packerServiceGetBucketOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type PackerServiceGetBucketDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the packer service get bucket default response
-func (o *PackerServiceGetBucketDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this packer service get bucket default response has a 2xx status code
 func (o *PackerServiceGetBucketDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *PackerServiceGetBucketDefault) IsServerError() bool {
 // IsCode returns true when this packer service get bucket default response a status code equal to that given
 func (o *PackerServiceGetBucketDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the packer service get bucket default response
+func (o *PackerServiceGetBucketDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *PackerServiceGetBucketDefault) Error() string {

@@ -84,6 +84,11 @@ func (o *PackerServiceUpdateChannelOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the packer service update channel o k response
+func (o *PackerServiceUpdateChannelOK) Code() int {
+	return 200
+}
+
 func (o *PackerServiceUpdateChannelOK) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceUpdateChannelOK  %+v", 200, o.Payload)
 }
@@ -126,11 +131,6 @@ type PackerServiceUpdateChannelDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the packer service update channel default response
-func (o *PackerServiceUpdateChannelDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this packer service update channel default response has a 2xx status code
 func (o *PackerServiceUpdateChannelDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -154,6 +154,11 @@ func (o *PackerServiceUpdateChannelDefault) IsServerError() bool {
 // IsCode returns true when this packer service update channel default response a status code equal to that given
 func (o *PackerServiceUpdateChannelDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the packer service update channel default response
+func (o *PackerServiceUpdateChannelDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *PackerServiceUpdateChannelDefault) Error() string {
@@ -298,6 +303,11 @@ func (o *PackerServiceUpdateChannelBody) ContextValidate(ctx context.Context, fo
 func (o *PackerServiceUpdateChannelBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -314,6 +324,11 @@ func (o *PackerServiceUpdateChannelBody) contextValidateLocation(ctx context.Con
 func (o *PackerServiceUpdateChannelBody) contextValidateRestriction(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Restriction != nil {
+
+		if swag.IsZero(o.Restriction) { // not required
+			return nil
+		}
+
 		if err := o.Restriction.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "restriction")
@@ -406,6 +421,11 @@ func (o *PackerServiceUpdateChannelParamsBodyLocation) ContextValidate(ctx conte
 func (o *PackerServiceUpdateChannelParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

@@ -135,6 +135,11 @@ func (m *HashicorpCloudPackerRegistryConfig) ContextValidate(ctx context.Context
 func (m *HashicorpCloudPackerRegistryConfig) contextValidateBillingDeprovision(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.BillingDeprovision != nil {
+
+		if swag.IsZero(m.BillingDeprovision) { // not required
+			return nil
+		}
+
 		if err := m.BillingDeprovision.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("billing_deprovision")
@@ -151,6 +156,11 @@ func (m *HashicorpCloudPackerRegistryConfig) contextValidateBillingDeprovision(c
 func (m *HashicorpCloudPackerRegistryConfig) contextValidateFeatureTier(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.FeatureTier != nil {
+
+		if swag.IsZero(m.FeatureTier) { // not required
+			return nil
+		}
+
 		if err := m.FeatureTier.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("feature_tier")
@@ -167,6 +177,11 @@ func (m *HashicorpCloudPackerRegistryConfig) contextValidateFeatureTier(ctx cont
 func (m *HashicorpCloudPackerRegistryConfig) contextValidateTfcRunTaskConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TfcRunTaskConfig != nil {
+
+		if swag.IsZero(m.TfcRunTaskConfig) { // not required
+			return nil
+		}
+
 		if err := m.TfcRunTaskConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tfc_run_task_config")

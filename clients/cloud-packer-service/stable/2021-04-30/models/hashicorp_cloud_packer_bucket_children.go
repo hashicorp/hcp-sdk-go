@@ -76,6 +76,11 @@ func (m *HashicorpCloudPackerBucketChildren) ContextValidate(ctx context.Context
 func (m *HashicorpCloudPackerBucketChildren) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
+
+		if swag.IsZero(m.Status) { // not required
+			return nil
+		}
+
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")

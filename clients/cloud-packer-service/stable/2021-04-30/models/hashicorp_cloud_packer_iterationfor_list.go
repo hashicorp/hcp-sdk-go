@@ -206,6 +206,11 @@ func (m *HashicorpCloudPackerIterationforList) ContextValidate(ctx context.Conte
 func (m *HashicorpCloudPackerIterationforList) contextValidateRevocationInheritedFrom(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RevocationInheritedFrom != nil {
+
+		if swag.IsZero(m.RevocationInheritedFrom) { // not required
+			return nil
+		}
+
 		if err := m.RevocationInheritedFrom.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("revocation_inherited_from")
@@ -222,6 +227,11 @@ func (m *HashicorpCloudPackerIterationforList) contextValidateRevocationInherite
 func (m *HashicorpCloudPackerIterationforList) contextValidateRevocationType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RevocationType != nil {
+
+		if swag.IsZero(m.RevocationType) { // not required
+			return nil
+		}
+
 		if err := m.RevocationType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("revocation_type")

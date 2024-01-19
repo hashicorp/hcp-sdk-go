@@ -72,6 +72,11 @@ func (m *HashicorpCloudPackerUpdateChannelResponse) ContextValidate(ctx context.
 func (m *HashicorpCloudPackerUpdateChannelResponse) contextValidateChannel(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Channel != nil {
+
+		if swag.IsZero(m.Channel) { // not required
+			return nil
+		}
+
 		if err := m.Channel.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("channel")

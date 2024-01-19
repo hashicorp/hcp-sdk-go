@@ -84,6 +84,11 @@ func (o *PackerServiceCreateRegistryOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the packer service create registry o k response
+func (o *PackerServiceCreateRegistryOK) Code() int {
+	return 200
+}
+
 func (o *PackerServiceCreateRegistryOK) Error() string {
 	return fmt.Sprintf("[PUT /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceCreateRegistryOK  %+v", 200, o.Payload)
 }
@@ -126,11 +131,6 @@ type PackerServiceCreateRegistryDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the packer service create registry default response
-func (o *PackerServiceCreateRegistryDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this packer service create registry default response has a 2xx status code
 func (o *PackerServiceCreateRegistryDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -154,6 +154,11 @@ func (o *PackerServiceCreateRegistryDefault) IsServerError() bool {
 // IsCode returns true when this packer service create registry default response a status code equal to that given
 func (o *PackerServiceCreateRegistryDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the packer service create registry default response
+func (o *PackerServiceCreateRegistryDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *PackerServiceCreateRegistryDefault) Error() string {
@@ -270,6 +275,11 @@ func (o *PackerServiceCreateRegistryBody) ContextValidate(ctx context.Context, f
 func (o *PackerServiceCreateRegistryBody) contextValidateFeatureTier(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.FeatureTier != nil {
+
+		if swag.IsZero(o.FeatureTier) { // not required
+			return nil
+		}
+
 		if err := o.FeatureTier.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "feature_tier")
@@ -286,6 +296,11 @@ func (o *PackerServiceCreateRegistryBody) contextValidateFeatureTier(ctx context
 func (o *PackerServiceCreateRegistryBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -378,6 +393,11 @@ func (o *PackerServiceCreateRegistryParamsBodyLocation) ContextValidate(ctx cont
 func (o *PackerServiceCreateRegistryParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

@@ -84,6 +84,11 @@ func (o *PackerServiceUpdateBucketOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the packer service update bucket o k response
+func (o *PackerServiceUpdateBucketOK) Code() int {
+	return 200
+}
+
 func (o *PackerServiceUpdateBucketOK) Error() string {
 	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}][%d] packerServiceUpdateBucketOK  %+v", 200, o.Payload)
 }
@@ -126,11 +131,6 @@ type PackerServiceUpdateBucketDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the packer service update bucket default response
-func (o *PackerServiceUpdateBucketDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this packer service update bucket default response has a 2xx status code
 func (o *PackerServiceUpdateBucketDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -154,6 +154,11 @@ func (o *PackerServiceUpdateBucketDefault) IsServerError() bool {
 // IsCode returns true when this packer service update bucket default response a status code equal to that given
 func (o *PackerServiceUpdateBucketDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the packer service update bucket default response
+func (o *PackerServiceUpdateBucketDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *PackerServiceUpdateBucketDefault) Error() string {
@@ -249,6 +254,11 @@ func (o *PackerServiceUpdateBucketBody) ContextValidate(ctx context.Context, for
 func (o *PackerServiceUpdateBucketBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -341,6 +351,11 @@ func (o *PackerServiceUpdateBucketParamsBodyLocation) ContextValidate(ctx contex
 func (o *PackerServiceUpdateBucketParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

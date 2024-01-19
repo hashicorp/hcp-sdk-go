@@ -227,6 +227,11 @@ func (m *HashicorpCloudPackerBucket) ContextValidate(ctx context.Context, format
 func (m *HashicorpCloudPackerBucket) contextValidateChildren(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Children != nil {
+
+		if swag.IsZero(m.Children) { // not required
+			return nil
+		}
+
 		if err := m.Children.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("children")
@@ -243,6 +248,11 @@ func (m *HashicorpCloudPackerBucket) contextValidateChildren(ctx context.Context
 func (m *HashicorpCloudPackerBucket) contextValidateLatestIteration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LatestIteration != nil {
+
+		if swag.IsZero(m.LatestIteration) { // not required
+			return nil
+		}
+
 		if err := m.LatestIteration.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("latest_iteration")
@@ -259,6 +269,11 @@ func (m *HashicorpCloudPackerBucket) contextValidateLatestIteration(ctx context.
 func (m *HashicorpCloudPackerBucket) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -275,6 +290,11 @@ func (m *HashicorpCloudPackerBucket) contextValidateLocation(ctx context.Context
 func (m *HashicorpCloudPackerBucket) contextValidateParents(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Parents != nil {
+
+		if swag.IsZero(m.Parents) { // not required
+			return nil
+		}
+
 		if err := m.Parents.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("parents")

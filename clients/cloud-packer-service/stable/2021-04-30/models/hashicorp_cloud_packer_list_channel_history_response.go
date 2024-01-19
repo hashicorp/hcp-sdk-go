@@ -116,6 +116,11 @@ func (m *HashicorpCloudPackerListChannelHistoryResponse) contextValidateHistory(
 	for i := 0; i < len(m.History); i++ {
 
 		if m.History[i] != nil {
+
+			if swag.IsZero(m.History[i]) { // not required
+				return nil
+			}
+
 			if err := m.History[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("history" + "." + strconv.Itoa(i))
@@ -134,6 +139,11 @@ func (m *HashicorpCloudPackerListChannelHistoryResponse) contextValidateHistory(
 func (m *HashicorpCloudPackerListChannelHistoryResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")

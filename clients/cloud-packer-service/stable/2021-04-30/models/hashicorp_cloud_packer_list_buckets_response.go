@@ -113,6 +113,11 @@ func (m *HashicorpCloudPackerListBucketsResponse) contextValidateBuckets(ctx con
 	for i := 0; i < len(m.Buckets); i++ {
 
 		if m.Buckets[i] != nil {
+
+			if swag.IsZero(m.Buckets[i]) { // not required
+				return nil
+			}
+
 			if err := m.Buckets[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("buckets" + "." + strconv.Itoa(i))
@@ -131,6 +136,11 @@ func (m *HashicorpCloudPackerListBucketsResponse) contextValidateBuckets(ctx con
 func (m *HashicorpCloudPackerListBucketsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")

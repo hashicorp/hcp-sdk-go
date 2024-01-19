@@ -81,6 +81,11 @@ func (o *PackerServiceDeleteChannelOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the packer service delete channel o k response
+func (o *PackerServiceDeleteChannelOK) Code() int {
+	return 200
+}
+
 func (o *PackerServiceDeleteChannelOK) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceDeleteChannelOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type PackerServiceDeleteChannelDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the packer service delete channel default response
-func (o *PackerServiceDeleteChannelDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this packer service delete channel default response has a 2xx status code
 func (o *PackerServiceDeleteChannelDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *PackerServiceDeleteChannelDefault) IsServerError() bool {
 // IsCode returns true when this packer service delete channel default response a status code equal to that given
 func (o *PackerServiceDeleteChannelDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the packer service delete channel default response
+func (o *PackerServiceDeleteChannelDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *PackerServiceDeleteChannelDefault) Error() string {

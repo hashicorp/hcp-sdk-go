@@ -147,6 +147,11 @@ func (m *HashicorpCloudPackerRegistry) ContextValidate(ctx context.Context, form
 func (m *HashicorpCloudPackerRegistry) contextValidateConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Config != nil {
+
+		if swag.IsZero(m.Config) { // not required
+			return nil
+		}
+
 		if err := m.Config.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("config")
@@ -163,6 +168,11 @@ func (m *HashicorpCloudPackerRegistry) contextValidateConfig(ctx context.Context
 func (m *HashicorpCloudPackerRegistry) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")

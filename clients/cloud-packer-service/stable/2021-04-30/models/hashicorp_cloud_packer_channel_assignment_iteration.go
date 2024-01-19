@@ -114,6 +114,11 @@ func (m *HashicorpCloudPackerChannelAssignmentIteration) ContextValidate(ctx con
 func (m *HashicorpCloudPackerChannelAssignmentIteration) contextValidateParents(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Parents != nil {
+
+		if swag.IsZero(m.Parents) { // not required
+			return nil
+		}
+
 		if err := m.Parents.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("parents")
@@ -130,6 +135,11 @@ func (m *HashicorpCloudPackerChannelAssignmentIteration) contextValidateParents(
 func (m *HashicorpCloudPackerChannelAssignmentIteration) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
+
+		if swag.IsZero(m.Status) { // not required
+			return nil
+		}
+
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")

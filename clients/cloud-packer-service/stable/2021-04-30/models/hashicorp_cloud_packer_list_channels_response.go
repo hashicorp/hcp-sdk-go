@@ -82,6 +82,11 @@ func (m *HashicorpCloudPackerListChannelsResponse) contextValidateChannels(ctx c
 	for i := 0; i < len(m.Channels); i++ {
 
 		if m.Channels[i] != nil {
+
+			if swag.IsZero(m.Channels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Channels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("channels" + "." + strconv.Itoa(i))

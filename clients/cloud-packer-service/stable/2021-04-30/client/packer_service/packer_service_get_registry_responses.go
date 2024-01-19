@@ -81,6 +81,11 @@ func (o *PackerServiceGetRegistryOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the packer service get registry o k response
+func (o *PackerServiceGetRegistryOK) Code() int {
+	return 200
+}
+
 func (o *PackerServiceGetRegistryOK) Error() string {
 	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceGetRegistryOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type PackerServiceGetRegistryDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the packer service get registry default response
-func (o *PackerServiceGetRegistryDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this packer service get registry default response has a 2xx status code
 func (o *PackerServiceGetRegistryDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *PackerServiceGetRegistryDefault) IsServerError() bool {
 // IsCode returns true when this packer service get registry default response a status code equal to that given
 func (o *PackerServiceGetRegistryDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the packer service get registry default response
+func (o *PackerServiceGetRegistryDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *PackerServiceGetRegistryDefault) Error() string {

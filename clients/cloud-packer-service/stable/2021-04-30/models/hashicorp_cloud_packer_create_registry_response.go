@@ -103,6 +103,11 @@ func (m *HashicorpCloudPackerCreateRegistryResponse) ContextValidate(ctx context
 func (m *HashicorpCloudPackerCreateRegistryResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Operation != nil {
+
+		if swag.IsZero(m.Operation) { // not required
+			return nil
+		}
+
 		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operation")
@@ -119,6 +124,11 @@ func (m *HashicorpCloudPackerCreateRegistryResponse) contextValidateOperation(ct
 func (m *HashicorpCloudPackerCreateRegistryResponse) contextValidateRegistry(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Registry != nil {
+
+		if swag.IsZero(m.Registry) { // not required
+			return nil
+		}
+
 		if err := m.Registry.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("registry")

@@ -143,6 +143,11 @@ func (m *HashicorpCloudPackerListBuildsResponse) contextValidateBuilds(ctx conte
 	for i := 0; i < len(m.Builds); i++ {
 
 		if m.Builds[i] != nil {
+
+			if swag.IsZero(m.Builds[i]) { // not required
+				return nil
+			}
+
 			if err := m.Builds[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("builds" + "." + strconv.Itoa(i))
@@ -161,6 +166,11 @@ func (m *HashicorpCloudPackerListBuildsResponse) contextValidateBuilds(ctx conte
 func (m *HashicorpCloudPackerListBuildsResponse) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -177,6 +187,11 @@ func (m *HashicorpCloudPackerListBuildsResponse) contextValidateLocation(ctx con
 func (m *HashicorpCloudPackerListBuildsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")

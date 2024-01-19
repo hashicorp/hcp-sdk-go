@@ -87,6 +87,11 @@ func (m *HashicorpCloudPackerBucketAncestryParent) ContextValidate(ctx context.C
 func (m *HashicorpCloudPackerBucketAncestryParent) contextValidateChannelIteration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ChannelIteration != nil {
+
+		if swag.IsZero(m.ChannelIteration) { // not required
+			return nil
+		}
+
 		if err := m.ChannelIteration.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("channel_iteration")

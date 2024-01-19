@@ -162,6 +162,11 @@ func (m *HashicorpCloudPackerChannel) ContextValidate(ctx context.Context, forma
 func (m *HashicorpCloudPackerChannel) contextValidateIteration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Iteration != nil {
+
+		if swag.IsZero(m.Iteration) { // not required
+			return nil
+		}
+
 		if err := m.Iteration.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("iteration")
@@ -178,6 +183,11 @@ func (m *HashicorpCloudPackerChannel) contextValidateIteration(ctx context.Conte
 func (m *HashicorpCloudPackerChannel) contextValidatePointer(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pointer != nil {
+
+		if swag.IsZero(m.Pointer) { // not required
+			return nil
+		}
+
 		if err := m.Pointer.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pointer")

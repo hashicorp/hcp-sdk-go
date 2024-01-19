@@ -183,6 +183,11 @@ func (m *HashicorpCloudPackerBuild) contextValidateImages(ctx context.Context, f
 	for i := 0; i < len(m.Images); i++ {
 
 		if m.Images[i] != nil {
+
+			if swag.IsZero(m.Images[i]) { // not required
+				return nil
+			}
+
 			if err := m.Images[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("images" + "." + strconv.Itoa(i))
@@ -201,6 +206,11 @@ func (m *HashicorpCloudPackerBuild) contextValidateImages(ctx context.Context, f
 func (m *HashicorpCloudPackerBuild) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
+
+		if swag.IsZero(m.Status) { // not required
+			return nil
+		}
+
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")

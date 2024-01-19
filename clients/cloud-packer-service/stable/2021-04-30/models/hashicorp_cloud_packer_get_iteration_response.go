@@ -72,6 +72,11 @@ func (m *HashicorpCloudPackerGetIterationResponse) ContextValidate(ctx context.C
 func (m *HashicorpCloudPackerGetIterationResponse) contextValidateIteration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Iteration != nil {
+
+		if swag.IsZero(m.Iteration) { // not required
+			return nil
+		}
+
 		if err := m.Iteration.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("iteration")

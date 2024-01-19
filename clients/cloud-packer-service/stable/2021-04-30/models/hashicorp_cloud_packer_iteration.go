@@ -273,6 +273,11 @@ func (m *HashicorpCloudPackerIteration) contextValidateBuilds(ctx context.Contex
 	for i := 0; i < len(m.Builds); i++ {
 
 		if m.Builds[i] != nil {
+
+			if swag.IsZero(m.Builds[i]) { // not required
+				return nil
+			}
+
 			if err := m.Builds[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("builds" + "." + strconv.Itoa(i))
@@ -291,6 +296,11 @@ func (m *HashicorpCloudPackerIteration) contextValidateBuilds(ctx context.Contex
 func (m *HashicorpCloudPackerIteration) contextValidateRevocationInheritedFrom(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RevocationInheritedFrom != nil {
+
+		if swag.IsZero(m.RevocationInheritedFrom) { // not required
+			return nil
+		}
+
 		if err := m.RevocationInheritedFrom.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("revocation_inherited_from")
@@ -307,6 +317,11 @@ func (m *HashicorpCloudPackerIteration) contextValidateRevocationInheritedFrom(c
 func (m *HashicorpCloudPackerIteration) contextValidateRevocationType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RevocationType != nil {
+
+		if swag.IsZero(m.RevocationType) { // not required
+			return nil
+		}
+
 		if err := m.RevocationType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("revocation_type")
@@ -323,6 +338,11 @@ func (m *HashicorpCloudPackerIteration) contextValidateRevocationType(ctx contex
 func (m *HashicorpCloudPackerIteration) contextValidateTemplateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TemplateType != nil {
+
+		if swag.IsZero(m.TemplateType) { // not required
+			return nil
+		}
+
 		if err := m.TemplateType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("template_type")

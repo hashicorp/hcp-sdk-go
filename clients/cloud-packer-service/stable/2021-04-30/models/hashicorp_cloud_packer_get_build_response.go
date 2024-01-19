@@ -72,6 +72,11 @@ func (m *HashicorpCloudPackerGetBuildResponse) ContextValidate(ctx context.Conte
 func (m *HashicorpCloudPackerGetBuildResponse) contextValidateBuild(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Build != nil {
+
+		if swag.IsZero(m.Build) { // not required
+			return nil
+		}
+
 		if err := m.Build.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("build")

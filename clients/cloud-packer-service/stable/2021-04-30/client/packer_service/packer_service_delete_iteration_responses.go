@@ -81,6 +81,11 @@ func (o *PackerServiceDeleteIterationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the packer service delete iteration o k response
+func (o *PackerServiceDeleteIterationOK) Code() int {
+	return 200
+}
+
 func (o *PackerServiceDeleteIterationOK) Error() string {
 	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceDeleteIterationOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type PackerServiceDeleteIterationDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the packer service delete iteration default response
-func (o *PackerServiceDeleteIterationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this packer service delete iteration default response has a 2xx status code
 func (o *PackerServiceDeleteIterationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *PackerServiceDeleteIterationDefault) IsServerError() bool {
 // IsCode returns true when this packer service delete iteration default response a status code equal to that given
 func (o *PackerServiceDeleteIterationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the packer service delete iteration default response
+func (o *PackerServiceDeleteIterationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *PackerServiceDeleteIterationDefault) Error() string {

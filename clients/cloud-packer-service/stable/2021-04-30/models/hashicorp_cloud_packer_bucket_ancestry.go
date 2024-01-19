@@ -132,6 +132,11 @@ func (m *HashicorpCloudPackerBucketAncestry) ContextValidate(ctx context.Context
 func (m *HashicorpCloudPackerBucketAncestry) contextValidateChild(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Child != nil {
+
+		if swag.IsZero(m.Child) { // not required
+			return nil
+		}
+
 		if err := m.Child.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("child")
@@ -148,6 +153,11 @@ func (m *HashicorpCloudPackerBucketAncestry) contextValidateChild(ctx context.Co
 func (m *HashicorpCloudPackerBucketAncestry) contextValidateParent(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Parent != nil {
+
+		if swag.IsZero(m.Parent) { // not required
+			return nil
+		}
+
 		if err := m.Parent.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("parent")
@@ -164,6 +174,11 @@ func (m *HashicorpCloudPackerBucketAncestry) contextValidateParent(ctx context.C
 func (m *HashicorpCloudPackerBucketAncestry) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
+
+		if swag.IsZero(m.Status) { // not required
+			return nil
+		}
+
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")

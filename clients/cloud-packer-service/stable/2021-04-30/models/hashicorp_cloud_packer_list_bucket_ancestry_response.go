@@ -114,6 +114,11 @@ func (m *HashicorpCloudPackerListBucketAncestryResponse) ContextValidate(ctx con
 func (m *HashicorpCloudPackerListBucketAncestryResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")
@@ -132,6 +137,11 @@ func (m *HashicorpCloudPackerListBucketAncestryResponse) contextValidateRelation
 	for i := 0; i < len(m.Relations); i++ {
 
 		if m.Relations[i] != nil {
+
+			if swag.IsZero(m.Relations[i]) { // not required
+				return nil
+			}
+
 			if err := m.Relations[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("relations" + "." + strconv.Itoa(i))

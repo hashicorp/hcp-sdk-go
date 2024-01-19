@@ -104,6 +104,11 @@ func (m *HashicorpCloudPackerUpdateIterationResponse) ContextValidate(ctx contex
 func (m *HashicorpCloudPackerUpdateIterationResponse) contextValidateIteration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Iteration != nil {
+
+		if swag.IsZero(m.Iteration) { // not required
+			return nil
+		}
+
 		if err := m.Iteration.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("iteration")
@@ -120,6 +125,11 @@ func (m *HashicorpCloudPackerUpdateIterationResponse) contextValidateIteration(c
 func (m *HashicorpCloudPackerUpdateIterationResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Operation != nil {
+
+		if swag.IsZero(m.Operation) { // not required
+			return nil
+		}
+
 		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operation")
