@@ -17,6 +17,9 @@ import (
 // swagger:model hashicorp.cloud.consul_telemetry_20230414.HttpMetrics
 type HashicorpCloudConsulTelemetry20230414HTTPMetrics struct {
 
+	// duration_ms_avg is the average latency of response from a service in milliseconds.
+	DurationMsAvg float32 `json:"duration_ms_avg,omitempty"`
+
 	// duration_ms_p50 is the P50 latency of response from a service in milliseconds.
 	DurationMsP50 float32 `json:"duration_ms_p50,omitempty"`
 

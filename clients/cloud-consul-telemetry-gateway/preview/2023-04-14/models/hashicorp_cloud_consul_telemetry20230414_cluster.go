@@ -21,6 +21,9 @@ type HashicorpCloudConsulTelemetry20230414Cluster struct {
 	// id/name in GNM if an existing cluster is linked with differing names.
 	Datacenter string `json:"datacenter,omitempty"`
 
+	// external is set to true if the cluster could not be found in GNM, implying that this cluster is unlinked or outside the project.
+	External bool `json:"external,omitempty"`
+
 	// ID is the user settable name of the cluster in GNM.
 	ID string `json:"id,omitempty"`
 
