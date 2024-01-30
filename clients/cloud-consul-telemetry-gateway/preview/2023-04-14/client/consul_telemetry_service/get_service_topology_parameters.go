@@ -99,6 +99,13 @@ type GetServiceTopologyParams struct {
 	*/
 	IncludesPartition *string
 
+	/* IncludesTrustDomain.
+
+	     trust_domain of the cluster. This is a globally unique UUID created by the Consul cluster on startup
+	for its certificate authority if connect is enabled: https://developer.hashicorp.com/consul/api-docs/connect/ca#sample-request.
+	*/
+	IncludesTrustDomain *string
+
 	/* LocationOrganizationID.
 
 	   organization_id is the id of the organization.
@@ -152,6 +159,13 @@ type GetServiceTopologyParams struct {
 	   Partition where the service is deployed.
 	*/
 	RootPartition *string
+
+	/* RootTrustDomain.
+
+	     trust_domain of the cluster. This is a globally unique UUID created by the Consul cluster on startup
+	for its certificate authority if connect is enabled: https://developer.hashicorp.com/consul/api-docs/connect/ca#sample-request.
+	*/
+	RootTrustDomain *string
 
 	/* Start.
 
@@ -282,6 +296,17 @@ func (o *GetServiceTopologyParams) SetIncludesPartition(includesPartition *strin
 	o.IncludesPartition = includesPartition
 }
 
+// WithIncludesTrustDomain adds the includesTrustDomain to the get service topology params
+func (o *GetServiceTopologyParams) WithIncludesTrustDomain(includesTrustDomain *string) *GetServiceTopologyParams {
+	o.SetIncludesTrustDomain(includesTrustDomain)
+	return o
+}
+
+// SetIncludesTrustDomain adds the includesTrustDomain to the get service topology params
+func (o *GetServiceTopologyParams) SetIncludesTrustDomain(includesTrustDomain *string) {
+	o.IncludesTrustDomain = includesTrustDomain
+}
+
 // WithLocationOrganizationID adds the locationOrganizationID to the get service topology params
 func (o *GetServiceTopologyParams) WithLocationOrganizationID(locationOrganizationID string) *GetServiceTopologyParams {
 	o.SetLocationOrganizationID(locationOrganizationID)
@@ -379,6 +404,17 @@ func (o *GetServiceTopologyParams) WithRootPartition(rootPartition *string) *Get
 // SetRootPartition adds the rootPartition to the get service topology params
 func (o *GetServiceTopologyParams) SetRootPartition(rootPartition *string) {
 	o.RootPartition = rootPartition
+}
+
+// WithRootTrustDomain adds the rootTrustDomain to the get service topology params
+func (o *GetServiceTopologyParams) WithRootTrustDomain(rootTrustDomain *string) *GetServiceTopologyParams {
+	o.SetRootTrustDomain(rootTrustDomain)
+	return o
+}
+
+// SetRootTrustDomain adds the rootTrustDomain to the get service topology params
+func (o *GetServiceTopologyParams) SetRootTrustDomain(rootTrustDomain *string) {
+	o.RootTrustDomain = rootTrustDomain
 }
 
 // WithStart adds the start to the get service topology params
@@ -497,6 +533,23 @@ func (o *GetServiceTopologyParams) WriteToRequest(r runtime.ClientRequest, reg s
 		if qIncludesPartition != "" {
 
 			if err := r.SetQueryParam("includes.partition", qIncludesPartition); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.IncludesTrustDomain != nil {
+
+		// query param includes.trust_domain
+		var qrIncludesTrustDomain string
+
+		if o.IncludesTrustDomain != nil {
+			qrIncludesTrustDomain = *o.IncludesTrustDomain
+		}
+		qIncludesTrustDomain := qrIncludesTrustDomain
+		if qIncludesTrustDomain != "" {
+
+			if err := r.SetQueryParam("includes.trust_domain", qIncludesTrustDomain); err != nil {
 				return err
 			}
 		}
@@ -626,6 +679,23 @@ func (o *GetServiceTopologyParams) WriteToRequest(r runtime.ClientRequest, reg s
 		if qRootPartition != "" {
 
 			if err := r.SetQueryParam("root.partition", qRootPartition); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.RootTrustDomain != nil {
+
+		// query param root.trust_domain
+		var qrRootTrustDomain string
+
+		if o.RootTrustDomain != nil {
+			qrRootTrustDomain = *o.RootTrustDomain
+		}
+		qRootTrustDomain := qrRootTrustDomain
+		if qRootTrustDomain != "" {
+
+			if err := r.SetQueryParam("root.trust_domain", qRootTrustDomain); err != nil {
 				return err
 			}
 		}

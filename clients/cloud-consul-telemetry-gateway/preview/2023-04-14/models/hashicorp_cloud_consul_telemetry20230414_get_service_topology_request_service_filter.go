@@ -31,6 +31,10 @@ type HashicorpCloudConsulTelemetry20230414GetServiceTopologyRequestServiceFilter
 
 	// Partition where the service is deployed.
 	Partition string `json:"partition,omitempty"`
+
+	// trust_domain of the cluster. This is a globally unique UUID created by the Consul cluster on startup
+	// for its certificate authority if connect is enabled: https://developer.hashicorp.com/consul/api-docs/connect/ca#sample-request.
+	TrustDomain string `json:"trust_domain,omitempty"`
 }
 
 // Validate validates this hashicorp cloud consul telemetry 20230414 get service topology request service filter
