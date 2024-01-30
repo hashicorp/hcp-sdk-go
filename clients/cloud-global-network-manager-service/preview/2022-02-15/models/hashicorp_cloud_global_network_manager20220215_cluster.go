@@ -65,6 +65,10 @@ type HashicorpCloudGlobalNetworkManager20220215Cluster struct {
 
 	// Current state of the cluster.
 	State *HashicorpCloudGlobalNetworkManager20220215ClusterState `json:"state,omitempty"`
+
+	// trust domain is a globally unique UUID that clusters set for themselves. We use this
+	// to tell clusters apart based on Envoy labels which include it in their "consul_destination_trust_domain".
+	TrustDomain string `json:"trust_domain,omitempty"`
 }
 
 // Validate validates this hashicorp cloud global network manager 20220215 cluster
