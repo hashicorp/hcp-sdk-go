@@ -64,7 +64,7 @@ WaypointServiceCreateAddOnParams contains all the parameters to send to the API 
 type WaypointServiceCreateAddOnParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudWaypointCreateAddOnRequest
+	Body *models.HashicorpCloudWaypointWaypointServiceCreateAddOnBody
 
 	// NamespaceID.
 	NamespaceID string
@@ -123,13 +123,13 @@ func (o *WaypointServiceCreateAddOnParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the waypoint service create add on params
-func (o *WaypointServiceCreateAddOnParams) WithBody(body *models.HashicorpCloudWaypointCreateAddOnRequest) *WaypointServiceCreateAddOnParams {
+func (o *WaypointServiceCreateAddOnParams) WithBody(body *models.HashicorpCloudWaypointWaypointServiceCreateAddOnBody) *WaypointServiceCreateAddOnParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the waypoint service create add on params
-func (o *WaypointServiceCreateAddOnParams) SetBody(body *models.HashicorpCloudWaypointCreateAddOnRequest) {
+func (o *WaypointServiceCreateAddOnParams) SetBody(body *models.HashicorpCloudWaypointWaypointServiceCreateAddOnBody) {
 	o.Body = body
 }
 

@@ -64,7 +64,7 @@ WaypointServiceUpdateAddOnDefinitionParams contains all the parameters to send t
 type WaypointServiceUpdateAddOnDefinitionParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudWaypointUpdateAddOnDefinitionRequest
+	Body *models.HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody
 
 	// ExistingAddOnDefinitionID.
 	ExistingAddOnDefinitionID string
@@ -126,13 +126,13 @@ func (o *WaypointServiceUpdateAddOnDefinitionParams) SetHTTPClient(client *http.
 }
 
 // WithBody adds the body to the waypoint service update add on definition params
-func (o *WaypointServiceUpdateAddOnDefinitionParams) WithBody(body *models.HashicorpCloudWaypointUpdateAddOnDefinitionRequest) *WaypointServiceUpdateAddOnDefinitionParams {
+func (o *WaypointServiceUpdateAddOnDefinitionParams) WithBody(body *models.HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) *WaypointServiceUpdateAddOnDefinitionParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the waypoint service update add on definition params
-func (o *WaypointServiceUpdateAddOnDefinitionParams) SetBody(body *models.HashicorpCloudWaypointUpdateAddOnDefinitionRequest) {
+func (o *WaypointServiceUpdateAddOnDefinitionParams) SetBody(body *models.HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) {
 	o.Body = body
 }
 

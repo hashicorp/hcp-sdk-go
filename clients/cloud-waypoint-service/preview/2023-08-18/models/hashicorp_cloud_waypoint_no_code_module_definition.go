@@ -19,7 +19,7 @@ import (
 // swagger:model hashicorp.cloud.waypoint.NoCodeModuleDefinition
 type HashicorpCloudWaypointNoCodeModuleDefinition struct {
 
-	// created
+	// date created
 	// Format: date-time
 	Created strfmt.DateTime `json:"created,omitempty"`
 
@@ -30,7 +30,7 @@ type HashicorpCloudWaypointNoCodeModuleDefinition struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// provider
+	// ex: AWS
 	Provider string `json:"provider,omitempty"`
 
 	// versions

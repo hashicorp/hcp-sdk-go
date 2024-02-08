@@ -87,11 +87,11 @@ func (o *WaypointServiceGetTFModuleDetailsOK) Code() int {
 }
 
 func (o *WaypointServiceGetTFModuleDetailsOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{source}/{version}][%d] waypointServiceGetTFModuleDetailsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}/{version}][%d] waypointServiceGetTFModuleDetailsOK  %+v", 200, o.Payload)
 }
 
 func (o *WaypointServiceGetTFModuleDetailsOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{source}/{version}][%d] waypointServiceGetTFModuleDetailsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}/{version}][%d] waypointServiceGetTFModuleDetailsOK  %+v", 200, o.Payload)
 }
 
 func (o *WaypointServiceGetTFModuleDetailsOK) GetPayload() *models.HashicorpCloudWaypointGetTFModuleDetailsResponse {
@@ -125,7 +125,7 @@ An unexpected error response.
 type WaypointServiceGetTFModuleDetailsDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // IsSuccess returns true when this waypoint service get t f module details default response has a 2xx status code
@@ -159,20 +159,20 @@ func (o *WaypointServiceGetTFModuleDetailsDefault) Code() int {
 }
 
 func (o *WaypointServiceGetTFModuleDetailsDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{source}/{version}][%d] WaypointService_GetTFModuleDetails default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}/{version}][%d] WaypointService_GetTFModuleDetails default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *WaypointServiceGetTFModuleDetailsDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{source}/{version}][%d] WaypointService_GetTFModuleDetails default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}/{version}][%d] WaypointService_GetTFModuleDetails default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *WaypointServiceGetTFModuleDetailsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *WaypointServiceGetTFModuleDetailsDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *WaypointServiceGetTFModuleDetailsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

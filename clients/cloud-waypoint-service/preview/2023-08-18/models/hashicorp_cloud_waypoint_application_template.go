@@ -19,6 +19,11 @@ import (
 // swagger:model hashicorp.cloud.waypoint.ApplicationTemplate
 type HashicorpCloudWaypointApplicationTemplate struct {
 
+	// The actions driver configurations for the application template
+	// NOTE(briancain): This var is not hooked up yet, and thus not stored
+	// alongside the ApplicationTemplate record
+	ActionCfgRefs []*HashicorpCloudWaypointActionCfgRef `json:"action_cfg_refs"`
+
 	// A long-form description of what the ApplicationTemplate is to be used for. This description
 	// is shared between platform engineers and application developers.
 	Description string `json:"description,omitempty"`
@@ -56,11 +61,18 @@ type HashicorpCloudWaypointApplicationTemplate struct {
 	// The Terraform No-Code Module which should be used to provision
 	// infrastructure that is used by the application created from a ApplicationTemplate.
 	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
+
+	// variable_options is the collection of input variables which may be set for an application.
+	VariableOptions []*HashicorpCloudWaypointTFModuleVariable `json:"variable_options"`
 }
 
 // Validate validates this hashicorp cloud waypoint application template
 func (m *HashicorpCloudWaypointApplicationTemplate) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateActionCfgRefs(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateTags(formats); err != nil {
 		res = append(res, err)
@@ -74,9 +86,39 @@ func (m *HashicorpCloudWaypointApplicationTemplate) Validate(formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.validateVariableOptions(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplicationTemplate) validateActionCfgRefs(formats strfmt.Registry) error {
+	if swag.IsZero(m.ActionCfgRefs) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ActionCfgRefs); i++ {
+		if swag.IsZero(m.ActionCfgRefs[i]) { // not required
+			continue
+		}
+
+		if m.ActionCfgRefs[i] != nil {
+			if err := m.ActionCfgRefs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("action_cfg_refs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("action_cfg_refs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -144,9 +186,39 @@ func (m *HashicorpCloudWaypointApplicationTemplate) validateTerraformNocodeModul
 	return nil
 }
 
+func (m *HashicorpCloudWaypointApplicationTemplate) validateVariableOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.VariableOptions) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.VariableOptions); i++ {
+		if swag.IsZero(m.VariableOptions[i]) { // not required
+			continue
+		}
+
+		if m.VariableOptions[i] != nil {
+			if err := m.VariableOptions[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variable_options" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variable_options" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint application template based on the context it is used
 func (m *HashicorpCloudWaypointApplicationTemplate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.contextValidateActionCfgRefs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateTags(ctx, formats); err != nil {
 		res = append(res, err)
@@ -160,9 +232,38 @@ func (m *HashicorpCloudWaypointApplicationTemplate) ContextValidate(ctx context.
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateVariableOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplicationTemplate) contextValidateActionCfgRefs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ActionCfgRefs); i++ {
+
+		if m.ActionCfgRefs[i] != nil {
+
+			if swag.IsZero(m.ActionCfgRefs[i]) { // not required
+				return nil
+			}
+
+			if err := m.ActionCfgRefs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("action_cfg_refs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("action_cfg_refs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -228,6 +329,31 @@ func (m *HashicorpCloudWaypointApplicationTemplate) contextValidateTerraformNoco
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplicationTemplate) contextValidateVariableOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.VariableOptions); i++ {
+
+		if m.VariableOptions[i] != nil {
+
+			if swag.IsZero(m.VariableOptions[i]) { // not required
+				return nil
+			}
+
+			if err := m.VariableOptions[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variable_options" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variable_options" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

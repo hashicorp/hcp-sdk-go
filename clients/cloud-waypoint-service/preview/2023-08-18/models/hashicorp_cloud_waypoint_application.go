@@ -20,7 +20,7 @@ import (
 type HashicorpCloudWaypointApplication struct {
 
 	// An application can have 0-Many action configs
-	ActionCfgRef []*HashicorpCloudWaypointActionsdriverActionCfgRef `json:"action_cfg_ref"`
+	ActionCfgRefs []*HashicorpCloudWaypointActionCfgRef `json:"action_cfg_refs"`
 
 	// The reference of the template this application was generated from
 	ApplicationTemplate *HashicorpCloudWaypointRefApplicationTemplate `json:"application_template,omitempty"`
@@ -47,7 +47,7 @@ type HashicorpCloudWaypointApplication struct {
 func (m *HashicorpCloudWaypointApplication) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateActionCfgRef(formats); err != nil {
+	if err := m.validateActionCfgRefs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -65,22 +65,22 @@ func (m *HashicorpCloudWaypointApplication) Validate(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *HashicorpCloudWaypointApplication) validateActionCfgRef(formats strfmt.Registry) error {
-	if swag.IsZero(m.ActionCfgRef) { // not required
+func (m *HashicorpCloudWaypointApplication) validateActionCfgRefs(formats strfmt.Registry) error {
+	if swag.IsZero(m.ActionCfgRefs) { // not required
 		return nil
 	}
 
-	for i := 0; i < len(m.ActionCfgRef); i++ {
-		if swag.IsZero(m.ActionCfgRef[i]) { // not required
+	for i := 0; i < len(m.ActionCfgRefs); i++ {
+		if swag.IsZero(m.ActionCfgRefs[i]) { // not required
 			continue
 		}
 
-		if m.ActionCfgRef[i] != nil {
-			if err := m.ActionCfgRef[i].Validate(formats); err != nil {
+		if m.ActionCfgRefs[i] != nil {
+			if err := m.ActionCfgRefs[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("action_cfg_ref" + "." + strconv.Itoa(i))
+					return ve.ValidateName("action_cfg_refs" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("action_cfg_ref" + "." + strconv.Itoa(i))
+					return ce.ValidateName("action_cfg_refs" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -140,7 +140,7 @@ func (m *HashicorpCloudWaypointApplication) validateTags(formats strfmt.Registry
 func (m *HashicorpCloudWaypointApplication) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateActionCfgRef(ctx, formats); err != nil {
+	if err := m.contextValidateActionCfgRefs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -158,21 +158,21 @@ func (m *HashicorpCloudWaypointApplication) ContextValidate(ctx context.Context,
 	return nil
 }
 
-func (m *HashicorpCloudWaypointApplication) contextValidateActionCfgRef(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointApplication) contextValidateActionCfgRefs(ctx context.Context, formats strfmt.Registry) error {
 
-	for i := 0; i < len(m.ActionCfgRef); i++ {
+	for i := 0; i < len(m.ActionCfgRefs); i++ {
 
-		if m.ActionCfgRef[i] != nil {
+		if m.ActionCfgRefs[i] != nil {
 
-			if swag.IsZero(m.ActionCfgRef[i]) { // not required
+			if swag.IsZero(m.ActionCfgRefs[i]) { // not required
 				return nil
 			}
 
-			if err := m.ActionCfgRef[i].ContextValidate(ctx, formats); err != nil {
+			if err := m.ActionCfgRefs[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("action_cfg_ref" + "." + strconv.Itoa(i))
+					return ve.ValidateName("action_cfg_refs" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("action_cfg_ref" + "." + strconv.Itoa(i))
+					return ce.ValidateName("action_cfg_refs" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

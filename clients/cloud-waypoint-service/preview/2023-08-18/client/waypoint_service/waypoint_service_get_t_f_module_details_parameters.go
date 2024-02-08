@@ -61,13 +61,31 @@ WaypointServiceGetTFModuleDetailsParams contains all the parameters to send to t
 */
 type WaypointServiceGetTFModuleDetailsParams struct {
 
+	/* Name.
+
+	   name is the name of the Terraform module.
+	*/
+	Name string
+
 	// NamespaceID.
 	NamespaceID string
 
-	// Source.
-	Source string
+	/* Provider.
 
-	// Version.
+	   provider is the name of the provider for the Terraform module.
+	*/
+	Provider string
+
+	/* TfcNamespace.
+
+	   tfc_namespace is the Terraform user who owns the Terraform module.
+	*/
+	TfcNamespace string
+
+	/* Version.
+
+	   version is the version of the Terraform module.
+	*/
 	Version string
 
 	timeout    time.Duration
@@ -123,6 +141,17 @@ func (o *WaypointServiceGetTFModuleDetailsParams) SetHTTPClient(client *http.Cli
 	o.HTTPClient = client
 }
 
+// WithName adds the name to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) WithName(name string) *WaypointServiceGetTFModuleDetailsParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) SetName(name string) {
+	o.Name = name
+}
+
 // WithNamespaceID adds the namespaceID to the waypoint service get t f module details params
 func (o *WaypointServiceGetTFModuleDetailsParams) WithNamespaceID(namespaceID string) *WaypointServiceGetTFModuleDetailsParams {
 	o.SetNamespaceID(namespaceID)
@@ -134,15 +163,26 @@ func (o *WaypointServiceGetTFModuleDetailsParams) SetNamespaceID(namespaceID str
 	o.NamespaceID = namespaceID
 }
 
-// WithSource adds the source to the waypoint service get t f module details params
-func (o *WaypointServiceGetTFModuleDetailsParams) WithSource(source string) *WaypointServiceGetTFModuleDetailsParams {
-	o.SetSource(source)
+// WithProvider adds the provider to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) WithProvider(provider string) *WaypointServiceGetTFModuleDetailsParams {
+	o.SetProvider(provider)
 	return o
 }
 
-// SetSource adds the source to the waypoint service get t f module details params
-func (o *WaypointServiceGetTFModuleDetailsParams) SetSource(source string) {
-	o.Source = source
+// SetProvider adds the provider to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) SetProvider(provider string) {
+	o.Provider = provider
+}
+
+// WithTfcNamespace adds the tfcNamespace to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) WithTfcNamespace(tfcNamespace string) *WaypointServiceGetTFModuleDetailsParams {
+	o.SetTfcNamespace(tfcNamespace)
+	return o
+}
+
+// SetTfcNamespace adds the tfcNamespace to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) SetTfcNamespace(tfcNamespace string) {
+	o.TfcNamespace = tfcNamespace
 }
 
 // WithVersion adds the version to the waypoint service get t f module details params
@@ -164,13 +204,23 @@ func (o *WaypointServiceGetTFModuleDetailsParams) WriteToRequest(r runtime.Clien
 	}
 	var res []error
 
+	// path param name
+	if err := r.SetPathParam("name", o.Name); err != nil {
+		return err
+	}
+
 	// path param namespace.id
 	if err := r.SetPathParam("namespace.id", o.NamespaceID); err != nil {
 		return err
 	}
 
-	// path param source
-	if err := r.SetPathParam("source", o.Source); err != nil {
+	// path param provider
+	if err := r.SetPathParam("provider", o.Provider); err != nil {
+		return err
+	}
+
+	// path param tfc_namespace
+	if err := r.SetPathParam("tfc_namespace", o.TfcNamespace); err != nil {
 		return err
 	}
 

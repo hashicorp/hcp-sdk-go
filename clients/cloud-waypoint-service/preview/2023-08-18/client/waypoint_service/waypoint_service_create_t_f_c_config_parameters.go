@@ -64,7 +64,7 @@ WaypointServiceCreateTFCConfigParams contains all the parameters to send to the 
 type WaypointServiceCreateTFCConfigParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudWaypointCreateTFCConfigRequest
+	Body *models.HashicorpCloudWaypointWaypointServiceCreateTFCConfigBody
 
 	// NamespaceID.
 	NamespaceID string
@@ -123,13 +123,13 @@ func (o *WaypointServiceCreateTFCConfigParams) SetHTTPClient(client *http.Client
 }
 
 // WithBody adds the body to the waypoint service create t f c config params
-func (o *WaypointServiceCreateTFCConfigParams) WithBody(body *models.HashicorpCloudWaypointCreateTFCConfigRequest) *WaypointServiceCreateTFCConfigParams {
+func (o *WaypointServiceCreateTFCConfigParams) WithBody(body *models.HashicorpCloudWaypointWaypointServiceCreateTFCConfigBody) *WaypointServiceCreateTFCConfigParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the waypoint service create t f c config params
-func (o *WaypointServiceCreateTFCConfigParams) SetBody(body *models.HashicorpCloudWaypointCreateTFCConfigRequest) {
+func (o *WaypointServiceCreateTFCConfigParams) SetBody(body *models.HashicorpCloudWaypointWaypointServiceCreateTFCConfigBody) {
 	o.Body = body
 }
 

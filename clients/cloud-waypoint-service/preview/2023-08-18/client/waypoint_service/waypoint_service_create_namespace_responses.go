@@ -125,7 +125,7 @@ An unexpected error response.
 type WaypointServiceCreateNamespaceDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // IsSuccess returns true when this waypoint service create namespace default response has a 2xx status code
@@ -166,13 +166,13 @@ func (o *WaypointServiceCreateNamespaceDefault) String() string {
 	return fmt.Sprintf("[POST /waypoint/2023-08-18/organizations/{location.organization_id}/projects/{location.project_id}/namespaces][%d] WaypointService_CreateNamespace default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *WaypointServiceCreateNamespaceDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *WaypointServiceCreateNamespaceDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *WaypointServiceCreateNamespaceDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

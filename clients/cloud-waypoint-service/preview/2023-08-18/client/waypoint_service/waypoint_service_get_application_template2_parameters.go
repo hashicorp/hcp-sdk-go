@@ -63,7 +63,7 @@ type WaypointServiceGetApplicationTemplate2Params struct {
 
 	/* ApplicationTemplateID.
 
-	   ID of the ApplicationTemplate.
+	   ID of the ApplicationTemplate
 	*/
 	ApplicationTemplateID *string
 

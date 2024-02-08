@@ -10,7 +10,6 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-waypoint-service/preview/2023-08-18/client/action"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-waypoint-service/preview/2023-08-18/client/waypoint_service"
 )
 
@@ -56,7 +55,6 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudWaypo
 
 	cli := new(CloudWaypointService)
 	cli.Transport = transport
-	cli.Action = action.New(transport, formats)
 	cli.WaypointService = waypoint_service.New(transport, formats)
 	return cli
 }
@@ -102,8 +100,6 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // CloudWaypointService is a client for cloud waypoint service
 type CloudWaypointService struct {
-	Action action.ClientService
-
 	WaypointService waypoint_service.ClientService
 
 	Transport runtime.ClientTransport
@@ -112,6 +108,5 @@ type CloudWaypointService struct {
 // SetTransport changes the transport on the client and all its subresources
 func (c *CloudWaypointService) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
-	c.Action.SetTransport(transport)
 	c.WaypointService.SetTransport(transport)
 }

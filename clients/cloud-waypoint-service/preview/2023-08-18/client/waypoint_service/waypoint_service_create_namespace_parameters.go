@@ -64,7 +64,7 @@ WaypointServiceCreateNamespaceParams contains all the parameters to send to the 
 type WaypointServiceCreateNamespaceParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudWaypointCreateNamespaceRequest
+	Body *models.HashicorpCloudWaypointWaypointServiceCreateNamespaceBody
 
 	/* LocationOrganizationID.
 
@@ -132,13 +132,13 @@ func (o *WaypointServiceCreateNamespaceParams) SetHTTPClient(client *http.Client
 }
 
 // WithBody adds the body to the waypoint service create namespace params
-func (o *WaypointServiceCreateNamespaceParams) WithBody(body *models.HashicorpCloudWaypointCreateNamespaceRequest) *WaypointServiceCreateNamespaceParams {
+func (o *WaypointServiceCreateNamespaceParams) WithBody(body *models.HashicorpCloudWaypointWaypointServiceCreateNamespaceBody) *WaypointServiceCreateNamespaceParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the waypoint service create namespace params
-func (o *WaypointServiceCreateNamespaceParams) SetBody(body *models.HashicorpCloudWaypointCreateNamespaceRequest) {
+func (o *WaypointServiceCreateNamespaceParams) SetBody(body *models.HashicorpCloudWaypointWaypointServiceCreateNamespaceBody) {
 	o.Body = body
 }
 

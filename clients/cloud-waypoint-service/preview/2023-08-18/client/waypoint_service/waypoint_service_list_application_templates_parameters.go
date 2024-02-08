@@ -94,7 +94,7 @@ type WaypointServiceListApplicationTemplatesParams struct {
 
 	/* WithTotalCount.
 
-	   If set to false or not provided, response will not include a total_count value.
+	   If set to false or not provided, response will not include a total_count value
 	*/
 	WithTotalCount *bool
 

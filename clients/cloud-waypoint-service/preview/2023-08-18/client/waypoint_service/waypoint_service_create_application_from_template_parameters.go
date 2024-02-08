@@ -64,7 +64,7 @@ WaypointServiceCreateApplicationFromTemplateParams contains all the parameters t
 type WaypointServiceCreateApplicationFromTemplateParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudWaypointCreateApplicationFromTemplateRequest
+	Body *models.HashicorpCloudWaypointWaypointServiceCreateApplicationFromTemplateBody
 
 	// NamespaceID.
 	NamespaceID string
@@ -123,13 +123,13 @@ func (o *WaypointServiceCreateApplicationFromTemplateParams) SetHTTPClient(clien
 }
 
 // WithBody adds the body to the waypoint service create application from template params
-func (o *WaypointServiceCreateApplicationFromTemplateParams) WithBody(body *models.HashicorpCloudWaypointCreateApplicationFromTemplateRequest) *WaypointServiceCreateApplicationFromTemplateParams {
+func (o *WaypointServiceCreateApplicationFromTemplateParams) WithBody(body *models.HashicorpCloudWaypointWaypointServiceCreateApplicationFromTemplateBody) *WaypointServiceCreateApplicationFromTemplateParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the waypoint service create application from template params
-func (o *WaypointServiceCreateApplicationFromTemplateParams) SetBody(body *models.HashicorpCloudWaypointCreateApplicationFromTemplateRequest) {
+func (o *WaypointServiceCreateApplicationFromTemplateParams) SetBody(body *models.HashicorpCloudWaypointWaypointServiceCreateApplicationFromTemplateBody) {
 	o.Body = body
 }
 

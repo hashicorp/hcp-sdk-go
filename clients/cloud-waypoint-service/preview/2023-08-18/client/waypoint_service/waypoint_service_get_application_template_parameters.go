@@ -69,7 +69,7 @@ type WaypointServiceGetApplicationTemplateParams struct {
 
 	/* ApplicationTemplateName.
 
-	   Name of the ApplicationTemplate.
+	   Name of the ApplicationTemplate
 	*/
 	ApplicationTemplateName *string
 

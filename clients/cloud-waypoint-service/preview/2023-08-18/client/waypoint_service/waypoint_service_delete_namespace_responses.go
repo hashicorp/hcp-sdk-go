@@ -123,7 +123,7 @@ An unexpected error response.
 type WaypointServiceDeleteNamespaceDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // IsSuccess returns true when this waypoint service delete namespace default response has a 2xx status code
@@ -164,13 +164,13 @@ func (o *WaypointServiceDeleteNamespaceDefault) String() string {
 	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/organizations/{location.organization_id}/projects/{location.project_id}/namespaces/{namespace.id}][%d] WaypointService_DeleteNamespace default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *WaypointServiceDeleteNamespaceDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *WaypointServiceDeleteNamespaceDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *WaypointServiceDeleteNamespaceDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -67,7 +67,7 @@ type WaypointServiceUpdateApplicationParams struct {
 	ApplicationID string
 
 	// Body.
-	Body *models.HashicorpCloudWaypointUpdateApplicationRequest
+	Body *models.HashicorpCloudWaypointWaypointServiceUpdateApplicationBody
 
 	// NamespaceID.
 	NamespaceID string
@@ -137,13 +137,13 @@ func (o *WaypointServiceUpdateApplicationParams) SetApplicationID(applicationID 
 }
 
 // WithBody adds the body to the waypoint service update application params
-func (o *WaypointServiceUpdateApplicationParams) WithBody(body *models.HashicorpCloudWaypointUpdateApplicationRequest) *WaypointServiceUpdateApplicationParams {
+func (o *WaypointServiceUpdateApplicationParams) WithBody(body *models.HashicorpCloudWaypointWaypointServiceUpdateApplicationBody) *WaypointServiceUpdateApplicationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the waypoint service update application params
-func (o *WaypointServiceUpdateApplicationParams) SetBody(body *models.HashicorpCloudWaypointUpdateApplicationRequest) {
+func (o *WaypointServiceUpdateApplicationParams) SetBody(body *models.HashicorpCloudWaypointWaypointServiceUpdateApplicationBody) {
 	o.Body = body
 }
 

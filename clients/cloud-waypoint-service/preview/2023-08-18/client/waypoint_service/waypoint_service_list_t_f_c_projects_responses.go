@@ -125,7 +125,7 @@ An unexpected error response.
 type WaypointServiceListTFCProjectsDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // IsSuccess returns true when this waypoint service list t f c projects default response has a 2xx status code
@@ -166,13 +166,13 @@ func (o *WaypointServiceListTFCProjectsDefault) String() string {
 	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-projects][%d] WaypointService_ListTFCProjects default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *WaypointServiceListTFCProjectsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *WaypointServiceListTFCProjectsDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *WaypointServiceListTFCProjectsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

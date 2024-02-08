@@ -17,8 +17,11 @@ import (
 // swagger:model hashicorp.cloud.waypoint.TFCOrganization
 type HashicorpCloudWaypointTFCOrganization struct {
 
-	// id
-	ID string `json:"id,omitempty"`
+	// external id
+	ExternalID string `json:"external_id,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint t f c organization

@@ -49,6 +49,9 @@ type HashicorpCloudWaypointAddOn struct {
 	// Name of the Add-on
 	Name string `json:"name,omitempty"`
 
+	// Terraform output values, sensitive values have type and value omitted
+	OutputValues []*HashicorpCloudWaypointTFOutputValue `json:"output_values"`
+
 	// Rendered README markdown template for Add-on
 	// Format: byte
 	ReadmeMarkdown strfmt.Base64 `json:"readme_markdown,omitempty"`
@@ -80,6 +83,10 @@ func (m *HashicorpCloudWaypointAddOn) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDefinition(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOutputValues(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -146,6 +153,32 @@ func (m *HashicorpCloudWaypointAddOn) validateDefinition(formats strfmt.Registry
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointAddOn) validateOutputValues(formats strfmt.Registry) error {
+	if swag.IsZero(m.OutputValues) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.OutputValues); i++ {
+		if swag.IsZero(m.OutputValues[i]) { // not required
+			continue
+		}
+
+		if m.OutputValues[i] != nil {
+			if err := m.OutputValues[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("output_values" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("output_values" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -227,6 +260,10 @@ func (m *HashicorpCloudWaypointAddOn) ContextValidate(ctx context.Context, forma
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateOutputValues(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -282,6 +319,31 @@ func (m *HashicorpCloudWaypointAddOn) contextValidateDefinition(ctx context.Cont
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointAddOn) contextValidateOutputValues(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.OutputValues); i++ {
+
+		if m.OutputValues[i] != nil {
+
+			if swag.IsZero(m.OutputValues[i]) { // not required
+				return nil
+			}
+
+			if err := m.OutputValues[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("output_values" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("output_values" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

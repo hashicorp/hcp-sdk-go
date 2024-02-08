@@ -18,7 +18,7 @@ import (
 // swagger:model hashicorp.cloud.waypoint.GetApplicationResponse
 type HashicorpCloudWaypointGetApplicationResponse struct {
 
-	// application
+	// The retrieved application
 	Application *HashicorpCloudWaypointApplication `json:"application,omitempty"`
 }
 

@@ -125,7 +125,7 @@ An unexpected error response.
 type WaypointServiceCreateApplicationFromTemplateDefault struct {
 	_statusCode int
 
-	Payload *cloud.GrpcGatewayRuntimeError
+	Payload *cloud.GoogleRPCStatus
 }
 
 // IsSuccess returns true when this waypoint service create application from template default response has a 2xx status code
@@ -166,13 +166,13 @@ func (o *WaypointServiceCreateApplicationFromTemplateDefault) String() string {
 	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/applications/from-template][%d] WaypointService_CreateApplicationFromTemplate default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *WaypointServiceCreateApplicationFromTemplateDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
+func (o *WaypointServiceCreateApplicationFromTemplateDefault) GetPayload() *cloud.GoogleRPCStatus {
 	return o.Payload
 }
 
 func (o *WaypointServiceCreateApplicationFromTemplateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(cloud.GrpcGatewayRuntimeError)
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

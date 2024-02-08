@@ -64,6 +64,12 @@ type WaypointServiceListTFCOrganizationsParams struct {
 	// NamespaceID.
 	NamespaceID string
 
+	/* Token.
+
+	   Token to use with the TFC API. If this is blank, the stored token will be used.
+	*/
+	Token *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -128,6 +134,17 @@ func (o *WaypointServiceListTFCOrganizationsParams) SetNamespaceID(namespaceID s
 	o.NamespaceID = namespaceID
 }
 
+// WithToken adds the token to the waypoint service list t f c organizations params
+func (o *WaypointServiceListTFCOrganizationsParams) WithToken(token *string) *WaypointServiceListTFCOrganizationsParams {
+	o.SetToken(token)
+	return o
+}
+
+// SetToken adds the token to the waypoint service list t f c organizations params
+func (o *WaypointServiceListTFCOrganizationsParams) SetToken(token *string) {
+	o.Token = token
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *WaypointServiceListTFCOrganizationsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -139,6 +156,23 @@ func (o *WaypointServiceListTFCOrganizationsParams) WriteToRequest(r runtime.Cli
 	// path param namespace.id
 	if err := r.SetPathParam("namespace.id", o.NamespaceID); err != nil {
 		return err
+	}
+
+	if o.Token != nil {
+
+		// query param token
+		var qrToken string
+
+		if o.Token != nil {
+			qrToken = *o.Token
+		}
+		qToken := qrToken
+		if qToken != "" {
+
+			if err := r.SetQueryParam("token", qToken); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

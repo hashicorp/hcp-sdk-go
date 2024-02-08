@@ -64,7 +64,7 @@ WaypointServiceUpdateApplicationTemplateParams contains all the parameters to se
 type WaypointServiceUpdateApplicationTemplateParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudWaypointUpdateApplicationTemplateRequest
+	Body *models.HashicorpCloudWaypointWaypointServiceUpdateApplicationTemplateBody
 
 	/* ExistingApplicationTemplateID.
 
@@ -129,13 +129,13 @@ func (o *WaypointServiceUpdateApplicationTemplateParams) SetHTTPClient(client *h
 }
 
 // WithBody adds the body to the waypoint service update application template params
-func (o *WaypointServiceUpdateApplicationTemplateParams) WithBody(body *models.HashicorpCloudWaypointUpdateApplicationTemplateRequest) *WaypointServiceUpdateApplicationTemplateParams {
+func (o *WaypointServiceUpdateApplicationTemplateParams) WithBody(body *models.HashicorpCloudWaypointWaypointServiceUpdateApplicationTemplateBody) *WaypointServiceUpdateApplicationTemplateParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the waypoint service update application template params
-func (o *WaypointServiceUpdateApplicationTemplateParams) SetBody(body *models.HashicorpCloudWaypointUpdateApplicationTemplateRequest) {
+func (o *WaypointServiceUpdateApplicationTemplateParams) SetBody(body *models.HashicorpCloudWaypointWaypointServiceUpdateApplicationTemplateBody) {
 	o.Body = body
 }
 
