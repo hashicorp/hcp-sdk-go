@@ -22,6 +22,7 @@ import (
 //   - VERSION_REVOKED: Revoked means the version has been revoked.
 //   - VERSION_REVOCATION_SCHEDULED: Revocation scheduled means the version has been scheduled to be revoked.
 //   - VERSION_ACTIVE: Active means the version is valid and ready to be used.
+//   - VERSION_INCOMPLETE: Incomplete means the version has one or more builds that didn't run and the status is UNSET.
 //
 // swagger:model hashicorp.cloud.packer_20230101.VersionStatus
 type HashicorpCloudPacker20230101VersionStatus string
@@ -57,6 +58,9 @@ const (
 
 	// HashicorpCloudPacker20230101VersionStatusVERSIONACTIVE captures enum value "VERSION_ACTIVE"
 	HashicorpCloudPacker20230101VersionStatusVERSIONACTIVE HashicorpCloudPacker20230101VersionStatus = "VERSION_ACTIVE"
+
+	// HashicorpCloudPacker20230101VersionStatusVERSIONINCOMPLETE captures enum value "VERSION_INCOMPLETE"
+	HashicorpCloudPacker20230101VersionStatusVERSIONINCOMPLETE HashicorpCloudPacker20230101VersionStatus = "VERSION_INCOMPLETE"
 )
 
 // for schema
@@ -64,7 +68,7 @@ var hashicorpCloudPacker20230101VersionStatusEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudPacker20230101VersionStatus
-	if err := json.Unmarshal([]byte(`["VERSION_UNSET","VERSION_RUNNING","VERSION_CANCELLED","VERSION_FAILED","VERSION_REVOKED","VERSION_REVOCATION_SCHEDULED","VERSION_ACTIVE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["VERSION_UNSET","VERSION_RUNNING","VERSION_CANCELLED","VERSION_FAILED","VERSION_REVOKED","VERSION_REVOCATION_SCHEDULED","VERSION_ACTIVE","VERSION_INCOMPLETE"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
