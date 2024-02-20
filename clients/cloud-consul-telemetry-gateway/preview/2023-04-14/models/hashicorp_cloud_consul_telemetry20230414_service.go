@@ -29,6 +29,15 @@ type HashicorpCloudConsulTelemetry20230414Service struct {
 	// Count of total service instances.
 	InstanceCount int32 `json:"instance_count,omitempty"`
 
+	// Count of instances with critical checks.
+	InstancesCritical int32 `json:"instances_critical,omitempty"`
+
+	// Count of instances passing checks.
+	InstancesPassing int32 `json:"instances_passing,omitempty"`
+
+	// Count of instances with warning checks.
+	InstancesWarning int32 `json:"instances_warning,omitempty"`
+
 	// The kind of service.
 	Kind string `json:"kind,omitempty"`
 
