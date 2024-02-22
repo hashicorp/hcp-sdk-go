@@ -25,6 +25,10 @@ type HashicorpCloudBoundary20211221CreateRequest struct {
 	// cluster_id is the id of the cluster set by user on creation.
 	ClusterID string `json:"cluster_id,omitempty"`
 
+	// enable_hcp_auth determines whether the cluster is preconfigured with HCP Oauth as an
+	// authentication method.
+	EnableHcpAuth bool `json:"enable_hcp_auth,omitempty"`
+
 	// location is the location of the cluster.
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
 
@@ -115,6 +119,11 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) ContextValidate(ctx contex
 func (m *HashicorpCloudBoundary20211221CreateRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -131,6 +140,11 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) contextValidateLocation(ct
 func (m *HashicorpCloudBoundary20211221CreateRequest) contextValidateMarketingSku(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MarketingSku != nil {
+
+		if swag.IsZero(m.MarketingSku) { // not required
+			return nil
+		}
+
 		if err := m.MarketingSku.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("marketing_sku")

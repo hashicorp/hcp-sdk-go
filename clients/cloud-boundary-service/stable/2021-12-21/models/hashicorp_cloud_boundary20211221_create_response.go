@@ -79,6 +79,11 @@ func (m *HashicorpCloudBoundary20211221CreateResponse) ContextValidate(ctx conte
 func (m *HashicorpCloudBoundary20211221CreateResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Operation != nil {
+
+		if swag.IsZero(m.Operation) { // not required
+			return nil
+		}
+
 		if err := m.Operation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operation")

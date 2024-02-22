@@ -82,6 +82,11 @@ func (m *HashicorpCloudBoundary20211221SessionsResponse) contextValidateSessions
 	for i := 0; i < len(m.Sessions); i++ {
 
 		if m.Sessions[i] != nil {
+
+			if swag.IsZero(m.Sessions[i]) { // not required
+				return nil
+			}
+
 			if err := m.Sessions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("sessions" + "." + strconv.Itoa(i))

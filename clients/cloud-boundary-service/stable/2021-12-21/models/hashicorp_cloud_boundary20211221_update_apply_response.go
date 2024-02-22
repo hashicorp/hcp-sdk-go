@@ -14,17 +14,17 @@ import (
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudBoundary20211221UpdateResponse UpdateResponse is a response of the update request.
+// HashicorpCloudBoundary20211221UpdateApplyResponse UpdateApplyResponse is the response once manually triggering a cluster update.
 //
-// swagger:model hashicorp.cloud.boundary_20211221.UpdateResponse
-type HashicorpCloudBoundary20211221UpdateResponse struct {
+// swagger:model hashicorp.cloud.boundary_20211221.UpdateApplyResponse
+type HashicorpCloudBoundary20211221UpdateApplyResponse struct {
 
 	// operation tracks the asynchronous update of the Boundary cluster.
 	Operation *cloud.HashicorpCloudOperationOperation `json:"operation,omitempty"`
 }
 
-// Validate validates this hashicorp cloud boundary 20211221 update response
-func (m *HashicorpCloudBoundary20211221UpdateResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud boundary 20211221 update apply response
+func (m *HashicorpCloudBoundary20211221UpdateApplyResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateOperation(formats); err != nil {
@@ -37,7 +37,7 @@ func (m *HashicorpCloudBoundary20211221UpdateResponse) Validate(formats strfmt.R
 	return nil
 }
 
-func (m *HashicorpCloudBoundary20211221UpdateResponse) validateOperation(formats strfmt.Registry) error {
+func (m *HashicorpCloudBoundary20211221UpdateApplyResponse) validateOperation(formats strfmt.Registry) error {
 	if swag.IsZero(m.Operation) { // not required
 		return nil
 	}
@@ -56,8 +56,8 @@ func (m *HashicorpCloudBoundary20211221UpdateResponse) validateOperation(formats
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud boundary 20211221 update response based on the context it is used
-func (m *HashicorpCloudBoundary20211221UpdateResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud boundary 20211221 update apply response based on the context it is used
+func (m *HashicorpCloudBoundary20211221UpdateApplyResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateOperation(ctx, formats); err != nil {
@@ -70,7 +70,7 @@ func (m *HashicorpCloudBoundary20211221UpdateResponse) ContextValidate(ctx conte
 	return nil
 }
 
-func (m *HashicorpCloudBoundary20211221UpdateResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudBoundary20211221UpdateApplyResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Operation != nil {
 
@@ -92,7 +92,7 @@ func (m *HashicorpCloudBoundary20211221UpdateResponse) contextValidateOperation(
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudBoundary20211221UpdateResponse) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudBoundary20211221UpdateApplyResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -100,8 +100,8 @@ func (m *HashicorpCloudBoundary20211221UpdateResponse) MarshalBinary() ([]byte, 
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudBoundary20211221UpdateResponse) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudBoundary20211221UpdateResponse
+func (m *HashicorpCloudBoundary20211221UpdateApplyResponse) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudBoundary20211221UpdateApplyResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -14,21 +14,23 @@ import (
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudBoundary20211221UpdateRequest UpdateRequest is the request for updating HCP Boundary.
+// HashicorpCloudBoundary20211221UpdateApplyRequest UpdateApplyRequest is the request for manually updating this cluster.
 //
-// swagger:model hashicorp.cloud.boundary_20211221.UpdateRequest
-type HashicorpCloudBoundary20211221UpdateRequest struct {
+// swagger:model hashicorp.cloud.boundary_20211221.UpdateApplyRequest
+type HashicorpCloudBoundary20211221UpdateApplyRequest struct {
 
 	// cluster_id is the id of the cluster set by user on creation.
 	ClusterID string `json:"cluster_id,omitempty"`
 
-	// Location specifies the project to list from. If region is not specified,
-	// all regions are returned.
+	// location is the location of the cluster.
 	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+
+	// version contains the desired boundary version.
+	Version string `json:"version,omitempty"`
 }
 
-// Validate validates this hashicorp cloud boundary 20211221 update request
-func (m *HashicorpCloudBoundary20211221UpdateRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud boundary 20211221 update apply request
+func (m *HashicorpCloudBoundary20211221UpdateApplyRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateLocation(formats); err != nil {
@@ -41,7 +43,7 @@ func (m *HashicorpCloudBoundary20211221UpdateRequest) Validate(formats strfmt.Re
 	return nil
 }
 
-func (m *HashicorpCloudBoundary20211221UpdateRequest) validateLocation(formats strfmt.Registry) error {
+func (m *HashicorpCloudBoundary20211221UpdateApplyRequest) validateLocation(formats strfmt.Registry) error {
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -60,8 +62,8 @@ func (m *HashicorpCloudBoundary20211221UpdateRequest) validateLocation(formats s
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud boundary 20211221 update request based on the context it is used
-func (m *HashicorpCloudBoundary20211221UpdateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud boundary 20211221 update apply request based on the context it is used
+func (m *HashicorpCloudBoundary20211221UpdateApplyRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
@@ -74,7 +76,7 @@ func (m *HashicorpCloudBoundary20211221UpdateRequest) ContextValidate(ctx contex
 	return nil
 }
 
-func (m *HashicorpCloudBoundary20211221UpdateRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudBoundary20211221UpdateApplyRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
 
@@ -96,7 +98,7 @@ func (m *HashicorpCloudBoundary20211221UpdateRequest) contextValidateLocation(ct
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudBoundary20211221UpdateRequest) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudBoundary20211221UpdateApplyRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -104,8 +106,8 @@ func (m *HashicorpCloudBoundary20211221UpdateRequest) MarshalBinary() ([]byte, e
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudBoundary20211221UpdateRequest) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudBoundary20211221UpdateRequest
+func (m *HashicorpCloudBoundary20211221UpdateApplyRequest) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudBoundary20211221UpdateApplyRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

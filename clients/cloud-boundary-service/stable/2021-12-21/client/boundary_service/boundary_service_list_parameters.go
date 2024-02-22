@@ -17,50 +17,50 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewListParams creates a new ListParams object,
+// NewBoundaryServiceListParams creates a new BoundaryServiceListParams object,
 // with the default timeout for this client.
 //
 // Default values are not hydrated, since defaults are normally applied by the API server side.
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
-func NewListParams() *ListParams {
-	return &ListParams{
+func NewBoundaryServiceListParams() *BoundaryServiceListParams {
+	return &BoundaryServiceListParams{
 		timeout: cr.DefaultTimeout,
 	}
 }
 
-// NewListParamsWithTimeout creates a new ListParams object
+// NewBoundaryServiceListParamsWithTimeout creates a new BoundaryServiceListParams object
 // with the ability to set a timeout on a request.
-func NewListParamsWithTimeout(timeout time.Duration) *ListParams {
-	return &ListParams{
+func NewBoundaryServiceListParamsWithTimeout(timeout time.Duration) *BoundaryServiceListParams {
+	return &BoundaryServiceListParams{
 		timeout: timeout,
 	}
 }
 
-// NewListParamsWithContext creates a new ListParams object
+// NewBoundaryServiceListParamsWithContext creates a new BoundaryServiceListParams object
 // with the ability to set a context for a request.
-func NewListParamsWithContext(ctx context.Context) *ListParams {
-	return &ListParams{
+func NewBoundaryServiceListParamsWithContext(ctx context.Context) *BoundaryServiceListParams {
+	return &BoundaryServiceListParams{
 		Context: ctx,
 	}
 }
 
-// NewListParamsWithHTTPClient creates a new ListParams object
+// NewBoundaryServiceListParamsWithHTTPClient creates a new BoundaryServiceListParams object
 // with the ability to set a custom HTTPClient for a request.
-func NewListParamsWithHTTPClient(client *http.Client) *ListParams {
-	return &ListParams{
+func NewBoundaryServiceListParamsWithHTTPClient(client *http.Client) *BoundaryServiceListParams {
+	return &BoundaryServiceListParams{
 		HTTPClient: client,
 	}
 }
 
 /*
-ListParams contains all the parameters to send to the API endpoint
+BoundaryServiceListParams contains all the parameters to send to the API endpoint
 
-	for the list operation.
+	for the boundary service list operation.
 
 	Typically these are written to a http.Request.
 */
-type ListParams struct {
+type BoundaryServiceListParams struct {
 
 	/* LocationOrganizationID.
 
@@ -118,133 +118,133 @@ type ListParams struct {
 	HTTPClient *http.Client
 }
 
-// WithDefaults hydrates default values in the list params (not the query body).
+// WithDefaults hydrates default values in the boundary service list params (not the query body).
 //
 // All values with no default are reset to their zero value.
-func (o *ListParams) WithDefaults() *ListParams {
+func (o *BoundaryServiceListParams) WithDefaults() *BoundaryServiceListParams {
 	o.SetDefaults()
 	return o
 }
 
-// SetDefaults hydrates default values in the list params (not the query body).
+// SetDefaults hydrates default values in the boundary service list params (not the query body).
 //
 // All values with no default are reset to their zero value.
-func (o *ListParams) SetDefaults() {
+func (o *BoundaryServiceListParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the list params
-func (o *ListParams) WithTimeout(timeout time.Duration) *ListParams {
+// WithTimeout adds the timeout to the boundary service list params
+func (o *BoundaryServiceListParams) WithTimeout(timeout time.Duration) *BoundaryServiceListParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the list params
-func (o *ListParams) SetTimeout(timeout time.Duration) {
+// SetTimeout adds the timeout to the boundary service list params
+func (o *BoundaryServiceListParams) SetTimeout(timeout time.Duration) {
 	o.timeout = timeout
 }
 
-// WithContext adds the context to the list params
-func (o *ListParams) WithContext(ctx context.Context) *ListParams {
+// WithContext adds the context to the boundary service list params
+func (o *BoundaryServiceListParams) WithContext(ctx context.Context) *BoundaryServiceListParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the list params
-func (o *ListParams) SetContext(ctx context.Context) {
+// SetContext adds the context to the boundary service list params
+func (o *BoundaryServiceListParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the list params
-func (o *ListParams) WithHTTPClient(client *http.Client) *ListParams {
+// WithHTTPClient adds the HTTPClient to the boundary service list params
+func (o *BoundaryServiceListParams) WithHTTPClient(client *http.Client) *BoundaryServiceListParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the list params
-func (o *ListParams) SetHTTPClient(client *http.Client) {
+// SetHTTPClient adds the HTTPClient to the boundary service list params
+func (o *BoundaryServiceListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithLocationOrganizationID adds the locationOrganizationID to the list params
-func (o *ListParams) WithLocationOrganizationID(locationOrganizationID string) *ListParams {
+// WithLocationOrganizationID adds the locationOrganizationID to the boundary service list params
+func (o *BoundaryServiceListParams) WithLocationOrganizationID(locationOrganizationID string) *BoundaryServiceListParams {
 	o.SetLocationOrganizationID(locationOrganizationID)
 	return o
 }
 
-// SetLocationOrganizationID adds the locationOrganizationId to the list params
-func (o *ListParams) SetLocationOrganizationID(locationOrganizationID string) {
+// SetLocationOrganizationID adds the locationOrganizationId to the boundary service list params
+func (o *BoundaryServiceListParams) SetLocationOrganizationID(locationOrganizationID string) {
 	o.LocationOrganizationID = locationOrganizationID
 }
 
-// WithLocationProjectID adds the locationProjectID to the list params
-func (o *ListParams) WithLocationProjectID(locationProjectID string) *ListParams {
+// WithLocationProjectID adds the locationProjectID to the boundary service list params
+func (o *BoundaryServiceListParams) WithLocationProjectID(locationProjectID string) *BoundaryServiceListParams {
 	o.SetLocationProjectID(locationProjectID)
 	return o
 }
 
-// SetLocationProjectID adds the locationProjectId to the list params
-func (o *ListParams) SetLocationProjectID(locationProjectID string) {
+// SetLocationProjectID adds the locationProjectId to the boundary service list params
+func (o *BoundaryServiceListParams) SetLocationProjectID(locationProjectID string) {
 	o.LocationProjectID = locationProjectID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the list params
-func (o *ListParams) WithLocationRegionProvider(locationRegionProvider *string) *ListParams {
+// WithLocationRegionProvider adds the locationRegionProvider to the boundary service list params
+func (o *BoundaryServiceListParams) WithLocationRegionProvider(locationRegionProvider *string) *BoundaryServiceListParams {
 	o.SetLocationRegionProvider(locationRegionProvider)
 	return o
 }
 
-// SetLocationRegionProvider adds the locationRegionProvider to the list params
-func (o *ListParams) SetLocationRegionProvider(locationRegionProvider *string) {
+// SetLocationRegionProvider adds the locationRegionProvider to the boundary service list params
+func (o *BoundaryServiceListParams) SetLocationRegionProvider(locationRegionProvider *string) {
 	o.LocationRegionProvider = locationRegionProvider
 }
 
-// WithLocationRegionRegion adds the locationRegionRegion to the list params
-func (o *ListParams) WithLocationRegionRegion(locationRegionRegion *string) *ListParams {
+// WithLocationRegionRegion adds the locationRegionRegion to the boundary service list params
+func (o *BoundaryServiceListParams) WithLocationRegionRegion(locationRegionRegion *string) *BoundaryServiceListParams {
 	o.SetLocationRegionRegion(locationRegionRegion)
 	return o
 }
 
-// SetLocationRegionRegion adds the locationRegionRegion to the list params
-func (o *ListParams) SetLocationRegionRegion(locationRegionRegion *string) {
+// SetLocationRegionRegion adds the locationRegionRegion to the boundary service list params
+func (o *BoundaryServiceListParams) SetLocationRegionRegion(locationRegionRegion *string) {
 	o.LocationRegionRegion = locationRegionRegion
 }
 
-// WithPaginationNextPageToken adds the paginationNextPageToken to the list params
-func (o *ListParams) WithPaginationNextPageToken(paginationNextPageToken *string) *ListParams {
+// WithPaginationNextPageToken adds the paginationNextPageToken to the boundary service list params
+func (o *BoundaryServiceListParams) WithPaginationNextPageToken(paginationNextPageToken *string) *BoundaryServiceListParams {
 	o.SetPaginationNextPageToken(paginationNextPageToken)
 	return o
 }
 
-// SetPaginationNextPageToken adds the paginationNextPageToken to the list params
-func (o *ListParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
+// SetPaginationNextPageToken adds the paginationNextPageToken to the boundary service list params
+func (o *BoundaryServiceListParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
 	o.PaginationNextPageToken = paginationNextPageToken
 }
 
-// WithPaginationPageSize adds the paginationPageSize to the list params
-func (o *ListParams) WithPaginationPageSize(paginationPageSize *int64) *ListParams {
+// WithPaginationPageSize adds the paginationPageSize to the boundary service list params
+func (o *BoundaryServiceListParams) WithPaginationPageSize(paginationPageSize *int64) *BoundaryServiceListParams {
 	o.SetPaginationPageSize(paginationPageSize)
 	return o
 }
 
-// SetPaginationPageSize adds the paginationPageSize to the list params
-func (o *ListParams) SetPaginationPageSize(paginationPageSize *int64) {
+// SetPaginationPageSize adds the paginationPageSize to the boundary service list params
+func (o *BoundaryServiceListParams) SetPaginationPageSize(paginationPageSize *int64) {
 	o.PaginationPageSize = paginationPageSize
 }
 
-// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the list params
-func (o *ListParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *ListParams {
+// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the boundary service list params
+func (o *BoundaryServiceListParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *BoundaryServiceListParams {
 	o.SetPaginationPreviousPageToken(paginationPreviousPageToken)
 	return o
 }
 
-// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the list params
-func (o *ListParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
+// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the boundary service list params
+func (o *BoundaryServiceListParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
 	o.PaginationPreviousPageToken = paginationPreviousPageToken
 }
 
 // WriteToRequest writes these params to a swagger request
-func (o *ListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
+func (o *BoundaryServiceListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
 	if err := r.SetTimeout(o.timeout); err != nil {
 		return err

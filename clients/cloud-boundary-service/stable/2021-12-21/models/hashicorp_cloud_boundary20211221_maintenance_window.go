@@ -78,6 +78,11 @@ func (m *HashicorpCloudBoundary20211221MaintenanceWindow) ContextValidate(ctx co
 func (m *HashicorpCloudBoundary20211221MaintenanceWindow) contextValidateDayOfWeek(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DayOfWeek != nil {
+
+		if swag.IsZero(m.DayOfWeek) { // not required
+			return nil
+		}
+
 		if err := m.DayOfWeek.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("day_of_week")

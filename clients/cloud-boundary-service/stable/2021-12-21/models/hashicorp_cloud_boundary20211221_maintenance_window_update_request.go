@@ -136,6 +136,11 @@ func (m *HashicorpCloudBoundary20211221MaintenanceWindowUpdateRequest) ContextVa
 func (m *HashicorpCloudBoundary20211221MaintenanceWindowUpdateRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -152,6 +157,11 @@ func (m *HashicorpCloudBoundary20211221MaintenanceWindowUpdateRequest) contextVa
 func (m *HashicorpCloudBoundary20211221MaintenanceWindowUpdateRequest) contextValidateMaintenanceWindow(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MaintenanceWindow != nil {
+
+		if swag.IsZero(m.MaintenanceWindow) { // not required
+			return nil
+		}
+
 		if err := m.MaintenanceWindow.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("maintenance_window")
@@ -168,6 +178,11 @@ func (m *HashicorpCloudBoundary20211221MaintenanceWindowUpdateRequest) contextVa
 func (m *HashicorpCloudBoundary20211221MaintenanceWindowUpdateRequest) contextValidateUpgradeType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UpgradeType != nil {
+
+		if swag.IsZero(m.UpgradeType) { // not required
+			return nil
+		}
+
 		if err := m.UpgradeType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("upgrade_type")

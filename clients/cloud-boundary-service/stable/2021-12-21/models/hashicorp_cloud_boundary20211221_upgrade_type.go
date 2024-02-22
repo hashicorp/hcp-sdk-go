@@ -19,6 +19,9 @@ import (
 // - UPGRADE_TYPE_UNSPECIFIED: UPGRADE_TYPE_UNSPECIFIED is an unspecified upgrade type
 //   - UPGRADE_TYPE_AUTOMATIC: UPGRADE_TYPE_AUTOMATIC is the upgrade type where we pick the schedule
 //   - UPGRADE_TYPE_SCHEDULED: UPGRADE_TYPE_SCHEDULED is the upgrade type where the user picks the schedule
+//   - UPGRADE_TYPE_MANUAL: UPGRADE_TYPE_MANUAL is the upgrade type where the user can manually trigger the upgrade before a set window,
+//
+// after which the cluster will be automatically upgraded.
 //
 // swagger:model hashicorp.cloud.boundary_20211221.UpgradeType
 type HashicorpCloudBoundary20211221UpgradeType string
@@ -42,6 +45,9 @@ const (
 
 	// HashicorpCloudBoundary20211221UpgradeTypeUPGRADETYPESCHEDULED captures enum value "UPGRADE_TYPE_SCHEDULED"
 	HashicorpCloudBoundary20211221UpgradeTypeUPGRADETYPESCHEDULED HashicorpCloudBoundary20211221UpgradeType = "UPGRADE_TYPE_SCHEDULED"
+
+	// HashicorpCloudBoundary20211221UpgradeTypeUPGRADETYPEMANUAL captures enum value "UPGRADE_TYPE_MANUAL"
+	HashicorpCloudBoundary20211221UpgradeTypeUPGRADETYPEMANUAL HashicorpCloudBoundary20211221UpgradeType = "UPGRADE_TYPE_MANUAL"
 )
 
 // for schema
@@ -49,7 +55,7 @@ var hashicorpCloudBoundary20211221UpgradeTypeEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudBoundary20211221UpgradeType
-	if err := json.Unmarshal([]byte(`["UPGRADE_TYPE_UNSPECIFIED","UPGRADE_TYPE_AUTOMATIC","UPGRADE_TYPE_SCHEDULED"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["UPGRADE_TYPE_UNSPECIFIED","UPGRADE_TYPE_AUTOMATIC","UPGRADE_TYPE_SCHEDULED","UPGRADE_TYPE_MANUAL"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -28,42 +28,46 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error)
+	BoundaryServiceAvailableUpdateGet(params *BoundaryServiceAvailableUpdateGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceAvailableUpdateGetOK, error)
 
-	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error)
+	BoundaryServiceCreate(params *BoundaryServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceCreateOK, error)
 
-	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error)
+	BoundaryServiceDelete(params *BoundaryServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceDeleteOK, error)
 
-	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error)
+	BoundaryServiceGet(params *BoundaryServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceGetOK, error)
 
-	MaintenanceWindowGet(params *MaintenanceWindowGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MaintenanceWindowGetOK, error)
+	BoundaryServiceList(params *BoundaryServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceListOK, error)
 
-	MaintenanceWindowUpdate(params *MaintenanceWindowUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MaintenanceWindowUpdateOK, error)
+	BoundaryServiceMaintenanceWindowGet(params *BoundaryServiceMaintenanceWindowGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceMaintenanceWindowGetOK, error)
 
-	Sessions(params *SessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SessionsOK, error)
+	BoundaryServiceMaintenanceWindowUpdate(params *BoundaryServiceMaintenanceWindowUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceMaintenanceWindowUpdateOK, error)
 
-	Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOK, error)
+	BoundaryServiceSessions(params *BoundaryServiceSessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceSessionsOK, error)
+
+	BoundaryServiceUpdate(params *BoundaryServiceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceUpdateOK, error)
+
+	BoundaryServiceUpdateApply(params *BoundaryServiceUpdateApplyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceUpdateApplyOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-Create creates creates a new h c p boundary cluster
+BoundaryServiceAvailableUpdateGet availables update get is used to return the next available update for a boundary cluster
 */
-func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
+func (a *Client) BoundaryServiceAvailableUpdateGet(params *BoundaryServiceAvailableUpdateGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceAvailableUpdateGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateParams()
+		params = NewBoundaryServiceAvailableUpdateGetParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "Create",
-		Method:             "POST",
-		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters",
+		ID:                 "BoundaryService_AvailableUpdateGet",
+		Method:             "GET",
+		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateReader{formats: a.formats},
+		Reader:             &BoundaryServiceAvailableUpdateGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -76,32 +80,70 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateOK)
+	success, ok := result.(*BoundaryServiceAvailableUpdateGetOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateDefault)
+	unexpectedSuccess := result.(*BoundaryServiceAvailableUpdateGetDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Delete deletes deletes the specified h c p boundary cluster
+BoundaryServiceCreate creates creates a new h c p boundary cluster
 */
-func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
+func (a *Client) BoundaryServiceCreate(params *BoundaryServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteParams()
+		params = NewBoundaryServiceCreateParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "Delete",
+		ID:                 "BoundaryService_Create",
+		Method:             "POST",
+		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &BoundaryServiceCreateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*BoundaryServiceCreateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*BoundaryServiceCreateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+BoundaryServiceDelete deletes deletes the specified h c p boundary cluster
+*/
+func (a *Client) BoundaryServiceDelete(params *BoundaryServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceDeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewBoundaryServiceDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "BoundaryService_Delete",
 		Method:             "DELETE",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteReader{formats: a.formats},
+		Reader:             &BoundaryServiceDeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -114,32 +156,32 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteOK)
+	success, ok := result.(*BoundaryServiceDeleteOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteDefault)
+	unexpectedSuccess := result.(*BoundaryServiceDeleteDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Get gets returns a single existing h c p boundary cluster
+BoundaryServiceGet gets returns a single existing h c p boundary cluster
 */
-func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error) {
+func (a *Client) BoundaryServiceGet(params *BoundaryServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetParams()
+		params = NewBoundaryServiceGetParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "Get",
+		ID:                 "BoundaryService_Get",
 		Method:             "GET",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetReader{formats: a.formats},
+		Reader:             &BoundaryServiceGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -152,32 +194,32 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, o
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetOK)
+	success, ok := result.(*BoundaryServiceGetOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetDefault)
+	unexpectedSuccess := result.(*BoundaryServiceGetDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-List lists returns all existing h c p boundary clusters
+BoundaryServiceList lists returns all existing h c p boundary clusters
 */
-func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error) {
+func (a *Client) BoundaryServiceList(params *BoundaryServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListParams()
+		params = NewBoundaryServiceListParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "List",
+		ID:                 "BoundaryService_List",
 		Method:             "GET",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListReader{formats: a.formats},
+		Reader:             &BoundaryServiceListReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -190,32 +232,32 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListOK)
+	success, ok := result.(*BoundaryServiceListOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListDefault)
+	unexpectedSuccess := result.(*BoundaryServiceListDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-MaintenanceWindowGet maintenances window get is used to fetch the type of maintenance for the given cluster maintenance can either be automatic or scheduled if scheduled the response returns the window set by the user
+BoundaryServiceMaintenanceWindowGet maintenances window get is used to fetch the type of maintenance for the given cluster maintenance can either be automatic or scheduled if scheduled the response returns the window set by the user
 */
-func (a *Client) MaintenanceWindowGet(params *MaintenanceWindowGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MaintenanceWindowGetOK, error) {
+func (a *Client) BoundaryServiceMaintenanceWindowGet(params *BoundaryServiceMaintenanceWindowGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceMaintenanceWindowGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewMaintenanceWindowGetParams()
+		params = NewBoundaryServiceMaintenanceWindowGetParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "MaintenanceWindowGet",
+		ID:                 "BoundaryService_MaintenanceWindowGet",
 		Method:             "GET",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &MaintenanceWindowGetReader{formats: a.formats},
+		Reader:             &BoundaryServiceMaintenanceWindowGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -228,32 +270,32 @@ func (a *Client) MaintenanceWindowGet(params *MaintenanceWindowGetParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*MaintenanceWindowGetOK)
+	success, ok := result.(*BoundaryServiceMaintenanceWindowGetOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*MaintenanceWindowGetDefault)
+	unexpectedSuccess := result.(*BoundaryServiceMaintenanceWindowGetDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-MaintenanceWindowUpdate maintenances window update sets maintenance window for update version
+BoundaryServiceMaintenanceWindowUpdate maintenances window update sets maintenance window for update version
 */
-func (a *Client) MaintenanceWindowUpdate(params *MaintenanceWindowUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MaintenanceWindowUpdateOK, error) {
+func (a *Client) BoundaryServiceMaintenanceWindowUpdate(params *BoundaryServiceMaintenanceWindowUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceMaintenanceWindowUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewMaintenanceWindowUpdateParams()
+		params = NewBoundaryServiceMaintenanceWindowUpdateParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "MaintenanceWindowUpdate",
+		ID:                 "BoundaryService_MaintenanceWindowUpdate",
 		Method:             "POST",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &MaintenanceWindowUpdateReader{formats: a.formats},
+		Reader:             &BoundaryServiceMaintenanceWindowUpdateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -266,32 +308,32 @@ func (a *Client) MaintenanceWindowUpdate(params *MaintenanceWindowUpdateParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*MaintenanceWindowUpdateOK)
+	success, ok := result.(*BoundaryServiceMaintenanceWindowUpdateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*MaintenanceWindowUpdateDefault)
+	unexpectedSuccess := result.(*BoundaryServiceMaintenanceWindowUpdateDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Sessions sessions returns all session information for existing h c p boundary cluster
+BoundaryServiceSessions sessions returns all session information for existing h c p boundary cluster
 */
-func (a *Client) Sessions(params *SessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SessionsOK, error) {
+func (a *Client) BoundaryServiceSessions(params *BoundaryServiceSessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceSessionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSessionsParams()
+		params = NewBoundaryServiceSessionsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "Sessions",
+		ID:                 "BoundaryService_Sessions",
 		Method:             "GET",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SessionsReader{formats: a.formats},
+		Reader:             &BoundaryServiceSessionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -304,32 +346,32 @@ func (a *Client) Sessions(params *SessionsParams, authInfo runtime.ClientAuthInf
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*SessionsOK)
+	success, ok := result.(*BoundaryServiceSessionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*SessionsDefault)
+	unexpectedSuccess := result.(*BoundaryServiceSessionsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Update updates triggers checks if update for the specific cluster is needed and forces an update
+BoundaryServiceUpdate updates triggers checks if update for the specific cluster is needed and forces an update
 */
-func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOK, error) {
+func (a *Client) BoundaryServiceUpdate(params *BoundaryServiceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateParams()
+		params = NewBoundaryServiceUpdateParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "Update",
+		ID:                 "BoundaryService_Update",
 		Method:             "POST",
 		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateReader{formats: a.formats},
+		Reader:             &BoundaryServiceUpdateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -342,12 +384,50 @@ func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateOK)
+	success, ok := result.(*BoundaryServiceUpdateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdateDefault)
+	unexpectedSuccess := result.(*BoundaryServiceUpdateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+BoundaryServiceUpdateApply updates apply is used to manually update a cluster to a specific version
+*/
+func (a *Client) BoundaryServiceUpdateApply(params *BoundaryServiceUpdateApplyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceUpdateApplyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewBoundaryServiceUpdateApplyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "BoundaryService_UpdateApply",
+		Method:             "POST",
+		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &BoundaryServiceUpdateApplyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*BoundaryServiceUpdateApplyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*BoundaryServiceUpdateApplyDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
