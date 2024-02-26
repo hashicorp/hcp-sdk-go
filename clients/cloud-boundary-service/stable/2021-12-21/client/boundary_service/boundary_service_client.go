@@ -30,6 +30,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	BoundaryServiceAvailableUpdateGet(params *BoundaryServiceAvailableUpdateGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceAvailableUpdateGetOK, error)
 
+	BoundaryServiceClusterUpdateDeadlineGet(params *BoundaryServiceClusterUpdateDeadlineGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceClusterUpdateDeadlineGetOK, error)
+
 	BoundaryServiceCreate(params *BoundaryServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceCreateOK, error)
 
 	BoundaryServiceDelete(params *BoundaryServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceDeleteOK, error)
@@ -86,6 +88,44 @@ func (a *Client) BoundaryServiceAvailableUpdateGet(params *BoundaryServiceAvaila
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*BoundaryServiceAvailableUpdateGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+BoundaryServiceClusterUpdateDeadlineGet clusters update deadline get is used to get the deadline for a cluster update
+*/
+func (a *Client) BoundaryServiceClusterUpdateDeadlineGet(params *BoundaryServiceClusterUpdateDeadlineGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceClusterUpdateDeadlineGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewBoundaryServiceClusterUpdateDeadlineGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "BoundaryService_ClusterUpdateDeadlineGet",
+		Method:             "GET",
+		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-deadline",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &BoundaryServiceClusterUpdateDeadlineGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*BoundaryServiceClusterUpdateDeadlineGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*BoundaryServiceClusterUpdateDeadlineGetDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
