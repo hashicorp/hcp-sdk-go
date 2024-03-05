@@ -10,13 +10,13 @@ require (
 	github.com/go-openapi/errors v0.21.0
 	github.com/go-openapi/runtime v0.26.2
 	github.com/go-openapi/strfmt v0.21.10
-	github.com/go-openapi/swag v0.22.5
+	github.com/go-openapi/swag v0.22.10
 	github.com/go-openapi/validate v0.22.4
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db
 	github.com/skratchdot/open-golang v0.0.0-20200116055534-eef842397966
-	github.com/stretchr/testify v1.8.4
+	github.com/stretchr/testify v1.9.0
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb
 	golang.org/x/oauth2 v0.15.0
 )
