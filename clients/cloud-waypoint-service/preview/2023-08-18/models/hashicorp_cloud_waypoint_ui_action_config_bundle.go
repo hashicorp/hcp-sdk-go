@@ -7,32 +7,40 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudWaypointUIListActionConfigBundle hashicorp cloud waypoint UI list action config bundle
+// HashicorpCloudWaypointUIActionConfigBundle hashicorp cloud waypoint UI action config bundle
 //
-// swagger:model hashicorp.cloud.waypoint.UI.ListActionConfigBundle
-type HashicorpCloudWaypointUIListActionConfigBundle struct {
+// swagger:model hashicorp.cloud.waypoint.UI.ActionConfigBundle
+type HashicorpCloudWaypointUIActionConfigBundle struct {
 
 	// action config
 	ActionConfig *HashicorpCloudWaypointActionConfig `json:"action_config,omitempty"`
+
+	// A list of assigned applications to this action config
+	AssignedApplications []*HashicorpCloudWaypointUIActionConfigBundleApplicationAssignment `json:"assigned_applications"`
 
 	// The latest run for this action_config, if one exists
 	LatestRun *HashicorpCloudWaypointActionRun `json:"latest_run,omitempty"`
 
 	// The total number of runs for this action_config
-	TotalRuns *HashicorpCloudWaypointUIListActionConfigBundleTotalRuns `json:"total_runs,omitempty"`
+	TotalRuns *HashicorpCloudWaypointUIActionConfigBundleTotalRuns `json:"total_runs,omitempty"`
 }
 
-// Validate validates this hashicorp cloud waypoint UI list action config bundle
-func (m *HashicorpCloudWaypointUIListActionConfigBundle) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud waypoint UI action config bundle
+func (m *HashicorpCloudWaypointUIActionConfigBundle) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateActionConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAssignedApplications(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -50,7 +58,7 @@ func (m *HashicorpCloudWaypointUIListActionConfigBundle) Validate(formats strfmt
 	return nil
 }
 
-func (m *HashicorpCloudWaypointUIListActionConfigBundle) validateActionConfig(formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointUIActionConfigBundle) validateActionConfig(formats strfmt.Registry) error {
 	if swag.IsZero(m.ActionConfig) { // not required
 		return nil
 	}
@@ -69,7 +77,33 @@ func (m *HashicorpCloudWaypointUIListActionConfigBundle) validateActionConfig(fo
 	return nil
 }
 
-func (m *HashicorpCloudWaypointUIListActionConfigBundle) validateLatestRun(formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointUIActionConfigBundle) validateAssignedApplications(formats strfmt.Registry) error {
+	if swag.IsZero(m.AssignedApplications) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.AssignedApplications); i++ {
+		if swag.IsZero(m.AssignedApplications[i]) { // not required
+			continue
+		}
+
+		if m.AssignedApplications[i] != nil {
+			if err := m.AssignedApplications[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("assigned_applications" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("assigned_applications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointUIActionConfigBundle) validateLatestRun(formats strfmt.Registry) error {
 	if swag.IsZero(m.LatestRun) { // not required
 		return nil
 	}
@@ -88,7 +122,7 @@ func (m *HashicorpCloudWaypointUIListActionConfigBundle) validateLatestRun(forma
 	return nil
 }
 
-func (m *HashicorpCloudWaypointUIListActionConfigBundle) validateTotalRuns(formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointUIActionConfigBundle) validateTotalRuns(formats strfmt.Registry) error {
 	if swag.IsZero(m.TotalRuns) { // not required
 		return nil
 	}
@@ -107,11 +141,15 @@ func (m *HashicorpCloudWaypointUIListActionConfigBundle) validateTotalRuns(forma
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud waypoint UI list action config bundle based on the context it is used
-func (m *HashicorpCloudWaypointUIListActionConfigBundle) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud waypoint UI action config bundle based on the context it is used
+func (m *HashicorpCloudWaypointUIActionConfigBundle) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateActionConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAssignedApplications(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -129,7 +167,7 @@ func (m *HashicorpCloudWaypointUIListActionConfigBundle) ContextValidate(ctx con
 	return nil
 }
 
-func (m *HashicorpCloudWaypointUIListActionConfigBundle) contextValidateActionConfig(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointUIActionConfigBundle) contextValidateActionConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ActionConfig != nil {
 
@@ -150,7 +188,32 @@ func (m *HashicorpCloudWaypointUIListActionConfigBundle) contextValidateActionCo
 	return nil
 }
 
-func (m *HashicorpCloudWaypointUIListActionConfigBundle) contextValidateLatestRun(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointUIActionConfigBundle) contextValidateAssignedApplications(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.AssignedApplications); i++ {
+
+		if m.AssignedApplications[i] != nil {
+
+			if swag.IsZero(m.AssignedApplications[i]) { // not required
+				return nil
+			}
+
+			if err := m.AssignedApplications[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("assigned_applications" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("assigned_applications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointUIActionConfigBundle) contextValidateLatestRun(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LatestRun != nil {
 
@@ -171,7 +234,7 @@ func (m *HashicorpCloudWaypointUIListActionConfigBundle) contextValidateLatestRu
 	return nil
 }
 
-func (m *HashicorpCloudWaypointUIListActionConfigBundle) contextValidateTotalRuns(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointUIActionConfigBundle) contextValidateTotalRuns(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TotalRuns != nil {
 
@@ -193,7 +256,7 @@ func (m *HashicorpCloudWaypointUIListActionConfigBundle) contextValidateTotalRun
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudWaypointUIListActionConfigBundle) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudWaypointUIActionConfigBundle) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -201,8 +264,8 @@ func (m *HashicorpCloudWaypointUIListActionConfigBundle) MarshalBinary() ([]byte
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudWaypointUIListActionConfigBundle) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudWaypointUIListActionConfigBundle
+func (m *HashicorpCloudWaypointUIActionConfigBundle) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudWaypointUIActionConfigBundle
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

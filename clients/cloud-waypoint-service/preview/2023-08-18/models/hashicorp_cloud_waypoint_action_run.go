@@ -47,6 +47,9 @@ type HashicorpCloudWaypointActionRun struct {
 	//  so maybe we can store that here directly on the run action message
 	RunBy string `json:"run_by,omitempty"`
 
+	// The scope for which this run was invoked in.
+	Scope *HashicorpCloudWaypointActionRunScope `json:"scope,omitempty"`
+
 	// The sequence number used to determine how many times this has been run
 	Sequence string `json:"sequence,omitempty"`
 
@@ -79,6 +82,10 @@ func (m *HashicorpCloudWaypointActionRun) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateResponseStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateScope(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -192,6 +199,25 @@ func (m *HashicorpCloudWaypointActionRun) validateResponseStatus(formats strfmt.
 	return nil
 }
 
+func (m *HashicorpCloudWaypointActionRun) validateScope(formats strfmt.Registry) error {
+	if swag.IsZero(m.Scope) { // not required
+		return nil
+	}
+
+	if m.Scope != nil {
+		if err := m.Scope.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("scope")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scope")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudWaypointActionRun) validateStatusLog(formats strfmt.Registry) error {
 	if swag.IsZero(m.StatusLog) { // not required
 		return nil
@@ -235,6 +261,10 @@ func (m *HashicorpCloudWaypointActionRun) ContextValidate(ctx context.Context, f
 	}
 
 	if err := m.contextValidateResponseStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateScope(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -324,6 +354,27 @@ func (m *HashicorpCloudWaypointActionRun) contextValidateResponseStatus(ctx cont
 				return ve.ValidateName("response_status")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("response_status")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointActionRun) contextValidateScope(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Scope != nil {
+
+		if swag.IsZero(m.Scope) { // not required
+			return nil
+		}
+
+		if err := m.Scope.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("scope")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scope")
 			}
 			return err
 		}

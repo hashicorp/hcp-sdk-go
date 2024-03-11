@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -48,8 +49,8 @@ type HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody struct {
 	// Terraform No Code module used for provisioning the Add-on
 	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
 
-	// The TF variable set to apply to the Add-on's No Code workspace
-	TfVariableSetIds []string `json:"tf_variable_set_ids"`
+	// variable_options is the collection of input variables which may be set for a template.
+	VariableOptions []*HashicorpCloudWaypointTFModuleVariable `json:"variable_options"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service update add on definition body
@@ -65,6 +66,10 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) Validat
 	}
 
 	if err := m.validateTerraformNocodeModule(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVariableOptions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -131,6 +136,32 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) validat
 	return nil
 }
 
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) validateVariableOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.VariableOptions) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.VariableOptions); i++ {
+		if swag.IsZero(m.VariableOptions[i]) { // not required
+			continue
+		}
+
+		if m.VariableOptions[i] != nil {
+			if err := m.VariableOptions[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variable_options" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variable_options" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint waypoint service update add on definition body based on the context it is used
 func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -144,6 +175,10 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) Context
 	}
 
 	if err := m.contextValidateTerraformNocodeModule(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVariableOptions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -211,6 +246,31 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) context
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) contextValidateVariableOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.VariableOptions); i++ {
+
+		if m.VariableOptions[i] != nil {
+
+			if swag.IsZero(m.VariableOptions[i]) { // not required
+				return nil
+			}
+
+			if err := m.VariableOptions[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variable_options" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variable_options" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

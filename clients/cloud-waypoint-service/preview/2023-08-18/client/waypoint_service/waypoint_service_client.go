@@ -418,7 +418,7 @@ func (a *Client) WaypointServiceCreateNamespace(params *WaypointServiceCreateNam
 }
 
 /*
-WaypointServiceCreateTFCConfig bs e t a create t f c config creates a terraform cloud configuration
+WaypointServiceCreateTFCConfig creates t f c config creates a terraform cloud configuration
 */
 func (a *Client) WaypointServiceCreateTFCConfig(params *WaypointServiceCreateTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateTFCConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -1330,7 +1330,7 @@ func (a *Client) WaypointServiceGetNamespace(params *WaypointServiceGetNamespace
 }
 
 /*
-WaypointServiceGetTFCConfig bs e t a get t f c config gets the server stored terraform cloud config
+WaypointServiceGetTFCConfig gets t f c config gets the server stored terraform cloud config
 */
 func (a *Client) WaypointServiceGetTFCConfig(params *WaypointServiceGetTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFCConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -2356,7 +2356,7 @@ func (a *Client) WaypointServiceUpdateApplicationTemplate(params *WaypointServic
 }
 
 /*
-WaypointServiceUpdateTFCConfig bs e t a update t f c config updates a terraform cloud configuration
+WaypointServiceUpdateTFCConfig updates t f c config updates a terraform cloud configuration
 */
 func (a *Client) WaypointServiceUpdateTFCConfig(params *WaypointServiceUpdateTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateTFCConfigOK, error) {
 	// TODO: Validate the params before sending

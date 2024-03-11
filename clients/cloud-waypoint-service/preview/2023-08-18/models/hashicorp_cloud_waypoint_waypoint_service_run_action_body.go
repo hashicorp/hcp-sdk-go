@@ -23,6 +23,9 @@ type HashicorpCloudWaypointWaypointServiceRunActionBody struct {
 
 	// The namespace the action will run in
 	Namespace interface{} `json:"namespace,omitempty"`
+
+	// Optional scope to set for running the action
+	Scope *HashicorpCloudWaypointActionRunScope `json:"scope,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service run action body
@@ -30,6 +33,10 @@ func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) Validate(formats st
 	var res []error
 
 	if err := m.validateActionRef(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateScope(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -58,11 +65,34 @@ func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) validateActionRef(f
 	return nil
 }
 
+func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) validateScope(formats strfmt.Registry) error {
+	if swag.IsZero(m.Scope) { // not required
+		return nil
+	}
+
+	if m.Scope != nil {
+		if err := m.Scope.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("scope")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scope")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint waypoint service run action body based on the context it is used
 func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateActionRef(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateScope(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -85,6 +115,27 @@ func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) contextValidateActi
 				return ve.ValidateName("action_ref")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("action_ref")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) contextValidateScope(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Scope != nil {
+
+		if swag.IsZero(m.Scope) { // not required
+			return nil
+		}
+
+		if err := m.Scope.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("scope")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scope")
 			}
 			return err
 		}

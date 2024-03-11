@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudWaypointUIListActionConfigResponse hashicorp cloud waypoint UI list action config response
@@ -20,7 +21,10 @@ import (
 type HashicorpCloudWaypointUIListActionConfigResponse struct {
 
 	// action config bundles
-	ActionConfigBundles []*HashicorpCloudWaypointUIListActionConfigBundle `json:"action_config_bundles"`
+	ActionConfigBundles []*HashicorpCloudWaypointUIActionConfigBundle `json:"action_config_bundles"`
+
+	// pagination
+	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint UI list action config response
@@ -28,6 +32,10 @@ func (m *HashicorpCloudWaypointUIListActionConfigResponse) Validate(formats strf
 	var res []error
 
 	if err := m.validateActionConfigBundles(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePagination(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -63,11 +71,34 @@ func (m *HashicorpCloudWaypointUIListActionConfigResponse) validateActionConfigB
 	return nil
 }
 
+func (m *HashicorpCloudWaypointUIListActionConfigResponse) validatePagination(formats strfmt.Registry) error {
+	if swag.IsZero(m.Pagination) { // not required
+		return nil
+	}
+
+	if m.Pagination != nil {
+		if err := m.Pagination.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint UI list action config response based on the context it is used
 func (m *HashicorpCloudWaypointUIListActionConfigResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateActionConfigBundles(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePagination(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -97,6 +128,27 @@ func (m *HashicorpCloudWaypointUIListActionConfigResponse) contextValidateAction
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointUIListActionConfigResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
+		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
 	}
 
 	return nil

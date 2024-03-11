@@ -7,17 +7,22 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudWaypointGetTFRunStatusResponse GetTFRunStatusResponse is the response containing the status of the latest
-// run of a Terraform workspace
+// HashicorpCloudWaypointGetTFRunStatusResponse GetTFRunStatusResponse is the response containing the url & status of the
+// latest run for a Terraform workspace, as well as the variables set on the
+// workspace.
 //
 // swagger:model hashicorp.cloud.waypoint.GetTFRunStatusResponse
 type HashicorpCloudWaypointGetTFRunStatusResponse struct {
+
+	// the variables set on the TF workspace
+	InputVariables []*HashicorpCloudWaypointInputVariable `json:"input_variables"`
 
 	// the state of the TF run
 	State *HashicorpCloudWaypointTerraformTFRunState `json:"state,omitempty"`
@@ -30,6 +35,10 @@ type HashicorpCloudWaypointGetTFRunStatusResponse struct {
 func (m *HashicorpCloudWaypointGetTFRunStatusResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateInputVariables(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateState(formats); err != nil {
 		res = append(res, err)
 	}
@@ -37,6 +46,32 @@ func (m *HashicorpCloudWaypointGetTFRunStatusResponse) Validate(formats strfmt.R
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointGetTFRunStatusResponse) validateInputVariables(formats strfmt.Registry) error {
+	if swag.IsZero(m.InputVariables) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InputVariables); i++ {
+		if swag.IsZero(m.InputVariables[i]) { // not required
+			continue
+		}
+
+		if m.InputVariables[i] != nil {
+			if err := m.InputVariables[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("input_variables" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("input_variables" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -63,6 +98,10 @@ func (m *HashicorpCloudWaypointGetTFRunStatusResponse) validateState(formats str
 func (m *HashicorpCloudWaypointGetTFRunStatusResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateInputVariables(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateState(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -70,6 +109,31 @@ func (m *HashicorpCloudWaypointGetTFRunStatusResponse) ContextValidate(ctx conte
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointGetTFRunStatusResponse) contextValidateInputVariables(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InputVariables); i++ {
+
+		if m.InputVariables[i] != nil {
+
+			if swag.IsZero(m.InputVariables[i]) { // not required
+				return nil
+			}
+
+			if err := m.InputVariables[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("input_variables" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("input_variables" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

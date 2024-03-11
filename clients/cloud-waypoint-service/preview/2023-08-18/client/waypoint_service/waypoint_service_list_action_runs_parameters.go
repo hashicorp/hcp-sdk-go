@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewWaypointServiceListActionRunsParams creates a new WaypointServiceListActionRunsParams object,
@@ -75,6 +76,39 @@ type WaypointServiceListActionRunsParams struct {
 
 	// NamespaceID.
 	NamespaceID string
+
+	/* PaginationNextPageToken.
+
+	     Specifies a page token to use to retrieve the next page. Set this to the
+	`next_page_token` returned by previous list requests to get the next page of
+	results. If set, `previous_page_token` must not be set.
+	*/
+	PaginationNextPageToken *string
+
+	/* PaginationPageSize.
+
+	     The max number of results per page that should be returned. If the number
+	of available results is larger than `page_size`, a `next_page_token` is
+	returned which can be used to get the next page of results in subsequent
+	requests. A value of zero will cause `page_size` to be defaulted.
+
+	     Format: int64
+	*/
+	PaginationPageSize *int64
+
+	/* PaginationPreviousPageToken.
+
+	     Specifies a page token to use to retrieve the previous page. Set this to
+	the `previous_page_token` returned by previous list requests to get the
+	previous page of results. If set, `next_page_token` must not be set.
+	*/
+	PaginationPreviousPageToken *string
+
+	// ScopeApplicationID.
+	ScopeApplicationID *string
+
+	// ScopeApplicationName.
+	ScopeApplicationName *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -162,6 +196,61 @@ func (o *WaypointServiceListActionRunsParams) SetNamespaceID(namespaceID string)
 	o.NamespaceID = namespaceID
 }
 
+// WithPaginationNextPageToken adds the paginationNextPageToken to the waypoint service list action runs params
+func (o *WaypointServiceListActionRunsParams) WithPaginationNextPageToken(paginationNextPageToken *string) *WaypointServiceListActionRunsParams {
+	o.SetPaginationNextPageToken(paginationNextPageToken)
+	return o
+}
+
+// SetPaginationNextPageToken adds the paginationNextPageToken to the waypoint service list action runs params
+func (o *WaypointServiceListActionRunsParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
+	o.PaginationNextPageToken = paginationNextPageToken
+}
+
+// WithPaginationPageSize adds the paginationPageSize to the waypoint service list action runs params
+func (o *WaypointServiceListActionRunsParams) WithPaginationPageSize(paginationPageSize *int64) *WaypointServiceListActionRunsParams {
+	o.SetPaginationPageSize(paginationPageSize)
+	return o
+}
+
+// SetPaginationPageSize adds the paginationPageSize to the waypoint service list action runs params
+func (o *WaypointServiceListActionRunsParams) SetPaginationPageSize(paginationPageSize *int64) {
+	o.PaginationPageSize = paginationPageSize
+}
+
+// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the waypoint service list action runs params
+func (o *WaypointServiceListActionRunsParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *WaypointServiceListActionRunsParams {
+	o.SetPaginationPreviousPageToken(paginationPreviousPageToken)
+	return o
+}
+
+// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the waypoint service list action runs params
+func (o *WaypointServiceListActionRunsParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
+	o.PaginationPreviousPageToken = paginationPreviousPageToken
+}
+
+// WithScopeApplicationID adds the scopeApplicationID to the waypoint service list action runs params
+func (o *WaypointServiceListActionRunsParams) WithScopeApplicationID(scopeApplicationID *string) *WaypointServiceListActionRunsParams {
+	o.SetScopeApplicationID(scopeApplicationID)
+	return o
+}
+
+// SetScopeApplicationID adds the scopeApplicationId to the waypoint service list action runs params
+func (o *WaypointServiceListActionRunsParams) SetScopeApplicationID(scopeApplicationID *string) {
+	o.ScopeApplicationID = scopeApplicationID
+}
+
+// WithScopeApplicationName adds the scopeApplicationName to the waypoint service list action runs params
+func (o *WaypointServiceListActionRunsParams) WithScopeApplicationName(scopeApplicationName *string) *WaypointServiceListActionRunsParams {
+	o.SetScopeApplicationName(scopeApplicationName)
+	return o
+}
+
+// SetScopeApplicationName adds the scopeApplicationName to the waypoint service list action runs params
+func (o *WaypointServiceListActionRunsParams) SetScopeApplicationName(scopeApplicationName *string) {
+	o.ScopeApplicationName = scopeApplicationName
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *WaypointServiceListActionRunsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -207,6 +296,91 @@ func (o *WaypointServiceListActionRunsParams) WriteToRequest(r runtime.ClientReq
 	// path param namespace.id
 	if err := r.SetPathParam("namespace.id", o.NamespaceID); err != nil {
 		return err
+	}
+
+	if o.PaginationNextPageToken != nil {
+
+		// query param pagination.next_page_token
+		var qrPaginationNextPageToken string
+
+		if o.PaginationNextPageToken != nil {
+			qrPaginationNextPageToken = *o.PaginationNextPageToken
+		}
+		qPaginationNextPageToken := qrPaginationNextPageToken
+		if qPaginationNextPageToken != "" {
+
+			if err := r.SetQueryParam("pagination.next_page_token", qPaginationNextPageToken); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationPageSize != nil {
+
+		// query param pagination.page_size
+		var qrPaginationPageSize int64
+
+		if o.PaginationPageSize != nil {
+			qrPaginationPageSize = *o.PaginationPageSize
+		}
+		qPaginationPageSize := swag.FormatInt64(qrPaginationPageSize)
+		if qPaginationPageSize != "" {
+
+			if err := r.SetQueryParam("pagination.page_size", qPaginationPageSize); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationPreviousPageToken != nil {
+
+		// query param pagination.previous_page_token
+		var qrPaginationPreviousPageToken string
+
+		if o.PaginationPreviousPageToken != nil {
+			qrPaginationPreviousPageToken = *o.PaginationPreviousPageToken
+		}
+		qPaginationPreviousPageToken := qrPaginationPreviousPageToken
+		if qPaginationPreviousPageToken != "" {
+
+			if err := r.SetQueryParam("pagination.previous_page_token", qPaginationPreviousPageToken); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ScopeApplicationID != nil {
+
+		// query param scope.application.id
+		var qrScopeApplicationID string
+
+		if o.ScopeApplicationID != nil {
+			qrScopeApplicationID = *o.ScopeApplicationID
+		}
+		qScopeApplicationID := qrScopeApplicationID
+		if qScopeApplicationID != "" {
+
+			if err := r.SetQueryParam("scope.application.id", qScopeApplicationID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ScopeApplicationName != nil {
+
+		// query param scope.application.name
+		var qrScopeApplicationName string
+
+		if o.ScopeApplicationName != nil {
+			qrScopeApplicationName = *o.ScopeApplicationName
+		}
+		qScopeApplicationName := qrScopeApplicationName
+		if qScopeApplicationName != "" {
+
+			if err := r.SetQueryParam("scope.application.name", qScopeApplicationName); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

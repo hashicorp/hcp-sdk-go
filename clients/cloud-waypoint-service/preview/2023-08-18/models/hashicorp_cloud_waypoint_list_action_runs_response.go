@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudWaypointListActionRunsResponse hashicorp cloud waypoint list action runs response
@@ -21,6 +22,9 @@ type HashicorpCloudWaypointListActionRunsResponse struct {
 
 	// action runs
 	ActionRuns []*HashicorpCloudWaypointActionRun `json:"action_runs"`
+
+	// pagination
+	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint list action runs response
@@ -28,6 +32,10 @@ func (m *HashicorpCloudWaypointListActionRunsResponse) Validate(formats strfmt.R
 	var res []error
 
 	if err := m.validateActionRuns(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePagination(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -63,11 +71,34 @@ func (m *HashicorpCloudWaypointListActionRunsResponse) validateActionRuns(format
 	return nil
 }
 
+func (m *HashicorpCloudWaypointListActionRunsResponse) validatePagination(formats strfmt.Registry) error {
+	if swag.IsZero(m.Pagination) { // not required
+		return nil
+	}
+
+	if m.Pagination != nil {
+		if err := m.Pagination.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint list action runs response based on the context it is used
 func (m *HashicorpCloudWaypointListActionRunsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateActionRuns(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePagination(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -97,6 +128,27 @@ func (m *HashicorpCloudWaypointListActionRunsResponse) contextValidateActionRuns
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointListActionRunsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
+		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
 	}
 
 	return nil

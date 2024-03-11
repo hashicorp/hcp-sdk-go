@@ -31,6 +31,9 @@ type HashicorpCloudWaypointApplication struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// Terraform output values, sensitive values have type and value omitted
+	OutputValues []*HashicorpCloudWaypointTFOutputValue `json:"output_values"`
+
 	// readme_markdown is markdown formatted instructions on how to
 	// operate the application. This may be populated from a application template.
 	// Format: byte
@@ -52,6 +55,10 @@ func (m *HashicorpCloudWaypointApplication) Validate(formats strfmt.Registry) er
 	}
 
 	if err := m.validateApplicationTemplate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOutputValues(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -110,6 +117,32 @@ func (m *HashicorpCloudWaypointApplication) validateApplicationTemplate(formats 
 	return nil
 }
 
+func (m *HashicorpCloudWaypointApplication) validateOutputValues(formats strfmt.Registry) error {
+	if swag.IsZero(m.OutputValues) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.OutputValues); i++ {
+		if swag.IsZero(m.OutputValues[i]) { // not required
+			continue
+		}
+
+		if m.OutputValues[i] != nil {
+			if err := m.OutputValues[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("output_values" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("output_values" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudWaypointApplication) validateTags(formats strfmt.Registry) error {
 	if swag.IsZero(m.Tags) { // not required
 		return nil
@@ -145,6 +178,10 @@ func (m *HashicorpCloudWaypointApplication) ContextValidate(ctx context.Context,
 	}
 
 	if err := m.contextValidateApplicationTemplate(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateOutputValues(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -199,6 +236,31 @@ func (m *HashicorpCloudWaypointApplication) contextValidateApplicationTemplate(c
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplication) contextValidateOutputValues(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.OutputValues); i++ {
+
+		if m.OutputValues[i] != nil {
+
+			if swag.IsZero(m.OutputValues[i]) { // not required
+				return nil
+			}
+
+			if err := m.OutputValues[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("output_values" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("output_values" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
