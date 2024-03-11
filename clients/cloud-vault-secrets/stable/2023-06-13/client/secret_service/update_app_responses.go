@@ -83,6 +83,11 @@ func (o *UpdateAppOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update app o k response
+func (o *UpdateAppOK) Code() int {
+	return 200
+}
+
 func (o *UpdateAppOK) Error() string {
 	return fmt.Sprintf("[PATCH /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{name}][%d] updateAppOK  %+v", 200, o.Payload)
 }
@@ -125,11 +130,6 @@ type UpdateAppDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the update app default response
-func (o *UpdateAppDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this update app default response has a 2xx status code
 func (o *UpdateAppDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +153,11 @@ func (o *UpdateAppDefault) IsServerError() bool {
 // IsCode returns true when this update app default response a status code equal to that given
 func (o *UpdateAppDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the update app default response
+func (o *UpdateAppDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UpdateAppDefault) Error() string {
@@ -245,6 +250,11 @@ func (o *UpdateAppBody) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (o *UpdateAppBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -337,6 +347,11 @@ func (o *UpdateAppParamsBodyLocation) ContextValidate(ctx context.Context, forma
 func (o *UpdateAppParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

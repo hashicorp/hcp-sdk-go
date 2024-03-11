@@ -80,6 +80,11 @@ func (o *GetVercelInstallationLinkOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get vercel installation link o k response
+func (o *GetVercelInstallationLinkOK) Code() int {
+	return 200
+}
+
 func (o *GetVercelInstallationLinkOK) Error() string {
 	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel/link][%d] getVercelInstallationLinkOK  %+v", 200, o.Payload)
 }
@@ -122,11 +127,6 @@ type GetVercelInstallationLinkDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the get vercel installation link default response
-func (o *GetVercelInstallationLinkDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get vercel installation link default response has a 2xx status code
 func (o *GetVercelInstallationLinkDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,6 +150,11 @@ func (o *GetVercelInstallationLinkDefault) IsServerError() bool {
 // IsCode returns true when this get vercel installation link default response a status code equal to that given
 func (o *GetVercelInstallationLinkDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get vercel installation link default response
+func (o *GetVercelInstallationLinkDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetVercelInstallationLinkDefault) Error() string {

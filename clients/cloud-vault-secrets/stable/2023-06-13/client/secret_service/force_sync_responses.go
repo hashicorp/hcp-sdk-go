@@ -83,6 +83,11 @@ func (o *ForceSyncOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the force sync o k response
+func (o *ForceSyncOK) Code() int {
+	return 200
+}
+
 func (o *ForceSyncOK) Error() string {
 	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/force][%d] forceSyncOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ForceSyncDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the force sync default response
-func (o *ForceSyncDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this force sync default response has a 2xx status code
 func (o *ForceSyncDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ForceSyncDefault) IsServerError() bool {
 // IsCode returns true when this force sync default response a status code equal to that given
 func (o *ForceSyncDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the force sync default response
+func (o *ForceSyncDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ForceSyncDefault) Error() string {
@@ -273,6 +278,11 @@ func (o *ForceSyncBody) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (o *ForceSyncBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -289,6 +299,11 @@ func (o *ForceSyncBody) contextValidateLocation(ctx context.Context, formats str
 func (o *ForceSyncBody) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Operation != nil {
+
+		if swag.IsZero(o.Operation) { // not required
+			return nil
+		}
+
 		if err := o.Operation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "operation")
@@ -381,6 +396,11 @@ func (o *ForceSyncParamsBodyLocation) ContextValidate(ctx context.Context, forma
 func (o *ForceSyncParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

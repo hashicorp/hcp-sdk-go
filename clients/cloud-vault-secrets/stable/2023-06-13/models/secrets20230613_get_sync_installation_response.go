@@ -72,6 +72,11 @@ func (m *Secrets20230613GetSyncInstallationResponse) ContextValidate(ctx context
 func (m *Secrets20230613GetSyncInstallationResponse) contextValidateSyncInstallation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SyncInstallation != nil {
+
+		if swag.IsZero(m.SyncInstallation) { // not required
+			return nil
+		}
+
 		if err := m.SyncInstallation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("sync_installation")

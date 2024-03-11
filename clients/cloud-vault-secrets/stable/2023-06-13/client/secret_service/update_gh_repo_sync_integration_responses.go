@@ -83,6 +83,11 @@ func (o *UpdateGhRepoSyncIntegrationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update gh repo sync integration o k response
+func (o *UpdateGhRepoSyncIntegrationOK) Code() int {
+	return 200
+}
+
 func (o *UpdateGhRepoSyncIntegrationOK) Error() string {
 	return fmt.Sprintf("[PATCH /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gh-repo/{name}][%d] updateGhRepoSyncIntegrationOK  %+v", 200, o.Payload)
 }
@@ -125,11 +130,6 @@ type UpdateGhRepoSyncIntegrationDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the update gh repo sync integration default response
-func (o *UpdateGhRepoSyncIntegrationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this update gh repo sync integration default response has a 2xx status code
 func (o *UpdateGhRepoSyncIntegrationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +153,11 @@ func (o *UpdateGhRepoSyncIntegrationDefault) IsServerError() bool {
 // IsCode returns true when this update gh repo sync integration default response a status code equal to that given
 func (o *UpdateGhRepoSyncIntegrationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the update gh repo sync integration default response
+func (o *UpdateGhRepoSyncIntegrationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UpdateGhRepoSyncIntegrationDefault) Error() string {
@@ -269,6 +274,11 @@ func (o *UpdateGhRepoSyncIntegrationBody) ContextValidate(ctx context.Context, f
 func (o *UpdateGhRepoSyncIntegrationBody) contextValidateGhRepoConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.GhRepoConnectionDetails != nil {
+
+		if swag.IsZero(o.GhRepoConnectionDetails) { // not required
+			return nil
+		}
+
 		if err := o.GhRepoConnectionDetails.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "gh_repo_connection_details")
@@ -285,6 +295,11 @@ func (o *UpdateGhRepoSyncIntegrationBody) contextValidateGhRepoConnectionDetails
 func (o *UpdateGhRepoSyncIntegrationBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -377,6 +392,11 @@ func (o *UpdateGhRepoSyncIntegrationParamsBodyLocation) ContextValidate(ctx cont
 func (o *UpdateGhRepoSyncIntegrationParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

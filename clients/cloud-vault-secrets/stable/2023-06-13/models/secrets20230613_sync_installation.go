@@ -165,6 +165,11 @@ func (m *Secrets20230613SyncInstallation) ContextValidate(ctx context.Context, f
 func (m *Secrets20230613SyncInstallation) contextValidateAwsAssumeRole(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AwsAssumeRole != nil {
+
+		if swag.IsZero(m.AwsAssumeRole) { // not required
+			return nil
+		}
+
 		if err := m.AwsAssumeRole.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_assume_role")
@@ -181,6 +186,11 @@ func (m *Secrets20230613SyncInstallation) contextValidateAwsAssumeRole(ctx conte
 func (m *Secrets20230613SyncInstallation) contextValidateGhApp(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GhApp != nil {
+
+		if swag.IsZero(m.GhApp) { // not required
+			return nil
+		}
+
 		if err := m.GhApp.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gh_app")
@@ -197,6 +207,11 @@ func (m *Secrets20230613SyncInstallation) contextValidateGhApp(ctx context.Conte
 func (m *Secrets20230613SyncInstallation) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -213,6 +228,11 @@ func (m *Secrets20230613SyncInstallation) contextValidateLocation(ctx context.Co
 func (m *Secrets20230613SyncInstallation) contextValidateVercelOauth(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.VercelOauth != nil {
+
+		if swag.IsZero(m.VercelOauth) { // not required
+			return nil
+		}
+
 		if err := m.VercelOauth.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("vercel_oauth")

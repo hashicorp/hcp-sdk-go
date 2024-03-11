@@ -83,6 +83,11 @@ func (o *CreateAppOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the create app o k response
+func (o *CreateAppOK) Code() int {
+	return 200
+}
+
 func (o *CreateAppOK) Error() string {
 	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps][%d] createAppOK  %+v", 200, o.Payload)
 }
@@ -125,11 +130,6 @@ type CreateAppDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the create app default response
-func (o *CreateAppDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this create app default response has a 2xx status code
 func (o *CreateAppDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +153,11 @@ func (o *CreateAppDefault) IsServerError() bool {
 // IsCode returns true when this create app default response a status code equal to that given
 func (o *CreateAppDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the create app default response
+func (o *CreateAppDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *CreateAppDefault) Error() string {
@@ -248,6 +253,11 @@ func (o *CreateAppBody) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (o *CreateAppBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -340,6 +350,11 @@ func (o *CreateAppParamsBodyLocation) ContextValidate(ctx context.Context, forma
 func (o *CreateAppParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

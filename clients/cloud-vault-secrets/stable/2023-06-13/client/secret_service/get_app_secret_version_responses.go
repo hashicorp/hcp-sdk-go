@@ -80,6 +80,11 @@ func (o *GetAppSecretVersionOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get app secret version o k response
+func (o *GetAppSecretVersionOK) Code() int {
+	return 200
+}
+
 func (o *GetAppSecretVersionOK) Error() string {
 	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] getAppSecretVersionOK  %+v", 200, o.Payload)
 }
@@ -122,11 +127,6 @@ type GetAppSecretVersionDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the get app secret version default response
-func (o *GetAppSecretVersionDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get app secret version default response has a 2xx status code
 func (o *GetAppSecretVersionDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,6 +150,11 @@ func (o *GetAppSecretVersionDefault) IsServerError() bool {
 // IsCode returns true when this get app secret version default response a status code equal to that given
 func (o *GetAppSecretVersionDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get app secret version default response
+func (o *GetAppSecretVersionDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetAppSecretVersionDefault) Error() string {

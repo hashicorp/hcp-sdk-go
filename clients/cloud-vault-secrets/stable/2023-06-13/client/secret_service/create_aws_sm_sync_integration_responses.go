@@ -83,6 +83,11 @@ func (o *CreateAwsSmSyncIntegrationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the create aws sm sync integration o k response
+func (o *CreateAwsSmSyncIntegrationOK) Code() int {
+	return 200
+}
+
 func (o *CreateAwsSmSyncIntegrationOK) Error() string {
 	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/aws-sm][%d] createAwsSmSyncIntegrationOK  %+v", 200, o.Payload)
 }
@@ -125,11 +130,6 @@ type CreateAwsSmSyncIntegrationDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the create aws sm sync integration default response
-func (o *CreateAwsSmSyncIntegrationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this create aws sm sync integration default response has a 2xx status code
 func (o *CreateAwsSmSyncIntegrationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +153,11 @@ func (o *CreateAwsSmSyncIntegrationDefault) IsServerError() bool {
 // IsCode returns true when this create aws sm sync integration default response a status code equal to that given
 func (o *CreateAwsSmSyncIntegrationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the create aws sm sync integration default response
+func (o *CreateAwsSmSyncIntegrationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *CreateAwsSmSyncIntegrationDefault) Error() string {
@@ -272,6 +277,11 @@ func (o *CreateAwsSmSyncIntegrationBody) ContextValidate(ctx context.Context, fo
 func (o *CreateAwsSmSyncIntegrationBody) contextValidateAwsSmConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.AwsSmConnectionDetails != nil {
+
+		if swag.IsZero(o.AwsSmConnectionDetails) { // not required
+			return nil
+		}
+
 		if err := o.AwsSmConnectionDetails.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "aws_sm_connection_details")
@@ -288,6 +298,11 @@ func (o *CreateAwsSmSyncIntegrationBody) contextValidateAwsSmConnectionDetails(c
 func (o *CreateAwsSmSyncIntegrationBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -380,6 +395,11 @@ func (o *CreateAwsSmSyncIntegrationParamsBodyLocation) ContextValidate(ctx conte
 func (o *CreateAwsSmSyncIntegrationParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

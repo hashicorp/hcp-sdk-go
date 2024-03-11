@@ -83,6 +83,11 @@ func (o *UpsertVercelProjectSyncIntegrationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the upsert vercel project sync integration o k response
+func (o *UpsertVercelProjectSyncIntegrationOK) Code() int {
+	return 200
+}
+
 func (o *UpsertVercelProjectSyncIntegrationOK) Error() string {
 	return fmt.Sprintf("[PUT /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project][%d] upsertVercelProjectSyncIntegrationOK  %+v", 200, o.Payload)
 }
@@ -125,11 +130,6 @@ type UpsertVercelProjectSyncIntegrationDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the upsert vercel project sync integration default response
-func (o *UpsertVercelProjectSyncIntegrationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this upsert vercel project sync integration default response has a 2xx status code
 func (o *UpsertVercelProjectSyncIntegrationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +153,11 @@ func (o *UpsertVercelProjectSyncIntegrationDefault) IsServerError() bool {
 // IsCode returns true when this upsert vercel project sync integration default response a status code equal to that given
 func (o *UpsertVercelProjectSyncIntegrationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the upsert vercel project sync integration default response
+func (o *UpsertVercelProjectSyncIntegrationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UpsertVercelProjectSyncIntegrationDefault) Error() string {
@@ -272,6 +277,11 @@ func (o *UpsertVercelProjectSyncIntegrationBody) ContextValidate(ctx context.Con
 func (o *UpsertVercelProjectSyncIntegrationBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -288,6 +298,11 @@ func (o *UpsertVercelProjectSyncIntegrationBody) contextValidateLocation(ctx con
 func (o *UpsertVercelProjectSyncIntegrationBody) contextValidateVercelProjectConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.VercelProjectConnectionDetails != nil {
+
+		if swag.IsZero(o.VercelProjectConnectionDetails) { // not required
+			return nil
+		}
+
 		if err := o.VercelProjectConnectionDetails.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "vercel_project_connection_details")
@@ -380,6 +395,11 @@ func (o *UpsertVercelProjectSyncIntegrationParamsBodyLocation) ContextValidate(c
 func (o *UpsertVercelProjectSyncIntegrationParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

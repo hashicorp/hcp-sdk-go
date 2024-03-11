@@ -82,6 +82,11 @@ func (m *Secrets20230613ListSyncIntegrationsResponse) contextValidateSyncIntegra
 	for i := 0; i < len(m.SyncIntegrations); i++ {
 
 		if m.SyncIntegrations[i] != nil {
+
+			if swag.IsZero(m.SyncIntegrations[i]) { // not required
+				return nil
+			}
+
 			if err := m.SyncIntegrations[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("sync_integrations" + "." + strconv.Itoa(i))

@@ -72,6 +72,11 @@ func (m *Secrets20230613OpenAppSecretResponse) ContextValidate(ctx context.Conte
 func (m *Secrets20230613OpenAppSecretResponse) contextValidateSecret(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Secret != nil {
+
+		if swag.IsZero(m.Secret) { // not required
+			return nil
+		}
+
 		if err := m.Secret.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("secret")

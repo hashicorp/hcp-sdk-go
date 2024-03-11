@@ -162,6 +162,11 @@ func (m *Secrets20230613GetUsageResponse) ContextValidate(ctx context.Context, f
 func (m *Secrets20230613GetUsageResponse) contextValidateApps(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Apps != nil {
+
+		if swag.IsZero(m.Apps) { // not required
+			return nil
+		}
+
 		if err := m.Apps.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("apps")
@@ -178,6 +183,11 @@ func (m *Secrets20230613GetUsageResponse) contextValidateApps(ctx context.Contex
 func (m *Secrets20230613GetUsageResponse) contextValidateBillingTier(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.BillingTier != nil {
+
+		if swag.IsZero(m.BillingTier) { // not required
+			return nil
+		}
+
 		if err := m.BillingTier.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("billing_tier")
@@ -194,6 +204,11 @@ func (m *Secrets20230613GetUsageResponse) contextValidateBillingTier(ctx context
 func (m *Secrets20230613GetUsageResponse) contextValidateIntegrations(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Integrations != nil {
+
+		if swag.IsZero(m.Integrations) { // not required
+			return nil
+		}
+
 		if err := m.Integrations.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("integrations")
@@ -210,6 +225,11 @@ func (m *Secrets20230613GetUsageResponse) contextValidateIntegrations(ctx contex
 func (m *Secrets20230613GetUsageResponse) contextValidateSecrets(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Secrets != nil {
+
+		if swag.IsZero(m.Secrets) { // not required
+			return nil
+		}
+
 		if err := m.Secrets.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("secrets")

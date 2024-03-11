@@ -80,6 +80,11 @@ func (o *DeleteSyncIntegrationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete sync integration o k response
+func (o *DeleteSyncIntegrationOK) Code() int {
+	return 200
+}
+
 func (o *DeleteSyncIntegrationOK) Error() string {
 	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/integrations/{name}][%d] deleteSyncIntegrationOK  %+v", 200, o.Payload)
 }
@@ -120,11 +125,6 @@ type DeleteSyncIntegrationDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the delete sync integration default response
-func (o *DeleteSyncIntegrationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this delete sync integration default response has a 2xx status code
 func (o *DeleteSyncIntegrationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -148,6 +148,11 @@ func (o *DeleteSyncIntegrationDefault) IsServerError() bool {
 // IsCode returns true when this delete sync integration default response a status code equal to that given
 func (o *DeleteSyncIntegrationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the delete sync integration default response
+func (o *DeleteSyncIntegrationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DeleteSyncIntegrationDefault) Error() string {

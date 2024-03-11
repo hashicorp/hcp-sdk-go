@@ -83,6 +83,11 @@ func (o *CreateAppKVSecretOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the create app k v secret o k response
+func (o *CreateAppKVSecretOK) Code() int {
+	return 200
+}
+
 func (o *CreateAppKVSecretOK) Error() string {
 	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/kv][%d] createAppKVSecretOK  %+v", 200, o.Payload)
 }
@@ -125,11 +130,6 @@ type CreateAppKVSecretDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the create app k v secret default response
-func (o *CreateAppKVSecretDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this create app k v secret default response has a 2xx status code
 func (o *CreateAppKVSecretDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +153,11 @@ func (o *CreateAppKVSecretDefault) IsServerError() bool {
 // IsCode returns true when this create app k v secret default response a status code equal to that given
 func (o *CreateAppKVSecretDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the create app k v secret default response
+func (o *CreateAppKVSecretDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *CreateAppKVSecretDefault) Error() string {
@@ -245,6 +250,11 @@ func (o *CreateAppKVSecretBody) ContextValidate(ctx context.Context, formats str
 func (o *CreateAppKVSecretBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -337,6 +347,11 @@ func (o *CreateAppKVSecretParamsBodyLocation) ContextValidate(ctx context.Contex
 func (o *CreateAppKVSecretParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

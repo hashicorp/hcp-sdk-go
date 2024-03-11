@@ -269,6 +269,11 @@ func (m *Secrets20230613SyncIntegration) ContextValidate(ctx context.Context, fo
 func (m *Secrets20230613SyncIntegration) contextValidateAwsSmConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AwsSmConnectionDetails != nil {
+
+		if swag.IsZero(m.AwsSmConnectionDetails) { // not required
+			return nil
+		}
+
 		if err := m.AwsSmConnectionDetails.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_sm_connection_details")
@@ -285,6 +290,11 @@ func (m *Secrets20230613SyncIntegration) contextValidateAwsSmConnectionDetails(c
 func (m *Secrets20230613SyncIntegration) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CreatedBy != nil {
+
+		if swag.IsZero(m.CreatedBy) { // not required
+			return nil
+		}
+
 		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("created_by")
@@ -301,6 +311,11 @@ func (m *Secrets20230613SyncIntegration) contextValidateCreatedBy(ctx context.Co
 func (m *Secrets20230613SyncIntegration) contextValidateGhRepoConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GhRepoConnectionDetails != nil {
+
+		if swag.IsZero(m.GhRepoConnectionDetails) { // not required
+			return nil
+		}
+
 		if err := m.GhRepoConnectionDetails.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gh_repo_connection_details")
@@ -317,6 +332,11 @@ func (m *Secrets20230613SyncIntegration) contextValidateGhRepoConnectionDetails(
 func (m *Secrets20230613SyncIntegration) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -333,6 +353,11 @@ func (m *Secrets20230613SyncIntegration) contextValidateLocation(ctx context.Con
 func (m *Secrets20230613SyncIntegration) contextValidateUpdatedBy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UpdatedBy != nil {
+
+		if swag.IsZero(m.UpdatedBy) { // not required
+			return nil
+		}
+
 		if err := m.UpdatedBy.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("updated_by")
@@ -349,6 +374,11 @@ func (m *Secrets20230613SyncIntegration) contextValidateUpdatedBy(ctx context.Co
 func (m *Secrets20230613SyncIntegration) contextValidateVercelProjectConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.VercelProjectConnectionDetails != nil {
+
+		if swag.IsZero(m.VercelProjectConnectionDetails) { // not required
+			return nil
+		}
+
 		if err := m.VercelProjectConnectionDetails.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("vercel_project_connection_details")

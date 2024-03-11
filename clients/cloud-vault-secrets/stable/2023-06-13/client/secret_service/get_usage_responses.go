@@ -80,6 +80,11 @@ func (o *GetUsageOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get usage o k response
+func (o *GetUsageOK) Code() int {
+	return 200
+}
+
 func (o *GetUsageOK) Error() string {
 	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/usage][%d] getUsageOK  %+v", 200, o.Payload)
 }
@@ -122,11 +127,6 @@ type GetUsageDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the get usage default response
-func (o *GetUsageDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get usage default response has a 2xx status code
 func (o *GetUsageDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,6 +150,11 @@ func (o *GetUsageDefault) IsServerError() bool {
 // IsCode returns true when this get usage default response a status code equal to that given
 func (o *GetUsageDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get usage default response
+func (o *GetUsageDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetUsageDefault) Error() string {

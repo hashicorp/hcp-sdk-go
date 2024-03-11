@@ -80,6 +80,11 @@ func (o *ListAppSecretsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list app secrets o k response
+func (o *ListAppSecretsOK) Code() int {
+	return 200
+}
+
 func (o *ListAppSecretsOK) Error() string {
 	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets][%d] listAppSecretsOK  %+v", 200, o.Payload)
 }
@@ -122,11 +127,6 @@ type ListAppSecretsDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the list app secrets default response
-func (o *ListAppSecretsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list app secrets default response has a 2xx status code
 func (o *ListAppSecretsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,6 +150,11 @@ func (o *ListAppSecretsDefault) IsServerError() bool {
 // IsCode returns true when this list app secrets default response a status code equal to that given
 func (o *ListAppSecretsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list app secrets default response
+func (o *ListAppSecretsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListAppSecretsDefault) Error() string {

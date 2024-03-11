@@ -182,6 +182,11 @@ func (m *Secrets20230613App) ContextValidate(ctx context.Context, formats strfmt
 func (m *Secrets20230613App) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CreatedBy != nil {
+
+		if swag.IsZero(m.CreatedBy) { // not required
+			return nil
+		}
+
 		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("created_by")
@@ -198,6 +203,11 @@ func (m *Secrets20230613App) contextValidateCreatedBy(ctx context.Context, forma
 func (m *Secrets20230613App) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
@@ -214,6 +224,11 @@ func (m *Secrets20230613App) contextValidateLocation(ctx context.Context, format
 func (m *Secrets20230613App) contextValidateUpdatedBy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UpdatedBy != nil {
+
+		if swag.IsZero(m.UpdatedBy) { // not required
+			return nil
+		}
+
 		if err := m.UpdatedBy.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("updated_by")

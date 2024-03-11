@@ -83,6 +83,11 @@ func (o *SetTierOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the set tier o k response
+func (o *SetTierOK) Code() int {
+	return 200
+}
+
 func (o *SetTierOK) Error() string {
 	return fmt.Sprintf("[PUT /secrets/2023-06-13/organizations/{location.organization_id}/billing/tier][%d] setTierOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type SetTierDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the set tier default response
-func (o *SetTierDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this set tier default response has a 2xx status code
 func (o *SetTierDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *SetTierDefault) IsServerError() bool {
 // IsCode returns true when this set tier default response a status code equal to that given
 func (o *SetTierDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the set tier default response
+func (o *SetTierDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *SetTierDefault) Error() string {
@@ -267,6 +272,11 @@ func (o *SetTierBody) ContextValidate(ctx context.Context, formats strfmt.Regist
 func (o *SetTierBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -283,6 +293,11 @@ func (o *SetTierBody) contextValidateLocation(ctx context.Context, formats strfm
 func (o *SetTierBody) contextValidateTier(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Tier != nil {
+
+		if swag.IsZero(o.Tier) { // not required
+			return nil
+		}
+
 		if err := o.Tier.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "tier")
@@ -378,6 +393,11 @@ func (o *SetTierParamsBodyLocation) ContextValidate(ctx context.Context, formats
 func (o *SetTierParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

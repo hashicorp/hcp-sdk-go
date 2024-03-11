@@ -80,6 +80,11 @@ func (o *CompleteVercelInstallationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the complete vercel installation o k response
+func (o *CompleteVercelInstallationOK) Code() int {
+	return 200
+}
+
 func (o *CompleteVercelInstallationOK) Error() string {
 	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/vercel/callback][%d] completeVercelInstallationOK  %+v", 200, o.Payload)
 }
@@ -122,11 +127,6 @@ type CompleteVercelInstallationDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the complete vercel installation default response
-func (o *CompleteVercelInstallationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this complete vercel installation default response has a 2xx status code
 func (o *CompleteVercelInstallationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,6 +150,11 @@ func (o *CompleteVercelInstallationDefault) IsServerError() bool {
 // IsCode returns true when this complete vercel installation default response a status code equal to that given
 func (o *CompleteVercelInstallationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the complete vercel installation default response
+func (o *CompleteVercelInstallationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *CompleteVercelInstallationDefault) Error() string {

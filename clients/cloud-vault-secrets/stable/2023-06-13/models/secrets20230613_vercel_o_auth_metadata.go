@@ -97,6 +97,11 @@ func (m *Secrets20230613VercelOAuthMetadata) contextValidateProjects(ctx context
 	for i := 0; i < len(m.Projects); i++ {
 
 		if m.Projects[i] != nil {
+
+			if swag.IsZero(m.Projects[i]) { // not required
+				return nil
+			}
+
 			if err := m.Projects[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("projects" + "." + strconv.Itoa(i))

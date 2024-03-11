@@ -72,6 +72,11 @@ func (m *Secrets20230613CreateAppResponse) ContextValidate(ctx context.Context, 
 func (m *Secrets20230613CreateAppResponse) contextValidateApp(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.App != nil {
+
+		if swag.IsZero(m.App) { // not required
+			return nil
+		}
+
 		if err := m.App.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("app")

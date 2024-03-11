@@ -72,6 +72,11 @@ func (m *Secrets20230613OpenAppSecretVersionResponse) ContextValidate(ctx contex
 func (m *Secrets20230613OpenAppSecretVersionResponse) contextValidateVersion(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Version != nil {
+
+		if swag.IsZero(m.Version) { // not required
+			return nil
+		}
+
 		if err := m.Version.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("version")

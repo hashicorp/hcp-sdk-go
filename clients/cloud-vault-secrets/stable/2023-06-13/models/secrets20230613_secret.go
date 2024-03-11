@@ -166,6 +166,11 @@ func (m *Secrets20230613Secret) ContextValidate(ctx context.Context, formats str
 func (m *Secrets20230613Secret) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CreatedBy != nil {
+
+		if swag.IsZero(m.CreatedBy) { // not required
+			return nil
+		}
+
 		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("created_by")
@@ -197,6 +202,11 @@ func (m *Secrets20230613Secret) contextValidateSyncStatus(ctx context.Context, f
 func (m *Secrets20230613Secret) contextValidateVersion(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Version != nil {
+
+		if swag.IsZero(m.Version) { // not required
+			return nil
+		}
+
 		if err := m.Version.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("version")

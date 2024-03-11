@@ -83,6 +83,11 @@ func (o *UpsertSyncInstallationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the upsert sync installation o k response
+func (o *UpsertSyncInstallationOK) Code() int {
+	return 200
+}
+
 func (o *UpsertSyncInstallationOK) Error() string {
 	return fmt.Sprintf("[PUT /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations][%d] upsertSyncInstallationOK  %+v", 200, o.Payload)
 }
@@ -125,11 +130,6 @@ type UpsertSyncInstallationDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the upsert sync installation default response
-func (o *UpsertSyncInstallationDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this upsert sync installation default response has a 2xx status code
 func (o *UpsertSyncInstallationDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,6 +153,11 @@ func (o *UpsertSyncInstallationDefault) IsServerError() bool {
 // IsCode returns true when this upsert sync installation default response a status code equal to that given
 func (o *UpsertSyncInstallationDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the upsert sync installation default response
+func (o *UpsertSyncInstallationDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *UpsertSyncInstallationDefault) Error() string {
@@ -242,6 +247,11 @@ func (o *UpsertSyncInstallationBody) ContextValidate(ctx context.Context, format
 func (o *UpsertSyncInstallationBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Location != nil {
+
+		if swag.IsZero(o.Location) { // not required
+			return nil
+		}
+
 		if err := o.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location")
@@ -334,6 +344,11 @@ func (o *UpsertSyncInstallationParamsBodyLocation) ContextValidate(ctx context.C
 func (o *UpsertSyncInstallationParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if o.Region != nil {
+
+		if swag.IsZero(o.Region) { // not required
+			return nil
+		}
+
 		if err := o.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("body" + "." + "location" + "." + "region")

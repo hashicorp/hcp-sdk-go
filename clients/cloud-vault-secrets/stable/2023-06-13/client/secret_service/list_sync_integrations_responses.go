@@ -80,6 +80,11 @@ func (o *ListSyncIntegrationsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list sync integrations o k response
+func (o *ListSyncIntegrationsOK) Code() int {
+	return 200
+}
+
 func (o *ListSyncIntegrationsOK) Error() string {
 	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/integrations][%d] listSyncIntegrationsOK  %+v", 200, o.Payload)
 }
@@ -122,11 +127,6 @@ type ListSyncIntegrationsDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the list sync integrations default response
-func (o *ListSyncIntegrationsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list sync integrations default response has a 2xx status code
 func (o *ListSyncIntegrationsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,6 +150,11 @@ func (o *ListSyncIntegrationsDefault) IsServerError() bool {
 // IsCode returns true when this list sync integrations default response a status code equal to that given
 func (o *ListSyncIntegrationsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list sync integrations default response
+func (o *ListSyncIntegrationsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListSyncIntegrationsDefault) Error() string {

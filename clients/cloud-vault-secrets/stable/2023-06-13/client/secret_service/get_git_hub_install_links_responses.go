@@ -80,6 +80,11 @@ func (o *GetGitHubInstallLinksOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get git hub install links o k response
+func (o *GetGitHubInstallLinksOK) Code() int {
+	return 200
+}
+
 func (o *GetGitHubInstallLinksOK) Error() string {
 	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/links][%d] getGitHubInstallLinksOK  %+v", 200, o.Payload)
 }
@@ -122,11 +127,6 @@ type GetGitHubInstallLinksDefault struct {
 	Payload *models.RPCStatus
 }
 
-// Code gets the status code for the get git hub install links default response
-func (o *GetGitHubInstallLinksDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get git hub install links default response has a 2xx status code
 func (o *GetGitHubInstallLinksDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,6 +150,11 @@ func (o *GetGitHubInstallLinksDefault) IsServerError() bool {
 // IsCode returns true when this get git hub install links default response a status code equal to that given
 func (o *GetGitHubInstallLinksDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get git hub install links default response
+func (o *GetGitHubInstallLinksDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetGitHubInstallLinksDefault) Error() string {
