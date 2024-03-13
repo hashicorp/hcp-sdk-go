@@ -21,7 +21,7 @@ type HashicorpCloudWebhookWebhookSubscriptionEvent struct {
 	// When the action is '*', it means that the webhook is subscribed to all event actions for the event source.
 	Action string `json:"action,omitempty"`
 
-	// The source of the event, such as `hashicorp.packer.iteration`.
+	// The source of the event, such as `hashicorp.packer.version`.
 	Source string `json:"source,omitempty"`
 }
 

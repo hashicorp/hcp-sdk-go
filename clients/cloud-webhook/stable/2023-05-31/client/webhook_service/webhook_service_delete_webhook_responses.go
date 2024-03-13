@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-webhook/preview/2023-05-31/models"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-webhook/stable/2023-05-31/models"
 )
 
 // WebhookServiceDeleteWebhookReader is a Reader for the WebhookServiceDeleteWebhook structure.

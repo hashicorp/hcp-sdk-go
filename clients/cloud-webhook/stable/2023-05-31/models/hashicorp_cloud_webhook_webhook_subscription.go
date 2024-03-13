@@ -23,8 +23,8 @@ type HashicorpCloudWebhookWebhookSubscription struct {
 
 	// The list of resource lifecycle events that the webhook is subscribed to.
 	// Events are a combination of event source and event action.
-	// For example, `hashicorp.packer.iteration:create`.
-	// The wildcard(`*`) subscribes the webhook to all the source's events, for example `hashicorp.packer.iteration:*`.
+	// For example, `hashicorp.packer.version:create`.
+	// The wildcard(`*`) subscribes the webhook to all the source's events, for example `hashicorp.packer.version:*`.
 	Events []*HashicorpCloudWebhookWebhookSubscriptionEvent `json:"events"`
 
 	// Refers to the resource the webhook is subscribed to.

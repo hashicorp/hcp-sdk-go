@@ -30,11 +30,11 @@ type HashicorpCloudWebhookWebhookPayload struct {
 	// The payload containing information about the resource's lifecycle event. The lifecycle event is defined by the services that own the resources.
 	EventPayload interface{} `json:"event_payload,omitempty"`
 
-	// Refers to the source of the event, for example `hashicorp.packer.iteration`.
+	// Refers to the source of the event, for example `hashicorp.packer.version`.
 	// The event source type may differ from the resource that the webhook is subscribed to when the event is from a
 	// descendent resource.
 	// For example, webhooks subscribed to `hashicorp.packer.registry` receive events for the descendant's resources,
-	// such as a `hashicorp.packer.iteration`.
+	// such as a `hashicorp.packer.version`.
 	EventSource string `json:"event_source,omitempty"`
 
 	// The version of the payload being sent.

@@ -10,7 +10,7 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-webhook/preview/2023-05-31/client/webhook_service"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-webhook/stable/2023-05-31/client/webhook_service"
 )
 
 // Default cloud webhook HTTP client.
