@@ -301,8 +301,8 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) Unmarsh
 // swagger:model HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyExistingAddOnDefinition
 type HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyExistingAddOnDefinition struct {
 
-	// name
-	Name string `json:"name,omitempty"`
+	// id
+	ID string `json:"id,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service update add on definition body existing add on definition

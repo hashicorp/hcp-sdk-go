@@ -17,14 +17,20 @@ import (
 // swagger:model hashicorp.cloud.waypoint.TFModuleVariable
 type HashicorpCloudWaypointTFModuleVariable struct {
 
+	// description is the description of the variable.
+	Description string `json:"description,omitempty"`
+
 	// name is the name of the variable.
 	Name string `json:"name,omitempty"`
 
 	// options is the list of options for the variable, set in Terraform Cloud.
-	// 1. If len(options) == 0, then the variable may be set by the developer.
+	// 1. If len(options) == 0, then the variable is forcibly left unset.
 	// 2. If len(options) == 1, then the variable was set to be that value by the platform engineer, and cannot be set by the app developer.
 	// 3. If len(options) > 1, then the variable may be set to one of the options in the list, which can be chosen by the app developer.
 	Options []string `json:"options"`
+
+	// indicates if the variable may be set by the app developer.
+	UserEditable bool `json:"user_editable,omitempty"`
 
 	// variable_type is the type of Terraform variable. See the documentation for more info:
 	// https://developer.hashicorp.com/terraform/language/expressions/types

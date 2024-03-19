@@ -18,8 +18,7 @@ import (
 // swagger:model hashicorp.cloud.waypoint.WaypointService.CreateApplicationTemplateBody
 type HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody struct {
 
-	// NOTE: In the future, enumerate the fields which are set by the client,
-	// instead of the entire proto message (in this case, ApplicationTemplate).
+	// application template
 	ApplicationTemplate *HashicorpCloudWaypointApplicationTemplate `json:"application_template,omitempty"`
 
 	// Global references the entire server. This is used in some APIs

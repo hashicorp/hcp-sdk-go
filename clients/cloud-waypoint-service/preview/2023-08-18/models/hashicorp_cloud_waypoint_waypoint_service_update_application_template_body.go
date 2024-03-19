@@ -171,8 +171,8 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateApplicationTemplateBody) Unm
 // swagger:model HashicorpCloudWaypointWaypointServiceUpdateApplicationTemplateBodyExistingApplicationTemplate
 type HashicorpCloudWaypointWaypointServiceUpdateApplicationTemplateBodyExistingApplicationTemplate struct {
 
-	// Name of the ApplicationTemplate
-	Name string `json:"name,omitempty"`
+	// ID of the ApplicationTemplate
+	ID string `json:"id,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service update application template body existing application template
