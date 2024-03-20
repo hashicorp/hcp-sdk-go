@@ -20,6 +20,7 @@ import (
 //   - PRINCIPAL_TYPE_USER: PRINCIPAL_TYPE_USER is the user principal type.
 //   - PRINCIPAL_TYPE_SERVICE: PRINCIPAL_TYPE_SERVICE is the service principal type.
 //   - PRINCIPAL_TYPE_GROUP: PRINCIPAL_TYPE_GROUP is the group principal type.
+//   - PRINCIPAL_TYPE_INTERNAL_OPERATOR: PRINCIPAL_TYPE_INTERNAL_OPERATOR is the internal operator principal type.
 //
 // swagger:model hashicorp.cloud.iam.PrincipalType
 type HashicorpCloudIamPrincipalType string
@@ -46,6 +47,9 @@ const (
 
 	// HashicorpCloudIamPrincipalTypePRINCIPALTYPEGROUP captures enum value "PRINCIPAL_TYPE_GROUP"
 	HashicorpCloudIamPrincipalTypePRINCIPALTYPEGROUP HashicorpCloudIamPrincipalType = "PRINCIPAL_TYPE_GROUP"
+
+	// HashicorpCloudIamPrincipalTypePRINCIPALTYPEINTERNALOPERATOR captures enum value "PRINCIPAL_TYPE_INTERNAL_OPERATOR"
+	HashicorpCloudIamPrincipalTypePRINCIPALTYPEINTERNALOPERATOR HashicorpCloudIamPrincipalType = "PRINCIPAL_TYPE_INTERNAL_OPERATOR"
 )
 
 // for schema
@@ -53,7 +57,7 @@ var hashicorpCloudIamPrincipalTypeEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudIamPrincipalType
-	if err := json.Unmarshal([]byte(`["PRINCIPAL_TYPE_UNSPECIFIED","PRINCIPAL_TYPE_USER","PRINCIPAL_TYPE_SERVICE","PRINCIPAL_TYPE_GROUP"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["PRINCIPAL_TYPE_UNSPECIFIED","PRINCIPAL_TYPE_USER","PRINCIPAL_TYPE_SERVICE","PRINCIPAL_TYPE_GROUP","PRINCIPAL_TYPE_INTERNAL_OPERATOR"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -360,10 +360,10 @@ func (a *Client) SSOManagementServiceVerifyDomainOwnership(params *SSOManagement
 /*
 	SSOManagementServiceVerifySSODomainOwnership verifies s s o domain ownership checks whether the organization has proven their ownership control of the given domain by adding the required t x t record
 
-	This endpoint differs from the one above because it is intended to be used for HashiCorp
+	This endpoint differs from the one above because it is intended to be used
 
-SSO domain ownership verification and not Auth0 SAML SSO.
-It is intended to be used to provide early feedback to the user; we check
+for HashiCorp SSO domain ownership verification and not Auth0 SAML SSO. It
+is intended to be used to provide early feedback to the user; we check
 domain ownership in cloud-idp.
 */
 func (a *Client) SSOManagementServiceVerifySSODomainOwnership(params *SSOManagementServiceVerifySSODomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceVerifySSODomainOwnershipOK, error) {

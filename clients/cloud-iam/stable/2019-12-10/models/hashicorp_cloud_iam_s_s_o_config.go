@@ -23,6 +23,10 @@ type HashicorpCloudIamSSOConfig struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
+	// default_role is the default RBAC role that users joining the
+	// SSO organization should get.
+	DefaultRole string `json:"default_role,omitempty"`
+
 	// SAML holds SAML SSO configuration details.
 	Saml *HashicorpCloudIamSAMLDetails `json:"saml,omitempty"`
 

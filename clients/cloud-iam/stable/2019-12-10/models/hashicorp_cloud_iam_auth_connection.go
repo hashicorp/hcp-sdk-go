@@ -27,6 +27,10 @@ type HashicorpCloudIamAuthConnection struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
+	// default_role is the RBAC role that users signing in to the
+	// SSO org will get as the default.
+	DefaultRole string `json:"default_role,omitempty"`
+
 	// email_domain of the connection
 	EmailDomain string `json:"email_domain,omitempty"`
 

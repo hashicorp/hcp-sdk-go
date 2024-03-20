@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // HashicorpCloudIamUserPrincipal UserPrincipal represents a human user of our platform.
@@ -42,6 +43,10 @@ type HashicorpCloudIamUserPrincipal struct {
 
 	// subject is the user ID from the authenticating IDP (e.g. Hydra).
 	Subject string `json:"subject,omitempty"`
+
+	// tfc_synchronized_at denotes the timestamp of when the user was synced to TFC when applicable.
+	// Format: date-time
+	TfcSynchronizedAt *strfmt.DateTime `json:"tfc_synchronized_at,omitempty"`
 }
 
 // Validate validates this hashicorp cloud iam user principal
@@ -53,6 +58,10 @@ func (m *HashicorpCloudIamUserPrincipal) Validate(formats strfmt.Registry) error
 	}
 
 	if err := m.validateIdentityTypes(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTfcSynchronizedAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -102,6 +111,18 @@ func (m *HashicorpCloudIamUserPrincipal) validateIdentityTypes(formats strfmt.Re
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudIamUserPrincipal) validateTfcSynchronizedAt(formats strfmt.Registry) error {
+	if swag.IsZero(m.TfcSynchronizedAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("tfc_synchronized_at", "body", "date-time", m.TfcSynchronizedAt.String(), formats); err != nil {
+		return err
 	}
 
 	return nil

@@ -193,6 +193,10 @@ type AuthConfigServiceEditAuthConnectionBody struct {
 	// client_secret is the secret for the client above.
 	ClientSecret string `json:"client_secret,omitempty"`
 
+	// default_role is the RBAC role that users signing in to the
+	// SSO org will get as the default.
+	DefaultRole string `json:"default_role,omitempty"`
+
 	// email_domain associated with the connection.
 	EmailDomain string `json:"email_domain,omitempty"`
 

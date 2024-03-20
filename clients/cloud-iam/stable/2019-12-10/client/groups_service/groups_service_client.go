@@ -46,6 +46,8 @@ type ClientService interface {
 
 	GroupsServiceUpdateGroup(params *GroupsServiceUpdateGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceUpdateGroupOK, error)
 
+	GroupsServiceUpdateGroup2(params *GroupsServiceUpdateGroup2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceUpdateGroup2OK, error)
+
 	GroupsServiceUpdateGroupMembers(params *GroupsServiceUpdateGroupMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceUpdateGroupMembersOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -356,7 +358,7 @@ func (a *Client) GroupsServiceListGroups(params *GroupsServiceListGroupsParams, 
 }
 
 /*
-GroupsServiceUpdateGroup updates group updates a group s modifiable field
+GroupsServiceUpdateGroup updates group updates a group s modifiable fields
 */
 func (a *Client) GroupsServiceUpdateGroup(params *GroupsServiceUpdateGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceUpdateGroupOK, error) {
 	// TODO: Validate the params before sending
@@ -390,6 +392,44 @@ func (a *Client) GroupsServiceUpdateGroup(params *GroupsServiceUpdateGroupParams
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GroupsServiceUpdateGroupDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GroupsServiceUpdateGroup2 updates group updates a group s modifiable fields
+*/
+func (a *Client) GroupsServiceUpdateGroup2(params *GroupsServiceUpdateGroup2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceUpdateGroup2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGroupsServiceUpdateGroup2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GroupsService_UpdateGroup2",
+		Method:             "PATCH",
+		PathPattern:        "/iam/2019-12-10/{resource_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GroupsServiceUpdateGroup2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GroupsServiceUpdateGroup2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GroupsServiceUpdateGroup2Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
