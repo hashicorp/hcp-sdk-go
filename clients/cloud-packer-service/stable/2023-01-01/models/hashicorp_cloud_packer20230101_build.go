@@ -37,6 +37,10 @@ type HashicorpCloudPacker20230101Build struct {
 	// A key:value map for custom, user-settable metadata about your build.
 	Labels map[string]string `json:"labels,omitempty"`
 
+	// Information set by Packer about the build process of the artifact.
+	// Builds are returned on many endpoints, but Build Metadata is only returned for Build endpoints and GetVersion.
+	Metadata *HashicorpCloudPacker20230101BuildMetadata `json:"metadata,omitempty"`
+
 	// The UUID specific to this call to Packer build. If you use the manifest
 	// post-processor, this UUID will match the UUID present there.
 	PackerRunUUID string `json:"packer_run_uuid,omitempty"`
@@ -70,6 +74,10 @@ func (m *HashicorpCloudPacker20230101Build) Validate(formats strfmt.Registry) er
 	}
 
 	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMetadata(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -125,6 +133,25 @@ func (m *HashicorpCloudPacker20230101Build) validateCreatedAt(formats strfmt.Reg
 	return nil
 }
 
+func (m *HashicorpCloudPacker20230101Build) validateMetadata(formats strfmt.Registry) error {
+	if swag.IsZero(m.Metadata) { // not required
+		return nil
+	}
+
+	if m.Metadata != nil {
+		if err := m.Metadata.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metadata")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudPacker20230101Build) validateStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.Status) { // not required
 		return nil
@@ -164,6 +191,10 @@ func (m *HashicorpCloudPacker20230101Build) ContextValidate(ctx context.Context,
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateMetadata(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -194,6 +225,27 @@ func (m *HashicorpCloudPacker20230101Build) contextValidateArtifacts(ctx context
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudPacker20230101Build) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Metadata != nil {
+
+		if swag.IsZero(m.Metadata) { // not required
+			return nil
+		}
+
+		if err := m.Metadata.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metadata")
+			}
+			return err
+		}
 	}
 
 	return nil
