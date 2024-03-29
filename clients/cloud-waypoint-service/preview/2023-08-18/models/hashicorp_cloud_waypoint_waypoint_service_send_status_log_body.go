@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // HashicorpCloudWaypointWaypointServiceSendStatusLogBody hashicorp cloud waypoint waypoint service send status log body
@@ -172,6 +173,11 @@ type HashicorpCloudWaypointWaypointServiceSendStatusLogBodyActionConfig struct {
 	// URL to trigger an action on. Only used in Custom mode.
 	ActionURL string `json:"action_url,omitempty"`
 
+	// The time the action config was created in the database
+	// This is mainly a convenience field for the UI and might not always be set.
+	// Format: date-time
+	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+
 	// Description of the action
 	Description string `json:"description,omitempty"`
 
@@ -186,6 +192,10 @@ type HashicorpCloudWaypointWaypointServiceSendStatusLogBodyActionConfig struct {
 func (m *HashicorpCloudWaypointWaypointServiceSendStatusLogBodyActionConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRequest(formats); err != nil {
 		res = append(res, err)
 	}
@@ -193,6 +203,18 @@ func (m *HashicorpCloudWaypointWaypointServiceSendStatusLogBodyActionConfig) Val
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceSendStatusLogBodyActionConfig) validateCreatedAt(formats strfmt.Registry) error {
+	if swag.IsZero(m.CreatedAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("action_config"+"."+"created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
+		return err
+	}
+
 	return nil
 }
 

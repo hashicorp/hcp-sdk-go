@@ -22,6 +22,9 @@ type HashicorpCloudWaypointUIActionConfigBundle struct {
 	// action config
 	ActionConfig *HashicorpCloudWaypointActionConfig `json:"action_config,omitempty"`
 
+	// A list of assigned application templates to this action config
+	AssignedApplicationTemplates []*HashicorpCloudWaypointUIActionConfigBundleApplicationTemplateAssignment `json:"assigned_application_templates"`
+
 	// A list of assigned applications to this action config
 	AssignedApplications []*HashicorpCloudWaypointUIActionConfigBundleApplicationAssignment `json:"assigned_applications"`
 
@@ -37,6 +40,10 @@ func (m *HashicorpCloudWaypointUIActionConfigBundle) Validate(formats strfmt.Reg
 	var res []error
 
 	if err := m.validateActionConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAssignedApplicationTemplates(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -72,6 +79,32 @@ func (m *HashicorpCloudWaypointUIActionConfigBundle) validateActionConfig(format
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointUIActionConfigBundle) validateAssignedApplicationTemplates(formats strfmt.Registry) error {
+	if swag.IsZero(m.AssignedApplicationTemplates) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.AssignedApplicationTemplates); i++ {
+		if swag.IsZero(m.AssignedApplicationTemplates[i]) { // not required
+			continue
+		}
+
+		if m.AssignedApplicationTemplates[i] != nil {
+			if err := m.AssignedApplicationTemplates[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("assigned_application_templates" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("assigned_application_templates" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -149,6 +182,10 @@ func (m *HashicorpCloudWaypointUIActionConfigBundle) ContextValidate(ctx context
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAssignedApplicationTemplates(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAssignedApplications(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -183,6 +220,31 @@ func (m *HashicorpCloudWaypointUIActionConfigBundle) contextValidateActionConfig
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointUIActionConfigBundle) contextValidateAssignedApplicationTemplates(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.AssignedApplicationTemplates); i++ {
+
+		if m.AssignedApplicationTemplates[i] != nil {
+
+			if swag.IsZero(m.AssignedApplicationTemplates[i]) { // not required
+				return nil
+			}
+
+			if err := m.AssignedApplicationTemplates[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("assigned_application_templates" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("assigned_application_templates" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

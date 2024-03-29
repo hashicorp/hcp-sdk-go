@@ -190,8 +190,8 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateApplicationBody) UnmarshalBi
 // swagger:model HashicorpCloudWaypointWaypointServiceUpdateApplicationBodyApplication
 type HashicorpCloudWaypointWaypointServiceUpdateApplicationBodyApplication struct {
 
-	// name
-	Name string `json:"name,omitempty"`
+	// id
+	ID string `json:"id,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service update application body application

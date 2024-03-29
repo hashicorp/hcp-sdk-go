@@ -19,6 +19,8 @@ import (
 type HashicorpCloudWaypointUIActionConfigBundleApplicationAssignment struct {
 
 	// The application ref that is assigned
+	// This should be using the Name over the ID, because the frontend will
+	// want the name to save a lookup.
 	Application *HashicorpCloudWaypointRefApplication `json:"application,omitempty"`
 
 	// The latest action run, if one exists. Nil if none found.

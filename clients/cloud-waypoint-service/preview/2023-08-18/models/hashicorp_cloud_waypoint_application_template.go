@@ -19,9 +19,8 @@ import (
 // swagger:model hashicorp.cloud.waypoint.ApplicationTemplate
 type HashicorpCloudWaypointApplicationTemplate struct {
 
-	// The actions driver configurations for the application template
-	// NOTE(briancain): This var is not hooked up yet, and thus not stored
-	// alongside the ApplicationTemplate record
+	// The actions configurations assignments for the application template. Can
+	// have 0-Many action configurations.
 	ActionCfgRefs []*HashicorpCloudWaypointActionCfgRef `json:"action_cfg_refs"`
 
 	// A long-form description of what the ApplicationTemplate is to be used for. This description

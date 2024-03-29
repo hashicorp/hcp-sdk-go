@@ -40,6 +40,8 @@ type ClientService interface {
 
 	WaypointServiceCreateApplicationTemplate(params *WaypointServiceCreateApplicationTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateApplicationTemplateOK, error)
 
+	WaypointServiceCreateApplicationTemplate2(params *WaypointServiceCreateApplicationTemplate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateApplicationTemplate2OK, error)
+
 	WaypointServiceCreateNamespace(params *WaypointServiceCreateNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateNamespaceOK, error)
 
 	WaypointServiceCreateTFCConfig(params *WaypointServiceCreateTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateTFCConfigOK, error)
@@ -55,6 +57,10 @@ type ClientService interface {
 	WaypointServiceDeleteApplicationTemplate(params *WaypointServiceDeleteApplicationTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteApplicationTemplateOK, error)
 
 	WaypointServiceDeleteApplicationTemplate2(params *WaypointServiceDeleteApplicationTemplate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteApplicationTemplate2OK, error)
+
+	WaypointServiceDeleteApplicationTemplate3(params *WaypointServiceDeleteApplicationTemplate3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteApplicationTemplate3OK, error)
+
+	WaypointServiceDeleteApplicationTemplate4(params *WaypointServiceDeleteApplicationTemplate4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteApplicationTemplate4OK, error)
 
 	WaypointServiceDeleteNamespace(params *WaypointServiceDeleteNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteNamespaceOK, error)
 
@@ -92,6 +98,10 @@ type ClientService interface {
 
 	WaypointServiceGetApplicationTemplate2(params *WaypointServiceGetApplicationTemplate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetApplicationTemplate2OK, error)
 
+	WaypointServiceGetApplicationTemplate3(params *WaypointServiceGetApplicationTemplate3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetApplicationTemplate3OK, error)
+
+	WaypointServiceGetApplicationTemplate4(params *WaypointServiceGetApplicationTemplate4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetApplicationTemplate4OK, error)
+
 	WaypointServiceGetNamespace(params *WaypointServiceGetNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetNamespaceOK, error)
 
 	WaypointServiceGetTFCConfig(params *WaypointServiceGetTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFCConfigOK, error)
@@ -111,6 +121,8 @@ type ClientService interface {
 	WaypointServiceListAgentGroups(params *WaypointServiceListAgentGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListAgentGroupsOK, error)
 
 	WaypointServiceListApplicationTemplates(params *WaypointServiceListApplicationTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListApplicationTemplatesOK, error)
+
+	WaypointServiceListApplicationTemplates2(params *WaypointServiceListApplicationTemplates2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListApplicationTemplates2OK, error)
 
 	WaypointServiceListApplications(params *WaypointServiceListApplicationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListApplicationsOK, error)
 
@@ -140,6 +152,10 @@ type ClientService interface {
 
 	WaypointServiceUIGetApplicationBundle2(params *WaypointServiceUIGetApplicationBundle2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetApplicationBundle2OK, error)
 
+	WaypointServiceUIGetApplicationTemplateBundle(params *WaypointServiceUIGetApplicationTemplateBundleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetApplicationTemplateBundleOK, error)
+
+	WaypointServiceUIGetApplicationTemplateBundle2(params *WaypointServiceUIGetApplicationTemplateBundle2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetApplicationTemplateBundle2OK, error)
+
 	WaypointServiceUIListAddOnDefinitions(params *WaypointServiceUIListAddOnDefinitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIListAddOnDefinitionsOK, error)
 
 	WaypointServiceUpdateActionConfig(params *WaypointServiceUpdateActionConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateActionConfigOK, error)
@@ -154,9 +170,15 @@ type ClientService interface {
 
 	WaypointServiceUpdateApplication(params *WaypointServiceUpdateApplicationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationOK, error)
 
+	WaypointServiceUpdateApplication2(params *WaypointServiceUpdateApplication2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplication2OK, error)
+
 	WaypointServiceUpdateApplicationTemplate(params *WaypointServiceUpdateApplicationTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplateOK, error)
 
 	WaypointServiceUpdateApplicationTemplate2(params *WaypointServiceUpdateApplicationTemplate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate2OK, error)
+
+	WaypointServiceUpdateApplicationTemplate3(params *WaypointServiceUpdateApplicationTemplate3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate3OK, error)
+
+	WaypointServiceUpdateApplicationTemplate4(params *WaypointServiceUpdateApplicationTemplate4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate4OK, error)
 
 	WaypointServiceUpdateApplicationsList(params *WaypointServiceUpdateApplicationsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationsListOK, error)
 
@@ -392,6 +414,44 @@ func (a *Client) WaypointServiceCreateApplicationTemplate(params *WaypointServic
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceCreateApplicationTemplateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceCreateApplicationTemplate2 creates application template creates a new application template
+*/
+func (a *Client) WaypointServiceCreateApplicationTemplate2(params *WaypointServiceCreateApplicationTemplate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateApplicationTemplate2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceCreateApplicationTemplate2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_CreateApplicationTemplate2",
+		Method:             "POST",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/templates",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceCreateApplicationTemplate2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceCreateApplicationTemplate2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceCreateApplicationTemplate2Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -696,6 +756,82 @@ func (a *Client) WaypointServiceDeleteApplicationTemplate2(params *WaypointServi
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceDeleteApplicationTemplate2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceDeleteApplicationTemplate3 deletes application template deletes a application template by the application template name or id
+*/
+func (a *Client) WaypointServiceDeleteApplicationTemplate3(params *WaypointServiceDeleteApplicationTemplate3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteApplicationTemplate3OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceDeleteApplicationTemplate3Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_DeleteApplicationTemplate3",
+		Method:             "DELETE",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/templates/{application_template.id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceDeleteApplicationTemplate3Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceDeleteApplicationTemplate3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceDeleteApplicationTemplate3Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceDeleteApplicationTemplate4 deletes application template deletes a application template by the application template name or id
+*/
+func (a *Client) WaypointServiceDeleteApplicationTemplate4(params *WaypointServiceDeleteApplicationTemplate4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteApplicationTemplate4OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceDeleteApplicationTemplate4Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_DeleteApplicationTemplate4",
+		Method:             "DELETE",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/templates/by-name/{application_template.name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceDeleteApplicationTemplate4Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceDeleteApplicationTemplate4OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceDeleteApplicationTemplate4Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1384,6 +1520,82 @@ func (a *Client) WaypointServiceGetApplicationTemplate2(params *WaypointServiceG
 }
 
 /*
+WaypointServiceGetApplicationTemplate3 gets application template returns a application template by the application template name or id
+*/
+func (a *Client) WaypointServiceGetApplicationTemplate3(params *WaypointServiceGetApplicationTemplate3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetApplicationTemplate3OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetApplicationTemplate3Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetApplicationTemplate3",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/templates/{application_template.id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetApplicationTemplate3Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetApplicationTemplate3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetApplicationTemplate3Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceGetApplicationTemplate4 gets application template returns a application template by the application template name or id
+*/
+func (a *Client) WaypointServiceGetApplicationTemplate4(params *WaypointServiceGetApplicationTemplate4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetApplicationTemplate4OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetApplicationTemplate4Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetApplicationTemplate4",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/templates/by-name/{application_template.name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetApplicationTemplate4Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetApplicationTemplate4OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetApplicationTemplate4Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 WaypointServiceGetNamespace gets namespace gets a namespace based on either the namespace ID or an h c p location returns not found if the namespace doesn t exist
 */
 func (a *Client) WaypointServiceGetNamespace(params *WaypointServiceGetNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetNamespaceOK, error) {
@@ -1760,6 +1972,44 @@ func (a *Client) WaypointServiceListApplicationTemplates(params *WaypointService
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceListApplicationTemplatesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceListApplicationTemplates2 lists application templates returns a list of all application templates known
+*/
+func (a *Client) WaypointServiceListApplicationTemplates2(params *WaypointServiceListApplicationTemplates2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListApplicationTemplates2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceListApplicationTemplates2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_ListApplicationTemplates2",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/templates",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceListApplicationTemplates2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceListApplicationTemplates2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceListApplicationTemplates2Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2296,6 +2546,82 @@ func (a *Client) WaypointServiceUIGetApplicationBundle2(params *WaypointServiceU
 }
 
 /*
+WaypointServiceUIGetApplicationTemplateBundle gets application template returns a application template by the application template name or id
+*/
+func (a *Client) WaypointServiceUIGetApplicationTemplateBundle(params *WaypointServiceUIGetApplicationTemplateBundleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetApplicationTemplateBundleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUIGetApplicationTemplateBundleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UI_GetApplicationTemplateBundle",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/ui/application-templates/{application_template.id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUIGetApplicationTemplateBundleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUIGetApplicationTemplateBundleOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUIGetApplicationTemplateBundleDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceUIGetApplicationTemplateBundle2 gets application template returns a application template by the application template name or id
+*/
+func (a *Client) WaypointServiceUIGetApplicationTemplateBundle2(params *WaypointServiceUIGetApplicationTemplateBundle2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetApplicationTemplateBundle2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUIGetApplicationTemplateBundle2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UI_GetApplicationTemplateBundle2",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/ui/application-templates/by-name/{application_template.name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUIGetApplicationTemplateBundle2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUIGetApplicationTemplateBundle2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUIGetApplicationTemplateBundle2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 WaypointServiceUIListAddOnDefinitions lists add on definitions within the context of a project
 */
 func (a *Client) WaypointServiceUIListAddOnDefinitions(params *WaypointServiceUIListAddOnDefinitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIListAddOnDefinitionsOK, error) {
@@ -2562,6 +2888,44 @@ func (a *Client) WaypointServiceUpdateApplication(params *WaypointServiceUpdateA
 }
 
 /*
+WaypointServiceUpdateApplication2 waypoint service update application2 API
+*/
+func (a *Client) WaypointServiceUpdateApplication2(params *WaypointServiceUpdateApplication2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplication2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUpdateApplication2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UpdateApplication2",
+		Method:             "PUT",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/applications/by-name/{application.name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUpdateApplication2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUpdateApplication2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUpdateApplication2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 WaypointServiceUpdateApplicationTemplate updates application template updates an existing application template
 */
 func (a *Client) WaypointServiceUpdateApplicationTemplate(params *WaypointServiceUpdateApplicationTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplateOK, error) {
@@ -2634,6 +2998,82 @@ func (a *Client) WaypointServiceUpdateApplicationTemplate2(params *WaypointServi
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceUpdateApplicationTemplate2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceUpdateApplicationTemplate3 updates application template updates an existing application template
+*/
+func (a *Client) WaypointServiceUpdateApplicationTemplate3(params *WaypointServiceUpdateApplicationTemplate3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate3OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUpdateApplicationTemplate3Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UpdateApplicationTemplate3",
+		Method:             "PUT",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/templates/{existing_application_template.id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUpdateApplicationTemplate3Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUpdateApplicationTemplate3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUpdateApplicationTemplate3Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceUpdateApplicationTemplate4 updates application template updates an existing application template
+*/
+func (a *Client) WaypointServiceUpdateApplicationTemplate4(params *WaypointServiceUpdateApplicationTemplate4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate4OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUpdateApplicationTemplate4Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UpdateApplicationTemplate4",
+		Method:             "PUT",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/templates/by-name/{existing_application_template.name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUpdateApplicationTemplate4Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUpdateApplicationTemplate4OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUpdateApplicationTemplate4Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
