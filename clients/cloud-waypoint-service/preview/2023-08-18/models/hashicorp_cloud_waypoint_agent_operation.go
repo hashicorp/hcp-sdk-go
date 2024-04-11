@@ -17,9 +17,9 @@ import (
 // swagger:model hashicorp.cloud.waypoint.AgentOperation
 type HashicorpCloudWaypointAgentOperation struct {
 
-	// An optional action config id. If specified the agent will interaction
+	// An optional action run id. If specified the agent will interaction
 	// with the actions subsystem
-	ActionConfigID string `json:"action_config_id,omitempty"`
+	ActionRunID string `json:"action_run_id,omitempty"`
 
 	// Arguments to the operation, specified as JSON
 	// Format: byte

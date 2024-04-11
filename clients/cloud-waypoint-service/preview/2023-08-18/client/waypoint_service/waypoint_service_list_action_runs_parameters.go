@@ -66,7 +66,7 @@ type WaypointServiceListActionRunsParams struct {
 
 	   The id of the action config being listed
 	*/
-	ActionID *string
+	ActionID string
 
 	/* ActionName.
 
@@ -164,13 +164,13 @@ func (o *WaypointServiceListActionRunsParams) SetHTTPClient(client *http.Client)
 }
 
 // WithActionID adds the actionID to the waypoint service list action runs params
-func (o *WaypointServiceListActionRunsParams) WithActionID(actionID *string) *WaypointServiceListActionRunsParams {
+func (o *WaypointServiceListActionRunsParams) WithActionID(actionID string) *WaypointServiceListActionRunsParams {
 	o.SetActionID(actionID)
 	return o
 }
 
 // SetActionID adds the actionId to the waypoint service list action runs params
-func (o *WaypointServiceListActionRunsParams) SetActionID(actionID *string) {
+func (o *WaypointServiceListActionRunsParams) SetActionID(actionID string) {
 	o.ActionID = actionID
 }
 
@@ -259,21 +259,9 @@ func (o *WaypointServiceListActionRunsParams) WriteToRequest(r runtime.ClientReq
 	}
 	var res []error
 
-	if o.ActionID != nil {
-
-		// query param action_id
-		var qrActionID string
-
-		if o.ActionID != nil {
-			qrActionID = *o.ActionID
-		}
-		qActionID := qrActionID
-		if qActionID != "" {
-
-			if err := r.SetQueryParam("action_id", qActionID); err != nil {
-				return err
-			}
-		}
+	// path param action_id
+	if err := r.SetPathParam("action_id", o.ActionID); err != nil {
+		return err
 	}
 
 	if o.ActionName != nil {

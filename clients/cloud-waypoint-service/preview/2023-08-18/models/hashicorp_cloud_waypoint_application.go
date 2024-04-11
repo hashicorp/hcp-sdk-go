@@ -44,6 +44,9 @@ type HashicorpCloudWaypointApplication struct {
 
 	// The name of the template this application was generated from
 	TemplateName string `json:"template_name,omitempty"`
+
+	// Terraform Workspace Id
+	TfcWorkspaceID string `json:"tfc_workspace_id,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint application

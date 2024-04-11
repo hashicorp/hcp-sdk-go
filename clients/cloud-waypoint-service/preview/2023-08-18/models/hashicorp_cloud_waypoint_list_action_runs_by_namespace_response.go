@@ -15,20 +15,20 @@ import (
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudWaypointListActionRunsResponse hashicorp cloud waypoint list action runs response
+// HashicorpCloudWaypointListActionRunsByNamespaceResponse hashicorp cloud waypoint list action runs by namespace response
 //
-// swagger:model hashicorp.cloud.waypoint.ListActionRunsResponse
-type HashicorpCloudWaypointListActionRunsResponse struct {
+// swagger:model hashicorp.cloud.waypoint.ListActionRunsByNamespaceResponse
+type HashicorpCloudWaypointListActionRunsByNamespaceResponse struct {
 
-	// The list of action runs for the given action config
+	// The list of action runs for the namespace
 	ActionRuns []*HashicorpCloudWaypointActionRun `json:"action_runs"`
 
 	// pagination
 	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 
-// Validate validates this hashicorp cloud waypoint list action runs response
-func (m *HashicorpCloudWaypointListActionRunsResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud waypoint list action runs by namespace response
+func (m *HashicorpCloudWaypointListActionRunsByNamespaceResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateActionRuns(formats); err != nil {
@@ -45,7 +45,7 @@ func (m *HashicorpCloudWaypointListActionRunsResponse) Validate(formats strfmt.R
 	return nil
 }
 
-func (m *HashicorpCloudWaypointListActionRunsResponse) validateActionRuns(formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointListActionRunsByNamespaceResponse) validateActionRuns(formats strfmt.Registry) error {
 	if swag.IsZero(m.ActionRuns) { // not required
 		return nil
 	}
@@ -71,7 +71,7 @@ func (m *HashicorpCloudWaypointListActionRunsResponse) validateActionRuns(format
 	return nil
 }
 
-func (m *HashicorpCloudWaypointListActionRunsResponse) validatePagination(formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointListActionRunsByNamespaceResponse) validatePagination(formats strfmt.Registry) error {
 	if swag.IsZero(m.Pagination) { // not required
 		return nil
 	}
@@ -90,8 +90,8 @@ func (m *HashicorpCloudWaypointListActionRunsResponse) validatePagination(format
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud waypoint list action runs response based on the context it is used
-func (m *HashicorpCloudWaypointListActionRunsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud waypoint list action runs by namespace response based on the context it is used
+func (m *HashicorpCloudWaypointListActionRunsByNamespaceResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateActionRuns(ctx, formats); err != nil {
@@ -108,7 +108,7 @@ func (m *HashicorpCloudWaypointListActionRunsResponse) ContextValidate(ctx conte
 	return nil
 }
 
-func (m *HashicorpCloudWaypointListActionRunsResponse) contextValidateActionRuns(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointListActionRunsByNamespaceResponse) contextValidateActionRuns(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.ActionRuns); i++ {
 
@@ -133,7 +133,7 @@ func (m *HashicorpCloudWaypointListActionRunsResponse) contextValidateActionRuns
 	return nil
 }
 
-func (m *HashicorpCloudWaypointListActionRunsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointListActionRunsByNamespaceResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
 
@@ -155,7 +155,7 @@ func (m *HashicorpCloudWaypointListActionRunsResponse) contextValidatePagination
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudWaypointListActionRunsResponse) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudWaypointListActionRunsByNamespaceResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -163,8 +163,8 @@ func (m *HashicorpCloudWaypointListActionRunsResponse) MarshalBinary() ([]byte, 
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudWaypointListActionRunsResponse) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudWaypointListActionRunsResponse
+func (m *HashicorpCloudWaypointListActionRunsByNamespaceResponse) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudWaypointListActionRunsByNamespaceResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

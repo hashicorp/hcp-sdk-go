@@ -25,6 +25,11 @@ type HashicorpCloudWaypointWaypointServiceUpdateApplicationTemplateBody struct {
 	// existing application template
 	ExistingApplicationTemplate *HashicorpCloudWaypointWaypointServiceUpdateApplicationTemplateBodyExistingApplicationTemplate `json:"existing_application_template,omitempty"`
 
+	// Field mask to update only specific fields. I.e. if you want a field updated,
+	// you must include it in the field mask. For now, we only use this
+	// for ActionConfigRefs inside application_template for clearing assignments.
+	FieldMask string `json:"field_mask,omitempty"`
+
 	// Global references the entire server. This is used in some APIs
 	// as a way to read/write values that are server-global.
 	Namespace interface{} `json:"namespace,omitempty"`

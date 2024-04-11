@@ -23,6 +23,9 @@ type HashicorpCloudWaypointActionRun struct {
 	// The full action config that was ran in the moment it was invoked
 	ActionConfig *HashicorpCloudWaypointActionConfig `json:"action_config,omitempty"`
 
+	// The status of the background job that was used to run this action
+	BackgroundJob *HashicorpCloudWaypointJob `json:"background_job,omitempty"`
+
 	// Time that the action run has finished
 	// Format: date-time
 	CompletedAt strfmt.DateTime `json:"completed_at,omitempty"`
@@ -30,6 +33,9 @@ type HashicorpCloudWaypointActionRun struct {
 	// Time that the action run was invoked
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+
+	// The unique identifer for this action run
+	ID string `json:"id,omitempty"`
 
 	// The namespace the action will run in
 	Namespace *HashicorpCloudWaypointRefNamespace `json:"namespace,omitempty"`
@@ -62,6 +68,10 @@ func (m *HashicorpCloudWaypointActionRun) Validate(formats strfmt.Registry) erro
 	var res []error
 
 	if err := m.validateActionConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBackgroundJob(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -110,6 +120,25 @@ func (m *HashicorpCloudWaypointActionRun) validateActionConfig(formats strfmt.Re
 				return ve.ValidateName("action_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("action_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointActionRun) validateBackgroundJob(formats strfmt.Registry) error {
+	if swag.IsZero(m.BackgroundJob) { // not required
+		return nil
+	}
+
+	if m.BackgroundJob != nil {
+		if err := m.BackgroundJob.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("background_job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("background_job")
 			}
 			return err
 		}
@@ -252,6 +281,10 @@ func (m *HashicorpCloudWaypointActionRun) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateBackgroundJob(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateNamespace(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -291,6 +324,27 @@ func (m *HashicorpCloudWaypointActionRun) contextValidateActionConfig(ctx contex
 				return ve.ValidateName("action_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("action_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointActionRun) contextValidateBackgroundJob(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BackgroundJob != nil {
+
+		if swag.IsZero(m.BackgroundJob) { // not required
+			return nil
+		}
+
+		if err := m.BackgroundJob.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("background_job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("background_job")
 			}
 			return err
 		}

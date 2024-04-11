@@ -23,6 +23,11 @@ type HashicorpCloudWaypointWaypointServiceUpdateApplicationsListBody struct {
 	// and do an "Upsert" over the the provided fields rather than a full record Upsert.
 	Applications []*HashicorpCloudWaypointApplication `json:"applications"`
 
+	// Field mask to update only specific fields. I.e. if you want a field updated,
+	// you must include it in the field mask. For now, we only use this for
+	// clearing out action assignments.
+	FieldMask string `json:"field_mask,omitempty"`
+
 	// Global references the entire server. This is used in some APIs
 	// as a way to read/write values that are server-global.
 	Namespace interface{} `json:"namespace,omitempty"`

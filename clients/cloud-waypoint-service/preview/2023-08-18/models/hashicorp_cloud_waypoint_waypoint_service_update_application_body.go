@@ -19,11 +19,18 @@ import (
 // swagger:model hashicorp.cloud.waypoint.WaypointService.UpdateApplicationBody
 type HashicorpCloudWaypointWaypointServiceUpdateApplicationBody struct {
 
-	// Update with any *new* Action Configs. Old action configs will not be removed.
+	// Any action assignments for this application. To update, you must specify the
+	// field mask for the action_cfg_refs field. Additionally, if you specify the
+	// field mask, but this array is null, it means clearing out any assignments.
 	ActionCfgRefs []*HashicorpCloudWaypointActionCfgRef `json:"action_cfg_refs"`
 
 	// application
 	Application *HashicorpCloudWaypointWaypointServiceUpdateApplicationBodyApplication `json:"application,omitempty"`
+
+	// Field mask to update only specific fields. I.e. if you want a field updated,
+	// you must include it in the field mask. For now, we only use this for
+	// clearing out action assignments.
+	FieldMask string `json:"field_mask,omitempty"`
 
 	// Updated application name
 	Name string `json:"name,omitempty"`

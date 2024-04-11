@@ -114,6 +114,10 @@ type ClientService interface {
 
 	WaypointServiceListActionRuns(params *WaypointServiceListActionRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionRunsOK, error)
 
+	WaypointServiceListActionRuns2(params *WaypointServiceListActionRuns2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionRuns2OK, error)
+
+	WaypointServiceListActionRunsByNamespace(params *WaypointServiceListActionRunsByNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionRunsByNamespaceOK, error)
+
 	WaypointServiceListAddOnDefinitions(params *WaypointServiceListAddOnDefinitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListAddOnDefinitionsOK, error)
 
 	WaypointServiceListAddOns(params *WaypointServiceListAddOnsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListAddOnsOK, error)
@@ -1786,7 +1790,7 @@ func (a *Client) WaypointServiceListActionConfigs(params *WaypointServiceListAct
 }
 
 /*
-WaypointServiceListActionRuns waypoint service list action runs API
+WaypointServiceListActionRuns lists all action runs for a given config
 */
 func (a *Client) WaypointServiceListActionRuns(params *WaypointServiceListActionRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionRunsOK, error) {
 	// TODO: Validate the params before sending
@@ -1796,7 +1800,7 @@ func (a *Client) WaypointServiceListActionRuns(params *WaypointServiceListAction
 	op := &runtime.ClientOperation{
 		ID:                 "WaypointService_ListActionRuns",
 		Method:             "GET",
-		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/actionruns",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/action/{action_id}/runs",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -1820,6 +1824,82 @@ func (a *Client) WaypointServiceListActionRuns(params *WaypointServiceListAction
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceListActionRunsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceListActionRuns2 lists all action runs for a given config
+*/
+func (a *Client) WaypointServiceListActionRuns2(params *WaypointServiceListActionRuns2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionRuns2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceListActionRuns2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_ListActionRuns2",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/action/by-name/{action_name}/runs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceListActionRuns2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceListActionRuns2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceListActionRuns2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceListActionRunsByNamespace lists all action runs for the entire namespace for all configs
+*/
+func (a *Client) WaypointServiceListActionRunsByNamespace(params *WaypointServiceListActionRunsByNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionRunsByNamespaceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceListActionRunsByNamespaceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_ListActionRunsByNamespace",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/action-runs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceListActionRunsByNamespaceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceListActionRunsByNamespaceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceListActionRunsByNamespaceDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

@@ -18,6 +18,9 @@ import (
 // swagger:model hashicorp.cloud.waypoint.ActionConfig.Request
 type HashicorpCloudWaypointActionConfigRequest struct {
 
+	// The configuration for an agent operation
+	Agent *HashicorpCloudWaypointActionConfigFlavorAgent `json:"agent,omitempty"`
+
 	// Specify the exact details of the HTTP request to be made
 	// Defaults to Custom, and will default to an HTTP POST if no fields are set
 	Custom *HashicorpCloudWaypointActionConfigFlavorCustom `json:"custom,omitempty"`
@@ -30,6 +33,10 @@ type HashicorpCloudWaypointActionConfigRequest struct {
 func (m *HashicorpCloudWaypointActionConfigRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAgent(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCustom(formats); err != nil {
 		res = append(res, err)
 	}
@@ -41,6 +48,25 @@ func (m *HashicorpCloudWaypointActionConfigRequest) Validate(formats strfmt.Regi
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointActionConfigRequest) validateAgent(formats strfmt.Registry) error {
+	if swag.IsZero(m.Agent) { // not required
+		return nil
+	}
+
+	if m.Agent != nil {
+		if err := m.Agent.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("agent")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("agent")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -86,6 +112,10 @@ func (m *HashicorpCloudWaypointActionConfigRequest) validateGithub(formats strfm
 func (m *HashicorpCloudWaypointActionConfigRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAgent(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCustom(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -97,6 +127,27 @@ func (m *HashicorpCloudWaypointActionConfigRequest) ContextValidate(ctx context.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointActionConfigRequest) contextValidateAgent(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Agent != nil {
+
+		if swag.IsZero(m.Agent) { // not required
+			return nil
+		}
+
+		if err := m.Agent.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("agent")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("agent")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

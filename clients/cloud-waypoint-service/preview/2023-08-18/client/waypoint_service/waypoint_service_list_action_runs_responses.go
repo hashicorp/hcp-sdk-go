@@ -87,11 +87,11 @@ func (o *WaypointServiceListActionRunsOK) Code() int {
 }
 
 func (o *WaypointServiceListActionRunsOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/actionruns][%d] waypointServiceListActionRunsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_id}/runs][%d] waypointServiceListActionRunsOK  %+v", 200, o.Payload)
 }
 
 func (o *WaypointServiceListActionRunsOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/actionruns][%d] waypointServiceListActionRunsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_id}/runs][%d] waypointServiceListActionRunsOK  %+v", 200, o.Payload)
 }
 
 func (o *WaypointServiceListActionRunsOK) GetPayload() *models.HashicorpCloudWaypointListActionRunsResponse {
@@ -159,11 +159,11 @@ func (o *WaypointServiceListActionRunsDefault) Code() int {
 }
 
 func (o *WaypointServiceListActionRunsDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/actionruns][%d] WaypointService_ListActionRuns default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_id}/runs][%d] WaypointService_ListActionRuns default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *WaypointServiceListActionRunsDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/actionruns][%d] WaypointService_ListActionRuns default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_id}/runs][%d] WaypointService_ListActionRuns default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *WaypointServiceListActionRunsDefault) GetPayload() *cloud.GoogleRPCStatus {

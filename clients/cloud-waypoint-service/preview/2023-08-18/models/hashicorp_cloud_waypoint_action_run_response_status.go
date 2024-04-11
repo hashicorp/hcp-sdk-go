@@ -14,7 +14,9 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// HashicorpCloudWaypointActionRunResponseStatus - NONE: default/zero value; we have no status yet
+// HashicorpCloudWaypointActionRunResponseStatus This is the status of the request that the action ran.
+//
+//   - NONE: default/zero value; we have no status yet
 //   - UNKNOWN: a status we didn't understand
 //   - SUCCESS: action submitted successfully
 //   - ERROR: it did not work

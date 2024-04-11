@@ -17,6 +17,9 @@ import (
 // swagger:model hashicorp.cloud.waypoint.TerraformNocodeModule
 type HashicorpCloudWaypointTerraformNocodeModule struct {
 
+	// The id of the Terraform no-code module
+	ModuleID string `json:"module_id,omitempty"`
+
 	// The source of the Terraform no-code module.
 	// https://developer.hashicorp.com/terraform/language/modules/sources
 	Source string `json:"source,omitempty"`

@@ -18,7 +18,7 @@ import (
 type HashicorpCloudWaypointWaypointServiceStartingActionBody struct {
 
 	// The external identifier of the action config to create an action run against
-	ActionConfigID string `json:"action_config_id,omitempty"`
+	ActionRunID string `json:"action_run_id,omitempty"`
 
 	// The name of the group that the operation was started in
 	GroupName string `json:"group_name,omitempty"`
