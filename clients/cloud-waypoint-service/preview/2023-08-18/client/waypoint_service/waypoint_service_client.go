@@ -148,6 +148,8 @@ type ClientService interface {
 
 	WaypointServiceUIListActionConfigBundles(params *WaypointServiceUIListActionConfigBundlesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIListActionConfigBundlesOK, error)
 
+	WaypointServiceUIBulkUpdateActionAssignForApp(params *WaypointServiceUIBulkUpdateActionAssignForAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIBulkUpdateActionAssignForAppOK, error)
+
 	WaypointServiceUIGetActionConfigBundle(params *WaypointServiceUIGetActionConfigBundleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetActionConfigBundleOK, error)
 
 	WaypointServiceUIGetActionConfigBundle2(params *WaypointServiceUIGetActionConfigBundle2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetActionConfigBundle2OK, error)
@@ -2470,6 +2472,44 @@ func (a *Client) WaypointServiceUIListActionConfigBundles(params *WaypointServic
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceUIListActionConfigBundlesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceUIBulkUpdateActionAssignForApp waypoint service UI bulk update action assign for app API
+*/
+func (a *Client) WaypointServiceUIBulkUpdateActionAssignForApp(params *WaypointServiceUIBulkUpdateActionAssignForAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIBulkUpdateActionAssignForAppOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUIBulkUpdateActionAssignForAppParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UI_BulkUpdateActionAssignForApp",
+		Method:             "PATCH",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/ui/applications/action-assignments",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUIBulkUpdateActionAssignForAppReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUIBulkUpdateActionAssignForAppOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUIBulkUpdateActionAssignForAppDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

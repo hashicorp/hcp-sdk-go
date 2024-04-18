@@ -20,8 +20,12 @@ import (
 // swagger:model hashicorp.cloud.waypoint.ActionRun
 type HashicorpCloudWaypointActionRun struct {
 
-	// The full action config that was ran in the moment it was invoked
+	// This option is no longer used. Use Ref.ActionConfig instead. Or look at the
+	// request field for the exact request used to run this action.
 	ActionConfig *HashicorpCloudWaypointActionConfig `json:"action_config,omitempty"`
+
+	// The action config reference used for this action run
+	ActionConfigRef *HashicorpCloudWaypointActionCfgRef `json:"action_config_ref,omitempty"`
 
 	// The status of the background job that was used to run this action
 	BackgroundJob *HashicorpCloudWaypointJob `json:"background_job,omitempty"`
@@ -68,6 +72,10 @@ func (m *HashicorpCloudWaypointActionRun) Validate(formats strfmt.Registry) erro
 	var res []error
 
 	if err := m.validateActionConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateActionConfigRef(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -120,6 +128,25 @@ func (m *HashicorpCloudWaypointActionRun) validateActionConfig(formats strfmt.Re
 				return ve.ValidateName("action_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("action_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointActionRun) validateActionConfigRef(formats strfmt.Registry) error {
+	if swag.IsZero(m.ActionConfigRef) { // not required
+		return nil
+	}
+
+	if m.ActionConfigRef != nil {
+		if err := m.ActionConfigRef.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("action_config_ref")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("action_config_ref")
 			}
 			return err
 		}
@@ -281,6 +308,10 @@ func (m *HashicorpCloudWaypointActionRun) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateActionConfigRef(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateBackgroundJob(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -324,6 +355,27 @@ func (m *HashicorpCloudWaypointActionRun) contextValidateActionConfig(ctx contex
 				return ve.ValidateName("action_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("action_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointActionRun) contextValidateActionConfigRef(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ActionConfigRef != nil {
+
+		if swag.IsZero(m.ActionConfigRef) { // not required
+			return nil
+		}
+
+		if err := m.ActionConfigRef.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("action_config_ref")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("action_config_ref")
 			}
 			return err
 		}

@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewWaypointServiceDeleteActionConfigParams creates a new WaypointServiceDeleteActionConfigParams object,
@@ -72,6 +73,12 @@ type WaypointServiceDeleteActionConfigParams struct {
 	   The name of the action being deleted (will only be used if id not provided)
 	*/
 	ActionName *string
+
+	/* Force.
+
+	   Force, if set to true, will auto-unassign the action from all apps and templates
+	*/
+	Force *bool
 
 	// NamespaceID.
 	NamespaceID string
@@ -151,6 +158,17 @@ func (o *WaypointServiceDeleteActionConfigParams) SetActionName(actionName *stri
 	o.ActionName = actionName
 }
 
+// WithForce adds the force to the waypoint service delete action config params
+func (o *WaypointServiceDeleteActionConfigParams) WithForce(force *bool) *WaypointServiceDeleteActionConfigParams {
+	o.SetForce(force)
+	return o
+}
+
+// SetForce adds the force to the waypoint service delete action config params
+func (o *WaypointServiceDeleteActionConfigParams) SetForce(force *bool) {
+	o.Force = force
+}
+
 // WithNamespaceID adds the namespaceID to the waypoint service delete action config params
 func (o *WaypointServiceDeleteActionConfigParams) WithNamespaceID(namespaceID string) *WaypointServiceDeleteActionConfigParams {
 	o.SetNamespaceID(namespaceID)
@@ -199,6 +217,23 @@ func (o *WaypointServiceDeleteActionConfigParams) WriteToRequest(r runtime.Clien
 		if qActionName != "" {
 
 			if err := r.SetQueryParam("action_name", qActionName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Force != nil {
+
+		// query param force
+		var qrForce bool
+
+		if o.Force != nil {
+			qrForce = *o.Force
+		}
+		qForce := swag.FormatBool(qrForce)
+		if qForce != "" {
+
+			if err := r.SetQueryParam("force", qForce); err != nil {
 				return err
 			}
 		}

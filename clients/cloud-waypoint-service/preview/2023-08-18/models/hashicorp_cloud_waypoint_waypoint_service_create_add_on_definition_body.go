@@ -47,7 +47,7 @@ type HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody struct {
 	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
 
 	// variable_options is the collection of input variables which may be set for an add-on.
-	Variables []*HashicorpCloudWaypointTFModuleVariable `json:"variables"`
+	VariableOptions []*HashicorpCloudWaypointTFModuleVariable `json:"variable_options"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service create add on definition body
@@ -62,7 +62,7 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) Validat
 		res = append(res, err)
 	}
 
-	if err := m.validateVariables(formats); err != nil {
+	if err := m.validateVariableOptions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -110,22 +110,22 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) validat
 	return nil
 }
 
-func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) validateVariables(formats strfmt.Registry) error {
-	if swag.IsZero(m.Variables) { // not required
+func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) validateVariableOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.VariableOptions) { // not required
 		return nil
 	}
 
-	for i := 0; i < len(m.Variables); i++ {
-		if swag.IsZero(m.Variables[i]) { // not required
+	for i := 0; i < len(m.VariableOptions); i++ {
+		if swag.IsZero(m.VariableOptions[i]) { // not required
 			continue
 		}
 
-		if m.Variables[i] != nil {
-			if err := m.Variables[i].Validate(formats); err != nil {
+		if m.VariableOptions[i] != nil {
+			if err := m.VariableOptions[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("variables" + "." + strconv.Itoa(i))
+					return ve.ValidateName("variable_options" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("variables" + "." + strconv.Itoa(i))
+					return ce.ValidateName("variable_options" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -148,7 +148,7 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) Context
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateVariables(ctx, formats); err != nil {
+	if err := m.contextValidateVariableOptions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -200,21 +200,21 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) context
 	return nil
 }
 
-func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) contextValidateVariables(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) contextValidateVariableOptions(ctx context.Context, formats strfmt.Registry) error {
 
-	for i := 0; i < len(m.Variables); i++ {
+	for i := 0; i < len(m.VariableOptions); i++ {
 
-		if m.Variables[i] != nil {
+		if m.VariableOptions[i] != nil {
 
-			if swag.IsZero(m.Variables[i]) { // not required
+			if swag.IsZero(m.VariableOptions[i]) { // not required
 				return nil
 			}
 
-			if err := m.Variables[i].ContextValidate(ctx, formats); err != nil {
+			if err := m.VariableOptions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("variables" + "." + strconv.Itoa(i))
+					return ve.ValidateName("variable_options" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("variables" + "." + strconv.Itoa(i))
+					return ce.ValidateName("variable_options" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

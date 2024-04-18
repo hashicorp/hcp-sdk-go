@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // HashicorpCloudWaypointAddOnDefinition AddOnDefinition is the template for an add-on
@@ -49,6 +50,13 @@ type HashicorpCloudWaypointAddOnDefinition struct {
 
 	// variable_options is the collection of input variables which may be set for a template.
 	VariableOptions []*HashicorpCloudWaypointTFModuleVariable `json:"variable_options"`
+
+	// variable_options_out_of_sync is a boolean value that indicates whether the variable_options
+	// are out of sync with the Terraform no-code module, published in Terraform Cloud.
+	// This is used to determine whether the variable_options should be updated.
+	// API client should not set this value.
+	// Read Only: true
+	VariableOptionsOutOfSync *bool `json:"variable_options_out_of_sync,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint add on definition
@@ -187,6 +195,10 @@ func (m *HashicorpCloudWaypointAddOnDefinition) ContextValidate(ctx context.Cont
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateVariableOptionsOutOfSync(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -280,6 +292,15 @@ func (m *HashicorpCloudWaypointAddOnDefinition) contextValidateVariableOptions(c
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointAddOnDefinition) contextValidateVariableOptionsOutOfSync(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "variable_options_out_of_sync", "body", m.VariableOptionsOutOfSync); err != nil {
+		return err
 	}
 
 	return nil
