@@ -79,7 +79,7 @@ See `cmd/example` for a complete example.
 
 ### SDK Release Cycle
 
-HCP aims to strike a balance between the public SDK consumer's need for a stable SDK interface, and the developer's need to iterate on new features. To this end, we use SDK versions composed of a dated version (`2021-02-04`) and stage (`preview` or `stable`) to allow consumers the flexibility to pin to specific versions or try out new new features.
+HCP aims to strike a balance between the public SDK consumer's need for a stable SDK interface, and the developer's need to iterate on new features. To this end, we use SDK versions composed of a dated version (`2021-02-04`) and stage (`preview` or `stable`) to allow consumers the flexibility to pin to specific versions or try out new features.
 
 Preview SDK versions allow consumers to try out features in beta, but may undergo breaking changes. What constitutes a breaking change is described in the [Breaking Changes doc](/docs/breaking-changes.md).
 
@@ -111,7 +111,7 @@ The Cache interface lives under the `tokencache` package. It handles writing the
 
 ### Changelogs
 
-This repo requires that a chagnelog file be added in all pull requests. The name of the file must follow `[PR #].txt` and must reside in the `.changelog` directory. The contents must have the following formatting:
+This repo requires that a changelog file be added in all pull requests. The name of the file must follow `[PR #].txt` and must reside in the `.changelog` directory. The contents must have the following formatting:
 
 ```text
     ```release-note:TYPE
