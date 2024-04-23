@@ -36,6 +36,11 @@ type HashicorpCloudWaypointAddOnDefinition struct {
 	// Format: byte
 	ReadmeMarkdownTemplate strfmt.Base64 `json:"readme_markdown_template,omitempty"`
 
+	// readme_template is markdown formatted instructions on how to operate the application.
+	// This may be populated from a application template.
+	// This field is favored over readme_markdown_template and support for both is transitional.
+	ReadmeTemplate string `json:"readme_template,omitempty"`
+
 	// Short description of the Add-on
 	Summary string `json:"summary,omitempty"`
 

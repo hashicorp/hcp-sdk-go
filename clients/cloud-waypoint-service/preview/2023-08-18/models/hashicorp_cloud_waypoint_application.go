@@ -34,6 +34,11 @@ type HashicorpCloudWaypointApplication struct {
 	// Terraform output values, sensitive values have type and value omitted
 	OutputValues []*HashicorpCloudWaypointTFOutputValue `json:"output_values"`
 
+	// readme is markdown formatted instructions on how to operate the application.
+	// This may be populated from a application template.
+	// This field is favored over readme_markdown and support for both is transitional.
+	Readme string `json:"readme,omitempty"`
+
 	// readme_markdown is markdown formatted instructions on how to
 	// operate the application. This may be populated from a application template.
 	// Format: byte

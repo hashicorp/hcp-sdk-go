@@ -46,6 +46,15 @@ type HashicorpCloudWaypointApplicationTemplate struct {
 	// Format: byte
 	ReadmeMarkdownTemplate strfmt.Base64 `json:"readme_markdown_template,omitempty"`
 
+	// A markdown text template which is rendered when an Application is created from a
+	// ApplicationTemplate to be shown to application developers.
+	// Accepted tokens:
+	// "{{ .ApplicationName }}", representing the application developer chosen application name
+	// "{{ .TfcOrgName }}", representing the Terraform Cloud organization name in which
+	//  the no-code module was reified.
+	// This field is favored over readme_markdown_template and support for both is transitional.
+	ReadmeTemplate string `json:"readme_template,omitempty"`
+
 	// A short summary for use by platform engineers to distinguish between
 	// multiple templates
 	Summary string `json:"summary,omitempty"`
