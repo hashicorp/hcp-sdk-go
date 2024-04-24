@@ -36,9 +36,21 @@ type ClientService interface {
 
 	CreateAppKVSecret(params *CreateAppKVSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppKVSecretOK, error)
 
+	CreateAwsDynamicSecret(params *CreateAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsDynamicSecretOK, error)
+
+	CreateAwsIntegration(params *CreateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsIntegrationOK, error)
+
 	CreateAwsSmSyncIntegration(params *CreateAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsSmSyncIntegrationOK, error)
 
+	CreateAzureKvSyncIntegration(params *CreateAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureKvSyncIntegrationOK, error)
+
+	CreateGcpSmSyncIntegration(params *CreateGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpSmSyncIntegrationOK, error)
+
 	CreateGhRepoSyncIntegration(params *CreateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGhRepoSyncIntegrationOK, error)
+
+	CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotatingSecretOK, error)
+
+	CreateMongoDBAtlasRotationIntegration(params *CreateMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotationIntegrationOK, error)
 
 	CreateTwilioRotatingSecret(params *CreateTwilioRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTwilioRotatingSecretOK, error)
 
@@ -51,6 +63,12 @@ type ClientService interface {
 	DeleteAppSecret(params *DeleteAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppSecretOK, error)
 
 	DeleteAppSecretVersion(params *DeleteAppSecretVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppSecretVersionOK, error)
+
+	DeleteAwsDynamicSecret(params *DeleteAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAwsDynamicSecretOK, error)
+
+	DeleteAwsIntegration(params *DeleteAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAwsIntegrationOK, error)
+
+	DeleteMongoDBAtlasRotationIntegration(params *DeleteMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMongoDBAtlasRotationIntegrationOK, error)
 
 	DeleteSyncInstallation(params *DeleteSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSyncInstallationOK, error)
 
@@ -66,7 +84,15 @@ type ClientService interface {
 
 	GetAppSecretVersion(params *GetAppSecretVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSecretVersionOK, error)
 
+	GetAwsDynamicSecret(params *GetAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsDynamicSecretOK, error)
+
+	GetAwsIntegration(params *GetAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIntegrationOK, error)
+
 	GetGitHubInstallLinks(params *GetGitHubInstallLinksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubInstallLinksOK, error)
+
+	GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotatingSecretConfigOK, error)
+
+	GetMongoDBAtlasRotationIntegration(params *GetMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotationIntegrationOK, error)
 
 	GetRotatingSecretState(params *GetRotatingSecretStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRotatingSecretStateOK, error)
 
@@ -90,6 +116,10 @@ type ClientService interface {
 
 	ListApps(params *ListAppsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAppsOK, error)
 
+	ListAwsDynamicSecrets(params *ListAwsDynamicSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAwsDynamicSecretsOK, error)
+
+	ListAwsIntegrations(params *ListAwsIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAwsIntegrationsOK, error)
+
 	ListOpenAppSecretVersions(params *ListOpenAppSecretVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenAppSecretVersionsOK, error)
 
 	ListRotationIntegrations(params *ListRotationIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRotationIntegrationsOK, error)
@@ -110,11 +140,19 @@ type ClientService interface {
 
 	UpdateAwsSmSyncIntegration(params *UpdateAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsSmSyncIntegrationOK, error)
 
+	UpdateAzureKvSyncIntegration(params *UpdateAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureKvSyncIntegrationOK, error)
+
+	UpdateGcpSmSyncIntegration(params *UpdateGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpSmSyncIntegrationOK, error)
+
 	UpdateGhRepoSyncIntegration(params *UpdateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGhRepoSyncIntegrationOK, error)
 
 	UpdateVercelProjectSyncIntegration(params *UpdateVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVercelProjectSyncIntegrationOK, error)
 
 	UpsertAwsSmSyncIntegration(params *UpsertAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertAwsSmSyncIntegrationOK, error)
+
+	UpsertAzureKvSyncIntegration(params *UpsertAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertAzureKvSyncIntegrationOK, error)
+
+	UpsertGcpSmSyncIntegration(params *UpsertGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertGcpSmSyncIntegrationOK, error)
 
 	UpsertGhRepoSyncIntegration(params *UpsertGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertGhRepoSyncIntegrationOK, error)
 
@@ -278,6 +316,82 @@ func (a *Client) CreateAppKVSecret(params *CreateAppKVSecretParams, authInfo run
 }
 
 /*
+CreateAwsDynamicSecret create aws dynamic secret API
+*/
+func (a *Client) CreateAwsDynamicSecret(params *CreateAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsDynamicSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateAwsDynamicSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAwsDynamicSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAwsDynamicSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateAwsDynamicSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateAwsDynamicSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateAwsIntegration create aws integration API
+*/
+func (a *Client) CreateAwsIntegration(params *CreateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateAwsIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAwsIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAwsIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateAwsIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateAwsSmSyncIntegration create aws sm sync integration API
 */
 func (a *Client) CreateAwsSmSyncIntegration(params *CreateAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsSmSyncIntegrationOK, error) {
@@ -316,6 +430,82 @@ func (a *Client) CreateAwsSmSyncIntegration(params *CreateAwsSmSyncIntegrationPa
 }
 
 /*
+CreateAzureKvSyncIntegration create azure kv sync integration API
+*/
+func (a *Client) CreateAzureKvSyncIntegration(params *CreateAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureKvSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateAzureKvSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAzureKvSyncIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/azure-kv",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAzureKvSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateAzureKvSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateAzureKvSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateGcpSmSyncIntegration create gcp sm sync integration API
+*/
+func (a *Client) CreateGcpSmSyncIntegration(params *CreateGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpSmSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateGcpSmSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateGcpSmSyncIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/gcp-sm",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateGcpSmSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateGcpSmSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateGcpSmSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateGhRepoSyncIntegration create gh repo sync integration API
 */
 func (a *Client) CreateGhRepoSyncIntegration(params *CreateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGhRepoSyncIntegrationOK, error) {
@@ -350,6 +540,82 @@ func (a *Client) CreateGhRepoSyncIntegration(params *CreateGhRepoSyncIntegration
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateGhRepoSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateMongoDBAtlasRotatingSecret create mongo d b atlas rotating secret API
+*/
+func (a *Client) CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateMongoDBAtlasRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateMongoDBAtlasRotatingSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/mongodb-atlas",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateMongoDBAtlasRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateMongoDBAtlasRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateMongoDBAtlasRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateMongoDBAtlasRotationIntegration create mongo d b atlas rotation integration API
+*/
+func (a *Client) CreateMongoDBAtlasRotationIntegration(params *CreateMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotationIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateMongoDBAtlasRotationIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateMongoDBAtlasRotationIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation/mongodb-atlas",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateMongoDBAtlasRotationIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateMongoDBAtlasRotationIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateMongoDBAtlasRotationIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -578,6 +844,120 @@ func (a *Client) DeleteAppSecretVersion(params *DeleteAppSecretVersionParams, au
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteAppSecretVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteAwsDynamicSecret delete aws dynamic secret API
+*/
+func (a *Client) DeleteAwsDynamicSecret(params *DeleteAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAwsDynamicSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteAwsDynamicSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteAwsDynamicSecret",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteAwsDynamicSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteAwsDynamicSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteAwsDynamicSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteAwsIntegration delete aws integration API
+*/
+func (a *Client) DeleteAwsIntegration(params *DeleteAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAwsIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteAwsIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteAwsIntegration",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteAwsIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteAwsIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteMongoDBAtlasRotationIntegration delete mongo d b atlas rotation integration API
+*/
+func (a *Client) DeleteMongoDBAtlasRotationIntegration(params *DeleteMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMongoDBAtlasRotationIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteMongoDBAtlasRotationIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteMongoDBAtlasRotationIntegration",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation/mongodb-atlas/{integration_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteMongoDBAtlasRotationIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteMongoDBAtlasRotationIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteMongoDBAtlasRotationIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -848,6 +1228,82 @@ func (a *Client) GetAppSecretVersion(params *GetAppSecretVersionParams, authInfo
 }
 
 /*
+GetAwsDynamicSecret get aws dynamic secret API
+*/
+func (a *Client) GetAwsDynamicSecret(params *GetAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsDynamicSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAwsDynamicSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAwsDynamicSecret",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAwsDynamicSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAwsDynamicSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetAwsDynamicSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetAwsIntegration get aws integration API
+*/
+func (a *Client) GetAwsIntegration(params *GetAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAwsIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAwsIntegration",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAwsIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAwsIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetGitHubInstallLinks get git hub install links API
 */
 func (a *Client) GetGitHubInstallLinks(params *GetGitHubInstallLinksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubInstallLinksOK, error) {
@@ -882,6 +1338,82 @@ func (a *Client) GetGitHubInstallLinks(params *GetGitHubInstallLinksParams, auth
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetGitHubInstallLinksDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetMongoDBAtlasRotatingSecretConfig get mongo d b atlas rotating secret config API
+*/
+func (a *Client) GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotatingSecretConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetMongoDBAtlasRotatingSecretConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetMongoDBAtlasRotatingSecretConfig",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/mongodb-atlas/{secret_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetMongoDBAtlasRotatingSecretConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetMongoDBAtlasRotatingSecretConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetMongoDBAtlasRotatingSecretConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetMongoDBAtlasRotationIntegration get mongo d b atlas rotation integration API
+*/
+func (a *Client) GetMongoDBAtlasRotationIntegration(params *GetMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotationIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetMongoDBAtlasRotationIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetMongoDBAtlasRotationIntegration",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation/mongodb-atlas/{integration_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetMongoDBAtlasRotationIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetMongoDBAtlasRotationIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetMongoDBAtlasRotationIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1304,6 +1836,82 @@ func (a *Client) ListApps(params *ListAppsParams, authInfo runtime.ClientAuthInf
 }
 
 /*
+ListAwsDynamicSecrets list aws dynamic secrets API
+*/
+func (a *Client) ListAwsDynamicSecrets(params *ListAwsDynamicSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAwsDynamicSecretsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListAwsDynamicSecretsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListAwsDynamicSecrets",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListAwsDynamicSecretsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListAwsDynamicSecretsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListAwsDynamicSecretsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListAwsIntegrations list aws integrations API
+*/
+func (a *Client) ListAwsIntegrations(params *ListAwsIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAwsIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListAwsIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListAwsIntegrations",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListAwsIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListAwsIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListAwsIntegrationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ListOpenAppSecretVersions list open app secret versions API
 */
 func (a *Client) ListOpenAppSecretVersions(params *ListOpenAppSecretVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenAppSecretVersionsOK, error) {
@@ -1684,6 +2292,82 @@ func (a *Client) UpdateAwsSmSyncIntegration(params *UpdateAwsSmSyncIntegrationPa
 }
 
 /*
+UpdateAzureKvSyncIntegration update azure kv sync integration API
+*/
+func (a *Client) UpdateAzureKvSyncIntegration(params *UpdateAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureKvSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAzureKvSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAzureKvSyncIntegration",
+		Method:             "PATCH",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/azure-kv/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAzureKvSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateAzureKvSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateAzureKvSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateGcpSmSyncIntegration update gcp sm sync integration API
+*/
+func (a *Client) UpdateGcpSmSyncIntegration(params *UpdateGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpSmSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateGcpSmSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateGcpSmSyncIntegration",
+		Method:             "PATCH",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/gcp-sm/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateGcpSmSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateGcpSmSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateGcpSmSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 UpdateGhRepoSyncIntegration update gh repo sync integration API
 */
 func (a *Client) UpdateGhRepoSyncIntegration(params *UpdateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGhRepoSyncIntegrationOK, error) {
@@ -1794,6 +2478,82 @@ func (a *Client) UpsertAwsSmSyncIntegration(params *UpsertAwsSmSyncIntegrationPa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpsertAwsSmSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpsertAzureKvSyncIntegration upsert azure kv sync integration API
+*/
+func (a *Client) UpsertAzureKvSyncIntegration(params *UpsertAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertAzureKvSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpsertAzureKvSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpsertAzureKvSyncIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/azure-kv",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpsertAzureKvSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpsertAzureKvSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpsertAzureKvSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpsertGcpSmSyncIntegration upsert gcp sm sync integration API
+*/
+func (a *Client) UpsertGcpSmSyncIntegration(params *UpsertGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertGcpSmSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpsertGcpSmSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpsertGcpSmSyncIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/gcp-sm",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpsertGcpSmSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpsertGcpSmSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpsertGcpSmSyncIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

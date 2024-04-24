@@ -52,7 +52,7 @@ DeleteTwilioRotationIntegrationOK describes a response with status code 200, wit
 A successful response.
 */
 type DeleteTwilioRotationIntegrationOK struct {
-	Payload models.Secrets20231128DeleteTwilioRotationIntegrationResponse
+	Payload models.Secrets20231128DeleteRotationIntegrationResponse
 }
 
 // IsSuccess returns true when this delete twilio rotation integration o k response has a 2xx status code
@@ -93,7 +93,7 @@ func (o *DeleteTwilioRotationIntegrationOK) String() string {
 	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation/twilio/{integration_name}][%d] deleteTwilioRotationIntegrationOK  %+v", 200, o.Payload)
 }
 
-func (o *DeleteTwilioRotationIntegrationOK) GetPayload() models.Secrets20231128DeleteTwilioRotationIntegrationResponse {
+func (o *DeleteTwilioRotationIntegrationOK) GetPayload() models.Secrets20231128DeleteRotationIntegrationResponse {
 	return o.Payload
 }
 

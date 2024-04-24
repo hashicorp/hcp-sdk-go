@@ -21,6 +21,9 @@ type Secrets20231128ListAppsResponse struct {
 
 	// apps
 	Apps []*Secrets20231128App `json:"apps"`
+
+	// pagination
+	Pagination *CommonPaginationResponse `json:"pagination,omitempty"`
 }
 
 // Validate validates this secrets 20231128 list apps response
@@ -28,6 +31,10 @@ func (m *Secrets20231128ListAppsResponse) Validate(formats strfmt.Registry) erro
 	var res []error
 
 	if err := m.validateApps(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePagination(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -63,11 +70,34 @@ func (m *Secrets20231128ListAppsResponse) validateApps(formats strfmt.Registry) 
 	return nil
 }
 
+func (m *Secrets20231128ListAppsResponse) validatePagination(formats strfmt.Registry) error {
+	if swag.IsZero(m.Pagination) { // not required
+		return nil
+	}
+
+	if m.Pagination != nil {
+		if err := m.Pagination.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this secrets 20231128 list apps response based on the context it is used
 func (m *Secrets20231128ListAppsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateApps(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePagination(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -97,6 +127,27 @@ func (m *Secrets20231128ListAppsResponse) contextValidateApps(ctx context.Contex
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128ListAppsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
+		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
 	}
 
 	return nil
