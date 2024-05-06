@@ -6,12 +6,16 @@ package box_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
@@ -30,7 +34,14 @@ func (o *UpdateBoxReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewUpdateBoxDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -45,7 +56,7 @@ UpdateBoxOK describes a response with status code 200, with default header value
 A successful response.
 */
 type UpdateBoxOK struct {
-	Payload *models.HashicorpCloudVagrantUpdateBoxResponse
+	Payload *models.HashicorpCloudVagrant20220930UpdateBoxResponse
 }
 
 // IsSuccess returns true when this update box o k response has a 2xx status code
@@ -73,6 +84,11 @@ func (o *UpdateBoxOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update box o k response
+func (o *UpdateBoxOK) Code() int {
+	return 200
+}
+
 func (o *UpdateBoxOK) Error() string {
 	return fmt.Sprintf("[PATCH /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] updateBoxOK  %+v", 200, o.Payload)
 }
@@ -81,18 +97,187 @@ func (o *UpdateBoxOK) String() string {
 	return fmt.Sprintf("[PATCH /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] updateBoxOK  %+v", 200, o.Payload)
 }
 
-func (o *UpdateBoxOK) GetPayload() *models.HashicorpCloudVagrantUpdateBoxResponse {
+func (o *UpdateBoxOK) GetPayload() *models.HashicorpCloudVagrant20220930UpdateBoxResponse {
 	return o.Payload
 }
 
 func (o *UpdateBoxOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVagrantUpdateBoxResponse)
+	o.Payload = new(models.HashicorpCloudVagrant20220930UpdateBoxResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
+	return nil
+}
+
+// NewUpdateBoxDefault creates a UpdateBoxDefault with default headers values
+func NewUpdateBoxDefault(code int) *UpdateBoxDefault {
+	return &UpdateBoxDefault{
+		_statusCode: code,
+	}
+}
+
+/*
+UpdateBoxDefault describes a response with status code -1, with default header values.
+
+An unexpected error response.
+*/
+type UpdateBoxDefault struct {
+	_statusCode int
+
+	Payload *cloud.GoogleRPCStatus
+}
+
+// IsSuccess returns true when this update box default response has a 2xx status code
+func (o *UpdateBoxDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this update box default response has a 3xx status code
+func (o *UpdateBoxDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this update box default response has a 4xx status code
+func (o *UpdateBoxDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this update box default response has a 5xx status code
+func (o *UpdateBoxDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this update box default response a status code equal to that given
+func (o *UpdateBoxDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
+// Code gets the status code for the update box default response
+func (o *UpdateBoxDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *UpdateBoxDefault) Error() string {
+	return fmt.Sprintf("[PATCH /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] UpdateBox default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *UpdateBoxDefault) String() string {
+	return fmt.Sprintf("[PATCH /vagrant/2022-09-30/registry/{registry}/boxes/{box}][%d] UpdateBox default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *UpdateBoxDefault) GetPayload() *cloud.GoogleRPCStatus {
+	return o.Payload
+}
+
+func (o *UpdateBoxDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(cloud.GoogleRPCStatus)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+/*
+UpdateBoxBody update box body
+swagger:model UpdateBoxBody
+*/
+type UpdateBoxBody struct {
+
+	// Details of the Box to update. Note that some fields are ignored
+	// on input and should not be set.
+	Data *models.HashicorpCloudVagrant20220930Box `json:"data,omitempty"`
+}
+
+// Validate validates this update box body
+func (o *UpdateBoxBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *UpdateBoxBody) validateData(formats strfmt.Registry) error {
+	if swag.IsZero(o.Data) { // not required
+		return nil
+	}
+
+	if o.Data != nil {
+		if err := o.Data.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this update box body based on the context it is used
+func (o *UpdateBoxBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *UpdateBoxBody) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Data != nil {
+
+		if swag.IsZero(o.Data) { // not required
+			return nil
+		}
+
+		if err := o.Data.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *UpdateBoxBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *UpdateBoxBody) UnmarshalBinary(b []byte) error {
+	var res UpdateBoxBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

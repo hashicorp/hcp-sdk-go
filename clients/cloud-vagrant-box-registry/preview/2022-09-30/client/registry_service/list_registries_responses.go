@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
@@ -30,7 +31,14 @@ func (o *ListRegistriesReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewListRegistriesDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -45,7 +53,7 @@ ListRegistriesOK describes a response with status code 200, with default header 
 A successful response.
 */
 type ListRegistriesOK struct {
-	Payload *models.HashicorpCloudVagrantListRegistriesResponse
+	Payload *models.HashicorpCloudVagrant20220930ListRegistriesResponse
 }
 
 // IsSuccess returns true when this list registries o k response has a 2xx status code
@@ -73,6 +81,11 @@ func (o *ListRegistriesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list registries o k response
+func (o *ListRegistriesOK) Code() int {
+	return 200
+}
+
 func (o *ListRegistriesOK) Error() string {
 	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry][%d] listRegistriesOK  %+v", 200, o.Payload)
 }
@@ -81,13 +94,85 @@ func (o *ListRegistriesOK) String() string {
 	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry][%d] listRegistriesOK  %+v", 200, o.Payload)
 }
 
-func (o *ListRegistriesOK) GetPayload() *models.HashicorpCloudVagrantListRegistriesResponse {
+func (o *ListRegistriesOK) GetPayload() *models.HashicorpCloudVagrant20220930ListRegistriesResponse {
 	return o.Payload
 }
 
 func (o *ListRegistriesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVagrantListRegistriesResponse)
+	o.Payload = new(models.HashicorpCloudVagrant20220930ListRegistriesResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListRegistriesDefault creates a ListRegistriesDefault with default headers values
+func NewListRegistriesDefault(code int) *ListRegistriesDefault {
+	return &ListRegistriesDefault{
+		_statusCode: code,
+	}
+}
+
+/*
+ListRegistriesDefault describes a response with status code -1, with default header values.
+
+An unexpected error response.
+*/
+type ListRegistriesDefault struct {
+	_statusCode int
+
+	Payload *cloud.GoogleRPCStatus
+}
+
+// IsSuccess returns true when this list registries default response has a 2xx status code
+func (o *ListRegistriesDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list registries default response has a 3xx status code
+func (o *ListRegistriesDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list registries default response has a 4xx status code
+func (o *ListRegistriesDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list registries default response has a 5xx status code
+func (o *ListRegistriesDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list registries default response a status code equal to that given
+func (o *ListRegistriesDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
+// Code gets the status code for the list registries default response
+func (o *ListRegistriesDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *ListRegistriesDefault) Error() string {
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry][%d] ListRegistries default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ListRegistriesDefault) String() string {
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry][%d] ListRegistries default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ListRegistriesDefault) GetPayload() *cloud.GoogleRPCStatus {
+	return o.Payload
+}
+
+func (o *ListRegistriesDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(cloud.GoogleRPCStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

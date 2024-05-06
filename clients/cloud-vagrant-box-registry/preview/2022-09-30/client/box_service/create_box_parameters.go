@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
 // NewCreateBoxParams creates a new CreateBoxParams object,
@@ -64,7 +62,7 @@ CreateBoxParams contains all the parameters to send to the API endpoint
 type CreateBoxParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudVagrantCreateBoxRequest
+	Body CreateBoxBody
 
 	/* Registry.
 
@@ -127,13 +125,13 @@ func (o *CreateBoxParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create box params
-func (o *CreateBoxParams) WithBody(body *models.HashicorpCloudVagrantCreateBoxRequest) *CreateBoxParams {
+func (o *CreateBoxParams) WithBody(body CreateBoxBody) *CreateBoxParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create box params
-func (o *CreateBoxParams) SetBody(body *models.HashicorpCloudVagrantCreateBoxRequest) {
+func (o *CreateBoxParams) SetBody(body CreateBoxBody) {
 	o.Body = body
 }
 
@@ -155,10 +153,8 @@ func (o *CreateBoxParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param registry

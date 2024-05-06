@@ -6,12 +6,16 @@ package box_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
@@ -30,7 +34,14 @@ func (o *CreateBoxReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewCreateBoxDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -45,7 +56,7 @@ CreateBoxOK describes a response with status code 200, with default header value
 A successful response.
 */
 type CreateBoxOK struct {
-	Payload *models.HashicorpCloudVagrantCreateBoxResponse
+	Payload *models.HashicorpCloudVagrant20220930CreateBoxResponse
 }
 
 // IsSuccess returns true when this create box o k response has a 2xx status code
@@ -73,6 +84,11 @@ func (o *CreateBoxOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the create box o k response
+func (o *CreateBoxOK) Code() int {
+	return 200
+}
+
 func (o *CreateBoxOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes][%d] createBoxOK  %+v", 200, o.Payload)
 }
@@ -81,18 +97,187 @@ func (o *CreateBoxOK) String() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes][%d] createBoxOK  %+v", 200, o.Payload)
 }
 
-func (o *CreateBoxOK) GetPayload() *models.HashicorpCloudVagrantCreateBoxResponse {
+func (o *CreateBoxOK) GetPayload() *models.HashicorpCloudVagrant20220930CreateBoxResponse {
 	return o.Payload
 }
 
 func (o *CreateBoxOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVagrantCreateBoxResponse)
+	o.Payload = new(models.HashicorpCloudVagrant20220930CreateBoxResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
+	return nil
+}
+
+// NewCreateBoxDefault creates a CreateBoxDefault with default headers values
+func NewCreateBoxDefault(code int) *CreateBoxDefault {
+	return &CreateBoxDefault{
+		_statusCode: code,
+	}
+}
+
+/*
+CreateBoxDefault describes a response with status code -1, with default header values.
+
+An unexpected error response.
+*/
+type CreateBoxDefault struct {
+	_statusCode int
+
+	Payload *cloud.GoogleRPCStatus
+}
+
+// IsSuccess returns true when this create box default response has a 2xx status code
+func (o *CreateBoxDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this create box default response has a 3xx status code
+func (o *CreateBoxDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this create box default response has a 4xx status code
+func (o *CreateBoxDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this create box default response has a 5xx status code
+func (o *CreateBoxDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this create box default response a status code equal to that given
+func (o *CreateBoxDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
+// Code gets the status code for the create box default response
+func (o *CreateBoxDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *CreateBoxDefault) Error() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes][%d] CreateBox default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *CreateBoxDefault) String() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes][%d] CreateBox default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *CreateBoxDefault) GetPayload() *cloud.GoogleRPCStatus {
+	return o.Payload
+}
+
+func (o *CreateBoxDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(cloud.GoogleRPCStatus)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+/*
+CreateBoxBody create box body
+swagger:model CreateBoxBody
+*/
+type CreateBoxBody struct {
+
+	// Details of the Box to create. Note that some fields are ignored
+	// on input and should not be set.
+	Data *models.HashicorpCloudVagrant20220930Box `json:"data,omitempty"`
+}
+
+// Validate validates this create box body
+func (o *CreateBoxBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateBoxBody) validateData(formats strfmt.Registry) error {
+	if swag.IsZero(o.Data) { // not required
+		return nil
+	}
+
+	if o.Data != nil {
+		if err := o.Data.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create box body based on the context it is used
+func (o *CreateBoxBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateBoxBody) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Data != nil {
+
+		if swag.IsZero(o.Data) { // not required
+			return nil
+		}
+
+		if err := o.Data.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateBoxBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateBoxBody) UnmarshalBinary(b []byte) error {
+	var res CreateBoxBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

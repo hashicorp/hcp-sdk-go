@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
 // NewRevokeVersionParams creates a new RevokeVersionParams object,
@@ -64,7 +62,7 @@ RevokeVersionParams contains all the parameters to send to the API endpoint
 type RevokeVersionParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudVagrantRevokeVersionRequest
+	Body interface{}
 
 	/* Box.
 
@@ -140,13 +138,13 @@ func (o *RevokeVersionParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the revoke version params
-func (o *RevokeVersionParams) WithBody(body *models.HashicorpCloudVagrantRevokeVersionRequest) *RevokeVersionParams {
+func (o *RevokeVersionParams) WithBody(body interface{}) *RevokeVersionParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the revoke version params
-func (o *RevokeVersionParams) SetBody(body *models.HashicorpCloudVagrantRevokeVersionRequest) {
+func (o *RevokeVersionParams) SetBody(body interface{}) {
 	o.Body = body
 }
 

@@ -6,8 +6,6 @@ package version_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"fmt"
-
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -34,13 +32,15 @@ type ClientService interface {
 
 	DeleteVersion(params *DeleteVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVersionOK, error)
 
-	ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVersionsOK, error)
+	ListVersions(params *ListVersionsParams, opts ...ClientOption) (*ListVersionsOK, error)
 
-	ReadVersion(params *ReadVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadVersionOK, error)
+	ReadVersion(params *ReadVersionParams, opts ...ClientOption) (*ReadVersionOK, error)
 
 	ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReleaseVersionOK, error)
 
 	RevokeVersion(params *RevokeVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RevokeVersionOK, error)
+
+	UpdateVersion(params *UpdateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVersionOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -59,7 +59,7 @@ func (a *Client) CreateVersion(params *CreateVersionParams, authInfo runtime.Cli
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &CreateVersionReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -79,9 +79,8 @@ func (a *Client) CreateVersion(params *CreateVersionParams, authInfo runtime.Cli
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateVersion: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*CreateVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -102,7 +101,7 @@ func (a *Client) DeleteVersion(params *DeleteVersionParams, authInfo runtime.Cli
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &DeleteVersionReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -122,15 +121,14 @@ func (a *Client) DeleteVersion(params *DeleteVersionParams, authInfo runtime.Cli
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteVersion: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*DeleteVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
 ListVersions lists version lists all of the versions within a particular box
 */
-func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVersionsOK, error) {
+func (a *Client) ListVersions(params *ListVersionsParams, opts ...ClientOption) (*ListVersionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListVersionsParams()
@@ -141,10 +139,9 @@ func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.Clien
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ListVersionsReader{formats: a.formats},
-		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -161,15 +158,14 @@ func (a *Client) ListVersions(params *ListVersionsParams, authInfo runtime.Clien
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListVersions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ListVersionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
 ReadVersion reads version reads a box version
 */
-func (a *Client) ReadVersion(params *ReadVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadVersionOK, error) {
+func (a *Client) ReadVersion(params *ReadVersionParams, opts ...ClientOption) (*ReadVersionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewReadVersionParams()
@@ -180,10 +176,9 @@ func (a *Client) ReadVersion(params *ReadVersionParams, authInfo runtime.ClientA
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ReadVersionReader{formats: a.formats},
-		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -200,9 +195,8 @@ func (a *Client) ReadVersion(params *ReadVersionParams, authInfo runtime.ClientA
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ReadVersion: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ReadVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -219,7 +213,7 @@ func (a *Client) ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.C
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/release",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ReleaseVersionReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -239,9 +233,8 @@ func (a *Client) ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ReleaseVersion: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ReleaseVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -258,7 +251,7 @@ func (a *Client) RevokeVersion(params *RevokeVersionParams, authInfo runtime.Cli
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/revoke",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &RevokeVersionReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -278,9 +271,46 @@ func (a *Client) RevokeVersion(params *RevokeVersionParams, authInfo runtime.Cli
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for RevokeVersion: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*RevokeVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateVersion updates version updates a box version
+*/
+func (a *Client) UpdateVersion(params *UpdateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateVersion",
+		Method:             "PATCH",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

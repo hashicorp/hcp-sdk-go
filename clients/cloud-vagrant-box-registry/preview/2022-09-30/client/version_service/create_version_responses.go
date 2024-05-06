@@ -6,12 +6,16 @@ package version_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
@@ -30,7 +34,14 @@ func (o *CreateVersionReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewCreateVersionDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -45,7 +56,7 @@ CreateVersionOK describes a response with status code 200, with default header v
 A successful response.
 */
 type CreateVersionOK struct {
-	Payload *models.HashicorpCloudVagrantCreateVersionResponse
+	Payload *models.HashicorpCloudVagrant20220930CreateVersionResponse
 }
 
 // IsSuccess returns true when this create version o k response has a 2xx status code
@@ -73,6 +84,11 @@ func (o *CreateVersionOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the create version o k response
+func (o *CreateVersionOK) Code() int {
+	return 200
+}
+
 func (o *CreateVersionOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions][%d] createVersionOK  %+v", 200, o.Payload)
 }
@@ -81,18 +97,187 @@ func (o *CreateVersionOK) String() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions][%d] createVersionOK  %+v", 200, o.Payload)
 }
 
-func (o *CreateVersionOK) GetPayload() *models.HashicorpCloudVagrantCreateVersionResponse {
+func (o *CreateVersionOK) GetPayload() *models.HashicorpCloudVagrant20220930CreateVersionResponse {
 	return o.Payload
 }
 
 func (o *CreateVersionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudVagrantCreateVersionResponse)
+	o.Payload = new(models.HashicorpCloudVagrant20220930CreateVersionResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
+	return nil
+}
+
+// NewCreateVersionDefault creates a CreateVersionDefault with default headers values
+func NewCreateVersionDefault(code int) *CreateVersionDefault {
+	return &CreateVersionDefault{
+		_statusCode: code,
+	}
+}
+
+/*
+CreateVersionDefault describes a response with status code -1, with default header values.
+
+An unexpected error response.
+*/
+type CreateVersionDefault struct {
+	_statusCode int
+
+	Payload *cloud.GoogleRPCStatus
+}
+
+// IsSuccess returns true when this create version default response has a 2xx status code
+func (o *CreateVersionDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this create version default response has a 3xx status code
+func (o *CreateVersionDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this create version default response has a 4xx status code
+func (o *CreateVersionDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this create version default response has a 5xx status code
+func (o *CreateVersionDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this create version default response a status code equal to that given
+func (o *CreateVersionDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
+// Code gets the status code for the create version default response
+func (o *CreateVersionDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *CreateVersionDefault) Error() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions][%d] CreateVersion default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *CreateVersionDefault) String() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions][%d] CreateVersion default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *CreateVersionDefault) GetPayload() *cloud.GoogleRPCStatus {
+	return o.Payload
+}
+
+func (o *CreateVersionDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(cloud.GoogleRPCStatus)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+/*
+CreateVersionBody create version body
+swagger:model CreateVersionBody
+*/
+type CreateVersionBody struct {
+
+	// Details of the Version to create. Note that some fields are ignored
+	// on input and should not be set.
+	Data *models.HashicorpCloudVagrant20220930Version `json:"data,omitempty"`
+}
+
+// Validate validates this create version body
+func (o *CreateVersionBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateVersionBody) validateData(formats strfmt.Registry) error {
+	if swag.IsZero(o.Data) { // not required
+		return nil
+	}
+
+	if o.Data != nil {
+		if err := o.Data.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create version body based on the context it is used
+func (o *CreateVersionBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateVersionBody) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Data != nil {
+
+		if swag.IsZero(o.Data) { // not required
+			return nil
+		}
+
+		if err := o.Data.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("body" + "." + "data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateVersionBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateVersionBody) UnmarshalBinary(b []byte) error {
+	var res CreateVersionBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

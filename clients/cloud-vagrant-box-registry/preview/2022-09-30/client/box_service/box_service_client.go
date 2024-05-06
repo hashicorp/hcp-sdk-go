@@ -6,8 +6,6 @@ package box_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"fmt"
-
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -34,9 +32,9 @@ type ClientService interface {
 
 	DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBoxOK, error)
 
-	ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBoxesOK, error)
+	ListBoxes(params *ListBoxesParams, opts ...ClientOption) (*ListBoxesOK, error)
 
-	ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadBoxOK, error)
+	ReadBox(params *ReadBoxParams, opts ...ClientOption) (*ReadBoxOK, error)
 
 	UpdateBox(params *UpdateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBoxOK, error)
 
@@ -57,7 +55,7 @@ func (a *Client) CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthI
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &CreateBoxReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -77,9 +75,8 @@ func (a *Client) CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthI
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateBox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*CreateBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -100,7 +97,7 @@ func (a *Client) DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthI
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &DeleteBoxReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -120,15 +117,14 @@ func (a *Client) DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthI
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteBox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*DeleteBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
 ListBoxes lists boxes lists all of the boxes within a particular registry
 */
-func (a *Client) ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBoxesOK, error) {
+func (a *Client) ListBoxes(params *ListBoxesParams, opts ...ClientOption) (*ListBoxesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListBoxesParams()
@@ -139,10 +135,9 @@ func (a *Client) ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthI
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ListBoxesReader{formats: a.formats},
-		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -159,15 +154,14 @@ func (a *Client) ListBoxes(params *ListBoxesParams, authInfo runtime.ClientAuthI
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListBoxes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ListBoxesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
 ReadBox reads box reads a vagrant box
 */
-func (a *Client) ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadBoxOK, error) {
+func (a *Client) ReadBox(params *ReadBoxParams, opts ...ClientOption) (*ReadBoxOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewReadBoxParams()
@@ -178,10 +172,9 @@ func (a *Client) ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoW
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ReadBoxReader{formats: a.formats},
-		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -198,9 +191,8 @@ func (a *Client) ReadBox(params *ReadBoxParams, authInfo runtime.ClientAuthInfoW
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ReadBox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ReadBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -222,7 +214,7 @@ func (a *Client) UpdateBox(params *UpdateBoxParams, authInfo runtime.ClientAuthI
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &UpdateBoxReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -242,9 +234,8 @@ func (a *Client) UpdateBox(params *UpdateBoxParams, authInfo runtime.ClientAuthI
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UpdateBox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*UpdateBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

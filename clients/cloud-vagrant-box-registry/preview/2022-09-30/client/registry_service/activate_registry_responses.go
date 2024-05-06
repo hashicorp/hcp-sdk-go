@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
@@ -30,7 +31,14 @@ func (o *ActivateRegistryReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewActivateRegistryDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -45,7 +53,7 @@ ActivateRegistryOK describes a response with status code 200, with default heade
 A successful response.
 */
 type ActivateRegistryOK struct {
-	Payload models.HashicorpCloudVagrantActivateRegistryResponse
+	Payload models.HashicorpCloudVagrant20220930ActivateRegistryResponse
 }
 
 // IsSuccess returns true when this activate registry o k response has a 2xx status code
@@ -73,6 +81,11 @@ func (o *ActivateRegistryOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the activate registry o k response
+func (o *ActivateRegistryOK) Code() int {
+	return 200
+}
+
 func (o *ActivateRegistryOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/activate][%d] activateRegistryOK  %+v", 200, o.Payload)
 }
@@ -81,7 +94,7 @@ func (o *ActivateRegistryOK) String() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/activate][%d] activateRegistryOK  %+v", 200, o.Payload)
 }
 
-func (o *ActivateRegistryOK) GetPayload() models.HashicorpCloudVagrantActivateRegistryResponse {
+func (o *ActivateRegistryOK) GetPayload() models.HashicorpCloudVagrant20220930ActivateRegistryResponse {
 	return o.Payload
 }
 
@@ -89,6 +102,78 @@ func (o *ActivateRegistryOK) readResponse(response runtime.ClientResponse, consu
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewActivateRegistryDefault creates a ActivateRegistryDefault with default headers values
+func NewActivateRegistryDefault(code int) *ActivateRegistryDefault {
+	return &ActivateRegistryDefault{
+		_statusCode: code,
+	}
+}
+
+/*
+ActivateRegistryDefault describes a response with status code -1, with default header values.
+
+An unexpected error response.
+*/
+type ActivateRegistryDefault struct {
+	_statusCode int
+
+	Payload *cloud.GoogleRPCStatus
+}
+
+// IsSuccess returns true when this activate registry default response has a 2xx status code
+func (o *ActivateRegistryDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this activate registry default response has a 3xx status code
+func (o *ActivateRegistryDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this activate registry default response has a 4xx status code
+func (o *ActivateRegistryDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this activate registry default response has a 5xx status code
+func (o *ActivateRegistryDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this activate registry default response a status code equal to that given
+func (o *ActivateRegistryDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
+// Code gets the status code for the activate registry default response
+func (o *ActivateRegistryDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *ActivateRegistryDefault) Error() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/activate][%d] ActivateRegistry default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ActivateRegistryDefault) String() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/activate][%d] ActivateRegistry default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ActivateRegistryDefault) GetPayload() *cloud.GoogleRPCStatus {
+	return o.Payload
+}
+
+func (o *ActivateRegistryDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(cloud.GoogleRPCStatus)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

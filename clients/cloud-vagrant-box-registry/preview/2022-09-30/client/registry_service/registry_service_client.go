@@ -6,8 +6,6 @@ package registry_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"fmt"
-
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -40,7 +38,7 @@ type ClientService interface {
 
 	ListRegistries(params *ListRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRegistriesOK, error)
 
-	ReadRegistry(params *ReadRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadRegistryOK, error)
+	ReadRegistry(params *ReadRegistryParams, opts ...ClientOption) (*ReadRegistryOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -63,7 +61,7 @@ func (a *Client) ActivateRegistry(params *ActivateRegistryParams, authInfo runti
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/activate",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ActivateRegistryReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -83,9 +81,8 @@ func (a *Client) ActivateRegistry(params *ActivateRegistryParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ActivateRegistry: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ActivateRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -102,7 +99,7 @@ func (a *Client) CreateRegistry(params *CreateRegistryParams, authInfo runtime.C
 		PathPattern:        "/vagrant/2022-09-30/registry",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &CreateRegistryReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -122,9 +119,8 @@ func (a *Client) CreateRegistry(params *CreateRegistryParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateRegistry: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*CreateRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -147,7 +143,7 @@ func (a *Client) DeactivateRegistry(params *DeactivateRegistryParams, authInfo r
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/deactivate",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &DeactivateRegistryReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -167,9 +163,8 @@ func (a *Client) DeactivateRegistry(params *DeactivateRegistryParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeactivateRegistry: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*DeactivateRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -192,7 +187,7 @@ func (a *Client) DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.C
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &DeleteRegistryReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -212,13 +207,12 @@ func (a *Client) DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteRegistry: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*DeleteRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListRegistries lists registries lists available vagrant box registries the query can be scoped to a particular organization or project
+ListRegistries lists registries lists available vagrant box registries in a particular project
 */
 func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRegistriesOK, error) {
 	// TODO: Validate the params before sending
@@ -231,7 +225,7 @@ func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.C
 		PathPattern:        "/vagrant/2022-09-30/registry",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ListRegistriesReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -251,15 +245,14 @@ func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListRegistries: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ListRegistriesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
 ReadRegistry reads registry reads a vagrant box registry by its name
 */
-func (a *Client) ReadRegistry(params *ReadRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReadRegistryOK, error) {
+func (a *Client) ReadRegistry(params *ReadRegistryParams, opts ...ClientOption) (*ReadRegistryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewReadRegistryParams()
@@ -270,10 +263,9 @@ func (a *Client) ReadRegistry(params *ReadRegistryParams, authInfo runtime.Clien
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ReadRegistryReader{formats: a.formats},
-		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -290,9 +282,8 @@ func (a *Client) ReadRegistry(params *ReadRegistryParams, authInfo runtime.Clien
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ReadRegistry: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ReadRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

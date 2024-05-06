@@ -64,7 +64,7 @@ CreateRegistryParams contains all the parameters to send to the API endpoint
 type CreateRegistryParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudVagrantCreateRegistryRequest
+	Body *models.HashicorpCloudVagrant20220930CreateRegistryRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,13 +120,13 @@ func (o *CreateRegistryParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create registry params
-func (o *CreateRegistryParams) WithBody(body *models.HashicorpCloudVagrantCreateRegistryRequest) *CreateRegistryParams {
+func (o *CreateRegistryParams) WithBody(body *models.HashicorpCloudVagrant20220930CreateRegistryRequest) *CreateRegistryParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create registry params
-func (o *CreateRegistryParams) SetBody(body *models.HashicorpCloudVagrantCreateRegistryRequest) {
+func (o *CreateRegistryParams) SetBody(body *models.HashicorpCloudVagrant20220930CreateRegistryRequest) {
 	o.Body = body
 }
 

@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
@@ -30,7 +31,14 @@ func (o *ReleaseVersionReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		result := NewReleaseVersionDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -45,7 +53,7 @@ ReleaseVersionOK describes a response with status code 200, with default header 
 A successful response.
 */
 type ReleaseVersionOK struct {
-	Payload models.HashicorpCloudVagrantReleaseVersionResponse
+	Payload models.HashicorpCloudVagrant20220930ReleaseVersionResponse
 }
 
 // IsSuccess returns true when this release version o k response has a 2xx status code
@@ -73,6 +81,11 @@ func (o *ReleaseVersionOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the release version o k response
+func (o *ReleaseVersionOK) Code() int {
+	return 200
+}
+
 func (o *ReleaseVersionOK) Error() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/release][%d] releaseVersionOK  %+v", 200, o.Payload)
 }
@@ -81,7 +94,7 @@ func (o *ReleaseVersionOK) String() string {
 	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/release][%d] releaseVersionOK  %+v", 200, o.Payload)
 }
 
-func (o *ReleaseVersionOK) GetPayload() models.HashicorpCloudVagrantReleaseVersionResponse {
+func (o *ReleaseVersionOK) GetPayload() models.HashicorpCloudVagrant20220930ReleaseVersionResponse {
 	return o.Payload
 }
 
@@ -89,6 +102,78 @@ func (o *ReleaseVersionOK) readResponse(response runtime.ClientResponse, consume
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewReleaseVersionDefault creates a ReleaseVersionDefault with default headers values
+func NewReleaseVersionDefault(code int) *ReleaseVersionDefault {
+	return &ReleaseVersionDefault{
+		_statusCode: code,
+	}
+}
+
+/*
+ReleaseVersionDefault describes a response with status code -1, with default header values.
+
+An unexpected error response.
+*/
+type ReleaseVersionDefault struct {
+	_statusCode int
+
+	Payload *cloud.GoogleRPCStatus
+}
+
+// IsSuccess returns true when this release version default response has a 2xx status code
+func (o *ReleaseVersionDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this release version default response has a 3xx status code
+func (o *ReleaseVersionDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this release version default response has a 4xx status code
+func (o *ReleaseVersionDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this release version default response has a 5xx status code
+func (o *ReleaseVersionDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this release version default response a status code equal to that given
+func (o *ReleaseVersionDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
+// Code gets the status code for the release version default response
+func (o *ReleaseVersionDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *ReleaseVersionDefault) Error() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/release][%d] ReleaseVersion default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ReleaseVersionDefault) String() string {
+	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/release][%d] ReleaseVersion default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ReleaseVersionDefault) GetPayload() *cloud.GoogleRPCStatus {
+	return o.Payload
+}
+
+func (o *ReleaseVersionDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(cloud.GoogleRPCStatus)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

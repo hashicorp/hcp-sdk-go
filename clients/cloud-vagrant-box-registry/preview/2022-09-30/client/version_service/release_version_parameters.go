@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
 // NewReleaseVersionParams creates a new ReleaseVersionParams object,
@@ -64,7 +62,7 @@ ReleaseVersionParams contains all the parameters to send to the API endpoint
 type ReleaseVersionParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudVagrantReleaseVersionRequest
+	Body interface{}
 
 	/* Box.
 
@@ -140,13 +138,13 @@ func (o *ReleaseVersionParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the release version params
-func (o *ReleaseVersionParams) WithBody(body *models.HashicorpCloudVagrantReleaseVersionRequest) *ReleaseVersionParams {
+func (o *ReleaseVersionParams) WithBody(body interface{}) *ReleaseVersionParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the release version params
-func (o *ReleaseVersionParams) SetBody(body *models.HashicorpCloudVagrantReleaseVersionRequest) {
+func (o *ReleaseVersionParams) SetBody(body interface{}) {
 	o.Body = body
 }
 

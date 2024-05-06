@@ -10,7 +10,9 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/client/architecture_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/client/box_service"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/client/index_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/client/provider_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/client/registry_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/client/version_service"
@@ -29,7 +31,7 @@ const (
 )
 
 // DefaultSchemes are the default schemes found in Meta (info) section of spec file
-var DefaultSchemes = []string{"http", "https"}
+var DefaultSchemes = []string{"http"}
 
 // NewHTTPClient creates a new cloud vagrant box registry HTTP client.
 func NewHTTPClient(formats strfmt.Registry) *CloudVagrantBoxRegistry {
@@ -58,7 +60,9 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudVagra
 
 	cli := new(CloudVagrantBoxRegistry)
 	cli.Transport = transport
+	cli.ArchitectureService = architecture_service.New(transport, formats)
 	cli.BoxService = box_service.New(transport, formats)
+	cli.IndexService = index_service.New(transport, formats)
 	cli.ProviderService = provider_service.New(transport, formats)
 	cli.RegistryService = registry_service.New(transport, formats)
 	cli.VersionService = version_service.New(transport, formats)
@@ -106,7 +110,11 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // CloudVagrantBoxRegistry is a client for cloud vagrant box registry
 type CloudVagrantBoxRegistry struct {
+	ArchitectureService architecture_service.ClientService
+
 	BoxService box_service.ClientService
+
+	IndexService index_service.ClientService
 
 	ProviderService provider_service.ClientService
 
@@ -120,7 +128,9 @@ type CloudVagrantBoxRegistry struct {
 // SetTransport changes the transport on the client and all its subresources
 func (c *CloudVagrantBoxRegistry) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
+	c.ArchitectureService.SetTransport(transport)
 	c.BoxService.SetTransport(transport)
+	c.IndexService.SetTransport(transport)
 	c.ProviderService.SetTransport(transport)
 	c.RegistryService.SetTransport(transport)
 	c.VersionService.SetTransport(transport)

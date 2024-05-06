@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
 // NewUpdateProviderParams creates a new UpdateProviderParams object,
@@ -64,7 +62,7 @@ UpdateProviderParams contains all the parameters to send to the API endpoint
 type UpdateProviderParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudVagrantUpdateProviderRequest
+	Body UpdateProviderBody
 
 	/* Box.
 
@@ -146,13 +144,13 @@ func (o *UpdateProviderParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the update provider params
-func (o *UpdateProviderParams) WithBody(body *models.HashicorpCloudVagrantUpdateProviderRequest) *UpdateProviderParams {
+func (o *UpdateProviderParams) WithBody(body UpdateProviderBody) *UpdateProviderParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the update provider params
-func (o *UpdateProviderParams) SetBody(body *models.HashicorpCloudVagrantUpdateProviderRequest) {
+func (o *UpdateProviderParams) SetBody(body UpdateProviderBody) {
 	o.Body = body
 }
 
@@ -207,10 +205,8 @@ func (o *UpdateProviderParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	// path param box

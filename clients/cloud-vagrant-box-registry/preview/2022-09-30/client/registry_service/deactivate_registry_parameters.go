@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vagrant-box-registry/preview/2022-09-30/models"
 )
 
 // NewDeactivateRegistryParams creates a new DeactivateRegistryParams object,
@@ -64,7 +62,7 @@ DeactivateRegistryParams contains all the parameters to send to the API endpoint
 type DeactivateRegistryParams struct {
 
 	// Body.
-	Body *models.HashicorpCloudVagrantDeactivateRegistryRequest
+	Body interface{}
 
 	/* Registry.
 
@@ -126,13 +124,13 @@ func (o *DeactivateRegistryParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the deactivate registry params
-func (o *DeactivateRegistryParams) WithBody(body *models.HashicorpCloudVagrantDeactivateRegistryRequest) *DeactivateRegistryParams {
+func (o *DeactivateRegistryParams) WithBody(body interface{}) *DeactivateRegistryParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the deactivate registry params
-func (o *DeactivateRegistryParams) SetBody(body *models.HashicorpCloudVagrantDeactivateRegistryRequest) {
+func (o *DeactivateRegistryParams) SetBody(body interface{}) {
 	o.Body = body
 }
 

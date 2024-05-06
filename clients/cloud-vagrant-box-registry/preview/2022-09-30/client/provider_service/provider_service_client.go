@@ -6,8 +6,6 @@ package provider_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"fmt"
-
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -30,62 +28,19 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CompleteUpload(params *CompleteUploadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteUploadOK, error)
-
 	CreateProvider(params *CreateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProviderOK, error)
 
 	DeleteProvider(params *DeleteProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProviderOK, error)
 
-	DownloadProvider(params *DownloadProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DownloadProviderOK, error)
+	GetProvider(params *GetProviderParams, opts ...ClientOption) (*GetProviderOK, error)
 
-	GetProvider(params *GetProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProviderOK, error)
+	ListProviders(params *ListProvidersParams, opts ...ClientOption) (*ListProvidersOK, error)
 
-	ListProviders(params *ListProvidersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProvidersOK, error)
+	ReadProvider(params *ReadProviderParams, opts ...ClientOption) (*ReadProviderOK, error)
 
 	UpdateProvider(params *UpdateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProviderOK, error)
 
-	UploadProvider(params *UploadProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadProviderOK, error)
-
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-CompleteUpload completes upload signals that the upload for a provider is complete
-*/
-func (a *Client) CompleteUpload(params *CompleteUploadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteUploadOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCompleteUploadParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "CompleteUpload",
-		Method:             "PUT",
-		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}/complete",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &CompleteUploadReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CompleteUploadOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CompleteUpload: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*
@@ -102,7 +57,7 @@ func (a *Client) CreateProvider(params *CreateProviderParams, authInfo runtime.C
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &CreateProviderReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -122,9 +77,8 @@ func (a *Client) CreateProvider(params *CreateProviderParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateProvider: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*CreateProviderDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -141,7 +95,7 @@ func (a *Client) DeleteProvider(params *DeleteProviderParams, authInfo runtime.C
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &DeleteProviderReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -161,60 +115,14 @@ func (a *Client) DeleteProvider(params *DeleteProviderParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteProvider: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*DeleteProviderDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-	DownloadProvider downloads provider initiates a provider download
-
-	For Hosted Providers, this is an atomic call that prepares the Provider
-
-for download from the object storage. For External Providers, this is
-simply a pass-through to the external download data supplied in the
-External Provider record.
+GetProvider gets provider fetches a provider for the specified version n o t e this is deprecated and should be removed once confirmed the UI is not longer using it
 */
-func (a *Client) DownloadProvider(params *DownloadProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DownloadProviderOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDownloadProviderParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "DownloadProvider",
-		Method:             "GET",
-		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}/download",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &DownloadProviderReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DownloadProviderOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DownloadProvider: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetProvider gets provider fetches a provider for the specified version
-*/
-func (a *Client) GetProvider(params *GetProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProviderOK, error) {
+func (a *Client) GetProvider(params *GetProviderParams, opts ...ClientOption) (*GetProviderOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetProviderParams()
@@ -222,13 +130,12 @@ func (a *Client) GetProvider(params *GetProviderParams, authInfo runtime.ClientA
 	op := &runtime.ClientOperation{
 		ID:                 "GetProvider",
 		Method:             "GET",
-		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/g_providers/{provider}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &GetProviderReader{formats: a.formats},
-		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -245,15 +152,14 @@ func (a *Client) GetProvider(params *GetProviderParams, authInfo runtime.ClientA
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetProvider: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*GetProviderDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
 ListProviders lists providers lists all providers within a version
 */
-func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProvidersOK, error) {
+func (a *Client) ListProviders(params *ListProvidersParams, opts ...ClientOption) (*ListProvidersOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListProvidersParams()
@@ -264,10 +170,9 @@ func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.Cli
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &ListProvidersReader{formats: a.formats},
-		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -284,9 +189,45 @@ func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.Cli
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ListProviders: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*ListProvidersDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ReadProvider reads provider fetches a provider for the specified version
+*/
+func (a *Client) ReadProvider(params *ReadProviderParams, opts ...ClientOption) (*ReadProviderOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewReadProviderParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ReadProvider",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ReadProviderReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ReadProviderOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ReadProviderDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -307,7 +248,7 @@ func (a *Client) UpdateProvider(params *UpdateProviderParams, authInfo runtime.C
 		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
+		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &UpdateProviderReader{formats: a.formats},
 		AuthInfo:           authInfo,
@@ -327,56 +268,8 @@ func (a *Client) UpdateProvider(params *UpdateProviderParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UpdateProvider: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	UploadProvider uploads provider initiates the upload of a hosted provider the service will return details that can be used to upload the data over HTTP after complete the caller should call complete upload
-
-	Note that a Version needs to be unreleased in order to upload Providers to
-
-it.
-
-Overwrite is permitted; old/existing data for a particular Provider will
-be replaced with data from a new successful upload for that same
-Provider.
-*/
-func (a *Client) UploadProvider(params *UploadProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadProviderOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUploadProviderParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UploadProvider",
-		Method:             "PUT",
-		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes/{box}/versions/{version}/providers/{provider}/upload",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &UploadProviderReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UploadProviderOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UploadProvider: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
+	unexpectedSuccess := result.(*UpdateProviderDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client
