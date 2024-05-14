@@ -46,6 +46,8 @@ type ClientService interface {
 
 	CreateGcpSmSyncIntegration(params *CreateGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpSmSyncIntegrationOK, error)
 
+	CreateGhOrgSyncIntegration(params *CreateGhOrgSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGhOrgSyncIntegrationOK, error)
+
 	CreateGhRepoSyncIntegration(params *CreateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGhRepoSyncIntegrationOK, error)
 
 	CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotatingSecretOK, error)
@@ -88,7 +90,11 @@ type ClientService interface {
 
 	GetAwsIntegration(params *GetAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIntegrationOK, error)
 
+	GetGitHubEnvironments(params *GetGitHubEnvironmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubEnvironmentsOK, error)
+
 	GetGitHubInstallLinks(params *GetGitHubInstallLinksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubInstallLinksOK, error)
+
+	GetGitHubRepositories(params *GetGitHubRepositoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubRepositoriesOK, error)
 
 	GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotatingSecretConfigOK, error)
 
@@ -138,27 +144,7 @@ type ClientService interface {
 
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
 
-	UpdateAwsSmSyncIntegration(params *UpdateAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsSmSyncIntegrationOK, error)
-
-	UpdateAzureKvSyncIntegration(params *UpdateAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureKvSyncIntegrationOK, error)
-
-	UpdateGcpSmSyncIntegration(params *UpdateGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpSmSyncIntegrationOK, error)
-
-	UpdateGhRepoSyncIntegration(params *UpdateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGhRepoSyncIntegrationOK, error)
-
-	UpdateVercelProjectSyncIntegration(params *UpdateVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVercelProjectSyncIntegrationOK, error)
-
-	UpsertAwsSmSyncIntegration(params *UpsertAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertAwsSmSyncIntegrationOK, error)
-
-	UpsertAzureKvSyncIntegration(params *UpsertAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertAzureKvSyncIntegrationOK, error)
-
-	UpsertGcpSmSyncIntegration(params *UpsertGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertGcpSmSyncIntegrationOK, error)
-
-	UpsertGhRepoSyncIntegration(params *UpsertGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertGhRepoSyncIntegrationOK, error)
-
 	UpsertSyncInstallation(params *UpsertSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertSyncInstallationOK, error)
-
-	UpsertVercelProjectSyncIntegration(params *UpsertVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertVercelProjectSyncIntegrationOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -502,6 +488,44 @@ func (a *Client) CreateGcpSmSyncIntegration(params *CreateGcpSmSyncIntegrationPa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateGcpSmSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateGhOrgSyncIntegration create gh org sync integration API
+*/
+func (a *Client) CreateGhOrgSyncIntegration(params *CreateGhOrgSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGhOrgSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateGhOrgSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateGhOrgSyncIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/gh-org",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateGhOrgSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateGhOrgSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateGhOrgSyncIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1304,6 +1328,44 @@ func (a *Client) GetAwsIntegration(params *GetAwsIntegrationParams, authInfo run
 }
 
 /*
+GetGitHubEnvironments get git hub environments API
+*/
+func (a *Client) GetGitHubEnvironments(params *GetGitHubEnvironmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubEnvironmentsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetGitHubEnvironmentsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetGitHubEnvironments",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/github/repositories/{repository}/environments",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetGitHubEnvironmentsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetGitHubEnvironmentsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetGitHubEnvironmentsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetGitHubInstallLinks get git hub install links API
 */
 func (a *Client) GetGitHubInstallLinks(params *GetGitHubInstallLinksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubInstallLinksOK, error) {
@@ -1338,6 +1400,44 @@ func (a *Client) GetGitHubInstallLinks(params *GetGitHubInstallLinksParams, auth
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetGitHubInstallLinksDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetGitHubRepositories get git hub repositories API
+*/
+func (a *Client) GetGitHubRepositories(params *GetGitHubRepositoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubRepositoriesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetGitHubRepositoriesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetGitHubRepositories",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/github/repositories",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetGitHubRepositoriesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetGitHubRepositoriesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetGitHubRepositoriesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2254,348 +2354,6 @@ func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthI
 }
 
 /*
-UpdateAwsSmSyncIntegration update aws sm sync integration API
-*/
-func (a *Client) UpdateAwsSmSyncIntegration(params *UpdateAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsSmSyncIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateAwsSmSyncIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpdateAwsSmSyncIntegration",
-		Method:             "PATCH",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/aws-sm/{name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateAwsSmSyncIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateAwsSmSyncIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpdateAwsSmSyncIntegrationDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-UpdateAzureKvSyncIntegration update azure kv sync integration API
-*/
-func (a *Client) UpdateAzureKvSyncIntegration(params *UpdateAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureKvSyncIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateAzureKvSyncIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpdateAzureKvSyncIntegration",
-		Method:             "PATCH",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/azure-kv/{name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateAzureKvSyncIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateAzureKvSyncIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpdateAzureKvSyncIntegrationDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-UpdateGcpSmSyncIntegration update gcp sm sync integration API
-*/
-func (a *Client) UpdateGcpSmSyncIntegration(params *UpdateGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpSmSyncIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateGcpSmSyncIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpdateGcpSmSyncIntegration",
-		Method:             "PATCH",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/gcp-sm/{name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateGcpSmSyncIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateGcpSmSyncIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpdateGcpSmSyncIntegrationDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-UpdateGhRepoSyncIntegration update gh repo sync integration API
-*/
-func (a *Client) UpdateGhRepoSyncIntegration(params *UpdateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGhRepoSyncIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateGhRepoSyncIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpdateGhRepoSyncIntegration",
-		Method:             "PATCH",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/gh-repo/{name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateGhRepoSyncIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateGhRepoSyncIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpdateGhRepoSyncIntegrationDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-UpdateVercelProjectSyncIntegration update vercel project sync integration API
-*/
-func (a *Client) UpdateVercelProjectSyncIntegration(params *UpdateVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVercelProjectSyncIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateVercelProjectSyncIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpdateVercelProjectSyncIntegration",
-		Method:             "PATCH",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/vercel-project/{name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateVercelProjectSyncIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateVercelProjectSyncIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpdateVercelProjectSyncIntegrationDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-UpsertAwsSmSyncIntegration upsert aws sm sync integration API
-*/
-func (a *Client) UpsertAwsSmSyncIntegration(params *UpsertAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertAwsSmSyncIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpsertAwsSmSyncIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpsertAwsSmSyncIntegration",
-		Method:             "PUT",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/aws-sm",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpsertAwsSmSyncIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpsertAwsSmSyncIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpsertAwsSmSyncIntegrationDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-UpsertAzureKvSyncIntegration upsert azure kv sync integration API
-*/
-func (a *Client) UpsertAzureKvSyncIntegration(params *UpsertAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertAzureKvSyncIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpsertAzureKvSyncIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpsertAzureKvSyncIntegration",
-		Method:             "PUT",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/azure-kv",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpsertAzureKvSyncIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpsertAzureKvSyncIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpsertAzureKvSyncIntegrationDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-UpsertGcpSmSyncIntegration upsert gcp sm sync integration API
-*/
-func (a *Client) UpsertGcpSmSyncIntegration(params *UpsertGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertGcpSmSyncIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpsertGcpSmSyncIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpsertGcpSmSyncIntegration",
-		Method:             "PUT",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/gcp-sm",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpsertGcpSmSyncIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpsertGcpSmSyncIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpsertGcpSmSyncIntegrationDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-UpsertGhRepoSyncIntegration upsert gh repo sync integration API
-*/
-func (a *Client) UpsertGhRepoSyncIntegration(params *UpsertGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertGhRepoSyncIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpsertGhRepoSyncIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpsertGhRepoSyncIntegration",
-		Method:             "PUT",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/gh-repo",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpsertGhRepoSyncIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpsertGhRepoSyncIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpsertGhRepoSyncIntegrationDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
 UpsertSyncInstallation upsert sync installation API
 */
 func (a *Client) UpsertSyncInstallation(params *UpsertSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertSyncInstallationOK, error) {
@@ -2630,44 +2388,6 @@ func (a *Client) UpsertSyncInstallation(params *UpsertSyncInstallationParams, au
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpsertSyncInstallationDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-UpsertVercelProjectSyncIntegration upsert vercel project sync integration API
-*/
-func (a *Client) UpsertVercelProjectSyncIntegration(params *UpsertVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertVercelProjectSyncIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpsertVercelProjectSyncIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpsertVercelProjectSyncIntegration",
-		Method:             "PUT",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/vercel-project",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpsertVercelProjectSyncIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpsertVercelProjectSyncIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpsertVercelProjectSyncIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

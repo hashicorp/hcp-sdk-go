@@ -26,6 +26,9 @@ type Secrets20231128OpenSecret struct {
 	// created by
 	CreatedBy *Secrets20231128Principal `json:"created_by,omitempty"`
 
+	// dynamic instance
+	DynamicInstance *Secrets20231128OpenSecretDynamicInstance `json:"dynamic_instance,omitempty"`
+
 	// latest version
 	LatestVersion int64 `json:"latest_version,omitempty"`
 
@@ -57,6 +60,10 @@ func (m *Secrets20231128OpenSecret) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDynamicInstance(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -101,6 +108,25 @@ func (m *Secrets20231128OpenSecret) validateCreatedBy(formats strfmt.Registry) e
 				return ve.ValidateName("created_by")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("created_by")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128OpenSecret) validateDynamicInstance(formats strfmt.Registry) error {
+	if swag.IsZero(m.DynamicInstance) { // not required
+		return nil
+	}
+
+	if m.DynamicInstance != nil {
+		if err := m.DynamicInstance.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dynamic_instance")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dynamic_instance")
 			}
 			return err
 		}
@@ -181,6 +207,10 @@ func (m *Secrets20231128OpenSecret) ContextValidate(ctx context.Context, formats
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDynamicInstance(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRotatingVersion(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -212,6 +242,27 @@ func (m *Secrets20231128OpenSecret) contextValidateCreatedBy(ctx context.Context
 				return ve.ValidateName("created_by")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("created_by")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128OpenSecret) contextValidateDynamicInstance(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DynamicInstance != nil {
+
+		if swag.IsZero(m.DynamicInstance) { // not required
+			return nil
+		}
+
+		if err := m.DynamicInstance.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dynamic_instance")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dynamic_instance")
 			}
 			return err
 		}

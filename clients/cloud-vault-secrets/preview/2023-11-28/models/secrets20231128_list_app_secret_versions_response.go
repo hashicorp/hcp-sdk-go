@@ -18,6 +18,9 @@ import (
 // swagger:model secrets_20231128ListAppSecretVersionsResponse
 type Secrets20231128ListAppSecretVersionsResponse struct {
 
+	// pagination
+	Pagination *CommonPaginationResponse `json:"pagination,omitempty"`
+
 	// rotating versions
 	RotatingVersions *Secrets20231128SecretRotatingVersionList `json:"rotating_versions,omitempty"`
 
@@ -32,6 +35,10 @@ type Secrets20231128ListAppSecretVersionsResponse struct {
 func (m *Secrets20231128ListAppSecretVersionsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validatePagination(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRotatingVersions(formats); err != nil {
 		res = append(res, err)
 	}
@@ -43,6 +50,25 @@ func (m *Secrets20231128ListAppSecretVersionsResponse) Validate(formats strfmt.R
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20231128ListAppSecretVersionsResponse) validatePagination(formats strfmt.Registry) error {
+	if swag.IsZero(m.Pagination) { // not required
+		return nil
+	}
+
+	if m.Pagination != nil {
+		if err := m.Pagination.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -88,6 +114,10 @@ func (m *Secrets20231128ListAppSecretVersionsResponse) validateStaticVersions(fo
 func (m *Secrets20231128ListAppSecretVersionsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidatePagination(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRotatingVersions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -99,6 +129,27 @@ func (m *Secrets20231128ListAppSecretVersionsResponse) ContextValidate(ctx conte
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20231128ListAppSecretVersionsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
+		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

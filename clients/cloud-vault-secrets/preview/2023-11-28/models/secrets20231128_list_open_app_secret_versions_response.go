@@ -18,6 +18,9 @@ import (
 // swagger:model secrets_20231128ListOpenAppSecretVersionsResponse
 type Secrets20231128ListOpenAppSecretVersionsResponse struct {
 
+	// dynamic instance
+	DynamicInstance *Secrets20231128OpenSecretDynamicInstance `json:"dynamic_instance,omitempty"`
+
 	// rotating versions
 	RotatingVersions *Secrets20231128OpenSecretRotatingVersionList `json:"rotating_versions,omitempty"`
 
@@ -32,6 +35,10 @@ type Secrets20231128ListOpenAppSecretVersionsResponse struct {
 func (m *Secrets20231128ListOpenAppSecretVersionsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDynamicInstance(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRotatingVersions(formats); err != nil {
 		res = append(res, err)
 	}
@@ -43,6 +50,25 @@ func (m *Secrets20231128ListOpenAppSecretVersionsResponse) Validate(formats strf
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20231128ListOpenAppSecretVersionsResponse) validateDynamicInstance(formats strfmt.Registry) error {
+	if swag.IsZero(m.DynamicInstance) { // not required
+		return nil
+	}
+
+	if m.DynamicInstance != nil {
+		if err := m.DynamicInstance.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dynamic_instance")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dynamic_instance")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -88,6 +114,10 @@ func (m *Secrets20231128ListOpenAppSecretVersionsResponse) validateStaticVersion
 func (m *Secrets20231128ListOpenAppSecretVersionsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateDynamicInstance(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRotatingVersions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -99,6 +129,27 @@ func (m *Secrets20231128ListOpenAppSecretVersionsResponse) ContextValidate(ctx c
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20231128ListOpenAppSecretVersionsResponse) contextValidateDynamicInstance(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DynamicInstance != nil {
+
+		if swag.IsZero(m.DynamicInstance) { // not required
+			return nil
+		}
+
+		if err := m.DynamicInstance.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dynamic_instance")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dynamic_instance")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

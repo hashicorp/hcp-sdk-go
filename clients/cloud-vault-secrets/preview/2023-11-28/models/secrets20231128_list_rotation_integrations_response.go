@@ -19,6 +19,9 @@ import (
 // swagger:model secrets_20231128ListRotationIntegrationsResponse
 type Secrets20231128ListRotationIntegrationsResponse struct {
 
+	// pagination
+	Pagination *CommonPaginationResponse `json:"pagination,omitempty"`
+
 	// rotation integrations
 	RotationIntegrations []*Secrets20231128RotationIntegration `json:"rotation_integrations"`
 }
@@ -27,6 +30,10 @@ type Secrets20231128ListRotationIntegrationsResponse struct {
 func (m *Secrets20231128ListRotationIntegrationsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validatePagination(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRotationIntegrations(formats); err != nil {
 		res = append(res, err)
 	}
@@ -34,6 +41,25 @@ func (m *Secrets20231128ListRotationIntegrationsResponse) Validate(formats strfm
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20231128ListRotationIntegrationsResponse) validatePagination(formats strfmt.Registry) error {
+	if swag.IsZero(m.Pagination) { // not required
+		return nil
+	}
+
+	if m.Pagination != nil {
+		if err := m.Pagination.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -67,6 +93,10 @@ func (m *Secrets20231128ListRotationIntegrationsResponse) validateRotationIntegr
 func (m *Secrets20231128ListRotationIntegrationsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidatePagination(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRotationIntegrations(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -74,6 +104,27 @@ func (m *Secrets20231128ListRotationIntegrationsResponse) ContextValidate(ctx co
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20231128ListRotationIntegrationsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
+		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

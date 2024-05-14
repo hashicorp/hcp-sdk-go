@@ -19,9 +19,6 @@ import (
 // swagger:model secrets_20231128AwsDynamicSecret
 type Secrets20231128AwsDynamicSecret struct {
 
-	// app name
-	AppName string `json:"app_name,omitempty"`
-
 	// assume role
 	AssumeRole *Secrets20231128AssumeRoleResponse `json:"assume_role,omitempty"`
 
@@ -29,8 +26,8 @@ type Secrets20231128AwsDynamicSecret struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// created by
-	CreatedBy *Secrets20231128Principal `json:"created_by,omitempty"`
+	// created by id
+	CreatedByID string `json:"created_by_id,omitempty"`
 
 	// default ttl
 	DefaultTTL string `json:"default_ttl,omitempty"`
@@ -45,8 +42,8 @@ type Secrets20231128AwsDynamicSecret struct {
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 
-	// updated by
-	UpdatedBy *Secrets20231128Principal `json:"updated_by,omitempty"`
+	// updated by id
+	UpdatedByID string `json:"updated_by_id,omitempty"`
 }
 
 // Validate validates this secrets 20231128 aws dynamic secret
@@ -61,15 +58,7 @@ func (m *Secrets20231128AwsDynamicSecret) Validate(formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
-	if err := m.validateCreatedBy(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateUpdatedAt(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateUpdatedBy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -110,25 +99,6 @@ func (m *Secrets20231128AwsDynamicSecret) validateCreatedAt(formats strfmt.Regis
 	return nil
 }
 
-func (m *Secrets20231128AwsDynamicSecret) validateCreatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedBy) { // not required
-		return nil
-	}
-
-	if m.CreatedBy != nil {
-		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *Secrets20231128AwsDynamicSecret) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -141,38 +111,11 @@ func (m *Secrets20231128AwsDynamicSecret) validateUpdatedAt(formats strfmt.Regis
 	return nil
 }
 
-func (m *Secrets20231128AwsDynamicSecret) validateUpdatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.UpdatedBy) { // not required
-		return nil
-	}
-
-	if m.UpdatedBy != nil {
-		if err := m.UpdatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("updated_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("updated_by")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this secrets 20231128 aws dynamic secret based on the context it is used
 func (m *Secrets20231128AwsDynamicSecret) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateAssumeRole(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateUpdatedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -195,48 +138,6 @@ func (m *Secrets20231128AwsDynamicSecret) contextValidateAssumeRole(ctx context.
 				return ve.ValidateName("assume_role")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("assume_role")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128AwsDynamicSecret) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.CreatedBy != nil {
-
-		if swag.IsZero(m.CreatedBy) { // not required
-			return nil
-		}
-
-		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128AwsDynamicSecret) contextValidateUpdatedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.UpdatedBy != nil {
-
-		if swag.IsZero(m.UpdatedBy) { // not required
-			return nil
-		}
-
-		if err := m.UpdatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("updated_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("updated_by")
 			}
 			return err
 		}

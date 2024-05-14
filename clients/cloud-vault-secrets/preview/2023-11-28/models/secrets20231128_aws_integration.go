@@ -23,8 +23,8 @@ type Secrets20231128AwsIntegration struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// created by
-	CreatedBy *Secrets20231128Principal `json:"created_by,omitempty"`
+	// created by id
+	CreatedByID string `json:"created_by_id,omitempty"`
 
 	// federated workload identity
 	FederatedWorkloadIdentity *Secrets20231128AwsFederatedWorkloadIdentityResponse `json:"federated_workload_identity,omitempty"`
@@ -36,8 +36,8 @@ type Secrets20231128AwsIntegration struct {
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 
-	// updated by
-	UpdatedBy *Secrets20231128Principal `json:"updated_by,omitempty"`
+	// updated by id
+	UpdatedByID string `json:"updated_by_id,omitempty"`
 }
 
 // Validate validates this secrets 20231128 aws integration
@@ -48,19 +48,11 @@ func (m *Secrets20231128AwsIntegration) Validate(formats strfmt.Registry) error 
 		res = append(res, err)
 	}
 
-	if err := m.validateCreatedBy(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateFederatedWorkloadIdentity(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateUpdatedAt(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateUpdatedBy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -77,25 +69,6 @@ func (m *Secrets20231128AwsIntegration) validateCreatedAt(formats strfmt.Registr
 
 	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128AwsIntegration) validateCreatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedBy) { // not required
-		return nil
-	}
-
-	if m.CreatedBy != nil {
-		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -132,65 +105,17 @@ func (m *Secrets20231128AwsIntegration) validateUpdatedAt(formats strfmt.Registr
 	return nil
 }
 
-func (m *Secrets20231128AwsIntegration) validateUpdatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.UpdatedBy) { // not required
-		return nil
-	}
-
-	if m.UpdatedBy != nil {
-		if err := m.UpdatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("updated_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("updated_by")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this secrets 20231128 aws integration based on the context it is used
 func (m *Secrets20231128AwsIntegration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateFederatedWorkloadIdentity(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateUpdatedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *Secrets20231128AwsIntegration) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.CreatedBy != nil {
-
-		if swag.IsZero(m.CreatedBy) { // not required
-			return nil
-		}
-
-		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -207,27 +132,6 @@ func (m *Secrets20231128AwsIntegration) contextValidateFederatedWorkloadIdentity
 				return ve.ValidateName("federated_workload_identity")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("federated_workload_identity")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128AwsIntegration) contextValidateUpdatedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.UpdatedBy != nil {
-
-		if swag.IsZero(m.UpdatedBy) { // not required
-			return nil
-		}
-
-		if err := m.UpdatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("updated_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("updated_by")
 			}
 			return err
 		}

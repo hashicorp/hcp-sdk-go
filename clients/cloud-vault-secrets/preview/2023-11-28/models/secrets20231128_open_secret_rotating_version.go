@@ -30,6 +30,9 @@ type Secrets20231128OpenSecretRotatingVersion struct {
 	// Format: date-time
 	ExpiresAt strfmt.DateTime `json:"expires_at,omitempty"`
 
+	// keys
+	Keys []string `json:"keys"`
+
 	// revoked at
 	// Format: date-time
 	RevokedAt strfmt.DateTime `json:"revoked_at,omitempty"`

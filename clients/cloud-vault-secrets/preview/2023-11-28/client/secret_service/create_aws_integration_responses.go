@@ -190,8 +190,8 @@ swagger:model CreateAwsIntegrationBody
 */
 type CreateAwsIntegrationBody struct {
 
-	// aws wif connection details
-	AwsWifConnectionDetails *models.Secrets20231128AwsFederatedWorkloadIdentityRequest `json:"aws_wif_connection_details,omitempty"`
+	// federated workload identity
+	FederatedWorkloadIdentity *models.Secrets20231128AwsFederatedWorkloadIdentityRequest `json:"federated_workload_identity,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -201,7 +201,7 @@ type CreateAwsIntegrationBody struct {
 func (o *CreateAwsIntegrationBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := o.validateAwsWifConnectionDetails(formats); err != nil {
+	if err := o.validateFederatedWorkloadIdentity(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -211,17 +211,17 @@ func (o *CreateAwsIntegrationBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (o *CreateAwsIntegrationBody) validateAwsWifConnectionDetails(formats strfmt.Registry) error {
-	if swag.IsZero(o.AwsWifConnectionDetails) { // not required
+func (o *CreateAwsIntegrationBody) validateFederatedWorkloadIdentity(formats strfmt.Registry) error {
+	if swag.IsZero(o.FederatedWorkloadIdentity) { // not required
 		return nil
 	}
 
-	if o.AwsWifConnectionDetails != nil {
-		if err := o.AwsWifConnectionDetails.Validate(formats); err != nil {
+	if o.FederatedWorkloadIdentity != nil {
+		if err := o.FederatedWorkloadIdentity.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "aws_wif_connection_details")
+				return ve.ValidateName("body" + "." + "federated_workload_identity")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "aws_wif_connection_details")
+				return ce.ValidateName("body" + "." + "federated_workload_identity")
 			}
 			return err
 		}
@@ -234,7 +234,7 @@ func (o *CreateAwsIntegrationBody) validateAwsWifConnectionDetails(formats strfm
 func (o *CreateAwsIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := o.contextValidateAwsWifConnectionDetails(ctx, formats); err != nil {
+	if err := o.contextValidateFederatedWorkloadIdentity(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -244,19 +244,19 @@ func (o *CreateAwsIntegrationBody) ContextValidate(ctx context.Context, formats 
 	return nil
 }
 
-func (o *CreateAwsIntegrationBody) contextValidateAwsWifConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
+func (o *CreateAwsIntegrationBody) contextValidateFederatedWorkloadIdentity(ctx context.Context, formats strfmt.Registry) error {
 
-	if o.AwsWifConnectionDetails != nil {
+	if o.FederatedWorkloadIdentity != nil {
 
-		if swag.IsZero(o.AwsWifConnectionDetails) { // not required
+		if swag.IsZero(o.FederatedWorkloadIdentity) { // not required
 			return nil
 		}
 
-		if err := o.AwsWifConnectionDetails.ContextValidate(ctx, formats); err != nil {
+		if err := o.FederatedWorkloadIdentity.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "aws_wif_connection_details")
+				return ve.ValidateName("body" + "." + "federated_workload_identity")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "aws_wif_connection_details")
+				return ce.ValidateName("body" + "." + "federated_workload_identity")
 			}
 			return err
 		}

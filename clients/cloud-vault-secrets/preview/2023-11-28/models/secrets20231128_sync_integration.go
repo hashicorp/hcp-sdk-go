@@ -35,6 +35,9 @@ type Secrets20231128SyncIntegration struct {
 	// gcp sm connection details
 	GcpSmConnectionDetails *Secrets20231128GcpSmConnectionDetailsResponse `json:"gcp_sm_connection_details,omitempty"`
 
+	// gh org connection details
+	GhOrgConnectionDetails *Secrets20231128GhOrgConnectionDetailsResponse `json:"gh_org_connection_details,omitempty"`
+
 	// gh repo connection details
 	GhRepoConnectionDetails *Secrets20231128GhRepoConnectionDetailsResponse `json:"gh_repo_connection_details,omitempty"`
 
@@ -82,6 +85,10 @@ func (m *Secrets20231128SyncIntegration) Validate(formats strfmt.Registry) error
 	}
 
 	if err := m.validateGcpSmConnectionDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGhOrgConnectionDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -195,6 +202,25 @@ func (m *Secrets20231128SyncIntegration) validateGcpSmConnectionDetails(formats 
 	return nil
 }
 
+func (m *Secrets20231128SyncIntegration) validateGhOrgConnectionDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.GhOrgConnectionDetails) { // not required
+		return nil
+	}
+
+	if m.GhOrgConnectionDetails != nil {
+		if err := m.GhOrgConnectionDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gh_org_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gh_org_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128SyncIntegration) validateGhRepoConnectionDetails(formats strfmt.Registry) error {
 	if swag.IsZero(m.GhRepoConnectionDetails) { // not required
 		return nil
@@ -281,6 +307,10 @@ func (m *Secrets20231128SyncIntegration) ContextValidate(ctx context.Context, fo
 	}
 
 	if err := m.contextValidateGcpSmConnectionDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGhOrgConnectionDetails(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -378,6 +408,27 @@ func (m *Secrets20231128SyncIntegration) contextValidateGcpSmConnectionDetails(c
 				return ve.ValidateName("gcp_sm_connection_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("gcp_sm_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128SyncIntegration) contextValidateGhOrgConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GhOrgConnectionDetails != nil {
+
+		if swag.IsZero(m.GhOrgConnectionDetails) { // not required
+			return nil
+		}
+
+		if err := m.GhOrgConnectionDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gh_org_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gh_org_connection_details")
 			}
 			return err
 		}

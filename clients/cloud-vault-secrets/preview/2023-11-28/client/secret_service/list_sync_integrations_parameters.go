@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewListSyncIntegrationsParams creates a new ListSyncIntegrationsParams object,
@@ -63,6 +64,33 @@ type ListSyncIntegrationsParams struct {
 
 	// OrganizationID.
 	OrganizationID string
+
+	/* PaginationNextPageToken.
+
+	     Specifies a page token to use to retrieve the next page. Set this to the
+	`next_page_token` returned by previous list requests to get the next page of
+	results. If set, `previous_page_token` must not be set.
+	*/
+	PaginationNextPageToken *string
+
+	/* PaginationPageSize.
+
+	     The max number of results per page that should be returned. If the number
+	of available results is larger than `page_size`, a `next_page_token` is
+	returned which can be used to get the next page of results in subsequent
+	requests. A value of zero will cause `page_size` to be defaulted.
+
+	     Format: int64
+	*/
+	PaginationPageSize *int64
+
+	/* PaginationPreviousPageToken.
+
+	     Specifies a page token to use to retrieve the previous page. Set this to
+	the `previous_page_token` returned by previous list requests to get the
+	previous page of results. If set, `next_page_token` must not be set.
+	*/
+	PaginationPreviousPageToken *string
 
 	// ProjectID.
 	ProjectID string
@@ -131,6 +159,39 @@ func (o *ListSyncIntegrationsParams) SetOrganizationID(organizationID string) {
 	o.OrganizationID = organizationID
 }
 
+// WithPaginationNextPageToken adds the paginationNextPageToken to the list sync integrations params
+func (o *ListSyncIntegrationsParams) WithPaginationNextPageToken(paginationNextPageToken *string) *ListSyncIntegrationsParams {
+	o.SetPaginationNextPageToken(paginationNextPageToken)
+	return o
+}
+
+// SetPaginationNextPageToken adds the paginationNextPageToken to the list sync integrations params
+func (o *ListSyncIntegrationsParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
+	o.PaginationNextPageToken = paginationNextPageToken
+}
+
+// WithPaginationPageSize adds the paginationPageSize to the list sync integrations params
+func (o *ListSyncIntegrationsParams) WithPaginationPageSize(paginationPageSize *int64) *ListSyncIntegrationsParams {
+	o.SetPaginationPageSize(paginationPageSize)
+	return o
+}
+
+// SetPaginationPageSize adds the paginationPageSize to the list sync integrations params
+func (o *ListSyncIntegrationsParams) SetPaginationPageSize(paginationPageSize *int64) {
+	o.PaginationPageSize = paginationPageSize
+}
+
+// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the list sync integrations params
+func (o *ListSyncIntegrationsParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *ListSyncIntegrationsParams {
+	o.SetPaginationPreviousPageToken(paginationPreviousPageToken)
+	return o
+}
+
+// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the list sync integrations params
+func (o *ListSyncIntegrationsParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
+	o.PaginationPreviousPageToken = paginationPreviousPageToken
+}
+
 // WithProjectID adds the projectID to the list sync integrations params
 func (o *ListSyncIntegrationsParams) WithProjectID(projectID string) *ListSyncIntegrationsParams {
 	o.SetProjectID(projectID)
@@ -153,6 +214,57 @@ func (o *ListSyncIntegrationsParams) WriteToRequest(r runtime.ClientRequest, reg
 	// path param organization_id
 	if err := r.SetPathParam("organization_id", o.OrganizationID); err != nil {
 		return err
+	}
+
+	if o.PaginationNextPageToken != nil {
+
+		// query param pagination.next_page_token
+		var qrPaginationNextPageToken string
+
+		if o.PaginationNextPageToken != nil {
+			qrPaginationNextPageToken = *o.PaginationNextPageToken
+		}
+		qPaginationNextPageToken := qrPaginationNextPageToken
+		if qPaginationNextPageToken != "" {
+
+			if err := r.SetQueryParam("pagination.next_page_token", qPaginationNextPageToken); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationPageSize != nil {
+
+		// query param pagination.page_size
+		var qrPaginationPageSize int64
+
+		if o.PaginationPageSize != nil {
+			qrPaginationPageSize = *o.PaginationPageSize
+		}
+		qPaginationPageSize := swag.FormatInt64(qrPaginationPageSize)
+		if qPaginationPageSize != "" {
+
+			if err := r.SetQueryParam("pagination.page_size", qPaginationPageSize); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationPreviousPageToken != nil {
+
+		// query param pagination.previous_page_token
+		var qrPaginationPreviousPageToken string
+
+		if o.PaginationPreviousPageToken != nil {
+			qrPaginationPreviousPageToken = *o.PaginationPreviousPageToken
+		}
+		qPaginationPreviousPageToken := qrPaginationPreviousPageToken
+		if qPaginationPreviousPageToken != "" {
+
+			if err := r.SetQueryParam("pagination.previous_page_token", qPaginationPreviousPageToken); err != nil {
+				return err
+			}
+		}
 	}
 
 	// path param project_id
