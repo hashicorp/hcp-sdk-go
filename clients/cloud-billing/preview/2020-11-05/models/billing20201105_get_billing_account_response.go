@@ -21,9 +21,9 @@ type Billing20201105GetBillingAccountResponse struct {
 	// billing_account is the Billing Account.
 	BillingAccount *Billing20201105BillingAccount `json:"billing_account,omitempty"`
 
-	// contract_billing_method_details contains details about the contract that
-	// can be attached to a billing account to cover charges of it.
-	ContractBillingMethodDetails *Billing20201105ContractBillingMethodDetails `json:"contract_billing_method_details,omitempty"`
+	// entitlement_billing_method_details contains details about the entitlement contract
+	// that can be attached to a billing account to cover charges of it.
+	EntitlementBillingMethodDetails *Billing20201105EntitlementBillingMethodDetails `json:"entitlement_billing_method_details,omitempty"`
 
 	// flexible_consumption_billing_method_details contains details of the billing
 	// account's flexible consumption billing method.
@@ -43,7 +43,7 @@ func (m *Billing20201105GetBillingAccountResponse) Validate(formats strfmt.Regis
 		res = append(res, err)
 	}
 
-	if err := m.validateContractBillingMethodDetails(formats); err != nil {
+	if err := m.validateEntitlementBillingMethodDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -76,17 +76,17 @@ func (m *Billing20201105GetBillingAccountResponse) validateBillingAccount(format
 	return nil
 }
 
-func (m *Billing20201105GetBillingAccountResponse) validateContractBillingMethodDetails(formats strfmt.Registry) error {
-	if swag.IsZero(m.ContractBillingMethodDetails) { // not required
+func (m *Billing20201105GetBillingAccountResponse) validateEntitlementBillingMethodDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.EntitlementBillingMethodDetails) { // not required
 		return nil
 	}
 
-	if m.ContractBillingMethodDetails != nil {
-		if err := m.ContractBillingMethodDetails.Validate(formats); err != nil {
+	if m.EntitlementBillingMethodDetails != nil {
+		if err := m.EntitlementBillingMethodDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("contract_billing_method_details")
+				return ve.ValidateName("entitlement_billing_method_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("contract_billing_method_details")
+				return ce.ValidateName("entitlement_billing_method_details")
 			}
 			return err
 		}
@@ -122,7 +122,7 @@ func (m *Billing20201105GetBillingAccountResponse) ContextValidate(ctx context.C
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateContractBillingMethodDetails(ctx, formats); err != nil {
+	if err := m.contextValidateEntitlementBillingMethodDetails(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -139,6 +139,11 @@ func (m *Billing20201105GetBillingAccountResponse) ContextValidate(ctx context.C
 func (m *Billing20201105GetBillingAccountResponse) contextValidateBillingAccount(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.BillingAccount != nil {
+
+		if swag.IsZero(m.BillingAccount) { // not required
+			return nil
+		}
+
 		if err := m.BillingAccount.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("billing_account")
@@ -152,14 +157,19 @@ func (m *Billing20201105GetBillingAccountResponse) contextValidateBillingAccount
 	return nil
 }
 
-func (m *Billing20201105GetBillingAccountResponse) contextValidateContractBillingMethodDetails(ctx context.Context, formats strfmt.Registry) error {
+func (m *Billing20201105GetBillingAccountResponse) contextValidateEntitlementBillingMethodDetails(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.ContractBillingMethodDetails != nil {
-		if err := m.ContractBillingMethodDetails.ContextValidate(ctx, formats); err != nil {
+	if m.EntitlementBillingMethodDetails != nil {
+
+		if swag.IsZero(m.EntitlementBillingMethodDetails) { // not required
+			return nil
+		}
+
+		if err := m.EntitlementBillingMethodDetails.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("contract_billing_method_details")
+				return ve.ValidateName("entitlement_billing_method_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("contract_billing_method_details")
+				return ce.ValidateName("entitlement_billing_method_details")
 			}
 			return err
 		}
@@ -171,6 +181,11 @@ func (m *Billing20201105GetBillingAccountResponse) contextValidateContractBillin
 func (m *Billing20201105GetBillingAccountResponse) contextValidateOnDemandBillingMethodDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OnDemandBillingMethodDetails != nil {
+
+		if swag.IsZero(m.OnDemandBillingMethodDetails) { // not required
+			return nil
+		}
+
 		if err := m.OnDemandBillingMethodDetails.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("on_demand_billing_method_details")

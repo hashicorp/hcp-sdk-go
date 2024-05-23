@@ -80,6 +80,11 @@ func (o *BillingAccountServiceRemoveOnDemandPaymentMethodOK) IsCode(code int) bo
 	return code == 200
 }
 
+// Code gets the status code for the billing account service remove on demand payment method o k response
+func (o *BillingAccountServiceRemoveOnDemandPaymentMethodOK) Code() int {
+	return 200
+}
+
 func (o *BillingAccountServiceRemoveOnDemandPaymentMethodOK) Error() string {
 	return fmt.Sprintf("[DELETE /billing/2020-11-05/organizations/{organization_id}/billing_accounts/{billing_account_id}/on_demand_payment_method][%d] billingAccountServiceRemoveOnDemandPaymentMethodOK  %+v", 200, o.Payload)
 }
@@ -119,12 +124,7 @@ An unexpected error response.
 type BillingAccountServiceRemoveOnDemandPaymentMethodDefault struct {
 	_statusCode int
 
-	Payload *models.RuntimeError
-}
-
-// Code gets the status code for the billing account service remove on demand payment method default response
-func (o *BillingAccountServiceRemoveOnDemandPaymentMethodDefault) Code() int {
-	return o._statusCode
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this billing account service remove on demand payment method default response has a 2xx status code
@@ -152,6 +152,11 @@ func (o *BillingAccountServiceRemoveOnDemandPaymentMethodDefault) IsCode(code in
 	return o._statusCode == code
 }
 
+// Code gets the status code for the billing account service remove on demand payment method default response
+func (o *BillingAccountServiceRemoveOnDemandPaymentMethodDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *BillingAccountServiceRemoveOnDemandPaymentMethodDefault) Error() string {
 	return fmt.Sprintf("[DELETE /billing/2020-11-05/organizations/{organization_id}/billing_accounts/{billing_account_id}/on_demand_payment_method][%d] BillingAccountService_RemoveOnDemandPaymentMethod default  %+v", o._statusCode, o.Payload)
 }
@@ -160,13 +165,13 @@ func (o *BillingAccountServiceRemoveOnDemandPaymentMethodDefault) String() strin
 	return fmt.Sprintf("[DELETE /billing/2020-11-05/organizations/{organization_id}/billing_accounts/{billing_account_id}/on_demand_payment_method][%d] BillingAccountService_RemoveOnDemandPaymentMethod default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *BillingAccountServiceRemoveOnDemandPaymentMethodDefault) GetPayload() *models.RuntimeError {
+func (o *BillingAccountServiceRemoveOnDemandPaymentMethodDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *BillingAccountServiceRemoveOnDemandPaymentMethodDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RuntimeError)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

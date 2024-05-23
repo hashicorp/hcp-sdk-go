@@ -106,6 +106,11 @@ func (m *Billing20201105OnDemandBillingMethodDetails) ContextValidate(ctx contex
 func (m *Billing20201105OnDemandBillingMethodDetails) contextValidateBillingMethod(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.BillingMethod != nil {
+
+		if swag.IsZero(m.BillingMethod) { // not required
+			return nil
+		}
+
 		if err := m.BillingMethod.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("billing_method")
@@ -122,6 +127,11 @@ func (m *Billing20201105OnDemandBillingMethodDetails) contextValidateBillingMeth
 func (m *Billing20201105OnDemandBillingMethodDetails) contextValidateCardDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CardDetails != nil {
+
+		if swag.IsZero(m.CardDetails) { // not required
+			return nil
+		}
+
 		if err := m.CardDetails.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("card_details")

@@ -32,8 +32,15 @@ type Billing20201105StatementResource struct {
 	// amount is the sum of the amount of all line items.
 	Amount string `json:"amount,omitempty"`
 
+	// common_resource_attributes contains all the attributes that are
+	// common to all the resource's line items.
+	CommonResourceAttributes map[string]string `json:"common_resource_attributes,omitempty"`
+
 	// fcp contains flexible consumption specific properties.
-	FlexibleConsumptionMetadata *Billing20201105StatementResourceFlexibleConsumptionMetadata `json:"flexible_consumption_metadata,omitempty"`
+	FlexibleConsumptionMetadata *StatementResourceFlexibleConsumptionMetadata `json:"flexible_consumption_metadata,omitempty"`
+
+	// geo defines on which geography the control-plane for this resource exists.
+	Geo *Billing20201105Geo `json:"geo,omitempty"`
 
 	// line_items is the list of line items as they would appear on an invoice.
 	LineItems []*StatementResourceLineItem `json:"line_items"`
@@ -55,6 +62,10 @@ func (m *Billing20201105StatementResource) Validate(formats strfmt.Registry) err
 	}
 
 	if err := m.validateFlexibleConsumptionMetadata(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGeo(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -107,6 +118,25 @@ func (m *Billing20201105StatementResource) validateFlexibleConsumptionMetadata(f
 				return ve.ValidateName("flexible_consumption_metadata")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("flexible_consumption_metadata")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Billing20201105StatementResource) validateGeo(formats strfmt.Registry) error {
+	if swag.IsZero(m.Geo) { // not required
+		return nil
+	}
+
+	if m.Geo != nil {
+		if err := m.Geo.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("geo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("geo")
 			}
 			return err
 		}
@@ -168,6 +198,10 @@ func (m *Billing20201105StatementResource) ContextValidate(ctx context.Context, 
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGeo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLineItems(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -185,6 +219,11 @@ func (m *Billing20201105StatementResource) ContextValidate(ctx context.Context, 
 func (m *Billing20201105StatementResource) contextValidateFlexibleConsumptionMetadata(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.FlexibleConsumptionMetadata != nil {
+
+		if swag.IsZero(m.FlexibleConsumptionMetadata) { // not required
+			return nil
+		}
+
 		if err := m.FlexibleConsumptionMetadata.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("flexible_consumption_metadata")
@@ -198,11 +237,37 @@ func (m *Billing20201105StatementResource) contextValidateFlexibleConsumptionMet
 	return nil
 }
 
+func (m *Billing20201105StatementResource) contextValidateGeo(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Geo != nil {
+
+		if swag.IsZero(m.Geo) { // not required
+			return nil
+		}
+
+		if err := m.Geo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("geo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("geo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Billing20201105StatementResource) contextValidateLineItems(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.LineItems); i++ {
 
 		if m.LineItems[i] != nil {
+
+			if swag.IsZero(m.LineItems[i]) { // not required
+				return nil
+			}
+
 			if err := m.LineItems[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("line_items" + "." + strconv.Itoa(i))
@@ -221,6 +286,11 @@ func (m *Billing20201105StatementResource) contextValidateLineItems(ctx context.
 func (m *Billing20201105StatementResource) contextValidateResourceLink(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ResourceLink != nil {
+
+		if swag.IsZero(m.ResourceLink) { // not required
+			return nil
+		}
+
 		if err := m.ResourceLink.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("resource_link")

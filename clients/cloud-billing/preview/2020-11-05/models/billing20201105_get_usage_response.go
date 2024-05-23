@@ -73,6 +73,11 @@ func (m *Billing20201105GetUsageResponse) ContextValidate(ctx context.Context, f
 func (m *Billing20201105GetUsageResponse) contextValidateUsage(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Usage != nil {
+
+		if swag.IsZero(m.Usage) { // not required
+			return nil
+		}
+
 		if err := m.Usage.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("usage")

@@ -112,6 +112,11 @@ func (m *Billing20201105ListConsumptionPoolsResponse) contextValidateConsumption
 	for i := 0; i < len(m.ConsumptionPools); i++ {
 
 		if m.ConsumptionPools[i] != nil {
+
+			if swag.IsZero(m.ConsumptionPools[i]) { // not required
+				return nil
+			}
+
 			if err := m.ConsumptionPools[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("consumption_pools" + "." + strconv.Itoa(i))
@@ -130,6 +135,11 @@ func (m *Billing20201105ListConsumptionPoolsResponse) contextValidateConsumption
 func (m *Billing20201105ListConsumptionPoolsResponse) contextValidateSummary(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Summary != nil {
+
+		if swag.IsZero(m.Summary) { // not required
+			return nil
+		}
+
 		if err := m.Summary.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("summary")

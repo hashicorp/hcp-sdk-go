@@ -41,6 +41,9 @@ type Billing20201105BillingAccount struct {
 	// belongs.
 	OrganizationID string `json:"organization_id,omitempty"`
 
+	// pricing_model is the value of the current pricing model for the billing account.
+	PricingModel *Billing20201105PricingModel `json:"pricing_model,omitempty"`
+
 	// project_ids is the list of IDs of all projects associated with the Billing
 	// Account. Projects can be linked to *at most* one Billing Account.
 	ProjectIds []string `json:"project_ids"`
@@ -58,6 +61,10 @@ func (m *Billing20201105BillingAccount) Validate(formats strfmt.Registry) error 
 	}
 
 	if err := m.validateOnDemandStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePricingModel(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -109,6 +116,25 @@ func (m *Billing20201105BillingAccount) validateOnDemandStatus(formats strfmt.Re
 	return nil
 }
 
+func (m *Billing20201105BillingAccount) validatePricingModel(formats strfmt.Registry) error {
+	if swag.IsZero(m.PricingModel) { // not required
+		return nil
+	}
+
+	if m.PricingModel != nil {
+		if err := m.PricingModel.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pricing_model")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pricing_model")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Billing20201105BillingAccount) validateStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.Status) { // not required
 		return nil
@@ -140,6 +166,10 @@ func (m *Billing20201105BillingAccount) ContextValidate(ctx context.Context, for
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePricingModel(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -153,6 +183,11 @@ func (m *Billing20201105BillingAccount) ContextValidate(ctx context.Context, for
 func (m *Billing20201105BillingAccount) contextValidateCountry(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Country != nil {
+
+		if swag.IsZero(m.Country) { // not required
+			return nil
+		}
+
 		if err := m.Country.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("country")
@@ -169,6 +204,11 @@ func (m *Billing20201105BillingAccount) contextValidateCountry(ctx context.Conte
 func (m *Billing20201105BillingAccount) contextValidateOnDemandStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OnDemandStatus != nil {
+
+		if swag.IsZero(m.OnDemandStatus) { // not required
+			return nil
+		}
+
 		if err := m.OnDemandStatus.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("on_demand_status")
@@ -182,9 +222,35 @@ func (m *Billing20201105BillingAccount) contextValidateOnDemandStatus(ctx contex
 	return nil
 }
 
+func (m *Billing20201105BillingAccount) contextValidatePricingModel(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PricingModel != nil {
+
+		if swag.IsZero(m.PricingModel) { // not required
+			return nil
+		}
+
+		if err := m.PricingModel.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pricing_model")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pricing_model")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Billing20201105BillingAccount) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
+
+		if swag.IsZero(m.Status) { // not required
+			return nil
+		}
+
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")

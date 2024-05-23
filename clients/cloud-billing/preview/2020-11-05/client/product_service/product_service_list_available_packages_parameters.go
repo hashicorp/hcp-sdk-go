@@ -75,19 +75,21 @@ type ProductServiceListAvailablePackagesParams struct {
 
 	/* RegionProvider.
 
-	   provider is the named cloud provider ("aws", "gcp", "azure").
+	   provider is the named cloud provider ("aws", "gcp", "azure")
 	*/
 	RegionProvider *string
 
 	/* RegionRegion.
 
-	   region is the cloud region ("us-west1", "us-east1").
+	   region is the cloud region ("us-west1", "us-east1")
 	*/
 	RegionRegion *string
 
 	/* ResourceType.
 
-	   resource_type is the resource to retrieve available packages for.
+	     resource_type is the resource to retrieve available packages for.
+
+	e.g. hashicorp.consul.cluster
 	*/
 	ResourceType *string
 

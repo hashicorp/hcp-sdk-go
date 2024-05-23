@@ -15,8 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Billing20201105Statement RunningUsage describes the usage that accrued during a specific
-// billing period.
+// Billing20201105Statement Statement describes the usage that accrued during a specific billing period
 //
 // swagger:model billing_20201105Statement
 type Billing20201105Statement struct {
@@ -31,9 +30,6 @@ type Billing20201105Statement struct {
 	// Format: date-time
 	BillingPeriodStart strfmt.DateTime `json:"billing_period_start,omitempty"`
 
-	// fcp contains flexible consumption specific properties.
-	FlexibleConsumptionMetadata *Billing20201105StatementFlexibleConsumptionMetadata `json:"flexible_consumption_metadata,omitempty"`
-
 	// id is the id associated with the statement.
 	ID string `json:"id,omitempty"`
 
@@ -42,11 +38,17 @@ type Billing20201105Statement struct {
 	// Format: date-time
 	LastUpdatedAt strfmt.DateTime `json:"last_updated_at,omitempty"`
 
-	// on_demand contains pay-as-you-go specific properties.
-	OnDemandMetadata *Billing20201105StatementOnDemandMetadata `json:"on_demand_metadata,omitempty"`
+	// non_usage_charges has information about each resource that is part of the statement but non usage charge type.
+	NonUsageCharges []*Billing20201105StatementResource `json:"non_usage_charges"`
 
 	// resources has information about each resource that is part of the statement.
 	Resources []*Billing20201105StatementResource `json:"resources"`
+
+	// state indicates the life cycle step that the Statement is currently in.
+	State *Billing20201105StatementState `json:"state,omitempty"`
+
+	// statement_metadata contains metadata for the statement.
+	StatementMetadata *StatementStatementMetadata `json:"statement_metadata,omitempty"`
 
 	// total is the cost produced within this billing period minus any
 	// discount that is granted because of a positive account balance. This
@@ -68,19 +70,23 @@ func (m *Billing20201105Statement) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateFlexibleConsumptionMetadata(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLastUpdatedAt(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateOnDemandMetadata(formats); err != nil {
+	if err := m.validateNonUsageCharges(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateResources(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatementMetadata(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -114,25 +120,6 @@ func (m *Billing20201105Statement) validateBillingPeriodStart(formats strfmt.Reg
 	return nil
 }
 
-func (m *Billing20201105Statement) validateFlexibleConsumptionMetadata(formats strfmt.Registry) error {
-	if swag.IsZero(m.FlexibleConsumptionMetadata) { // not required
-		return nil
-	}
-
-	if m.FlexibleConsumptionMetadata != nil {
-		if err := m.FlexibleConsumptionMetadata.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("flexible_consumption_metadata")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("flexible_consumption_metadata")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *Billing20201105Statement) validateLastUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.LastUpdatedAt) { // not required
 		return nil
@@ -145,20 +132,27 @@ func (m *Billing20201105Statement) validateLastUpdatedAt(formats strfmt.Registry
 	return nil
 }
 
-func (m *Billing20201105Statement) validateOnDemandMetadata(formats strfmt.Registry) error {
-	if swag.IsZero(m.OnDemandMetadata) { // not required
+func (m *Billing20201105Statement) validateNonUsageCharges(formats strfmt.Registry) error {
+	if swag.IsZero(m.NonUsageCharges) { // not required
 		return nil
 	}
 
-	if m.OnDemandMetadata != nil {
-		if err := m.OnDemandMetadata.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("on_demand_metadata")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("on_demand_metadata")
-			}
-			return err
+	for i := 0; i < len(m.NonUsageCharges); i++ {
+		if swag.IsZero(m.NonUsageCharges[i]) { // not required
+			continue
 		}
+
+		if m.NonUsageCharges[i] != nil {
+			if err := m.NonUsageCharges[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("non_usage_charges" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("non_usage_charges" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -190,19 +184,61 @@ func (m *Billing20201105Statement) validateResources(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *Billing20201105Statement) validateState(formats strfmt.Registry) error {
+	if swag.IsZero(m.State) { // not required
+		return nil
+	}
+
+	if m.State != nil {
+		if err := m.State.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("state")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Billing20201105Statement) validateStatementMetadata(formats strfmt.Registry) error {
+	if swag.IsZero(m.StatementMetadata) { // not required
+		return nil
+	}
+
+	if m.StatementMetadata != nil {
+		if err := m.StatementMetadata.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("statement_metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("statement_metadata")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this billing 20201105 statement based on the context it is used
 func (m *Billing20201105Statement) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateFlexibleConsumptionMetadata(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateOnDemandMetadata(ctx, formats); err != nil {
+	if err := m.contextValidateNonUsageCharges(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateResources(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatementMetadata(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -212,33 +248,26 @@ func (m *Billing20201105Statement) ContextValidate(ctx context.Context, formats 
 	return nil
 }
 
-func (m *Billing20201105Statement) contextValidateFlexibleConsumptionMetadata(ctx context.Context, formats strfmt.Registry) error {
+func (m *Billing20201105Statement) contextValidateNonUsageCharges(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.FlexibleConsumptionMetadata != nil {
-		if err := m.FlexibleConsumptionMetadata.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("flexible_consumption_metadata")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("flexible_consumption_metadata")
+	for i := 0; i < len(m.NonUsageCharges); i++ {
+
+		if m.NonUsageCharges[i] != nil {
+
+			if swag.IsZero(m.NonUsageCharges[i]) { // not required
+				return nil
 			}
-			return err
-		}
-	}
 
-	return nil
-}
-
-func (m *Billing20201105Statement) contextValidateOnDemandMetadata(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.OnDemandMetadata != nil {
-		if err := m.OnDemandMetadata.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("on_demand_metadata")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("on_demand_metadata")
+			if err := m.NonUsageCharges[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("non_usage_charges" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("non_usage_charges" + "." + strconv.Itoa(i))
+				}
+				return err
 			}
-			return err
 		}
+
 	}
 
 	return nil
@@ -249,6 +278,11 @@ func (m *Billing20201105Statement) contextValidateResources(ctx context.Context,
 	for i := 0; i < len(m.Resources); i++ {
 
 		if m.Resources[i] != nil {
+
+			if swag.IsZero(m.Resources[i]) { // not required
+				return nil
+			}
+
 			if err := m.Resources[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("resources" + "." + strconv.Itoa(i))
@@ -259,6 +293,48 @@ func (m *Billing20201105Statement) contextValidateResources(ctx context.Context,
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *Billing20201105Statement) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
+		if err := m.State.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("state")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Billing20201105Statement) contextValidateStatementMetadata(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StatementMetadata != nil {
+
+		if swag.IsZero(m.StatementMetadata) { // not required
+			return nil
+		}
+
+		if err := m.StatementMetadata.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("statement_metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("statement_metadata")
+			}
+			return err
+		}
 	}
 
 	return nil

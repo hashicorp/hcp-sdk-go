@@ -18,6 +18,256 @@ import (
 //
 // https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 //
+//   - AF: Afghanistan
+//   - AL: Albania
+//   - AQ: Antarctica
+//   - DZ: Algeria
+//   - AS: American Samoa
+//   - AD: Andorra
+//   - AO: Angola
+//   - AG: Antigua and Barbuda
+//   - AZ: Azerbaijan
+//   - AR: Argentina
+//   - AU: Australia
+//   - AT: Austria
+//   - BS: Bahamas (the)
+//   - BH: Bahrain
+//   - BD: Bangladesh
+//   - AM: Armenia
+//   - BB: Barbados
+//   - BE: Belgium
+//   - BM: Bermuda
+//   - BT: Bhutan
+//   - BO: Bolivia (Plurinational State of)
+//   - BA: Bosnia and Herzegovina
+//   - BW: Botswana
+//   - BV: Bouvet Island
+//   - BR: Brazil
+//   - BZ: Belize
+//   - IO: British Indian Ocean Territory (the)
+//   - SB: Solomon Islands
+//   - VG: Virgin Islands (British)
+//   - BN: Brunei Darussalam
+//   - BG: Bulgaria
+//   - MM: Myanmar
+//   - BI: Burundi
+//   - BY: Belarus
+//   - KH: Cambodia
+//   - CM: Cameroon
+//   - CA: Canada
+//   - CV: Cabo Verde
+//   - KY: Cayman Islands (the)
+//   - CF: Central African Republic (the)
+//   - LK: Sri Lanka
+//   - TD: Chad
+//   - CL: Chile
+//   - CN: China
+//   - TW: Taiwan (Province of China)
+//   - CX: Christmas Island
+//   - CC: Cocos (Keeling) Islands (the)
+//   - CO: Colombia
+//   - KM: Comoros (the)
+//   - YT: Mayotte
+//   - CG: Congo (the)
+//   - CD: Congo (the Democratic Republic of the)
+//   - CK: Cook Islands (the)
+//   - CR: Costa Rica
+//   - HR: Croatia
+//   - CU: Cuba
+//   - CY: Cyprus
+//   - CZ: Czech Republic (the)
+//   - BJ: Benin
+//   - DK: Denmark
+//   - DM: Dominica
+//   - DO: Dominican Republic (the)
+//   - EC: Ecuador
+//   - SV: El Salvador
+//   - GQ: Equatorial Guinea
+//   - ET: Ethiopia
+//   - ER: Eritrea
+//   - EE: Estonia
+//   - FO: Faroe Islands (the)
+//   - FK: Falkland Islands (the) [Malvinas]
+//   - GS: South Georgia and the South Sandwich Islands
+//   - FJ: Fiji
+//   - FI: Finland
+//   - AX: Åland Islands
+//   - FR: France
+//   - GF: French Guiana
+//   - PF: French Polynesia
+//   - TF: French Southern Territories (the)
+//   - DJ: Djibouti
+//   - GA: Gabon
+//   - GE: Georgia
+//   - GM: Gambia (the)
+//   - PS: Palestine, State of
+//   - DE: Germany
+//   - GH: Ghana
+//   - GI: Gibraltar
+//   - KI: Kiribati
+//   - GR: Greece
+//   - GL: Greenland
+//   - GD: Grenada
+//   - GP: Guadeloupe
+//   - GU: Guam
+//   - GT: Guatemala
+//   - GN: Guinea
+//   - GY: Guyana
+//   - HT: Haiti
+//   - HM: Heard Island and McDonald Islands
+//   - VA: Holy See (the)
+//   - HN: Honduras
+//   - HK: Hong Kong
+//   - HU: Hungary
+//   - IS: Iceland
+//   - IN: India
+//   - ID: Indonesia
+//   - IR: Iran (Islamic Republic of)
+//   - IQ: Iraq
+//   - IE: Ireland
+//   - IL: Israel
+//   - IT: Italy
+//   - CI: Côte d'Ivoire
+//   - JM: Jamaica
+//   - JP: Japan
+//   - KZ: Kazakhstan
+//   - JO: Jordan
+//   - KE: Kenya
+//   - KP: Korea (the Democratic People's Republic of)
+//   - KR: Korea (the Republic of)
+//   - KW: Kuwait
+//   - KG: Kyrgyzstan
+//   - LA: Lao People's Democratic Republic (the)
+//   - LB: Lebanon
+//   - LS: Lesotho
+//   - LV: Latvia
+//   - LR: Liberia
+//   - LY: Libya
+//   - LI: Liechtenstein
+//   - LT: Lithuania
+//   - LU: Luxembourg
+//   - MO: Macao
+//   - MG: Madagascar
+//   - MW: Malawi
+//   - MY: Malaysia
+//   - MV: Maldives
+//   - ML: Mali
+//   - MT: Malta
+//   - MQ: Martinique
+//   - MR: Mauritania
+//   - MU: Mauritius
+//   - MX: Mexico
+//   - MC: Monaco
+//   - MN: Mongolia
+//   - MD: Moldova (the Republic of)
+//   - ME: Montenegro
+//   - MS: Montserrat
+//   - MA: Morocco
+//   - MZ: Mozambique
+//   - OM: Oman
+//   - NA: Namibia
+//   - NR: Nauru
+//   - NP: Nepal
+//   - NL: Netherlands (the)
+//   - CW: Curaçao
+//   - AW: Aruba
+//   - SX: Sint Maarten (Dutch part)
+//   - BQ: Bonaire, Sint Eustatius and Saba
+//   - NC: New Caledonia
+//   - VU: Vanuatu
+//   - NZ: New Zealand
+//   - NI: Nicaragua
+//   - NE: Niger (the)
+//   - NG: Nigeria
+//   - NU: Niue
+//   - NF: Norfolk Island
+//   - NO: Norway
+//   - MP: Northern Mariana Islands (the)
+//   - UM: United States Minor Outlying Islands (the)
+//   - FM: Micronesia (Federated States of)
+//   - MH: Marshall Islands (the)
+//   - PW: Palau
+//   - PK: Pakistan
+//   - PA: Panama
+//   - PG: Papua New Guinea
+//   - PY: Paraguay
+//   - PE: Peru
+//   - PH: Philippines (the)
+//   - PN: Pitcairn
+//   - PL: Poland
+//   - PT: Portugal
+//   - GW: Guinea-Bissau
+//   - TL: Timor-Leste
+//   - PR: Puerto Rico
+//   - QA: Qatar
+//   - RE: Réunion
+//   - RO: Romania
+//   - RU: Russian Federation (the)
+//   - RW: Rwanda
+//   - BL: Saint Barthélemy
+//   - SH: Saint Helena, Ascension and Tristan da Cunha
+//   - KN: Saint Kitts and Nevis
+//   - AI: Anguilla
+//   - LC: Saint Lucia
+//   - MF: Saint Martin (French part)
+//   - PM: Saint Pierre and Miquelon
+//   - VC: Saint Vincent and the Grenadines
+//   - SM: San Marino
+//   - ST: Sao Tome and Principe
+//   - SA: Saudi Arabia
+//   - SN: Senegal
+//   - RS: Serbia
+//   - SC: Seychelles
+//   - SL: Sierra Leone
+//   - SG: Singapore
+//   - SK: Slovakia
+//   - VN: Viet Nam
+//   - SI: Slovenia
+//   - SO: Somalia
+//   - ZA: South Africa
+//   - ZW: Zimbabwe
+//   - ES: Spain
+//   - SS: South Sudan
+//   - SD: Sudan (the)
+//   - EH: Western Sahara*
+//   - SR: Suriname
+//   - SJ: Svalbard and Jan Mayen
+//   - SZ: Swaziland
+//   - SE: Sweden
+//   - CH: Switzerland
+//   - SY: Syrian Arab Republic
+//   - TJ: Tajikistan
+//   - TH: Thailand
+//   - TG: Togo
+//   - TK: Tokelau
+//   - TO: Tonga
+//   - TT: Trinidad and Tobago
+//   - AE: United Arab Emirates (the)
+//   - TN: Tunisia
+//   - TR: Turkey
+//   - TM: Turkmenistan
+//   - TC: Turks and Caicos Islands (the)
+//   - TV: Tuvalu
+//   - UG: Uganda
+//   - UA: Ukraine
+//   - MK: Macedonia (the former Yugoslav Republic of)
+//   - EG: Egypt
+//   - GB: United Kingdom of Great Britain and Northern Ireland (the)
+//   - GG: Guernsey
+//   - JE: Jersey
+//   - IM: Isle of Man
+//   - TZ: Tanzania, United Republic of
+//   - US: United States of America (the)
+//   - VI: Virgin Islands (U.S.)
+//   - BF: Burkina Faso
+//   - UY: Uruguay
+//   - UZ: Uzbekistan
+//   - VE: Venezuela (Bolivarian Republic of)
+//   - WF: Wallis and Futuna
+//   - WS: Samoa
+//   - YE: Yemen
+//   - ZM: Zambia
+//
 // swagger:model billing_20201105Country
 type Billing20201105Country string
 

@@ -110,6 +110,11 @@ func (m *Billing20201105TaxSettings) ContextValidate(ctx context.Context, format
 func (m *Billing20201105TaxSettings) contextValidateExemptionStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExemptionStatus != nil {
+
+		if swag.IsZero(m.ExemptionStatus) { // not required
+			return nil
+		}
+
 		if err := m.ExemptionStatus.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("exemption_status")
@@ -126,6 +131,11 @@ func (m *Billing20201105TaxSettings) contextValidateExemptionStatus(ctx context.
 func (m *Billing20201105TaxSettings) contextValidateIDType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.IDType != nil {
+
+		if swag.IsZero(m.IDType) { // not required
+			return nil
+		}
+
 		if err := m.IDType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("id_type")

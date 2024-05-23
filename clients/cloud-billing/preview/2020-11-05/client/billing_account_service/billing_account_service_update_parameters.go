@@ -64,7 +64,7 @@ BillingAccountServiceUpdateParams contains all the parameters to send to the API
 type BillingAccountServiceUpdateParams struct {
 
 	// Body.
-	Body *models.Billing20201105UpdateBillingAccountRequest
+	Body *models.BillingAccountServiceUpdateBody
 
 	/* ID.
 
@@ -134,13 +134,13 @@ func (o *BillingAccountServiceUpdateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the billing account service update params
-func (o *BillingAccountServiceUpdateParams) WithBody(body *models.Billing20201105UpdateBillingAccountRequest) *BillingAccountServiceUpdateParams {
+func (o *BillingAccountServiceUpdateParams) WithBody(body *models.BillingAccountServiceUpdateBody) *BillingAccountServiceUpdateParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the billing account service update params
-func (o *BillingAccountServiceUpdateParams) SetBody(body *models.Billing20201105UpdateBillingAccountRequest) {
+func (o *BillingAccountServiceUpdateParams) SetBody(body *models.BillingAccountServiceUpdateBody) {
 	o.Body = body
 }
 

@@ -32,6 +32,8 @@ type ClientService interface {
 
 	StatementServiceGetStatement(params *StatementServiceGetStatementParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatementServiceGetStatementOK, error)
 
+	StatementServiceGetStatementCSV(params *StatementServiceGetStatementCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatementServiceGetStatementCSVOK, error)
+
 	StatementServiceListStatements(params *StatementServiceListStatementsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatementServiceListStatementsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -110,6 +112,44 @@ func (a *Client) StatementServiceGetStatement(params *StatementServiceGetStateme
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*StatementServiceGetStatementDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+StatementServiceGetStatementCSV statement service get statement c s v API
+*/
+func (a *Client) StatementServiceGetStatementCSV(params *StatementServiceGetStatementCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatementServiceGetStatementCSVOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStatementServiceGetStatementCSVParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StatementService_GetStatementCSV",
+		Method:             "GET",
+		PathPattern:        "/billing/2020-11-05/organizations/{organization_id}/accounts/{billing_account_id}/statements/{statement_id}/csv",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &StatementServiceGetStatementCSVReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StatementServiceGetStatementCSVOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*StatementServiceGetStatementCSVDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

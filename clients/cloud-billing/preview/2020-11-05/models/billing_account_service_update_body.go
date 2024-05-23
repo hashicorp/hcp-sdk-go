@@ -13,19 +13,14 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Billing20201105CreateBillingAccountRequest CreateBillingAccountRequest is the request to add a new Billing Account for
-// an organization.
+// BillingAccountServiceUpdateBody UpdateBillingAccountRequest is the request to update a Billing Account.
 //
-// swagger:model billing_20201105CreateBillingAccountRequest
-type Billing20201105CreateBillingAccountRequest struct {
+// swagger:model BillingAccountServiceUpdateBody
+type BillingAccountServiceUpdateBody struct {
 
 	// country is the billing account's country which is used for selecting
 	// country-specific prices and for invoicing.
 	Country *Billing20201105Country `json:"country,omitempty"`
-
-	// id is the user-settable ID for this Billing Account. It must be unique
-	// within the organization.
-	ID string `json:"id,omitempty"`
 
 	// name is the Billing Account's user-defined name.
 	Name string `json:"name,omitempty"`
@@ -36,17 +31,13 @@ type Billing20201105CreateBillingAccountRequest struct {
 	// account balance.
 	OnDemandBillingMethod *Billing20201105OnDemandBillingMethod `json:"on_demand_billing_method,omitempty"`
 
-	// organization_id is the ID of the organization to which the Billing Account
-	// belongs.
-	OrganizationID string `json:"organization_id,omitempty"`
-
 	// project_ids is the list of IDs of all projects associated with the Billing
 	// Account. Projects can be linked to *at most* one Billing Account.
 	ProjectIds []string `json:"project_ids"`
 }
 
-// Validate validates this billing 20201105 create billing account request
-func (m *Billing20201105CreateBillingAccountRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this billing account service update body
+func (m *BillingAccountServiceUpdateBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCountry(formats); err != nil {
@@ -63,7 +54,7 @@ func (m *Billing20201105CreateBillingAccountRequest) Validate(formats strfmt.Reg
 	return nil
 }
 
-func (m *Billing20201105CreateBillingAccountRequest) validateCountry(formats strfmt.Registry) error {
+func (m *BillingAccountServiceUpdateBody) validateCountry(formats strfmt.Registry) error {
 	if swag.IsZero(m.Country) { // not required
 		return nil
 	}
@@ -82,7 +73,7 @@ func (m *Billing20201105CreateBillingAccountRequest) validateCountry(formats str
 	return nil
 }
 
-func (m *Billing20201105CreateBillingAccountRequest) validateOnDemandBillingMethod(formats strfmt.Registry) error {
+func (m *BillingAccountServiceUpdateBody) validateOnDemandBillingMethod(formats strfmt.Registry) error {
 	if swag.IsZero(m.OnDemandBillingMethod) { // not required
 		return nil
 	}
@@ -101,8 +92,8 @@ func (m *Billing20201105CreateBillingAccountRequest) validateOnDemandBillingMeth
 	return nil
 }
 
-// ContextValidate validate this billing 20201105 create billing account request based on the context it is used
-func (m *Billing20201105CreateBillingAccountRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this billing account service update body based on the context it is used
+func (m *BillingAccountServiceUpdateBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateCountry(ctx, formats); err != nil {
@@ -119,9 +110,14 @@ func (m *Billing20201105CreateBillingAccountRequest) ContextValidate(ctx context
 	return nil
 }
 
-func (m *Billing20201105CreateBillingAccountRequest) contextValidateCountry(ctx context.Context, formats strfmt.Registry) error {
+func (m *BillingAccountServiceUpdateBody) contextValidateCountry(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Country != nil {
+
+		if swag.IsZero(m.Country) { // not required
+			return nil
+		}
+
 		if err := m.Country.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("country")
@@ -135,9 +131,14 @@ func (m *Billing20201105CreateBillingAccountRequest) contextValidateCountry(ctx 
 	return nil
 }
 
-func (m *Billing20201105CreateBillingAccountRequest) contextValidateOnDemandBillingMethod(ctx context.Context, formats strfmt.Registry) error {
+func (m *BillingAccountServiceUpdateBody) contextValidateOnDemandBillingMethod(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OnDemandBillingMethod != nil {
+
+		if swag.IsZero(m.OnDemandBillingMethod) { // not required
+			return nil
+		}
+
 		if err := m.OnDemandBillingMethod.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("on_demand_billing_method")
@@ -152,7 +153,7 @@ func (m *Billing20201105CreateBillingAccountRequest) contextValidateOnDemandBill
 }
 
 // MarshalBinary interface implementation
-func (m *Billing20201105CreateBillingAccountRequest) MarshalBinary() ([]byte, error) {
+func (m *BillingAccountServiceUpdateBody) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -160,8 +161,8 @@ func (m *Billing20201105CreateBillingAccountRequest) MarshalBinary() ([]byte, er
 }
 
 // UnmarshalBinary interface implementation
-func (m *Billing20201105CreateBillingAccountRequest) UnmarshalBinary(b []byte) error {
-	var res Billing20201105CreateBillingAccountRequest
+func (m *BillingAccountServiceUpdateBody) UnmarshalBinary(b []byte) error {
+	var res BillingAccountServiceUpdateBody
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

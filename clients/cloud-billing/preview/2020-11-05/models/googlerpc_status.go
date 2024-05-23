@@ -14,10 +14,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// RuntimeError runtime error
+// GooglerpcStatus googlerpc status
 //
-// swagger:model runtimeError
-type RuntimeError struct {
+// swagger:model googlerpcStatus
+type GooglerpcStatus struct {
 
 	// code
 	Code int32 `json:"code,omitempty"`
@@ -25,15 +25,12 @@ type RuntimeError struct {
 	// details
 	Details []*ProtobufAny `json:"details"`
 
-	// error
-	Error string `json:"error,omitempty"`
-
 	// message
 	Message string `json:"message,omitempty"`
 }
 
-// Validate validates this runtime error
-func (m *RuntimeError) Validate(formats strfmt.Registry) error {
+// Validate validates this googlerpc status
+func (m *GooglerpcStatus) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateDetails(formats); err != nil {
@@ -46,7 +43,7 @@ func (m *RuntimeError) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *RuntimeError) validateDetails(formats strfmt.Registry) error {
+func (m *GooglerpcStatus) validateDetails(formats strfmt.Registry) error {
 	if swag.IsZero(m.Details) { // not required
 		return nil
 	}
@@ -72,8 +69,8 @@ func (m *RuntimeError) validateDetails(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this runtime error based on the context it is used
-func (m *RuntimeError) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this googlerpc status based on the context it is used
+func (m *GooglerpcStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateDetails(ctx, formats); err != nil {
@@ -86,11 +83,16 @@ func (m *RuntimeError) ContextValidate(ctx context.Context, formats strfmt.Regis
 	return nil
 }
 
-func (m *RuntimeError) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+func (m *GooglerpcStatus) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Details); i++ {
 
 		if m.Details[i] != nil {
+
+			if swag.IsZero(m.Details[i]) { // not required
+				return nil
+			}
+
 			if err := m.Details[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("details" + "." + strconv.Itoa(i))
@@ -107,7 +109,7 @@ func (m *RuntimeError) contextValidateDetails(ctx context.Context, formats strfm
 }
 
 // MarshalBinary interface implementation
-func (m *RuntimeError) MarshalBinary() ([]byte, error) {
+func (m *GooglerpcStatus) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -115,8 +117,8 @@ func (m *RuntimeError) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *RuntimeError) UnmarshalBinary(b []byte) error {
-	var res RuntimeError
+func (m *GooglerpcStatus) UnmarshalBinary(b []byte) error {
+	var res GooglerpcStatus
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

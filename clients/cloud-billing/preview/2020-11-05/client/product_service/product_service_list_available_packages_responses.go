@@ -80,6 +80,11 @@ func (o *ProductServiceListAvailablePackagesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the product service list available packages o k response
+func (o *ProductServiceListAvailablePackagesOK) Code() int {
+	return 200
+}
+
 func (o *ProductServiceListAvailablePackagesOK) Error() string {
 	return fmt.Sprintf("[GET /billing/2020-11-05/packages][%d] productServiceListAvailablePackagesOK  %+v", 200, o.Payload)
 }
@@ -119,12 +124,7 @@ An unexpected error response.
 type ProductServiceListAvailablePackagesDefault struct {
 	_statusCode int
 
-	Payload *models.RuntimeError
-}
-
-// Code gets the status code for the product service list available packages default response
-func (o *ProductServiceListAvailablePackagesDefault) Code() int {
-	return o._statusCode
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this product service list available packages default response has a 2xx status code
@@ -152,6 +152,11 @@ func (o *ProductServiceListAvailablePackagesDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the product service list available packages default response
+func (o *ProductServiceListAvailablePackagesDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ProductServiceListAvailablePackagesDefault) Error() string {
 	return fmt.Sprintf("[GET /billing/2020-11-05/packages][%d] ProductService_ListAvailablePackages default  %+v", o._statusCode, o.Payload)
 }
@@ -160,13 +165,13 @@ func (o *ProductServiceListAvailablePackagesDefault) String() string {
 	return fmt.Sprintf("[GET /billing/2020-11-05/packages][%d] ProductService_ListAvailablePackages default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ProductServiceListAvailablePackagesDefault) GetPayload() *models.RuntimeError {
+func (o *ProductServiceListAvailablePackagesDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *ProductServiceListAvailablePackagesDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RuntimeError)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

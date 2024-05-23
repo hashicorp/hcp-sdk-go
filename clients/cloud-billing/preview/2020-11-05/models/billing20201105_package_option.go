@@ -157,6 +157,11 @@ func (m *Billing20201105PackageOption) contextValidateDependencies(ctx context.C
 	for i := 0; i < len(m.Dependencies); i++ {
 
 		if m.Dependencies[i] != nil {
+
+			if swag.IsZero(m.Dependencies[i]) { // not required
+				return nil
+			}
+
 			if err := m.Dependencies[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dependencies" + "." + strconv.Itoa(i))
@@ -175,6 +180,11 @@ func (m *Billing20201105PackageOption) contextValidateDependencies(ctx context.C
 func (m *Billing20201105PackageOption) contextValidateUnit(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Unit != nil {
+
+		if swag.IsZero(m.Unit) { // not required
+			return nil
+		}
+
 		if err := m.Unit.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("unit")

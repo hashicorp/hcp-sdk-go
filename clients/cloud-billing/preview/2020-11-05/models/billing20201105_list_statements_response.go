@@ -82,6 +82,11 @@ func (m *Billing20201105ListStatementsResponse) contextValidateStatementSummarie
 	for i := 0; i < len(m.StatementSummaries); i++ {
 
 		if m.StatementSummaries[i] != nil {
+
+			if swag.IsZero(m.StatementSummaries[i]) { // not required
+				return nil
+			}
+
 			if err := m.StatementSummaries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("statement_summaries" + "." + strconv.Itoa(i))

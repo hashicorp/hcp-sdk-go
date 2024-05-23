@@ -147,6 +147,11 @@ func (m *Billing20201105BillingAccountUsage) contextValidateResourceUsages(ctx c
 	for i := 0; i < len(m.ResourceUsages); i++ {
 
 		if m.ResourceUsages[i] != nil {
+
+			if swag.IsZero(m.ResourceUsages[i]) { // not required
+				return nil
+			}
+
 			if err := m.ResourceUsages[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("resource_usages" + "." + strconv.Itoa(i))

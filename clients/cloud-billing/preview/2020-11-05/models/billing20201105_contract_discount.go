@@ -12,10 +12,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Billing20201105Discount Discount represents a consumption pool discount
+// Billing20201105ContractDiscount Discount represents discount under a contract.
 //
-// swagger:model billing_20201105Discount
-type Billing20201105Discount struct {
+// swagger:model billing_20201105ContractDiscount
+type Billing20201105ContractDiscount struct {
 
 	// percentage is the discount percentage.
 	Percentage string `json:"percentage,omitempty"`
@@ -24,18 +24,18 @@ type Billing20201105Discount struct {
 	ProductType string `json:"product_type,omitempty"`
 }
 
-// Validate validates this billing 20201105 discount
-func (m *Billing20201105Discount) Validate(formats strfmt.Registry) error {
+// Validate validates this billing 20201105 contract discount
+func (m *Billing20201105ContractDiscount) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this billing 20201105 discount based on context it is used
-func (m *Billing20201105Discount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this billing 20201105 contract discount based on context it is used
+func (m *Billing20201105ContractDiscount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *Billing20201105Discount) MarshalBinary() ([]byte, error) {
+func (m *Billing20201105ContractDiscount) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -43,8 +43,8 @@ func (m *Billing20201105Discount) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Billing20201105Discount) UnmarshalBinary(b []byte) error {
-	var res Billing20201105Discount
+func (m *Billing20201105ContractDiscount) UnmarshalBinary(b []byte) error {
+	var res Billing20201105ContractDiscount
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

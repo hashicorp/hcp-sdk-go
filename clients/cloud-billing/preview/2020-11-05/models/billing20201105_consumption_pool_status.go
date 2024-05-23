@@ -16,6 +16,11 @@ import (
 
 // Billing20201105ConsumptionPoolStatus Status represents the status of a given consumption pool.
 //
+//   - ACTIVE: UPCOMING = 2;
+//     ROLLOVER = 3;
+//     NEGATIVE = 4;
+//     EXPIRED = 5;
+//
 // swagger:model billing_20201105ConsumptionPoolStatus
 type Billing20201105ConsumptionPoolStatus string
 

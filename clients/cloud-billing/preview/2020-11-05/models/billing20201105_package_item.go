@@ -118,6 +118,11 @@ func (m *Billing20201105PackageItem) contextValidateOptions(ctx context.Context,
 	for i := 0; i < len(m.Options); i++ {
 
 		if m.Options[i] != nil {
+
+			if swag.IsZero(m.Options[i]) { // not required
+				return nil
+			}
+
 			if err := m.Options[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("options" + "." + strconv.Itoa(i))
@@ -136,6 +141,11 @@ func (m *Billing20201105PackageItem) contextValidateOptions(ctx context.Context,
 func (m *Billing20201105PackageItem) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Type != nil {
+
+		if swag.IsZero(m.Type) { // not required
+			return nil
+		}
+
 		if err := m.Type.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("type")

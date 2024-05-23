@@ -72,6 +72,11 @@ func (m *Billing20201105GetRunningStatementResponse) ContextValidate(ctx context
 func (m *Billing20201105GetRunningStatementResponse) contextValidateRunningStatement(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RunningStatement != nil {
+
+		if swag.IsZero(m.RunningStatement) { // not required
+			return nil
+		}
+
 		if err := m.RunningStatement.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("running_statement")

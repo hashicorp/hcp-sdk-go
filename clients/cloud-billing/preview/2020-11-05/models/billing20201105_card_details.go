@@ -81,6 +81,11 @@ func (m *Billing20201105CardDetails) ContextValidate(ctx context.Context, format
 func (m *Billing20201105CardDetails) contextValidateBrand(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Brand != nil {
+
+		if swag.IsZero(m.Brand) { // not required
+			return nil
+		}
+
 		if err := m.Brand.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("brand")

@@ -80,6 +80,11 @@ func (o *FCPManagementServiceGetConsumptionPoolOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the f c p management service get consumption pool o k response
+func (o *FCPManagementServiceGetConsumptionPoolOK) Code() int {
+	return 200
+}
+
 func (o *FCPManagementServiceGetConsumptionPoolOK) Error() string {
 	return fmt.Sprintf("[GET /billing/2020-11-05/organizations/{organization_id}/accounts/{billing_account_id}/fcp-consumption-pools/{consumption_pool_id}][%d] fCPManagementServiceGetConsumptionPoolOK  %+v", 200, o.Payload)
 }
@@ -119,12 +124,7 @@ An unexpected error response.
 type FCPManagementServiceGetConsumptionPoolDefault struct {
 	_statusCode int
 
-	Payload *models.RuntimeError
-}
-
-// Code gets the status code for the f c p management service get consumption pool default response
-func (o *FCPManagementServiceGetConsumptionPoolDefault) Code() int {
-	return o._statusCode
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this f c p management service get consumption pool default response has a 2xx status code
@@ -152,6 +152,11 @@ func (o *FCPManagementServiceGetConsumptionPoolDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the f c p management service get consumption pool default response
+func (o *FCPManagementServiceGetConsumptionPoolDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *FCPManagementServiceGetConsumptionPoolDefault) Error() string {
 	return fmt.Sprintf("[GET /billing/2020-11-05/organizations/{organization_id}/accounts/{billing_account_id}/fcp-consumption-pools/{consumption_pool_id}][%d] FCPManagementService_GetConsumptionPool default  %+v", o._statusCode, o.Payload)
 }
@@ -160,13 +165,13 @@ func (o *FCPManagementServiceGetConsumptionPoolDefault) String() string {
 	return fmt.Sprintf("[GET /billing/2020-11-05/organizations/{organization_id}/accounts/{billing_account_id}/fcp-consumption-pools/{consumption_pool_id}][%d] FCPManagementService_GetConsumptionPool default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *FCPManagementServiceGetConsumptionPoolDefault) GetPayload() *models.RuntimeError {
+func (o *FCPManagementServiceGetConsumptionPoolDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *FCPManagementServiceGetConsumptionPoolDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RuntimeError)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

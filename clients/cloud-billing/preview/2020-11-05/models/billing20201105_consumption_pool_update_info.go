@@ -26,11 +26,15 @@ type Billing20201105ConsumptionPoolUpdateInfo struct {
 	PrevState string `json:"prev_state,omitempty"`
 
 	// update_cause is the reason for the update to the consumption pool (ex. addon, rollover)
-	UpdateCause *ConsumptionPoolUpdateInfoUpdateCause `json:"update_cause,omitempty"`
+	UpdateCause *Billing20201105ConsumptionPoolUpdateInfoUpdateCause `json:"update_cause,omitempty"`
 
 	// update_date is the timestamp of when the consumption pool was updated.
 	// Format: date-time
 	UpdateDate strfmt.DateTime `json:"update_date,omitempty"`
+
+	// created_at is the time when consumption pool update has been created.
+	// Format: date-time
+	UpdateEffectiveAt strfmt.DateTime `json:"update_effective_at,omitempty"`
 
 	// updated_field is the field of the consumption pool that was updated.
 	UpdatedField string `json:"updated_field,omitempty"`
@@ -48,6 +52,10 @@ func (m *Billing20201105ConsumptionPoolUpdateInfo) Validate(formats strfmt.Regis
 	}
 
 	if err := m.validateUpdateDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUpdateEffectiveAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -88,6 +96,18 @@ func (m *Billing20201105ConsumptionPoolUpdateInfo) validateUpdateDate(formats st
 	return nil
 }
 
+func (m *Billing20201105ConsumptionPoolUpdateInfo) validateUpdateEffectiveAt(formats strfmt.Registry) error {
+	if swag.IsZero(m.UpdateEffectiveAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("update_effective_at", "body", "date-time", m.UpdateEffectiveAt.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // ContextValidate validate this billing 20201105 consumption pool update info based on the context it is used
 func (m *Billing20201105ConsumptionPoolUpdateInfo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -105,6 +125,11 @@ func (m *Billing20201105ConsumptionPoolUpdateInfo) ContextValidate(ctx context.C
 func (m *Billing20201105ConsumptionPoolUpdateInfo) contextValidateUpdateCause(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UpdateCause != nil {
+
+		if swag.IsZero(m.UpdateCause) { // not required
+			return nil
+		}
+
 		if err := m.UpdateCause.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("update_cause")

@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // Billing20201105ContractBillingMethod ContractBillingMethod contains the information used to associate a Billing
@@ -18,6 +20,10 @@ import (
 // swagger:model billing_20201105ContractBillingMethod
 type Billing20201105ContractBillingMethod struct {
 
+	// created_at is the time at which the Contract was created.
+	// Format: date-time
+	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+
 	// reference is the unique reference number, provided to the customer, which
 	// allows them to associate a Billing Account to their sales contract.
 	Reference string `json:"reference,omitempty"`
@@ -25,6 +31,27 @@ type Billing20201105ContractBillingMethod struct {
 
 // Validate validates this billing 20201105 contract billing method
 func (m *Billing20201105ContractBillingMethod) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Billing20201105ContractBillingMethod) validateCreatedAt(formats strfmt.Registry) error {
+	if swag.IsZero(m.CreatedAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
+		return err
+	}
+
 	return nil
 }
 

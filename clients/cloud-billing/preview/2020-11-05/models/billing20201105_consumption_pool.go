@@ -37,7 +37,7 @@ type Billing20201105ConsumptionPool struct {
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
 	// discounts is the list of discounts associated with the consumption pool.
-	Discounts []*Billing20201105Discount `json:"discounts"`
+	Discounts []*Cloudbilling20201105Discount `json:"discounts"`
 
 	// id is the id associated with the consumption pool.
 	ID string `json:"id,omitempty"`
@@ -51,6 +51,12 @@ type Billing20201105ConsumptionPool struct {
 	// recognized_balance is the official remaining balance of this consumption pool in USD
 	// as of the last recognition event.
 	RecognizedBalance string `json:"recognized_balance,omitempty"`
+
+	// roll_in_percentage is the percentage of a remaining balance an account is allowed to rolled in to
+	// this renewal consumption pool.
+	// For renewal consumption pools, must be between 0 and 100.
+	// For non-renewal consumption it will always be 0.
+	RollInPercentage string `json:"roll_in_percentage,omitempty"`
 
 	// running_total is a running usage estimate since the last recognition event.
 	// This number will be increased after each new running transaction and
@@ -256,6 +262,11 @@ func (m *Billing20201105ConsumptionPool) contextValidateDiscounts(ctx context.Co
 	for i := 0; i < len(m.Discounts); i++ {
 
 		if m.Discounts[i] != nil {
+
+			if swag.IsZero(m.Discounts[i]) { // not required
+				return nil
+			}
+
 			if err := m.Discounts[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("discounts" + "." + strconv.Itoa(i))
@@ -274,6 +285,11 @@ func (m *Billing20201105ConsumptionPool) contextValidateDiscounts(ctx context.Co
 func (m *Billing20201105ConsumptionPool) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
+
+		if swag.IsZero(m.Status) { // not required
+			return nil
+		}
+
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")
@@ -292,6 +308,11 @@ func (m *Billing20201105ConsumptionPool) contextValidateSupportLevels(ctx contex
 	for i := 0; i < len(m.SupportLevels); i++ {
 
 		if m.SupportLevels[i] != nil {
+
+			if swag.IsZero(m.SupportLevels[i]) { // not required
+				return nil
+			}
+
 			if err := m.SupportLevels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("support_levels" + "." + strconv.Itoa(i))

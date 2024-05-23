@@ -14,7 +14,8 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Billing20201105StatementSummary StatementSummary represents the response type for the ListStatements endpoint
+// Billing20201105StatementSummary StatementSummary represents the response type for the ListStatements endpoint.
+// TODO: This will be replaced by the public StatementOverview object.
 //
 // swagger:model billing_20201105StatementSummary
 type Billing20201105StatementSummary struct {
@@ -33,8 +34,8 @@ type Billing20201105StatementSummary struct {
 	// id is the id associated with the statement
 	ID string `json:"id,omitempty"`
 
-	// OnDemandMetadata contains PAYG specific properties.
-	OnDemandMetadata *Billing20201105StatementSummaryOnDemandMetadata `json:"on_demand_metadata,omitempty"`
+	// state indicates the life cycle step that the Statement is currently in.
+	State *Billing20201105StatementState `json:"state,omitempty"`
 }
 
 // Validate validates this billing 20201105 statement summary
@@ -49,7 +50,7 @@ func (m *Billing20201105StatementSummary) Validate(formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
-	if err := m.validateOnDemandMetadata(formats); err != nil {
+	if err := m.validateState(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -83,17 +84,17 @@ func (m *Billing20201105StatementSummary) validateBillingPeriodStart(formats str
 	return nil
 }
 
-func (m *Billing20201105StatementSummary) validateOnDemandMetadata(formats strfmt.Registry) error {
-	if swag.IsZero(m.OnDemandMetadata) { // not required
+func (m *Billing20201105StatementSummary) validateState(formats strfmt.Registry) error {
+	if swag.IsZero(m.State) { // not required
 		return nil
 	}
 
-	if m.OnDemandMetadata != nil {
-		if err := m.OnDemandMetadata.Validate(formats); err != nil {
+	if m.State != nil {
+		if err := m.State.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("on_demand_metadata")
+				return ve.ValidateName("state")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("on_demand_metadata")
+				return ce.ValidateName("state")
 			}
 			return err
 		}
@@ -106,7 +107,7 @@ func (m *Billing20201105StatementSummary) validateOnDemandMetadata(formats strfm
 func (m *Billing20201105StatementSummary) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateOnDemandMetadata(ctx, formats); err != nil {
+	if err := m.contextValidateState(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -116,14 +117,19 @@ func (m *Billing20201105StatementSummary) ContextValidate(ctx context.Context, f
 	return nil
 }
 
-func (m *Billing20201105StatementSummary) contextValidateOnDemandMetadata(ctx context.Context, formats strfmt.Registry) error {
+func (m *Billing20201105StatementSummary) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.OnDemandMetadata != nil {
-		if err := m.OnDemandMetadata.ContextValidate(ctx, formats); err != nil {
+	if m.State != nil {
+
+		if swag.IsZero(m.State) { // not required
+			return nil
+		}
+
+		if err := m.State.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("on_demand_metadata")
+				return ve.ValidateName("state")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("on_demand_metadata")
+				return ce.ValidateName("state")
 			}
 			return err
 		}

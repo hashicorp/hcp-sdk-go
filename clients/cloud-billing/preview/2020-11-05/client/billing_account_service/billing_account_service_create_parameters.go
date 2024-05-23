@@ -64,7 +64,7 @@ BillingAccountServiceCreateParams contains all the parameters to send to the API
 type BillingAccountServiceCreateParams struct {
 
 	// Body.
-	Body *models.Billing20201105CreateBillingAccountRequest
+	Body *models.BillingAccountServiceCreateBody
 
 	/* OrganizationID.
 
@@ -127,13 +127,13 @@ func (o *BillingAccountServiceCreateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the billing account service create params
-func (o *BillingAccountServiceCreateParams) WithBody(body *models.Billing20201105CreateBillingAccountRequest) *BillingAccountServiceCreateParams {
+func (o *BillingAccountServiceCreateParams) WithBody(body *models.BillingAccountServiceCreateBody) *BillingAccountServiceCreateParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the billing account service create params
-func (o *BillingAccountServiceCreateParams) SetBody(body *models.Billing20201105CreateBillingAccountRequest) {
+func (o *BillingAccountServiceCreateParams) SetBody(body *models.BillingAccountServiceCreateBody) {
 	o.Body = body
 }
 

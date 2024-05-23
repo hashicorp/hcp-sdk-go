@@ -64,7 +64,7 @@ ProductServiceEstimateCostParams contains all the parameters to send to the API 
 type ProductServiceEstimateCostParams struct {
 
 	// Body.
-	Body *models.Billing20201105EstimateCostRequest
+	Body *models.ProductServiceEstimateCostBody
 
 	/* OrganizationID.
 
@@ -126,13 +126,13 @@ func (o *ProductServiceEstimateCostParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the product service estimate cost params
-func (o *ProductServiceEstimateCostParams) WithBody(body *models.Billing20201105EstimateCostRequest) *ProductServiceEstimateCostParams {
+func (o *ProductServiceEstimateCostParams) WithBody(body *models.ProductServiceEstimateCostBody) *ProductServiceEstimateCostParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the product service estimate cost params
-func (o *ProductServiceEstimateCostParams) SetBody(body *models.Billing20201105EstimateCostRequest) {
+func (o *ProductServiceEstimateCostParams) SetBody(body *models.ProductServiceEstimateCostBody) {
 	o.Body = body
 }
 

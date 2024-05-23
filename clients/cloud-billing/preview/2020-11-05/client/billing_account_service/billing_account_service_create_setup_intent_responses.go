@@ -80,6 +80,11 @@ func (o *BillingAccountServiceCreateSetupIntentOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the billing account service create setup intent o k response
+func (o *BillingAccountServiceCreateSetupIntentOK) Code() int {
+	return 200
+}
+
 func (o *BillingAccountServiceCreateSetupIntentOK) Error() string {
 	return fmt.Sprintf("[POST /billing/2020-11-05/organizations/{organization_id}/setup-intents][%d] billingAccountServiceCreateSetupIntentOK  %+v", 200, o.Payload)
 }
@@ -119,12 +124,7 @@ An unexpected error response.
 type BillingAccountServiceCreateSetupIntentDefault struct {
 	_statusCode int
 
-	Payload *models.RuntimeError
-}
-
-// Code gets the status code for the billing account service create setup intent default response
-func (o *BillingAccountServiceCreateSetupIntentDefault) Code() int {
-	return o._statusCode
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this billing account service create setup intent default response has a 2xx status code
@@ -152,6 +152,11 @@ func (o *BillingAccountServiceCreateSetupIntentDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the billing account service create setup intent default response
+func (o *BillingAccountServiceCreateSetupIntentDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *BillingAccountServiceCreateSetupIntentDefault) Error() string {
 	return fmt.Sprintf("[POST /billing/2020-11-05/organizations/{organization_id}/setup-intents][%d] BillingAccountService_CreateSetupIntent default  %+v", o._statusCode, o.Payload)
 }
@@ -160,13 +165,13 @@ func (o *BillingAccountServiceCreateSetupIntentDefault) String() string {
 	return fmt.Sprintf("[POST /billing/2020-11-05/organizations/{organization_id}/setup-intents][%d] BillingAccountService_CreateSetupIntent default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *BillingAccountServiceCreateSetupIntentDefault) GetPayload() *models.RuntimeError {
+func (o *BillingAccountServiceCreateSetupIntentDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *BillingAccountServiceCreateSetupIntentDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RuntimeError)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

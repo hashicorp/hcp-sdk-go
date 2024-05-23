@@ -32,13 +32,11 @@ type ClientService interface {
 
 	BillingAccountServiceCreateSetupIntent(params *BillingAccountServiceCreateSetupIntentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceCreateSetupIntentOK, error)
 
-	BillingAccountServiceDeleteBillingAccount(params *BillingAccountServiceDeleteBillingAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceDeleteBillingAccountOK, error)
-
 	BillingAccountServiceGet(params *BillingAccountServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceGetOK, error)
 
 	BillingAccountServiceGetByProject(params *BillingAccountServiceGetByProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceGetByProjectOK, error)
 
-	BillingAccountServiceList(params *BillingAccountServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceListOK, error)
+	BillingAccountServiceGetPricingModelTransitions(params *BillingAccountServiceGetPricingModelTransitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceGetPricingModelTransitionsOK, error)
 
 	BillingAccountServiceRemoveOnDemandPaymentMethod(params *BillingAccountServiceRemoveOnDemandPaymentMethodParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceRemoveOnDemandPaymentMethodOK, error)
 
@@ -130,44 +128,6 @@ func (a *Client) BillingAccountServiceCreateSetupIntent(params *BillingAccountSe
 }
 
 /*
-BillingAccountServiceDeleteBillingAccount deletes deletes an organization s billing account this method does not follow the convention of the file due to swagger conflicts
-*/
-func (a *Client) BillingAccountServiceDeleteBillingAccount(params *BillingAccountServiceDeleteBillingAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceDeleteBillingAccountOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewBillingAccountServiceDeleteBillingAccountParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "BillingAccountService_DeleteBillingAccount",
-		Method:             "DELETE",
-		PathPattern:        "/billing/2020-11-05/organizations/{organization_id}/accounts/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &BillingAccountServiceDeleteBillingAccountReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*BillingAccountServiceDeleteBillingAccountOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*BillingAccountServiceDeleteBillingAccountDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
 BillingAccountServiceGet gets a billing account by ID
 */
 func (a *Client) BillingAccountServiceGet(params *BillingAccountServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceGetOK, error) {
@@ -244,22 +204,22 @@ func (a *Client) BillingAccountServiceGetByProject(params *BillingAccountService
 }
 
 /*
-BillingAccountServiceList lists an organization s billing accounts
+BillingAccountServiceGetPricingModelTransitions gets pricing model transitions gets the pricing model transitions for the given billing account if no start is specified it will default to 1 1 1 00 00 00 000000000 u t c if no end date is specified it will default to 12 31 9999 11 59 59 000000000 u t c
 */
-func (a *Client) BillingAccountServiceList(params *BillingAccountServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceListOK, error) {
+func (a *Client) BillingAccountServiceGetPricingModelTransitions(params *BillingAccountServiceGetPricingModelTransitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BillingAccountServiceGetPricingModelTransitionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewBillingAccountServiceListParams()
+		params = NewBillingAccountServiceGetPricingModelTransitionsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "BillingAccountService_List",
+		ID:                 "BillingAccountService_GetPricingModelTransitions",
 		Method:             "GET",
-		PathPattern:        "/billing/2020-11-05/organizations/{organization_id}/accounts",
+		PathPattern:        "/billing/2020-11-05/organizations/{organization_id}/accounts/{billing_account_id}/pricing-model-transitions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &BillingAccountServiceListReader{formats: a.formats},
+		Reader:             &BillingAccountServiceGetPricingModelTransitionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -272,12 +232,12 @@ func (a *Client) BillingAccountServiceList(params *BillingAccountServiceListPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*BillingAccountServiceListOK)
+	success, ok := result.(*BillingAccountServiceGetPricingModelTransitionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*BillingAccountServiceListDefault)
+	unexpectedSuccess := result.(*BillingAccountServiceGetPricingModelTransitionsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

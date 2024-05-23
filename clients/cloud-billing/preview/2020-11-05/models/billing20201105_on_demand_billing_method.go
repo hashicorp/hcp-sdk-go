@@ -123,6 +123,11 @@ func (m *Billing20201105OnDemandBillingMethod) ContextValidate(ctx context.Conte
 func (m *Billing20201105OnDemandBillingMethod) contextValidateBillingAddress(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.BillingAddress != nil {
+
+		if swag.IsZero(m.BillingAddress) { // not required
+			return nil
+		}
+
 		if err := m.BillingAddress.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("billing_address")
@@ -139,6 +144,11 @@ func (m *Billing20201105OnDemandBillingMethod) contextValidateBillingAddress(ctx
 func (m *Billing20201105OnDemandBillingMethod) contextValidateTaxSettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TaxSettings != nil {
+
+		if swag.IsZero(m.TaxSettings) { // not required
+			return nil
+		}
+
 		if err := m.TaxSettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tax_settings")

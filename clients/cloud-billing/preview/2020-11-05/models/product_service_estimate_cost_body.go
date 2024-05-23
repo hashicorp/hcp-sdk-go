@@ -14,16 +14,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Billing20201105EstimateCostRequest EstimateCostRequest returns hourly and monthly pricing information for a given package for the given resource type.
+// ProductServiceEstimateCostBody EstimateCostRequest returns hourly and monthly pricing information for a given package for the given resource type.
 //
-// swagger:model billing_20201105EstimateCostRequest
-type Billing20201105EstimateCostRequest struct {
+// swagger:model ProductServiceEstimateCostBody
+type ProductServiceEstimateCostBody struct {
 
 	// customized_input allows the quantity of dependent products (i.e. number of Vault Clients for a Vault Cluster) to be specified for the cost estimation.
 	CustomizedInput []*Billing20201105CustomizedInput `json:"customized_input"`
-
-	// organization_id is the organization ID used to scope the request for the package.
-	OrganizationID string `json:"organization_id,omitempty"`
 
 	// package_item_selection is the item/option selections that cost will be estimated for.
 	PackageItemSelection []*Billing20201105PackageItemSelection `json:"package_item_selection"`
@@ -38,8 +35,8 @@ type Billing20201105EstimateCostRequest struct {
 	Region *LocationRegion `json:"region,omitempty"`
 }
 
-// Validate validates this billing 20201105 estimate cost request
-func (m *Billing20201105EstimateCostRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this product service estimate cost body
+func (m *ProductServiceEstimateCostBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCustomizedInput(formats); err != nil {
@@ -60,7 +57,7 @@ func (m *Billing20201105EstimateCostRequest) Validate(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *Billing20201105EstimateCostRequest) validateCustomizedInput(formats strfmt.Registry) error {
+func (m *ProductServiceEstimateCostBody) validateCustomizedInput(formats strfmt.Registry) error {
 	if swag.IsZero(m.CustomizedInput) { // not required
 		return nil
 	}
@@ -86,7 +83,7 @@ func (m *Billing20201105EstimateCostRequest) validateCustomizedInput(formats str
 	return nil
 }
 
-func (m *Billing20201105EstimateCostRequest) validatePackageItemSelection(formats strfmt.Registry) error {
+func (m *ProductServiceEstimateCostBody) validatePackageItemSelection(formats strfmt.Registry) error {
 	if swag.IsZero(m.PackageItemSelection) { // not required
 		return nil
 	}
@@ -112,7 +109,7 @@ func (m *Billing20201105EstimateCostRequest) validatePackageItemSelection(format
 	return nil
 }
 
-func (m *Billing20201105EstimateCostRequest) validateRegion(formats strfmt.Registry) error {
+func (m *ProductServiceEstimateCostBody) validateRegion(formats strfmt.Registry) error {
 	if swag.IsZero(m.Region) { // not required
 		return nil
 	}
@@ -131,8 +128,8 @@ func (m *Billing20201105EstimateCostRequest) validateRegion(formats strfmt.Regis
 	return nil
 }
 
-// ContextValidate validate this billing 20201105 estimate cost request based on the context it is used
-func (m *Billing20201105EstimateCostRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this product service estimate cost body based on the context it is used
+func (m *ProductServiceEstimateCostBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateCustomizedInput(ctx, formats); err != nil {
@@ -153,11 +150,16 @@ func (m *Billing20201105EstimateCostRequest) ContextValidate(ctx context.Context
 	return nil
 }
 
-func (m *Billing20201105EstimateCostRequest) contextValidateCustomizedInput(ctx context.Context, formats strfmt.Registry) error {
+func (m *ProductServiceEstimateCostBody) contextValidateCustomizedInput(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.CustomizedInput); i++ {
 
 		if m.CustomizedInput[i] != nil {
+
+			if swag.IsZero(m.CustomizedInput[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomizedInput[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("customized_input" + "." + strconv.Itoa(i))
@@ -173,11 +175,16 @@ func (m *Billing20201105EstimateCostRequest) contextValidateCustomizedInput(ctx 
 	return nil
 }
 
-func (m *Billing20201105EstimateCostRequest) contextValidatePackageItemSelection(ctx context.Context, formats strfmt.Registry) error {
+func (m *ProductServiceEstimateCostBody) contextValidatePackageItemSelection(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.PackageItemSelection); i++ {
 
 		if m.PackageItemSelection[i] != nil {
+
+			if swag.IsZero(m.PackageItemSelection[i]) { // not required
+				return nil
+			}
+
 			if err := m.PackageItemSelection[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("package_item_selection" + "." + strconv.Itoa(i))
@@ -193,9 +200,14 @@ func (m *Billing20201105EstimateCostRequest) contextValidatePackageItemSelection
 	return nil
 }
 
-func (m *Billing20201105EstimateCostRequest) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
+func (m *ProductServiceEstimateCostBody) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Region != nil {
+
+		if swag.IsZero(m.Region) { // not required
+			return nil
+		}
+
 		if err := m.Region.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("region")
@@ -210,7 +222,7 @@ func (m *Billing20201105EstimateCostRequest) contextValidateRegion(ctx context.C
 }
 
 // MarshalBinary interface implementation
-func (m *Billing20201105EstimateCostRequest) MarshalBinary() ([]byte, error) {
+func (m *ProductServiceEstimateCostBody) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -218,8 +230,8 @@ func (m *Billing20201105EstimateCostRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Billing20201105EstimateCostRequest) UnmarshalBinary(b []byte) error {
-	var res Billing20201105EstimateCostRequest
+func (m *ProductServiceEstimateCostBody) UnmarshalBinary(b []byte) error {
+	var res ProductServiceEstimateCostBody
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

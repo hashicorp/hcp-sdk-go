@@ -10,7 +10,9 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-billing/preview/2020-11-05/client/activation_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-billing/preview/2020-11-05/client/billing_account_service"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-billing/preview/2020-11-05/client/contract_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-billing/preview/2020-11-05/client/f_c_p_management_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-billing/preview/2020-11-05/client/invoice_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-billing/preview/2020-11-05/client/product_service"
@@ -59,7 +61,9 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudBilli
 
 	cli := new(CloudBilling)
 	cli.Transport = transport
+	cli.ActivationService = activation_service.New(transport, formats)
 	cli.BillingAccountService = billing_account_service.New(transport, formats)
+	cli.ContractService = contract_service.New(transport, formats)
 	cli.FcpManagementService = f_c_p_management_service.New(transport, formats)
 	cli.InvoiceService = invoice_service.New(transport, formats)
 	cli.ProductService = product_service.New(transport, formats)
@@ -108,7 +112,11 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // CloudBilling is a client for cloud billing
 type CloudBilling struct {
+	ActivationService activation_service.ClientService
+
 	BillingAccountService billing_account_service.ClientService
+
+	ContractService contract_service.ClientService
 
 	FcpManagementService f_c_p_management_service.ClientService
 
@@ -124,7 +132,9 @@ type CloudBilling struct {
 // SetTransport changes the transport on the client and all its subresources
 func (c *CloudBilling) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
+	c.ActivationService.SetTransport(transport)
 	c.BillingAccountService.SetTransport(transport)
+	c.ContractService.SetTransport(transport)
 	c.FcpManagementService.SetTransport(transport)
 	c.InvoiceService.SetTransport(transport)
 	c.ProductService.SetTransport(transport)

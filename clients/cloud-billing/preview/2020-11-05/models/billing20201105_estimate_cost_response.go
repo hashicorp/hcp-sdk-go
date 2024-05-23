@@ -88,6 +88,11 @@ func (m *Billing20201105EstimateCostResponse) contextValidateItemPrice(ctx conte
 	for i := 0; i < len(m.ItemPrice); i++ {
 
 		if m.ItemPrice[i] != nil {
+
+			if swag.IsZero(m.ItemPrice[i]) { // not required
+				return nil
+			}
+
 			if err := m.ItemPrice[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("item_price" + "." + strconv.Itoa(i))
