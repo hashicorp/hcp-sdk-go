@@ -36,14 +36,14 @@ type HashicorpCloudVagrant20220930Registry struct {
 	// The gravatar used for this registry
 	GravatarURL string `json:"gravatar_url,omitempty"`
 
+	// The Location that the Registry resides in.
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+
 	// The name of the Registry. This is a user-settable, globally-unique name,
 	// and forms the first segment of a box, ie: the "hashicorp" in
 	// "hashicorp/vagrant". No two registries can have the same name, regardless
 	// of the location (org/project) they are in.
-	ID string `json:"id,omitempty"`
-
-	// The Location that the Registry resides in.
-	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+	Name string `json:"name,omitempty"`
 
 	// The date that the record was last updated.
 	// Format: date-time

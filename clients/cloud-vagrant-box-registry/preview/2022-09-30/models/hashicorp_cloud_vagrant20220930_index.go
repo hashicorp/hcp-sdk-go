@@ -20,20 +20,20 @@ import (
 type HashicorpCloudVagrant20220930Index struct {
 
 	// Architectures supported in this version.
-	Architectures []string `json:"architectures"`
+	ArchitectureTypes []string `json:"architecture_types"`
 
 	// Avatar is the url to use as the avatar for the index
 	Avatar string `json:"avatar,omitempty"`
 
 	// The name segment of the box.
-	BoxID string `json:"box_id,omitempty"`
+	BoxName string `json:"box_name,omitempty"`
 
 	// The date the box was created.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
 	// The current version of the box
-	CurrentVersionID string `json:"current_version_id,omitempty"`
+	CurrentVersionName string `json:"current_version_name,omitempty"`
 
 	// The long-form description of the box.
 	Description string `json:"description,omitempty"`
@@ -45,10 +45,10 @@ type HashicorpCloudVagrant20220930Index struct {
 	IsPrivate bool `json:"is_private,omitempty"`
 
 	// Providers supported in this version.
-	Providers []string `json:"providers"`
+	ProviderNames []string `json:"provider_names"`
 
 	// The registry the box belongs to.
-	RegistryID string `json:"registry_id,omitempty"`
+	RegistryName string `json:"registry_name,omitempty"`
 
 	// A short-form description of the box. Limited to 100 characters.
 	ShortDescription string `json:"short_description,omitempty"`

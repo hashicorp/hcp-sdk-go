@@ -61,9 +61,6 @@ ActivateRegistryParams contains all the parameters to send to the API endpoint
 */
 type ActivateRegistryParams struct {
 
-	// Body.
-	Body interface{}
-
 	/* Registry.
 
 	   The name of the Registry to activate.
@@ -123,17 +120,6 @@ func (o *ActivateRegistryParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the activate registry params
-func (o *ActivateRegistryParams) WithBody(body interface{}) *ActivateRegistryParams {
-	o.SetBody(body)
-	return o
-}
-
-// SetBody adds the body to the activate registry params
-func (o *ActivateRegistryParams) SetBody(body interface{}) {
-	o.Body = body
-}
-
 // WithRegistry adds the registry to the activate registry params
 func (o *ActivateRegistryParams) WithRegistry(registry string) *ActivateRegistryParams {
 	o.SetRegistry(registry)
@@ -152,11 +138,6 @@ func (o *ActivateRegistryParams) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
-	}
 
 	// path param registry
 	if err := r.SetPathParam("registry", o.Registry); err != nil {

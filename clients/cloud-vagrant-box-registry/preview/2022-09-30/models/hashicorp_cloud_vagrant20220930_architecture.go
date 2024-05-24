@@ -32,9 +32,6 @@ type HashicorpCloudVagrant20220930Architecture struct {
 	// Whether or not this is the default Architecture for the Provider
 	Default bool `json:"default,omitempty"`
 
-	// The Provider that this Architecture belongs to
-	ProviderID string `json:"provider_id,omitempty"`
-
 	// The date that the record was last updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`

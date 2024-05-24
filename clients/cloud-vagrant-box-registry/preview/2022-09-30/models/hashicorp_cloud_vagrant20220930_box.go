@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -32,13 +33,13 @@ type HashicorpCloudVagrant20220930Box struct {
 	// The number of times this box has been downloaded.
 	Downloads string `json:"downloads,omitempty"`
 
+	// Whether or not the Box is private.
+	IsPrivate bool `json:"is_private,omitempty"`
+
 	// The name segment of the Box. As an example, this field would represent the
 	// "vagrant" in "hashicorp/vagrant". Should be unique within the Registry.
 	// This field should only be set when creating the box.
-	ID string `json:"id,omitempty"`
-
-	// Whether or not the Box is private.
-	IsPrivate bool `json:"is_private,omitempty"`
+	Name string `json:"name,omitempty"`
 
 	// A short-form description of the box. Limited to 100 characters.
 	ShortDescription string `json:"short_description,omitempty"`
@@ -52,6 +53,9 @@ type HashicorpCloudVagrant20220930Box struct {
 	// The date that the record was last updated.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+
+	// Versions of box (if expanded).
+	Versions []*HashicorpCloudVagrant20220930Version `json:"versions"`
 }
 
 // Validate validates this hashicorp cloud vagrant 20220930 box
@@ -71,6 +75,10 @@ func (m *HashicorpCloudVagrant20220930Box) Validate(formats strfmt.Registry) err
 	}
 
 	if err := m.validateUpdatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVersions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -142,6 +150,32 @@ func (m *HashicorpCloudVagrant20220930Box) validateUpdatedAt(formats strfmt.Regi
 	return nil
 }
 
+func (m *HashicorpCloudVagrant20220930Box) validateVersions(formats strfmt.Registry) error {
+	if swag.IsZero(m.Versions) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Versions); i++ {
+		if swag.IsZero(m.Versions[i]) { // not required
+			continue
+		}
+
+		if m.Versions[i] != nil {
+			if err := m.Versions[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("versions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("versions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud vagrant 20220930 box based on the context it is used
 func (m *HashicorpCloudVagrant20220930Box) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -151,6 +185,10 @@ func (m *HashicorpCloudVagrant20220930Box) ContextValidate(ctx context.Context, 
 	}
 
 	if err := m.contextValidateSummary(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVersions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -197,6 +235,31 @@ func (m *HashicorpCloudVagrant20220930Box) contextValidateSummary(ctx context.Co
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Box) contextValidateVersions(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Versions); i++ {
+
+		if m.Versions[i] != nil {
+
+			if swag.IsZero(m.Versions[i]) { // not required
+				return nil
+			}
+
+			if err := m.Versions[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("versions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("versions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

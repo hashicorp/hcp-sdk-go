@@ -19,15 +19,15 @@ import (
 // swagger:model hashicorp.cloud.vagrant_20220930.CreateRegistryRequest
 type HashicorpCloudVagrant20220930CreateRegistryRequest struct {
 
+	// The Location to create the Registry in.
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+
 	// The name of the Registry. This is a user-settable, globally-unique name,
 	// and forms the first segment of a Box, ie: the "hashicorp" in
 	// "hashicorp/vagrant". No two registries can have the same name, regardless
 	// of the Organization they are in, or specific Project within that
 	// Organization.
-	ID string `json:"id,omitempty"`
-
-	// The Location to create the Registry in.
-	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+	Name string `json:"name,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vagrant 20220930 create registry request

@@ -87,11 +87,11 @@ func (o *CreateRegistryOK) Code() int {
 }
 
 func (o *CreateRegistryOK) Error() string {
-	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry][%d] createRegistryOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /vagrant/2022-09-30/registries][%d] createRegistryOK  %+v", 200, o.Payload)
 }
 
 func (o *CreateRegistryOK) String() string {
-	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry][%d] createRegistryOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /vagrant/2022-09-30/registries][%d] createRegistryOK  %+v", 200, o.Payload)
 }
 
 func (o *CreateRegistryOK) GetPayload() *models.HashicorpCloudVagrant20220930CreateRegistryResponse {
@@ -159,11 +159,11 @@ func (o *CreateRegistryDefault) Code() int {
 }
 
 func (o *CreateRegistryDefault) Error() string {
-	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry][%d] CreateRegistry default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /vagrant/2022-09-30/registries][%d] CreateRegistry default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *CreateRegistryDefault) String() string {
-	return fmt.Sprintf("[PUT /vagrant/2022-09-30/registry][%d] CreateRegistry default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /vagrant/2022-09-30/registries][%d] CreateRegistry default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *CreateRegistryDefault) GetPayload() *cloud.GoogleRPCStatus {

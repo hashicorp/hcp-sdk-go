@@ -30,15 +30,71 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	ActivateRegistry(params *ActivateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ActivateRegistryOK, error)
 
+	CompleteDirectUploadBox(params *CompleteDirectUploadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteDirectUploadBoxOK, error)
+
+	CompleteUploadBox(params *CompleteUploadBoxParams, opts ...ClientOption) (*CompleteUploadBoxOK, error)
+
+	CreateArchitecture(params *CreateArchitectureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateArchitectureOK, error)
+
+	CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBoxOK, error)
+
+	CreateProvider(params *CreateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProviderOK, error)
+
 	CreateRegistry(params *CreateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRegistryOK, error)
+
+	CreateVersion(params *CreateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVersionOK, error)
 
 	DeactivateRegistry(params *DeactivateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeactivateRegistryOK, error)
 
+	DeleteArchitecture(params *DeleteArchitectureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArchitectureOK, error)
+
+	DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBoxOK, error)
+
+	DeleteProvider(params *DeleteProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProviderOK, error)
+
 	DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteRegistryOK, error)
+
+	DeleteVersion(params *DeleteVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVersionOK, error)
+
+	DirectUploadBox(params *DirectUploadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DirectUploadBoxOK, error)
+
+	DownloadBox(params *DownloadBoxParams, opts ...ClientOption) (*DownloadBoxOK, error)
+
+	ListArchitectures(params *ListArchitecturesParams, opts ...ClientOption) (*ListArchitecturesOK, error)
+
+	ListBoxes(params *ListBoxesParams, opts ...ClientOption) (*ListBoxesOK, error)
+
+	ListProviders(params *ListProvidersParams, opts ...ClientOption) (*ListProvidersOK, error)
 
 	ListRegistries(params *ListRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRegistriesOK, error)
 
+	ListVersions(params *ListVersionsParams, opts ...ClientOption) (*ListVersionsOK, error)
+
+	ReadArchitecture(params *ReadArchitectureParams, opts ...ClientOption) (*ReadArchitectureOK, error)
+
+	ReadBox(params *ReadBoxParams, opts ...ClientOption) (*ReadBoxOK, error)
+
+	ReadProvider(params *ReadProviderParams, opts ...ClientOption) (*ReadProviderOK, error)
+
 	ReadRegistry(params *ReadRegistryParams, opts ...ClientOption) (*ReadRegistryOK, error)
+
+	ReadVersion(params *ReadVersionParams, opts ...ClientOption) (*ReadVersionOK, error)
+
+	ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReleaseVersionOK, error)
+
+	RevokeVersion(params *RevokeVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RevokeVersionOK, error)
+
+	Search(params *SearchParams, opts ...ClientOption) (*SearchOK, error)
+
+	UpdateArchitecture(params *UpdateArchitectureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateArchitectureOK, error)
+
+	UpdateBox(params *UpdateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBoxOK, error)
+
+	UpdateProvider(params *UpdateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProviderOK, error)
+
+	UpdateVersion(params *UpdateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVersionOK, error)
+
+	UploadBox(params *UploadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadBoxOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -86,6 +142,195 @@ func (a *Client) ActivateRegistry(params *ActivateRegistryParams, authInfo runti
 }
 
 /*
+CompleteDirectUploadBox completes direct upload box is a callback endpoint used to signal than a direct to backend storage upload of boxfile is finished
+*/
+func (a *Client) CompleteDirectUploadBox(params *CompleteDirectUploadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteDirectUploadBoxOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCompleteDirectUploadBoxParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CompleteDirectUploadBox",
+		Method:             "PUT",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architecture/{architecture}/direct/complete/{object}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CompleteDirectUploadBoxReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CompleteDirectUploadBoxOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CompleteDirectUploadBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CompleteUploadBox completes upload box is a callback endpoint used to signal that an upload of boxfile is finished
+*/
+func (a *Client) CompleteUploadBox(params *CompleteUploadBoxParams, opts ...ClientOption) (*CompleteUploadBoxOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCompleteUploadBoxParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CompleteUploadBox",
+		Method:             "PUT",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architecture/{architecture}/complete",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CompleteUploadBoxReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CompleteUploadBoxOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CompleteUploadBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateArchitecture creates architecture creates a architecture in the specified version
+*/
+func (a *Client) CreateArchitecture(params *CreateArchitectureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateArchitectureOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateArchitectureParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateArchitecture",
+		Method:             "POST",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architectures",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateArchitectureReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateArchitectureOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateArchitectureDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateBox creates box creates a new vagrant box
+*/
+func (a *Client) CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBoxOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateBoxParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateBox",
+		Method:             "POST",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateBoxReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateBoxOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateProvider creates provider creates a provider in the specified version
+*/
+func (a *Client) CreateProvider(params *CreateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProviderOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateProviderParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateProvider",
+		Method:             "POST",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/providers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateProviderReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateProviderOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateProviderDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateRegistry creates registry creates a vagrant box registry at the location specified
 */
 func (a *Client) CreateRegistry(params *CreateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRegistryOK, error) {
@@ -95,8 +340,8 @@ func (a *Client) CreateRegistry(params *CreateRegistryParams, authInfo runtime.C
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "CreateRegistry",
-		Method:             "PUT",
-		PathPattern:        "/vagrant/2022-09-30/registry",
+		Method:             "POST",
+		PathPattern:        "/vagrant/2022-09-30/registries",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -120,6 +365,44 @@ func (a *Client) CreateRegistry(params *CreateRegistryParams, authInfo runtime.C
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateVersion creates version creates a new box version
+*/
+func (a *Client) CreateVersion(params *CreateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateVersion",
+		Method:             "POST",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/versions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateVersionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -168,6 +451,124 @@ func (a *Client) DeactivateRegistry(params *DeactivateRegistryParams, authInfo r
 }
 
 /*
+DeleteArchitecture deletes architecture deletes a architecture note that this deletes any box data associated with an architecture so use with care
+*/
+func (a *Client) DeleteArchitecture(params *DeleteArchitectureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArchitectureOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteArchitectureParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteArchitecture",
+		Method:             "DELETE",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architecture/{architecture}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteArchitectureReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteArchitectureOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteArchitectureDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	DeleteBox deletes box deletes a vagrant box
+
+	Deleting a Box removes all its Versions and Providers as
+
+well. This operation cannot be undone.
+*/
+func (a *Client) DeleteBox(params *DeleteBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBoxOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteBoxParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteBox",
+		Method:             "DELETE",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteBoxReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteBoxOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteProvider deletes provider deletes a provider note that this deletes any data associated with a hosted provider so use with care
+*/
+func (a *Client) DeleteProvider(params *DeleteProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProviderOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteProviderParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteProvider",
+		Method:             "DELETE",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteProviderReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteProviderOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteProviderDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 	DeleteRegistry deletes registry deletes a vagrant box registry at the location specified
 
 	Deletion removes the Registry and all of its Box, Version, and
@@ -212,6 +613,240 @@ func (a *Client) DeleteRegistry(params *DeleteRegistryParams, authInfo runtime.C
 }
 
 /*
+	DeleteVersion deletes version deletes a box version
+
+	Deleting a Box Version removes all its Providers as well. This
+
+operation cannot be undone.
+*/
+func (a *Client) DeleteVersion(params *DeleteVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteVersion",
+		Method:             "DELETE",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DirectUploadBox directs upload box initiates the upload of a single hosted boxfile directly to the backend storage the service will return details that can be used to upload the data over HTTP
+*/
+func (a *Client) DirectUploadBox(params *DirectUploadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DirectUploadBoxOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDirectUploadBoxParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DirectUploadBox",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architecture/{architecture}/direct/upload",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DirectUploadBoxReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DirectUploadBoxOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DirectUploadBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	DownloadBox downloads initiates a boxfile download
+
+	For Archivist-hosted Boxfile, this is an atomic call that prepares the
+
+Provider for download from the object storage. For externally-hosted
+Boxfiles, this is simply a pass-through to the external download data
+supplied in the record.
+*/
+func (a *Client) DownloadBox(params *DownloadBoxParams, opts ...ClientOption) (*DownloadBoxOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDownloadBoxParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DownloadBox",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architecture/{architecture}/download",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DownloadBoxReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DownloadBoxOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DownloadBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListArchitectures lists architectures lists all architectures within a provider
+*/
+func (a *Client) ListArchitectures(params *ListArchitecturesParams, opts ...ClientOption) (*ListArchitecturesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListArchitecturesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListArchitectures",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architectures",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListArchitecturesReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListArchitecturesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListArchitecturesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListBoxes lists boxes lists all of the boxes within a particular registry
+*/
+func (a *Client) ListBoxes(params *ListBoxesParams, opts ...ClientOption) (*ListBoxesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListBoxesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListBoxes",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/boxes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListBoxesReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListBoxesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListBoxesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListProviders lists providers lists all providers within a version
+*/
+func (a *Client) ListProviders(params *ListProvidersParams, opts ...ClientOption) (*ListProvidersOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListProvidersParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListProviders",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/providers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListProvidersReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListProvidersOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListProvidersDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ListRegistries lists registries lists available vagrant box registries in a particular project
 */
 func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRegistriesOK, error) {
@@ -222,7 +857,7 @@ func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.C
 	op := &runtime.ClientOperation{
 		ID:                 "ListRegistries",
 		Method:             "GET",
-		PathPattern:        "/vagrant/2022-09-30/registry",
+		PathPattern:        "/vagrant/2022-09-30/registries",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -246,6 +881,154 @@ func (a *Client) ListRegistries(params *ListRegistriesParams, authInfo runtime.C
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListRegistriesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListVersions lists version lists all of the versions within a particular box
+*/
+func (a *Client) ListVersions(params *ListVersionsParams, opts ...ClientOption) (*ListVersionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListVersionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListVersions",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/versions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListVersionsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListVersionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListVersionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ReadArchitecture reads architecture fetches a architecture for the specified provider
+*/
+func (a *Client) ReadArchitecture(params *ReadArchitectureParams, opts ...ClientOption) (*ReadArchitectureOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewReadArchitectureParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ReadArchitecture",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architecture/{architecture}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ReadArchitectureReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ReadArchitectureOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ReadArchitectureDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ReadBox reads box reads a vagrant box
+*/
+func (a *Client) ReadBox(params *ReadBoxParams, opts ...ClientOption) (*ReadBoxOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewReadBoxParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ReadBox",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ReadBoxReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ReadBoxOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ReadBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ReadProvider reads provider fetches a provider for the specified version
+*/
+func (a *Client) ReadProvider(params *ReadProviderParams, opts ...ClientOption) (*ReadProviderOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewReadProviderParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ReadProvider",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ReadProviderReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ReadProviderOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ReadProviderDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -283,6 +1066,360 @@ func (a *Client) ReadRegistry(params *ReadRegistryParams, opts ...ClientOption) 
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ReadRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ReadVersion reads version reads a box version
+*/
+func (a *Client) ReadVersion(params *ReadVersionParams, opts ...ClientOption) (*ReadVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewReadVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ReadVersion",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ReadVersionReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ReadVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ReadVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ReleaseVersion releases releases the specified version the version must not already be released
+*/
+func (a *Client) ReleaseVersion(params *ReleaseVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReleaseVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewReleaseVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ReleaseVersion",
+		Method:             "PUT",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/release",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ReleaseVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ReleaseVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ReleaseVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+RevokeVersion revokes revokes the specified version the version must be actively released
+*/
+func (a *Client) RevokeVersion(params *RevokeVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RevokeVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRevokeVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "RevokeVersion",
+		Method:             "PUT",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/revoke",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &RevokeVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RevokeVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*RevokeVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+Search searches returns a list of available boxes based on search parameters
+*/
+func (a *Client) Search(params *SearchParams, opts ...ClientOption) (*SearchOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSearchParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "Search",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/search",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &SearchReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SearchOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SearchDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateArchitecture updates architecture updates details about a specified architecture
+*/
+func (a *Client) UpdateArchitecture(params *UpdateArchitectureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateArchitectureOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateArchitectureParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateArchitecture",
+		Method:             "PUT",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architecture/{architecture}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateArchitectureReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateArchitectureOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateArchitectureDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	UpdateBox updates box updates the details of a vagrant box
+
+	Note that this only updates details about the Box itself. To
+
+work with a Box's Versions or Providers, use those respective
+services.
+*/
+func (a *Client) UpdateBox(params *UpdateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBoxOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateBoxParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateBox",
+		Method:             "PUT",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateBoxReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateBoxOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateBoxDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	UpdateProvider updates provider updates details about a specified provider
+
+	Note that you don't use this to upload data to Hosted Providers, to do
+
+that, use the Upload method.
+*/
+func (a *Client) UpdateProvider(params *UpdateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProviderOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateProviderParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateProvider",
+		Method:             "PUT",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateProviderReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateProviderOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateProviderDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateVersion updates version updates a box version
+*/
+func (a *Client) UpdateVersion(params *UpdateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateVersion",
+		Method:             "PUT",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	UploadBox uploads box initiates the upload of a single hosted boxfile the service will return details that can be used to upload the data over HTTP
+
+	Overwrite is permitted; old/existing data for a particular Architecture will
+
+be replaced with data from a new successful upload for that same
+Architecture.
+*/
+func (a *Client) UploadBox(params *UploadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadBoxOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUploadBoxParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UploadBox",
+		Method:             "GET",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architecture/{architecture}/upload",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UploadBoxReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UploadBoxOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UploadBoxDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

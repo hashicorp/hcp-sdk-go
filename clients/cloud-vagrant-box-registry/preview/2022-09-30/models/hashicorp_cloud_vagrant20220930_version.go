@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -31,10 +32,16 @@ type HashicorpCloudVagrant20220930Version struct {
 
 	// The version string, ie: v0.0.1 or v2006010201, etc. Must be unique within
 	// the Box.
-	ID string `json:"id,omitempty"`
+	Name string `json:"name,omitempty"`
+
+	// Providers of version (if expanded).
+	Providers []*HashicorpCloudVagrant20220930Provider `json:"providers"`
 
 	// The release status of the Version.
 	State *HashicorpCloudVagrant20220930VersionState `json:"state,omitempty"`
+
+	// Summary details about this version.bool
+	Summary *HashicorpCloudVagrant20220930VersionSummary `json:"summary,omitempty"`
 
 	// The date that the record was last updated.
 	// Format: date-time
@@ -49,7 +56,15 @@ func (m *HashicorpCloudVagrant20220930Version) Validate(formats strfmt.Registry)
 		res = append(res, err)
 	}
 
+	if err := m.validateProviders(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSummary(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -75,6 +90,32 @@ func (m *HashicorpCloudVagrant20220930Version) validateCreatedAt(formats strfmt.
 	return nil
 }
 
+func (m *HashicorpCloudVagrant20220930Version) validateProviders(formats strfmt.Registry) error {
+	if swag.IsZero(m.Providers) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Providers); i++ {
+		if swag.IsZero(m.Providers[i]) { // not required
+			continue
+		}
+
+		if m.Providers[i] != nil {
+			if err := m.Providers[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("providers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("providers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVagrant20220930Version) validateState(formats strfmt.Registry) error {
 	if swag.IsZero(m.State) { // not required
 		return nil
@@ -86,6 +127,25 @@ func (m *HashicorpCloudVagrant20220930Version) validateState(formats strfmt.Regi
 				return ve.ValidateName("state")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("state")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Version) validateSummary(formats strfmt.Registry) error {
+	if swag.IsZero(m.Summary) { // not required
+		return nil
+	}
+
+	if m.Summary != nil {
+		if err := m.Summary.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("summary")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("summary")
 			}
 			return err
 		}
@@ -110,13 +170,46 @@ func (m *HashicorpCloudVagrant20220930Version) validateUpdatedAt(formats strfmt.
 func (m *HashicorpCloudVagrant20220930Version) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateProviders(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSummary(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Version) contextValidateProviders(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Providers); i++ {
+
+		if m.Providers[i] != nil {
+
+			if swag.IsZero(m.Providers[i]) { // not required
+				return nil
+			}
+
+			if err := m.Providers[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("providers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("providers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -133,6 +226,27 @@ func (m *HashicorpCloudVagrant20220930Version) contextValidateState(ctx context.
 				return ve.ValidateName("state")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("state")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Version) contextValidateSummary(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Summary != nil {
+
+		if swag.IsZero(m.Summary) { // not required
+			return nil
+		}
+
+		if err := m.Summary.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("summary")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("summary")
 			}
 			return err
 		}

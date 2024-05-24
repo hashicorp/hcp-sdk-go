@@ -61,9 +61,6 @@ DeactivateRegistryParams contains all the parameters to send to the API endpoint
 */
 type DeactivateRegistryParams struct {
 
-	// Body.
-	Body interface{}
-
 	/* Registry.
 
 	   The name of the Registry to deactivate.
@@ -123,17 +120,6 @@ func (o *DeactivateRegistryParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the deactivate registry params
-func (o *DeactivateRegistryParams) WithBody(body interface{}) *DeactivateRegistryParams {
-	o.SetBody(body)
-	return o
-}
-
-// SetBody adds the body to the deactivate registry params
-func (o *DeactivateRegistryParams) SetBody(body interface{}) {
-	o.Body = body
-}
-
 // WithRegistry adds the registry to the deactivate registry params
 func (o *DeactivateRegistryParams) WithRegistry(registry string) *DeactivateRegistryParams {
 	o.SetRegistry(registry)
@@ -152,11 +138,6 @@ func (o *DeactivateRegistryParams) WriteToRequest(r runtime.ClientRequest, reg s
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
-	}
 
 	// path param registry
 	if err := r.SetPathParam("registry", o.Registry); err != nil {

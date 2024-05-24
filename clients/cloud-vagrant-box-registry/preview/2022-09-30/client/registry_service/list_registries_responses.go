@@ -87,11 +87,11 @@ func (o *ListRegistriesOK) Code() int {
 }
 
 func (o *ListRegistriesOK) Error() string {
-	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry][%d] listRegistriesOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registries][%d] listRegistriesOK  %+v", 200, o.Payload)
 }
 
 func (o *ListRegistriesOK) String() string {
-	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry][%d] listRegistriesOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registries][%d] listRegistriesOK  %+v", 200, o.Payload)
 }
 
 func (o *ListRegistriesOK) GetPayload() *models.HashicorpCloudVagrant20220930ListRegistriesResponse {
@@ -159,11 +159,11 @@ func (o *ListRegistriesDefault) Code() int {
 }
 
 func (o *ListRegistriesDefault) Error() string {
-	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry][%d] ListRegistries default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registries][%d] ListRegistries default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ListRegistriesDefault) String() string {
-	return fmt.Sprintf("[GET /vagrant/2022-09-30/registry][%d] ListRegistries default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /vagrant/2022-09-30/registries][%d] ListRegistries default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ListRegistriesDefault) GetPayload() *cloud.GoogleRPCStatus {

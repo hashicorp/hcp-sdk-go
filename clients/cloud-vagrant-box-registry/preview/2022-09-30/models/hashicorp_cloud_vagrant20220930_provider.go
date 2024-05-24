@@ -20,7 +20,7 @@ import (
 // swagger:model hashicorp.cloud.vagrant_20220930.Provider
 type HashicorpCloudVagrant20220930Provider struct {
 
-	// The list of architectures and box data that this provider has.
+	// Architectures of provider (if expanded).
 	Architectures []*HashicorpCloudVagrant20220930Architecture `json:"architectures"`
 
 	// The date the record was created.
@@ -28,7 +28,10 @@ type HashicorpCloudVagrant20220930Provider struct {
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
 	// The name of the Provider, should be unique within the version.
-	ID string `json:"id,omitempty"`
+	Name string `json:"name,omitempty"`
+
+	// The ProviderSummary provides quick facts about provider child objects
+	Summary *HashicorpCloudVagrant20220930ProviderSummary `json:"summary,omitempty"`
 
 	// The date that the record was last updated.
 	// Format: date-time
@@ -44,6 +47,10 @@ func (m *HashicorpCloudVagrant20220930Provider) Validate(formats strfmt.Registry
 	}
 
 	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSummary(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -95,6 +102,25 @@ func (m *HashicorpCloudVagrant20220930Provider) validateCreatedAt(formats strfmt
 	return nil
 }
 
+func (m *HashicorpCloudVagrant20220930Provider) validateSummary(formats strfmt.Registry) error {
+	if swag.IsZero(m.Summary) { // not required
+		return nil
+	}
+
+	if m.Summary != nil {
+		if err := m.Summary.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("summary")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("summary")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVagrant20220930Provider) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -112,6 +138,10 @@ func (m *HashicorpCloudVagrant20220930Provider) ContextValidate(ctx context.Cont
 	var res []error
 
 	if err := m.contextValidateArchitectures(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSummary(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -141,6 +171,27 @@ func (m *HashicorpCloudVagrant20220930Provider) contextValidateArchitectures(ctx
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Provider) contextValidateSummary(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Summary != nil {
+
+		if swag.IsZero(m.Summary) { // not required
+			return nil
+		}
+
+		if err := m.Summary.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("summary")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("summary")
+			}
+			return err
+		}
 	}
 
 	return nil
