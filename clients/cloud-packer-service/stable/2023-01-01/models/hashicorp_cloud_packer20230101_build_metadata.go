@@ -17,8 +17,14 @@ import (
 // swagger:model hashicorp.cloud.packer_20230101.BuildMetadata
 type HashicorpCloudPacker20230101BuildMetadata struct {
 
-	// Information from Packer related to its runtime state, such as version, and plugins used.
+	// Information about the CICD pipeline.
+	Cicd interface{} `json:"cicd,omitempty"`
+
+	// Information about the packer version, plugins, and OS.
 	Packer interface{} `json:"packer,omitempty"`
+
+	// Information about the version control system.
+	Vcs interface{} `json:"vcs,omitempty"`
 }
 
 // Validate validates this hashicorp cloud packer 20230101 build metadata

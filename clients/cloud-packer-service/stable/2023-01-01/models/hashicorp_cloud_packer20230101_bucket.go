@@ -55,6 +55,9 @@ type HashicorpCloudPacker20230101Bucket struct {
 	// latest complete version. e.g aws, gcp, or azure.
 	Platforms []string `json:"platforms"`
 
+	// The human-readable identifier in the platform. For example, `packer/project/<project-id>/bucket/<bucket-name>`.
+	ResourceName string `json:"resource_name,omitempty"`
+
 	// Last updated datetime.
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
