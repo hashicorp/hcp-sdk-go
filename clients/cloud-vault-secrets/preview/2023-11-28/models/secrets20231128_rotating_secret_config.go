@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Secrets20231128RotatingSecretConfig Rotation
+// Secrets20231128RotatingSecretConfig secrets 20231128 rotating secret config
 //
 // swagger:model secrets_20231128RotatingSecretConfig
 type Secrets20231128RotatingSecretConfig struct {

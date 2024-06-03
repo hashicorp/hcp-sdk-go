@@ -88,11 +88,11 @@ func (o *CreateTwilioRotatingSecretOK) Code() int {
 }
 
 func (o *CreateTwilioRotatingSecretOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/twilio][%d] createTwilioRotatingSecretOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret][%d] createTwilioRotatingSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *CreateTwilioRotatingSecretOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/twilio][%d] createTwilioRotatingSecretOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret][%d] createTwilioRotatingSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *CreateTwilioRotatingSecretOK) GetPayload() *models.Secrets20231128CreateTwilioRotatingSecretResponse {
@@ -160,11 +160,11 @@ func (o *CreateTwilioRotatingSecretDefault) Code() int {
 }
 
 func (o *CreateTwilioRotatingSecretDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/twilio][%d] CreateTwilioRotatingSecret default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret][%d] CreateTwilioRotatingSecret default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *CreateTwilioRotatingSecretDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/twilio][%d] CreateTwilioRotatingSecret default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret][%d] CreateTwilioRotatingSecret default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *CreateTwilioRotatingSecretDefault) GetPayload() *models.RPCStatus {

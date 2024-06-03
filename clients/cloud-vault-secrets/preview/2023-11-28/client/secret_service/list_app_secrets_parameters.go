@@ -65,6 +65,9 @@ type ListAppSecretsParams struct {
 	// AppName.
 	AppName string
 
+	// Name.
+	Name *string
+
 	// OrganizationID.
 	OrganizationID string
 
@@ -97,6 +100,9 @@ type ListAppSecretsParams struct {
 
 	// ProjectID.
 	ProjectID string
+
+	// Type.
+	Type *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -162,6 +168,17 @@ func (o *ListAppSecretsParams) SetAppName(appName string) {
 	o.AppName = appName
 }
 
+// WithName adds the name to the list app secrets params
+func (o *ListAppSecretsParams) WithName(name *string) *ListAppSecretsParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the list app secrets params
+func (o *ListAppSecretsParams) SetName(name *string) {
+	o.Name = name
+}
+
 // WithOrganizationID adds the organizationID to the list app secrets params
 func (o *ListAppSecretsParams) WithOrganizationID(organizationID string) *ListAppSecretsParams {
 	o.SetOrganizationID(organizationID)
@@ -217,6 +234,17 @@ func (o *ListAppSecretsParams) SetProjectID(projectID string) {
 	o.ProjectID = projectID
 }
 
+// WithType adds the typeVar to the list app secrets params
+func (o *ListAppSecretsParams) WithType(typeVar *string) *ListAppSecretsParams {
+	o.SetType(typeVar)
+	return o
+}
+
+// SetType adds the type to the list app secrets params
+func (o *ListAppSecretsParams) SetType(typeVar *string) {
+	o.Type = typeVar
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListAppSecretsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -228,6 +256,23 @@ func (o *ListAppSecretsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	// path param app_name
 	if err := r.SetPathParam("app_name", o.AppName); err != nil {
 		return err
+	}
+
+	if o.Name != nil {
+
+		// query param name
+		var qrName string
+
+		if o.Name != nil {
+			qrName = *o.Name
+		}
+		qName := qrName
+		if qName != "" {
+
+			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
 	}
 
 	// path param organization_id
@@ -289,6 +334,23 @@ func (o *ListAppSecretsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	// path param project_id
 	if err := r.SetPathParam("project_id", o.ProjectID); err != nil {
 		return err
+	}
+
+	if o.Type != nil {
+
+		// query param type
+		var qrType string
+
+		if o.Type != nil {
+			qrType = *o.Type
+		}
+		qType := qrType
+		if qType != "" {
+
+			if err := r.SetQueryParam("type", qType); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

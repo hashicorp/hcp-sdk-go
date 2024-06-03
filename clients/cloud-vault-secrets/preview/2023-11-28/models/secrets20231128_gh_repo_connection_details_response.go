@@ -17,6 +17,9 @@ import (
 // swagger:model secrets_20231128GhRepoConnectionDetailsResponse
 type Secrets20231128GhRepoConnectionDetailsResponse struct {
 
+	// environment
+	Environment string `json:"environment,omitempty"`
+
 	// owner
 	Owner string `json:"owner,omitempty"`
 

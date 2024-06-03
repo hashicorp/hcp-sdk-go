@@ -17,6 +17,9 @@ import (
 // swagger:model secrets_20231128GetGitHubInstallLinksResponse
 type Secrets20231128GetGitHubInstallLinksResponse struct {
 
+	// authorization url
+	AuthorizationURL string `json:"authorization_url,omitempty"`
+
 	// installation url
 	InstallationURL string `json:"installation_url,omitempty"`
 }

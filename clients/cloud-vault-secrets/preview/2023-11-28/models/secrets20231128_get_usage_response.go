@@ -30,8 +30,14 @@ type Secrets20231128GetUsageResponse struct {
 	// integrations
 	Integrations *Secrets20231128Usage `json:"integrations,omitempty"`
 
+	// rotating secrets
+	RotatingSecrets *Secrets20231128Usage `json:"rotating_secrets,omitempty"`
+
 	// secrets
 	Secrets *Secrets20231128Usage `json:"secrets,omitempty"`
+
+	// static secrets
+	StaticSecrets *Secrets20231128Usage `json:"static_secrets,omitempty"`
 }
 
 // Validate validates this secrets 20231128 get usage response
@@ -54,7 +60,15 @@ func (m *Secrets20231128GetUsageResponse) Validate(formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
+	if err := m.validateRotatingSecrets(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSecrets(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStaticSecrets(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -140,6 +154,25 @@ func (m *Secrets20231128GetUsageResponse) validateIntegrations(formats strfmt.Re
 	return nil
 }
 
+func (m *Secrets20231128GetUsageResponse) validateRotatingSecrets(formats strfmt.Registry) error {
+	if swag.IsZero(m.RotatingSecrets) { // not required
+		return nil
+	}
+
+	if m.RotatingSecrets != nil {
+		if err := m.RotatingSecrets.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("rotating_secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("rotating_secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128GetUsageResponse) validateSecrets(formats strfmt.Registry) error {
 	if swag.IsZero(m.Secrets) { // not required
 		return nil
@@ -151,6 +184,25 @@ func (m *Secrets20231128GetUsageResponse) validateSecrets(formats strfmt.Registr
 				return ve.ValidateName("secrets")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128GetUsageResponse) validateStaticSecrets(formats strfmt.Registry) error {
+	if swag.IsZero(m.StaticSecrets) { // not required
+		return nil
+	}
+
+	if m.StaticSecrets != nil {
+		if err := m.StaticSecrets.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("static_secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("static_secrets")
 			}
 			return err
 		}
@@ -179,7 +231,15 @@ func (m *Secrets20231128GetUsageResponse) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateRotatingSecrets(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSecrets(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStaticSecrets(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -273,6 +333,27 @@ func (m *Secrets20231128GetUsageResponse) contextValidateIntegrations(ctx contex
 	return nil
 }
 
+func (m *Secrets20231128GetUsageResponse) contextValidateRotatingSecrets(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RotatingSecrets != nil {
+
+		if swag.IsZero(m.RotatingSecrets) { // not required
+			return nil
+		}
+
+		if err := m.RotatingSecrets.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("rotating_secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("rotating_secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128GetUsageResponse) contextValidateSecrets(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Secrets != nil {
@@ -286,6 +367,27 @@ func (m *Secrets20231128GetUsageResponse) contextValidateSecrets(ctx context.Con
 				return ve.ValidateName("secrets")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128GetUsageResponse) contextValidateStaticSecrets(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StaticSecrets != nil {
+
+		if swag.IsZero(m.StaticSecrets) { // not required
+			return nil
+		}
+
+		if err := m.StaticSecrets.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("static_secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("static_secrets")
 			}
 			return err
 		}

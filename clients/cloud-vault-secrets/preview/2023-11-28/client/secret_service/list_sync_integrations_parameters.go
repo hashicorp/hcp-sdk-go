@@ -62,6 +62,12 @@ ListSyncIntegrationsParams contains all the parameters to send to the API endpoi
 */
 type ListSyncIntegrationsParams struct {
 
+	// AppName.
+	AppName *string
+
+	// Name.
+	Name *string
+
 	// OrganizationID.
 	OrganizationID string
 
@@ -94,6 +100,9 @@ type ListSyncIntegrationsParams struct {
 
 	// ProjectID.
 	ProjectID string
+
+	// Type.
+	Type *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -146,6 +155,28 @@ func (o *ListSyncIntegrationsParams) WithHTTPClient(client *http.Client) *ListSy
 // SetHTTPClient adds the HTTPClient to the list sync integrations params
 func (o *ListSyncIntegrationsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
+}
+
+// WithAppName adds the appName to the list sync integrations params
+func (o *ListSyncIntegrationsParams) WithAppName(appName *string) *ListSyncIntegrationsParams {
+	o.SetAppName(appName)
+	return o
+}
+
+// SetAppName adds the appName to the list sync integrations params
+func (o *ListSyncIntegrationsParams) SetAppName(appName *string) {
+	o.AppName = appName
+}
+
+// WithName adds the name to the list sync integrations params
+func (o *ListSyncIntegrationsParams) WithName(name *string) *ListSyncIntegrationsParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the list sync integrations params
+func (o *ListSyncIntegrationsParams) SetName(name *string) {
+	o.Name = name
 }
 
 // WithOrganizationID adds the organizationID to the list sync integrations params
@@ -203,6 +234,17 @@ func (o *ListSyncIntegrationsParams) SetProjectID(projectID string) {
 	o.ProjectID = projectID
 }
 
+// WithType adds the typeVar to the list sync integrations params
+func (o *ListSyncIntegrationsParams) WithType(typeVar *string) *ListSyncIntegrationsParams {
+	o.SetType(typeVar)
+	return o
+}
+
+// SetType adds the type to the list sync integrations params
+func (o *ListSyncIntegrationsParams) SetType(typeVar *string) {
+	o.Type = typeVar
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListSyncIntegrationsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -210,6 +252,40 @@ func (o *ListSyncIntegrationsParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
+
+	if o.AppName != nil {
+
+		// query param app_name
+		var qrAppName string
+
+		if o.AppName != nil {
+			qrAppName = *o.AppName
+		}
+		qAppName := qrAppName
+		if qAppName != "" {
+
+			if err := r.SetQueryParam("app_name", qAppName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Name != nil {
+
+		// query param name
+		var qrName string
+
+		if o.Name != nil {
+			qrName = *o.Name
+		}
+		qName := qrName
+		if qName != "" {
+
+			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param organization_id
 	if err := r.SetPathParam("organization_id", o.OrganizationID); err != nil {
@@ -270,6 +346,23 @@ func (o *ListSyncIntegrationsParams) WriteToRequest(r runtime.ClientRequest, reg
 	// path param project_id
 	if err := r.SetPathParam("project_id", o.ProjectID); err != nil {
 		return err
+	}
+
+	if o.Type != nil {
+
+		// query param type
+		var qrType string
+
+		if o.Type != nil {
+			qrType = *o.Type
+		}
+		qType := qrType
+		if qType != "" {
+
+			if err := r.SetQueryParam("type", qType); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

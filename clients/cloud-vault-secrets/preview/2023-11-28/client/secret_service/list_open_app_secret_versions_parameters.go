@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewListOpenAppSecretVersionsParams creates a new ListOpenAppSecretVersionsParams object,
@@ -66,6 +67,33 @@ type ListOpenAppSecretVersionsParams struct {
 
 	// OrganizationID.
 	OrganizationID string
+
+	/* PaginationNextPageToken.
+
+	     Specifies a page token to use to retrieve the next page. Set this to the
+	`next_page_token` returned by previous list requests to get the next page of
+	results. If set, `previous_page_token` must not be set.
+	*/
+	PaginationNextPageToken *string
+
+	/* PaginationPageSize.
+
+	     The max number of results per page that should be returned. If the number
+	of available results is larger than `page_size`, a `next_page_token` is
+	returned which can be used to get the next page of results in subsequent
+	requests. A value of zero will cause `page_size` to be defaulted.
+
+	     Format: int64
+	*/
+	PaginationPageSize *int64
+
+	/* PaginationPreviousPageToken.
+
+	     Specifies a page token to use to retrieve the previous page. Set this to
+	the `previous_page_token` returned by previous list requests to get the
+	previous page of results. If set, `next_page_token` must not be set.
+	*/
+	PaginationPreviousPageToken *string
 
 	// ProjectID.
 	ProjectID string
@@ -148,6 +176,39 @@ func (o *ListOpenAppSecretVersionsParams) SetOrganizationID(organizationID strin
 	o.OrganizationID = organizationID
 }
 
+// WithPaginationNextPageToken adds the paginationNextPageToken to the list open app secret versions params
+func (o *ListOpenAppSecretVersionsParams) WithPaginationNextPageToken(paginationNextPageToken *string) *ListOpenAppSecretVersionsParams {
+	o.SetPaginationNextPageToken(paginationNextPageToken)
+	return o
+}
+
+// SetPaginationNextPageToken adds the paginationNextPageToken to the list open app secret versions params
+func (o *ListOpenAppSecretVersionsParams) SetPaginationNextPageToken(paginationNextPageToken *string) {
+	o.PaginationNextPageToken = paginationNextPageToken
+}
+
+// WithPaginationPageSize adds the paginationPageSize to the list open app secret versions params
+func (o *ListOpenAppSecretVersionsParams) WithPaginationPageSize(paginationPageSize *int64) *ListOpenAppSecretVersionsParams {
+	o.SetPaginationPageSize(paginationPageSize)
+	return o
+}
+
+// SetPaginationPageSize adds the paginationPageSize to the list open app secret versions params
+func (o *ListOpenAppSecretVersionsParams) SetPaginationPageSize(paginationPageSize *int64) {
+	o.PaginationPageSize = paginationPageSize
+}
+
+// WithPaginationPreviousPageToken adds the paginationPreviousPageToken to the list open app secret versions params
+func (o *ListOpenAppSecretVersionsParams) WithPaginationPreviousPageToken(paginationPreviousPageToken *string) *ListOpenAppSecretVersionsParams {
+	o.SetPaginationPreviousPageToken(paginationPreviousPageToken)
+	return o
+}
+
+// SetPaginationPreviousPageToken adds the paginationPreviousPageToken to the list open app secret versions params
+func (o *ListOpenAppSecretVersionsParams) SetPaginationPreviousPageToken(paginationPreviousPageToken *string) {
+	o.PaginationPreviousPageToken = paginationPreviousPageToken
+}
+
 // WithProjectID adds the projectID to the list open app secret versions params
 func (o *ListOpenAppSecretVersionsParams) WithProjectID(projectID string) *ListOpenAppSecretVersionsParams {
 	o.SetProjectID(projectID)
@@ -186,6 +247,57 @@ func (o *ListOpenAppSecretVersionsParams) WriteToRequest(r runtime.ClientRequest
 	// path param organization_id
 	if err := r.SetPathParam("organization_id", o.OrganizationID); err != nil {
 		return err
+	}
+
+	if o.PaginationNextPageToken != nil {
+
+		// query param pagination.next_page_token
+		var qrPaginationNextPageToken string
+
+		if o.PaginationNextPageToken != nil {
+			qrPaginationNextPageToken = *o.PaginationNextPageToken
+		}
+		qPaginationNextPageToken := qrPaginationNextPageToken
+		if qPaginationNextPageToken != "" {
+
+			if err := r.SetQueryParam("pagination.next_page_token", qPaginationNextPageToken); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationPageSize != nil {
+
+		// query param pagination.page_size
+		var qrPaginationPageSize int64
+
+		if o.PaginationPageSize != nil {
+			qrPaginationPageSize = *o.PaginationPageSize
+		}
+		qPaginationPageSize := swag.FormatInt64(qrPaginationPageSize)
+		if qPaginationPageSize != "" {
+
+			if err := r.SetQueryParam("pagination.page_size", qPaginationPageSize); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PaginationPreviousPageToken != nil {
+
+		// query param pagination.previous_page_token
+		var qrPaginationPreviousPageToken string
+
+		if o.PaginationPreviousPageToken != nil {
+			qrPaginationPreviousPageToken = *o.PaginationPreviousPageToken
+		}
+		qPaginationPreviousPageToken := qrPaginationPreviousPageToken
+		if qPaginationPreviousPageToken != "" {
+
+			if err := r.SetQueryParam("pagination.previous_page_token", qPaginationPreviousPageToken); err != nil {
+				return err
+			}
+		}
 	}
 
 	// path param project_id

@@ -90,11 +90,11 @@ func (o *CreateMongoDBAtlasRotatingSecretOK) Code() int {
 }
 
 func (o *CreateMongoDBAtlasRotatingSecretOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/mongodb-atlas][%d] createMongoDBAtlasRotatingSecretOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret][%d] createMongoDBAtlasRotatingSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *CreateMongoDBAtlasRotatingSecretOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/mongodb-atlas][%d] createMongoDBAtlasRotatingSecretOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret][%d] createMongoDBAtlasRotatingSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *CreateMongoDBAtlasRotatingSecretOK) GetPayload() *models.Secrets20231128CreateMongoDBAtlasRotatingSecretResponse {
@@ -162,11 +162,11 @@ func (o *CreateMongoDBAtlasRotatingSecretDefault) Code() int {
 }
 
 func (o *CreateMongoDBAtlasRotatingSecretDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/mongodb-atlas][%d] CreateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret][%d] CreateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *CreateMongoDBAtlasRotatingSecretDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/mongodb-atlas][%d] CreateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret][%d] CreateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *CreateMongoDBAtlasRotatingSecretDefault) GetPayload() *models.RPCStatus {

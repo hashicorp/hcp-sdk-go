@@ -21,6 +21,9 @@ type Secrets20231128ListOpenAppSecretVersionsResponse struct {
 	// dynamic instance
 	DynamicInstance *Secrets20231128OpenSecretDynamicInstance `json:"dynamic_instance,omitempty"`
 
+	// pagination
+	Pagination *CommonPaginationResponse `json:"pagination,omitempty"`
+
 	// rotating versions
 	RotatingVersions *Secrets20231128OpenSecretRotatingVersionList `json:"rotating_versions,omitempty"`
 
@@ -36,6 +39,10 @@ func (m *Secrets20231128ListOpenAppSecretVersionsResponse) Validate(formats strf
 	var res []error
 
 	if err := m.validateDynamicInstance(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePagination(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,6 +71,25 @@ func (m *Secrets20231128ListOpenAppSecretVersionsResponse) validateDynamicInstan
 				return ve.ValidateName("dynamic_instance")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("dynamic_instance")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128ListOpenAppSecretVersionsResponse) validatePagination(formats strfmt.Registry) error {
+	if swag.IsZero(m.Pagination) { // not required
+		return nil
+	}
+
+	if m.Pagination != nil {
+		if err := m.Pagination.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
 			}
 			return err
 		}
@@ -118,6 +144,10 @@ func (m *Secrets20231128ListOpenAppSecretVersionsResponse) ContextValidate(ctx c
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePagination(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRotatingVersions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -145,6 +175,27 @@ func (m *Secrets20231128ListOpenAppSecretVersionsResponse) contextValidateDynami
 				return ve.ValidateName("dynamic_instance")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("dynamic_instance")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128ListOpenAppSecretVersionsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
+		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
 			}
 			return err
 		}

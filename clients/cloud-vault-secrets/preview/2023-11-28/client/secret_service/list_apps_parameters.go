@@ -62,6 +62,9 @@ ListAppsParams contains all the parameters to send to the API endpoint
 */
 type ListAppsParams struct {
 
+	// Name.
+	Name *string
+
 	// OrganizationID.
 	OrganizationID string
 
@@ -148,6 +151,17 @@ func (o *ListAppsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithName adds the name to the list apps params
+func (o *ListAppsParams) WithName(name *string) *ListAppsParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the list apps params
+func (o *ListAppsParams) SetName(name *string) {
+	o.Name = name
+}
+
 // WithOrganizationID adds the organizationID to the list apps params
 func (o *ListAppsParams) WithOrganizationID(organizationID string) *ListAppsParams {
 	o.SetOrganizationID(organizationID)
@@ -210,6 +224,23 @@ func (o *ListAppsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
+
+	if o.Name != nil {
+
+		// query param name
+		var qrName string
+
+		if o.Name != nil {
+			qrName = *o.Name
+		}
+		qName := qrName
+		if qName != "" {
+
+			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param organization_id
 	if err := r.SetPathParam("organization_id", o.OrganizationID); err != nil {

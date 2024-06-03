@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -16,6 +17,9 @@ import (
 //
 // swagger:model secrets_20231128GhAppMetadata
 type Secrets20231128GhAppMetadata struct {
+
+	// account type
+	AccountType *GhAppMetadataAccountType `json:"account_type,omitempty"`
 
 	// installation id
 	InstallationID string `json:"installation_id,omitempty"`
@@ -29,11 +33,69 @@ type Secrets20231128GhAppMetadata struct {
 
 // Validate validates this secrets 20231128 gh app metadata
 func (m *Secrets20231128GhAppMetadata) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAccountType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this secrets 20231128 gh app metadata based on context it is used
+func (m *Secrets20231128GhAppMetadata) validateAccountType(formats strfmt.Registry) error {
+	if swag.IsZero(m.AccountType) { // not required
+		return nil
+	}
+
+	if m.AccountType != nil {
+		if err := m.AccountType.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("account_type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("account_type")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this secrets 20231128 gh app metadata based on the context it is used
 func (m *Secrets20231128GhAppMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAccountType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Secrets20231128GhAppMetadata) contextValidateAccountType(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AccountType != nil {
+
+		if swag.IsZero(m.AccountType) { // not required
+			return nil
+		}
+
+		if err := m.AccountType.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("account_type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("account_type")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

@@ -32,6 +32,8 @@ type ClientService interface {
 
 	CompleteVercelInstallation(params *CompleteVercelInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteVercelInstallationOK, error)
 
+	ConnectGitHubInstallation(params *ConnectGitHubInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConnectGitHubInstallationOK, error)
+
 	CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppOK, error)
 
 	CreateAppKVSecret(params *CreateAppKVSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppKVSecretOK, error)
@@ -44,19 +46,23 @@ type ClientService interface {
 
 	CreateAzureKvSyncIntegration(params *CreateAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureKvSyncIntegrationOK, error)
 
+	CreateGcpDynamicSecret(params *CreateGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpDynamicSecretOK, error)
+
+	CreateGcpIntegration(params *CreateGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpIntegrationOK, error)
+
 	CreateGcpSmSyncIntegration(params *CreateGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpSmSyncIntegrationOK, error)
 
 	CreateGhOrgSyncIntegration(params *CreateGhOrgSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGhOrgSyncIntegrationOK, error)
 
 	CreateGhRepoSyncIntegration(params *CreateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGhRepoSyncIntegrationOK, error)
 
+	CreateMongoDBAtlasIntegration(params *CreateMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasIntegrationOK, error)
+
 	CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotatingSecretOK, error)
 
-	CreateMongoDBAtlasRotationIntegration(params *CreateMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotationIntegrationOK, error)
+	CreateTwilioIntegration(params *CreateTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTwilioIntegrationOK, error)
 
 	CreateTwilioRotatingSecret(params *CreateTwilioRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTwilioRotatingSecretOK, error)
-
-	CreateTwilioRotationIntegration(params *CreateTwilioRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTwilioRotationIntegrationOK, error)
 
 	CreateVercelProjectSyncIntegration(params *CreateVercelProjectSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVercelProjectSyncIntegrationOK, error)
 
@@ -70,13 +76,17 @@ type ClientService interface {
 
 	DeleteAwsIntegration(params *DeleteAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAwsIntegrationOK, error)
 
-	DeleteMongoDBAtlasRotationIntegration(params *DeleteMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMongoDBAtlasRotationIntegrationOK, error)
+	DeleteGcpDynamicSecret(params *DeleteGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGcpDynamicSecretOK, error)
+
+	DeleteGcpIntegration(params *DeleteGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGcpIntegrationOK, error)
+
+	DeleteMongoDBAtlasIntegration(params *DeleteMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMongoDBAtlasIntegrationOK, error)
 
 	DeleteSyncInstallation(params *DeleteSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSyncInstallationOK, error)
 
 	DeleteSyncIntegration(params *DeleteSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSyncIntegrationOK, error)
 
-	DeleteTwilioRotationIntegration(params *DeleteTwilioRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTwilioRotationIntegrationOK, error)
+	DeleteTwilioIntegration(params *DeleteTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTwilioIntegrationOK, error)
 
 	ForceSync(params *ForceSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForceSyncOK, error)
 
@@ -90,15 +100,19 @@ type ClientService interface {
 
 	GetAwsIntegration(params *GetAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIntegrationOK, error)
 
+	GetGcpDynamicSecret(params *GetGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpDynamicSecretOK, error)
+
+	GetGcpIntegration(params *GetGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpIntegrationOK, error)
+
 	GetGitHubEnvironments(params *GetGitHubEnvironmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubEnvironmentsOK, error)
 
 	GetGitHubInstallLinks(params *GetGitHubInstallLinksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubInstallLinksOK, error)
 
 	GetGitHubRepositories(params *GetGitHubRepositoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubRepositoriesOK, error)
 
-	GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotatingSecretConfigOK, error)
+	GetMongoDBAtlasIntegration(params *GetMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasIntegrationOK, error)
 
-	GetMongoDBAtlasRotationIntegration(params *GetMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotationIntegrationOK, error)
+	GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotatingSecretConfigOK, error)
 
 	GetRotatingSecretState(params *GetRotatingSecretStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRotatingSecretStateOK, error)
 
@@ -106,9 +120,9 @@ type ClientService interface {
 
 	GetSyncIntegration(params *GetSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSyncIntegrationOK, error)
 
-	GetTwilioRotatingSecretConfig(params *GetTwilioRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTwilioRotatingSecretConfigOK, error)
+	GetTwilioIntegration(params *GetTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTwilioIntegrationOK, error)
 
-	GetTwilioRotationIntegration(params *GetTwilioRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTwilioRotationIntegrationOK, error)
+	GetTwilioRotatingSecretConfig(params *GetTwilioRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTwilioRotatingSecretConfigOK, error)
 
 	GetUsage(params *GetUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsageOK, error)
 
@@ -126,11 +140,21 @@ type ClientService interface {
 
 	ListAwsIntegrations(params *ListAwsIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAwsIntegrationsOK, error)
 
+	ListGcpDynamicSecrets(params *ListGcpDynamicSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGcpDynamicSecretsOK, error)
+
+	ListGcpIntegrations(params *ListGcpIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGcpIntegrationsOK, error)
+
+	ListGitHubInstallations(params *ListGitHubInstallationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGitHubInstallationsOK, error)
+
+	ListMongoDBAtlasIntegrations(params *ListMongoDBAtlasIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMongoDBAtlasIntegrationsOK, error)
+
 	ListOpenAppSecretVersions(params *ListOpenAppSecretVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenAppSecretVersionsOK, error)
 
-	ListRotationIntegrations(params *ListRotationIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRotationIntegrationsOK, error)
+	ListSyncInstallations(params *ListSyncInstallationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSyncInstallationsOK, error)
 
 	ListSyncIntegrations(params *ListSyncIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSyncIntegrationsOK, error)
+
+	ListTwilioIntegrations(params *ListTwilioIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTwilioIntegrationsOK, error)
 
 	OpenAppSecret(params *OpenAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretOK, error)
 
@@ -222,6 +246,44 @@ func (a *Client) CompleteVercelInstallation(params *CompleteVercelInstallationPa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CompleteVercelInstallationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ConnectGitHubInstallation connect git hub installation API
+*/
+func (a *Client) ConnectGitHubInstallation(params *ConnectGitHubInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConnectGitHubInstallationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewConnectGitHubInstallationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ConnectGitHubInstallation",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/github/installations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ConnectGitHubInstallationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ConnectGitHubInstallationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ConnectGitHubInstallationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -454,6 +516,82 @@ func (a *Client) CreateAzureKvSyncIntegration(params *CreateAzureKvSyncIntegrati
 }
 
 /*
+CreateGcpDynamicSecret create gcp dynamic secret API
+*/
+func (a *Client) CreateGcpDynamicSecret(params *CreateGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpDynamicSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateGcpDynamicSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateGcpDynamicSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateGcpDynamicSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateGcpDynamicSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateGcpDynamicSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateGcpIntegration create gcp integration API
+*/
+func (a *Client) CreateGcpIntegration(params *CreateGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateGcpIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateGcpIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateGcpIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateGcpIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateGcpIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateGcpSmSyncIntegration create gcp sm sync integration API
 */
 func (a *Client) CreateGcpSmSyncIntegration(params *CreateGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpSmSyncIntegrationOK, error) {
@@ -568,6 +706,44 @@ func (a *Client) CreateGhRepoSyncIntegration(params *CreateGhRepoSyncIntegration
 }
 
 /*
+CreateMongoDBAtlasIntegration create mongo d b atlas integration API
+*/
+func (a *Client) CreateMongoDBAtlasIntegration(params *CreateMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateMongoDBAtlasIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateMongoDBAtlasIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateMongoDBAtlasIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateMongoDBAtlasIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateMongoDBAtlasIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateMongoDBAtlasRotatingSecret create mongo d b atlas rotating secret API
 */
 func (a *Client) CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotatingSecretOK, error) {
@@ -578,7 +754,7 @@ func (a *Client) CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRota
 	op := &runtime.ClientOperation{
 		ID:                 "CreateMongoDBAtlasRotatingSecret",
 		Method:             "POST",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/mongodb-atlas",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -606,22 +782,22 @@ func (a *Client) CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRota
 }
 
 /*
-CreateMongoDBAtlasRotationIntegration create mongo d b atlas rotation integration API
+CreateTwilioIntegration create twilio integration API
 */
-func (a *Client) CreateMongoDBAtlasRotationIntegration(params *CreateMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotationIntegrationOK, error) {
+func (a *Client) CreateTwilioIntegration(params *CreateTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTwilioIntegrationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateMongoDBAtlasRotationIntegrationParams()
+		params = NewCreateTwilioIntegrationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateMongoDBAtlasRotationIntegration",
+		ID:                 "CreateTwilioIntegration",
 		Method:             "POST",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation/mongodb-atlas",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateMongoDBAtlasRotationIntegrationReader{formats: a.formats},
+		Reader:             &CreateTwilioIntegrationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -634,12 +810,12 @@ func (a *Client) CreateMongoDBAtlasRotationIntegration(params *CreateMongoDBAtla
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateMongoDBAtlasRotationIntegrationOK)
+	success, ok := result.(*CreateTwilioIntegrationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateMongoDBAtlasRotationIntegrationDefault)
+	unexpectedSuccess := result.(*CreateTwilioIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -654,7 +830,7 @@ func (a *Client) CreateTwilioRotatingSecret(params *CreateTwilioRotatingSecretPa
 	op := &runtime.ClientOperation{
 		ID:                 "CreateTwilioRotatingSecret",
 		Method:             "POST",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/twilio",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -678,44 +854,6 @@ func (a *Client) CreateTwilioRotatingSecret(params *CreateTwilioRotatingSecretPa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateTwilioRotatingSecretDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-CreateTwilioRotationIntegration create twilio rotation integration API
-*/
-func (a *Client) CreateTwilioRotationIntegration(params *CreateTwilioRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTwilioRotationIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateTwilioRotationIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "CreateTwilioRotationIntegration",
-		Method:             "POST",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation/twilio",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CreateTwilioRotationIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateTwilioRotationIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*CreateTwilioRotationIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -948,22 +1086,22 @@ func (a *Client) DeleteAwsIntegration(params *DeleteAwsIntegrationParams, authIn
 }
 
 /*
-DeleteMongoDBAtlasRotationIntegration delete mongo d b atlas rotation integration API
+DeleteGcpDynamicSecret delete gcp dynamic secret API
 */
-func (a *Client) DeleteMongoDBAtlasRotationIntegration(params *DeleteMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMongoDBAtlasRotationIntegrationOK, error) {
+func (a *Client) DeleteGcpDynamicSecret(params *DeleteGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGcpDynamicSecretOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteMongoDBAtlasRotationIntegrationParams()
+		params = NewDeleteGcpDynamicSecretParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteMongoDBAtlasRotationIntegration",
+		ID:                 "DeleteGcpDynamicSecret",
 		Method:             "DELETE",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation/mongodb-atlas/{integration_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteMongoDBAtlasRotationIntegrationReader{formats: a.formats},
+		Reader:             &DeleteGcpDynamicSecretReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -976,12 +1114,88 @@ func (a *Client) DeleteMongoDBAtlasRotationIntegration(params *DeleteMongoDBAtla
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteMongoDBAtlasRotationIntegrationOK)
+	success, ok := result.(*DeleteGcpDynamicSecretOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteMongoDBAtlasRotationIntegrationDefault)
+	unexpectedSuccess := result.(*DeleteGcpDynamicSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteGcpIntegration delete gcp integration API
+*/
+func (a *Client) DeleteGcpIntegration(params *DeleteGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGcpIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteGcpIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteGcpIntegration",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteGcpIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteGcpIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteGcpIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteMongoDBAtlasIntegration delete mongo d b atlas integration API
+*/
+func (a *Client) DeleteMongoDBAtlasIntegration(params *DeleteMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMongoDBAtlasIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteMongoDBAtlasIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteMongoDBAtlasIntegration",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteMongoDBAtlasIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteMongoDBAtlasIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteMongoDBAtlasIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1062,22 +1276,22 @@ func (a *Client) DeleteSyncIntegration(params *DeleteSyncIntegrationParams, auth
 }
 
 /*
-DeleteTwilioRotationIntegration delete twilio rotation integration API
+DeleteTwilioIntegration delete twilio integration API
 */
-func (a *Client) DeleteTwilioRotationIntegration(params *DeleteTwilioRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTwilioRotationIntegrationOK, error) {
+func (a *Client) DeleteTwilioIntegration(params *DeleteTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTwilioIntegrationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteTwilioRotationIntegrationParams()
+		params = NewDeleteTwilioIntegrationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteTwilioRotationIntegration",
+		ID:                 "DeleteTwilioIntegration",
 		Method:             "DELETE",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation/twilio/{integration_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteTwilioRotationIntegrationReader{formats: a.formats},
+		Reader:             &DeleteTwilioIntegrationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1090,12 +1304,12 @@ func (a *Client) DeleteTwilioRotationIntegration(params *DeleteTwilioRotationInt
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteTwilioRotationIntegrationOK)
+	success, ok := result.(*DeleteTwilioIntegrationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteTwilioRotationIntegrationDefault)
+	unexpectedSuccess := result.(*DeleteTwilioIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1328,6 +1542,82 @@ func (a *Client) GetAwsIntegration(params *GetAwsIntegrationParams, authInfo run
 }
 
 /*
+GetGcpDynamicSecret get gcp dynamic secret API
+*/
+func (a *Client) GetGcpDynamicSecret(params *GetGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpDynamicSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetGcpDynamicSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetGcpDynamicSecret",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetGcpDynamicSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetGcpDynamicSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetGcpDynamicSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetGcpIntegration get gcp integration API
+*/
+func (a *Client) GetGcpIntegration(params *GetGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetGcpIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetGcpIntegration",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetGcpIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetGcpIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetGcpIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetGitHubEnvironments get git hub environments API
 */
 func (a *Client) GetGitHubEnvironments(params *GetGitHubEnvironmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubEnvironmentsOK, error) {
@@ -1442,6 +1732,44 @@ func (a *Client) GetGitHubRepositories(params *GetGitHubRepositoriesParams, auth
 }
 
 /*
+GetMongoDBAtlasIntegration get mongo d b atlas integration API
+*/
+func (a *Client) GetMongoDBAtlasIntegration(params *GetMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetMongoDBAtlasIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetMongoDBAtlasIntegration",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetMongoDBAtlasIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetMongoDBAtlasIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetMongoDBAtlasIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetMongoDBAtlasRotatingSecretConfig get mongo d b atlas rotating secret config API
 */
 func (a *Client) GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotatingSecretConfigOK, error) {
@@ -1452,7 +1780,7 @@ func (a *Client) GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRota
 	op := &runtime.ClientOperation{
 		ID:                 "GetMongoDBAtlasRotatingSecretConfig",
 		Method:             "GET",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/mongodb-atlas/{secret_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -1476,44 +1804,6 @@ func (a *Client) GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRota
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetMongoDBAtlasRotatingSecretConfigDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-GetMongoDBAtlasRotationIntegration get mongo d b atlas rotation integration API
-*/
-func (a *Client) GetMongoDBAtlasRotationIntegration(params *GetMongoDBAtlasRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotationIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetMongoDBAtlasRotationIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetMongoDBAtlasRotationIntegration",
-		Method:             "GET",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation/mongodb-atlas/{integration_name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetMongoDBAtlasRotationIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetMongoDBAtlasRotationIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*GetMongoDBAtlasRotationIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1632,6 +1922,44 @@ func (a *Client) GetSyncIntegration(params *GetSyncIntegrationParams, authInfo r
 }
 
 /*
+GetTwilioIntegration get twilio integration API
+*/
+func (a *Client) GetTwilioIntegration(params *GetTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTwilioIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTwilioIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetTwilioIntegration",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTwilioIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTwilioIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetTwilioIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetTwilioRotatingSecretConfig get twilio rotating secret config API
 */
 func (a *Client) GetTwilioRotatingSecretConfig(params *GetTwilioRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTwilioRotatingSecretConfigOK, error) {
@@ -1642,7 +1970,7 @@ func (a *Client) GetTwilioRotatingSecretConfig(params *GetTwilioRotatingSecretCo
 	op := &runtime.ClientOperation{
 		ID:                 "GetTwilioRotatingSecretConfig",
 		Method:             "GET",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/rotating/twilio/{secret_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{secret_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -1666,44 +1994,6 @@ func (a *Client) GetTwilioRotatingSecretConfig(params *GetTwilioRotatingSecretCo
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetTwilioRotatingSecretConfigDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-GetTwilioRotationIntegration get twilio rotation integration API
-*/
-func (a *Client) GetTwilioRotationIntegration(params *GetTwilioRotationIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTwilioRotationIntegrationOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetTwilioRotationIntegrationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetTwilioRotationIntegration",
-		Method:             "GET",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation/twilio/{integration_name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetTwilioRotationIntegrationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetTwilioRotationIntegrationOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*GetTwilioRotationIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2012,6 +2302,158 @@ func (a *Client) ListAwsIntegrations(params *ListAwsIntegrationsParams, authInfo
 }
 
 /*
+ListGcpDynamicSecrets list gcp dynamic secrets API
+*/
+func (a *Client) ListGcpDynamicSecrets(params *ListGcpDynamicSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGcpDynamicSecretsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListGcpDynamicSecretsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListGcpDynamicSecrets",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListGcpDynamicSecretsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListGcpDynamicSecretsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListGcpDynamicSecretsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListGcpIntegrations list gcp integrations API
+*/
+func (a *Client) ListGcpIntegrations(params *ListGcpIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGcpIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListGcpIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListGcpIntegrations",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListGcpIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListGcpIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListGcpIntegrationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListGitHubInstallations list git hub installations API
+*/
+func (a *Client) ListGitHubInstallations(params *ListGitHubInstallationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGitHubInstallationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListGitHubInstallationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListGitHubInstallations",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/github/installations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListGitHubInstallationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListGitHubInstallationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListGitHubInstallationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListMongoDBAtlasIntegrations list mongo d b atlas integrations API
+*/
+func (a *Client) ListMongoDBAtlasIntegrations(params *ListMongoDBAtlasIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMongoDBAtlasIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListMongoDBAtlasIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListMongoDBAtlasIntegrations",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListMongoDBAtlasIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListMongoDBAtlasIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListMongoDBAtlasIntegrationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ListOpenAppSecretVersions list open app secret versions API
 */
 func (a *Client) ListOpenAppSecretVersions(params *ListOpenAppSecretVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenAppSecretVersionsOK, error) {
@@ -2050,22 +2492,22 @@ func (a *Client) ListOpenAppSecretVersions(params *ListOpenAppSecretVersionsPara
 }
 
 /*
-ListRotationIntegrations list rotation integrations API
+ListSyncInstallations list sync installations API
 */
-func (a *Client) ListRotationIntegrations(params *ListRotationIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRotationIntegrationsOK, error) {
+func (a *Client) ListSyncInstallations(params *ListSyncInstallationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSyncInstallationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListRotationIntegrationsParams()
+		params = NewListSyncInstallationsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ListRotationIntegrations",
+		ID:                 "ListSyncInstallations",
 		Method:             "GET",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/rotation",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListRotationIntegrationsReader{formats: a.formats},
+		Reader:             &ListSyncInstallationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -2078,12 +2520,12 @@ func (a *Client) ListRotationIntegrations(params *ListRotationIntegrationsParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListRotationIntegrationsOK)
+	success, ok := result.(*ListSyncInstallationsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListRotationIntegrationsDefault)
+	unexpectedSuccess := result.(*ListSyncInstallationsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2122,6 +2564,44 @@ func (a *Client) ListSyncIntegrations(params *ListSyncIntegrationsParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListSyncIntegrationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListTwilioIntegrations list twilio integrations API
+*/
+func (a *Client) ListTwilioIntegrations(params *ListTwilioIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTwilioIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListTwilioIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListTwilioIntegrations",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListTwilioIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListTwilioIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListTwilioIntegrationsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

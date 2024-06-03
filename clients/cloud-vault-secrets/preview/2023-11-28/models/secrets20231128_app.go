@@ -38,6 +38,12 @@ type Secrets20231128App struct {
 	// project id
 	ProjectID string `json:"project_id,omitempty"`
 
+	// resource id
+	ResourceID string `json:"resource_id,omitempty"`
+
+	// resource name
+	ResourceName string `json:"resource_name,omitempty"`
+
 	// secret count
 	SecretCount int32 `json:"secret_count,omitempty"`
 

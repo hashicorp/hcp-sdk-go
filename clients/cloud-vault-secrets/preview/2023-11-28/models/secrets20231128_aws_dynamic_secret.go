@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Secrets20231128AwsDynamicSecret secrets 20231128 aws dynamic secret
+// Secrets20231128AwsDynamicSecret AWS
 //
 // swagger:model secrets_20231128AwsDynamicSecret
 type Secrets20231128AwsDynamicSecret struct {
