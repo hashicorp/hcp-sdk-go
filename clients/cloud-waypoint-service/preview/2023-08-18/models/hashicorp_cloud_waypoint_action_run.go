@@ -65,6 +65,9 @@ type HashicorpCloudWaypointActionRun struct {
 
 	// A list of 0-Many status logs.
 	StatusLog []*HashicorpCloudWaypointStatusLog `json:"status_log"`
+
+	// The historical variables used in this specific action run sequence
+	Variables []*HashicorpCloudWaypointActionRunVariable `json:"variables"`
 }
 
 // Validate validates this hashicorp cloud waypoint action run
@@ -108,6 +111,10 @@ func (m *HashicorpCloudWaypointActionRun) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateStatusLog(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVariables(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -300,6 +307,32 @@ func (m *HashicorpCloudWaypointActionRun) validateStatusLog(formats strfmt.Regis
 	return nil
 }
 
+func (m *HashicorpCloudWaypointActionRun) validateVariables(formats strfmt.Registry) error {
+	if swag.IsZero(m.Variables) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Variables); i++ {
+		if swag.IsZero(m.Variables[i]) { // not required
+			continue
+		}
+
+		if m.Variables[i] != nil {
+			if err := m.Variables[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variables" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variables" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint action run based on the context it is used
 func (m *HashicorpCloudWaypointActionRun) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -333,6 +366,10 @@ func (m *HashicorpCloudWaypointActionRun) ContextValidate(ctx context.Context, f
 	}
 
 	if err := m.contextValidateStatusLog(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVariables(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -504,6 +541,31 @@ func (m *HashicorpCloudWaypointActionRun) contextValidateStatusLog(ctx context.C
 					return ve.ValidateName("status_log" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("status_log" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointActionRun) contextValidateVariables(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Variables); i++ {
+
+		if m.Variables[i] != nil {
+
+			if swag.IsZero(m.Variables[i]) { // not required
+				return nil
+			}
+
+			if err := m.Variables[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variables" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variables" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

@@ -46,6 +46,8 @@ type ClientService interface {
 
 	WaypointServiceCreateTFCConfig(params *WaypointServiceCreateTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateTFCConfigOK, error)
 
+	WaypointServiceCreateVariable(params *WaypointServiceCreateVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateVariableOK, error)
+
 	WaypointServiceDeleteActionConfig(params *WaypointServiceDeleteActionConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteActionConfigOK, error)
 
 	WaypointServiceDeleteAddOnDefinition(params *WaypointServiceDeleteAddOnDefinitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteAddOnDefinitionOK, error)
@@ -65,6 +67,8 @@ type ClientService interface {
 	WaypointServiceDeleteNamespace(params *WaypointServiceDeleteNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteNamespaceOK, error)
 
 	WaypointServiceDeleteTFCConfig(params *WaypointServiceDeleteTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteTFCConfigOK, error)
+
+	WaypointServiceDeleteVariable(params *WaypointServiceDeleteVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteVariableOK, error)
 
 	WaypointServiceDestroyAddOn(params *WaypointServiceDestroyAddOnParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDestroyAddOnOK, error)
 
@@ -110,6 +114,8 @@ type ClientService interface {
 
 	WaypointServiceGetTFRunStatus(params *WaypointServiceGetTFRunStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFRunStatusOK, error)
 
+	WaypointServiceGetVariable(params *WaypointServiceGetVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetVariableOK, error)
+
 	WaypointServiceListActionConfigs(params *WaypointServiceListActionConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionConfigsOK, error)
 
 	WaypointServiceListActionRuns(params *WaypointServiceListActionRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionRunsOK, error)
@@ -135,6 +141,8 @@ type ClientService interface {
 	WaypointServiceListTFCOrganizations(params *WaypointServiceListTFCOrganizationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListTFCOrganizationsOK, error)
 
 	WaypointServiceListTFCProjects(params *WaypointServiceListTFCProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListTFCProjectsOK, error)
+
+	WaypointServiceListVariables(params *WaypointServiceListVariablesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListVariablesOK, error)
 
 	WaypointServiceQueueAgentOperation(params *WaypointServiceQueueAgentOperationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceQueueAgentOperationOK, error)
 
@@ -186,9 +194,15 @@ type ClientService interface {
 
 	WaypointServiceUpdateApplicationTemplate4(params *WaypointServiceUpdateApplicationTemplate4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate4OK, error)
 
+	WaypointServiceUpdateApplicationTemplate5(params *WaypointServiceUpdateApplicationTemplate5Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate5OK, error)
+
+	WaypointServiceUpdateApplicationTemplate6(params *WaypointServiceUpdateApplicationTemplate6Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate6OK, error)
+
 	WaypointServiceUpdateApplicationsList(params *WaypointServiceUpdateApplicationsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationsListOK, error)
 
 	WaypointServiceUpdateTFCConfig(params *WaypointServiceUpdateTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateTFCConfigOK, error)
+
+	WaypointServiceUpdateVariable(params *WaypointServiceUpdateVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateVariableOK, error)
 
 	WaypointServiceValidateAgentGroups(params *WaypointServiceValidateAgentGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceValidateAgentGroupsOK, error)
 
@@ -534,6 +548,44 @@ func (a *Client) WaypointServiceCreateTFCConfig(params *WaypointServiceCreateTFC
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceCreateTFCConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceCreateVariable waypoint service create variable API
+*/
+func (a *Client) WaypointServiceCreateVariable(params *WaypointServiceCreateVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateVariableOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceCreateVariableParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_CreateVariable",
+		Method:             "POST",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/variable",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceCreateVariableReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceCreateVariableOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceCreateVariableDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -914,6 +966,44 @@ func (a *Client) WaypointServiceDeleteTFCConfig(params *WaypointServiceDeleteTFC
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceDeleteTFCConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceDeleteVariable waypoint service delete variable API
+*/
+func (a *Client) WaypointServiceDeleteVariable(params *WaypointServiceDeleteVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteVariableOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceDeleteVariableParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_DeleteVariable",
+		Method:             "DELETE",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/variable",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceDeleteVariableReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceDeleteVariableOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceDeleteVariableDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1754,6 +1844,44 @@ func (a *Client) WaypointServiceGetTFRunStatus(params *WaypointServiceGetTFRunSt
 }
 
 /*
+WaypointServiceGetVariable waypoint service get variable API
+*/
+func (a *Client) WaypointServiceGetVariable(params *WaypointServiceGetVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetVariableOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetVariableParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetVariable",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/variable",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetVariableReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetVariableOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetVariableDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 WaypointServiceListActionConfigs waypoint service list action configs API
 */
 func (a *Client) WaypointServiceListActionConfigs(params *WaypointServiceListActionConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionConfigsOK, error) {
@@ -2244,6 +2372,44 @@ func (a *Client) WaypointServiceListTFCProjects(params *WaypointServiceListTFCPr
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceListTFCProjectsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceListVariables waypoint service list variables API
+*/
+func (a *Client) WaypointServiceListVariables(params *WaypointServiceListVariablesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListVariablesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceListVariablesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_ListVariables",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/variables",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceListVariablesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceListVariablesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceListVariablesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -3198,6 +3364,82 @@ func (a *Client) WaypointServiceUpdateApplicationTemplate4(params *WaypointServi
 }
 
 /*
+WaypointServiceUpdateApplicationTemplate5 updates application template updates an existing application template
+*/
+func (a *Client) WaypointServiceUpdateApplicationTemplate5(params *WaypointServiceUpdateApplicationTemplate5Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate5OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUpdateApplicationTemplate5Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UpdateApplicationTemplate5",
+		Method:             "PATCH",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/templates/{existing_application_template.id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUpdateApplicationTemplate5Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUpdateApplicationTemplate5OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUpdateApplicationTemplate5Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceUpdateApplicationTemplate6 updates application template updates an existing application template
+*/
+func (a *Client) WaypointServiceUpdateApplicationTemplate6(params *WaypointServiceUpdateApplicationTemplate6Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate6OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUpdateApplicationTemplate6Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UpdateApplicationTemplate6",
+		Method:             "PATCH",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/templates/by-name/{existing_application_template.name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUpdateApplicationTemplate6Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUpdateApplicationTemplate6OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUpdateApplicationTemplate6Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 WaypointServiceUpdateApplicationsList ns o t e briancain in the future this could be used as part of a application template upgrade i e apply updates to all inherited apps in a single rpc
 */
 func (a *Client) WaypointServiceUpdateApplicationsList(params *WaypointServiceUpdateApplicationsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationsListOK, error) {
@@ -3270,6 +3512,44 @@ func (a *Client) WaypointServiceUpdateTFCConfig(params *WaypointServiceUpdateTFC
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceUpdateTFCConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceUpdateVariable waypoint service update variable API
+*/
+func (a *Client) WaypointServiceUpdateVariable(params *WaypointServiceUpdateVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateVariableOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUpdateVariableParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UpdateVariable",
+		Method:             "PATCH",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/variable",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUpdateVariableReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUpdateVariableOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUpdateVariableDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

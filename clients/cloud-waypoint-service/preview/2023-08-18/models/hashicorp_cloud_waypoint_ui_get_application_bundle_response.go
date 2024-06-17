@@ -25,6 +25,9 @@ type HashicorpCloudWaypointUIGetApplicationBundleResponse struct {
 
 	// The retrieved application
 	Application *HashicorpCloudWaypointApplication `json:"application,omitempty"`
+
+	// the variables set on the TF workspace
+	InputVariables []*HashicorpCloudWaypointInputVariable `json:"input_variables"`
 }
 
 // Validate validates this hashicorp cloud waypoint UI get application bundle response
@@ -36,6 +39,10 @@ func (m *HashicorpCloudWaypointUIGetApplicationBundleResponse) Validate(formats 
 	}
 
 	if err := m.validateApplication(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInputVariables(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -90,6 +97,32 @@ func (m *HashicorpCloudWaypointUIGetApplicationBundleResponse) validateApplicati
 	return nil
 }
 
+func (m *HashicorpCloudWaypointUIGetApplicationBundleResponse) validateInputVariables(formats strfmt.Registry) error {
+	if swag.IsZero(m.InputVariables) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InputVariables); i++ {
+		if swag.IsZero(m.InputVariables[i]) { // not required
+			continue
+		}
+
+		if m.InputVariables[i] != nil {
+			if err := m.InputVariables[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("input_variables" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("input_variables" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint UI get application bundle response based on the context it is used
 func (m *HashicorpCloudWaypointUIGetApplicationBundleResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -99,6 +132,10 @@ func (m *HashicorpCloudWaypointUIGetApplicationBundleResponse) ContextValidate(c
 	}
 
 	if err := m.contextValidateApplication(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInputVariables(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -149,6 +186,31 @@ func (m *HashicorpCloudWaypointUIGetApplicationBundleResponse) contextValidateAp
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointUIGetApplicationBundleResponse) contextValidateInputVariables(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InputVariables); i++ {
+
+		if m.InputVariables[i] != nil {
+
+			if swag.IsZero(m.InputVariables[i]) { // not required
+				return nil
+			}
+
+			if err := m.InputVariables[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("input_variables" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("input_variables" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

@@ -23,7 +23,7 @@ type HashicorpCloudWaypointListActionConfigResponse struct {
 	// action configs
 	ActionConfigs []*HashicorpCloudWaypointActionConfig `json:"action_configs"`
 
-	// pagination
+	// Pagination
 	Pagination *cloud.HashicorpCloudCommonPaginationResponse `json:"pagination,omitempty"`
 }
 
