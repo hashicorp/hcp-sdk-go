@@ -34,6 +34,9 @@ type HashicorpCloudWaypointApplicationTemplate struct {
 	// A list of descriptive strings that can be applied to the ApplicationTemplate.
 	Labels []string `json:"labels"`
 
+	// module_source is where to find the source code for the desired child module.
+	ModuleSource string `json:"module_source,omitempty"`
+
 	// Unique name of the ApplicationTemplate
 	Name string `json:"name,omitempty"`
 
