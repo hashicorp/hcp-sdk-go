@@ -26,6 +26,9 @@ type HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody struct {
 	// A list of descriptive labels for an Add-on
 	Labels []string `json:"labels"`
 
+	// module_source is where to find the source code for the desired child module.
+	ModuleSource string `json:"module_source,omitempty"`
+
 	// Name of the Add-on definition
 	Name string `json:"name,omitempty"`
 
