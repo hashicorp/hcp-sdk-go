@@ -1,3 +1,8 @@
+## v0.101.0 (July 03, 2024)
+
+IMPROVEMENTS:
+
+* Update team name for cloud foundations to access-control [[GH-261](https://github.com/hashicorp/hcp-sdk-go/pull/261)]
 ## v0.100.0 (June 26, 2024)
 
 ## v0.99.0 (June 19, 2024)
