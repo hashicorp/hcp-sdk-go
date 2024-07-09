@@ -142,8 +142,6 @@ type ClientService interface {
 
 	WaypointServiceListTFCOrganizations(params *WaypointServiceListTFCOrganizationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListTFCOrganizationsOK, error)
 
-	WaypointServiceListTFCOrganizations2(params *WaypointServiceListTFCOrganizations2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListTFCOrganizations2OK, error)
-
 	WaypointServiceListTFCProjects(params *WaypointServiceListTFCProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListTFCProjectsOK, error)
 
 	WaypointServiceListVariables(params *WaypointServiceListVariablesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListVariablesOK, error)
@@ -2378,44 +2376,6 @@ func (a *Client) WaypointServiceListTFCOrganizations(params *WaypointServiceList
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceListTFCOrganizationsDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-WaypointServiceListTFCOrganizations2 waypoint service list t f c organizations2 API
-*/
-func (a *Client) WaypointServiceListTFCOrganizations2(params *WaypointServiceListTFCOrganizations2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListTFCOrganizations2OK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewWaypointServiceListTFCOrganizations2Params()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "WaypointService_ListTFCOrganizations2",
-		Method:             "GET",
-		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &WaypointServiceListTFCOrganizations2Reader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*WaypointServiceListTFCOrganizations2OK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*WaypointServiceListTFCOrganizations2Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
