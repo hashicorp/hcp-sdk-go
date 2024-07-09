@@ -33,6 +33,9 @@ type HashicorpCloudWaypointUIActionConfigBundle struct {
 
 	// The total number of runs for this action_config
 	TotalRuns *HashicorpCloudWaypointUIActionConfigBundleTotalRuns `json:"total_runs,omitempty"`
+
+	// The list of variables this action has been defined to use
+	VariablesUsed []*HashicorpCloudWaypointUIActionConfigBundleVariable `json:"variables_used"`
 }
 
 // Validate validates this hashicorp cloud waypoint UI action config bundle
@@ -56,6 +59,10 @@ func (m *HashicorpCloudWaypointUIActionConfigBundle) Validate(formats strfmt.Reg
 	}
 
 	if err := m.validateTotalRuns(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVariablesUsed(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -174,6 +181,32 @@ func (m *HashicorpCloudWaypointUIActionConfigBundle) validateTotalRuns(formats s
 	return nil
 }
 
+func (m *HashicorpCloudWaypointUIActionConfigBundle) validateVariablesUsed(formats strfmt.Registry) error {
+	if swag.IsZero(m.VariablesUsed) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.VariablesUsed); i++ {
+		if swag.IsZero(m.VariablesUsed[i]) { // not required
+			continue
+		}
+
+		if m.VariablesUsed[i] != nil {
+			if err := m.VariablesUsed[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variables_used" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variables_used" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint UI action config bundle based on the context it is used
 func (m *HashicorpCloudWaypointUIActionConfigBundle) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -195,6 +228,10 @@ func (m *HashicorpCloudWaypointUIActionConfigBundle) ContextValidate(ctx context
 	}
 
 	if err := m.contextValidateTotalRuns(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVariablesUsed(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -312,6 +349,31 @@ func (m *HashicorpCloudWaypointUIActionConfigBundle) contextValidateTotalRuns(ct
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointUIActionConfigBundle) contextValidateVariablesUsed(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.VariablesUsed); i++ {
+
+		if m.VariablesUsed[i] != nil {
+
+			if swag.IsZero(m.VariablesUsed[i]) { // not required
+				return nil
+			}
+
+			if err := m.VariablesUsed[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variables_used" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variables_used" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

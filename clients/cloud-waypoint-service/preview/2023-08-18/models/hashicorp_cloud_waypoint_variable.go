@@ -30,10 +30,13 @@ type HashicorpCloudWaypointVariable struct {
 	// Name of the variable
 	Key string `json:"key,omitempty"`
 
+	// Can be overridden by the user on use. Cannot be updated once created.
+	Overridable bool `json:"overridable,omitempty"`
+
 	// The scope that this variable is valid for
 	Scope *HashicorpCloudWaypointVariableScope `json:"scope,omitempty"`
 
-	// Whether the variable is sensitive
+	// Whether the variable is sensitive. Cannot be updated once created.
 	Sensitive bool `json:"sensitive,omitempty"`
 
 	// The type of the variable

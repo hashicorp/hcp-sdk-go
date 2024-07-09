@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -26,6 +27,9 @@ type HashicorpCloudWaypointWaypointServiceRunActionBody struct {
 
 	// Optional scope to set for running the action
 	Scope *HashicorpCloudWaypointActionRunScope `json:"scope,omitempty"`
+
+	// Optional variables to override in the action run
+	VariableOverrides []*HashicorpCloudWaypointRunActionRequestVariableOverride `json:"variable_overrides"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service run action body
@@ -37,6 +41,10 @@ func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) Validate(formats st
 	}
 
 	if err := m.validateScope(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVariableOverrides(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -84,6 +92,32 @@ func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) validateScope(forma
 	return nil
 }
 
+func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) validateVariableOverrides(formats strfmt.Registry) error {
+	if swag.IsZero(m.VariableOverrides) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.VariableOverrides); i++ {
+		if swag.IsZero(m.VariableOverrides[i]) { // not required
+			continue
+		}
+
+		if m.VariableOverrides[i] != nil {
+			if err := m.VariableOverrides[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variable_overrides" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variable_overrides" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint waypoint service run action body based on the context it is used
 func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -93,6 +127,10 @@ func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) ContextValidate(ctx
 	}
 
 	if err := m.contextValidateScope(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVariableOverrides(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -139,6 +177,31 @@ func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) contextValidateScop
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceRunActionBody) contextValidateVariableOverrides(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.VariableOverrides); i++ {
+
+		if m.VariableOverrides[i] != nil {
+
+			if swag.IsZero(m.VariableOverrides[i]) { // not required
+				return nil
+			}
+
+			if err := m.VariableOverrides[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variable_overrides" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variable_overrides" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

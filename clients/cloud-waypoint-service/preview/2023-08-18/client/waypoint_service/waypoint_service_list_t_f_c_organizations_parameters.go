@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-waypoint-service/preview/2023-08-18/models"
 )
 
 // NewWaypointServiceListTFCOrganizationsParams creates a new WaypointServiceListTFCOrganizationsParams object,
@@ -61,14 +63,11 @@ WaypointServiceListTFCOrganizationsParams contains all the parameters to send to
 */
 type WaypointServiceListTFCOrganizationsParams struct {
 
+	// Body.
+	Body *models.HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody
+
 	// NamespaceID.
 	NamespaceID string
-
-	/* Token.
-
-	   Token to use with the TFC API. If this is blank, the stored token will be used.
-	*/
-	Token *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -123,6 +122,17 @@ func (o *WaypointServiceListTFCOrganizationsParams) SetHTTPClient(client *http.C
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the waypoint service list t f c organizations params
+func (o *WaypointServiceListTFCOrganizationsParams) WithBody(body *models.HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody) *WaypointServiceListTFCOrganizationsParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the waypoint service list t f c organizations params
+func (o *WaypointServiceListTFCOrganizationsParams) SetBody(body *models.HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody) {
+	o.Body = body
+}
+
 // WithNamespaceID adds the namespaceID to the waypoint service list t f c organizations params
 func (o *WaypointServiceListTFCOrganizationsParams) WithNamespaceID(namespaceID string) *WaypointServiceListTFCOrganizationsParams {
 	o.SetNamespaceID(namespaceID)
@@ -134,17 +144,6 @@ func (o *WaypointServiceListTFCOrganizationsParams) SetNamespaceID(namespaceID s
 	o.NamespaceID = namespaceID
 }
 
-// WithToken adds the token to the waypoint service list t f c organizations params
-func (o *WaypointServiceListTFCOrganizationsParams) WithToken(token *string) *WaypointServiceListTFCOrganizationsParams {
-	o.SetToken(token)
-	return o
-}
-
-// SetToken adds the token to the waypoint service list t f c organizations params
-func (o *WaypointServiceListTFCOrganizationsParams) SetToken(token *string) {
-	o.Token = token
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *WaypointServiceListTFCOrganizationsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -152,27 +151,15 @@ func (o *WaypointServiceListTFCOrganizationsParams) WriteToRequest(r runtime.Cli
 		return err
 	}
 	var res []error
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
+	}
 
 	// path param namespace.id
 	if err := r.SetPathParam("namespace.id", o.NamespaceID); err != nil {
 		return err
-	}
-
-	if o.Token != nil {
-
-		// query param token
-		var qrToken string
-
-		if o.Token != nil {
-			qrToken = *o.Token
-		}
-		qToken := qrToken
-		if qToken != "" {
-
-			if err := r.SetQueryParam("token", qToken); err != nil {
-				return err
-			}
-		}
 	}
 
 	if len(res) > 0 {

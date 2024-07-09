@@ -87,11 +87,11 @@ func (o *WaypointServiceListTFCOrganizationsOK) Code() int {
 }
 
 func (o *WaypointServiceListTFCOrganizationsOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] waypointServiceListTFCOrganizationsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] waypointServiceListTFCOrganizationsOK  %+v", 200, o.Payload)
 }
 
 func (o *WaypointServiceListTFCOrganizationsOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] waypointServiceListTFCOrganizationsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] waypointServiceListTFCOrganizationsOK  %+v", 200, o.Payload)
 }
 
 func (o *WaypointServiceListTFCOrganizationsOK) GetPayload() *models.HashicorpCloudWaypointListTFCOrganizationsResponse {
@@ -159,11 +159,11 @@ func (o *WaypointServiceListTFCOrganizationsDefault) Code() int {
 }
 
 func (o *WaypointServiceListTFCOrganizationsDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] WaypointService_ListTFCOrganizations default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] WaypointService_ListTFCOrganizations default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *WaypointServiceListTFCOrganizationsDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] WaypointService_ListTFCOrganizations default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] WaypointService_ListTFCOrganizations default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *WaypointServiceListTFCOrganizationsDefault) GetPayload() *cloud.GoogleRPCStatus {
