@@ -38,6 +38,9 @@ type Secrets20231128AwsIntegration struct {
 
 	// updated by id
 	UpdatedByID string `json:"updated_by_id,omitempty"`
+
+	// used by
+	UsedBy map[string]Secrets20231128IntegrationUsage `json:"used_by,omitempty"`
 }
 
 // Validate validates this secrets 20231128 aws integration
@@ -53,6 +56,10 @@ func (m *Secrets20231128AwsIntegration) Validate(formats strfmt.Registry) error 
 	}
 
 	if err := m.validateUpdatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUsedBy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -105,11 +112,41 @@ func (m *Secrets20231128AwsIntegration) validateUpdatedAt(formats strfmt.Registr
 	return nil
 }
 
+func (m *Secrets20231128AwsIntegration) validateUsedBy(formats strfmt.Registry) error {
+	if swag.IsZero(m.UsedBy) { // not required
+		return nil
+	}
+
+	for k := range m.UsedBy {
+
+		if err := validate.Required("used_by"+"."+k, "body", m.UsedBy[k]); err != nil {
+			return err
+		}
+		if val, ok := m.UsedBy[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("used_by" + "." + k)
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("used_by" + "." + k)
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this secrets 20231128 aws integration based on the context it is used
 func (m *Secrets20231128AwsIntegration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateFederatedWorkloadIdentity(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUsedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -135,6 +172,21 @@ func (m *Secrets20231128AwsIntegration) contextValidateFederatedWorkloadIdentity
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128AwsIntegration) contextValidateUsedBy(ctx context.Context, formats strfmt.Registry) error {
+
+	for k := range m.UsedBy {
+
+		if val, ok := m.UsedBy[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	return nil

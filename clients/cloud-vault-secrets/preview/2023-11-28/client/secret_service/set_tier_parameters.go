@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewSetTierParams creates a new SetTierParams object,
@@ -62,7 +64,7 @@ SetTierParams contains all the parameters to send to the API endpoint
 type SetTierParams struct {
 
 	// Body.
-	Body SetTierBody
+	Body *models.SecretServiceSetTierBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -121,13 +123,13 @@ func (o *SetTierParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the set tier params
-func (o *SetTierParams) WithBody(body SetTierBody) *SetTierParams {
+func (o *SetTierParams) WithBody(body *models.SecretServiceSetTierBody) *SetTierParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the set tier params
-func (o *SetTierParams) SetBody(body SetTierBody) {
+func (o *SetTierParams) SetBody(body *models.SecretServiceSetTierBody) {
 	o.Body = body
 }
 
@@ -149,8 +151,10 @@ func (o *SetTierParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regis
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

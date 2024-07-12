@@ -6,13 +6,11 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
@@ -126,7 +124,7 @@ An unexpected error response.
 type CreateTwilioIntegrationDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this create twilio integration default response has a 2xx status code
@@ -167,65 +165,18 @@ func (o *CreateTwilioIntegrationDefault) String() string {
 	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config][%d] CreateTwilioIntegration default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateTwilioIntegrationDefault) GetPayload() *models.RPCStatus {
+func (o *CreateTwilioIntegrationDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *CreateTwilioIntegrationDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-CreateTwilioIntegrationBody create twilio integration body
-swagger:model CreateTwilioIntegrationBody
-*/
-type CreateTwilioIntegrationBody struct {
-
-	// integration name
-	IntegrationName string `json:"integration_name,omitempty"`
-
-	// twilio account sid
-	TwilioAccountSid string `json:"twilio_account_sid,omitempty"`
-
-	// twilio api key secret
-	TwilioAPIKeySecret string `json:"twilio_api_key_secret,omitempty"`
-
-	// twilio api key sid
-	TwilioAPIKeySid string `json:"twilio_api_key_sid,omitempty"`
-}
-
-// Validate validates this create twilio integration body
-func (o *CreateTwilioIntegrationBody) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this create twilio integration body based on context it is used
-func (o *CreateTwilioIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *CreateTwilioIntegrationBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *CreateTwilioIntegrationBody) UnmarshalBinary(b []byte) error {
-	var res CreateTwilioIntegrationBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

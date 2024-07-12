@@ -46,6 +46,9 @@ type Secrets20231128Secret struct {
 
 	// type
 	Type string `json:"type,omitempty"`
+
+	// version count
+	VersionCount string `json:"version_count,omitempty"`
 }
 
 // Validate validates this secrets 20231128 secret

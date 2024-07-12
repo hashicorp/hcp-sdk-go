@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateAzureKvSyncIntegrationParams creates a new CreateAzureKvSyncIntegrationParams object,
@@ -62,7 +64,7 @@ CreateAzureKvSyncIntegrationParams contains all the parameters to send to the AP
 type CreateAzureKvSyncIntegrationParams struct {
 
 	// Body.
-	Body CreateAzureKvSyncIntegrationBody
+	Body *models.SecretServiceCreateAzureKvSyncIntegrationBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -124,13 +126,13 @@ func (o *CreateAzureKvSyncIntegrationParams) SetHTTPClient(client *http.Client) 
 }
 
 // WithBody adds the body to the create azure kv sync integration params
-func (o *CreateAzureKvSyncIntegrationParams) WithBody(body CreateAzureKvSyncIntegrationBody) *CreateAzureKvSyncIntegrationParams {
+func (o *CreateAzureKvSyncIntegrationParams) WithBody(body *models.SecretServiceCreateAzureKvSyncIntegrationBody) *CreateAzureKvSyncIntegrationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create azure kv sync integration params
-func (o *CreateAzureKvSyncIntegrationParams) SetBody(body CreateAzureKvSyncIntegrationBody) {
+func (o *CreateAzureKvSyncIntegrationParams) SetBody(body *models.SecretServiceCreateAzureKvSyncIntegrationBody) {
 	o.Body = body
 }
 
@@ -163,8 +165,10 @@ func (o *CreateAzureKvSyncIntegrationParams) WriteToRequest(r runtime.ClientRequ
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

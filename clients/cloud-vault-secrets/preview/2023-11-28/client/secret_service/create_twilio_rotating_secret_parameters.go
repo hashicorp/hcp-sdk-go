@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateTwilioRotatingSecretParams creates a new CreateTwilioRotatingSecretParams object,
@@ -65,7 +67,7 @@ type CreateTwilioRotatingSecretParams struct {
 	AppName string
 
 	// Body.
-	Body CreateTwilioRotatingSecretBody
+	Body *models.SecretServiceCreateTwilioRotatingSecretBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -138,13 +140,13 @@ func (o *CreateTwilioRotatingSecretParams) SetAppName(appName string) {
 }
 
 // WithBody adds the body to the create twilio rotating secret params
-func (o *CreateTwilioRotatingSecretParams) WithBody(body CreateTwilioRotatingSecretBody) *CreateTwilioRotatingSecretParams {
+func (o *CreateTwilioRotatingSecretParams) WithBody(body *models.SecretServiceCreateTwilioRotatingSecretBody) *CreateTwilioRotatingSecretParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create twilio rotating secret params
-func (o *CreateTwilioRotatingSecretParams) SetBody(body CreateTwilioRotatingSecretBody) {
+func (o *CreateTwilioRotatingSecretParams) SetBody(body *models.SecretServiceCreateTwilioRotatingSecretBody) {
 	o.Body = body
 }
 
@@ -182,8 +184,10 @@ func (o *CreateTwilioRotatingSecretParams) WriteToRequest(r runtime.ClientReques
 	if err := r.SetPathParam("app_name", o.AppName); err != nil {
 		return err
 	}
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

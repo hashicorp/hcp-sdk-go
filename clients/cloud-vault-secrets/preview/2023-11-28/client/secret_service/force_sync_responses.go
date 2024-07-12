@@ -6,14 +6,11 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
@@ -125,7 +122,7 @@ An unexpected error response.
 type ForceSyncDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this force sync default response has a 2xx status code
@@ -166,120 +163,18 @@ func (o *ForceSyncDefault) String() string {
 	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/force][%d] ForceSync default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ForceSyncDefault) GetPayload() *models.RPCStatus {
+func (o *ForceSyncDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *ForceSyncDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-ForceSyncBody force sync body
-swagger:model ForceSyncBody
-*/
-type ForceSyncBody struct {
-
-	// app name
-	AppName string `json:"app_name,omitempty"`
-
-	// operation
-	Operation *models.ForceSyncRequestOPERATION `json:"operation,omitempty"`
-
-	// sync integration name
-	SyncIntegrationName string `json:"sync_integration_name,omitempty"`
-}
-
-// Validate validates this force sync body
-func (o *ForceSyncBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateOperation(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *ForceSyncBody) validateOperation(formats strfmt.Registry) error {
-	if swag.IsZero(o.Operation) { // not required
-		return nil
-	}
-
-	if o.Operation != nil {
-		if err := o.Operation.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "operation")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "operation")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this force sync body based on the context it is used
-func (o *ForceSyncBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateOperation(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *ForceSyncBody) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Operation != nil {
-
-		if swag.IsZero(o.Operation) { // not required
-			return nil
-		}
-
-		if err := o.Operation.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "operation")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "operation")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *ForceSyncBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *ForceSyncBody) UnmarshalBinary(b []byte) error {
-	var res ForceSyncBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateMongoDBAtlasIntegrationParams creates a new CreateMongoDBAtlasIntegrationParams object,
@@ -62,7 +64,7 @@ CreateMongoDBAtlasIntegrationParams contains all the parameters to send to the A
 type CreateMongoDBAtlasIntegrationParams struct {
 
 	// Body.
-	Body CreateMongoDBAtlasIntegrationBody
+	Body *models.SecretServiceCreateMongoDBAtlasIntegrationBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -124,13 +126,13 @@ func (o *CreateMongoDBAtlasIntegrationParams) SetHTTPClient(client *http.Client)
 }
 
 // WithBody adds the body to the create mongo d b atlas integration params
-func (o *CreateMongoDBAtlasIntegrationParams) WithBody(body CreateMongoDBAtlasIntegrationBody) *CreateMongoDBAtlasIntegrationParams {
+func (o *CreateMongoDBAtlasIntegrationParams) WithBody(body *models.SecretServiceCreateMongoDBAtlasIntegrationBody) *CreateMongoDBAtlasIntegrationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create mongo d b atlas integration params
-func (o *CreateMongoDBAtlasIntegrationParams) SetBody(body CreateMongoDBAtlasIntegrationBody) {
+func (o *CreateMongoDBAtlasIntegrationParams) SetBody(body *models.SecretServiceCreateMongoDBAtlasIntegrationBody) {
 	o.Body = body
 }
 
@@ -163,8 +165,10 @@ func (o *CreateMongoDBAtlasIntegrationParams) WriteToRequest(r runtime.ClientReq
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

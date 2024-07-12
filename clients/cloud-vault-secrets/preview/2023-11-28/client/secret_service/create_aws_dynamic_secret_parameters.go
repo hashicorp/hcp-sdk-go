@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateAwsDynamicSecretParams creates a new CreateAwsDynamicSecretParams object,
@@ -65,7 +67,7 @@ type CreateAwsDynamicSecretParams struct {
 	AppName string
 
 	// Body.
-	Body CreateAwsDynamicSecretBody
+	Body *models.SecretServiceCreateAwsDynamicSecretBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -138,13 +140,13 @@ func (o *CreateAwsDynamicSecretParams) SetAppName(appName string) {
 }
 
 // WithBody adds the body to the create aws dynamic secret params
-func (o *CreateAwsDynamicSecretParams) WithBody(body CreateAwsDynamicSecretBody) *CreateAwsDynamicSecretParams {
+func (o *CreateAwsDynamicSecretParams) WithBody(body *models.SecretServiceCreateAwsDynamicSecretBody) *CreateAwsDynamicSecretParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create aws dynamic secret params
-func (o *CreateAwsDynamicSecretParams) SetBody(body CreateAwsDynamicSecretBody) {
+func (o *CreateAwsDynamicSecretParams) SetBody(body *models.SecretServiceCreateAwsDynamicSecretBody) {
 	o.Body = body
 }
 
@@ -182,8 +184,10 @@ func (o *CreateAwsDynamicSecretParams) WriteToRequest(r runtime.ClientRequest, r
 	if err := r.SetPathParam("app_name", o.AppName); err != nil {
 		return err
 	}
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

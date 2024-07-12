@@ -6,13 +6,11 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
@@ -126,7 +124,7 @@ An unexpected error response.
 type CreateAppDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this create app default response has a 2xx status code
@@ -167,62 +165,18 @@ func (o *CreateAppDefault) String() string {
 	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps][%d] CreateApp default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateAppDefault) GetPayload() *models.RPCStatus {
+func (o *CreateAppDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *CreateAppDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-CreateAppBody create app body
-swagger:model CreateAppBody
-*/
-type CreateAppBody struct {
-
-	// description
-	Description string `json:"description,omitempty"`
-
-	// name
-	Name string `json:"name,omitempty"`
-
-	// sync integrations
-	SyncIntegrations []string `json:"sync_integrations"`
-}
-
-// Validate validates this create app body
-func (o *CreateAppBody) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this create app body based on context it is used
-func (o *CreateAppBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *CreateAppBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *CreateAppBody) UnmarshalBinary(b []byte) error {
-	var res CreateAppBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

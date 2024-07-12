@@ -98,6 +98,9 @@ type OpenAppSecretsParams struct {
 	// ProjectID.
 	ProjectID string
 
+	// Types.
+	Types []string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -217,6 +220,17 @@ func (o *OpenAppSecretsParams) SetProjectID(projectID string) {
 	o.ProjectID = projectID
 }
 
+// WithTypes adds the types to the open app secrets params
+func (o *OpenAppSecretsParams) WithTypes(types []string) *OpenAppSecretsParams {
+	o.SetTypes(types)
+	return o
+}
+
+// SetTypes adds the types to the open app secrets params
+func (o *OpenAppSecretsParams) SetTypes(types []string) {
+	o.Types = types
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *OpenAppSecretsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -291,8 +305,36 @@ func (o *OpenAppSecretsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 
+	if o.Types != nil {
+
+		// binding items for types
+		joinedTypes := o.bindParamTypes(reg)
+
+		// query array param types
+		if err := r.SetQueryParam("types", joinedTypes...); err != nil {
+			return err
+		}
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamOpenAppSecrets binds the parameter types
+func (o *OpenAppSecretsParams) bindParamTypes(formats strfmt.Registry) []string {
+	typesIR := o.Types
+
+	var typesIC []string
+	for _, typesIIR := range typesIR { // explode []string
+
+		typesIIV := typesIIR // string as string
+		typesIC = append(typesIC, typesIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	typesIS := swag.JoinByFormat(typesIC, "multi")
+
+	return typesIS
 }

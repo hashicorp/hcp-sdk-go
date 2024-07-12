@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewUpdateAppParams creates a new UpdateAppParams object,
@@ -62,7 +64,7 @@ UpdateAppParams contains all the parameters to send to the API endpoint
 type UpdateAppParams struct {
 
 	// Body.
-	Body UpdateAppBody
+	Body *models.SecretServiceUpdateAppBody
 
 	// Name.
 	Name string
@@ -127,13 +129,13 @@ func (o *UpdateAppParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the update app params
-func (o *UpdateAppParams) WithBody(body UpdateAppBody) *UpdateAppParams {
+func (o *UpdateAppParams) WithBody(body *models.SecretServiceUpdateAppBody) *UpdateAppParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the update app params
-func (o *UpdateAppParams) SetBody(body UpdateAppBody) {
+func (o *UpdateAppParams) SetBody(body *models.SecretServiceUpdateAppBody) {
 	o.Body = body
 }
 
@@ -177,8 +179,10 @@ func (o *UpdateAppParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param name

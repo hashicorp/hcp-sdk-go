@@ -23,8 +23,8 @@ type Secrets20231128OpenSecretRotatingVersion struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// created by
-	CreatedBy *Secrets20231128Principal `json:"created_by,omitempty"`
+	// created by id
+	CreatedByID string `json:"created_by_id,omitempty"`
 
 	// expires at
 	// Format: date-time
@@ -49,10 +49,6 @@ func (m *Secrets20231128OpenSecretRotatingVersion) Validate(formats strfmt.Regis
 	var res []error
 
 	if err := m.validateCreatedAt(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateCreatedBy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -82,25 +78,6 @@ func (m *Secrets20231128OpenSecretRotatingVersion) validateCreatedAt(formats str
 	return nil
 }
 
-func (m *Secrets20231128OpenSecretRotatingVersion) validateCreatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedBy) { // not required
-		return nil
-	}
-
-	if m.CreatedBy != nil {
-		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *Secrets20231128OpenSecretRotatingVersion) validateExpiresAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.ExpiresAt) { // not required
 		return nil
@@ -125,38 +102,8 @@ func (m *Secrets20231128OpenSecretRotatingVersion) validateRevokedAt(formats str
 	return nil
 }
 
-// ContextValidate validate this secrets 20231128 open secret rotating version based on the context it is used
+// ContextValidate validates this secrets 20231128 open secret rotating version based on context it is used
 func (m *Secrets20231128OpenSecretRotatingVersion) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *Secrets20231128OpenSecretRotatingVersion) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.CreatedBy != nil {
-
-		if swag.IsZero(m.CreatedBy) { // not required
-			return nil
-		}
-
-		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

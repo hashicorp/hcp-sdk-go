@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateMongoDBAtlasRotatingSecretParams creates a new CreateMongoDBAtlasRotatingSecretParams object,
@@ -65,7 +67,7 @@ type CreateMongoDBAtlasRotatingSecretParams struct {
 	AppName string
 
 	// Body.
-	Body CreateMongoDBAtlasRotatingSecretBody
+	Body *models.SecretServiceCreateMongoDBAtlasRotatingSecretBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -138,13 +140,13 @@ func (o *CreateMongoDBAtlasRotatingSecretParams) SetAppName(appName string) {
 }
 
 // WithBody adds the body to the create mongo d b atlas rotating secret params
-func (o *CreateMongoDBAtlasRotatingSecretParams) WithBody(body CreateMongoDBAtlasRotatingSecretBody) *CreateMongoDBAtlasRotatingSecretParams {
+func (o *CreateMongoDBAtlasRotatingSecretParams) WithBody(body *models.SecretServiceCreateMongoDBAtlasRotatingSecretBody) *CreateMongoDBAtlasRotatingSecretParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create mongo d b atlas rotating secret params
-func (o *CreateMongoDBAtlasRotatingSecretParams) SetBody(body CreateMongoDBAtlasRotatingSecretBody) {
+func (o *CreateMongoDBAtlasRotatingSecretParams) SetBody(body *models.SecretServiceCreateMongoDBAtlasRotatingSecretBody) {
 	o.Body = body
 }
 
@@ -182,8 +184,10 @@ func (o *CreateMongoDBAtlasRotatingSecretParams) WriteToRequest(r runtime.Client
 	if err := r.SetPathParam("app_name", o.AppName); err != nil {
 		return err
 	}
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

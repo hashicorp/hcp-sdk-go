@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateAwsIntegrationParams creates a new CreateAwsIntegrationParams object,
@@ -62,7 +64,7 @@ CreateAwsIntegrationParams contains all the parameters to send to the API endpoi
 type CreateAwsIntegrationParams struct {
 
 	// Body.
-	Body CreateAwsIntegrationBody
+	Body *models.SecretServiceCreateAwsIntegrationBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -124,13 +126,13 @@ func (o *CreateAwsIntegrationParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create aws integration params
-func (o *CreateAwsIntegrationParams) WithBody(body CreateAwsIntegrationBody) *CreateAwsIntegrationParams {
+func (o *CreateAwsIntegrationParams) WithBody(body *models.SecretServiceCreateAwsIntegrationBody) *CreateAwsIntegrationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create aws integration params
-func (o *CreateAwsIntegrationParams) SetBody(body CreateAwsIntegrationBody) {
+func (o *CreateAwsIntegrationParams) SetBody(body *models.SecretServiceCreateAwsIntegrationBody) {
 	o.Body = body
 }
 
@@ -163,8 +165,10 @@ func (o *CreateAwsIntegrationParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

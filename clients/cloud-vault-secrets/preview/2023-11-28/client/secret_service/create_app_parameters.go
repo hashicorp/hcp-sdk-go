@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateAppParams creates a new CreateAppParams object,
@@ -62,7 +64,7 @@ CreateAppParams contains all the parameters to send to the API endpoint
 type CreateAppParams struct {
 
 	// Body.
-	Body CreateAppBody
+	Body *models.SecretServiceCreateAppBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -124,13 +126,13 @@ func (o *CreateAppParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create app params
-func (o *CreateAppParams) WithBody(body CreateAppBody) *CreateAppParams {
+func (o *CreateAppParams) WithBody(body *models.SecretServiceCreateAppBody) *CreateAppParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create app params
-func (o *CreateAppParams) SetBody(body CreateAppBody) {
+func (o *CreateAppParams) SetBody(body *models.SecretServiceCreateAppBody) {
 	o.Body = body
 }
 
@@ -163,8 +165,10 @@ func (o *CreateAppParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

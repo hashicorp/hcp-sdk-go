@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateGhRepoSyncIntegrationParams creates a new CreateGhRepoSyncIntegrationParams object,
@@ -62,7 +64,7 @@ CreateGhRepoSyncIntegrationParams contains all the parameters to send to the API
 type CreateGhRepoSyncIntegrationParams struct {
 
 	// Body.
-	Body CreateGhRepoSyncIntegrationBody
+	Body *models.SecretServiceCreateGhRepoSyncIntegrationBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -124,13 +126,13 @@ func (o *CreateGhRepoSyncIntegrationParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create gh repo sync integration params
-func (o *CreateGhRepoSyncIntegrationParams) WithBody(body CreateGhRepoSyncIntegrationBody) *CreateGhRepoSyncIntegrationParams {
+func (o *CreateGhRepoSyncIntegrationParams) WithBody(body *models.SecretServiceCreateGhRepoSyncIntegrationBody) *CreateGhRepoSyncIntegrationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create gh repo sync integration params
-func (o *CreateGhRepoSyncIntegrationParams) SetBody(body CreateGhRepoSyncIntegrationBody) {
+func (o *CreateGhRepoSyncIntegrationParams) SetBody(body *models.SecretServiceCreateGhRepoSyncIntegrationBody) {
 	o.Body = body
 }
 
@@ -163,8 +165,10 @@ func (o *CreateGhRepoSyncIntegrationParams) WriteToRequest(r runtime.ClientReque
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

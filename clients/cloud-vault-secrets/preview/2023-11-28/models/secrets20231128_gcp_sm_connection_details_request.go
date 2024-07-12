@@ -19,6 +19,9 @@ type Secrets20231128GcpSmConnectionDetailsRequest struct {
 
 	// credentials
 	Credentials string `json:"credentials,omitempty"`
+
+	// locations
+	Locations []string `json:"locations"`
 }
 
 // Validate validates this secrets 20231128 gcp sm connection details request

@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateAppKVSecretParams creates a new CreateAppKVSecretParams object,
@@ -65,7 +67,7 @@ type CreateAppKVSecretParams struct {
 	AppName string
 
 	// Body.
-	Body CreateAppKVSecretBody
+	Body *models.SecretServiceCreateAppKVSecretBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -138,13 +140,13 @@ func (o *CreateAppKVSecretParams) SetAppName(appName string) {
 }
 
 // WithBody adds the body to the create app k v secret params
-func (o *CreateAppKVSecretParams) WithBody(body CreateAppKVSecretBody) *CreateAppKVSecretParams {
+func (o *CreateAppKVSecretParams) WithBody(body *models.SecretServiceCreateAppKVSecretBody) *CreateAppKVSecretParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create app k v secret params
-func (o *CreateAppKVSecretParams) SetBody(body CreateAppKVSecretBody) {
+func (o *CreateAppKVSecretParams) SetBody(body *models.SecretServiceCreateAppKVSecretBody) {
 	o.Body = body
 }
 
@@ -182,8 +184,10 @@ func (o *CreateAppKVSecretParams) WriteToRequest(r runtime.ClientRequest, reg st
 	if err := r.SetPathParam("app_name", o.AppName); err != nil {
 		return err
 	}
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

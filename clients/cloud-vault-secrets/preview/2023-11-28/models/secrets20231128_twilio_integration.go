@@ -29,6 +29,12 @@ type Secrets20231128TwilioIntegration struct {
 	// integration name
 	IntegrationName string `json:"integration_name,omitempty"`
 
+	// name
+	Name string `json:"name,omitempty"`
+
+	// static credential details
+	StaticCredentialDetails *Secrets20231128TwilioStaticCredentialsResponse `json:"static_credential_details,omitempty"`
+
 	// twilio account sid
 	TwilioAccountSid string `json:"twilio_account_sid,omitempty"`
 
@@ -48,6 +54,10 @@ func (m *Secrets20231128TwilioIntegration) Validate(formats strfmt.Registry) err
 	var res []error
 
 	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStaticCredentialDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -73,6 +83,25 @@ func (m *Secrets20231128TwilioIntegration) validateCreatedAt(formats strfmt.Regi
 	return nil
 }
 
+func (m *Secrets20231128TwilioIntegration) validateStaticCredentialDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.StaticCredentialDetails) { // not required
+		return nil
+	}
+
+	if m.StaticCredentialDetails != nil {
+		if err := m.StaticCredentialDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("static_credential_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("static_credential_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128TwilioIntegration) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -85,8 +114,38 @@ func (m *Secrets20231128TwilioIntegration) validateUpdatedAt(formats strfmt.Regi
 	return nil
 }
 
-// ContextValidate validates this secrets 20231128 twilio integration based on context it is used
+// ContextValidate validate this secrets 20231128 twilio integration based on the context it is used
 func (m *Secrets20231128TwilioIntegration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateStaticCredentialDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Secrets20231128TwilioIntegration) contextValidateStaticCredentialDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StaticCredentialDetails != nil {
+
+		if swag.IsZero(m.StaticCredentialDetails) { // not required
+			return nil
+		}
+
+		if err := m.StaticCredentialDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("static_credential_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("static_credential_details")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

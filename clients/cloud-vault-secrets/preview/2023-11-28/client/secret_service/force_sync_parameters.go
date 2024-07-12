@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewForceSyncParams creates a new ForceSyncParams object,
@@ -62,7 +64,7 @@ ForceSyncParams contains all the parameters to send to the API endpoint
 type ForceSyncParams struct {
 
 	// Body.
-	Body ForceSyncBody
+	Body *models.SecretServiceForceSyncBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -124,13 +126,13 @@ func (o *ForceSyncParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the force sync params
-func (o *ForceSyncParams) WithBody(body ForceSyncBody) *ForceSyncParams {
+func (o *ForceSyncParams) WithBody(body *models.SecretServiceForceSyncBody) *ForceSyncParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the force sync params
-func (o *ForceSyncParams) SetBody(body ForceSyncBody) {
+func (o *ForceSyncParams) SetBody(body *models.SecretServiceForceSyncBody) {
 	o.Body = body
 }
 
@@ -163,8 +165,10 @@ func (o *ForceSyncParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

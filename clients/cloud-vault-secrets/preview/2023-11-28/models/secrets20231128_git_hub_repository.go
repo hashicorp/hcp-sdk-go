@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -19,15 +20,76 @@ type Secrets20231128GitHubRepository struct {
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// visibility
+	Visibility *GitHubRepositoryVisibility `json:"visibility,omitempty"`
 }
 
 // Validate validates this secrets 20231128 git hub repository
 func (m *Secrets20231128GitHubRepository) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateVisibility(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this secrets 20231128 git hub repository based on context it is used
+func (m *Secrets20231128GitHubRepository) validateVisibility(formats strfmt.Registry) error {
+	if swag.IsZero(m.Visibility) { // not required
+		return nil
+	}
+
+	if m.Visibility != nil {
+		if err := m.Visibility.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("visibility")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("visibility")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this secrets 20231128 git hub repository based on the context it is used
 func (m *Secrets20231128GitHubRepository) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateVisibility(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Secrets20231128GitHubRepository) contextValidateVisibility(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Visibility != nil {
+
+		if swag.IsZero(m.Visibility) { // not required
+			return nil
+		}
+
+		if err := m.Visibility.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("visibility")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("visibility")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

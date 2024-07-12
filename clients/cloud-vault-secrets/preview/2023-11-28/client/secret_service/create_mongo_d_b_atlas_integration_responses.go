@@ -6,13 +6,11 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
@@ -126,7 +124,7 @@ An unexpected error response.
 type CreateMongoDBAtlasIntegrationDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this create mongo d b atlas integration default response has a 2xx status code
@@ -167,62 +165,18 @@ func (o *CreateMongoDBAtlasIntegrationDefault) String() string {
 	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config][%d] CreateMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateMongoDBAtlasIntegrationDefault) GetPayload() *models.RPCStatus {
+func (o *CreateMongoDBAtlasIntegrationDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *CreateMongoDBAtlasIntegrationDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-CreateMongoDBAtlasIntegrationBody create mongo d b atlas integration body
-swagger:model CreateMongoDBAtlasIntegrationBody
-*/
-type CreateMongoDBAtlasIntegrationBody struct {
-
-	// integration name
-	IntegrationName string `json:"integration_name,omitempty"`
-
-	// mongodb api private key
-	MongodbAPIPrivateKey string `json:"mongodb_api_private_key,omitempty"`
-
-	// mongodb api public key
-	MongodbAPIPublicKey string `json:"mongodb_api_public_key,omitempty"`
-}
-
-// Validate validates this create mongo d b atlas integration body
-func (o *CreateMongoDBAtlasIntegrationBody) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this create mongo d b atlas integration body based on context it is used
-func (o *CreateMongoDBAtlasIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *CreateMongoDBAtlasIntegrationBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *CreateMongoDBAtlasIntegrationBody) UnmarshalBinary(b []byte) error {
-	var res CreateMongoDBAtlasIntegrationBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

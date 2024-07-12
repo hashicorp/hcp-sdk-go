@@ -6,14 +6,11 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
@@ -127,7 +124,7 @@ An unexpected error response.
 type CreateAwsIntegrationDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this create aws integration default response has a 2xx status code
@@ -168,117 +165,18 @@ func (o *CreateAwsIntegrationDefault) String() string {
 	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config][%d] CreateAwsIntegration default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateAwsIntegrationDefault) GetPayload() *models.RPCStatus {
+func (o *CreateAwsIntegrationDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *CreateAwsIntegrationDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-CreateAwsIntegrationBody create aws integration body
-swagger:model CreateAwsIntegrationBody
-*/
-type CreateAwsIntegrationBody struct {
-
-	// federated workload identity
-	FederatedWorkloadIdentity *models.Secrets20231128AwsFederatedWorkloadIdentityRequest `json:"federated_workload_identity,omitempty"`
-
-	// name
-	Name string `json:"name,omitempty"`
-}
-
-// Validate validates this create aws integration body
-func (o *CreateAwsIntegrationBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateFederatedWorkloadIdentity(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateAwsIntegrationBody) validateFederatedWorkloadIdentity(formats strfmt.Registry) error {
-	if swag.IsZero(o.FederatedWorkloadIdentity) { // not required
-		return nil
-	}
-
-	if o.FederatedWorkloadIdentity != nil {
-		if err := o.FederatedWorkloadIdentity.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "federated_workload_identity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "federated_workload_identity")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this create aws integration body based on the context it is used
-func (o *CreateAwsIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateFederatedWorkloadIdentity(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateAwsIntegrationBody) contextValidateFederatedWorkloadIdentity(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.FederatedWorkloadIdentity != nil {
-
-		if swag.IsZero(o.FederatedWorkloadIdentity) { // not required
-			return nil
-		}
-
-		if err := o.FederatedWorkloadIdentity.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "federated_workload_identity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "federated_workload_identity")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *CreateAwsIntegrationBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *CreateAwsIntegrationBody) UnmarshalBinary(b []byte) error {
-	var res CreateAwsIntegrationBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

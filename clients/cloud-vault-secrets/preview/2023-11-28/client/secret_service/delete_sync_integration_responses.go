@@ -122,7 +122,7 @@ An unexpected error response.
 type DeleteSyncIntegrationDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this delete sync integration default response has a 2xx status code
@@ -163,13 +163,13 @@ func (o *DeleteSyncIntegrationDefault) String() string {
 	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/integrations/{name}][%d] DeleteSyncIntegration default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *DeleteSyncIntegrationDefault) GetPayload() *models.RPCStatus {
+func (o *DeleteSyncIntegrationDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *DeleteSyncIntegrationDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

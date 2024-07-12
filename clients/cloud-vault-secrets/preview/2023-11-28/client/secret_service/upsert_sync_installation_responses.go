@@ -6,13 +6,11 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
@@ -126,7 +124,7 @@ An unexpected error response.
 type UpsertSyncInstallationDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this upsert sync installation default response has a 2xx status code
@@ -167,56 +165,18 @@ func (o *UpsertSyncInstallationDefault) String() string {
 	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations][%d] UpsertSyncInstallation default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *UpsertSyncInstallationDefault) GetPayload() *models.RPCStatus {
+func (o *UpsertSyncInstallationDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *UpsertSyncInstallationDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-UpsertSyncInstallationBody upsert sync installation body
-swagger:model UpsertSyncInstallationBody
-*/
-type UpsertSyncInstallationBody struct {
-
-	// name
-	Name string `json:"name,omitempty"`
-}
-
-// Validate validates this upsert sync installation body
-func (o *UpsertSyncInstallationBody) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this upsert sync installation body based on context it is used
-func (o *UpsertSyncInstallationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *UpsertSyncInstallationBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *UpsertSyncInstallationBody) UnmarshalBinary(b []byte) error {
-	var res UpsertSyncInstallationBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

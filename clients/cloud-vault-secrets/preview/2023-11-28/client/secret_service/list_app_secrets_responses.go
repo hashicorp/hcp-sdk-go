@@ -124,7 +124,7 @@ An unexpected error response.
 type ListAppSecretsDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this list app secrets default response has a 2xx status code
@@ -165,13 +165,13 @@ func (o *ListAppSecretsDefault) String() string {
 	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets][%d] ListAppSecrets default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListAppSecretsDefault) GetPayload() *models.RPCStatus {
+func (o *ListAppSecretsDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *ListAppSecretsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

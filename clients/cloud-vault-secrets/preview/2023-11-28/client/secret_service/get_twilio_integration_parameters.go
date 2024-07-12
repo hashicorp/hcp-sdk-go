@@ -64,6 +64,9 @@ type GetTwilioIntegrationParams struct {
 	// IntegrationName.
 	IntegrationName string
 
+	// Name.
+	Name *string
+
 	// OrganizationID.
 	OrganizationID string
 
@@ -134,6 +137,17 @@ func (o *GetTwilioIntegrationParams) SetIntegrationName(integrationName string) 
 	o.IntegrationName = integrationName
 }
 
+// WithName adds the name to the get twilio integration params
+func (o *GetTwilioIntegrationParams) WithName(name *string) *GetTwilioIntegrationParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the get twilio integration params
+func (o *GetTwilioIntegrationParams) SetName(name *string) {
+	o.Name = name
+}
+
 // WithOrganizationID adds the organizationID to the get twilio integration params
 func (o *GetTwilioIntegrationParams) WithOrganizationID(organizationID string) *GetTwilioIntegrationParams {
 	o.SetOrganizationID(organizationID)
@@ -167,6 +181,23 @@ func (o *GetTwilioIntegrationParams) WriteToRequest(r runtime.ClientRequest, reg
 	// path param integration_name
 	if err := r.SetPathParam("integration_name", o.IntegrationName); err != nil {
 		return err
+	}
+
+	if o.Name != nil {
+
+		// query param name
+		var qrName string
+
+		if o.Name != nil {
+			qrName = *o.Name
+		}
+		qName := qrName
+		if qName != "" {
+
+			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
 	}
 
 	// path param organization_id

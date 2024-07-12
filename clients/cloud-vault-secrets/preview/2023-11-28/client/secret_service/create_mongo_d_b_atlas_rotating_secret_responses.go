@@ -6,15 +6,11 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
-	"strconv"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
@@ -128,7 +124,7 @@ An unexpected error response.
 type CreateMongoDBAtlasRotatingSecretDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this create mongo d b atlas rotating secret default response has a 2xx status code
@@ -169,199 +165,18 @@ func (o *CreateMongoDBAtlasRotatingSecretDefault) String() string {
 	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret][%d] CreateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateMongoDBAtlasRotatingSecretDefault) GetPayload() *models.RPCStatus {
+func (o *CreateMongoDBAtlasRotatingSecretDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *CreateMongoDBAtlasRotatingSecretDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-CreateMongoDBAtlasRotatingSecretBody create mongo d b atlas rotating secret body
-swagger:model CreateMongoDBAtlasRotatingSecretBody
-*/
-type CreateMongoDBAtlasRotatingSecretBody struct {
-
-	// mongodb group id
-	MongodbGroupID string `json:"mongodb_group_id,omitempty"`
-
-	// mongodb roles
-	MongodbRoles []*models.Secrets20231128MongoDBRole `json:"mongodb_roles"`
-
-	// mongodb scopes
-	MongodbScopes []*models.Secrets20231128MongoDBScope `json:"mongodb_scopes"`
-
-	// rotation integration name
-	RotationIntegrationName string `json:"rotation_integration_name,omitempty"`
-
-	// rotation policy name
-	RotationPolicyName string `json:"rotation_policy_name,omitempty"`
-
-	// secret name
-	SecretName string `json:"secret_name,omitempty"`
-}
-
-// Validate validates this create mongo d b atlas rotating secret body
-func (o *CreateMongoDBAtlasRotatingSecretBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateMongodbRoles(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := o.validateMongodbScopes(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateMongoDBAtlasRotatingSecretBody) validateMongodbRoles(formats strfmt.Registry) error {
-	if swag.IsZero(o.MongodbRoles) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(o.MongodbRoles); i++ {
-		if swag.IsZero(o.MongodbRoles[i]) { // not required
-			continue
-		}
-
-		if o.MongodbRoles[i] != nil {
-			if err := o.MongodbRoles[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("body" + "." + "mongodb_roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("body" + "." + "mongodb_roles" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-func (o *CreateMongoDBAtlasRotatingSecretBody) validateMongodbScopes(formats strfmt.Registry) error {
-	if swag.IsZero(o.MongodbScopes) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(o.MongodbScopes); i++ {
-		if swag.IsZero(o.MongodbScopes[i]) { // not required
-			continue
-		}
-
-		if o.MongodbScopes[i] != nil {
-			if err := o.MongodbScopes[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("body" + "." + "mongodb_scopes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("body" + "." + "mongodb_scopes" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this create mongo d b atlas rotating secret body based on the context it is used
-func (o *CreateMongoDBAtlasRotatingSecretBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateMongodbRoles(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := o.contextValidateMongodbScopes(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateMongoDBAtlasRotatingSecretBody) contextValidateMongodbRoles(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(o.MongodbRoles); i++ {
-
-		if o.MongodbRoles[i] != nil {
-
-			if swag.IsZero(o.MongodbRoles[i]) { // not required
-				return nil
-			}
-
-			if err := o.MongodbRoles[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("body" + "." + "mongodb_roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("body" + "." + "mongodb_roles" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-func (o *CreateMongoDBAtlasRotatingSecretBody) contextValidateMongodbScopes(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(o.MongodbScopes); i++ {
-
-		if o.MongodbScopes[i] != nil {
-
-			if swag.IsZero(o.MongodbScopes[i]) { // not required
-				return nil
-			}
-
-			if err := o.MongodbScopes[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("body" + "." + "mongodb_scopes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("body" + "." + "mongodb_scopes" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *CreateMongoDBAtlasRotatingSecretBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *CreateMongoDBAtlasRotatingSecretBody) UnmarshalBinary(b []byte) error {
-	var res CreateMongoDBAtlasRotatingSecretBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

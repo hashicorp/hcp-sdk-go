@@ -64,6 +64,9 @@ type DeleteTwilioIntegrationParams struct {
 	// IntegrationName.
 	IntegrationName string
 
+	// Name.
+	Name *string
+
 	// OrganizationID.
 	OrganizationID string
 
@@ -134,6 +137,17 @@ func (o *DeleteTwilioIntegrationParams) SetIntegrationName(integrationName strin
 	o.IntegrationName = integrationName
 }
 
+// WithName adds the name to the delete twilio integration params
+func (o *DeleteTwilioIntegrationParams) WithName(name *string) *DeleteTwilioIntegrationParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the delete twilio integration params
+func (o *DeleteTwilioIntegrationParams) SetName(name *string) {
+	o.Name = name
+}
+
 // WithOrganizationID adds the organizationID to the delete twilio integration params
 func (o *DeleteTwilioIntegrationParams) WithOrganizationID(organizationID string) *DeleteTwilioIntegrationParams {
 	o.SetOrganizationID(organizationID)
@@ -167,6 +181,23 @@ func (o *DeleteTwilioIntegrationParams) WriteToRequest(r runtime.ClientRequest, 
 	// path param integration_name
 	if err := r.SetPathParam("integration_name", o.IntegrationName); err != nil {
 		return err
+	}
+
+	if o.Name != nil {
+
+		// query param name
+		var qrName string
+
+		if o.Name != nil {
+			qrName = *o.Name
+		}
+		qName := qrName
+		if qName != "" {
+
+			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
 	}
 
 	// path param organization_id

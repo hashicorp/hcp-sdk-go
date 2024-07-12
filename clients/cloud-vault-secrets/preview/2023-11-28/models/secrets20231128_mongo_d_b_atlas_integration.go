@@ -32,6 +32,12 @@ type Secrets20231128MongoDBAtlasIntegration struct {
 	// mongodb api public key
 	MongodbAPIPublicKey string `json:"mongodb_api_public_key,omitempty"`
 
+	// name
+	Name string `json:"name,omitempty"`
+
+	// static credential details
+	StaticCredentialDetails *Secrets20231128MongoDBAtlasStaticCredentialsResponse `json:"static_credential_details,omitempty"`
+
 	// updated at
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
@@ -45,6 +51,10 @@ func (m *Secrets20231128MongoDBAtlasIntegration) Validate(formats strfmt.Registr
 	var res []error
 
 	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStaticCredentialDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -70,6 +80,25 @@ func (m *Secrets20231128MongoDBAtlasIntegration) validateCreatedAt(formats strfm
 	return nil
 }
 
+func (m *Secrets20231128MongoDBAtlasIntegration) validateStaticCredentialDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.StaticCredentialDetails) { // not required
+		return nil
+	}
+
+	if m.StaticCredentialDetails != nil {
+		if err := m.StaticCredentialDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("static_credential_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("static_credential_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128MongoDBAtlasIntegration) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -82,8 +111,38 @@ func (m *Secrets20231128MongoDBAtlasIntegration) validateUpdatedAt(formats strfm
 	return nil
 }
 
-// ContextValidate validates this secrets 20231128 mongo d b atlas integration based on context it is used
+// ContextValidate validate this secrets 20231128 mongo d b atlas integration based on the context it is used
 func (m *Secrets20231128MongoDBAtlasIntegration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateStaticCredentialDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Secrets20231128MongoDBAtlasIntegration) contextValidateStaticCredentialDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StaticCredentialDetails != nil {
+
+		if swag.IsZero(m.StaticCredentialDetails) { // not required
+			return nil
+		}
+
+		if err := m.StaticCredentialDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("static_credential_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("static_credential_details")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

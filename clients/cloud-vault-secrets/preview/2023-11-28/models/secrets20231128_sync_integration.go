@@ -41,6 +41,9 @@ type Secrets20231128SyncIntegration struct {
 	// gh repo connection details
 	GhRepoConnectionDetails *Secrets20231128GhRepoConnectionDetailsResponse `json:"gh_repo_connection_details,omitempty"`
 
+	// hcp terraform connection details
+	HcpTerraformConnectionDetails *Secrets20231128HcpTerraformConnectionDetailsResponse `json:"hcp_terraform_connection_details,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
@@ -93,6 +96,10 @@ func (m *Secrets20231128SyncIntegration) Validate(formats strfmt.Registry) error
 	}
 
 	if err := m.validateGhRepoConnectionDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHcpTerraformConnectionDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -240,6 +247,25 @@ func (m *Secrets20231128SyncIntegration) validateGhRepoConnectionDetails(formats
 	return nil
 }
 
+func (m *Secrets20231128SyncIntegration) validateHcpTerraformConnectionDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.HcpTerraformConnectionDetails) { // not required
+		return nil
+	}
+
+	if m.HcpTerraformConnectionDetails != nil {
+		if err := m.HcpTerraformConnectionDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128SyncIntegration) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -315,6 +341,10 @@ func (m *Secrets20231128SyncIntegration) ContextValidate(ctx context.Context, fo
 	}
 
 	if err := m.contextValidateGhRepoConnectionDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHcpTerraformConnectionDetails(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -450,6 +480,27 @@ func (m *Secrets20231128SyncIntegration) contextValidateGhRepoConnectionDetails(
 				return ve.ValidateName("gh_repo_connection_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("gh_repo_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128SyncIntegration) contextValidateHcpTerraformConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HcpTerraformConnectionDetails != nil {
+
+		if swag.IsZero(m.HcpTerraformConnectionDetails) { // not required
+			return nil
+		}
+
+		if err := m.HcpTerraformConnectionDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform_connection_details")
 			}
 			return err
 		}

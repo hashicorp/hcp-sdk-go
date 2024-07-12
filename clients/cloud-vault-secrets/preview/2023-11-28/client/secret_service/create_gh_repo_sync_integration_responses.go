@@ -6,14 +6,11 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
@@ -127,7 +124,7 @@ An unexpected error response.
 type CreateGhRepoSyncIntegrationDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this create gh repo sync integration default response has a 2xx status code
@@ -168,117 +165,18 @@ func (o *CreateGhRepoSyncIntegrationDefault) String() string {
 	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/gh-repo][%d] CreateGhRepoSyncIntegration default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateGhRepoSyncIntegrationDefault) GetPayload() *models.RPCStatus {
+func (o *CreateGhRepoSyncIntegrationDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *CreateGhRepoSyncIntegrationDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-CreateGhRepoSyncIntegrationBody create gh repo sync integration body
-swagger:model CreateGhRepoSyncIntegrationBody
-*/
-type CreateGhRepoSyncIntegrationBody struct {
-
-	// gh repo connection details
-	GhRepoConnectionDetails *models.Secrets20231128GhRepoConnectionDetailsRequest `json:"gh_repo_connection_details,omitempty"`
-
-	// name
-	Name string `json:"name,omitempty"`
-}
-
-// Validate validates this create gh repo sync integration body
-func (o *CreateGhRepoSyncIntegrationBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateGhRepoConnectionDetails(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateGhRepoSyncIntegrationBody) validateGhRepoConnectionDetails(formats strfmt.Registry) error {
-	if swag.IsZero(o.GhRepoConnectionDetails) { // not required
-		return nil
-	}
-
-	if o.GhRepoConnectionDetails != nil {
-		if err := o.GhRepoConnectionDetails.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "gh_repo_connection_details")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "gh_repo_connection_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this create gh repo sync integration body based on the context it is used
-func (o *CreateGhRepoSyncIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateGhRepoConnectionDetails(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateGhRepoSyncIntegrationBody) contextValidateGhRepoConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.GhRepoConnectionDetails != nil {
-
-		if swag.IsZero(o.GhRepoConnectionDetails) { // not required
-			return nil
-		}
-
-		if err := o.GhRepoConnectionDetails.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "gh_repo_connection_details")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "gh_repo_connection_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *CreateGhRepoSyncIntegrationBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *CreateGhRepoSyncIntegrationBody) UnmarshalBinary(b []byte) error {
-	var res CreateGhRepoSyncIntegrationBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

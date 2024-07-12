@@ -46,6 +46,8 @@ type ClientService interface {
 
 	CreateAzureKvSyncIntegration(params *CreateAzureKvSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureKvSyncIntegrationOK, error)
 
+	CreateGatewayPool(params *CreateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGatewayPoolOK, error)
+
 	CreateGcpDynamicSecret(params *CreateGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpDynamicSecretOK, error)
 
 	CreateGcpIntegration(params *CreateGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpIntegrationOK, error)
@@ -55,6 +57,10 @@ type ClientService interface {
 	CreateGhOrgSyncIntegration(params *CreateGhOrgSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGhOrgSyncIntegrationOK, error)
 
 	CreateGhRepoSyncIntegration(params *CreateGhRepoSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGhRepoSyncIntegrationOK, error)
+
+	CreateHcpTerraformSyncInstallation(params *CreateHcpTerraformSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHcpTerraformSyncInstallationOK, error)
+
+	CreateHcpTerraformSyncIntegration(params *CreateHcpTerraformSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHcpTerraformSyncIntegrationOK, error)
 
 	CreateMongoDBAtlasIntegration(params *CreateMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasIntegrationOK, error)
 
@@ -75,6 +81,8 @@ type ClientService interface {
 	DeleteAwsDynamicSecret(params *DeleteAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAwsDynamicSecretOK, error)
 
 	DeleteAwsIntegration(params *DeleteAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAwsIntegrationOK, error)
+
+	DeleteGatewayPool(params *DeleteGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGatewayPoolOK, error)
 
 	DeleteGcpDynamicSecret(params *DeleteGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGcpDynamicSecretOK, error)
 
@@ -100,6 +108,8 @@ type ClientService interface {
 
 	GetAwsIntegration(params *GetAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIntegrationOK, error)
 
+	GetGatewayPool(params *GetGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGatewayPoolOK, error)
+
 	GetGcpDynamicSecret(params *GetGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpDynamicSecretOK, error)
 
 	GetGcpIntegration(params *GetGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpIntegrationOK, error)
@@ -109,6 +119,8 @@ type ClientService interface {
 	GetGitHubInstallLinks(params *GetGitHubInstallLinksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubInstallLinksOK, error)
 
 	GetGitHubRepositories(params *GetGitHubRepositoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubRepositoriesOK, error)
+
+	GetIntegration(params *GetIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIntegrationOK, error)
 
 	GetMongoDBAtlasIntegration(params *GetMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasIntegrationOK, error)
 
@@ -140,11 +152,17 @@ type ClientService interface {
 
 	ListAwsIntegrations(params *ListAwsIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAwsIntegrationsOK, error)
 
+	ListGatewayPoolGateways(params *ListGatewayPoolGatewaysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolGatewaysOK, error)
+
+	ListGatewayPools(params *ListGatewayPoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolsOK, error)
+
 	ListGcpDynamicSecrets(params *ListGcpDynamicSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGcpDynamicSecretsOK, error)
 
 	ListGcpIntegrations(params *ListGcpIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGcpIntegrationsOK, error)
 
 	ListGitHubInstallations(params *ListGitHubInstallationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGitHubInstallationsOK, error)
+
+	ListIntegrations(params *ListIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIntegrationsOK, error)
 
 	ListMongoDBAtlasIntegrations(params *ListMongoDBAtlasIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMongoDBAtlasIntegrationsOK, error)
 
@@ -167,6 +185,8 @@ type ClientService interface {
 	SetTier(params *SetTierParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetTierOK, error)
 
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
+
+	UpdateGatewayPool(params *UpdateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGatewayPoolOK, error)
 
 	UpsertSyncInstallation(params *UpsertSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertSyncInstallationOK, error)
 
@@ -516,6 +536,44 @@ func (a *Client) CreateAzureKvSyncIntegration(params *CreateAzureKvSyncIntegrati
 }
 
 /*
+CreateGatewayPool gateways
+*/
+func (a *Client) CreateGatewayPool(params *CreateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGatewayPoolOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateGatewayPoolParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateGatewayPool",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateGatewayPoolReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateGatewayPoolOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateGatewayPoolDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateGcpDynamicSecret create gcp dynamic secret API
 */
 func (a *Client) CreateGcpDynamicSecret(params *CreateGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpDynamicSecretOK, error) {
@@ -702,6 +760,82 @@ func (a *Client) CreateGhRepoSyncIntegration(params *CreateGhRepoSyncIntegration
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateGhRepoSyncIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateHcpTerraformSyncInstallation create hcp terraform sync installation API
+*/
+func (a *Client) CreateHcpTerraformSyncInstallation(params *CreateHcpTerraformSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHcpTerraformSyncInstallationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateHcpTerraformSyncInstallationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateHcpTerraformSyncInstallation",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/hcp-terraform/installations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateHcpTerraformSyncInstallationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateHcpTerraformSyncInstallationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateHcpTerraformSyncInstallationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateHcpTerraformSyncIntegration create hcp terraform sync integration API
+*/
+func (a *Client) CreateHcpTerraformSyncIntegration(params *CreateHcpTerraformSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHcpTerraformSyncIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateHcpTerraformSyncIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateHcpTerraformSyncIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/hcp-terraform",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateHcpTerraformSyncIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateHcpTerraformSyncIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateHcpTerraformSyncIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1082,6 +1216,44 @@ func (a *Client) DeleteAwsIntegration(params *DeleteAwsIntegrationParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteGatewayPool delete gateway pool API
+*/
+func (a *Client) DeleteGatewayPool(params *DeleteGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGatewayPoolOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteGatewayPoolParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteGatewayPool",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteGatewayPoolReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteGatewayPoolOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteGatewayPoolDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1542,6 +1714,44 @@ func (a *Client) GetAwsIntegration(params *GetAwsIntegrationParams, authInfo run
 }
 
 /*
+GetGatewayPool get gateway pool API
+*/
+func (a *Client) GetGatewayPool(params *GetGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGatewayPoolOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetGatewayPoolParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetGatewayPool",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetGatewayPoolReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetGatewayPoolOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetGatewayPoolDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetGcpDynamicSecret get gcp dynamic secret API
 */
 func (a *Client) GetGcpDynamicSecret(params *GetGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpDynamicSecretOK, error) {
@@ -1728,6 +1938,44 @@ func (a *Client) GetGitHubRepositories(params *GetGitHubRepositoriesParams, auth
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetGitHubRepositoriesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetIntegration get integration API
+*/
+func (a *Client) GetIntegration(params *GetIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetIntegration",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2302,6 +2550,82 @@ func (a *Client) ListAwsIntegrations(params *ListAwsIntegrationsParams, authInfo
 }
 
 /*
+ListGatewayPoolGateways list gateway pool gateways API
+*/
+func (a *Client) ListGatewayPoolGateways(params *ListGatewayPoolGatewaysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolGatewaysOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListGatewayPoolGatewaysParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListGatewayPoolGateways",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/gateways",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListGatewayPoolGatewaysReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListGatewayPoolGatewaysOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListGatewayPoolGatewaysDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListGatewayPools list gateway pools API
+*/
+func (a *Client) ListGatewayPools(params *ListGatewayPoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListGatewayPoolsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListGatewayPools",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListGatewayPoolsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListGatewayPoolsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListGatewayPoolsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ListGcpDynamicSecrets list gcp dynamic secrets API
 */
 func (a *Client) ListGcpDynamicSecrets(params *ListGcpDynamicSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGcpDynamicSecretsOK, error) {
@@ -2412,6 +2736,44 @@ func (a *Client) ListGitHubInstallations(params *ListGitHubInstallationsParams, 
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListGitHubInstallationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListIntegrations list integrations API
+*/
+func (a *Client) ListIntegrations(params *ListIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListIntegrations",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListIntegrationsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2830,6 +3192,44 @@ func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthI
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateAppDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateGatewayPool update gateway pool API
+*/
+func (a *Client) UpdateGatewayPool(params *UpdateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGatewayPoolOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateGatewayPoolParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateGatewayPool",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateGatewayPoolReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateGatewayPoolOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateGatewayPoolDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

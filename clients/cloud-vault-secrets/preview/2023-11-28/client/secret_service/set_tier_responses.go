@@ -6,14 +6,11 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
@@ -125,7 +122,7 @@ An unexpected error response.
 type SetTierDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this set tier default response has a 2xx status code
@@ -166,117 +163,18 @@ func (o *SetTierDefault) String() string {
 	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/billing/tier][%d] SetTier default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *SetTierDefault) GetPayload() *models.RPCStatus {
+func (o *SetTierDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *SetTierDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-SetTierBody Billing
-swagger:model SetTierBody
-*/
-type SetTierBody struct {
-
-	// project id
-	ProjectID string `json:"project_id,omitempty"`
-
-	// tier
-	Tier *models.Secrets20231128Tier `json:"tier,omitempty"`
-}
-
-// Validate validates this set tier body
-func (o *SetTierBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateTier(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *SetTierBody) validateTier(formats strfmt.Registry) error {
-	if swag.IsZero(o.Tier) { // not required
-		return nil
-	}
-
-	if o.Tier != nil {
-		if err := o.Tier.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "tier")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "tier")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this set tier body based on the context it is used
-func (o *SetTierBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateTier(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *SetTierBody) contextValidateTier(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Tier != nil {
-
-		if swag.IsZero(o.Tier) { // not required
-			return nil
-		}
-
-		if err := o.Tier.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "tier")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "tier")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *SetTierBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *SetTierBody) UnmarshalBinary(b []byte) error {
-	var res SetTierBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

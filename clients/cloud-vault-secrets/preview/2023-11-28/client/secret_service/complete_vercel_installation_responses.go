@@ -124,7 +124,7 @@ An unexpected error response.
 type CompleteVercelInstallationDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this complete vercel installation default response has a 2xx status code
@@ -165,13 +165,13 @@ func (o *CompleteVercelInstallationDefault) String() string {
 	return fmt.Sprintf("[GET /secrets/2023-11-28/sync/vercel/callback][%d] CompleteVercelInstallation default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CompleteVercelInstallationDefault) GetPayload() *models.RPCStatus {
+func (o *CompleteVercelInstallationDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *CompleteVercelInstallationDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

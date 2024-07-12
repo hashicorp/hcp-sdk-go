@@ -124,7 +124,7 @@ An unexpected error response.
 type ListSyncInstallationsDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this list sync installations default response has a 2xx status code
@@ -165,13 +165,13 @@ func (o *ListSyncInstallationsDefault) String() string {
 	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations][%d] ListSyncInstallations default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListSyncInstallationsDefault) GetPayload() *models.RPCStatus {
+func (o *ListSyncInstallationsDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *ListSyncInstallationsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

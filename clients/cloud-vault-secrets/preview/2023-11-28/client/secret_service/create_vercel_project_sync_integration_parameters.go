@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateVercelProjectSyncIntegrationParams creates a new CreateVercelProjectSyncIntegrationParams object,
@@ -62,7 +64,7 @@ CreateVercelProjectSyncIntegrationParams contains all the parameters to send to 
 type CreateVercelProjectSyncIntegrationParams struct {
 
 	// Body.
-	Body CreateVercelProjectSyncIntegrationBody
+	Body *models.SecretServiceCreateVercelProjectSyncIntegrationBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -124,13 +126,13 @@ func (o *CreateVercelProjectSyncIntegrationParams) SetHTTPClient(client *http.Cl
 }
 
 // WithBody adds the body to the create vercel project sync integration params
-func (o *CreateVercelProjectSyncIntegrationParams) WithBody(body CreateVercelProjectSyncIntegrationBody) *CreateVercelProjectSyncIntegrationParams {
+func (o *CreateVercelProjectSyncIntegrationParams) WithBody(body *models.SecretServiceCreateVercelProjectSyncIntegrationBody) *CreateVercelProjectSyncIntegrationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create vercel project sync integration params
-func (o *CreateVercelProjectSyncIntegrationParams) SetBody(body CreateVercelProjectSyncIntegrationBody) {
+func (o *CreateVercelProjectSyncIntegrationParams) SetBody(body *models.SecretServiceCreateVercelProjectSyncIntegrationBody) {
 	o.Body = body
 }
 
@@ -163,8 +165,10 @@ func (o *CreateVercelProjectSyncIntegrationParams) WriteToRequest(r runtime.Clie
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

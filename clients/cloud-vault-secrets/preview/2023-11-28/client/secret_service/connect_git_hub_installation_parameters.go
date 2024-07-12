@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewConnectGitHubInstallationParams creates a new ConnectGitHubInstallationParams object,
@@ -62,7 +64,7 @@ ConnectGitHubInstallationParams contains all the parameters to send to the API e
 type ConnectGitHubInstallationParams struct {
 
 	// Body.
-	Body ConnectGitHubInstallationBody
+	Body *models.SecretServiceConnectGitHubInstallationBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -124,13 +126,13 @@ func (o *ConnectGitHubInstallationParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the connect git hub installation params
-func (o *ConnectGitHubInstallationParams) WithBody(body ConnectGitHubInstallationBody) *ConnectGitHubInstallationParams {
+func (o *ConnectGitHubInstallationParams) WithBody(body *models.SecretServiceConnectGitHubInstallationBody) *ConnectGitHubInstallationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the connect git hub installation params
-func (o *ConnectGitHubInstallationParams) SetBody(body ConnectGitHubInstallationBody) {
+func (o *ConnectGitHubInstallationParams) SetBody(body *models.SecretServiceConnectGitHubInstallationBody) {
 	o.Body = body
 }
 
@@ -163,8 +165,10 @@ func (o *ConnectGitHubInstallationParams) WriteToRequest(r runtime.ClientRequest
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

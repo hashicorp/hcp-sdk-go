@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateGcpDynamicSecretParams creates a new CreateGcpDynamicSecretParams object,
@@ -65,7 +67,7 @@ type CreateGcpDynamicSecretParams struct {
 	AppName string
 
 	// Body.
-	Body CreateGcpDynamicSecretBody
+	Body *models.SecretServiceCreateGcpDynamicSecretBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -138,13 +140,13 @@ func (o *CreateGcpDynamicSecretParams) SetAppName(appName string) {
 }
 
 // WithBody adds the body to the create gcp dynamic secret params
-func (o *CreateGcpDynamicSecretParams) WithBody(body CreateGcpDynamicSecretBody) *CreateGcpDynamicSecretParams {
+func (o *CreateGcpDynamicSecretParams) WithBody(body *models.SecretServiceCreateGcpDynamicSecretBody) *CreateGcpDynamicSecretParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create gcp dynamic secret params
-func (o *CreateGcpDynamicSecretParams) SetBody(body CreateGcpDynamicSecretBody) {
+func (o *CreateGcpDynamicSecretParams) SetBody(body *models.SecretServiceCreateGcpDynamicSecretBody) {
 	o.Body = body
 }
 
@@ -182,8 +184,10 @@ func (o *CreateGcpDynamicSecretParams) WriteToRequest(r runtime.ClientRequest, r
 	if err := r.SetPathParam("app_name", o.AppName); err != nil {
 		return err
 	}
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

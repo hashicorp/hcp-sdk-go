@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewRotateSecretParams creates a new RotateSecretParams object,
@@ -65,7 +67,7 @@ type RotateSecretParams struct {
 	AppName string
 
 	// Body.
-	Body interface{}
+	Body models.SecretServiceRotateSecretBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -141,13 +143,13 @@ func (o *RotateSecretParams) SetAppName(appName string) {
 }
 
 // WithBody adds the body to the rotate secret params
-func (o *RotateSecretParams) WithBody(body interface{}) *RotateSecretParams {
+func (o *RotateSecretParams) WithBody(body models.SecretServiceRotateSecretBody) *RotateSecretParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the rotate secret params
-func (o *RotateSecretParams) SetBody(body interface{}) {
+func (o *RotateSecretParams) SetBody(body models.SecretServiceRotateSecretBody) {
 	o.Body = body
 }
 

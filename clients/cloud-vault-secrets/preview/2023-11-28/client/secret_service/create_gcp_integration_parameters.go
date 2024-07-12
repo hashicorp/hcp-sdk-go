@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewCreateGcpIntegrationParams creates a new CreateGcpIntegrationParams object,
@@ -62,7 +64,7 @@ CreateGcpIntegrationParams contains all the parameters to send to the API endpoi
 type CreateGcpIntegrationParams struct {
 
 	// Body.
-	Body CreateGcpIntegrationBody
+	Body *models.SecretServiceCreateGcpIntegrationBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -124,13 +126,13 @@ func (o *CreateGcpIntegrationParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create gcp integration params
-func (o *CreateGcpIntegrationParams) WithBody(body CreateGcpIntegrationBody) *CreateGcpIntegrationParams {
+func (o *CreateGcpIntegrationParams) WithBody(body *models.SecretServiceCreateGcpIntegrationBody) *CreateGcpIntegrationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create gcp integration params
-func (o *CreateGcpIntegrationParams) SetBody(body CreateGcpIntegrationBody) {
+func (o *CreateGcpIntegrationParams) SetBody(body *models.SecretServiceCreateGcpIntegrationBody) {
 	o.Body = body
 }
 
@@ -163,8 +165,10 @@ func (o *CreateGcpIntegrationParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

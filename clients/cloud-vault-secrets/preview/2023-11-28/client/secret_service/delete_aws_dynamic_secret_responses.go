@@ -122,7 +122,7 @@ An unexpected error response.
 type DeleteAwsDynamicSecretDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this delete aws dynamic secret default response has a 2xx status code
@@ -163,13 +163,13 @@ func (o *DeleteAwsDynamicSecretDefault) String() string {
 	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] DeleteAwsDynamicSecret default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *DeleteAwsDynamicSecretDefault) GetPayload() *models.RPCStatus {
+func (o *DeleteAwsDynamicSecretDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *DeleteAwsDynamicSecretDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

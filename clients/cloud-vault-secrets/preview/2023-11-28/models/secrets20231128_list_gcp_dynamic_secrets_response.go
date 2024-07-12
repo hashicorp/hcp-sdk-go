@@ -19,6 +19,9 @@ import (
 // swagger:model secrets_20231128ListGcpDynamicSecretsResponse
 type Secrets20231128ListGcpDynamicSecretsResponse struct {
 
+	// pagination
+	Pagination *CommonPaginationResponse `json:"pagination,omitempty"`
+
 	// secrets
 	Secrets []*Secrets20231128GcpDynamicSecret `json:"secrets"`
 }
@@ -27,6 +30,10 @@ type Secrets20231128ListGcpDynamicSecretsResponse struct {
 func (m *Secrets20231128ListGcpDynamicSecretsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validatePagination(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSecrets(formats); err != nil {
 		res = append(res, err)
 	}
@@ -34,6 +41,25 @@ func (m *Secrets20231128ListGcpDynamicSecretsResponse) Validate(formats strfmt.R
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20231128ListGcpDynamicSecretsResponse) validatePagination(formats strfmt.Registry) error {
+	if swag.IsZero(m.Pagination) { // not required
+		return nil
+	}
+
+	if m.Pagination != nil {
+		if err := m.Pagination.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -67,6 +93,10 @@ func (m *Secrets20231128ListGcpDynamicSecretsResponse) validateSecrets(formats s
 func (m *Secrets20231128ListGcpDynamicSecretsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidatePagination(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSecrets(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -74,6 +104,27 @@ func (m *Secrets20231128ListGcpDynamicSecretsResponse) ContextValidate(ctx conte
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20231128ListGcpDynamicSecretsResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
+		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pagination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pagination")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

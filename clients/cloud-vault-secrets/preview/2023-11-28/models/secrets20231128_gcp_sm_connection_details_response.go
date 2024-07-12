@@ -20,6 +20,9 @@ type Secrets20231128GcpSmConnectionDetailsResponse struct {
 	// client email
 	ClientEmail string `json:"client_email,omitempty"`
 
+	// locations
+	Locations []string `json:"locations"`
+
 	// project id
 	ProjectID string `json:"project_id,omitempty"`
 }

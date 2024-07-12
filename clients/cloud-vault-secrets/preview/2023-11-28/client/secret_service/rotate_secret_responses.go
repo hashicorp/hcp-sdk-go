@@ -122,7 +122,7 @@ An unexpected error response.
 type RotateSecretDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this rotate secret default response has a 2xx status code
@@ -163,13 +163,13 @@ func (o *RotateSecretDefault) String() string {
 	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}:rotate][%d] RotateSecret default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *RotateSecretDefault) GetPayload() *models.RPCStatus {
+func (o *RotateSecretDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *RotateSecretDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

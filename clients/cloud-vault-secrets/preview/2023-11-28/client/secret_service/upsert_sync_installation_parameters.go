@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
 
 // NewUpsertSyncInstallationParams creates a new UpsertSyncInstallationParams object,
@@ -62,7 +64,7 @@ UpsertSyncInstallationParams contains all the parameters to send to the API endp
 type UpsertSyncInstallationParams struct {
 
 	// Body.
-	Body UpsertSyncInstallationBody
+	Body *models.SecretServiceUpsertSyncInstallationBody
 
 	// OrganizationID.
 	OrganizationID string
@@ -124,13 +126,13 @@ func (o *UpsertSyncInstallationParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the upsert sync installation params
-func (o *UpsertSyncInstallationParams) WithBody(body UpsertSyncInstallationBody) *UpsertSyncInstallationParams {
+func (o *UpsertSyncInstallationParams) WithBody(body *models.SecretServiceUpsertSyncInstallationBody) *UpsertSyncInstallationParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the upsert sync installation params
-func (o *UpsertSyncInstallationParams) SetBody(body UpsertSyncInstallationBody) {
+func (o *UpsertSyncInstallationParams) SetBody(body *models.SecretServiceUpsertSyncInstallationBody) {
 	o.Body = body
 }
 
@@ -163,8 +165,10 @@ func (o *UpsertSyncInstallationParams) WriteToRequest(r runtime.ClientRequest, r
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param organization_id

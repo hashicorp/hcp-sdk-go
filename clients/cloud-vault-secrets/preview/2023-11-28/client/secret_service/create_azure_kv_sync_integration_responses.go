@@ -6,14 +6,11 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-secrets/preview/2023-11-28/models"
 )
@@ -127,7 +124,7 @@ An unexpected error response.
 type CreateAzureKvSyncIntegrationDefault struct {
 	_statusCode int
 
-	Payload *models.RPCStatus
+	Payload *models.GooglerpcStatus
 }
 
 // IsSuccess returns true when this create azure kv sync integration default response has a 2xx status code
@@ -168,117 +165,18 @@ func (o *CreateAzureKvSyncIntegrationDefault) String() string {
 	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/azure-kv][%d] CreateAzureKvSyncIntegration default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateAzureKvSyncIntegrationDefault) GetPayload() *models.RPCStatus {
+func (o *CreateAzureKvSyncIntegrationDefault) GetPayload() *models.GooglerpcStatus {
 	return o.Payload
 }
 
 func (o *CreateAzureKvSyncIntegrationDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.RPCStatus)
+	o.Payload = new(models.GooglerpcStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
-	return nil
-}
-
-/*
-CreateAzureKvSyncIntegrationBody create azure kv sync integration body
-swagger:model CreateAzureKvSyncIntegrationBody
-*/
-type CreateAzureKvSyncIntegrationBody struct {
-
-	// azure kv connection details
-	AzureKvConnectionDetails *models.Secrets20231128AzureKvConnectionDetailsRequest `json:"azure_kv_connection_details,omitempty"`
-
-	// name
-	Name string `json:"name,omitempty"`
-}
-
-// Validate validates this create azure kv sync integration body
-func (o *CreateAzureKvSyncIntegrationBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateAzureKvConnectionDetails(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateAzureKvSyncIntegrationBody) validateAzureKvConnectionDetails(formats strfmt.Registry) error {
-	if swag.IsZero(o.AzureKvConnectionDetails) { // not required
-		return nil
-	}
-
-	if o.AzureKvConnectionDetails != nil {
-		if err := o.AzureKvConnectionDetails.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "azure_kv_connection_details")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "azure_kv_connection_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this create azure kv sync integration body based on the context it is used
-func (o *CreateAzureKvSyncIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateAzureKvConnectionDetails(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *CreateAzureKvSyncIntegrationBody) contextValidateAzureKvConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.AzureKvConnectionDetails != nil {
-
-		if swag.IsZero(o.AzureKvConnectionDetails) { // not required
-			return nil
-		}
-
-		if err := o.AzureKvConnectionDetails.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "azure_kv_connection_details")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "azure_kv_connection_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *CreateAzureKvSyncIntegrationBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *CreateAzureKvSyncIntegrationBody) UnmarshalBinary(b []byte) error {
-	var res CreateAzureKvSyncIntegrationBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

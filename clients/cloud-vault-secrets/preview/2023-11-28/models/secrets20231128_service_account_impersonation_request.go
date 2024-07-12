@@ -19,9 +19,6 @@ type Secrets20231128ServiceAccountImpersonationRequest struct {
 
 	// service account email
 	ServiceAccountEmail string `json:"service_account_email,omitempty"`
-
-	// token scopes
-	TokenScopes []string `json:"token_scopes"`
 }
 
 // Validate validates this secrets 20231128 service account impersonation request
