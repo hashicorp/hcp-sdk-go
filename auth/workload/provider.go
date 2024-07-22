@@ -29,6 +29,9 @@ type IdentityProviderConfig struct {
 	// File sources the subject credential from a file.
 	File *FileCredentialSource `json:"file,omitempty"`
 
+	// Token sources the credentials from a directly supplied token.
+	Token *CredentialTokenSource `json:"token,omitempty"`
+
 	// EnvironmentVariable sources the subject credential from an environment
 	// variable.
 	EnvironmentVariable *EnvironmentVariableCredentialSource `json:"env,omitempty"`
@@ -55,6 +58,13 @@ func (c *IdentityProviderConfig) Validate() error {
 	if c.File != nil {
 		set++
 		if err := c.File.Validate(); err != nil {
+			return err
+		}
+	}
+
+	if c.Token != nil {
+		set++
+		if err := c.Token.Validate(); err != nil {
 			return err
 		}
 	}
@@ -129,6 +139,8 @@ func New(c *IdentityProviderConfig) (*Provider, error) {
 		p.jwtProvider = c.File
 	} else if c.EnvironmentVariable != nil {
 		p.jwtProvider = c.EnvironmentVariable
+	} else if c.Token != nil {
+		p.jwtProvider = c.Token
 	}
 
 	return p, nil
