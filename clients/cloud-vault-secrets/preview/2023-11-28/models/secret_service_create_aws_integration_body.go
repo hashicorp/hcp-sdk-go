@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -17,6 +18,9 @@ import (
 //
 // swagger:model SecretServiceCreateAwsIntegrationBody
 type SecretServiceCreateAwsIntegrationBody struct {
+
+	// capabilities
+	Capabilities []*Secrets20231128Capability `json:"capabilities"`
 
 	// federated workload identity
 	FederatedWorkloadIdentity *Secrets20231128AwsFederatedWorkloadIdentityRequest `json:"federated_workload_identity,omitempty"`
@@ -29,6 +33,10 @@ type SecretServiceCreateAwsIntegrationBody struct {
 func (m *SecretServiceCreateAwsIntegrationBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCapabilities(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateFederatedWorkloadIdentity(formats); err != nil {
 		res = append(res, err)
 	}
@@ -36,6 +44,32 @@ func (m *SecretServiceCreateAwsIntegrationBody) Validate(formats strfmt.Registry
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SecretServiceCreateAwsIntegrationBody) validateCapabilities(formats strfmt.Registry) error {
+	if swag.IsZero(m.Capabilities) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Capabilities); i++ {
+		if swag.IsZero(m.Capabilities[i]) { // not required
+			continue
+		}
+
+		if m.Capabilities[i] != nil {
+			if err := m.Capabilities[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -62,6 +96,10 @@ func (m *SecretServiceCreateAwsIntegrationBody) validateFederatedWorkloadIdentit
 func (m *SecretServiceCreateAwsIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateCapabilities(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateFederatedWorkloadIdentity(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -69,6 +107,31 @@ func (m *SecretServiceCreateAwsIntegrationBody) ContextValidate(ctx context.Cont
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SecretServiceCreateAwsIntegrationBody) contextValidateCapabilities(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Capabilities); i++ {
+
+		if m.Capabilities[i] != nil {
+
+			if swag.IsZero(m.Capabilities[i]) { // not required
+				return nil
+			}
+
+			if err := m.Capabilities[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

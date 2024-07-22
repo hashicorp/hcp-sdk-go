@@ -33,6 +33,9 @@ type Secrets20231128HcpTerraformConnectionDetailsResponse struct {
 	// variable set id
 	VariableSetID string `json:"variable_set_id,omitempty"`
 
+	// variable set name
+	VariableSetName string `json:"variable_set_name,omitempty"`
+
 	// workspace id
 	WorkspaceID string `json:"workspace_id,omitempty"`
 

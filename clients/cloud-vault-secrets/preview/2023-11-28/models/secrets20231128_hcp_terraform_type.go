@@ -30,8 +30,8 @@ func (m Secrets20231128HcpTerraformType) Pointer() *Secrets20231128HcpTerraformT
 
 const (
 
-	// Secrets20231128HcpTerraformTypeWORKSPACEVARIABLE captures enum value "WORKSPACE_VARIABLE"
-	Secrets20231128HcpTerraformTypeWORKSPACEVARIABLE Secrets20231128HcpTerraformType = "WORKSPACE_VARIABLE"
+	// Secrets20231128HcpTerraformTypeWORKSPACE captures enum value "WORKSPACE"
+	Secrets20231128HcpTerraformTypeWORKSPACE Secrets20231128HcpTerraformType = "WORKSPACE"
 
 	// Secrets20231128HcpTerraformTypeVARIABLESET captures enum value "VARIABLE_SET"
 	Secrets20231128HcpTerraformTypeVARIABLESET Secrets20231128HcpTerraformType = "VARIABLE_SET"
@@ -42,7 +42,7 @@ var secrets20231128HcpTerraformTypeEnum []interface{}
 
 func init() {
 	var res []Secrets20231128HcpTerraformType
-	if err := json.Unmarshal([]byte(`["WORKSPACE_VARIABLE","VARIABLE_SET"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["WORKSPACE","VARIABLE_SET"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -52,7 +52,7 @@ CreateHcpTerraformSyncInstallationOK describes a response with status code 200, 
 A successful response.
 */
 type CreateHcpTerraformSyncInstallationOK struct {
-	Payload *models.Secrets20231128CreateHcpTerraformSyncInstallationResponse
+	Payload *models.Secrets20231128GetSyncInstallationResponse
 }
 
 // IsSuccess returns true when this create hcp terraform sync installation o k response has a 2xx status code
@@ -93,13 +93,13 @@ func (o *CreateHcpTerraformSyncInstallationOK) String() string {
 	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/hcp-terraform/installations][%d] createHcpTerraformSyncInstallationOK  %+v", 200, o.Payload)
 }
 
-func (o *CreateHcpTerraformSyncInstallationOK) GetPayload() *models.Secrets20231128CreateHcpTerraformSyncInstallationResponse {
+func (o *CreateHcpTerraformSyncInstallationOK) GetPayload() *models.Secrets20231128GetSyncInstallationResponse {
 	return o.Payload
 }
 
 func (o *CreateHcpTerraformSyncInstallationOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Secrets20231128CreateHcpTerraformSyncInstallationResponse)
+	o.Payload = new(models.Secrets20231128GetSyncInstallationResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
