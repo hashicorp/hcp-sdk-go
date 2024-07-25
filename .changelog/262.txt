@@ -1,0 +1,3 @@
+```release-note:improvement
+IdentityProviderConfig accepts a workload credential directly.
+```
