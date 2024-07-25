@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -21,6 +22,9 @@ type Secrets20231128Integration struct {
 
 	// aws federated workload identity
 	AwsFederatedWorkloadIdentity *Secrets20231128AwsFederatedWorkloadIdentityResponse `json:"aws_federated_workload_identity,omitempty"`
+
+	// capabilities
+	Capabilities []*Secrets20231128Capability `json:"capabilities"`
 
 	// created at
 	// Format: date-time
@@ -60,6 +64,10 @@ func (m *Secrets20231128Integration) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAwsFederatedWorkloadIdentity(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCapabilities(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -107,6 +115,32 @@ func (m *Secrets20231128Integration) validateAwsFederatedWorkloadIdentity(format
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Integration) validateCapabilities(formats strfmt.Registry) error {
+	if swag.IsZero(m.Capabilities) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Capabilities); i++ {
+		if swag.IsZero(m.Capabilities[i]) { // not required
+			continue
+		}
+
+		if m.Capabilities[i] != nil {
+			if err := m.Capabilities[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -227,6 +261,10 @@ func (m *Secrets20231128Integration) ContextValidate(ctx context.Context, format
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCapabilities(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGcpFederatedWorkloadIdentity(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -265,6 +303,31 @@ func (m *Secrets20231128Integration) contextValidateAwsFederatedWorkloadIdentity
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Integration) contextValidateCapabilities(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Capabilities); i++ {
+
+		if m.Capabilities[i] != nil {
+
+			if swag.IsZero(m.Capabilities[i]) { // not required
+				return nil
+			}
+
+			if err := m.Capabilities[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

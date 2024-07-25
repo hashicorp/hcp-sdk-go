@@ -154,6 +154,8 @@ type ClientService interface {
 
 	ListGatewayPoolGateways(params *ListGatewayPoolGatewaysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolGatewaysOK, error)
 
+	ListGatewayPoolIntegrations(params *ListGatewayPoolIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolIntegrationsOK, error)
+
 	ListGatewayPools(params *ListGatewayPoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolsOK, error)
 
 	ListGcpDynamicSecrets(params *ListGcpDynamicSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGcpDynamicSecretsOK, error)
@@ -188,7 +190,7 @@ type ClientService interface {
 
 	UpdateGatewayPool(params *UpdateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGatewayPoolOK, error)
 
-	UpsertSyncInstallation(params *UpsertSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertSyncInstallationOK, error)
+	UpdateSyncInstallation(params *UpdateSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSyncInstallationOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -2588,6 +2590,44 @@ func (a *Client) ListGatewayPoolGateways(params *ListGatewayPoolGatewaysParams, 
 }
 
 /*
+ListGatewayPoolIntegrations list gateway pool integrations API
+*/
+func (a *Client) ListGatewayPoolIntegrations(params *ListGatewayPoolIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListGatewayPoolIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListGatewayPoolIntegrations",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/integrations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListGatewayPoolIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListGatewayPoolIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListGatewayPoolIntegrationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ListGatewayPools list gateway pools API
 */
 func (a *Client) ListGatewayPools(params *ListGatewayPoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolsOK, error) {
@@ -3234,22 +3274,22 @@ func (a *Client) UpdateGatewayPool(params *UpdateGatewayPoolParams, authInfo run
 }
 
 /*
-UpsertSyncInstallation upsert sync installation API
+UpdateSyncInstallation update sync installation API
 */
-func (a *Client) UpsertSyncInstallation(params *UpsertSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpsertSyncInstallationOK, error) {
+func (a *Client) UpdateSyncInstallation(params *UpdateSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSyncInstallationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpsertSyncInstallationParams()
+		params = NewUpdateSyncInstallationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "UpsertSyncInstallation",
-		Method:             "PUT",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations",
+		ID:                 "UpdateSyncInstallation",
+		Method:             "PATCH",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/name",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpsertSyncInstallationReader{formats: a.formats},
+		Reader:             &UpdateSyncInstallationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -3262,12 +3302,12 @@ func (a *Client) UpsertSyncInstallation(params *UpsertSyncInstallationParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpsertSyncInstallationOK)
+	success, ok := result.(*UpdateSyncInstallationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpsertSyncInstallationDefault)
+	unexpectedSuccess := result.(*UpdateSyncInstallationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

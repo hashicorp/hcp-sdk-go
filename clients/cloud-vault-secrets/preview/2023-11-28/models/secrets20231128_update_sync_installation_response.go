@@ -13,17 +13,17 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Secrets20231128UpsertSyncInstallationResponse secrets 20231128 upsert sync installation response
+// Secrets20231128UpdateSyncInstallationResponse secrets 20231128 update sync installation response
 //
-// swagger:model secrets_20231128UpsertSyncInstallationResponse
-type Secrets20231128UpsertSyncInstallationResponse struct {
+// swagger:model secrets_20231128UpdateSyncInstallationResponse
+type Secrets20231128UpdateSyncInstallationResponse struct {
 
 	// sync installation
 	SyncInstallation *Secrets20231128SyncInstallation `json:"sync_installation,omitempty"`
 }
 
-// Validate validates this secrets 20231128 upsert sync installation response
-func (m *Secrets20231128UpsertSyncInstallationResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this secrets 20231128 update sync installation response
+func (m *Secrets20231128UpdateSyncInstallationResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateSyncInstallation(formats); err != nil {
@@ -36,7 +36,7 @@ func (m *Secrets20231128UpsertSyncInstallationResponse) Validate(formats strfmt.
 	return nil
 }
 
-func (m *Secrets20231128UpsertSyncInstallationResponse) validateSyncInstallation(formats strfmt.Registry) error {
+func (m *Secrets20231128UpdateSyncInstallationResponse) validateSyncInstallation(formats strfmt.Registry) error {
 	if swag.IsZero(m.SyncInstallation) { // not required
 		return nil
 	}
@@ -55,8 +55,8 @@ func (m *Secrets20231128UpsertSyncInstallationResponse) validateSyncInstallation
 	return nil
 }
 
-// ContextValidate validate this secrets 20231128 upsert sync installation response based on the context it is used
-func (m *Secrets20231128UpsertSyncInstallationResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this secrets 20231128 update sync installation response based on the context it is used
+func (m *Secrets20231128UpdateSyncInstallationResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateSyncInstallation(ctx, formats); err != nil {
@@ -69,7 +69,7 @@ func (m *Secrets20231128UpsertSyncInstallationResponse) ContextValidate(ctx cont
 	return nil
 }
 
-func (m *Secrets20231128UpsertSyncInstallationResponse) contextValidateSyncInstallation(ctx context.Context, formats strfmt.Registry) error {
+func (m *Secrets20231128UpdateSyncInstallationResponse) contextValidateSyncInstallation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SyncInstallation != nil {
 
@@ -91,7 +91,7 @@ func (m *Secrets20231128UpsertSyncInstallationResponse) contextValidateSyncInsta
 }
 
 // MarshalBinary interface implementation
-func (m *Secrets20231128UpsertSyncInstallationResponse) MarshalBinary() ([]byte, error) {
+func (m *Secrets20231128UpdateSyncInstallationResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -99,8 +99,8 @@ func (m *Secrets20231128UpsertSyncInstallationResponse) MarshalBinary() ([]byte,
 }
 
 // UnmarshalBinary interface implementation
-func (m *Secrets20231128UpsertSyncInstallationResponse) UnmarshalBinary(b []byte) error {
-	var res Secrets20231128UpsertSyncInstallationResponse
+func (m *Secrets20231128UpdateSyncInstallationResponse) UnmarshalBinary(b []byte) error {
+	var res Secrets20231128UpdateSyncInstallationResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

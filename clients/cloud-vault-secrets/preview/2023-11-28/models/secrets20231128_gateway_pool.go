@@ -44,6 +44,9 @@ type Secrets20231128GatewayPool struct {
 	// resource name
 	ResourceName string `json:"resource_name,omitempty"`
 
+	// service principal id
+	ServicePrincipalID string `json:"service_principal_id,omitempty"`
+
 	// updated at
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`

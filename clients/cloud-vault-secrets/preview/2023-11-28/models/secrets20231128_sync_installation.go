@@ -24,6 +24,9 @@ type Secrets20231128SyncInstallation struct {
 	// gh app
 	GhApp *Secrets20231128GhAppMetadata `json:"gh_app,omitempty"`
 
+	// hcp terraform
+	HcpTerraform *Secrets20231128HcpTerraformMetadata `json:"hcp_terraform,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
@@ -46,6 +49,10 @@ func (m *Secrets20231128SyncInstallation) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateGhApp(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHcpTerraform(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -97,6 +104,25 @@ func (m *Secrets20231128SyncInstallation) validateGhApp(formats strfmt.Registry)
 	return nil
 }
 
+func (m *Secrets20231128SyncInstallation) validateHcpTerraform(formats strfmt.Registry) error {
+	if swag.IsZero(m.HcpTerraform) { // not required
+		return nil
+	}
+
+	if m.HcpTerraform != nil {
+		if err := m.HcpTerraform.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128SyncInstallation) validateVercelOauth(formats strfmt.Registry) error {
 	if swag.IsZero(m.VercelOauth) { // not required
 		return nil
@@ -125,6 +151,10 @@ func (m *Secrets20231128SyncInstallation) ContextValidate(ctx context.Context, f
 	}
 
 	if err := m.contextValidateGhApp(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHcpTerraform(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -172,6 +202,27 @@ func (m *Secrets20231128SyncInstallation) contextValidateGhApp(ctx context.Conte
 				return ve.ValidateName("gh_app")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("gh_app")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128SyncInstallation) contextValidateHcpTerraform(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HcpTerraform != nil {
+
+		if swag.IsZero(m.HcpTerraform) { // not required
+			return nil
+		}
+
+		if err := m.HcpTerraform.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform")
 			}
 			return err
 		}

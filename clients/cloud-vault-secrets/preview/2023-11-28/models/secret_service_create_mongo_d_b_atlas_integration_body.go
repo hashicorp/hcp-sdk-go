@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -17,6 +18,12 @@ import (
 //
 // swagger:model SecretServiceCreateMongoDBAtlasIntegrationBody
 type SecretServiceCreateMongoDBAtlasIntegrationBody struct {
+
+	// capabilities
+	Capabilities []*Secrets20231128Capability `json:"capabilities"`
+
+	// gateway pool id
+	GatewayPoolID string `json:"gateway_pool_id,omitempty"`
 
 	// integration name
 	IntegrationName string `json:"integration_name,omitempty"`
@@ -38,6 +45,10 @@ type SecretServiceCreateMongoDBAtlasIntegrationBody struct {
 func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCapabilities(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStaticCredentialDetails(formats); err != nil {
 		res = append(res, err)
 	}
@@ -45,6 +56,32 @@ func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) Validate(formats strfmt
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) validateCapabilities(formats strfmt.Registry) error {
+	if swag.IsZero(m.Capabilities) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Capabilities); i++ {
+		if swag.IsZero(m.Capabilities[i]) { // not required
+			continue
+		}
+
+		if m.Capabilities[i] != nil {
+			if err := m.Capabilities[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -71,6 +108,10 @@ func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) validateStaticCredentia
 func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateCapabilities(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStaticCredentialDetails(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -78,6 +119,31 @@ func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) ContextValidate(ctx con
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) contextValidateCapabilities(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Capabilities); i++ {
+
+		if m.Capabilities[i] != nil {
+
+			if swag.IsZero(m.Capabilities[i]) { // not required
+				return nil
+			}
+
+			if err := m.Capabilities[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
