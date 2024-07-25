@@ -66,6 +66,9 @@ type UpdateSyncInstallationParams struct {
 	// Body.
 	Body *models.SecretServiceUpdateSyncInstallationBody
 
+	// Name.
+	Name string
+
 	// OrganizationID.
 	OrganizationID string
 
@@ -136,6 +139,17 @@ func (o *UpdateSyncInstallationParams) SetBody(body *models.SecretServiceUpdateS
 	o.Body = body
 }
 
+// WithName adds the name to the update sync installation params
+func (o *UpdateSyncInstallationParams) WithName(name string) *UpdateSyncInstallationParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the update sync installation params
+func (o *UpdateSyncInstallationParams) SetName(name string) {
+	o.Name = name
+}
+
 // WithOrganizationID adds the organizationID to the update sync installation params
 func (o *UpdateSyncInstallationParams) WithOrganizationID(organizationID string) *UpdateSyncInstallationParams {
 	o.SetOrganizationID(organizationID)
@@ -169,6 +183,11 @@ func (o *UpdateSyncInstallationParams) WriteToRequest(r runtime.ClientRequest, r
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
 		}
+	}
+
+	// path param name
+	if err := r.SetPathParam("name", o.Name); err != nil {
+		return err
 	}
 
 	// path param organization_id

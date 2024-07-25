@@ -86,11 +86,11 @@ func (o *UpdateSyncInstallationOK) Code() int {
 }
 
 func (o *UpdateSyncInstallationOK) Error() string {
-	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/name][%d] updateSyncInstallationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/{name}][%d] updateSyncInstallationOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateSyncInstallationOK) String() string {
-	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/name][%d] updateSyncInstallationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/{name}][%d] updateSyncInstallationOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateSyncInstallationOK) GetPayload() *models.Secrets20231128UpdateSyncInstallationResponse {
@@ -158,11 +158,11 @@ func (o *UpdateSyncInstallationDefault) Code() int {
 }
 
 func (o *UpdateSyncInstallationDefault) Error() string {
-	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/name][%d] UpdateSyncInstallation default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/{name}][%d] UpdateSyncInstallation default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *UpdateSyncInstallationDefault) String() string {
-	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/name][%d] UpdateSyncInstallation default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/{name}][%d] UpdateSyncInstallation default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *UpdateSyncInstallationDefault) GetPayload() *models.GooglerpcStatus {

@@ -23,6 +23,9 @@ type Secrets20231128Integration struct {
 	// aws federated workload identity
 	AwsFederatedWorkloadIdentity *Secrets20231128AwsFederatedWorkloadIdentityResponse `json:"aws_federated_workload_identity,omitempty"`
 
+	// aws static credentials
+	AwsStaticCredentials *Secrets20231128AwsStaticCredentialsResponse `json:"aws_static_credentials,omitempty"`
+
 	// capabilities
 	Capabilities []*Secrets20231128Capability `json:"capabilities"`
 
@@ -45,6 +48,12 @@ type Secrets20231128Integration struct {
 	// provider
 	Provider string `json:"provider,omitempty"`
 
+	// resource id
+	ResourceID string `json:"resource_id,omitempty"`
+
+	// resource name
+	ResourceName string `json:"resource_name,omitempty"`
+
 	// twilio static credentials
 	TwilioStaticCredentials *Secrets20231128TwilioStaticCredentialsResponse `json:"twilio_static_credentials,omitempty"`
 
@@ -64,6 +73,10 @@ func (m *Secrets20231128Integration) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAwsFederatedWorkloadIdentity(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAwsStaticCredentials(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -112,6 +125,25 @@ func (m *Secrets20231128Integration) validateAwsFederatedWorkloadIdentity(format
 				return ve.ValidateName("aws_federated_workload_identity")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("aws_federated_workload_identity")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Integration) validateAwsStaticCredentials(formats strfmt.Registry) error {
+	if swag.IsZero(m.AwsStaticCredentials) { // not required
+		return nil
+	}
+
+	if m.AwsStaticCredentials != nil {
+		if err := m.AwsStaticCredentials.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("aws_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("aws_static_credentials")
 			}
 			return err
 		}
@@ -261,6 +293,10 @@ func (m *Secrets20231128Integration) ContextValidate(ctx context.Context, format
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAwsStaticCredentials(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCapabilities(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -300,6 +336,27 @@ func (m *Secrets20231128Integration) contextValidateAwsFederatedWorkloadIdentity
 				return ve.ValidateName("aws_federated_workload_identity")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("aws_federated_workload_identity")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Integration) contextValidateAwsStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AwsStaticCredentials != nil {
+
+		if swag.IsZero(m.AwsStaticCredentials) { // not required
+			return nil
+		}
+
+		if err := m.AwsStaticCredentials.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("aws_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("aws_static_credentials")
 			}
 			return err
 		}

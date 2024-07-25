@@ -110,6 +110,8 @@ type ClientService interface {
 
 	GetGatewayPool(params *GetGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGatewayPoolOK, error)
 
+	GetGatewayPoolCertificate(params *GetGatewayPoolCertificateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGatewayPoolCertificateOK, error)
+
 	GetGcpDynamicSecret(params *GetGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpDynamicSecretOK, error)
 
 	GetGcpIntegration(params *GetGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpIntegrationOK, error)
@@ -1754,6 +1756,44 @@ func (a *Client) GetGatewayPool(params *GetGatewayPoolParams, authInfo runtime.C
 }
 
 /*
+GetGatewayPoolCertificate get gateway pool certificate API
+*/
+func (a *Client) GetGatewayPoolCertificate(params *GetGatewayPoolCertificateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGatewayPoolCertificateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetGatewayPoolCertificateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetGatewayPoolCertificate",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/certificate",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetGatewayPoolCertificateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetGatewayPoolCertificateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetGatewayPoolCertificateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetGcpDynamicSecret get gcp dynamic secret API
 */
 func (a *Client) GetGcpDynamicSecret(params *GetGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpDynamicSecretOK, error) {
@@ -3284,7 +3324,7 @@ func (a *Client) UpdateSyncInstallation(params *UpdateSyncInstallationParams, au
 	op := &runtime.ClientOperation{
 		ID:                 "UpdateSyncInstallation",
 		Method:             "PATCH",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/name",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/sync/installations/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
