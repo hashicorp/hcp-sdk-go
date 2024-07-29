@@ -42,6 +42,12 @@ type Secrets20231128MongoDBAtlasIntegration struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// resource id
+	ResourceID string `json:"resource_id,omitempty"`
+
+	// resource name
+	ResourceName string `json:"resource_name,omitempty"`
+
 	// static credential details
 	StaticCredentialDetails *Secrets20231128MongoDBAtlasStaticCredentialsResponse `json:"static_credential_details,omitempty"`
 
@@ -51,6 +57,9 @@ type Secrets20231128MongoDBAtlasIntegration struct {
 
 	// updated by id
 	UpdatedByID string `json:"updated_by_id,omitempty"`
+
+	// used by
+	UsedBy map[string]Secrets20231128IntegrationUsage `json:"used_by,omitempty"`
 }
 
 // Validate validates this secrets 20231128 mongo d b atlas integration
@@ -70,6 +79,10 @@ func (m *Secrets20231128MongoDBAtlasIntegration) Validate(formats strfmt.Registr
 	}
 
 	if err := m.validateUpdatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUsedBy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -148,6 +161,32 @@ func (m *Secrets20231128MongoDBAtlasIntegration) validateUpdatedAt(formats strfm
 	return nil
 }
 
+func (m *Secrets20231128MongoDBAtlasIntegration) validateUsedBy(formats strfmt.Registry) error {
+	if swag.IsZero(m.UsedBy) { // not required
+		return nil
+	}
+
+	for k := range m.UsedBy {
+
+		if err := validate.Required("used_by"+"."+k, "body", m.UsedBy[k]); err != nil {
+			return err
+		}
+		if val, ok := m.UsedBy[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("used_by" + "." + k)
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("used_by" + "." + k)
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this secrets 20231128 mongo d b atlas integration based on the context it is used
 func (m *Secrets20231128MongoDBAtlasIntegration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -157,6 +196,10 @@ func (m *Secrets20231128MongoDBAtlasIntegration) ContextValidate(ctx context.Con
 	}
 
 	if err := m.contextValidateStaticCredentialDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUsedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -207,6 +250,21 @@ func (m *Secrets20231128MongoDBAtlasIntegration) contextValidateStaticCredential
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128MongoDBAtlasIntegration) contextValidateUsedBy(ctx context.Context, formats strfmt.Registry) error {
+
+	for k := range m.UsedBy {
+
+		if val, ok := m.UsedBy[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	return nil

@@ -36,6 +36,12 @@ type Secrets20231128GcpIntegration struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// resource id
+	ResourceID string `json:"resource_id,omitempty"`
+
+	// resource name
+	ResourceName string `json:"resource_name,omitempty"`
+
 	// updated at
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`

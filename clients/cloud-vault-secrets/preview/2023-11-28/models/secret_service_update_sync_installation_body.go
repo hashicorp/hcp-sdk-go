@@ -20,9 +20,6 @@ type SecretServiceUpdateSyncInstallationBody struct {
 
 	// hcp terraform update installation request
 	HcpTerraformUpdateInstallationRequest *Secrets20231128HcpTerraformUpdateInstallationRequest `json:"hcp_terraform_update_installation_request,omitempty"`
-
-	// name
-	Name string `json:"name,omitempty"`
 }
 
 // Validate validates this secret service update sync installation body

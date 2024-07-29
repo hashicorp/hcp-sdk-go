@@ -27,6 +27,9 @@ type SecretServiceCreateAwsIntegrationBody struct {
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// static credentials
+	StaticCredentials *Secrets20231128AwsStaticCredentialsRequest `json:"static_credentials,omitempty"`
 }
 
 // Validate validates this secret service create aws integration body
@@ -38,6 +41,10 @@ func (m *SecretServiceCreateAwsIntegrationBody) Validate(formats strfmt.Registry
 	}
 
 	if err := m.validateFederatedWorkloadIdentity(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStaticCredentials(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -92,6 +99,25 @@ func (m *SecretServiceCreateAwsIntegrationBody) validateFederatedWorkloadIdentit
 	return nil
 }
 
+func (m *SecretServiceCreateAwsIntegrationBody) validateStaticCredentials(formats strfmt.Registry) error {
+	if swag.IsZero(m.StaticCredentials) { // not required
+		return nil
+	}
+
+	if m.StaticCredentials != nil {
+		if err := m.StaticCredentials.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this secret service create aws integration body based on the context it is used
 func (m *SecretServiceCreateAwsIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -101,6 +127,10 @@ func (m *SecretServiceCreateAwsIntegrationBody) ContextValidate(ctx context.Cont
 	}
 
 	if err := m.contextValidateFederatedWorkloadIdentity(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStaticCredentials(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -148,6 +178,27 @@ func (m *SecretServiceCreateAwsIntegrationBody) contextValidateFederatedWorkload
 				return ve.ValidateName("federated_workload_identity")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("federated_workload_identity")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceCreateAwsIntegrationBody) contextValidateStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StaticCredentials != nil {
+
+		if swag.IsZero(m.StaticCredentials) { // not required
+			return nil
+		}
+
+		if err := m.StaticCredentials.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("static_credentials")
 			}
 			return err
 		}
