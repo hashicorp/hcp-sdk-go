@@ -1,3 +1,8 @@
+## v0.105.0 (July 31, 2024)
+
+IMPROVEMENTS:
+
+* IdentityProviderConfig accepts a workload credential directly. [[GH-262](https://github.com/hashicorp/hcp-sdk-go/pull/262)]
 ## v0.104.0 (July 22, 2024)
 
 ## v0.103.0 (July 12, 2024)
