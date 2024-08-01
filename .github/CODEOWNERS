@@ -13,7 +13,7 @@
 
 # The Network and Resource Manager clients are owned by access-control and platform systems team respectively.
 /clients/cloud-resource-manager/ @hashicorp/cloud-access-control
-/clients/cloud-network/ @hashicorp/cloud-platform-systems
+/clients/cloud-network/ @hashicorp/hcp-managed-services-ind
 
 # The Operation clients are owned by Dataplane
 /clients/cloud-operation/ @hashicorp/cloud-access-control
