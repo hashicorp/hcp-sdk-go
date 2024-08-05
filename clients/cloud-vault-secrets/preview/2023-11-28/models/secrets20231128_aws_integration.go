@@ -20,6 +20,9 @@ import (
 // swagger:model secrets_20231128AwsIntegration
 type Secrets20231128AwsIntegration struct {
 
+	// access keys
+	AccessKeys *Secrets20231128AwsAccessKeysResponse `json:"access_keys,omitempty"`
+
 	// capabilities
 	Capabilities []*Secrets20231128Capability `json:"capabilities"`
 
@@ -42,9 +45,6 @@ type Secrets20231128AwsIntegration struct {
 	// resource name
 	ResourceName string `json:"resource_name,omitempty"`
 
-	// static credentials
-	StaticCredentials *Secrets20231128AwsStaticCredentialsResponse `json:"static_credentials,omitempty"`
-
 	// updated at
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
@@ -60,6 +60,10 @@ type Secrets20231128AwsIntegration struct {
 func (m *Secrets20231128AwsIntegration) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAccessKeys(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCapabilities(formats); err != nil {
 		res = append(res, err)
 	}
@@ -69,10 +73,6 @@ func (m *Secrets20231128AwsIntegration) Validate(formats strfmt.Registry) error 
 	}
 
 	if err := m.validateFederatedWorkloadIdentity(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateStaticCredentials(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -87,6 +87,25 @@ func (m *Secrets20231128AwsIntegration) Validate(formats strfmt.Registry) error 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20231128AwsIntegration) validateAccessKeys(formats strfmt.Registry) error {
+	if swag.IsZero(m.AccessKeys) { // not required
+		return nil
+	}
+
+	if m.AccessKeys != nil {
+		if err := m.AccessKeys.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("access_keys")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("access_keys")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -147,25 +166,6 @@ func (m *Secrets20231128AwsIntegration) validateFederatedWorkloadIdentity(format
 	return nil
 }
 
-func (m *Secrets20231128AwsIntegration) validateStaticCredentials(formats strfmt.Registry) error {
-	if swag.IsZero(m.StaticCredentials) { // not required
-		return nil
-	}
-
-	if m.StaticCredentials != nil {
-		if err := m.StaticCredentials.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("static_credentials")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("static_credentials")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *Secrets20231128AwsIntegration) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -208,15 +208,15 @@ func (m *Secrets20231128AwsIntegration) validateUsedBy(formats strfmt.Registry) 
 func (m *Secrets20231128AwsIntegration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAccessKeys(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCapabilities(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateFederatedWorkloadIdentity(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateStaticCredentials(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -227,6 +227,27 @@ func (m *Secrets20231128AwsIntegration) ContextValidate(ctx context.Context, for
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20231128AwsIntegration) contextValidateAccessKeys(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AccessKeys != nil {
+
+		if swag.IsZero(m.AccessKeys) { // not required
+			return nil
+		}
+
+		if err := m.AccessKeys.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("access_keys")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("access_keys")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -268,27 +289,6 @@ func (m *Secrets20231128AwsIntegration) contextValidateFederatedWorkloadIdentity
 				return ve.ValidateName("federated_workload_identity")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("federated_workload_identity")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128AwsIntegration) contextValidateStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.StaticCredentials != nil {
-
-		if swag.IsZero(m.StaticCredentials) { // not required
-			return nil
-		}
-
-		if err := m.StaticCredentials.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("static_credentials")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("static_credentials")
 			}
 			return err
 		}

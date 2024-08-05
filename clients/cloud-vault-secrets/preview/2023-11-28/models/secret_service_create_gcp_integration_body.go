@@ -27,6 +27,9 @@ type SecretServiceCreateGcpIntegrationBody struct {
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// service account key
+	ServiceAccountKey *Secrets20231128GcpServiceAccountKeyRequest `json:"service_account_key,omitempty"`
 }
 
 // Validate validates this secret service create gcp integration body
@@ -38,6 +41,10 @@ func (m *SecretServiceCreateGcpIntegrationBody) Validate(formats strfmt.Registry
 	}
 
 	if err := m.validateFederatedWorkloadIdentity(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateServiceAccountKey(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -92,6 +99,25 @@ func (m *SecretServiceCreateGcpIntegrationBody) validateFederatedWorkloadIdentit
 	return nil
 }
 
+func (m *SecretServiceCreateGcpIntegrationBody) validateServiceAccountKey(formats strfmt.Registry) error {
+	if swag.IsZero(m.ServiceAccountKey) { // not required
+		return nil
+	}
+
+	if m.ServiceAccountKey != nil {
+		if err := m.ServiceAccountKey.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("service_account_key")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("service_account_key")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this secret service create gcp integration body based on the context it is used
 func (m *SecretServiceCreateGcpIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -101,6 +127,10 @@ func (m *SecretServiceCreateGcpIntegrationBody) ContextValidate(ctx context.Cont
 	}
 
 	if err := m.contextValidateFederatedWorkloadIdentity(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateServiceAccountKey(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -148,6 +178,27 @@ func (m *SecretServiceCreateGcpIntegrationBody) contextValidateFederatedWorkload
 				return ve.ValidateName("federated_workload_identity")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("federated_workload_identity")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceCreateGcpIntegrationBody) contextValidateServiceAccountKey(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ServiceAccountKey != nil {
+
+		if swag.IsZero(m.ServiceAccountKey) { // not required
+			return nil
+		}
+
+		if err := m.ServiceAccountKey.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("service_account_key")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("service_account_key")
 			}
 			return err
 		}

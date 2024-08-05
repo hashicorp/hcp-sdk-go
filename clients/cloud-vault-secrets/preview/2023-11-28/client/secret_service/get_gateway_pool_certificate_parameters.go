@@ -61,6 +61,9 @@ GetGatewayPoolCertificateParams contains all the parameters to send to the API e
 */
 type GetGatewayPoolCertificateParams struct {
 
+	// CsrPem.
+	CsrPem *string
+
 	// GatewayPoolName.
 	GatewayPoolName string
 
@@ -123,6 +126,17 @@ func (o *GetGatewayPoolCertificateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithCsrPem adds the csrPem to the get gateway pool certificate params
+func (o *GetGatewayPoolCertificateParams) WithCsrPem(csrPem *string) *GetGatewayPoolCertificateParams {
+	o.SetCsrPem(csrPem)
+	return o
+}
+
+// SetCsrPem adds the csrPem to the get gateway pool certificate params
+func (o *GetGatewayPoolCertificateParams) SetCsrPem(csrPem *string) {
+	o.CsrPem = csrPem
+}
+
 // WithGatewayPoolName adds the gatewayPoolName to the get gateway pool certificate params
 func (o *GetGatewayPoolCertificateParams) WithGatewayPoolName(gatewayPoolName string) *GetGatewayPoolCertificateParams {
 	o.SetGatewayPoolName(gatewayPoolName)
@@ -163,6 +177,23 @@ func (o *GetGatewayPoolCertificateParams) WriteToRequest(r runtime.ClientRequest
 		return err
 	}
 	var res []error
+
+	if o.CsrPem != nil {
+
+		// query param csr_pem
+		var qrCsrPem string
+
+		if o.CsrPem != nil {
+			qrCsrPem = *o.CsrPem
+		}
+		qCsrPem := qrCsrPem
+		if qCsrPem != "" {
+
+			if err := r.SetQueryParam("csr_pem", qCsrPem); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param gateway_pool_name
 	if err := r.SetPathParam("gateway_pool_name", o.GatewayPoolName); err != nil {

@@ -19,6 +19,9 @@ import (
 // swagger:model SecretServiceCreateAwsIntegrationBody
 type SecretServiceCreateAwsIntegrationBody struct {
 
+	// access keys
+	AccessKeys *Secrets20231128AwsAccessKeysRequest `json:"access_keys,omitempty"`
+
 	// capabilities
 	Capabilities []*Secrets20231128Capability `json:"capabilities"`
 
@@ -27,14 +30,15 @@ type SecretServiceCreateAwsIntegrationBody struct {
 
 	// name
 	Name string `json:"name,omitempty"`
-
-	// static credentials
-	StaticCredentials *Secrets20231128AwsStaticCredentialsRequest `json:"static_credentials,omitempty"`
 }
 
 // Validate validates this secret service create aws integration body
 func (m *SecretServiceCreateAwsIntegrationBody) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAccessKeys(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateCapabilities(formats); err != nil {
 		res = append(res, err)
@@ -44,13 +48,28 @@ func (m *SecretServiceCreateAwsIntegrationBody) Validate(formats strfmt.Registry
 		res = append(res, err)
 	}
 
-	if err := m.validateStaticCredentials(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SecretServiceCreateAwsIntegrationBody) validateAccessKeys(formats strfmt.Registry) error {
+	if swag.IsZero(m.AccessKeys) { // not required
+		return nil
+	}
+
+	if m.AccessKeys != nil {
+		if err := m.AccessKeys.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("access_keys")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("access_keys")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -99,28 +118,13 @@ func (m *SecretServiceCreateAwsIntegrationBody) validateFederatedWorkloadIdentit
 	return nil
 }
 
-func (m *SecretServiceCreateAwsIntegrationBody) validateStaticCredentials(formats strfmt.Registry) error {
-	if swag.IsZero(m.StaticCredentials) { // not required
-		return nil
-	}
-
-	if m.StaticCredentials != nil {
-		if err := m.StaticCredentials.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("static_credentials")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("static_credentials")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this secret service create aws integration body based on the context it is used
 func (m *SecretServiceCreateAwsIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.contextValidateAccessKeys(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateCapabilities(ctx, formats); err != nil {
 		res = append(res, err)
@@ -130,13 +134,30 @@ func (m *SecretServiceCreateAwsIntegrationBody) ContextValidate(ctx context.Cont
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateStaticCredentials(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SecretServiceCreateAwsIntegrationBody) contextValidateAccessKeys(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AccessKeys != nil {
+
+		if swag.IsZero(m.AccessKeys) { // not required
+			return nil
+		}
+
+		if err := m.AccessKeys.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("access_keys")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("access_keys")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -178,27 +199,6 @@ func (m *SecretServiceCreateAwsIntegrationBody) contextValidateFederatedWorkload
 				return ve.ValidateName("federated_workload_identity")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("federated_workload_identity")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *SecretServiceCreateAwsIntegrationBody) contextValidateStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.StaticCredentials != nil {
-
-		if swag.IsZero(m.StaticCredentials) { // not required
-			return nil
-		}
-
-		if err := m.StaticCredentials.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("static_credentials")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("static_credentials")
 			}
 			return err
 		}

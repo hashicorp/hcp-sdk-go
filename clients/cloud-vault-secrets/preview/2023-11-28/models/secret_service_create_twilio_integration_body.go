@@ -22,9 +22,6 @@ type SecretServiceCreateTwilioIntegrationBody struct {
 	// capabilities
 	Capabilities []*Secrets20231128Capability `json:"capabilities"`
 
-	// gateway pool id
-	GatewayPoolID string `json:"gateway_pool_id,omitempty"`
-
 	// integration name
 	IntegrationName string `json:"integration_name,omitempty"`
 

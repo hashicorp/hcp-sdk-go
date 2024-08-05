@@ -18,6 +18,9 @@ import (
 // swagger:model secrets_20231128CreateGatewayPoolResponse
 type Secrets20231128CreateGatewayPoolResponse struct {
 
+	// cert pem
+	CertPem string `json:"cert_pem,omitempty"`
+
 	// client_id is the oauth client_id for the gateway service principal
 	ClientID string `json:"client_id,omitempty"`
 

@@ -42,6 +42,9 @@ type Secrets20231128GcpIntegration struct {
 	// resource name
 	ResourceName string `json:"resource_name,omitempty"`
 
+	// service account key
+	ServiceAccountKey *Secrets20231128GcpServiceAccountKeyResponse `json:"service_account_key,omitempty"`
+
 	// updated at
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
@@ -66,6 +69,10 @@ func (m *Secrets20231128GcpIntegration) Validate(formats strfmt.Registry) error 
 	}
 
 	if err := m.validateFederatedWorkloadIdentity(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateServiceAccountKey(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -140,6 +147,25 @@ func (m *Secrets20231128GcpIntegration) validateFederatedWorkloadIdentity(format
 	return nil
 }
 
+func (m *Secrets20231128GcpIntegration) validateServiceAccountKey(formats strfmt.Registry) error {
+	if swag.IsZero(m.ServiceAccountKey) { // not required
+		return nil
+	}
+
+	if m.ServiceAccountKey != nil {
+		if err := m.ServiceAccountKey.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("service_account_key")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("service_account_key")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128GcpIntegration) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -187,6 +213,10 @@ func (m *Secrets20231128GcpIntegration) ContextValidate(ctx context.Context, for
 	}
 
 	if err := m.contextValidateFederatedWorkloadIdentity(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateServiceAccountKey(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -238,6 +268,27 @@ func (m *Secrets20231128GcpIntegration) contextValidateFederatedWorkloadIdentity
 				return ve.ValidateName("federated_workload_identity")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("federated_workload_identity")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128GcpIntegration) contextValidateServiceAccountKey(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ServiceAccountKey != nil {
+
+		if swag.IsZero(m.ServiceAccountKey) { // not required
+			return nil
+		}
+
+		if err := m.ServiceAccountKey.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("service_account_key")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("service_account_key")
 			}
 			return err
 		}

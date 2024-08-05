@@ -22,7 +22,7 @@ type Secrets20231128GitHubRepository struct {
 	Name string `json:"name,omitempty"`
 
 	// visibility
-	Visibility *GitHubRepositoryVisibility `json:"visibility,omitempty"`
+	Visibility *Secrets20231128GitHubRepositoryVisibility `json:"visibility,omitempty"`
 }
 
 // Validate validates this secrets 20231128 git hub repository
