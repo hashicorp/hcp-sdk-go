@@ -37,6 +37,9 @@ type Secrets20230613Secret struct {
 
 	// version
 	Version *Secrets20230613SecretVersion `json:"version,omitempty"`
+
+	// version count
+	VersionCount string `json:"version_count,omitempty"`
 }
 
 // Validate validates this secrets 20230613 secret

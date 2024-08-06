@@ -13,17 +13,17 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Secrets20230613UpsertSyncInstallationResponse secrets 20230613 upsert sync installation response
+// Secrets20230613ConnectGitHubInstallationResponse secrets 20230613 connect git hub installation response
 //
-// swagger:model secrets_20230613UpsertSyncInstallationResponse
-type Secrets20230613UpsertSyncInstallationResponse struct {
+// swagger:model secrets_20230613ConnectGitHubInstallationResponse
+type Secrets20230613ConnectGitHubInstallationResponse struct {
 
 	// sync installation
 	SyncInstallation *Secrets20230613SyncInstallation `json:"sync_installation,omitempty"`
 }
 
-// Validate validates this secrets 20230613 upsert sync installation response
-func (m *Secrets20230613UpsertSyncInstallationResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this secrets 20230613 connect git hub installation response
+func (m *Secrets20230613ConnectGitHubInstallationResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateSyncInstallation(formats); err != nil {
@@ -36,7 +36,7 @@ func (m *Secrets20230613UpsertSyncInstallationResponse) Validate(formats strfmt.
 	return nil
 }
 
-func (m *Secrets20230613UpsertSyncInstallationResponse) validateSyncInstallation(formats strfmt.Registry) error {
+func (m *Secrets20230613ConnectGitHubInstallationResponse) validateSyncInstallation(formats strfmt.Registry) error {
 	if swag.IsZero(m.SyncInstallation) { // not required
 		return nil
 	}
@@ -55,8 +55,8 @@ func (m *Secrets20230613UpsertSyncInstallationResponse) validateSyncInstallation
 	return nil
 }
 
-// ContextValidate validate this secrets 20230613 upsert sync installation response based on the context it is used
-func (m *Secrets20230613UpsertSyncInstallationResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this secrets 20230613 connect git hub installation response based on the context it is used
+func (m *Secrets20230613ConnectGitHubInstallationResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateSyncInstallation(ctx, formats); err != nil {
@@ -69,7 +69,7 @@ func (m *Secrets20230613UpsertSyncInstallationResponse) ContextValidate(ctx cont
 	return nil
 }
 
-func (m *Secrets20230613UpsertSyncInstallationResponse) contextValidateSyncInstallation(ctx context.Context, formats strfmt.Registry) error {
+func (m *Secrets20230613ConnectGitHubInstallationResponse) contextValidateSyncInstallation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SyncInstallation != nil {
 
@@ -91,7 +91,7 @@ func (m *Secrets20230613UpsertSyncInstallationResponse) contextValidateSyncInsta
 }
 
 // MarshalBinary interface implementation
-func (m *Secrets20230613UpsertSyncInstallationResponse) MarshalBinary() ([]byte, error) {
+func (m *Secrets20230613ConnectGitHubInstallationResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -99,8 +99,8 @@ func (m *Secrets20230613UpsertSyncInstallationResponse) MarshalBinary() ([]byte,
 }
 
 // UnmarshalBinary interface implementation
-func (m *Secrets20230613UpsertSyncInstallationResponse) UnmarshalBinary(b []byte) error {
-	var res Secrets20230613UpsertSyncInstallationResponse
+func (m *Secrets20230613ConnectGitHubInstallationResponse) UnmarshalBinary(b []byte) error {
+	var res Secrets20230613ConnectGitHubInstallationResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

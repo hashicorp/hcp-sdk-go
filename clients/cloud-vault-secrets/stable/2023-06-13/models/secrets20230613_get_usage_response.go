@@ -18,22 +18,38 @@ import (
 // swagger:model secrets_20230613GetUsageResponse
 type Secrets20230613GetUsageResponse struct {
 
+	// access api counts
+	AccessAPICounts *Secrets20230613UsageOptLimitRemaining `json:"access_api_counts,omitempty"`
+
 	// apps
 	Apps *Secrets20230613Usage `json:"apps,omitempty"`
 
 	// billing tier
 	BillingTier *Secrets20230613Tier `json:"billing_tier,omitempty"`
 
+	// gateway pools
+	GatewayPools *Secrets20230613Usage `json:"gateway_pools,omitempty"`
+
 	// integrations
 	Integrations *Secrets20230613Usage `json:"integrations,omitempty"`
 
+	// rotating secrets
+	RotatingSecrets *Secrets20230613Usage `json:"rotating_secrets,omitempty"`
+
 	// secrets
 	Secrets *Secrets20230613Usage `json:"secrets,omitempty"`
+
+	// static secrets
+	StaticSecrets *Secrets20230613Usage `json:"static_secrets,omitempty"`
 }
 
 // Validate validates this secrets 20230613 get usage response
 func (m *Secrets20230613GetUsageResponse) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAccessAPICounts(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateApps(formats); err != nil {
 		res = append(res, err)
@@ -43,7 +59,15 @@ func (m *Secrets20230613GetUsageResponse) Validate(formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
+	if err := m.validateGatewayPools(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateIntegrations(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRotatingSecrets(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -51,9 +75,32 @@ func (m *Secrets20230613GetUsageResponse) Validate(formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
+	if err := m.validateStaticSecrets(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20230613GetUsageResponse) validateAccessAPICounts(formats strfmt.Registry) error {
+	if swag.IsZero(m.AccessAPICounts) { // not required
+		return nil
+	}
+
+	if m.AccessAPICounts != nil {
+		if err := m.AccessAPICounts.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("access_api_counts")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("access_api_counts")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -95,6 +142,25 @@ func (m *Secrets20230613GetUsageResponse) validateBillingTier(formats strfmt.Reg
 	return nil
 }
 
+func (m *Secrets20230613GetUsageResponse) validateGatewayPools(formats strfmt.Registry) error {
+	if swag.IsZero(m.GatewayPools) { // not required
+		return nil
+	}
+
+	if m.GatewayPools != nil {
+		if err := m.GatewayPools.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gateway_pools")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gateway_pools")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20230613GetUsageResponse) validateIntegrations(formats strfmt.Registry) error {
 	if swag.IsZero(m.Integrations) { // not required
 		return nil
@@ -106,6 +172,25 @@ func (m *Secrets20230613GetUsageResponse) validateIntegrations(formats strfmt.Re
 				return ve.ValidateName("integrations")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("integrations")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20230613GetUsageResponse) validateRotatingSecrets(formats strfmt.Registry) error {
+	if swag.IsZero(m.RotatingSecrets) { // not required
+		return nil
+	}
+
+	if m.RotatingSecrets != nil {
+		if err := m.RotatingSecrets.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("rotating_secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("rotating_secrets")
 			}
 			return err
 		}
@@ -133,9 +218,32 @@ func (m *Secrets20230613GetUsageResponse) validateSecrets(formats strfmt.Registr
 	return nil
 }
 
+func (m *Secrets20230613GetUsageResponse) validateStaticSecrets(formats strfmt.Registry) error {
+	if swag.IsZero(m.StaticSecrets) { // not required
+		return nil
+	}
+
+	if m.StaticSecrets != nil {
+		if err := m.StaticSecrets.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("static_secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("static_secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this secrets 20230613 get usage response based on the context it is used
 func (m *Secrets20230613GetUsageResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.contextValidateAccessAPICounts(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateApps(ctx, formats); err != nil {
 		res = append(res, err)
@@ -145,7 +253,15 @@ func (m *Secrets20230613GetUsageResponse) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGatewayPools(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateIntegrations(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRotatingSecrets(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -153,9 +269,34 @@ func (m *Secrets20230613GetUsageResponse) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateStaticSecrets(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Secrets20230613GetUsageResponse) contextValidateAccessAPICounts(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AccessAPICounts != nil {
+
+		if swag.IsZero(m.AccessAPICounts) { // not required
+			return nil
+		}
+
+		if err := m.AccessAPICounts.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("access_api_counts")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("access_api_counts")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -201,6 +342,27 @@ func (m *Secrets20230613GetUsageResponse) contextValidateBillingTier(ctx context
 	return nil
 }
 
+func (m *Secrets20230613GetUsageResponse) contextValidateGatewayPools(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GatewayPools != nil {
+
+		if swag.IsZero(m.GatewayPools) { // not required
+			return nil
+		}
+
+		if err := m.GatewayPools.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gateway_pools")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gateway_pools")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20230613GetUsageResponse) contextValidateIntegrations(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Integrations != nil {
@@ -222,6 +384,27 @@ func (m *Secrets20230613GetUsageResponse) contextValidateIntegrations(ctx contex
 	return nil
 }
 
+func (m *Secrets20230613GetUsageResponse) contextValidateRotatingSecrets(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RotatingSecrets != nil {
+
+		if swag.IsZero(m.RotatingSecrets) { // not required
+			return nil
+		}
+
+		if err := m.RotatingSecrets.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("rotating_secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("rotating_secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20230613GetUsageResponse) contextValidateSecrets(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Secrets != nil {
@@ -235,6 +418,27 @@ func (m *Secrets20230613GetUsageResponse) contextValidateSecrets(ctx context.Con
 				return ve.ValidateName("secrets")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20230613GetUsageResponse) contextValidateStaticSecrets(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StaticSecrets != nil {
+
+		if swag.IsZero(m.StaticSecrets) { // not required
+			return nil
+		}
+
+		if err := m.StaticSecrets.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("static_secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("static_secrets")
 			}
 			return err
 		}

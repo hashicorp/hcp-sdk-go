@@ -26,6 +26,9 @@ type Secrets20230613OpenSecretVersion struct {
 	// created by
 	CreatedBy *Secrets20230613Principal `json:"created_by,omitempty"`
 
+	// created by id
+	CreatedByID string `json:"created_by_id,omitempty"`
+
 	// type
 	Type string `json:"type,omitempty"`
 

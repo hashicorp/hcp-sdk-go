@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewDeleteSyncIntegrationParams creates a new DeleteSyncIntegrationParams object,
@@ -61,6 +62,9 @@ DeleteSyncIntegrationParams contains all the parameters to send to the API endpo
 */
 type DeleteSyncIntegrationParams struct {
 
+	// CascadeDelete.
+	CascadeDelete *bool
+
 	/* LocationOrganizationID.
 
 	   organization_id is the id of the organization.
@@ -87,6 +91,9 @@ type DeleteSyncIntegrationParams struct {
 
 	// Name.
 	Name string
+
+	// PurgeSyncedSecrets.
+	PurgeSyncedSecrets *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -139,6 +146,17 @@ func (o *DeleteSyncIntegrationParams) WithHTTPClient(client *http.Client) *Delet
 // SetHTTPClient adds the HTTPClient to the delete sync integration params
 func (o *DeleteSyncIntegrationParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
+}
+
+// WithCascadeDelete adds the cascadeDelete to the delete sync integration params
+func (o *DeleteSyncIntegrationParams) WithCascadeDelete(cascadeDelete *bool) *DeleteSyncIntegrationParams {
+	o.SetCascadeDelete(cascadeDelete)
+	return o
+}
+
+// SetCascadeDelete adds the cascadeDelete to the delete sync integration params
+func (o *DeleteSyncIntegrationParams) SetCascadeDelete(cascadeDelete *bool) {
+	o.CascadeDelete = cascadeDelete
 }
 
 // WithLocationOrganizationID adds the locationOrganizationID to the delete sync integration params
@@ -196,6 +214,17 @@ func (o *DeleteSyncIntegrationParams) SetName(name string) {
 	o.Name = name
 }
 
+// WithPurgeSyncedSecrets adds the purgeSyncedSecrets to the delete sync integration params
+func (o *DeleteSyncIntegrationParams) WithPurgeSyncedSecrets(purgeSyncedSecrets *bool) *DeleteSyncIntegrationParams {
+	o.SetPurgeSyncedSecrets(purgeSyncedSecrets)
+	return o
+}
+
+// SetPurgeSyncedSecrets adds the purgeSyncedSecrets to the delete sync integration params
+func (o *DeleteSyncIntegrationParams) SetPurgeSyncedSecrets(purgeSyncedSecrets *bool) {
+	o.PurgeSyncedSecrets = purgeSyncedSecrets
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *DeleteSyncIntegrationParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -203,6 +232,23 @@ func (o *DeleteSyncIntegrationParams) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 	var res []error
+
+	if o.CascadeDelete != nil {
+
+		// query param cascade_delete
+		var qrCascadeDelete bool
+
+		if o.CascadeDelete != nil {
+			qrCascadeDelete = *o.CascadeDelete
+		}
+		qCascadeDelete := swag.FormatBool(qrCascadeDelete)
+		if qCascadeDelete != "" {
+
+			if err := r.SetQueryParam("cascade_delete", qCascadeDelete); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param location.organization_id
 	if err := r.SetPathParam("location.organization_id", o.LocationOrganizationID); err != nil {
@@ -251,6 +297,23 @@ func (o *DeleteSyncIntegrationParams) WriteToRequest(r runtime.ClientRequest, re
 	// path param name
 	if err := r.SetPathParam("name", o.Name); err != nil {
 		return err
+	}
+
+	if o.PurgeSyncedSecrets != nil {
+
+		// query param purge_synced_secrets
+		var qrPurgeSyncedSecrets bool
+
+		if o.PurgeSyncedSecrets != nil {
+			qrPurgeSyncedSecrets = *o.PurgeSyncedSecrets
+		}
+		qPurgeSyncedSecrets := swag.FormatBool(qrPurgeSyncedSecrets)
+		if qPurgeSyncedSecrets != "" {
+
+			if err := r.SetQueryParam("purge_synced_secrets", qPurgeSyncedSecrets); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

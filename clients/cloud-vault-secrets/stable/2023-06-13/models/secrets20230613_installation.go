@@ -13,26 +13,26 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Secrets20230613GhAppMetadata secrets 20230613 gh app metadata
+// Secrets20230613Installation secrets 20230613 installation
 //
-// swagger:model secrets_20230613GhAppMetadata
-type Secrets20230613GhAppMetadata struct {
+// swagger:model secrets_20230613Installation
+type Secrets20230613Installation struct {
+
+	// account login
+	AccountLogin string `json:"account_login,omitempty"`
 
 	// account type
 	AccountType *GhAppMetadataAccountType `json:"account_type,omitempty"`
 
-	// installation id
-	InstallationID string `json:"installation_id,omitempty"`
+	// app slug
+	AppSlug string `json:"app_slug,omitempty"`
 
-	// owner
-	Owner string `json:"owner,omitempty"`
-
-	// repositories
-	Repositories []string `json:"repositories"`
+	// id
+	ID string `json:"id,omitempty"`
 }
 
-// Validate validates this secrets 20230613 gh app metadata
-func (m *Secrets20230613GhAppMetadata) Validate(formats strfmt.Registry) error {
+// Validate validates this secrets 20230613 installation
+func (m *Secrets20230613Installation) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAccountType(formats); err != nil {
@@ -45,7 +45,7 @@ func (m *Secrets20230613GhAppMetadata) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Secrets20230613GhAppMetadata) validateAccountType(formats strfmt.Registry) error {
+func (m *Secrets20230613Installation) validateAccountType(formats strfmt.Registry) error {
 	if swag.IsZero(m.AccountType) { // not required
 		return nil
 	}
@@ -64,8 +64,8 @@ func (m *Secrets20230613GhAppMetadata) validateAccountType(formats strfmt.Regist
 	return nil
 }
 
-// ContextValidate validate this secrets 20230613 gh app metadata based on the context it is used
-func (m *Secrets20230613GhAppMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this secrets 20230613 installation based on the context it is used
+func (m *Secrets20230613Installation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateAccountType(ctx, formats); err != nil {
@@ -78,7 +78,7 @@ func (m *Secrets20230613GhAppMetadata) ContextValidate(ctx context.Context, form
 	return nil
 }
 
-func (m *Secrets20230613GhAppMetadata) contextValidateAccountType(ctx context.Context, formats strfmt.Registry) error {
+func (m *Secrets20230613Installation) contextValidateAccountType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AccountType != nil {
 
@@ -100,7 +100,7 @@ func (m *Secrets20230613GhAppMetadata) contextValidateAccountType(ctx context.Co
 }
 
 // MarshalBinary interface implementation
-func (m *Secrets20230613GhAppMetadata) MarshalBinary() ([]byte, error) {
+func (m *Secrets20230613Installation) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -108,8 +108,8 @@ func (m *Secrets20230613GhAppMetadata) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Secrets20230613GhAppMetadata) UnmarshalBinary(b []byte) error {
-	var res Secrets20230613GhAppMetadata
+func (m *Secrets20230613Installation) UnmarshalBinary(b []byte) error {
+	var res Secrets20230613Installation
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -22,6 +22,9 @@ type Secrets20230613SyncIntegration struct {
 	// aws sm connection details
 	AwsSmConnectionDetails *Secrets20230613AwsSmConnectionDetailsResponse `json:"aws_sm_connection_details,omitempty"`
 
+	// azure kv connection details
+	AzureKvConnectionDetails *Secrets20230613AzureKvConnectionDetailsResponse `json:"azure_kv_connection_details,omitempty"`
+
 	// created at
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
@@ -29,8 +32,17 @@ type Secrets20230613SyncIntegration struct {
 	// created by
 	CreatedBy *Secrets20230613Principal `json:"created_by,omitempty"`
 
+	// gcp sm connection details
+	GcpSmConnectionDetails *Secrets20230613GcpSmConnectionDetailsResponse `json:"gcp_sm_connection_details,omitempty"`
+
+	// gh org connection details
+	GhOrgConnectionDetails *Secrets20230613GhOrgConnectionDetailsResponse `json:"gh_org_connection_details,omitempty"`
+
 	// gh repo connection details
 	GhRepoConnectionDetails *Secrets20230613GhRepoConnectionDetailsResponse `json:"gh_repo_connection_details,omitempty"`
+
+	// hcp terraform connection details
+	HcpTerraformConnectionDetails *Secrets20230613HcpTerraformConnectionDetailsResponse `json:"hcp_terraform_connection_details,omitempty"`
 
 	// location
 	Location *CloudlocationLocation `json:"location,omitempty"`
@@ -60,6 +72,10 @@ func (m *Secrets20230613SyncIntegration) Validate(formats strfmt.Registry) error
 		res = append(res, err)
 	}
 
+	if err := m.validateAzureKvConnectionDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreatedAt(formats); err != nil {
 		res = append(res, err)
 	}
@@ -68,7 +84,19 @@ func (m *Secrets20230613SyncIntegration) Validate(formats strfmt.Registry) error
 		res = append(res, err)
 	}
 
+	if err := m.validateGcpSmConnectionDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGhOrgConnectionDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateGhRepoConnectionDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHcpTerraformConnectionDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -113,6 +141,25 @@ func (m *Secrets20230613SyncIntegration) validateAwsSmConnectionDetails(formats 
 	return nil
 }
 
+func (m *Secrets20230613SyncIntegration) validateAzureKvConnectionDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.AzureKvConnectionDetails) { // not required
+		return nil
+	}
+
+	if m.AzureKvConnectionDetails != nil {
+		if err := m.AzureKvConnectionDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_kv_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_kv_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20230613SyncIntegration) validateCreatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
@@ -144,6 +191,44 @@ func (m *Secrets20230613SyncIntegration) validateCreatedBy(formats strfmt.Regist
 	return nil
 }
 
+func (m *Secrets20230613SyncIntegration) validateGcpSmConnectionDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.GcpSmConnectionDetails) { // not required
+		return nil
+	}
+
+	if m.GcpSmConnectionDetails != nil {
+		if err := m.GcpSmConnectionDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gcp_sm_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gcp_sm_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20230613SyncIntegration) validateGhOrgConnectionDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.GhOrgConnectionDetails) { // not required
+		return nil
+	}
+
+	if m.GhOrgConnectionDetails != nil {
+		if err := m.GhOrgConnectionDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gh_org_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gh_org_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20230613SyncIntegration) validateGhRepoConnectionDetails(formats strfmt.Registry) error {
 	if swag.IsZero(m.GhRepoConnectionDetails) { // not required
 		return nil
@@ -155,6 +240,25 @@ func (m *Secrets20230613SyncIntegration) validateGhRepoConnectionDetails(formats
 				return ve.ValidateName("gh_repo_connection_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("gh_repo_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20230613SyncIntegration) validateHcpTerraformConnectionDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.HcpTerraformConnectionDetails) { // not required
+		return nil
+	}
+
+	if m.HcpTerraformConnectionDetails != nil {
+		if err := m.HcpTerraformConnectionDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform_connection_details")
 			}
 			return err
 		}
@@ -240,11 +344,27 @@ func (m *Secrets20230613SyncIntegration) ContextValidate(ctx context.Context, fo
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAzureKvConnectionDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGcpSmConnectionDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGhOrgConnectionDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGhRepoConnectionDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHcpTerraformConnectionDetails(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -287,6 +407,27 @@ func (m *Secrets20230613SyncIntegration) contextValidateAwsSmConnectionDetails(c
 	return nil
 }
 
+func (m *Secrets20230613SyncIntegration) contextValidateAzureKvConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AzureKvConnectionDetails != nil {
+
+		if swag.IsZero(m.AzureKvConnectionDetails) { // not required
+			return nil
+		}
+
+		if err := m.AzureKvConnectionDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_kv_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_kv_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20230613SyncIntegration) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CreatedBy != nil {
@@ -308,6 +449,48 @@ func (m *Secrets20230613SyncIntegration) contextValidateCreatedBy(ctx context.Co
 	return nil
 }
 
+func (m *Secrets20230613SyncIntegration) contextValidateGcpSmConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GcpSmConnectionDetails != nil {
+
+		if swag.IsZero(m.GcpSmConnectionDetails) { // not required
+			return nil
+		}
+
+		if err := m.GcpSmConnectionDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gcp_sm_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gcp_sm_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20230613SyncIntegration) contextValidateGhOrgConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GhOrgConnectionDetails != nil {
+
+		if swag.IsZero(m.GhOrgConnectionDetails) { // not required
+			return nil
+		}
+
+		if err := m.GhOrgConnectionDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gh_org_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gh_org_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20230613SyncIntegration) contextValidateGhRepoConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GhRepoConnectionDetails != nil {
@@ -321,6 +504,27 @@ func (m *Secrets20230613SyncIntegration) contextValidateGhRepoConnectionDetails(
 				return ve.ValidateName("gh_repo_connection_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("gh_repo_connection_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20230613SyncIntegration) contextValidateHcpTerraformConnectionDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HcpTerraformConnectionDetails != nil {
+
+		if swag.IsZero(m.HcpTerraformConnectionDetails) { // not required
+			return nil
+		}
+
+		if err := m.HcpTerraformConnectionDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform_connection_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform_connection_details")
 			}
 			return err
 		}

@@ -35,6 +35,9 @@ type Secrets20230613App struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// secret count
+	SecretCount int32 `json:"secret_count,omitempty"`
+
 	// sync integrations
 	SyncIntegrations []string `json:"sync_integrations"`
 

@@ -24,6 +24,9 @@ type Secrets20230613SyncInstallation struct {
 	// gh app
 	GhApp *Secrets20230613GhAppMetadata `json:"gh_app,omitempty"`
 
+	// hcp terraform
+	HcpTerraform *Secrets20230613HcpTerraformMetadata `json:"hcp_terraform,omitempty"`
+
 	// location
 	Location *CloudlocationLocation `json:"location,omitempty"`
 
@@ -43,6 +46,10 @@ func (m *Secrets20230613SyncInstallation) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateGhApp(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHcpTerraform(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -90,6 +97,25 @@ func (m *Secrets20230613SyncInstallation) validateGhApp(formats strfmt.Registry)
 				return ve.ValidateName("gh_app")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("gh_app")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20230613SyncInstallation) validateHcpTerraform(formats strfmt.Registry) error {
+	if swag.IsZero(m.HcpTerraform) { // not required
+		return nil
+	}
+
+	if m.HcpTerraform != nil {
+		if err := m.HcpTerraform.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform")
 			}
 			return err
 		}
@@ -148,6 +174,10 @@ func (m *Secrets20230613SyncInstallation) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateHcpTerraform(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -196,6 +226,27 @@ func (m *Secrets20230613SyncInstallation) contextValidateGhApp(ctx context.Conte
 				return ve.ValidateName("gh_app")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("gh_app")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20230613SyncInstallation) contextValidateHcpTerraform(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HcpTerraform != nil {
+
+		if swag.IsZero(m.HcpTerraform) { // not required
+			return nil
+		}
+
+		if err := m.HcpTerraform.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform")
 			}
 			return err
 		}
