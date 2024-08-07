@@ -1,3 +1,5 @@
+## v0.106.0 (August 07, 2024)
+
 ## v0.105.0 (July 31, 2024)
 
 IMPROVEMENTS:
