@@ -42,13 +42,13 @@ type oauthBrowser struct{}
 
 // GetTokenFromBrowser opens a browser window for the user to log in and handles the OAuth2 flow to obtain a token.
 func (b *oauthBrowser) GetTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
-	// Launch a request to Auth0's authorization endpoint.
-	colorstring.Printf("[bold][yellow]The default web browser has been opened at %s. Please continue the login in the web browser.\n", conf.Endpoint.AuthURL)
-
 	// Prepare the /authorize request with randomly generated state, offline access option, and audience
 	aud := "https://api.hashicorp.cloud"
 	opt := oauth2.SetAuthURLParam("audience", aud)
 	authzURL := conf.AuthCodeURL(generateRandomString(32), oauth2.AccessTypeOffline, opt)
+
+	// Launch a request to HCP's authorization endpoint.
+	colorstring.Printf("[bold][yellow]The default web browser has been opened at %s. Please continue the login in the web browser.\n", authzURL)
 
 	// Handle ctrl-c while waiting for the callback
 	sigintCh := make(chan os.Signal, 1)
