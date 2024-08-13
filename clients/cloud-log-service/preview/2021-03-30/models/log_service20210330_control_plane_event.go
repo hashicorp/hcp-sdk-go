@@ -39,16 +39,8 @@ type LogService20210330ControlPlaneEvent struct {
 	// operation_info describes the operation this event is part of.
 	OperationInfo *LogService20210330OperationInfo `json:"operation_info,omitempty"`
 
-	// principal holds information about the principal that performed the action.
-	Principal *CloudlogService20210330Principal `json:"principal,omitempty"`
-
 	// request_info contains information about the request triggering this event.
 	RequestInfo *LogService20210330RequestInfo `json:"request_info,omitempty"`
-
-	// service_principal_delegation_chain store the chain of assumed principals
-	// leading up to the current principal. The order of principals will be in the
-	// order the identities were assumed.
-	ServicePrincipalDelegationChain []*LogService20210330ServicePrincipalDelegationInfo `json:"service_principal_delegation_chain"`
 
 	// status_code contains the status code the audited action resulted in. This
 	// is the string representation of the event's status.code.
@@ -75,15 +67,7 @@ func (m *LogService20210330ControlPlaneEvent) Validate(formats strfmt.Registry) 
 		res = append(res, err)
 	}
 
-	if err := m.validatePrincipal(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateRequestInfo(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateServicePrincipalDelegationChain(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -176,25 +160,6 @@ func (m *LogService20210330ControlPlaneEvent) validateOperationInfo(formats strf
 	return nil
 }
 
-func (m *LogService20210330ControlPlaneEvent) validatePrincipal(formats strfmt.Registry) error {
-	if swag.IsZero(m.Principal) { // not required
-		return nil
-	}
-
-	if m.Principal != nil {
-		if err := m.Principal.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("principal")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("principal")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *LogService20210330ControlPlaneEvent) validateRequestInfo(formats strfmt.Registry) error {
 	if swag.IsZero(m.RequestInfo) { // not required
 		return nil
@@ -209,32 +174,6 @@ func (m *LogService20210330ControlPlaneEvent) validateRequestInfo(formats strfmt
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *LogService20210330ControlPlaneEvent) validateServicePrincipalDelegationChain(formats strfmt.Registry) error {
-	if swag.IsZero(m.ServicePrincipalDelegationChain) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.ServicePrincipalDelegationChain); i++ {
-		if swag.IsZero(m.ServicePrincipalDelegationChain[i]) { // not required
-			continue
-		}
-
-		if m.ServicePrincipalDelegationChain[i] != nil {
-			if err := m.ServicePrincipalDelegationChain[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("service_principal_delegation_chain" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("service_principal_delegation_chain" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil
@@ -260,15 +199,7 @@ func (m *LogService20210330ControlPlaneEvent) ContextValidate(ctx context.Contex
 		res = append(res, err)
 	}
 
-	if err := m.contextValidatePrincipal(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateRequestInfo(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateServicePrincipalDelegationChain(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -366,27 +297,6 @@ func (m *LogService20210330ControlPlaneEvent) contextValidateOperationInfo(ctx c
 	return nil
 }
 
-func (m *LogService20210330ControlPlaneEvent) contextValidatePrincipal(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Principal != nil {
-
-		if swag.IsZero(m.Principal) { // not required
-			return nil
-		}
-
-		if err := m.Principal.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("principal")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("principal")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *LogService20210330ControlPlaneEvent) contextValidateRequestInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RequestInfo != nil {
@@ -403,31 +313,6 @@ func (m *LogService20210330ControlPlaneEvent) contextValidateRequestInfo(ctx con
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *LogService20210330ControlPlaneEvent) contextValidateServicePrincipalDelegationChain(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.ServicePrincipalDelegationChain); i++ {
-
-		if m.ServicePrincipalDelegationChain[i] != nil {
-
-			if swag.IsZero(m.ServicePrincipalDelegationChain[i]) { // not required
-				return nil
-			}
-
-			if err := m.ServicePrincipalDelegationChain[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("service_principal_delegation_chain" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("service_principal_delegation_chain" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil

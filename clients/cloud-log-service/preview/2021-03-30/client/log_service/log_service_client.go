@@ -44,9 +44,13 @@ type ClientService interface {
 
 	LogServiceGetStreamingDestination(params *LogServiceGetStreamingDestinationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogServiceGetStreamingDestinationOK, error)
 
+	LogServiceGetStreamingDestination2(params *LogServiceGetStreamingDestination2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogServiceGetStreamingDestination2OK, error)
+
 	LogServiceListArchives(params *LogServiceListArchivesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogServiceListArchivesOK, error)
 
 	LogServiceListStreamingDestinations(params *LogServiceListStreamingDestinationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogServiceListStreamingDestinationsOK, error)
+
+	LogServiceListStreamingDestinations2(params *LogServiceListStreamingDestinations2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogServiceListStreamingDestinations2OK, error)
 
 	LogServiceListStreamingDestinationsForResource(params *LogServiceListStreamingDestinationsForResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogServiceListStreamingDestinationsForResourceOK, error)
 
@@ -366,6 +370,44 @@ func (a *Client) LogServiceGetStreamingDestination(params *LogServiceGetStreamin
 }
 
 /*
+LogServiceGetStreamingDestination2 gets a streaming destination by its project and id
+*/
+func (a *Client) LogServiceGetStreamingDestination2(params *LogServiceGetStreamingDestination2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogServiceGetStreamingDestination2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLogServiceGetStreamingDestination2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "LogService_GetStreamingDestination2",
+		Method:             "GET",
+		PathPattern:        "/logs/2021-03-30/organizations/{location.organization_id}/resources/destinations/{destination_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LogServiceGetStreamingDestination2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LogServiceGetStreamingDestination2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*LogServiceGetStreamingDestination2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 LogServiceListArchives lists archives for a given resource
 */
 func (a *Client) LogServiceListArchives(params *LogServiceListArchivesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogServiceListArchivesOK, error) {
@@ -438,6 +480,44 @@ func (a *Client) LogServiceListStreamingDestinations(params *LogServiceListStrea
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*LogServiceListStreamingDestinationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+LogServiceListStreamingDestinations2 lists streaming destinations for a given location
+*/
+func (a *Client) LogServiceListStreamingDestinations2(params *LogServiceListStreamingDestinations2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogServiceListStreamingDestinations2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLogServiceListStreamingDestinations2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "LogService_ListStreamingDestinations2",
+		Method:             "GET",
+		PathPattern:        "/logs/2021-03-30/organizations/{location.organization_id}/resources/destinations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LogServiceListStreamingDestinations2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LogServiceListStreamingDestinations2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*LogServiceListStreamingDestinations2Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

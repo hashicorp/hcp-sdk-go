@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-log-service/preview/2021-03-30/client/log_service"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-log-service/preview/2021-03-30/client/streaming_service"
 )
 
 // Default cloud log service HTTP client.
@@ -56,6 +57,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudLogSe
 	cli := new(CloudLogService)
 	cli.Transport = transport
 	cli.LogService = log_service.New(transport, formats)
+	cli.StreamingService = streaming_service.New(transport, formats)
 	return cli
 }
 
@@ -102,6 +104,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type CloudLogService struct {
 	LogService log_service.ClientService
 
+	StreamingService streaming_service.ClientService
+
 	Transport runtime.ClientTransport
 }
 
@@ -109,4 +113,5 @@ type CloudLogService struct {
 func (c *CloudLogService) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.LogService.SetTransport(transport)
+	c.StreamingService.SetTransport(transport)
 }

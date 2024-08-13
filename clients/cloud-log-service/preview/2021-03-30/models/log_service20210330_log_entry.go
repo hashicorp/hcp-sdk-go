@@ -36,6 +36,10 @@ type LogService20210330LogEntry struct {
 	// stream identifies the log stream this log entry is part of.
 	Stream *LogService20210330LogStream `json:"stream,omitempty"`
 
+	// Subject will replace resource and identifies the resources/users/organizations/etc
+	// associated with the log entry
+	Subject *LogService20210330Subject `json:"subject,omitempty"`
+
 	// timestamp is the time this log entry was stored.
 	// Format: date-time
 	Timestamp strfmt.DateTime `json:"timestamp,omitempty"`
@@ -58,6 +62,10 @@ func (m *LogService20210330LogEntry) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStream(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSubject(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -147,6 +155,25 @@ func (m *LogService20210330LogEntry) validateStream(formats strfmt.Registry) err
 	return nil
 }
 
+func (m *LogService20210330LogEntry) validateSubject(formats strfmt.Registry) error {
+	if swag.IsZero(m.Subject) { // not required
+		return nil
+	}
+
+	if m.Subject != nil {
+		if err := m.Subject.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("subject")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("subject")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *LogService20210330LogEntry) validateTimestamp(formats strfmt.Registry) error {
 	if swag.IsZero(m.Timestamp) { // not required
 		return nil
@@ -176,6 +203,10 @@ func (m *LogService20210330LogEntry) ContextValidate(ctx context.Context, format
 	}
 
 	if err := m.contextValidateStream(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSubject(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -261,6 +292,27 @@ func (m *LogService20210330LogEntry) contextValidateStream(ctx context.Context, 
 				return ve.ValidateName("stream")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("stream")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *LogService20210330LogEntry) contextValidateSubject(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Subject != nil {
+
+		if swag.IsZero(m.Subject) { // not required
+			return nil
+		}
+
+		if err := m.Subject.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("subject")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("subject")
 			}
 			return err
 		}
