@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,6 +23,9 @@ type HashicorpCloudVagrant20220930Registry struct {
 
 	// Whether or not the Registry is currently activated, ignored on input.
 	Activated bool `json:"activated,omitempty"`
+
+	// Boxes of registry (if expanded).
+	Boxes []*HashicorpCloudVagrant20220930Box `json:"boxes"`
 
 	// The date the record was created.
 	// Format: date-time
@@ -54,6 +58,10 @@ type HashicorpCloudVagrant20220930Registry struct {
 func (m *HashicorpCloudVagrant20220930Registry) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateBoxes(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreatedAt(formats); err != nil {
 		res = append(res, err)
 	}
@@ -69,6 +77,32 @@ func (m *HashicorpCloudVagrant20220930Registry) Validate(formats strfmt.Registry
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Registry) validateBoxes(formats strfmt.Registry) error {
+	if swag.IsZero(m.Boxes) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Boxes); i++ {
+		if swag.IsZero(m.Boxes[i]) { // not required
+			continue
+		}
+
+		if m.Boxes[i] != nil {
+			if err := m.Boxes[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("boxes" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("boxes" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -119,6 +153,10 @@ func (m *HashicorpCloudVagrant20220930Registry) validateUpdatedAt(formats strfmt
 func (m *HashicorpCloudVagrant20220930Registry) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateBoxes(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -126,6 +164,31 @@ func (m *HashicorpCloudVagrant20220930Registry) ContextValidate(ctx context.Cont
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Registry) contextValidateBoxes(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Boxes); i++ {
+
+		if m.Boxes[i] != nil {
+
+			if swag.IsZero(m.Boxes[i]) { // not required
+				return nil
+			}
+
+			if err := m.Boxes[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("boxes" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("boxes" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

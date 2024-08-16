@@ -53,7 +53,7 @@ DeleteRegistryOK describes a response with status code 200, with default header 
 A successful response.
 */
 type DeleteRegistryOK struct {
-	Payload models.HashicorpCloudVagrant20220930DeleteRegistryResponse
+	Payload *models.HashicorpCloudVagrant20220930DeleteRegistryResponse
 }
 
 // IsSuccess returns true when this delete registry o k response has a 2xx status code
@@ -94,14 +94,16 @@ func (o *DeleteRegistryOK) String() string {
 	return fmt.Sprintf("[DELETE /vagrant/2022-09-30/registry/{registry}][%d] deleteRegistryOK  %+v", 200, o.Payload)
 }
 
-func (o *DeleteRegistryOK) GetPayload() models.HashicorpCloudVagrant20220930DeleteRegistryResponse {
+func (o *DeleteRegistryOK) GetPayload() *models.HashicorpCloudVagrant20220930DeleteRegistryResponse {
 	return o.Payload
 }
 
 func (o *DeleteRegistryOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.HashicorpCloudVagrant20220930DeleteRegistryResponse)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

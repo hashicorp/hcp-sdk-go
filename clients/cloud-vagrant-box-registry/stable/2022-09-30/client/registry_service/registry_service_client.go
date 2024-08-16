@@ -92,6 +92,8 @@ type ClientService interface {
 
 	UpdateProvider(params *UpdateProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProviderOK, error)
 
+	UpdateRegistry(params *UpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRegistryOK, error)
+
 	UpdateVersion(params *UpdateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVersionOK, error)
 
 	UploadBox(params *UploadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadBoxOK, error)
@@ -1339,6 +1341,44 @@ func (a *Client) UpdateProvider(params *UpdateProviderParams, authInfo runtime.C
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateProviderDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateRegistry updates registry updates the details of a vagrant box registry
+*/
+func (a *Client) UpdateRegistry(params *UpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRegistryOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateRegistryParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateRegistry",
+		Method:             "PUT",
+		PathPattern:        "/vagrant/2022-09-30/registry/{registry}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateRegistryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateRegistryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateRegistryDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

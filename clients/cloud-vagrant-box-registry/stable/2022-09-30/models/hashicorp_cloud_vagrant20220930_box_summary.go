@@ -8,14 +8,20 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // HashicorpCloudVagrant20220930BoxSummary hashicorp cloud vagrant 20220930 box summary
 //
 // swagger:model hashicorp.cloud.vagrant_20220930.BoxSummary
 type HashicorpCloudVagrant20220930BoxSummary struct {
+
+	// The date the most recent version was released
+	// Format: date-time
+	LatestReleasedAt strfmt.DateTime `json:"latest_released_at,omitempty"`
 
 	// List of providers taht have versions available for this box
 	ProviderNames []string `json:"provider_names"`
@@ -26,6 +32,27 @@ type HashicorpCloudVagrant20220930BoxSummary struct {
 
 // Validate validates this hashicorp cloud vagrant 20220930 box summary
 func (m *HashicorpCloudVagrant20220930BoxSummary) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLatestReleasedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930BoxSummary) validateLatestReleasedAt(formats strfmt.Registry) error {
+	if swag.IsZero(m.LatestReleasedAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("latest_released_at", "body", "date-time", m.LatestReleasedAt.String(), formats); err != nil {
+		return err
+	}
+
 	return nil
 }
 

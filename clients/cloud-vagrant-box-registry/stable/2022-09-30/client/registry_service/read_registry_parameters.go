@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewReadRegistryParams creates a new ReadRegistryParams object,
@@ -60,6 +61,12 @@ ReadRegistryParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type ReadRegistryParams struct {
+
+	/* Expanded.
+
+	   Expand the registry child elements.
+	*/
+	Expanded *bool
 
 	/* Registry.
 
@@ -120,6 +127,17 @@ func (o *ReadRegistryParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithExpanded adds the expanded to the read registry params
+func (o *ReadRegistryParams) WithExpanded(expanded *bool) *ReadRegistryParams {
+	o.SetExpanded(expanded)
+	return o
+}
+
+// SetExpanded adds the expanded to the read registry params
+func (o *ReadRegistryParams) SetExpanded(expanded *bool) {
+	o.Expanded = expanded
+}
+
 // WithRegistry adds the registry to the read registry params
 func (o *ReadRegistryParams) WithRegistry(registry string) *ReadRegistryParams {
 	o.SetRegistry(registry)
@@ -138,6 +156,23 @@ func (o *ReadRegistryParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
+
+	if o.Expanded != nil {
+
+		// query param expanded
+		var qrExpanded bool
+
+		if o.Expanded != nil {
+			qrExpanded = *o.Expanded
+		}
+		qExpanded := swag.FormatBool(qrExpanded)
+		if qExpanded != "" {
+
+			if err := r.SetQueryParam("expanded", qExpanded); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param registry
 	if err := r.SetPathParam("registry", o.Registry); err != nil {
