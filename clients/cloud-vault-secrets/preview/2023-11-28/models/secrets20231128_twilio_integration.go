@@ -30,9 +30,6 @@ type Secrets20231128TwilioIntegration struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// integration name
-	IntegrationName string `json:"integration_name,omitempty"`
-
 	// name
 	Name string `json:"name,omitempty"`
 
@@ -44,12 +41,6 @@ type Secrets20231128TwilioIntegration struct {
 
 	// static credential details
 	StaticCredentialDetails *Secrets20231128TwilioStaticCredentialsResponse `json:"static_credential_details,omitempty"`
-
-	// twilio account sid
-	TwilioAccountSid string `json:"twilio_account_sid,omitempty"`
-
-	// twilio api key sid
-	TwilioAPIKeySid string `json:"twilio_api_key_sid,omitempty"`
 
 	// updated at
 	// Format: date-time

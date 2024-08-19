@@ -86,11 +86,11 @@ func (o *GetMongoDBAtlasIntegrationOK) Code() int {
 }
 
 func (o *GetMongoDBAtlasIntegrationOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}][%d] getMongoDBAtlasIntegrationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] getMongoDBAtlasIntegrationOK  %+v", 200, o.Payload)
 }
 
 func (o *GetMongoDBAtlasIntegrationOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}][%d] getMongoDBAtlasIntegrationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] getMongoDBAtlasIntegrationOK  %+v", 200, o.Payload)
 }
 
 func (o *GetMongoDBAtlasIntegrationOK) GetPayload() *models.Secrets20231128GetMongoDBAtlasIntegrationResponse {
@@ -158,11 +158,11 @@ func (o *GetMongoDBAtlasIntegrationDefault) Code() int {
 }
 
 func (o *GetMongoDBAtlasIntegrationDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}][%d] GetMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] GetMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetMongoDBAtlasIntegrationDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}][%d] GetMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] GetMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetMongoDBAtlasIntegrationDefault) GetPayload() *models.GooglerpcStatus {

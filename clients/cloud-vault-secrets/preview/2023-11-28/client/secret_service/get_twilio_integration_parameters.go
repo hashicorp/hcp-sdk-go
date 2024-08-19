@@ -61,11 +61,8 @@ GetTwilioIntegrationParams contains all the parameters to send to the API endpoi
 */
 type GetTwilioIntegrationParams struct {
 
-	// IntegrationName.
-	IntegrationName string
-
 	// Name.
-	Name *string
+	Name string
 
 	// OrganizationID.
 	OrganizationID string
@@ -126,25 +123,14 @@ func (o *GetTwilioIntegrationParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithIntegrationName adds the integrationName to the get twilio integration params
-func (o *GetTwilioIntegrationParams) WithIntegrationName(integrationName string) *GetTwilioIntegrationParams {
-	o.SetIntegrationName(integrationName)
-	return o
-}
-
-// SetIntegrationName adds the integrationName to the get twilio integration params
-func (o *GetTwilioIntegrationParams) SetIntegrationName(integrationName string) {
-	o.IntegrationName = integrationName
-}
-
 // WithName adds the name to the get twilio integration params
-func (o *GetTwilioIntegrationParams) WithName(name *string) *GetTwilioIntegrationParams {
+func (o *GetTwilioIntegrationParams) WithName(name string) *GetTwilioIntegrationParams {
 	o.SetName(name)
 	return o
 }
 
 // SetName adds the name to the get twilio integration params
-func (o *GetTwilioIntegrationParams) SetName(name *string) {
+func (o *GetTwilioIntegrationParams) SetName(name string) {
 	o.Name = name
 }
 
@@ -178,26 +164,9 @@ func (o *GetTwilioIntegrationParams) WriteToRequest(r runtime.ClientRequest, reg
 	}
 	var res []error
 
-	// path param integration_name
-	if err := r.SetPathParam("integration_name", o.IntegrationName); err != nil {
+	// path param name
+	if err := r.SetPathParam("name", o.Name); err != nil {
 		return err
-	}
-
-	if o.Name != nil {
-
-		// query param name
-		var qrName string
-
-		if o.Name != nil {
-			qrName = *o.Name
-		}
-		qName := qrName
-		if qName != "" {
-
-			if err := r.SetQueryParam("name", qName); err != nil {
-				return err
-			}
-		}
 	}
 
 	// path param organization_id

@@ -61,11 +61,8 @@ GetMongoDBAtlasIntegrationParams contains all the parameters to send to the API 
 */
 type GetMongoDBAtlasIntegrationParams struct {
 
-	// IntegrationName.
-	IntegrationName string
-
 	// Name.
-	Name *string
+	Name string
 
 	// OrganizationID.
 	OrganizationID string
@@ -126,25 +123,14 @@ func (o *GetMongoDBAtlasIntegrationParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithIntegrationName adds the integrationName to the get mongo d b atlas integration params
-func (o *GetMongoDBAtlasIntegrationParams) WithIntegrationName(integrationName string) *GetMongoDBAtlasIntegrationParams {
-	o.SetIntegrationName(integrationName)
-	return o
-}
-
-// SetIntegrationName adds the integrationName to the get mongo d b atlas integration params
-func (o *GetMongoDBAtlasIntegrationParams) SetIntegrationName(integrationName string) {
-	o.IntegrationName = integrationName
-}
-
 // WithName adds the name to the get mongo d b atlas integration params
-func (o *GetMongoDBAtlasIntegrationParams) WithName(name *string) *GetMongoDBAtlasIntegrationParams {
+func (o *GetMongoDBAtlasIntegrationParams) WithName(name string) *GetMongoDBAtlasIntegrationParams {
 	o.SetName(name)
 	return o
 }
 
 // SetName adds the name to the get mongo d b atlas integration params
-func (o *GetMongoDBAtlasIntegrationParams) SetName(name *string) {
+func (o *GetMongoDBAtlasIntegrationParams) SetName(name string) {
 	o.Name = name
 }
 
@@ -178,26 +164,9 @@ func (o *GetMongoDBAtlasIntegrationParams) WriteToRequest(r runtime.ClientReques
 	}
 	var res []error
 
-	// path param integration_name
-	if err := r.SetPathParam("integration_name", o.IntegrationName); err != nil {
+	// path param name
+	if err := r.SetPathParam("name", o.Name); err != nil {
 		return err
-	}
-
-	if o.Name != nil {
-
-		// query param name
-		var qrName string
-
-		if o.Name != nil {
-			qrName = *o.Name
-		}
-		qName := qrName
-		if qName != "" {
-
-			if err := r.SetQueryParam("name", qName); err != nil {
-				return err
-			}
-		}
 	}
 
 	// path param organization_id

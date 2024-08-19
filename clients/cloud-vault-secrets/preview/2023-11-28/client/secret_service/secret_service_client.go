@@ -40,6 +40,8 @@ type ClientService interface {
 
 	CreateAwsDynamicSecret(params *CreateAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsDynamicSecretOK, error)
 
+	CreateAwsIAMUserAccessKeyRotatingSecret(params *CreateAwsIAMUserAccessKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsIAMUserAccessKeyRotatingSecretOK, error)
+
 	CreateAwsIntegration(params *CreateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsIntegrationOK, error)
 
 	CreateAwsSmSyncIntegration(params *CreateAwsSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsSmSyncIntegrationOK, error)
@@ -51,6 +53,8 @@ type ClientService interface {
 	CreateGcpDynamicSecret(params *CreateGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpDynamicSecretOK, error)
 
 	CreateGcpIntegration(params *CreateGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpIntegrationOK, error)
+
+	CreateGcpServiceAccountKeyRotatingSecret(params *CreateGcpServiceAccountKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpServiceAccountKeyRotatingSecretOK, error)
 
 	CreateGcpSmSyncIntegration(params *CreateGcpSmSyncIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpSmSyncIntegrationOK, error)
 
@@ -106,6 +110,8 @@ type ClientService interface {
 
 	GetAwsDynamicSecret(params *GetAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsDynamicSecretOK, error)
 
+	GetAwsIAMUserAccessKeyRotatingSecretConfig(params *GetAwsIAMUserAccessKeyRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIAMUserAccessKeyRotatingSecretConfigOK, error)
+
 	GetAwsIntegration(params *GetAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIntegrationOK, error)
 
 	GetGatewayPool(params *GetGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGatewayPoolOK, error)
@@ -115,6 +121,8 @@ type ClientService interface {
 	GetGcpDynamicSecret(params *GetGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpDynamicSecretOK, error)
 
 	GetGcpIntegration(params *GetGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpIntegrationOK, error)
+
+	GetGcpServiceAccountKeyRotatingSecretConfig(params *GetGcpServiceAccountKeyRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpServiceAccountKeyRotatingSecretConfigOK, error)
 
 	GetGitHubEnvironments(params *GetGitHubEnvironmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubEnvironmentsOK, error)
 
@@ -190,9 +198,21 @@ type ClientService interface {
 
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
 
+	UpdateAwsIntegration(params *UpdateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsIntegrationOK, error)
+
 	UpdateGatewayPool(params *UpdateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGatewayPoolOK, error)
 
+	UpdateGcpIntegration(params *UpdateGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpIntegrationOK, error)
+
+	UpdateMongoDBAtlasIntegration(params *UpdateMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMongoDBAtlasIntegrationOK, error)
+
+	UpdateMongoDBAtlasRotatingSecret(params *UpdateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMongoDBAtlasRotatingSecretOK, error)
+
 	UpdateSyncInstallation(params *UpdateSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSyncInstallationOK, error)
+
+	UpdateTwilioIntegration(params *UpdateTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTwilioIntegrationOK, error)
+
+	UpdateTwilioRotatingSecret(params *UpdateTwilioRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTwilioRotatingSecretOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -426,6 +446,44 @@ func (a *Client) CreateAwsDynamicSecret(params *CreateAwsDynamicSecretParams, au
 }
 
 /*
+CreateAwsIAMUserAccessKeyRotatingSecret create aws i a m user access key rotating secret API
+*/
+func (a *Client) CreateAwsIAMUserAccessKeyRotatingSecret(params *CreateAwsIAMUserAccessKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsIAMUserAccessKeyRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateAwsIAMUserAccessKeyRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAwsIAMUserAccessKeyRotatingSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAwsIAMUserAccessKeyRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateAwsIAMUserAccessKeyRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateAwsIAMUserAccessKeyRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateAwsIntegration create aws integration API
 */
 func (a *Client) CreateAwsIntegration(params *CreateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsIntegrationOK, error) {
@@ -650,6 +708,44 @@ func (a *Client) CreateGcpIntegration(params *CreateGcpIntegrationParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateGcpIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateGcpServiceAccountKeyRotatingSecret create gcp service account key rotating secret API
+*/
+func (a *Client) CreateGcpServiceAccountKeyRotatingSecret(params *CreateGcpServiceAccountKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpServiceAccountKeyRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateGcpServiceAccountKeyRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateGcpServiceAccountKeyRotatingSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateGcpServiceAccountKeyRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateGcpServiceAccountKeyRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateGcpServiceAccountKeyRotatingSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1348,7 +1444,7 @@ func (a *Client) DeleteMongoDBAtlasIntegration(params *DeleteMongoDBAtlasIntegra
 	op := &runtime.ClientOperation{
 		ID:                 "DeleteMongoDBAtlasIntegration",
 		Method:             "DELETE",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -1462,7 +1558,7 @@ func (a *Client) DeleteTwilioIntegration(params *DeleteTwilioIntegrationParams, 
 	op := &runtime.ClientOperation{
 		ID:                 "DeleteTwilioIntegration",
 		Method:             "DELETE",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -1680,6 +1776,44 @@ func (a *Client) GetAwsDynamicSecret(params *GetAwsDynamicSecretParams, authInfo
 }
 
 /*
+GetAwsIAMUserAccessKeyRotatingSecretConfig get aws i a m user access key rotating secret config API
+*/
+func (a *Client) GetAwsIAMUserAccessKeyRotatingSecretConfig(params *GetAwsIAMUserAccessKeyRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIAMUserAccessKeyRotatingSecretConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAwsIAMUserAccessKeyRotatingSecretConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAwsIAMUserAccessKeyRotatingSecretConfig",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAwsIAMUserAccessKeyRotatingSecretConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAwsIAMUserAccessKeyRotatingSecretConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetAwsIAMUserAccessKeyRotatingSecretConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetAwsIntegration get aws integration API
 */
 func (a *Client) GetAwsIntegration(params *GetAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIntegrationOK, error) {
@@ -1870,6 +2004,44 @@ func (a *Client) GetGcpIntegration(params *GetGcpIntegrationParams, authInfo run
 }
 
 /*
+GetGcpServiceAccountKeyRotatingSecretConfig get gcp service account key rotating secret config API
+*/
+func (a *Client) GetGcpServiceAccountKeyRotatingSecretConfig(params *GetGcpServiceAccountKeyRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGcpServiceAccountKeyRotatingSecretConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetGcpServiceAccountKeyRotatingSecretConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetGcpServiceAccountKeyRotatingSecretConfig",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetGcpServiceAccountKeyRotatingSecretConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetGcpServiceAccountKeyRotatingSecretConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetGcpServiceAccountKeyRotatingSecretConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetGitHubEnvironments get git hub environments API
 */
 func (a *Client) GetGitHubEnvironments(params *GetGitHubEnvironmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHubEnvironmentsOK, error) {
@@ -2032,7 +2204,7 @@ func (a *Client) GetMongoDBAtlasIntegration(params *GetMongoDBAtlasIntegrationPa
 	op := &runtime.ClientOperation{
 		ID:                 "GetMongoDBAtlasIntegration",
 		Method:             "GET",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -2222,7 +2394,7 @@ func (a *Client) GetTwilioIntegration(params *GetTwilioIntegrationParams, authIn
 	op := &runtime.ClientOperation{
 		ID:                 "GetTwilioIntegration",
 		Method:             "GET",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -3276,6 +3448,44 @@ func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthI
 }
 
 /*
+UpdateAwsIntegration update aws integration API
+*/
+func (a *Client) UpdateAwsIntegration(params *UpdateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAwsIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAwsIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAwsIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateAwsIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 UpdateGatewayPool update gateway pool API
 */
 func (a *Client) UpdateGatewayPool(params *UpdateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGatewayPoolOK, error) {
@@ -3314,6 +3524,120 @@ func (a *Client) UpdateGatewayPool(params *UpdateGatewayPoolParams, authInfo run
 }
 
 /*
+UpdateGcpIntegration update gcp integration API
+*/
+func (a *Client) UpdateGcpIntegration(params *UpdateGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateGcpIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateGcpIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateGcpIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateGcpIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateGcpIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateMongoDBAtlasIntegration update mongo d b atlas integration API
+*/
+func (a *Client) UpdateMongoDBAtlasIntegration(params *UpdateMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMongoDBAtlasIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateMongoDBAtlasIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateMongoDBAtlasIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateMongoDBAtlasIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateMongoDBAtlasIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateMongoDBAtlasIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateMongoDBAtlasRotatingSecret update mongo d b atlas rotating secret API
+*/
+func (a *Client) UpdateMongoDBAtlasRotatingSecret(params *UpdateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMongoDBAtlasRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateMongoDBAtlasRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateMongoDBAtlasRotatingSecret",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateMongoDBAtlasRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateMongoDBAtlasRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateMongoDBAtlasRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 UpdateSyncInstallation update sync installation API
 */
 func (a *Client) UpdateSyncInstallation(params *UpdateSyncInstallationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSyncInstallationOK, error) {
@@ -3348,6 +3672,82 @@ func (a *Client) UpdateSyncInstallation(params *UpdateSyncInstallationParams, au
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateSyncInstallationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateTwilioIntegration update twilio integration API
+*/
+func (a *Client) UpdateTwilioIntegration(params *UpdateTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTwilioIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateTwilioIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateTwilioIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateTwilioIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateTwilioIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateTwilioIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateTwilioRotatingSecret update twilio rotating secret API
+*/
+func (a *Client) UpdateTwilioRotatingSecret(params *UpdateTwilioRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTwilioRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateTwilioRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateTwilioRotatingSecret",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{secret_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateTwilioRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateTwilioRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateTwilioRotatingSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

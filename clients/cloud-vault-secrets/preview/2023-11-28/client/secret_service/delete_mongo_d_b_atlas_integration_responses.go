@@ -86,11 +86,11 @@ func (o *DeleteMongoDBAtlasIntegrationOK) Code() int {
 }
 
 func (o *DeleteMongoDBAtlasIntegrationOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}][%d] deleteMongoDBAtlasIntegrationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] deleteMongoDBAtlasIntegrationOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteMongoDBAtlasIntegrationOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}][%d] deleteMongoDBAtlasIntegrationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] deleteMongoDBAtlasIntegrationOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteMongoDBAtlasIntegrationOK) GetPayload() models.Secrets20231128DeleteMongoDBAtlasIntegrationResponse {
@@ -156,11 +156,11 @@ func (o *DeleteMongoDBAtlasIntegrationDefault) Code() int {
 }
 
 func (o *DeleteMongoDBAtlasIntegrationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}][%d] DeleteMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] DeleteMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *DeleteMongoDBAtlasIntegrationDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{integration_name}][%d] DeleteMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] DeleteMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *DeleteMongoDBAtlasIntegrationDefault) GetPayload() *models.GooglerpcStatus {

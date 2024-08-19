@@ -14,23 +14,26 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SecretServiceCreateMongoDBAtlasIntegrationBody secret service create mongo d b atlas integration body
+// SecretServiceUpdateMongoDBAtlasIntegrationBody secret service update mongo d b atlas integration body
 //
-// swagger:model SecretServiceCreateMongoDBAtlasIntegrationBody
-type SecretServiceCreateMongoDBAtlasIntegrationBody struct {
+// swagger:model SecretServiceUpdateMongoDBAtlasIntegrationBody
+type SecretServiceUpdateMongoDBAtlasIntegrationBody struct {
 
 	// capabilities
 	Capabilities []*Secrets20231128Capability `json:"capabilities"`
 
-	// name
-	Name string `json:"name,omitempty"`
+	// gateway pool id
+	GatewayPoolID string `json:"gateway_pool_id,omitempty"`
+
+	// rotate on update
+	RotateOnUpdate bool `json:"rotate_on_update,omitempty"`
 
 	// static credential details
 	StaticCredentialDetails *Secrets20231128MongoDBAtlasStaticCredentialsRequest `json:"static_credential_details,omitempty"`
 }
 
-// Validate validates this secret service create mongo d b atlas integration body
-func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) Validate(formats strfmt.Registry) error {
+// Validate validates this secret service update mongo d b atlas integration body
+func (m *SecretServiceUpdateMongoDBAtlasIntegrationBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCapabilities(formats); err != nil {
@@ -47,7 +50,7 @@ func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) Validate(formats strfmt
 	return nil
 }
 
-func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) validateCapabilities(formats strfmt.Registry) error {
+func (m *SecretServiceUpdateMongoDBAtlasIntegrationBody) validateCapabilities(formats strfmt.Registry) error {
 	if swag.IsZero(m.Capabilities) { // not required
 		return nil
 	}
@@ -73,7 +76,7 @@ func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) validateCapabilities(fo
 	return nil
 }
 
-func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) validateStaticCredentialDetails(formats strfmt.Registry) error {
+func (m *SecretServiceUpdateMongoDBAtlasIntegrationBody) validateStaticCredentialDetails(formats strfmt.Registry) error {
 	if swag.IsZero(m.StaticCredentialDetails) { // not required
 		return nil
 	}
@@ -92,8 +95,8 @@ func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) validateStaticCredentia
 	return nil
 }
 
-// ContextValidate validate this secret service create mongo d b atlas integration body based on the context it is used
-func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this secret service update mongo d b atlas integration body based on the context it is used
+func (m *SecretServiceUpdateMongoDBAtlasIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateCapabilities(ctx, formats); err != nil {
@@ -110,7 +113,7 @@ func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) ContextValidate(ctx con
 	return nil
 }
 
-func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) contextValidateCapabilities(ctx context.Context, formats strfmt.Registry) error {
+func (m *SecretServiceUpdateMongoDBAtlasIntegrationBody) contextValidateCapabilities(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Capabilities); i++ {
 
@@ -135,7 +138,7 @@ func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) contextValidateCapabili
 	return nil
 }
 
-func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) contextValidateStaticCredentialDetails(ctx context.Context, formats strfmt.Registry) error {
+func (m *SecretServiceUpdateMongoDBAtlasIntegrationBody) contextValidateStaticCredentialDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.StaticCredentialDetails != nil {
 
@@ -157,7 +160,7 @@ func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) contextValidateStaticCr
 }
 
 // MarshalBinary interface implementation
-func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) MarshalBinary() ([]byte, error) {
+func (m *SecretServiceUpdateMongoDBAtlasIntegrationBody) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -165,8 +168,8 @@ func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) MarshalBinary() ([]byte
 }
 
 // UnmarshalBinary interface implementation
-func (m *SecretServiceCreateMongoDBAtlasIntegrationBody) UnmarshalBinary(b []byte) error {
-	var res SecretServiceCreateMongoDBAtlasIntegrationBody
+func (m *SecretServiceUpdateMongoDBAtlasIntegrationBody) UnmarshalBinary(b []byte) error {
+	var res SecretServiceUpdateMongoDBAtlasIntegrationBody
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

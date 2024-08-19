@@ -86,11 +86,11 @@ func (o *DeleteTwilioIntegrationOK) Code() int {
 }
 
 func (o *DeleteTwilioIntegrationOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}][%d] deleteTwilioIntegrationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] deleteTwilioIntegrationOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteTwilioIntegrationOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}][%d] deleteTwilioIntegrationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] deleteTwilioIntegrationOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteTwilioIntegrationOK) GetPayload() models.Secrets20231128DeleteTwilioIntegrationResponse {
@@ -156,11 +156,11 @@ func (o *DeleteTwilioIntegrationDefault) Code() int {
 }
 
 func (o *DeleteTwilioIntegrationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}][%d] DeleteTwilioIntegration default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] DeleteTwilioIntegration default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *DeleteTwilioIntegrationDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}][%d] DeleteTwilioIntegration default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] DeleteTwilioIntegration default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *DeleteTwilioIntegrationDefault) GetPayload() *models.GooglerpcStatus {

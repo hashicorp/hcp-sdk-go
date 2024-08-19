@@ -30,12 +30,6 @@ type Secrets20231128MongoDBAtlasIntegration struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// integration name
-	IntegrationName string `json:"integration_name,omitempty"`
-
-	// mongodb api public key
-	MongodbAPIPublicKey string `json:"mongodb_api_public_key,omitempty"`
-
 	// name
 	Name string `json:"name,omitempty"`
 

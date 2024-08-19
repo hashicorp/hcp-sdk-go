@@ -14,10 +14,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SecretServiceCreateMongoDBAtlasRotatingSecretBody secret service create mongo d b atlas rotating secret body
+// Secrets20231128MongoDBAtlasSecretDetails secrets 20231128 mongo d b atlas secret details
 //
-// swagger:model SecretServiceCreateMongoDBAtlasRotatingSecretBody
-type SecretServiceCreateMongoDBAtlasRotatingSecretBody struct {
+// swagger:model secrets_20231128MongoDBAtlasSecretDetails
+type Secrets20231128MongoDBAtlasSecretDetails struct {
 
 	// mongodb group id
 	MongodbGroupID string `json:"mongodb_group_id,omitempty"`
@@ -27,22 +27,10 @@ type SecretServiceCreateMongoDBAtlasRotatingSecretBody struct {
 
 	// mongodb scopes
 	MongodbScopes []*Secrets20231128MongoDBScope `json:"mongodb_scopes"`
-
-	// rotation integration name
-	RotationIntegrationName string `json:"rotation_integration_name,omitempty"`
-
-	// rotation policy name
-	RotationPolicyName string `json:"rotation_policy_name,omitempty"`
-
-	// secret details
-	SecretDetails *Secrets20231128MongoDBAtlasSecretDetails `json:"secret_details,omitempty"`
-
-	// secret name
-	SecretName string `json:"secret_name,omitempty"`
 }
 
-// Validate validates this secret service create mongo d b atlas rotating secret body
-func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) Validate(formats strfmt.Registry) error {
+// Validate validates this secrets 20231128 mongo d b atlas secret details
+func (m *Secrets20231128MongoDBAtlasSecretDetails) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateMongodbRoles(formats); err != nil {
@@ -53,17 +41,13 @@ func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) Validate(formats str
 		res = append(res, err)
 	}
 
-	if err := m.validateSecretDetails(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
-func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) validateMongodbRoles(formats strfmt.Registry) error {
+func (m *Secrets20231128MongoDBAtlasSecretDetails) validateMongodbRoles(formats strfmt.Registry) error {
 	if swag.IsZero(m.MongodbRoles) { // not required
 		return nil
 	}
@@ -89,7 +73,7 @@ func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) validateMongodbRoles
 	return nil
 }
 
-func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) validateMongodbScopes(formats strfmt.Registry) error {
+func (m *Secrets20231128MongoDBAtlasSecretDetails) validateMongodbScopes(formats strfmt.Registry) error {
 	if swag.IsZero(m.MongodbScopes) { // not required
 		return nil
 	}
@@ -115,27 +99,8 @@ func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) validateMongodbScope
 	return nil
 }
 
-func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) validateSecretDetails(formats strfmt.Registry) error {
-	if swag.IsZero(m.SecretDetails) { // not required
-		return nil
-	}
-
-	if m.SecretDetails != nil {
-		if err := m.SecretDetails.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("secret_details")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("secret_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this secret service create mongo d b atlas rotating secret body based on the context it is used
-func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this secrets 20231128 mongo d b atlas secret details based on the context it is used
+func (m *Secrets20231128MongoDBAtlasSecretDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateMongodbRoles(ctx, formats); err != nil {
@@ -146,17 +111,13 @@ func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) ContextValidate(ctx 
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateSecretDetails(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
-func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) contextValidateMongodbRoles(ctx context.Context, formats strfmt.Registry) error {
+func (m *Secrets20231128MongoDBAtlasSecretDetails) contextValidateMongodbRoles(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.MongodbRoles); i++ {
 
@@ -181,7 +142,7 @@ func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) contextValidateMongo
 	return nil
 }
 
-func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) contextValidateMongodbScopes(ctx context.Context, formats strfmt.Registry) error {
+func (m *Secrets20231128MongoDBAtlasSecretDetails) contextValidateMongodbScopes(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.MongodbScopes); i++ {
 
@@ -206,29 +167,8 @@ func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) contextValidateMongo
 	return nil
 }
 
-func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) contextValidateSecretDetails(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.SecretDetails != nil {
-
-		if swag.IsZero(m.SecretDetails) { // not required
-			return nil
-		}
-
-		if err := m.SecretDetails.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("secret_details")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("secret_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // MarshalBinary interface implementation
-func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) MarshalBinary() ([]byte, error) {
+func (m *Secrets20231128MongoDBAtlasSecretDetails) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -236,8 +176,8 @@ func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) MarshalBinary() ([]b
 }
 
 // UnmarshalBinary interface implementation
-func (m *SecretServiceCreateMongoDBAtlasRotatingSecretBody) UnmarshalBinary(b []byte) error {
-	var res SecretServiceCreateMongoDBAtlasRotatingSecretBody
+func (m *Secrets20231128MongoDBAtlasSecretDetails) UnmarshalBinary(b []byte) error {
+	var res Secrets20231128MongoDBAtlasSecretDetails
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -61,11 +61,8 @@ DeleteTwilioIntegrationParams contains all the parameters to send to the API end
 */
 type DeleteTwilioIntegrationParams struct {
 
-	// IntegrationName.
-	IntegrationName string
-
 	// Name.
-	Name *string
+	Name string
 
 	// OrganizationID.
 	OrganizationID string
@@ -126,25 +123,14 @@ func (o *DeleteTwilioIntegrationParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithIntegrationName adds the integrationName to the delete twilio integration params
-func (o *DeleteTwilioIntegrationParams) WithIntegrationName(integrationName string) *DeleteTwilioIntegrationParams {
-	o.SetIntegrationName(integrationName)
-	return o
-}
-
-// SetIntegrationName adds the integrationName to the delete twilio integration params
-func (o *DeleteTwilioIntegrationParams) SetIntegrationName(integrationName string) {
-	o.IntegrationName = integrationName
-}
-
 // WithName adds the name to the delete twilio integration params
-func (o *DeleteTwilioIntegrationParams) WithName(name *string) *DeleteTwilioIntegrationParams {
+func (o *DeleteTwilioIntegrationParams) WithName(name string) *DeleteTwilioIntegrationParams {
 	o.SetName(name)
 	return o
 }
 
 // SetName adds the name to the delete twilio integration params
-func (o *DeleteTwilioIntegrationParams) SetName(name *string) {
+func (o *DeleteTwilioIntegrationParams) SetName(name string) {
 	o.Name = name
 }
 
@@ -178,26 +164,9 @@ func (o *DeleteTwilioIntegrationParams) WriteToRequest(r runtime.ClientRequest, 
 	}
 	var res []error
 
-	// path param integration_name
-	if err := r.SetPathParam("integration_name", o.IntegrationName); err != nil {
+	// path param name
+	if err := r.SetPathParam("name", o.Name); err != nil {
 		return err
-	}
-
-	if o.Name != nil {
-
-		// query param name
-		var qrName string
-
-		if o.Name != nil {
-			qrName = *o.Name
-		}
-		qName := qrName
-		if qName != "" {
-
-			if err := r.SetQueryParam("name", qName); err != nil {
-				return err
-			}
-		}
 	}
 
 	// path param organization_id

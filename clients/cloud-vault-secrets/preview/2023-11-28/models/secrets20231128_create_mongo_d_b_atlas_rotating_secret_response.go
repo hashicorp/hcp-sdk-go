@@ -30,6 +30,9 @@ type Secrets20231128CreateMongoDBAtlasRotatingSecretResponse struct {
 
 	// mongodb scopes
 	MongodbScopes []*Secrets20231128MongoDBScope `json:"mongodb_scopes"`
+
+	// secret details
+	SecretDetails *Secrets20231128MongoDBAtlasSecretDetails `json:"secret_details,omitempty"`
 }
 
 // Validate validates this secrets 20231128 create mongo d b atlas rotating secret response
@@ -45,6 +48,10 @@ func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) Validate(forma
 	}
 
 	if err := m.validateMongodbScopes(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSecretDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -125,6 +132,25 @@ func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) validateMongod
 	return nil
 }
 
+func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) validateSecretDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.SecretDetails) { // not required
+		return nil
+	}
+
+	if m.SecretDetails != nil {
+		if err := m.SecretDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("secret_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("secret_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this secrets 20231128 create mongo d b atlas rotating secret response based on the context it is used
 func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -138,6 +164,10 @@ func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) ContextValidat
 	}
 
 	if err := m.contextValidateMongodbScopes(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSecretDetails(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -213,6 +243,27 @@ func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) contextValidat
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) contextValidateSecretDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SecretDetails != nil {
+
+		if swag.IsZero(m.SecretDetails) { // not required
+			return nil
+		}
+
+		if err := m.SecretDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("secret_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("secret_details")
+			}
+			return err
+		}
 	}
 
 	return nil

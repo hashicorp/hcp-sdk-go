@@ -22,23 +22,11 @@ type SecretServiceCreateTwilioIntegrationBody struct {
 	// capabilities
 	Capabilities []*Secrets20231128Capability `json:"capabilities"`
 
-	// integration name
-	IntegrationName string `json:"integration_name,omitempty"`
-
 	// name
 	Name string `json:"name,omitempty"`
 
 	// static credential details
 	StaticCredentialDetails *Secrets20231128TwilioStaticCredentialsRequest `json:"static_credential_details,omitempty"`
-
-	// twilio account sid
-	TwilioAccountSid string `json:"twilio_account_sid,omitempty"`
-
-	// twilio api key secret
-	TwilioAPIKeySecret string `json:"twilio_api_key_secret,omitempty"`
-
-	// twilio api key sid
-	TwilioAPIKeySid string `json:"twilio_api_key_sid,omitempty"`
 }
 
 // Validate validates this secret service create twilio integration body

@@ -86,11 +86,11 @@ func (o *GetTwilioIntegrationOK) Code() int {
 }
 
 func (o *GetTwilioIntegrationOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}][%d] getTwilioIntegrationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] getTwilioIntegrationOK  %+v", 200, o.Payload)
 }
 
 func (o *GetTwilioIntegrationOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}][%d] getTwilioIntegrationOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] getTwilioIntegrationOK  %+v", 200, o.Payload)
 }
 
 func (o *GetTwilioIntegrationOK) GetPayload() *models.Secrets20231128GetTwilioIntegrationResponse {
@@ -158,11 +158,11 @@ func (o *GetTwilioIntegrationDefault) Code() int {
 }
 
 func (o *GetTwilioIntegrationDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}][%d] GetTwilioIntegration default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] GetTwilioIntegration default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetTwilioIntegrationDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{integration_name}][%d] GetTwilioIntegration default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] GetTwilioIntegration default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetTwilioIntegrationDefault) GetPayload() *models.GooglerpcStatus {
