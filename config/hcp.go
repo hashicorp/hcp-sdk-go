@@ -103,6 +103,9 @@ type hcpConfig struct {
 	// noBrowserLogin is an option to prevent automatic browser login when no local credentials are found.
 	noBrowserLogin bool
 
+	// noDefaultBrowser is an option to prevent the browser login from opening the default browser.
+	noDefaultBrowser bool
+
 	// suppressLogging is an option to prevent this SDK from printing anything
 	suppressLogging bool
 

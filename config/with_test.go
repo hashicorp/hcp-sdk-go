@@ -127,6 +127,17 @@ func TestWithout_BrowserLogin(t *testing.T) {
 	require.True(config.noBrowserLogin)
 }
 
+func TestWithout_OpenDefaultBrowser(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config := &hcpConfig{}
+	require.NoError(apply(config, WithoutOpenDefaultBrowser()))
+
+	// Ensure browser login doesn't use the default browser
+	require.True(config.noDefaultBrowser)
+}
+
 func TestWith_CredentialFile(t *testing.T) {
 	require := requirepkg.New(t)
 
