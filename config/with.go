@@ -155,6 +155,15 @@ func WithoutBrowserLogin() HCPConfigOption {
 	}
 }
 
+// WithoutOpenDefaultBrowser disables opening the default browser when
+// browser login is enabled.
+func WithoutOpenDefaultBrowser() HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.noDefaultBrowser = true
+		return nil
+	}
+}
+
 // WithoutLogging disables this SDK from printing of any kind, this is necessary
 // since there is not a consistent logger that is used throughout the project so
 // a log level option is not sufficient.

@@ -22,29 +22,30 @@ import (
 // browserLogin implements an oauth2.TokenSource for interactive browser logins.
 type browserLogin struct {
 	oauthConfig *oauth2.Config
+
+	// Wether to open a browser in an external window or not.
+	openBrowser bool
 }
 
 // NewBrowserLogin will return an oauth2.TokenSource that will return a Token from an interactive browser login.
-func NewBrowserLogin(oauthConfig *oauth2.Config) *browserLogin {
+func NewBrowserLogin(oauthConfig *oauth2.Config, openBrowser bool) *browserLogin {
 	return &browserLogin{
 		oauthConfig: oauthConfig,
+		openBrowser: openBrowser,
 	}
 }
 
 // Token will return an oauth2.Token retrieved from an interactive browser login.
 func (b *browserLogin) Token() (*oauth2.Token, error) {
 	browser := &oauthBrowser{}
-	return browser.GetTokenFromBrowser(context.Background(), b.oauthConfig)
+	return browser.GetTokenFromBrowser(context.Background(), b.oauthConfig, b.openBrowser)
 }
 
 // oauthBrowser implements the Browser interface using the real OAuth2 login flow.
 type oauthBrowser struct{}
 
 // GetTokenFromBrowser opens a browser window for the user to log in and handles the OAuth2 flow to obtain a token.
-func (b *oauthBrowser) GetTokenFromBrowser(ctx context.Context, conf *oauth2.Config) (*oauth2.Token, error) {
-	// Launch a request to Auth0's authorization endpoint.
-	colorstring.Printf("[bold][yellow]The default web browser has been opened at %s. Please continue the login in the web browser.\n", conf.Endpoint.AuthURL)
-
+func (b *oauthBrowser) GetTokenFromBrowser(ctx context.Context, conf *oauth2.Config, openBrowser bool) (*oauth2.Token, error) {
 	// Prepare the /authorize request with randomly generated state, offline access option, and audience
 	aud := "https://api.hashicorp.cloud"
 	opt := oauth2.SetAuthURLParam("audience", aud)
@@ -55,8 +56,15 @@ func (b *oauthBrowser) GetTokenFromBrowser(ctx context.Context, conf *oauth2.Con
 	signal.Notify(sigintCh, os.Interrupt)
 	defer signal.Stop(sigintCh)
 
-	if err := open.Start(authzURL); err != nil {
-		return nil, fmt.Errorf("failed to open browser at URL %q: %w", authzURL, err)
+	// Launch a request to HCP's authorization endpoint.
+	if openBrowser {
+		colorstring.Printf("[bold][yellow]The default web browser has been opened at %s. Please continue the login in the web browser.\n", authzURL)
+
+		if err := open.Start(authzURL); err != nil {
+			return nil, fmt.Errorf("failed to open browser at URL %q: %w", authzURL, err)
+		}
+	} else {
+		colorstring.Printf("[bold][yellow]Please open the following URL in your browser and follow the instructions to authenticate:\n%s\n", authzURL)
 	}
 
 	// Start callback server
