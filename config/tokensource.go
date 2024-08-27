@@ -143,7 +143,7 @@ func (c *hcpConfig) getTokenSource() (oauth2.TokenSource, sourceType, string, er
 
 	var loginTokenSource oauth2.TokenSource
 	if !c.noBrowserLogin {
-		loginTokenSource = auth.NewBrowserLogin(&c.oauth2Config, c.noDefaultBrowser)
+		loginTokenSource = auth.NewBrowserLogin(&c.oauth2Config, !c.noDefaultBrowser)
 	}
 
 	return loginTokenSource, sourceTypeLogin, "", nil
