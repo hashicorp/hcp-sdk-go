@@ -1,3 +1,8 @@
+## v0.109.0 (August 27, 2024)
+
+IMPROVEMENTS:
+
+* Browser auth flow prints URL and can be configured to not open the default browser. [[GH-265](https://github.com/hashicorp/hcp-sdk-go/pull/265)]
 ## v0.108.0 (August 20, 2024)
 
 ## v0.107.0 (August 14, 2024)
