@@ -27,6 +27,9 @@ type Secrets20231128GetUsageResponse struct {
 	// billing tier
 	BillingTier *Secrets20231128Tier `json:"billing_tier,omitempty"`
 
+	// dynamic secrets
+	DynamicSecrets *Secrets20231128Usage `json:"dynamic_secrets,omitempty"`
+
 	// gateway pools
 	GatewayPools *Secrets20231128Usage `json:"gateway_pools,omitempty"`
 
@@ -56,6 +59,10 @@ func (m *Secrets20231128GetUsageResponse) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateBillingTier(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDynamicSecrets(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -134,6 +141,25 @@ func (m *Secrets20231128GetUsageResponse) validateBillingTier(formats strfmt.Reg
 				return ve.ValidateName("billing_tier")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("billing_tier")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128GetUsageResponse) validateDynamicSecrets(formats strfmt.Registry) error {
+	if swag.IsZero(m.DynamicSecrets) { // not required
+		return nil
+	}
+
+	if m.DynamicSecrets != nil {
+		if err := m.DynamicSecrets.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dynamic_secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dynamic_secrets")
 			}
 			return err
 		}
@@ -253,6 +279,10 @@ func (m *Secrets20231128GetUsageResponse) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDynamicSecrets(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGatewayPools(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -334,6 +364,27 @@ func (m *Secrets20231128GetUsageResponse) contextValidateBillingTier(ctx context
 				return ve.ValidateName("billing_tier")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("billing_tier")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128GetUsageResponse) contextValidateDynamicSecrets(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DynamicSecrets != nil {
+
+		if swag.IsZero(m.DynamicSecrets) { // not required
+			return nil
+		}
+
+		if err := m.DynamicSecrets.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dynamic_secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dynamic_secrets")
 			}
 			return err
 		}

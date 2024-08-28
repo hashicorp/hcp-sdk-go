@@ -19,6 +19,9 @@ import (
 // swagger:model SecretServiceCreateMongoDBAtlasRotatingSecretBody
 type SecretServiceCreateMongoDBAtlasRotatingSecretBody struct {
 
+	// integration name
+	IntegrationName string `json:"integration_name,omitempty"`
+
 	// mongodb group id
 	MongodbGroupID string `json:"mongodb_group_id,omitempty"`
 
@@ -28,7 +31,7 @@ type SecretServiceCreateMongoDBAtlasRotatingSecretBody struct {
 	// mongodb scopes
 	MongodbScopes []*Secrets20231128MongoDBScope `json:"mongodb_scopes"`
 
-	// rotation integration name
+	// TODO: remove
 	RotationIntegrationName string `json:"rotation_integration_name,omitempty"`
 
 	// rotation policy name

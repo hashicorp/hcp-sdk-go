@@ -22,6 +22,9 @@ type Secrets20231128IntegrationUsage struct {
 
 	// secrets count
 	SecretsCount int32 `json:"secrets_count,omitempty"`
+
+	// secrets count by app
+	SecretsCountByApp map[string]int32 `json:"secrets_count_by_app,omitempty"`
 }
 
 // Validate validates this secrets 20231128 integration usage

@@ -29,7 +29,10 @@ type Secrets20231128RotatingSecretConfig struct {
 	// created by
 	CreatedBy *Secrets20231128Principal `json:"created_by,omitempty"`
 
-	// rotation integration name
+	// integration name
+	IntegrationName string `json:"integration_name,omitempty"`
+
+	// TODO: remove
 	RotationIntegrationName string `json:"rotation_integration_name,omitempty"`
 
 	// rotation policy name

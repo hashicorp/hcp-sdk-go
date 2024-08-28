@@ -19,9 +19,6 @@ type SecretServiceUpdateAppBody struct {
 
 	// description
 	Description string `json:"description,omitempty"`
-
-	// sync integrations
-	SyncIntegrations []string `json:"sync_integrations"`
 }
 
 // Validate validates this secret service update app body

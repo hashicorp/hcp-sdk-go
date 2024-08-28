@@ -98,6 +98,9 @@ type ListIntegrationsParams struct {
 	// ProjectID.
 	ProjectID string
 
+	// Providers.
+	Providers []string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -217,6 +220,17 @@ func (o *ListIntegrationsParams) SetProjectID(projectID string) {
 	o.ProjectID = projectID
 }
 
+// WithProviders adds the providers to the list integrations params
+func (o *ListIntegrationsParams) WithProviders(providers []string) *ListIntegrationsParams {
+	o.SetProviders(providers)
+	return o
+}
+
+// SetProviders adds the providers to the list integrations params
+func (o *ListIntegrationsParams) SetProviders(providers []string) {
+	o.Providers = providers
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListIntegrationsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -297,6 +311,17 @@ func (o *ListIntegrationsParams) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 
+	if o.Providers != nil {
+
+		// binding items for providers
+		joinedProviders := o.bindParamProviders(reg)
+
+		// query array param providers
+		if err := r.SetQueryParam("providers", joinedProviders...); err != nil {
+			return err
+		}
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -318,4 +343,21 @@ func (o *ListIntegrationsParams) bindParamCapabilities(formats strfmt.Registry) 
 	capabilitiesIS := swag.JoinByFormat(capabilitiesIC, "multi")
 
 	return capabilitiesIS
+}
+
+// bindParamListIntegrations binds the parameter providers
+func (o *ListIntegrationsParams) bindParamProviders(formats strfmt.Registry) []string {
+	providersIR := o.Providers
+
+	var providersIC []string
+	for _, providersIIR := range providersIR { // explode []string
+
+		providersIIV := providersIIR // string as string
+		providersIC = append(providersIC, providersIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	providersIS := swag.JoinByFormat(providersIC, "multi")
+
+	return providersIS
 }

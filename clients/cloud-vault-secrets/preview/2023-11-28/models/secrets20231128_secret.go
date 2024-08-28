@@ -26,6 +26,9 @@ type Secrets20231128Secret struct {
 	// created by
 	CreatedBy *Secrets20231128Principal `json:"created_by,omitempty"`
 
+	// dynamic config
+	DynamicConfig *Secrets20231128SecretDynamicConfig `json:"dynamic_config,omitempty"`
+
 	// latest version
 	LatestVersion int64 `json:"latest_version,omitempty"`
 
@@ -60,6 +63,10 @@ func (m *Secrets20231128Secret) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDynamicConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -104,6 +111,25 @@ func (m *Secrets20231128Secret) validateCreatedBy(formats strfmt.Registry) error
 				return ve.ValidateName("created_by")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("created_by")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Secret) validateDynamicConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.DynamicConfig) { // not required
+		return nil
+	}
+
+	if m.DynamicConfig != nil {
+		if err := m.DynamicConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dynamic_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dynamic_config")
 			}
 			return err
 		}
@@ -184,6 +210,10 @@ func (m *Secrets20231128Secret) ContextValidate(ctx context.Context, formats str
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDynamicConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRotatingVersion(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -215,6 +245,27 @@ func (m *Secrets20231128Secret) contextValidateCreatedBy(ctx context.Context, fo
 				return ve.ValidateName("created_by")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("created_by")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Secret) contextValidateDynamicConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DynamicConfig != nil {
+
+		if swag.IsZero(m.DynamicConfig) { // not required
+			return nil
+		}
+
+		if err := m.DynamicConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dynamic_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dynamic_config")
 			}
 			return err
 		}

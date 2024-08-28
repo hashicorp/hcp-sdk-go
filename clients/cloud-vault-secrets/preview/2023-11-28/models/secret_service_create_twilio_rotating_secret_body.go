@@ -17,7 +17,10 @@ import (
 // swagger:model SecretServiceCreateTwilioRotatingSecretBody
 type SecretServiceCreateTwilioRotatingSecretBody struct {
 
-	// rotation integration name
+	// integration name
+	IntegrationName string `json:"integration_name,omitempty"`
+
+	// TODO: remove
 	RotationIntegrationName string `json:"rotation_integration_name,omitempty"`
 
 	// rotation policy name
