@@ -1,0 +1,3 @@
+```release-note:bug
+Fixes concurrency issues while using a browser based token.
+```
