@@ -1,3 +1,9 @@
+## v0.110.0 (August 29, 2024)
+
+BUG FIXES:
+
+* Fixed default browser opening logic. [[GH-266](https://github.com/hashicorp/hcp-sdk-go/pull/266)]
+* Fixes concurrency issues while using a browser based token. [[GH-267](https://github.com/hashicorp/hcp-sdk-go/pull/267)]
 ## v0.109.0 (August 27, 2024)
 
 IMPROVEMENTS:
