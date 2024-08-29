@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"sync"
 	"time"
 
 	"golang.org/x/oauth2"
@@ -20,6 +21,10 @@ const (
 	// minTTL is the minimum time that a cached token has to be valid for in order to be returned. 15 seconds should be
 	// sufficient for most calls that make use of a returned token.
 	minTTL = 15 * time.Second
+)
+
+var (
+	mutex sync.Mutex
 )
 
 // sourceType identities the type of token source.
@@ -37,6 +42,14 @@ type cachingTokenSource struct {
 // Token implements the oauth2.TokenSource interface. It will read cached tokens from a file and based on their validity
 // return, refresh or replace them.
 func (source *cachingTokenSource) Token() (*oauth2.Token, error) {
+	// According to https://cs.opensource.google/go/x/oauth2/+/refs/tags/v0.22.0:oauth2.go;l=68-73
+	// Token must be safe for concurrent use by multiple goroutines.
+	// Additionally, terraform invoke the provider in a parallel manner. Without this synchronization,
+	// multiple Token exchange will happen. This also means that if user uses browser based token,
+	// it will opens the browser multiple times.
+	mutex.Lock()
+	defer mutex.Unlock()
+
 	// Read the cache information from the file, if it exists
 	cachedTokens, err := readCache(source.cacheFile)
 	if err != nil {
