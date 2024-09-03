@@ -24,6 +24,10 @@ type HashicorpCloudWaypointWaypointServiceUpdateVariableBody struct {
 	// The reference to the variable to update
 	Ref *HashicorpCloudWaypointRefVariable `json:"ref,omitempty"`
 
+	// Optional, will be used for PATCH requests. This includes what fields to
+	// update in the request.
+	UpdateMask string `json:"update_mask,omitempty"`
+
 	// The variables fields to update
 	Variable *HashicorpCloudWaypointVariable `json:"variable,omitempty"`
 }

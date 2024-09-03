@@ -76,6 +76,10 @@ type HashicorpCloudWaypointAddOn struct {
 
 	// Terraform No Code module used for provisioning the Add-on
 	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
+
+	// Terraform workspace ID
+	// Read Only: true
+	TerraformWorkspaceID string `json:"terraform_workspace_id,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint add on
@@ -284,6 +288,10 @@ func (m *HashicorpCloudWaypointAddOn) ContextValidate(ctx context.Context, forma
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateTerraformWorkspaceID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -419,6 +427,15 @@ func (m *HashicorpCloudWaypointAddOn) contextValidateTerraformNocodeModule(ctx c
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointAddOn) contextValidateTerraformWorkspaceID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "terraform_workspace_id", "body", string(m.TerraformWorkspaceID)); err != nil {
+		return err
 	}
 
 	return nil

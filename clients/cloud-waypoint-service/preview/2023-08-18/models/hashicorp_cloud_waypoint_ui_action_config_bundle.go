@@ -34,7 +34,9 @@ type HashicorpCloudWaypointUIActionConfigBundle struct {
 	// The total number of runs for this action_config
 	TotalRuns *HashicorpCloudWaypointUIActionConfigBundleTotalRuns `json:"total_runs,omitempty"`
 
-	// The list of variables this action has been defined to use
+	// The list of variables this action has been defined to use.
+	// This field is currently unimplemented and will always be empty
+	// until it is turned back on in the future.
 	VariablesUsed []*HashicorpCloudWaypointUIActionConfigBundleVariable `json:"variables_used"`
 }
 

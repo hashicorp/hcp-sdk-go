@@ -27,11 +27,6 @@ type HashicorpCloudWaypointWaypointServiceUpdateApplicationBody struct {
 	// application
 	Application *HashicorpCloudWaypointWaypointServiceUpdateApplicationBodyApplication `json:"application,omitempty"`
 
-	// Field mask to update only specific fields. I.e. if you want a field updated,
-	// you must include it in the field mask. For now, we only use this for
-	// clearing out action assignments.
-	FieldMask string `json:"field_mask,omitempty"`
-
 	// Updated application name
 	Name string `json:"name,omitempty"`
 
@@ -48,6 +43,11 @@ type HashicorpCloudWaypointWaypointServiceUpdateApplicationBody struct {
 	// This may be populated from a application template.
 	// Format: byte
 	ReadmeMarkdown strfmt.Base64 `json:"readme_markdown,omitempty"`
+
+	// Field mask to update only specific fields. I.e. if you want a field updated,
+	// you must include it in the field mask. For now, we only use this for
+	// clearing out action assignments.
+	UpdateMask string `json:"update_mask,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service update application body

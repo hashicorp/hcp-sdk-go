@@ -82,14 +82,6 @@ type WaypointServiceUpdateApplicationTemplate5Params struct {
 	*/
 	ExistingApplicationTemplateName *string
 
-	/* FieldMask.
-
-	     Field mask to update only specific fields. I.e. if you want a field updated,
-	you must include it in the field mask. For now, we only use this
-	for ActionConfigRefs inside application_template for clearing assignments.
-	*/
-	FieldMask *string
-
 	// NamespaceID.
 	NamespaceID string
 
@@ -179,17 +171,6 @@ func (o *WaypointServiceUpdateApplicationTemplate5Params) SetExistingApplication
 	o.ExistingApplicationTemplateName = existingApplicationTemplateName
 }
 
-// WithFieldMask adds the fieldMask to the waypoint service update application template5 params
-func (o *WaypointServiceUpdateApplicationTemplate5Params) WithFieldMask(fieldMask *string) *WaypointServiceUpdateApplicationTemplate5Params {
-	o.SetFieldMask(fieldMask)
-	return o
-}
-
-// SetFieldMask adds the fieldMask to the waypoint service update application template5 params
-func (o *WaypointServiceUpdateApplicationTemplate5Params) SetFieldMask(fieldMask *string) {
-	o.FieldMask = fieldMask
-}
-
 // WithNamespaceID adds the namespaceID to the waypoint service update application template5 params
 func (o *WaypointServiceUpdateApplicationTemplate5Params) WithNamespaceID(namespaceID string) *WaypointServiceUpdateApplicationTemplate5Params {
 	o.SetNamespaceID(namespaceID)
@@ -231,23 +212,6 @@ func (o *WaypointServiceUpdateApplicationTemplate5Params) WriteToRequest(r runti
 		if qExistingApplicationTemplateName != "" {
 
 			if err := r.SetQueryParam("existing_application_template.name", qExistingApplicationTemplateName); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.FieldMask != nil {
-
-		// query param field_mask
-		var qrFieldMask string
-
-		if o.FieldMask != nil {
-			qrFieldMask = *o.FieldMask
-		}
-		qFieldMask := qrFieldMask
-		if qFieldMask != "" {
-
-			if err := r.SetQueryParam("field_mask", qFieldMask); err != nil {
 				return err
 			}
 		}

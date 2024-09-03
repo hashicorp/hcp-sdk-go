@@ -28,6 +28,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	WaypointServiceCheckTFCOrganization(params *WaypointServiceCheckTFCOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCheckTFCOrganizationOK, error)
+
 	WaypointServiceCreateActionConfig(params *WaypointServiceCreateActionConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateActionConfigOK, error)
 
 	WaypointServiceCreateAddOn(params *WaypointServiceCreateAddOnParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateAddOnOK, error)
@@ -116,6 +118,14 @@ type ClientService interface {
 
 	WaypointServiceGetTFRunStatus(params *WaypointServiceGetTFRunStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFRunStatusOK, error)
 
+	WaypointServiceGetTFWorkspaceInfo(params *WaypointServiceGetTFWorkspaceInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFWorkspaceInfoOK, error)
+
+	WaypointServiceGetTFWorkspaceInfo2(params *WaypointServiceGetTFWorkspaceInfo2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFWorkspaceInfo2OK, error)
+
+	WaypointServiceGetTFWorkspaceInfo3(params *WaypointServiceGetTFWorkspaceInfo3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFWorkspaceInfo3OK, error)
+
+	WaypointServiceGetTFWorkspaceInfo4(params *WaypointServiceGetTFWorkspaceInfo4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFWorkspaceInfo4OK, error)
+
 	WaypointServiceGetVariable(params *WaypointServiceGetVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetVariableOK, error)
 
 	WaypointServiceListActionConfigs(params *WaypointServiceListActionConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionConfigsOK, error)
@@ -176,6 +186,8 @@ type ClientService interface {
 
 	WaypointServiceUIListAddOnDefinitions(params *WaypointServiceUIListAddOnDefinitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIListAddOnDefinitionsOK, error)
 
+	WaypointServiceUILoadProductBanner(params *WaypointServiceUILoadProductBannerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUILoadProductBannerOK, error)
+
 	WaypointServiceUpdateActionConfig(params *WaypointServiceUpdateActionConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateActionConfigOK, error)
 
 	WaypointServiceUpdateAddOn(params *WaypointServiceUpdateAddOnParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateAddOnOK, error)
@@ -202,15 +214,53 @@ type ClientService interface {
 
 	WaypointServiceUpdateApplicationTemplate6(params *WaypointServiceUpdateApplicationTemplate6Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationTemplate6OK, error)
 
-	WaypointServiceUpdateApplicationsList(params *WaypointServiceUpdateApplicationsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationsListOK, error)
-
 	WaypointServiceUpdateTFCConfig(params *WaypointServiceUpdateTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateTFCConfigOK, error)
 
 	WaypointServiceUpdateVariable(params *WaypointServiceUpdateVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateVariableOK, error)
 
+	WaypointServiceUpgradeApplicationTFWorkspace(params *WaypointServiceUpgradeApplicationTFWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpgradeApplicationTFWorkspaceOK, error)
+
 	WaypointServiceValidateAgentGroups(params *WaypointServiceValidateAgentGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceValidateAgentGroupsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+WaypointServiceCheckTFCOrganization checks t f c organization will use the stored t f c config to look up the t f c org and look at what permissions it has
+*/
+func (a *Client) WaypointServiceCheckTFCOrganization(params *WaypointServiceCheckTFCOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCheckTFCOrganizationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceCheckTFCOrganizationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_CheckTFCOrganization",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig/check-organization",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceCheckTFCOrganizationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceCheckTFCOrganizationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceCheckTFCOrganizationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -1886,6 +1936,158 @@ func (a *Client) WaypointServiceGetTFRunStatus(params *WaypointServiceGetTFRunSt
 }
 
 /*
+WaypointServiceGetTFWorkspaceInfo useds to retrieve the upgrade status of a workspace given the workspace id or workspace name
+*/
+func (a *Client) WaypointServiceGetTFWorkspaceInfo(params *WaypointServiceGetTFWorkspaceInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFWorkspaceInfoOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetTFWorkspaceInfoParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetTFWorkspaceInfo",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/application/{application.id}/workspace",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetTFWorkspaceInfoReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetTFWorkspaceInfoOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetTFWorkspaceInfoDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceGetTFWorkspaceInfo2 useds to retrieve the upgrade status of a workspace given the workspace id or workspace name
+*/
+func (a *Client) WaypointServiceGetTFWorkspaceInfo2(params *WaypointServiceGetTFWorkspaceInfo2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFWorkspaceInfo2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetTFWorkspaceInfo2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetTFWorkspaceInfo2",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/application/by-name/{application.name}/workspace",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetTFWorkspaceInfo2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetTFWorkspaceInfo2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetTFWorkspaceInfo2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceGetTFWorkspaceInfo3 useds to retrieve the upgrade status of a workspace given the workspace id or workspace name
+*/
+func (a *Client) WaypointServiceGetTFWorkspaceInfo3(params *WaypointServiceGetTFWorkspaceInfo3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFWorkspaceInfo3OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetTFWorkspaceInfo3Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetTFWorkspaceInfo3",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/add-on/by-name/{add_on.name}/workspace",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetTFWorkspaceInfo3Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetTFWorkspaceInfo3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetTFWorkspaceInfo3Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceGetTFWorkspaceInfo4 useds to retrieve the upgrade status of a workspace given the workspace id or workspace name
+*/
+func (a *Client) WaypointServiceGetTFWorkspaceInfo4(params *WaypointServiceGetTFWorkspaceInfo4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFWorkspaceInfo4OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetTFWorkspaceInfo4Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetTFWorkspaceInfo4",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}/workspace",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetTFWorkspaceInfo4Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetTFWorkspaceInfo4OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetTFWorkspaceInfo4Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 WaypointServiceGetVariable waypoint service get variable API
 */
 func (a *Client) WaypointServiceGetVariable(params *WaypointServiceGetVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetVariableOK, error) {
@@ -3026,6 +3228,44 @@ func (a *Client) WaypointServiceUIListAddOnDefinitions(params *WaypointServiceUI
 }
 
 /*
+WaypointServiceUILoadProductBanner UIs load product banner will call two functions for checking the stored t f c tokens expiration against t f c as well as the stored t f c orgs permisions as set by t f c the UI uses this function to show product activation or deactivation banners
+*/
+func (a *Client) WaypointServiceUILoadProductBanner(params *WaypointServiceUILoadProductBannerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUILoadProductBannerOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUILoadProductBannerParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UI_LoadProductBanner",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/ui/product-banner",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUILoadProductBannerReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUILoadProductBannerOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUILoadProductBannerDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 WaypointServiceUpdateActionConfig waypoint service update action config API
 */
 func (a *Client) WaypointServiceUpdateActionConfig(params *WaypointServiceUpdateActionConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateActionConfigOK, error) {
@@ -3520,44 +3760,6 @@ func (a *Client) WaypointServiceUpdateApplicationTemplate6(params *WaypointServi
 }
 
 /*
-WaypointServiceUpdateApplicationsList ns o t e briancain in the future this could be used as part of a application template upgrade i e apply updates to all inherited apps in a single rpc
-*/
-func (a *Client) WaypointServiceUpdateApplicationsList(params *WaypointServiceUpdateApplicationsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationsListOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewWaypointServiceUpdateApplicationsListParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "WaypointService_UpdateApplicationsList",
-		Method:             "PATCH",
-		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/applications",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &WaypointServiceUpdateApplicationsListReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*WaypointServiceUpdateApplicationsListOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*WaypointServiceUpdateApplicationsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
 WaypointServiceUpdateTFCConfig updates t f c config updates a terraform cloud configuration
 */
 func (a *Client) WaypointServiceUpdateTFCConfig(params *WaypointServiceUpdateTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateTFCConfigOK, error) {
@@ -3630,6 +3832,44 @@ func (a *Client) WaypointServiceUpdateVariable(params *WaypointServiceUpdateVari
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceUpdateVariableDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceUpgradeApplicationTFWorkspace upgrades application t f workspace upgrades the application s terraform workspace to the pinned version of the no code module used to provision the application infrastructure
+*/
+func (a *Client) WaypointServiceUpgradeApplicationTFWorkspace(params *WaypointServiceUpgradeApplicationTFWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpgradeApplicationTFWorkspaceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUpgradeApplicationTFWorkspaceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UpgradeApplicationTFWorkspace",
+		Method:             "POST",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.name}/upgrade-tf-workspace",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUpgradeApplicationTFWorkspaceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUpgradeApplicationTFWorkspaceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUpgradeApplicationTFWorkspaceDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
