@@ -21,9 +21,11 @@ import (
 type HashicorpCloudVagrant20220930Provider struct {
 
 	// Architectures of provider (if expanded).
+	// Read Only: true
 	Architectures []*HashicorpCloudVagrant20220930Architecture `json:"architectures"`
 
 	// The date the record was created.
+	// Read Only: true
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
@@ -31,9 +33,11 @@ type HashicorpCloudVagrant20220930Provider struct {
 	Name string `json:"name,omitempty"`
 
 	// The ProviderSummary provides quick facts about provider child objects
+	// Read Only: true
 	Summary *HashicorpCloudVagrant20220930ProviderSummary `json:"summary,omitempty"`
 
 	// The date that the record was last updated.
+	// Read Only: true
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }
@@ -141,7 +145,15 @@ func (m *HashicorpCloudVagrant20220930Provider) ContextValidate(ctx context.Cont
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCreatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSummary(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUpdatedAt(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -152,6 +164,10 @@ func (m *HashicorpCloudVagrant20220930Provider) ContextValidate(ctx context.Cont
 }
 
 func (m *HashicorpCloudVagrant20220930Provider) contextValidateArchitectures(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "architectures", "body", []*HashicorpCloudVagrant20220930Architecture(m.Architectures)); err != nil {
+		return err
+	}
 
 	for i := 0; i < len(m.Architectures); i++ {
 
@@ -176,6 +192,15 @@ func (m *HashicorpCloudVagrant20220930Provider) contextValidateArchitectures(ctx
 	return nil
 }
 
+func (m *HashicorpCloudVagrant20220930Provider) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVagrant20220930Provider) contextValidateSummary(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Summary != nil {
@@ -192,6 +217,15 @@ func (m *HashicorpCloudVagrant20220930Provider) contextValidateSummary(ctx conte
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Provider) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+		return err
 	}
 
 	return nil

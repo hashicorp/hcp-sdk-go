@@ -18,7 +18,7 @@ import (
 // swagger:model hashicorp.cloud.vagrant_20220930.CreateArchitectureResponse
 type HashicorpCloudVagrant20220930CreateArchitectureResponse struct {
 
-	// The created Architecture
+	// The created Architecture.
 	Architecture *HashicorpCloudVagrant20220930Architecture `json:"architecture,omitempty"`
 }
 

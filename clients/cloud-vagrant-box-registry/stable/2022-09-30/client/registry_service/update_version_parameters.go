@@ -72,8 +72,7 @@ type UpdateVersionParams struct {
 
 	/* Data.
 
-	     Details of the Version to update. Note that some fields are ignored
-	on input and should not be set.
+	   Details of the Version to update.
 	*/
 	Data *models.HashicorpCloudVagrant20220930Version
 

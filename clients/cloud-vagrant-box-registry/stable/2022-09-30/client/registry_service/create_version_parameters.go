@@ -72,8 +72,7 @@ type CreateVersionParams struct {
 
 	/* Data.
 
-	     Details of the Version to create. Note that some fields are ignored
-	on input and should not be set.
+	   Details of the Version to create.
 	*/
 	Data *models.HashicorpCloudVagrant20220930Version
 

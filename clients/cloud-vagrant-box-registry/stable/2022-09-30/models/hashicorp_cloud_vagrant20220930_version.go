@@ -21,6 +21,7 @@ import (
 type HashicorpCloudVagrant20220930Version struct {
 
 	// The date the record was created.
+	// Read Only: true
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
@@ -28,6 +29,7 @@ type HashicorpCloudVagrant20220930Version struct {
 	Description string `json:"description,omitempty"`
 
 	// The HTML rendered description.
+	// Read Only: true
 	DescriptionHTML string `json:"description_html,omitempty"`
 
 	// The version string, ie: v0.0.1 or v2006010201, etc. Must be unique within
@@ -35,15 +37,19 @@ type HashicorpCloudVagrant20220930Version struct {
 	Name string `json:"name,omitempty"`
 
 	// Providers of version (if expanded).
+	// Read Only: true
 	Providers []*HashicorpCloudVagrant20220930Provider `json:"providers"`
 
 	// The release status of the Version.
+	// Read Only: true
 	State *HashicorpCloudVagrant20220930VersionState `json:"state,omitempty"`
 
-	// Summary details about this version.bool
+	// Summary details about this version.
+	// Read Only: true
 	Summary *HashicorpCloudVagrant20220930VersionSummary `json:"summary,omitempty"`
 
 	// The date that the record was last updated.
+	// Read Only: true
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }
@@ -170,6 +176,14 @@ func (m *HashicorpCloudVagrant20220930Version) validateUpdatedAt(formats strfmt.
 func (m *HashicorpCloudVagrant20220930Version) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateCreatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDescriptionHTML(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateProviders(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -182,13 +196,39 @@ func (m *HashicorpCloudVagrant20220930Version) ContextValidate(ctx context.Conte
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateUpdatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
+func (m *HashicorpCloudVagrant20220930Version) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Version) contextValidateDescriptionHTML(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "description_html", "body", string(m.DescriptionHTML)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVagrant20220930Version) contextValidateProviders(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "providers", "body", []*HashicorpCloudVagrant20220930Provider(m.Providers)); err != nil {
+		return err
+	}
 
 	for i := 0; i < len(m.Providers); i++ {
 
@@ -250,6 +290,15 @@ func (m *HashicorpCloudVagrant20220930Version) contextValidateSummary(ctx contex
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Version) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+		return err
 	}
 
 	return nil

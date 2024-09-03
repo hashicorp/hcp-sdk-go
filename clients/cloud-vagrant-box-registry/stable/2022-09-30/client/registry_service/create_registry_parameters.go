@@ -65,8 +65,7 @@ type CreateRegistryParams struct {
 
 	/* Data.
 
-	     Details of the Registry to create. Note that some fields are ignored
-	on input and should not be set.
+	   Details of the Registry to create.
 	*/
 	Data *models.HashicorpCloudVagrant20220930Registry
 

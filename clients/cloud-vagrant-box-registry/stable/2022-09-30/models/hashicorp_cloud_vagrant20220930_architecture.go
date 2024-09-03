@@ -26,6 +26,7 @@ type HashicorpCloudVagrant20220930Architecture struct {
 	BoxData *HashicorpCloudVagrant20220930BoxData `json:"box_data,omitempty"`
 
 	// The date the record was created.
+	// Read Only: true
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
@@ -33,6 +34,7 @@ type HashicorpCloudVagrant20220930Architecture struct {
 	Default bool `json:"default,omitempty"`
 
 	// The date that the record was last updated.
+	// Read Only: true
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }
@@ -110,6 +112,14 @@ func (m *HashicorpCloudVagrant20220930Architecture) ContextValidate(ctx context.
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCreatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUpdatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -132,6 +142,24 @@ func (m *HashicorpCloudVagrant20220930Architecture) contextValidateBoxData(ctx c
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Architecture) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Architecture) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+		return err
 	}
 
 	return nil

@@ -18,8 +18,7 @@ import (
 // swagger:model hashicorp.cloud.vagrant_20220930.DownloadBoxResponse
 type HashicorpCloudVagrant20220930DownloadBoxResponse struct {
 
-	// (Optional) checksum data to validate the download with. This field may
-	// not be populated for Hosted Provider downloads.
+	// (Optional) checksum data to validate the download with.
 	Checksum string `json:"checksum,omitempty"`
 
 	// The algorithm type for the provided checksum.

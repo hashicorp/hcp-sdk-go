@@ -72,8 +72,7 @@ type UpdateProviderParams struct {
 
 	/* Data.
 
-	     Details of the Provider to update. Note that some fields are ignored on
-	input and should not be set.
+	   Details of the Provider to update.
 	*/
 	Data *models.HashicorpCloudVagrant20220930Provider
 

@@ -72,8 +72,7 @@ type UpdateBoxParams struct {
 
 	/* Data.
 
-	     Details of the Box to update. Note that some fields are ignored
-	on input and should not be set.
+	   Details of the Box to update.
 	*/
 	Data *models.HashicorpCloudVagrant20220930Box
 

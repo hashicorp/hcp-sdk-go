@@ -21,6 +21,7 @@ import (
 type HashicorpCloudVagrant20220930Box struct {
 
 	// The date the record was created.
+	// Read Only: true
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
@@ -28,9 +29,11 @@ type HashicorpCloudVagrant20220930Box struct {
 	Description string `json:"description,omitempty"`
 
 	// The HTML rendered description.
+	// Read Only: true
 	DescriptionHTML string `json:"description_html,omitempty"`
 
 	// The number of times this box has been downloaded.
+	// Read Only: true
 	Downloads string `json:"downloads,omitempty"`
 
 	// Whether or not the Box is private.
@@ -45,16 +48,20 @@ type HashicorpCloudVagrant20220930Box struct {
 	ShortDescription string `json:"short_description,omitempty"`
 
 	// The state of the box.
+	// Read Only: true
 	State *HashicorpCloudVagrant20220930BoxState `json:"state,omitempty"`
 
 	// Summary details about this box.
+	// Read Only: true
 	Summary *HashicorpCloudVagrant20220930BoxSummary `json:"summary,omitempty"`
 
 	// The date that the record was last updated.
+	// Read Only: true
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// Versions of box (if expanded).
+	// Read Only: true
 	Versions []*HashicorpCloudVagrant20220930Version `json:"versions"`
 }
 
@@ -180,11 +187,27 @@ func (m *HashicorpCloudVagrant20220930Box) validateVersions(formats strfmt.Regis
 func (m *HashicorpCloudVagrant20220930Box) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateCreatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDescriptionHTML(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDownloads(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateState(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateSummary(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUpdatedAt(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -195,6 +218,33 @@ func (m *HashicorpCloudVagrant20220930Box) ContextValidate(ctx context.Context, 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Box) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Box) contextValidateDescriptionHTML(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "description_html", "body", string(m.DescriptionHTML)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Box) contextValidateDownloads(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "downloads", "body", string(m.Downloads)); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -240,7 +290,20 @@ func (m *HashicorpCloudVagrant20220930Box) contextValidateSummary(ctx context.Co
 	return nil
 }
 
+func (m *HashicorpCloudVagrant20220930Box) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVagrant20220930Box) contextValidateVersions(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "versions", "body", []*HashicorpCloudVagrant20220930Version(m.Versions)); err != nil {
+		return err
+	}
 
 	for i := 0; i < len(m.Versions); i++ {
 

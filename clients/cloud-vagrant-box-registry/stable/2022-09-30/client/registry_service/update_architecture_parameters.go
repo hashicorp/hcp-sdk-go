@@ -78,8 +78,7 @@ type UpdateArchitectureParams struct {
 
 	/* Data.
 
-	     Details of the Architecture to update. Note that some fields are ignored on
-	input and should not be set.
+	   Details of the Architecture to update.
 	*/
 	Data *models.HashicorpCloudVagrant20220930Architecture
 

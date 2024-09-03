@@ -21,23 +21,28 @@ import (
 // swagger:model hashicorp.cloud.vagrant_20220930.Registry
 type HashicorpCloudVagrant20220930Registry struct {
 
-	// Whether or not the Registry is currently activated, ignored on input.
-	Activated bool `json:"activated,omitempty"`
+	// Whether or not the Registry is currently activated.
+	// Read Only: true
+	Activated *bool `json:"activated,omitempty"`
 
 	// Boxes of registry (if expanded).
+	// Read Only: true
 	Boxes []*HashicorpCloudVagrant20220930Box `json:"boxes"`
 
 	// The date the record was created.
+	// Read Only: true
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// The description of the registry, if it exists
+	// The description of the registry, if it exists.
 	Description string `json:"description,omitempty"`
 
-	// The HTML rendered description, ignored on input
+	// The HTML rendered description
+	// Read Only: true
 	DescriptionHTML string `json:"description_html,omitempty"`
 
-	// The gravatar used for this registry, ignored on input
+	// The gravatar used for this registry
+	// Read Only: true
 	GravatarURL string `json:"gravatar_url,omitempty"`
 
 	// The Location that the Registry resides in.
@@ -50,6 +55,7 @@ type HashicorpCloudVagrant20220930Registry struct {
 	Name string `json:"name,omitempty"`
 
 	// The date that the record was last updated.
+	// Read Only: true
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 }
@@ -153,11 +159,31 @@ func (m *HashicorpCloudVagrant20220930Registry) validateUpdatedAt(formats strfmt
 func (m *HashicorpCloudVagrant20220930Registry) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateActivated(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateBoxes(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCreatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDescriptionHTML(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGravatarURL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUpdatedAt(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -167,7 +193,20 @@ func (m *HashicorpCloudVagrant20220930Registry) ContextValidate(ctx context.Cont
 	return nil
 }
 
+func (m *HashicorpCloudVagrant20220930Registry) contextValidateActivated(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "activated", "body", m.Activated); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVagrant20220930Registry) contextValidateBoxes(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "boxes", "body", []*HashicorpCloudVagrant20220930Box(m.Boxes)); err != nil {
+		return err
+	}
 
 	for i := 0; i < len(m.Boxes); i++ {
 
@@ -192,6 +231,33 @@ func (m *HashicorpCloudVagrant20220930Registry) contextValidateBoxes(ctx context
 	return nil
 }
 
+func (m *HashicorpCloudVagrant20220930Registry) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Registry) contextValidateDescriptionHTML(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "description_html", "body", string(m.DescriptionHTML)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Registry) contextValidateGravatarURL(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "gravatar_url", "body", string(m.GravatarURL)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVagrant20220930Registry) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
@@ -208,6 +274,15 @@ func (m *HashicorpCloudVagrant20220930Registry) contextValidateLocation(ctx cont
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVagrant20220930Registry) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+		return err
 	}
 
 	return nil

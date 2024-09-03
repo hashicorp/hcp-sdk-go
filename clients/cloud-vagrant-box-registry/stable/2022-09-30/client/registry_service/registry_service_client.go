@@ -32,8 +32,6 @@ type ClientService interface {
 
 	CompleteDirectUploadBox(params *CompleteDirectUploadBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteDirectUploadBoxOK, error)
 
-	CompleteUploadBox(params *CompleteUploadBoxParams, opts ...ClientOption) (*CompleteUploadBoxOK, error)
-
 	CreateArchitecture(params *CreateArchitectureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateArchitectureOK, error)
 
 	CreateBox(params *CreateBoxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBoxOK, error)
@@ -178,43 +176,6 @@ func (a *Client) CompleteDirectUploadBox(params *CompleteDirectUploadBoxParams, 
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CompleteDirectUploadBoxDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-CompleteUploadBox completes upload box is a callback endpoint used to signal that an upload of boxfile is finished
-*/
-func (a *Client) CompleteUploadBox(params *CompleteUploadBoxParams, opts ...ClientOption) (*CompleteUploadBoxOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCompleteUploadBoxParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "CompleteUploadBox",
-		Method:             "PUT",
-		PathPattern:        "/vagrant/2022-09-30/registry/{registry}/box/{box}/version/{version}/provider/{provider}/architecture/{architecture}/complete",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CompleteUploadBoxReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CompleteUploadBoxOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*CompleteUploadBoxDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

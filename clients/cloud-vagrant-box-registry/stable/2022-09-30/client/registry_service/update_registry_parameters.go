@@ -65,7 +65,7 @@ type UpdateRegistryParams struct {
 
 	/* Data.
 
-	   The updated Registry details. Some fields are ignored on input.
+	   The updated Registry details.
 	*/
 	Data *models.HashicorpCloudVagrant20220930Registry
 
