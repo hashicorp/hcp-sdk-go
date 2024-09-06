@@ -1,0 +1,3 @@
+```release-note:deprecation
+Remove cloud-vault-scanning-proxy client.
+```
