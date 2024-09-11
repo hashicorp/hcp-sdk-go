@@ -1,3 +1,8 @@
+## v0.112.0 (September 11, 2024)
+
+DEPRECATIONS:
+
+* Remove cloud-vault-scanning-proxy client. [[GH-268](https://github.com/hashicorp/hcp-sdk-go/pull/268)]
 ## v0.111.0 (September 04, 2024)
 
 ## v0.110.0 (August 29, 2024)
