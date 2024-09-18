@@ -1,3 +1,5 @@
+## v0.113.0 (September 18, 2024)
+
 ## v0.112.0 (September 11, 2024)
 
 DEPRECATIONS:
