@@ -31,9 +31,6 @@ type SecretServiceCreateMongoDBAtlasRotatingSecretBody struct {
 	// mongodb scopes
 	MongodbScopes []*Secrets20231128MongoDBScope `json:"mongodb_scopes"`
 
-	// TODO: remove
-	RotationIntegrationName string `json:"rotation_integration_name,omitempty"`
-
 	// rotation policy name
 	RotationPolicyName string `json:"rotation_policy_name,omitempty"`
 

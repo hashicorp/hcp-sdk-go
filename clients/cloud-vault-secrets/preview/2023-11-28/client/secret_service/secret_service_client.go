@@ -152,11 +152,15 @@ type ClientService interface {
 
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
 
+	UpdateAwsDynamicSecret(params *UpdateAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsDynamicSecretOK, error)
+
 	UpdateAwsIAMUserAccessKeyRotatingSecret(params *UpdateAwsIAMUserAccessKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsIAMUserAccessKeyRotatingSecretOK, error)
 
 	UpdateAwsIntegration(params *UpdateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsIntegrationOK, error)
 
 	UpdateGatewayPool(params *UpdateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGatewayPoolOK, error)
+
+	UpdateGcpDynamicSecret(params *UpdateGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpDynamicSecretOK, error)
 
 	UpdateGcpIntegration(params *UpdateGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpIntegrationOK, error)
 
@@ -2530,6 +2534,44 @@ func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthI
 }
 
 /*
+UpdateAwsDynamicSecret update aws dynamic secret API
+*/
+func (a *Client) UpdateAwsDynamicSecret(params *UpdateAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsDynamicSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAwsDynamicSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAwsDynamicSecret",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAwsDynamicSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateAwsDynamicSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateAwsDynamicSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 UpdateAwsIAMUserAccessKeyRotatingSecret update aws i a m user access key rotating secret API
 */
 func (a *Client) UpdateAwsIAMUserAccessKeyRotatingSecret(params *UpdateAwsIAMUserAccessKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsIAMUserAccessKeyRotatingSecretOK, error) {
@@ -2640,6 +2682,44 @@ func (a *Client) UpdateGatewayPool(params *UpdateGatewayPoolParams, authInfo run
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateGatewayPoolDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateGcpDynamicSecret update gcp dynamic secret API
+*/
+func (a *Client) UpdateGcpDynamicSecret(params *UpdateGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpDynamicSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateGcpDynamicSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateGcpDynamicSecret",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateGcpDynamicSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateGcpDynamicSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateGcpDynamicSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

@@ -32,9 +32,6 @@ type Secrets20231128RotatingSecretConfig struct {
 	// integration name
 	IntegrationName string `json:"integration_name,omitempty"`
 
-	// TODO: remove
-	RotationIntegrationName string `json:"rotation_integration_name,omitempty"`
-
 	// rotation policy name
 	RotationPolicyName string `json:"rotation_policy_name,omitempty"`
 
