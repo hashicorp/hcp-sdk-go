@@ -34,6 +34,10 @@ type HashicorpCloudWaypointApplicationTemplate struct {
 	// A list of descriptive strings that can be applied to the ApplicationTemplate.
 	Labels []string `json:"labels"`
 
+	// module_id is the ID of the template's Terraform module.
+	// Read Only: true
+	ModuleID string `json:"module_id,omitempty"`
+
 	// module_source is where to find the source code for the desired child module.
 	ModuleSource string `json:"module_source,omitempty"`
 
@@ -70,9 +74,16 @@ type HashicorpCloudWaypointApplicationTemplate struct {
 	// created when this project was created from a template.
 	TerraformCloudWorkspaceDetails *HashicorpCloudWaypointTerraformCloudWorkspaceDetails `json:"terraform_cloud_workspace_details,omitempty"`
 
-	// The Terraform No-Code Module which should be used to provision
-	// infrastructure that is used by the application created from a ApplicationTemplate.
+	// DEPRECATED: Do not use.
 	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
+
+	// tf_agent_pool_id is the ID of the agent pool to use for the Terraform
+	// workspace if 'agent' is used for 'tf_execution_mode'.
+	TfAgentPoolID string `json:"tf_agent_pool_id,omitempty"`
+
+	// tf_execution_mode is the mode in which the Terraform backed workspace should
+	// operate in. Defaults to 'remote'.
+	TfExecutionMode string `json:"tf_execution_mode,omitempty"`
 
 	// variable_options is the collection of input variables which may be set for an application.
 	VariableOptions []*HashicorpCloudWaypointTFModuleVariable `json:"variable_options"`
@@ -239,6 +250,10 @@ func (m *HashicorpCloudWaypointApplicationTemplate) ContextValidate(ctx context.
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateModuleID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTags(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -285,6 +300,15 @@ func (m *HashicorpCloudWaypointApplicationTemplate) contextValidateActionCfgRefs
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointApplicationTemplate) contextValidateModuleID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "module_id", "body", string(m.ModuleID)); err != nil {
+		return err
 	}
 
 	return nil

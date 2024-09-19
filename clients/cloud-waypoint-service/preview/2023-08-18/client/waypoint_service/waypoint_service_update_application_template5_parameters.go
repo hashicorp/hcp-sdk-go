@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-waypoint-service/preview/2023-08-18/models"
 )
@@ -84,6 +85,13 @@ type WaypointServiceUpdateApplicationTemplate5Params struct {
 
 	// NamespaceID.
 	NamespaceID string
+
+	/* UseModuleReadme.
+
+	     If true, will auto-import the readme from the Terraform module used
+	rather than the one specified in application_template.
+	*/
+	UseModuleReadme *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -182,6 +190,17 @@ func (o *WaypointServiceUpdateApplicationTemplate5Params) SetNamespaceID(namespa
 	o.NamespaceID = namespaceID
 }
 
+// WithUseModuleReadme adds the useModuleReadme to the waypoint service update application template5 params
+func (o *WaypointServiceUpdateApplicationTemplate5Params) WithUseModuleReadme(useModuleReadme *bool) *WaypointServiceUpdateApplicationTemplate5Params {
+	o.SetUseModuleReadme(useModuleReadme)
+	return o
+}
+
+// SetUseModuleReadme adds the useModuleReadme to the waypoint service update application template5 params
+func (o *WaypointServiceUpdateApplicationTemplate5Params) SetUseModuleReadme(useModuleReadme *bool) {
+	o.UseModuleReadme = useModuleReadme
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *WaypointServiceUpdateApplicationTemplate5Params) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -220,6 +239,23 @@ func (o *WaypointServiceUpdateApplicationTemplate5Params) WriteToRequest(r runti
 	// path param namespace.id
 	if err := r.SetPathParam("namespace.id", o.NamespaceID); err != nil {
 		return err
+	}
+
+	if o.UseModuleReadme != nil {
+
+		// query param use_module_readme
+		var qrUseModuleReadme bool
+
+		if o.UseModuleReadme != nil {
+			qrUseModuleReadme = *o.UseModuleReadme
+		}
+		qUseModuleReadme := swag.FormatBool(qrUseModuleReadme)
+		if qUseModuleReadme != "" {
+
+			if err := r.SetQueryParam("use_module_readme", qUseModuleReadme); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

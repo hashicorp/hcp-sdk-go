@@ -33,6 +33,10 @@ type HashicorpCloudWaypointWaypointServiceUpdateApplicationTemplateBody struct {
 	// you must include it in the field mask. For now, we only use this
 	// for ActionConfigRefs inside application_template for clearing assignments.
 	UpdateMask string `json:"update_mask,omitempty"`
+
+	// If true, will auto-import the readme from the Terraform module used
+	// rather than the one specified in application_template.
+	UseModuleReadme bool `json:"use_module_readme,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service update application template body

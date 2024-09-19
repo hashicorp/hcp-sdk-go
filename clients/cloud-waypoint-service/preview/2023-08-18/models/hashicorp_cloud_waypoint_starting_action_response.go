@@ -19,6 +19,9 @@ type HashicorpCloudWaypointStartingActionResponse struct {
 
 	// The external identifier for the action run created
 	ActionRunID string `json:"action_run_id,omitempty"`
+
+	// The sequence number used to determine how many times this has been run
+	Sequence string `json:"sequence,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint starting action response

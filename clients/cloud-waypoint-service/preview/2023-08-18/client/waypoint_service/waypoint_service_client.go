@@ -28,6 +28,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	WaypointServiceCheckNamespaceActivation(params *WaypointServiceCheckNamespaceActivationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCheckNamespaceActivationOK, error)
+
 	WaypointServiceCheckTFCOrganization(params *WaypointServiceCheckTFCOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCheckTFCOrganizationOK, error)
 
 	WaypointServiceCreateActionConfig(params *WaypointServiceCreateActionConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateActionConfigOK, error)
@@ -223,6 +225,44 @@ type ClientService interface {
 	WaypointServiceValidateAgentGroups(params *WaypointServiceValidateAgentGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceValidateAgentGroupsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+WaypointServiceCheckNamespaceActivation checks namespace activation checks the activation status of a namespace based on the t f c token stored in the namespaces database
+*/
+func (a *Client) WaypointServiceCheckNamespaceActivation(params *WaypointServiceCheckNamespaceActivationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCheckNamespaceActivationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceCheckNamespaceActivationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_CheckNamespaceActivation",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/check-activation",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceCheckNamespaceActivationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceCheckNamespaceActivationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceCheckNamespaceActivationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*

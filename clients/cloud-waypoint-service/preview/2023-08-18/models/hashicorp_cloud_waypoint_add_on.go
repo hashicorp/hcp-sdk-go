@@ -74,7 +74,7 @@ type HashicorpCloudWaypointAddOn struct {
 	// kv tags
 	Tags []*HashicorpCloudWaypointTag `json:"tags"`
 
-	// Terraform No Code module used for provisioning the Add-on
+	// DEPRECATED: Do not use.
 	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
 
 	// Terraform workspace ID

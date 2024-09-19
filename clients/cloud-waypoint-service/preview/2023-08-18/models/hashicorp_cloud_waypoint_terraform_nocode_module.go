@@ -12,19 +12,18 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudWaypointTerraformNocodeModule hashicorp cloud waypoint terraform nocode module
+// HashicorpCloudWaypointTerraformNocodeModule DEPRECATED
 //
 // swagger:model hashicorp.cloud.waypoint.TerraformNocodeModule
 type HashicorpCloudWaypointTerraformNocodeModule struct {
 
-	// The id of the Terraform no-code module
+	// DEPRECATED: Do not use.
 	ModuleID string `json:"module_id,omitempty"`
 
-	// The source of the Terraform no-code module.
-	// https://developer.hashicorp.com/terraform/language/modules/sources
+	// DEPRECATED: Use module_source instead.
 	Source string `json:"source,omitempty"`
 
-	// The version of the Terraform no-code module.
+	// DEPRECATED: Do not use.
 	Version string `json:"version,omitempty"`
 }
 
