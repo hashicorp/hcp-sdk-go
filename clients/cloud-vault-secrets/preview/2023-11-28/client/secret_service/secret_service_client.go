@@ -142,6 +142,8 @@ type ClientService interface {
 
 	OpenAppSecret(params *OpenAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretOK, error)
 
+	OpenAppSecretByResourceName(params *OpenAppSecretByResourceNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretByResourceNameOK, error)
+
 	OpenAppSecretVersion(params *OpenAppSecretVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretVersionOK, error)
 
 	OpenAppSecrets(params *OpenAppSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretsOK, error)
@@ -2340,6 +2342,44 @@ func (a *Client) OpenAppSecret(params *OpenAppSecretParams, authInfo runtime.Cli
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*OpenAppSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+OpenAppSecretByResourceName open app secret by resource name API
+*/
+func (a *Client) OpenAppSecretByResourceName(params *OpenAppSecretByResourceNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretByResourceNameOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOpenAppSecretByResourceNameParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "OpenAppSecretByResourceName",
+		Method:             "GET",
+		PathPattern:        "/2023-11-28/{resource_name}:open",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OpenAppSecretByResourceNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OpenAppSecretByResourceNameOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OpenAppSecretByResourceNameDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
