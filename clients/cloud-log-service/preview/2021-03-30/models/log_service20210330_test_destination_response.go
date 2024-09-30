@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -25,10 +26,8 @@ type LogService20210330TestDestinationResponse struct {
 	// request_id is a unique id that can be used to refer to this specific test operation
 	RequestID string `json:"request_id,omitempty"`
 
-	// status is the overall status of the test destination operation
-	// success means that the test passed successfully
-	// failed means that the test failed for some reason
-	Status string `json:"status,omitempty"`
+	// status indicates whether the destination is successfully streaming logs to the provider or failing to do so.
+	Status *LogService20210330DestinationStatus `json:"status,omitempty"`
 
 	// test_payload is the log payload we sent to the customer destination
 	// this would only be set if the status is "success"
@@ -37,11 +36,69 @@ type LogService20210330TestDestinationResponse struct {
 
 // Validate validates this log service 20210330 test destination response
 func (m *LogService20210330TestDestinationResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this log service 20210330 test destination response based on context it is used
+func (m *LogService20210330TestDestinationResponse) validateStatus(formats strfmt.Registry) error {
+	if swag.IsZero(m.Status) { // not required
+		return nil
+	}
+
+	if m.Status != nil {
+		if err := m.Status.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this log service 20210330 test destination response based on the context it is used
 func (m *LogService20210330TestDestinationResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *LogService20210330TestDestinationResponse) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Status != nil {
+
+		if swag.IsZero(m.Status) { // not required
+			return nil
+		}
+
+		if err := m.Status.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
