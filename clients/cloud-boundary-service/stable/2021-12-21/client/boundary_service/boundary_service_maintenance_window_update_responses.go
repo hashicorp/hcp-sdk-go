@@ -53,7 +53,7 @@ BoundaryServiceMaintenanceWindowUpdateOK describes a response with status code 2
 A successful response.
 */
 type BoundaryServiceMaintenanceWindowUpdateOK struct {
-	Payload *models.HashicorpCloudBoundary20211221MaintenanceWindowUpdateResponse
+	Payload models.HashicorpCloudBoundary20211221MaintenanceWindowUpdateResponse
 }
 
 // IsSuccess returns true when this boundary service maintenance window update o k response has a 2xx status code
@@ -94,16 +94,14 @@ func (o *BoundaryServiceMaintenanceWindowUpdateOK) String() string {
 	return fmt.Sprintf("[POST /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window][%d] boundaryServiceMaintenanceWindowUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *BoundaryServiceMaintenanceWindowUpdateOK) GetPayload() *models.HashicorpCloudBoundary20211221MaintenanceWindowUpdateResponse {
+func (o *BoundaryServiceMaintenanceWindowUpdateOK) GetPayload() models.HashicorpCloudBoundary20211221MaintenanceWindowUpdateResponse {
 	return o.Payload
 }
 
 func (o *BoundaryServiceMaintenanceWindowUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudBoundary20211221MaintenanceWindowUpdateResponse)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

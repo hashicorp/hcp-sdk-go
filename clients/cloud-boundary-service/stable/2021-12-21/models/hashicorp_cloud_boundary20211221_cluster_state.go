@@ -16,14 +16,14 @@ import (
 
 // HashicorpCloudBoundary20211221ClusterState State is the state of the HCP Boundary cluster.
 //
-//   - STATE_INVALID_UNSPECIFIED: STATE_INVALID_UNSPECIFIED is used when state is not valid.
-//   - STATE_PENDING: STATE_PENDING is used when cluster is waiting for creation.
-//   - STATE_CREATING: STATE_CREATING is used when cluster is creating.
-//   - STATE_RUNNING: STATE_RUNNING is used when cluster is up and running.
-//   - STATE_FAILED: STATE_FAILED is used when cluster failed to be created.
-//   - STATE_DELETING: STATE_DELETING is used when cluster received a deletion request.
-//   - STATE_DELETED: STATE_DELETED is used when cluster finished deleting.
-//   - STATE_UPDATING: STATE_UPDATING is used when cluster finished updating.
+//   - STATE_INVALID_UNSPECIFIED: STATE_INVALID_UNSPECIFIED is used when the cluster state is not valid.
+//   - STATE_PENDING: STATE_PENDING is used when the cluster is waiting for creation.
+//   - STATE_CREATING: STATE_CREATING is used when the cluster is being created.
+//   - STATE_RUNNING: STATE_RUNNING is used when the cluster is up and running.
+//   - STATE_FAILED: STATE_FAILED is used when cluster creation failed.
+//   - STATE_DELETING: STATE_DELETING is used when cluster deletion is in progress.
+//   - STATE_DELETED: STATE_DELETED is used when the cluster has been deleted.
+//   - STATE_UPDATING: STATE_UPDATING is used when an upgrade is in progress for the cluster.
 //
 // swagger:model hashicorp.cloud.boundary_20211221.Cluster.State
 type HashicorpCloudBoundary20211221ClusterState string
