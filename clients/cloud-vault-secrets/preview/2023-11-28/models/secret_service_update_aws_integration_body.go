@@ -27,6 +27,9 @@ type SecretServiceUpdateAwsIntegrationBody struct {
 
 	// federated workload identity
 	FederatedWorkloadIdentity *Secrets20231128AwsFederatedWorkloadIdentityRequest `json:"federated_workload_identity,omitempty"`
+
+	// rotate on update
+	RotateOnUpdate bool `json:"rotate_on_update,omitempty"`
 }
 
 // Validate validates this secret service update aws integration body

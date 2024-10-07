@@ -23,6 +23,9 @@ type Secrets20230613VercelProjectConnectionDetailsResponse struct {
 	// deployment environments
 	DeploymentEnvironments []string `json:"deployment_environments"`
 
+	// installation name
+	InstallationName string `json:"installation_name,omitempty"`
+
 	// project id
 	ProjectID string `json:"project_id,omitempty"`
 

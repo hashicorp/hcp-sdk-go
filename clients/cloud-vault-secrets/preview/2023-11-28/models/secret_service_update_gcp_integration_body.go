@@ -25,6 +25,9 @@ type SecretServiceUpdateGcpIntegrationBody struct {
 	// federated workload identity
 	FederatedWorkloadIdentity *Secrets20231128GcpFederatedWorkloadIdentityRequest `json:"federated_workload_identity,omitempty"`
 
+	// rotate on update
+	RotateOnUpdate bool `json:"rotate_on_update,omitempty"`
+
 	// service account key
 	ServiceAccountKey *Secrets20231128GcpServiceAccountKeyRequest `json:"service_account_key,omitempty"`
 }

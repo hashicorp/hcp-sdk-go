@@ -38,6 +38,10 @@ type ClientService interface {
 
 	CreateAwsIntegration(params *CreateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsIntegrationOK, error)
 
+	CreateConfluentCloudAPIKeyRotatingSecret(params *CreateConfluentCloudAPIKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateConfluentCloudAPIKeyRotatingSecretOK, error)
+
+	CreateConfluentIntegration(params *CreateConfluentIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateConfluentIntegrationOK, error)
+
 	CreateGatewayPool(params *CreateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGatewayPoolOK, error)
 
 	CreateGcpDynamicSecret(params *CreateGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpDynamicSecretOK, error)
@@ -49,6 +53,8 @@ type ClientService interface {
 	CreateMongoDBAtlasIntegration(params *CreateMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasIntegrationOK, error)
 
 	CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotatingSecretOK, error)
+
+	CreateSync(params *CreateSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSyncOK, error)
 
 	CreateTwilioIntegration(params *CreateTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTwilioIntegrationOK, error)
 
@@ -64,6 +70,8 @@ type ClientService interface {
 
 	DeleteAwsIntegration(params *DeleteAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAwsIntegrationOK, error)
 
+	DeleteConfluentIntegration(params *DeleteConfluentIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteConfluentIntegrationOK, error)
+
 	DeleteGatewayPool(params *DeleteGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGatewayPoolOK, error)
 
 	DeleteGcpDynamicSecret(params *DeleteGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGcpDynamicSecretOK, error)
@@ -71,6 +79,8 @@ type ClientService interface {
 	DeleteGcpIntegration(params *DeleteGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGcpIntegrationOK, error)
 
 	DeleteMongoDBAtlasIntegration(params *DeleteMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMongoDBAtlasIntegrationOK, error)
+
+	DeleteSync(params *DeleteSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSyncOK, error)
 
 	DeleteTwilioIntegration(params *DeleteTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTwilioIntegrationOK, error)
 
@@ -80,11 +90,17 @@ type ClientService interface {
 
 	GetAppSecretVersion(params *GetAppSecretVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSecretVersionOK, error)
 
+	GetAppSyncs(params *GetAppSyncsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSyncsOK, error)
+
 	GetAwsDynamicSecret(params *GetAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsDynamicSecretOK, error)
 
 	GetAwsIAMUserAccessKeyRotatingSecretConfig(params *GetAwsIAMUserAccessKeyRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIAMUserAccessKeyRotatingSecretConfigOK, error)
 
 	GetAwsIntegration(params *GetAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIntegrationOK, error)
+
+	GetConfluentCloudAPIKeyRotatingSecretConfig(params *GetConfluentCloudAPIKeyRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetConfluentCloudAPIKeyRotatingSecretConfigOK, error)
+
+	GetConfluentIntegration(params *GetConfluentIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetConfluentIntegrationOK, error)
 
 	GetGatewayPool(params *GetGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGatewayPoolOK, error)
 
@@ -104,6 +120,8 @@ type ClientService interface {
 
 	GetRotatingSecretState(params *GetRotatingSecretStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRotatingSecretStateOK, error)
 
+	GetSync(params *GetSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSyncOK, error)
+
 	GetTwilioIntegration(params *GetTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTwilioIntegrationOK, error)
 
 	GetTwilioRotatingSecretConfig(params *GetTwilioRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTwilioRotatingSecretConfigOK, error)
@@ -122,6 +140,8 @@ type ClientService interface {
 
 	ListAwsIntegrations(params *ListAwsIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAwsIntegrationsOK, error)
 
+	ListConfluentIntegrations(params *ListConfluentIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfluentIntegrationsOK, error)
+
 	ListGatewayPoolGateways(params *ListGatewayPoolGatewaysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolGatewaysOK, error)
 
 	ListGatewayPoolIntegrations(params *ListGatewayPoolIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolIntegrationsOK, error)
@@ -137,6 +157,8 @@ type ClientService interface {
 	ListMongoDBAtlasIntegrations(params *ListMongoDBAtlasIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMongoDBAtlasIntegrationsOK, error)
 
 	ListOpenAppSecretVersions(params *ListOpenAppSecretVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenAppSecretVersionsOK, error)
+
+	ListSyncs(params *ListSyncsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSyncsOK, error)
 
 	ListTwilioIntegrations(params *ListTwilioIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTwilioIntegrationsOK, error)
 
@@ -159,6 +181,10 @@ type ClientService interface {
 	UpdateAwsIAMUserAccessKeyRotatingSecret(params *UpdateAwsIAMUserAccessKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsIAMUserAccessKeyRotatingSecretOK, error)
 
 	UpdateAwsIntegration(params *UpdateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsIntegrationOK, error)
+
+	UpdateConfluentCloudAPIKeyRotatingSecret(params *UpdateConfluentCloudAPIKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateConfluentCloudAPIKeyRotatingSecretOK, error)
+
+	UpdateConfluentIntegration(params *UpdateConfluentIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateConfluentIntegrationOK, error)
 
 	UpdateGatewayPool(params *UpdateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGatewayPoolOK, error)
 
@@ -366,6 +392,82 @@ func (a *Client) CreateAwsIntegration(params *CreateAwsIntegrationParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateConfluentCloudAPIKeyRotatingSecret create confluent cloud Api key rotating secret API
+*/
+func (a *Client) CreateConfluentCloudAPIKeyRotatingSecret(params *CreateConfluentCloudAPIKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateConfluentCloudAPIKeyRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateConfluentCloudAPIKeyRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateConfluentCloudApiKeyRotatingSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateConfluentCloudAPIKeyRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateConfluentCloudAPIKeyRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateConfluentCloudAPIKeyRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateConfluentIntegration create confluent integration API
+*/
+func (a *Client) CreateConfluentIntegration(params *CreateConfluentIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateConfluentIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateConfluentIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateConfluentIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateConfluentIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateConfluentIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateConfluentIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -594,6 +696,44 @@ func (a *Client) CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRota
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateMongoDBAtlasRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateSync create sync API
+*/
+func (a *Client) CreateSync(params *CreateSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSyncOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateSyncParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateSync",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateSyncReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateSyncOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateSyncDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -864,6 +1004,44 @@ func (a *Client) DeleteAwsIntegration(params *DeleteAwsIntegrationParams, authIn
 }
 
 /*
+DeleteConfluentIntegration delete confluent integration API
+*/
+func (a *Client) DeleteConfluentIntegration(params *DeleteConfluentIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteConfluentIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteConfluentIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteConfluentIntegration",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteConfluentIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteConfluentIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteConfluentIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 DeleteGatewayPool delete gateway pool API
 */
 func (a *Client) DeleteGatewayPool(params *DeleteGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGatewayPoolOK, error) {
@@ -1012,6 +1190,44 @@ func (a *Client) DeleteMongoDBAtlasIntegration(params *DeleteMongoDBAtlasIntegra
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteMongoDBAtlasIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteSync delete sync API
+*/
+func (a *Client) DeleteSync(params *DeleteSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSyncOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteSyncParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteSync",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteSyncReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteSyncOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteSyncDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1168,6 +1384,44 @@ func (a *Client) GetAppSecretVersion(params *GetAppSecretVersionParams, authInfo
 }
 
 /*
+GetAppSyncs ps r e v i e w u n s t a b l e
+*/
+func (a *Client) GetAppSyncs(params *GetAppSyncsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSyncsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppSyncsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppSyncs",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}/syncs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppSyncsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppSyncsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetAppSyncsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetAwsDynamicSecret get aws dynamic secret API
 */
 func (a *Client) GetAwsDynamicSecret(params *GetAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsDynamicSecretOK, error) {
@@ -1278,6 +1532,82 @@ func (a *Client) GetAwsIntegration(params *GetAwsIntegrationParams, authInfo run
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetConfluentCloudAPIKeyRotatingSecretConfig get confluent cloud Api key rotating secret config API
+*/
+func (a *Client) GetConfluentCloudAPIKeyRotatingSecretConfig(params *GetConfluentCloudAPIKeyRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetConfluentCloudAPIKeyRotatingSecretConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetConfluentCloudAPIKeyRotatingSecretConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetConfluentCloudApiKeyRotatingSecretConfig",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetConfluentCloudAPIKeyRotatingSecretConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetConfluentCloudAPIKeyRotatingSecretConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetConfluentCloudAPIKeyRotatingSecretConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetConfluentIntegration get confluent integration API
+*/
+func (a *Client) GetConfluentIntegration(params *GetConfluentIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetConfluentIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetConfluentIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetConfluentIntegration",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetConfluentIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetConfluentIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetConfluentIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1624,6 +1954,44 @@ func (a *Client) GetRotatingSecretState(params *GetRotatingSecretStateParams, au
 }
 
 /*
+GetSync get sync API
+*/
+func (a *Client) GetSync(params *GetSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSyncOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetSyncParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetSync",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetSyncReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetSyncOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetSyncDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetTwilioIntegration get twilio integration API
 */
 func (a *Client) GetTwilioIntegration(params *GetTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTwilioIntegrationOK, error) {
@@ -1966,6 +2334,44 @@ func (a *Client) ListAwsIntegrations(params *ListAwsIntegrationsParams, authInfo
 }
 
 /*
+ListConfluentIntegrations confluents
+*/
+func (a *Client) ListConfluentIntegrations(params *ListConfluentIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfluentIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListConfluentIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListConfluentIntegrations",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListConfluentIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListConfluentIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListConfluentIntegrationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ListGatewayPoolGateways list gateway pool gateways API
 */
 func (a *Client) ListGatewayPoolGateways(params *ListGatewayPoolGatewaysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListGatewayPoolGatewaysOK, error) {
@@ -2266,6 +2672,44 @@ func (a *Client) ListOpenAppSecretVersions(params *ListOpenAppSecretVersionsPara
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListOpenAppSecretVersionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListSyncs syncs
+*/
+func (a *Client) ListSyncs(params *ListSyncsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSyncsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListSyncsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListSyncs",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListSyncsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListSyncsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListSyncsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2684,6 +3128,82 @@ func (a *Client) UpdateAwsIntegration(params *UpdateAwsIntegrationParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateConfluentCloudAPIKeyRotatingSecret update confluent cloud Api key rotating secret API
+*/
+func (a *Client) UpdateConfluentCloudAPIKeyRotatingSecret(params *UpdateConfluentCloudAPIKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateConfluentCloudAPIKeyRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateConfluentCloudAPIKeyRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateConfluentCloudApiKeyRotatingSecret",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateConfluentCloudAPIKeyRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateConfluentCloudAPIKeyRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateConfluentCloudAPIKeyRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateConfluentIntegration update confluent integration API
+*/
+func (a *Client) UpdateConfluentIntegration(params *UpdateConfluentIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateConfluentIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateConfluentIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateConfluentIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateConfluentIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateConfluentIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateConfluentIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

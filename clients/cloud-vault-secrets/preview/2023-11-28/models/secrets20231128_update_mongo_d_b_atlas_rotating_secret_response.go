@@ -21,9 +21,6 @@ type Secrets20231128UpdateMongoDBAtlasRotatingSecretResponse struct {
 	// config
 	Config *Secrets20231128RotatingSecretConfig `json:"config,omitempty"`
 
-	// mongodb group id
-	MongodbGroupID string `json:"mongodb_group_id,omitempty"`
-
 	// secret details
 	SecretDetails *Secrets20231128MongoDBAtlasSecretDetails `json:"secret_details,omitempty"`
 }
