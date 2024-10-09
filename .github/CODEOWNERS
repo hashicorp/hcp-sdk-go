@@ -1,6 +1,6 @@
 # These owners will be the default owners for everything in
 # the repo, unless a later match takes precedence
-# *
+* @hashicorp/cloud-core-platform-surfaces @hashicorp/cloud-core-platform-systems
 
 # The Consul clients are owned by Consul
 /clients/cloud-consul-service/ @hashicorp/consul-cloud-ui @hashicorp/consul-cloud
