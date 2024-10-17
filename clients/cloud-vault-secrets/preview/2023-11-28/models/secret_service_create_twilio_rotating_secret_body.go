@@ -20,6 +20,9 @@ type SecretServiceCreateTwilioRotatingSecretBody struct {
 	// integration name
 	IntegrationName string `json:"integration_name,omitempty"`
 
+	// name
+	Name string `json:"name,omitempty"`
+
 	// rotation policy name
 	RotationPolicyName string `json:"rotation_policy_name,omitempty"`
 

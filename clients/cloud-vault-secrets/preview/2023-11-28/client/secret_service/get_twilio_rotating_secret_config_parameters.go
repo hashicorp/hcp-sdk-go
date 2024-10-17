@@ -64,14 +64,14 @@ type GetTwilioRotatingSecretConfigParams struct {
 	// AppName.
 	AppName string
 
+	// Name.
+	Name string
+
 	// OrganizationID.
 	OrganizationID string
 
 	// ProjectID.
 	ProjectID string
-
-	// SecretName.
-	SecretName string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -137,6 +137,17 @@ func (o *GetTwilioRotatingSecretConfigParams) SetAppName(appName string) {
 	o.AppName = appName
 }
 
+// WithName adds the name to the get twilio rotating secret config params
+func (o *GetTwilioRotatingSecretConfigParams) WithName(name string) *GetTwilioRotatingSecretConfigParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the get twilio rotating secret config params
+func (o *GetTwilioRotatingSecretConfigParams) SetName(name string) {
+	o.Name = name
+}
+
 // WithOrganizationID adds the organizationID to the get twilio rotating secret config params
 func (o *GetTwilioRotatingSecretConfigParams) WithOrganizationID(organizationID string) *GetTwilioRotatingSecretConfigParams {
 	o.SetOrganizationID(organizationID)
@@ -159,17 +170,6 @@ func (o *GetTwilioRotatingSecretConfigParams) SetProjectID(projectID string) {
 	o.ProjectID = projectID
 }
 
-// WithSecretName adds the secretName to the get twilio rotating secret config params
-func (o *GetTwilioRotatingSecretConfigParams) WithSecretName(secretName string) *GetTwilioRotatingSecretConfigParams {
-	o.SetSecretName(secretName)
-	return o
-}
-
-// SetSecretName adds the secretName to the get twilio rotating secret config params
-func (o *GetTwilioRotatingSecretConfigParams) SetSecretName(secretName string) {
-	o.SecretName = secretName
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetTwilioRotatingSecretConfigParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -183,6 +183,11 @@ func (o *GetTwilioRotatingSecretConfigParams) WriteToRequest(r runtime.ClientReq
 		return err
 	}
 
+	// path param name
+	if err := r.SetPathParam("name", o.Name); err != nil {
+		return err
+	}
+
 	// path param organization_id
 	if err := r.SetPathParam("organization_id", o.OrganizationID); err != nil {
 		return err
@@ -190,11 +195,6 @@ func (o *GetTwilioRotatingSecretConfigParams) WriteToRequest(r runtime.ClientReq
 
 	// path param project_id
 	if err := r.SetPathParam("project_id", o.ProjectID); err != nil {
-		return err
-	}
-
-	// path param secret_name
-	if err := r.SetPathParam("secret_name", o.SecretName); err != nil {
 		return err
 	}
 

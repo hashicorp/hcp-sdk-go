@@ -86,11 +86,11 @@ func (o *GetMongoDBAtlasRotatingSecretConfigOK) Code() int {
 }
 
 func (o *GetMongoDBAtlasRotatingSecretConfigOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}][%d] getMongoDBAtlasRotatingSecretConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] getMongoDBAtlasRotatingSecretConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *GetMongoDBAtlasRotatingSecretConfigOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}][%d] getMongoDBAtlasRotatingSecretConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] getMongoDBAtlasRotatingSecretConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *GetMongoDBAtlasRotatingSecretConfigOK) GetPayload() *models.Secrets20231128GetMongoDBAtlasRotatingSecretConfigResponse {
@@ -158,11 +158,11 @@ func (o *GetMongoDBAtlasRotatingSecretConfigDefault) Code() int {
 }
 
 func (o *GetMongoDBAtlasRotatingSecretConfigDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}][%d] GetMongoDBAtlasRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] GetMongoDBAtlasRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetMongoDBAtlasRotatingSecretConfigDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}][%d] GetMongoDBAtlasRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] GetMongoDBAtlasRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetMongoDBAtlasRotatingSecretConfigDefault) GetPayload() *models.GooglerpcStatus {

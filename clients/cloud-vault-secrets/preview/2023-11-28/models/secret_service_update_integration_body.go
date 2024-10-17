@@ -12,73 +12,43 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
-// Secrets20231128Integration secrets 20231128 integration
+// SecretServiceUpdateIntegrationBody secret service update integration body
 //
-// swagger:model secrets_20231128Integration
-type Secrets20231128Integration struct {
+// swagger:model SecretServiceUpdateIntegrationBody
+type SecretServiceUpdateIntegrationBody struct {
 
 	// aws access keys
-	AwsAccessKeys *Secrets20231128AwsAccessKeysResponse `json:"aws_access_keys,omitempty"`
+	AwsAccessKeys *Secrets20231128AwsAccessKeysRequest `json:"aws_access_keys,omitempty"`
 
 	// aws federated workload identity
-	AwsFederatedWorkloadIdentity *Secrets20231128AwsFederatedWorkloadIdentityResponse `json:"aws_federated_workload_identity,omitempty"`
+	AwsFederatedWorkloadIdentity *Secrets20231128AwsFederatedWorkloadIdentityRequest `json:"aws_federated_workload_identity,omitempty"`
 
 	// capabilities
 	Capabilities []*Secrets20231128Capability `json:"capabilities"`
 
 	// confluent static credentials
-	ConfluentStaticCredentials *Secrets20231128ConfluentStaticCredentialsResponse `json:"confluent_static_credentials,omitempty"`
-
-	// created at
-	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
-
-	// created by id
-	CreatedByID string `json:"created_by_id,omitempty"`
+	ConfluentStaticCredentials *Secrets20231128ConfluentStaticCredentialsRequest `json:"confluent_static_credentials,omitempty"`
 
 	// gcp federated workload identity
-	GcpFederatedWorkloadIdentity *Secrets20231128GcpFederatedWorkloadIdentityResponse `json:"gcp_federated_workload_identity,omitempty"`
+	GcpFederatedWorkloadIdentity *Secrets20231128GcpFederatedWorkloadIdentityRequest `json:"gcp_federated_workload_identity,omitempty"`
 
 	// gcp service account key
-	GcpServiceAccountKey *Secrets20231128GcpServiceAccountKeyResponse `json:"gcp_service_account_key,omitempty"`
+	GcpServiceAccountKey *Secrets20231128GcpServiceAccountKeyRequest `json:"gcp_service_account_key,omitempty"`
 
 	// gitlab access token
-	GitlabAccessToken Secrets20231128GitlabAccessTokenResponse `json:"gitlab_access_token,omitempty"`
+	GitlabAccessToken *Secrets20231128GitlabAccessTokenRequest `json:"gitlab_access_token,omitempty"`
 
 	// mongo db atlas static credentials
-	MongoDbAtlasStaticCredentials *Secrets20231128MongoDBAtlasStaticCredentialsResponse `json:"mongo_db_atlas_static_credentials,omitempty"`
-
-	// name
-	Name string `json:"name,omitempty"`
-
-	// provider
-	Provider string `json:"provider,omitempty"`
-
-	// resource id
-	ResourceID string `json:"resource_id,omitempty"`
-
-	// resource name
-	ResourceName string `json:"resource_name,omitempty"`
+	MongoDbAtlasStaticCredentials *Secrets20231128MongoDBAtlasStaticCredentialsRequest `json:"mongo_db_atlas_static_credentials,omitempty"`
 
 	// twilio static credentials
-	TwilioStaticCredentials *Secrets20231128TwilioStaticCredentialsResponse `json:"twilio_static_credentials,omitempty"`
-
-	// updated at
-	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
-
-	// updated by id
-	UpdatedByID string `json:"updated_by_id,omitempty"`
-
-	// used by
-	UsedBy map[string]Secrets20231128IntegrationUsage `json:"used_by,omitempty"`
+	TwilioStaticCredentials *Secrets20231128TwilioStaticCredentialsRequest `json:"twilio_static_credentials,omitempty"`
 }
 
-// Validate validates this secrets 20231128 integration
-func (m *Secrets20231128Integration) Validate(formats strfmt.Registry) error {
+// Validate validates this secret service update integration body
+func (m *SecretServiceUpdateIntegrationBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAwsAccessKeys(formats); err != nil {
@@ -97,15 +67,15 @@ func (m *Secrets20231128Integration) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateCreatedAt(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateGcpFederatedWorkloadIdentity(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateGcpServiceAccountKey(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGitlabAccessToken(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -117,21 +87,13 @@ func (m *Secrets20231128Integration) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateUpdatedAt(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateUsedBy(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
-func (m *Secrets20231128Integration) validateAwsAccessKeys(formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) validateAwsAccessKeys(formats strfmt.Registry) error {
 	if swag.IsZero(m.AwsAccessKeys) { // not required
 		return nil
 	}
@@ -150,7 +112,7 @@ func (m *Secrets20231128Integration) validateAwsAccessKeys(formats strfmt.Regist
 	return nil
 }
 
-func (m *Secrets20231128Integration) validateAwsFederatedWorkloadIdentity(formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) validateAwsFederatedWorkloadIdentity(formats strfmt.Registry) error {
 	if swag.IsZero(m.AwsFederatedWorkloadIdentity) { // not required
 		return nil
 	}
@@ -169,7 +131,7 @@ func (m *Secrets20231128Integration) validateAwsFederatedWorkloadIdentity(format
 	return nil
 }
 
-func (m *Secrets20231128Integration) validateCapabilities(formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) validateCapabilities(formats strfmt.Registry) error {
 	if swag.IsZero(m.Capabilities) { // not required
 		return nil
 	}
@@ -195,7 +157,7 @@ func (m *Secrets20231128Integration) validateCapabilities(formats strfmt.Registr
 	return nil
 }
 
-func (m *Secrets20231128Integration) validateConfluentStaticCredentials(formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) validateConfluentStaticCredentials(formats strfmt.Registry) error {
 	if swag.IsZero(m.ConfluentStaticCredentials) { // not required
 		return nil
 	}
@@ -214,19 +176,7 @@ func (m *Secrets20231128Integration) validateConfluentStaticCredentials(formats 
 	return nil
 }
 
-func (m *Secrets20231128Integration) validateCreatedAt(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedAt) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128Integration) validateGcpFederatedWorkloadIdentity(formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) validateGcpFederatedWorkloadIdentity(formats strfmt.Registry) error {
 	if swag.IsZero(m.GcpFederatedWorkloadIdentity) { // not required
 		return nil
 	}
@@ -245,7 +195,7 @@ func (m *Secrets20231128Integration) validateGcpFederatedWorkloadIdentity(format
 	return nil
 }
 
-func (m *Secrets20231128Integration) validateGcpServiceAccountKey(formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) validateGcpServiceAccountKey(formats strfmt.Registry) error {
 	if swag.IsZero(m.GcpServiceAccountKey) { // not required
 		return nil
 	}
@@ -264,7 +214,26 @@ func (m *Secrets20231128Integration) validateGcpServiceAccountKey(formats strfmt
 	return nil
 }
 
-func (m *Secrets20231128Integration) validateMongoDbAtlasStaticCredentials(formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) validateGitlabAccessToken(formats strfmt.Registry) error {
+	if swag.IsZero(m.GitlabAccessToken) { // not required
+		return nil
+	}
+
+	if m.GitlabAccessToken != nil {
+		if err := m.GitlabAccessToken.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gitlab_access_token")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gitlab_access_token")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceUpdateIntegrationBody) validateMongoDbAtlasStaticCredentials(formats strfmt.Registry) error {
 	if swag.IsZero(m.MongoDbAtlasStaticCredentials) { // not required
 		return nil
 	}
@@ -283,7 +252,7 @@ func (m *Secrets20231128Integration) validateMongoDbAtlasStaticCredentials(forma
 	return nil
 }
 
-func (m *Secrets20231128Integration) validateTwilioStaticCredentials(formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) validateTwilioStaticCredentials(formats strfmt.Registry) error {
 	if swag.IsZero(m.TwilioStaticCredentials) { // not required
 		return nil
 	}
@@ -302,46 +271,8 @@ func (m *Secrets20231128Integration) validateTwilioStaticCredentials(formats str
 	return nil
 }
 
-func (m *Secrets20231128Integration) validateUpdatedAt(formats strfmt.Registry) error {
-	if swag.IsZero(m.UpdatedAt) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("updated_at", "body", "date-time", m.UpdatedAt.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128Integration) validateUsedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.UsedBy) { // not required
-		return nil
-	}
-
-	for k := range m.UsedBy {
-
-		if err := validate.Required("used_by"+"."+k, "body", m.UsedBy[k]); err != nil {
-			return err
-		}
-		if val, ok := m.UsedBy[k]; ok {
-			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("used_by" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("used_by" + "." + k)
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this secrets 20231128 integration based on the context it is used
-func (m *Secrets20231128Integration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this secret service update integration body based on the context it is used
+func (m *SecretServiceUpdateIntegrationBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateAwsAccessKeys(ctx, formats); err != nil {
@@ -368,15 +299,15 @@ func (m *Secrets20231128Integration) ContextValidate(ctx context.Context, format
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGitlabAccessToken(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateMongoDbAtlasStaticCredentials(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateTwilioStaticCredentials(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateUsedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -386,7 +317,7 @@ func (m *Secrets20231128Integration) ContextValidate(ctx context.Context, format
 	return nil
 }
 
-func (m *Secrets20231128Integration) contextValidateAwsAccessKeys(ctx context.Context, formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) contextValidateAwsAccessKeys(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AwsAccessKeys != nil {
 
@@ -407,7 +338,7 @@ func (m *Secrets20231128Integration) contextValidateAwsAccessKeys(ctx context.Co
 	return nil
 }
 
-func (m *Secrets20231128Integration) contextValidateAwsFederatedWorkloadIdentity(ctx context.Context, formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) contextValidateAwsFederatedWorkloadIdentity(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AwsFederatedWorkloadIdentity != nil {
 
@@ -428,7 +359,7 @@ func (m *Secrets20231128Integration) contextValidateAwsFederatedWorkloadIdentity
 	return nil
 }
 
-func (m *Secrets20231128Integration) contextValidateCapabilities(ctx context.Context, formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) contextValidateCapabilities(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Capabilities); i++ {
 
@@ -453,7 +384,7 @@ func (m *Secrets20231128Integration) contextValidateCapabilities(ctx context.Con
 	return nil
 }
 
-func (m *Secrets20231128Integration) contextValidateConfluentStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) contextValidateConfluentStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ConfluentStaticCredentials != nil {
 
@@ -474,7 +405,7 @@ func (m *Secrets20231128Integration) contextValidateConfluentStaticCredentials(c
 	return nil
 }
 
-func (m *Secrets20231128Integration) contextValidateGcpFederatedWorkloadIdentity(ctx context.Context, formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) contextValidateGcpFederatedWorkloadIdentity(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GcpFederatedWorkloadIdentity != nil {
 
@@ -495,7 +426,7 @@ func (m *Secrets20231128Integration) contextValidateGcpFederatedWorkloadIdentity
 	return nil
 }
 
-func (m *Secrets20231128Integration) contextValidateGcpServiceAccountKey(ctx context.Context, formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) contextValidateGcpServiceAccountKey(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GcpServiceAccountKey != nil {
 
@@ -516,7 +447,28 @@ func (m *Secrets20231128Integration) contextValidateGcpServiceAccountKey(ctx con
 	return nil
 }
 
-func (m *Secrets20231128Integration) contextValidateMongoDbAtlasStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) contextValidateGitlabAccessToken(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GitlabAccessToken != nil {
+
+		if swag.IsZero(m.GitlabAccessToken) { // not required
+			return nil
+		}
+
+		if err := m.GitlabAccessToken.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gitlab_access_token")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gitlab_access_token")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceUpdateIntegrationBody) contextValidateMongoDbAtlasStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MongoDbAtlasStaticCredentials != nil {
 
@@ -537,7 +489,7 @@ func (m *Secrets20231128Integration) contextValidateMongoDbAtlasStaticCredential
 	return nil
 }
 
-func (m *Secrets20231128Integration) contextValidateTwilioStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+func (m *SecretServiceUpdateIntegrationBody) contextValidateTwilioStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TwilioStaticCredentials != nil {
 
@@ -558,23 +510,8 @@ func (m *Secrets20231128Integration) contextValidateTwilioStaticCredentials(ctx 
 	return nil
 }
 
-func (m *Secrets20231128Integration) contextValidateUsedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	for k := range m.UsedBy {
-
-		if val, ok := m.UsedBy[k]; ok {
-			if err := val.ContextValidate(ctx, formats); err != nil {
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
 // MarshalBinary interface implementation
-func (m *Secrets20231128Integration) MarshalBinary() ([]byte, error) {
+func (m *SecretServiceUpdateIntegrationBody) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -582,8 +519,8 @@ func (m *Secrets20231128Integration) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Secrets20231128Integration) UnmarshalBinary(b []byte) error {
-	var res Secrets20231128Integration
+func (m *SecretServiceUpdateIntegrationBody) UnmarshalBinary(b []byte) error {
+	var res SecretServiceUpdateIntegrationBody
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

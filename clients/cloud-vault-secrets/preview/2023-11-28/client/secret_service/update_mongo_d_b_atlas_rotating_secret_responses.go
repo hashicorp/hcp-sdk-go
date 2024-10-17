@@ -86,11 +86,11 @@ func (o *UpdateMongoDBAtlasRotatingSecretOK) Code() int {
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}][%d] updateMongoDBAtlasRotatingSecretOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] updateMongoDBAtlasRotatingSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}][%d] updateMongoDBAtlasRotatingSecretOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] updateMongoDBAtlasRotatingSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretOK) GetPayload() *models.Secrets20231128UpdateMongoDBAtlasRotatingSecretResponse {
@@ -158,11 +158,11 @@ func (o *UpdateMongoDBAtlasRotatingSecretDefault) Code() int {
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}][%d] UpdateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] UpdateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}][%d] UpdateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] UpdateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretDefault) GetPayload() *models.GooglerpcStatus {

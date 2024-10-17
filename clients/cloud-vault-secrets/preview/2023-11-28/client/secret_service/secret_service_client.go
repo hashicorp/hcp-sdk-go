@@ -50,6 +50,8 @@ type ClientService interface {
 
 	CreateGcpServiceAccountKeyRotatingSecret(params *CreateGcpServiceAccountKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpServiceAccountKeyRotatingSecretOK, error)
 
+	CreateIntegration(params *CreateIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateIntegrationOK, error)
+
 	CreateMongoDBAtlasIntegration(params *CreateMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasIntegrationOK, error)
 
 	CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotatingSecretOK, error)
@@ -77,6 +79,8 @@ type ClientService interface {
 	DeleteGcpDynamicSecret(params *DeleteGcpDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGcpDynamicSecretOK, error)
 
 	DeleteGcpIntegration(params *DeleteGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteGcpIntegrationOK, error)
+
+	DeleteIntegration(params *DeleteIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteIntegrationOK, error)
 
 	DeleteMongoDBAtlasIntegration(params *DeleteMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMongoDBAtlasIntegrationOK, error)
 
@@ -193,6 +197,8 @@ type ClientService interface {
 	UpdateGcpIntegration(params *UpdateGcpIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpIntegrationOK, error)
 
 	UpdateGcpServiceAccountKeyRotatingSecret(params *UpdateGcpServiceAccountKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpServiceAccountKeyRotatingSecretOK, error)
+
+	UpdateIntegration(params *UpdateIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIntegrationOK, error)
 
 	UpdateMongoDBAtlasIntegration(params *UpdateMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMongoDBAtlasIntegrationOK, error)
 
@@ -620,6 +626,44 @@ func (a *Client) CreateGcpServiceAccountKeyRotatingSecret(params *CreateGcpServi
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateGcpServiceAccountKeyRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateIntegration create integration API
+*/
+func (a *Client) CreateIntegration(params *CreateIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1152,6 +1196,44 @@ func (a *Client) DeleteGcpIntegration(params *DeleteGcpIntegrationParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteGcpIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteIntegration delete integration API
+*/
+func (a *Client) DeleteIntegration(params *DeleteIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteIntegration",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1888,7 +1970,7 @@ func (a *Client) GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRota
 	op := &runtime.ClientOperation{
 		ID:                 "GetMongoDBAtlasRotatingSecretConfig",
 		Method:             "GET",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -1926,7 +2008,7 @@ func (a *Client) GetRotatingSecretState(params *GetRotatingSecretStateParams, au
 	op := &runtime.ClientOperation{
 		ID:                 "GetRotatingSecretState",
 		Method:             "GET",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/rotation-state",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}/rotation-state",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -2040,7 +2122,7 @@ func (a *Client) GetTwilioRotatingSecretConfig(params *GetTwilioRotatingSecretCo
 	op := &runtime.ClientOperation{
 		ID:                 "GetTwilioRotatingSecretConfig",
 		Method:             "GET",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{secret_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -2914,7 +2996,7 @@ func (a *Client) RotateSecret(params *RotateSecretParams, authInfo runtime.Clien
 	op := &runtime.ClientOperation{
 		ID:                 "RotateSecret",
 		Method:             "POST",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}:rotate",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -3360,6 +3442,44 @@ func (a *Client) UpdateGcpServiceAccountKeyRotatingSecret(params *UpdateGcpServi
 }
 
 /*
+UpdateIntegration update integration API
+*/
+func (a *Client) UpdateIntegration(params *UpdateIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 UpdateMongoDBAtlasIntegration update mongo d b atlas integration API
 */
 func (a *Client) UpdateMongoDBAtlasIntegration(params *UpdateMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMongoDBAtlasIntegrationOK, error) {
@@ -3408,7 +3528,7 @@ func (a *Client) UpdateMongoDBAtlasRotatingSecret(params *UpdateMongoDBAtlasRota
 	op := &runtime.ClientOperation{
 		ID:                 "UpdateMongoDBAtlasRotatingSecret",
 		Method:             "PUT",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{secret_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -3484,7 +3604,7 @@ func (a *Client) UpdateTwilioRotatingSecret(params *UpdateTwilioRotatingSecretPa
 	op := &runtime.ClientOperation{
 		ID:                 "UpdateTwilioRotatingSecret",
 		Method:             "PUT",
-		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{secret_name}",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

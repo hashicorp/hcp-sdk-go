@@ -86,11 +86,11 @@ func (o *UpdateTwilioRotatingSecretOK) Code() int {
 }
 
 func (o *UpdateTwilioRotatingSecretOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{secret_name}][%d] updateTwilioRotatingSecretOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] updateTwilioRotatingSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateTwilioRotatingSecretOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{secret_name}][%d] updateTwilioRotatingSecretOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] updateTwilioRotatingSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateTwilioRotatingSecretOK) GetPayload() *models.Secrets20231128UpdateTwilioRotatingSecretResponse {
@@ -158,11 +158,11 @@ func (o *UpdateTwilioRotatingSecretDefault) Code() int {
 }
 
 func (o *UpdateTwilioRotatingSecretDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{secret_name}][%d] UpdateTwilioRotatingSecret default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] UpdateTwilioRotatingSecret default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *UpdateTwilioRotatingSecretDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{secret_name}][%d] UpdateTwilioRotatingSecret default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] UpdateTwilioRotatingSecret default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *UpdateTwilioRotatingSecretDefault) GetPayload() *models.GooglerpcStatus {

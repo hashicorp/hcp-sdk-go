@@ -69,14 +69,14 @@ type UpdateMongoDBAtlasRotatingSecretParams struct {
 	// Body.
 	Body *models.SecretServiceUpdateMongoDBAtlasRotatingSecretBody
 
+	// Name.
+	Name string
+
 	// OrganizationID.
 	OrganizationID string
 
 	// ProjectID.
 	ProjectID string
-
-	// SecretName.
-	SecretName string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -153,6 +153,17 @@ func (o *UpdateMongoDBAtlasRotatingSecretParams) SetBody(body *models.SecretServ
 	o.Body = body
 }
 
+// WithName adds the name to the update mongo d b atlas rotating secret params
+func (o *UpdateMongoDBAtlasRotatingSecretParams) WithName(name string) *UpdateMongoDBAtlasRotatingSecretParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the update mongo d b atlas rotating secret params
+func (o *UpdateMongoDBAtlasRotatingSecretParams) SetName(name string) {
+	o.Name = name
+}
+
 // WithOrganizationID adds the organizationID to the update mongo d b atlas rotating secret params
 func (o *UpdateMongoDBAtlasRotatingSecretParams) WithOrganizationID(organizationID string) *UpdateMongoDBAtlasRotatingSecretParams {
 	o.SetOrganizationID(organizationID)
@@ -175,17 +186,6 @@ func (o *UpdateMongoDBAtlasRotatingSecretParams) SetProjectID(projectID string) 
 	o.ProjectID = projectID
 }
 
-// WithSecretName adds the secretName to the update mongo d b atlas rotating secret params
-func (o *UpdateMongoDBAtlasRotatingSecretParams) WithSecretName(secretName string) *UpdateMongoDBAtlasRotatingSecretParams {
-	o.SetSecretName(secretName)
-	return o
-}
-
-// SetSecretName adds the secretName to the update mongo d b atlas rotating secret params
-func (o *UpdateMongoDBAtlasRotatingSecretParams) SetSecretName(secretName string) {
-	o.SecretName = secretName
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *UpdateMongoDBAtlasRotatingSecretParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -204,6 +204,11 @@ func (o *UpdateMongoDBAtlasRotatingSecretParams) WriteToRequest(r runtime.Client
 		}
 	}
 
+	// path param name
+	if err := r.SetPathParam("name", o.Name); err != nil {
+		return err
+	}
+
 	// path param organization_id
 	if err := r.SetPathParam("organization_id", o.OrganizationID); err != nil {
 		return err
@@ -211,11 +216,6 @@ func (o *UpdateMongoDBAtlasRotatingSecretParams) WriteToRequest(r runtime.Client
 
 	// path param project_id
 	if err := r.SetPathParam("project_id", o.ProjectID); err != nil {
-		return err
-	}
-
-	// path param secret_name
-	if err := r.SetPathParam("secret_name", o.SecretName); err != nil {
 		return err
 	}
 
