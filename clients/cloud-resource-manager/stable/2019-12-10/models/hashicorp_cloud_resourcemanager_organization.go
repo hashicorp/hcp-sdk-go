@@ -37,6 +37,9 @@ type HashicorpCloudResourcemanagerOrganization struct {
 
 	// State is the state of the organization.
 	State *HashicorpCloudResourcemanagerOrganizationOrganizationState `json:"state,omitempty"`
+
+	// TfcSynced is true if this organization has synced to TFC.
+	TfcSynced bool `json:"tfc_synced,omitempty"`
 }
 
 // Validate validates this hashicorp cloud resourcemanager organization

@@ -30,7 +30,13 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	ResourceServiceGetIamPolicy(params *ResourceServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceGetIamPolicyOK, error)
 
+	ResourceServiceGetResource(params *ResourceServiceGetResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceGetResourceOK, error)
+
 	ResourceServiceList(params *ResourceServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceListOK, error)
+
+	ResourceServiceListAccessibleResources(params *ResourceServiceListAccessibleResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceListAccessibleResourcesOK, error)
+
+	ResourceServiceListRoles(params *ResourceServiceListRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceListRolesOK, error)
 
 	ResourceServiceSetIamPolicy(params *ResourceServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceSetIamPolicyOK, error)
 
@@ -78,6 +84,44 @@ func (a *Client) ResourceServiceGetIamPolicy(params *ResourceServiceGetIamPolicy
 }
 
 /*
+ResourceServiceGetResource gets resource retrieves a resource
+*/
+func (a *Client) ResourceServiceGetResource(params *ResourceServiceGetResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceGetResourceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewResourceServiceGetResourceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ResourceService_GetResource",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/resource",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ResourceServiceGetResourceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ResourceServiceGetResourceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ResourceServiceGetResourceDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ResourceServiceList lists lists the resources the caller has access to
 */
 func (a *Client) ResourceServiceList(params *ResourceServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceListOK, error) {
@@ -112,6 +156,82 @@ func (a *Client) ResourceServiceList(params *ResourceServiceListParams, authInfo
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ResourceServiceListDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ResourceServiceListAccessibleResources lists accessible resources lists the resources the caller has access to at and below the given scope
+*/
+func (a *Client) ResourceServiceListAccessibleResources(params *ResourceServiceListAccessibleResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceListAccessibleResourcesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewResourceServiceListAccessibleResourcesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ResourceService_ListAccessibleResources",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/resources/accessible",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ResourceServiceListAccessibleResourcesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ResourceServiceListAccessibleResourcesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ResourceServiceListAccessibleResourcesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ResourceServiceListRoles lists roles lists roles applicable on the given resource requires caller to have resource manager resource list roles permission on the given resource
+*/
+func (a *Client) ResourceServiceListRoles(params *ResourceServiceListRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceServiceListRolesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewResourceServiceListRolesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ResourceService_ListRoles",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/resource/roles",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ResourceServiceListRolesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ResourceServiceListRolesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ResourceServiceListRolesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
