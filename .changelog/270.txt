@@ -1,0 +1,3 @@
+```release-note:bug
+Fix definition of GoogleProtobufAny to match values returned by HCP services
+```

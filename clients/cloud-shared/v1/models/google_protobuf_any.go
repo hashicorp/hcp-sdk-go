@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -50,13 +51,10 @@ import (
 //	Example 4: Pack and unpack a message in Go
 //
 //	    foo := &pb.Foo{...}
-//	    any, err := anypb.New(foo)
-//	    if err != nil {
-//	      ...
-//	    }
+//	    any, err := ptypes.MarshalAny(foo)
 //	    ...
 //	    foo := &pb.Foo{}
-//	    if err := any.UnmarshalTo(foo); err != nil {
+//	    if err := ptypes.UnmarshalAny(any, foo); err != nil {
 //	      ...
 //	    }
 //
@@ -124,11 +122,135 @@ type GoogleProtobufAny struct {
 	//
 	// Schemes other than `http`, `https` (or the empty scheme) might be
 	// used with implementation specific semantics.
-	TypeURL string `json:"type_url,omitempty"`
+	AtType string `json:"@type,omitempty"`
 
-	// Must be a valid serialized protocol buffer of the above specified type.
-	// Format: byte
-	Value strfmt.Base64 `json:"value,omitempty"`
+	// google protobuf any additional properties
+	GoogleProtobufAnyAdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// UnmarshalJSON unmarshals this object with additional properties from JSON
+func (m *GoogleProtobufAny) UnmarshalJSON(data []byte) error {
+	// stage 1, bind the properties
+	var stage1 struct {
+
+		// A URL/resource name that uniquely identifies the type of the serialized
+		// protocol buffer message. This string must contain at least
+		// one "/" character. The last segment of the URL's path must represent
+		// the fully qualified name of the type (as in
+		// `path/google.protobuf.Duration`). The name should be in a canonical form
+		// (e.g., leading "." is not accepted).
+		//
+		// In practice, teams usually precompile into the binary all types that they
+		// expect it to use in the context of Any. However, for URLs which use the
+		// scheme `http`, `https`, or no scheme, one can optionally set up a type
+		// server that maps type URLs to message definitions as follows:
+		//
+		// * If no scheme is provided, `https` is assumed.
+		// * An HTTP GET on the URL must yield a [google.protobuf.Type][]
+		//   value in binary format, or produce an error.
+		// * Applications are allowed to cache lookup results based on the
+		//   URL, or have them precompiled into a binary to avoid any
+		//   lookup. Therefore, binary compatibility needs to be preserved
+		//   on changes to types. (Use versioned type names to manage
+		//   breaking changes.)
+		//
+		// Note: this functionality is not currently available in the official
+		// protobuf release, and it is not used for type URLs beginning with
+		// type.googleapis.com.
+		//
+		// Schemes other than `http`, `https` (or the empty scheme) might be
+		// used with implementation specific semantics.
+		AtType string `json:"@type,omitempty"`
+	}
+	if err := json.Unmarshal(data, &stage1); err != nil {
+		return err
+	}
+	var rcv GoogleProtobufAny
+
+	rcv.AtType = stage1.AtType
+	*m = rcv
+
+	// stage 2, remove properties and add to map
+	stage2 := make(map[string]json.RawMessage)
+	if err := json.Unmarshal(data, &stage2); err != nil {
+		return err
+	}
+
+	delete(stage2, "@type")
+	// stage 3, add additional properties values
+	if len(stage2) > 0 {
+		result := make(map[string]interface{})
+		for k, v := range stage2 {
+			var toadd interface{}
+			if err := json.Unmarshal(v, &toadd); err != nil {
+				return err
+			}
+			result[k] = toadd
+		}
+		m.GoogleProtobufAnyAdditionalProperties = result
+	}
+
+	return nil
+}
+
+// MarshalJSON marshals this object with additional properties into a JSON object
+func (m GoogleProtobufAny) MarshalJSON() ([]byte, error) {
+	var stage1 struct {
+
+		// A URL/resource name that uniquely identifies the type of the serialized
+		// protocol buffer message. This string must contain at least
+		// one "/" character. The last segment of the URL's path must represent
+		// the fully qualified name of the type (as in
+		// `path/google.protobuf.Duration`). The name should be in a canonical form
+		// (e.g., leading "." is not accepted).
+		//
+		// In practice, teams usually precompile into the binary all types that they
+		// expect it to use in the context of Any. However, for URLs which use the
+		// scheme `http`, `https`, or no scheme, one can optionally set up a type
+		// server that maps type URLs to message definitions as follows:
+		//
+		// * If no scheme is provided, `https` is assumed.
+		// * An HTTP GET on the URL must yield a [google.protobuf.Type][]
+		//   value in binary format, or produce an error.
+		// * Applications are allowed to cache lookup results based on the
+		//   URL, or have them precompiled into a binary to avoid any
+		//   lookup. Therefore, binary compatibility needs to be preserved
+		//   on changes to types. (Use versioned type names to manage
+		//   breaking changes.)
+		//
+		// Note: this functionality is not currently available in the official
+		// protobuf release, and it is not used for type URLs beginning with
+		// type.googleapis.com.
+		//
+		// Schemes other than `http`, `https` (or the empty scheme) might be
+		// used with implementation specific semantics.
+		AtType string `json:"@type,omitempty"`
+	}
+
+	stage1.AtType = m.AtType
+
+	// make JSON object for known properties
+	props, err := json.Marshal(stage1)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(m.GoogleProtobufAnyAdditionalProperties) == 0 { // no additional properties
+		return props, nil
+	}
+
+	// make JSON object for the additional properties
+	additional, err := json.Marshal(m.GoogleProtobufAnyAdditionalProperties)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(props) < 3 { // "{}": only additional properties
+		return additional, nil
+	}
+
+	// concatenate the 2 objects
+	return swag.ConcatJSON(props, additional), nil
 }
 
 // Validate validates this google protobuf any
