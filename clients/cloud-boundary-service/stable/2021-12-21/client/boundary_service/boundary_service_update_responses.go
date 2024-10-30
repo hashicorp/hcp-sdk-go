@@ -53,7 +53,7 @@ BoundaryServiceUpdateOK describes a response with status code 200, with default 
 A successful response.
 */
 type BoundaryServiceUpdateOK struct {
-	Payload *models.HashicorpCloudBoundary20211221UpdateResponse
+	Payload models.HashicorpCloudBoundary20211221UpdateResponse
 }
 
 // IsSuccess returns true when this boundary service update o k response has a 2xx status code
@@ -94,16 +94,14 @@ func (o *BoundaryServiceUpdateOK) String() string {
 	return fmt.Sprintf("[POST /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] boundaryServiceUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *BoundaryServiceUpdateOK) GetPayload() *models.HashicorpCloudBoundary20211221UpdateResponse {
+func (o *BoundaryServiceUpdateOK) GetPayload() models.HashicorpCloudBoundary20211221UpdateResponse {
 	return o.Payload
 }
 
 func (o *BoundaryServiceUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudBoundary20211221UpdateResponse)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

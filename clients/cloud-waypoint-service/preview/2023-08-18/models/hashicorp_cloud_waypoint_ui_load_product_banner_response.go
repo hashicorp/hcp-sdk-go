@@ -17,6 +17,9 @@ import (
 // swagger:model hashicorp.cloud.waypoint.UI.LoadProductBannerResponse
 type HashicorpCloudWaypointUILoadProductBannerResponse struct {
 
+	// product has activated
+	ProductHasActivated bool `json:"product_has_activated,omitempty"`
+
 	// product valid
 	ProductValid bool `json:"product_valid,omitempty"`
 

@@ -24,6 +24,10 @@ type HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody struct {
 	// Global references the entire server. This is used in some APIs
 	// as a way to read/write values that are server-global.
 	Namespace interface{} `json:"namespace,omitempty"`
+
+	// If true, will auto-import the readme from the Terraform module used
+	// rather than the one specified in application_template.
+	UseModuleReadme bool `json:"use_module_readme,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service create application template body

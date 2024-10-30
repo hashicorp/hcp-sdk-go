@@ -15,9 +15,6 @@ import (
 )
 
 // HashicorpCloudWaypointJobStatus The various status we allow a job to be in.
-// NOTE(briancain): I hate that buf linter requires the Enum name to be
-// in front of each field, but I guess that's what we do to make the tests pass lol.
-// It also requres the Zero value always be UNSPECIFIED.
 //
 //   - STATUS_UNSPECIFIED: default/zero value; we have no job status
 //   - STATUS_UNKNOWN: we don't know the status of the job!
@@ -25,6 +22,7 @@ import (
 //   - STATUS_HALTED: the job was halted/failed to be launched
 //   - STATUS_SUCCESS: the job was successful
 //   - STATUS_ERRORED: the job ran, but errored out
+//   - STATUS_QUEUED: the job is queued to run, used by agents
 //
 // swagger:model hashicorp.cloud.waypoint.Job.Status
 type HashicorpCloudWaypointJobStatus string
@@ -57,6 +55,9 @@ const (
 
 	// HashicorpCloudWaypointJobStatusSTATUSERRORED captures enum value "STATUS_ERRORED"
 	HashicorpCloudWaypointJobStatusSTATUSERRORED HashicorpCloudWaypointJobStatus = "STATUS_ERRORED"
+
+	// HashicorpCloudWaypointJobStatusSTATUSQUEUED captures enum value "STATUS_QUEUED"
+	HashicorpCloudWaypointJobStatusSTATUSQUEUED HashicorpCloudWaypointJobStatus = "STATUS_QUEUED"
 )
 
 // for schema
@@ -64,7 +65,7 @@ var hashicorpCloudWaypointJobStatusEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudWaypointJobStatus
-	if err := json.Unmarshal([]byte(`["STATUS_UNSPECIFIED","STATUS_UNKNOWN","STATUS_RUNNING","STATUS_HALTED","STATUS_SUCCESS","STATUS_ERRORED"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["STATUS_UNSPECIFIED","STATUS_UNKNOWN","STATUS_RUNNING","STATUS_HALTED","STATUS_SUCCESS","STATUS_ERRORED","STATUS_QUEUED"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

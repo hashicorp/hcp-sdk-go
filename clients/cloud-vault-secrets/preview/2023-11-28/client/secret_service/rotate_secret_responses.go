@@ -86,11 +86,11 @@ func (o *RotateSecretOK) Code() int {
 }
 
 func (o *RotateSecretOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}:rotate][%d] rotateSecretOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] rotateSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *RotateSecretOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}:rotate][%d] rotateSecretOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] rotateSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *RotateSecretOK) GetPayload() models.Secrets20231128RotateSecretResponse {
@@ -156,11 +156,11 @@ func (o *RotateSecretDefault) Code() int {
 }
 
 func (o *RotateSecretDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}:rotate][%d] RotateSecret default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] RotateSecret default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *RotateSecretDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}:rotate][%d] RotateSecret default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] RotateSecret default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *RotateSecretDefault) GetPayload() *models.GooglerpcStatus {

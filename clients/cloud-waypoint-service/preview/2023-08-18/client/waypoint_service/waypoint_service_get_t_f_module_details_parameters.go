@@ -84,7 +84,7 @@ type WaypointServiceGetTFModuleDetailsParams struct {
 
 	/* Version.
 
-	   version is the version of the Terraform module.
+	   DEPRECATED: Do not use.
 	*/
 	Version string
 

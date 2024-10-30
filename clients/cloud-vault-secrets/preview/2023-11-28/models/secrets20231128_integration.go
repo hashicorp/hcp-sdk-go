@@ -29,6 +29,9 @@ type Secrets20231128Integration struct {
 	// capabilities
 	Capabilities []*Secrets20231128Capability `json:"capabilities"`
 
+	// confluent static credentials
+	ConfluentStaticCredentials *Secrets20231128ConfluentStaticCredentialsResponse `json:"confluent_static_credentials,omitempty"`
+
 	// created at
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
@@ -41,6 +44,9 @@ type Secrets20231128Integration struct {
 
 	// gcp service account key
 	GcpServiceAccountKey *Secrets20231128GcpServiceAccountKeyResponse `json:"gcp_service_account_key,omitempty"`
+
+	// gitlab access token
+	GitlabAccessToken Secrets20231128GitlabAccessTokenResponse `json:"gitlab_access_token,omitempty"`
 
 	// mongo db atlas static credentials
 	MongoDbAtlasStaticCredentials *Secrets20231128MongoDBAtlasStaticCredentialsResponse `json:"mongo_db_atlas_static_credentials,omitempty"`
@@ -84,6 +90,10 @@ func (m *Secrets20231128Integration) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCapabilities(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateConfluentStaticCredentials(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -180,6 +190,25 @@ func (m *Secrets20231128Integration) validateCapabilities(formats strfmt.Registr
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Integration) validateConfluentStaticCredentials(formats strfmt.Registry) error {
+	if swag.IsZero(m.ConfluentStaticCredentials) { // not required
+		return nil
+	}
+
+	if m.ConfluentStaticCredentials != nil {
+		if err := m.ConfluentStaticCredentials.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("confluent_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("confluent_static_credentials")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -327,6 +356,10 @@ func (m *Secrets20231128Integration) ContextValidate(ctx context.Context, format
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateConfluentStaticCredentials(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGcpFederatedWorkloadIdentity(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -415,6 +448,27 @@ func (m *Secrets20231128Integration) contextValidateCapabilities(ctx context.Con
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Integration) contextValidateConfluentStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ConfluentStaticCredentials != nil {
+
+		if swag.IsZero(m.ConfluentStaticCredentials) { // not required
+			return nil
+		}
+
+		if err := m.ConfluentStaticCredentials.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("confluent_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("confluent_static_credentials")
+			}
+			return err
+		}
 	}
 
 	return nil

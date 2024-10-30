@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,15 +21,6 @@ type Secrets20231128CreateMongoDBAtlasRotatingSecretResponse struct {
 	// config
 	Config *Secrets20231128RotatingSecretConfig `json:"config,omitempty"`
 
-	// mongodb group id
-	MongodbGroupID string `json:"mongodb_group_id,omitempty"`
-
-	// mongodb roles
-	MongodbRoles []*Secrets20231128MongoDBRole `json:"mongodb_roles"`
-
-	// mongodb scopes
-	MongodbScopes []*Secrets20231128MongoDBScope `json:"mongodb_scopes"`
-
 	// secret details
 	SecretDetails *Secrets20231128MongoDBAtlasSecretDetails `json:"secret_details,omitempty"`
 }
@@ -40,14 +30,6 @@ func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) Validate(forma
 	var res []error
 
 	if err := m.validateConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateMongodbRoles(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateMongodbScopes(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -80,58 +62,6 @@ func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) validateConfig
 	return nil
 }
 
-func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) validateMongodbRoles(formats strfmt.Registry) error {
-	if swag.IsZero(m.MongodbRoles) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.MongodbRoles); i++ {
-		if swag.IsZero(m.MongodbRoles[i]) { // not required
-			continue
-		}
-
-		if m.MongodbRoles[i] != nil {
-			if err := m.MongodbRoles[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("mongodb_roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("mongodb_roles" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) validateMongodbScopes(formats strfmt.Registry) error {
-	if swag.IsZero(m.MongodbScopes) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.MongodbScopes); i++ {
-		if swag.IsZero(m.MongodbScopes[i]) { // not required
-			continue
-		}
-
-		if m.MongodbScopes[i] != nil {
-			if err := m.MongodbScopes[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("mongodb_scopes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("mongodb_scopes" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
 func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) validateSecretDetails(formats strfmt.Registry) error {
 	if swag.IsZero(m.SecretDetails) { // not required
 		return nil
@@ -156,14 +86,6 @@ func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) ContextValidat
 	var res []error
 
 	if err := m.contextValidateConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateMongodbRoles(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateMongodbScopes(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -193,56 +115,6 @@ func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) contextValidat
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) contextValidateMongodbRoles(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.MongodbRoles); i++ {
-
-		if m.MongodbRoles[i] != nil {
-
-			if swag.IsZero(m.MongodbRoles[i]) { // not required
-				return nil
-			}
-
-			if err := m.MongodbRoles[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("mongodb_roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("mongodb_roles" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128CreateMongoDBAtlasRotatingSecretResponse) contextValidateMongodbScopes(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.MongodbScopes); i++ {
-
-		if m.MongodbScopes[i] != nil {
-
-			if swag.IsZero(m.MongodbScopes[i]) { // not required
-				return nil
-			}
-
-			if err := m.MongodbScopes[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("mongodb_scopes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("mongodb_scopes" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil

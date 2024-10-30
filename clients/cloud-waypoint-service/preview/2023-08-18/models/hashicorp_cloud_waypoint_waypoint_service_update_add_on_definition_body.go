@@ -54,8 +54,16 @@ type HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody struct {
 	// The TF project
 	TerraformCloudWorkspaceDetails *HashicorpCloudWaypointTerraformCloudWorkspaceDetails `json:"terraform_cloud_workspace_details,omitempty"`
 
-	// Terraform No Code module used for provisioning the Add-on
+	// DEPRECATED: Do not use.
 	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
+
+	// tf_agent_pool_id is the ID of the agent pool to use for the Terraform
+	// workspace if 'agent' is used for 'tf_execution_mode'.
+	TfAgentPoolID string `json:"tf_agent_pool_id,omitempty"`
+
+	// tf_execution_mode is the mode in which the Terraform backed workspace should
+	// operate in. Defaults to 'remote'.
+	TfExecutionMode string `json:"tf_execution_mode,omitempty"`
 
 	// variable_options is the collection of input variables which may be set for a template.
 	VariableOptions []*HashicorpCloudWaypointTFModuleVariable `json:"variable_options"`

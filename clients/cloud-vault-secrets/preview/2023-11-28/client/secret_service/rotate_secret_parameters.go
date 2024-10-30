@@ -69,14 +69,14 @@ type RotateSecretParams struct {
 	// Body.
 	Body models.SecretServiceRotateSecretBody
 
+	// Name.
+	Name string
+
 	// OrganizationID.
 	OrganizationID string
 
 	// ProjectID.
 	ProjectID string
-
-	// SecretName.
-	SecretName string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -153,6 +153,17 @@ func (o *RotateSecretParams) SetBody(body models.SecretServiceRotateSecretBody) 
 	o.Body = body
 }
 
+// WithName adds the name to the rotate secret params
+func (o *RotateSecretParams) WithName(name string) *RotateSecretParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the rotate secret params
+func (o *RotateSecretParams) SetName(name string) {
+	o.Name = name
+}
+
 // WithOrganizationID adds the organizationID to the rotate secret params
 func (o *RotateSecretParams) WithOrganizationID(organizationID string) *RotateSecretParams {
 	o.SetOrganizationID(organizationID)
@@ -175,17 +186,6 @@ func (o *RotateSecretParams) SetProjectID(projectID string) {
 	o.ProjectID = projectID
 }
 
-// WithSecretName adds the secretName to the rotate secret params
-func (o *RotateSecretParams) WithSecretName(secretName string) *RotateSecretParams {
-	o.SetSecretName(secretName)
-	return o
-}
-
-// SetSecretName adds the secretName to the rotate secret params
-func (o *RotateSecretParams) SetSecretName(secretName string) {
-	o.SecretName = secretName
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *RotateSecretParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -204,6 +204,11 @@ func (o *RotateSecretParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
+	// path param name
+	if err := r.SetPathParam("name", o.Name); err != nil {
+		return err
+	}
+
 	// path param organization_id
 	if err := r.SetPathParam("organization_id", o.OrganizationID); err != nil {
 		return err
@@ -211,11 +216,6 @@ func (o *RotateSecretParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 	// path param project_id
 	if err := r.SetPathParam("project_id", o.ProjectID); err != nil {
-		return err
-	}
-
-	// path param secret_name
-	if err := r.SetPathParam("secret_name", o.SecretName); err != nil {
 		return err
 	}
 

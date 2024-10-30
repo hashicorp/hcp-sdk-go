@@ -19,6 +19,12 @@ import (
 // swagger:model hashicorp.cloud.waypoint.Namespace
 type HashicorpCloudWaypointNamespace struct {
 
+	// If the namespace is active and usable
+	Active bool `json:"active,omitempty"`
+
+	// If the namespace has _ever_ been activated for product usage
+	HasActivated bool `json:"has_activated,omitempty"`
+
 	// ULID of the namespace
 	ID string `json:"id,omitempty"`
 

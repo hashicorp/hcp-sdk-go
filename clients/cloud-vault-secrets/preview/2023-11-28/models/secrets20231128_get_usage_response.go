@@ -39,9 +39,6 @@ type Secrets20231128GetUsageResponse struct {
 	// rotating secrets
 	RotatingSecrets *Secrets20231128Usage `json:"rotating_secrets,omitempty"`
 
-	// secrets
-	Secrets *Secrets20231128Usage `json:"secrets,omitempty"`
-
 	// static secrets
 	StaticSecrets *Secrets20231128Usage `json:"static_secrets,omitempty"`
 }
@@ -75,10 +72,6 @@ func (m *Secrets20231128GetUsageResponse) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateRotatingSecrets(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSecrets(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -225,25 +218,6 @@ func (m *Secrets20231128GetUsageResponse) validateRotatingSecrets(formats strfmt
 	return nil
 }
 
-func (m *Secrets20231128GetUsageResponse) validateSecrets(formats strfmt.Registry) error {
-	if swag.IsZero(m.Secrets) { // not required
-		return nil
-	}
-
-	if m.Secrets != nil {
-		if err := m.Secrets.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("secrets")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("secrets")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *Secrets20231128GetUsageResponse) validateStaticSecrets(formats strfmt.Registry) error {
 	if swag.IsZero(m.StaticSecrets) { // not required
 		return nil
@@ -292,10 +266,6 @@ func (m *Secrets20231128GetUsageResponse) ContextValidate(ctx context.Context, f
 	}
 
 	if err := m.contextValidateRotatingSecrets(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateSecrets(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -448,27 +418,6 @@ func (m *Secrets20231128GetUsageResponse) contextValidateRotatingSecrets(ctx con
 				return ve.ValidateName("rotating_secrets")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("rotating_secrets")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *Secrets20231128GetUsageResponse) contextValidateSecrets(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Secrets != nil {
-
-		if swag.IsZero(m.Secrets) { // not required
-			return nil
-		}
-
-		if err := m.Secrets.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("secrets")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("secrets")
 			}
 			return err
 		}

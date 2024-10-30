@@ -86,11 +86,11 @@ func (o *GetRotatingSecretStateOK) Code() int {
 }
 
 func (o *GetRotatingSecretStateOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/rotation-state][%d] getRotatingSecretStateOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}/rotation-state][%d] getRotatingSecretStateOK  %+v", 200, o.Payload)
 }
 
 func (o *GetRotatingSecretStateOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/rotation-state][%d] getRotatingSecretStateOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}/rotation-state][%d] getRotatingSecretStateOK  %+v", 200, o.Payload)
 }
 
 func (o *GetRotatingSecretStateOK) GetPayload() *models.Secrets20231128GetRotatingSecretStateResponse {
@@ -158,11 +158,11 @@ func (o *GetRotatingSecretStateDefault) Code() int {
 }
 
 func (o *GetRotatingSecretStateDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/rotation-state][%d] GetRotatingSecretState default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}/rotation-state][%d] GetRotatingSecretState default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetRotatingSecretStateDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/rotation-state][%d] GetRotatingSecretState default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}/rotation-state][%d] GetRotatingSecretState default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetRotatingSecretStateDefault) GetPayload() *models.GooglerpcStatus {

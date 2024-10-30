@@ -28,8 +28,6 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	BoundaryServiceAvailableUpdateGet(params *BoundaryServiceAvailableUpdateGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceAvailableUpdateGetOK, error)
-
 	BoundaryServiceClusterUpdateDeadlineGet(params *BoundaryServiceClusterUpdateDeadlineGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceClusterUpdateDeadlineGetOK, error)
 
 	BoundaryServiceCreate(params *BoundaryServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceCreateOK, error)
@@ -51,44 +49,6 @@ type ClientService interface {
 	BoundaryServiceUpdateApply(params *BoundaryServiceUpdateApplyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceUpdateApplyOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-BoundaryServiceAvailableUpdateGet availables update get is used to return the next available update for a boundary cluster
-*/
-func (a *Client) BoundaryServiceAvailableUpdateGet(params *BoundaryServiceAvailableUpdateGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceAvailableUpdateGetOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewBoundaryServiceAvailableUpdateGetParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "BoundaryService_AvailableUpdateGet",
-		Method:             "GET",
-		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &BoundaryServiceAvailableUpdateGetReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*BoundaryServiceAvailableUpdateGetOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*BoundaryServiceAvailableUpdateGetDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*

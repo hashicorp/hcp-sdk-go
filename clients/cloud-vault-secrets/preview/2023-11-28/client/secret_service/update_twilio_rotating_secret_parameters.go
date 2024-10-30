@@ -69,14 +69,14 @@ type UpdateTwilioRotatingSecretParams struct {
 	// Body.
 	Body *models.SecretServiceUpdateTwilioRotatingSecretBody
 
+	// Name.
+	Name string
+
 	// OrganizationID.
 	OrganizationID string
 
 	// ProjectID.
 	ProjectID string
-
-	// SecretName.
-	SecretName string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -153,6 +153,17 @@ func (o *UpdateTwilioRotatingSecretParams) SetBody(body *models.SecretServiceUpd
 	o.Body = body
 }
 
+// WithName adds the name to the update twilio rotating secret params
+func (o *UpdateTwilioRotatingSecretParams) WithName(name string) *UpdateTwilioRotatingSecretParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the update twilio rotating secret params
+func (o *UpdateTwilioRotatingSecretParams) SetName(name string) {
+	o.Name = name
+}
+
 // WithOrganizationID adds the organizationID to the update twilio rotating secret params
 func (o *UpdateTwilioRotatingSecretParams) WithOrganizationID(organizationID string) *UpdateTwilioRotatingSecretParams {
 	o.SetOrganizationID(organizationID)
@@ -175,17 +186,6 @@ func (o *UpdateTwilioRotatingSecretParams) SetProjectID(projectID string) {
 	o.ProjectID = projectID
 }
 
-// WithSecretName adds the secretName to the update twilio rotating secret params
-func (o *UpdateTwilioRotatingSecretParams) WithSecretName(secretName string) *UpdateTwilioRotatingSecretParams {
-	o.SetSecretName(secretName)
-	return o
-}
-
-// SetSecretName adds the secretName to the update twilio rotating secret params
-func (o *UpdateTwilioRotatingSecretParams) SetSecretName(secretName string) {
-	o.SecretName = secretName
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *UpdateTwilioRotatingSecretParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -204,6 +204,11 @@ func (o *UpdateTwilioRotatingSecretParams) WriteToRequest(r runtime.ClientReques
 		}
 	}
 
+	// path param name
+	if err := r.SetPathParam("name", o.Name); err != nil {
+		return err
+	}
+
 	// path param organization_id
 	if err := r.SetPathParam("organization_id", o.OrganizationID); err != nil {
 		return err
@@ -211,11 +216,6 @@ func (o *UpdateTwilioRotatingSecretParams) WriteToRequest(r runtime.ClientReques
 
 	// path param project_id
 	if err := r.SetPathParam("project_id", o.ProjectID); err != nil {
-		return err
-	}
-
-	// path param secret_name
-	if err := r.SetPathParam("secret_name", o.SecretName); err != nil {
 		return err
 	}
 
