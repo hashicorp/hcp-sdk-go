@@ -1,3 +1,8 @@
+## v0.119.0 (October 31, 2024)
+
+BUG FIXES:
+
+* Fix definition of GoogleProtobufAny to match values returned by HCP services [[GH-270](https://github.com/hashicorp/hcp-sdk-go/pull/270)]
 ## v0.118.0 (October 30, 2024)
 
 ## v0.117.0 (October 17, 2024)
