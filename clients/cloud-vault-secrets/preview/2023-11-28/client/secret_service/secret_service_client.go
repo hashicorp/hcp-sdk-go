@@ -56,6 +56,10 @@ type ClientService interface {
 
 	CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMongoDBAtlasRotatingSecretOK, error)
 
+	CreatePostgresIntegration(params *CreatePostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresIntegrationOK, error)
+
+	CreatePostgresRotatingSecret(params *CreatePostgresRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresRotatingSecretOK, error)
+
 	CreateSync(params *CreateSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSyncOK, error)
 
 	CreateTwilioIntegration(params *CreateTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTwilioIntegrationOK, error)
@@ -83,6 +87,8 @@ type ClientService interface {
 	DeleteIntegration(params *DeleteIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteIntegrationOK, error)
 
 	DeleteMongoDBAtlasIntegration(params *DeleteMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMongoDBAtlasIntegrationOK, error)
+
+	DeletePostgresIntegration(params *DeletePostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresIntegrationOK, error)
 
 	DeleteSync(params *DeleteSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSyncOK, error)
 
@@ -121,6 +127,10 @@ type ClientService interface {
 	GetMongoDBAtlasIntegration(params *GetMongoDBAtlasIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasIntegrationOK, error)
 
 	GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotatingSecretConfigOK, error)
+
+	GetPostgresIntegration(params *GetPostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresIntegrationOK, error)
+
+	GetPostgresRotatingSecretConfig(params *GetPostgresRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresRotatingSecretConfigOK, error)
 
 	GetRotatingSecretState(params *GetRotatingSecretStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRotatingSecretStateOK, error)
 
@@ -161,6 +171,8 @@ type ClientService interface {
 	ListMongoDBAtlasIntegrations(params *ListMongoDBAtlasIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMongoDBAtlasIntegrationsOK, error)
 
 	ListOpenAppSecretVersions(params *ListOpenAppSecretVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenAppSecretVersionsOK, error)
+
+	ListPostgresIntegrations(params *ListPostgresIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresIntegrationsOK, error)
 
 	ListSyncs(params *ListSyncsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSyncsOK, error)
 
@@ -744,6 +756,82 @@ func (a *Client) CreateMongoDBAtlasRotatingSecret(params *CreateMongoDBAtlasRota
 }
 
 /*
+CreatePostgresIntegration create postgres integration API
+*/
+func (a *Client) CreatePostgresIntegration(params *CreatePostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreatePostgresIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreatePostgresIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreatePostgresIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreatePostgresIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreatePostgresIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreatePostgresRotatingSecret create postgres rotating secret API
+*/
+func (a *Client) CreatePostgresRotatingSecret(params *CreatePostgresRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreatePostgresRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreatePostgresRotatingSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/postgres/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreatePostgresRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreatePostgresRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreatePostgresRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateSync create sync API
 */
 func (a *Client) CreateSync(params *CreateSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSyncOK, error) {
@@ -1272,6 +1360,44 @@ func (a *Client) DeleteMongoDBAtlasIntegration(params *DeleteMongoDBAtlasIntegra
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteMongoDBAtlasIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeletePostgresIntegration delete postgres integration API
+*/
+func (a *Client) DeletePostgresIntegration(params *DeletePostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeletePostgresIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeletePostgresIntegration",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeletePostgresIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeletePostgresIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeletePostgresIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1994,6 +2120,82 @@ func (a *Client) GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRota
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetMongoDBAtlasRotatingSecretConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetPostgresIntegration get postgres integration API
+*/
+func (a *Client) GetPostgresIntegration(params *GetPostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetPostgresIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetPostgresIntegration",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPostgresIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPostgresIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetPostgresIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetPostgresRotatingSecretConfig get postgres rotating secret config API
+*/
+func (a *Client) GetPostgresRotatingSecretConfig(params *GetPostgresRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresRotatingSecretConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetPostgresRotatingSecretConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetPostgresRotatingSecretConfig",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/postgres/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPostgresRotatingSecretConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPostgresRotatingSecretConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetPostgresRotatingSecretConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2754,6 +2956,44 @@ func (a *Client) ListOpenAppSecretVersions(params *ListOpenAppSecretVersionsPara
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListOpenAppSecretVersionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListPostgresIntegrations list postgres integrations API
+*/
+func (a *Client) ListPostgresIntegrations(params *ListPostgresIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListPostgresIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListPostgresIntegrations",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListPostgresIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListPostgresIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListPostgresIntegrationsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

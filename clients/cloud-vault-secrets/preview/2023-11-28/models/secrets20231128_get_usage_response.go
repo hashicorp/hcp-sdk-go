@@ -27,6 +27,9 @@ type Secrets20231128GetUsageResponse struct {
 	// billing tier
 	BillingTier *Secrets20231128Tier `json:"billing_tier,omitempty"`
 
+	// connected syncs
+	ConnectedSyncs *Secrets20231128Usage `json:"connected_syncs,omitempty"`
+
 	// dynamic secrets
 	DynamicSecrets *Secrets20231128Usage `json:"dynamic_secrets,omitempty"`
 
@@ -56,6 +59,10 @@ func (m *Secrets20231128GetUsageResponse) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateBillingTier(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateConnectedSyncs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -134,6 +141,25 @@ func (m *Secrets20231128GetUsageResponse) validateBillingTier(formats strfmt.Reg
 				return ve.ValidateName("billing_tier")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("billing_tier")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128GetUsageResponse) validateConnectedSyncs(formats strfmt.Registry) error {
+	if swag.IsZero(m.ConnectedSyncs) { // not required
+		return nil
+	}
+
+	if m.ConnectedSyncs != nil {
+		if err := m.ConnectedSyncs.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("connected_syncs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("connected_syncs")
 			}
 			return err
 		}
@@ -253,6 +279,10 @@ func (m *Secrets20231128GetUsageResponse) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateConnectedSyncs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateDynamicSecrets(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -334,6 +364,27 @@ func (m *Secrets20231128GetUsageResponse) contextValidateBillingTier(ctx context
 				return ve.ValidateName("billing_tier")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("billing_tier")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128GetUsageResponse) contextValidateConnectedSyncs(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ConnectedSyncs != nil {
+
+		if swag.IsZero(m.ConnectedSyncs) { // not required
+			return nil
+		}
+
+		if err := m.ConnectedSyncs.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("connected_syncs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("connected_syncs")
 			}
 			return err
 		}

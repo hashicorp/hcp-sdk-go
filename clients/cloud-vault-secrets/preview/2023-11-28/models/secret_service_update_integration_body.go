@@ -43,6 +43,9 @@ type SecretServiceUpdateIntegrationBody struct {
 	// mongo db atlas static credentials
 	MongoDbAtlasStaticCredentials *Secrets20231128MongoDBAtlasStaticCredentialsRequest `json:"mongo_db_atlas_static_credentials,omitempty"`
 
+	// provider
+	Provider string `json:"provider,omitempty"`
+
 	// twilio static credentials
 	TwilioStaticCredentials *Secrets20231128TwilioStaticCredentialsRequest `json:"twilio_static_credentials,omitempty"`
 }

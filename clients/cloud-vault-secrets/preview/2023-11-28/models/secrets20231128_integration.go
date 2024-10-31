@@ -54,6 +54,9 @@ type Secrets20231128Integration struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// postgres static credentials
+	PostgresStaticCredentials *Secrets20231128PostgresStaticCredentialsResponse `json:"postgres_static_credentials,omitempty"`
+
 	// provider
 	Provider string `json:"provider,omitempty"`
 
@@ -110,6 +113,10 @@ func (m *Secrets20231128Integration) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateMongoDbAtlasStaticCredentials(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostgresStaticCredentials(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -283,6 +290,25 @@ func (m *Secrets20231128Integration) validateMongoDbAtlasStaticCredentials(forma
 	return nil
 }
 
+func (m *Secrets20231128Integration) validatePostgresStaticCredentials(formats strfmt.Registry) error {
+	if swag.IsZero(m.PostgresStaticCredentials) { // not required
+		return nil
+	}
+
+	if m.PostgresStaticCredentials != nil {
+		if err := m.PostgresStaticCredentials.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postgres_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("postgres_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128Integration) validateTwilioStaticCredentials(formats strfmt.Registry) error {
 	if swag.IsZero(m.TwilioStaticCredentials) { // not required
 		return nil
@@ -369,6 +395,10 @@ func (m *Secrets20231128Integration) ContextValidate(ctx context.Context, format
 	}
 
 	if err := m.contextValidateMongoDbAtlasStaticCredentials(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePostgresStaticCredentials(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -529,6 +559,27 @@ func (m *Secrets20231128Integration) contextValidateMongoDbAtlasStaticCredential
 				return ve.ValidateName("mongo_db_atlas_static_credentials")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("mongo_db_atlas_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Integration) contextValidatePostgresStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PostgresStaticCredentials != nil {
+
+		if swag.IsZero(m.PostgresStaticCredentials) { // not required
+			return nil
+		}
+
+		if err := m.PostgresStaticCredentials.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postgres_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("postgres_static_credentials")
 			}
 			return err
 		}

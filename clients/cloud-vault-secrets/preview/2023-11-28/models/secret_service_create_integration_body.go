@@ -46,6 +46,9 @@ type SecretServiceCreateIntegrationBody struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// provider
+	Provider string `json:"provider,omitempty"`
+
 	// twilio static credentials
 	TwilioStaticCredentials *Secrets20231128TwilioStaticCredentialsRequest `json:"twilio_static_credentials,omitempty"`
 }
