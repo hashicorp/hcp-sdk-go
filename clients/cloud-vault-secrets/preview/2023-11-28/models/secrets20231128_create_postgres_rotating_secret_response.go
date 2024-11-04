@@ -19,10 +19,7 @@ import (
 type Secrets20231128CreatePostgresRotatingSecretResponse struct {
 
 	// config
-	Config *Secrets20231128RotatingSecretConfig `json:"config,omitempty"`
-
-	// usernames
-	Usernames []string `json:"usernames"`
+	Config *Secrets20231128PostgresRotatingSecretConfig `json:"config,omitempty"`
 }
 
 // Validate validates this secrets 20231128 create postgres rotating secret response

@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -23,20 +24,78 @@ type SecretServiceCreatePostgresRotatingSecretBody struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// postgres params
+	PostgresParams *Secrets20231128PostgresParams `json:"postgres_params,omitempty"`
+
 	// rotation policy name
 	RotationPolicyName string `json:"rotation_policy_name,omitempty"`
-
-	// usernames
-	Usernames []string `json:"usernames"`
 }
 
 // Validate validates this secret service create postgres rotating secret body
 func (m *SecretServiceCreatePostgresRotatingSecretBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validatePostgresParams(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this secret service create postgres rotating secret body based on context it is used
+func (m *SecretServiceCreatePostgresRotatingSecretBody) validatePostgresParams(formats strfmt.Registry) error {
+	if swag.IsZero(m.PostgresParams) { // not required
+		return nil
+	}
+
+	if m.PostgresParams != nil {
+		if err := m.PostgresParams.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postgres_params")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("postgres_params")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this secret service create postgres rotating secret body based on the context it is used
 func (m *SecretServiceCreatePostgresRotatingSecretBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePostgresParams(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SecretServiceCreatePostgresRotatingSecretBody) contextValidatePostgresParams(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PostgresParams != nil {
+
+		if swag.IsZero(m.PostgresParams) { // not required
+			return nil
+		}
+
+		if err := m.PostgresParams.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postgres_params")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("postgres_params")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
