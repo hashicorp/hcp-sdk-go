@@ -1,3 +1,5 @@
+## v0.120.0 (November 06, 2024)
+
 ## v0.119.0 (October 31, 2024)
 
 BUG FIXES:
