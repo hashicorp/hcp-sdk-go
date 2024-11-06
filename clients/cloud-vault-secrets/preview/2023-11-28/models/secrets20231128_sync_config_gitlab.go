@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -16,9 +17,6 @@ import (
 //
 // swagger:model secrets_20231128SyncConfigGitlab
 type Secrets20231128SyncConfigGitlab struct {
-
-	// destination
-	Destination string `json:"destination,omitempty"`
 
 	// environment scope
 	EnvironmentScope string `json:"environment_scope,omitempty"`
@@ -34,15 +32,76 @@ type Secrets20231128SyncConfigGitlab struct {
 
 	// raw
 	Raw bool `json:"raw,omitempty"`
+
+	// scope
+	Scope *SyncConfigGitlabScope `json:"scope,omitempty"`
 }
 
 // Validate validates this secrets 20231128 sync config gitlab
 func (m *Secrets20231128SyncConfigGitlab) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateScope(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this secrets 20231128 sync config gitlab based on context it is used
+func (m *Secrets20231128SyncConfigGitlab) validateScope(formats strfmt.Registry) error {
+	if swag.IsZero(m.Scope) { // not required
+		return nil
+	}
+
+	if m.Scope != nil {
+		if err := m.Scope.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("scope")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scope")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this secrets 20231128 sync config gitlab based on the context it is used
 func (m *Secrets20231128SyncConfigGitlab) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateScope(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Secrets20231128SyncConfigGitlab) contextValidateScope(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Scope != nil {
+
+		if swag.IsZero(m.Scope) { // not required
+			return nil
+		}
+
+		if err := m.Scope.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("scope")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scope")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

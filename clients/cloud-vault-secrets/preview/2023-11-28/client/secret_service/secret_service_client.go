@@ -216,6 +216,8 @@ type ClientService interface {
 
 	UpdateMongoDBAtlasRotatingSecret(params *UpdateMongoDBAtlasRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMongoDBAtlasRotatingSecretOK, error)
 
+	UpdatePostgresIntegration(params *UpdatePostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresIntegrationOK, error)
+
 	UpdatePostgresRotatingSecret(params *UpdatePostgresRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresRotatingSecretOK, error)
 
 	UpdateTwilioIntegration(params *UpdateTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTwilioIntegrationOK, error)
@@ -3794,6 +3796,44 @@ func (a *Client) UpdateMongoDBAtlasRotatingSecret(params *UpdateMongoDBAtlasRota
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateMongoDBAtlasRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdatePostgresIntegration update postgres integration API
+*/
+func (a *Client) UpdatePostgresIntegration(params *UpdatePostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdatePostgresIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdatePostgresIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdatePostgresIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdatePostgresIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdatePostgresIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

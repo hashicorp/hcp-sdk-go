@@ -43,6 +43,9 @@ type SecretServiceUpdateIntegrationBody struct {
 	// mongo db atlas static credentials
 	MongoDbAtlasStaticCredentials *Secrets20231128MongoDBAtlasStaticCredentialsRequest `json:"mongo_db_atlas_static_credentials,omitempty"`
 
+	// postgres static credentials
+	PostgresStaticCredentials *Secrets20231128PostgresStaticCredentialsRequest `json:"postgres_static_credentials,omitempty"`
+
 	// provider
 	Provider string `json:"provider,omitempty"`
 
@@ -83,6 +86,10 @@ func (m *SecretServiceUpdateIntegrationBody) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateMongoDbAtlasStaticCredentials(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostgresStaticCredentials(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -255,6 +262,25 @@ func (m *SecretServiceUpdateIntegrationBody) validateMongoDbAtlasStaticCredentia
 	return nil
 }
 
+func (m *SecretServiceUpdateIntegrationBody) validatePostgresStaticCredentials(formats strfmt.Registry) error {
+	if swag.IsZero(m.PostgresStaticCredentials) { // not required
+		return nil
+	}
+
+	if m.PostgresStaticCredentials != nil {
+		if err := m.PostgresStaticCredentials.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postgres_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("postgres_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *SecretServiceUpdateIntegrationBody) validateTwilioStaticCredentials(formats strfmt.Registry) error {
 	if swag.IsZero(m.TwilioStaticCredentials) { // not required
 		return nil
@@ -307,6 +333,10 @@ func (m *SecretServiceUpdateIntegrationBody) ContextValidate(ctx context.Context
 	}
 
 	if err := m.contextValidateMongoDbAtlasStaticCredentials(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePostgresStaticCredentials(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -484,6 +514,27 @@ func (m *SecretServiceUpdateIntegrationBody) contextValidateMongoDbAtlasStaticCr
 				return ve.ValidateName("mongo_db_atlas_static_credentials")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("mongo_db_atlas_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceUpdateIntegrationBody) contextValidatePostgresStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PostgresStaticCredentials != nil {
+
+		if swag.IsZero(m.PostgresStaticCredentials) { // not required
+			return nil
+		}
+
+		if err := m.PostgresStaticCredentials.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postgres_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("postgres_static_credentials")
 			}
 			return err
 		}
