@@ -36,6 +36,8 @@ type ClientService interface {
 
 	GetIntegrationSubscriptionByName(params *GetIntegrationSubscriptionByNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIntegrationSubscriptionByNameOK, error)
 
+	UpdateIntegrationSubscription(params *UpdateIntegrationSubscriptionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIntegrationSubscriptionOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
 }
 
@@ -188,6 +190,44 @@ func (a *Client) GetIntegrationSubscriptionByName(params *GetIntegrationSubscrip
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetIntegrationSubscriptionByNameDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateIntegrationSubscription update integration subscription API
+*/
+func (a *Client) UpdateIntegrationSubscription(params *UpdateIntegrationSubscriptionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIntegrationSubscriptionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateIntegrationSubscriptionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateIntegrationSubscription",
+		Method:             "PUT",
+		PathPattern:        "/2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateIntegrationSubscriptionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateIntegrationSubscriptionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateIntegrationSubscriptionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

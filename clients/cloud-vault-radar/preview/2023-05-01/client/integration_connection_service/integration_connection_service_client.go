@@ -36,6 +36,8 @@ type ClientService interface {
 
 	GetIntegrationConnectionByName(params *GetIntegrationConnectionByNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIntegrationConnectionByNameOK, error)
 
+	UpdateIntegrationConnection(params *UpdateIntegrationConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIntegrationConnectionOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
 }
 
@@ -188,6 +190,44 @@ func (a *Client) GetIntegrationConnectionByName(params *GetIntegrationConnection
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetIntegrationConnectionByNameDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateIntegrationConnection update integration connection API
+*/
+func (a *Client) UpdateIntegrationConnection(params *UpdateIntegrationConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIntegrationConnectionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateIntegrationConnectionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateIntegrationConnection",
+		Method:             "PUT",
+		PathPattern:        "/2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateIntegrationConnectionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateIntegrationConnectionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateIntegrationConnectionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
