@@ -1,19 +1,13 @@
-# These owners will be the default owners for everything in
-# the repo, unless a later match takes precedence
-# *
+# Each line is a file pattern followed by one or more owners.
+# More on CODEOWNERS files: https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
 
-# The Consul clients are owned by Consul
-/clients/cloud-consul-service/ @hashicorp/consul-cloud-ui @hashicorp/consul-cloud
+# Default owner
+* @hashicorp/team-ip-compliance
 
-# The Vault clients are owned by Vault
-/clients/cloud-vault-service/ @hashicorp/vault-cloud-ui @hashicorp/vault-cloud
-
-# The Packer clients are owned by Packer
-/clients/cloud-packer-service/ @hashicorp/packer-cloud-ui @hashicorp/cloud-packer
-
-# The Network and Resource Manager clients are owned by access-control and platform systems team respectively.
-/clients/cloud-resource-manager/ @hashicorp/cloud-access-control
-/clients/cloud-network/ @hashicorp/hcp-managed-services-ind
-
-# The Operation clients are owned by Dataplane
-/clients/cloud-operation/ @hashicorp/cloud-access-control
+# Add override rules below. Each line is a file/folder pattern followed by one or more owners.
+# Being an owner means those groups or individuals will be added as reviewers to PRs affecting
+# those areas of the code.
+# Examples:
+# /docs/  @docs-team
+# *.js    @js-team
+# *.go    @go-team
