@@ -13,7 +13,7 @@
 # *.go    @go-team
 
 # The Consul clients are owned by Consul
-/clients/cloud-consul-service/ @hashicorp/consul-cloud-ui @hashicorp/consul-cloud
+/clients/cloud-consul-service/ @hashicorp/consul-cloud-ui
 
 # The Vault clients are owned by Vault
 /clients/cloud-vault-service/ @hashicorp/vault-cloud-ui @hashicorp/vault-cloud
