@@ -31,7 +31,7 @@ type HashicorpCloudWaypointAddOn struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// created_by indicates what created the Add-on
+	// DEPRECATED: Do not use.
 	CreatedBy string `json:"created_by,omitempty"`
 
 	// The Add-on definition from which this Add-on was created
@@ -74,9 +74,6 @@ type HashicorpCloudWaypointAddOn struct {
 	// kv tags
 	Tags []*HashicorpCloudWaypointTag `json:"tags"`
 
-	// DEPRECATED: Do not use.
-	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
-
 	// Terraform workspace ID
 	// Read Only: true
 	TerraformWorkspaceID string `json:"terraform_workspace_id,omitempty"`
@@ -107,10 +104,6 @@ func (m *HashicorpCloudWaypointAddOn) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTags(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateTerraformNocodeModule(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -241,25 +234,6 @@ func (m *HashicorpCloudWaypointAddOn) validateTags(formats strfmt.Registry) erro
 	return nil
 }
 
-func (m *HashicorpCloudWaypointAddOn) validateTerraformNocodeModule(formats strfmt.Registry) error {
-	if swag.IsZero(m.TerraformNocodeModule) { // not required
-		return nil
-	}
-
-	if m.TerraformNocodeModule != nil {
-		if err := m.TerraformNocodeModule.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("terraform_nocode_module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("terraform_nocode_module")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this hashicorp cloud waypoint add on based on the context it is used
 func (m *HashicorpCloudWaypointAddOn) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -281,10 +255,6 @@ func (m *HashicorpCloudWaypointAddOn) ContextValidate(ctx context.Context, forma
 	}
 
 	if err := m.contextValidateTags(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateTerraformNocodeModule(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -406,27 +376,6 @@ func (m *HashicorpCloudWaypointAddOn) contextValidateTags(ctx context.Context, f
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudWaypointAddOn) contextValidateTerraformNocodeModule(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.TerraformNocodeModule != nil {
-
-		if swag.IsZero(m.TerraformNocodeModule) { // not required
-			return nil
-		}
-
-		if err := m.TerraformNocodeModule.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("terraform_nocode_module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("terraform_nocode_module")
-			}
-			return err
-		}
 	}
 
 	return nil

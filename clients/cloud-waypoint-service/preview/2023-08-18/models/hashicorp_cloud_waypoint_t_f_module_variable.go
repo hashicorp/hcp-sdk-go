@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // HashicorpCloudWaypointTFModuleVariable TFModuleVariable represents a Terraform module variable.
@@ -34,6 +36,8 @@ type HashicorpCloudWaypointTFModuleVariable struct {
 
 	// variable_type is the type of Terraform variable. See the documentation for more info:
 	// https://developer.hashicorp.com/terraform/language/expressions/types
+	// The API client should not set this field.
+	// Read Only: true
 	VariableType string `json:"variable_type,omitempty"`
 }
 
@@ -42,8 +46,26 @@ func (m *HashicorpCloudWaypointTFModuleVariable) Validate(formats strfmt.Registr
 	return nil
 }
 
-// ContextValidate validates this hashicorp cloud waypoint t f module variable based on context it is used
+// ContextValidate validate this hashicorp cloud waypoint t f module variable based on the context it is used
 func (m *HashicorpCloudWaypointTFModuleVariable) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateVariableType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointTFModuleVariable) contextValidateVariableType(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "variable_type", "body", string(m.VariableType)); err != nil {
+		return err
+	}
+
 	return nil
 }
 

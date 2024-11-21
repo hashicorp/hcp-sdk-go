@@ -19,21 +19,38 @@ import (
 // swagger:model hashicorp.cloud.waypoint.NoCodeModuleDefinition
 type HashicorpCloudWaypointNoCodeModuleDefinition struct {
 
+	// created is the date the module was created
+	//
 	// date created
 	// Format: date-time
 	Created strfmt.DateTime `json:"created,omitempty"`
 
-	// last updated
+	// last_updated is the date the module was last updated
 	// Format: date-time
 	LastUpdated strfmt.DateTime `json:"last_updated,omitempty"`
 
-	// name
+	// module_id is the ID of the no-code module.
+	ModuleID string `json:"module_id,omitempty"`
+
+	// name is the name of the no-code module.
 	Name string `json:"name,omitempty"`
 
+	// pinned_version is the version of the module that is pinned for use in no-code.
+	PinnedVersion string `json:"pinned_version,omitempty"`
+
+	// provider is the Terraform provider for the no-code module.
+	//
 	// ex: AWS
 	Provider string `json:"provider,omitempty"`
 
-	// versions
+	// registry_name is the name of the Terraform registry where the module is
+	// hosted. This is one of "public" or "private".
+	RegistryName string `json:"registry_name,omitempty"`
+
+	// tf_namespace is the name of the Terraform organization that owns the module
+	TfNamespace string `json:"tf_namespace,omitempty"`
+
+	// DEPRECATED: Do not use.
 	Versions []string `json:"versions"`
 }
 

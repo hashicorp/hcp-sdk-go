@@ -20,49 +20,45 @@ import (
 // swagger:model hashicorp.cloud.waypoint.WaypointService.CreateAddOnDefinitionBody
 type HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody struct {
 
-	// Longer description of the Add-on
+	// Add-on definition to be created
+	AddOnDefinition *HashicorpCloudWaypointAddOnDefinition `json:"add_on_definition,omitempty"`
+
+	// DEPRECATED: Use add_on_definition instead.
 	Description string `json:"description,omitempty"`
 
-	// A list of descriptive labels for an Add-on
+	// DEPRECATED: Use add_on_definition instead.
 	Labels []string `json:"labels"`
 
-	// module_source is where to find the source code for the desired child module.
+	// DEPRECATED: Use add_on_definition instead.
 	ModuleSource string `json:"module_source,omitempty"`
 
-	// Name of the Add-on definition
+	// DEPRECATED: Use add_on_definition instead.
 	Name string `json:"name,omitempty"`
 
 	// Global references the entire server. This is used in some APIs
 	// as a way to read/write values that are server-global.
 	Namespace interface{} `json:"namespace,omitempty"`
 
-	// A templated README describing the Add-on
+	// DEPRECATED: Use add_on_definition instead.
 	// Format: byte
 	ReadmeMarkdownTemplate strfmt.Base64 `json:"readme_markdown_template,omitempty"`
 
-	// readme_template is markdown formatted instructions on how to operate the application.
-	// This may be populated from a application template.
-	// This field is favored over readme_markdown_template and support for both is transitional.
+	// DEPRECATED: Use add_on_definition instead.
 	ReadmeTemplate string `json:"readme_template,omitempty"`
 
-	// Short description of the Add-on
+	// DEPRECATED: Use add_on_definition instead.
 	Summary string `json:"summary,omitempty"`
 
-	// The TF project
+	// DEPRECATED: Use add_on_definition instead.
 	TerraformCloudWorkspaceDetails *HashicorpCloudWaypointTerraformCloudWorkspaceDetails `json:"terraform_cloud_workspace_details,omitempty"`
 
-	// DEPRECATED: Do not use.
-	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
-
-	// tf_agent_pool_id is the ID of the agent pool to use for the Terraform
-	// workspace if 'agent' is used for 'tf_execution_mode'.
+	// DEPRECATED: Use add_on_definition instead.
 	TfAgentPoolID string `json:"tf_agent_pool_id,omitempty"`
 
-	// tf_execution_mode is the mode in which the Terraform backed workspace should
-	// operate in. Defaults to 'remote'.
+	// DEPRECATED: Use add_on_definition instead.
 	TfExecutionMode string `json:"tf_execution_mode,omitempty"`
 
-	// variable_options is the collection of input variables which may be set for an add-on.
+	// DEPRECATED: Use add_on_definition instead.
 	VariableOptions []*HashicorpCloudWaypointTFModuleVariable `json:"variable_options"`
 }
 
@@ -70,11 +66,11 @@ type HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody struct {
 func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateTerraformCloudWorkspaceDetails(formats); err != nil {
+	if err := m.validateAddOnDefinition(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateTerraformNocodeModule(formats); err != nil {
+	if err := m.validateTerraformCloudWorkspaceDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -85,6 +81,25 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) Validat
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) validateAddOnDefinition(formats strfmt.Registry) error {
+	if swag.IsZero(m.AddOnDefinition) { // not required
+		return nil
+	}
+
+	if m.AddOnDefinition != nil {
+		if err := m.AddOnDefinition.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("add_on_definition")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("add_on_definition")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -99,25 +114,6 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) validat
 				return ve.ValidateName("terraform_cloud_workspace_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("terraform_cloud_workspace_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) validateTerraformNocodeModule(formats strfmt.Registry) error {
-	if swag.IsZero(m.TerraformNocodeModule) { // not required
-		return nil
-	}
-
-	if m.TerraformNocodeModule != nil {
-		if err := m.TerraformNocodeModule.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("terraform_nocode_module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("terraform_nocode_module")
 			}
 			return err
 		}
@@ -156,11 +152,11 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) validat
 func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateTerraformCloudWorkspaceDetails(ctx, formats); err != nil {
+	if err := m.contextValidateAddOnDefinition(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateTerraformNocodeModule(ctx, formats); err != nil {
+	if err := m.contextValidateTerraformCloudWorkspaceDetails(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -171,6 +167,27 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) Context
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) contextValidateAddOnDefinition(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AddOnDefinition != nil {
+
+		if swag.IsZero(m.AddOnDefinition) { // not required
+			return nil
+		}
+
+		if err := m.AddOnDefinition.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("add_on_definition")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("add_on_definition")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -187,27 +204,6 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) context
 				return ve.ValidateName("terraform_cloud_workspace_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("terraform_cloud_workspace_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudWaypointWaypointServiceCreateAddOnDefinitionBody) contextValidateTerraformNocodeModule(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.TerraformNocodeModule != nil {
-
-		if swag.IsZero(m.TerraformNocodeModule) { // not required
-			return nil
-		}
-
-		if err := m.TerraformNocodeModule.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("terraform_nocode_module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("terraform_nocode_module")
 			}
 			return err
 		}

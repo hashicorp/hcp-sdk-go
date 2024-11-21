@@ -17,11 +17,17 @@ import (
 // swagger:model hashicorp.cloud.waypoint.CheckTFCOrganizationResponse
 type HashicorpCloudWaypointCheckTFCOrganizationResponse struct {
 
+	// True if the TFC org has the WaypointActions entitlement
+	HasActions bool `json:"has_actions,omitempty"`
+
+	// True if the TFC org has the WaypointTemplatesAndAddons entitlement
+	HasTemplatesAndAddons bool `json:"has_templates_and_addons,omitempty"`
+
 	// is_valid is true if the organization is valid.
 	IsValid bool `json:"is_valid,omitempty"`
 
-	// permissions is a list of permissions the token has on the organization
-	// according to TFC.
+	// DEPRECATED: permissions is a list of permissions the token has on the
+	// organization according to TFC.
 	Permissions []string `json:"permissions"`
 }
 

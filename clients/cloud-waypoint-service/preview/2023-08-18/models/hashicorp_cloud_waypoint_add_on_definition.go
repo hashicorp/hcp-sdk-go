@@ -24,10 +24,15 @@ type HashicorpCloudWaypointAddOnDefinition struct {
 	Description string `json:"description,omitempty"`
 
 	// Unique identifier of the Add-on definition
+	// Read Only: true
 	ID string `json:"id,omitempty"`
 
 	// A list of descriptive labels for an Add-on
 	Labels []string `json:"labels"`
+
+	// module_id is the ID of the template's Terraform module. Clients are
+	// expected to set this field when creating a new application template.
+	ModuleID string `json:"module_id,omitempty"`
 
 	// module_source is where to find the source code for the desired child module.
 	ModuleSource string `json:"module_source,omitempty"`
@@ -52,9 +57,6 @@ type HashicorpCloudWaypointAddOnDefinition struct {
 
 	// The TF project
 	TerraformCloudWorkspaceDetails *HashicorpCloudWaypointTerraformCloudWorkspaceDetails `json:"terraform_cloud_workspace_details,omitempty"`
-
-	// DEPRECATED: Do not use.
-	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
 
 	// tf_agent_pool_id is the ID of the agent pool to use for the Terraform
 	// workspace if 'agent' is used for 'tf_execution_mode'.
@@ -84,10 +86,6 @@ func (m *HashicorpCloudWaypointAddOnDefinition) Validate(formats strfmt.Registry
 	}
 
 	if err := m.validateTerraformCloudWorkspaceDetails(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateTerraformNocodeModule(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -146,25 +144,6 @@ func (m *HashicorpCloudWaypointAddOnDefinition) validateTerraformCloudWorkspaceD
 	return nil
 }
 
-func (m *HashicorpCloudWaypointAddOnDefinition) validateTerraformNocodeModule(formats strfmt.Registry) error {
-	if swag.IsZero(m.TerraformNocodeModule) { // not required
-		return nil
-	}
-
-	if m.TerraformNocodeModule != nil {
-		if err := m.TerraformNocodeModule.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("terraform_nocode_module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("terraform_nocode_module")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *HashicorpCloudWaypointAddOnDefinition) validateVariableOptions(formats strfmt.Registry) error {
 	if swag.IsZero(m.VariableOptions) { // not required
 		return nil
@@ -195,15 +174,15 @@ func (m *HashicorpCloudWaypointAddOnDefinition) validateVariableOptions(formats 
 func (m *HashicorpCloudWaypointAddOnDefinition) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTags(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateTerraformCloudWorkspaceDetails(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateTerraformNocodeModule(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -218,6 +197,15 @@ func (m *HashicorpCloudWaypointAddOnDefinition) ContextValidate(ctx context.Cont
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointAddOnDefinition) contextValidateID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "id", "body", string(m.ID)); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -259,27 +247,6 @@ func (m *HashicorpCloudWaypointAddOnDefinition) contextValidateTerraformCloudWor
 				return ve.ValidateName("terraform_cloud_workspace_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("terraform_cloud_workspace_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudWaypointAddOnDefinition) contextValidateTerraformNocodeModule(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.TerraformNocodeModule != nil {
-
-		if swag.IsZero(m.TerraformNocodeModule) { // not required
-			return nil
-		}
-
-		if err := m.TerraformNocodeModule.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("terraform_nocode_module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("terraform_nocode_module")
 			}
 			return err
 		}
