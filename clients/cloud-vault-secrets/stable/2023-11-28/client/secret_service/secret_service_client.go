@@ -38,6 +38,8 @@ type ClientService interface {
 
 	CreateAwsIntegration(params *CreateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsIntegrationOK, error)
 
+	CreateAzureApplicationPasswordRotatingSecret(params *CreateAzureApplicationPasswordRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureApplicationPasswordRotatingSecretOK, error)
+
 	CreateAzureIntegration(params *CreateAzureIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureIntegrationOK, error)
 
 	CreateConfluentCloudAPIKeyRotatingSecret(params *CreateConfluentCloudAPIKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateConfluentCloudAPIKeyRotatingSecretOK, error)
@@ -111,6 +113,8 @@ type ClientService interface {
 	GetAwsIAMUserAccessKeyRotatingSecretConfig(params *GetAwsIAMUserAccessKeyRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIAMUserAccessKeyRotatingSecretConfigOK, error)
 
 	GetAwsIntegration(params *GetAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAwsIntegrationOK, error)
+
+	GetAzureApplicationPasswordRotatingSecretConfig(params *GetAzureApplicationPasswordRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAzureApplicationPasswordRotatingSecretConfigOK, error)
 
 	GetAzureIntegration(params *GetAzureIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAzureIntegrationOK, error)
 
@@ -207,6 +211,8 @@ type ClientService interface {
 	UpdateAwsIAMUserAccessKeyRotatingSecret(params *UpdateAwsIAMUserAccessKeyRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsIAMUserAccessKeyRotatingSecretOK, error)
 
 	UpdateAwsIntegration(params *UpdateAwsIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsIntegrationOK, error)
+
+	UpdateAzureApplicationPasswordRotatingSecret(params *UpdateAzureApplicationPasswordRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureApplicationPasswordRotatingSecretOK, error)
 
 	UpdateAzureIntegration(params *UpdateAzureIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureIntegrationOK, error)
 
@@ -426,6 +432,44 @@ func (a *Client) CreateAwsIntegration(params *CreateAwsIntegrationParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateAzureApplicationPasswordRotatingSecret create azure application password rotating secret API
+*/
+func (a *Client) CreateAzureApplicationPasswordRotatingSecret(params *CreateAzureApplicationPasswordRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureApplicationPasswordRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateAzureApplicationPasswordRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAzureApplicationPasswordRotatingSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAzureApplicationPasswordRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateAzureApplicationPasswordRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateAzureApplicationPasswordRotatingSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1832,6 +1876,44 @@ func (a *Client) GetAwsIntegration(params *GetAwsIntegrationParams, authInfo run
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetAzureApplicationPasswordRotatingSecretConfig get azure application password rotating secret config API
+*/
+func (a *Client) GetAzureApplicationPasswordRotatingSecretConfig(params *GetAzureApplicationPasswordRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAzureApplicationPasswordRotatingSecretConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAzureApplicationPasswordRotatingSecretConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAzureApplicationPasswordRotatingSecretConfig",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAzureApplicationPasswordRotatingSecretConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAzureApplicationPasswordRotatingSecretConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetAzureApplicationPasswordRotatingSecretConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -3656,6 +3738,44 @@ func (a *Client) UpdateAwsIntegration(params *UpdateAwsIntegrationParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateAwsIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateAzureApplicationPasswordRotatingSecret update azure application password rotating secret API
+*/
+func (a *Client) UpdateAzureApplicationPasswordRotatingSecret(params *UpdateAzureApplicationPasswordRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureApplicationPasswordRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAzureApplicationPasswordRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAzureApplicationPasswordRotatingSecret",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAzureApplicationPasswordRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateAzureApplicationPasswordRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateAzureApplicationPasswordRotatingSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
