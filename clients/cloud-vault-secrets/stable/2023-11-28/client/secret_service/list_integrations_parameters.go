@@ -65,6 +65,9 @@ type ListIntegrationsParams struct {
 	// Capabilities.
 	Capabilities []string
 
+	// NameContains.
+	NameContains *string
+
 	// OrganizationID.
 	OrganizationID string
 
@@ -165,6 +168,17 @@ func (o *ListIntegrationsParams) SetCapabilities(capabilities []string) {
 	o.Capabilities = capabilities
 }
 
+// WithNameContains adds the nameContains to the list integrations params
+func (o *ListIntegrationsParams) WithNameContains(nameContains *string) *ListIntegrationsParams {
+	o.SetNameContains(nameContains)
+	return o
+}
+
+// SetNameContains adds the nameContains to the list integrations params
+func (o *ListIntegrationsParams) SetNameContains(nameContains *string) {
+	o.NameContains = nameContains
+}
+
 // WithOrganizationID adds the organizationID to the list integrations params
 func (o *ListIntegrationsParams) WithOrganizationID(organizationID string) *ListIntegrationsParams {
 	o.SetOrganizationID(organizationID)
@@ -247,6 +261,23 @@ func (o *ListIntegrationsParams) WriteToRequest(r runtime.ClientRequest, reg str
 		// query array param capabilities
 		if err := r.SetQueryParam("capabilities", joinedCapabilities...); err != nil {
 			return err
+		}
+	}
+
+	if o.NameContains != nil {
+
+		// query param name_contains
+		var qrNameContains string
+
+		if o.NameContains != nil {
+			qrNameContains = *o.NameContains
+		}
+		qNameContains := qrNameContains
+		if qNameContains != "" {
+
+			if err := r.SetQueryParam("name_contains", qNameContains); err != nil {
+				return err
+			}
 		}
 	}
 
