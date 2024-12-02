@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Public Repo
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
         with:
           fetch-depth: 0
           token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
           path: public
 
       - name: Checkout Internal Repo
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
         with:
           token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
           repository: hashicorp/hcp-sdk-go-internal
