@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *SetTierOK) Code() int {
 }
 
 func (o *SetTierOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/billing/tier][%d] setTierOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/billing/tier][%d] setTierOK %s", 200, payload)
 }
 
 func (o *SetTierOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/billing/tier][%d] setTierOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/billing/tier][%d] setTierOK %s", 200, payload)
 }
 
 func (o *SetTierOK) GetPayload() interface{} {
@@ -156,11 +159,13 @@ func (o *SetTierDefault) Code() int {
 }
 
 func (o *SetTierDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/billing/tier][%d] SetTier default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/billing/tier][%d] SetTier default %s", o._statusCode, payload)
 }
 
 func (o *SetTierDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/billing/tier][%d] SetTier default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/billing/tier][%d] SetTier default %s", o._statusCode, payload)
 }
 
 func (o *SetTierDefault) GetPayload() *models.GooglerpcStatus {

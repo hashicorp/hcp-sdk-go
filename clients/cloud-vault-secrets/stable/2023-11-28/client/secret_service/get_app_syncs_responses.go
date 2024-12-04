@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetAppSyncsOK) Code() int {
 }
 
 func (o *GetAppSyncsOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}/syncs][%d] getAppSyncsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}/syncs][%d] getAppSyncsOK %s", 200, payload)
 }
 
 func (o *GetAppSyncsOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}/syncs][%d] getAppSyncsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}/syncs][%d] getAppSyncsOK %s", 200, payload)
 }
 
 func (o *GetAppSyncsOK) GetPayload() *models.Secrets20231128GetAppSyncsResponse {
@@ -158,11 +161,13 @@ func (o *GetAppSyncsDefault) Code() int {
 }
 
 func (o *GetAppSyncsDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}/syncs][%d] GetAppSyncs default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}/syncs][%d] GetAppSyncs default %s", o._statusCode, payload)
 }
 
 func (o *GetAppSyncsDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}/syncs][%d] GetAppSyncs default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}/syncs][%d] GetAppSyncs default %s", o._statusCode, payload)
 }
 
 func (o *GetAppSyncsDefault) GetPayload() *models.GooglerpcStatus {

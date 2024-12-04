@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteAzureIntegrationOK) Code() int {
 }
 
 func (o *DeleteAzureIntegrationOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] deleteAzureIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] deleteAzureIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteAzureIntegrationOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] deleteAzureIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] deleteAzureIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteAzureIntegrationOK) GetPayload() models.Secrets20231128DeleteAzureIntegrationResponse {
@@ -156,11 +159,13 @@ func (o *DeleteAzureIntegrationDefault) Code() int {
 }
 
 func (o *DeleteAzureIntegrationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] DeleteAzureIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] DeleteAzureIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAzureIntegrationDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] DeleteAzureIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] DeleteAzureIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAzureIntegrationDefault) GetPayload() *models.GooglerpcStatus {

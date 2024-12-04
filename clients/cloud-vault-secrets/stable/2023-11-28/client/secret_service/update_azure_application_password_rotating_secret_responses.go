@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *UpdateAzureApplicationPasswordRotatingSecretOK) Code() int {
 }
 
 func (o *UpdateAzureApplicationPasswordRotatingSecretOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] updateAzureApplicationPasswordRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] updateAzureApplicationPasswordRotatingSecretOK %s", 200, payload)
 }
 
 func (o *UpdateAzureApplicationPasswordRotatingSecretOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] updateAzureApplicationPasswordRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] updateAzureApplicationPasswordRotatingSecretOK %s", 200, payload)
 }
 
 func (o *UpdateAzureApplicationPasswordRotatingSecretOK) GetPayload() *models.Secrets20231128UpdateAzureApplicationPasswordRotatingSecretResponse {
@@ -158,11 +161,13 @@ func (o *UpdateAzureApplicationPasswordRotatingSecretDefault) Code() int {
 }
 
 func (o *UpdateAzureApplicationPasswordRotatingSecretDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] UpdateAzureApplicationPasswordRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] UpdateAzureApplicationPasswordRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *UpdateAzureApplicationPasswordRotatingSecretDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] UpdateAzureApplicationPasswordRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] UpdateAzureApplicationPasswordRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *UpdateAzureApplicationPasswordRotatingSecretDefault) GetPayload() *models.GooglerpcStatus {

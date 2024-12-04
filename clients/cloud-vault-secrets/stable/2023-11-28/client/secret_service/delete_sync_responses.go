@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteSyncOK) Code() int {
 }
 
 func (o *DeleteSyncOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs/{name}][%d] deleteSyncOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs/{name}][%d] deleteSyncOK %s", 200, payload)
 }
 
 func (o *DeleteSyncOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs/{name}][%d] deleteSyncOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs/{name}][%d] deleteSyncOK %s", 200, payload)
 }
 
 func (o *DeleteSyncOK) GetPayload() models.Secrets20231128DeleteSyncResponse {
@@ -156,11 +159,13 @@ func (o *DeleteSyncDefault) Code() int {
 }
 
 func (o *DeleteSyncDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs/{name}][%d] DeleteSync default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs/{name}][%d] DeleteSync default %s", o._statusCode, payload)
 }
 
 func (o *DeleteSyncDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs/{name}][%d] DeleteSync default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs/{name}][%d] DeleteSync default %s", o._statusCode, payload)
 }
 
 func (o *DeleteSyncDefault) GetPayload() *models.GooglerpcStatus {

@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *ListGatewayPoolGatewaysOK) Code() int {
 }
 
 func (o *ListGatewayPoolGatewaysOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/gateways][%d] listGatewayPoolGatewaysOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/gateways][%d] listGatewayPoolGatewaysOK %s", 200, payload)
 }
 
 func (o *ListGatewayPoolGatewaysOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/gateways][%d] listGatewayPoolGatewaysOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/gateways][%d] listGatewayPoolGatewaysOK %s", 200, payload)
 }
 
 func (o *ListGatewayPoolGatewaysOK) GetPayload() *models.Secrets20231128ListGatewayPoolGatewaysResponse {
@@ -158,11 +161,13 @@ func (o *ListGatewayPoolGatewaysDefault) Code() int {
 }
 
 func (o *ListGatewayPoolGatewaysDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/gateways][%d] ListGatewayPoolGateways default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/gateways][%d] ListGatewayPoolGateways default %s", o._statusCode, payload)
 }
 
 func (o *ListGatewayPoolGatewaysDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/gateways][%d] ListGatewayPoolGateways default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/gateways][%d] ListGatewayPoolGateways default %s", o._statusCode, payload)
 }
 
 func (o *ListGatewayPoolGatewaysDefault) GetPayload() *models.GooglerpcStatus {

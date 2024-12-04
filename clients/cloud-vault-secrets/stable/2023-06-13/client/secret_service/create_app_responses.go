@@ -7,6 +7,7 @@ package secret_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *CreateAppOK) Code() int {
 }
 
 func (o *CreateAppOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps][%d] createAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps][%d] createAppOK %s", 200, payload)
 }
 
 func (o *CreateAppOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps][%d] createAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps][%d] createAppOK %s", 200, payload)
 }
 
 func (o *CreateAppOK) GetPayload() *models.Secrets20230613CreateAppResponse {
@@ -161,11 +164,13 @@ func (o *CreateAppDefault) Code() int {
 }
 
 func (o *CreateAppDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps][%d] CreateApp default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps][%d] CreateApp default %s", o._statusCode, payload)
 }
 
 func (o *CreateAppDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps][%d] CreateApp default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps][%d] CreateApp default %s", o._statusCode, payload)
 }
 
 func (o *CreateAppDefault) GetPayload() *models.RPCStatus {

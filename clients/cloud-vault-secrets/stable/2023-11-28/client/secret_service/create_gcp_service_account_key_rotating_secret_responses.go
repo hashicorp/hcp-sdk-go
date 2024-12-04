@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *CreateGcpServiceAccountKeyRotatingSecretOK) Code() int {
 }
 
 func (o *CreateGcpServiceAccountKeyRotatingSecretOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret][%d] createGcpServiceAccountKeyRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret][%d] createGcpServiceAccountKeyRotatingSecretOK %s", 200, payload)
 }
 
 func (o *CreateGcpServiceAccountKeyRotatingSecretOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret][%d] createGcpServiceAccountKeyRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret][%d] createGcpServiceAccountKeyRotatingSecretOK %s", 200, payload)
 }
 
 func (o *CreateGcpServiceAccountKeyRotatingSecretOK) GetPayload() *models.Secrets20231128CreateGcpServiceAccountKeyRotatingSecretResponse {
@@ -158,11 +161,13 @@ func (o *CreateGcpServiceAccountKeyRotatingSecretDefault) Code() int {
 }
 
 func (o *CreateGcpServiceAccountKeyRotatingSecretDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret][%d] CreateGcpServiceAccountKeyRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret][%d] CreateGcpServiceAccountKeyRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *CreateGcpServiceAccountKeyRotatingSecretDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret][%d] CreateGcpServiceAccountKeyRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret][%d] CreateGcpServiceAccountKeyRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *CreateGcpServiceAccountKeyRotatingSecretDefault) GetPayload() *models.GooglerpcStatus {

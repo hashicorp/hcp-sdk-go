@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetAzureApplicationPasswordRotatingSecretConfigOK) Code() int {
 }
 
 func (o *GetAzureApplicationPasswordRotatingSecretConfigOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] getAzureApplicationPasswordRotatingSecretConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] getAzureApplicationPasswordRotatingSecretConfigOK %s", 200, payload)
 }
 
 func (o *GetAzureApplicationPasswordRotatingSecretConfigOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] getAzureApplicationPasswordRotatingSecretConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] getAzureApplicationPasswordRotatingSecretConfigOK %s", 200, payload)
 }
 
 func (o *GetAzureApplicationPasswordRotatingSecretConfigOK) GetPayload() *models.Secrets20231128GetAzureApplicationPasswordRotatingSecretConfigResponse {
@@ -158,11 +161,13 @@ func (o *GetAzureApplicationPasswordRotatingSecretConfigDefault) Code() int {
 }
 
 func (o *GetAzureApplicationPasswordRotatingSecretConfigDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] GetAzureApplicationPasswordRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] GetAzureApplicationPasswordRotatingSecretConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetAzureApplicationPasswordRotatingSecretConfigDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] GetAzureApplicationPasswordRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/azure/secret/{name}][%d] GetAzureApplicationPasswordRotatingSecretConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetAzureApplicationPasswordRotatingSecretConfigDefault) GetPayload() *models.GooglerpcStatus {

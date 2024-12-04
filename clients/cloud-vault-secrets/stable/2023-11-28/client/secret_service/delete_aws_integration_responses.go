@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteAwsIntegrationOK) Code() int {
 }
 
 func (o *DeleteAwsIntegrationOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] deleteAwsIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] deleteAwsIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteAwsIntegrationOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] deleteAwsIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] deleteAwsIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteAwsIntegrationOK) GetPayload() models.Secrets20231128DeleteAwsIntegrationResponse {
@@ -156,11 +159,13 @@ func (o *DeleteAwsIntegrationDefault) Code() int {
 }
 
 func (o *DeleteAwsIntegrationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] DeleteAwsIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] DeleteAwsIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAwsIntegrationDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] DeleteAwsIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] DeleteAwsIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAwsIntegrationDefault) GetPayload() *models.GooglerpcStatus {

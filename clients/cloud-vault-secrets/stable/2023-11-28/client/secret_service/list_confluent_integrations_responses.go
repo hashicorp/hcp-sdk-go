@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *ListConfluentIntegrationsOK) Code() int {
 }
 
 func (o *ListConfluentIntegrationsOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config][%d] listConfluentIntegrationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config][%d] listConfluentIntegrationsOK %s", 200, payload)
 }
 
 func (o *ListConfluentIntegrationsOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config][%d] listConfluentIntegrationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config][%d] listConfluentIntegrationsOK %s", 200, payload)
 }
 
 func (o *ListConfluentIntegrationsOK) GetPayload() *models.Secrets20231128ListConfluentIntegrationsResponse {
@@ -158,11 +161,13 @@ func (o *ListConfluentIntegrationsDefault) Code() int {
 }
 
 func (o *ListConfluentIntegrationsDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config][%d] ListConfluentIntegrations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config][%d] ListConfluentIntegrations default %s", o._statusCode, payload)
 }
 
 func (o *ListConfluentIntegrationsDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config][%d] ListConfluentIntegrations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config][%d] ListConfluentIntegrations default %s", o._statusCode, payload)
 }
 
 func (o *ListConfluentIntegrationsDefault) GetPayload() *models.GooglerpcStatus {

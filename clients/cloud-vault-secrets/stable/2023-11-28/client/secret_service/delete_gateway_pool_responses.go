@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteGatewayPoolOK) Code() int {
 }
 
 func (o *DeleteGatewayPoolOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] deleteGatewayPoolOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] deleteGatewayPoolOK %s", 200, payload)
 }
 
 func (o *DeleteGatewayPoolOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] deleteGatewayPoolOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] deleteGatewayPoolOK %s", 200, payload)
 }
 
 func (o *DeleteGatewayPoolOK) GetPayload() models.Secrets20231128DeleteGatewayPoolResponse {
@@ -156,11 +159,13 @@ func (o *DeleteGatewayPoolDefault) Code() int {
 }
 
 func (o *DeleteGatewayPoolDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] DeleteGatewayPool default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] DeleteGatewayPool default %s", o._statusCode, payload)
 }
 
 func (o *DeleteGatewayPoolDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] DeleteGatewayPool default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] DeleteGatewayPool default %s", o._statusCode, payload)
 }
 
 func (o *DeleteGatewayPoolDefault) GetPayload() *models.GooglerpcStatus {

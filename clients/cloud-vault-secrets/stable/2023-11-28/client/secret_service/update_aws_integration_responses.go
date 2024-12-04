@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *UpdateAwsIntegrationOK) Code() int {
 }
 
 func (o *UpdateAwsIntegrationOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] updateAwsIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] updateAwsIntegrationOK %s", 200, payload)
 }
 
 func (o *UpdateAwsIntegrationOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] updateAwsIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] updateAwsIntegrationOK %s", 200, payload)
 }
 
 func (o *UpdateAwsIntegrationOK) GetPayload() *models.Secrets20231128UpdateAwsIntegrationResponse {
@@ -158,11 +161,13 @@ func (o *UpdateAwsIntegrationDefault) Code() int {
 }
 
 func (o *UpdateAwsIntegrationDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] UpdateAwsIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] UpdateAwsIntegration default %s", o._statusCode, payload)
 }
 
 func (o *UpdateAwsIntegrationDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] UpdateAwsIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] UpdateAwsIntegration default %s", o._statusCode, payload)
 }
 
 func (o *UpdateAwsIntegrationDefault) GetPayload() *models.GooglerpcStatus {

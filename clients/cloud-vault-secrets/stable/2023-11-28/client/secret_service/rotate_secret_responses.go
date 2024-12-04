@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *RotateSecretOK) Code() int {
 }
 
 func (o *RotateSecretOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] rotateSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] rotateSecretOK %s", 200, payload)
 }
 
 func (o *RotateSecretOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] rotateSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] rotateSecretOK %s", 200, payload)
 }
 
 func (o *RotateSecretOK) GetPayload() models.Secrets20231128RotateSecretResponse {
@@ -156,11 +159,13 @@ func (o *RotateSecretDefault) Code() int {
 }
 
 func (o *RotateSecretDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] RotateSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] RotateSecret default %s", o._statusCode, payload)
 }
 
 func (o *RotateSecretDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] RotateSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{name}:rotate][%d] RotateSecret default %s", o._statusCode, payload)
 }
 
 func (o *RotateSecretDefault) GetPayload() *models.GooglerpcStatus {

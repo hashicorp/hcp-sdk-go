@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteAppOK) Code() int {
 }
 
 func (o *DeleteAppOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] deleteAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] deleteAppOK %s", 200, payload)
 }
 
 func (o *DeleteAppOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] deleteAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] deleteAppOK %s", 200, payload)
 }
 
 func (o *DeleteAppOK) GetPayload() models.Secrets20231128DeleteAppResponse {
@@ -156,11 +159,13 @@ func (o *DeleteAppDefault) Code() int {
 }
 
 func (o *DeleteAppDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] DeleteApp default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] DeleteApp default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAppDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] DeleteApp default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] DeleteApp default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAppDefault) GetPayload() *models.GooglerpcStatus {

@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetUsage2OK) Code() int {
 }
 
 func (o *GetUsage2OK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/usage][%d] getUsage2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/usage][%d] getUsage2OK %s", 200, payload)
 }
 
 func (o *GetUsage2OK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/usage][%d] getUsage2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/usage][%d] getUsage2OK %s", 200, payload)
 }
 
 func (o *GetUsage2OK) GetPayload() *models.Secrets20231128GetUsageResponse {
@@ -158,11 +161,13 @@ func (o *GetUsage2Default) Code() int {
 }
 
 func (o *GetUsage2Default) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/usage][%d] GetUsage2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/usage][%d] GetUsage2 default %s", o._statusCode, payload)
 }
 
 func (o *GetUsage2Default) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/usage][%d] GetUsage2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/usage][%d] GetUsage2 default %s", o._statusCode, payload)
 }
 
 func (o *GetUsage2Default) GetPayload() *models.GooglerpcStatus {

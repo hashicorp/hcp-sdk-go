@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *CreateAwsIAMUserAccessKeyRotatingSecretOK) Code() int {
 }
 
 func (o *CreateAwsIAMUserAccessKeyRotatingSecretOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret][%d] createAwsIAMUserAccessKeyRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret][%d] createAwsIAMUserAccessKeyRotatingSecretOK %s", 200, payload)
 }
 
 func (o *CreateAwsIAMUserAccessKeyRotatingSecretOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret][%d] createAwsIAMUserAccessKeyRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret][%d] createAwsIAMUserAccessKeyRotatingSecretOK %s", 200, payload)
 }
 
 func (o *CreateAwsIAMUserAccessKeyRotatingSecretOK) GetPayload() *models.Secrets20231128CreateAwsIAMUserAccessKeyRotatingSecretResponse {
@@ -158,11 +161,13 @@ func (o *CreateAwsIAMUserAccessKeyRotatingSecretDefault) Code() int {
 }
 
 func (o *CreateAwsIAMUserAccessKeyRotatingSecretDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret][%d] CreateAwsIAMUserAccessKeyRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret][%d] CreateAwsIAMUserAccessKeyRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *CreateAwsIAMUserAccessKeyRotatingSecretDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret][%d] CreateAwsIAMUserAccessKeyRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret][%d] CreateAwsIAMUserAccessKeyRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *CreateAwsIAMUserAccessKeyRotatingSecretDefault) GetPayload() *models.GooglerpcStatus {

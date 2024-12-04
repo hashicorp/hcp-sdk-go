@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetTwilioRotatingSecretConfigOK) Code() int {
 }
 
 func (o *GetTwilioRotatingSecretConfigOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] getTwilioRotatingSecretConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] getTwilioRotatingSecretConfigOK %s", 200, payload)
 }
 
 func (o *GetTwilioRotatingSecretConfigOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] getTwilioRotatingSecretConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] getTwilioRotatingSecretConfigOK %s", 200, payload)
 }
 
 func (o *GetTwilioRotatingSecretConfigOK) GetPayload() *models.Secrets20231128GetTwilioRotatingSecretConfigResponse {
@@ -158,11 +161,13 @@ func (o *GetTwilioRotatingSecretConfigDefault) Code() int {
 }
 
 func (o *GetTwilioRotatingSecretConfigDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] GetTwilioRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] GetTwilioRotatingSecretConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetTwilioRotatingSecretConfigDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] GetTwilioRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/twilio/secret/{name}][%d] GetTwilioRotatingSecretConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetTwilioRotatingSecretConfigDefault) GetPayload() *models.GooglerpcStatus {

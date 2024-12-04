@@ -7,6 +7,7 @@ package secret_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *CreateVercelProjectSyncIntegrationOK) Code() int {
 }
 
 func (o *CreateVercelProjectSyncIntegrationOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project][%d] createVercelProjectSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project][%d] createVercelProjectSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateVercelProjectSyncIntegrationOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project][%d] createVercelProjectSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project][%d] createVercelProjectSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateVercelProjectSyncIntegrationOK) GetPayload() *models.Secrets20230613CreateSyncIntegrationResponse {
@@ -161,11 +164,13 @@ func (o *CreateVercelProjectSyncIntegrationDefault) Code() int {
 }
 
 func (o *CreateVercelProjectSyncIntegrationDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project][%d] CreateVercelProjectSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project][%d] CreateVercelProjectSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateVercelProjectSyncIntegrationDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project][%d] CreateVercelProjectSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel-project][%d] CreateVercelProjectSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateVercelProjectSyncIntegrationDefault) GetPayload() *models.RPCStatus {

@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *UpdateMongoDBAtlasRotatingSecretOK) Code() int {
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] updateMongoDBAtlasRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] updateMongoDBAtlasRotatingSecretOK %s", 200, payload)
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] updateMongoDBAtlasRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] updateMongoDBAtlasRotatingSecretOK %s", 200, payload)
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretOK) GetPayload() *models.Secrets20231128UpdateMongoDBAtlasRotatingSecretResponse {
@@ -158,11 +161,13 @@ func (o *UpdateMongoDBAtlasRotatingSecretDefault) Code() int {
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] UpdateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] UpdateMongoDBAtlasRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] UpdateMongoDBAtlasRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/mongodb-atlas/secret/{name}][%d] UpdateMongoDBAtlasRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *UpdateMongoDBAtlasRotatingSecretDefault) GetPayload() *models.GooglerpcStatus {

@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteIntegrationOK) Code() int {
 }
 
 func (o *DeleteIntegrationOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] deleteIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] deleteIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteIntegrationOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] deleteIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] deleteIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteIntegrationOK) GetPayload() models.Secrets20231128DeleteIntegrationResponse {
@@ -156,11 +159,13 @@ func (o *DeleteIntegrationDefault) Code() int {
 }
 
 func (o *DeleteIntegrationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] DeleteIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] DeleteIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteIntegrationDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] DeleteIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] DeleteIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteIntegrationDefault) GetPayload() *models.GooglerpcStatus {

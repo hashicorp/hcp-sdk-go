@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteGcpDynamicSecretOK) Code() int {
 }
 
 func (o *DeleteGcpDynamicSecretOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}][%d] deleteGcpDynamicSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}][%d] deleteGcpDynamicSecretOK %s", 200, payload)
 }
 
 func (o *DeleteGcpDynamicSecretOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}][%d] deleteGcpDynamicSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}][%d] deleteGcpDynamicSecretOK %s", 200, payload)
 }
 
 func (o *DeleteGcpDynamicSecretOK) GetPayload() models.Secrets20231128DeleteGcpDynamicSecretResponse {
@@ -156,11 +159,13 @@ func (o *DeleteGcpDynamicSecretDefault) Code() int {
 }
 
 func (o *DeleteGcpDynamicSecretDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}][%d] DeleteGcpDynamicSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}][%d] DeleteGcpDynamicSecret default %s", o._statusCode, payload)
 }
 
 func (o *DeleteGcpDynamicSecretDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}][%d] DeleteGcpDynamicSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret/{name}][%d] DeleteGcpDynamicSecret default %s", o._statusCode, payload)
 }
 
 func (o *DeleteGcpDynamicSecretDefault) GetPayload() *models.GooglerpcStatus {

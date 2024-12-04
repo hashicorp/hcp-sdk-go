@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *ListAwsIntegrationsOK) Code() int {
 }
 
 func (o *ListAwsIntegrationsOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config][%d] listAwsIntegrationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config][%d] listAwsIntegrationsOK %s", 200, payload)
 }
 
 func (o *ListAwsIntegrationsOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config][%d] listAwsIntegrationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config][%d] listAwsIntegrationsOK %s", 200, payload)
 }
 
 func (o *ListAwsIntegrationsOK) GetPayload() *models.Secrets20231128ListAwsIntegrationsResponse {
@@ -158,11 +161,13 @@ func (o *ListAwsIntegrationsDefault) Code() int {
 }
 
 func (o *ListAwsIntegrationsDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config][%d] ListAwsIntegrations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config][%d] ListAwsIntegrations default %s", o._statusCode, payload)
 }
 
 func (o *ListAwsIntegrationsDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config][%d] ListAwsIntegrations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config][%d] ListAwsIntegrations default %s", o._statusCode, payload)
 }
 
 func (o *ListAwsIntegrationsDefault) GetPayload() *models.GooglerpcStatus {

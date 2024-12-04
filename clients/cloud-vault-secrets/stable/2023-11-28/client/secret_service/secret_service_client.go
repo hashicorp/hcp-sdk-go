@@ -7,12 +7,38 @@ package secret_service
 
 import (
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new secret service API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new secret service API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new secret service API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -23,7 +49,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -31,6 +57,8 @@ type ClientService interface {
 	CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppOK, error)
 
 	CreateAppKVSecret(params *CreateAppKVSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppKVSecretOK, error)
+
+	CreateAppRotatingSecret(params *CreateAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppRotatingSecretOK, error)
 
 	CreateAwsDynamicSecret(params *CreateAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsDynamicSecretOK, error)
 
@@ -64,6 +92,10 @@ type ClientService interface {
 
 	CreatePostgresRotatingSecret(params *CreatePostgresRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresRotatingSecretOK, error)
 
+	CreateRandomIntegration(params *CreateRandomIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRandomIntegrationOK, error)
+
+	CreateRandomRotatingSecret(params *CreateRandomRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRandomRotatingSecretOK, error)
+
 	CreateSync(params *CreateSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSyncOK, error)
 
 	CreateTwilioIntegration(params *CreateTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTwilioIntegrationOK, error)
@@ -96,11 +128,15 @@ type ClientService interface {
 
 	DeletePostgresIntegration(params *DeletePostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresIntegrationOK, error)
 
+	DeleteRandomIntegration(params *DeleteRandomIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteRandomIntegrationOK, error)
+
 	DeleteSync(params *DeleteSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSyncOK, error)
 
 	DeleteTwilioIntegration(params *DeleteTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTwilioIntegrationOK, error)
 
 	GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppOK, error)
+
+	GetAppRotatingSecret(params *GetAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppRotatingSecretOK, error)
 
 	GetAppSecret(params *GetAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSecretOK, error)
 
@@ -141,6 +177,10 @@ type ClientService interface {
 	GetPostgresIntegration(params *GetPostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresIntegrationOK, error)
 
 	GetPostgresRotatingSecretConfig(params *GetPostgresRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresRotatingSecretConfigOK, error)
+
+	GetRandomIntegration(params *GetRandomIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRandomIntegrationOK, error)
+
+	GetRandomRotatingSecretConfig(params *GetRandomRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRandomRotatingSecretConfigOK, error)
 
 	GetRotatingSecretState(params *GetRotatingSecretStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRotatingSecretStateOK, error)
 
@@ -188,6 +228,8 @@ type ClientService interface {
 
 	ListProviders(params *ListProvidersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProvidersOK, error)
 
+	ListRandomIntegrations(params *ListRandomIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRandomIntegrationsOK, error)
+
 	ListSyncs(params *ListSyncsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSyncsOK, error)
 
 	ListTwilioIntegrations(params *ListTwilioIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTwilioIntegrationsOK, error)
@@ -205,6 +247,8 @@ type ClientService interface {
 	SetTier(params *SetTierParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetTierOK, error)
 
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
+
+	UpdateAppRotatingSecret(params *UpdateAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppRotatingSecretOK, error)
 
 	UpdateAwsDynamicSecret(params *UpdateAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsDynamicSecretOK, error)
 
@@ -237,6 +281,10 @@ type ClientService interface {
 	UpdatePostgresIntegration(params *UpdatePostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresIntegrationOK, error)
 
 	UpdatePostgresRotatingSecret(params *UpdatePostgresRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresRotatingSecretOK, error)
+
+	UpdateRandomIntegration(params *UpdateRandomIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRandomIntegrationOK, error)
+
+	UpdateRandomRotatingSecret(params *UpdateRandomRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRandomRotatingSecretOK, error)
 
 	UpdateTwilioIntegration(params *UpdateTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTwilioIntegrationOK, error)
 
@@ -318,6 +366,44 @@ func (a *Client) CreateAppKVSecret(params *CreateAppKVSecretParams, authInfo run
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateAppKVSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateAppRotatingSecret create app rotating secret API
+*/
+func (a *Client) CreateAppRotatingSecret(params *CreateAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateAppRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAppRotatingSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAppRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateAppRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateAppRotatingSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -588,7 +674,7 @@ func (a *Client) CreateConfluentIntegration(params *CreateConfluentIntegrationPa
 }
 
 /*
-CreateGatewayPool gateways
+CreateGatewayPool create gateway pool API
 */
 func (a *Client) CreateGatewayPool(params *CreateGatewayPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGatewayPoolOK, error) {
 	// TODO: Validate the params before sending
@@ -926,6 +1012,82 @@ func (a *Client) CreatePostgresRotatingSecret(params *CreatePostgresRotatingSecr
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreatePostgresRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateRandomIntegration create random integration API
+*/
+func (a *Client) CreateRandomIntegration(params *CreateRandomIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRandomIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateRandomIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateRandomIntegration",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/random/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateRandomIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateRandomIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateRandomIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateRandomRotatingSecret create random rotating secret API
+*/
+func (a *Client) CreateRandomRotatingSecret(params *CreateRandomRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRandomRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateRandomRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateRandomRotatingSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/random/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateRandomRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateRandomRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateRandomRotatingSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1538,6 +1700,44 @@ func (a *Client) DeletePostgresIntegration(params *DeletePostgresIntegrationPara
 }
 
 /*
+DeleteRandomIntegration delete random integration API
+*/
+func (a *Client) DeleteRandomIntegration(params *DeleteRandomIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteRandomIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteRandomIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteRandomIntegration",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/random/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteRandomIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteRandomIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteRandomIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 DeleteSync delete sync API
 */
 func (a *Client) DeleteSync(params *DeleteSyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSyncOK, error) {
@@ -1648,6 +1848,44 @@ func (a *Client) GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWri
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetAppDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetAppRotatingSecret get app rotating secret API
+*/
+func (a *Client) GetAppRotatingSecret(params *GetAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppRotatingSecret",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetAppRotatingSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2412,6 +2650,82 @@ func (a *Client) GetPostgresRotatingSecretConfig(params *GetPostgresRotatingSecr
 }
 
 /*
+GetRandomIntegration get random integration API
+*/
+func (a *Client) GetRandomIntegration(params *GetRandomIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRandomIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRandomIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetRandomIntegration",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/random/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRandomIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRandomIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetRandomIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetRandomRotatingSecretConfig get random rotating secret config API
+*/
+func (a *Client) GetRandomRotatingSecretConfig(params *GetRandomRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRandomRotatingSecretConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRandomRotatingSecretConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetRandomRotatingSecretConfig",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/random/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRandomRotatingSecretConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRandomRotatingSecretConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetRandomRotatingSecretConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetRotatingSecretState get rotating secret state API
 */
 func (a *Client) GetRotatingSecretState(params *GetRotatingSecretStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRotatingSecretStateOK, error) {
@@ -2830,7 +3144,7 @@ func (a *Client) ListAwsIntegrations(params *ListAwsIntegrationsParams, authInfo
 }
 
 /*
-ListAzureIntegrations as z u r e
+ListAzureIntegrations list azure integrations API
 */
 func (a *Client) ListAzureIntegrations(params *ListAzureIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAzureIntegrationsOK, error) {
 	// TODO: Validate the params before sending
@@ -2868,7 +3182,7 @@ func (a *Client) ListAzureIntegrations(params *ListAzureIntegrationsParams, auth
 }
 
 /*
-ListConfluentIntegrations confluents
+ListConfluentIntegrations list confluent integrations API
 */
 func (a *Client) ListConfluentIntegrations(params *ListConfluentIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfluentIntegrationsOK, error) {
 	// TODO: Validate the params before sending
@@ -3248,7 +3562,7 @@ func (a *Client) ListPostgresIntegrations(params *ListPostgresIntegrationsParams
 }
 
 /*
-ListProviders ecosystems
+ListProviders list providers API
 */
 func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProvidersOK, error) {
 	// TODO: Validate the params before sending
@@ -3286,7 +3600,45 @@ func (a *Client) ListProviders(params *ListProvidersParams, authInfo runtime.Cli
 }
 
 /*
-ListSyncs syncs
+ListRandomIntegrations list random integrations API
+*/
+func (a *Client) ListRandomIntegrations(params *ListRandomIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRandomIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListRandomIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListRandomIntegrations",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/random/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListRandomIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListRandomIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListRandomIntegrationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListSyncs list syncs API
 */
 func (a *Client) ListSyncs(params *ListSyncsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSyncsOK, error) {
 	// TODO: Validate the params before sending
@@ -3624,6 +3976,44 @@ func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthI
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdateAppDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateAppRotatingSecret update app rotating secret API
+*/
+func (a *Client) UpdateAppRotatingSecret(params *UpdateAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAppRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAppRotatingSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAppRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateAppRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateAppRotatingSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -4232,6 +4622,82 @@ func (a *Client) UpdatePostgresRotatingSecret(params *UpdatePostgresRotatingSecr
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdatePostgresRotatingSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateRandomIntegration update random integration API
+*/
+func (a *Client) UpdateRandomIntegration(params *UpdateRandomIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRandomIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateRandomIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateRandomIntegration",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/random/config/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateRandomIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateRandomIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateRandomIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateRandomRotatingSecret update random rotating secret API
+*/
+func (a *Client) UpdateRandomRotatingSecret(params *UpdateRandomRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRandomRotatingSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateRandomRotatingSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateRandomRotatingSecret",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/random/secret/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateRandomRotatingSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateRandomRotatingSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateRandomRotatingSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

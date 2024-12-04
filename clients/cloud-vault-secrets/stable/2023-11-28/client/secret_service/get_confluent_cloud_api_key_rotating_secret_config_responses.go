@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetConfluentCloudAPIKeyRotatingSecretConfigOK) Code() int {
 }
 
 func (o *GetConfluentCloudAPIKeyRotatingSecretConfigOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] getConfluentCloudApiKeyRotatingSecretConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] getConfluentCloudApiKeyRotatingSecretConfigOK %s", 200, payload)
 }
 
 func (o *GetConfluentCloudAPIKeyRotatingSecretConfigOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] getConfluentCloudApiKeyRotatingSecretConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] getConfluentCloudApiKeyRotatingSecretConfigOK %s", 200, payload)
 }
 
 func (o *GetConfluentCloudAPIKeyRotatingSecretConfigOK) GetPayload() *models.Secrets20231128GetConfluentCloudAPIKeyRotatingSecretConfigResponse {
@@ -158,11 +161,13 @@ func (o *GetConfluentCloudAPIKeyRotatingSecretConfigDefault) Code() int {
 }
 
 func (o *GetConfluentCloudAPIKeyRotatingSecretConfigDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] GetConfluentCloudApiKeyRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] GetConfluentCloudApiKeyRotatingSecretConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetConfluentCloudAPIKeyRotatingSecretConfigDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] GetConfluentCloudApiKeyRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] GetConfluentCloudApiKeyRotatingSecretConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetConfluentCloudAPIKeyRotatingSecretConfigDefault) GetPayload() *models.GooglerpcStatus {

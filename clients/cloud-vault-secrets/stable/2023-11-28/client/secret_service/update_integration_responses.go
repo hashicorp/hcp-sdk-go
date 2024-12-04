@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *UpdateIntegrationOK) Code() int {
 }
 
 func (o *UpdateIntegrationOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] updateIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] updateIntegrationOK %s", 200, payload)
 }
 
 func (o *UpdateIntegrationOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] updateIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] updateIntegrationOK %s", 200, payload)
 }
 
 func (o *UpdateIntegrationOK) GetPayload() *models.Secrets20231128UpdateIntegrationResponse {
@@ -158,11 +161,13 @@ func (o *UpdateIntegrationDefault) Code() int {
 }
 
 func (o *UpdateIntegrationDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] UpdateIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] UpdateIntegration default %s", o._statusCode, payload)
 }
 
 func (o *UpdateIntegrationDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] UpdateIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/{name}][%d] UpdateIntegration default %s", o._statusCode, payload)
 }
 
 func (o *UpdateIntegrationDefault) GetPayload() *models.GooglerpcStatus {

@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteTwilioIntegrationOK) Code() int {
 }
 
 func (o *DeleteTwilioIntegrationOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] deleteTwilioIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] deleteTwilioIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteTwilioIntegrationOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] deleteTwilioIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] deleteTwilioIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteTwilioIntegrationOK) GetPayload() models.Secrets20231128DeleteTwilioIntegrationResponse {
@@ -156,11 +159,13 @@ func (o *DeleteTwilioIntegrationDefault) Code() int {
 }
 
 func (o *DeleteTwilioIntegrationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] DeleteTwilioIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] DeleteTwilioIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteTwilioIntegrationDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] DeleteTwilioIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config/{name}][%d] DeleteTwilioIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteTwilioIntegrationDefault) GetPayload() *models.GooglerpcStatus {

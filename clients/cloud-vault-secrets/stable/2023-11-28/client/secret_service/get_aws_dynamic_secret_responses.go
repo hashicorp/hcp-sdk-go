@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetAwsDynamicSecretOK) Code() int {
 }
 
 func (o *GetAwsDynamicSecretOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] getAwsDynamicSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] getAwsDynamicSecretOK %s", 200, payload)
 }
 
 func (o *GetAwsDynamicSecretOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] getAwsDynamicSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] getAwsDynamicSecretOK %s", 200, payload)
 }
 
 func (o *GetAwsDynamicSecretOK) GetPayload() *models.Secrets20231128GetAwsDynamicSecretResponse {
@@ -158,11 +161,13 @@ func (o *GetAwsDynamicSecretDefault) Code() int {
 }
 
 func (o *GetAwsDynamicSecretDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] GetAwsDynamicSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] GetAwsDynamicSecret default %s", o._statusCode, payload)
 }
 
 func (o *GetAwsDynamicSecretDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] GetAwsDynamicSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] GetAwsDynamicSecret default %s", o._statusCode, payload)
 }
 
 func (o *GetAwsDynamicSecretDefault) GetPayload() *models.GooglerpcStatus {

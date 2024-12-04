@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *ListAzureIntegrationsOK) Code() int {
 }
 
 func (o *ListAzureIntegrationsOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config][%d] listAzureIntegrationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config][%d] listAzureIntegrationsOK %s", 200, payload)
 }
 
 func (o *ListAzureIntegrationsOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config][%d] listAzureIntegrationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config][%d] listAzureIntegrationsOK %s", 200, payload)
 }
 
 func (o *ListAzureIntegrationsOK) GetPayload() *models.Secrets20231128ListAzureIntegrationsResponse {
@@ -158,11 +161,13 @@ func (o *ListAzureIntegrationsDefault) Code() int {
 }
 
 func (o *ListAzureIntegrationsDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config][%d] ListAzureIntegrations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config][%d] ListAzureIntegrations default %s", o._statusCode, payload)
 }
 
 func (o *ListAzureIntegrationsDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config][%d] ListAzureIntegrations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config][%d] ListAzureIntegrations default %s", o._statusCode, payload)
 }
 
 func (o *ListAzureIntegrationsDefault) GetPayload() *models.GooglerpcStatus {

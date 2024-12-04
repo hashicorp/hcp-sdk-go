@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetSyncInstallationOK) Code() int {
 }
 
 func (o *GetSyncInstallationOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] getSyncInstallationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] getSyncInstallationOK %s", 200, payload)
 }
 
 func (o *GetSyncInstallationOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] getSyncInstallationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] getSyncInstallationOK %s", 200, payload)
 }
 
 func (o *GetSyncInstallationOK) GetPayload() *models.Secrets20230613GetSyncInstallationResponse {
@@ -158,11 +161,13 @@ func (o *GetSyncInstallationDefault) Code() int {
 }
 
 func (o *GetSyncInstallationDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] GetSyncInstallation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] GetSyncInstallation default %s", o._statusCode, payload)
 }
 
 func (o *GetSyncInstallationDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] GetSyncInstallation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] GetSyncInstallation default %s", o._statusCode, payload)
 }
 
 func (o *GetSyncInstallationDefault) GetPayload() *models.RPCStatus {

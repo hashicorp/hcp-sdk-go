@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetAzureIntegrationOK) Code() int {
 }
 
 func (o *GetAzureIntegrationOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] getAzureIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] getAzureIntegrationOK %s", 200, payload)
 }
 
 func (o *GetAzureIntegrationOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] getAzureIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] getAzureIntegrationOK %s", 200, payload)
 }
 
 func (o *GetAzureIntegrationOK) GetPayload() *models.Secrets20231128GetAzureIntegrationResponse {
@@ -158,11 +161,13 @@ func (o *GetAzureIntegrationDefault) Code() int {
 }
 
 func (o *GetAzureIntegrationDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] GetAzureIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] GetAzureIntegration default %s", o._statusCode, payload)
 }
 
 func (o *GetAzureIntegrationDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] GetAzureIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/azure/config/{name}][%d] GetAzureIntegration default %s", o._statusCode, payload)
 }
 
 func (o *GetAzureIntegrationDefault) GetPayload() *models.GooglerpcStatus {

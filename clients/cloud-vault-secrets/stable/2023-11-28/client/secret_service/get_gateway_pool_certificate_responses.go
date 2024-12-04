@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetGatewayPoolCertificateOK) Code() int {
 }
 
 func (o *GetGatewayPoolCertificateOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/certificate][%d] getGatewayPoolCertificateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/certificate][%d] getGatewayPoolCertificateOK %s", 200, payload)
 }
 
 func (o *GetGatewayPoolCertificateOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/certificate][%d] getGatewayPoolCertificateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/certificate][%d] getGatewayPoolCertificateOK %s", 200, payload)
 }
 
 func (o *GetGatewayPoolCertificateOK) GetPayload() *models.Secrets20231128GetGatewayPoolCertificateResponse {
@@ -158,11 +161,13 @@ func (o *GetGatewayPoolCertificateDefault) Code() int {
 }
 
 func (o *GetGatewayPoolCertificateDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/certificate][%d] GetGatewayPoolCertificate default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/certificate][%d] GetGatewayPoolCertificate default %s", o._statusCode, payload)
 }
 
 func (o *GetGatewayPoolCertificateDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/certificate][%d] GetGatewayPoolCertificate default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}/certificate][%d] GetGatewayPoolCertificate default %s", o._statusCode, payload)
 }
 
 func (o *GetGatewayPoolCertificateDefault) GetPayload() *models.GooglerpcStatus {

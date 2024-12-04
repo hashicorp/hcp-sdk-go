@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteGcpIntegrationOK) Code() int {
 }
 
 func (o *DeleteGcpIntegrationOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}][%d] deleteGcpIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}][%d] deleteGcpIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteGcpIntegrationOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}][%d] deleteGcpIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}][%d] deleteGcpIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteGcpIntegrationOK) GetPayload() models.Secrets20231128DeleteGcpIntegrationResponse {
@@ -156,11 +159,13 @@ func (o *DeleteGcpIntegrationDefault) Code() int {
 }
 
 func (o *DeleteGcpIntegrationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}][%d] DeleteGcpIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}][%d] DeleteGcpIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteGcpIntegrationDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}][%d] DeleteGcpIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config/{name}][%d] DeleteGcpIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteGcpIntegrationDefault) GetPayload() *models.GooglerpcStatus {

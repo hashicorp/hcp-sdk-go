@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeletePostgresIntegrationOK) Code() int {
 }
 
 func (o *DeletePostgresIntegrationOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}][%d] deletePostgresIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}][%d] deletePostgresIntegrationOK %s", 200, payload)
 }
 
 func (o *DeletePostgresIntegrationOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}][%d] deletePostgresIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}][%d] deletePostgresIntegrationOK %s", 200, payload)
 }
 
 func (o *DeletePostgresIntegrationOK) GetPayload() models.Secrets20231128DeletePostgresIntegrationResponse {
@@ -156,11 +159,13 @@ func (o *DeletePostgresIntegrationDefault) Code() int {
 }
 
 func (o *DeletePostgresIntegrationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}][%d] DeletePostgresIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}][%d] DeletePostgresIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeletePostgresIntegrationDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}][%d] DeletePostgresIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config/{name}][%d] DeletePostgresIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeletePostgresIntegrationDefault) GetPayload() *models.GooglerpcStatus {

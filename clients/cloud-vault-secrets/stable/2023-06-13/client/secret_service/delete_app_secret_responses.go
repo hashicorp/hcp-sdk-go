@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteAppSecretOK) Code() int {
 }
 
 func (o *DeleteAppSecretOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets/{secret_name}][%d] deleteAppSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets/{secret_name}][%d] deleteAppSecretOK %s", 200, payload)
 }
 
 func (o *DeleteAppSecretOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets/{secret_name}][%d] deleteAppSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets/{secret_name}][%d] deleteAppSecretOK %s", 200, payload)
 }
 
 func (o *DeleteAppSecretOK) GetPayload() models.Secrets20230613DeleteAppSecretResponse {
@@ -156,11 +159,13 @@ func (o *DeleteAppSecretDefault) Code() int {
 }
 
 func (o *DeleteAppSecretDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets/{secret_name}][%d] DeleteAppSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets/{secret_name}][%d] DeleteAppSecret default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAppSecretDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets/{secret_name}][%d] DeleteAppSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/secrets/{secret_name}][%d] DeleteAppSecret default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAppSecretDefault) GetPayload() *models.RPCStatus {

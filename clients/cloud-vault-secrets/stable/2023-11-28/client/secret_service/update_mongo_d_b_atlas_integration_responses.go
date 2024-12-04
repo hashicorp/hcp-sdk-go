@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *UpdateMongoDBAtlasIntegrationOK) Code() int {
 }
 
 func (o *UpdateMongoDBAtlasIntegrationOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] updateMongoDBAtlasIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] updateMongoDBAtlasIntegrationOK %s", 200, payload)
 }
 
 func (o *UpdateMongoDBAtlasIntegrationOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] updateMongoDBAtlasIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] updateMongoDBAtlasIntegrationOK %s", 200, payload)
 }
 
 func (o *UpdateMongoDBAtlasIntegrationOK) GetPayload() *models.Secrets20231128UpdateMongoDBAtlasIntegrationResponse {
@@ -158,11 +161,13 @@ func (o *UpdateMongoDBAtlasIntegrationDefault) Code() int {
 }
 
 func (o *UpdateMongoDBAtlasIntegrationDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] UpdateMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] UpdateMongoDBAtlasIntegration default %s", o._statusCode, payload)
 }
 
 func (o *UpdateMongoDBAtlasIntegrationDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] UpdateMongoDBAtlasIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/mongodb-atlas/config/{name}][%d] UpdateMongoDBAtlasIntegration default %s", o._statusCode, payload)
 }
 
 func (o *UpdateMongoDBAtlasIntegrationDefault) GetPayload() *models.GooglerpcStatus {

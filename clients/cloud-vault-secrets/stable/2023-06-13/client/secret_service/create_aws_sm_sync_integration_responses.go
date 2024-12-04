@@ -7,6 +7,7 @@ package secret_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *CreateAwsSmSyncIntegrationOK) Code() int {
 }
 
 func (o *CreateAwsSmSyncIntegrationOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/aws-sm][%d] createAwsSmSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/aws-sm][%d] createAwsSmSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateAwsSmSyncIntegrationOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/aws-sm][%d] createAwsSmSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/aws-sm][%d] createAwsSmSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateAwsSmSyncIntegrationOK) GetPayload() *models.Secrets20230613CreateSyncIntegrationResponse {
@@ -161,11 +164,13 @@ func (o *CreateAwsSmSyncIntegrationDefault) Code() int {
 }
 
 func (o *CreateAwsSmSyncIntegrationDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/aws-sm][%d] CreateAwsSmSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/aws-sm][%d] CreateAwsSmSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateAwsSmSyncIntegrationDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/aws-sm][%d] CreateAwsSmSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/aws-sm][%d] CreateAwsSmSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateAwsSmSyncIntegrationDefault) GetPayload() *models.RPCStatus {

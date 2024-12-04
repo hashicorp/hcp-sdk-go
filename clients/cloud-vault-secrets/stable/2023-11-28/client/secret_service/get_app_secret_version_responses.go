@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetAppSecretVersionOK) Code() int {
 }
 
 func (o *GetAppSecretVersionOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] getAppSecretVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] getAppSecretVersionOK %s", 200, payload)
 }
 
 func (o *GetAppSecretVersionOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] getAppSecretVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] getAppSecretVersionOK %s", 200, payload)
 }
 
 func (o *GetAppSecretVersionOK) GetPayload() *models.Secrets20231128GetAppSecretVersionResponse {
@@ -158,11 +161,13 @@ func (o *GetAppSecretVersionDefault) Code() int {
 }
 
 func (o *GetAppSecretVersionDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] GetAppSecretVersion default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] GetAppSecretVersion default %s", o._statusCode, payload)
 }
 
 func (o *GetAppSecretVersionDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] GetAppSecretVersion default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] GetAppSecretVersion default %s", o._statusCode, payload)
 }
 
 func (o *GetAppSecretVersionDefault) GetPayload() *models.GooglerpcStatus {

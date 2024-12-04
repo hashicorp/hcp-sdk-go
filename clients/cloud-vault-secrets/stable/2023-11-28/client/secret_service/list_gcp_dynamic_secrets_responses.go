@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *ListGcpDynamicSecretsOK) Code() int {
 }
 
 func (o *ListGcpDynamicSecretsOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret][%d] listGcpDynamicSecretsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret][%d] listGcpDynamicSecretsOK %s", 200, payload)
 }
 
 func (o *ListGcpDynamicSecretsOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret][%d] listGcpDynamicSecretsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret][%d] listGcpDynamicSecretsOK %s", 200, payload)
 }
 
 func (o *ListGcpDynamicSecretsOK) GetPayload() *models.Secrets20231128ListGcpDynamicSecretsResponse {
@@ -158,11 +161,13 @@ func (o *ListGcpDynamicSecretsDefault) Code() int {
 }
 
 func (o *ListGcpDynamicSecretsDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret][%d] ListGcpDynamicSecrets default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret][%d] ListGcpDynamicSecrets default %s", o._statusCode, payload)
 }
 
 func (o *ListGcpDynamicSecretsDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret][%d] ListGcpDynamicSecrets default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/gcp/secret][%d] ListGcpDynamicSecrets default %s", o._statusCode, payload)
 }
 
 func (o *ListGcpDynamicSecretsDefault) GetPayload() *models.GooglerpcStatus {

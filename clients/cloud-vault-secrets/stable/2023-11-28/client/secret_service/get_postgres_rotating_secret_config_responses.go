@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetPostgresRotatingSecretConfigOK) Code() int {
 }
 
 func (o *GetPostgresRotatingSecretConfigOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/postgres/secret/{name}][%d] getPostgresRotatingSecretConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/postgres/secret/{name}][%d] getPostgresRotatingSecretConfigOK %s", 200, payload)
 }
 
 func (o *GetPostgresRotatingSecretConfigOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/postgres/secret/{name}][%d] getPostgresRotatingSecretConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/postgres/secret/{name}][%d] getPostgresRotatingSecretConfigOK %s", 200, payload)
 }
 
 func (o *GetPostgresRotatingSecretConfigOK) GetPayload() *models.Secrets20231128GetPostgresRotatingSecretConfigResponse {
@@ -158,11 +161,13 @@ func (o *GetPostgresRotatingSecretConfigDefault) Code() int {
 }
 
 func (o *GetPostgresRotatingSecretConfigDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/postgres/secret/{name}][%d] GetPostgresRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/postgres/secret/{name}][%d] GetPostgresRotatingSecretConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetPostgresRotatingSecretConfigDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/postgres/secret/{name}][%d] GetPostgresRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/postgres/secret/{name}][%d] GetPostgresRotatingSecretConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetPostgresRotatingSecretConfigDefault) GetPayload() *models.GooglerpcStatus {

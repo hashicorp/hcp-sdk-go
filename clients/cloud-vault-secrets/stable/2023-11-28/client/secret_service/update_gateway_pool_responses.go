@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *UpdateGatewayPoolOK) Code() int {
 }
 
 func (o *UpdateGatewayPoolOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] updateGatewayPoolOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] updateGatewayPoolOK %s", 200, payload)
 }
 
 func (o *UpdateGatewayPoolOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] updateGatewayPoolOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] updateGatewayPoolOK %s", 200, payload)
 }
 
 func (o *UpdateGatewayPoolOK) GetPayload() *models.Secrets20231128UpdateGatewayPoolResponse {
@@ -158,11 +161,13 @@ func (o *UpdateGatewayPoolDefault) Code() int {
 }
 
 func (o *UpdateGatewayPoolDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] UpdateGatewayPool default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] UpdateGatewayPool default %s", o._statusCode, payload)
 }
 
 func (o *UpdateGatewayPoolDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] UpdateGatewayPool default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/gateway-pools/{gateway_pool_name}][%d] UpdateGatewayPool default %s", o._statusCode, payload)
 }
 
 func (o *UpdateGatewayPoolDefault) GetPayload() *models.GooglerpcStatus {

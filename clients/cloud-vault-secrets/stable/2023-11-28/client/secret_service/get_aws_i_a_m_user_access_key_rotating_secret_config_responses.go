@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetAwsIAMUserAccessKeyRotatingSecretConfigOK) Code() int {
 }
 
 func (o *GetAwsIAMUserAccessKeyRotatingSecretConfigOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret/{name}][%d] getAwsIAMUserAccessKeyRotatingSecretConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret/{name}][%d] getAwsIAMUserAccessKeyRotatingSecretConfigOK %s", 200, payload)
 }
 
 func (o *GetAwsIAMUserAccessKeyRotatingSecretConfigOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret/{name}][%d] getAwsIAMUserAccessKeyRotatingSecretConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret/{name}][%d] getAwsIAMUserAccessKeyRotatingSecretConfigOK %s", 200, payload)
 }
 
 func (o *GetAwsIAMUserAccessKeyRotatingSecretConfigOK) GetPayload() *models.Secrets20231128GetAwsIAMUserAccessKeyRotatingSecretConfigResponse {
@@ -158,11 +161,13 @@ func (o *GetAwsIAMUserAccessKeyRotatingSecretConfigDefault) Code() int {
 }
 
 func (o *GetAwsIAMUserAccessKeyRotatingSecretConfigDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret/{name}][%d] GetAwsIAMUserAccessKeyRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret/{name}][%d] GetAwsIAMUserAccessKeyRotatingSecretConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetAwsIAMUserAccessKeyRotatingSecretConfigDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret/{name}][%d] GetAwsIAMUserAccessKeyRotatingSecretConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/aws/secret/{name}][%d] GetAwsIAMUserAccessKeyRotatingSecretConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetAwsIAMUserAccessKeyRotatingSecretConfigDefault) GetPayload() *models.GooglerpcStatus {

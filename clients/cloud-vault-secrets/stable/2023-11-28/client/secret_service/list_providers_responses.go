@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *ListProvidersOK) Code() int {
 }
 
 func (o *ListProvidersOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/providers][%d] listProvidersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/providers][%d] listProvidersOK %s", 200, payload)
 }
 
 func (o *ListProvidersOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/providers][%d] listProvidersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/providers][%d] listProvidersOK %s", 200, payload)
 }
 
 func (o *ListProvidersOK) GetPayload() *models.Secrets20231128ListProvidersResponse {
@@ -158,11 +161,13 @@ func (o *ListProvidersDefault) Code() int {
 }
 
 func (o *ListProvidersDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/providers][%d] ListProviders default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/providers][%d] ListProviders default %s", o._statusCode, payload)
 }
 
 func (o *ListProvidersDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/providers][%d] ListProviders default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/providers][%d] ListProviders default %s", o._statusCode, payload)
 }
 
 func (o *ListProvidersDefault) GetPayload() *models.GooglerpcStatus {

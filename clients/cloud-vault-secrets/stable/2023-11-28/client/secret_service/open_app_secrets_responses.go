@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *OpenAppSecretsOK) Code() int {
 }
 
 func (o *OpenAppSecretsOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets:open][%d] openAppSecretsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets:open][%d] openAppSecretsOK %s", 200, payload)
 }
 
 func (o *OpenAppSecretsOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets:open][%d] openAppSecretsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets:open][%d] openAppSecretsOK %s", 200, payload)
 }
 
 func (o *OpenAppSecretsOK) GetPayload() *models.Secrets20231128OpenAppSecretsResponse {
@@ -158,11 +161,13 @@ func (o *OpenAppSecretsDefault) Code() int {
 }
 
 func (o *OpenAppSecretsDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets:open][%d] OpenAppSecrets default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets:open][%d] OpenAppSecrets default %s", o._statusCode, payload)
 }
 
 func (o *OpenAppSecretsDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets:open][%d] OpenAppSecrets default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets:open][%d] OpenAppSecrets default %s", o._statusCode, payload)
 }
 
 func (o *OpenAppSecretsDefault) GetPayload() *models.GooglerpcStatus {

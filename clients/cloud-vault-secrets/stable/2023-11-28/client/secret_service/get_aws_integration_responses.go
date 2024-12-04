@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetAwsIntegrationOK) Code() int {
 }
 
 func (o *GetAwsIntegrationOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] getAwsIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] getAwsIntegrationOK %s", 200, payload)
 }
 
 func (o *GetAwsIntegrationOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] getAwsIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] getAwsIntegrationOK %s", 200, payload)
 }
 
 func (o *GetAwsIntegrationOK) GetPayload() *models.Secrets20231128GetAwsIntegrationResponse {
@@ -158,11 +161,13 @@ func (o *GetAwsIntegrationDefault) Code() int {
 }
 
 func (o *GetAwsIntegrationDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] GetAwsIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] GetAwsIntegration default %s", o._statusCode, payload)
 }
 
 func (o *GetAwsIntegrationDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] GetAwsIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/aws/config/{name}][%d] GetAwsIntegration default %s", o._statusCode, payload)
 }
 
 func (o *GetAwsIntegrationDefault) GetPayload() *models.GooglerpcStatus {

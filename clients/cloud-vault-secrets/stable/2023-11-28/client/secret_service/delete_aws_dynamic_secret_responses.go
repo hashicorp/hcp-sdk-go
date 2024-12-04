@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteAwsDynamicSecretOK) Code() int {
 }
 
 func (o *DeleteAwsDynamicSecretOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] deleteAwsDynamicSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] deleteAwsDynamicSecretOK %s", 200, payload)
 }
 
 func (o *DeleteAwsDynamicSecretOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] deleteAwsDynamicSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] deleteAwsDynamicSecretOK %s", 200, payload)
 }
 
 func (o *DeleteAwsDynamicSecretOK) GetPayload() models.Secrets20231128DeleteAwsDynamicSecretResponse {
@@ -156,11 +159,13 @@ func (o *DeleteAwsDynamicSecretDefault) Code() int {
 }
 
 func (o *DeleteAwsDynamicSecretDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] DeleteAwsDynamicSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] DeleteAwsDynamicSecret default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAwsDynamicSecretDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] DeleteAwsDynamicSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/dynamic/aws/secret/{name}][%d] DeleteAwsDynamicSecret default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAwsDynamicSecretDefault) GetPayload() *models.GooglerpcStatus {

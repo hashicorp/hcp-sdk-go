@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *UpdateConfluentCloudAPIKeyRotatingSecretOK) Code() int {
 }
 
 func (o *UpdateConfluentCloudAPIKeyRotatingSecretOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] updateConfluentCloudApiKeyRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] updateConfluentCloudApiKeyRotatingSecretOK %s", 200, payload)
 }
 
 func (o *UpdateConfluentCloudAPIKeyRotatingSecretOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] updateConfluentCloudApiKeyRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] updateConfluentCloudApiKeyRotatingSecretOK %s", 200, payload)
 }
 
 func (o *UpdateConfluentCloudAPIKeyRotatingSecretOK) GetPayload() *models.Secrets20231128UpdateConfluentCloudAPIKeyRotatingSecretResponse {
@@ -158,11 +161,13 @@ func (o *UpdateConfluentCloudAPIKeyRotatingSecretDefault) Code() int {
 }
 
 func (o *UpdateConfluentCloudAPIKeyRotatingSecretDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] UpdateConfluentCloudApiKeyRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] UpdateConfluentCloudApiKeyRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *UpdateConfluentCloudAPIKeyRotatingSecretDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] UpdateConfluentCloudApiKeyRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/confluent/secret/{name}][%d] UpdateConfluentCloudApiKeyRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *UpdateConfluentCloudAPIKeyRotatingSecretDefault) GetPayload() *models.GooglerpcStatus {

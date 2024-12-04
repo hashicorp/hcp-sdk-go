@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *UpdateAppOK) Code() int {
 }
 
 func (o *UpdateAppOK) Error() string {
-	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] updateAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] updateAppOK %s", 200, payload)
 }
 
 func (o *UpdateAppOK) String() string {
-	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] updateAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] updateAppOK %s", 200, payload)
 }
 
 func (o *UpdateAppOK) GetPayload() *models.Secrets20231128UpdateAppResponse {
@@ -158,11 +161,13 @@ func (o *UpdateAppDefault) Code() int {
 }
 
 func (o *UpdateAppDefault) Error() string {
-	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] UpdateApp default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] UpdateApp default %s", o._statusCode, payload)
 }
 
 func (o *UpdateAppDefault) String() string {
-	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] UpdateApp default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}][%d] UpdateApp default %s", o._statusCode, payload)
 }
 
 func (o *UpdateAppDefault) GetPayload() *models.GooglerpcStatus {

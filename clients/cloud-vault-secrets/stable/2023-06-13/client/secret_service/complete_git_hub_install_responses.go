@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *CompleteGitHubInstallOK) Code() int {
 }
 
 func (o *CompleteGitHubInstallOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/github/callback][%d] completeGitHubInstallOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/github/callback][%d] completeGitHubInstallOK %s", 200, payload)
 }
 
 func (o *CompleteGitHubInstallOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/github/callback][%d] completeGitHubInstallOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/github/callback][%d] completeGitHubInstallOK %s", 200, payload)
 }
 
 func (o *CompleteGitHubInstallOK) GetPayload() *models.APIHTTPBody {
@@ -158,11 +161,13 @@ func (o *CompleteGitHubInstallDefault) Code() int {
 }
 
 func (o *CompleteGitHubInstallDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/github/callback][%d] CompleteGitHubInstall default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/github/callback][%d] CompleteGitHubInstall default %s", o._statusCode, payload)
 }
 
 func (o *CompleteGitHubInstallDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/github/callback][%d] CompleteGitHubInstall default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/github/callback][%d] CompleteGitHubInstall default %s", o._statusCode, payload)
 }
 
 func (o *CompleteGitHubInstallDefault) GetPayload() *models.RPCStatus {

@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteConfluentIntegrationOK) Code() int {
 }
 
 func (o *DeleteConfluentIntegrationOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}][%d] deleteConfluentIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}][%d] deleteConfluentIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteConfluentIntegrationOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}][%d] deleteConfluentIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}][%d] deleteConfluentIntegrationOK %s", 200, payload)
 }
 
 func (o *DeleteConfluentIntegrationOK) GetPayload() models.Secrets20231128DeleteConfluentIntegrationResponse {
@@ -156,11 +159,13 @@ func (o *DeleteConfluentIntegrationDefault) Code() int {
 }
 
 func (o *DeleteConfluentIntegrationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}][%d] DeleteConfluentIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}][%d] DeleteConfluentIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteConfluentIntegrationDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}][%d] DeleteConfluentIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/confluent/config/{name}][%d] DeleteConfluentIntegration default %s", o._statusCode, payload)
 }
 
 func (o *DeleteConfluentIntegrationDefault) GetPayload() *models.GooglerpcStatus {

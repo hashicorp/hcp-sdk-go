@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *ListTwilioIntegrationsOK) Code() int {
 }
 
 func (o *ListTwilioIntegrationsOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config][%d] listTwilioIntegrationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config][%d] listTwilioIntegrationsOK %s", 200, payload)
 }
 
 func (o *ListTwilioIntegrationsOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config][%d] listTwilioIntegrationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config][%d] listTwilioIntegrationsOK %s", 200, payload)
 }
 
 func (o *ListTwilioIntegrationsOK) GetPayload() *models.Secrets20231128ListTwilioIntegrationsResponse {
@@ -158,11 +161,13 @@ func (o *ListTwilioIntegrationsDefault) Code() int {
 }
 
 func (o *ListTwilioIntegrationsDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config][%d] ListTwilioIntegrations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config][%d] ListTwilioIntegrations default %s", o._statusCode, payload)
 }
 
 func (o *ListTwilioIntegrationsDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config][%d] ListTwilioIntegrations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/twilio/config][%d] ListTwilioIntegrations default %s", o._statusCode, payload)
 }
 
 func (o *ListTwilioIntegrationsDefault) GetPayload() *models.GooglerpcStatus {

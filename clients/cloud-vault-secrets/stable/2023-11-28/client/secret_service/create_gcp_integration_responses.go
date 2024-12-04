@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *CreateGcpIntegrationOK) Code() int {
 }
 
 func (o *CreateGcpIntegrationOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config][%d] createGcpIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config][%d] createGcpIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateGcpIntegrationOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config][%d] createGcpIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config][%d] createGcpIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateGcpIntegrationOK) GetPayload() *models.Secrets20231128CreateGcpIntegrationResponse {
@@ -158,11 +161,13 @@ func (o *CreateGcpIntegrationDefault) Code() int {
 }
 
 func (o *CreateGcpIntegrationDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config][%d] CreateGcpIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config][%d] CreateGcpIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateGcpIntegrationDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config][%d] CreateGcpIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/gcp/config][%d] CreateGcpIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateGcpIntegrationDefault) GetPayload() *models.GooglerpcStatus {

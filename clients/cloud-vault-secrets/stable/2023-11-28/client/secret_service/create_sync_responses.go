@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *CreateSyncOK) Code() int {
 }
 
 func (o *CreateSyncOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs][%d] createSyncOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs][%d] createSyncOK %s", 200, payload)
 }
 
 func (o *CreateSyncOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs][%d] createSyncOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs][%d] createSyncOK %s", 200, payload)
 }
 
 func (o *CreateSyncOK) GetPayload() *models.Secrets20231128CreateSyncResponse {
@@ -158,11 +161,13 @@ func (o *CreateSyncDefault) Code() int {
 }
 
 func (o *CreateSyncDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs][%d] CreateSync default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs][%d] CreateSync default %s", o._statusCode, payload)
 }
 
 func (o *CreateSyncDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs][%d] CreateSync default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/syncs][%d] CreateSync default %s", o._statusCode, payload)
 }
 
 func (o *CreateSyncDefault) GetPayload() *models.GooglerpcStatus {

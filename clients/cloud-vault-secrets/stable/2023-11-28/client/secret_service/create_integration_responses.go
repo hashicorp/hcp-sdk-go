@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *CreateIntegrationOK) Code() int {
 }
 
 func (o *CreateIntegrationOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations][%d] createIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations][%d] createIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateIntegrationOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations][%d] createIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations][%d] createIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateIntegrationOK) GetPayload() *models.Secrets20231128CreateIntegrationResponse {
@@ -158,11 +161,13 @@ func (o *CreateIntegrationDefault) Code() int {
 }
 
 func (o *CreateIntegrationDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations][%d] CreateIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations][%d] CreateIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateIntegrationDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations][%d] CreateIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations][%d] CreateIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateIntegrationDefault) GetPayload() *models.GooglerpcStatus {

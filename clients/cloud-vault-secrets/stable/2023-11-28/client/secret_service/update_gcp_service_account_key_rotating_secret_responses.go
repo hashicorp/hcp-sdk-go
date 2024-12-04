@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *UpdateGcpServiceAccountKeyRotatingSecretOK) Code() int {
 }
 
 func (o *UpdateGcpServiceAccountKeyRotatingSecretOK) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret/{name}][%d] updateGcpServiceAccountKeyRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret/{name}][%d] updateGcpServiceAccountKeyRotatingSecretOK %s", 200, payload)
 }
 
 func (o *UpdateGcpServiceAccountKeyRotatingSecretOK) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret/{name}][%d] updateGcpServiceAccountKeyRotatingSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret/{name}][%d] updateGcpServiceAccountKeyRotatingSecretOK %s", 200, payload)
 }
 
 func (o *UpdateGcpServiceAccountKeyRotatingSecretOK) GetPayload() *models.Secrets20231128UpdateGcpServiceAccountKeyRotatingSecretResponse {
@@ -158,11 +161,13 @@ func (o *UpdateGcpServiceAccountKeyRotatingSecretDefault) Code() int {
 }
 
 func (o *UpdateGcpServiceAccountKeyRotatingSecretDefault) Error() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret/{name}][%d] UpdateGcpServiceAccountKeyRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret/{name}][%d] UpdateGcpServiceAccountKeyRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *UpdateGcpServiceAccountKeyRotatingSecretDefault) String() string {
-	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret/{name}][%d] UpdateGcpServiceAccountKeyRotatingSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/rotating/gcp/secret/{name}][%d] UpdateGcpServiceAccountKeyRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *UpdateGcpServiceAccountKeyRotatingSecretDefault) GetPayload() *models.GooglerpcStatus {

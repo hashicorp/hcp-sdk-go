@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *CreatePostgresIntegrationOK) Code() int {
 }
 
 func (o *CreatePostgresIntegrationOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config][%d] createPostgresIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config][%d] createPostgresIntegrationOK %s", 200, payload)
 }
 
 func (o *CreatePostgresIntegrationOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config][%d] createPostgresIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config][%d] createPostgresIntegrationOK %s", 200, payload)
 }
 
 func (o *CreatePostgresIntegrationOK) GetPayload() *models.Secrets20231128CreatePostgresIntegrationResponse {
@@ -158,11 +161,13 @@ func (o *CreatePostgresIntegrationDefault) Code() int {
 }
 
 func (o *CreatePostgresIntegrationDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config][%d] CreatePostgresIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config][%d] CreatePostgresIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreatePostgresIntegrationDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config][%d] CreatePostgresIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/integrations/postgres/config][%d] CreatePostgresIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreatePostgresIntegrationDefault) GetPayload() *models.GooglerpcStatus {

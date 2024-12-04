@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteAppSecretVersionOK) Code() int {
 }
 
 func (o *DeleteAppSecretVersionOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] deleteAppSecretVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] deleteAppSecretVersionOK %s", 200, payload)
 }
 
 func (o *DeleteAppSecretVersionOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] deleteAppSecretVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] deleteAppSecretVersionOK %s", 200, payload)
 }
 
 func (o *DeleteAppSecretVersionOK) GetPayload() models.Secrets20231128DeleteAppSecretVersionResponse {
@@ -156,11 +159,13 @@ func (o *DeleteAppSecretVersionDefault) Code() int {
 }
 
 func (o *DeleteAppSecretVersionDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] DeleteAppSecretVersion default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] DeleteAppSecretVersion default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAppSecretVersionDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] DeleteAppSecretVersion default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/{secret_name}/versions/{version}][%d] DeleteAppSecretVersion default %s", o._statusCode, payload)
 }
 
 func (o *DeleteAppSecretVersionDefault) GetPayload() *models.GooglerpcStatus {

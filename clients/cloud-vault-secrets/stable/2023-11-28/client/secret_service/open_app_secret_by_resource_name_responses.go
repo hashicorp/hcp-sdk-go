@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *OpenAppSecretByResourceNameOK) Code() int {
 }
 
 func (o *OpenAppSecretByResourceNameOK) Error() string {
-	return fmt.Sprintf("[GET /2023-11-28/{resource_name}:open][%d] openAppSecretByResourceNameOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-11-28/{resource_name}:open][%d] openAppSecretByResourceNameOK %s", 200, payload)
 }
 
 func (o *OpenAppSecretByResourceNameOK) String() string {
-	return fmt.Sprintf("[GET /2023-11-28/{resource_name}:open][%d] openAppSecretByResourceNameOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-11-28/{resource_name}:open][%d] openAppSecretByResourceNameOK %s", 200, payload)
 }
 
 func (o *OpenAppSecretByResourceNameOK) GetPayload() *models.Secrets20231128OpenAppSecretResponse {
@@ -158,11 +161,13 @@ func (o *OpenAppSecretByResourceNameDefault) Code() int {
 }
 
 func (o *OpenAppSecretByResourceNameDefault) Error() string {
-	return fmt.Sprintf("[GET /2023-11-28/{resource_name}:open][%d] OpenAppSecretByResourceName default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-11-28/{resource_name}:open][%d] OpenAppSecretByResourceName default %s", o._statusCode, payload)
 }
 
 func (o *OpenAppSecretByResourceNameDefault) String() string {
-	return fmt.Sprintf("[GET /2023-11-28/{resource_name}:open][%d] OpenAppSecretByResourceName default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-11-28/{resource_name}:open][%d] OpenAppSecretByResourceName default %s", o._statusCode, payload)
 }
 
 func (o *OpenAppSecretByResourceNameDefault) GetPayload() *models.GooglerpcStatus {
