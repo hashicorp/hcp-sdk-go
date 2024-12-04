@@ -6,6 +6,7 @@ package resource_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ResourceServiceGetIamPolicyOK) Code() int {
 }
 
 func (o *ResourceServiceGetIamPolicyOK) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/resource-manager/resources/iam-policy][%d] resourceServiceGetIamPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/resource-manager/resources/iam-policy][%d] resourceServiceGetIamPolicyOK %s", 200, payload)
 }
 
 func (o *ResourceServiceGetIamPolicyOK) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/resource-manager/resources/iam-policy][%d] resourceServiceGetIamPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/resource-manager/resources/iam-policy][%d] resourceServiceGetIamPolicyOK %s", 200, payload)
 }
 
 func (o *ResourceServiceGetIamPolicyOK) GetPayload() *models.HashicorpCloudResourcemanagerResourceGetIamPolicyResponse {
@@ -159,11 +162,13 @@ func (o *ResourceServiceGetIamPolicyDefault) Code() int {
 }
 
 func (o *ResourceServiceGetIamPolicyDefault) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/resource-manager/resources/iam-policy][%d] ResourceService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/resource-manager/resources/iam-policy][%d] ResourceService_GetIamPolicy default %s", o._statusCode, payload)
 }
 
 func (o *ResourceServiceGetIamPolicyDefault) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/resource-manager/resources/iam-policy][%d] ResourceService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/resource-manager/resources/iam-policy][%d] ResourceService_GetIamPolicy default %s", o._statusCode, payload)
 }
 
 func (o *ResourceServiceGetIamPolicyDefault) GetPayload() *cloud.GoogleRPCStatus {

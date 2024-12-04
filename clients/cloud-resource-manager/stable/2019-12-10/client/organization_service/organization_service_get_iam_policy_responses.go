@@ -6,6 +6,7 @@ package organization_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *OrganizationServiceGetIamPolicyOK) Code() int {
 }
 
 func (o *OrganizationServiceGetIamPolicyOK) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceGetIamPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceGetIamPolicyOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceGetIamPolicyOK) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceGetIamPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceGetIamPolicyOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceGetIamPolicyOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationGetIamPolicyResponse {
@@ -159,11 +162,13 @@ func (o *OrganizationServiceGetIamPolicyDefault) Code() int {
 }
 
 func (o *OrganizationServiceGetIamPolicyDefault) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_GetIamPolicy default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceGetIamPolicyDefault) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_GetIamPolicy default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceGetIamPolicyDefault) GetPayload() *cloud.GoogleRPCStatus {

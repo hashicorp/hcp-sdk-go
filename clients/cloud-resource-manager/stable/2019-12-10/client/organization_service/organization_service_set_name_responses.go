@@ -7,6 +7,7 @@ package organization_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *OrganizationServiceSetNameOK) Code() int {
 }
 
 func (o *OrganizationServiceSetNameOK) Error() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/name][%d] organizationServiceSetNameOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/name][%d] organizationServiceSetNameOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceSetNameOK) String() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/name][%d] organizationServiceSetNameOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/name][%d] organizationServiceSetNameOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceSetNameOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationSetNameResponse {
@@ -161,11 +164,13 @@ func (o *OrganizationServiceSetNameDefault) Code() int {
 }
 
 func (o *OrganizationServiceSetNameDefault) Error() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/name][%d] OrganizationService_SetName default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/name][%d] OrganizationService_SetName default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceSetNameDefault) String() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/name][%d] OrganizationService_SetName default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/name][%d] OrganizationService_SetName default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceSetNameDefault) GetPayload() *cloud.GoogleRPCStatus {

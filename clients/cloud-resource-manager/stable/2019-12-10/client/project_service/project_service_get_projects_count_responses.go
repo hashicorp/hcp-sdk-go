@@ -6,6 +6,7 @@ package project_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ProjectServiceGetProjectsCountOK) Code() int {
 }
 
 func (o *ProjectServiceGetProjectsCountOK) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/count][%d] projectServiceGetProjectsCountOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/count][%d] projectServiceGetProjectsCountOK %s", 200, payload)
 }
 
 func (o *ProjectServiceGetProjectsCountOK) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/count][%d] projectServiceGetProjectsCountOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/count][%d] projectServiceGetProjectsCountOK %s", 200, payload)
 }
 
 func (o *ProjectServiceGetProjectsCountOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectGetProjectsCountResponse {
@@ -159,11 +162,13 @@ func (o *ProjectServiceGetProjectsCountDefault) Code() int {
 }
 
 func (o *ProjectServiceGetProjectsCountDefault) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/count][%d] ProjectService_GetProjectsCount default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/count][%d] ProjectService_GetProjectsCount default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceGetProjectsCountDefault) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/count][%d] ProjectService_GetProjectsCount default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/count][%d] ProjectService_GetProjectsCount default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceGetProjectsCountDefault) GetPayload() *cloud.GoogleRPCStatus {

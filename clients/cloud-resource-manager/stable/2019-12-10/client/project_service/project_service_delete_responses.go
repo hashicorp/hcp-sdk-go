@@ -6,6 +6,7 @@ package project_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ProjectServiceDeleteOK) Code() int {
 }
 
 func (o *ProjectServiceDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] projectServiceDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] projectServiceDeleteOK %s", 200, payload)
 }
 
 func (o *ProjectServiceDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] projectServiceDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] projectServiceDeleteOK %s", 200, payload)
 }
 
 func (o *ProjectServiceDeleteOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectDeleteResponse {
@@ -159,11 +162,13 @@ func (o *ProjectServiceDeleteDefault) Code() int {
 }
 
 func (o *ProjectServiceDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] ProjectService_Delete default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] ProjectService_Delete default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceDeleteDefault) String() string {
-	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] ProjectService_Delete default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/projects/{id}][%d] ProjectService_Delete default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceDeleteDefault) GetPayload() *cloud.GoogleRPCStatus {

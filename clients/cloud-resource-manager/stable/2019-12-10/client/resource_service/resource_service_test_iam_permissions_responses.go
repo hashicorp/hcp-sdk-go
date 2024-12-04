@@ -6,6 +6,7 @@ package resource_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ResourceServiceTestIamPermissionsOK) Code() int {
 }
 
 func (o *ResourceServiceTestIamPermissionsOK) Error() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/resources/test-iam-permissions][%d] resourceServiceTestIamPermissionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/resources/test-iam-permissions][%d] resourceServiceTestIamPermissionsOK %s", 200, payload)
 }
 
 func (o *ResourceServiceTestIamPermissionsOK) String() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/resources/test-iam-permissions][%d] resourceServiceTestIamPermissionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/resources/test-iam-permissions][%d] resourceServiceTestIamPermissionsOK %s", 200, payload)
 }
 
 func (o *ResourceServiceTestIamPermissionsOK) GetPayload() *models.HashicorpCloudResourcemanagerResourceTestIamPermissionsResponse {
@@ -159,11 +162,13 @@ func (o *ResourceServiceTestIamPermissionsDefault) Code() int {
 }
 
 func (o *ResourceServiceTestIamPermissionsDefault) Error() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/resources/test-iam-permissions][%d] ResourceService_TestIamPermissions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/resources/test-iam-permissions][%d] ResourceService_TestIamPermissions default %s", o._statusCode, payload)
 }
 
 func (o *ResourceServiceTestIamPermissionsDefault) String() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/resources/test-iam-permissions][%d] ResourceService_TestIamPermissions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/resources/test-iam-permissions][%d] ResourceService_TestIamPermissions default %s", o._statusCode, payload)
 }
 
 func (o *ResourceServiceTestIamPermissionsDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -6,6 +6,7 @@ package resource_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ResourceServiceListAccessibleResourcesOK) Code() int {
 }
 
 func (o *ResourceServiceListAccessibleResourcesOK) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/resources/accessible][%d] resourceServiceListAccessibleResourcesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/resources/accessible][%d] resourceServiceListAccessibleResourcesOK %s", 200, payload)
 }
 
 func (o *ResourceServiceListAccessibleResourcesOK) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/resources/accessible][%d] resourceServiceListAccessibleResourcesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/resources/accessible][%d] resourceServiceListAccessibleResourcesOK %s", 200, payload)
 }
 
 func (o *ResourceServiceListAccessibleResourcesOK) GetPayload() *models.HashicorpCloudResourcemanagerResourceListAccessibleResourcesResponse {
@@ -159,11 +162,13 @@ func (o *ResourceServiceListAccessibleResourcesDefault) Code() int {
 }
 
 func (o *ResourceServiceListAccessibleResourcesDefault) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/resources/accessible][%d] ResourceService_ListAccessibleResources default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/resources/accessible][%d] ResourceService_ListAccessibleResources default %s", o._statusCode, payload)
 }
 
 func (o *ResourceServiceListAccessibleResourcesDefault) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/resources/accessible][%d] ResourceService_ListAccessibleResources default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/resources/accessible][%d] ResourceService_ListAccessibleResources default %s", o._statusCode, payload)
 }
 
 func (o *ResourceServiceListAccessibleResourcesDefault) GetPayload() *cloud.GoogleRPCStatus {

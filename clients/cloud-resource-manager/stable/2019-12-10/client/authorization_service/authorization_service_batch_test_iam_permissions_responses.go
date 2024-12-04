@@ -6,6 +6,7 @@ package authorization_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *AuthorizationServiceBatchTestIamPermissionsOK) Code() int {
 }
 
 func (o *AuthorizationServiceBatchTestIamPermissionsOK) Error() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/authorization/batch-test-iam-permissions][%d] authorizationServiceBatchTestIamPermissionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/authorization/batch-test-iam-permissions][%d] authorizationServiceBatchTestIamPermissionsOK %s", 200, payload)
 }
 
 func (o *AuthorizationServiceBatchTestIamPermissionsOK) String() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/authorization/batch-test-iam-permissions][%d] authorizationServiceBatchTestIamPermissionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/authorization/batch-test-iam-permissions][%d] authorizationServiceBatchTestIamPermissionsOK %s", 200, payload)
 }
 
 func (o *AuthorizationServiceBatchTestIamPermissionsOK) GetPayload() *models.HashicorpCloudResourcemanagerBatchAuthorizationTestIamPermissionsResponse {
@@ -159,11 +162,13 @@ func (o *AuthorizationServiceBatchTestIamPermissionsDefault) Code() int {
 }
 
 func (o *AuthorizationServiceBatchTestIamPermissionsDefault) Error() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/authorization/batch-test-iam-permissions][%d] AuthorizationService_BatchTestIamPermissions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/authorization/batch-test-iam-permissions][%d] AuthorizationService_BatchTestIamPermissions default %s", o._statusCode, payload)
 }
 
 func (o *AuthorizationServiceBatchTestIamPermissionsDefault) String() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/authorization/batch-test-iam-permissions][%d] AuthorizationService_BatchTestIamPermissions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/authorization/batch-test-iam-permissions][%d] AuthorizationService_BatchTestIamPermissions default %s", o._statusCode, payload)
 }
 
 func (o *AuthorizationServiceBatchTestIamPermissionsDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -7,6 +7,7 @@ package project_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *ProjectServiceTestIamPermissionsOK) Code() int {
 }
 
 func (o *ProjectServiceTestIamPermissionsOK) Error() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/projects/{id}/test-iam-permissions][%d] projectServiceTestIamPermissionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/projects/{id}/test-iam-permissions][%d] projectServiceTestIamPermissionsOK %s", 200, payload)
 }
 
 func (o *ProjectServiceTestIamPermissionsOK) String() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/projects/{id}/test-iam-permissions][%d] projectServiceTestIamPermissionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/projects/{id}/test-iam-permissions][%d] projectServiceTestIamPermissionsOK %s", 200, payload)
 }
 
 func (o *ProjectServiceTestIamPermissionsOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectTestIamPermissionsResponse {
@@ -161,11 +164,13 @@ func (o *ProjectServiceTestIamPermissionsDefault) Code() int {
 }
 
 func (o *ProjectServiceTestIamPermissionsDefault) Error() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/projects/{id}/test-iam-permissions][%d] ProjectService_TestIamPermissions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/projects/{id}/test-iam-permissions][%d] ProjectService_TestIamPermissions default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceTestIamPermissionsDefault) String() string {
-	return fmt.Sprintf("[POST /resource-manager/2019-12-10/projects/{id}/test-iam-permissions][%d] ProjectService_TestIamPermissions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource-manager/2019-12-10/projects/{id}/test-iam-permissions][%d] ProjectService_TestIamPermissions default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceTestIamPermissionsDefault) GetPayload() *cloud.GoogleRPCStatus {
