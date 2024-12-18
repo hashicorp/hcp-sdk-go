@@ -57,6 +57,9 @@ type Secrets20231128Integration struct {
 	// mongo db atlas static credentials
 	MongoDbAtlasStaticCredentials *Secrets20231128MongoDBAtlasStaticCredentialsResponse `json:"mongo_db_atlas_static_credentials,omitempty"`
 
+	// mysql static credentials
+	MysqlStaticCredentials *Secrets20231128MysqlStaticCredentialsResponse `json:"mysql_static_credentials,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
@@ -127,6 +130,10 @@ func (m *Secrets20231128Integration) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateMongoDbAtlasStaticCredentials(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMysqlStaticCredentials(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -342,6 +349,25 @@ func (m *Secrets20231128Integration) validateMongoDbAtlasStaticCredentials(forma
 	return nil
 }
 
+func (m *Secrets20231128Integration) validateMysqlStaticCredentials(formats strfmt.Registry) error {
+	if swag.IsZero(m.MysqlStaticCredentials) { // not required
+		return nil
+	}
+
+	if m.MysqlStaticCredentials != nil {
+		if err := m.MysqlStaticCredentials.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mysql_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("mysql_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128Integration) validatePostgresStaticCredentials(formats strfmt.Registry) error {
 	if swag.IsZero(m.PostgresStaticCredentials) { // not required
 		return nil
@@ -455,6 +481,10 @@ func (m *Secrets20231128Integration) ContextValidate(ctx context.Context, format
 	}
 
 	if err := m.contextValidateMongoDbAtlasStaticCredentials(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMysqlStaticCredentials(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -661,6 +691,27 @@ func (m *Secrets20231128Integration) contextValidateMongoDbAtlasStaticCredential
 				return ve.ValidateName("mongo_db_atlas_static_credentials")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("mongo_db_atlas_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Integration) contextValidateMysqlStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MysqlStaticCredentials != nil {
+
+		if swag.IsZero(m.MysqlStaticCredentials) { // not required
+			return nil
+		}
+
+		if err := m.MysqlStaticCredentials.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mysql_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("mysql_static_credentials")
 			}
 			return err
 		}

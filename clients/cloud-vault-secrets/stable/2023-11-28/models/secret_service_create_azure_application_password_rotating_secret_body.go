@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SecretServiceCreateAzureApplicationPasswordRotatingSecretBody --- Azure Rotating Secrets ---
+// SecretServiceCreateAzureApplicationPasswordRotatingSecretBody secret service create azure application password rotating secret body
 //
 // swagger:model SecretServiceCreateAzureApplicationPasswordRotatingSecretBody
 type SecretServiceCreateAzureApplicationPasswordRotatingSecretBody struct {

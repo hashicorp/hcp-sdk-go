@@ -19,8 +19,14 @@ import (
 // swagger:model secrets_20231128RotatingSecret
 type Secrets20231128RotatingSecret struct {
 
-	// app name
-	AppName string `json:"app_name,omitempty"`
+	// aws access key details
+	AwsAccessKeyDetails *Secrets20231128AwsIAMUserAccessKeyParams `json:"aws_access_key_details,omitempty"`
+
+	// azure application password details
+	AzureApplicationPasswordDetails *Secrets20231128AzureApplicationPasswordParams `json:"azure_application_password_details,omitempty"`
+
+	// confluent cloud api key details
+	ConfluentCloudAPIKeyDetails *Secrets20231128ConfluentCloudAPIKeyParams `json:"confluent_cloud_api_key_details,omitempty"`
 
 	// created at
 	// Format: date-time
@@ -29,17 +35,32 @@ type Secrets20231128RotatingSecret struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// gcp service account key details
+	GcpServiceAccountKeyDetails *Secrets20231128GcpServiceAccountKeyParams `json:"gcp_service_account_key_details,omitempty"`
+
 	// integration name
 	IntegrationName string `json:"integration_name,omitempty"`
+
+	// mongodb atlas user password details
+	MongodbAtlasUserPasswordDetails *Secrets20231128MongoDBAtlasSecretDetails `json:"mongodb_atlas_user_password_details,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
 
+	// postgres user password details
+	PostgresUserPasswordDetails *Secrets20231128PostgresParams `json:"postgres_user_password_details,omitempty"`
+
+	// provider
+	Provider string `json:"provider,omitempty"`
+
+	// random user password details
+	RandomUserPasswordDetails *Secrets20231128RandomParams `json:"random_user_password_details,omitempty"`
+
 	// rotation policy name
 	RotationPolicyName string `json:"rotation_policy_name,omitempty"`
 
-	// secret details
-	SecretDetails interface{} `json:"secret_details,omitempty"`
+	// twilio api key details
+	TwilioAPIKeyDetails Secrets20231128TwilioAPIKeyDetails `json:"twilio_api_key_details,omitempty"`
 
 	// updated at
 	// Format: date-time
@@ -53,7 +74,35 @@ type Secrets20231128RotatingSecret struct {
 func (m *Secrets20231128RotatingSecret) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAwsAccessKeyDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAzureApplicationPasswordDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateConfluentCloudAPIKeyDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGcpServiceAccountKeyDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMongodbAtlasUserPasswordDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostgresUserPasswordDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRandomUserPasswordDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -67,6 +116,63 @@ func (m *Secrets20231128RotatingSecret) Validate(formats strfmt.Registry) error 
 	return nil
 }
 
+func (m *Secrets20231128RotatingSecret) validateAwsAccessKeyDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.AwsAccessKeyDetails) { // not required
+		return nil
+	}
+
+	if m.AwsAccessKeyDetails != nil {
+		if err := m.AwsAccessKeyDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("aws_access_key_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("aws_access_key_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) validateAzureApplicationPasswordDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.AzureApplicationPasswordDetails) { // not required
+		return nil
+	}
+
+	if m.AzureApplicationPasswordDetails != nil {
+		if err := m.AzureApplicationPasswordDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_application_password_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_application_password_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) validateConfluentCloudAPIKeyDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.ConfluentCloudAPIKeyDetails) { // not required
+		return nil
+	}
+
+	if m.ConfluentCloudAPIKeyDetails != nil {
+		if err := m.ConfluentCloudAPIKeyDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("confluent_cloud_api_key_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("confluent_cloud_api_key_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128RotatingSecret) validateCreatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreatedAt) { // not required
 		return nil
@@ -74,6 +180,82 @@ func (m *Secrets20231128RotatingSecret) validateCreatedAt(formats strfmt.Registr
 
 	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) validateGcpServiceAccountKeyDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.GcpServiceAccountKeyDetails) { // not required
+		return nil
+	}
+
+	if m.GcpServiceAccountKeyDetails != nil {
+		if err := m.GcpServiceAccountKeyDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gcp_service_account_key_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gcp_service_account_key_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) validateMongodbAtlasUserPasswordDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.MongodbAtlasUserPasswordDetails) { // not required
+		return nil
+	}
+
+	if m.MongodbAtlasUserPasswordDetails != nil {
+		if err := m.MongodbAtlasUserPasswordDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mongodb_atlas_user_password_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("mongodb_atlas_user_password_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) validatePostgresUserPasswordDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.PostgresUserPasswordDetails) { // not required
+		return nil
+	}
+
+	if m.PostgresUserPasswordDetails != nil {
+		if err := m.PostgresUserPasswordDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postgres_user_password_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("postgres_user_password_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) validateRandomUserPasswordDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.RandomUserPasswordDetails) { // not required
+		return nil
+	}
+
+	if m.RandomUserPasswordDetails != nil {
+		if err := m.RandomUserPasswordDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("random_user_password_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("random_user_password_details")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -91,8 +273,188 @@ func (m *Secrets20231128RotatingSecret) validateUpdatedAt(formats strfmt.Registr
 	return nil
 }
 
-// ContextValidate validates this secrets 20231128 rotating secret based on context it is used
+// ContextValidate validate this secrets 20231128 rotating secret based on the context it is used
 func (m *Secrets20231128RotatingSecret) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAwsAccessKeyDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAzureApplicationPasswordDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateConfluentCloudAPIKeyDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGcpServiceAccountKeyDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMongodbAtlasUserPasswordDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePostgresUserPasswordDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRandomUserPasswordDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) contextValidateAwsAccessKeyDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AwsAccessKeyDetails != nil {
+
+		if swag.IsZero(m.AwsAccessKeyDetails) { // not required
+			return nil
+		}
+
+		if err := m.AwsAccessKeyDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("aws_access_key_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("aws_access_key_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) contextValidateAzureApplicationPasswordDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AzureApplicationPasswordDetails != nil {
+
+		if swag.IsZero(m.AzureApplicationPasswordDetails) { // not required
+			return nil
+		}
+
+		if err := m.AzureApplicationPasswordDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_application_password_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_application_password_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) contextValidateConfluentCloudAPIKeyDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ConfluentCloudAPIKeyDetails != nil {
+
+		if swag.IsZero(m.ConfluentCloudAPIKeyDetails) { // not required
+			return nil
+		}
+
+		if err := m.ConfluentCloudAPIKeyDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("confluent_cloud_api_key_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("confluent_cloud_api_key_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) contextValidateGcpServiceAccountKeyDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GcpServiceAccountKeyDetails != nil {
+
+		if swag.IsZero(m.GcpServiceAccountKeyDetails) { // not required
+			return nil
+		}
+
+		if err := m.GcpServiceAccountKeyDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gcp_service_account_key_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gcp_service_account_key_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) contextValidateMongodbAtlasUserPasswordDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MongodbAtlasUserPasswordDetails != nil {
+
+		if swag.IsZero(m.MongodbAtlasUserPasswordDetails) { // not required
+			return nil
+		}
+
+		if err := m.MongodbAtlasUserPasswordDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mongodb_atlas_user_password_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("mongodb_atlas_user_password_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) contextValidatePostgresUserPasswordDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PostgresUserPasswordDetails != nil {
+
+		if swag.IsZero(m.PostgresUserPasswordDetails) { // not required
+			return nil
+		}
+
+		if err := m.PostgresUserPasswordDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postgres_user_password_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("postgres_user_password_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128RotatingSecret) contextValidateRandomUserPasswordDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RandomUserPasswordDetails != nil {
+
+		if swag.IsZero(m.RandomUserPasswordDetails) { // not required
+			return nil
+		}
+
+		if err := m.RandomUserPasswordDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("random_user_password_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("random_user_password_details")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

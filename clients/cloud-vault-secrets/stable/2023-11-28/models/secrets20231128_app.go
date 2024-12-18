@@ -47,6 +47,9 @@ type Secrets20231128App struct {
 	// secret count
 	SecretCount int32 `json:"secret_count,omitempty"`
 
+	// sync names
+	SyncNames []string `json:"sync_names"`
+
 	// updated at
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`

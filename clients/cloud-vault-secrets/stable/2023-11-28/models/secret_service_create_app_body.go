@@ -22,6 +22,9 @@ type SecretServiceCreateAppBody struct {
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// sync names
+	SyncNames []string `json:"sync_names"`
 }
 
 // Validate validates this secret service create app body

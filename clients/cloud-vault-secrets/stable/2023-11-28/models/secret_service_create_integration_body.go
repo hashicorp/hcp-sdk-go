@@ -37,6 +37,9 @@ type SecretServiceCreateIntegrationBody struct {
 	// confluent static credentials
 	ConfluentStaticCredentials *Secrets20231128ConfluentStaticCredentialsRequest `json:"confluent_static_credentials,omitempty"`
 
+	// gateway pool id
+	GatewayPoolID string `json:"gateway_pool_id,omitempty"`
+
 	// gcp federated workload identity
 	GcpFederatedWorkloadIdentity *Secrets20231128GcpFederatedWorkloadIdentityRequest `json:"gcp_federated_workload_identity,omitempty"`
 
@@ -49,8 +52,14 @@ type SecretServiceCreateIntegrationBody struct {
 	// mongo db atlas static credentials
 	MongoDbAtlasStaticCredentials *Secrets20231128MongoDBAtlasStaticCredentialsRequest `json:"mongo_db_atlas_static_credentials,omitempty"`
 
+	// mysql static credentials
+	MysqlStaticCredentials *Secrets20231128MysqlStaticCredentialsRequest `json:"mysql_static_credentials,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
+
+	// postgres static credentials
+	PostgresStaticCredentials *Secrets20231128PostgresStaticCredentialsRequest `json:"postgres_static_credentials,omitempty"`
 
 	// provider
 	Provider string `json:"provider,omitempty"`
@@ -100,6 +109,14 @@ func (m *SecretServiceCreateIntegrationBody) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateMongoDbAtlasStaticCredentials(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMysqlStaticCredentials(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostgresStaticCredentials(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -310,6 +327,44 @@ func (m *SecretServiceCreateIntegrationBody) validateMongoDbAtlasStaticCredentia
 	return nil
 }
 
+func (m *SecretServiceCreateIntegrationBody) validateMysqlStaticCredentials(formats strfmt.Registry) error {
+	if swag.IsZero(m.MysqlStaticCredentials) { // not required
+		return nil
+	}
+
+	if m.MysqlStaticCredentials != nil {
+		if err := m.MysqlStaticCredentials.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mysql_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("mysql_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceCreateIntegrationBody) validatePostgresStaticCredentials(formats strfmt.Registry) error {
+	if swag.IsZero(m.PostgresStaticCredentials) { // not required
+		return nil
+	}
+
+	if m.PostgresStaticCredentials != nil {
+		if err := m.PostgresStaticCredentials.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postgres_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("postgres_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *SecretServiceCreateIntegrationBody) validateTwilioStaticCredentials(formats strfmt.Registry) error {
 	if swag.IsZero(m.TwilioStaticCredentials) { // not required
 		return nil
@@ -370,6 +425,14 @@ func (m *SecretServiceCreateIntegrationBody) ContextValidate(ctx context.Context
 	}
 
 	if err := m.contextValidateMongoDbAtlasStaticCredentials(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMysqlStaticCredentials(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePostgresStaticCredentials(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -589,6 +652,48 @@ func (m *SecretServiceCreateIntegrationBody) contextValidateMongoDbAtlasStaticCr
 				return ve.ValidateName("mongo_db_atlas_static_credentials")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("mongo_db_atlas_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceCreateIntegrationBody) contextValidateMysqlStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MysqlStaticCredentials != nil {
+
+		if swag.IsZero(m.MysqlStaticCredentials) { // not required
+			return nil
+		}
+
+		if err := m.MysqlStaticCredentials.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mysql_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("mysql_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceCreateIntegrationBody) contextValidatePostgresStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PostgresStaticCredentials != nil {
+
+		if swag.IsZero(m.PostgresStaticCredentials) { // not required
+			return nil
+		}
+
+		if err := m.PostgresStaticCredentials.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postgres_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("postgres_static_credentials")
 			}
 			return err
 		}

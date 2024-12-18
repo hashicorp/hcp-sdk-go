@@ -65,6 +65,9 @@ type OpenAppSecretsParams struct {
 	// AppName.
 	AppName string
 
+	// NameContains.
+	NameContains *string
+
 	// OrganizationID.
 	OrganizationID string
 
@@ -165,6 +168,17 @@ func (o *OpenAppSecretsParams) SetAppName(appName string) {
 	o.AppName = appName
 }
 
+// WithNameContains adds the nameContains to the open app secrets params
+func (o *OpenAppSecretsParams) WithNameContains(nameContains *string) *OpenAppSecretsParams {
+	o.SetNameContains(nameContains)
+	return o
+}
+
+// SetNameContains adds the nameContains to the open app secrets params
+func (o *OpenAppSecretsParams) SetNameContains(nameContains *string) {
+	o.NameContains = nameContains
+}
+
 // WithOrganizationID adds the organizationID to the open app secrets params
 func (o *OpenAppSecretsParams) WithOrganizationID(organizationID string) *OpenAppSecretsParams {
 	o.SetOrganizationID(organizationID)
@@ -242,6 +256,23 @@ func (o *OpenAppSecretsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	// path param app_name
 	if err := r.SetPathParam("app_name", o.AppName); err != nil {
 		return err
+	}
+
+	if o.NameContains != nil {
+
+		// query param name_contains
+		var qrNameContains string
+
+		if o.NameContains != nil {
+			qrNameContains = *o.NameContains
+		}
+		qNameContains := qrNameContains
+		if qNameContains != "" {
+
+			if err := r.SetQueryParam("name_contains", qNameContains); err != nil {
+				return err
+			}
+		}
 	}
 
 	// path param organization_id
