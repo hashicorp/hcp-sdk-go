@@ -6,6 +6,7 @@ package boundary_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *BoundaryServiceUpdateApplyOK) Code() int {
 }
 
 func (o *BoundaryServiceUpdateApplyOK) Error() string {
-	return fmt.Sprintf("[POST /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update][%d] boundaryServiceUpdateApplyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update][%d] boundaryServiceUpdateApplyOK %s", 200, payload)
 }
 
 func (o *BoundaryServiceUpdateApplyOK) String() string {
-	return fmt.Sprintf("[POST /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update][%d] boundaryServiceUpdateApplyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update][%d] boundaryServiceUpdateApplyOK %s", 200, payload)
 }
 
 func (o *BoundaryServiceUpdateApplyOK) GetPayload() models.HashicorpCloudBoundary20211221UpdateApplyResponse {
@@ -157,11 +160,13 @@ func (o *BoundaryServiceUpdateApplyDefault) Code() int {
 }
 
 func (o *BoundaryServiceUpdateApplyDefault) Error() string {
-	return fmt.Sprintf("[POST /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update][%d] BoundaryService_UpdateApply default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update][%d] BoundaryService_UpdateApply default %s", o._statusCode, payload)
 }
 
 func (o *BoundaryServiceUpdateApplyDefault) String() string {
-	return fmt.Sprintf("[POST /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update][%d] BoundaryService_UpdateApply default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update][%d] BoundaryService_UpdateApply default %s", o._statusCode, payload)
 }
 
 func (o *BoundaryServiceUpdateApplyDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

@@ -7,12 +7,38 @@ package boundary_service
 
 import (
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new boundary service API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new boundary service API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new boundary service API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -23,7 +49,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -36,17 +62,23 @@ type ClientService interface {
 
 	BoundaryServiceGet(params *BoundaryServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceGetOK, error)
 
+	BoundaryServiceGetControllerConfiguration(params *BoundaryServiceGetControllerConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceGetControllerConfigurationOK, error)
+
 	BoundaryServiceList(params *BoundaryServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceListOK, error)
 
 	BoundaryServiceMaintenanceWindowGet(params *BoundaryServiceMaintenanceWindowGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceMaintenanceWindowGetOK, error)
 
 	BoundaryServiceMaintenanceWindowUpdate(params *BoundaryServiceMaintenanceWindowUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceMaintenanceWindowUpdateOK, error)
 
+	BoundaryServiceResetControllerConfiguration(params *BoundaryServiceResetControllerConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceResetControllerConfigurationOK, error)
+
 	BoundaryServiceSessions(params *BoundaryServiceSessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceSessionsOK, error)
 
 	BoundaryServiceUpdate(params *BoundaryServiceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceUpdateOK, error)
 
 	BoundaryServiceUpdateApply(params *BoundaryServiceUpdateApplyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceUpdateApplyOK, error)
+
+	BoundaryServiceUpdateControllerConfiguration(params *BoundaryServiceUpdateControllerConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceUpdateControllerConfigurationOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -204,6 +236,44 @@ func (a *Client) BoundaryServiceGet(params *BoundaryServiceGetParams, authInfo r
 }
 
 /*
+BoundaryServiceGetControllerConfiguration gets controller configuration is used to retrieve the controller configuration values of a specified boundary cluster
+*/
+func (a *Client) BoundaryServiceGetControllerConfiguration(params *BoundaryServiceGetControllerConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceGetControllerConfigurationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewBoundaryServiceGetControllerConfigurationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "BoundaryService_GetControllerConfiguration",
+		Method:             "GET",
+		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/controller-configuration",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &BoundaryServiceGetControllerConfigurationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*BoundaryServiceGetControllerConfigurationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*BoundaryServiceGetControllerConfigurationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 BoundaryServiceList lists returns all existing h c p boundary clusters
 */
 func (a *Client) BoundaryServiceList(params *BoundaryServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceListOK, error) {
@@ -318,6 +388,44 @@ func (a *Client) BoundaryServiceMaintenanceWindowUpdate(params *BoundaryServiceM
 }
 
 /*
+BoundaryServiceResetControllerConfiguration resets controller configuration is used to reset a cluster s controller configuration to its default values
+*/
+func (a *Client) BoundaryServiceResetControllerConfiguration(params *BoundaryServiceResetControllerConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceResetControllerConfigurationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewBoundaryServiceResetControllerConfigurationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "BoundaryService_ResetControllerConfiguration",
+		Method:             "DELETE",
+		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/controller-configuration",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &BoundaryServiceResetControllerConfigurationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*BoundaryServiceResetControllerConfigurationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*BoundaryServiceResetControllerConfigurationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 BoundaryServiceSessions sessions returns all session information for existing h c p boundary cluster
 */
 func (a *Client) BoundaryServiceSessions(params *BoundaryServiceSessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceSessionsOK, error) {
@@ -428,6 +536,44 @@ func (a *Client) BoundaryServiceUpdateApply(params *BoundaryServiceUpdateApplyPa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*BoundaryServiceUpdateApplyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+BoundaryServiceUpdateControllerConfiguration updates controller configuration is used to modify the controller configuration values of a specified boundary cluster
+*/
+func (a *Client) BoundaryServiceUpdateControllerConfiguration(params *BoundaryServiceUpdateControllerConfigurationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BoundaryServiceUpdateControllerConfigurationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewBoundaryServiceUpdateControllerConfigurationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "BoundaryService_UpdateControllerConfiguration",
+		Method:             "PUT",
+		PathPattern:        "/boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/controller-configuration",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &BoundaryServiceUpdateControllerConfigurationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*BoundaryServiceUpdateControllerConfigurationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*BoundaryServiceUpdateControllerConfigurationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

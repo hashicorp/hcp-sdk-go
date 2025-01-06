@@ -6,6 +6,7 @@ package boundary_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *BoundaryServiceDeleteOK) Code() int {
 }
 
 func (o *BoundaryServiceDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] boundaryServiceDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] boundaryServiceDeleteOK %s", 200, payload)
 }
 
 func (o *BoundaryServiceDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] boundaryServiceDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] boundaryServiceDeleteOK %s", 200, payload)
 }
 
 func (o *BoundaryServiceDeleteOK) GetPayload() *models.HashicorpCloudBoundary20211221DeleteResponse {
@@ -159,11 +162,13 @@ func (o *BoundaryServiceDeleteDefault) Code() int {
 }
 
 func (o *BoundaryServiceDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] BoundaryService_Delete default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] BoundaryService_Delete default %s", o._statusCode, payload)
 }
 
 func (o *BoundaryServiceDeleteDefault) String() string {
-	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] BoundaryService_Delete default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}][%d] BoundaryService_Delete default %s", o._statusCode, payload)
 }
 
 func (o *BoundaryServiceDeleteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

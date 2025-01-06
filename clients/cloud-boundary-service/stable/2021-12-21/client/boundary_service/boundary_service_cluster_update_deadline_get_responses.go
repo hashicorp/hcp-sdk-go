@@ -6,6 +6,7 @@ package boundary_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *BoundaryServiceClusterUpdateDeadlineGetOK) Code() int {
 }
 
 func (o *BoundaryServiceClusterUpdateDeadlineGetOK) Error() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-deadline][%d] boundaryServiceClusterUpdateDeadlineGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-deadline][%d] boundaryServiceClusterUpdateDeadlineGetOK %s", 200, payload)
 }
 
 func (o *BoundaryServiceClusterUpdateDeadlineGetOK) String() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-deadline][%d] boundaryServiceClusterUpdateDeadlineGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-deadline][%d] boundaryServiceClusterUpdateDeadlineGetOK %s", 200, payload)
 }
 
 func (o *BoundaryServiceClusterUpdateDeadlineGetOK) GetPayload() *models.HashicorpCloudBoundary20211221ClusterUpdateDeadlineGetResponse {
@@ -159,11 +162,13 @@ func (o *BoundaryServiceClusterUpdateDeadlineGetDefault) Code() int {
 }
 
 func (o *BoundaryServiceClusterUpdateDeadlineGetDefault) Error() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-deadline][%d] BoundaryService_ClusterUpdateDeadlineGet default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-deadline][%d] BoundaryService_ClusterUpdateDeadlineGet default %s", o._statusCode, payload)
 }
 
 func (o *BoundaryServiceClusterUpdateDeadlineGetDefault) String() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-deadline][%d] BoundaryService_ClusterUpdateDeadlineGet default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-deadline][%d] BoundaryService_ClusterUpdateDeadlineGet default %s", o._statusCode, payload)
 }
 
 func (o *BoundaryServiceClusterUpdateDeadlineGetDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
