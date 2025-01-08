@@ -7,6 +7,7 @@ package packer_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,13 @@ func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) Code() int {
 }
 
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) Error() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] packerServiceRegenerateTFCRunTaskHmacKeyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] packerServiceRegenerateTFCRunTaskHmacKeyOK %s", 200, payload)
 }
 
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) String() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] packerServiceRegenerateTFCRunTaskHmacKeyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] packerServiceRegenerateTFCRunTaskHmacKeyOK %s", 200, payload)
 }
 
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyOK) GetPayload() *models.HashicorpCloudPackerRegenerateTFCRunTaskHmacKeyResponse {
@@ -162,11 +165,13 @@ func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) Code() int {
 }
 
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) Error() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] PackerService_RegenerateTFCRunTaskHmacKey default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] PackerService_RegenerateTFCRunTaskHmacKey default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) String() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] PackerService_RegenerateTFCRunTaskHmacKey default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/hmac][%d] PackerService_RegenerateTFCRunTaskHmacKey default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceRegenerateTFCRunTaskHmacKeyDefault) GetPayload() *cloud.GoogleRPCStatus {

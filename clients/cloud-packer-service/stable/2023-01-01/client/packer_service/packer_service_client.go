@@ -7,12 +7,38 @@ package packer_service
 
 import (
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new packer service API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new packer service API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new packer service API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -23,7 +49,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -58,6 +84,8 @@ type ClientService interface {
 
 	PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetRegistryTFCRunTaskAPIParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryTFCRunTaskAPIOK, error)
 
+	PackerServiceGetSbom(params *PackerServiceGetSbomParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetSbomOK, error)
+
 	PackerServiceGetVersion(params *PackerServiceGetVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetVersionOK, error)
 
 	PackerServiceListBucketAncestry(params *PackerServiceListBucketAncestryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketAncestryOK, error)
@@ -69,6 +97,8 @@ type ClientService interface {
 	PackerServiceListChannelAssignmentHistory(params *PackerServiceListChannelAssignmentHistoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListChannelAssignmentHistoryOK, error)
 
 	PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListChannelsOK, error)
+
+	PackerServiceListSboms(params *PackerServiceListSbomsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListSbomsOK, error)
 
 	PackerServiceListVersions(params *PackerServiceListVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListVersionsOK, error)
 
@@ -83,6 +113,8 @@ type ClientService interface {
 	PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateRegistryOK, error)
 
 	PackerServiceUpdateVersion(params *PackerServiceUpdateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateVersionOK, error)
+
+	PackerServiceUploadSbom(params *PackerServiceUploadSbomParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUploadSbomOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -658,6 +690,44 @@ func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetR
 }
 
 /*
+PackerServiceGetSbom retrieves the stored s b o m generating a presigned URL with a w s s3 to retrieve the file
+*/
+func (a *Client) PackerServiceGetSbom(params *PackerServiceGetSbomParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetSbomOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceGetSbomParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_GetSbom",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}/sboms/{sbom_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceGetSbomReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceGetSbomOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceGetSbomDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 PackerServiceGetVersion retrieves the version using the version fingerprint
 */
 func (a *Client) PackerServiceGetVersion(params *PackerServiceGetVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetVersionOK, error) {
@@ -882,6 +952,44 @@ func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsPara
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PackerServiceListChannelsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceListSboms lists every existing sbom for a build
+*/
+func (a *Client) PackerServiceListSboms(params *PackerServiceListSbomsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListSbomsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceListSbomsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_ListSboms",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}/sboms",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceListSbomsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceListSbomsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceListSbomsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1148,6 +1256,44 @@ func (a *Client) PackerServiceUpdateVersion(params *PackerServiceUpdateVersionPa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PackerServiceUpdateVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceUploadSbom stores a zstd compressed s b o m and associates it with a build
+*/
+func (a *Client) PackerServiceUploadSbom(params *PackerServiceUploadSbomParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUploadSbomOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceUploadSbomParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_UploadSbom",
+		Method:             "PUT",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}/sboms",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceUploadSbomReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceUploadSbomOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceUploadSbomDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

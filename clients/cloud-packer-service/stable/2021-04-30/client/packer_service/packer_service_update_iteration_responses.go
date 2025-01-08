@@ -7,6 +7,7 @@ package packer_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *PackerServiceUpdateIterationOK) Code() int {
 }
 
 func (o *PackerServiceUpdateIterationOK) Error() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceUpdateIterationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceUpdateIterationOK %s", 200, payload)
 }
 
 func (o *PackerServiceUpdateIterationOK) String() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceUpdateIterationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceUpdateIterationOK %s", 200, payload)
 }
 
 func (o *PackerServiceUpdateIterationOK) GetPayload() *models.HashicorpCloudPackerUpdateIterationResponse {
@@ -163,11 +166,13 @@ func (o *PackerServiceUpdateIterationDefault) Code() int {
 }
 
 func (o *PackerServiceUpdateIterationDefault) Error() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_UpdateIteration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_UpdateIteration default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceUpdateIterationDefault) String() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_UpdateIteration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_UpdateIteration default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceUpdateIterationDefault) GetPayload() *cloud.GoogleRPCStatus {

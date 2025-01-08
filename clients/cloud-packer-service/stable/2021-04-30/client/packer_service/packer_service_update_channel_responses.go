@@ -7,6 +7,7 @@ package packer_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,13 @@ func (o *PackerServiceUpdateChannelOK) Code() int {
 }
 
 func (o *PackerServiceUpdateChannelOK) Error() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceUpdateChannelOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceUpdateChannelOK %s", 200, payload)
 }
 
 func (o *PackerServiceUpdateChannelOK) String() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceUpdateChannelOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] packerServiceUpdateChannelOK %s", 200, payload)
 }
 
 func (o *PackerServiceUpdateChannelOK) GetPayload() *models.HashicorpCloudPackerUpdateChannelResponse {
@@ -162,11 +165,13 @@ func (o *PackerServiceUpdateChannelDefault) Code() int {
 }
 
 func (o *PackerServiceUpdateChannelDefault) Error() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_UpdateChannel default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_UpdateChannel default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceUpdateChannelDefault) String() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_UpdateChannel default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}][%d] PackerService_UpdateChannel default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceUpdateChannelDefault) GetPayload() *cloud.GoogleRPCStatus {

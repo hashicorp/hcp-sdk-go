@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceCreateVersionOK) Code() int {
 }
 
 func (o *PackerServiceCreateVersionOK) Error() string {
-	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] packerServiceCreateVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] packerServiceCreateVersionOK %s", 200, payload)
 }
 
 func (o *PackerServiceCreateVersionOK) String() string {
-	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] packerServiceCreateVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] packerServiceCreateVersionOK %s", 200, payload)
 }
 
 func (o *PackerServiceCreateVersionOK) GetPayload() *models.HashicorpCloudPacker20230101CreateVersionResponse {
@@ -159,11 +162,13 @@ func (o *PackerServiceCreateVersionDefault) Code() int {
 }
 
 func (o *PackerServiceCreateVersionDefault) Error() string {
-	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] PackerService_CreateVersion default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] PackerService_CreateVersion default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceCreateVersionDefault) String() string {
-	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] PackerService_CreateVersion default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] PackerService_CreateVersion default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceCreateVersionDefault) GetPayload() *cloud.GoogleRPCStatus {

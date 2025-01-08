@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceListChannelHistoryOK) Code() int {
 }
 
 func (o *PackerServiceListChannelHistoryOK) Error() string {
-	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}/history][%d] packerServiceListChannelHistoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}/history][%d] packerServiceListChannelHistoryOK %s", 200, payload)
 }
 
 func (o *PackerServiceListChannelHistoryOK) String() string {
-	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}/history][%d] packerServiceListChannelHistoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}/history][%d] packerServiceListChannelHistoryOK %s", 200, payload)
 }
 
 func (o *PackerServiceListChannelHistoryOK) GetPayload() *models.HashicorpCloudPackerListChannelHistoryResponse {
@@ -159,11 +162,13 @@ func (o *PackerServiceListChannelHistoryDefault) Code() int {
 }
 
 func (o *PackerServiceListChannelHistoryDefault) Error() string {
-	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}/history][%d] PackerService_ListChannelHistory default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}/history][%d] PackerService_ListChannelHistory default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceListChannelHistoryDefault) String() string {
-	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}/history][%d] PackerService_ListChannelHistory default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}/history][%d] PackerService_ListChannelHistory default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceListChannelHistoryDefault) GetPayload() *cloud.GoogleRPCStatus {

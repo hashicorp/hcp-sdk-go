@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceListVersionsOK) Code() int {
 }
 
 func (o *PackerServiceListVersionsOK) Error() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] packerServiceListVersionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] packerServiceListVersionsOK %s", 200, payload)
 }
 
 func (o *PackerServiceListVersionsOK) String() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] packerServiceListVersionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] packerServiceListVersionsOK %s", 200, payload)
 }
 
 func (o *PackerServiceListVersionsOK) GetPayload() *models.HashicorpCloudPacker20230101ListVersionsResponse {
@@ -159,11 +162,13 @@ func (o *PackerServiceListVersionsDefault) Code() int {
 }
 
 func (o *PackerServiceListVersionsDefault) Error() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] PackerService_ListVersions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] PackerService_ListVersions default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceListVersionsDefault) String() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] PackerService_ListVersions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions][%d] PackerService_ListVersions default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceListVersionsDefault) GetPayload() *cloud.GoogleRPCStatus {

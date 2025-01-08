@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceUpdateVersionOK) Code() int {
 }
 
 func (o *PackerServiceUpdateVersionOK) Error() string {
-	return fmt.Sprintf("[PATCH /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}][%d] packerServiceUpdateVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}][%d] packerServiceUpdateVersionOK %s", 200, payload)
 }
 
 func (o *PackerServiceUpdateVersionOK) String() string {
-	return fmt.Sprintf("[PATCH /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}][%d] packerServiceUpdateVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}][%d] packerServiceUpdateVersionOK %s", 200, payload)
 }
 
 func (o *PackerServiceUpdateVersionOK) GetPayload() *models.HashicorpCloudPacker20230101UpdateVersionResponse {
@@ -159,11 +162,13 @@ func (o *PackerServiceUpdateVersionDefault) Code() int {
 }
 
 func (o *PackerServiceUpdateVersionDefault) Error() string {
-	return fmt.Sprintf("[PATCH /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}][%d] PackerService_UpdateVersion default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}][%d] PackerService_UpdateVersion default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceUpdateVersionDefault) String() string {
-	return fmt.Sprintf("[PATCH /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}][%d] PackerService_UpdateVersion default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}][%d] PackerService_UpdateVersion default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceUpdateVersionDefault) GetPayload() *cloud.GoogleRPCStatus {

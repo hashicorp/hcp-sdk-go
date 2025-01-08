@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceListBucketAncestryOK) Code() int {
 }
 
 func (o *PackerServiceListBucketAncestryOK) Error() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/ancestry][%d] packerServiceListBucketAncestryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/ancestry][%d] packerServiceListBucketAncestryOK %s", 200, payload)
 }
 
 func (o *PackerServiceListBucketAncestryOK) String() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/ancestry][%d] packerServiceListBucketAncestryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/ancestry][%d] packerServiceListBucketAncestryOK %s", 200, payload)
 }
 
 func (o *PackerServiceListBucketAncestryOK) GetPayload() *models.HashicorpCloudPacker20230101ListBucketAncestryResponse {
@@ -159,11 +162,13 @@ func (o *PackerServiceListBucketAncestryDefault) Code() int {
 }
 
 func (o *PackerServiceListBucketAncestryDefault) Error() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/ancestry][%d] PackerService_ListBucketAncestry default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/ancestry][%d] PackerService_ListBucketAncestry default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceListBucketAncestryDefault) String() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/ancestry][%d] PackerService_ListBucketAncestry default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/ancestry][%d] PackerService_ListBucketAncestry default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceListBucketAncestryDefault) GetPayload() *cloud.GoogleRPCStatus {

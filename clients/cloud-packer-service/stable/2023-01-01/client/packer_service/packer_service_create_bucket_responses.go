@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceCreateBucketOK) Code() int {
 }
 
 func (o *PackerServiceCreateBucketOK) Error() string {
-	return fmt.Sprintf("[PUT /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets][%d] packerServiceCreateBucketOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets][%d] packerServiceCreateBucketOK %s", 200, payload)
 }
 
 func (o *PackerServiceCreateBucketOK) String() string {
-	return fmt.Sprintf("[PUT /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets][%d] packerServiceCreateBucketOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets][%d] packerServiceCreateBucketOK %s", 200, payload)
 }
 
 func (o *PackerServiceCreateBucketOK) GetPayload() *models.HashicorpCloudPacker20230101CreateBucketResponse {
@@ -159,11 +162,13 @@ func (o *PackerServiceCreateBucketDefault) Code() int {
 }
 
 func (o *PackerServiceCreateBucketDefault) Error() string {
-	return fmt.Sprintf("[PUT /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets][%d] PackerService_CreateBucket default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets][%d] PackerService_CreateBucket default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceCreateBucketDefault) String() string {
-	return fmt.Sprintf("[PUT /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets][%d] PackerService_CreateBucket default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets][%d] PackerService_CreateBucket default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceCreateBucketDefault) GetPayload() *cloud.GoogleRPCStatus {

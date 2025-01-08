@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceGetBuildOK) Code() int {
 }
 
 func (o *PackerServiceGetBuildOK) Error() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] packerServiceGetBuildOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] packerServiceGetBuildOK %s", 200, payload)
 }
 
 func (o *PackerServiceGetBuildOK) String() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] packerServiceGetBuildOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] packerServiceGetBuildOK %s", 200, payload)
 }
 
 func (o *PackerServiceGetBuildOK) GetPayload() *models.HashicorpCloudPacker20230101GetBuildResponse {
@@ -159,11 +162,13 @@ func (o *PackerServiceGetBuildDefault) Code() int {
 }
 
 func (o *PackerServiceGetBuildDefault) Error() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] PackerService_GetBuild default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] PackerService_GetBuild default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceGetBuildDefault) String() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] PackerService_GetBuild default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] PackerService_GetBuild default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceGetBuildDefault) GetPayload() *cloud.GoogleRPCStatus {

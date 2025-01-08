@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceDeleteRegistryOK) Code() int {
 }
 
 func (o *PackerServiceDeleteRegistryOK) Error() string {
-	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceDeleteRegistryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceDeleteRegistryOK %s", 200, payload)
 }
 
 func (o *PackerServiceDeleteRegistryOK) String() string {
-	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceDeleteRegistryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceDeleteRegistryOK %s", 200, payload)
 }
 
 func (o *PackerServiceDeleteRegistryOK) GetPayload() *models.HashicorpCloudPacker20230101DeleteRegistryResponse {
@@ -159,11 +162,13 @@ func (o *PackerServiceDeleteRegistryDefault) Code() int {
 }
 
 func (o *PackerServiceDeleteRegistryDefault) Error() string {
-	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_DeleteRegistry default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_DeleteRegistry default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceDeleteRegistryDefault) String() string {
-	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_DeleteRegistry default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_DeleteRegistry default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceDeleteRegistryDefault) GetPayload() *cloud.GoogleRPCStatus {
