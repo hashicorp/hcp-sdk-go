@@ -41,6 +41,9 @@ type Secrets20231128Sync struct {
 	// sync config gitlab
 	SyncConfigGitlab *Secrets20231128SyncConfigGitlab `json:"sync_config_gitlab,omitempty"`
 
+	// sync config hcp terraform
+	SyncConfigHcpTerraform *Secrets20231128SyncConfigHcpTerraform `json:"sync_config_hcp_terraform,omitempty"`
+
 	// type
 	Type string `json:"type,omitempty"`
 
@@ -61,6 +64,10 @@ func (m *Secrets20231128Sync) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSyncConfigGitlab(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSyncConfigHcpTerraform(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -105,6 +112,25 @@ func (m *Secrets20231128Sync) validateSyncConfigGitlab(formats strfmt.Registry) 
 	return nil
 }
 
+func (m *Secrets20231128Sync) validateSyncConfigHcpTerraform(formats strfmt.Registry) error {
+	if swag.IsZero(m.SyncConfigHcpTerraform) { // not required
+		return nil
+	}
+
+	if m.SyncConfigHcpTerraform != nil {
+		if err := m.SyncConfigHcpTerraform.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sync_config_hcp_terraform")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sync_config_hcp_terraform")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128Sync) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -122,6 +148,10 @@ func (m *Secrets20231128Sync) ContextValidate(ctx context.Context, formats strfm
 	var res []error
 
 	if err := m.contextValidateSyncConfigGitlab(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSyncConfigHcpTerraform(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -144,6 +174,27 @@ func (m *Secrets20231128Sync) contextValidateSyncConfigGitlab(ctx context.Contex
 				return ve.ValidateName("sync_config_gitlab")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("sync_config_gitlab")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Sync) contextValidateSyncConfigHcpTerraform(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SyncConfigHcpTerraform != nil {
+
+		if swag.IsZero(m.SyncConfigHcpTerraform) { // not required
+			return nil
+		}
+
+		if err := m.SyncConfigHcpTerraform.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sync_config_hcp_terraform")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sync_config_hcp_terraform")
 			}
 			return err
 		}

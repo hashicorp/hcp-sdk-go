@@ -54,6 +54,9 @@ type Secrets20231128Integration struct {
 	// gitlab access token
 	GitlabAccessToken Secrets20231128GitlabAccessTokenResponse `json:"gitlab_access_token,omitempty"`
 
+	// hcp terraform api token
+	HcpTerraformAPIToken *Secrets20231128HcpTerraformAPITokenResponse `json:"hcp_terraform_api_token,omitempty"`
+
 	// mongo db atlas static credentials
 	MongoDbAtlasStaticCredentials *Secrets20231128MongoDBAtlasStaticCredentialsResponse `json:"mongo_db_atlas_static_credentials,omitempty"`
 
@@ -126,6 +129,10 @@ func (m *Secrets20231128Integration) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateGcpServiceAccountKey(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHcpTerraformAPIToken(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -330,6 +337,25 @@ func (m *Secrets20231128Integration) validateGcpServiceAccountKey(formats strfmt
 	return nil
 }
 
+func (m *Secrets20231128Integration) validateHcpTerraformAPIToken(formats strfmt.Registry) error {
+	if swag.IsZero(m.HcpTerraformAPIToken) { // not required
+		return nil
+	}
+
+	if m.HcpTerraformAPIToken != nil {
+		if err := m.HcpTerraformAPIToken.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform_api_token")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform_api_token")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Secrets20231128Integration) validateMongoDbAtlasStaticCredentials(formats strfmt.Registry) error {
 	if swag.IsZero(m.MongoDbAtlasStaticCredentials) { // not required
 		return nil
@@ -477,6 +503,10 @@ func (m *Secrets20231128Integration) ContextValidate(ctx context.Context, format
 	}
 
 	if err := m.contextValidateGcpServiceAccountKey(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHcpTerraformAPIToken(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -670,6 +700,27 @@ func (m *Secrets20231128Integration) contextValidateGcpServiceAccountKey(ctx con
 				return ve.ValidateName("gcp_service_account_key")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("gcp_service_account_key")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Integration) contextValidateHcpTerraformAPIToken(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HcpTerraformAPIToken != nil {
+
+		if swag.IsZero(m.HcpTerraformAPIToken) { // not required
+			return nil
+		}
+
+		if err := m.HcpTerraformAPIToken.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform_api_token")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform_api_token")
 			}
 			return err
 		}

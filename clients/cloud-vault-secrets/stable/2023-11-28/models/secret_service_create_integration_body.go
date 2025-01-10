@@ -49,6 +49,9 @@ type SecretServiceCreateIntegrationBody struct {
 	// gitlab access token
 	GitlabAccessToken *Secrets20231128GitlabAccessTokenRequest `json:"gitlab_access_token,omitempty"`
 
+	// hcp terraform api token
+	HcpTerraformAPIToken *Secrets20231128HcpTerraformAPITokenRequest `json:"hcp_terraform_api_token,omitempty"`
+
 	// mongo db atlas static credentials
 	MongoDbAtlasStaticCredentials *Secrets20231128MongoDBAtlasStaticCredentialsRequest `json:"mongo_db_atlas_static_credentials,omitempty"`
 
@@ -105,6 +108,10 @@ func (m *SecretServiceCreateIntegrationBody) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateGitlabAccessToken(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHcpTerraformAPIToken(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -308,6 +315,25 @@ func (m *SecretServiceCreateIntegrationBody) validateGitlabAccessToken(formats s
 	return nil
 }
 
+func (m *SecretServiceCreateIntegrationBody) validateHcpTerraformAPIToken(formats strfmt.Registry) error {
+	if swag.IsZero(m.HcpTerraformAPIToken) { // not required
+		return nil
+	}
+
+	if m.HcpTerraformAPIToken != nil {
+		if err := m.HcpTerraformAPIToken.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform_api_token")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform_api_token")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *SecretServiceCreateIntegrationBody) validateMongoDbAtlasStaticCredentials(formats strfmt.Registry) error {
 	if swag.IsZero(m.MongoDbAtlasStaticCredentials) { // not required
 		return nil
@@ -421,6 +447,10 @@ func (m *SecretServiceCreateIntegrationBody) ContextValidate(ctx context.Context
 	}
 
 	if err := m.contextValidateGitlabAccessToken(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHcpTerraformAPIToken(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -631,6 +661,27 @@ func (m *SecretServiceCreateIntegrationBody) contextValidateGitlabAccessToken(ct
 				return ve.ValidateName("gitlab_access_token")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("gitlab_access_token")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceCreateIntegrationBody) contextValidateHcpTerraformAPIToken(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HcpTerraformAPIToken != nil {
+
+		if swag.IsZero(m.HcpTerraformAPIToken) { // not required
+			return nil
+		}
+
+		if err := m.HcpTerraformAPIToken.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hcp_terraform_api_token")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hcp_terraform_api_token")
 			}
 			return err
 		}

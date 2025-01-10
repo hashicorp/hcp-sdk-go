@@ -54,6 +54,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	BulkCreateAppKVSecrets(params *BulkCreateAppKVSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkCreateAppKVSecretsOK, error)
+
 	CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppOK, error)
 
 	CreateAppKVSecret(params *CreateAppKVSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppKVSecretOK, error)
@@ -134,6 +136,8 @@ type ClientService interface {
 
 	DeleteTwilioIntegration(params *DeleteTwilioIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTwilioIntegrationOK, error)
 
+	DescribeProvider(params *DescribeProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DescribeProviderOK, error)
+
 	GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppOK, error)
 
 	GetAppRotatingSecret(params *GetAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppRotatingSecretOK, error)
@@ -174,9 +178,13 @@ type ClientService interface {
 
 	GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMongoDBAtlasRotatingSecretConfigOK, error)
 
+	GetOrganizationLockStatus(params *GetOrganizationLockStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationLockStatusOK, error)
+
 	GetPostgresIntegration(params *GetPostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresIntegrationOK, error)
 
 	GetPostgresRotatingSecretConfig(params *GetPostgresRotatingSecretConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresRotatingSecretConfigOK, error)
+
+	GetProjectLockStatus(params *GetProjectLockStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectLockStatusOK, error)
 
 	GetRandomIntegration(params *GetRandomIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRandomIntegrationOK, error)
 
@@ -234,6 +242,10 @@ type ClientService interface {
 
 	ListTwilioIntegrations(params *ListTwilioIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTwilioIntegrationsOK, error)
 
+	LockOrganization(params *LockOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LockOrganizationOK, error)
+
+	LockProject(params *LockProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LockProjectOK, error)
+
 	OpenAppSecret(params *OpenAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretOK, error)
 
 	OpenAppSecretByResourceName(params *OpenAppSecretByResourceNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretByResourceNameOK, error)
@@ -242,9 +254,15 @@ type ClientService interface {
 
 	OpenAppSecrets(params *OpenAppSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretsOK, error)
 
+	PurgeAppAndSecrets(params *PurgeAppAndSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PurgeAppAndSecretsOK, error)
+
 	RotateSecret(params *RotateSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RotateSecretOK, error)
 
 	SetTier(params *SetTierParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetTierOK, error)
+
+	UnlockOrganization(params *UnlockOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlockOrganizationOK, error)
+
+	UnlockProject(params *UnlockProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlockProjectOK, error)
 
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
 
@@ -291,6 +309,44 @@ type ClientService interface {
 	UpdateTwilioRotatingSecret(params *UpdateTwilioRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTwilioRotatingSecretOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+BulkCreateAppKVSecrets bulk create app k v secrets API
+*/
+func (a *Client) BulkCreateAppKVSecrets(params *BulkCreateAppKVSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkCreateAppKVSecretsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewBulkCreateAppKVSecretsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "BulkCreateAppKVSecrets",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secret/kv:batch",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &BulkCreateAppKVSecretsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*BulkCreateAppKVSecretsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*BulkCreateAppKVSecretsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -1814,6 +1870,44 @@ func (a *Client) DeleteTwilioIntegration(params *DeleteTwilioIntegrationParams, 
 }
 
 /*
+DescribeProvider describe provider API
+*/
+func (a *Client) DescribeProvider(params *DescribeProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DescribeProviderOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDescribeProviderParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DescribeProvider",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/providers/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DescribeProviderReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DescribeProviderOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DescribeProviderDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetApp get app API
 */
 func (a *Client) GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppOK, error) {
@@ -2574,6 +2668,44 @@ func (a *Client) GetMongoDBAtlasRotatingSecretConfig(params *GetMongoDBAtlasRota
 }
 
 /*
+GetOrganizationLockStatus get organization lock status API
+*/
+func (a *Client) GetOrganizationLockStatus(params *GetOrganizationLockStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationLockStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetOrganizationLockStatusParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetOrganizationLockStatus",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/lock-status",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetOrganizationLockStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetOrganizationLockStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetOrganizationLockStatusDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetPostgresIntegration get postgres integration API
 */
 func (a *Client) GetPostgresIntegration(params *GetPostgresIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresIntegrationOK, error) {
@@ -2646,6 +2778,44 @@ func (a *Client) GetPostgresRotatingSecretConfig(params *GetPostgresRotatingSecr
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetPostgresRotatingSecretConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetProjectLockStatus get project lock status API
+*/
+func (a *Client) GetProjectLockStatus(params *GetProjectLockStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectLockStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetProjectLockStatusParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetProjectLockStatus",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/lock-status",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetProjectLockStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetProjectLockStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetProjectLockStatusDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -3714,6 +3884,82 @@ func (a *Client) ListTwilioIntegrations(params *ListTwilioIntegrationsParams, au
 }
 
 /*
+LockOrganization lock organization API
+*/
+func (a *Client) LockOrganization(params *LockOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LockOrganizationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLockOrganizationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "LockOrganization",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/lock",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LockOrganizationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LockOrganizationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*LockOrganizationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+LockProject lock project API
+*/
+func (a *Client) LockProject(params *LockProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LockProjectOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLockProjectParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "LockProject",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/lock",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LockProjectReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LockProjectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*LockProjectDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 OpenAppSecret open app secret API
 */
 func (a *Client) OpenAppSecret(params *OpenAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAppSecretOK, error) {
@@ -3866,6 +4112,44 @@ func (a *Client) OpenAppSecrets(params *OpenAppSecretsParams, authInfo runtime.C
 }
 
 /*
+PurgeAppAndSecrets purge app and secrets API
+*/
+func (a *Client) PurgeAppAndSecrets(params *PurgeAppAndSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PurgeAppAndSecretsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPurgeAppAndSecretsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PurgeAppAndSecrets",
+		Method:             "DELETE",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{name}:purge",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PurgeAppAndSecretsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PurgeAppAndSecretsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PurgeAppAndSecretsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 RotateSecret rotate secret API
 */
 func (a *Client) RotateSecret(params *RotateSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RotateSecretOK, error) {
@@ -3938,6 +4222,82 @@ func (a *Client) SetTier(params *SetTierParams, authInfo runtime.ClientAuthInfoW
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*SetTierDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UnlockOrganization unlock organization API
+*/
+func (a *Client) UnlockOrganization(params *UnlockOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlockOrganizationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUnlockOrganizationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UnlockOrganization",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/unlock",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UnlockOrganizationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UnlockOrganizationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UnlockOrganizationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UnlockProject unlock project API
+*/
+func (a *Client) UnlockProject(params *UnlockProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlockProjectOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUnlockProjectParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UnlockProject",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/unlock",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UnlockProjectReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UnlockProjectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UnlockProjectDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

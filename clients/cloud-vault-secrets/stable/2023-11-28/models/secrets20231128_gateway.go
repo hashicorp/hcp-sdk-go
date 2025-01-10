@@ -38,6 +38,9 @@ type Secrets20231128Gateway struct {
 
 	// version
 	Version string `json:"version,omitempty"`
+
+	// version status
+	VersionStatus *GatewayVersionStatus `json:"version_status,omitempty"`
 }
 
 // Validate validates this secrets 20231128 gateway
@@ -45,6 +48,10 @@ func (m *Secrets20231128Gateway) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVersionStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -73,11 +80,34 @@ func (m *Secrets20231128Gateway) validateStatus(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Secrets20231128Gateway) validateVersionStatus(formats strfmt.Registry) error {
+	if swag.IsZero(m.VersionStatus) { // not required
+		return nil
+	}
+
+	if m.VersionStatus != nil {
+		if err := m.VersionStatus.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("version_status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("version_status")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this secrets 20231128 gateway based on the context it is used
 func (m *Secrets20231128Gateway) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVersionStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -100,6 +130,27 @@ func (m *Secrets20231128Gateway) contextValidateStatus(ctx context.Context, form
 				return ve.ValidateName("status")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("status")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Secrets20231128Gateway) contextValidateVersionStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VersionStatus != nil {
+
+		if swag.IsZero(m.VersionStatus) { // not required
+			return nil
+		}
+
+		if err := m.VersionStatus.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("version_status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("version_status")
 			}
 			return err
 		}

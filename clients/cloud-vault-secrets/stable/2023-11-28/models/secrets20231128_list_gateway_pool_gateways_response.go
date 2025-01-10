@@ -21,6 +21,9 @@ type Secrets20231128ListGatewayPoolGatewaysResponse struct {
 
 	// gateways
 	Gateways []*Secrets20231128Gateway `json:"gateways"`
+
+	// oldest supported version
+	OldestSupportedVersion string `json:"oldest_supported_version,omitempty"`
 }
 
 // Validate validates this secrets 20231128 list gateway pool gateways response
