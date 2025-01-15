@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceListTFCProjectsOK) Code() int {
 }
 
 func (o *WaypointServiceListTFCProjectsOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-projects][%d] waypointServiceListTFCProjectsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-projects][%d] waypointServiceListTFCProjectsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListTFCProjectsOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-projects][%d] waypointServiceListTFCProjectsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-projects][%d] waypointServiceListTFCProjectsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListTFCProjectsOK) GetPayload() *models.HashicorpCloudWaypointListTerraformCloudProjectsResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceListTFCProjectsDefault) Code() int {
 }
 
 func (o *WaypointServiceListTFCProjectsDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-projects][%d] WaypointService_ListTFCProjects default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-projects][%d] WaypointService_ListTFCProjects default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListTFCProjectsDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-projects][%d] WaypointService_ListTFCProjects default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfc-projects][%d] WaypointService_ListTFCProjects default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListTFCProjectsDefault) GetPayload() *cloud.GoogleRPCStatus {

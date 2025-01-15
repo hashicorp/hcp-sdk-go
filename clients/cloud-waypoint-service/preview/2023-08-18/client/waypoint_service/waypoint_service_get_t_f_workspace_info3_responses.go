@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceGetTFWorkspaceInfo3OK) Code() int {
 }
 
 func (o *WaypointServiceGetTFWorkspaceInfo3OK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/by-name/{add_on.name}/workspace][%d] waypointServiceGetTFWorkspaceInfo3OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/by-name/{add_on.name}/workspace][%d] waypointServiceGetTFWorkspaceInfo3OK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetTFWorkspaceInfo3OK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/by-name/{add_on.name}/workspace][%d] waypointServiceGetTFWorkspaceInfo3OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/by-name/{add_on.name}/workspace][%d] waypointServiceGetTFWorkspaceInfo3OK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetTFWorkspaceInfo3OK) GetPayload() *models.HashicorpCloudWaypointGetTFWorkspaceInfoResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceGetTFWorkspaceInfo3Default) Code() int {
 }
 
 func (o *WaypointServiceGetTFWorkspaceInfo3Default) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/by-name/{add_on.name}/workspace][%d] WaypointService_GetTFWorkspaceInfo3 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/by-name/{add_on.name}/workspace][%d] WaypointService_GetTFWorkspaceInfo3 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetTFWorkspaceInfo3Default) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/by-name/{add_on.name}/workspace][%d] WaypointService_GetTFWorkspaceInfo3 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/by-name/{add_on.name}/workspace][%d] WaypointService_GetTFWorkspaceInfo3 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetTFWorkspaceInfo3Default) GetPayload() *cloud.GoogleRPCStatus {

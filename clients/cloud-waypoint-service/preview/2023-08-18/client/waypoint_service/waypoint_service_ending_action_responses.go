@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceEndingActionOK) Code() int {
 }
 
 func (o *WaypointServiceEndingActionOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:endAction][%d] waypointServiceEndingActionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:endAction][%d] waypointServiceEndingActionOK %s", 200, payload)
 }
 
 func (o *WaypointServiceEndingActionOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:endAction][%d] waypointServiceEndingActionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:endAction][%d] waypointServiceEndingActionOK %s", 200, payload)
 }
 
 func (o *WaypointServiceEndingActionOK) GetPayload() models.HashicorpCloudWaypointEndingActionResponse {
@@ -157,11 +160,13 @@ func (o *WaypointServiceEndingActionDefault) Code() int {
 }
 
 func (o *WaypointServiceEndingActionDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:endAction][%d] WaypointService_EndingAction default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:endAction][%d] WaypointService_EndingAction default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceEndingActionDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:endAction][%d] WaypointService_EndingAction default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:endAction][%d] WaypointService_EndingAction default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceEndingActionDefault) GetPayload() *cloud.GoogleRPCStatus {

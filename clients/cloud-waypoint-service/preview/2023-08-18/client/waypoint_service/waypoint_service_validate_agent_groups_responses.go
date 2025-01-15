@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceValidateAgentGroupsOK) Code() int {
 }
 
 func (o *WaypointServiceValidateAgentGroupsOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/group:validate][%d] waypointServiceValidateAgentGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/group:validate][%d] waypointServiceValidateAgentGroupsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceValidateAgentGroupsOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/group:validate][%d] waypointServiceValidateAgentGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/group:validate][%d] waypointServiceValidateAgentGroupsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceValidateAgentGroupsOK) GetPayload() *models.HashicorpCloudWaypointValidateAgentGroupsResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceValidateAgentGroupsDefault) Code() int {
 }
 
 func (o *WaypointServiceValidateAgentGroupsDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/group:validate][%d] WaypointService_ValidateAgentGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/group:validate][%d] WaypointService_ValidateAgentGroups default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceValidateAgentGroupsDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/group:validate][%d] WaypointService_ValidateAgentGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/group:validate][%d] WaypointService_ValidateAgentGroups default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceValidateAgentGroupsDefault) GetPayload() *cloud.GoogleRPCStatus {

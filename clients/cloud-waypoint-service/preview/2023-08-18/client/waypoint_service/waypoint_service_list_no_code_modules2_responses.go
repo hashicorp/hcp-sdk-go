@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceListNoCodeModules2OK) Code() int {
 }
 
 func (o *WaypointServiceListNoCodeModules2OK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfmodules][%d] waypointServiceListNoCodeModules2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfmodules][%d] waypointServiceListNoCodeModules2OK %s", 200, payload)
 }
 
 func (o *WaypointServiceListNoCodeModules2OK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfmodules][%d] waypointServiceListNoCodeModules2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfmodules][%d] waypointServiceListNoCodeModules2OK %s", 200, payload)
 }
 
 func (o *WaypointServiceListNoCodeModules2OK) GetPayload() *models.HashicorpCloudWaypointListNoCodeModulesResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceListNoCodeModules2Default) Code() int {
 }
 
 func (o *WaypointServiceListNoCodeModules2Default) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfmodules][%d] WaypointService_ListNoCodeModules2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfmodules][%d] WaypointService_ListNoCodeModules2 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListNoCodeModules2Default) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfmodules][%d] WaypointService_ListNoCodeModules2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfmodules][%d] WaypointService_ListNoCodeModules2 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListNoCodeModules2Default) GetPayload() *cloud.GoogleRPCStatus {

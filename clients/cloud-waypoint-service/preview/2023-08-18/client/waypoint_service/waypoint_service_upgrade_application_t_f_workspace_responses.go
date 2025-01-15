@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceUpgradeApplicationTFWorkspaceOK) Code() int {
 }
 
 func (o *WaypointServiceUpgradeApplicationTFWorkspaceOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.name}/upgrade-tf-workspace][%d] waypointServiceUpgradeApplicationTFWorkspaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.name}/upgrade-tf-workspace][%d] waypointServiceUpgradeApplicationTFWorkspaceOK %s", 200, payload)
 }
 
 func (o *WaypointServiceUpgradeApplicationTFWorkspaceOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.name}/upgrade-tf-workspace][%d] waypointServiceUpgradeApplicationTFWorkspaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.name}/upgrade-tf-workspace][%d] waypointServiceUpgradeApplicationTFWorkspaceOK %s", 200, payload)
 }
 
 func (o *WaypointServiceUpgradeApplicationTFWorkspaceOK) GetPayload() *models.HashicorpCloudWaypointUpgradeApplicationTFWorkspaceResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceUpgradeApplicationTFWorkspaceDefault) Code() int {
 }
 
 func (o *WaypointServiceUpgradeApplicationTFWorkspaceDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.name}/upgrade-tf-workspace][%d] WaypointService_UpgradeApplicationTFWorkspace default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.name}/upgrade-tf-workspace][%d] WaypointService_UpgradeApplicationTFWorkspace default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUpgradeApplicationTFWorkspaceDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.name}/upgrade-tf-workspace][%d] WaypointService_UpgradeApplicationTFWorkspace default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.name}/upgrade-tf-workspace][%d] WaypointService_UpgradeApplicationTFWorkspace default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUpgradeApplicationTFWorkspaceDefault) GetPayload() *cloud.GoogleRPCStatus {

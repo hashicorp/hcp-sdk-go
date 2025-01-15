@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceListTFAgentPoolsOK) Code() int {
 }
 
 func (o *WaypointServiceListTFAgentPoolsOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-agent-pools][%d] waypointServiceListTFAgentPoolsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-agent-pools][%d] waypointServiceListTFAgentPoolsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListTFAgentPoolsOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-agent-pools][%d] waypointServiceListTFAgentPoolsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-agent-pools][%d] waypointServiceListTFAgentPoolsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListTFAgentPoolsOK) GetPayload() *models.HashicorpCloudWaypointListTFAgentPoolsResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceListTFAgentPoolsDefault) Code() int {
 }
 
 func (o *WaypointServiceListTFAgentPoolsDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-agent-pools][%d] WaypointService_ListTFAgentPools default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-agent-pools][%d] WaypointService_ListTFAgentPools default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListTFAgentPoolsDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-agent-pools][%d] WaypointService_ListTFAgentPools default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-agent-pools][%d] WaypointService_ListTFAgentPools default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListTFAgentPoolsDefault) GetPayload() *cloud.GoogleRPCStatus {

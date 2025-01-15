@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceDeleteAgentGroupOK) Code() int {
 }
 
 func (o *WaypointServiceDeleteAgentGroupOK) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] waypointServiceDeleteAgentGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] waypointServiceDeleteAgentGroupOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteAgentGroupOK) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] waypointServiceDeleteAgentGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] waypointServiceDeleteAgentGroupOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteAgentGroupOK) GetPayload() models.HashicorpCloudWaypointDeleteAgentGroupResponse {
@@ -157,11 +160,13 @@ func (o *WaypointServiceDeleteAgentGroupDefault) Code() int {
 }
 
 func (o *WaypointServiceDeleteAgentGroupDefault) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] WaypointService_DeleteAgentGroup default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] WaypointService_DeleteAgentGroup default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteAgentGroupDefault) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] WaypointService_DeleteAgentGroup default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] WaypointService_DeleteAgentGroup default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteAgentGroupDefault) GetPayload() *cloud.GoogleRPCStatus {

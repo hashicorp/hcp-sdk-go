@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceDeleteApplicationTemplateOK) Code() int {
 }
 
 func (o *WaypointServiceDeleteApplicationTemplateOK) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/application-templates/{application_template.id}][%d] waypointServiceDeleteApplicationTemplateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/application-templates/{application_template.id}][%d] waypointServiceDeleteApplicationTemplateOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteApplicationTemplateOK) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/application-templates/{application_template.id}][%d] waypointServiceDeleteApplicationTemplateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/application-templates/{application_template.id}][%d] waypointServiceDeleteApplicationTemplateOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteApplicationTemplateOK) GetPayload() models.HashicorpCloudWaypointDeleteApplicationTemplateResponse {
@@ -157,11 +160,13 @@ func (o *WaypointServiceDeleteApplicationTemplateDefault) Code() int {
 }
 
 func (o *WaypointServiceDeleteApplicationTemplateDefault) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/application-templates/{application_template.id}][%d] WaypointService_DeleteApplicationTemplate default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/application-templates/{application_template.id}][%d] WaypointService_DeleteApplicationTemplate default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteApplicationTemplateDefault) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/application-templates/{application_template.id}][%d] WaypointService_DeleteApplicationTemplate default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/application-templates/{application_template.id}][%d] WaypointService_DeleteApplicationTemplate default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteApplicationTemplateDefault) GetPayload() *cloud.GoogleRPCStatus {

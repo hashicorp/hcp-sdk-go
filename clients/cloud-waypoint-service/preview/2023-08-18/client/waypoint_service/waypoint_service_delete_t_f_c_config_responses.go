@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceDeleteTFCConfigOK) Code() int {
 }
 
 func (o *WaypointServiceDeleteTFCConfigOK) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] waypointServiceDeleteTFCConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] waypointServiceDeleteTFCConfigOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteTFCConfigOK) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] waypointServiceDeleteTFCConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] waypointServiceDeleteTFCConfigOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteTFCConfigOK) GetPayload() models.HashicorpCloudWaypointDeleteTFCConfigResponse {
@@ -157,11 +160,13 @@ func (o *WaypointServiceDeleteTFCConfigDefault) Code() int {
 }
 
 func (o *WaypointServiceDeleteTFCConfigDefault) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] WaypointService_DeleteTFCConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] WaypointService_DeleteTFCConfig default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteTFCConfigDefault) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] WaypointService_DeleteTFCConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] WaypointService_DeleteTFCConfig default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteTFCConfigDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceGetTFCConfigOK) Code() int {
 }
 
 func (o *WaypointServiceGetTFCConfigOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] waypointServiceGetTFCConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] waypointServiceGetTFCConfigOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetTFCConfigOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] waypointServiceGetTFCConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] waypointServiceGetTFCConfigOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetTFCConfigOK) GetPayload() *models.HashicorpCloudWaypointGetTFCConfigResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceGetTFCConfigDefault) Code() int {
 }
 
 func (o *WaypointServiceGetTFCConfigDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] WaypointService_GetTFCConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] WaypointService_GetTFCConfig default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetTFCConfigDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] WaypointService_GetTFCConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tfcconfig][%d] WaypointService_GetTFCConfig default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetTFCConfigDefault) GetPayload() *cloud.GoogleRPCStatus {

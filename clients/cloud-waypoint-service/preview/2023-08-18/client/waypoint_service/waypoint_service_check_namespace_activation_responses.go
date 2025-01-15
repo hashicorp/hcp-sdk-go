@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceCheckNamespaceActivationOK) Code() int {
 }
 
 func (o *WaypointServiceCheckNamespaceActivationOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/check-activation][%d] waypointServiceCheckNamespaceActivationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/check-activation][%d] waypointServiceCheckNamespaceActivationOK %s", 200, payload)
 }
 
 func (o *WaypointServiceCheckNamespaceActivationOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/check-activation][%d] waypointServiceCheckNamespaceActivationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/check-activation][%d] waypointServiceCheckNamespaceActivationOK %s", 200, payload)
 }
 
 func (o *WaypointServiceCheckNamespaceActivationOK) GetPayload() *models.HashicorpCloudWaypointCheckNamespaceActivationResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceCheckNamespaceActivationDefault) Code() int {
 }
 
 func (o *WaypointServiceCheckNamespaceActivationDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/check-activation][%d] WaypointService_CheckNamespaceActivation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/check-activation][%d] WaypointService_CheckNamespaceActivation default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceCheckNamespaceActivationDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/check-activation][%d] WaypointService_CheckNamespaceActivation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/check-activation][%d] WaypointService_CheckNamespaceActivation default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceCheckNamespaceActivationDefault) GetPayload() *cloud.GoogleRPCStatus {

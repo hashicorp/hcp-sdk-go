@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceUIBulkUpdateActionAssignForAppOK) Code() int {
 }
 
 func (o *WaypointServiceUIBulkUpdateActionAssignForAppOK) Error() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/ui/applications/action-assignments][%d] waypointServiceUiBulkUpdateActionAssignForAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/ui/applications/action-assignments][%d] waypointServiceUiBulkUpdateActionAssignForAppOK %s", 200, payload)
 }
 
 func (o *WaypointServiceUIBulkUpdateActionAssignForAppOK) String() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/ui/applications/action-assignments][%d] waypointServiceUiBulkUpdateActionAssignForAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/ui/applications/action-assignments][%d] waypointServiceUiBulkUpdateActionAssignForAppOK %s", 200, payload)
 }
 
 func (o *WaypointServiceUIBulkUpdateActionAssignForAppOK) GetPayload() *models.HashicorpCloudWaypointUIBulkUpdateActionAssignmentsForAppResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceUIBulkUpdateActionAssignForAppDefault) Code() int {
 }
 
 func (o *WaypointServiceUIBulkUpdateActionAssignForAppDefault) Error() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/ui/applications/action-assignments][%d] WaypointService_UI_BulkUpdateActionAssignForApp default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/ui/applications/action-assignments][%d] WaypointService_UI_BulkUpdateActionAssignForApp default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUIBulkUpdateActionAssignForAppDefault) String() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/ui/applications/action-assignments][%d] WaypointService_UI_BulkUpdateActionAssignForApp default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/ui/applications/action-assignments][%d] WaypointService_UI_BulkUpdateActionAssignForApp default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUIBulkUpdateActionAssignForAppDefault) GetPayload() *cloud.GoogleRPCStatus {

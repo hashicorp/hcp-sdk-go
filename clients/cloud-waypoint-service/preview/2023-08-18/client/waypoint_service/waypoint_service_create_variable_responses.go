@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceCreateVariableOK) Code() int {
 }
 
 func (o *WaypointServiceCreateVariableOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceCreateVariableOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceCreateVariableOK %s", 200, payload)
 }
 
 func (o *WaypointServiceCreateVariableOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceCreateVariableOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceCreateVariableOK %s", 200, payload)
 }
 
 func (o *WaypointServiceCreateVariableOK) GetPayload() *models.HashicorpCloudWaypointCreateVariableResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceCreateVariableDefault) Code() int {
 }
 
 func (o *WaypointServiceCreateVariableDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_CreateVariable default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_CreateVariable default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceCreateVariableDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_CreateVariable default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_CreateVariable default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceCreateVariableDefault) GetPayload() *cloud.GoogleRPCStatus {

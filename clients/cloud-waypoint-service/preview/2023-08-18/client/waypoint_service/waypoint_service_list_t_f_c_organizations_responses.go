@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceListTFCOrganizationsOK) Code() int {
 }
 
 func (o *WaypointServiceListTFCOrganizationsOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] waypointServiceListTFCOrganizationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] waypointServiceListTFCOrganizationsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListTFCOrganizationsOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] waypointServiceListTFCOrganizationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] waypointServiceListTFCOrganizationsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListTFCOrganizationsOK) GetPayload() *models.HashicorpCloudWaypointListTFCOrganizationsResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceListTFCOrganizationsDefault) Code() int {
 }
 
 func (o *WaypointServiceListTFCOrganizationsDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] WaypointService_ListTFCOrganizations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] WaypointService_ListTFCOrganizations default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListTFCOrganizationsDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] WaypointService_ListTFCOrganizations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/tfc-organizations][%d] WaypointService_ListTFCOrganizations default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListTFCOrganizationsDefault) GetPayload() *cloud.GoogleRPCStatus {

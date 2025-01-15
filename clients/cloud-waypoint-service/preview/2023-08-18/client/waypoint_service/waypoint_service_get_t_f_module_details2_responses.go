@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceGetTFModuleDetails2OK) Code() int {
 }
 
 func (o *WaypointServiceGetTFModuleDetails2OK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}][%d] waypointServiceGetTFModuleDetails2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}][%d] waypointServiceGetTFModuleDetails2OK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetTFModuleDetails2OK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}][%d] waypointServiceGetTFModuleDetails2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}][%d] waypointServiceGetTFModuleDetails2OK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetTFModuleDetails2OK) GetPayload() *models.HashicorpCloudWaypointGetTFModuleDetailsResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceGetTFModuleDetails2Default) Code() int {
 }
 
 func (o *WaypointServiceGetTFModuleDetails2Default) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}][%d] WaypointService_GetTFModuleDetails2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}][%d] WaypointService_GetTFModuleDetails2 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetTFModuleDetails2Default) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}][%d] WaypointService_GetTFModuleDetails2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}][%d] WaypointService_GetTFModuleDetails2 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetTFModuleDetails2Default) GetPayload() *cloud.GoogleRPCStatus {

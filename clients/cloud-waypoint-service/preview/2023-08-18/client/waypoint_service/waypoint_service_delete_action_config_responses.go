@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *WaypointServiceDeleteActionConfigOK) Code() int {
 }
 
 func (o *WaypointServiceDeleteActionConfigOK) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] waypointServiceDeleteActionConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] waypointServiceDeleteActionConfigOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteActionConfigOK) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] waypointServiceDeleteActionConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] waypointServiceDeleteActionConfigOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteActionConfigOK) GetPayload() interface{} {
@@ -156,11 +159,13 @@ func (o *WaypointServiceDeleteActionConfigDefault) Code() int {
 }
 
 func (o *WaypointServiceDeleteActionConfigDefault) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] WaypointService_DeleteActionConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] WaypointService_DeleteActionConfig default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteActionConfigDefault) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] WaypointService_DeleteActionConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] WaypointService_DeleteActionConfig default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteActionConfigDefault) GetPayload() *cloud.GoogleRPCStatus {

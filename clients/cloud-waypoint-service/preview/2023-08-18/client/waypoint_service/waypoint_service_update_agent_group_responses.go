@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceUpdateAgentGroupOK) Code() int {
 }
 
 func (o *WaypointServiceUpdateAgentGroupOK) Error() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] waypointServiceUpdateAgentGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] waypointServiceUpdateAgentGroupOK %s", 200, payload)
 }
 
 func (o *WaypointServiceUpdateAgentGroupOK) String() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] waypointServiceUpdateAgentGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] waypointServiceUpdateAgentGroupOK %s", 200, payload)
 }
 
 func (o *WaypointServiceUpdateAgentGroupOK) GetPayload() *models.HashicorpCloudWaypointUpdateAgentGroupResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceUpdateAgentGroupDefault) Code() int {
 }
 
 func (o *WaypointServiceUpdateAgentGroupDefault) Error() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] WaypointService_UpdateAgentGroup default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] WaypointService_UpdateAgentGroup default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUpdateAgentGroupDefault) String() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] WaypointService_UpdateAgentGroup default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/agent/group/{name}][%d] WaypointService_UpdateAgentGroup default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUpdateAgentGroupDefault) GetPayload() *cloud.GoogleRPCStatus {

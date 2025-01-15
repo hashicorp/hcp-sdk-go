@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceDeleteNamespaceOK) Code() int {
 }
 
 func (o *WaypointServiceDeleteNamespaceOK) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/organizations/{location.organization_id}/projects/{location.project_id}/namespaces/{namespace.id}][%d] waypointServiceDeleteNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/organizations/{location.organization_id}/projects/{location.project_id}/namespaces/{namespace.id}][%d] waypointServiceDeleteNamespaceOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteNamespaceOK) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/organizations/{location.organization_id}/projects/{location.project_id}/namespaces/{namespace.id}][%d] waypointServiceDeleteNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/organizations/{location.organization_id}/projects/{location.project_id}/namespaces/{namespace.id}][%d] waypointServiceDeleteNamespaceOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteNamespaceOK) GetPayload() models.HashicorpCloudWaypointDeleteNamespaceResponse {
@@ -157,11 +160,13 @@ func (o *WaypointServiceDeleteNamespaceDefault) Code() int {
 }
 
 func (o *WaypointServiceDeleteNamespaceDefault) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/organizations/{location.organization_id}/projects/{location.project_id}/namespaces/{namespace.id}][%d] WaypointService_DeleteNamespace default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/organizations/{location.organization_id}/projects/{location.project_id}/namespaces/{namespace.id}][%d] WaypointService_DeleteNamespace default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteNamespaceDefault) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/organizations/{location.organization_id}/projects/{location.project_id}/namespaces/{namespace.id}][%d] WaypointService_DeleteNamespace default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/organizations/{location.organization_id}/projects/{location.project_id}/namespaces/{namespace.id}][%d] WaypointService_DeleteNamespace default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteNamespaceDefault) GetPayload() *cloud.GoogleRPCStatus {
