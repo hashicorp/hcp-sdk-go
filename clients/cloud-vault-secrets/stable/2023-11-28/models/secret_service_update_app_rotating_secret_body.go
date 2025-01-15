@@ -36,6 +36,9 @@ type SecretServiceUpdateAppRotatingSecretBody struct {
 	// mongodb atlas user password details
 	MongodbAtlasUserPasswordDetails *Secrets20231128MongoDBAtlasSecretDetails `json:"mongodb_atlas_user_password_details,omitempty"`
 
+	// mssql user password details
+	MssqlUserPasswordDetails *Secrets20231128MssqlUserPasswordDetails `json:"mssql_user_password_details,omitempty"`
+
 	// mysql user password details
 	MysqlUserPasswordDetails *Secrets20231128MysqlUserPasswordDetails `json:"mysql_user_password_details,omitempty"`
 
@@ -76,6 +79,10 @@ func (m *SecretServiceUpdateAppRotatingSecretBody) Validate(formats strfmt.Regis
 	}
 
 	if err := m.validateMongodbAtlasUserPasswordDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMssqlUserPasswordDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -192,6 +199,25 @@ func (m *SecretServiceUpdateAppRotatingSecretBody) validateMongodbAtlasUserPassw
 	return nil
 }
 
+func (m *SecretServiceUpdateAppRotatingSecretBody) validateMssqlUserPasswordDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.MssqlUserPasswordDetails) { // not required
+		return nil
+	}
+
+	if m.MssqlUserPasswordDetails != nil {
+		if err := m.MssqlUserPasswordDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mssql_user_password_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("mssql_user_password_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *SecretServiceUpdateAppRotatingSecretBody) validateMysqlUserPasswordDetails(formats strfmt.Registry) error {
 	if swag.IsZero(m.MysqlUserPasswordDetails) { // not required
 		return nil
@@ -270,6 +296,10 @@ func (m *SecretServiceUpdateAppRotatingSecretBody) ContextValidate(ctx context.C
 	}
 
 	if err := m.contextValidateMongodbAtlasUserPasswordDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMssqlUserPasswordDetails(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -388,6 +418,27 @@ func (m *SecretServiceUpdateAppRotatingSecretBody) contextValidateMongodbAtlasUs
 				return ve.ValidateName("mongodb_atlas_user_password_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("mongodb_atlas_user_password_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceUpdateAppRotatingSecretBody) contextValidateMssqlUserPasswordDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MssqlUserPasswordDetails != nil {
+
+		if swag.IsZero(m.MssqlUserPasswordDetails) { // not required
+			return nil
+		}
+
+		if err := m.MssqlUserPasswordDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mssql_user_password_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("mssql_user_password_details")
 			}
 			return err
 		}

@@ -55,6 +55,9 @@ type SecretServiceCreateIntegrationBody struct {
 	// mongo db atlas static credentials
 	MongoDbAtlasStaticCredentials *Secrets20231128MongoDBAtlasStaticCredentialsRequest `json:"mongo_db_atlas_static_credentials,omitempty"`
 
+	// mssql static credentials
+	MssqlStaticCredentials *Secrets20231128MssqlStaticCredentialsRequest `json:"mssql_static_credentials,omitempty"`
+
 	// mysql static credentials
 	MysqlStaticCredentials *Secrets20231128MysqlStaticCredentialsRequest `json:"mysql_static_credentials,omitempty"`
 
@@ -116,6 +119,10 @@ func (m *SecretServiceCreateIntegrationBody) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateMongoDbAtlasStaticCredentials(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMssqlStaticCredentials(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -353,6 +360,25 @@ func (m *SecretServiceCreateIntegrationBody) validateMongoDbAtlasStaticCredentia
 	return nil
 }
 
+func (m *SecretServiceCreateIntegrationBody) validateMssqlStaticCredentials(formats strfmt.Registry) error {
+	if swag.IsZero(m.MssqlStaticCredentials) { // not required
+		return nil
+	}
+
+	if m.MssqlStaticCredentials != nil {
+		if err := m.MssqlStaticCredentials.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mssql_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("mssql_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *SecretServiceCreateIntegrationBody) validateMysqlStaticCredentials(formats strfmt.Registry) error {
 	if swag.IsZero(m.MysqlStaticCredentials) { // not required
 		return nil
@@ -455,6 +481,10 @@ func (m *SecretServiceCreateIntegrationBody) ContextValidate(ctx context.Context
 	}
 
 	if err := m.contextValidateMongoDbAtlasStaticCredentials(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMssqlStaticCredentials(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -703,6 +733,27 @@ func (m *SecretServiceCreateIntegrationBody) contextValidateMongoDbAtlasStaticCr
 				return ve.ValidateName("mongo_db_atlas_static_credentials")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("mongo_db_atlas_static_credentials")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SecretServiceCreateIntegrationBody) contextValidateMssqlStaticCredentials(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MssqlStaticCredentials != nil {
+
+		if swag.IsZero(m.MssqlStaticCredentials) { // not required
+			return nil
+		}
+
+		if err := m.MssqlStaticCredentials.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mssql_static_credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("mssql_static_credentials")
 			}
 			return err
 		}
