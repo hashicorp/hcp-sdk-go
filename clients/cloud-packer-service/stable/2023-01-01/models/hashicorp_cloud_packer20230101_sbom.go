@@ -18,7 +18,7 @@ import (
 // swagger:model hashicorp.cloud.packer_20230101.Sbom
 type HashicorpCloudPacker20230101Sbom struct {
 
-	// Format of the SBOM
+	// Format of the SBOM will either be CYCLONEDX or SPDX.
 	Format *HashicorpCloudPacker20230101SbomFormat `json:"format,omitempty"`
 
 	// Unique identifier (ULID).

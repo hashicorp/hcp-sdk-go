@@ -18,14 +18,14 @@ import (
 // swagger:model hashicorp.cloud.packer_20230101.UploadSbomBody
 type HashicorpCloudPacker20230101UploadSbomBody struct {
 
-	// ZSTD Compressed SBOM bytes
+	// The sbom bytes compressed in zstd and base 64 encoded. Only CycloneDX and SPDX SBOMs are supported, and they must be json files, XML is not supported currently.
 	// Format: byte
 	CompressedSbom strfmt.Base64 `json:"compressed_sbom,omitempty"`
 
-	// Format of the SBOM
+	// Format of the SBOM, must either be CYCLONEDX or SPDX, values are case-sensitive.
 	Format *HashicorpCloudPacker20230101SbomFormat `json:"format,omitempty"`
 
-	// Optional: user settable sbom name, 3-36 characters [A-Za-z0-9-]
+	// Optional: user settable sbom name, 3-36 characters [A-Za-z0-9-].
 	Name string `json:"name,omitempty"`
 }
 

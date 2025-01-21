@@ -17,7 +17,7 @@ import (
 // swagger:model hashicorp.cloud.packer_20230101.GetSbomResponse
 type HashicorpCloudPacker20230101GetSbomResponse struct {
 
-	// download url
+	// Short-lived presigned download URL to retrieve the SBOM.
 	DownloadURL string `json:"download_url,omitempty"`
 }
 
