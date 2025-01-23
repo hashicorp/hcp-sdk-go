@@ -88,12 +88,12 @@ func (o *UpdateAppRotatingSecretOK) Code() int {
 
 func (o *UpdateAppRotatingSecretOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}][%d] updateAppRotatingSecretOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}][%d] updateAppRotatingSecretOK %s", 200, payload)
 }
 
 func (o *UpdateAppRotatingSecretOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}][%d] updateAppRotatingSecretOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}][%d] updateAppRotatingSecretOK %s", 200, payload)
 }
 
 func (o *UpdateAppRotatingSecretOK) GetPayload() *models.Secrets20231128UpdateAppRotatingSecretResponse {
@@ -162,12 +162,12 @@ func (o *UpdateAppRotatingSecretDefault) Code() int {
 
 func (o *UpdateAppRotatingSecretDefault) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}][%d] UpdateAppRotatingSecret default %s", o._statusCode, payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}][%d] UpdateAppRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *UpdateAppRotatingSecretDefault) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}][%d] UpdateAppRotatingSecret default %s", o._statusCode, payload)
+	return fmt.Sprintf("[PUT /secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}][%d] UpdateAppRotatingSecret default %s", o._statusCode, payload)
 }
 
 func (o *UpdateAppRotatingSecretDefault) GetPayload() *models.GooglerpcStatus {

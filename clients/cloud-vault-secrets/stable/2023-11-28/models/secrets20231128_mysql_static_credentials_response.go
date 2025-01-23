@@ -17,8 +17,8 @@ import (
 // swagger:model secrets_20231128MysqlStaticCredentialsResponse
 type Secrets20231128MysqlStaticCredentialsResponse struct {
 
-	// connection string
-	ConnectionString string `json:"connection_string,omitempty"`
+	// connection string without creds
+	ConnectionStringWithoutCreds string `json:"connection_string_without_creds,omitempty"`
 }
 
 // Validate validates this secrets 20231128 mysql static credentials response

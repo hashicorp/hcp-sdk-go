@@ -58,6 +58,8 @@ type ClientService interface {
 
 	CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppOK, error)
 
+	CreateAppDynamicSecret(params *CreateAppDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppDynamicSecretOK, error)
+
 	CreateAppKVSecret(params *CreateAppKVSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppKVSecretOK, error)
 
 	CreateAppRotatingSecret(params *CreateAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppRotatingSecretOK, error)
@@ -139,6 +141,8 @@ type ClientService interface {
 	DescribeProvider(params *DescribeProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DescribeProviderOK, error)
 
 	GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppOK, error)
+
+	GetAppDynamicSecret(params *GetAppDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppDynamicSecretOK, error)
 
 	GetAppRotatingSecret(params *GetAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppRotatingSecretOK, error)
 
@@ -266,6 +270,8 @@ type ClientService interface {
 
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
 
+	UpdateAppDynamicSecret(params *UpdateAppDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppDynamicSecretOK, error)
+
 	UpdateAppRotatingSecret(params *UpdateAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppRotatingSecretOK, error)
 
 	UpdateAwsDynamicSecret(params *UpdateAwsDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsDynamicSecretOK, error)
@@ -384,6 +390,44 @@ func (a *Client) CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthI
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateAppDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateAppDynamicSecret create app dynamic secret API
+*/
+func (a *Client) CreateAppDynamicSecret(params *CreateAppDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppDynamicSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateAppDynamicSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAppDynamicSecret",
+		Method:             "POST",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/dynamic",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAppDynamicSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateAppDynamicSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateAppDynamicSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1942,6 +1986,44 @@ func (a *Client) GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWri
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetAppDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetAppDynamicSecret get app dynamic secret API
+*/
+func (a *Client) GetAppDynamicSecret(params *GetAppDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppDynamicSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppDynamicSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppDynamicSecret",
+		Method:             "GET",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/dynamic/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppDynamicSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppDynamicSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetAppDynamicSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -4340,6 +4422,44 @@ func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthI
 }
 
 /*
+UpdateAppDynamicSecret update app dynamic secret API
+*/
+func (a *Client) UpdateAppDynamicSecret(params *UpdateAppDynamicSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppDynamicSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAppDynamicSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAppDynamicSecret",
+		Method:             "PUT",
+		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/dynamic/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAppDynamicSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateAppDynamicSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateAppDynamicSecretDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 UpdateAppRotatingSecret update app rotating secret API
 */
 func (a *Client) UpdateAppRotatingSecret(params *UpdateAppRotatingSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppRotatingSecretOK, error) {
@@ -4349,7 +4469,7 @@ func (a *Client) UpdateAppRotatingSecret(params *UpdateAppRotatingSecretParams, 
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "UpdateAppRotatingSecret",
-		Method:             "POST",
+		Method:             "PUT",
 		PathPattern:        "/secrets/2023-11-28/organizations/{organization_id}/projects/{project_id}/apps/{app_name}/secrets/rotating/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
