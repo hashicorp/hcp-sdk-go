@@ -88,6 +88,18 @@ type WaypointServiceDeleteNamespaceParams struct {
 	// NamespaceID.
 	NamespaceID string
 
+	/* NamespaceLocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure")
+	*/
+	NamespaceLocationRegionProvider *string
+
+	/* NamespaceLocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1")
+	*/
+	NamespaceLocationRegionRegion *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -196,6 +208,28 @@ func (o *WaypointServiceDeleteNamespaceParams) SetNamespaceID(namespaceID string
 	o.NamespaceID = namespaceID
 }
 
+// WithNamespaceLocationRegionProvider adds the namespaceLocationRegionProvider to the waypoint service delete namespace params
+func (o *WaypointServiceDeleteNamespaceParams) WithNamespaceLocationRegionProvider(namespaceLocationRegionProvider *string) *WaypointServiceDeleteNamespaceParams {
+	o.SetNamespaceLocationRegionProvider(namespaceLocationRegionProvider)
+	return o
+}
+
+// SetNamespaceLocationRegionProvider adds the namespaceLocationRegionProvider to the waypoint service delete namespace params
+func (o *WaypointServiceDeleteNamespaceParams) SetNamespaceLocationRegionProvider(namespaceLocationRegionProvider *string) {
+	o.NamespaceLocationRegionProvider = namespaceLocationRegionProvider
+}
+
+// WithNamespaceLocationRegionRegion adds the namespaceLocationRegionRegion to the waypoint service delete namespace params
+func (o *WaypointServiceDeleteNamespaceParams) WithNamespaceLocationRegionRegion(namespaceLocationRegionRegion *string) *WaypointServiceDeleteNamespaceParams {
+	o.SetNamespaceLocationRegionRegion(namespaceLocationRegionRegion)
+	return o
+}
+
+// SetNamespaceLocationRegionRegion adds the namespaceLocationRegionRegion to the waypoint service delete namespace params
+func (o *WaypointServiceDeleteNamespaceParams) SetNamespaceLocationRegionRegion(namespaceLocationRegionRegion *string) {
+	o.NamespaceLocationRegionRegion = namespaceLocationRegionRegion
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *WaypointServiceDeleteNamespaceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -251,6 +285,40 @@ func (o *WaypointServiceDeleteNamespaceParams) WriteToRequest(r runtime.ClientRe
 	// path param namespace.id
 	if err := r.SetPathParam("namespace.id", o.NamespaceID); err != nil {
 		return err
+	}
+
+	if o.NamespaceLocationRegionProvider != nil {
+
+		// query param namespace.location.region.provider
+		var qrNamespaceLocationRegionProvider string
+
+		if o.NamespaceLocationRegionProvider != nil {
+			qrNamespaceLocationRegionProvider = *o.NamespaceLocationRegionProvider
+		}
+		qNamespaceLocationRegionProvider := qrNamespaceLocationRegionProvider
+		if qNamespaceLocationRegionProvider != "" {
+
+			if err := r.SetQueryParam("namespace.location.region.provider", qNamespaceLocationRegionProvider); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespaceLocationRegionRegion != nil {
+
+		// query param namespace.location.region.region
+		var qrNamespaceLocationRegionRegion string
+
+		if o.NamespaceLocationRegionRegion != nil {
+			qrNamespaceLocationRegionRegion = *o.NamespaceLocationRegionRegion
+		}
+		qNamespaceLocationRegionRegion := qrNamespaceLocationRegionRegion
+		if qNamespaceLocationRegionRegion != "" {
+
+			if err := r.SetQueryParam("namespace.location.region.region", qNamespaceLocationRegionRegion); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

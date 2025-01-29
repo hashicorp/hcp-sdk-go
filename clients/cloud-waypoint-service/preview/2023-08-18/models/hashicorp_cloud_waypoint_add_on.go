@@ -31,9 +31,6 @@ type HashicorpCloudWaypointAddOn struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// DEPRECATED: Do not use.
-	CreatedBy string `json:"created_by,omitempty"`
-
 	// The Add-on definition from which this Add-on was created
 	Definition *HashicorpCloudWaypointRefAddOnDefinition `json:"definition,omitempty"`
 
@@ -46,7 +43,13 @@ type HashicorpCloudWaypointAddOn struct {
 	// A list of descriptive labels for an Add-on
 	Labels []string `json:"labels"`
 
+	// module_id is the ID of the Terraform no-code module configured for the
+	// add-on definition used to create this add-on.
+	// Read Only: true
+	ModuleID string `json:"module_id,omitempty"`
+
 	// module_source is where to find the source code for the desired child module.
+	// Read Only: true
 	ModuleSource string `json:"module_source,omitempty"`
 
 	// Name of the Add-on
@@ -246,6 +249,14 @@ func (m *HashicorpCloudWaypointAddOn) ContextValidate(ctx context.Context, forma
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateModuleID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateModuleSource(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateOutputValues(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -305,6 +316,24 @@ func (m *HashicorpCloudWaypointAddOn) contextValidateDefinition(ctx context.Cont
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointAddOn) contextValidateModuleID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "module_id", "body", string(m.ModuleID)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointAddOn) contextValidateModuleSource(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "module_source", "body", string(m.ModuleSource)); err != nil {
+		return err
 	}
 
 	return nil

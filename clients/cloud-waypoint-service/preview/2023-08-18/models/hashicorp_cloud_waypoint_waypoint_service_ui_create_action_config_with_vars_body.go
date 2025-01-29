@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody hashicorp cloud waypoint waypoint service UI create action config with vars body
@@ -22,8 +23,8 @@ type HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody struc
 	// The action config to create
 	ActionConfig *HashicorpCloudWaypointActionConfig `json:"action_config,omitempty"`
 
-	// The namespace this action config belongs to
-	Namespace interface{} `json:"namespace,omitempty"`
+	// namespace
+	Namespace *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace `json:"namespace,omitempty"`
 
 	// The variables to create and attach the action config scope to
 	Variables []*HashicorpCloudWaypointVariable `json:"variables"`
@@ -34,6 +35,10 @@ func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody) 
 	var res []error
 
 	if err := m.validateActionConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNamespace(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -58,6 +63,25 @@ func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody) 
 				return ve.ValidateName("action_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("action_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody) validateNamespace(formats strfmt.Registry) error {
+	if swag.IsZero(m.Namespace) { // not required
+		return nil
+	}
+
+	if m.Namespace != nil {
+		if err := m.Namespace.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace")
 			}
 			return err
 		}
@@ -100,6 +124,10 @@ func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody) 
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateNamespace(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateVariables(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -123,6 +151,27 @@ func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody) 
 				return ve.ValidateName("action_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("action_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody) contextValidateNamespace(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Namespace != nil {
+
+		if swag.IsZero(m.Namespace) { // not required
+			return nil
+		}
+
+		if err := m.Namespace.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace")
 			}
 			return err
 		}
@@ -167,6 +216,101 @@ func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody) 
 // UnmarshalBinary interface implementation
 func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody) UnmarshalBinary(b []byte) error {
 	var res HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace The namespace this action config belongs to
+//
+// swagger:model HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace
+type HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace struct {
+
+	// When used via an API request, this is populated and used to populate id.
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+}
+
+// Validate validates this hashicorp cloud waypoint waypoint service UI create action config with vars body namespace
+func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(m.Location) { // not required
+		return nil
+	}
+
+	if m.Location != nil {
+		if err := m.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud waypoint waypoint service UI create action config with vars body namespace based on the context it is used
+func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudWaypointWaypointServiceUICreateActionConfigWithVarsBodyNamespace
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -144,6 +144,8 @@ type ClientService interface {
 
 	WaypointServiceGetTFModuleDetails2(params *WaypointServiceGetTFModuleDetails2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFModuleDetails2OK, error)
 
+	WaypointServiceGetTFModuleDetails3(params *WaypointServiceGetTFModuleDetails3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFModuleDetails3OK, error)
+
 	WaypointServiceGetTFRunStatus(params *WaypointServiceGetTFRunStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFRunStatusOK, error)
 
 	WaypointServiceGetTFWorkspaceInfo(params *WaypointServiceGetTFWorkspaceInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFWorkspaceInfoOK, error)
@@ -1964,6 +1966,44 @@ func (a *Client) WaypointServiceGetTFModuleDetails2(params *WaypointServiceGetTF
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceGetTFModuleDetails2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceGetTFModuleDetails3 gets t f module details returns the details of a specific no code module
+*/
+func (a *Client) WaypointServiceGetTFModuleDetails3(params *WaypointServiceGetTFModuleDetails3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFModuleDetails3OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetTFModuleDetails3Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetTFModuleDetails3",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}/{module_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetTFModuleDetails3Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetTFModuleDetails3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetTFModuleDetails3Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

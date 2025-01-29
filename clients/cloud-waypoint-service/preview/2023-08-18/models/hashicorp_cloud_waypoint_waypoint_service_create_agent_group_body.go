@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody hashicorp cloud waypoint waypoint service create agent group body
@@ -21,9 +22,8 @@ type HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody struct {
 	// The group to create
 	Group *HashicorpCloudWaypointAgentGroup `json:"group,omitempty"`
 
-	// Global references the entire server. This is used in some APIs
-	// as a way to read/write values that are server-global.
-	Namespace interface{} `json:"namespace,omitempty"`
+	// namespace
+	Namespace *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace `json:"namespace,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service create agent group body
@@ -31,6 +31,10 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody) Validate(for
 	var res []error
 
 	if err := m.validateGroup(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNamespace(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -59,11 +63,34 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody) validateGrou
 	return nil
 }
 
+func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody) validateNamespace(formats strfmt.Registry) error {
+	if swag.IsZero(m.Namespace) { // not required
+		return nil
+	}
+
+	if m.Namespace != nil {
+		if err := m.Namespace.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint waypoint service create agent group body based on the context it is used
 func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateGroup(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNamespace(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -94,6 +121,27 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody) contextValid
 	return nil
 }
 
+func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody) contextValidateNamespace(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Namespace != nil {
+
+		if swag.IsZero(m.Namespace) { // not required
+			return nil
+		}
+
+		if err := m.Namespace.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody) MarshalBinary() ([]byte, error) {
 	if m == nil {
@@ -105,6 +153,102 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody) MarshalBinar
 // UnmarshalBinary interface implementation
 func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody) UnmarshalBinary(b []byte) error {
 	var res HashicorpCloudWaypointWaypointServiceCreateAgentGroupBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace Global references the entire server. This is used in some APIs
+// as a way to read/write values that are server-global.
+//
+// swagger:model HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace
+type HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace struct {
+
+	// When used via an API request, this is populated and used to populate id.
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+}
+
+// Validate validates this hashicorp cloud waypoint waypoint service create agent group body namespace
+func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(m.Location) { // not required
+		return nil
+	}
+
+	if m.Location != nil {
+		if err := m.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud waypoint waypoint service create agent group body namespace based on the context it is used
+func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudWaypointWaypointServiceCreateAgentGroupBodyNamespace
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
