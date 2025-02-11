@@ -6,6 +6,7 @@ package groups_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GroupsServiceDeleteGroupOK) Code() int {
 }
 
 func (o *GroupsServiceDeleteGroupOK) Error() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/{resource_name}][%d] groupsServiceDeleteGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/{resource_name}][%d] groupsServiceDeleteGroupOK %s", 200, payload)
 }
 
 func (o *GroupsServiceDeleteGroupOK) String() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/{resource_name}][%d] groupsServiceDeleteGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/{resource_name}][%d] groupsServiceDeleteGroupOK %s", 200, payload)
 }
 
 func (o *GroupsServiceDeleteGroupOK) GetPayload() interface{} {
@@ -156,11 +159,13 @@ func (o *GroupsServiceDeleteGroupDefault) Code() int {
 }
 
 func (o *GroupsServiceDeleteGroupDefault) Error() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/{resource_name}][%d] GroupsService_DeleteGroup default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/{resource_name}][%d] GroupsService_DeleteGroup default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceDeleteGroupDefault) String() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/{resource_name}][%d] GroupsService_DeleteGroup default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/{resource_name}][%d] GroupsService_DeleteGroup default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceDeleteGroupDefault) GetPayload() *cloud.GoogleRPCStatus {

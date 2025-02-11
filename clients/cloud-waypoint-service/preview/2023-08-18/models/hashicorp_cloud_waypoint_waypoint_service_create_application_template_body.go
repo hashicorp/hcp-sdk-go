@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody hashicorp cloud waypoint waypoint service create application template body
@@ -21,9 +22,12 @@ type HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody struct {
 	// application template
 	ApplicationTemplate *HashicorpCloudWaypointApplicationTemplate `json:"application_template,omitempty"`
 
-	// Global references the entire server. This is used in some APIs
-	// as a way to read/write values that are server-global.
-	Namespace interface{} `json:"namespace,omitempty"`
+	// namespace
+	Namespace *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace `json:"namespace,omitempty"`
+
+	// If true, will auto-import the readme from the Terraform module used
+	// rather than the one specified in application_template.
+	UseModuleReadme bool `json:"use_module_readme,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint waypoint service create application template body
@@ -31,6 +35,10 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody) Val
 	var res []error
 
 	if err := m.validateApplicationTemplate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNamespace(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -59,11 +67,34 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody) val
 	return nil
 }
 
+func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody) validateNamespace(formats strfmt.Registry) error {
+	if swag.IsZero(m.Namespace) { // not required
+		return nil
+	}
+
+	if m.Namespace != nil {
+		if err := m.Namespace.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud waypoint waypoint service create application template body based on the context it is used
 func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateApplicationTemplate(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNamespace(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -94,6 +125,27 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody) con
 	return nil
 }
 
+func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody) contextValidateNamespace(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Namespace != nil {
+
+		if swag.IsZero(m.Namespace) { // not required
+			return nil
+		}
+
+		if err := m.Namespace.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody) MarshalBinary() ([]byte, error) {
 	if m == nil {
@@ -105,6 +157,102 @@ func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody) Mar
 // UnmarshalBinary interface implementation
 func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody) UnmarshalBinary(b []byte) error {
 	var res HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace Global references the entire server. This is used in some APIs
+// as a way to read/write values that are server-global.
+//
+// swagger:model HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace
+type HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace struct {
+
+	// When used via an API request, this is populated and used to populate id.
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+}
+
+// Validate validates this hashicorp cloud waypoint waypoint service create application template body namespace
+func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(m.Location) { // not required
+		return nil
+	}
+
+	if m.Location != nil {
+		if err := m.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud waypoint waypoint service create application template body namespace based on the context it is used
+func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudWaypointWaypointServiceCreateApplicationTemplateBodyNamespace
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

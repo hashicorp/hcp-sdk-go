@@ -6,6 +6,7 @@ package project_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ProjectServiceListOK) Code() int {
 }
 
 func (o *ProjectServiceListOK) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] projectServiceListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] projectServiceListOK %s", 200, payload)
 }
 
 func (o *ProjectServiceListOK) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] projectServiceListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] projectServiceListOK %s", 200, payload)
 }
 
 func (o *ProjectServiceListOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectListResponse {
@@ -159,11 +162,13 @@ func (o *ProjectServiceListDefault) Code() int {
 }
 
 func (o *ProjectServiceListDefault) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] ProjectService_List default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] ProjectService_List default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceListDefault) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] ProjectService_List default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects][%d] ProjectService_List default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceListDefault) GetPayload() *cloud.GoogleRPCStatus {

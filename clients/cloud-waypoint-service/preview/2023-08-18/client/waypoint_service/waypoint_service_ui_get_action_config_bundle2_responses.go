@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceUIGetActionConfigBundle2OK) Code() int {
 }
 
 func (o *WaypointServiceUIGetActionConfigBundle2OK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/actionconfig/by-name/{action_name}][%d] waypointServiceUiGetActionConfigBundle2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/actionconfig/by-name/{action_name}][%d] waypointServiceUiGetActionConfigBundle2OK %s", 200, payload)
 }
 
 func (o *WaypointServiceUIGetActionConfigBundle2OK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/actionconfig/by-name/{action_name}][%d] waypointServiceUiGetActionConfigBundle2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/actionconfig/by-name/{action_name}][%d] waypointServiceUiGetActionConfigBundle2OK %s", 200, payload)
 }
 
 func (o *WaypointServiceUIGetActionConfigBundle2OK) GetPayload() *models.HashicorpCloudWaypointUIGetActionConfigResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceUIGetActionConfigBundle2Default) Code() int {
 }
 
 func (o *WaypointServiceUIGetActionConfigBundle2Default) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/actionconfig/by-name/{action_name}][%d] WaypointService_UI_GetActionConfigBundle2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/actionconfig/by-name/{action_name}][%d] WaypointService_UI_GetActionConfigBundle2 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUIGetActionConfigBundle2Default) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/actionconfig/by-name/{action_name}][%d] WaypointService_UI_GetActionConfigBundle2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/actionconfig/by-name/{action_name}][%d] WaypointService_UI_GetActionConfigBundle2 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUIGetActionConfigBundle2Default) GetPayload() *cloud.GoogleRPCStatus {

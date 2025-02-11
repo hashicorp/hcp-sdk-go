@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceUpdateActionConfigOK) Code() int {
 }
 
 func (o *WaypointServiceUpdateActionConfigOK) Error() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] waypointServiceUpdateActionConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] waypointServiceUpdateActionConfigOK %s", 200, payload)
 }
 
 func (o *WaypointServiceUpdateActionConfigOK) String() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] waypointServiceUpdateActionConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] waypointServiceUpdateActionConfigOK %s", 200, payload)
 }
 
 func (o *WaypointServiceUpdateActionConfigOK) GetPayload() *models.HashicorpCloudWaypointUpdateActionConfigResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceUpdateActionConfigDefault) Code() int {
 }
 
 func (o *WaypointServiceUpdateActionConfigDefault) Error() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] WaypointService_UpdateActionConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] WaypointService_UpdateActionConfig default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUpdateActionConfigDefault) String() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] WaypointService_UpdateActionConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/actionconfig][%d] WaypointService_UpdateActionConfig default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUpdateActionConfigDefault) GetPayload() *cloud.GoogleRPCStatus {

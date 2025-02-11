@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *CompleteVercelInstallationOK) Code() int {
 }
 
 func (o *CompleteVercelInstallationOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/vercel/callback][%d] completeVercelInstallationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/vercel/callback][%d] completeVercelInstallationOK %s", 200, payload)
 }
 
 func (o *CompleteVercelInstallationOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/vercel/callback][%d] completeVercelInstallationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/vercel/callback][%d] completeVercelInstallationOK %s", 200, payload)
 }
 
 func (o *CompleteVercelInstallationOK) GetPayload() *models.APIHTTPBody {
@@ -158,11 +161,13 @@ func (o *CompleteVercelInstallationDefault) Code() int {
 }
 
 func (o *CompleteVercelInstallationDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/vercel/callback][%d] CompleteVercelInstallation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/vercel/callback][%d] CompleteVercelInstallation default %s", o._statusCode, payload)
 }
 
 func (o *CompleteVercelInstallationDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/vercel/callback][%d] CompleteVercelInstallation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/sync/vercel/callback][%d] CompleteVercelInstallation default %s", o._statusCode, payload)
 }
 
 func (o *CompleteVercelInstallationDefault) GetPayload() *models.RPCStatus {

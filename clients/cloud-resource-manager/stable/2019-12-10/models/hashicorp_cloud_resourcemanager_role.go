@@ -29,6 +29,14 @@ type HashicorpCloudResourcemanagerRole struct {
 	// Builtin roles are prefixed with "roles/"
 	ID string `json:"id,omitempty"`
 
+	// LowestApplicableResourceTypes is a list of lowest applicable resource types that this role should be assigned to.
+	// The parent resource types will be deduced by the Resource Manager.
+	// The list should contain valid resource types in the format hashicorp.<service>.<resource>
+	// Examples:
+	// * hashicorp.resource-manager.project
+	// * hashicorp.secrets.app
+	LowestApplicableResourceTypes []string `json:"lowest_applicable_resource_types"`
+
 	// Permissions is a set of allowed permissions in the format: <service>.<noun>.<action>
 	// Examples:
 	// * network.hvns.create

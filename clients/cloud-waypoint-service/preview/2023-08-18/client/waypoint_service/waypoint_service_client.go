@@ -7,12 +7,38 @@ package waypoint_service
 
 import (
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new waypoint service API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new waypoint service API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new waypoint service API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -23,11 +49,13 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	WaypointServiceCheckNamespaceActivation(params *WaypointServiceCheckNamespaceActivationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCheckNamespaceActivationOK, error)
+
 	WaypointServiceCheckTFCOrganization(params *WaypointServiceCheckTFCOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCheckTFCOrganizationOK, error)
 
 	WaypointServiceCreateActionConfig(params *WaypointServiceCreateActionConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateActionConfigOK, error)
@@ -116,6 +144,8 @@ type ClientService interface {
 
 	WaypointServiceGetTFModuleDetails2(params *WaypointServiceGetTFModuleDetails2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFModuleDetails2OK, error)
 
+	WaypointServiceGetTFModuleDetails3(params *WaypointServiceGetTFModuleDetails3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFModuleDetails3OK, error)
+
 	WaypointServiceGetTFRunStatus(params *WaypointServiceGetTFRunStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFRunStatusOK, error)
 
 	WaypointServiceGetTFWorkspaceInfo(params *WaypointServiceGetTFWorkspaceInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFWorkspaceInfoOK, error)
@@ -149,6 +179,10 @@ type ClientService interface {
 	WaypointServiceListApplications(params *WaypointServiceListApplicationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListApplicationsOK, error)
 
 	WaypointServiceListNoCodeModules(params *WaypointServiceListNoCodeModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListNoCodeModulesOK, error)
+
+	WaypointServiceListNoCodeModules2(params *WaypointServiceListNoCodeModules2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListNoCodeModules2OK, error)
+
+	WaypointServiceListTFAgentPools(params *WaypointServiceListTFAgentPoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListTFAgentPoolsOK, error)
 
 	WaypointServiceListTFCOrganizations(params *WaypointServiceListTFCOrganizationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListTFCOrganizationsOK, error)
 
@@ -223,6 +257,44 @@ type ClientService interface {
 	WaypointServiceValidateAgentGroups(params *WaypointServiceValidateAgentGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceValidateAgentGroupsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+WaypointServiceCheckNamespaceActivation checks namespace activation checks the activation status of a namespace based on the t f c token stored in the namespaces database
+*/
+func (a *Client) WaypointServiceCheckNamespaceActivation(params *WaypointServiceCheckNamespaceActivationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCheckNamespaceActivationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceCheckNamespaceActivationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_CheckNamespaceActivation",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/check-activation",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceCheckNamespaceActivationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceCheckNamespaceActivationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceCheckNamespaceActivationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -1138,7 +1210,7 @@ func (a *Client) WaypointServiceDestroyAddOn2(params *WaypointServiceDestroyAddO
 }
 
 /*
-WaypointServiceDestroyApplication waypoint service destroy application API
+WaypointServiceDestroyApplication destroys application destroys an existing application a destroy operation is queued for the application s terraform workspace and the application is deleted from h c p waypoint
 */
 func (a *Client) WaypointServiceDestroyApplication(params *WaypointServiceDestroyApplicationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDestroyApplicationOK, error) {
 	// TODO: Validate the params before sending
@@ -1176,7 +1248,7 @@ func (a *Client) WaypointServiceDestroyApplication(params *WaypointServiceDestro
 }
 
 /*
-WaypointServiceDestroyApplication2 waypoint service destroy application2 API
+WaypointServiceDestroyApplication2 destroys application destroys an existing application a destroy operation is queued for the application s terraform workspace and the application is deleted from h c p waypoint
 */
 func (a *Client) WaypointServiceDestroyApplication2(params *WaypointServiceDestroyApplication2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDestroyApplication2OK, error) {
 	// TODO: Validate the params before sending
@@ -1518,7 +1590,7 @@ func (a *Client) WaypointServiceGetAgentGroup(params *WaypointServiceGetAgentGro
 }
 
 /*
-WaypointServiceGetApplication waypoint service get application API
+WaypointServiceGetApplication gets application returns an application by ID or name
 */
 func (a *Client) WaypointServiceGetApplication(params *WaypointServiceGetApplicationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetApplicationOK, error) {
 	// TODO: Validate the params before sending
@@ -1556,7 +1628,7 @@ func (a *Client) WaypointServiceGetApplication(params *WaypointServiceGetApplica
 }
 
 /*
-WaypointServiceGetApplication2 waypoint service get application2 API
+WaypointServiceGetApplication2 gets application returns an application by ID or name
 */
 func (a *Client) WaypointServiceGetApplication2(params *WaypointServiceGetApplication2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetApplication2OK, error) {
 	// TODO: Validate the params before sending
@@ -1822,7 +1894,7 @@ func (a *Client) WaypointServiceGetTFCConfig(params *WaypointServiceGetTFCConfig
 }
 
 /*
-WaypointServiceGetTFModuleDetails waypoint service get t f module details API
+WaypointServiceGetTFModuleDetails gets t f module details returns the details of a specific no code module
 */
 func (a *Client) WaypointServiceGetTFModuleDetails(params *WaypointServiceGetTFModuleDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFModuleDetailsOK, error) {
 	// TODO: Validate the params before sending
@@ -1860,7 +1932,7 @@ func (a *Client) WaypointServiceGetTFModuleDetails(params *WaypointServiceGetTFM
 }
 
 /*
-WaypointServiceGetTFModuleDetails2 waypoint service get t f module details2 API
+WaypointServiceGetTFModuleDetails2 gets t f module details returns the details of a specific no code module
 */
 func (a *Client) WaypointServiceGetTFModuleDetails2(params *WaypointServiceGetTFModuleDetails2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFModuleDetails2OK, error) {
 	// TODO: Validate the params before sending
@@ -1894,6 +1966,44 @@ func (a *Client) WaypointServiceGetTFModuleDetails2(params *WaypointServiceGetTF
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceGetTFModuleDetails2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceGetTFModuleDetails3 gets t f module details returns the details of a specific no code module
+*/
+func (a *Client) WaypointServiceGetTFModuleDetails3(params *WaypointServiceGetTFModuleDetails3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFModuleDetails3OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetTFModuleDetails3Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetTFModuleDetails3",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/tf-module-details/{tfc_namespace}/{name}/{provider}/{module_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetTFModuleDetails3Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetTFModuleDetails3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetTFModuleDetails3Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2468,7 +2578,7 @@ func (a *Client) WaypointServiceListApplicationTemplates2(params *WaypointServic
 }
 
 /*
-WaypointServiceListApplications waypoint service list applications API
+WaypointServiceListApplications lists applications returns a list of all applications
 */
 func (a *Client) WaypointServiceListApplications(params *WaypointServiceListApplicationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListApplicationsOK, error) {
 	// TODO: Validate the params before sending
@@ -2544,7 +2654,83 @@ func (a *Client) WaypointServiceListNoCodeModules(params *WaypointServiceListNoC
 }
 
 /*
-WaypointServiceListTFCOrganizations waypoint service list t f c organizations API
+WaypointServiceListNoCodeModules2 lists no code modules returns a list of available no code module for the configured t f c organization
+*/
+func (a *Client) WaypointServiceListNoCodeModules2(params *WaypointServiceListNoCodeModules2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListNoCodeModules2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceListNoCodeModules2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_ListNoCodeModules2",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/tfmodules",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceListNoCodeModules2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceListNoCodeModules2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceListNoCodeModules2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceListTFAgentPools lists t f agent pools returns a list of h c p terraform agent pools
+*/
+func (a *Client) WaypointServiceListTFAgentPools(params *WaypointServiceListTFAgentPoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListTFAgentPoolsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceListTFAgentPoolsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_ListTFAgentPools",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2023-08-18/namespace/{namespace.id}/tf-agent-pools",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceListTFAgentPoolsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceListTFAgentPoolsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceListTFAgentPoolsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceListTFCOrganizations lists t f c organizations returns a list of available h c p terraform organizations which can be used by the currently set token
 */
 func (a *Client) WaypointServiceListTFCOrganizations(params *WaypointServiceListTFCOrganizationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListTFCOrganizationsOK, error) {
 	// TODO: Validate the params before sending
@@ -2848,7 +3034,7 @@ func (a *Client) WaypointServiceStartingAction(params *WaypointServiceStartingAc
 }
 
 /*
-WaypointServiceUIListActionConfigBundles UIs bundle endpoints
+WaypointServiceUIListActionConfigBundles waypoint service UI list action config bundles API
 */
 func (a *Client) WaypointServiceUIListActionConfigBundles(params *WaypointServiceUIListActionConfigBundlesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIListActionConfigBundlesOK, error) {
 	// TODO: Validate the params before sending
@@ -3038,7 +3224,7 @@ func (a *Client) WaypointServiceUIGetActionConfigBundle2(params *WaypointService
 }
 
 /*
-WaypointServiceUIGetApplicationBundle gets application bundle will return an application and any associated action configs it may have
+WaypointServiceUIGetApplicationBundle UIs get application bundle returns an application and any associated action configs it may have
 */
 func (a *Client) WaypointServiceUIGetApplicationBundle(params *WaypointServiceUIGetApplicationBundleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetApplicationBundleOK, error) {
 	// TODO: Validate the params before sending
@@ -3076,7 +3262,7 @@ func (a *Client) WaypointServiceUIGetApplicationBundle(params *WaypointServiceUI
 }
 
 /*
-WaypointServiceUIGetApplicationBundle2 gets application bundle will return an application and any associated action configs it may have
+WaypointServiceUIGetApplicationBundle2 UIs get application bundle returns an application and any associated action configs it may have
 */
 func (a *Client) WaypointServiceUIGetApplicationBundle2(params *WaypointServiceUIGetApplicationBundle2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetApplicationBundle2OK, error) {
 	// TODO: Validate the params before sending
@@ -3114,7 +3300,7 @@ func (a *Client) WaypointServiceUIGetApplicationBundle2(params *WaypointServiceU
 }
 
 /*
-WaypointServiceUIGetApplicationTemplateBundle gets application template returns a application template by the application template name or id
+WaypointServiceUIGetApplicationTemplateBundle UIs get application template bundle returns a template using a name or id to look it up this RPC is used by the h c p waypoint UI
 */
 func (a *Client) WaypointServiceUIGetApplicationTemplateBundle(params *WaypointServiceUIGetApplicationTemplateBundleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetApplicationTemplateBundleOK, error) {
 	// TODO: Validate the params before sending
@@ -3152,7 +3338,7 @@ func (a *Client) WaypointServiceUIGetApplicationTemplateBundle(params *WaypointS
 }
 
 /*
-WaypointServiceUIGetApplicationTemplateBundle2 gets application template returns a application template by the application template name or id
+WaypointServiceUIGetApplicationTemplateBundle2 UIs get application template bundle returns a template using a name or id to look it up this RPC is used by the h c p waypoint UI
 */
 func (a *Client) WaypointServiceUIGetApplicationTemplateBundle2(params *WaypointServiceUIGetApplicationTemplateBundle2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIGetApplicationTemplateBundle2OK, error) {
 	// TODO: Validate the params before sending
@@ -3456,7 +3642,7 @@ func (a *Client) WaypointServiceUpdateAgentGroup(params *WaypointServiceUpdateAg
 }
 
 /*
-WaypointServiceUpdateApplication waypoint service update application API
+WaypointServiceUpdateApplication updates application updates an existing application
 */
 func (a *Client) WaypointServiceUpdateApplication(params *WaypointServiceUpdateApplicationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplicationOK, error) {
 	// TODO: Validate the params before sending
@@ -3494,7 +3680,7 @@ func (a *Client) WaypointServiceUpdateApplication(params *WaypointServiceUpdateA
 }
 
 /*
-WaypointServiceUpdateApplication2 waypoint service update application2 API
+WaypointServiceUpdateApplication2 updates application updates an existing application
 */
 func (a *Client) WaypointServiceUpdateApplication2(params *WaypointServiceUpdateApplication2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateApplication2OK, error) {
 	// TODO: Validate the params before sending

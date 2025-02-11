@@ -18,35 +18,35 @@ import (
 // swagger:model log_service_20210330TestDestinationRequest
 type LogService20210330TestDestinationRequest struct {
 
-	// cloudwatch logs
-	CloudwatchLogs *LogService20210330StreamingCloudwatchLogsProvider `json:"cloudwatch_logs,omitempty"`
+	// cloudwatch logs provider
+	CloudwatchLogsProvider *LogService20210330StreamingCloudwatchLogsProvider `json:"cloudwatch_logs_provider,omitempty"`
 
-	// datadog
-	Datadog *LogService20210330StreamingDatadogProvider `json:"datadog,omitempty"`
+	// datadog provider
+	DatadogProvider *LogService20210330StreamingDatadogProvider `json:"datadog_provider,omitempty"`
 
-	// existing_destination_id is the original destination id
-	// this should be set only if we need to test config with redacted fields
-	ExistingDestinationID string `json:"existing_destination_id,omitempty"`
+	// id is an optional field that identifies an existing destination
+	ID string `json:"id,omitempty"`
 
-	// mask specifies which fields to use from provider to override fields in existing destination
+	// mask is an optional field specifying the fields to replace on the existing destination.
+	// If id is empty, mask must be empty. If the id is not empty, mask is required.
 	Mask *ProtobufFieldMask `json:"mask,omitempty"`
 
 	// organization id
 	OrganizationID string `json:"organization_id,omitempty"`
 
-	// splunk cloud
-	SplunkCloud *LogService20210330StreamingSplunkCloudProvider `json:"splunk_cloud,omitempty"`
+	// splunk cloud provider
+	SplunkCloudProvider *LogService20210330StreamingSplunkCloudProvider `json:"splunk_cloud_provider,omitempty"`
 }
 
 // Validate validates this log service 20210330 test destination request
 func (m *LogService20210330TestDestinationRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCloudwatchLogs(formats); err != nil {
+	if err := m.validateCloudwatchLogsProvider(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateDatadog(formats); err != nil {
+	if err := m.validateDatadogProvider(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -54,7 +54,7 @@ func (m *LogService20210330TestDestinationRequest) Validate(formats strfmt.Regis
 		res = append(res, err)
 	}
 
-	if err := m.validateSplunkCloud(formats); err != nil {
+	if err := m.validateSplunkCloudProvider(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,17 +64,17 @@ func (m *LogService20210330TestDestinationRequest) Validate(formats strfmt.Regis
 	return nil
 }
 
-func (m *LogService20210330TestDestinationRequest) validateCloudwatchLogs(formats strfmt.Registry) error {
-	if swag.IsZero(m.CloudwatchLogs) { // not required
+func (m *LogService20210330TestDestinationRequest) validateCloudwatchLogsProvider(formats strfmt.Registry) error {
+	if swag.IsZero(m.CloudwatchLogsProvider) { // not required
 		return nil
 	}
 
-	if m.CloudwatchLogs != nil {
-		if err := m.CloudwatchLogs.Validate(formats); err != nil {
+	if m.CloudwatchLogsProvider != nil {
+		if err := m.CloudwatchLogsProvider.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("cloudwatch_logs")
+				return ve.ValidateName("cloudwatch_logs_provider")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("cloudwatch_logs")
+				return ce.ValidateName("cloudwatch_logs_provider")
 			}
 			return err
 		}
@@ -83,17 +83,17 @@ func (m *LogService20210330TestDestinationRequest) validateCloudwatchLogs(format
 	return nil
 }
 
-func (m *LogService20210330TestDestinationRequest) validateDatadog(formats strfmt.Registry) error {
-	if swag.IsZero(m.Datadog) { // not required
+func (m *LogService20210330TestDestinationRequest) validateDatadogProvider(formats strfmt.Registry) error {
+	if swag.IsZero(m.DatadogProvider) { // not required
 		return nil
 	}
 
-	if m.Datadog != nil {
-		if err := m.Datadog.Validate(formats); err != nil {
+	if m.DatadogProvider != nil {
+		if err := m.DatadogProvider.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("datadog")
+				return ve.ValidateName("datadog_provider")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("datadog")
+				return ce.ValidateName("datadog_provider")
 			}
 			return err
 		}
@@ -121,17 +121,17 @@ func (m *LogService20210330TestDestinationRequest) validateMask(formats strfmt.R
 	return nil
 }
 
-func (m *LogService20210330TestDestinationRequest) validateSplunkCloud(formats strfmt.Registry) error {
-	if swag.IsZero(m.SplunkCloud) { // not required
+func (m *LogService20210330TestDestinationRequest) validateSplunkCloudProvider(formats strfmt.Registry) error {
+	if swag.IsZero(m.SplunkCloudProvider) { // not required
 		return nil
 	}
 
-	if m.SplunkCloud != nil {
-		if err := m.SplunkCloud.Validate(formats); err != nil {
+	if m.SplunkCloudProvider != nil {
+		if err := m.SplunkCloudProvider.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("splunk_cloud")
+				return ve.ValidateName("splunk_cloud_provider")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("splunk_cloud")
+				return ce.ValidateName("splunk_cloud_provider")
 			}
 			return err
 		}
@@ -144,11 +144,11 @@ func (m *LogService20210330TestDestinationRequest) validateSplunkCloud(formats s
 func (m *LogService20210330TestDestinationRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateCloudwatchLogs(ctx, formats); err != nil {
+	if err := m.contextValidateCloudwatchLogsProvider(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateDatadog(ctx, formats); err != nil {
+	if err := m.contextValidateDatadogProvider(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -156,7 +156,7 @@ func (m *LogService20210330TestDestinationRequest) ContextValidate(ctx context.C
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateSplunkCloud(ctx, formats); err != nil {
+	if err := m.contextValidateSplunkCloudProvider(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -166,19 +166,19 @@ func (m *LogService20210330TestDestinationRequest) ContextValidate(ctx context.C
 	return nil
 }
 
-func (m *LogService20210330TestDestinationRequest) contextValidateCloudwatchLogs(ctx context.Context, formats strfmt.Registry) error {
+func (m *LogService20210330TestDestinationRequest) contextValidateCloudwatchLogsProvider(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.CloudwatchLogs != nil {
+	if m.CloudwatchLogsProvider != nil {
 
-		if swag.IsZero(m.CloudwatchLogs) { // not required
+		if swag.IsZero(m.CloudwatchLogsProvider) { // not required
 			return nil
 		}
 
-		if err := m.CloudwatchLogs.ContextValidate(ctx, formats); err != nil {
+		if err := m.CloudwatchLogsProvider.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("cloudwatch_logs")
+				return ve.ValidateName("cloudwatch_logs_provider")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("cloudwatch_logs")
+				return ce.ValidateName("cloudwatch_logs_provider")
 			}
 			return err
 		}
@@ -187,19 +187,19 @@ func (m *LogService20210330TestDestinationRequest) contextValidateCloudwatchLogs
 	return nil
 }
 
-func (m *LogService20210330TestDestinationRequest) contextValidateDatadog(ctx context.Context, formats strfmt.Registry) error {
+func (m *LogService20210330TestDestinationRequest) contextValidateDatadogProvider(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.Datadog != nil {
+	if m.DatadogProvider != nil {
 
-		if swag.IsZero(m.Datadog) { // not required
+		if swag.IsZero(m.DatadogProvider) { // not required
 			return nil
 		}
 
-		if err := m.Datadog.ContextValidate(ctx, formats); err != nil {
+		if err := m.DatadogProvider.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("datadog")
+				return ve.ValidateName("datadog_provider")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("datadog")
+				return ce.ValidateName("datadog_provider")
 			}
 			return err
 		}
@@ -229,19 +229,19 @@ func (m *LogService20210330TestDestinationRequest) contextValidateMask(ctx conte
 	return nil
 }
 
-func (m *LogService20210330TestDestinationRequest) contextValidateSplunkCloud(ctx context.Context, formats strfmt.Registry) error {
+func (m *LogService20210330TestDestinationRequest) contextValidateSplunkCloudProvider(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.SplunkCloud != nil {
+	if m.SplunkCloudProvider != nil {
 
-		if swag.IsZero(m.SplunkCloud) { // not required
+		if swag.IsZero(m.SplunkCloudProvider) { // not required
 			return nil
 		}
 
-		if err := m.SplunkCloud.ContextValidate(ctx, formats); err != nil {
+		if err := m.SplunkCloudProvider.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("splunk_cloud")
+				return ve.ValidateName("splunk_cloud_provider")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("splunk_cloud")
+				return ce.ValidateName("splunk_cloud_provider")
 			}
 			return err
 		}

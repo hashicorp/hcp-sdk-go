@@ -6,6 +6,7 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ServicePrincipalsServiceDeleteServicePrincipal2OK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipal2OK) Error() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_1}][%d] servicePrincipalsServiceDeleteServicePrincipal2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_1}][%d] servicePrincipalsServiceDeleteServicePrincipal2OK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipal2OK) String() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_1}][%d] servicePrincipalsServiceDeleteServicePrincipal2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_1}][%d] servicePrincipalsServiceDeleteServicePrincipal2OK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipal2OK) GetPayload() models.HashicorpCloudIamDeleteServicePrincipalResponse {
@@ -157,11 +160,13 @@ func (o *ServicePrincipalsServiceDeleteServicePrincipal2Default) Code() int {
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipal2Default) Error() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_1}][%d] ServicePrincipalsService_DeleteServicePrincipal2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_1}][%d] ServicePrincipalsService_DeleteServicePrincipal2 default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipal2Default) String() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_1}][%d] ServicePrincipalsService_DeleteServicePrincipal2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_1}][%d] ServicePrincipalsService_DeleteServicePrincipal2 default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipal2Default) GetPayload() *cloud.GoogleRPCStatus {

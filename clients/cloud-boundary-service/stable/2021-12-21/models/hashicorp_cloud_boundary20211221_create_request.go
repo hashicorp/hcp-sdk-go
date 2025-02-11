@@ -25,6 +25,10 @@ type HashicorpCloudBoundary20211221CreateRequest struct {
 	// cluster_id is the id of the cluster set by user on creation.
 	ClusterID string `json:"cluster_id,omitempty"`
 
+	// controller_config contains controller-specific configuration values to apply to the cluster's
+	// controllers on creation.
+	ControllerConfig *HashicorpCloudBoundary20211221ControllerConfiguration `json:"controller_config,omitempty"`
+
 	// enable_hcp_auth determines whether the cluster is preconfigured with HCP Oauth as an
 	// authentication method.
 	EnableHcpAuth bool `json:"enable_hcp_auth,omitempty"`
@@ -46,6 +50,10 @@ type HashicorpCloudBoundary20211221CreateRequest struct {
 func (m *HashicorpCloudBoundary20211221CreateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateControllerConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLocation(formats); err != nil {
 		res = append(res, err)
 	}
@@ -57,6 +65,25 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) Validate(formats strfmt.Re
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudBoundary20211221CreateRequest) validateControllerConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.ControllerConfig) { // not required
+		return nil
+	}
+
+	if m.ControllerConfig != nil {
+		if err := m.ControllerConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("controller_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("controller_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -102,6 +129,10 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) validateMarketingSku(forma
 func (m *HashicorpCloudBoundary20211221CreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateControllerConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -113,6 +144,27 @@ func (m *HashicorpCloudBoundary20211221CreateRequest) ContextValidate(ctx contex
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudBoundary20211221CreateRequest) contextValidateControllerConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ControllerConfig != nil {
+
+		if swag.IsZero(m.ControllerConfig) { // not required
+			return nil
+		}
+
+		if err := m.ControllerConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("controller_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("controller_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

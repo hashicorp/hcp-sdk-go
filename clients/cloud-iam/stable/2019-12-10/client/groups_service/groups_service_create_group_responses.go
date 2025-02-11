@@ -7,6 +7,7 @@ package groups_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *GroupsServiceCreateGroupOK) Code() int {
 }
 
 func (o *GroupsServiceCreateGroupOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] groupsServiceCreateGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] groupsServiceCreateGroupOK %s", 200, payload)
 }
 
 func (o *GroupsServiceCreateGroupOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] groupsServiceCreateGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] groupsServiceCreateGroupOK %s", 200, payload)
 }
 
 func (o *GroupsServiceCreateGroupOK) GetPayload() *models.HashicorpCloudIamCreateGroupResponse {
@@ -161,11 +164,13 @@ func (o *GroupsServiceCreateGroupDefault) Code() int {
 }
 
 func (o *GroupsServiceCreateGroupDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] GroupsService_CreateGroup default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] GroupsService_CreateGroup default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceCreateGroupDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] GroupsService_CreateGroup default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] GroupsService_CreateGroup default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceCreateGroupDefault) GetPayload() *cloud.GoogleRPCStatus {

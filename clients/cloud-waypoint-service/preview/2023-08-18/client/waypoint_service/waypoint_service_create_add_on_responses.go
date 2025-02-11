@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceCreateAddOnOK) Code() int {
 }
 
 func (o *WaypointServiceCreateAddOnOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/add-on][%d] waypointServiceCreateAddOnOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/add-on][%d] waypointServiceCreateAddOnOK %s", 200, payload)
 }
 
 func (o *WaypointServiceCreateAddOnOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/add-on][%d] waypointServiceCreateAddOnOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/add-on][%d] waypointServiceCreateAddOnOK %s", 200, payload)
 }
 
 func (o *WaypointServiceCreateAddOnOK) GetPayload() *models.HashicorpCloudWaypointCreateAddOnResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceCreateAddOnDefault) Code() int {
 }
 
 func (o *WaypointServiceCreateAddOnDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/add-on][%d] WaypointService_CreateAddOn default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/add-on][%d] WaypointService_CreateAddOn default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceCreateAddOnDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/add-on][%d] WaypointService_CreateAddOn default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/add-on][%d] WaypointService_CreateAddOn default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceCreateAddOnDefault) GetPayload() *cloud.GoogleRPCStatus {

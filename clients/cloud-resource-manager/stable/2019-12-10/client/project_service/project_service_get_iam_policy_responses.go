@@ -6,6 +6,7 @@ package project_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ProjectServiceGetIamPolicyOK) Code() int {
 }
 
 func (o *ProjectServiceGetIamPolicyOK) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceGetIamPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceGetIamPolicyOK %s", 200, payload)
 }
 
 func (o *ProjectServiceGetIamPolicyOK) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceGetIamPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceGetIamPolicyOK %s", 200, payload)
 }
 
 func (o *ProjectServiceGetIamPolicyOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectGetIamPolicyResponse {
@@ -159,11 +162,13 @@ func (o *ProjectServiceGetIamPolicyDefault) Code() int {
 }
 
 func (o *ProjectServiceGetIamPolicyDefault) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] ProjectService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] ProjectService_GetIamPolicy default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceGetIamPolicyDefault) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] ProjectService_GetIamPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] ProjectService_GetIamPolicy default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceGetIamPolicyDefault) GetPayload() *cloud.GoogleRPCStatus {

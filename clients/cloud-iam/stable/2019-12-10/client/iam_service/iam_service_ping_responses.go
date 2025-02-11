@@ -6,6 +6,7 @@ package iam_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *IamServicePingOK) Code() int {
 }
 
 func (o *IamServicePingOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/ping][%d] iamServicePingOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/ping][%d] iamServicePingOK %s", 200, payload)
 }
 
 func (o *IamServicePingOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/ping][%d] iamServicePingOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/ping][%d] iamServicePingOK %s", 200, payload)
 }
 
 func (o *IamServicePingOK) GetPayload() models.HashicorpCloudIamPingResponse {
@@ -157,11 +160,13 @@ func (o *IamServicePingDefault) Code() int {
 }
 
 func (o *IamServicePingDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/ping][%d] IamService_Ping default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/ping][%d] IamService_Ping default %s", o._statusCode, payload)
 }
 
 func (o *IamServicePingDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/ping][%d] IamService_Ping default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/ping][%d] IamService_Ping default %s", o._statusCode, payload)
 }
 
 func (o *IamServicePingDefault) GetPayload() *cloud.GoogleRPCStatus {

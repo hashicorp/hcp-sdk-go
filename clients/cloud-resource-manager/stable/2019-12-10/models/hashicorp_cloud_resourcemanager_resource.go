@@ -19,9 +19,23 @@ import (
 // swagger:model hashicorp.cloud.resourcemanager.Resource
 type HashicorpCloudResourcemanagerResource struct {
 
+	// Geo is the geography where the resource is registered. A resource MAY NOT
+	// have a geography associated with it. The currently valid values are: "",
+	// "us", and "eu".  This is only available on List responses and is not valid
+	// for any creation or update requests.
+	Geo string `json:"geo,omitempty"`
+
 	// Link is a link to the resource. This includes the organization
 	// and project ID as well as the ID of the resource itself.
 	Link *cloud.HashicorpCloudLocationLink `json:"link,omitempty"`
+
+	// ResourceID is the ID of the resource. This is only available on List
+	// responses and is not valid for any creation or update requests.
+	ResourceID string `json:"resource_id,omitempty"`
+
+	// ResourceName is the name of the resource. This is only available on
+	// List responses and is not valid for any creation or update requests.
+	ResourceName string `json:"resource_name,omitempty"`
 }
 
 // Validate validates this hashicorp cloud resourcemanager resource

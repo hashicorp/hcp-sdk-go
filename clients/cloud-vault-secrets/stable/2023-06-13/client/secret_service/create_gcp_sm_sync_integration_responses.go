@@ -7,6 +7,7 @@ package secret_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *CreateGcpSmSyncIntegrationOK) Code() int {
 }
 
 func (o *CreateGcpSmSyncIntegrationOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gcp-sm][%d] createGcpSmSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gcp-sm][%d] createGcpSmSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateGcpSmSyncIntegrationOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gcp-sm][%d] createGcpSmSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gcp-sm][%d] createGcpSmSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateGcpSmSyncIntegrationOK) GetPayload() *models.Secrets20230613CreateSyncIntegrationResponse {
@@ -161,11 +164,13 @@ func (o *CreateGcpSmSyncIntegrationDefault) Code() int {
 }
 
 func (o *CreateGcpSmSyncIntegrationDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gcp-sm][%d] CreateGcpSmSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gcp-sm][%d] CreateGcpSmSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateGcpSmSyncIntegrationDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gcp-sm][%d] CreateGcpSmSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gcp-sm][%d] CreateGcpSmSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateGcpSmSyncIntegrationDefault) GetPayload() *models.RPCStatus {

@@ -6,6 +6,7 @@ package invitations_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *InvitationsServiceAcceptOrganizationInvitationOK) Code() int {
 }
 
 func (o *InvitationsServiceAcceptOrganizationInvitationOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/accept-invitation][%d] invitationsServiceAcceptOrganizationInvitationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/accept-invitation][%d] invitationsServiceAcceptOrganizationInvitationOK %s", 200, payload)
 }
 
 func (o *InvitationsServiceAcceptOrganizationInvitationOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/accept-invitation][%d] invitationsServiceAcceptOrganizationInvitationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/accept-invitation][%d] invitationsServiceAcceptOrganizationInvitationOK %s", 200, payload)
 }
 
 func (o *InvitationsServiceAcceptOrganizationInvitationOK) GetPayload() *models.HashicorpCloudIamAcceptOrganizationInvitationResponse {
@@ -159,11 +162,13 @@ func (o *InvitationsServiceAcceptOrganizationInvitationDefault) Code() int {
 }
 
 func (o *InvitationsServiceAcceptOrganizationInvitationDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/accept-invitation][%d] InvitationsService_AcceptOrganizationInvitation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/accept-invitation][%d] InvitationsService_AcceptOrganizationInvitation default %s", o._statusCode, payload)
 }
 
 func (o *InvitationsServiceAcceptOrganizationInvitationDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/accept-invitation][%d] InvitationsService_AcceptOrganizationInvitation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/accept-invitation][%d] InvitationsService_AcceptOrganizationInvitation default %s", o._statusCode, payload)
 }
 
 func (o *InvitationsServiceAcceptOrganizationInvitationDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -7,6 +7,7 @@ package secret_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *CreateGhOrgSyncIntegrationOK) Code() int {
 }
 
 func (o *CreateGhOrgSyncIntegrationOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gh-org][%d] createGhOrgSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gh-org][%d] createGhOrgSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateGhOrgSyncIntegrationOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gh-org][%d] createGhOrgSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gh-org][%d] createGhOrgSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateGhOrgSyncIntegrationOK) GetPayload() *models.Secrets20230613CreateSyncIntegrationResponse {
@@ -161,11 +164,13 @@ func (o *CreateGhOrgSyncIntegrationDefault) Code() int {
 }
 
 func (o *CreateGhOrgSyncIntegrationDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gh-org][%d] CreateGhOrgSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gh-org][%d] CreateGhOrgSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateGhOrgSyncIntegrationDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gh-org][%d] CreateGhOrgSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/gh-org][%d] CreateGhOrgSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateGhOrgSyncIntegrationDefault) GetPayload() *models.RPCStatus {

@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceQueueAgentOperationOK) Code() int {
 }
 
 func (o *WaypointServiceQueueAgentOperationOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:queue][%d] waypointServiceQueueAgentOperationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:queue][%d] waypointServiceQueueAgentOperationOK %s", 200, payload)
 }
 
 func (o *WaypointServiceQueueAgentOperationOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:queue][%d] waypointServiceQueueAgentOperationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:queue][%d] waypointServiceQueueAgentOperationOK %s", 200, payload)
 }
 
 func (o *WaypointServiceQueueAgentOperationOK) GetPayload() models.HashicorpCloudWaypointQueueAgentOperationResponse {
@@ -157,11 +160,13 @@ func (o *WaypointServiceQueueAgentOperationDefault) Code() int {
 }
 
 func (o *WaypointServiceQueueAgentOperationDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:queue][%d] WaypointService_QueueAgentOperation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:queue][%d] WaypointService_QueueAgentOperation default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceQueueAgentOperationDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:queue][%d] WaypointService_QueueAgentOperation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:queue][%d] WaypointService_QueueAgentOperation default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceQueueAgentOperationDefault) GetPayload() *cloud.GoogleRPCStatus {

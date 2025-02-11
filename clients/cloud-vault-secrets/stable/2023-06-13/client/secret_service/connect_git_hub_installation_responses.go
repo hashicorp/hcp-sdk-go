@@ -7,6 +7,7 @@ package secret_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *ConnectGitHubInstallationOK) Code() int {
 }
 
 func (o *ConnectGitHubInstallationOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/installations][%d] connectGitHubInstallationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/installations][%d] connectGitHubInstallationOK %s", 200, payload)
 }
 
 func (o *ConnectGitHubInstallationOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/installations][%d] connectGitHubInstallationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/installations][%d] connectGitHubInstallationOK %s", 200, payload)
 }
 
 func (o *ConnectGitHubInstallationOK) GetPayload() *models.Secrets20230613ConnectGitHubInstallationResponse {
@@ -161,11 +164,13 @@ func (o *ConnectGitHubInstallationDefault) Code() int {
 }
 
 func (o *ConnectGitHubInstallationDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/installations][%d] ConnectGitHubInstallation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/installations][%d] ConnectGitHubInstallation default %s", o._statusCode, payload)
 }
 
 func (o *ConnectGitHubInstallationDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/installations][%d] ConnectGitHubInstallation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/installations][%d] ConnectGitHubInstallation default %s", o._statusCode, payload)
 }
 
 func (o *ConnectGitHubInstallationDefault) GetPayload() *models.RPCStatus {

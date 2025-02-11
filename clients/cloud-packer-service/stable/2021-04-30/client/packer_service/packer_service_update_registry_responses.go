@@ -7,6 +7,7 @@ package packer_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,13 @@ func (o *PackerServiceUpdateRegistryOK) Code() int {
 }
 
 func (o *PackerServiceUpdateRegistryOK) Error() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceUpdateRegistryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceUpdateRegistryOK %s", 200, payload)
 }
 
 func (o *PackerServiceUpdateRegistryOK) String() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceUpdateRegistryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] packerServiceUpdateRegistryOK %s", 200, payload)
 }
 
 func (o *PackerServiceUpdateRegistryOK) GetPayload() *models.HashicorpCloudPackerUpdateRegistryResponse {
@@ -162,11 +165,13 @@ func (o *PackerServiceUpdateRegistryDefault) Code() int {
 }
 
 func (o *PackerServiceUpdateRegistryDefault) Error() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_UpdateRegistry default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_UpdateRegistry default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceUpdateRegistryDefault) String() string {
-	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_UpdateRegistry default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry][%d] PackerService_UpdateRegistry default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceUpdateRegistryDefault) GetPayload() *cloud.GoogleRPCStatus {

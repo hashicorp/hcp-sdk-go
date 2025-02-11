@@ -6,6 +6,7 @@ package boundary_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *BoundaryServiceSessionsOK) Code() int {
 }
 
 func (o *BoundaryServiceSessionsOK) Error() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] boundaryServiceSessionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] boundaryServiceSessionsOK %s", 200, payload)
 }
 
 func (o *BoundaryServiceSessionsOK) String() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] boundaryServiceSessionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] boundaryServiceSessionsOK %s", 200, payload)
 }
 
 func (o *BoundaryServiceSessionsOK) GetPayload() *models.HashicorpCloudBoundary20211221SessionsResponse {
@@ -159,11 +162,13 @@ func (o *BoundaryServiceSessionsDefault) Code() int {
 }
 
 func (o *BoundaryServiceSessionsDefault) Error() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] BoundaryService_Sessions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] BoundaryService_Sessions default %s", o._statusCode, payload)
 }
 
 func (o *BoundaryServiceSessionsDefault) String() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] BoundaryService_Sessions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sessions][%d] BoundaryService_Sessions default %s", o._statusCode, payload)
 }
 
 func (o *BoundaryServiceSessionsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

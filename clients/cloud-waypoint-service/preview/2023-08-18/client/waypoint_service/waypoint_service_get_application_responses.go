@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceGetApplicationOK) Code() int {
 }
 
 func (o *WaypointServiceGetApplicationOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.id}][%d] waypointServiceGetApplicationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.id}][%d] waypointServiceGetApplicationOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetApplicationOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.id}][%d] waypointServiceGetApplicationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.id}][%d] waypointServiceGetApplicationOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetApplicationOK) GetPayload() *models.HashicorpCloudWaypointGetApplicationResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceGetApplicationDefault) Code() int {
 }
 
 func (o *WaypointServiceGetApplicationDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.id}][%d] WaypointService_GetApplication default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.id}][%d] WaypointService_GetApplication default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetApplicationDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.id}][%d] WaypointService_GetApplication default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/applications/{application.id}][%d] WaypointService_GetApplication default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetApplicationDefault) GetPayload() *cloud.GoogleRPCStatus {

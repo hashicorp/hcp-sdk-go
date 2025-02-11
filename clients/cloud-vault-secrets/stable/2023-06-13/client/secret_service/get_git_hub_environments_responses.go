@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetGitHubEnvironmentsOK) Code() int {
 }
 
 func (o *GetGitHubEnvironmentsOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories/{repository}/environments][%d] getGitHubEnvironmentsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories/{repository}/environments][%d] getGitHubEnvironmentsOK %s", 200, payload)
 }
 
 func (o *GetGitHubEnvironmentsOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories/{repository}/environments][%d] getGitHubEnvironmentsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories/{repository}/environments][%d] getGitHubEnvironmentsOK %s", 200, payload)
 }
 
 func (o *GetGitHubEnvironmentsOK) GetPayload() *models.Secrets20230613GetGitHubEnvironmentsResponse {
@@ -158,11 +161,13 @@ func (o *GetGitHubEnvironmentsDefault) Code() int {
 }
 
 func (o *GetGitHubEnvironmentsDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories/{repository}/environments][%d] GetGitHubEnvironments default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories/{repository}/environments][%d] GetGitHubEnvironments default %s", o._statusCode, payload)
 }
 
 func (o *GetGitHubEnvironmentsDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories/{repository}/environments][%d] GetGitHubEnvironments default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories/{repository}/environments][%d] GetGitHubEnvironments default %s", o._statusCode, payload)
 }
 
 func (o *GetGitHubEnvironmentsDefault) GetPayload() *models.RPCStatus {

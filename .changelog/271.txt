@@ -1,0 +1,3 @@
+```release-note:chore
+Updated CODEOWNERS file with valid github teams from HashiCorp organization.
+```

@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceGetTFRunStatusOK) Code() int {
 }
 
 func (o *WaypointServiceGetTFRunStatusOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-run-status/{workspace_name}][%d] waypointServiceGetTFRunStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-run-status/{workspace_name}][%d] waypointServiceGetTFRunStatusOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetTFRunStatusOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-run-status/{workspace_name}][%d] waypointServiceGetTFRunStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-run-status/{workspace_name}][%d] waypointServiceGetTFRunStatusOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetTFRunStatusOK) GetPayload() *models.HashicorpCloudWaypointGetTFRunStatusResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceGetTFRunStatusDefault) Code() int {
 }
 
 func (o *WaypointServiceGetTFRunStatusDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-run-status/{workspace_name}][%d] WaypointService_GetTFRunStatus default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-run-status/{workspace_name}][%d] WaypointService_GetTFRunStatus default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetTFRunStatusDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-run-status/{workspace_name}][%d] WaypointService_GetTFRunStatus default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/tf-run-status/{workspace_name}][%d] WaypointService_GetTFRunStatus default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetTFRunStatusDefault) GetPayload() *cloud.GoogleRPCStatus {

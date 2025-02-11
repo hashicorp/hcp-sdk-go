@@ -6,6 +6,7 @@ package invitations_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *InvitationsServiceGetOrganizationNameByInvitationTokenOK) Code() int {
 }
 
 func (o *InvitationsServiceGetOrganizationNameByInvitationTokenOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/invitations/{invitation_token}/organization][%d] invitationsServiceGetOrganizationNameByInvitationTokenOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/invitations/{invitation_token}/organization][%d] invitationsServiceGetOrganizationNameByInvitationTokenOK %s", 200, payload)
 }
 
 func (o *InvitationsServiceGetOrganizationNameByInvitationTokenOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/invitations/{invitation_token}/organization][%d] invitationsServiceGetOrganizationNameByInvitationTokenOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/invitations/{invitation_token}/organization][%d] invitationsServiceGetOrganizationNameByInvitationTokenOK %s", 200, payload)
 }
 
 func (o *InvitationsServiceGetOrganizationNameByInvitationTokenOK) GetPayload() *models.HashicorpCloudIamGetOrganizationNameByInvitationTokenResponse {
@@ -159,11 +162,13 @@ func (o *InvitationsServiceGetOrganizationNameByInvitationTokenDefault) Code() i
 }
 
 func (o *InvitationsServiceGetOrganizationNameByInvitationTokenDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/invitations/{invitation_token}/organization][%d] InvitationsService_GetOrganizationNameByInvitationToken default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/invitations/{invitation_token}/organization][%d] InvitationsService_GetOrganizationNameByInvitationToken default %s", o._statusCode, payload)
 }
 
 func (o *InvitationsServiceGetOrganizationNameByInvitationTokenDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/invitations/{invitation_token}/organization][%d] InvitationsService_GetOrganizationNameByInvitationToken default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/invitations/{invitation_token}/organization][%d] InvitationsService_GetOrganizationNameByInvitationToken default %s", o._statusCode, payload)
 }
 
 func (o *InvitationsServiceGetOrganizationNameByInvitationTokenDefault) GetPayload() *cloud.GoogleRPCStatus {

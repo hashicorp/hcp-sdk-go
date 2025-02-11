@@ -6,6 +6,7 @@ package s_s_o_management_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *SSOManagementServiceGetPreconfigurationDataOK) Code() int {
 }
 
 func (o *SSOManagementServiceGetPreconfigurationDataOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-preconfiguration-data][%d] sSOManagementServiceGetPreconfigurationDataOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-preconfiguration-data][%d] sSOManagementServiceGetPreconfigurationDataOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceGetPreconfigurationDataOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-preconfiguration-data][%d] sSOManagementServiceGetPreconfigurationDataOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-preconfiguration-data][%d] sSOManagementServiceGetPreconfigurationDataOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceGetPreconfigurationDataOK) GetPayload() *models.HashicorpCloudIamGetPreconfigurationDataResponse {
@@ -159,11 +162,13 @@ func (o *SSOManagementServiceGetPreconfigurationDataDefault) Code() int {
 }
 
 func (o *SSOManagementServiceGetPreconfigurationDataDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-preconfiguration-data][%d] SSOManagementService_GetPreconfigurationData default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-preconfiguration-data][%d] SSOManagementService_GetPreconfigurationData default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceGetPreconfigurationDataDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-preconfiguration-data][%d] SSOManagementService_GetPreconfigurationData default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-preconfiguration-data][%d] SSOManagementService_GetPreconfigurationData default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceGetPreconfigurationDataDefault) GetPayload() *cloud.GoogleRPCStatus {

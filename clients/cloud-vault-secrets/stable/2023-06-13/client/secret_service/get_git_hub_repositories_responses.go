@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetGitHubRepositoriesOK) Code() int {
 }
 
 func (o *GetGitHubRepositoriesOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories][%d] getGitHubRepositoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories][%d] getGitHubRepositoriesOK %s", 200, payload)
 }
 
 func (o *GetGitHubRepositoriesOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories][%d] getGitHubRepositoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories][%d] getGitHubRepositoriesOK %s", 200, payload)
 }
 
 func (o *GetGitHubRepositoriesOK) GetPayload() *models.Secrets20230613GetGitHubRepositoriesResponse {
@@ -158,11 +161,13 @@ func (o *GetGitHubRepositoriesDefault) Code() int {
 }
 
 func (o *GetGitHubRepositoriesDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories][%d] GetGitHubRepositories default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories][%d] GetGitHubRepositories default %s", o._statusCode, payload)
 }
 
 func (o *GetGitHubRepositoriesDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories][%d] GetGitHubRepositories default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/github/repositories][%d] GetGitHubRepositories default %s", o._statusCode, payload)
 }
 
 func (o *GetGitHubRepositoriesDefault) GetPayload() *models.RPCStatus {

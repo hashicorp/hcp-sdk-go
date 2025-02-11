@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-waypoint-service/preview/2023-08-18/models"
 )
@@ -84,6 +85,37 @@ type WaypointServiceUpdateApplicationTemplate6Params struct {
 
 	// NamespaceID.
 	NamespaceID string
+
+	/* NamespaceLocationOrganizationID.
+
+	   organization_id is the id of the organization.
+	*/
+	NamespaceLocationOrganizationID *string
+
+	/* NamespaceLocationProjectID.
+
+	   project_id is the projects id.
+	*/
+	NamespaceLocationProjectID *string
+
+	/* NamespaceLocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure")
+	*/
+	NamespaceLocationRegionProvider *string
+
+	/* NamespaceLocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1")
+	*/
+	NamespaceLocationRegionRegion *string
+
+	/* UseModuleReadme.
+
+	     If true, will auto-import the readme from the Terraform module used
+	rather than the one specified in application_template.
+	*/
+	UseModuleReadme *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -182,6 +214,61 @@ func (o *WaypointServiceUpdateApplicationTemplate6Params) SetNamespaceID(namespa
 	o.NamespaceID = namespaceID
 }
 
+// WithNamespaceLocationOrganizationID adds the namespaceLocationOrganizationID to the waypoint service update application template6 params
+func (o *WaypointServiceUpdateApplicationTemplate6Params) WithNamespaceLocationOrganizationID(namespaceLocationOrganizationID *string) *WaypointServiceUpdateApplicationTemplate6Params {
+	o.SetNamespaceLocationOrganizationID(namespaceLocationOrganizationID)
+	return o
+}
+
+// SetNamespaceLocationOrganizationID adds the namespaceLocationOrganizationId to the waypoint service update application template6 params
+func (o *WaypointServiceUpdateApplicationTemplate6Params) SetNamespaceLocationOrganizationID(namespaceLocationOrganizationID *string) {
+	o.NamespaceLocationOrganizationID = namespaceLocationOrganizationID
+}
+
+// WithNamespaceLocationProjectID adds the namespaceLocationProjectID to the waypoint service update application template6 params
+func (o *WaypointServiceUpdateApplicationTemplate6Params) WithNamespaceLocationProjectID(namespaceLocationProjectID *string) *WaypointServiceUpdateApplicationTemplate6Params {
+	o.SetNamespaceLocationProjectID(namespaceLocationProjectID)
+	return o
+}
+
+// SetNamespaceLocationProjectID adds the namespaceLocationProjectId to the waypoint service update application template6 params
+func (o *WaypointServiceUpdateApplicationTemplate6Params) SetNamespaceLocationProjectID(namespaceLocationProjectID *string) {
+	o.NamespaceLocationProjectID = namespaceLocationProjectID
+}
+
+// WithNamespaceLocationRegionProvider adds the namespaceLocationRegionProvider to the waypoint service update application template6 params
+func (o *WaypointServiceUpdateApplicationTemplate6Params) WithNamespaceLocationRegionProvider(namespaceLocationRegionProvider *string) *WaypointServiceUpdateApplicationTemplate6Params {
+	o.SetNamespaceLocationRegionProvider(namespaceLocationRegionProvider)
+	return o
+}
+
+// SetNamespaceLocationRegionProvider adds the namespaceLocationRegionProvider to the waypoint service update application template6 params
+func (o *WaypointServiceUpdateApplicationTemplate6Params) SetNamespaceLocationRegionProvider(namespaceLocationRegionProvider *string) {
+	o.NamespaceLocationRegionProvider = namespaceLocationRegionProvider
+}
+
+// WithNamespaceLocationRegionRegion adds the namespaceLocationRegionRegion to the waypoint service update application template6 params
+func (o *WaypointServiceUpdateApplicationTemplate6Params) WithNamespaceLocationRegionRegion(namespaceLocationRegionRegion *string) *WaypointServiceUpdateApplicationTemplate6Params {
+	o.SetNamespaceLocationRegionRegion(namespaceLocationRegionRegion)
+	return o
+}
+
+// SetNamespaceLocationRegionRegion adds the namespaceLocationRegionRegion to the waypoint service update application template6 params
+func (o *WaypointServiceUpdateApplicationTemplate6Params) SetNamespaceLocationRegionRegion(namespaceLocationRegionRegion *string) {
+	o.NamespaceLocationRegionRegion = namespaceLocationRegionRegion
+}
+
+// WithUseModuleReadme adds the useModuleReadme to the waypoint service update application template6 params
+func (o *WaypointServiceUpdateApplicationTemplate6Params) WithUseModuleReadme(useModuleReadme *bool) *WaypointServiceUpdateApplicationTemplate6Params {
+	o.SetUseModuleReadme(useModuleReadme)
+	return o
+}
+
+// SetUseModuleReadme adds the useModuleReadme to the waypoint service update application template6 params
+func (o *WaypointServiceUpdateApplicationTemplate6Params) SetUseModuleReadme(useModuleReadme *bool) {
+	o.UseModuleReadme = useModuleReadme
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *WaypointServiceUpdateApplicationTemplate6Params) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -220,6 +307,91 @@ func (o *WaypointServiceUpdateApplicationTemplate6Params) WriteToRequest(r runti
 	// path param namespace.id
 	if err := r.SetPathParam("namespace.id", o.NamespaceID); err != nil {
 		return err
+	}
+
+	if o.NamespaceLocationOrganizationID != nil {
+
+		// query param namespace.location.organization_id
+		var qrNamespaceLocationOrganizationID string
+
+		if o.NamespaceLocationOrganizationID != nil {
+			qrNamespaceLocationOrganizationID = *o.NamespaceLocationOrganizationID
+		}
+		qNamespaceLocationOrganizationID := qrNamespaceLocationOrganizationID
+		if qNamespaceLocationOrganizationID != "" {
+
+			if err := r.SetQueryParam("namespace.location.organization_id", qNamespaceLocationOrganizationID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespaceLocationProjectID != nil {
+
+		// query param namespace.location.project_id
+		var qrNamespaceLocationProjectID string
+
+		if o.NamespaceLocationProjectID != nil {
+			qrNamespaceLocationProjectID = *o.NamespaceLocationProjectID
+		}
+		qNamespaceLocationProjectID := qrNamespaceLocationProjectID
+		if qNamespaceLocationProjectID != "" {
+
+			if err := r.SetQueryParam("namespace.location.project_id", qNamespaceLocationProjectID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespaceLocationRegionProvider != nil {
+
+		// query param namespace.location.region.provider
+		var qrNamespaceLocationRegionProvider string
+
+		if o.NamespaceLocationRegionProvider != nil {
+			qrNamespaceLocationRegionProvider = *o.NamespaceLocationRegionProvider
+		}
+		qNamespaceLocationRegionProvider := qrNamespaceLocationRegionProvider
+		if qNamespaceLocationRegionProvider != "" {
+
+			if err := r.SetQueryParam("namespace.location.region.provider", qNamespaceLocationRegionProvider); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespaceLocationRegionRegion != nil {
+
+		// query param namespace.location.region.region
+		var qrNamespaceLocationRegionRegion string
+
+		if o.NamespaceLocationRegionRegion != nil {
+			qrNamespaceLocationRegionRegion = *o.NamespaceLocationRegionRegion
+		}
+		qNamespaceLocationRegionRegion := qrNamespaceLocationRegionRegion
+		if qNamespaceLocationRegionRegion != "" {
+
+			if err := r.SetQueryParam("namespace.location.region.region", qNamespaceLocationRegionRegion); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.UseModuleReadme != nil {
+
+		// query param use_module_readme
+		var qrUseModuleReadme bool
+
+		if o.UseModuleReadme != nil {
+			qrUseModuleReadme = *o.UseModuleReadme
+		}
+		qUseModuleReadme := swag.FormatBool(qrUseModuleReadme)
+		if qUseModuleReadme != "" {
+
+			if err := r.SetQueryParam("use_module_readme", qUseModuleReadme); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

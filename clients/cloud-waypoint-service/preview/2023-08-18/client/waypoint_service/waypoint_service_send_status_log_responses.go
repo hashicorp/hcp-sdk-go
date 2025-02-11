@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceSendStatusLogOK) Code() int {
 }
 
 func (o *WaypointServiceSendStatusLogOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] waypointServiceSendStatusLogOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] waypointServiceSendStatusLogOK %s", 200, payload)
 }
 
 func (o *WaypointServiceSendStatusLogOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] waypointServiceSendStatusLogOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] waypointServiceSendStatusLogOK %s", 200, payload)
 }
 
 func (o *WaypointServiceSendStatusLogOK) GetPayload() models.HashicorpCloudWaypointSendStatusLogResponse {
@@ -157,11 +160,13 @@ func (o *WaypointServiceSendStatusLogDefault) Code() int {
 }
 
 func (o *WaypointServiceSendStatusLogDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] WaypointService_SendStatusLog default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] WaypointService_SendStatusLog default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceSendStatusLogDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] WaypointService_SendStatusLog default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] WaypointService_SendStatusLog default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceSendStatusLogDefault) GetPayload() *cloud.GoogleRPCStatus {

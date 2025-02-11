@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceListAgentGroupsOK) Code() int {
 }
 
 func (o *WaypointServiceListAgentGroupsOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/agent/group][%d] waypointServiceListAgentGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/agent/group][%d] waypointServiceListAgentGroupsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListAgentGroupsOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/agent/group][%d] waypointServiceListAgentGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/agent/group][%d] waypointServiceListAgentGroupsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListAgentGroupsOK) GetPayload() *models.HashicorpCloudWaypointListAgentGroupsResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceListAgentGroupsDefault) Code() int {
 }
 
 func (o *WaypointServiceListAgentGroupsDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/agent/group][%d] WaypointService_ListAgentGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/agent/group][%d] WaypointService_ListAgentGroups default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListAgentGroupsDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/agent/group][%d] WaypointService_ListAgentGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/agent/group][%d] WaypointService_ListAgentGroups default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListAgentGroupsDefault) GetPayload() *cloud.GoogleRPCStatus {

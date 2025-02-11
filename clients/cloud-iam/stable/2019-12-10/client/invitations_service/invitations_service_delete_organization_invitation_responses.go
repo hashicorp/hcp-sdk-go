@@ -6,6 +6,7 @@ package invitations_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *InvitationsServiceDeleteOrganizationInvitationOK) Code() int {
 }
 
 func (o *InvitationsServiceDeleteOrganizationInvitationOK) Error() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/invitations/{invitation_id}][%d] invitationsServiceDeleteOrganizationInvitationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/invitations/{invitation_id}][%d] invitationsServiceDeleteOrganizationInvitationOK %s", 200, payload)
 }
 
 func (o *InvitationsServiceDeleteOrganizationInvitationOK) String() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/invitations/{invitation_id}][%d] invitationsServiceDeleteOrganizationInvitationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/invitations/{invitation_id}][%d] invitationsServiceDeleteOrganizationInvitationOK %s", 200, payload)
 }
 
 func (o *InvitationsServiceDeleteOrganizationInvitationOK) GetPayload() models.HashicorpCloudIamDeleteOrganizationInvitationResponse {
@@ -157,11 +160,13 @@ func (o *InvitationsServiceDeleteOrganizationInvitationDefault) Code() int {
 }
 
 func (o *InvitationsServiceDeleteOrganizationInvitationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/invitations/{invitation_id}][%d] InvitationsService_DeleteOrganizationInvitation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/invitations/{invitation_id}][%d] InvitationsService_DeleteOrganizationInvitation default %s", o._statusCode, payload)
 }
 
 func (o *InvitationsServiceDeleteOrganizationInvitationDefault) String() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/invitations/{invitation_id}][%d] InvitationsService_DeleteOrganizationInvitation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/invitations/{invitation_id}][%d] InvitationsService_DeleteOrganizationInvitation default %s", o._statusCode, payload)
 }
 
 func (o *InvitationsServiceDeleteOrganizationInvitationDefault) GetPayload() *cloud.GoogleRPCStatus {

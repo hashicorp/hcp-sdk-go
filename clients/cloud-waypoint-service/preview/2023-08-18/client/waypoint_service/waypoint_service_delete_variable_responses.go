@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceDeleteVariableOK) Code() int {
 }
 
 func (o *WaypointServiceDeleteVariableOK) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceDeleteVariableOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceDeleteVariableOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteVariableOK) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceDeleteVariableOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceDeleteVariableOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDeleteVariableOK) GetPayload() models.HashicorpCloudWaypointDeleteVariableResponse {
@@ -157,11 +160,13 @@ func (o *WaypointServiceDeleteVariableDefault) Code() int {
 }
 
 func (o *WaypointServiceDeleteVariableDefault) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_DeleteVariable default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_DeleteVariable default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteVariableDefault) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_DeleteVariable default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_DeleteVariable default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDeleteVariableDefault) GetPayload() *cloud.GoogleRPCStatus {

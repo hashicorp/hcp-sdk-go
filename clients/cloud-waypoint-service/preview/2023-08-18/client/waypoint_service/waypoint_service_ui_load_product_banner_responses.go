@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceUILoadProductBannerOK) Code() int {
 }
 
 func (o *WaypointServiceUILoadProductBannerOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/product-banner][%d] waypointServiceUiLoadProductBannerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/product-banner][%d] waypointServiceUiLoadProductBannerOK %s", 200, payload)
 }
 
 func (o *WaypointServiceUILoadProductBannerOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/product-banner][%d] waypointServiceUiLoadProductBannerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/product-banner][%d] waypointServiceUiLoadProductBannerOK %s", 200, payload)
 }
 
 func (o *WaypointServiceUILoadProductBannerOK) GetPayload() *models.HashicorpCloudWaypointUILoadProductBannerResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceUILoadProductBannerDefault) Code() int {
 }
 
 func (o *WaypointServiceUILoadProductBannerDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/product-banner][%d] WaypointService_UI_LoadProductBanner default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/product-banner][%d] WaypointService_UI_LoadProductBanner default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUILoadProductBannerDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/product-banner][%d] WaypointService_UI_LoadProductBanner default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/ui/product-banner][%d] WaypointService_UI_LoadProductBanner default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUILoadProductBannerDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -6,6 +6,7 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ServicePrincipalsServiceDeleteServicePrincipalKey2OK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipalKey2OK) Error() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_3}][%d] servicePrincipalsServiceDeleteServicePrincipalKey2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_3}][%d] servicePrincipalsServiceDeleteServicePrincipalKey2OK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipalKey2OK) String() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_3}][%d] servicePrincipalsServiceDeleteServicePrincipalKey2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_3}][%d] servicePrincipalsServiceDeleteServicePrincipalKey2OK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipalKey2OK) GetPayload() models.HashicorpCloudIamDeleteServicePrincipalKeyResponse {
@@ -157,11 +160,13 @@ func (o *ServicePrincipalsServiceDeleteServicePrincipalKey2Default) Code() int {
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipalKey2Default) Error() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_3}][%d] ServicePrincipalsService_DeleteServicePrincipalKey2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_3}][%d] ServicePrincipalsService_DeleteServicePrincipalKey2 default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipalKey2Default) String() string {
-	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_3}][%d] ServicePrincipalsService_DeleteServicePrincipalKey2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2019-12-10/{resource_name_3}][%d] ServicePrincipalsService_DeleteServicePrincipalKey2 default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceDeleteServicePrincipalKey2Default) GetPayload() *cloud.GoogleRPCStatus {

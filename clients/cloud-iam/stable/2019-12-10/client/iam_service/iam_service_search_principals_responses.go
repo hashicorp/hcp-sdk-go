@@ -7,6 +7,7 @@ package iam_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,13 @@ func (o *IamServiceSearchPrincipalsOK) Code() int {
 }
 
 func (o *IamServiceSearchPrincipalsOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/principals/search][%d] iamServiceSearchPrincipalsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/principals/search][%d] iamServiceSearchPrincipalsOK %s", 200, payload)
 }
 
 func (o *IamServiceSearchPrincipalsOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/principals/search][%d] iamServiceSearchPrincipalsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/principals/search][%d] iamServiceSearchPrincipalsOK %s", 200, payload)
 }
 
 func (o *IamServiceSearchPrincipalsOK) GetPayload() *models.HashicorpCloudIamSearchPrincipalsResponse {
@@ -162,11 +165,13 @@ func (o *IamServiceSearchPrincipalsDefault) Code() int {
 }
 
 func (o *IamServiceSearchPrincipalsDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/principals/search][%d] IamService_SearchPrincipals default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/principals/search][%d] IamService_SearchPrincipals default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceSearchPrincipalsDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/principals/search][%d] IamService_SearchPrincipals default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/principals/search][%d] IamService_SearchPrincipals default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceSearchPrincipalsDefault) GetPayload() *cloud.GoogleRPCStatus {

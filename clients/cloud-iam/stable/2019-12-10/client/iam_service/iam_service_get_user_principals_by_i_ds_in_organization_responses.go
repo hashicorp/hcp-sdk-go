@@ -7,6 +7,7 @@ package iam_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *IamServiceGetUserPrincipalsByIDsInOrganizationOK) Code() int {
 }
 
 func (o *IamServiceGetUserPrincipalsByIDsInOrganizationOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch][%d] iamServiceGetUserPrincipalsByIDsInOrganizationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch][%d] iamServiceGetUserPrincipalsByIDsInOrganizationOK %s", 200, payload)
 }
 
 func (o *IamServiceGetUserPrincipalsByIDsInOrganizationOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch][%d] iamServiceGetUserPrincipalsByIDsInOrganizationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch][%d] iamServiceGetUserPrincipalsByIDsInOrganizationOK %s", 200, payload)
 }
 
 func (o *IamServiceGetUserPrincipalsByIDsInOrganizationOK) GetPayload() *models.HashicorpCloudIamGetUserPrincipalsByIDsInOrganizationResponse {
@@ -161,11 +164,13 @@ func (o *IamServiceGetUserPrincipalsByIDsInOrganizationDefault) Code() int {
 }
 
 func (o *IamServiceGetUserPrincipalsByIDsInOrganizationDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch][%d] IamService_GetUserPrincipalsByIDsInOrganization default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch][%d] IamService_GetUserPrincipalsByIDsInOrganization default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceGetUserPrincipalsByIDsInOrganizationDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch][%d] IamService_GetUserPrincipalsByIDsInOrganization default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/user-principals/batch-fetch][%d] IamService_GetUserPrincipalsByIDsInOrganization default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceGetUserPrincipalsByIDsInOrganizationDefault) GetPayload() *cloud.GoogleRPCStatus {

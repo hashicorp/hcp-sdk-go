@@ -6,6 +6,7 @@ package groups_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GroupsServiceListGroupsOK) Code() int {
 }
 
 func (o *GroupsServiceListGroupsOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] groupsServiceListGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] groupsServiceListGroupsOK %s", 200, payload)
 }
 
 func (o *GroupsServiceListGroupsOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] groupsServiceListGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] groupsServiceListGroupsOK %s", 200, payload)
 }
 
 func (o *GroupsServiceListGroupsOK) GetPayload() *models.HashicorpCloudIamListGroupsResponse {
@@ -159,11 +162,13 @@ func (o *GroupsServiceListGroupsDefault) Code() int {
 }
 
 func (o *GroupsServiceListGroupsDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] GroupsService_ListGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] GroupsService_ListGroups default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceListGroupsDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] GroupsService_ListGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups][%d] GroupsService_ListGroups default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceListGroupsDefault) GetPayload() *cloud.GoogleRPCStatus {

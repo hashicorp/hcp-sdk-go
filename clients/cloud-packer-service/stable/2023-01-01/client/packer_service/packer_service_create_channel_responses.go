@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceCreateChannelOK) Code() int {
 }
 
 func (o *PackerServiceCreateChannelOK) Error() string {
-	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/channels][%d] packerServiceCreateChannelOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/channels][%d] packerServiceCreateChannelOK %s", 200, payload)
 }
 
 func (o *PackerServiceCreateChannelOK) String() string {
-	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/channels][%d] packerServiceCreateChannelOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/channels][%d] packerServiceCreateChannelOK %s", 200, payload)
 }
 
 func (o *PackerServiceCreateChannelOK) GetPayload() *models.HashicorpCloudPacker20230101CreateChannelResponse {
@@ -159,11 +162,13 @@ func (o *PackerServiceCreateChannelDefault) Code() int {
 }
 
 func (o *PackerServiceCreateChannelDefault) Error() string {
-	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/channels][%d] PackerService_CreateChannel default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/channels][%d] PackerService_CreateChannel default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceCreateChannelDefault) String() string {
-	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/channels][%d] PackerService_CreateChannel default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/channels][%d] PackerService_CreateChannel default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceCreateChannelDefault) GetPayload() *cloud.GoogleRPCStatus {

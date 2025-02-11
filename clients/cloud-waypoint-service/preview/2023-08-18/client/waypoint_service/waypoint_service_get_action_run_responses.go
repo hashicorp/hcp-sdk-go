@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceGetActionRunOK) Code() int {
 }
 
 func (o *WaypointServiceGetActionRunOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] waypointServiceGetActionRunOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] waypointServiceGetActionRunOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetActionRunOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] waypointServiceGetActionRunOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] waypointServiceGetActionRunOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetActionRunOK) GetPayload() *models.HashicorpCloudWaypointGetActionRunResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceGetActionRunDefault) Code() int {
 }
 
 func (o *WaypointServiceGetActionRunDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] WaypointService_GetActionRun default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] WaypointService_GetActionRun default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetActionRunDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] WaypointService_GetActionRun default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] WaypointService_GetActionRun default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetActionRunDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceListAddOnsOK) Code() int {
 }
 
 func (o *WaypointServiceListAddOnsOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-ons][%d] waypointServiceListAddOnsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-ons][%d] waypointServiceListAddOnsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListAddOnsOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-ons][%d] waypointServiceListAddOnsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-ons][%d] waypointServiceListAddOnsOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListAddOnsOK) GetPayload() *models.HashicorpCloudWaypointListAddOnsResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceListAddOnsDefault) Code() int {
 }
 
 func (o *WaypointServiceListAddOnsDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-ons][%d] WaypointService_ListAddOns default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-ons][%d] WaypointService_ListAddOns default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListAddOnsDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-ons][%d] WaypointService_ListAddOns default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-ons][%d] WaypointService_ListAddOns default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListAddOnsDefault) GetPayload() *cloud.GoogleRPCStatus {

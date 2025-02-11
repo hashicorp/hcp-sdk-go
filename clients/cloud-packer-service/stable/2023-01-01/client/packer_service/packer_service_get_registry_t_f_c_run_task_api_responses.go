@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) Code() int {
 }
 
 func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) Error() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] packerServiceGetRegistryTFCRunTaskApiOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] packerServiceGetRegistryTFCRunTaskApiOK %s", 200, payload)
 }
 
 func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) String() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] packerServiceGetRegistryTFCRunTaskApiOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] packerServiceGetRegistryTFCRunTaskApiOK %s", 200, payload)
 }
 
 func (o *PackerServiceGetRegistryTFCRunTaskAPIOK) GetPayload() *models.HashicorpCloudPacker20230101GetRegistryTFCRunTaskAPIResponse {
@@ -159,11 +162,13 @@ func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) Code() int {
 }
 
 func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) Error() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] PackerService_GetRegistryTFCRunTaskAPI default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] PackerService_GetRegistryTFCRunTaskAPI default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) String() string {
-	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] PackerService_GetRegistryTFCRunTaskAPI default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/{task_type}][%d] PackerService_GetRegistryTFCRunTaskAPI default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceGetRegistryTFCRunTaskAPIDefault) GetPayload() *cloud.GoogleRPCStatus {

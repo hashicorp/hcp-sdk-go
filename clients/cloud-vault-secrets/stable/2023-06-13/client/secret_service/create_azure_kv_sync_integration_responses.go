@@ -7,6 +7,7 @@ package secret_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *CreateAzureKvSyncIntegrationOK) Code() int {
 }
 
 func (o *CreateAzureKvSyncIntegrationOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/azure-kv][%d] createAzureKvSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/azure-kv][%d] createAzureKvSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateAzureKvSyncIntegrationOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/azure-kv][%d] createAzureKvSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/azure-kv][%d] createAzureKvSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateAzureKvSyncIntegrationOK) GetPayload() *models.Secrets20230613CreateSyncIntegrationResponse {
@@ -161,11 +164,13 @@ func (o *CreateAzureKvSyncIntegrationDefault) Code() int {
 }
 
 func (o *CreateAzureKvSyncIntegrationDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/azure-kv][%d] CreateAzureKvSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/azure-kv][%d] CreateAzureKvSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateAzureKvSyncIntegrationDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/azure-kv][%d] CreateAzureKvSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/azure-kv][%d] CreateAzureKvSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateAzureKvSyncIntegrationDefault) GetPayload() *models.RPCStatus {

@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceListActionRunsByNamespaceOK) Code() int {
 }
 
 func (o *WaypointServiceListActionRunsByNamespaceOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action-runs][%d] waypointServiceListActionRunsByNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action-runs][%d] waypointServiceListActionRunsByNamespaceOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListActionRunsByNamespaceOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action-runs][%d] waypointServiceListActionRunsByNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action-runs][%d] waypointServiceListActionRunsByNamespaceOK %s", 200, payload)
 }
 
 func (o *WaypointServiceListActionRunsByNamespaceOK) GetPayload() *models.HashicorpCloudWaypointListActionRunsByNamespaceResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceListActionRunsByNamespaceDefault) Code() int {
 }
 
 func (o *WaypointServiceListActionRunsByNamespaceDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action-runs][%d] WaypointService_ListActionRunsByNamespace default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action-runs][%d] WaypointService_ListActionRunsByNamespace default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListActionRunsByNamespaceDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action-runs][%d] WaypointService_ListActionRunsByNamespace default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/action-runs][%d] WaypointService_ListActionRunsByNamespace default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceListActionRunsByNamespaceDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -61,6 +61,13 @@ WaypointServiceGetTFModuleDetailsParams contains all the parameters to send to t
 */
 type WaypointServiceGetTFModuleDetailsParams struct {
 
+	/* ModuleID.
+
+	     module_id is the ID of the Terraform no-code module. The expected format is
+	"nocode-<UUID>". This parameter is used for the API call to Atlas.
+	*/
+	ModuleID string
+
 	/* Name.
 
 	   name is the name of the Terraform module.
@@ -69,6 +76,30 @@ type WaypointServiceGetTFModuleDetailsParams struct {
 
 	// NamespaceID.
 	NamespaceID string
+
+	/* NamespaceLocationOrganizationID.
+
+	   organization_id is the id of the organization.
+	*/
+	NamespaceLocationOrganizationID *string
+
+	/* NamespaceLocationProjectID.
+
+	   project_id is the projects id.
+	*/
+	NamespaceLocationProjectID *string
+
+	/* NamespaceLocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure")
+	*/
+	NamespaceLocationRegionProvider *string
+
+	/* NamespaceLocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1")
+	*/
+	NamespaceLocationRegionRegion *string
 
 	/* Provider.
 
@@ -84,7 +115,7 @@ type WaypointServiceGetTFModuleDetailsParams struct {
 
 	/* Version.
 
-	   version is the version of the Terraform module.
+	   DEPRECATED: Do not use.
 	*/
 	Version string
 
@@ -141,6 +172,17 @@ func (o *WaypointServiceGetTFModuleDetailsParams) SetHTTPClient(client *http.Cli
 	o.HTTPClient = client
 }
 
+// WithModuleID adds the moduleID to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) WithModuleID(moduleID string) *WaypointServiceGetTFModuleDetailsParams {
+	o.SetModuleID(moduleID)
+	return o
+}
+
+// SetModuleID adds the moduleId to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) SetModuleID(moduleID string) {
+	o.ModuleID = moduleID
+}
+
 // WithName adds the name to the waypoint service get t f module details params
 func (o *WaypointServiceGetTFModuleDetailsParams) WithName(name string) *WaypointServiceGetTFModuleDetailsParams {
 	o.SetName(name)
@@ -161,6 +203,50 @@ func (o *WaypointServiceGetTFModuleDetailsParams) WithNamespaceID(namespaceID st
 // SetNamespaceID adds the namespaceId to the waypoint service get t f module details params
 func (o *WaypointServiceGetTFModuleDetailsParams) SetNamespaceID(namespaceID string) {
 	o.NamespaceID = namespaceID
+}
+
+// WithNamespaceLocationOrganizationID adds the namespaceLocationOrganizationID to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) WithNamespaceLocationOrganizationID(namespaceLocationOrganizationID *string) *WaypointServiceGetTFModuleDetailsParams {
+	o.SetNamespaceLocationOrganizationID(namespaceLocationOrganizationID)
+	return o
+}
+
+// SetNamespaceLocationOrganizationID adds the namespaceLocationOrganizationId to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) SetNamespaceLocationOrganizationID(namespaceLocationOrganizationID *string) {
+	o.NamespaceLocationOrganizationID = namespaceLocationOrganizationID
+}
+
+// WithNamespaceLocationProjectID adds the namespaceLocationProjectID to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) WithNamespaceLocationProjectID(namespaceLocationProjectID *string) *WaypointServiceGetTFModuleDetailsParams {
+	o.SetNamespaceLocationProjectID(namespaceLocationProjectID)
+	return o
+}
+
+// SetNamespaceLocationProjectID adds the namespaceLocationProjectId to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) SetNamespaceLocationProjectID(namespaceLocationProjectID *string) {
+	o.NamespaceLocationProjectID = namespaceLocationProjectID
+}
+
+// WithNamespaceLocationRegionProvider adds the namespaceLocationRegionProvider to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) WithNamespaceLocationRegionProvider(namespaceLocationRegionProvider *string) *WaypointServiceGetTFModuleDetailsParams {
+	o.SetNamespaceLocationRegionProvider(namespaceLocationRegionProvider)
+	return o
+}
+
+// SetNamespaceLocationRegionProvider adds the namespaceLocationRegionProvider to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) SetNamespaceLocationRegionProvider(namespaceLocationRegionProvider *string) {
+	o.NamespaceLocationRegionProvider = namespaceLocationRegionProvider
+}
+
+// WithNamespaceLocationRegionRegion adds the namespaceLocationRegionRegion to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) WithNamespaceLocationRegionRegion(namespaceLocationRegionRegion *string) *WaypointServiceGetTFModuleDetailsParams {
+	o.SetNamespaceLocationRegionRegion(namespaceLocationRegionRegion)
+	return o
+}
+
+// SetNamespaceLocationRegionRegion adds the namespaceLocationRegionRegion to the waypoint service get t f module details params
+func (o *WaypointServiceGetTFModuleDetailsParams) SetNamespaceLocationRegionRegion(namespaceLocationRegionRegion *string) {
+	o.NamespaceLocationRegionRegion = namespaceLocationRegionRegion
 }
 
 // WithProvider adds the provider to the waypoint service get t f module details params
@@ -204,6 +290,16 @@ func (o *WaypointServiceGetTFModuleDetailsParams) WriteToRequest(r runtime.Clien
 	}
 	var res []error
 
+	// query param module_id
+	qrModuleID := o.ModuleID
+	qModuleID := qrModuleID
+	if qModuleID != "" {
+
+		if err := r.SetQueryParam("module_id", qModuleID); err != nil {
+			return err
+		}
+	}
+
 	// path param name
 	if err := r.SetPathParam("name", o.Name); err != nil {
 		return err
@@ -212,6 +308,74 @@ func (o *WaypointServiceGetTFModuleDetailsParams) WriteToRequest(r runtime.Clien
 	// path param namespace.id
 	if err := r.SetPathParam("namespace.id", o.NamespaceID); err != nil {
 		return err
+	}
+
+	if o.NamespaceLocationOrganizationID != nil {
+
+		// query param namespace.location.organization_id
+		var qrNamespaceLocationOrganizationID string
+
+		if o.NamespaceLocationOrganizationID != nil {
+			qrNamespaceLocationOrganizationID = *o.NamespaceLocationOrganizationID
+		}
+		qNamespaceLocationOrganizationID := qrNamespaceLocationOrganizationID
+		if qNamespaceLocationOrganizationID != "" {
+
+			if err := r.SetQueryParam("namespace.location.organization_id", qNamespaceLocationOrganizationID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespaceLocationProjectID != nil {
+
+		// query param namespace.location.project_id
+		var qrNamespaceLocationProjectID string
+
+		if o.NamespaceLocationProjectID != nil {
+			qrNamespaceLocationProjectID = *o.NamespaceLocationProjectID
+		}
+		qNamespaceLocationProjectID := qrNamespaceLocationProjectID
+		if qNamespaceLocationProjectID != "" {
+
+			if err := r.SetQueryParam("namespace.location.project_id", qNamespaceLocationProjectID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespaceLocationRegionProvider != nil {
+
+		// query param namespace.location.region.provider
+		var qrNamespaceLocationRegionProvider string
+
+		if o.NamespaceLocationRegionProvider != nil {
+			qrNamespaceLocationRegionProvider = *o.NamespaceLocationRegionProvider
+		}
+		qNamespaceLocationRegionProvider := qrNamespaceLocationRegionProvider
+		if qNamespaceLocationRegionProvider != "" {
+
+			if err := r.SetQueryParam("namespace.location.region.provider", qNamespaceLocationRegionProvider); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespaceLocationRegionRegion != nil {
+
+		// query param namespace.location.region.region
+		var qrNamespaceLocationRegionRegion string
+
+		if o.NamespaceLocationRegionRegion != nil {
+			qrNamespaceLocationRegionRegion = *o.NamespaceLocationRegionRegion
+		}
+		qNamespaceLocationRegionRegion := qrNamespaceLocationRegionRegion
+		if qNamespaceLocationRegionRegion != "" {
+
+			if err := r.SetQueryParam("namespace.location.region.region", qNamespaceLocationRegionRegion); err != nil {
+				return err
+			}
+		}
 	}
 
 	// path param provider

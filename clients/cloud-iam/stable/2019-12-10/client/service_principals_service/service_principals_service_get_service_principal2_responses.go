@@ -6,6 +6,7 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ServicePrincipalsServiceGetServicePrincipal2OK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceGetServicePrincipal2OK) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/{resource_name_1}][%d] servicePrincipalsServiceGetServicePrincipal2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{resource_name_1}][%d] servicePrincipalsServiceGetServicePrincipal2OK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceGetServicePrincipal2OK) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/{resource_name_1}][%d] servicePrincipalsServiceGetServicePrincipal2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{resource_name_1}][%d] servicePrincipalsServiceGetServicePrincipal2OK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceGetServicePrincipal2OK) GetPayload() *models.HashicorpCloudIamGetServicePrincipalResponse {
@@ -159,11 +162,13 @@ func (o *ServicePrincipalsServiceGetServicePrincipal2Default) Code() int {
 }
 
 func (o *ServicePrincipalsServiceGetServicePrincipal2Default) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/{resource_name_1}][%d] ServicePrincipalsService_GetServicePrincipal2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{resource_name_1}][%d] ServicePrincipalsService_GetServicePrincipal2 default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceGetServicePrincipal2Default) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/{resource_name_1}][%d] ServicePrincipalsService_GetServicePrincipal2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{resource_name_1}][%d] ServicePrincipalsService_GetServicePrincipal2 default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceGetServicePrincipal2Default) GetPayload() *cloud.GoogleRPCStatus {

@@ -38,6 +38,9 @@ const (
 
 	// Secrets20230613TierSTANDARD captures enum value "STANDARD"
 	Secrets20230613TierSTANDARD Secrets20230613Tier = "STANDARD"
+
+	// Secrets20230613TierPLUS captures enum value "PLUS"
+	Secrets20230613TierPLUS Secrets20230613Tier = "PLUS"
 )
 
 // for schema
@@ -45,7 +48,7 @@ var secrets20230613TierEnum []interface{}
 
 func init() {
 	var res []Secrets20230613Tier
-	if err := json.Unmarshal([]byte(`["UNKNOWN","FREE","STANDARD"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["UNKNOWN","FREE","STANDARD","PLUS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetVercelInstallationLinkOK) Code() int {
 }
 
 func (o *GetVercelInstallationLinkOK) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel/link][%d] getVercelInstallationLinkOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel/link][%d] getVercelInstallationLinkOK %s", 200, payload)
 }
 
 func (o *GetVercelInstallationLinkOK) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel/link][%d] getVercelInstallationLinkOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel/link][%d] getVercelInstallationLinkOK %s", 200, payload)
 }
 
 func (o *GetVercelInstallationLinkOK) GetPayload() *models.Secrets20230613GetVercelInstallationLinkResponse {
@@ -158,11 +161,13 @@ func (o *GetVercelInstallationLinkDefault) Code() int {
 }
 
 func (o *GetVercelInstallationLinkDefault) Error() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel/link][%d] GetVercelInstallationLink default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel/link][%d] GetVercelInstallationLink default %s", o._statusCode, payload)
 }
 
 func (o *GetVercelInstallationLinkDefault) String() string {
-	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel/link][%d] GetVercelInstallationLink default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/vercel/link][%d] GetVercelInstallationLink default %s", o._statusCode, payload)
 }
 
 func (o *GetVercelInstallationLinkDefault) GetPayload() *models.RPCStatus {

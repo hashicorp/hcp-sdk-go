@@ -7,6 +7,7 @@ package secret_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *ForceSyncOK) Code() int {
 }
 
 func (o *ForceSyncOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/force][%d] forceSyncOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/force][%d] forceSyncOK %s", 200, payload)
 }
 
 func (o *ForceSyncOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/force][%d] forceSyncOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/force][%d] forceSyncOK %s", 200, payload)
 }
 
 func (o *ForceSyncOK) GetPayload() models.Secrets20230613ForceSyncResponse {
@@ -159,11 +162,13 @@ func (o *ForceSyncDefault) Code() int {
 }
 
 func (o *ForceSyncDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/force][%d] ForceSync default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/force][%d] ForceSync default %s", o._statusCode, payload)
 }
 
 func (o *ForceSyncDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/force][%d] ForceSync default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/force][%d] ForceSync default %s", o._statusCode, payload)
 }
 
 func (o *ForceSyncDefault) GetPayload() *models.RPCStatus {

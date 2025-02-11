@@ -65,6 +65,30 @@ type WaypointServiceListVariablesParams struct {
 	// NamespaceID.
 	NamespaceID string
 
+	/* NamespaceLocationOrganizationID.
+
+	   organization_id is the id of the organization.
+	*/
+	NamespaceLocationOrganizationID *string
+
+	/* NamespaceLocationProjectID.
+
+	   project_id is the projects id.
+	*/
+	NamespaceLocationProjectID *string
+
+	/* NamespaceLocationRegionProvider.
+
+	   provider is the named cloud provider ("aws", "gcp", "azure")
+	*/
+	NamespaceLocationRegionProvider *string
+
+	/* NamespaceLocationRegionRegion.
+
+	   region is the cloud region ("us-west1", "us-east1")
+	*/
+	NamespaceLocationRegionRegion *string
+
 	/* PaginationNextPageToken.
 
 	     Specifies a page token to use to retrieve the next page. Set this to the
@@ -180,6 +204,50 @@ func (o *WaypointServiceListVariablesParams) SetNamespaceID(namespaceID string) 
 	o.NamespaceID = namespaceID
 }
 
+// WithNamespaceLocationOrganizationID adds the namespaceLocationOrganizationID to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) WithNamespaceLocationOrganizationID(namespaceLocationOrganizationID *string) *WaypointServiceListVariablesParams {
+	o.SetNamespaceLocationOrganizationID(namespaceLocationOrganizationID)
+	return o
+}
+
+// SetNamespaceLocationOrganizationID adds the namespaceLocationOrganizationId to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) SetNamespaceLocationOrganizationID(namespaceLocationOrganizationID *string) {
+	o.NamespaceLocationOrganizationID = namespaceLocationOrganizationID
+}
+
+// WithNamespaceLocationProjectID adds the namespaceLocationProjectID to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) WithNamespaceLocationProjectID(namespaceLocationProjectID *string) *WaypointServiceListVariablesParams {
+	o.SetNamespaceLocationProjectID(namespaceLocationProjectID)
+	return o
+}
+
+// SetNamespaceLocationProjectID adds the namespaceLocationProjectId to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) SetNamespaceLocationProjectID(namespaceLocationProjectID *string) {
+	o.NamespaceLocationProjectID = namespaceLocationProjectID
+}
+
+// WithNamespaceLocationRegionProvider adds the namespaceLocationRegionProvider to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) WithNamespaceLocationRegionProvider(namespaceLocationRegionProvider *string) *WaypointServiceListVariablesParams {
+	o.SetNamespaceLocationRegionProvider(namespaceLocationRegionProvider)
+	return o
+}
+
+// SetNamespaceLocationRegionProvider adds the namespaceLocationRegionProvider to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) SetNamespaceLocationRegionProvider(namespaceLocationRegionProvider *string) {
+	o.NamespaceLocationRegionProvider = namespaceLocationRegionProvider
+}
+
+// WithNamespaceLocationRegionRegion adds the namespaceLocationRegionRegion to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) WithNamespaceLocationRegionRegion(namespaceLocationRegionRegion *string) *WaypointServiceListVariablesParams {
+	o.SetNamespaceLocationRegionRegion(namespaceLocationRegionRegion)
+	return o
+}
+
+// SetNamespaceLocationRegionRegion adds the namespaceLocationRegionRegion to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) SetNamespaceLocationRegionRegion(namespaceLocationRegionRegion *string) {
+	o.NamespaceLocationRegionRegion = namespaceLocationRegionRegion
+}
+
 // WithPaginationNextPageToken adds the paginationNextPageToken to the waypoint service list variables params
 func (o *WaypointServiceListVariablesParams) WithPaginationNextPageToken(paginationNextPageToken *string) *WaypointServiceListVariablesParams {
 	o.SetPaginationNextPageToken(paginationNextPageToken)
@@ -290,6 +358,74 @@ func (o *WaypointServiceListVariablesParams) WriteToRequest(r runtime.ClientRequ
 	// path param namespace.id
 	if err := r.SetPathParam("namespace.id", o.NamespaceID); err != nil {
 		return err
+	}
+
+	if o.NamespaceLocationOrganizationID != nil {
+
+		// query param namespace.location.organization_id
+		var qrNamespaceLocationOrganizationID string
+
+		if o.NamespaceLocationOrganizationID != nil {
+			qrNamespaceLocationOrganizationID = *o.NamespaceLocationOrganizationID
+		}
+		qNamespaceLocationOrganizationID := qrNamespaceLocationOrganizationID
+		if qNamespaceLocationOrganizationID != "" {
+
+			if err := r.SetQueryParam("namespace.location.organization_id", qNamespaceLocationOrganizationID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespaceLocationProjectID != nil {
+
+		// query param namespace.location.project_id
+		var qrNamespaceLocationProjectID string
+
+		if o.NamespaceLocationProjectID != nil {
+			qrNamespaceLocationProjectID = *o.NamespaceLocationProjectID
+		}
+		qNamespaceLocationProjectID := qrNamespaceLocationProjectID
+		if qNamespaceLocationProjectID != "" {
+
+			if err := r.SetQueryParam("namespace.location.project_id", qNamespaceLocationProjectID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespaceLocationRegionProvider != nil {
+
+		// query param namespace.location.region.provider
+		var qrNamespaceLocationRegionProvider string
+
+		if o.NamespaceLocationRegionProvider != nil {
+			qrNamespaceLocationRegionProvider = *o.NamespaceLocationRegionProvider
+		}
+		qNamespaceLocationRegionProvider := qrNamespaceLocationRegionProvider
+		if qNamespaceLocationRegionProvider != "" {
+
+			if err := r.SetQueryParam("namespace.location.region.provider", qNamespaceLocationRegionProvider); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespaceLocationRegionRegion != nil {
+
+		// query param namespace.location.region.region
+		var qrNamespaceLocationRegionRegion string
+
+		if o.NamespaceLocationRegionRegion != nil {
+			qrNamespaceLocationRegionRegion = *o.NamespaceLocationRegionRegion
+		}
+		qNamespaceLocationRegionRegion := qrNamespaceLocationRegionRegion
+		if qNamespaceLocationRegionRegion != "" {
+
+			if err := r.SetQueryParam("namespace.location.region.region", qNamespaceLocationRegionRegion); err != nil {
+				return err
+			}
+		}
 	}
 
 	if o.PaginationNextPageToken != nil {

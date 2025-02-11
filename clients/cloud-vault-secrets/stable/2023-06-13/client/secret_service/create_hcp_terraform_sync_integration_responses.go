@@ -7,6 +7,7 @@ package secret_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *CreateHcpTerraformSyncIntegrationOK) Code() int {
 }
 
 func (o *CreateHcpTerraformSyncIntegrationOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/hcp-terraform][%d] createHcpTerraformSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/hcp-terraform][%d] createHcpTerraformSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateHcpTerraformSyncIntegrationOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/hcp-terraform][%d] createHcpTerraformSyncIntegrationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/hcp-terraform][%d] createHcpTerraformSyncIntegrationOK %s", 200, payload)
 }
 
 func (o *CreateHcpTerraformSyncIntegrationOK) GetPayload() *models.Secrets20230613CreateSyncIntegrationResponse {
@@ -161,11 +164,13 @@ func (o *CreateHcpTerraformSyncIntegrationDefault) Code() int {
 }
 
 func (o *CreateHcpTerraformSyncIntegrationDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/hcp-terraform][%d] CreateHcpTerraformSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/hcp-terraform][%d] CreateHcpTerraformSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateHcpTerraformSyncIntegrationDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/hcp-terraform][%d] CreateHcpTerraformSyncIntegration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/hcp-terraform][%d] CreateHcpTerraformSyncIntegration default %s", o._statusCode, payload)
 }
 
 func (o *CreateHcpTerraformSyncIntegrationDefault) GetPayload() *models.RPCStatus {

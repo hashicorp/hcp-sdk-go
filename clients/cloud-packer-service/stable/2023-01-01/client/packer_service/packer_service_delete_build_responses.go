@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceDeleteBuildOK) Code() int {
 }
 
 func (o *PackerServiceDeleteBuildOK) Error() string {
-	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] packerServiceDeleteBuildOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] packerServiceDeleteBuildOK %s", 200, payload)
 }
 
 func (o *PackerServiceDeleteBuildOK) String() string {
-	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] packerServiceDeleteBuildOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] packerServiceDeleteBuildOK %s", 200, payload)
 }
 
 func (o *PackerServiceDeleteBuildOK) GetPayload() models.HashicorpCloudPacker20230101DeleteBuildResponse {
@@ -157,11 +160,13 @@ func (o *PackerServiceDeleteBuildDefault) Code() int {
 }
 
 func (o *PackerServiceDeleteBuildDefault) Error() string {
-	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] PackerService_DeleteBuild default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] PackerService_DeleteBuild default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceDeleteBuildDefault) String() string {
-	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] PackerService_DeleteBuild default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}][%d] PackerService_DeleteBuild default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceDeleteBuildDefault) GetPayload() *cloud.GoogleRPCStatus {

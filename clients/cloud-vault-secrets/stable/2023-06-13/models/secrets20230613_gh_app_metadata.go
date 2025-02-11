@@ -26,9 +26,6 @@ type Secrets20230613GhAppMetadata struct {
 
 	// owner
 	Owner string `json:"owner,omitempty"`
-
-	// repositories
-	Repositories []string `json:"repositories"`
 }
 
 // Validate validates this secrets 20230613 gh app metadata

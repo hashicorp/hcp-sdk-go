@@ -6,6 +6,7 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ServicePrincipalsServiceListProjectServicePrincipalsOK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceListProjectServicePrincipalsOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals][%d] servicePrincipalsServiceListProjectServicePrincipalsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals][%d] servicePrincipalsServiceListProjectServicePrincipalsOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceListProjectServicePrincipalsOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals][%d] servicePrincipalsServiceListProjectServicePrincipalsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals][%d] servicePrincipalsServiceListProjectServicePrincipalsOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceListProjectServicePrincipalsOK) GetPayload() *models.HashicorpCloudIamListProjectServicePrincipalsResponse {
@@ -159,11 +162,13 @@ func (o *ServicePrincipalsServiceListProjectServicePrincipalsDefault) Code() int
 }
 
 func (o *ServicePrincipalsServiceListProjectServicePrincipalsDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals][%d] ServicePrincipalsService_ListProjectServicePrincipals default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals][%d] ServicePrincipalsService_ListProjectServicePrincipals default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceListProjectServicePrincipalsDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals][%d] ServicePrincipalsService_ListProjectServicePrincipals default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/projects/{project_id}/service-principals][%d] ServicePrincipalsService_ListProjectServicePrincipals default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceListProjectServicePrincipalsDefault) GetPayload() *cloud.GoogleRPCStatus {

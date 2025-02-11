@@ -6,6 +6,7 @@ package organization_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *OrganizationServiceListOK) Code() int {
 }
 
 func (o *OrganizationServiceListOK) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations][%d] organizationServiceListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations][%d] organizationServiceListOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceListOK) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations][%d] organizationServiceListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations][%d] organizationServiceListOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceListOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationListResponse {
@@ -159,11 +162,13 @@ func (o *OrganizationServiceListDefault) Code() int {
 }
 
 func (o *OrganizationServiceListDefault) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations][%d] OrganizationService_List default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations][%d] OrganizationService_List default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceListDefault) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations][%d] OrganizationService_List default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations][%d] OrganizationService_List default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceListDefault) GetPayload() *cloud.GoogleRPCStatus {

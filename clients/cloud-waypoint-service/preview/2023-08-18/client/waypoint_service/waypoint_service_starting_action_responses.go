@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceStartingActionOK) Code() int {
 }
 
 func (o *WaypointServiceStartingActionOK) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:startAction][%d] waypointServiceStartingActionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:startAction][%d] waypointServiceStartingActionOK %s", 200, payload)
 }
 
 func (o *WaypointServiceStartingActionOK) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:startAction][%d] waypointServiceStartingActionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:startAction][%d] waypointServiceStartingActionOK %s", 200, payload)
 }
 
 func (o *WaypointServiceStartingActionOK) GetPayload() *models.HashicorpCloudWaypointStartingActionResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceStartingActionDefault) Code() int {
 }
 
 func (o *WaypointServiceStartingActionDefault) Error() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:startAction][%d] WaypointService_StartingAction default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:startAction][%d] WaypointService_StartingAction default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceStartingActionDefault) String() string {
-	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:startAction][%d] WaypointService_StartingAction default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /waypoint/2023-08-18/namespace/{namespace.id}/agent/operation:startAction][%d] WaypointService_StartingAction default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceStartingActionDefault) GetPayload() *cloud.GoogleRPCStatus {

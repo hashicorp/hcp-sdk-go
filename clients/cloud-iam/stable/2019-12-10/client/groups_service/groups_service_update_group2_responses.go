@@ -6,6 +6,7 @@ package groups_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GroupsServiceUpdateGroup2OK) Code() int {
 }
 
 func (o *GroupsServiceUpdateGroup2OK) Error() string {
-	return fmt.Sprintf("[PATCH /iam/2019-12-10/{resource_name}][%d] groupsServiceUpdateGroup2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /iam/2019-12-10/{resource_name}][%d] groupsServiceUpdateGroup2OK %s", 200, payload)
 }
 
 func (o *GroupsServiceUpdateGroup2OK) String() string {
-	return fmt.Sprintf("[PATCH /iam/2019-12-10/{resource_name}][%d] groupsServiceUpdateGroup2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /iam/2019-12-10/{resource_name}][%d] groupsServiceUpdateGroup2OK %s", 200, payload)
 }
 
 func (o *GroupsServiceUpdateGroup2OK) GetPayload() interface{} {
@@ -156,11 +159,13 @@ func (o *GroupsServiceUpdateGroup2Default) Code() int {
 }
 
 func (o *GroupsServiceUpdateGroup2Default) Error() string {
-	return fmt.Sprintf("[PATCH /iam/2019-12-10/{resource_name}][%d] GroupsService_UpdateGroup2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /iam/2019-12-10/{resource_name}][%d] GroupsService_UpdateGroup2 default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceUpdateGroup2Default) String() string {
-	return fmt.Sprintf("[PATCH /iam/2019-12-10/{resource_name}][%d] GroupsService_UpdateGroup2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /iam/2019-12-10/{resource_name}][%d] GroupsService_UpdateGroup2 default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceUpdateGroup2Default) GetPayload() *cloud.GoogleRPCStatus {

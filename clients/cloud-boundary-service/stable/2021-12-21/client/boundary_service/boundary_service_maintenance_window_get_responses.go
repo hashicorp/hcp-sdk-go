@@ -6,6 +6,7 @@ package boundary_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *BoundaryServiceMaintenanceWindowGetOK) Code() int {
 }
 
 func (o *BoundaryServiceMaintenanceWindowGetOK) Error() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window][%d] boundaryServiceMaintenanceWindowGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window][%d] boundaryServiceMaintenanceWindowGetOK %s", 200, payload)
 }
 
 func (o *BoundaryServiceMaintenanceWindowGetOK) String() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window][%d] boundaryServiceMaintenanceWindowGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window][%d] boundaryServiceMaintenanceWindowGetOK %s", 200, payload)
 }
 
 func (o *BoundaryServiceMaintenanceWindowGetOK) GetPayload() *models.HashicorpCloudBoundary20211221MaintenanceWindowGetResponse {
@@ -159,11 +162,13 @@ func (o *BoundaryServiceMaintenanceWindowGetDefault) Code() int {
 }
 
 func (o *BoundaryServiceMaintenanceWindowGetDefault) Error() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window][%d] BoundaryService_MaintenanceWindowGet default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window][%d] BoundaryService_MaintenanceWindowGet default %s", o._statusCode, payload)
 }
 
 func (o *BoundaryServiceMaintenanceWindowGetDefault) String() string {
-	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window][%d] BoundaryService_MaintenanceWindowGet default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /boundary/2021-12-21/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/maintenance-window][%d] BoundaryService_MaintenanceWindowGet default %s", o._statusCode, payload)
 }
 
 func (o *BoundaryServiceMaintenanceWindowGetDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

@@ -6,6 +6,7 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ServicePrincipalsServiceCreateServicePrincipalKey2OK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2OK) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] servicePrincipalsServiceCreateServicePrincipalKey2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] servicePrincipalsServiceCreateServicePrincipalKey2OK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2OK) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] servicePrincipalsServiceCreateServicePrincipalKey2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] servicePrincipalsServiceCreateServicePrincipalKey2OK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2OK) GetPayload() *models.HashicorpCloudIamCreateServicePrincipalKeyResponse {
@@ -159,11 +162,13 @@ func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) Code() int {
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] ServicePrincipalsService_CreateServicePrincipalKey2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] ServicePrincipalsService_CreateServicePrincipalKey2 default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] ServicePrincipalsService_CreateServicePrincipalKey2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name_1}/keys][%d] ServicePrincipalsService_CreateServicePrincipalKey2 default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalKey2Default) GetPayload() *cloud.GoogleRPCStatus {

@@ -34,6 +34,8 @@ type ClientService interface {
 
 	OnboardDataSource(params *OnboardDataSourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OnboardDataSourceOK, error)
 
+	UpdateDataSourceToken(params *UpdateDataSourceTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateDataSourceTokenOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
 }
 
@@ -148,6 +150,44 @@ func (a *Client) OnboardDataSource(params *OnboardDataSourceParams, authInfo run
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*OnboardDataSourceDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdateDataSourceToken update data source token API
+*/
+func (a *Client) UpdateDataSourceToken(params *UpdateDataSourceTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateDataSourceTokenOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateDataSourceTokenParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateDataSourceToken",
+		Method:             "PUT",
+		PathPattern:        "/2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/token",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateDataSourceTokenReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateDataSourceTokenOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateDataSourceTokenDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

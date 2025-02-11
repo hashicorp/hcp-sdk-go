@@ -6,6 +6,7 @@ package auth_config_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationOK) Code() int {
 }
 
 func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationOK) Error() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceDeleteAuthConnectionFromOrganizationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceDeleteAuthConnectionFromOrganizationOK %s", 200, payload)
 }
 
 func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationOK) String() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceDeleteAuthConnectionFromOrganizationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceDeleteAuthConnectionFromOrganizationOK %s", 200, payload)
 }
 
 func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationOK) GetPayload() interface{} {
@@ -156,11 +159,13 @@ func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault) Code() in
 }
 
 func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_DeleteAuthConnectionFromOrganization default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_DeleteAuthConnectionFromOrganization default %s", o._statusCode, payload)
 }
 
 func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault) String() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_DeleteAuthConnectionFromOrganization default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_DeleteAuthConnectionFromOrganization default %s", o._statusCode, payload)
 }
 
 func (o *AuthConfigServiceDeleteAuthConnectionFromOrganizationDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -6,6 +6,7 @@ package secret_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteSyncInstallationOK) Code() int {
 }
 
 func (o *DeleteSyncInstallationOK) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] deleteSyncInstallationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] deleteSyncInstallationOK %s", 200, payload)
 }
 
 func (o *DeleteSyncInstallationOK) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] deleteSyncInstallationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] deleteSyncInstallationOK %s", 200, payload)
 }
 
 func (o *DeleteSyncInstallationOK) GetPayload() models.Secrets20230613DeleteSyncInstallationResponse {
@@ -156,11 +159,13 @@ func (o *DeleteSyncInstallationDefault) Code() int {
 }
 
 func (o *DeleteSyncInstallationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] DeleteSyncInstallation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] DeleteSyncInstallation default %s", o._statusCode, payload)
 }
 
 func (o *DeleteSyncInstallationDefault) String() string {
-	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] DeleteSyncInstallation default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/sync/installations/{name}][%d] DeleteSyncInstallation default %s", o._statusCode, payload)
 }
 
 func (o *DeleteSyncInstallationDefault) GetPayload() *models.RPCStatus {

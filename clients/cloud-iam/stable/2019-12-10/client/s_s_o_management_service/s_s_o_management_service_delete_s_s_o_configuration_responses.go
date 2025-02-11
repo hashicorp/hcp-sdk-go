@@ -6,6 +6,7 @@ package s_s_o_management_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *SSOManagementServiceDeleteSSOConfigurationOK) Code() int {
 }
 
 func (o *SSOManagementServiceDeleteSSOConfigurationOK) Error() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceDeleteSSOConfigurationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceDeleteSSOConfigurationOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceDeleteSSOConfigurationOK) String() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceDeleteSSOConfigurationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceDeleteSSOConfigurationOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceDeleteSSOConfigurationOK) GetPayload() models.HashicorpCloudIamDeleteSSOConfigurationResponse {
@@ -157,11 +160,13 @@ func (o *SSOManagementServiceDeleteSSOConfigurationDefault) Code() int {
 }
 
 func (o *SSOManagementServiceDeleteSSOConfigurationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_DeleteSSOConfiguration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_DeleteSSOConfiguration default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceDeleteSSOConfigurationDefault) String() string {
-	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_DeleteSSOConfiguration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_DeleteSSOConfiguration default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceDeleteSSOConfigurationDefault) GetPayload() *cloud.GoogleRPCStatus {

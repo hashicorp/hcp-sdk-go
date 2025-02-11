@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceUpdateApplicationTemplate5OK) Code() int {
 }
 
 func (o *WaypointServiceUpdateApplicationTemplate5OK) Error() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/templates/{existing_application_template.id}][%d] waypointServiceUpdateApplicationTemplate5OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/templates/{existing_application_template.id}][%d] waypointServiceUpdateApplicationTemplate5OK %s", 200, payload)
 }
 
 func (o *WaypointServiceUpdateApplicationTemplate5OK) String() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/templates/{existing_application_template.id}][%d] waypointServiceUpdateApplicationTemplate5OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/templates/{existing_application_template.id}][%d] waypointServiceUpdateApplicationTemplate5OK %s", 200, payload)
 }
 
 func (o *WaypointServiceUpdateApplicationTemplate5OK) GetPayload() *models.HashicorpCloudWaypointUpdateApplicationTemplateResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceUpdateApplicationTemplate5Default) Code() int {
 }
 
 func (o *WaypointServiceUpdateApplicationTemplate5Default) Error() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/templates/{existing_application_template.id}][%d] WaypointService_UpdateApplicationTemplate5 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/templates/{existing_application_template.id}][%d] WaypointService_UpdateApplicationTemplate5 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUpdateApplicationTemplate5Default) String() string {
-	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/templates/{existing_application_template.id}][%d] WaypointService_UpdateApplicationTemplate5 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /waypoint/2023-08-18/namespace/{namespace.id}/templates/{existing_application_template.id}][%d] WaypointService_UpdateApplicationTemplate5 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUpdateApplicationTemplate5Default) GetPayload() *cloud.GoogleRPCStatus {

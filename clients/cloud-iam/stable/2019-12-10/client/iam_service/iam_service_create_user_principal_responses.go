@@ -6,6 +6,7 @@ package iam_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *IamServiceCreateUserPrincipalOK) Code() int {
 }
 
 func (o *IamServiceCreateUserPrincipalOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/user-principals][%d] iamServiceCreateUserPrincipalOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/user-principals][%d] iamServiceCreateUserPrincipalOK %s", 200, payload)
 }
 
 func (o *IamServiceCreateUserPrincipalOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/user-principals][%d] iamServiceCreateUserPrincipalOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/user-principals][%d] iamServiceCreateUserPrincipalOK %s", 200, payload)
 }
 
 func (o *IamServiceCreateUserPrincipalOK) GetPayload() *models.HashicorpCloudIamUserPrincipalResponse {
@@ -159,11 +162,13 @@ func (o *IamServiceCreateUserPrincipalDefault) Code() int {
 }
 
 func (o *IamServiceCreateUserPrincipalDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/user-principals][%d] IamService_CreateUserPrincipal default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/user-principals][%d] IamService_CreateUserPrincipal default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceCreateUserPrincipalDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/user-principals][%d] IamService_CreateUserPrincipal default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/user-principals][%d] IamService_CreateUserPrincipal default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceCreateUserPrincipalDefault) GetPayload() *cloud.GoogleRPCStatus {

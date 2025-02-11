@@ -7,6 +7,7 @@ package packer_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,13 @@ func (o *PackerServiceCreateBuildOK) Code() int {
 }
 
 func (o *PackerServiceCreateBuildOK) Error() string {
-	return fmt.Sprintf("[POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}][%d] packerServiceCreateBuildOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}][%d] packerServiceCreateBuildOK %s", 200, payload)
 }
 
 func (o *PackerServiceCreateBuildOK) String() string {
-	return fmt.Sprintf("[POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}][%d] packerServiceCreateBuildOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}][%d] packerServiceCreateBuildOK %s", 200, payload)
 }
 
 func (o *PackerServiceCreateBuildOK) GetPayload() *models.HashicorpCloudPackerCreateBuildResponse {
@@ -162,11 +165,13 @@ func (o *PackerServiceCreateBuildDefault) Code() int {
 }
 
 func (o *PackerServiceCreateBuildDefault) Error() string {
-	return fmt.Sprintf("[POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}][%d] PackerService_CreateBuild default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}][%d] PackerService_CreateBuild default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceCreateBuildDefault) String() string {
-	return fmt.Sprintf("[POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}][%d] PackerService_CreateBuild default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}][%d] PackerService_CreateBuild default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceCreateBuildDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -1,3 +1,52 @@
+## v0.135.0 (February 05, 2025)
+
+## v0.134.0 (January 24, 2025)
+
+## v0.133.0 (January 23, 2025)
+
+## v0.132.0 (January 22, 2025)
+
+## v0.131.0 (January 15, 2025)
+
+## v0.130.0 (January 13, 2025)
+
+## v0.129.0 (January 06, 2025)
+
+## v0.128.0 (January 01, 2025)
+
+## v0.127.0 (December 19, 2024)
+
+## v0.126.0 (December 11, 2024)
+
+## v0.125.0 (November 27, 2024)
+
+## v0.124.0 (November 21, 2024)
+
+## v0.123.0 (November 20, 2024)
+
+## v0.122.0 (November 13, 2024)
+
+## v0.121.0 (November 07, 2024)
+
+## v0.120.0 (November 06, 2024)
+
+## v0.119.0 (October 31, 2024)
+
+BUG FIXES:
+
+* Fix definition of GoogleProtobufAny to match values returned by HCP services [[GH-270](https://github.com/hashicorp/hcp-sdk-go/pull/270)]
+## v0.118.0 (October 30, 2024)
+
+## v0.117.0 (October 17, 2024)
+
+## v0.116.0 (October 09, 2024)
+
+## v0.115.0 (October 02, 2024)
+
+## v0.114.0 (September 24, 2024)
+
+## v0.113.0 (September 18, 2024)
+
 ## v0.112.0 (September 11, 2024)
 
 DEPRECATIONS:

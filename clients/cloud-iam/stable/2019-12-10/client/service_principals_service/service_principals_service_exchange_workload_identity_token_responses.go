@@ -6,6 +6,7 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenOK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenOK) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/{resource_name}/exchange-token][%d] servicePrincipalsServiceExchangeWorkloadIdentityTokenOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{resource_name}/exchange-token][%d] servicePrincipalsServiceExchangeWorkloadIdentityTokenOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenOK) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/{resource_name}/exchange-token][%d] servicePrincipalsServiceExchangeWorkloadIdentityTokenOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{resource_name}/exchange-token][%d] servicePrincipalsServiceExchangeWorkloadIdentityTokenOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenOK) GetPayload() *models.HashicorpCloudIamExchangeWorkloadIdentityTokenResponse {
@@ -159,11 +162,13 @@ func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenDefault) Code() in
 }
 
 func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenDefault) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/{resource_name}/exchange-token][%d] ServicePrincipalsService_ExchangeWorkloadIdentityToken default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{resource_name}/exchange-token][%d] ServicePrincipalsService_ExchangeWorkloadIdentityToken default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenDefault) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/{resource_name}/exchange-token][%d] ServicePrincipalsService_ExchangeWorkloadIdentityToken default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{resource_name}/exchange-token][%d] ServicePrincipalsService_ExchangeWorkloadIdentityToken default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceExchangeWorkloadIdentityTokenDefault) GetPayload() *cloud.GoogleRPCStatus {

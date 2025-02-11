@@ -7,6 +7,7 @@ package service_principals_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK) Code()
 }
 
 func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/service-principal-keys][%d] servicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/service-principal-keys][%d] servicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/service-principal-keys][%d] servicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/service-principal-keys][%d] servicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyOK) GetPayload() *models.HashicorpCloudIamCreateOrganizationServicePrincipalKeyResponse {
@@ -161,11 +164,13 @@ func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault) C
 }
 
 func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/service-principal-keys][%d] ServicePrincipalsService_CreateOrganizationServicePrincipalKey default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/service-principal-keys][%d] ServicePrincipalsService_CreateOrganizationServicePrincipalKey default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/service-principal-keys][%d] ServicePrincipalsService_CreateOrganizationServicePrincipalKey default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/service-principal-keys][%d] ServicePrincipalsService_CreateOrganizationServicePrincipalKey default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateOrganizationServicePrincipalKeyDefault) GetPayload() *cloud.GoogleRPCStatus {

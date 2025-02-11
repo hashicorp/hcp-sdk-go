@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody UpdateAddOnDefinitionRequest is the request used to update an existing
@@ -20,44 +21,47 @@ import (
 // swagger:model hashicorp.cloud.waypoint.WaypointService.UpdateAddOnDefinitionBody
 type HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody struct {
 
-	// Longer description of the Add-on
+	// Add-on definition to be updated
+	AddOnDefinition *HashicorpCloudWaypointAddOnDefinition `json:"add_on_definition,omitempty"`
+
+	// DEPRECATED: Use add_on_definition instead.
 	Description string `json:"description,omitempty"`
 
 	// existing add on definition
 	ExistingAddOnDefinition *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyExistingAddOnDefinition `json:"existing_add_on_definition,omitempty"`
 
-	// A list of descriptive labels for an Add-on
+	// DEPRECATED: Use add_on_definition instead.
 	Labels []string `json:"labels"`
 
-	// module_source is where to find the source code for the desired child module.
+	// DEPRECATED: Use add_on_definition instead.
 	ModuleSource string `json:"module_source,omitempty"`
 
-	// Name of the Add-on definition
+	// DEPRECATED: Use add_on_definition instead.
 	Name string `json:"name,omitempty"`
 
-	// Global references the entire server. This is used in some APIs
-	// as a way to read/write values that are server-global.
-	Namespace interface{} `json:"namespace,omitempty"`
+	// namespace
+	Namespace *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace `json:"namespace,omitempty"`
 
-	// A templated README describing the Add-on
+	// DEPRECATED: Use add_on_definition instead.
 	// Format: byte
 	ReadmeMarkdownTemplate strfmt.Base64 `json:"readme_markdown_template,omitempty"`
 
-	// readme_template is markdown formatted instructions on how to operate the application.
-	// This may be populated from a application template.
-	// This field is favored over readme_markdown_template and support for both is transitional.
+	// DEPRECATED: Use add_on_definition instead.
 	ReadmeTemplate string `json:"readme_template,omitempty"`
 
-	// Short description of the Add-on
+	// DEPRECATED: Use add_on_definition instead.
 	Summary string `json:"summary,omitempty"`
 
-	// The TF project
+	// DEPRECATED: Use add_on_definition instead.
 	TerraformCloudWorkspaceDetails *HashicorpCloudWaypointTerraformCloudWorkspaceDetails `json:"terraform_cloud_workspace_details,omitempty"`
 
-	// Terraform No Code module used for provisioning the Add-on
-	TerraformNocodeModule *HashicorpCloudWaypointTerraformNocodeModule `json:"terraform_nocode_module,omitempty"`
+	// DEPRECATED: Use add_on_definition instead.
+	TfAgentPoolID string `json:"tf_agent_pool_id,omitempty"`
 
-	// variable_options is the collection of input variables which may be set for a template.
+	// DEPRECATED: Use add_on_definition instead.
+	TfExecutionMode string `json:"tf_execution_mode,omitempty"`
+
+	// DEPRECATED: Use add_on_definition instead.
 	VariableOptions []*HashicorpCloudWaypointTFModuleVariable `json:"variable_options"`
 }
 
@@ -65,15 +69,19 @@ type HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody struct {
 func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAddOnDefinition(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateExistingAddOnDefinition(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateTerraformCloudWorkspaceDetails(formats); err != nil {
+	if err := m.validateNamespace(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateTerraformNocodeModule(formats); err != nil {
+	if err := m.validateTerraformCloudWorkspaceDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -84,6 +92,25 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) Validat
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) validateAddOnDefinition(formats strfmt.Registry) error {
+	if swag.IsZero(m.AddOnDefinition) { // not required
+		return nil
+	}
+
+	if m.AddOnDefinition != nil {
+		if err := m.AddOnDefinition.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("add_on_definition")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("add_on_definition")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -106,6 +133,25 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) validat
 	return nil
 }
 
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) validateNamespace(formats strfmt.Registry) error {
+	if swag.IsZero(m.Namespace) { // not required
+		return nil
+	}
+
+	if m.Namespace != nil {
+		if err := m.Namespace.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) validateTerraformCloudWorkspaceDetails(formats strfmt.Registry) error {
 	if swag.IsZero(m.TerraformCloudWorkspaceDetails) { // not required
 		return nil
@@ -117,25 +163,6 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) validat
 				return ve.ValidateName("terraform_cloud_workspace_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("terraform_cloud_workspace_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) validateTerraformNocodeModule(formats strfmt.Registry) error {
-	if swag.IsZero(m.TerraformNocodeModule) { // not required
-		return nil
-	}
-
-	if m.TerraformNocodeModule != nil {
-		if err := m.TerraformNocodeModule.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("terraform_nocode_module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("terraform_nocode_module")
 			}
 			return err
 		}
@@ -174,15 +201,19 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) validat
 func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAddOnDefinition(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateExistingAddOnDefinition(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateTerraformCloudWorkspaceDetails(ctx, formats); err != nil {
+	if err := m.contextValidateNamespace(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateTerraformNocodeModule(ctx, formats); err != nil {
+	if err := m.contextValidateTerraformCloudWorkspaceDetails(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -193,6 +224,27 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) Context
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) contextValidateAddOnDefinition(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AddOnDefinition != nil {
+
+		if swag.IsZero(m.AddOnDefinition) { // not required
+			return nil
+		}
+
+		if err := m.AddOnDefinition.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("add_on_definition")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("add_on_definition")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -217,6 +269,27 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) context
 	return nil
 }
 
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) contextValidateNamespace(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Namespace != nil {
+
+		if swag.IsZero(m.Namespace) { // not required
+			return nil
+		}
+
+		if err := m.Namespace.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) contextValidateTerraformCloudWorkspaceDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TerraformCloudWorkspaceDetails != nil {
@@ -230,27 +303,6 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) context
 				return ve.ValidateName("terraform_cloud_workspace_details")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("terraform_cloud_workspace_details")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBody) contextValidateTerraformNocodeModule(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.TerraformNocodeModule != nil {
-
-		if swag.IsZero(m.TerraformNocodeModule) { // not required
-			return nil
-		}
-
-		if err := m.TerraformNocodeModule.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("terraform_nocode_module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("terraform_nocode_module")
 			}
 			return err
 		}
@@ -334,6 +386,102 @@ func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyExistingA
 // UnmarshalBinary interface implementation
 func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyExistingAddOnDefinition) UnmarshalBinary(b []byte) error {
 	var res HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyExistingAddOnDefinition
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace Global references the entire server. This is used in some APIs
+// as a way to read/write values that are server-global.
+//
+// swagger:model HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace
+type HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace struct {
+
+	// When used via an API request, this is populated and used to populate id.
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+}
+
+// Validate validates this hashicorp cloud waypoint waypoint service update add on definition body namespace
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(m.Location) { // not required
+		return nil
+	}
+
+	if m.Location != nil {
+		if err := m.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud waypoint waypoint service update add on definition body namespace based on the context it is used
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudWaypointWaypointServiceUpdateAddOnDefinitionBodyNamespace
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

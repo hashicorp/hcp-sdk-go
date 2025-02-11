@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody hashicorp cloud waypoint waypoint service list t f c organizations body
@@ -17,9 +19,8 @@ import (
 // swagger:model hashicorp.cloud.waypoint.WaypointService.ListTFCOrganizationsBody
 type HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody struct {
 
-	// Global references the entire server. This is used in some APIs
-	// as a way to read/write values that are server-global.
-	Namespace interface{} `json:"namespace,omitempty"`
+	// namespace
+	Namespace *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace `json:"namespace,omitempty"`
 
 	// Token to use with the TFC API. If this is blank, the stored token will be used.
 	Token string `json:"token,omitempty"`
@@ -27,11 +28,69 @@ type HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody struct {
 
 // Validate validates this hashicorp cloud waypoint waypoint service list t f c organizations body
 func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateNamespace(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this hashicorp cloud waypoint waypoint service list t f c organizations body based on context it is used
+func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody) validateNamespace(formats strfmt.Registry) error {
+	if swag.IsZero(m.Namespace) { // not required
+		return nil
+	}
+
+	if m.Namespace != nil {
+		if err := m.Namespace.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud waypoint waypoint service list t f c organizations body based on the context it is used
 func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateNamespace(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody) contextValidateNamespace(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Namespace != nil {
+
+		if swag.IsZero(m.Namespace) { // not required
+			return nil
+		}
+
+		if err := m.Namespace.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -46,6 +105,102 @@ func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody) MarshalB
 // UnmarshalBinary interface implementation
 func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody) UnmarshalBinary(b []byte) error {
 	var res HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace Global references the entire server. This is used in some APIs
+// as a way to read/write values that are server-global.
+//
+// swagger:model HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace
+type HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace struct {
+
+	// When used via an API request, this is populated and used to populate id.
+	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+}
+
+// Validate validates this hashicorp cloud waypoint waypoint service list t f c organizations body namespace
+func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace) validateLocation(formats strfmt.Registry) error {
+	if swag.IsZero(m.Location) { // not required
+		return nil
+	}
+
+	if m.Location != nil {
+		if err := m.Location.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud waypoint waypoint service list t f c organizations body namespace based on the context it is used
+func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
+		if err := m.Location.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("namespace" + "." + "location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("namespace" + "." + "location")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudWaypointWaypointServiceListTFCOrganizationsBodyNamespace
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

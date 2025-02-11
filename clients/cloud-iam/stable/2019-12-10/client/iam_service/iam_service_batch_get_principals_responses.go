@@ -6,6 +6,7 @@ package iam_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *IamServiceBatchGetPrincipalsOK) Code() int {
 }
 
 func (o *IamServiceBatchGetPrincipalsOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/principals][%d] iamServiceBatchGetPrincipalsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/principals][%d] iamServiceBatchGetPrincipalsOK %s", 200, payload)
 }
 
 func (o *IamServiceBatchGetPrincipalsOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/principals][%d] iamServiceBatchGetPrincipalsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/principals][%d] iamServiceBatchGetPrincipalsOK %s", 200, payload)
 }
 
 func (o *IamServiceBatchGetPrincipalsOK) GetPayload() *models.HashicorpCloudIamBatchGetPrincipalsResponse {
@@ -159,11 +162,13 @@ func (o *IamServiceBatchGetPrincipalsDefault) Code() int {
 }
 
 func (o *IamServiceBatchGetPrincipalsDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/principals][%d] IamService_BatchGetPrincipals default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/principals][%d] IamService_BatchGetPrincipals default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceBatchGetPrincipalsDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/principals][%d] IamService_BatchGetPrincipals default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/principals][%d] IamService_BatchGetPrincipals default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceBatchGetPrincipalsDefault) GetPayload() *cloud.GoogleRPCStatus {

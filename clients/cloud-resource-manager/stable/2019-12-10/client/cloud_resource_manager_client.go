@@ -10,6 +10,7 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/client/authorization_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/client/organization_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/client/project_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/client/resource_service"
@@ -57,6 +58,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudResou
 
 	cli := new(CloudResourceManager)
 	cli.Transport = transport
+	cli.AuthorizationService = authorization_service.New(transport, formats)
 	cli.OrganizationService = organization_service.New(transport, formats)
 	cli.ProjectService = project_service.New(transport, formats)
 	cli.ResourceService = resource_service.New(transport, formats)
@@ -104,6 +106,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // CloudResourceManager is a client for cloud resource manager
 type CloudResourceManager struct {
+	AuthorizationService authorization_service.ClientService
+
 	OrganizationService organization_service.ClientService
 
 	ProjectService project_service.ClientService
@@ -116,6 +120,7 @@ type CloudResourceManager struct {
 // SetTransport changes the transport on the client and all its subresources
 func (c *CloudResourceManager) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
+	c.AuthorizationService.SetTransport(transport)
 	c.OrganizationService.SetTransport(transport)
 	c.ProjectService.SetTransport(transport)
 	c.ResourceService.SetTransport(transport)

@@ -6,6 +6,7 @@ package profile_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ProfileServiceGetMFAStatusOK) Code() int {
 }
 
 func (o *ProfileServiceGetMFAStatusOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/me/mfa-status][%d] profileServiceGetMFAStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/me/mfa-status][%d] profileServiceGetMFAStatusOK %s", 200, payload)
 }
 
 func (o *ProfileServiceGetMFAStatusOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/me/mfa-status][%d] profileServiceGetMFAStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/me/mfa-status][%d] profileServiceGetMFAStatusOK %s", 200, payload)
 }
 
 func (o *ProfileServiceGetMFAStatusOK) GetPayload() *models.HashicorpCloudIamGetMFAStatusResponse {
@@ -159,11 +162,13 @@ func (o *ProfileServiceGetMFAStatusDefault) Code() int {
 }
 
 func (o *ProfileServiceGetMFAStatusDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/me/mfa-status][%d] ProfileService_GetMFAStatus default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/me/mfa-status][%d] ProfileService_GetMFAStatus default %s", o._statusCode, payload)
 }
 
 func (o *ProfileServiceGetMFAStatusDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/me/mfa-status][%d] ProfileService_GetMFAStatus default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/me/mfa-status][%d] ProfileService_GetMFAStatus default %s", o._statusCode, payload)
 }
 
 func (o *ProfileServiceGetMFAStatusDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -30,7 +30,11 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateTenant(params *CreateTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTenantOK, error)
 
+	GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTenantOK, error)
+
 	ListOrganizationTenants(params *ListOrganizationTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOrganizationTenantsOK, error)
+
+	ProvisionTenant(params *ProvisionTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProvisionTenantOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -74,6 +78,44 @@ func (a *Client) CreateTenant(params *CreateTenantParams, authInfo runtime.Clien
 }
 
 /*
+GetTenant get tenant API
+*/
+func (a *Client) GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTenantOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTenantParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetTenant",
+		Method:             "GET",
+		PathPattern:        "/2023-05-01/vault-radar/projects/{location.project_id}/tenants",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTenantReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTenantOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetTenantDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ListOrganizationTenants list organization tenants API
 */
 func (a *Client) ListOrganizationTenants(params *ListOrganizationTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOrganizationTenantsOK, error) {
@@ -108,6 +150,44 @@ func (a *Client) ListOrganizationTenants(params *ListOrganizationTenantsParams, 
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListOrganizationTenantsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ProvisionTenant provision tenant API
+*/
+func (a *Client) ProvisionTenant(params *ProvisionTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProvisionTenantOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewProvisionTenantParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ProvisionTenant",
+		Method:             "POST",
+		PathPattern:        "/2023-05-01/vault-radar/projects/{location.project_id}/tenants/provision",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ProvisionTenantReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ProvisionTenantOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ProvisionTenantDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

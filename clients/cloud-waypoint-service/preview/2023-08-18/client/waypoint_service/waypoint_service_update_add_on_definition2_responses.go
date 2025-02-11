@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceUpdateAddOnDefinition2OK) Code() int {
 }
 
 func (o *WaypointServiceUpdateAddOnDefinition2OK) Error() string {
-	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/add-on-definition/by-name/{existing_add_on_definition.name}][%d] waypointServiceUpdateAddOnDefinition2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/add-on-definition/by-name/{existing_add_on_definition.name}][%d] waypointServiceUpdateAddOnDefinition2OK %s", 200, payload)
 }
 
 func (o *WaypointServiceUpdateAddOnDefinition2OK) String() string {
-	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/add-on-definition/by-name/{existing_add_on_definition.name}][%d] waypointServiceUpdateAddOnDefinition2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/add-on-definition/by-name/{existing_add_on_definition.name}][%d] waypointServiceUpdateAddOnDefinition2OK %s", 200, payload)
 }
 
 func (o *WaypointServiceUpdateAddOnDefinition2OK) GetPayload() *models.HashicorpCloudWaypointUpdateAddOnDefinitionResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceUpdateAddOnDefinition2Default) Code() int {
 }
 
 func (o *WaypointServiceUpdateAddOnDefinition2Default) Error() string {
-	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/add-on-definition/by-name/{existing_add_on_definition.name}][%d] WaypointService_UpdateAddOnDefinition2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/add-on-definition/by-name/{existing_add_on_definition.name}][%d] WaypointService_UpdateAddOnDefinition2 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUpdateAddOnDefinition2Default) String() string {
-	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/add-on-definition/by-name/{existing_add_on_definition.name}][%d] WaypointService_UpdateAddOnDefinition2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/add-on-definition/by-name/{existing_add_on_definition.name}][%d] WaypointService_UpdateAddOnDefinition2 default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceUpdateAddOnDefinition2Default) GetPayload() *cloud.GoogleRPCStatus {

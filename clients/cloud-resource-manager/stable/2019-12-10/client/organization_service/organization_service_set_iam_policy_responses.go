@@ -7,6 +7,7 @@ package organization_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,13 @@ func (o *OrganizationServiceSetIamPolicyOK) Code() int {
 }
 
 func (o *OrganizationServiceSetIamPolicyOK) Error() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceSetIamPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceSetIamPolicyOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceSetIamPolicyOK) String() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceSetIamPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] organizationServiceSetIamPolicyOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceSetIamPolicyOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationSetIamPolicyResponse {
@@ -162,11 +165,13 @@ func (o *OrganizationServiceSetIamPolicyDefault) Code() int {
 }
 
 func (o *OrganizationServiceSetIamPolicyDefault) Error() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_SetIamPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_SetIamPolicy default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceSetIamPolicyDefault) String() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_SetIamPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/organizations/{id}/iam-policy][%d] OrganizationService_SetIamPolicy default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceSetIamPolicyDefault) GetPayload() *cloud.GoogleRPCStatus {

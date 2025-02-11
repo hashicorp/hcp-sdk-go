@@ -6,6 +6,7 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ServicePrincipalsServiceListWorkloadIdentityProviderOK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceListWorkloadIdentityProviderOK) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] servicePrincipalsServiceListWorkloadIdentityProviderOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] servicePrincipalsServiceListWorkloadIdentityProviderOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceListWorkloadIdentityProviderOK) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] servicePrincipalsServiceListWorkloadIdentityProviderOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] servicePrincipalsServiceListWorkloadIdentityProviderOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceListWorkloadIdentityProviderOK) GetPayload() *models.HashicorpCloudIamListWorkloadIdentityProviderResponse {
@@ -159,11 +162,13 @@ func (o *ServicePrincipalsServiceListWorkloadIdentityProviderDefault) Code() int
 }
 
 func (o *ServicePrincipalsServiceListWorkloadIdentityProviderDefault) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] ServicePrincipalsService_ListWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] ServicePrincipalsService_ListWorkloadIdentityProvider default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceListWorkloadIdentityProviderDefault) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] ServicePrincipalsService_ListWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] ServicePrincipalsService_ListWorkloadIdentityProvider default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceListWorkloadIdentityProviderDefault) GetPayload() *cloud.GoogleRPCStatus {

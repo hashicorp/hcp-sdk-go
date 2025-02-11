@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceRunActionOK) Code() int {
 }
 
 func (o *WaypointServiceRunActionOK) Error() string {
-	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] waypointServiceRunActionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] waypointServiceRunActionOK %s", 200, payload)
 }
 
 func (o *WaypointServiceRunActionOK) String() string {
-	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] waypointServiceRunActionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] waypointServiceRunActionOK %s", 200, payload)
 }
 
 func (o *WaypointServiceRunActionOK) GetPayload() *models.HashicorpCloudWaypointRunActionResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceRunActionDefault) Code() int {
 }
 
 func (o *WaypointServiceRunActionDefault) Error() string {
-	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] WaypointService_RunAction default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] WaypointService_RunAction default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceRunActionDefault) String() string {
-	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] WaypointService_RunAction default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /waypoint/2023-08-18/namespace/{namespace.id}/action][%d] WaypointService_RunAction default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceRunActionDefault) GetPayload() *cloud.GoogleRPCStatus {

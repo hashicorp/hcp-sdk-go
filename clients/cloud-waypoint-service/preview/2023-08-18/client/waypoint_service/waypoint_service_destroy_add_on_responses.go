@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceDestroyAddOnOK) Code() int {
 }
 
 func (o *WaypointServiceDestroyAddOnOK) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] waypointServiceDestroyAddOnOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] waypointServiceDestroyAddOnOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDestroyAddOnOK) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] waypointServiceDestroyAddOnOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] waypointServiceDestroyAddOnOK %s", 200, payload)
 }
 
 func (o *WaypointServiceDestroyAddOnOK) GetPayload() models.HashicorpCloudWaypointDestroyAddOnResponse {
@@ -157,11 +160,13 @@ func (o *WaypointServiceDestroyAddOnDefault) Code() int {
 }
 
 func (o *WaypointServiceDestroyAddOnDefault) Error() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] WaypointService_DestroyAddOn default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] WaypointService_DestroyAddOn default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDestroyAddOnDefault) String() string {
-	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] WaypointService_DestroyAddOn default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] WaypointService_DestroyAddOn default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceDestroyAddOnDefault) GetPayload() *cloud.GoogleRPCStatus {

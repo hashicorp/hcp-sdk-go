@@ -7,6 +7,7 @@ package project_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,13 @@ func (o *ProjectServiceSetIamPolicyOK) Code() int {
 }
 
 func (o *ProjectServiceSetIamPolicyOK) Error() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceSetIamPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceSetIamPolicyOK %s", 200, payload)
 }
 
 func (o *ProjectServiceSetIamPolicyOK) String() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceSetIamPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] projectServiceSetIamPolicyOK %s", 200, payload)
 }
 
 func (o *ProjectServiceSetIamPolicyOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectSetIamPolicyResponse {
@@ -162,11 +165,13 @@ func (o *ProjectServiceSetIamPolicyDefault) Code() int {
 }
 
 func (o *ProjectServiceSetIamPolicyDefault) Error() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] ProjectService_SetIamPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] ProjectService_SetIamPolicy default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceSetIamPolicyDefault) String() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] ProjectService_SetIamPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/iam-policy][%d] ProjectService_SetIamPolicy default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceSetIamPolicyDefault) GetPayload() *cloud.GoogleRPCStatus {

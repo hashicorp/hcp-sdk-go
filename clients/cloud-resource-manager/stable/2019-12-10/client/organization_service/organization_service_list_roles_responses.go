@@ -6,6 +6,7 @@ package organization_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *OrganizationServiceListRolesOK) Code() int {
 }
 
 func (o *OrganizationServiceListRolesOK) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/roles][%d] organizationServiceListRolesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/roles][%d] organizationServiceListRolesOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceListRolesOK) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/roles][%d] organizationServiceListRolesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/roles][%d] organizationServiceListRolesOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceListRolesOK) GetPayload() *models.HashicorpCloudResourcemanagerOrganizationListRolesResponse {
@@ -159,11 +162,13 @@ func (o *OrganizationServiceListRolesDefault) Code() int {
 }
 
 func (o *OrganizationServiceListRolesDefault) Error() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/roles][%d] OrganizationService_ListRoles default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/roles][%d] OrganizationService_ListRoles default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceListRolesDefault) String() string {
-	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/roles][%d] OrganizationService_ListRoles default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /resource-manager/2019-12-10/organizations/{id}/roles][%d] OrganizationService_ListRoles default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceListRolesDefault) GetPayload() *cloud.GoogleRPCStatus {

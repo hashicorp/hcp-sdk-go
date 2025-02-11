@@ -7,6 +7,7 @@ package groups_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -88,11 +89,13 @@ func (o *GroupsServiceUpdateGroupMembersOK) Code() int {
 }
 
 func (o *GroupsServiceUpdateGroupMembersOK) Error() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}/members][%d] groupsServiceUpdateGroupMembersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}/members][%d] groupsServiceUpdateGroupMembersOK %s", 200, payload)
 }
 
 func (o *GroupsServiceUpdateGroupMembersOK) String() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}/members][%d] groupsServiceUpdateGroupMembersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}/members][%d] groupsServiceUpdateGroupMembersOK %s", 200, payload)
 }
 
 func (o *GroupsServiceUpdateGroupMembersOK) GetPayload() interface{} {
@@ -158,11 +161,13 @@ func (o *GroupsServiceUpdateGroupMembersDefault) Code() int {
 }
 
 func (o *GroupsServiceUpdateGroupMembersDefault) Error() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}/members][%d] GroupsService_UpdateGroupMembers default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}/members][%d] GroupsService_UpdateGroupMembers default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceUpdateGroupMembersDefault) String() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}/members][%d] GroupsService_UpdateGroupMembers default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}/members][%d] GroupsService_UpdateGroupMembers default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceUpdateGroupMembersDefault) GetPayload() *cloud.GoogleRPCStatus {

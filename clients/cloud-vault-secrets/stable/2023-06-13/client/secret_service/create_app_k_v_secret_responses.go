@@ -7,6 +7,7 @@ package secret_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *CreateAppKVSecretOK) Code() int {
 }
 
 func (o *CreateAppKVSecretOK) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/kv][%d] createAppKVSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/kv][%d] createAppKVSecretOK %s", 200, payload)
 }
 
 func (o *CreateAppKVSecretOK) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/kv][%d] createAppKVSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/kv][%d] createAppKVSecretOK %s", 200, payload)
 }
 
 func (o *CreateAppKVSecretOK) GetPayload() *models.Secrets20230613CreateAppKVSecretResponse {
@@ -161,11 +164,13 @@ func (o *CreateAppKVSecretDefault) Code() int {
 }
 
 func (o *CreateAppKVSecretDefault) Error() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/kv][%d] CreateAppKVSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/kv][%d] CreateAppKVSecret default %s", o._statusCode, payload)
 }
 
 func (o *CreateAppKVSecretDefault) String() string {
-	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/kv][%d] CreateAppKVSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /secrets/2023-06-13/organizations/{location.organization_id}/projects/{location.project_id}/apps/{app_name}/kv][%d] CreateAppKVSecret default %s", o._statusCode, payload)
 }
 
 func (o *CreateAppKVSecretDefault) GetPayload() *models.RPCStatus {

@@ -7,6 +7,7 @@ package invitations_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"strconv"
@@ -91,11 +92,13 @@ func (o *InvitationsServiceCreateOrganizationInvitationsOK) Code() int {
 }
 
 func (o *InvitationsServiceCreateOrganizationInvitationsOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/invitations][%d] invitationsServiceCreateOrganizationInvitationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/invitations][%d] invitationsServiceCreateOrganizationInvitationsOK %s", 200, payload)
 }
 
 func (o *InvitationsServiceCreateOrganizationInvitationsOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/invitations][%d] invitationsServiceCreateOrganizationInvitationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/invitations][%d] invitationsServiceCreateOrganizationInvitationsOK %s", 200, payload)
 }
 
 func (o *InvitationsServiceCreateOrganizationInvitationsOK) GetPayload() models.HashicorpCloudIamCreateOrganizationInvitationsResponse {
@@ -161,11 +164,13 @@ func (o *InvitationsServiceCreateOrganizationInvitationsDefault) Code() int {
 }
 
 func (o *InvitationsServiceCreateOrganizationInvitationsDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/invitations][%d] InvitationsService_CreateOrganizationInvitations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/invitations][%d] InvitationsService_CreateOrganizationInvitations default %s", o._statusCode, payload)
 }
 
 func (o *InvitationsServiceCreateOrganizationInvitationsDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/invitations][%d] InvitationsService_CreateOrganizationInvitations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/invitations][%d] InvitationsService_CreateOrganizationInvitations default %s", o._statusCode, payload)
 }
 
 func (o *InvitationsServiceCreateOrganizationInvitationsDefault) GetPayload() *cloud.GoogleRPCStatus {

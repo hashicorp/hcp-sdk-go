@@ -7,6 +7,7 @@ package project_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -88,11 +89,13 @@ func (o *ProjectServiceSetNameOK) Code() int {
 }
 
 func (o *ProjectServiceSetNameOK) Error() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/name][%d] projectServiceSetNameOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/name][%d] projectServiceSetNameOK %s", 200, payload)
 }
 
 func (o *ProjectServiceSetNameOK) String() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/name][%d] projectServiceSetNameOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/name][%d] projectServiceSetNameOK %s", 200, payload)
 }
 
 func (o *ProjectServiceSetNameOK) GetPayload() interface{} {
@@ -158,11 +161,13 @@ func (o *ProjectServiceSetNameDefault) Code() int {
 }
 
 func (o *ProjectServiceSetNameDefault) Error() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/name][%d] ProjectService_SetName default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/name][%d] ProjectService_SetName default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceSetNameDefault) String() string {
-	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/name][%d] ProjectService_SetName default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/name][%d] ProjectService_SetName default %s", o._statusCode, payload)
 }
 
 func (o *ProjectServiceSetNameDefault) GetPayload() *cloud.GoogleRPCStatus {

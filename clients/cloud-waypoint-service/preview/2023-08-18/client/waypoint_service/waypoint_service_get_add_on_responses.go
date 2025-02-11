@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceGetAddOnOK) Code() int {
 }
 
 func (o *WaypointServiceGetAddOnOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] waypointServiceGetAddOnOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] waypointServiceGetAddOnOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetAddOnOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] waypointServiceGetAddOnOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] waypointServiceGetAddOnOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetAddOnOK) GetPayload() *models.HashicorpCloudWaypointGetAddOnResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceGetAddOnDefault) Code() int {
 }
 
 func (o *WaypointServiceGetAddOnDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] WaypointService_GetAddOn default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] WaypointService_GetAddOn default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetAddOnDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] WaypointService_GetAddOn default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/add-on/{add_on.id}][%d] WaypointService_GetAddOn default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetAddOnDefault) GetPayload() *cloud.GoogleRPCStatus {

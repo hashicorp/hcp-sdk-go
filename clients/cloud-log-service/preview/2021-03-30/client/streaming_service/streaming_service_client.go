@@ -30,7 +30,7 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	StreamingServiceCreateDestination(params *StreamingServiceCreateDestinationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StreamingServiceCreateDestinationOK, error)
 
-	StreamingServiceCreateOrganizationFilter(params *StreamingServiceCreateOrganizationFilterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StreamingServiceCreateOrganizationFilterOK, error)
+	StreamingServiceCreateDestinationFilter(params *StreamingServiceCreateDestinationFilterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StreamingServiceCreateDestinationFilterOK, error)
 
 	StreamingServiceDeleteDestination(params *StreamingServiceDeleteDestinationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StreamingServiceDeleteDestinationOK, error)
 
@@ -84,22 +84,22 @@ func (a *Client) StreamingServiceCreateDestination(params *StreamingServiceCreat
 }
 
 /*
-StreamingServiceCreateOrganizationFilter attaches a filter to a streaming destination
+StreamingServiceCreateDestinationFilter attaches a filter to a streaming destination
 */
-func (a *Client) StreamingServiceCreateOrganizationFilter(params *StreamingServiceCreateOrganizationFilterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StreamingServiceCreateOrganizationFilterOK, error) {
+func (a *Client) StreamingServiceCreateDestinationFilter(params *StreamingServiceCreateDestinationFilterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StreamingServiceCreateDestinationFilterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewStreamingServiceCreateOrganizationFilterParams()
+		params = NewStreamingServiceCreateDestinationFilterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "StreamingService_CreateOrganizationFilter",
+		ID:                 "StreamingService_CreateDestinationFilter",
 		Method:             "POST",
 		PathPattern:        "/logs/2021-03-30/organizations/{organization_id}/destinations/{destination_id}/filters",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &StreamingServiceCreateOrganizationFilterReader{formats: a.formats},
+		Reader:             &StreamingServiceCreateDestinationFilterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -112,12 +112,12 @@ func (a *Client) StreamingServiceCreateOrganizationFilter(params *StreamingServi
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*StreamingServiceCreateOrganizationFilterOK)
+	success, ok := result.(*StreamingServiceCreateDestinationFilterOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*StreamingServiceCreateOrganizationFilterDefault)
+	unexpectedSuccess := result.(*StreamingServiceCreateDestinationFilterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

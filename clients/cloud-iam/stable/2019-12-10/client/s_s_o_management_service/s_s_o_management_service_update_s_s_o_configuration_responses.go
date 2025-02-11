@@ -7,6 +7,7 @@ package s_s_o_management_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,13 @@ func (o *SSOManagementServiceUpdateSSOConfigurationOK) Code() int {
 }
 
 func (o *SSOManagementServiceUpdateSSOConfigurationOK) Error() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceUpdateSSOConfigurationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceUpdateSSOConfigurationOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceUpdateSSOConfigurationOK) String() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceUpdateSSOConfigurationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceUpdateSSOConfigurationOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceUpdateSSOConfigurationOK) GetPayload() models.HashicorpCloudIamUpdateSSOConfigurationResponse {
@@ -160,11 +163,13 @@ func (o *SSOManagementServiceUpdateSSOConfigurationDefault) Code() int {
 }
 
 func (o *SSOManagementServiceUpdateSSOConfigurationDefault) Error() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_UpdateSSOConfiguration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_UpdateSSOConfiguration default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceUpdateSSOConfigurationDefault) String() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_UpdateSSOConfiguration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_UpdateSSOConfiguration default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceUpdateSSOConfigurationDefault) GetPayload() *cloud.GoogleRPCStatus {

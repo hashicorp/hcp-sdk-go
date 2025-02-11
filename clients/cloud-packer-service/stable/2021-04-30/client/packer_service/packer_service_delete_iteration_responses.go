@@ -6,6 +6,7 @@ package packer_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PackerServiceDeleteIterationOK) Code() int {
 }
 
 func (o *PackerServiceDeleteIterationOK) Error() string {
-	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceDeleteIterationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceDeleteIterationOK %s", 200, payload)
 }
 
 func (o *PackerServiceDeleteIterationOK) String() string {
-	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceDeleteIterationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] packerServiceDeleteIterationOK %s", 200, payload)
 }
 
 func (o *PackerServiceDeleteIterationOK) GetPayload() models.HashicorpCloudPackerDeleteIterationResponse {
@@ -157,11 +160,13 @@ func (o *PackerServiceDeleteIterationDefault) Code() int {
 }
 
 func (o *PackerServiceDeleteIterationDefault) Error() string {
-	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_DeleteIteration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_DeleteIteration default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceDeleteIterationDefault) String() string {
-	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_DeleteIteration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}][%d] PackerService_DeleteIteration default %s", o._statusCode, payload)
 }
 
 func (o *PackerServiceDeleteIterationDefault) GetPayload() *cloud.GoogleRPCStatus {

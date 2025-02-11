@@ -6,6 +6,7 @@ package waypoint_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *WaypointServiceGetVariableOK) Code() int {
 }
 
 func (o *WaypointServiceGetVariableOK) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceGetVariableOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceGetVariableOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetVariableOK) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceGetVariableOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] waypointServiceGetVariableOK %s", 200, payload)
 }
 
 func (o *WaypointServiceGetVariableOK) GetPayload() *models.HashicorpCloudWaypointGetVariableResponse {
@@ -159,11 +162,13 @@ func (o *WaypointServiceGetVariableDefault) Code() int {
 }
 
 func (o *WaypointServiceGetVariableDefault) Error() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_GetVariable default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_GetVariable default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetVariableDefault) String() string {
-	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_GetVariable default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /waypoint/2023-08-18/namespace/{namespace.id}/variable][%d] WaypointService_GetVariable default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceGetVariableDefault) GetPayload() *cloud.GoogleRPCStatus {
