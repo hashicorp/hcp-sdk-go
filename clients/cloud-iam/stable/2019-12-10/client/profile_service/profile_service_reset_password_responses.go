@@ -6,6 +6,7 @@ package profile_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ProfileServiceResetPasswordOK) Code() int {
 }
 
 func (o *ProfileServiceResetPasswordOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/reset-password][%d] profileServiceResetPasswordOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/reset-password][%d] profileServiceResetPasswordOK %s", 200, payload)
 }
 
 func (o *ProfileServiceResetPasswordOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/reset-password][%d] profileServiceResetPasswordOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/reset-password][%d] profileServiceResetPasswordOK %s", 200, payload)
 }
 
 func (o *ProfileServiceResetPasswordOK) GetPayload() models.HashicorpCloudIamResetPasswordResponse {
@@ -157,11 +160,13 @@ func (o *ProfileServiceResetPasswordDefault) Code() int {
 }
 
 func (o *ProfileServiceResetPasswordDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/reset-password][%d] ProfileService_ResetPassword default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/reset-password][%d] ProfileService_ResetPassword default %s", o._statusCode, payload)
 }
 
 func (o *ProfileServiceResetPasswordDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/reset-password][%d] ProfileService_ResetPassword default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/reset-password][%d] ProfileService_ResetPassword default %s", o._statusCode, payload)
 }
 
 func (o *ProfileServiceResetPasswordDefault) GetPayload() *cloud.GoogleRPCStatus {

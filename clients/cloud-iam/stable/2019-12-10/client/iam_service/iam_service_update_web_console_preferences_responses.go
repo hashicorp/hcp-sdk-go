@@ -6,6 +6,7 @@ package iam_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *IamServiceUpdateWebConsolePreferencesOK) Code() int {
 }
 
 func (o *IamServiceUpdateWebConsolePreferencesOK) Error() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/me/web-portal-preferences][%d] iamServiceUpdateWebConsolePreferencesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/me/web-portal-preferences][%d] iamServiceUpdateWebConsolePreferencesOK %s", 200, payload)
 }
 
 func (o *IamServiceUpdateWebConsolePreferencesOK) String() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/me/web-portal-preferences][%d] iamServiceUpdateWebConsolePreferencesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/me/web-portal-preferences][%d] iamServiceUpdateWebConsolePreferencesOK %s", 200, payload)
 }
 
 func (o *IamServiceUpdateWebConsolePreferencesOK) GetPayload() *models.HashicorpCloudIamUpdateWebConsolePreferencesResponse {
@@ -159,11 +162,13 @@ func (o *IamServiceUpdateWebConsolePreferencesDefault) Code() int {
 }
 
 func (o *IamServiceUpdateWebConsolePreferencesDefault) Error() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/me/web-portal-preferences][%d] IamService_UpdateWebConsolePreferences default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/me/web-portal-preferences][%d] IamService_UpdateWebConsolePreferences default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceUpdateWebConsolePreferencesDefault) String() string {
-	return fmt.Sprintf("[PUT /iam/2019-12-10/me/web-portal-preferences][%d] IamService_UpdateWebConsolePreferences default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /iam/2019-12-10/me/web-portal-preferences][%d] IamService_UpdateWebConsolePreferences default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceUpdateWebConsolePreferencesDefault) GetPayload() *cloud.GoogleRPCStatus {

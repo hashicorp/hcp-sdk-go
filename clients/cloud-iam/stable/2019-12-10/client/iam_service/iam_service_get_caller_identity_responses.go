@@ -6,6 +6,7 @@ package iam_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *IamServiceGetCallerIdentityOK) Code() int {
 }
 
 func (o *IamServiceGetCallerIdentityOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/caller-identity][%d] iamServiceGetCallerIdentityOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/caller-identity][%d] iamServiceGetCallerIdentityOK %s", 200, payload)
 }
 
 func (o *IamServiceGetCallerIdentityOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/caller-identity][%d] iamServiceGetCallerIdentityOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/caller-identity][%d] iamServiceGetCallerIdentityOK %s", 200, payload)
 }
 
 func (o *IamServiceGetCallerIdentityOK) GetPayload() *models.HashicorpCloudIamGetCallerIdentityResponse {
@@ -159,11 +162,13 @@ func (o *IamServiceGetCallerIdentityDefault) Code() int {
 }
 
 func (o *IamServiceGetCallerIdentityDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/caller-identity][%d] IamService_GetCallerIdentity default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/caller-identity][%d] IamService_GetCallerIdentity default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceGetCallerIdentityDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/caller-identity][%d] IamService_GetCallerIdentity default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/caller-identity][%d] IamService_GetCallerIdentity default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceGetCallerIdentityDefault) GetPayload() *cloud.GoogleRPCStatus {

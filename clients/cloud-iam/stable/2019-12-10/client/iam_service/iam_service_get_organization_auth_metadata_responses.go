@@ -6,6 +6,7 @@ package iam_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *IamServiceGetOrganizationAuthMetadataOK) Code() int {
 }
 
 func (o *IamServiceGetOrganizationAuthMetadataOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth-metadata][%d] iamServiceGetOrganizationAuthMetadataOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth-metadata][%d] iamServiceGetOrganizationAuthMetadataOK %s", 200, payload)
 }
 
 func (o *IamServiceGetOrganizationAuthMetadataOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth-metadata][%d] iamServiceGetOrganizationAuthMetadataOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth-metadata][%d] iamServiceGetOrganizationAuthMetadataOK %s", 200, payload)
 }
 
 func (o *IamServiceGetOrganizationAuthMetadataOK) GetPayload() *models.HashicorpCloudIamGetOrganizationAuthMetadataResponse {
@@ -159,11 +162,13 @@ func (o *IamServiceGetOrganizationAuthMetadataDefault) Code() int {
 }
 
 func (o *IamServiceGetOrganizationAuthMetadataDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth-metadata][%d] IamService_GetOrganizationAuthMetadata default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth-metadata][%d] IamService_GetOrganizationAuthMetadata default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceGetOrganizationAuthMetadataDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth-metadata][%d] IamService_GetOrganizationAuthMetadata default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth-metadata][%d] IamService_GetOrganizationAuthMetadata default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceGetOrganizationAuthMetadataDefault) GetPayload() *cloud.GoogleRPCStatus {

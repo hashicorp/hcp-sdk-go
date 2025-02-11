@@ -7,6 +7,7 @@ package auth_config_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -88,11 +89,13 @@ func (o *AuthConfigServiceEditAuthConnectionOK) Code() int {
 }
 
 func (o *AuthConfigServiceEditAuthConnectionOK) Error() string {
-	return fmt.Sprintf("[PATCH /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceEditAuthConnectionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceEditAuthConnectionOK %s", 200, payload)
 }
 
 func (o *AuthConfigServiceEditAuthConnectionOK) String() string {
-	return fmt.Sprintf("[PATCH /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceEditAuthConnectionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceEditAuthConnectionOK %s", 200, payload)
 }
 
 func (o *AuthConfigServiceEditAuthConnectionOK) GetPayload() interface{} {
@@ -158,11 +161,13 @@ func (o *AuthConfigServiceEditAuthConnectionDefault) Code() int {
 }
 
 func (o *AuthConfigServiceEditAuthConnectionDefault) Error() string {
-	return fmt.Sprintf("[PATCH /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_EditAuthConnection default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_EditAuthConnection default %s", o._statusCode, payload)
 }
 
 func (o *AuthConfigServiceEditAuthConnectionDefault) String() string {
-	return fmt.Sprintf("[PATCH /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_EditAuthConnection default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_EditAuthConnection default %s", o._statusCode, payload)
 }
 
 func (o *AuthConfigServiceEditAuthConnectionDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -6,6 +6,7 @@ package auth_config_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *AuthConfigServiceGetAuthConnectionsOK) Code() int {
 }
 
 func (o *AuthConfigServiceGetAuthConnectionsOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceGetAuthConnectionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceGetAuthConnectionsOK %s", 200, payload)
 }
 
 func (o *AuthConfigServiceGetAuthConnectionsOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceGetAuthConnectionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceGetAuthConnectionsOK %s", 200, payload)
 }
 
 func (o *AuthConfigServiceGetAuthConnectionsOK) GetPayload() *models.HashicorpCloudIamGetAuthConnectionsResponse {
@@ -159,11 +162,13 @@ func (o *AuthConfigServiceGetAuthConnectionsDefault) Code() int {
 }
 
 func (o *AuthConfigServiceGetAuthConnectionsDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_GetAuthConnections default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_GetAuthConnections default %s", o._statusCode, payload)
 }
 
 func (o *AuthConfigServiceGetAuthConnectionsDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_GetAuthConnections default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_GetAuthConnections default %s", o._statusCode, payload)
 }
 
 func (o *AuthConfigServiceGetAuthConnectionsDefault) GetPayload() *cloud.GoogleRPCStatus {

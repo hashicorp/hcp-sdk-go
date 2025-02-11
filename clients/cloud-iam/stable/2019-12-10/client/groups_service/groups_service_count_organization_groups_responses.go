@@ -6,6 +6,7 @@ package groups_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GroupsServiceCountOrganizationGroupsOK) Code() int {
 }
 
 func (o *GroupsServiceCountOrganizationGroupsOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count][%d] groupsServiceCountOrganizationGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count][%d] groupsServiceCountOrganizationGroupsOK %s", 200, payload)
 }
 
 func (o *GroupsServiceCountOrganizationGroupsOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count][%d] groupsServiceCountOrganizationGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count][%d] groupsServiceCountOrganizationGroupsOK %s", 200, payload)
 }
 
 func (o *GroupsServiceCountOrganizationGroupsOK) GetPayload() *models.HashicorpCloudIamCountOrganizationGroupsResponse {
@@ -159,11 +162,13 @@ func (o *GroupsServiceCountOrganizationGroupsDefault) Code() int {
 }
 
 func (o *GroupsServiceCountOrganizationGroupsDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count][%d] GroupsService_CountOrganizationGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count][%d] GroupsService_CountOrganizationGroups default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceCountOrganizationGroupsDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count][%d] GroupsService_CountOrganizationGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count][%d] GroupsService_CountOrganizationGroups default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceCountOrganizationGroupsDefault) GetPayload() *cloud.GoogleRPCStatus {

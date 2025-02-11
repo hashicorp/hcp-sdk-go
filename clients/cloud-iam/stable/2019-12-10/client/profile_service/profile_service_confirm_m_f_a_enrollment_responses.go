@@ -6,6 +6,7 @@ package profile_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ProfileServiceConfirmMFAEnrollmentOK) Code() int {
 }
 
 func (o *ProfileServiceConfirmMFAEnrollmentOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/confirm-mfa-enrollment][%d] profileServiceConfirmMFAEnrollmentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/confirm-mfa-enrollment][%d] profileServiceConfirmMFAEnrollmentOK %s", 200, payload)
 }
 
 func (o *ProfileServiceConfirmMFAEnrollmentOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/confirm-mfa-enrollment][%d] profileServiceConfirmMFAEnrollmentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/confirm-mfa-enrollment][%d] profileServiceConfirmMFAEnrollmentOK %s", 200, payload)
 }
 
 func (o *ProfileServiceConfirmMFAEnrollmentOK) GetPayload() models.HashicorpCloudIamConfirmMFAEnrollmentResponse {
@@ -157,11 +160,13 @@ func (o *ProfileServiceConfirmMFAEnrollmentDefault) Code() int {
 }
 
 func (o *ProfileServiceConfirmMFAEnrollmentDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/confirm-mfa-enrollment][%d] ProfileService_ConfirmMFAEnrollment default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/confirm-mfa-enrollment][%d] ProfileService_ConfirmMFAEnrollment default %s", o._statusCode, payload)
 }
 
 func (o *ProfileServiceConfirmMFAEnrollmentDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/confirm-mfa-enrollment][%d] ProfileService_ConfirmMFAEnrollment default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/confirm-mfa-enrollment][%d] ProfileService_ConfirmMFAEnrollment default %s", o._statusCode, payload)
 }
 
 func (o *ProfileServiceConfirmMFAEnrollmentDefault) GetPayload() *cloud.GoogleRPCStatus {

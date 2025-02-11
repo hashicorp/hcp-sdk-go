@@ -7,6 +7,7 @@ package s_s_o_management_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *SSOManagementServiceVerifySSODomainOwnershipOK) Code() int {
 }
 
 func (o *SSOManagementServiceVerifySSODomainOwnershipOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/verify-sso-domain-ownership][%d] sSOManagementServiceVerifySSODomainOwnershipOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/verify-sso-domain-ownership][%d] sSOManagementServiceVerifySSODomainOwnershipOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceVerifySSODomainOwnershipOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/verify-sso-domain-ownership][%d] sSOManagementServiceVerifySSODomainOwnershipOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/verify-sso-domain-ownership][%d] sSOManagementServiceVerifySSODomainOwnershipOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceVerifySSODomainOwnershipOK) GetPayload() *models.HashicorpCloudIamVerifyDomainOwnershipResponse {
@@ -161,11 +164,13 @@ func (o *SSOManagementServiceVerifySSODomainOwnershipDefault) Code() int {
 }
 
 func (o *SSOManagementServiceVerifySSODomainOwnershipDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/verify-sso-domain-ownership][%d] SSOManagementService_VerifySSODomainOwnership default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/verify-sso-domain-ownership][%d] SSOManagementService_VerifySSODomainOwnership default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceVerifySSODomainOwnershipDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/verify-sso-domain-ownership][%d] SSOManagementService_VerifySSODomainOwnership default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/verify-sso-domain-ownership][%d] SSOManagementService_VerifySSODomainOwnership default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceVerifySSODomainOwnershipDefault) GetPayload() *cloud.GoogleRPCStatus {

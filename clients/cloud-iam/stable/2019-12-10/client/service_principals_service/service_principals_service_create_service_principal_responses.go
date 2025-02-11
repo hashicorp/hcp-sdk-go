@@ -7,6 +7,7 @@ package service_principals_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *ServicePrincipalsServiceCreateServicePrincipalOK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalOK) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] servicePrincipalsServiceCreateServicePrincipalOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] servicePrincipalsServiceCreateServicePrincipalOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalOK) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] servicePrincipalsServiceCreateServicePrincipalOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] servicePrincipalsServiceCreateServicePrincipalOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalOK) GetPayload() *models.HashicorpCloudIamCreateServicePrincipalResponse {
@@ -161,11 +164,13 @@ func (o *ServicePrincipalsServiceCreateServicePrincipalDefault) Code() int {
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalDefault) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] ServicePrincipalsService_CreateServicePrincipal default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] ServicePrincipalsService_CreateServicePrincipal default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalDefault) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] ServicePrincipalsService_CreateServicePrincipal default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/iam/{parent_resource_name}/service-principals][%d] ServicePrincipalsService_CreateServicePrincipal default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateServicePrincipalDefault) GetPayload() *cloud.GoogleRPCStatus {

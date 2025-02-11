@@ -6,6 +6,7 @@ package s_s_o_management_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *SSOManagementServiceGetSSOConfigurationOK) Code() int {
 }
 
 func (o *SSOManagementServiceGetSSOConfigurationOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceGetSSOConfigurationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceGetSSOConfigurationOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceGetSSOConfigurationOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceGetSSOConfigurationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] sSOManagementServiceGetSSOConfigurationOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceGetSSOConfigurationOK) GetPayload() *models.HashicorpCloudIamGetSSOConfigurationResponse {
@@ -159,11 +162,13 @@ func (o *SSOManagementServiceGetSSOConfigurationDefault) Code() int {
 }
 
 func (o *SSOManagementServiceGetSSOConfigurationDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_GetSSOConfiguration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_GetSSOConfiguration default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceGetSSOConfigurationDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_GetSSOConfiguration default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-configurations/{type}][%d] SSOManagementService_GetSSOConfiguration default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceGetSSOConfigurationDefault) GetPayload() *cloud.GoogleRPCStatus {

@@ -7,6 +7,7 @@ package auth_config_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *AuthConfigServiceCreateAuthConnectionOK) Code() int {
 }
 
 func (o *AuthConfigServiceCreateAuthConnectionOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceCreateAuthConnectionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceCreateAuthConnectionOK %s", 200, payload)
 }
 
 func (o *AuthConfigServiceCreateAuthConnectionOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceCreateAuthConnectionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] authConfigServiceCreateAuthConnectionOK %s", 200, payload)
 }
 
 func (o *AuthConfigServiceCreateAuthConnectionOK) GetPayload() *models.HashicorpCloudIamCreateAuthConnectionResponse {
@@ -161,11 +164,13 @@ func (o *AuthConfigServiceCreateAuthConnectionDefault) Code() int {
 }
 
 func (o *AuthConfigServiceCreateAuthConnectionDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_CreateAuthConnection default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_CreateAuthConnection default %s", o._statusCode, payload)
 }
 
 func (o *AuthConfigServiceCreateAuthConnectionDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_CreateAuthConnection default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/organizations/{organization_id}/auth_connections][%d] AuthConfigService_CreateAuthConnection default %s", o._statusCode, payload)
 }
 
 func (o *AuthConfigServiceCreateAuthConnectionDefault) GetPayload() *cloud.GoogleRPCStatus {

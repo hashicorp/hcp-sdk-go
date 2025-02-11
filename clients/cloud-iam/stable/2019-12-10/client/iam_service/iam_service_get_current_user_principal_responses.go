@@ -6,6 +6,7 @@ package iam_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *IamServiceGetCurrentUserPrincipalOK) Code() int {
 }
 
 func (o *IamServiceGetCurrentUserPrincipalOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/me][%d] iamServiceGetCurrentUserPrincipalOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/me][%d] iamServiceGetCurrentUserPrincipalOK %s", 200, payload)
 }
 
 func (o *IamServiceGetCurrentUserPrincipalOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/me][%d] iamServiceGetCurrentUserPrincipalOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/me][%d] iamServiceGetCurrentUserPrincipalOK %s", 200, payload)
 }
 
 func (o *IamServiceGetCurrentUserPrincipalOK) GetPayload() *models.HashicorpCloudIamGetCurrentUserPrincipalResponse {
@@ -159,11 +162,13 @@ func (o *IamServiceGetCurrentUserPrincipalDefault) Code() int {
 }
 
 func (o *IamServiceGetCurrentUserPrincipalDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/me][%d] IamService_GetCurrentUserPrincipal default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/me][%d] IamService_GetCurrentUserPrincipal default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceGetCurrentUserPrincipalDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/me][%d] IamService_GetCurrentUserPrincipal default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/me][%d] IamService_GetCurrentUserPrincipal default %s", o._statusCode, payload)
 }
 
 func (o *IamServiceGetCurrentUserPrincipalDefault) GetPayload() *cloud.GoogleRPCStatus {

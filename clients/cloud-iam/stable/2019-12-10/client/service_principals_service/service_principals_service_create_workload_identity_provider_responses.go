@@ -7,6 +7,7 @@ package service_principals_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,13 @@ func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderOK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderOK) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] servicePrincipalsServiceCreateWorkloadIdentityProviderOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] servicePrincipalsServiceCreateWorkloadIdentityProviderOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderOK) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] servicePrincipalsServiceCreateWorkloadIdentityProviderOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] servicePrincipalsServiceCreateWorkloadIdentityProviderOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderOK) GetPayload() *models.HashicorpCloudIamCreateWorkloadIdentityProviderResponse {
@@ -162,11 +165,13 @@ func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault) Code() i
 }
 
 func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault) Error() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] ServicePrincipalsService_CreateWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] ServicePrincipalsService_CreateWorkloadIdentityProvider default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault) String() string {
-	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] ServicePrincipalsService_CreateWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2019-12-10/{parent_resource_name}/workload-identity-providers][%d] ServicePrincipalsService_CreateWorkloadIdentityProvider default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceCreateWorkloadIdentityProviderDefault) GetPayload() *cloud.GoogleRPCStatus {

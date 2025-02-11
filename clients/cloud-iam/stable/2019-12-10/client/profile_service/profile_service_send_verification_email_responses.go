@@ -6,6 +6,7 @@ package profile_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ProfileServiceSendVerificationEmailOK) Code() int {
 }
 
 func (o *ProfileServiceSendVerificationEmailOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/send-verification-email][%d] profileServiceSendVerificationEmailOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/send-verification-email][%d] profileServiceSendVerificationEmailOK %s", 200, payload)
 }
 
 func (o *ProfileServiceSendVerificationEmailOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/send-verification-email][%d] profileServiceSendVerificationEmailOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/send-verification-email][%d] profileServiceSendVerificationEmailOK %s", 200, payload)
 }
 
 func (o *ProfileServiceSendVerificationEmailOK) GetPayload() models.HashicorpCloudIamSendVerificationEmailResponse {
@@ -157,11 +160,13 @@ func (o *ProfileServiceSendVerificationEmailDefault) Code() int {
 }
 
 func (o *ProfileServiceSendVerificationEmailDefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/send-verification-email][%d] ProfileService_SendVerificationEmail default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/send-verification-email][%d] ProfileService_SendVerificationEmail default %s", o._statusCode, payload)
 }
 
 func (o *ProfileServiceSendVerificationEmailDefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/send-verification-email][%d] ProfileService_SendVerificationEmail default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/send-verification-email][%d] ProfileService_SendVerificationEmail default %s", o._statusCode, payload)
 }
 
 func (o *ProfileServiceSendVerificationEmailDefault) GetPayload() *cloud.GoogleRPCStatus {

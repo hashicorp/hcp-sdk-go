@@ -6,6 +6,7 @@ package service_principals_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ServicePrincipalsServiceListServicePrincipals2OK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceListServicePrincipals2OK) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] servicePrincipalsServiceListServicePrincipals2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] servicePrincipalsServiceListServicePrincipals2OK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceListServicePrincipals2OK) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] servicePrincipalsServiceListServicePrincipals2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] servicePrincipalsServiceListServicePrincipals2OK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceListServicePrincipals2OK) GetPayload() *models.HashicorpCloudIamListServicePrincipalsResponse {
@@ -159,11 +162,13 @@ func (o *ServicePrincipalsServiceListServicePrincipals2Default) Code() int {
 }
 
 func (o *ServicePrincipalsServiceListServicePrincipals2Default) Error() string {
-	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] ServicePrincipalsService_ListServicePrincipals2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] ServicePrincipalsService_ListServicePrincipals2 default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceListServicePrincipals2Default) String() string {
-	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] ServicePrincipalsService_ListServicePrincipals2 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2019-12-10/iam/{parent_resource_name_1}/service-principals][%d] ServicePrincipalsService_ListServicePrincipals2 default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceListServicePrincipals2Default) GetPayload() *cloud.GoogleRPCStatus {

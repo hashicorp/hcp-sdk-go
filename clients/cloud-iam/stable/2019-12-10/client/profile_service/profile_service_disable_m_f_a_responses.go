@@ -6,6 +6,7 @@ package profile_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ProfileServiceDisableMFAOK) Code() int {
 }
 
 func (o *ProfileServiceDisableMFAOK) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/disable-mfa][%d] profileServiceDisableMFAOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/disable-mfa][%d] profileServiceDisableMFAOK %s", 200, payload)
 }
 
 func (o *ProfileServiceDisableMFAOK) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/disable-mfa][%d] profileServiceDisableMFAOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/disable-mfa][%d] profileServiceDisableMFAOK %s", 200, payload)
 }
 
 func (o *ProfileServiceDisableMFAOK) GetPayload() models.HashicorpCloudIamDisableMFAResponse {
@@ -157,11 +160,13 @@ func (o *ProfileServiceDisableMFADefault) Code() int {
 }
 
 func (o *ProfileServiceDisableMFADefault) Error() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/disable-mfa][%d] ProfileService_DisableMFA default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/disable-mfa][%d] ProfileService_DisableMFA default %s", o._statusCode, payload)
 }
 
 func (o *ProfileServiceDisableMFADefault) String() string {
-	return fmt.Sprintf("[POST /iam/2019-12-10/me/disable-mfa][%d] ProfileService_DisableMFA default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /iam/2019-12-10/me/disable-mfa][%d] ProfileService_DisableMFA default %s", o._statusCode, payload)
 }
 
 func (o *ProfileServiceDisableMFADefault) GetPayload() *cloud.GoogleRPCStatus {

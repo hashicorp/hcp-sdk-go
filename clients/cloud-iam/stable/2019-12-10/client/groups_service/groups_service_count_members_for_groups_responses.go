@@ -6,6 +6,7 @@ package groups_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GroupsServiceCountMembersForGroupsOK) Code() int {
 }
 
 func (o *GroupsServiceCountMembersForGroupsOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count-members-for-groups][%d] groupsServiceCountMembersForGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count-members-for-groups][%d] groupsServiceCountMembersForGroupsOK %s", 200, payload)
 }
 
 func (o *GroupsServiceCountMembersForGroupsOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count-members-for-groups][%d] groupsServiceCountMembersForGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count-members-for-groups][%d] groupsServiceCountMembersForGroupsOK %s", 200, payload)
 }
 
 func (o *GroupsServiceCountMembersForGroupsOK) GetPayload() *models.HashicorpCloudIamCountMembersForGroupsResponse {
@@ -159,11 +162,13 @@ func (o *GroupsServiceCountMembersForGroupsDefault) Code() int {
 }
 
 func (o *GroupsServiceCountMembersForGroupsDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count-members-for-groups][%d] GroupsService_CountMembersForGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count-members-for-groups][%d] GroupsService_CountMembersForGroups default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceCountMembersForGroupsDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count-members-for-groups][%d] GroupsService_CountMembersForGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/iam/{parent_resource_name}/groups/count-members-for-groups][%d] GroupsService_CountMembersForGroups default %s", o._statusCode, payload)
 }
 
 func (o *GroupsServiceCountMembersForGroupsDefault) GetPayload() *cloud.GoogleRPCStatus {

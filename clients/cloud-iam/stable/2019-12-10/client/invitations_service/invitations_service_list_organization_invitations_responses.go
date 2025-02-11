@@ -6,6 +6,7 @@ package invitations_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *InvitationsServiceListOrganizationInvitationsOK) Code() int {
 }
 
 func (o *InvitationsServiceListOrganizationInvitationsOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/invitations][%d] invitationsServiceListOrganizationInvitationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/invitations][%d] invitationsServiceListOrganizationInvitationsOK %s", 200, payload)
 }
 
 func (o *InvitationsServiceListOrganizationInvitationsOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/invitations][%d] invitationsServiceListOrganizationInvitationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/invitations][%d] invitationsServiceListOrganizationInvitationsOK %s", 200, payload)
 }
 
 func (o *InvitationsServiceListOrganizationInvitationsOK) GetPayload() *models.HashicorpCloudIamListOrganizationInvitationsResponse {
@@ -159,11 +162,13 @@ func (o *InvitationsServiceListOrganizationInvitationsDefault) Code() int {
 }
 
 func (o *InvitationsServiceListOrganizationInvitationsDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/invitations][%d] InvitationsService_ListOrganizationInvitations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/invitations][%d] InvitationsService_ListOrganizationInvitations default %s", o._statusCode, payload)
 }
 
 func (o *InvitationsServiceListOrganizationInvitationsDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/invitations][%d] InvitationsService_ListOrganizationInvitations default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/invitations][%d] InvitationsService_ListOrganizationInvitations default %s", o._statusCode, payload)
 }
 
 func (o *InvitationsServiceListOrganizationInvitationsDefault) GetPayload() *cloud.GoogleRPCStatus {

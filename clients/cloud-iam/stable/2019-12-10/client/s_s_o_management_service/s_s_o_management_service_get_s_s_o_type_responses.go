@@ -6,6 +6,7 @@ package s_s_o_management_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *SSOManagementServiceGetSSOTypeOK) Code() int {
 }
 
 func (o *SSOManagementServiceGetSSOTypeOK) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-type][%d] sSOManagementServiceGetSSOTypeOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-type][%d] sSOManagementServiceGetSSOTypeOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceGetSSOTypeOK) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-type][%d] sSOManagementServiceGetSSOTypeOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-type][%d] sSOManagementServiceGetSSOTypeOK %s", 200, payload)
 }
 
 func (o *SSOManagementServiceGetSSOTypeOK) GetPayload() *models.HashicorpCloudIamGetSSOTypeResponse {
@@ -159,11 +162,13 @@ func (o *SSOManagementServiceGetSSOTypeDefault) Code() int {
 }
 
 func (o *SSOManagementServiceGetSSOTypeDefault) Error() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-type][%d] SSOManagementService_GetSSOType default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-type][%d] SSOManagementService_GetSSOType default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceGetSSOTypeDefault) String() string {
-	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-type][%d] SSOManagementService_GetSSOType default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /iam/2019-12-10/organizations/{organization_id}/sso-type][%d] SSOManagementService_GetSSOType default %s", o._statusCode, payload)
 }
 
 func (o *SSOManagementServiceGetSSOTypeDefault) GetPayload() *cloud.GoogleRPCStatus {

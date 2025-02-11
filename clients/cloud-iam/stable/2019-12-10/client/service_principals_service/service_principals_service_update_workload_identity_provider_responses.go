@@ -7,6 +7,7 @@ package service_principals_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderOK) Code() int {
 }
 
 func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderOK) Error() string {
-	return fmt.Sprintf("[PATCH /2019-12-10/{provider.resource_name}][%d] servicePrincipalsServiceUpdateWorkloadIdentityProviderOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /2019-12-10/{provider.resource_name}][%d] servicePrincipalsServiceUpdateWorkloadIdentityProviderOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderOK) String() string {
-	return fmt.Sprintf("[PATCH /2019-12-10/{provider.resource_name}][%d] servicePrincipalsServiceUpdateWorkloadIdentityProviderOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /2019-12-10/{provider.resource_name}][%d] servicePrincipalsServiceUpdateWorkloadIdentityProviderOK %s", 200, payload)
 }
 
 func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderOK) GetPayload() *models.HashicorpCloudIamUpdateWorkloadIdentityProviderResponse {
@@ -163,11 +166,13 @@ func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderDefault) Code() i
 }
 
 func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderDefault) Error() string {
-	return fmt.Sprintf("[PATCH /2019-12-10/{provider.resource_name}][%d] ServicePrincipalsService_UpdateWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /2019-12-10/{provider.resource_name}][%d] ServicePrincipalsService_UpdateWorkloadIdentityProvider default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderDefault) String() string {
-	return fmt.Sprintf("[PATCH /2019-12-10/{provider.resource_name}][%d] ServicePrincipalsService_UpdateWorkloadIdentityProvider default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /2019-12-10/{provider.resource_name}][%d] ServicePrincipalsService_UpdateWorkloadIdentityProvider default %s", o._statusCode, payload)
 }
 
 func (o *ServicePrincipalsServiceUpdateWorkloadIdentityProviderDefault) GetPayload() *cloud.GoogleRPCStatus {
