@@ -28,6 +28,7 @@ func TestCache_ExpiredTokenRemoval(t *testing.T) {
 	valid := cacheEntry{
 		AccessToken:       "access-token",
 		AccessTokenExpiry: time.Now().Add(1 * time.Minute),
+		Geography:         "US",
 	}
 
 	// Set cache entries for service principals

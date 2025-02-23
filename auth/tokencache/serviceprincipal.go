@@ -41,7 +41,7 @@ func (source *cachingTokenSource) servicePrincipalToken(cachedTokens *cache) (*o
 	}
 
 	// Cache the new token
-	cachedTokens.ServicePrincipals[source.sourceIdentifier] = *cacheEntryFromToken(token)
+	cachedTokens.ServicePrincipals[source.sourceIdentifier] = *cacheEntryFromToken(token, source.geography)
 
 	// Write the cache back to the file
 	if err = cachedTokens.write(source.cacheFile); err != nil {
