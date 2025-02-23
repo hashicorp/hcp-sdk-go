@@ -10,10 +10,68 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hashicorp/hcp-sdk-go/auth"
-	"github.com/hashicorp/hcp-sdk-go/profile"
 	requirepkg "github.com/stretchr/testify/require"
+
+	"github.com/hashicorp/hcp-sdk-go/auth"
+	"github.com/hashicorp/hcp-sdk-go/config/geography"
+	"github.com/hashicorp/hcp-sdk-go/profile"
 )
+
+func TestWith_Geography(t *testing.T) {
+	t.Run("north_america", func(t *testing.T) {
+		require := requirepkg.New(t)
+
+		// Setup
+		config := &hcpConfig{}
+		geo := "north_america"
+		expectation := geography.NewConnectionConfigNorthAmerica()
+
+		// Exercise
+		require.NoError(apply(config, WithGeography(geo)))
+
+		// Ensure that the expected config values have been set
+		require.Equal(expectation.AuthURL, config.authURL.String())
+		require.Equal(expectation.PortalURL, config.portalURL.String())
+		require.Equal(expectation.APIAddress, config.apiAddress)
+		require.Equal(expectation.SCADAAddress, config.scadaAddress)
+		require.Equal(expectation.OAuth2ClientID, config.oauth2Config.ClientID)
+		require.Equal(expectation.OAuth2RedirectURL, config.oauth2Config.RedirectURL)
+
+	})
+
+	t.Run("europe", func(t *testing.T) {
+		require := requirepkg.New(t)
+
+		// Setup
+		config := &hcpConfig{}
+		geo := "europe"
+		expectation := geography.NewConnectionConfigEurope()
+
+		// Exercise
+		require.NoError(apply(config, WithGeography(geo)))
+
+		// Ensure that the expected config values have been set
+		require.Equal(expectation.AuthURL, config.authURL.String())
+		require.Equal(expectation.PortalURL, config.portalURL.String())
+		require.Equal(expectation.APIAddress, config.apiAddress)
+		require.Equal(expectation.SCADAAddress, config.scadaAddress)
+		require.Equal(expectation.OAuth2ClientID, config.oauth2Config.ClientID)
+		require.Equal(expectation.OAuth2RedirectURL, config.oauth2Config.RedirectURL)
+
+	})
+
+	t.Run("unsupported", func(t *testing.T) {
+		require := requirepkg.New(t)
+
+		// Setup
+		config := &hcpConfig{}
+		geo := "asia_pacific"
+
+		// Exercise
+		require.Error(apply(config, WithGeography(geo)))
+
+	})
+}
 
 func TestWith_ClientCredentials(t *testing.T) {
 	require := requirepkg.New(t)
