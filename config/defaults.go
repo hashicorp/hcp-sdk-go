@@ -4,10 +4,13 @@
 package config
 
 import (
+	"crypto/tls"
 	"fmt"
 	"net/url"
 
 	"github.com/hashicorp/hcp-sdk-go/config/geography"
+	"github.com/hashicorp/hcp-sdk-go/profile"
+	"golang.org/x/oauth2"
 )
 
 const (
@@ -26,9 +29,9 @@ var (
 	}
 )
 
-// HCPConfigFromGeography creates a config with defaults configured to interact
+// configFromGeography creates a config with defaults configured to interact
 // with a specific geography
-func HCPConfigFromGeography(config *hcpConfig, geo string) (*hcpConfig, error) {
+func configFromGeography(config *hcpConfig, geo string) (*hcpConfig, error) {
 	geoConfig := &geography.ConnectionConfig{}
 
 	// Get config based on geographical deployment
@@ -51,7 +54,6 @@ func HCPConfigFromGeography(config *hcpConfig, geo string) (*hcpConfig, error) {
 	config.apiAddress = geoConfig.APIAddress
 	config.scadaAddress = geoConfig.SCADAAddress
 
-	config.oauth2Config.Scopes = OAuth2Scopes
 	config.oauth2Config.ClientID = geoConfig.OAuth2ClientID
 	config.oauth2Config.RedirectURL = geoConfig.OAuth2RedirectURL
 
@@ -59,4 +61,26 @@ func HCPConfigFromGeography(config *hcpConfig, geo string) (*hcpConfig, error) {
 	config.oauth2Config.Endpoint.TokenURL = geoConfig.AuthURL + AuthEndpointTokenPath
 
 	return config, nil
+}
+
+// newDefaultConfig builds an empty HCP Config
+func newDefaultConfig() *hcpConfig {
+	hcpConfig := &hcpConfig{}
+	tlsConfig := &tls.Config{}
+
+	hcpConfig.authTLSConfig = tlsConfig
+	hcpConfig.apiTLSConfig = tlsConfig
+	hcpConfig.scadaTLSConfig = tlsConfig
+	hcpConfig.profile = &profile.UserProfile{}
+	hcpConfig.oauth2Config = newDefaultOAuth2Config()
+
+	return hcpConfig
+}
+
+// newDefaultOAuth2Config builds a default OAuth2 config
+func newDefaultOAuth2Config() oauth2.Config {
+	return oauth2.Config{
+		Scopes:   OAuth2Scopes,
+		Endpoint: oauth2.Endpoint{},
+	}
 }
