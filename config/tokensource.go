@@ -82,10 +82,10 @@ func (c *hcpConfig) getTokenSource() (oauth2.TokenSource, sourceType, string, er
 
 	// Set client credentials token URL based on auth URL.
 	tokenURL := c.authURL
-	tokenURL.Path = tokenPath
+	tokenURL.Path = AuthEndpointTokenPath
 
 	clientCredentials := clientcredentials.Config{
-		EndpointParams: url.Values{"audience": {aud}},
+		EndpointParams: url.Values{"audience": {APIAudienceID}},
 		TokenURL:       tokenURL.String(),
 	}
 
