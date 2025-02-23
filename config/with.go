@@ -14,6 +14,20 @@ import (
 	"golang.org/x/oauth2"
 )
 
+// WithGeography will override connection parameters to interact with a specific
+// geographical HCP deployment
+//
+// If used with other HCPConfigOptions, including FromEnv(), this should be called
+// first due to its broad scope of modification to the config.
+func WithGeography(geo string) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		cf, err := HCPConfigFromGeography(config, geo)
+		config = cf
+
+		return err
+	}
+}
+
 // WithClientCredentials credentials is an option that can be used to set
 // HCP client credentials on the configuration.
 func WithClientCredentials(clientID, clientSecret string) HCPConfigOption {
@@ -189,16 +203,6 @@ func WithCredentialFilePath(p string) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		cf, err := auth.ReadCredentialFile(p)
 		config.credentialFile = cf
-		return err
-	}
-}
-
-// WithGeography will override connection parameters to interact with a specific
-// geographical HCP deployment
-func WithGeography(geo string) HCPConfigOption {
-	return func(config *hcpConfig) error {
-		config, err := HCPConfigFromGeography(config, geo)
-
 		return err
 	}
 }
