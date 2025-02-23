@@ -192,3 +192,13 @@ func WithCredentialFilePath(p string) HCPConfigOption {
 		return err
 	}
 }
+
+// WithGeography will override connection parameters to interact with a specific
+// geographical HCP deployment
+func WithGeography(geo string) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config, err := HCPConfigFromGeography(config, geo)
+
+		return err
+	}
+}
