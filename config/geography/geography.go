@@ -14,8 +14,8 @@ var (
 	Geographies []string
 )
 
-// ConnectionConfig contains connection strings used to configure HCP clients
-type ConnectionConfig struct {
+// Config contains connection strings used to configure HCP clients
+type Config struct {
 	// AuthURL is the URL of the production auth endpoint
 	AuthURL string
 

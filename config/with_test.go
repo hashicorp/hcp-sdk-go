@@ -24,7 +24,7 @@ func TestWith_Geography(t *testing.T) {
 		// Setup
 		config := &hcpConfig{}
 		geo := "north_america"
-		expectation := geography.NewConnectionConfigNorthAmerica()
+		expectation := geography.NewConfigNorthAmerica()
 
 		// Exercise
 		require.NoError(apply(config, WithGeography(geo)))
@@ -45,7 +45,7 @@ func TestWith_Geography(t *testing.T) {
 		// Setup
 		config := &hcpConfig{}
 		geo := "europe"
-		expectation := geography.NewConnectionConfigEurope()
+		expectation := geography.NewConfigEurope()
 
 		// Exercise
 		require.NoError(apply(config, WithGeography(geo)))
