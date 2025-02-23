@@ -4,14 +4,10 @@
 package config
 
 import (
-	"crypto/tls"
 	"fmt"
 	"net/url"
 
-	"golang.org/x/oauth2"
-
 	"github.com/hashicorp/hcp-sdk-go/config/geography"
-	"github.com/hashicorp/hcp-sdk-go/profile"
 )
 
 const (
@@ -20,16 +16,19 @@ const (
 
 	// AuthEndpointAuthPath is the auth path for authentication endpoint
 	AuthEndpointAuthPath = "/oauth2/auth"
+)
 
-	// APIAudienceID is the API identifier configured in the auth provider and
-	// must be provided when requesting an access token for the API. The value
-	// is the same regardless of environment
-	APIAudienceID = "https://api.hashicorp.cloud"
+var (
+	// OAuth2Scopes are the default scopes used for the OAuth2 config
+	OAuth2Scopes = []string{
+		"openid",
+		"offline_access",
+	}
 )
 
 // HCPConfigFromGeography creates a config with defaults configured to interact
 // with a specific geography
-func HCPConfigFromGeography(geo string) (*hcpConfig, error) {
+func HCPConfigFromGeography(config *hcpConfig, geo string) (*hcpConfig, error) {
 	geoConfig := &geography.ConnectionConfig{}
 
 	// Get config based on geographical deployment
@@ -46,28 +45,18 @@ func HCPConfigFromGeography(geo string) (*hcpConfig, error) {
 	authURL, _ := url.Parse(geoConfig.AuthURL)
 	portalURL, _ := url.Parse(geoConfig.PortalURL)
 
-	config := &hcpConfig{
-		authURL:       authURL,
-		authTLSConfig: &tls.Config{},
-		oauth2Config: oauth2.Config{
-			ClientID:    geoConfig.OAuth2ClientID,
-			RedirectURL: geoConfig.OAuth2RedirectURL,
-			Endpoint: oauth2.Endpoint{
-				AuthURL:  geoConfig.AuthURL + AuthEndpointAuthPath,
-				TokenURL: geoConfig.AuthURL + AuthEndpointTokenPath,
-			},
-			Scopes: []string{
-				"openid",
-				"offline_access",
-			},
-		},
-		profile:        &profile.UserProfile{},
-		portalURL:      portalURL,
-		apiAddress:     geoConfig.APIAddress,
-		apiTLSConfig:   &tls.Config{},
-		scadaAddress:   geoConfig.SCADAAddress,
-		scadaTLSConfig: &tls.Config{},
-	}
+	// Override geography-specific parameters
+	config.authURL = authURL
+	config.portalURL = portalURL
+	config.apiAddress = geoConfig.APIAddress
+	config.scadaAddress = geoConfig.SCADAAddress
+
+	config.oauth2Config.Scopes = OAuth2Scopes
+	config.oauth2Config.ClientID = geoConfig.OAuth2ClientID
+	config.oauth2Config.RedirectURL = geoConfig.OAuth2RedirectURL
+
+	config.oauth2Config.Endpoint.AuthURL = geoConfig.AuthURL + AuthEndpointAuthPath
+	config.oauth2Config.Endpoint.TokenURL = geoConfig.AuthURL + AuthEndpointTokenPath
 
 	return config, nil
 }

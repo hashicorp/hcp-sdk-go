@@ -27,7 +27,7 @@ import (
 // environment variables).
 func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
 	// Prepare basic config with default values for north america
-	config, err := HCPConfigFromGeography(geography.Default)
+	config, err := HCPConfigFromGeography(&hcpConfig{}, geography.Default)
 	if err != nil {
 		return nil, fmt.Errorf("failed to apply geography configuration: %w", err)
 	}

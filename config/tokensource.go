@@ -19,6 +19,13 @@ import (
 
 type sourceType = string
 
+const (
+	// APIAudienceID is the API identifier configured in the auth provider and
+	// must be provided when requesting an access token for the API. The value
+	// is the same regardless of environment
+	APIAudienceID = "https://api.hashicorp.cloud"
+)
+
 var (
 	sourceTypeLogin            = sourceType("login")
 	sourceTypeServicePrincipal = sourceType("service-principal")
