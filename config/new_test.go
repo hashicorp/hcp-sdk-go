@@ -7,6 +7,7 @@ import (
 	"crypto/tls"
 	"testing"
 
+	"github.com/hashicorp/hcp-sdk-go/config/geography"
 	"github.com/hashicorp/hcp-sdk-go/profile"
 	requirepkg "github.com/stretchr/testify/require"
 )
@@ -14,14 +15,16 @@ import (
 func TestNew_Default(t *testing.T) {
 	require := requirepkg.New(t)
 
+	conf := geography.NewConnectionConfigNorthAmerica()
+
 	// Exercise
 	config, err := NewHCPConfig(WithClientCredentials("my-client-id", "my-client-secret"))
 	require.NoError(err)
 
 	// Ensure that the default configuration contains the default values
-	require.Equal(defaultPortalURL, config.PortalURL().String())
-	require.Equal(defaultAPIAddress, config.APIAddress())
-	require.Equal(defaultSCADAAddress, config.SCADAAddress())
+	require.Equal(conf.PortalURL, config.PortalURL().String())
+	require.Equal(conf.APIAddress, config.APIAddress())
+	require.Equal(conf.SCADAAddress, config.SCADAAddress())
 
 	// Ensure the default configuration uses secure TLS
 	require.NotNil(config.APITLSConfig())
@@ -136,6 +139,8 @@ func TestNew_NoConfigPassed(t *testing.T) {
 	}
 	require := requirepkg.New(t)
 
+	conf := geography.NewConnectionConfigNorthAmerica()
+
 	// Exercise
 	config, err := NewHCPConfig()
 	require.NoError(err)
@@ -145,7 +150,7 @@ func TestNew_NoConfigPassed(t *testing.T) {
 	require.NoError(err)
 	require.NotNil(token)
 
-	require.Equal(defaultPortalURL, config.PortalURL().String())
-	require.Equal(defaultAPIAddress, config.APIAddress())
-	require.Equal(defaultSCADAAddress, config.SCADAAddress())
+	require.Equal(conf.PortalURL, config.PortalURL().String())
+	require.Equal(conf.APIAddress, config.APIAddress())
+	require.Equal(conf.SCADAAddress, config.SCADAAddress())
 }
