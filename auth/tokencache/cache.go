@@ -113,6 +113,9 @@ type cacheEntry struct {
 
 	// AccessTokenExpiry is when the access token will expire.
 	AccessTokenExpiry time.Time `json:"access_token_expiry,omitempty"`
+
+	// geography is the geography of the HCP that issues the tokens.
+	Geography string `json:"geography,omitempty"`
 }
 
 // token will convert the cacheEntry to an oauth2.Token.
@@ -125,10 +128,11 @@ func (entry *cacheEntry) token() *oauth2.Token {
 }
 
 // cacheEntryFromToken will convert an oauth2.Token to a cacheEntry
-func cacheEntryFromToken(token *oauth2.Token) *cacheEntry {
+func cacheEntryFromToken(token *oauth2.Token, geo string) *cacheEntry {
 	return &cacheEntry{
 		AccessToken:       token.AccessToken,
 		AccessTokenExpiry: token.Expiry,
 		RefreshToken:      token.RefreshToken,
+		Geography:         geo,
 	}
 }

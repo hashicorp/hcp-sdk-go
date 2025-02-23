@@ -22,7 +22,7 @@ import (
 // first due to its broad scope of modification to the config.
 func WithGeography(geo string) HCPConfigOption {
 	return func(config *hcpConfig) error {
-		config, err := configFromGeography(config, geography.Geo(geo))
+		_, err := configFromGeography(config, geography.Geo(geo))
 
 		return err
 	}

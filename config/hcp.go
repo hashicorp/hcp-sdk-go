@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/auth/tokencache"
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"github.com/hashicorp/hcp-sdk-go/config/files"
+	"github.com/hashicorp/hcp-sdk-go/config/geography"
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/profile"
@@ -90,6 +91,9 @@ type hcpConfig struct {
 	// apiTLSConfig is the TLS configuration for the HCP API. It can be set to
 	// nil if TLS should be disabled.
 	apiTLSConfig *tls.Config
+
+	// geography is the geographical region for the HCP API
+	geography geography.Geo
 
 	// scadaAddress is the address (<hostname>[:port]) of the SCADA endpoint.
 	scadaAddress string
