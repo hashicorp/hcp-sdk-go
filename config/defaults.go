@@ -32,14 +32,14 @@ var (
 // configFromGeography creates a config with defaults configured to interact
 // with a specific geography
 func configFromGeography(config *hcpConfig, geo string) (*hcpConfig, error) {
-	geoConfig := &geography.ConnectionConfig{}
+	geoConfig := &geography.Config{}
 
 	// Get config based on geographical deployment
 	switch geo {
 	case geography.NorthAmerica:
-		geoConfig = geography.NewConnectionConfigNorthAmerica()
+		geoConfig = geography.NewConfigNorthAmerica()
 	case geography.Europe:
-		geoConfig = geography.NewConnectionConfigEurope()
+		geoConfig = geography.NewConfigEurope()
 	default:
 		return nil, fmt.Errorf("hcp geography invalid. Supported: %v", geography.Geographies)
 	}

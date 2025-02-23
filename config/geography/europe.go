@@ -12,8 +12,8 @@ func init() {
 	Geographies = append(Geographies, Europe)
 }
 
-func NewConnectionConfigEurope() *ConnectionConfig {
-	return &ConnectionConfig{
+func NewConfigEurope() *Config {
+	return &Config{
 		APIAddress:        "api.cloud.eu.hashicorp.com",
 		AuthURL:           "auth.idp.eu.hashicorp.com",
 		OAuth2ClientID:    "",
