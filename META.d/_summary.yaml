@@ -1,0 +1,7 @@
+schema: 1.1
+
+partition: hcp
+category: library
+
+summary:
+  owner: team-cloud-core-platform
