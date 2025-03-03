@@ -1,6 +1,6 @@
 name: Create Release
 
-on: 
+on:
   # Run Every Wednesday at 12:00 AM UTC
   schedule:
     - cron: '0 0 * * 3'
@@ -40,7 +40,7 @@ jobs:
           GOPRIVATE: 'github.com/hashicorp/*'
         run: |
           go install github.com/hashicorp/go-changelog/cmd/changelog-build@6ec9be372335f39c5df27e232c3669db7f5183a5
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.6
 
       - name: Run Unit Tests and Linter
         run: make test-ci
