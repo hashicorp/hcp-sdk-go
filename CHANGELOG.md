@@ -1,3 +1,8 @@
+## v0.138.0 (March 05, 2025)
+
+IMPROVEMENTS:
+
+* Update to Go 1.23 per the [Go support policy](https://go.dev/doc/devel/release#policy). [[GH-278](https://github.com/hashicorp/hcp-sdk-go/pull/278)]
 ## v0.137.0 (February 26, 2025)
 
 ## v0.136.0 (February 12, 2025)
