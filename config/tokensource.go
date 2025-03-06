@@ -19,6 +19,13 @@ import (
 
 type sourceType = string
 
+const (
+	// APIAudienceID is the API identifier configured in the auth provider and
+	// must be provided when requesting an access token for the API. The value
+	// is the same regardless of environment
+	APIAudienceID = "https://api.hashicorp.cloud"
+)
+
 var (
 	sourceTypeLogin            = sourceType("login")
 	sourceTypeServicePrincipal = sourceType("service-principal")
@@ -82,10 +89,10 @@ func (c *hcpConfig) getTokenSource() (oauth2.TokenSource, sourceType, string, er
 
 	// Set client credentials token URL based on auth URL.
 	tokenURL := c.authURL
-	tokenURL.Path = tokenPath
+	tokenURL.Path = AuthEndpointTokenPath
 
 	clientCredentials := clientcredentials.Config{
-		EndpointParams: url.Values{"audience": {aud}},
+		EndpointParams: url.Values{"audience": {APIAudienceID}},
 		TokenURL:       tokenURL.String(),
 	}
 
