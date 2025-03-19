@@ -1,3 +1,5 @@
+## v0.139.0 (March 19, 2025)
+
 ## v0.138.0 (March 05, 2025)
 
 IMPROVEMENTS:
