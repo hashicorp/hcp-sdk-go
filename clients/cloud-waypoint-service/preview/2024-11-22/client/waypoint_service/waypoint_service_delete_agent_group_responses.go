@@ -54,7 +54,7 @@ WaypointServiceDeleteAgentGroupOK describes a response with status code 200, wit
 A successful response.
 */
 type WaypointServiceDeleteAgentGroupOK struct {
-	Payload models.HashicorpCloudWaypointDeleteAgentGroupResponse
+	Payload models.HashicorpCloudWaypointV20241122DeleteAgentGroupResponse
 }
 
 // IsSuccess returns true when this waypoint service delete agent group o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceDeleteAgentGroupOK) String() string {
 	return fmt.Sprintf("[DELETE /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/agent/group/{name}][%d] waypointServiceDeleteAgentGroupOK %s", 200, payload)
 }
 
-func (o *WaypointServiceDeleteAgentGroupOK) GetPayload() models.HashicorpCloudWaypointDeleteAgentGroupResponse {
+func (o *WaypointServiceDeleteAgentGroupOK) GetPayload() models.HashicorpCloudWaypointV20241122DeleteAgentGroupResponse {
 	return o.Payload
 }
 

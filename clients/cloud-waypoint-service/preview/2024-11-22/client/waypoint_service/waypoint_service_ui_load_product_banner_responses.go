@@ -54,7 +54,7 @@ WaypointServiceUILoadProductBannerOK describes a response with status code 200, 
 A successful response.
 */
 type WaypointServiceUILoadProductBannerOK struct {
-	Payload *models.HashicorpCloudWaypointUILoadProductBannerResponse
+	Payload *models.HashicorpCloudWaypointV20241122UILoadProductBannerResponse
 }
 
 // IsSuccess returns true when this waypoint service Ui load product banner o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceUILoadProductBannerOK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/ui/product-banner][%d] waypointServiceUiLoadProductBannerOK %s", 200, payload)
 }
 
-func (o *WaypointServiceUILoadProductBannerOK) GetPayload() *models.HashicorpCloudWaypointUILoadProductBannerResponse {
+func (o *WaypointServiceUILoadProductBannerOK) GetPayload() *models.HashicorpCloudWaypointV20241122UILoadProductBannerResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceUILoadProductBannerOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointUILoadProductBannerResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122UILoadProductBannerResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

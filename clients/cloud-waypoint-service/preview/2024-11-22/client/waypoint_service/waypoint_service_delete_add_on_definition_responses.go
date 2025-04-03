@@ -54,7 +54,7 @@ WaypointServiceDeleteAddOnDefinitionOK describes a response with status code 200
 A successful response.
 */
 type WaypointServiceDeleteAddOnDefinitionOK struct {
-	Payload models.HashicorpCloudWaypointDeleteAddOnDefinitionResponse
+	Payload models.HashicorpCloudWaypointV20241122DeleteAddOnDefinitionResponse
 }
 
 // IsSuccess returns true when this waypoint service delete add on definition o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceDeleteAddOnDefinitionOK) String() string {
 	return fmt.Sprintf("[DELETE /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/add-on-definition/{add_on_definition.id}][%d] waypointServiceDeleteAddOnDefinitionOK %s", 200, payload)
 }
 
-func (o *WaypointServiceDeleteAddOnDefinitionOK) GetPayload() models.HashicorpCloudWaypointDeleteAddOnDefinitionResponse {
+func (o *WaypointServiceDeleteAddOnDefinitionOK) GetPayload() models.HashicorpCloudWaypointV20241122DeleteAddOnDefinitionResponse {
 	return o.Payload
 }
 

@@ -54,7 +54,7 @@ WaypointServiceGetTFModuleDetailsOK describes a response with status code 200, w
 A successful response.
 */
 type WaypointServiceGetTFModuleDetailsOK struct {
-	Payload *models.HashicorpCloudWaypointGetTFModuleDetailsResponse
+	Payload *models.HashicorpCloudWaypointV20241122GetTFModuleDetailsResponse
 }
 
 // IsSuccess returns true when this waypoint service get t f module details o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceGetTFModuleDetailsOK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/tf-module-details/{tfc_namespace}/{name}/{provider}/{version}][%d] waypointServiceGetTFModuleDetailsOK %s", 200, payload)
 }
 
-func (o *WaypointServiceGetTFModuleDetailsOK) GetPayload() *models.HashicorpCloudWaypointGetTFModuleDetailsResponse {
+func (o *WaypointServiceGetTFModuleDetailsOK) GetPayload() *models.HashicorpCloudWaypointV20241122GetTFModuleDetailsResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceGetTFModuleDetailsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointGetTFModuleDetailsResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122GetTFModuleDetailsResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

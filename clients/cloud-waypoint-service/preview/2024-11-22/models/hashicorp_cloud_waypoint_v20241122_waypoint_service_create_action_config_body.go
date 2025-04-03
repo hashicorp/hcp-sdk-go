@@ -20,7 +20,7 @@ import (
 type HashicorpCloudWaypointV20241122WaypointServiceCreateActionConfigBody struct {
 
 	// The action config to store
-	ActionConfig *HashicorpCloudWaypointActionConfig `json:"action_config,omitempty"`
+	ActionConfig *HashicorpCloudWaypointV20241122ActionConfig `json:"action_config,omitempty"`
 
 	// namespace
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceCreateActionConfigBodyNamespace `json:"namespace,omitempty"`

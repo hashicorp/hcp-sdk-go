@@ -22,7 +22,7 @@ import (
 type HashicorpCloudWaypointV20241122WaypointServiceUpdateAddOnDefinitionBody struct {
 
 	// Add-on definition to be updated
-	AddOnDefinition *HashicorpCloudWaypointAddOnDefinition `json:"add_on_definition,omitempty"`
+	AddOnDefinition *HashicorpCloudWaypointV20241122AddOnDefinition `json:"add_on_definition,omitempty"`
 
 	// DEPRECATED: Use add_on_definition instead.
 	Description string `json:"description,omitempty"`
@@ -53,7 +53,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceUpdateAddOnDefinitionBody str
 	Summary string `json:"summary,omitempty"`
 
 	// DEPRECATED: Use add_on_definition instead.
-	TerraformCloudWorkspaceDetails *HashicorpCloudWaypointTerraformCloudWorkspaceDetails `json:"terraform_cloud_workspace_details,omitempty"`
+	TerraformCloudWorkspaceDetails *HashicorpCloudWaypointV20241122TerraformCloudWorkspaceDetails `json:"terraform_cloud_workspace_details,omitempty"`
 
 	// DEPRECATED: Use add_on_definition instead.
 	TfAgentPoolID string `json:"tf_agent_pool_id,omitempty"`
@@ -61,8 +61,12 @@ type HashicorpCloudWaypointV20241122WaypointServiceUpdateAddOnDefinitionBody str
 	// DEPRECATED: Use add_on_definition instead.
 	TfExecutionMode string `json:"tf_execution_mode,omitempty"`
 
+	// Field mask to update only specific fields. I.e. if you want a field updated,
+	// you must include it in the field mask.
+	UpdateMask string `json:"update_mask,omitempty"`
+
 	// DEPRECATED: Use add_on_definition instead.
-	VariableOptions []*HashicorpCloudWaypointTFModuleVariable `json:"variable_options"`
+	VariableOptions []*HashicorpCloudWaypointV20241122TFModuleVariable `json:"variable_options"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service update add on definition body

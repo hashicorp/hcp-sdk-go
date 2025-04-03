@@ -54,7 +54,7 @@ WaypointServiceUpdateApplicationOK describes a response with status code 200, wi
 A successful response.
 */
 type WaypointServiceUpdateApplicationOK struct {
-	Payload *models.HashicorpCloudWaypointUpdateApplicationResponse
+	Payload *models.HashicorpCloudWaypointV20241122UpdateApplicationResponse
 }
 
 // IsSuccess returns true when this waypoint service update application o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceUpdateApplicationOK) String() string {
 	return fmt.Sprintf("[PATCH /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/applications/{application.id}][%d] waypointServiceUpdateApplicationOK %s", 200, payload)
 }
 
-func (o *WaypointServiceUpdateApplicationOK) GetPayload() *models.HashicorpCloudWaypointUpdateApplicationResponse {
+func (o *WaypointServiceUpdateApplicationOK) GetPayload() *models.HashicorpCloudWaypointV20241122UpdateApplicationResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceUpdateApplicationOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointUpdateApplicationResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122UpdateApplicationResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

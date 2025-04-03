@@ -54,7 +54,7 @@ WaypointServiceGetTFRunStatusOK describes a response with status code 200, with 
 A successful response.
 */
 type WaypointServiceGetTFRunStatusOK struct {
-	Payload *models.HashicorpCloudWaypointGetTFRunStatusResponse
+	Payload *models.HashicorpCloudWaypointV20241122GetTFRunStatusResponse
 }
 
 // IsSuccess returns true when this waypoint service get t f run status o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceGetTFRunStatusOK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/tf-run-status/{workspace_name}][%d] waypointServiceGetTFRunStatusOK %s", 200, payload)
 }
 
-func (o *WaypointServiceGetTFRunStatusOK) GetPayload() *models.HashicorpCloudWaypointGetTFRunStatusResponse {
+func (o *WaypointServiceGetTFRunStatusOK) GetPayload() *models.HashicorpCloudWaypointV20241122GetTFRunStatusResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceGetTFRunStatusOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointGetTFRunStatusResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122GetTFRunStatusResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -54,7 +54,7 @@ WaypointServiceCreateAgentGroupOK describes a response with status code 200, wit
 A successful response.
 */
 type WaypointServiceCreateAgentGroupOK struct {
-	Payload models.HashicorpCloudWaypointCreateAgentGroupResponse
+	Payload models.HashicorpCloudWaypointV20241122CreateAgentGroupResponse
 }
 
 // IsSuccess returns true when this waypoint service create agent group o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceCreateAgentGroupOK) String() string {
 	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/agent/group][%d] waypointServiceCreateAgentGroupOK %s", 200, payload)
 }
 
-func (o *WaypointServiceCreateAgentGroupOK) GetPayload() models.HashicorpCloudWaypointCreateAgentGroupResponse {
+func (o *WaypointServiceCreateAgentGroupOK) GetPayload() models.HashicorpCloudWaypointV20241122CreateAgentGroupResponse {
 	return o.Payload
 }
 

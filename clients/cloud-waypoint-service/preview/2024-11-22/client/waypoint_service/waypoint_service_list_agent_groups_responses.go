@@ -54,7 +54,7 @@ WaypointServiceListAgentGroupsOK describes a response with status code 200, with
 A successful response.
 */
 type WaypointServiceListAgentGroupsOK struct {
-	Payload *models.HashicorpCloudWaypointListAgentGroupsResponse
+	Payload *models.HashicorpCloudWaypointV20241122ListAgentGroupsResponse
 }
 
 // IsSuccess returns true when this waypoint service list agent groups o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceListAgentGroupsOK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/agent/group][%d] waypointServiceListAgentGroupsOK %s", 200, payload)
 }
 
-func (o *WaypointServiceListAgentGroupsOK) GetPayload() *models.HashicorpCloudWaypointListAgentGroupsResponse {
+func (o *WaypointServiceListAgentGroupsOK) GetPayload() *models.HashicorpCloudWaypointV20241122ListAgentGroupsResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceListAgentGroupsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointListAgentGroupsResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122ListAgentGroupsResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

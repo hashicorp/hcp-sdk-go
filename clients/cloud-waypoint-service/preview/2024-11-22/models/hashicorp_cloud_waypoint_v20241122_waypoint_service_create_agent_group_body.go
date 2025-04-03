@@ -20,7 +20,7 @@ import (
 type HashicorpCloudWaypointV20241122WaypointServiceCreateAgentGroupBody struct {
 
 	// The group to create
-	Group *HashicorpCloudWaypointAgentGroup `json:"group,omitempty"`
+	Group *HashicorpCloudWaypointV20241122AgentGroup `json:"group,omitempty"`
 
 	// namespace
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceCreateAgentGroupBodyNamespace `json:"namespace,omitempty"`

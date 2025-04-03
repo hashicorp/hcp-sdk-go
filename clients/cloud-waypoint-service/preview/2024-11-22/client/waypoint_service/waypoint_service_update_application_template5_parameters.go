@@ -69,7 +69,7 @@ type WaypointServiceUpdateApplicationTemplate5Params struct {
 	     application_template resembles the desired updated state of the existing
 	application template.
 	*/
-	ApplicationTemplate *models.HashicorpCloudWaypointApplicationTemplate
+	ApplicationTemplate *models.HashicorpCloudWaypointV20241122ApplicationTemplate
 
 	/* ExistingApplicationTemplateID.
 
@@ -171,13 +171,13 @@ func (o *WaypointServiceUpdateApplicationTemplate5Params) SetHTTPClient(client *
 }
 
 // WithApplicationTemplate adds the applicationTemplate to the waypoint service update application template5 params
-func (o *WaypointServiceUpdateApplicationTemplate5Params) WithApplicationTemplate(applicationTemplate *models.HashicorpCloudWaypointApplicationTemplate) *WaypointServiceUpdateApplicationTemplate5Params {
+func (o *WaypointServiceUpdateApplicationTemplate5Params) WithApplicationTemplate(applicationTemplate *models.HashicorpCloudWaypointV20241122ApplicationTemplate) *WaypointServiceUpdateApplicationTemplate5Params {
 	o.SetApplicationTemplate(applicationTemplate)
 	return o
 }
 
 // SetApplicationTemplate adds the applicationTemplate to the waypoint service update application template5 params
-func (o *WaypointServiceUpdateApplicationTemplate5Params) SetApplicationTemplate(applicationTemplate *models.HashicorpCloudWaypointApplicationTemplate) {
+func (o *WaypointServiceUpdateApplicationTemplate5Params) SetApplicationTemplate(applicationTemplate *models.HashicorpCloudWaypointV20241122ApplicationTemplate) {
 	o.ApplicationTemplate = applicationTemplate
 }
 

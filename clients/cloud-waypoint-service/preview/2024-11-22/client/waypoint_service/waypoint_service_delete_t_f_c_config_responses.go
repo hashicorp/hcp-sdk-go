@@ -54,7 +54,7 @@ WaypointServiceDeleteTFCConfigOK describes a response with status code 200, with
 A successful response.
 */
 type WaypointServiceDeleteTFCConfigOK struct {
-	Payload models.HashicorpCloudWaypointDeleteTFCConfigResponse
+	Payload models.HashicorpCloudWaypointV20241122DeleteTFCConfigResponse
 }
 
 // IsSuccess returns true when this waypoint service delete t f c config o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceDeleteTFCConfigOK) String() string {
 	return fmt.Sprintf("[DELETE /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/tfcconfig][%d] waypointServiceDeleteTFCConfigOK %s", 200, payload)
 }
 
-func (o *WaypointServiceDeleteTFCConfigOK) GetPayload() models.HashicorpCloudWaypointDeleteTFCConfigResponse {
+func (o *WaypointServiceDeleteTFCConfigOK) GetPayload() models.HashicorpCloudWaypointV20241122DeleteTFCConfigResponse {
 	return o.Payload
 }
 

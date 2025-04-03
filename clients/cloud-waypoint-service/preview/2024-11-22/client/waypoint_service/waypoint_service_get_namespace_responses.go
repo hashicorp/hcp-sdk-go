@@ -54,7 +54,7 @@ WaypointServiceGetNamespaceOK describes a response with status code 200, with de
 A successful response.
 */
 type WaypointServiceGetNamespaceOK struct {
-	Payload *models.HashicorpCloudWaypointGetNamespaceResponse
+	Payload *models.HashicorpCloudWaypointV20241122GetNamespaceResponse
 }
 
 // IsSuccess returns true when this waypoint service get namespace o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceGetNamespaceOK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{location.organization_id}/projects/{location.project_id}/namespaces][%d] waypointServiceGetNamespaceOK %s", 200, payload)
 }
 
-func (o *WaypointServiceGetNamespaceOK) GetPayload() *models.HashicorpCloudWaypointGetNamespaceResponse {
+func (o *WaypointServiceGetNamespaceOK) GetPayload() *models.HashicorpCloudWaypointV20241122GetNamespaceResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceGetNamespaceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointGetNamespaceResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122GetNamespaceResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

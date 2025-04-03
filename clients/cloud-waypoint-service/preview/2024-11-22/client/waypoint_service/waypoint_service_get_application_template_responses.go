@@ -54,7 +54,7 @@ WaypointServiceGetApplicationTemplateOK describes a response with status code 20
 A successful response.
 */
 type WaypointServiceGetApplicationTemplateOK struct {
-	Payload *models.HashicorpCloudWaypointGetApplicationTemplateResponse
+	Payload *models.HashicorpCloudWaypointV20241122GetApplicationTemplateResponse
 }
 
 // IsSuccess returns true when this waypoint service get application template o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceGetApplicationTemplateOK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/application-templates/{application_template.id}][%d] waypointServiceGetApplicationTemplateOK %s", 200, payload)
 }
 
-func (o *WaypointServiceGetApplicationTemplateOK) GetPayload() *models.HashicorpCloudWaypointGetApplicationTemplateResponse {
+func (o *WaypointServiceGetApplicationTemplateOK) GetPayload() *models.HashicorpCloudWaypointV20241122GetApplicationTemplateResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceGetApplicationTemplateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointGetApplicationTemplateResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122GetApplicationTemplateResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

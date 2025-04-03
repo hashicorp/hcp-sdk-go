@@ -54,7 +54,7 @@ WaypointServiceDeleteNamespaceOK describes a response with status code 200, with
 A successful response.
 */
 type WaypointServiceDeleteNamespaceOK struct {
-	Payload models.HashicorpCloudWaypointDeleteNamespaceResponse
+	Payload models.HashicorpCloudWaypointV20241122DeleteNamespaceResponse
 }
 
 // IsSuccess returns true when this waypoint service delete namespace o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceDeleteNamespaceOK) String() string {
 	return fmt.Sprintf("[DELETE /waypoint/2024-11-22/organizations/{location.organization_id}/projects/{location.project_id}/namespaces/{namespace.id}][%d] waypointServiceDeleteNamespaceOK %s", 200, payload)
 }
 
-func (o *WaypointServiceDeleteNamespaceOK) GetPayload() models.HashicorpCloudWaypointDeleteNamespaceResponse {
+func (o *WaypointServiceDeleteNamespaceOK) GetPayload() models.HashicorpCloudWaypointV20241122DeleteNamespaceResponse {
 	return o.Payload
 }
 

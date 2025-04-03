@@ -21,16 +21,16 @@ import (
 type HashicorpCloudWaypointV20241122WaypointServiceRunActionBody struct {
 
 	// The action config to run
-	ActionRef *HashicorpCloudWaypointActionCfgRef `json:"action_ref,omitempty"`
+	ActionRef *HashicorpCloudWaypointV20241122ActionCfgRef `json:"action_ref,omitempty"`
 
 	// namespace
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceRunActionBodyNamespace `json:"namespace,omitempty"`
 
 	// Optional scope to set for running the action
-	Scope *HashicorpCloudWaypointActionRunScope `json:"scope,omitempty"`
+	Scope *HashicorpCloudWaypointV20241122ActionRunScope `json:"scope,omitempty"`
 
 	// Optional variables to override in the action run
-	VariableOverrides []*HashicorpCloudWaypointRunActionRequestVariableOverride `json:"variable_overrides"`
+	VariableOverrides []*HashicorpCloudWaypointV20241122RunActionRequestVariableOverride `json:"variable_overrides"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service run action body

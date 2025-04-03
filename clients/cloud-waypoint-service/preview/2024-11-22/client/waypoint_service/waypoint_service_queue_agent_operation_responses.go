@@ -54,7 +54,7 @@ WaypointServiceQueueAgentOperationOK describes a response with status code 200, 
 A successful response.
 */
 type WaypointServiceQueueAgentOperationOK struct {
-	Payload models.HashicorpCloudWaypointQueueAgentOperationResponse
+	Payload models.HashicorpCloudWaypointV20241122QueueAgentOperationResponse
 }
 
 // IsSuccess returns true when this waypoint service queue agent operation o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceQueueAgentOperationOK) String() string {
 	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/agent/operation:queue][%d] waypointServiceQueueAgentOperationOK %s", 200, payload)
 }
 
-func (o *WaypointServiceQueueAgentOperationOK) GetPayload() models.HashicorpCloudWaypointQueueAgentOperationResponse {
+func (o *WaypointServiceQueueAgentOperationOK) GetPayload() models.HashicorpCloudWaypointV20241122QueueAgentOperationResponse {
 	return o.Payload
 }
 

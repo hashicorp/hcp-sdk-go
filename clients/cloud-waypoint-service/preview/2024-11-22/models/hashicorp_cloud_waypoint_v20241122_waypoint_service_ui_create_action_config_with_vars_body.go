@@ -21,13 +21,13 @@ import (
 type HashicorpCloudWaypointV20241122WaypointServiceUICreateActionConfigWithVarsBody struct {
 
 	// The action config to create
-	ActionConfig *HashicorpCloudWaypointActionConfig `json:"action_config,omitempty"`
+	ActionConfig *HashicorpCloudWaypointV20241122ActionConfig `json:"action_config,omitempty"`
 
 	// namespace
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceUICreateActionConfigWithVarsBodyNamespace `json:"namespace,omitempty"`
 
 	// The variables to create and attach the action config scope to
-	Variables []*HashicorpCloudWaypointVariable `json:"variables"`
+	Variables []*HashicorpCloudWaypointV20241122Variable `json:"variables"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service UI create action config with vars body

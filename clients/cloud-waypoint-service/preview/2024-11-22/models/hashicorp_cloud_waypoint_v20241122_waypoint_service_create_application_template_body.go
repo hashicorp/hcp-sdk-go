@@ -20,7 +20,7 @@ import (
 type HashicorpCloudWaypointV20241122WaypointServiceCreateApplicationTemplateBody struct {
 
 	// application template
-	ApplicationTemplate *HashicorpCloudWaypointApplicationTemplate `json:"application_template,omitempty"`
+	ApplicationTemplate *HashicorpCloudWaypointV20241122ApplicationTemplate `json:"application_template,omitempty"`
 
 	// namespace
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceCreateApplicationTemplateBodyNamespace `json:"namespace,omitempty"`
