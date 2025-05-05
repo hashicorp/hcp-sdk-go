@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *CreateOK) Code() int {
 }
 
 func (o *CreateOK) Error() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks][%d] createOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks][%d] createOK %s", 200, payload)
 }
 
 func (o *CreateOK) String() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks][%d] createOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks][%d] createOK %s", 200, payload)
 }
 
 func (o *CreateOK) GetPayload() *models.HashicorpCloudNetwork20200907CreateResponse {
@@ -159,11 +162,13 @@ func (o *CreateDefault) Code() int {
 }
 
 func (o *CreateDefault) Error() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks][%d] Create default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks][%d] Create default %s", o._statusCode, payload)
 }
 
 func (o *CreateDefault) String() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks][%d] Create default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{network.location.organization_id}/projects/{network.location.project_id}/networks][%d] Create default %s", o._statusCode, payload)
 }
 
 func (o *CreateDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

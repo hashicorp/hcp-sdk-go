@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *CreateHVNRouteOK) Code() int {
 }
 
 func (o *CreateHVNRouteOK) Error() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] createHVNRouteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] createHVNRouteOK %s", 200, payload)
 }
 
 func (o *CreateHVNRouteOK) String() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] createHVNRouteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] createHVNRouteOK %s", 200, payload)
 }
 
 func (o *CreateHVNRouteOK) GetPayload() *models.HashicorpCloudNetwork20200907CreateHVNRouteResponse {
@@ -159,11 +162,13 @@ func (o *CreateHVNRouteDefault) Code() int {
 }
 
 func (o *CreateHVNRouteDefault) Error() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] CreateHVNRoute default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] CreateHVNRoute default %s", o._statusCode, payload)
 }
 
 func (o *CreateHVNRouteDefault) String() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] CreateHVNRoute default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] CreateHVNRoute default %s", o._statusCode, payload)
 }
 
 func (o *CreateHVNRouteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

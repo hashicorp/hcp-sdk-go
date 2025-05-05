@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ListHVNRoutesOK) Code() int {
 }
 
 func (o *ListHVNRoutesOK) Error() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] listHVNRoutesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] listHVNRoutesOK %s", 200, payload)
 }
 
 func (o *ListHVNRoutesOK) String() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] listHVNRoutesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] listHVNRoutesOK %s", 200, payload)
 }
 
 func (o *ListHVNRoutesOK) GetPayload() *models.HashicorpCloudNetwork20200907ListHVNRoutesResponse {
@@ -159,11 +162,13 @@ func (o *ListHVNRoutesDefault) Code() int {
 }
 
 func (o *ListHVNRoutesDefault) Error() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] ListHVNRoutes default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] ListHVNRoutes default %s", o._statusCode, payload)
 }
 
 func (o *ListHVNRoutesDefault) String() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] ListHVNRoutes default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes][%d] ListHVNRoutes default %s", o._statusCode, payload)
 }
 
 func (o *ListHVNRoutesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *DeletePeeringOK) Code() int {
 }
 
 func (o *DeletePeeringOK) Error() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] deletePeeringOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] deletePeeringOK %s", 200, payload)
 }
 
 func (o *DeletePeeringOK) String() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] deletePeeringOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] deletePeeringOK %s", 200, payload)
 }
 
 func (o *DeletePeeringOK) GetPayload() *models.HashicorpCloudNetwork20200907DeletePeeringResponse {
@@ -159,11 +162,13 @@ func (o *DeletePeeringDefault) Code() int {
 }
 
 func (o *DeletePeeringDefault) Error() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] DeletePeering default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] DeletePeering default %s", o._statusCode, payload)
 }
 
 func (o *DeletePeeringDefault) String() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] DeletePeering default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings/{id}][%d] DeletePeering default %s", o._statusCode, payload)
 }
 
 func (o *DeletePeeringDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

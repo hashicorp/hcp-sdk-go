@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ListPeeringsOK) Code() int {
 }
 
 func (o *ListPeeringsOK) Error() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] listPeeringsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] listPeeringsOK %s", 200, payload)
 }
 
 func (o *ListPeeringsOK) String() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] listPeeringsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] listPeeringsOK %s", 200, payload)
 }
 
 func (o *ListPeeringsOK) GetPayload() *models.HashicorpCloudNetwork20200907ListPeeringsResponse {
@@ -159,11 +162,13 @@ func (o *ListPeeringsDefault) Code() int {
 }
 
 func (o *ListPeeringsDefault) Error() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] ListPeerings default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] ListPeerings default %s", o._statusCode, payload)
 }
 
 func (o *ListPeeringsDefault) String() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] ListPeerings default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/peerings][%d] ListPeerings default %s", o._statusCode, payload)
 }
 
 func (o *ListPeeringsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

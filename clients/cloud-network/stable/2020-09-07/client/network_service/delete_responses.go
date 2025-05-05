@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *DeleteOK) Code() int {
 }
 
 func (o *DeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] deleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] deleteOK %s", 200, payload)
 }
 
 func (o *DeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] deleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] deleteOK %s", 200, payload)
 }
 
 func (o *DeleteOK) GetPayload() *models.HashicorpCloudNetwork20200907DeleteResponse {
@@ -159,11 +162,13 @@ func (o *DeleteDefault) Code() int {
 }
 
 func (o *DeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Delete default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Delete default %s", o._statusCode, payload)
 }
 
 func (o *DeleteDefault) String() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Delete default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}][%d] Delete default %s", o._statusCode, payload)
 }
 
 func (o *DeleteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
