@@ -23,6 +23,9 @@ type HashicorpCloudPacker20230101RegistryBillingDeprovision struct {
 	// Format: date-time
 	At strfmt.DateTime `json:"at,omitempty"`
 
+	// Message for registry deactivation.
+	Message string `json:"message,omitempty"`
+
 	// Reason for registry deactivation.
 	Reason *HashicorpCloudPacker20230101RegistryBillingDeprovisionReason `json:"reason,omitempty"`
 }
