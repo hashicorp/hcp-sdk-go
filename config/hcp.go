@@ -114,6 +114,9 @@ type hcpConfig struct {
 
 	// workloadProviderConfig is the config of the workload identity provider to use for authentication.
 	workloadProviderConfig *workload.IdentityProviderConfig
+
+	// cachedTokenFile is the cached token file to use
+	cachedTokenFile string
 }
 
 func (c *hcpConfig) Profile() *profile.UserProfile {
