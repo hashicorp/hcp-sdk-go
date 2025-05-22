@@ -1,7 +1,6 @@
 module github.com/hashicorp/hcp-sdk-go
 
 go 1.23
-
 retract v0.26.0 // Pushed accidentally
 
 retract v0.76.0 // Backward-incompatible cloud-network client/models
@@ -42,8 +41,8 @@ require (
 	go.opentelemetry.io/otel v1.17.0 // indirect
 	go.opentelemetry.io/otel/metric v1.17.0 // indirect
 	go.opentelemetry.io/otel/trace v1.17.0 // indirect
-	golang.org/x/net v0.19.0 // indirect
+	golang.org/x/net v0.36.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/protobuf v1.31.0 // indirect
+	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
