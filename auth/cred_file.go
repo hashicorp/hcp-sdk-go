@@ -8,7 +8,6 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
 	"github.com/hashicorp/hcp-sdk-go/config/files"
@@ -18,9 +17,6 @@ const (
 	// EnvHCPCredFile is the environment variable that sets the HCP Credential
 	// File location.
 	EnvHCPCredFile = "HCP_CRED_FILE"
-
-	// CredentialFileName is the file name for the HCP credential file.
-	CredentialFileName = "cred_file.json"
 
 	// CredentialFileSchemeServicePrincipal is the credential file scheme value
 	// that indicates service principal credentials should be used to
@@ -127,8 +123,8 @@ func ReadCredentialFile(path string) (*CredentialFile, error) {
 // credential file location or by using the credential file environment variable
 // to look for an override. If no credential file is found, a nil value will be
 // returned with no error set.
-func GetDefaultCredentialFile() (*CredentialFile, error) {
-	p, err := GetCredentialFilePath()
+func GetDefaultCredentialFile(filePath string) (*CredentialFile, error) {
+	p, err := GetCredentialFilePath(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to find credential file: %v", err)
 	}
@@ -144,9 +140,9 @@ func GetDefaultCredentialFile() (*CredentialFile, error) {
 }
 
 // GetCredentialFilePath returns the credential file path, first looking for an
-// overriding environment variable and then falling back to the default file
+// overriding environment variable and then falling back to the default or configured file
 // location.
-func GetCredentialFilePath() (string, error) {
+func GetCredentialFilePath(filePath string) (string, error) {
 	if testDefaultHCPCredFilePath != "" {
 		return testDefaultHCPCredFilePath, nil
 	}
@@ -155,25 +151,8 @@ func GetCredentialFilePath() (string, error) {
 		return p, nil
 	}
 
-	// Get the user's home directory.
-	userHome, err := os.UserHomeDir()
-	if err != nil {
-		return "", fmt.Errorf("failed to retrieve user's home directory path: %v", err)
-	}
-
-	p := filepath.Join(userHome, files.DefaultDirectory, CredentialFileName)
-	return p, nil
-}
-
-// WriteDefaultCredentialFile writes the credential file to the default
-// credential file location or to the value of EnvHCPCredFile if set.
-func WriteDefaultCredentialFile(cf *CredentialFile) error {
-	p, err := GetCredentialFilePath()
-	if err != nil {
-		return err
-	}
-
-	return WriteCredentialFile(p, cf)
+	p, err := files.TokenCacheFile(filePath)
+	return p, err
 }
 
 // WriteCredentialFile writes the given credential file to the path.
