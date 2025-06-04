@@ -78,7 +78,7 @@ type ClientService interface {
 }
 
 /*
-ProjectServiceCreate creates creates a new project
+ProjectServiceCreate warnings bang internal use only create creates a new project
 */
 func (a *Client) ProjectServiceCreate(params *ProjectServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -116,7 +116,7 @@ func (a *Client) ProjectServiceCreate(params *ProjectServiceCreateParams, authIn
 }
 
 /*
-ProjectServiceDelete deletes updates the state of a project to d e l e t e d
+ProjectServiceDelete warnings bang internal use only delete updates the state of a project to d e l e t e d
 */
 func (a *Client) ProjectServiceDelete(params *ProjectServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceDeleteOK, error) {
 	// TODO: Validate the params before sending
