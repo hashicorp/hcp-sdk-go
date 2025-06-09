@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/hashicorp/hcp-sdk-go/config"
+	"github.com/hashicorp/hcp-sdk-go/config/geography"
 
 	consul "github.com/hashicorp/hcp-sdk-go/clients/cloud-consul-service/stable/2021-02-04/client/consul_service"
 	network "github.com/hashicorp/hcp-sdk-go/clients/cloud-network/stable/2020-09-07/client/network_service"
@@ -16,10 +17,14 @@ import (
 )
 
 func main() {
+	// Slice of config options including geography to target
+	opts := []config.HCPConfigOption{
+		config.WithGeography(geography.NorthAmerica),
+	}
+	opts = append(opts, config.FromEnv())
+
 	// Construct HCP config
-	hcpConfig, err := config.NewHCPConfig(
-		config.FromEnv(),
-	)
+	hcpConfig, err := config.NewHCPConfig(opts...)
 	if err != nil {
 		log.Fatal(err)
 	}
