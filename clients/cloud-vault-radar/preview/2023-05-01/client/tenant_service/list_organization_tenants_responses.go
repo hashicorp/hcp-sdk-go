@@ -6,6 +6,7 @@ package tenant_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *ListOrganizationTenantsOK) Code() int {
 }
 
 func (o *ListOrganizationTenantsOK) Error() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants/organizations/{location.organization_id}][%d] listOrganizationTenantsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants/organizations/{location.organization_id}][%d] listOrganizationTenantsOK %s", 200, payload)
 }
 
 func (o *ListOrganizationTenantsOK) String() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants/organizations/{location.organization_id}][%d] listOrganizationTenantsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants/organizations/{location.organization_id}][%d] listOrganizationTenantsOK %s", 200, payload)
 }
 
 func (o *ListOrganizationTenantsOK) GetPayload() *models.VaultRadar20230501ListOrganizationTenantsResponse {
@@ -158,11 +161,13 @@ func (o *ListOrganizationTenantsDefault) Code() int {
 }
 
 func (o *ListOrganizationTenantsDefault) Error() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants/organizations/{location.organization_id}][%d] ListOrganizationTenants default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants/organizations/{location.organization_id}][%d] ListOrganizationTenants default %s", o._statusCode, payload)
 }
 
 func (o *ListOrganizationTenantsDefault) String() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants/organizations/{location.organization_id}][%d] ListOrganizationTenants default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants/organizations/{location.organization_id}][%d] ListOrganizationTenants default %s", o._statusCode, payload)
 }
 
 func (o *ListOrganizationTenantsDefault) GetPayload() *models.RPCStatus {

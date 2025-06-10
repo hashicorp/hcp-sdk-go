@@ -7,6 +7,7 @@ package data_source_registration_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *OffboardDataSourceOK) Code() int {
 }
 
 func (o *OffboardDataSourceOK) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/offboard][%d] offboardDataSourceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/offboard][%d] offboardDataSourceOK %s", 200, payload)
 }
 
 func (o *OffboardDataSourceOK) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/offboard][%d] offboardDataSourceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/offboard][%d] offboardDataSourceOK %s", 200, payload)
 }
 
 func (o *OffboardDataSourceOK) GetPayload() interface{} {
@@ -159,11 +162,13 @@ func (o *OffboardDataSourceDefault) Code() int {
 }
 
 func (o *OffboardDataSourceDefault) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/offboard][%d] OffboardDataSource default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/offboard][%d] OffboardDataSource default %s", o._statusCode, payload)
 }
 
 func (o *OffboardDataSourceDefault) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/offboard][%d] OffboardDataSource default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/offboard][%d] OffboardDataSource default %s", o._statusCode, payload)
 }
 
 func (o *OffboardDataSourceDefault) GetPayload() *models.RPCStatus {
