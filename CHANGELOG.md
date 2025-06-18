@@ -1,3 +1,8 @@
+## v0.147.0 (June 18, 2025)
+
+BUG FIXES:
+
+* Restore preview version of cloud-billing version 2020-11-05 [[GH-295](https://github.com/hashicorp/hcp-sdk-go/pull/295)]
 ## v0.146.0 (June 11, 2025)
 
 ## v0.145.0 (June 09, 2025)
