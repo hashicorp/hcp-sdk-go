@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
@@ -53,7 +54,7 @@ GroupsServiceDeleteGroupOK describes a response with status code 200, with defau
 A successful response.
 */
 type GroupsServiceDeleteGroupOK struct {
-	Payload interface{}
+	Payload *models.HashicorpCloudIamDeleteGroupResponse
 }
 
 // IsSuccess returns true when this groups service delete group o k response has a 2xx status code
@@ -96,14 +97,16 @@ func (o *GroupsServiceDeleteGroupOK) String() string {
 	return fmt.Sprintf("[DELETE /iam/2019-12-10/{resource_name}][%d] groupsServiceDeleteGroupOK %s", 200, payload)
 }
 
-func (o *GroupsServiceDeleteGroupOK) GetPayload() interface{} {
+func (o *GroupsServiceDeleteGroupOK) GetPayload() *models.HashicorpCloudIamDeleteGroupResponse {
 	return o.Payload
 }
 
 func (o *GroupsServiceDeleteGroupOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.HashicorpCloudIamDeleteGroupResponse)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

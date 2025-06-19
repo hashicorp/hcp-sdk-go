@@ -21,7 +21,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceUpdateApplicationTemplateBody
 
 	// application_template resembles the desired updated state of the existing
 	// application template.
-	ApplicationTemplate *HashicorpCloudWaypointApplicationTemplate `json:"application_template,omitempty"`
+	ApplicationTemplate *HashicorpCloudWaypointV20241122ApplicationTemplate `json:"application_template,omitempty"`
 
 	// existing application template
 	ExistingApplicationTemplate *HashicorpCloudWaypointV20241122WaypointServiceUpdateApplicationTemplateBodyExistingApplicationTemplate `json:"existing_application_template,omitempty"`

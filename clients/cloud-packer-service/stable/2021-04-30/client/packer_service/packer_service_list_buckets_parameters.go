@@ -74,18 +74,6 @@ type PackerServiceListBucketsParams struct {
 	*/
 	LocationProjectID string
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure")
-	*/
-	LocationRegionProvider *string
-
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1")
-	*/
-	LocationRegionRegion *string
-
 	/* PaginationNextPageToken.
 
 	     Specifies a page token to use to retrieve the next page. Set this to the
@@ -120,10 +108,10 @@ type PackerServiceListBucketsParams struct {
 	matches, the next field is used to tie break the ordering.
 	The per field default ordering is ascending.
 
-	The fields should be immutabile, unique, and orderable. If the field is
+	The fields should be immutable, unique, and orderable. If the field is
 	not unique, more than one sort fields should be passed.
 
-	Example: oder_by=name,age desc,created_at asc
+	Example: order_by=name,created_at asc
 	In that case, 'name' will get the default 'ascending' order.
 	*/
 	SortingOrderBy []string
@@ -203,28 +191,6 @@ func (o *PackerServiceListBucketsParams) SetLocationProjectID(locationProjectID 
 	o.LocationProjectID = locationProjectID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the packer service list buckets params
-func (o *PackerServiceListBucketsParams) WithLocationRegionProvider(locationRegionProvider *string) *PackerServiceListBucketsParams {
-	o.SetLocationRegionProvider(locationRegionProvider)
-	return o
-}
-
-// SetLocationRegionProvider adds the locationRegionProvider to the packer service list buckets params
-func (o *PackerServiceListBucketsParams) SetLocationRegionProvider(locationRegionProvider *string) {
-	o.LocationRegionProvider = locationRegionProvider
-}
-
-// WithLocationRegionRegion adds the locationRegionRegion to the packer service list buckets params
-func (o *PackerServiceListBucketsParams) WithLocationRegionRegion(locationRegionRegion *string) *PackerServiceListBucketsParams {
-	o.SetLocationRegionRegion(locationRegionRegion)
-	return o
-}
-
-// SetLocationRegionRegion adds the locationRegionRegion to the packer service list buckets params
-func (o *PackerServiceListBucketsParams) SetLocationRegionRegion(locationRegionRegion *string) {
-	o.LocationRegionRegion = locationRegionRegion
-}
-
 // WithPaginationNextPageToken adds the paginationNextPageToken to the packer service list buckets params
 func (o *PackerServiceListBucketsParams) WithPaginationNextPageToken(paginationNextPageToken *string) *PackerServiceListBucketsParams {
 	o.SetPaginationNextPageToken(paginationNextPageToken)
@@ -285,40 +251,6 @@ func (o *PackerServiceListBucketsParams) WriteToRequest(r runtime.ClientRequest,
 	// path param location.project_id
 	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
 		return err
-	}
-
-	if o.LocationRegionProvider != nil {
-
-		// query param location.region.provider
-		var qrLocationRegionProvider string
-
-		if o.LocationRegionProvider != nil {
-			qrLocationRegionProvider = *o.LocationRegionProvider
-		}
-		qLocationRegionProvider := qrLocationRegionProvider
-		if qLocationRegionProvider != "" {
-
-			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.LocationRegionRegion != nil {
-
-		// query param location.region.region
-		var qrLocationRegionRegion string
-
-		if o.LocationRegionRegion != nil {
-			qrLocationRegionRegion = *o.LocationRegionRegion
-		}
-		qLocationRegionRegion := qrLocationRegionRegion
-		if qLocationRegionRegion != "" {
-
-			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
-				return err
-			}
-		}
 	}
 
 	if o.PaginationNextPageToken != nil {

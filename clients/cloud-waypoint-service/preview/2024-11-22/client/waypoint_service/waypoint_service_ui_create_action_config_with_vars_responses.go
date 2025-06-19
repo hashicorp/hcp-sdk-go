@@ -54,7 +54,7 @@ WaypointServiceUICreateActionConfigWithVarsOK describes a response with status c
 A successful response.
 */
 type WaypointServiceUICreateActionConfigWithVarsOK struct {
-	Payload *models.HashicorpCloudWaypointUICreateActionConfigWithVarsResponse
+	Payload *models.HashicorpCloudWaypointV20241122UICreateActionConfigWithVarsResponse
 }
 
 // IsSuccess returns true when this waypoint service Ui create action config with vars o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceUICreateActionConfigWithVarsOK) String() string {
 	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/ui/actionconfigwithvars][%d] waypointServiceUiCreateActionConfigWithVarsOK %s", 200, payload)
 }
 
-func (o *WaypointServiceUICreateActionConfigWithVarsOK) GetPayload() *models.HashicorpCloudWaypointUICreateActionConfigWithVarsResponse {
+func (o *WaypointServiceUICreateActionConfigWithVarsOK) GetPayload() *models.HashicorpCloudWaypointV20241122UICreateActionConfigWithVarsResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceUICreateActionConfigWithVarsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointUICreateActionConfigWithVarsResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122UICreateActionConfigWithVarsResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

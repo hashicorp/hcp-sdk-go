@@ -54,7 +54,7 @@ WaypointServiceUIGetActionConfigBundle2OK describes a response with status code 
 A successful response.
 */
 type WaypointServiceUIGetActionConfigBundle2OK struct {
-	Payload *models.HashicorpCloudWaypointUIGetActionConfigResponse
+	Payload *models.HashicorpCloudWaypointV20241122UIGetActionConfigResponse
 }
 
 // IsSuccess returns true when this waypoint service Ui get action config bundle2 o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceUIGetActionConfigBundle2OK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/ui/actionconfig/by-name/{action_name}][%d] waypointServiceUiGetActionConfigBundle2OK %s", 200, payload)
 }
 
-func (o *WaypointServiceUIGetActionConfigBundle2OK) GetPayload() *models.HashicorpCloudWaypointUIGetActionConfigResponse {
+func (o *WaypointServiceUIGetActionConfigBundle2OK) GetPayload() *models.HashicorpCloudWaypointV20241122UIGetActionConfigResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceUIGetActionConfigBundle2OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointUIGetActionConfigResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122UIGetActionConfigResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -54,7 +54,7 @@ WaypointServiceDeleteApplicationTemplate2OK describes a response with status cod
 A successful response.
 */
 type WaypointServiceDeleteApplicationTemplate2OK struct {
-	Payload models.HashicorpCloudWaypointDeleteApplicationTemplateResponse
+	Payload models.HashicorpCloudWaypointV20241122DeleteApplicationTemplateResponse
 }
 
 // IsSuccess returns true when this waypoint service delete application template2 o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceDeleteApplicationTemplate2OK) String() string {
 	return fmt.Sprintf("[DELETE /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/application-templates/by-name/{application_template.name}][%d] waypointServiceDeleteApplicationTemplate2OK %s", 200, payload)
 }
 
-func (o *WaypointServiceDeleteApplicationTemplate2OK) GetPayload() models.HashicorpCloudWaypointDeleteApplicationTemplateResponse {
+func (o *WaypointServiceDeleteApplicationTemplate2OK) GetPayload() models.HashicorpCloudWaypointV20241122DeleteApplicationTemplateResponse {
 	return o.Payload
 }
 

@@ -76,6 +76,8 @@ type ClientService interface {
 
 	IamServiceSearchPrincipals(params *IamServiceSearchPrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceSearchPrincipalsOK, error)
 
+	IamServiceUnifyUserPrincipal(params *IamServiceUnifyUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceUnifyUserPrincipalOK, error)
+
 	IamServiceUpdateWebConsolePreferences(params *IamServiceUpdateWebConsolePreferencesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceUpdateWebConsolePreferencesOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -495,6 +497,44 @@ func (a *Client) IamServiceSearchPrincipals(params *IamServiceSearchPrincipalsPa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*IamServiceSearchPrincipalsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+IamServiceUnifyUserPrincipal unifies user principal triggers the unification of a user principal to t f c
+*/
+func (a *Client) IamServiceUnifyUserPrincipal(params *IamServiceUnifyUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceUnifyUserPrincipalOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewIamServiceUnifyUserPrincipalParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "IamService_UnifyUserPrincipal",
+		Method:             "PUT",
+		PathPattern:        "/iam/2019-12-10/user-principals/unify",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &IamServiceUnifyUserPrincipalReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*IamServiceUnifyUserPrincipalOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*IamServiceUnifyUserPrincipalDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

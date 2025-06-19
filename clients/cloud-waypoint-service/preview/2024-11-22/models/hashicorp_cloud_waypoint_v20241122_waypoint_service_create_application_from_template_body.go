@@ -21,11 +21,11 @@ import (
 type HashicorpCloudWaypointV20241122WaypointServiceCreateApplicationFromTemplateBody struct {
 
 	// Attach any action config refs to the application
-	ActionCfgRefs []*HashicorpCloudWaypointActionCfgRef `json:"action_cfg_refs"`
+	ActionCfgRefs []*HashicorpCloudWaypointV20241122ActionCfgRef `json:"action_cfg_refs"`
 
 	// application_template is the name of the application template on which the
 	// new application will be based
-	ApplicationTemplate *HashicorpCloudWaypointRefApplicationTemplate `json:"application_template,omitempty"`
+	ApplicationTemplate *HashicorpCloudWaypointV20241122RefApplicationTemplate `json:"application_template,omitempty"`
 
 	// name is the name of the new application
 	Name string `json:"name,omitempty"`
@@ -35,7 +35,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceCreateApplicationFromTemplate
 
 	// variables is the series of input variables which have been set by the
 	// application developer for the new application being created. This may be empty.
-	Variables []*HashicorpCloudWaypointInputVariable `json:"variables"`
+	Variables []*HashicorpCloudWaypointV20241122InputVariable `json:"variables"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service create application from template body

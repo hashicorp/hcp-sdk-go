@@ -15,6 +15,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-iam/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
@@ -55,7 +56,7 @@ GroupsServiceUpdateGroupMembersOK describes a response with status code 200, wit
 A successful response.
 */
 type GroupsServiceUpdateGroupMembersOK struct {
-	Payload interface{}
+	Payload *models.HashicorpCloudIamUpdateGroupMembersResponse
 }
 
 // IsSuccess returns true when this groups service update group members o k response has a 2xx status code
@@ -98,14 +99,16 @@ func (o *GroupsServiceUpdateGroupMembersOK) String() string {
 	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}/members][%d] groupsServiceUpdateGroupMembersOK %s", 200, payload)
 }
 
-func (o *GroupsServiceUpdateGroupMembersOK) GetPayload() interface{} {
+func (o *GroupsServiceUpdateGroupMembersOK) GetPayload() *models.HashicorpCloudIamUpdateGroupMembersResponse {
 	return o.Payload
 }
 
 func (o *GroupsServiceUpdateGroupMembersOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.HashicorpCloudIamUpdateGroupMembersResponse)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

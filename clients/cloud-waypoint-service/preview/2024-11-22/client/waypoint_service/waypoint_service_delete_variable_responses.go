@@ -54,7 +54,7 @@ WaypointServiceDeleteVariableOK describes a response with status code 200, with 
 A successful response.
 */
 type WaypointServiceDeleteVariableOK struct {
-	Payload models.HashicorpCloudWaypointDeleteVariableResponse
+	Payload models.HashicorpCloudWaypointV20241122DeleteVariableResponse
 }
 
 // IsSuccess returns true when this waypoint service delete variable o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceDeleteVariableOK) String() string {
 	return fmt.Sprintf("[DELETE /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/variable][%d] waypointServiceDeleteVariableOK %s", 200, payload)
 }
 
-func (o *WaypointServiceDeleteVariableOK) GetPayload() models.HashicorpCloudWaypointDeleteVariableResponse {
+func (o *WaypointServiceDeleteVariableOK) GetPayload() models.HashicorpCloudWaypointV20241122DeleteVariableResponse {
 	return o.Payload
 }
 

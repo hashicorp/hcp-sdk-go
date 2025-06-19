@@ -7,6 +7,7 @@ package integration_subscription_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *UpdateIntegrationSubscriptionOK) Code() int {
 }
 
 func (o *UpdateIntegrationSubscriptionOK) Error() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] updateIntegrationSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] updateIntegrationSubscriptionOK %s", 200, payload)
 }
 
 func (o *UpdateIntegrationSubscriptionOK) String() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] updateIntegrationSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] updateIntegrationSubscriptionOK %s", 200, payload)
 }
 
 func (o *UpdateIntegrationSubscriptionOK) GetPayload() interface{} {
@@ -159,11 +162,13 @@ func (o *UpdateIntegrationSubscriptionDefault) Code() int {
 }
 
 func (o *UpdateIntegrationSubscriptionDefault) Error() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] UpdateIntegrationSubscription default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] UpdateIntegrationSubscription default %s", o._statusCode, payload)
 }
 
 func (o *UpdateIntegrationSubscriptionDefault) String() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] UpdateIntegrationSubscription default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] UpdateIntegrationSubscription default %s", o._statusCode, payload)
 }
 
 func (o *UpdateIntegrationSubscriptionDefault) GetPayload() *models.RPCStatus {

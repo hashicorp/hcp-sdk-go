@@ -54,7 +54,7 @@ WaypointServiceDestroyAddOn2OK describes a response with status code 200, with d
 A successful response.
 */
 type WaypointServiceDestroyAddOn2OK struct {
-	Payload models.HashicorpCloudWaypointDestroyAddOnResponse
+	Payload models.HashicorpCloudWaypointV20241122DestroyAddOnResponse
 }
 
 // IsSuccess returns true when this waypoint service destroy add on2 o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceDestroyAddOn2OK) String() string {
 	return fmt.Sprintf("[DELETE /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/add-on/by-name/{add_on.name}][%d] waypointServiceDestroyAddOn2OK %s", 200, payload)
 }
 
-func (o *WaypointServiceDestroyAddOn2OK) GetPayload() models.HashicorpCloudWaypointDestroyAddOnResponse {
+func (o *WaypointServiceDestroyAddOn2OK) GetPayload() models.HashicorpCloudWaypointV20241122DestroyAddOnResponse {
 	return o.Payload
 }
 

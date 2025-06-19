@@ -21,7 +21,7 @@ import (
 type HashicorpCloudWaypointV20241122WaypointServiceUIBulkUpdateActionAssignForAppBody struct {
 
 	// applications
-	Applications []*HashicorpCloudWaypointApplication `json:"applications"`
+	Applications []*HashicorpCloudWaypointV20241122Application `json:"applications"`
 
 	// namespace
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceUIBulkUpdateActionAssignForAppBodyNamespace `json:"namespace,omitempty"`

@@ -21,10 +21,10 @@ import (
 type HashicorpCloudWaypointV20241122WaypointServiceCreateAddOnBody struct {
 
 	// The application for which the Add-on is to be created
-	Application *HashicorpCloudWaypointRefApplication `json:"application,omitempty"`
+	Application *HashicorpCloudWaypointV20241122RefApplication `json:"application,omitempty"`
 
 	// The Add-on definition from which this Add-on is to be created
-	Definition *HashicorpCloudWaypointRefAddOnDefinition `json:"definition,omitempty"`
+	Definition *HashicorpCloudWaypointV20241122RefAddOnDefinition `json:"definition,omitempty"`
 
 	// name is the name of the Add-on
 	Name string `json:"name,omitempty"`
@@ -34,7 +34,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceCreateAddOnBody struct {
 
 	// variables is the series of input variables which have been set by the
 	// application developer for the new add-on being created. This may be empty.
-	Variables []*HashicorpCloudWaypointInputVariable `json:"variables"`
+	Variables []*HashicorpCloudWaypointV20241122InputVariable `json:"variables"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service create add on body

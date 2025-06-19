@@ -54,7 +54,7 @@ WaypointServiceEndingActionOK describes a response with status code 200, with de
 A successful response.
 */
 type WaypointServiceEndingActionOK struct {
-	Payload models.HashicorpCloudWaypointEndingActionResponse
+	Payload models.HashicorpCloudWaypointV20241122EndingActionResponse
 }
 
 // IsSuccess returns true when this waypoint service ending action o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceEndingActionOK) String() string {
 	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/agent/operation:endAction][%d] waypointServiceEndingActionOK %s", 200, payload)
 }
 
-func (o *WaypointServiceEndingActionOK) GetPayload() models.HashicorpCloudWaypointEndingActionResponse {
+func (o *WaypointServiceEndingActionOK) GetPayload() models.HashicorpCloudWaypointV20241122EndingActionResponse {
 	return o.Payload
 }
 

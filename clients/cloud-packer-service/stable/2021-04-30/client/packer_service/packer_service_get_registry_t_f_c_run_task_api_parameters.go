@@ -73,18 +73,6 @@ type PackerServiceGetRegistryTFCRunTaskAPIParams struct {
 	*/
 	LocationProjectID string
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure")
-	*/
-	LocationRegionProvider *string
-
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1")
-	*/
-	LocationRegionRegion *string
-
 	/* TaskType.
 
 	     The HCP Packer Terraform Cloud run task type.
@@ -167,28 +155,6 @@ func (o *PackerServiceGetRegistryTFCRunTaskAPIParams) SetLocationProjectID(locat
 	o.LocationProjectID = locationProjectID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the packer service get registry t f c run task API params
-func (o *PackerServiceGetRegistryTFCRunTaskAPIParams) WithLocationRegionProvider(locationRegionProvider *string) *PackerServiceGetRegistryTFCRunTaskAPIParams {
-	o.SetLocationRegionProvider(locationRegionProvider)
-	return o
-}
-
-// SetLocationRegionProvider adds the locationRegionProvider to the packer service get registry t f c run task API params
-func (o *PackerServiceGetRegistryTFCRunTaskAPIParams) SetLocationRegionProvider(locationRegionProvider *string) {
-	o.LocationRegionProvider = locationRegionProvider
-}
-
-// WithLocationRegionRegion adds the locationRegionRegion to the packer service get registry t f c run task API params
-func (o *PackerServiceGetRegistryTFCRunTaskAPIParams) WithLocationRegionRegion(locationRegionRegion *string) *PackerServiceGetRegistryTFCRunTaskAPIParams {
-	o.SetLocationRegionRegion(locationRegionRegion)
-	return o
-}
-
-// SetLocationRegionRegion adds the locationRegionRegion to the packer service get registry t f c run task API params
-func (o *PackerServiceGetRegistryTFCRunTaskAPIParams) SetLocationRegionRegion(locationRegionRegion *string) {
-	o.LocationRegionRegion = locationRegionRegion
-}
-
 // WithTaskType adds the taskType to the packer service get registry t f c run task API params
 func (o *PackerServiceGetRegistryTFCRunTaskAPIParams) WithTaskType(taskType string) *PackerServiceGetRegistryTFCRunTaskAPIParams {
 	o.SetTaskType(taskType)
@@ -216,40 +182,6 @@ func (o *PackerServiceGetRegistryTFCRunTaskAPIParams) WriteToRequest(r runtime.C
 	// path param location.project_id
 	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
 		return err
-	}
-
-	if o.LocationRegionProvider != nil {
-
-		// query param location.region.provider
-		var qrLocationRegionProvider string
-
-		if o.LocationRegionProvider != nil {
-			qrLocationRegionProvider = *o.LocationRegionProvider
-		}
-		qLocationRegionProvider := qrLocationRegionProvider
-		if qLocationRegionProvider != "" {
-
-			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.LocationRegionRegion != nil {
-
-		// query param location.region.region
-		var qrLocationRegionRegion string
-
-		if o.LocationRegionRegion != nil {
-			qrLocationRegionRegion = *o.LocationRegionRegion
-		}
-		qLocationRegionRegion := qrLocationRegionRegion
-		if qLocationRegionRegion != "" {
-
-			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
-				return err
-			}
-		}
 	}
 
 	// path param task_type

@@ -27,7 +27,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBody struct {
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyNamespace `json:"namespace,omitempty"`
 
 	// The status log to send
-	StatusLog *HashicorpCloudWaypointStatusLog `json:"status_log,omitempty"`
+	StatusLog *HashicorpCloudWaypointV20241122StatusLog `json:"status_log,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service send status log body
@@ -234,7 +234,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig
 	Name string `json:"name,omitempty"`
 
 	// More explicitly configure the kind of HTTP request to be made
-	Request *HashicorpCloudWaypointActionConfigRequest `json:"request,omitempty"`
+	Request *HashicorpCloudWaypointV20241122ActionConfigRequest `json:"request,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service send status log body action config

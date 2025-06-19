@@ -24,7 +24,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceQueueAgentOperationBody struc
 
 	// The retrieved operation. If not set, there were no operations available
 	// for the specified groups at this time.
-	Operation *HashicorpCloudWaypointAgentOperation `json:"operation,omitempty"`
+	Operation *HashicorpCloudWaypointV20241122AgentOperation `json:"operation,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service queue agent operation body

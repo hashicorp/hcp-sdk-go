@@ -54,7 +54,7 @@ WaypointServiceSendStatusLogOK describes a response with status code 200, with d
 A successful response.
 */
 type WaypointServiceSendStatusLogOK struct {
-	Payload models.HashicorpCloudWaypointSendStatusLogResponse
+	Payload models.HashicorpCloudWaypointV20241122SendStatusLogResponse
 }
 
 // IsSuccess returns true when this waypoint service send status log o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *WaypointServiceSendStatusLogOK) String() string {
 	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] waypointServiceSendStatusLogOK %s", 200, payload)
 }
 
-func (o *WaypointServiceSendStatusLogOK) GetPayload() models.HashicorpCloudWaypointSendStatusLogResponse {
+func (o *WaypointServiceSendStatusLogOK) GetPayload() models.HashicorpCloudWaypointV20241122SendStatusLogResponse {
 	return o.Payload
 }
 

@@ -20,6 +20,9 @@ type HashicorpCloudIamCreateGroupResponse struct {
 
 	// group is the newly created group.
 	Group *HashicorpCloudIamGroup `json:"group,omitempty"`
+
+	// operation_id is the ID of the operation which tracks synchronization across the platform.
+	OperationID string `json:"operation_id,omitempty"`
 }
 
 // Validate validates this hashicorp cloud iam create group response

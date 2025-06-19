@@ -54,7 +54,7 @@ WaypointServiceGetActionRunOK describes a response with status code 200, with de
 A successful response.
 */
 type WaypointServiceGetActionRunOK struct {
-	Payload *models.HashicorpCloudWaypointGetActionRunResponse
+	Payload *models.HashicorpCloudWaypointV20241122GetActionRunResponse
 }
 
 // IsSuccess returns true when this waypoint service get action run o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceGetActionRunOK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action][%d] waypointServiceGetActionRunOK %s", 200, payload)
 }
 
-func (o *WaypointServiceGetActionRunOK) GetPayload() *models.HashicorpCloudWaypointGetActionRunResponse {
+func (o *WaypointServiceGetActionRunOK) GetPayload() *models.HashicorpCloudWaypointV20241122GetActionRunResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceGetActionRunOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointGetActionRunResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122GetActionRunResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

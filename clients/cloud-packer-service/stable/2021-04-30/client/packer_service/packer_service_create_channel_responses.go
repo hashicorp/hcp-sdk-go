@@ -207,8 +207,8 @@ type PackerServiceCreateChannelBody struct {
 	// ULID of the iteration.
 	IterationID string `json:"iteration_id,omitempty"`
 
-	// location
-	Location *PackerServiceCreateChannelParamsBodyLocation `json:"location,omitempty"`
+	// Location represents a target for an operation in HCP.
+	Location interface{} `json:"location,omitempty"`
 
 	// When set, will set the channel access in HCP Packer registry. The channel is unrestricted by default;
 	Restriction *models.HashicorpCloudPackerCreateChannelRequestRestriction `json:"restriction,omitempty"`
@@ -221,10 +221,6 @@ type PackerServiceCreateChannelBody struct {
 func (o *PackerServiceCreateChannelBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := o.validateLocation(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := o.validateRestriction(formats); err != nil {
 		res = append(res, err)
 	}
@@ -232,25 +228,6 @@ func (o *PackerServiceCreateChannelBody) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (o *PackerServiceCreateChannelBody) validateLocation(formats strfmt.Registry) error {
-	if swag.IsZero(o.Location) { // not required
-		return nil
-	}
-
-	if o.Location != nil {
-		if err := o.Location.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -277,10 +254,6 @@ func (o *PackerServiceCreateChannelBody) validateRestriction(formats strfmt.Regi
 func (o *PackerServiceCreateChannelBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := o.contextValidateLocation(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := o.contextValidateRestriction(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -288,27 +261,6 @@ func (o *PackerServiceCreateChannelBody) ContextValidate(ctx context.Context, fo
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (o *PackerServiceCreateChannelBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Location != nil {
-
-		if swag.IsZero(o.Location) { // not required
-			return nil
-		}
-
-		if err := o.Location.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -344,103 +296,6 @@ func (o *PackerServiceCreateChannelBody) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (o *PackerServiceCreateChannelBody) UnmarshalBinary(b []byte) error {
 	var res PackerServiceCreateChannelBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*
-PackerServiceCreateChannelParamsBodyLocation Location represents a target for an operation in HCP.
-swagger:model PackerServiceCreateChannelParamsBodyLocation
-*/
-type PackerServiceCreateChannelParamsBodyLocation struct {
-
-	// region is the region that the resource is located in. It is
-	// optional if the object being referenced is a global object.
-	Region *cloud.HashicorpCloudLocationRegion `json:"region,omitempty"`
-}
-
-// Validate validates this packer service create channel params body location
-func (o *PackerServiceCreateChannelParamsBodyLocation) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateRegion(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *PackerServiceCreateChannelParamsBodyLocation) validateRegion(formats strfmt.Registry) error {
-	if swag.IsZero(o.Region) { // not required
-		return nil
-	}
-
-	if o.Region != nil {
-		if err := o.Region.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location" + "." + "region")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location" + "." + "region")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this packer service create channel params body location based on the context it is used
-func (o *PackerServiceCreateChannelParamsBodyLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateRegion(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *PackerServiceCreateChannelParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Region != nil {
-
-		if swag.IsZero(o.Region) { // not required
-			return nil
-		}
-
-		if err := o.Region.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location" + "." + "region")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location" + "." + "region")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *PackerServiceCreateChannelParamsBodyLocation) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *PackerServiceCreateChannelParamsBodyLocation) UnmarshalBinary(b []byte) error {
-	var res PackerServiceCreateChannelParamsBodyLocation
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

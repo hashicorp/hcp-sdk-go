@@ -54,7 +54,7 @@ WaypointServiceCheckNamespaceActivationOK describes a response with status code 
 A successful response.
 */
 type WaypointServiceCheckNamespaceActivationOK struct {
-	Payload *models.HashicorpCloudWaypointCheckNamespaceActivationResponse
+	Payload *models.HashicorpCloudWaypointV20241122CheckNamespaceActivationResponse
 }
 
 // IsSuccess returns true when this waypoint service check namespace activation o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceCheckNamespaceActivationOK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/check-activation][%d] waypointServiceCheckNamespaceActivationOK %s", 200, payload)
 }
 
-func (o *WaypointServiceCheckNamespaceActivationOK) GetPayload() *models.HashicorpCloudWaypointCheckNamespaceActivationResponse {
+func (o *WaypointServiceCheckNamespaceActivationOK) GetPayload() *models.HashicorpCloudWaypointV20241122CheckNamespaceActivationResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceCheckNamespaceActivationOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointCheckNamespaceActivationResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122CheckNamespaceActivationResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

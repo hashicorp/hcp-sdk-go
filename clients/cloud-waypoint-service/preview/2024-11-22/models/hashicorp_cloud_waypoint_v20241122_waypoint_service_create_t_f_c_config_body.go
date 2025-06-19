@@ -23,7 +23,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceCreateTFCConfigBody struct {
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceCreateTFCConfigBodyNamespace `json:"namespace,omitempty"`
 
 	// tfc config
-	TfcConfig *HashicorpCloudWaypointTFCConfig `json:"tfc_config,omitempty"`
+	TfcConfig *HashicorpCloudWaypointV20241122TFCConfig `json:"tfc_config,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service create t f c config body

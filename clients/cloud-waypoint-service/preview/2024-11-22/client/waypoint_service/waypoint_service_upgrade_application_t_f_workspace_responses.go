@@ -54,7 +54,7 @@ WaypointServiceUpgradeApplicationTFWorkspaceOK describes a response with status 
 A successful response.
 */
 type WaypointServiceUpgradeApplicationTFWorkspaceOK struct {
-	Payload *models.HashicorpCloudWaypointUpgradeApplicationTFWorkspaceResponse
+	Payload *models.HashicorpCloudWaypointV20241122UpgradeApplicationTFWorkspaceResponse
 }
 
 // IsSuccess returns true when this waypoint service upgrade application t f workspace o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceUpgradeApplicationTFWorkspaceOK) String() string {
 	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/applications/{application.name}/upgrade-tf-workspace][%d] waypointServiceUpgradeApplicationTFWorkspaceOK %s", 200, payload)
 }
 
-func (o *WaypointServiceUpgradeApplicationTFWorkspaceOK) GetPayload() *models.HashicorpCloudWaypointUpgradeApplicationTFWorkspaceResponse {
+func (o *WaypointServiceUpgradeApplicationTFWorkspaceOK) GetPayload() *models.HashicorpCloudWaypointV20241122UpgradeApplicationTFWorkspaceResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceUpgradeApplicationTFWorkspaceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointUpgradeApplicationTFWorkspaceResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122UpgradeApplicationTFWorkspaceResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
