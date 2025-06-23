@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -19,32 +18,26 @@ import (
 // swagger:model hashicorp.cloud.waypoint.v20241122.ActionConfig.Flavor.GitHub
 type HashicorpCloudWaypointV20241122ActionConfigFlavorGitHub struct {
 
-	// TODO(briancain): SECURITY. We'd be storing users GitHub auth tokens, but
-	// we need it to make the request for them.
-	AuthToken string `json:"auth_token,omitempty"`
-
 	// Enables debug logging on the workflow, if supported by the Method
 	EnableDebugLog bool `json:"enable_debug_log,omitempty"`
+
+	// Checked by the user to determine if we can send the magic input param
+	// False, i.e. default, means we will not supply the magic param or look
+	// up the workflow ID automatically.
+	GhEnabledWorkflowParam bool `json:"gh_enabled_workflow_param,omitempty"`
+
+	// The git reference for the workflow. Can be a branch or tag name.
+	GitRef string `json:"git_ref,omitempty"`
 
 	// Input keys and values configured in the workflow file. Expected to be
 	// turned into a string of json key/vals.
 	Inputs map[string]string `json:"inputs,omitempty"`
 
-	// Which GitHub action workflow method to take for this Waypoint action config
-	Method *HashicorpCloudWaypointV20241122ActionConfigFlavorGitHubMethod `json:"method,omitempty"`
-
-	// The git reference for the workflow. Can be a branch or tag name.
-	Ref string `json:"ref,omitempty"`
+	// Organization or account name
+	InstallName string `json:"install_name,omitempty"`
 
 	// The repo to submit the action to
-	Repo string `json:"repo,omitempty"`
-
-	// The unique identifier of the workflow run. Can be used to create, re-run,
-	// cancel workflows, or approve a workflow from a pull request. (Optional)
-	RunID string `json:"run_id,omitempty"`
-
-	// The username to submit the action to
-	Username string `json:"username,omitempty"`
+	Repository string `json:"repository,omitempty"`
 
 	// The workflow to run
 	WorkflowID string `json:"workflow_id,omitempty"`
@@ -52,69 +45,11 @@ type HashicorpCloudWaypointV20241122ActionConfigFlavorGitHub struct {
 
 // Validate validates this hashicorp cloud waypoint v20241122 action config flavor git hub
 func (m *HashicorpCloudWaypointV20241122ActionConfigFlavorGitHub) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateMethod(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *HashicorpCloudWaypointV20241122ActionConfigFlavorGitHub) validateMethod(formats strfmt.Registry) error {
-	if swag.IsZero(m.Method) { // not required
-		return nil
-	}
-
-	if m.Method != nil {
-		if err := m.Method.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("method")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("method")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this hashicorp cloud waypoint v20241122 action config flavor git hub based on the context it is used
+// ContextValidate validates this hashicorp cloud waypoint v20241122 action config flavor git hub based on context it is used
 func (m *HashicorpCloudWaypointV20241122ActionConfigFlavorGitHub) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateMethod(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *HashicorpCloudWaypointV20241122ActionConfigFlavorGitHub) contextValidateMethod(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Method != nil {
-
-		if swag.IsZero(m.Method) { // not required
-			return nil
-		}
-
-		if err := m.Method.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("method")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("method")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
