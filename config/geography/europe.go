@@ -18,7 +18,7 @@ func NewConfigEurope() *Config {
 		AuthURL:           "https://auth.idp.eu.hashicorp.com",
 		OAuth2ClientID:    "",
 		OAuth2RedirectURL: "http://localhost:8443/oidc/callback",
-		PortalURL:         "portal.cloud.eu.hashicorp.com",
+		PortalURL:         "https://portal.cloud.eu.hashicorp.com",
 		SCADAAddress:      "",
 	}
 }
