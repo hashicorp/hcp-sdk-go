@@ -4,15 +4,15 @@
 package geography
 
 const (
-	// Europe is the HCP deployment in Europe
-	Europe = "europe"
+	// EU is the multi-region Europe deployment of HCP
+	EU = "eu"
 )
 
 func init() {
-	Geographies = append(Geographies, Europe)
+	Geographies = append(Geographies, EU)
 }
 
-func NewConfigEurope() *Config {
+func NewConfigEU() *Config {
 	return &Config{
 		APIAddress:        "api.cloud.eu.hashicorp.com",
 		AuthURL:           "https://auth.idp.eu.hashicorp.com",

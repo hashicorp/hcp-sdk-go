@@ -15,7 +15,7 @@ import (
 func TestNew_Default(t *testing.T) {
 	require := requirepkg.New(t)
 
-	conf := geography.NewConfigNorthAmerica()
+	conf := geography.NewConfigUS()
 
 	// Exercise
 	config, err := NewHCPConfig(WithClientCredentials("my-client-id", "my-client-secret"))
@@ -139,7 +139,7 @@ func TestNew_NoConfigPassed(t *testing.T) {
 	}
 	require := requirepkg.New(t)
 
-	conf := geography.NewConfigNorthAmerica()
+	conf := geography.NewConfigUS()
 
 	// Exercise
 	config, err := NewHCPConfig()

@@ -18,13 +18,13 @@ import (
 )
 
 func TestWith_Geography(t *testing.T) {
-	t.Run("north_america", func(t *testing.T) {
+	t.Run("us", func(t *testing.T) {
 		require := requirepkg.New(t)
 
 		// Setup
 		config := &hcpConfig{}
-		geo := "north_america"
-		expectation := geography.NewConfigNorthAmerica()
+		geo := "us"
+		expectation := geography.NewConfigUS()
 
 		// Exercise
 		require.NoError(apply(config, WithGeography(geo)))
@@ -44,8 +44,8 @@ func TestWith_Geography(t *testing.T) {
 
 		// Setup
 		config := &hcpConfig{}
-		geo := "europe"
-		expectation := geography.NewConfigEurope()
+		geo := "eu"
+		expectation := geography.NewConfigEU()
 
 		// Exercise
 		require.NoError(apply(config, WithGeography(geo)))
@@ -65,7 +65,7 @@ func TestWith_Geography(t *testing.T) {
 
 		// Setup
 		config := &hcpConfig{}
-		geo := "asia_pacific"
+		geo := "ap"
 
 		// Exercise
 		require.Error(apply(config, WithGeography(geo)))

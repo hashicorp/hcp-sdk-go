@@ -6,7 +6,7 @@ package geography
 const (
 	// Default is the HCP geography that will be used by default if one is not
 	// specified
-	Default = NorthAmerica
+	Default = US
 )
 
 var (

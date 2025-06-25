@@ -36,10 +36,10 @@ func configFromGeography(config *hcpConfig, geo string) (*hcpConfig, error) {
 
 	// Get config based on geographical deployment
 	switch geo {
-	case geography.NorthAmerica:
-		geoConfig = geography.NewConfigNorthAmerica()
-	case geography.Europe:
-		geoConfig = geography.NewConfigEurope()
+	case geography.US:
+		geoConfig = geography.NewConfigUS()
+	case geography.EU:
+		geoConfig = geography.NewConfigEU()
 	default:
 		return nil, fmt.Errorf("hcp geography invalid. Supported: %v", geography.Geographies)
 	}
