@@ -25,9 +25,6 @@ type Config struct {
 	// OAuth2ClientID is the client ID of the production auth application
 	OAuth2ClientID string
 
-	// OAuth2RedirectURL is the callback URL for OAuth2
-	OAuth2RedirectURL string
-
 	// PortalURL is the URL of the production portal
 	PortalURL string
 

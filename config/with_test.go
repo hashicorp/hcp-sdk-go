@@ -35,11 +35,9 @@ func TestWith_Geography(t *testing.T) {
 		require.Equal(expectation.APIAddress, config.apiAddress)
 		require.Equal(expectation.SCADAAddress, config.scadaAddress)
 		require.Equal(expectation.OAuth2ClientID, config.oauth2Config.ClientID)
-		require.Equal(expectation.OAuth2RedirectURL, config.oauth2Config.RedirectURL)
-
 	})
 
-	t.Run("europe", func(t *testing.T) {
+	t.Run("eu", func(t *testing.T) {
 		require := requirepkg.New(t)
 
 		// Setup
@@ -56,8 +54,6 @@ func TestWith_Geography(t *testing.T) {
 		require.Equal(expectation.APIAddress, config.apiAddress)
 		require.Equal(expectation.SCADAAddress, config.scadaAddress)
 		require.Equal(expectation.OAuth2ClientID, config.oauth2Config.ClientID)
-		require.Equal(expectation.OAuth2RedirectURL, config.oauth2Config.RedirectURL)
-
 	})
 
 	t.Run("unsupported", func(t *testing.T) {

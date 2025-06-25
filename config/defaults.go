@@ -19,6 +19,9 @@ const (
 
 	// AuthEndpointAuthPath is the auth path for authentication endpoint
 	AuthEndpointAuthPath = "/oauth2/auth"
+
+	// AuthRedirectURL is the callback URL for OAuth2
+	AuthRedirectURL = "http://localhost:8443/oidc/callback"
 )
 
 var (
@@ -54,9 +57,9 @@ func configFromGeography(config *hcpConfig, geo geography.Geo) (*hcpConfig, erro
 	config.apiAddress = geoConfig.APIAddress
 	config.scadaAddress = geoConfig.SCADAAddress
 
+	// Oauth2 config
 	config.oauth2Config.ClientID = geoConfig.OAuth2ClientID
-	config.oauth2Config.RedirectURL = geoConfig.OAuth2RedirectURL
-
+	config.oauth2Config.RedirectURL = AuthRedirectURL
 	config.oauth2Config.Endpoint.AuthURL = geoConfig.AuthURL + AuthEndpointAuthPath
 	config.oauth2Config.Endpoint.TokenURL = geoConfig.AuthURL + AuthEndpointTokenPath
 
