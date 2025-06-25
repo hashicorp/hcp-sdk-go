@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
+	"github.com/hashicorp/hcp-sdk-go/config/geography"
 	"github.com/hashicorp/hcp-sdk-go/profile"
 	"golang.org/x/oauth2"
 )
@@ -21,7 +22,7 @@ import (
 // first due to its broad scope of modification to the config.
 func WithGeography(geo string) HCPConfigOption {
 	return func(config *hcpConfig) error {
-		config, err := configFromGeography(config, geo)
+		config, err := configFromGeography(config, geography.Geo(geo))
 
 		return err
 	}

@@ -5,7 +5,7 @@ package geography
 
 const (
 	// EU is the multi-region Europe deployment of HCP
-	EU = "eu"
+	EU Geo = "eu"
 )
 
 func init() {

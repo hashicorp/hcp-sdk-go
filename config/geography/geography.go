@@ -3,6 +3,9 @@
 
 package geography
 
+// Geo is a custom type for defining all supported HCP geographies
+type Geo string
+
 const (
 	// Default is the HCP geography that will be used by default if one is not
 	// specified
@@ -11,7 +14,7 @@ const (
 
 var (
 	// Geographies contains all supported geographies of which HCP is deployed
-	Geographies []string
+	Geographies []Geo
 )
 
 // Config contains connection strings used to configure HCP clients

@@ -19,7 +19,7 @@ import (
 func main() {
 	// Slice of config options including geography to target
 	opts := []config.HCPConfigOption{
-		config.WithGeography(geography.US),
+		config.WithGeography(string(geography.US)),
 	}
 	opts = append(opts, config.FromEnv())
 

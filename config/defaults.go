@@ -31,7 +31,7 @@ var (
 
 // configFromGeography creates a config with defaults configured to interact
 // with a specific geography
-func configFromGeography(config *hcpConfig, geo string) (*hcpConfig, error) {
+func configFromGeography(config *hcpConfig, geo geography.Geo) (*hcpConfig, error) {
 	geoConfig := &geography.Config{}
 
 	// Get config based on geographical deployment
