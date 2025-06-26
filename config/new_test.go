@@ -56,6 +56,38 @@ func TestNew_Options(t *testing.T) {
 	require.Equal("proj-id-123", config.Profile().ProjectID)
 }
 
+func TestNew_WithGeography_US(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config, err := NewHCPConfig(
+		WithGeography("us"),
+	)
+
+	require.NoError(err)
+
+	// Ensure the values have been set accordingly
+	require.Equal("api.cloud.hashicorp.com:443", config.APIAddress())
+	require.Equal("https://portal.cloud.hashicorp.com", config.PortalURL().String())
+	require.Equal("scada.hashicorp.cloud:7224", config.SCADAAddress())
+}
+
+func TestNew_WithGeography_EU(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config, err := NewHCPConfig(
+		WithGeography("eu"),
+	)
+
+	require.NoError(err)
+
+	// Ensure the values have been set accordingly
+	require.Equal("api.cloud.eu.hashicorp.com", config.APIAddress())
+	require.Equal("https://portal.cloud.eu.hashicorp.com", config.PortalURL().String())
+	require.Equal("", config.SCADAAddress())
+}
+
 func TestNew_Invalid(t *testing.T) {
 	testCases := []struct {
 		name          string

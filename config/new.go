@@ -18,7 +18,7 @@ import (
 // directly or will be read from other places (e.g. the environment).
 //
 // The configuration will default to values for the HCP production environment
-// in North America, but can be overwritten for development purposes and additional
+// in US, but can be overwritten for development purposes and additional
 // geographies.
 //
 // In addition to the default values the configuration requires client
@@ -26,7 +26,7 @@ import (
 // WithCredentials or by using FromEnv and providing the client credentials via
 // environment variables).
 func NewHCPConfig(opts ...HCPConfigOption) (HCPConfig, error) {
-	// Prepare basic config with default values for north america
+	// Prepare basic config with default values for us
 	config, err := configFromGeography(newDefaultConfig(), geography.Default)
 	if err != nil {
 		return nil, fmt.Errorf("failed to apply geography configuration: %w", err)
