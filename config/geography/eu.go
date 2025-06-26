@@ -17,7 +17,7 @@ func NewConfigEU() *Config {
 		APIAddress:     "api.cloud.eu.hashicorp.com",
 		PortalURL:      "https://portal.cloud.eu.hashicorp.com",
 		AuthURL:        "https://auth.idp.eu.hashicorp.com",
-		OAuth2ClientID: "",
-		SCADAAddress:   "",
+		OAuth2ClientID: "todo", // Value not yet available
+		SCADAAddress:   "todo", // Value not yet available
 	}
 }
