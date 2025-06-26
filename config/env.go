@@ -40,6 +40,8 @@ const (
 	envVarHCPOrganizationID = "HCP_ORGANIZATION_ID"
 
 	envVarHCPProjectID = "HCP_PROJECT_ID"
+
+	envVarHCPGeography = "HCP_GEOGRAPHY"
 )
 
 const (
@@ -72,6 +74,21 @@ func FromEnv() HCPConfigOption {
 		if clientIDOK && clientSecretOK {
 			if err := apply(config, WithClientCredentials(clientID, clientSecret)); err != nil {
 				return fmt.Errorf("failed to set client credentials from environment variables (%s, %s): %w", envVarClientID, envVarClientSecret, err)
+			}
+		}
+
+		// Read geography from environment
+		// Since this sets multiple potentially overlapping config values, it goes
+		// before to allow for individual overrides below.
+		// Values set by geo overlap with the following env vars:
+		// - HCP_API_ADDRESS
+		// - HCP_PORTAL_URL
+		// - HCP_AUTH_URL
+		// - HCP_OAUTH_CLIENT_ID
+		// - HCP_SCADA_ADDRESS
+		if geo, ok := os.LookupEnv(envVarHCPGeography); ok {
+			if err := apply(config, WithGeography(geo)); err != nil {
+				return fmt.Errorf("failed to set geography from environment variable (%s): %w", geo, err)
 			}
 		}
 
