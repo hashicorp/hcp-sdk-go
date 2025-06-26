@@ -159,7 +159,7 @@ func TestNew_Invalid(t *testing.T) {
 			options: []HCPConfigOption{
 				WithGeography("ap"),
 			},
-			expectedError: "failed to apply configuration option: hcp geography invalid. Supported: [eu us]",
+			expectedError: "failed to apply configuration option: hcp geography ap invalid. Supported: [eu us]",
 		},
 	}
 

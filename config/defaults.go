@@ -44,7 +44,7 @@ func configFromGeography(config *hcpConfig, geo geography.Geo) (*hcpConfig, erro
 	case geography.EU:
 		geoConfig = geography.NewConfigEU()
 	default:
-		return nil, fmt.Errorf("hcp geography invalid. Supported: %v", geography.Geographies)
+		return nil, fmt.Errorf("hcp geography %s invalid. Supported: %v", geo, geography.Geographies)
 	}
 
 	// Parse URLs
