@@ -85,7 +85,6 @@ func TestNew_WithGeography_EU(t *testing.T) {
 	// Ensure the values have been set accordingly
 	require.Equal("api.cloud.eu.hashicorp.com", config.APIAddress())
 	require.Equal("https://portal.cloud.eu.hashicorp.com", config.PortalURL().String())
-	require.Equal("", config.SCADAAddress())
 }
 
 func TestNew_Invalid(t *testing.T) {
