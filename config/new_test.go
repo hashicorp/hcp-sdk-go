@@ -7,8 +7,13 @@ import (
 	"crypto/tls"
 	"testing"
 
+	"github.com/hashicorp/hcp-sdk-go/config/geography"
 	"github.com/hashicorp/hcp-sdk-go/profile"
 	requirepkg "github.com/stretchr/testify/require"
+)
+
+var (
+	usConfig = geography.NewConfigUS()
 )
 
 func TestNew_Default(t *testing.T) {
@@ -19,9 +24,9 @@ func TestNew_Default(t *testing.T) {
 	require.NoError(err)
 
 	// Ensure that the default configuration contains the default values
-	require.Equal(defaultPortalURL, config.PortalURL().String())
-	require.Equal(defaultAPIAddress, config.APIAddress())
-	require.Equal(defaultSCADAAddress, config.SCADAAddress())
+	require.Equal(usConfig.PortalURL, config.PortalURL().String())
+	require.Equal(usConfig.APIAddress, config.APIAddress())
+	require.Equal(usConfig.SCADAAddress, config.SCADAAddress())
 
 	// Ensure the default configuration uses secure TLS
 	require.NotNil(config.APITLSConfig())
@@ -49,6 +54,37 @@ func TestNew_Options(t *testing.T) {
 	require.Equal("my-scada:3456", config.SCADAAddress())
 	require.Equal("org-id-123", config.Profile().OrganizationID)
 	require.Equal("proj-id-123", config.Profile().ProjectID)
+}
+
+func TestNew_WithGeography_US(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config, err := NewHCPConfig(
+		WithGeography("us"),
+	)
+
+	require.NoError(err)
+
+	// Ensure the values have been set accordingly
+	require.Equal("api.cloud.hashicorp.com:443", config.APIAddress())
+	require.Equal("https://portal.cloud.hashicorp.com", config.PortalURL().String())
+	require.Equal("scada.hashicorp.cloud:7224", config.SCADAAddress())
+}
+
+func TestNew_WithGeography_EU(t *testing.T) {
+	require := requirepkg.New(t)
+
+	// Exercise
+	config, err := NewHCPConfig(
+		WithGeography("eu"),
+	)
+
+	require.NoError(err)
+
+	// Ensure the values have been set accordingly
+	require.Equal("api.cloud.eu.hashicorp.com", config.APIAddress())
+	require.Equal("https://portal.cloud.eu.hashicorp.com", config.PortalURL().String())
 }
 
 func TestNew_Invalid(t *testing.T) {
@@ -117,6 +153,13 @@ func TestNew_Invalid(t *testing.T) {
 			},
 			expectedError: "the configuration is not valid: when setting a user profile, both organization ID and project ID must be provided",
 		},
+		{
+			name: "unsupported geography config",
+			options: []HCPConfigOption{
+				WithGeography("ap"),
+			},
+			expectedError: "failed to apply configuration option: hcp geography ap invalid. Supported: [eu us]",
+		},
 	}
 
 	for _, testCase := range testCases {
@@ -145,7 +188,7 @@ func TestNew_NoConfigPassed(t *testing.T) {
 	require.NoError(err)
 	require.NotNil(token)
 
-	require.Equal(defaultPortalURL, config.PortalURL().String())
-	require.Equal(defaultAPIAddress, config.APIAddress())
-	require.Equal(defaultSCADAAddress, config.SCADAAddress())
+	require.Equal(usConfig.PortalURL, config.PortalURL().String())
+	require.Equal(usConfig.APIAddress, config.APIAddress())
+	require.Equal(usConfig.SCADAAddress, config.SCADAAddress())
 }

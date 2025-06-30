@@ -8,6 +8,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/hashicorp/hcp-sdk-go/config/geography"
 	requirepkg "github.com/stretchr/testify/require"
 )
 
@@ -92,6 +93,36 @@ func TestFromEnv_LegacyHostname(t *testing.T) {
 	require.Equal("my-legacy-api", config.apiAddress)
 }
 
+func TestFromEnv_Geography(t *testing.T) {
+	testCases := []struct {
+		geo string
+	}{
+		{geo: "us"},
+		{geo: "eu"},
+	}
+
+	for _, tc := range testCases {
+		require := requirepkg.New(t)
+
+		// Clear the environment
+		clearEnv()
+		defer clearEnv()
+
+		// Prepare the environment
+		require.NoError(os.Setenv(envVarHCPGeography, tc.geo))
+
+		// Exercise
+		config := &hcpConfig{}
+		require.NoError(apply(config, FromEnv()))
+
+		// Ensure config values are set correctly
+		expectedGeoConfig, _ := configFromGeography(config, geography.Geo(tc.geo))
+		require.Equal(expectedGeoConfig.APIAddress(), config.apiAddress)
+		require.Equal(expectedGeoConfig.PortalURL().String(), config.PortalURL().String())
+		require.Equal(expectedGeoConfig.SCADAAddress(), config.SCADAAddress())
+	}
+}
+
 func TestFromEnv_TLSConfig_Plain(t *testing.T) {
 	require := requirepkg.New(t)
 
@@ -152,4 +183,5 @@ func clearEnv() {
 	os.Unsetenv(envVarAPITLS)
 	os.Unsetenv(envVarSCADAAddress)
 	os.Unsetenv(envVarSCADATLS)
+	os.Unsetenv(envVarHCPGeography)
 }
