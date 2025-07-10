@@ -114,6 +114,11 @@ func (m *HashicorpCloudOperationListResponse) contextValidateOperations(ctx cont
 	for i := 0; i < len(m.Operations); i++ {
 
 		if m.Operations[i] != nil {
+
+			if swag.IsZero(m.Operations[i]) { // not required
+				return nil
+			}
+
 			if err := m.Operations[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("operations" + "." + strconv.Itoa(i))
@@ -132,6 +137,11 @@ func (m *HashicorpCloudOperationListResponse) contextValidateOperations(ctx cont
 func (m *HashicorpCloudOperationListResponse) contextValidatePagination(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Pagination != nil {
+
+		if swag.IsZero(m.Pagination) { // not required
+			return nil
+		}
+
 		if err := m.Pagination.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pagination")

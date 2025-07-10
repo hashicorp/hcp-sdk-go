@@ -7,6 +7,7 @@ package integration_subscription_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *CreateIntegrationSubscriptionOK) Code() int {
 }
 
 func (o *CreateIntegrationSubscriptionOK) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] createIntegrationSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] createIntegrationSubscriptionOK %s", 200, payload)
 }
 
 func (o *CreateIntegrationSubscriptionOK) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] createIntegrationSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] createIntegrationSubscriptionOK %s", 200, payload)
 }
 
 func (o *CreateIntegrationSubscriptionOK) GetPayload() *models.VaultRadar20230501CreateIntegrationSubscriptionResponse {
@@ -161,11 +164,13 @@ func (o *CreateIntegrationSubscriptionDefault) Code() int {
 }
 
 func (o *CreateIntegrationSubscriptionDefault) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] CreateIntegrationSubscription default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] CreateIntegrationSubscription default %s", o._statusCode, payload)
 }
 
 func (o *CreateIntegrationSubscriptionDefault) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] CreateIntegrationSubscription default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions][%d] CreateIntegrationSubscription default %s", o._statusCode, payload)
 }
 
 func (o *CreateIntegrationSubscriptionDefault) GetPayload() *models.RPCStatus {

@@ -7,6 +7,7 @@ package integration_connection_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *CreateIntegrationConnectionOK) Code() int {
 }
 
 func (o *CreateIntegrationConnectionOK) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] createIntegrationConnectionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] createIntegrationConnectionOK %s", 200, payload)
 }
 
 func (o *CreateIntegrationConnectionOK) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] createIntegrationConnectionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] createIntegrationConnectionOK %s", 200, payload)
 }
 
 func (o *CreateIntegrationConnectionOK) GetPayload() *models.VaultRadar20230501CreateIntegrationConnectionResponse {
@@ -161,11 +164,13 @@ func (o *CreateIntegrationConnectionDefault) Code() int {
 }
 
 func (o *CreateIntegrationConnectionDefault) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] CreateIntegrationConnection default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] CreateIntegrationConnection default %s", o._statusCode, payload)
 }
 
 func (o *CreateIntegrationConnectionDefault) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] CreateIntegrationConnection default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] CreateIntegrationConnection default %s", o._statusCode, payload)
 }
 
 func (o *CreateIntegrationConnectionDefault) GetPayload() *models.RPCStatus {

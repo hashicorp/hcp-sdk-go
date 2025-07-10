@@ -7,6 +7,7 @@ package integration_connection_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *UpdateIntegrationConnectionOK) Code() int {
 }
 
 func (o *UpdateIntegrationConnectionOK) Error() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] updateIntegrationConnectionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] updateIntegrationConnectionOK %s", 200, payload)
 }
 
 func (o *UpdateIntegrationConnectionOK) String() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] updateIntegrationConnectionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] updateIntegrationConnectionOK %s", 200, payload)
 }
 
 func (o *UpdateIntegrationConnectionOK) GetPayload() interface{} {
@@ -159,11 +162,13 @@ func (o *UpdateIntegrationConnectionDefault) Code() int {
 }
 
 func (o *UpdateIntegrationConnectionDefault) Error() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] UpdateIntegrationConnection default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] UpdateIntegrationConnection default %s", o._statusCode, payload)
 }
 
 func (o *UpdateIntegrationConnectionDefault) String() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] UpdateIntegrationConnection default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections][%d] UpdateIntegrationConnection default %s", o._statusCode, payload)
 }
 
 func (o *UpdateIntegrationConnectionDefault) GetPayload() *models.RPCStatus {

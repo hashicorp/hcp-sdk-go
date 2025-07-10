@@ -89,12 +89,12 @@ func (o *WaypointServiceSendStatusLogOK) Code() int {
 
 func (o *WaypointServiceSendStatusLogOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] waypointServiceSendStatusLogOK %s", 200, payload)
+	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_run.specifier.action.id}/action-runs/{action_run.specifier.sequence}/status-log][%d] waypointServiceSendStatusLogOK %s", 200, payload)
 }
 
 func (o *WaypointServiceSendStatusLogOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] waypointServiceSendStatusLogOK %s", 200, payload)
+	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_run.specifier.action.id}/action-runs/{action_run.specifier.sequence}/status-log][%d] waypointServiceSendStatusLogOK %s", 200, payload)
 }
 
 func (o *WaypointServiceSendStatusLogOK) GetPayload() models.HashicorpCloudWaypointV20241122SendStatusLogResponse {
@@ -161,12 +161,12 @@ func (o *WaypointServiceSendStatusLogDefault) Code() int {
 
 func (o *WaypointServiceSendStatusLogDefault) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] WaypointService_SendStatusLog default %s", o._statusCode, payload)
+	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_run.specifier.action.id}/action-runs/{action_run.specifier.sequence}/status-log][%d] WaypointService_SendStatusLog default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceSendStatusLogDefault) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log][%d] WaypointService_SendStatusLog default %s", o._statusCode, payload)
+	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_run.specifier.action.id}/action-runs/{action_run.specifier.sequence}/status-log][%d] WaypointService_SendStatusLog default %s", o._statusCode, payload)
 }
 
 func (o *WaypointServiceSendStatusLogDefault) GetPayload() *cloud.GoogleRPCStatus {

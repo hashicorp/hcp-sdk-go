@@ -6,6 +6,7 @@ package operation_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -81,12 +82,19 @@ func (o *WaitOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the wait o k response
+func (o *WaitOK) Code() int {
+	return 200
+}
+
 func (o *WaitOK) Error() string {
-	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] waitOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] waitOK %s", 200, payload)
 }
 
 func (o *WaitOK) String() string {
-	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] waitOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] waitOK %s", 200, payload)
 }
 
 func (o *WaitOK) GetPayload() *models.HashicorpCloudOperationWaitResponse {
@@ -123,11 +131,6 @@ type WaitDefault struct {
 	Payload *cloud.GoogleRPCStatus
 }
 
-// Code gets the status code for the wait default response
-func (o *WaitDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this wait default response has a 2xx status code
 func (o *WaitDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -153,12 +156,19 @@ func (o *WaitDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the wait default response
+func (o *WaitDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *WaitDefault) Error() string {
-	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] Wait default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] Wait default %s", o._statusCode, payload)
 }
 
 func (o *WaitDefault) String() string {
-	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] Wait default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /operation/2020-05-05/organizations/{location.organization_id}/projects/{location.project_id}/operations/{id}/wait][%d] Wait default %s", o._statusCode, payload)
 }
 
 func (o *WaitDefault) GetPayload() *cloud.GoogleRPCStatus {

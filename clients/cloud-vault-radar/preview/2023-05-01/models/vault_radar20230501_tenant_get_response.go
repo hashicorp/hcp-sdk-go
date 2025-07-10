@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // VaultRadar20230501TenantGetResponse For now, we only want to send back type and state
@@ -20,12 +22,37 @@ type VaultRadar20230501TenantGetResponse struct {
 	// state
 	State string `json:"state,omitempty"`
 
+	// trial expires at
+	// Format: date-time
+	TrialExpiresAt strfmt.DateTime `json:"trial_expires_at,omitempty"`
+
 	// type
 	Type string `json:"type,omitempty"`
 }
 
 // Validate validates this vault radar 20230501 tenant get response
 func (m *VaultRadar20230501TenantGetResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateTrialExpiresAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *VaultRadar20230501TenantGetResponse) validateTrialExpiresAt(formats strfmt.Registry) error {
+	if swag.IsZero(m.TrialExpiresAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("trial_expires_at", "body", "date-time", m.TrialExpiresAt.String(), formats); err != nil {
+		return err
+	}
+
 	return nil
 }
 

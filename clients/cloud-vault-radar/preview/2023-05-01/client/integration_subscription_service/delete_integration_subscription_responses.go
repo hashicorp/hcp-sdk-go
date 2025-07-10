@@ -6,6 +6,7 @@ package integration_subscription_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *DeleteIntegrationSubscriptionOK) Code() int {
 }
 
 func (o *DeleteIntegrationSubscriptionOK) Error() string {
-	return fmt.Sprintf("[DELETE /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/{id}][%d] deleteIntegrationSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/{id}][%d] deleteIntegrationSubscriptionOK %s", 200, payload)
 }
 
 func (o *DeleteIntegrationSubscriptionOK) String() string {
-	return fmt.Sprintf("[DELETE /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/{id}][%d] deleteIntegrationSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/{id}][%d] deleteIntegrationSubscriptionOK %s", 200, payload)
 }
 
 func (o *DeleteIntegrationSubscriptionOK) GetPayload() interface{} {
@@ -156,11 +159,13 @@ func (o *DeleteIntegrationSubscriptionDefault) Code() int {
 }
 
 func (o *DeleteIntegrationSubscriptionDefault) Error() string {
-	return fmt.Sprintf("[DELETE /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/{id}][%d] DeleteIntegrationSubscription default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/{id}][%d] DeleteIntegrationSubscription default %s", o._statusCode, payload)
 }
 
 func (o *DeleteIntegrationSubscriptionDefault) String() string {
-	return fmt.Sprintf("[DELETE /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/{id}][%d] DeleteIntegrationSubscription default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/{id}][%d] DeleteIntegrationSubscription default %s", o._statusCode, payload)
 }
 
 func (o *DeleteIntegrationSubscriptionDefault) GetPayload() *models.RPCStatus {

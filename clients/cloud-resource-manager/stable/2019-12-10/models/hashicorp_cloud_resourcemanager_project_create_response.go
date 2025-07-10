@@ -18,6 +18,10 @@ import (
 // swagger:model hashicorp.cloud.resourcemanager.ProjectCreateResponse
 type HashicorpCloudResourcemanagerProjectCreateResponse struct {
 
+	// operation_id is the ID of the operation that represents the async creation
+	// of the project.
+	OperationID string `json:"operation_id,omitempty"`
+
 	// Project is the newly created project.
 	Project *HashicorpCloudResourcemanagerProject `json:"project,omitempty"`
 }

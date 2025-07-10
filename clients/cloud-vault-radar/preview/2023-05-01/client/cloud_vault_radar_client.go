@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-radar/preview/2023-05-01/client/data_source_registration_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-radar/preview/2023-05-01/client/integration_connection_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-radar/preview/2023-05-01/client/integration_subscription_service"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-radar/preview/2023-05-01/client/resource_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-radar/preview/2023-05-01/client/tenant_service"
 )
 
@@ -61,6 +62,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudVault
 	cli.DataSourceRegistrationService = data_source_registration_service.New(transport, formats)
 	cli.IntegrationConnectionService = integration_connection_service.New(transport, formats)
 	cli.IntegrationSubscriptionService = integration_subscription_service.New(transport, formats)
+	cli.ResourceService = resource_service.New(transport, formats)
 	cli.TenantService = tenant_service.New(transport, formats)
 	return cli
 }
@@ -112,6 +114,8 @@ type CloudVaultRadar struct {
 
 	IntegrationSubscriptionService integration_subscription_service.ClientService
 
+	ResourceService resource_service.ClientService
+
 	TenantService tenant_service.ClientService
 
 	Transport runtime.ClientTransport
@@ -123,5 +127,6 @@ func (c *CloudVaultRadar) SetTransport(transport runtime.ClientTransport) {
 	c.DataSourceRegistrationService.SetTransport(transport)
 	c.IntegrationConnectionService.SetTransport(transport)
 	c.IntegrationSubscriptionService.SetTransport(transport)
+	c.ResourceService.SetTransport(transport)
 	c.TenantService.SetTransport(transport)
 }

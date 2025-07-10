@@ -63,19 +63,13 @@ WaypointServiceSendStatusLogParams contains all the parameters to send to the AP
 */
 type WaypointServiceSendStatusLogParams struct {
 
-	/* ActionConfigID.
+	// ActionRunSpecifierActionID.
+	ActionRunSpecifierActionID string
 
-	   ULID of the action config id
-	*/
-	ActionConfigID string
-
-	/* ActionRunSeq.
-
-	   The run sequence to attach this run to
-
-	   Format: uint64
-	*/
-	ActionRunSeq string
+	// ActionRunSpecifierSequence.
+	//
+	// Format: uint64
+	ActionRunSpecifierSequence string
 
 	// Body.
 	Body *models.HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBody
@@ -145,26 +139,26 @@ func (o *WaypointServiceSendStatusLogParams) SetHTTPClient(client *http.Client) 
 	o.HTTPClient = client
 }
 
-// WithActionConfigID adds the actionConfigID to the waypoint service send status log params
-func (o *WaypointServiceSendStatusLogParams) WithActionConfigID(actionConfigID string) *WaypointServiceSendStatusLogParams {
-	o.SetActionConfigID(actionConfigID)
+// WithActionRunSpecifierActionID adds the actionRunSpecifierActionID to the waypoint service send status log params
+func (o *WaypointServiceSendStatusLogParams) WithActionRunSpecifierActionID(actionRunSpecifierActionID string) *WaypointServiceSendStatusLogParams {
+	o.SetActionRunSpecifierActionID(actionRunSpecifierActionID)
 	return o
 }
 
-// SetActionConfigID adds the actionConfigId to the waypoint service send status log params
-func (o *WaypointServiceSendStatusLogParams) SetActionConfigID(actionConfigID string) {
-	o.ActionConfigID = actionConfigID
+// SetActionRunSpecifierActionID adds the actionRunSpecifierActionId to the waypoint service send status log params
+func (o *WaypointServiceSendStatusLogParams) SetActionRunSpecifierActionID(actionRunSpecifierActionID string) {
+	o.ActionRunSpecifierActionID = actionRunSpecifierActionID
 }
 
-// WithActionRunSeq adds the actionRunSeq to the waypoint service send status log params
-func (o *WaypointServiceSendStatusLogParams) WithActionRunSeq(actionRunSeq string) *WaypointServiceSendStatusLogParams {
-	o.SetActionRunSeq(actionRunSeq)
+// WithActionRunSpecifierSequence adds the actionRunSpecifierSequence to the waypoint service send status log params
+func (o *WaypointServiceSendStatusLogParams) WithActionRunSpecifierSequence(actionRunSpecifierSequence string) *WaypointServiceSendStatusLogParams {
+	o.SetActionRunSpecifierSequence(actionRunSpecifierSequence)
 	return o
 }
 
-// SetActionRunSeq adds the actionRunSeq to the waypoint service send status log params
-func (o *WaypointServiceSendStatusLogParams) SetActionRunSeq(actionRunSeq string) {
-	o.ActionRunSeq = actionRunSeq
+// SetActionRunSpecifierSequence adds the actionRunSpecifierSequence to the waypoint service send status log params
+func (o *WaypointServiceSendStatusLogParams) SetActionRunSpecifierSequence(actionRunSpecifierSequence string) {
+	o.ActionRunSpecifierSequence = actionRunSpecifierSequence
 }
 
 // WithBody adds the body to the waypoint service send status log params
@@ -208,13 +202,13 @@ func (o *WaypointServiceSendStatusLogParams) WriteToRequest(r runtime.ClientRequ
 	}
 	var res []error
 
-	// path param action_config.id
-	if err := r.SetPathParam("action_config.id", o.ActionConfigID); err != nil {
+	// path param action_run.specifier.action.id
+	if err := r.SetPathParam("action_run.specifier.action.id", o.ActionRunSpecifierActionID); err != nil {
 		return err
 	}
 
-	// path param action_run_seq
-	if err := r.SetPathParam("action_run_seq", o.ActionRunSeq); err != nil {
+	// path param action_run.specifier.sequence
+	if err := r.SetPathParam("action_run.specifier.sequence", o.ActionRunSpecifierSequence); err != nil {
 		return err
 	}
 	if o.Body != nil {

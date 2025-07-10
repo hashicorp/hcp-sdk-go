@@ -220,6 +220,8 @@ type ClientService interface {
 
 	WaypointServiceSendStatusLog(params *WaypointServiceSendStatusLogParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceSendStatusLogOK, error)
 
+	WaypointServiceSendStatusLog2(params *WaypointServiceSendStatusLog2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceSendStatusLog2OK, error)
+
 	WaypointServiceStartingAction(params *WaypointServiceStartingActionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceStartingActionOK, error)
 
 	WaypointServiceUIListActionConfigBundles(params *WaypointServiceUIListActionConfigBundlesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUIListActionConfigBundlesOK, error)
@@ -3412,7 +3414,7 @@ func (a *Client) WaypointServiceSendStatusLog(params *WaypointServiceSendStatusL
 	op := &runtime.ClientOperation{
 		ID:                 "WaypointService_SendStatusLog",
 		Method:             "POST",
-		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_run.specifier.action.id}/action-runs/{action_run.specifier.sequence}/status-log",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -3436,6 +3438,44 @@ func (a *Client) WaypointServiceSendStatusLog(params *WaypointServiceSendStatusL
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceSendStatusLogDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceSendStatusLog2 statuses logs for action runs
+*/
+func (a *Client) WaypointServiceSendStatusLog2(params *WaypointServiceSendStatusLog2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceSendStatusLog2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceSendStatusLog2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_SendStatusLog2",
+		Method:             "POST",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action-runs/{action_run.id}/status-log",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceSendStatusLog2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceSendStatusLog2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceSendStatusLog2Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

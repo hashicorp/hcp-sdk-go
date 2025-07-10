@@ -21,6 +21,9 @@ import (
 // swagger:model hashicorp.cloud.network_20200907.DNSForwardingResponse
 type HashicorpCloudNetwork20200907DNSForwardingResponse struct {
 
+	// ConnectionType specifies the type of connection for the provided peering_id
+	ConnectionType string `json:"connection_type,omitempty"`
+
 	// CreatedAt is a timestamp when dns forwarding was originally created
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
@@ -31,7 +34,7 @@ type HashicorpCloudNetwork20200907DNSForwardingResponse struct {
 	// Id is the id of the created dns forwarding.
 	ID string `json:"id,omitempty"`
 
-	// PeeringId is the id of the peering to the target customer VPC/VNet
+	// PeeringId is the ID that represents peering or transit gateway attachment between HVN and target customer network.
 	PeeringID string `json:"peering_id,omitempty"`
 
 	// ForwardingRules is the DNS forwarding rules for this DNS forwarding

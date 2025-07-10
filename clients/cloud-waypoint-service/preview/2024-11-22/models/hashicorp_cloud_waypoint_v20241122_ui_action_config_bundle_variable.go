@@ -20,10 +20,10 @@ type HashicorpCloudWaypointV20241122UIActionConfigBundleVariable struct {
 	// The key of the variable
 	Key string `json:"key,omitempty"`
 
-	// If the variable is sensitive
+	// This field is currently deprecated and will not be populated.
 	Sensitive bool `json:"sensitive,omitempty"`
 
-	// The value of the variable
+	// This field is currently deprecated and will not be populated.
 	Value string `json:"value,omitempty"`
 }
 

@@ -6,6 +6,7 @@ package integration_connection_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetIntegrationConnectionByIDOK) Code() int {
 }
 
 func (o *GetIntegrationConnectionByIDOK) Error() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections/{id}][%d] getIntegrationConnectionByIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections/{id}][%d] getIntegrationConnectionByIdOK %s", 200, payload)
 }
 
 func (o *GetIntegrationConnectionByIDOK) String() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections/{id}][%d] getIntegrationConnectionByIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections/{id}][%d] getIntegrationConnectionByIdOK %s", 200, payload)
 }
 
 func (o *GetIntegrationConnectionByIDOK) GetPayload() *models.VaultRadar20230501IntegrationConnection {
@@ -158,11 +161,13 @@ func (o *GetIntegrationConnectionByIDDefault) Code() int {
 }
 
 func (o *GetIntegrationConnectionByIDDefault) Error() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections/{id}][%d] GetIntegrationConnectionByID default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections/{id}][%d] GetIntegrationConnectionByID default %s", o._statusCode, payload)
 }
 
 func (o *GetIntegrationConnectionByIDDefault) String() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections/{id}][%d] GetIntegrationConnectionByID default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/integrations/connections/{id}][%d] GetIntegrationConnectionByID default %s", o._statusCode, payload)
 }
 
 func (o *GetIntegrationConnectionByIDDefault) GetPayload() *models.RPCStatus {

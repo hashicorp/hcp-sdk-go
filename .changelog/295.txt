@@ -1,0 +1,3 @@
+```release-note:bug
+Restore preview version of cloud-billing version 2020-11-05
+```

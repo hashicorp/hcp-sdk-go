@@ -7,6 +7,7 @@ package data_source_registration_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *OnboardDataSourceOK) Code() int {
 }
 
 func (o *OnboardDataSourceOK) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/onboard][%d] onboardDataSourceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/onboard][%d] onboardDataSourceOK %s", 200, payload)
 }
 
 func (o *OnboardDataSourceOK) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/onboard][%d] onboardDataSourceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/onboard][%d] onboardDataSourceOK %s", 200, payload)
 }
 
 func (o *OnboardDataSourceOK) GetPayload() *models.VaultRadar20230501OnboardDataSourceResponse {
@@ -161,11 +164,13 @@ func (o *OnboardDataSourceDefault) Code() int {
 }
 
 func (o *OnboardDataSourceDefault) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/onboard][%d] OnboardDataSource default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/onboard][%d] OnboardDataSource default %s", o._statusCode, payload)
 }
 
 func (o *OnboardDataSourceDefault) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/onboard][%d] OnboardDataSource default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/onboard][%d] OnboardDataSource default %s", o._statusCode, payload)
 }
 
 func (o *OnboardDataSourceDefault) GetPayload() *models.RPCStatus {

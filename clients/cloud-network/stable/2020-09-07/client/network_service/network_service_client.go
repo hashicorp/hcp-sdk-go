@@ -90,6 +90,8 @@ type ClientService interface {
 
 	GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPeeringOK, error)
 
+	GetPrivateLinkService(params *GetPrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPrivateLinkServiceOK, error)
+
 	GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTGWAttachmentOK, error)
 
 	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error)
@@ -103,6 +105,8 @@ type ClientService interface {
 	ListHVNRoutes(params *ListHVNRoutesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListHVNRoutesOK, error)
 
 	ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPeeringsOK, error)
+
+	ListPrivateLinkService(params *ListPrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPrivateLinkServiceOK, error)
 
 	ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTGWAttachmentsOK, error)
 
@@ -796,6 +800,44 @@ func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAut
 }
 
 /*
+GetPrivateLinkService gets private link returns a private link matching the request
+*/
+func (a *Client) GetPrivateLinkService(params *GetPrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPrivateLinkServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetPrivateLinkServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetPrivateLinkService",
+		Method:             "GET",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/private-link-services/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPrivateLinkServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPrivateLinkServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetPrivateLinkServiceDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetTGWAttachment gets t g w attachment returns existing t g w attachment
 */
 func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTGWAttachmentOK, error) {
@@ -1058,6 +1100,44 @@ func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.Clien
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListPeeringsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListPrivateLinkService lists private link returns a list of private link matching the request
+*/
+func (a *Client) ListPrivateLinkService(params *ListPrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPrivateLinkServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListPrivateLinkServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListPrivateLinkService",
+		Method:             "GET",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/private-link-services",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListPrivateLinkServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListPrivateLinkServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListPrivateLinkServiceDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

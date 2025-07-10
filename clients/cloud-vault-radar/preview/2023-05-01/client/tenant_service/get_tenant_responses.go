@@ -6,6 +6,7 @@ package tenant_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetTenantOK) Code() int {
 }
 
 func (o *GetTenantOK) Error() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants][%d] getTenantOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants][%d] getTenantOK %s", 200, payload)
 }
 
 func (o *GetTenantOK) String() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants][%d] getTenantOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants][%d] getTenantOK %s", 200, payload)
 }
 
 func (o *GetTenantOK) GetPayload() *models.VaultRadar20230501TenantGetResponse {
@@ -158,11 +161,13 @@ func (o *GetTenantDefault) Code() int {
 }
 
 func (o *GetTenantDefault) Error() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants][%d] GetTenant default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants][%d] GetTenant default %s", o._statusCode, payload)
 }
 
 func (o *GetTenantDefault) String() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants][%d] GetTenant default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/tenants][%d] GetTenant default %s", o._statusCode, payload)
 }
 
 func (o *GetTenantDefault) GetPayload() *models.RPCStatus {

@@ -7,6 +7,7 @@ package data_source_registration_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *UpdateDataSourceTokenOK) Code() int {
 }
 
 func (o *UpdateDataSourceTokenOK) Error() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/token][%d] updateDataSourceTokenOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/token][%d] updateDataSourceTokenOK %s", 200, payload)
 }
 
 func (o *UpdateDataSourceTokenOK) String() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/token][%d] updateDataSourceTokenOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/token][%d] updateDataSourceTokenOK %s", 200, payload)
 }
 
 func (o *UpdateDataSourceTokenOK) GetPayload() interface{} {
@@ -159,11 +162,13 @@ func (o *UpdateDataSourceTokenDefault) Code() int {
 }
 
 func (o *UpdateDataSourceTokenDefault) Error() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/token][%d] UpdateDataSourceToken default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/token][%d] UpdateDataSourceToken default %s", o._statusCode, payload)
 }
 
 func (o *UpdateDataSourceTokenDefault) String() string {
-	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/token][%d] UpdateDataSourceToken default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/token][%d] UpdateDataSourceToken default %s", o._statusCode, payload)
 }
 
 func (o *UpdateDataSourceTokenDefault) GetPayload() *models.RPCStatus {

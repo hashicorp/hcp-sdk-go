@@ -7,6 +7,7 @@ package tenant_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *ProvisionTenantOK) Code() int {
 }
 
 func (o *ProvisionTenantOK) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/tenants/provision][%d] provisionTenantOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/tenants/provision][%d] provisionTenantOK %s", 200, payload)
 }
 
 func (o *ProvisionTenantOK) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/tenants/provision][%d] provisionTenantOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/tenants/provision][%d] provisionTenantOK %s", 200, payload)
 }
 
 func (o *ProvisionTenantOK) GetPayload() interface{} {
@@ -159,11 +162,13 @@ func (o *ProvisionTenantDefault) Code() int {
 }
 
 func (o *ProvisionTenantDefault) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/tenants/provision][%d] ProvisionTenant default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/tenants/provision][%d] ProvisionTenant default %s", o._statusCode, payload)
 }
 
 func (o *ProvisionTenantDefault) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/tenants/provision][%d] ProvisionTenant default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/tenants/provision][%d] ProvisionTenant default %s", o._statusCode, payload)
 }
 
 func (o *ProvisionTenantDefault) GetPayload() *models.RPCStatus {
