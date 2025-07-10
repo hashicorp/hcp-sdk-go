@@ -1,3 +1,8 @@
+## v0.151.0 (July 10, 2025)
+
+FEATURES:
+
+* Updated config package to allow for distinct defaults supporting different HCP deployment geographies [[GH-273](https://github.com/hashicorp/hcp-sdk-go/pull/273)]
 ## v0.150.0 (July 09, 2025)
 
 ## v0.149.0 (July 02, 2025)
