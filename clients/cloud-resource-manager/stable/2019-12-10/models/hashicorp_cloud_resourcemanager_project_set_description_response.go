@@ -17,8 +17,9 @@ import (
 // swagger:model hashicorp.cloud.resourcemanager.ProjectSetDescriptionResponse
 type HashicorpCloudResourcemanagerProjectSetDescriptionResponse struct {
 
-	// operation_id is the operation that represents the async update
-	// of the project description.
+	// operation_id is the operation that represents the async update of the project description.
+	// The client should poll the returned operation until it is completed.
+	// For more details on polling an operation, consult the [HCP Operations Service /wait endpoint documentation](https://developer.hashicorp.com/hcp/api-docs/operations#Wait).
 	OperationID string `json:"operation_id,omitempty"`
 }
 

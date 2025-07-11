@@ -18,8 +18,9 @@ import (
 // swagger:model hashicorp.cloud.resourcemanager.ProjectCreateResponse
 type HashicorpCloudResourcemanagerProjectCreateResponse struct {
 
-	// operation_id is the ID of the operation that represents the async creation
-	// of the project.
+	// operation_id is the ID of the operation that represents the async creation of the project.
+	// The client should poll the returned operation until it is completed.
+	// For more details on polling an operation, consult the [HCP Operations Service /wait endpoint documentation](https://developer.hashicorp.com/hcp/api-docs/operations#Wait).
 	OperationID string `json:"operation_id,omitempty"`
 
 	// Project is the newly created project.
