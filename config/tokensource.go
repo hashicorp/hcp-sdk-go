@@ -39,10 +39,13 @@ func (c *hcpConfig) setTokenSource() error {
 	}
 
 	// Get the credential cache path
-	// TODO: make this configurable
-	cacheFile, err := files.TokenCacheFile()
-	if err != nil {
-		return err
+	cacheFile := c.cachedTokenFile
+	var err error
+	if cacheFile == "" {
+		cacheFile, err = files.TokenCacheFile()
+		if err != nil {
+			return err
+		}
 	}
 
 	tokenSource, sourceType, sourceIdentifier, err := c.getTokenSource()

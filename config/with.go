@@ -152,6 +152,14 @@ func WithProfile(p *profile.UserProfile) HCPConfigOption {
 	}
 }
 
+// WithTokenFile is an option
+func WithCachedTokenFile(tokenFile string) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		config.cachedTokenFile = tokenFile
+		return nil
+	}
+}
+
 // WithTokenSource can be used to set a token source. This should only be necessary for testing.
 // Tokens from a custom token source will not be cached.
 func WithTokenSource(tokenSource oauth2.TokenSource) HCPConfigOption {
