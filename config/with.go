@@ -152,7 +152,7 @@ func WithProfile(p *profile.UserProfile) HCPConfigOption {
 	}
 }
 
-// WithTokenFile is an option
+// WithCachedTokenFile is an option
 func WithCachedTokenFile(tokenFile string) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.cachedTokenFile = tokenFile
