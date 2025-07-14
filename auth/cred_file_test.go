@@ -13,6 +13,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
+	"github.com/hashicorp/hcp-sdk-go/config/files"
 	"github.com/stretchr/testify/require"
 )
 
@@ -186,7 +187,7 @@ func TestGetDefaultCredentialFile(t *testing.T) {
 		r.NoError(WriteCredentialFile(f.Name(), cf))
 
 		t.Setenv(EnvHCPCredFile, f.Name())
-		out, err := GetDefaultCredentialFile()
+		out, err := GetDefaultCredentialFile("")
 		r.NoError(err)
 		r.EqualValues(cf, out)
 	})
@@ -207,7 +208,7 @@ func TestGetDefaultCredentialFile(t *testing.T) {
 		r.NoError(WriteCredentialFile(f.Name(), cf))
 
 		testDefaultHCPCredFilePath = f.Name()
-		out, err := GetDefaultCredentialFile()
+		out, err := GetDefaultCredentialFile("")
 		testDefaultHCPCredFilePath = ""
 		r.NoError(err)
 		r.EqualValues(cf, out)
@@ -219,16 +220,24 @@ func Test_getCredentialFilePath(t *testing.T) {
 		r := require.New(t)
 		cf := "test-path"
 		t.Setenv(EnvHCPCredFile, cf)
-		p, err := GetCredentialFilePath()
+		p, err := GetCredentialFilePath("")
 		r.NoError(err)
 		r.Equal(cf, p)
 	})
 
 	t.Run("without  env", func(t *testing.T) {
 		r := require.New(t)
-		p, err := GetCredentialFilePath()
+		p, err := GetCredentialFilePath("")
 		r.NoError(err)
-		r.Contains(p, CredentialFileName)
+		r.Contains(p, files.TokenCacheFileName, "%s", p)
+	})
+
+	t.Run("with  file path", func(t *testing.T) {
+		r := require.New(t)
+		filePath := "test-cred-file.json"
+		p, err := GetCredentialFilePath(filePath)
+		r.NoError(err)
+		r.Contains(p, filePath, "%s", p)
 	})
 }
 

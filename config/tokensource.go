@@ -39,13 +39,9 @@ func (c *hcpConfig) setTokenSource() error {
 	}
 
 	// Get the credential cache path
-	cacheFile := c.cachedTokenFile
-	var err error
-	if cacheFile == "" {
-		cacheFile, err = files.TokenCacheFile()
-		if err != nil {
-			return err
-		}
+	cacheFile, err := files.TokenCacheFile(c.cachedTokenFile)
+	if err != nil {
+		return err
 	}
 
 	tokenSource, sourceType, sourceIdentifier, err := c.getTokenSource()
@@ -121,7 +117,7 @@ func (c *hcpConfig) getTokenSource() (oauth2.TokenSource, sourceType, string, er
 	// If we haven't been given an explicit credential file to use, try to load
 	// the credential file from the environment or default location.
 	if c.credentialFile == nil {
-		credFile, err := auth.GetDefaultCredentialFile()
+		credFile, err := auth.GetDefaultCredentialFile(c.cachedTokenFile)
 		if err != nil {
 			return nil, "", "", err
 		}

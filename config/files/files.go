@@ -32,7 +32,13 @@ const (
 )
 
 // TokenCacheFile will return the absolute path to the token cache file.
-func TokenCacheFile() (string, error) {
+// If filePath is non-empty, it will be returned as is. Otherwise, the default path
+// will be constructed based on the user's home directory and DefaultDirectory/TokenCacheFileName.
+func TokenCacheFile(filePath string) (string, error) {
+	if filePath != "" {
+		return filePath, nil
+	}
+
 	userHome, err := os.UserHomeDir()
 	if err != nil {
 		return "", fmt.Errorf("failed to retrieve user's home directory path: %v", err)
