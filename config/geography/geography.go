@@ -34,3 +34,13 @@ type Config struct {
 	// SCADAAddress is the address of the production SCADA endpoint
 	SCADAAddress string
 }
+
+// ValidateGeo checks if the provided geography is valid
+func ValidateGeo(geo Geo) bool {
+	for _, g := range Geographies {
+		if g == geo {
+			return true
+		}
+	}
+	return false
+}

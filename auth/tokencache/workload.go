@@ -41,7 +41,7 @@ func (source *cachingTokenSource) workloadToken(cachedTokens *cache) (*oauth2.To
 	}
 
 	// Cache the new token
-	cachedTokens.Workloads[source.sourceIdentifier] = *cacheEntryFromToken(token)
+	cachedTokens.Workloads[source.sourceIdentifier] = *cacheEntryFromToken(token, source.geography)
 
 	// Write the cache back to the file
 	if err = cachedTokens.write(source.cacheFile); err != nil {
