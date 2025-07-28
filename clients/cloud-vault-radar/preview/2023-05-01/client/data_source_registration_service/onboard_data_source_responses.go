@@ -198,6 +198,9 @@ type OnboardDataSourceBody struct {
 	// connection url
 	ConnectionURL string `json:"connection_url,omitempty"`
 
+	// detector type
+	DetectorType string `json:"detector_type,omitempty"`
+
 	// location
 	Location *OnboardDataSourceParamsBodyLocation `json:"location,omitempty"`
 
