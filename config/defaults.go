@@ -63,6 +63,9 @@ func configFromGeography(config *hcpConfig, geo geography.Geo) (*hcpConfig, erro
 	config.oauth2Config.Endpoint.AuthURL = geoConfig.AuthURL + AuthEndpointAuthPath
 	config.oauth2Config.Endpoint.TokenURL = geoConfig.AuthURL + AuthEndpointTokenPath
 
+	// geography config
+	config.geography = geo
+
 	return config, nil
 }
 
