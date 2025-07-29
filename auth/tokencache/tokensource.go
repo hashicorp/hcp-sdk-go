@@ -122,7 +122,7 @@ func (source *cachingTokenSource) getValidToken(hitEntry *cacheEntry) (*oauth2.T
 //
 // TODO: remove sourceType once geography is set for service principal and workload tokens.
 func matchGeography(sourceType sourceType, cachedGeography string, configGeography string) bool {
-	if sourceType != sourceTypeLogin {
+	if sourceType != sourceTypeLogin && sourceType != sourceTypeServicePrincipal {
 		return true
 	}
 
