@@ -1,3 +1,8 @@
+## v0.153.0 (July 30, 2025)
+
+BUG FIXES:
+
+* Allow auth between switching HCP geographies [[GH-296](https://github.com/hashicorp/hcp-sdk-go/pull/296)]
 ## v0.152.0 (July 16, 2025)
 
 ## v0.151.0 (July 10, 2025)
