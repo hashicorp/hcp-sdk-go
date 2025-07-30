@@ -57,11 +57,15 @@ func (c *hcpConfig) setTokenSource() error {
 			return err
 		}
 	case sourceTypeServicePrincipal:
-		c.tokenSource = tokencache.NewServicePrincipalTokenSource(
+		c.tokenSource, err = tokencache.NewServicePrincipalTokenSource(
 			cacheFile,
 			sourceIdentifier,
 			tokenSource,
+			string(c.geography),
 		)
+		if err != nil {
+			return err
+		}
 	case sourceTypeWorkload:
 		c.tokenSource = tokencache.NewWorkloadTokenSource(
 			cacheFile,
