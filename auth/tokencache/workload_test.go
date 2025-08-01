@@ -29,7 +29,7 @@ func TestCachingTokenSource_Workloads(t *testing.T) {
 	tokenSourceA := NewTestTokenSource("a")
 	tokenSourceB := NewTestTokenSource("b")
 
-	// Create the caching token sources for service principals
+	// Create the caching token sources for workload identity
 	subjectA, err := NewWorkloadTokenSource(
 		cacheFile,
 		"workload-a",
@@ -137,7 +137,7 @@ func TestCachingTokenSource_Workloads_CompatibleWithNoGeography(t *testing.T) {
 	tokenSourceA := NewTestTokenSource("a")
 	tokenSourceB := NewTestTokenSource("b")
 
-	// Create the caching token sources for service principals
+	// Create the caching token sources for workload identity
 	subjectA, err := NewWorkloadTokenSource(
 		cacheFile,
 		"workload-a",
