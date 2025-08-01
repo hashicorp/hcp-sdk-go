@@ -53,7 +53,7 @@ func (source *cachingTokenSource) loginToken(cachedTokens *cache) (*oauth2.Token
 	// For backwards compatibility, if geography is not set in the cache entry,
 	// we force an update to store the geography in the cached file
 	if hitEntry != nil && hitEntry.AccessToken == token.AccessToken &&
-		matchGeography(source.sourceType, hitEntry.Geography, source.geography) {
+		matchGeography(hitEntry.Geography, source.geography) {
 		// The cached entry was used,  the cache does not need to be updated
 		return token, nil
 	}
