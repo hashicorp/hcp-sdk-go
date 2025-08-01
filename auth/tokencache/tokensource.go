@@ -87,14 +87,14 @@ func (source *cachingTokenSource) getValidToken(hitEntry *cacheEntry) (*oauth2.T
 	// Return the access token if it is still valid for at least minTTL
 	// and match the geography
 	if token != nil && token.Expiry.After(time.Now().Add(minTTL)) &&
-		matchGeography(source.sourceType, hitEntry.Geography, source.geography) {
+		matchGeography(hitEntry.Geography, source.geography) {
 		return token, nil
 	}
 
 	// Try to refresh the token if it has a RefreshToken and an oauth config was provided
 	// and match the geography
 	if token != nil && token.RefreshToken != "" && source.oauthConfig != nil &&
-		matchGeography(source.sourceType, hitEntry.Geography, source.geography) {
+		matchGeography(hitEntry.Geography, source.geography) {
 		ctx, cancel := context.WithTimeout(context.Background(), refreshTimeout)
 		defer cancel()
 
@@ -119,13 +119,7 @@ func (source *cachingTokenSource) getValidToken(hitEntry *cacheEntry) (*oauth2.T
 // matchGeography checks if the cached geography matches the config geography.
 // If the cached geography is empty, it means that the cache was created before geography support was added,
 // so it will return false to force an update of the cache.
-//
-// TODO: remove sourceType once geography is set for service principal and workload tokens.
-func matchGeography(sourceType sourceType, cachedGeography string, configGeography string) bool {
-	// if sourceType != sourceTypeLogin && sourceType != sourceTypeServicePrincipal {
-	// 	return true
-	// }
-
+func matchGeography(cachedGeography string, configGeography string) bool {
 	// The cached file is prior to geography support,
 	// return false
 	if cachedGeography == "" {
