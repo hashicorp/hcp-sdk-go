@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *UnsealOK) Code() int {
 }
 
 func (o *UnsealOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] unsealOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] unsealOK %s", 200, payload)
 }
 
 func (o *UnsealOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] unsealOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] unsealOK %s", 200, payload)
 }
 
 func (o *UnsealOK) GetPayload() *models.HashicorpCloudVault20200420UnsealResponse {
@@ -159,11 +162,13 @@ func (o *UnsealDefault) Code() int {
 }
 
 func (o *UnsealDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] Unseal default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] Unseal default %s", o._statusCode, payload)
 }
 
 func (o *UnsealDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] Unseal default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unseal][%d] Unseal default %s", o._statusCode, payload)
 }
 
 func (o *UnsealDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

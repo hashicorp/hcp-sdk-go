@@ -27,6 +27,9 @@ type HashicorpCloudVault20201125ClusterConfig struct {
 	// capacity config
 	CapacityConfig *HashicorpCloudVault20201125CapacityConfig `json:"capacity_config,omitempty"`
 
+	// disaster recovery network config
+	DisasterRecoveryNetworkConfig *HashicorpCloudVault20201125DisasterRecoveryNetworkConfig `json:"disaster_recovery_network_config,omitempty"`
+
 	// maintenance config
 	MaintenanceConfig HashicorpCloudVault20201125MaintenanceConfig `json:"maintenance_config,omitempty"`
 
@@ -39,6 +42,9 @@ type HashicorpCloudVault20201125ClusterConfig struct {
 	// network config
 	NetworkConfig *HashicorpCloudVault20201125NetworkConfig `json:"network_config,omitempty"`
 
+	// reporting config
+	ReportingConfig *HashicorpCloudVault20201125ReportingConfig `json:"reporting_config,omitempty"`
+
 	// snapshot config
 	SnapshotConfig *HashicorpCloudVault20201125SnapshotConfig `json:"snapshot_config,omitempty"`
 
@@ -50,9 +56,6 @@ type HashicorpCloudVault20201125ClusterConfig struct {
 
 	// vault config
 	VaultConfig *HashicorpCloudVault20201125VaultConfig `json:"vault_config,omitempty"`
-
-	// vault insights config
-	VaultInsightsConfig *HashicorpCloudVault20201125VaultInsightsConfig `json:"vault_insights_config,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 cluster config
@@ -71,6 +74,10 @@ func (m *HashicorpCloudVault20201125ClusterConfig) Validate(formats strfmt.Regis
 		res = append(res, err)
 	}
 
+	if err := m.validateDisasterRecoveryNetworkConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMajorVersionUpgradeConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -80,6 +87,10 @@ func (m *HashicorpCloudVault20201125ClusterConfig) Validate(formats strfmt.Regis
 	}
 
 	if err := m.validateNetworkConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReportingConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -96,10 +107,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) Validate(formats strfmt.Regis
 	}
 
 	if err := m.validateVaultConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateVaultInsightsConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -166,6 +173,25 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateCapacityConfig(format
 	return nil
 }
 
+func (m *HashicorpCloudVault20201125ClusterConfig) validateDisasterRecoveryNetworkConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.DisasterRecoveryNetworkConfig) { // not required
+		return nil
+	}
+
+	if m.DisasterRecoveryNetworkConfig != nil {
+		if err := m.DisasterRecoveryNetworkConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("disaster_recovery_network_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("disaster_recovery_network_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVault20201125ClusterConfig) validateMajorVersionUpgradeConfig(formats strfmt.Registry) error {
 	if swag.IsZero(m.MajorVersionUpgradeConfig) { // not required
 		return nil
@@ -215,6 +241,25 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateNetworkConfig(formats
 				return ve.ValidateName("network_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("network_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) validateReportingConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.ReportingConfig) { // not required
+		return nil
+	}
+
+	if m.ReportingConfig != nil {
+		if err := m.ReportingConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("reporting_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("reporting_config")
 			}
 			return err
 		}
@@ -299,25 +344,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateVaultConfig(formats s
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125ClusterConfig) validateVaultInsightsConfig(formats strfmt.Registry) error {
-	if swag.IsZero(m.VaultInsightsConfig) { // not required
-		return nil
-	}
-
-	if m.VaultInsightsConfig != nil {
-		if err := m.VaultInsightsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vault_insights_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vault_insights_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this hashicorp cloud vault 20201125 cluster config based on the context it is used
 func (m *HashicorpCloudVault20201125ClusterConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -334,6 +360,10 @@ func (m *HashicorpCloudVault20201125ClusterConfig) ContextValidate(ctx context.C
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDisasterRecoveryNetworkConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateMajorVersionUpgradeConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -343,6 +373,10 @@ func (m *HashicorpCloudVault20201125ClusterConfig) ContextValidate(ctx context.C
 	}
 
 	if err := m.contextValidateNetworkConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateReportingConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -359,10 +393,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) ContextValidate(ctx context.C
 	}
 
 	if err := m.contextValidateVaultConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateVaultInsightsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -435,6 +465,27 @@ func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateCapacityConfig
 	return nil
 }
 
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateDisasterRecoveryNetworkConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DisasterRecoveryNetworkConfig != nil {
+
+		if swag.IsZero(m.DisasterRecoveryNetworkConfig) { // not required
+			return nil
+		}
+
+		if err := m.DisasterRecoveryNetworkConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("disaster_recovery_network_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("disaster_recovery_network_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateMajorVersionUpgradeConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MajorVersionUpgradeConfig != nil {
@@ -490,6 +541,27 @@ func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateNetworkConfig(
 				return ve.ValidateName("network_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("network_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateReportingConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ReportingConfig != nil {
+
+		if swag.IsZero(m.ReportingConfig) { // not required
+			return nil
+		}
+
+		if err := m.ReportingConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("reporting_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("reporting_config")
 			}
 			return err
 		}
@@ -574,27 +646,6 @@ func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateVaultConfig(ct
 				return ve.ValidateName("vault_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("vault_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateVaultInsightsConfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.VaultInsightsConfig != nil {
-
-		if swag.IsZero(m.VaultInsightsConfig) { // not required
-			return nil
-		}
-
-		if err := m.VaultInsightsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vault_insights_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vault_insights_config")
 			}
 			return err
 		}

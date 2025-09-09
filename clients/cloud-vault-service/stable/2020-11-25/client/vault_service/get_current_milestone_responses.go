@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetCurrentMilestoneOK) Code() int {
 }
 
 func (o *GetCurrentMilestoneOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] getCurrentMilestoneOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] getCurrentMilestoneOK %s", 200, payload)
 }
 
 func (o *GetCurrentMilestoneOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] getCurrentMilestoneOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] getCurrentMilestoneOK %s", 200, payload)
 }
 
 func (o *GetCurrentMilestoneOK) GetPayload() *models.HashicorpCloudVault20201125GetCurrentMilestoneResponse {
@@ -159,11 +162,13 @@ func (o *GetCurrentMilestoneDefault) Code() int {
 }
 
 func (o *GetCurrentMilestoneDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] GetCurrentMilestone default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] GetCurrentMilestone default %s", o._statusCode, payload)
 }
 
 func (o *GetCurrentMilestoneDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] GetCurrentMilestone default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/current-milestone][%d] GetCurrentMilestone default %s", o._statusCode, payload)
 }
 
 func (o *GetCurrentMilestoneDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

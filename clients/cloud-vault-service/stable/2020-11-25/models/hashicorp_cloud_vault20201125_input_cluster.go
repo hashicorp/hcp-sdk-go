@@ -35,6 +35,9 @@ type HashicorpCloudVault20201125InputCluster struct {
 	// primary cluster under performance replication.
 	PerformanceReplicationPrimaryCluster *HashicorpCloudInternalLocationLink `json:"performance_replication_primary_cluster,omitempty"`
 
+	// snapshot_schedule is the cron-formatted schedule for snapshots
+	SnapshotSchedule string `json:"snapshot_schedule,omitempty"`
+
 	// template_input refers to the template used to create the cluster that will be applied during bootstrap time.
 	TemplateInput *HashicorpCloudVault20201125InputClusterTemplateInput `json:"template_input,omitempty"`
 }

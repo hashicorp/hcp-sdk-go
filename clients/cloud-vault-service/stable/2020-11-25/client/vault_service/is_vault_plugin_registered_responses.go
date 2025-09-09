@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *IsVaultPluginRegisteredOK) Code() int {
 }
 
 func (o *IsVaultPluginRegisteredOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/is-registered][%d] isVaultPluginRegisteredOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/is-registered][%d] isVaultPluginRegisteredOK %s", 200, payload)
 }
 
 func (o *IsVaultPluginRegisteredOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/is-registered][%d] isVaultPluginRegisteredOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/is-registered][%d] isVaultPluginRegisteredOK %s", 200, payload)
 }
 
 func (o *IsVaultPluginRegisteredOK) GetPayload() *models.HashicorpCloudVault20201125IsVaultPluginRegisteredResponse {
@@ -159,11 +162,13 @@ func (o *IsVaultPluginRegisteredDefault) Code() int {
 }
 
 func (o *IsVaultPluginRegisteredDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/is-registered][%d] IsVaultPluginRegistered default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/is-registered][%d] IsVaultPluginRegistered default %s", o._statusCode, payload)
 }
 
 func (o *IsVaultPluginRegisteredDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/is-registered][%d] IsVaultPluginRegistered default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/is-registered][%d] IsVaultPluginRegistered default %s", o._statusCode, payload)
 }
 
 func (o *IsVaultPluginRegisteredDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
