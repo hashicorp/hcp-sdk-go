@@ -65,7 +65,7 @@ type HashicorpCloudNetwork20200907PrivateLinkService struct {
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
 
-	// vault_cluster_id is HVD cluster's internal id
+	// vault_cluster_id is HVD cluster's slug id
 	VaultClusterID string `json:"vault_cluster_id,omitempty"`
 }
 
