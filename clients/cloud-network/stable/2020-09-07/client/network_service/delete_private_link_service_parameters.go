@@ -69,7 +69,7 @@ type DeletePrivateLinkServiceParams struct {
 
 	/* ID.
 
-	   Id is the user specified ID (Slug Id) of the private_link to which the rule belongs
+	   Id is the user specified ID (Slug Id) of the private_link to delete
 	*/
 	ID string
 
