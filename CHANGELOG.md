@@ -1,3 +1,5 @@
+## v0.160.0 (September 19, 2025)
+
 ## v0.159.0 (September 18, 2025)
 
 ## v0.158.0 (September 11, 2025)
