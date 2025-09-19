@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ListTGWAttachmentsOK) Code() int {
 }
 
 func (o *ListTGWAttachmentsOK) Error() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] listTGWAttachmentsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] listTGWAttachmentsOK %s", 200, payload)
 }
 
 func (o *ListTGWAttachmentsOK) String() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] listTGWAttachmentsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] listTGWAttachmentsOK %s", 200, payload)
 }
 
 func (o *ListTGWAttachmentsOK) GetPayload() *models.HashicorpCloudNetwork20200907ListTGWAttachmentsResponse {
@@ -159,11 +162,13 @@ func (o *ListTGWAttachmentsDefault) Code() int {
 }
 
 func (o *ListTGWAttachmentsDefault) Error() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] ListTGWAttachments default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] ListTGWAttachments default %s", o._statusCode, payload)
 }
 
 func (o *ListTGWAttachmentsDefault) String() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] ListTGWAttachments default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/transit-gateway-attachments][%d] ListTGWAttachments default %s", o._statusCode, payload)
 }
 
 func (o *ListTGWAttachmentsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

@@ -28,7 +28,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceUpgradeApplicationTFWorkspace
 
 	// Variables is a list of input variables to be used in the upgrade. These
 	// variables must be valid for the application's template.
-	Variables []*HashicorpCloudWaypointInputVariable `json:"variables"`
+	Variables []*HashicorpCloudWaypointV20241122InputVariable `json:"variables"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service upgrade application t f workspace body

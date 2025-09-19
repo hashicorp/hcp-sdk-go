@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewWaypointServiceUILoadProductBannerParams creates a new WaypointServiceUILoadProductBannerParams object,
@@ -60,6 +61,13 @@ WaypointServiceUILoadProductBannerParams contains all the parameters to send to 
 	Typically these are written to a http.Request.
 */
 type WaypointServiceUILoadProductBannerParams struct {
+
+	/* ForceCheckNamespace.
+
+	     If true, will force a recheck of the namespace even if it was recently
+	checked.
+	*/
+	ForceCheckNamespace *bool
 
 	// NamespaceID.
 	NamespaceID *string
@@ -141,6 +149,17 @@ func (o *WaypointServiceUILoadProductBannerParams) SetHTTPClient(client *http.Cl
 	o.HTTPClient = client
 }
 
+// WithForceCheckNamespace adds the forceCheckNamespace to the waypoint service UI load product banner params
+func (o *WaypointServiceUILoadProductBannerParams) WithForceCheckNamespace(forceCheckNamespace *bool) *WaypointServiceUILoadProductBannerParams {
+	o.SetForceCheckNamespace(forceCheckNamespace)
+	return o
+}
+
+// SetForceCheckNamespace adds the forceCheckNamespace to the waypoint service UI load product banner params
+func (o *WaypointServiceUILoadProductBannerParams) SetForceCheckNamespace(forceCheckNamespace *bool) {
+	o.ForceCheckNamespace = forceCheckNamespace
+}
+
 // WithNamespaceID adds the namespaceID to the waypoint service UI load product banner params
 func (o *WaypointServiceUILoadProductBannerParams) WithNamespaceID(namespaceID *string) *WaypointServiceUILoadProductBannerParams {
 	o.SetNamespaceID(namespaceID)
@@ -203,6 +222,23 @@ func (o *WaypointServiceUILoadProductBannerParams) WriteToRequest(r runtime.Clie
 		return err
 	}
 	var res []error
+
+	if o.ForceCheckNamespace != nil {
+
+		// query param force_check_namespace
+		var qrForceCheckNamespace bool
+
+		if o.ForceCheckNamespace != nil {
+			qrForceCheckNamespace = *o.ForceCheckNamespace
+		}
+		qForceCheckNamespace := swag.FormatBool(qrForceCheckNamespace)
+		if qForceCheckNamespace != "" {
+
+			if err := r.SetQueryParam("force_check_namespace", qForceCheckNamespace); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.NamespaceID != nil {
 

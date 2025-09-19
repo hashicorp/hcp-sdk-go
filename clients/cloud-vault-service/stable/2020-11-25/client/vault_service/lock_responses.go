@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *LockOK) Code() int {
 }
 
 func (o *LockOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/lock][%d] lockOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/lock][%d] lockOK %s", 200, payload)
 }
 
 func (o *LockOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/lock][%d] lockOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/lock][%d] lockOK %s", 200, payload)
 }
 
 func (o *LockOK) GetPayload() *models.HashicorpCloudVault20201125LockResponse {
@@ -159,11 +162,13 @@ func (o *LockDefault) Code() int {
 }
 
 func (o *LockDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/lock][%d] Lock default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/lock][%d] Lock default %s", o._statusCode, payload)
 }
 
 func (o *LockDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/lock][%d] Lock default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/lock][%d] Lock default %s", o._statusCode, payload)
 }
 
 func (o *LockDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

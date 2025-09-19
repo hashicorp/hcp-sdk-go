@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetCORSConfigOK) Code() int {
 }
 
 func (o *GetCORSConfigOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] getCORSConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] getCORSConfigOK %s", 200, payload)
 }
 
 func (o *GetCORSConfigOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] getCORSConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] getCORSConfigOK %s", 200, payload)
 }
 
 func (o *GetCORSConfigOK) GetPayload() *models.HashicorpCloudVault20200420GetCORSConfigResponse {
@@ -159,11 +162,13 @@ func (o *GetCORSConfigDefault) Code() int {
 }
 
 func (o *GetCORSConfigDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] GetCORSConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] GetCORSConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetCORSConfigDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] GetCORSConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/get-cors-config][%d] GetCORSConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetCORSConfigDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

@@ -54,7 +54,7 @@ WaypointServiceRetrieveAgentOperationOK describes a response with status code 20
 A successful response.
 */
 type WaypointServiceRetrieveAgentOperationOK struct {
-	Payload *models.HashicorpCloudWaypointRetrieveAgentOperationResponse
+	Payload *models.HashicorpCloudWaypointV20241122RetrieveAgentOperationResponse
 }
 
 // IsSuccess returns true when this waypoint service retrieve agent operation o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceRetrieveAgentOperationOK) String() string {
 	return fmt.Sprintf("[POST /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/agent/operation:retrieve][%d] waypointServiceRetrieveAgentOperationOK %s", 200, payload)
 }
 
-func (o *WaypointServiceRetrieveAgentOperationOK) GetPayload() *models.HashicorpCloudWaypointRetrieveAgentOperationResponse {
+func (o *WaypointServiceRetrieveAgentOperationOK) GetPayload() *models.HashicorpCloudWaypointV20241122RetrieveAgentOperationResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceRetrieveAgentOperationOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointRetrieveAgentOperationResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122RetrieveAgentOperationResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

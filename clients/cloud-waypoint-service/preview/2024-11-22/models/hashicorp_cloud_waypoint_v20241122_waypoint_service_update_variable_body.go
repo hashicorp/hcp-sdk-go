@@ -23,14 +23,14 @@ type HashicorpCloudWaypointV20241122WaypointServiceUpdateVariableBody struct {
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceUpdateVariableBodyNamespace `json:"namespace,omitempty"`
 
 	// The reference to the variable to update
-	Ref *HashicorpCloudWaypointRefVariable `json:"ref,omitempty"`
+	Ref *HashicorpCloudWaypointV20241122RefVariable `json:"ref,omitempty"`
 
 	// Optional, will be used for PATCH requests. This includes what fields to
 	// update in the request.
 	UpdateMask string `json:"update_mask,omitempty"`
 
 	// The variables fields to update
-	Variable *HashicorpCloudWaypointVariable `json:"variable,omitempty"`
+	Variable *HashicorpCloudWaypointV20241122Variable `json:"variable,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service update variable body

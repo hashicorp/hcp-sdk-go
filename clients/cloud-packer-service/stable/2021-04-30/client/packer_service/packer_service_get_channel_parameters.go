@@ -79,18 +79,6 @@ type PackerServiceGetChannelParams struct {
 	*/
 	LocationProjectID string
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure")
-	*/
-	LocationRegionProvider *string
-
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1")
-	*/
-	LocationRegionRegion *string
-
 	/* Slug.
 
 	   Human-readable name for the channel.
@@ -183,28 +171,6 @@ func (o *PackerServiceGetChannelParams) SetLocationProjectID(locationProjectID s
 	o.LocationProjectID = locationProjectID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the packer service get channel params
-func (o *PackerServiceGetChannelParams) WithLocationRegionProvider(locationRegionProvider *string) *PackerServiceGetChannelParams {
-	o.SetLocationRegionProvider(locationRegionProvider)
-	return o
-}
-
-// SetLocationRegionProvider adds the locationRegionProvider to the packer service get channel params
-func (o *PackerServiceGetChannelParams) SetLocationRegionProvider(locationRegionProvider *string) {
-	o.LocationRegionProvider = locationRegionProvider
-}
-
-// WithLocationRegionRegion adds the locationRegionRegion to the packer service get channel params
-func (o *PackerServiceGetChannelParams) WithLocationRegionRegion(locationRegionRegion *string) *PackerServiceGetChannelParams {
-	o.SetLocationRegionRegion(locationRegionRegion)
-	return o
-}
-
-// SetLocationRegionRegion adds the locationRegionRegion to the packer service get channel params
-func (o *PackerServiceGetChannelParams) SetLocationRegionRegion(locationRegionRegion *string) {
-	o.LocationRegionRegion = locationRegionRegion
-}
-
 // WithSlug adds the slug to the packer service get channel params
 func (o *PackerServiceGetChannelParams) WithSlug(slug string) *PackerServiceGetChannelParams {
 	o.SetSlug(slug)
@@ -237,40 +203,6 @@ func (o *PackerServiceGetChannelParams) WriteToRequest(r runtime.ClientRequest, 
 	// path param location.project_id
 	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
 		return err
-	}
-
-	if o.LocationRegionProvider != nil {
-
-		// query param location.region.provider
-		var qrLocationRegionProvider string
-
-		if o.LocationRegionProvider != nil {
-			qrLocationRegionProvider = *o.LocationRegionProvider
-		}
-		qLocationRegionProvider := qrLocationRegionProvider
-		if qLocationRegionProvider != "" {
-
-			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.LocationRegionRegion != nil {
-
-		// query param location.region.region
-		var qrLocationRegionRegion string
-
-		if o.LocationRegionRegion != nil {
-			qrLocationRegionRegion = *o.LocationRegionRegion
-		}
-		qLocationRegionRegion := qrLocationRegionRegion
-		if qLocationRegionRegion != "" {
-
-			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
-				return err
-			}
-		}
 	}
 
 	// path param slug

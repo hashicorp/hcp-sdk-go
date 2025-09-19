@@ -89,6 +89,12 @@ type ProjectServiceListParams struct {
 	*/
 	PaginationPreviousPageToken *string
 
+	/* Query.
+
+	   Query is the search query to filter the projects.
+	*/
+	Query *string
+
 	/* ScopeID.
 
 	   id is the id of the object being referenced.
@@ -102,6 +108,21 @@ type ProjectServiceListParams struct {
 	   Default: "UNKNOWN"
 	*/
 	ScopeType *string
+
+	/* SortingOrderBy.
+
+	     Specifies the list of per field ordering that should be used for sorting.
+	The order matters as rows are sorted in order by fields and when the field
+	matches, the next field is used to tie break the ordering.
+	The per field default ordering is ascending.
+
+	The fields should be immutabile, unique, and orderable. If the field is
+	not unique, more than one sort fields should be passed.
+
+	Example: oder_by=name,age desc,created_at asc
+	In that case, 'name' will get the default 'ascending' order.
+	*/
+	SortingOrderBy []string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -200,6 +221,17 @@ func (o *ProjectServiceListParams) SetPaginationPreviousPageToken(paginationPrev
 	o.PaginationPreviousPageToken = paginationPreviousPageToken
 }
 
+// WithQuery adds the query to the project service list params
+func (o *ProjectServiceListParams) WithQuery(query *string) *ProjectServiceListParams {
+	o.SetQuery(query)
+	return o
+}
+
+// SetQuery adds the query to the project service list params
+func (o *ProjectServiceListParams) SetQuery(query *string) {
+	o.Query = query
+}
+
 // WithScopeID adds the scopeID to the project service list params
 func (o *ProjectServiceListParams) WithScopeID(scopeID *string) *ProjectServiceListParams {
 	o.SetScopeID(scopeID)
@@ -220,6 +252,17 @@ func (o *ProjectServiceListParams) WithScopeType(scopeType *string) *ProjectServ
 // SetScopeType adds the scopeType to the project service list params
 func (o *ProjectServiceListParams) SetScopeType(scopeType *string) {
 	o.ScopeType = scopeType
+}
+
+// WithSortingOrderBy adds the sortingOrderBy to the project service list params
+func (o *ProjectServiceListParams) WithSortingOrderBy(sortingOrderBy []string) *ProjectServiceListParams {
+	o.SetSortingOrderBy(sortingOrderBy)
+	return o
+}
+
+// SetSortingOrderBy adds the sortingOrderBy to the project service list params
+func (o *ProjectServiceListParams) SetSortingOrderBy(sortingOrderBy []string) {
+	o.SortingOrderBy = sortingOrderBy
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -281,6 +324,23 @@ func (o *ProjectServiceListParams) WriteToRequest(r runtime.ClientRequest, reg s
 		}
 	}
 
+	if o.Query != nil {
+
+		// query param query
+		var qrQuery string
+
+		if o.Query != nil {
+			qrQuery = *o.Query
+		}
+		qQuery := qrQuery
+		if qQuery != "" {
+
+			if err := r.SetQueryParam("query", qQuery); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.ScopeID != nil {
 
 		// query param scope.id
@@ -315,8 +375,36 @@ func (o *ProjectServiceListParams) WriteToRequest(r runtime.ClientRequest, reg s
 		}
 	}
 
+	if o.SortingOrderBy != nil {
+
+		// binding items for sorting.order_by
+		joinedSortingOrderBy := o.bindParamSortingOrderBy(reg)
+
+		// query array param sorting.order_by
+		if err := r.SetQueryParam("sorting.order_by", joinedSortingOrderBy...); err != nil {
+			return err
+		}
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamProjectServiceList binds the parameter sorting.order_by
+func (o *ProjectServiceListParams) bindParamSortingOrderBy(formats strfmt.Registry) []string {
+	sortingOrderByIR := o.SortingOrderBy
+
+	var sortingOrderByIC []string
+	for _, sortingOrderByIIR := range sortingOrderByIR { // explode []string
+
+		sortingOrderByIIV := sortingOrderByIIR // string as string
+		sortingOrderByIC = append(sortingOrderByIC, sortingOrderByIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	sortingOrderByIS := swag.JoinByFormat(sortingOrderByIC, "multi")
+
+	return sortingOrderByIS
 }

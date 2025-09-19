@@ -19,7 +19,9 @@ import (
 // swagger:model hashicorp.cloud.resourcemanager.ProjectDeleteResponse
 type HashicorpCloudResourcemanagerProjectDeleteResponse struct {
 
-	// operation is the operation that represents the async delete
+	// operation is the operation that represents the async delete.
+	// The client should poll the returned operation until it is completed.
+	// For more details on polling an operation, consult the [HCP Operations Service /wait endpoint documentation](https://developer.hashicorp.com/hcp/api-docs/operations#Wait).
 	Operation *cloud.HashicorpCloudOperationOperation `json:"operation,omitempty"`
 }
 

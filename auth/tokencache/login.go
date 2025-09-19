@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/hashicorp/hcp-sdk-go/config/geography"
 	"golang.org/x/oauth2"
 )
 
@@ -20,13 +21,19 @@ func NewLoginTokenSource(
 	cacheFile string,
 	oauthTokenSource oauth2.TokenSource,
 	oauthConfig oAuth2Config,
-) oauth2.TokenSource {
+	geo string,
+) (oauth2.TokenSource, error) {
+	if !geography.ValidateGeo(geography.Geo(geo)) {
+		return nil, fmt.Errorf("login geography %s invalid. Supported: %v", geo, geography.Geographies)
+	}
+
 	return &cachingTokenSource{
 		cacheFile:        cacheFile,
 		sourceType:       sourceTypeLogin,
 		oauthTokenSource: oauthTokenSource,
 		oauthConfig:      oauthConfig,
-	}
+		geography:        geo,
+	}, nil
 }
 
 func (source *cachingTokenSource) loginToken(cachedTokens *cache) (*oauth2.Token, error) {
@@ -43,13 +50,16 @@ func (source *cachingTokenSource) loginToken(cachedTokens *cache) (*oauth2.Token
 		return nil, fmt.Errorf("failed to get new token: %w", err)
 	}
 
-	if hitEntry != nil && hitEntry.AccessToken == token.AccessToken {
+	// For backwards compatibility, if geography is not set in the cache entry,
+	// we force an update to store the geography in the cached file
+	if hitEntry != nil && hitEntry.AccessToken == token.AccessToken &&
+		matchGeography(hitEntry.Geography, source.geography) {
 		// The cached entry was used,  the cache does not need to be updated
 		return token, nil
 	}
 
 	// Cache the new token
-	cachedTokens.Login = cacheEntryFromToken(token)
+	cachedTokens.Login = cacheEntryFromToken(token, source.geography)
 
 	// Write the cache back to the file
 	if err = cachedTokens.write(source.cacheFile); err != nil {

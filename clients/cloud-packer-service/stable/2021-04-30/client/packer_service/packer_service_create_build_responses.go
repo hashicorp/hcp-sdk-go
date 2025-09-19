@@ -204,8 +204,8 @@ type PackerServiceCreateBuildBody struct {
 	// The fingerprint can be used as an identifier for the iteration.
 	Fingerprint string `json:"fingerprint,omitempty"`
 
-	// location
-	Location *PackerServiceCreateBuildParamsBodyLocation `json:"location,omitempty"`
+	// Location represents a target for an operation in HCP.
+	Location interface{} `json:"location,omitempty"`
 }
 
 // Validate validates this packer service create build body
@@ -213,10 +213,6 @@ func (o *PackerServiceCreateBuildBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := o.validateBuild(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := o.validateLocation(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -245,34 +241,11 @@ func (o *PackerServiceCreateBuildBody) validateBuild(formats strfmt.Registry) er
 	return nil
 }
 
-func (o *PackerServiceCreateBuildBody) validateLocation(formats strfmt.Registry) error {
-	if swag.IsZero(o.Location) { // not required
-		return nil
-	}
-
-	if o.Location != nil {
-		if err := o.Location.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this packer service create build body based on the context it is used
 func (o *PackerServiceCreateBuildBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := o.contextValidateBuild(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := o.contextValidateLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -303,27 +276,6 @@ func (o *PackerServiceCreateBuildBody) contextValidateBuild(ctx context.Context,
 	return nil
 }
 
-func (o *PackerServiceCreateBuildBody) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Location != nil {
-
-		if swag.IsZero(o.Location) { // not required
-			return nil
-		}
-
-		if err := o.Location.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // MarshalBinary interface implementation
 func (o *PackerServiceCreateBuildBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -335,103 +287,6 @@ func (o *PackerServiceCreateBuildBody) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (o *PackerServiceCreateBuildBody) UnmarshalBinary(b []byte) error {
 	var res PackerServiceCreateBuildBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*
-PackerServiceCreateBuildParamsBodyLocation Location represents a target for an operation in HCP.
-swagger:model PackerServiceCreateBuildParamsBodyLocation
-*/
-type PackerServiceCreateBuildParamsBodyLocation struct {
-
-	// region is the region that the resource is located in. It is
-	// optional if the object being referenced is a global object.
-	Region *cloud.HashicorpCloudLocationRegion `json:"region,omitempty"`
-}
-
-// Validate validates this packer service create build params body location
-func (o *PackerServiceCreateBuildParamsBodyLocation) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateRegion(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *PackerServiceCreateBuildParamsBodyLocation) validateRegion(formats strfmt.Registry) error {
-	if swag.IsZero(o.Region) { // not required
-		return nil
-	}
-
-	if o.Region != nil {
-		if err := o.Region.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location" + "." + "region")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location" + "." + "region")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this packer service create build params body location based on the context it is used
-func (o *PackerServiceCreateBuildParamsBodyLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidateRegion(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *PackerServiceCreateBuildParamsBodyLocation) contextValidateRegion(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Region != nil {
-
-		if swag.IsZero(o.Region) { // not required
-			return nil
-		}
-
-		if err := o.Region.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "location" + "." + "region")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "location" + "." + "region")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *PackerServiceCreateBuildParamsBodyLocation) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *PackerServiceCreateBuildParamsBodyLocation) UnmarshalBinary(b []byte) error {
-	var res PackerServiceCreateBuildParamsBodyLocation
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

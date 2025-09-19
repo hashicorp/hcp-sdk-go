@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -25,16 +26,26 @@ type HashicorpCloudIamSearchPrincipalsResult struct {
 	// id is the ID of the principal.
 	ID string `json:"id,omitempty"`
 
+	// identity_types is an array of the identity types for a user.
+	IdentityTypes []*HashicorpCloudIamUserPrincipalIdentityType `json:"identity_types"`
+
 	// name is the name of the principal.
 	Name string `json:"name,omitempty"`
 
 	// principal_type is the type of principal (user, service principal, group, etc.).
 	PrincipalType *HashicorpCloudIamPrincipalType `json:"principal_type,omitempty"`
+
+	// resource_name is the resource name for the principal
+	ResourceName string `json:"resource_name,omitempty"`
 }
 
 // Validate validates this hashicorp cloud iam search principals result
 func (m *HashicorpCloudIamSearchPrincipalsResult) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateIdentityTypes(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validatePrincipalType(formats); err != nil {
 		res = append(res, err)
@@ -43,6 +54,32 @@ func (m *HashicorpCloudIamSearchPrincipalsResult) Validate(formats strfmt.Regist
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudIamSearchPrincipalsResult) validateIdentityTypes(formats strfmt.Registry) error {
+	if swag.IsZero(m.IdentityTypes) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.IdentityTypes); i++ {
+		if swag.IsZero(m.IdentityTypes[i]) { // not required
+			continue
+		}
+
+		if m.IdentityTypes[i] != nil {
+			if err := m.IdentityTypes[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("identity_types" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("identity_types" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -69,6 +106,10 @@ func (m *HashicorpCloudIamSearchPrincipalsResult) validatePrincipalType(formats 
 func (m *HashicorpCloudIamSearchPrincipalsResult) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateIdentityTypes(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidatePrincipalType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -76,6 +117,31 @@ func (m *HashicorpCloudIamSearchPrincipalsResult) ContextValidate(ctx context.Co
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudIamSearchPrincipalsResult) contextValidateIdentityTypes(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.IdentityTypes); i++ {
+
+		if m.IdentityTypes[i] != nil {
+
+			if swag.IsZero(m.IdentityTypes[i]) { // not required
+				return nil
+			}
+
+			if err := m.IdentityTypes[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("identity_types" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("identity_types" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

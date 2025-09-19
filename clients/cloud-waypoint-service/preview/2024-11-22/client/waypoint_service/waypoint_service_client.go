@@ -72,6 +72,10 @@ type ClientService interface {
 
 	WaypointServiceCreateApplicationTemplate2(params *WaypointServiceCreateApplicationTemplate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateApplicationTemplate2OK, error)
 
+	WaypointServiceCreateGitHubSession(params *WaypointServiceCreateGitHubSessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateGitHubSessionOK, error)
+
+	WaypointServiceCreateIntegration(params *WaypointServiceCreateIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateIntegrationOK, error)
+
 	WaypointServiceCreateNamespace(params *WaypointServiceCreateNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateNamespaceOK, error)
 
 	WaypointServiceCreateTFCConfig(params *WaypointServiceCreateTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateTFCConfigOK, error)
@@ -93,6 +97,10 @@ type ClientService interface {
 	WaypointServiceDeleteApplicationTemplate3(params *WaypointServiceDeleteApplicationTemplate3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteApplicationTemplate3OK, error)
 
 	WaypointServiceDeleteApplicationTemplate4(params *WaypointServiceDeleteApplicationTemplate4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteApplicationTemplate4OK, error)
+
+	WaypointServiceDeleteIntegration(params *WaypointServiceDeleteIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteIntegrationOK, error)
+
+	WaypointServiceDeleteIntegration2(params *WaypointServiceDeleteIntegration2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteIntegration2OK, error)
 
 	WaypointServiceDeleteNamespace(params *WaypointServiceDeleteNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteNamespaceOK, error)
 
@@ -136,6 +144,16 @@ type ClientService interface {
 
 	WaypointServiceGetApplicationTemplate4(params *WaypointServiceGetApplicationTemplate4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetApplicationTemplate4OK, error)
 
+	WaypointServiceGetGitHubInstallations(params *WaypointServiceGetGitHubInstallationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetGitHubInstallationsOK, error)
+
+	WaypointServiceGetGitHubRepos(params *WaypointServiceGetGitHubReposParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetGitHubReposOK, error)
+
+	WaypointServiceGetGitHubWorkflows(params *WaypointServiceGetGitHubWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetGitHubWorkflowsOK, error)
+
+	WaypointServiceGetIntegration(params *WaypointServiceGetIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetIntegrationOK, error)
+
+	WaypointServiceGetIntegration2(params *WaypointServiceGetIntegration2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetIntegration2OK, error)
+
 	WaypointServiceGetNamespace(params *WaypointServiceGetNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetNamespaceOK, error)
 
 	WaypointServiceGetTFCConfig(params *WaypointServiceGetTFCConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetTFCConfigOK, error)
@@ -158,6 +176,8 @@ type ClientService interface {
 
 	WaypointServiceGetVariable(params *WaypointServiceGetVariableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetVariableOK, error)
 
+	WaypointServiceGitHubCallbackSession(params *WaypointServiceGitHubCallbackSessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGitHubCallbackSessionOK, error)
+
 	WaypointServiceListActionConfigs(params *WaypointServiceListActionConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionConfigsOK, error)
 
 	WaypointServiceListActionRuns(params *WaypointServiceListActionRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionRunsOK, error)
@@ -178,6 +198,8 @@ type ClientService interface {
 
 	WaypointServiceListApplications(params *WaypointServiceListApplicationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListApplicationsOK, error)
 
+	WaypointServiceListIntegrations(params *WaypointServiceListIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListIntegrationsOK, error)
+
 	WaypointServiceListNoCodeModules(params *WaypointServiceListNoCodeModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListNoCodeModulesOK, error)
 
 	WaypointServiceListNoCodeModules2(params *WaypointServiceListNoCodeModules2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListNoCodeModules2OK, error)
@@ -197,6 +219,8 @@ type ClientService interface {
 	WaypointServiceRunAction(params *WaypointServiceRunActionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceRunActionOK, error)
 
 	WaypointServiceSendStatusLog(params *WaypointServiceSendStatusLogParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceSendStatusLogOK, error)
+
+	WaypointServiceSendStatusLog2(params *WaypointServiceSendStatusLog2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceSendStatusLog2OK, error)
 
 	WaypointServiceStartingAction(params *WaypointServiceStartingActionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceStartingActionOK, error)
 
@@ -229,6 +253,10 @@ type ClientService interface {
 	WaypointServiceUpdateAddOnDefinition(params *WaypointServiceUpdateAddOnDefinitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateAddOnDefinitionOK, error)
 
 	WaypointServiceUpdateAddOnDefinition2(params *WaypointServiceUpdateAddOnDefinition2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateAddOnDefinition2OK, error)
+
+	WaypointServiceUpdateAddOnDefinition3(params *WaypointServiceUpdateAddOnDefinition3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateAddOnDefinition3OK, error)
+
+	WaypointServiceUpdateAddOnDefinition4(params *WaypointServiceUpdateAddOnDefinition4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateAddOnDefinition4OK, error)
 
 	WaypointServiceUpdateAgentGroup(params *WaypointServiceUpdateAgentGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateAgentGroupOK, error)
 
@@ -598,6 +626,82 @@ func (a *Client) WaypointServiceCreateApplicationTemplate2(params *WaypointServi
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceCreateApplicationTemplate2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceCreateGitHubSession creates git hub session is not implemented
+*/
+func (a *Client) WaypointServiceCreateGitHubSession(params *WaypointServiceCreateGitHubSessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateGitHubSessionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceCreateGitHubSessionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_CreateGitHubSession",
+		Method:             "POST",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/github/session",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceCreateGitHubSessionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceCreateGitHubSessionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceCreateGitHubSessionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceCreateIntegration creates integration is not implemented
+*/
+func (a *Client) WaypointServiceCreateIntegration(params *WaypointServiceCreateIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceCreateIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceCreateIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_CreateIntegration",
+		Method:             "POST",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/integrations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceCreateIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceCreateIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceCreateIntegrationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1016,6 +1120,82 @@ func (a *Client) WaypointServiceDeleteApplicationTemplate4(params *WaypointServi
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceDeleteApplicationTemplate4Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceDeleteIntegration deletes integration is not implemented
+*/
+func (a *Client) WaypointServiceDeleteIntegration(params *WaypointServiceDeleteIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceDeleteIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_DeleteIntegration",
+		Method:             "DELETE",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/integrations/{integration.id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceDeleteIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceDeleteIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceDeleteIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceDeleteIntegration2 deletes integration is not implemented
+*/
+func (a *Client) WaypointServiceDeleteIntegration2(params *WaypointServiceDeleteIntegration2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceDeleteIntegration2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceDeleteIntegration2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_DeleteIntegration2",
+		Method:             "DELETE",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/integrations/by-name/{integration.name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceDeleteIntegration2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceDeleteIntegration2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceDeleteIntegration2Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1818,6 +1998,196 @@ func (a *Client) WaypointServiceGetApplicationTemplate4(params *WaypointServiceG
 }
 
 /*
+WaypointServiceGetGitHubInstallations gets git hub installations is not implemented
+*/
+func (a *Client) WaypointServiceGetGitHubInstallations(params *WaypointServiceGetGitHubInstallationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetGitHubInstallationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetGitHubInstallationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetGitHubInstallations",
+		Method:             "POST",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/github/installations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetGitHubInstallationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetGitHubInstallationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetGitHubInstallationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceGetGitHubRepos gets git hub repos is not implemented
+*/
+func (a *Client) WaypointServiceGetGitHubRepos(params *WaypointServiceGetGitHubReposParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetGitHubReposOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetGitHubReposParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetGitHubRepos",
+		Method:             "POST",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/github/repos",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetGitHubReposReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetGitHubReposOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetGitHubReposDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceGetGitHubWorkflows gets git hub workflows is not implemented
+*/
+func (a *Client) WaypointServiceGetGitHubWorkflows(params *WaypointServiceGetGitHubWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetGitHubWorkflowsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetGitHubWorkflowsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetGitHubWorkflows",
+		Method:             "POST",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/github/workflows",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetGitHubWorkflowsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetGitHubWorkflowsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetGitHubWorkflowsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceGetIntegration gets integration is not implemented
+*/
+func (a *Client) WaypointServiceGetIntegration(params *WaypointServiceGetIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetIntegration",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/integrations/{integration.id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetIntegrationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceGetIntegration2 gets integration is not implemented
+*/
+func (a *Client) WaypointServiceGetIntegration2(params *WaypointServiceGetIntegration2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetIntegration2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGetIntegration2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GetIntegration2",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/integrations/by-name/{integration.name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGetIntegration2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGetIntegration2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGetIntegration2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 WaypointServiceGetNamespace gets namespace gets a namespace based on either the namespace ID or an h c p location returns not found if the namespace doesn t exist
 */
 func (a *Client) WaypointServiceGetNamespace(params *WaypointServiceGetNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGetNamespaceOK, error) {
@@ -2236,6 +2606,44 @@ func (a *Client) WaypointServiceGetVariable(params *WaypointServiceGetVariablePa
 }
 
 /*
+WaypointServiceGitHubCallbackSession gits hub callback session is not implemented
+*/
+func (a *Client) WaypointServiceGitHubCallbackSession(params *WaypointServiceGitHubCallbackSessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceGitHubCallbackSessionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceGitHubCallbackSessionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_GitHubCallbackSession",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2024-11-22/github/callback",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceGitHubCallbackSessionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceGitHubCallbackSessionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceGitHubCallbackSessionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 WaypointServiceListActionConfigs waypoint service list action configs API
 */
 func (a *Client) WaypointServiceListActionConfigs(params *WaypointServiceListActionConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListActionConfigsOK, error) {
@@ -2616,6 +3024,44 @@ func (a *Client) WaypointServiceListApplications(params *WaypointServiceListAppl
 }
 
 /*
+WaypointServiceListIntegrations lists integrations is not implemented
+*/
+func (a *Client) WaypointServiceListIntegrations(params *WaypointServiceListIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceListIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_ListIntegrations",
+		Method:             "GET",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/integrations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceListIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceListIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceListIntegrationsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 WaypointServiceListNoCodeModules lists no code modules returns a list of available no code module for the configured t f c organization
 */
 func (a *Client) WaypointServiceListNoCodeModules(params *WaypointServiceListNoCodeModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceListNoCodeModulesOK, error) {
@@ -2968,7 +3414,7 @@ func (a *Client) WaypointServiceSendStatusLog(params *WaypointServiceSendStatusL
 	op := &runtime.ClientOperation{
 		ID:                 "WaypointService_SendStatusLog",
 		Method:             "POST",
-		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_config.id}/action-runs/{action_run_seq}/status-log",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action/{action_run.specifier.action.id}/action-runs/{action_run.specifier.sequence}/status-log",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -2992,6 +3438,44 @@ func (a *Client) WaypointServiceSendStatusLog(params *WaypointServiceSendStatusL
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceSendStatusLogDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceSendStatusLog2 statuses logs for action runs
+*/
+func (a *Client) WaypointServiceSendStatusLog2(params *WaypointServiceSendStatusLog2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceSendStatusLog2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceSendStatusLog2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_SendStatusLog2",
+		Method:             "POST",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action-runs/{action_run.id}/status-log",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceSendStatusLog2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceSendStatusLog2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceSendStatusLog2Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -3600,6 +4084,82 @@ func (a *Client) WaypointServiceUpdateAddOnDefinition2(params *WaypointServiceUp
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*WaypointServiceUpdateAddOnDefinition2Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceUpdateAddOnDefinition3 updates add on definition updates an existing add on definition
+*/
+func (a *Client) WaypointServiceUpdateAddOnDefinition3(params *WaypointServiceUpdateAddOnDefinition3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateAddOnDefinition3OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUpdateAddOnDefinition3Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UpdateAddOnDefinition3",
+		Method:             "PATCH",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/add-on-definition/{existing_add_on_definition.id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUpdateAddOnDefinition3Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUpdateAddOnDefinition3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUpdateAddOnDefinition3Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+WaypointServiceUpdateAddOnDefinition4 updates add on definition updates an existing add on definition
+*/
+func (a *Client) WaypointServiceUpdateAddOnDefinition4(params *WaypointServiceUpdateAddOnDefinition4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WaypointServiceUpdateAddOnDefinition4OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWaypointServiceUpdateAddOnDefinition4Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WaypointService_UpdateAddOnDefinition4",
+		Method:             "PATCH",
+		PathPattern:        "/waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/add-on-definition/by-name/{existing_add_on_definition.name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &WaypointServiceUpdateAddOnDefinition4Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WaypointServiceUpdateAddOnDefinition4OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WaypointServiceUpdateAddOnDefinition4Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

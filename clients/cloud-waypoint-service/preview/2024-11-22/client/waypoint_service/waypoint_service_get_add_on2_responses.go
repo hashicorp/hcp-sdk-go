@@ -54,7 +54,7 @@ WaypointServiceGetAddOn2OK describes a response with status code 200, with defau
 A successful response.
 */
 type WaypointServiceGetAddOn2OK struct {
-	Payload *models.HashicorpCloudWaypointGetAddOnResponse
+	Payload *models.HashicorpCloudWaypointV20241122GetAddOnResponse
 }
 
 // IsSuccess returns true when this waypoint service get add on2 o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceGetAddOn2OK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/add-on/by-name/{add_on.name}][%d] waypointServiceGetAddOn2OK %s", 200, payload)
 }
 
-func (o *WaypointServiceGetAddOn2OK) GetPayload() *models.HashicorpCloudWaypointGetAddOnResponse {
+func (o *WaypointServiceGetAddOn2OK) GetPayload() *models.HashicorpCloudWaypointV20241122GetAddOnResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceGetAddOn2OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointGetAddOnResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122GetAddOnResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

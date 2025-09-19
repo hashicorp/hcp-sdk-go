@@ -38,6 +38,9 @@ const (
 
 	// HashicorpCloudPacker20230101RegistryBillingDeprovisionReasonHASHIADMINREQUEST captures enum value "HASHI_ADMIN_REQUEST"
 	HashicorpCloudPacker20230101RegistryBillingDeprovisionReasonHASHIADMINREQUEST HashicorpCloudPacker20230101RegistryBillingDeprovisionReason = "HASHI_ADMIN_REQUEST"
+
+	// HashicorpCloudPacker20230101RegistryBillingDeprovisionReasonDEPROVISIONEDBILLINGACCOUNT captures enum value "DEPROVISIONED_BILLING_ACCOUNT"
+	HashicorpCloudPacker20230101RegistryBillingDeprovisionReasonDEPROVISIONEDBILLINGACCOUNT HashicorpCloudPacker20230101RegistryBillingDeprovisionReason = "DEPROVISIONED_BILLING_ACCOUNT"
 )
 
 // for schema
@@ -45,7 +48,7 @@ var hashicorpCloudPacker20230101RegistryBillingDeprovisionReasonEnum []interface
 
 func init() {
 	var res []HashicorpCloudPacker20230101RegistryBillingDeprovisionReason
-	if err := json.Unmarshal([]byte(`["DELINQUENT_BILLING_ACCOUNT","USER_REQUEST","HASHI_ADMIN_REQUEST"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["DELINQUENT_BILLING_ACCOUNT","USER_REQUEST","HASHI_ADMIN_REQUEST","DEPROVISIONED_BILLING_ACCOUNT"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

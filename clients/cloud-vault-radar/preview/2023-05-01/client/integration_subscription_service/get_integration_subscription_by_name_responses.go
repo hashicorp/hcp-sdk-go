@@ -7,6 +7,7 @@ package integration_subscription_service
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *GetIntegrationSubscriptionByNameOK) Code() int {
 }
 
 func (o *GetIntegrationSubscriptionByNameOK) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/search-by-name][%d] getIntegrationSubscriptionByNameOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/search-by-name][%d] getIntegrationSubscriptionByNameOK %s", 200, payload)
 }
 
 func (o *GetIntegrationSubscriptionByNameOK) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/search-by-name][%d] getIntegrationSubscriptionByNameOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/search-by-name][%d] getIntegrationSubscriptionByNameOK %s", 200, payload)
 }
 
 func (o *GetIntegrationSubscriptionByNameOK) GetPayload() *models.VaultRadar20230501IntegrationSubscription {
@@ -161,11 +164,13 @@ func (o *GetIntegrationSubscriptionByNameDefault) Code() int {
 }
 
 func (o *GetIntegrationSubscriptionByNameDefault) Error() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/search-by-name][%d] GetIntegrationSubscriptionByName default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/search-by-name][%d] GetIntegrationSubscriptionByName default %s", o._statusCode, payload)
 }
 
 func (o *GetIntegrationSubscriptionByNameDefault) String() string {
-	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/search-by-name][%d] GetIntegrationSubscriptionByName default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /2023-05-01/vault-radar/projects/{location.project_id}/integrations/subscriptions/search-by-name][%d] GetIntegrationSubscriptionByName default %s", o._statusCode, payload)
 }
 
 func (o *GetIntegrationSubscriptionByNameDefault) GetPayload() *models.RPCStatus {

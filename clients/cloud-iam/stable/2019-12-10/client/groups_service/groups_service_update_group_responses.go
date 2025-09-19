@@ -57,7 +57,7 @@ GroupsServiceUpdateGroupOK describes a response with status code 200, with defau
 A successful response.
 */
 type GroupsServiceUpdateGroupOK struct {
-	Payload interface{}
+	Payload *models.HashicorpCloudIamUpdateGroupResponse
 }
 
 // IsSuccess returns true when this groups service update group o k response has a 2xx status code
@@ -100,14 +100,16 @@ func (o *GroupsServiceUpdateGroupOK) String() string {
 	return fmt.Sprintf("[PUT /iam/2019-12-10/{resource_name}][%d] groupsServiceUpdateGroupOK %s", 200, payload)
 }
 
-func (o *GroupsServiceUpdateGroupOK) GetPayload() interface{} {
+func (o *GroupsServiceUpdateGroupOK) GetPayload() *models.HashicorpCloudIamUpdateGroupResponse {
 	return o.Payload
 }
 
 func (o *GroupsServiceUpdateGroupOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.HashicorpCloudIamUpdateGroupResponse)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

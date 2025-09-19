@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *CreatePeeringOK) Code() int {
 }
 
 func (o *CreatePeeringOK) Error() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] createPeeringOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] createPeeringOK %s", 200, payload)
 }
 
 func (o *CreatePeeringOK) String() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] createPeeringOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] createPeeringOK %s", 200, payload)
 }
 
 func (o *CreatePeeringOK) GetPayload() *models.HashicorpCloudNetwork20200907CreatePeeringResponse {
@@ -159,11 +162,13 @@ func (o *CreatePeeringDefault) Code() int {
 }
 
 func (o *CreatePeeringDefault) Error() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] CreatePeering default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] CreatePeering default %s", o._statusCode, payload)
 }
 
 func (o *CreatePeeringDefault) String() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] CreatePeering default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{peering.hvn.location.organization_id}/projects/{peering.hvn.location.project_id}/networks/{peering.hvn.id}/peerings][%d] CreatePeering default %s", o._statusCode, payload)
 }
 
 func (o *CreatePeeringDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

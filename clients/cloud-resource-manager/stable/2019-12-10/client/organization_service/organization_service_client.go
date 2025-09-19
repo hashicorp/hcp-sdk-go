@@ -76,7 +76,7 @@ type ClientService interface {
 }
 
 /*
-OrganizationServiceCreate creates creates a new organization the owner is set to the identity of the caller an organization can not be owned by a machine account
+OrganizationServiceCreate warnings bang internal use only create creates a new organization the owner is set to the identity of the caller an organization can not be owned by a machine account
 */
 func (a *Client) OrganizationServiceCreate(params *OrganizationServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceCreateOK, error) {
 	// TODO: Validate the params before sending

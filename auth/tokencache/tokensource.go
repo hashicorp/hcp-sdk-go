@@ -37,6 +37,7 @@ type cachingTokenSource struct {
 	sourceIdentifier string
 	oauthTokenSource oauth2.TokenSource
 	oauthConfig      oAuth2Config
+	geography        string
 }
 
 // Token implements the oauth2.TokenSource interface. It will read cached tokens from a file and based on their validity
@@ -84,12 +85,16 @@ func (source *cachingTokenSource) getValidToken(hitEntry *cacheEntry) (*oauth2.T
 	}
 
 	// Return the access token if it is still valid for at least minTTL
-	if token != nil && token.Expiry.After(time.Now().Add(minTTL)) {
+	// and match the geography
+	if token != nil && token.Expiry.After(time.Now().Add(minTTL)) &&
+		matchGeography(hitEntry.Geography, source.geography) {
 		return token, nil
 	}
 
 	// Try to refresh the token if it has a RefreshToken and an oauth config was provided
-	if token != nil && token.RefreshToken != "" && source.oauthConfig != nil {
+	// and match the geography
+	if token != nil && token.RefreshToken != "" && source.oauthConfig != nil &&
+		matchGeography(hitEntry.Geography, source.geography) {
 		ctx, cancel := context.WithTimeout(context.Background(), refreshTimeout)
 		defer cancel()
 
@@ -109,4 +114,20 @@ func (source *cachingTokenSource) getValidToken(hitEntry *cacheEntry) (*oauth2.T
 	}
 
 	return nil, fmt.Errorf("no valid credential source available")
+}
+
+// matchGeography checks if the cached geography matches the config geography.
+// If the cached geography is empty, it means that the cache was created before geography support was added,
+// so it will return false to force an update of the cache.
+func matchGeography(cachedGeography string, configGeography string) bool {
+	// The cached file is prior to geography support,
+	// return false
+	if cachedGeography == "" {
+		return false
+	}
+
+	if cachedGeography != configGeography {
+		return false
+	}
+	return true
 }

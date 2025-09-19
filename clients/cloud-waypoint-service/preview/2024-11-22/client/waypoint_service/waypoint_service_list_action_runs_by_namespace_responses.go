@@ -54,7 +54,7 @@ WaypointServiceListActionRunsByNamespaceOK describes a response with status code
 A successful response.
 */
 type WaypointServiceListActionRunsByNamespaceOK struct {
-	Payload *models.HashicorpCloudWaypointListActionRunsByNamespaceResponse
+	Payload *models.HashicorpCloudWaypointV20241122ListActionRunsByNamespaceResponse
 }
 
 // IsSuccess returns true when this waypoint service list action runs by namespace o k response has a 2xx status code
@@ -97,13 +97,13 @@ func (o *WaypointServiceListActionRunsByNamespaceOK) String() string {
 	return fmt.Sprintf("[GET /waypoint/2024-11-22/organizations/{namespace.location.organization_id}/projects/{namespace.location.project_id}/action-runs][%d] waypointServiceListActionRunsByNamespaceOK %s", 200, payload)
 }
 
-func (o *WaypointServiceListActionRunsByNamespaceOK) GetPayload() *models.HashicorpCloudWaypointListActionRunsByNamespaceResponse {
+func (o *WaypointServiceListActionRunsByNamespaceOK) GetPayload() *models.HashicorpCloudWaypointV20241122ListActionRunsByNamespaceResponse {
 	return o.Payload
 }
 
 func (o *WaypointServiceListActionRunsByNamespaceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HashicorpCloudWaypointListActionRunsByNamespaceResponse)
+	o.Payload = new(models.HashicorpCloudWaypointV20241122ListActionRunsByNamespaceResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

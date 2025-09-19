@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *CreateTokenOK) Code() int {
 }
 
 func (o *CreateTokenOK) Error() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/tokens][%d] createTokenOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/tokens][%d] createTokenOK %s", 200, payload)
 }
 
 func (o *CreateTokenOK) String() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/tokens][%d] createTokenOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/tokens][%d] createTokenOK %s", 200, payload)
 }
 
 func (o *CreateTokenOK) GetPayload() *models.HashicorpCloudNetwork20200907CreateTokenResponse {
@@ -159,11 +162,13 @@ func (o *CreateTokenDefault) Code() int {
 }
 
 func (o *CreateTokenDefault) Error() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/tokens][%d] CreateToken default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/tokens][%d] CreateToken default %s", o._statusCode, payload)
 }
 
 func (o *CreateTokenDefault) String() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/tokens][%d] CreateToken default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/tokens][%d] CreateToken default %s", o._statusCode, payload)
 }
 
 func (o *CreateTokenDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

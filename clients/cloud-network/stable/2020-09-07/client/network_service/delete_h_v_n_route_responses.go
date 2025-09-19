@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *DeleteHVNRouteOK) Code() int {
 }
 
 func (o *DeleteHVNRouteOK) Error() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] deleteHVNRouteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] deleteHVNRouteOK %s", 200, payload)
 }
 
 func (o *DeleteHVNRouteOK) String() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] deleteHVNRouteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] deleteHVNRouteOK %s", 200, payload)
 }
 
 func (o *DeleteHVNRouteOK) GetPayload() *models.HashicorpCloudNetwork20200907DeleteHVNRouteResponse {
@@ -159,11 +162,13 @@ func (o *DeleteHVNRouteDefault) Code() int {
 }
 
 func (o *DeleteHVNRouteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] DeleteHVNRoute default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] DeleteHVNRoute default %s", o._statusCode, payload)
 }
 
 func (o *DeleteHVNRouteDefault) String() string {
-	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] DeleteHVNRoute default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/routes/{id}][%d] DeleteHVNRoute default %s", o._statusCode, payload)
 }
 
 func (o *DeleteHVNRouteDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

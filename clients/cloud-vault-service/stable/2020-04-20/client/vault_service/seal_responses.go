@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *SealOK) Code() int {
 }
 
 func (o *SealOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] sealOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] sealOK %s", 200, payload)
 }
 
 func (o *SealOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] sealOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] sealOK %s", 200, payload)
 }
 
 func (o *SealOK) GetPayload() *models.HashicorpCloudVault20200420SealResponse {
@@ -159,11 +162,13 @@ func (o *SealDefault) Code() int {
 }
 
 func (o *SealDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] Seal default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] Seal default %s", o._statusCode, payload)
 }
 
 func (o *SealDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] Seal default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/seal][%d] Seal default %s", o._statusCode, payload)
 }
 
 func (o *SealDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

@@ -6,6 +6,7 @@ package data_source_registration_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *GetDataSourceByIDOK) Code() int {
 }
 
 func (o *GetDataSourceByIDOK) Error() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/{id}][%d] getDataSourceByIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/{id}][%d] getDataSourceByIdOK %s", 200, payload)
 }
 
 func (o *GetDataSourceByIDOK) String() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/{id}][%d] getDataSourceByIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/{id}][%d] getDataSourceByIdOK %s", 200, payload)
 }
 
 func (o *GetDataSourceByIDOK) GetPayload() *models.VaultRadar20230501GetDataSourceByIDResponse {
@@ -158,11 +161,13 @@ func (o *GetDataSourceByIDDefault) Code() int {
 }
 
 func (o *GetDataSourceByIDDefault) Error() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/{id}][%d] GetDataSourceByID default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/{id}][%d] GetDataSourceByID default %s", o._statusCode, payload)
 }
 
 func (o *GetDataSourceByIDDefault) String() string {
-	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/{id}][%d] GetDataSourceByID default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /2023-05-01/vault-radar/projects/{location.project_id}/data-source-registrations/{id}][%d] GetDataSourceByID default %s", o._statusCode, payload)
 }
 
 func (o *GetDataSourceByIDDefault) GetPayload() *models.RPCStatus {

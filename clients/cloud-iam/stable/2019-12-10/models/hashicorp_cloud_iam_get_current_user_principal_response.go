@@ -22,6 +22,9 @@ type HashicorpCloudIamGetCurrentUserPrincipalResponse struct {
 	// user_principal is a user principal
 	UserPrincipal *HashicorpCloudIamUserPrincipal `json:"user_principal,omitempty"`
 
+	// userinfo
+	Userinfo interface{} `json:"userinfo,omitempty"`
+
 	// web_portal_preferences are the user preferences for the HCP Web Portal
 	// JS application. They're only included in the response if the caller client
 	// has enabled the corresponding flag in the request parameters.

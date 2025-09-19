@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) Code() int {
 }
 
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) Error() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] associateHVNWithAWSRoute53PrivateHostedZoneOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] associateHVNWithAWSRoute53PrivateHostedZoneOK %s", 200, payload)
 }
 
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) String() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] associateHVNWithAWSRoute53PrivateHostedZoneOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] associateHVNWithAWSRoute53PrivateHostedZoneOK %s", 200, payload)
 }
 
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneOK) GetPayload() interface{} {
@@ -156,11 +159,13 @@ func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) Code() int {
 }
 
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) Error() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] AssociateHVNWithAWSRoute53PrivateHostedZone default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] AssociateHVNWithAWSRoute53PrivateHostedZone default %s", o._statusCode, payload)
 }
 
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) String() string {
-	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] AssociateHVNWithAWSRoute53PrivateHostedZone default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/aws-route53-private-hosted-zone-associations][%d] AssociateHVNWithAWSRoute53PrivateHostedZone default %s", o._statusCode, payload)
 }
 
 func (o *AssociateHVNWithAWSRoute53PrivateHostedZoneDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

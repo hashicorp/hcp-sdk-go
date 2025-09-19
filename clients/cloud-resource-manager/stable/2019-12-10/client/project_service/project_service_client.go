@@ -78,7 +78,7 @@ type ClientService interface {
 }
 
 /*
-ProjectServiceCreate creates creates a new project
+ProjectServiceCreate warnings bang internal use only create provisions a new project create is an asynchronous action meaning that the project creation may not be immediately visible to the client the client should poll the returned operation until it is completed to ensure the project is successfully created for more details on polling an operation consult the h c p operations service wait endpoint documentation https developer hashicorp com hcp api docs operations wait
 */
 func (a *Client) ProjectServiceCreate(params *ProjectServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -116,7 +116,7 @@ func (a *Client) ProjectServiceCreate(params *ProjectServiceCreateParams, authIn
 }
 
 /*
-ProjectServiceDelete deletes updates the state of a project to d e l e t e d
+ProjectServiceDelete warnings bang internal use only delete updates the state of a project to d e l e t e d delete is an asynchronous action meaning that the project deletion may not be immediately visible to the client the client should poll the returned operation until it is completed to ensure the project is successfully deleted for more details on polling an operation consult the h c p operations service wait endpoint documentation https developer hashicorp com hcp api docs operations wait
 */
 func (a *Client) ProjectServiceDelete(params *ProjectServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceDeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -268,7 +268,7 @@ func (a *Client) ProjectServiceGetProjectsCount(params *ProjectServiceGetProject
 }
 
 /*
-ProjectServiceList lists list the projects the caller has access to
+ProjectServiceList lists retrieves the projects the caller has access to
 */
 func (a *Client) ProjectServiceList(params *ProjectServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceListOK, error) {
 	// TODO: Validate the params before sending
@@ -306,7 +306,7 @@ func (a *Client) ProjectServiceList(params *ProjectServiceListParams, authInfo r
 }
 
 /*
-ProjectServiceSetDescription sets description sets the requested project s description
+ProjectServiceSetDescription sets description updates the requested project s description set description is an asynchronous action meaning that the project update may not be immediately visible to the client the client should poll the returned operation until it is completed to ensure the project is successfully updated for more details on polling an operation consult the h c p operations service wait endpoint documentation https developer hashicorp com hcp api docs operations wait
 */
 func (a *Client) ProjectServiceSetDescription(params *ProjectServiceSetDescriptionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceSetDescriptionOK, error) {
 	// TODO: Validate the params before sending
@@ -344,7 +344,7 @@ func (a *Client) ProjectServiceSetDescription(params *ProjectServiceSetDescripti
 }
 
 /*
-ProjectServiceSetIamPolicy sets iam policy sets the i a m policy for a project since this updates the full policy the policy takes an etag argument that should match with the current policy stored in the system this is to avoid concurrent writes erasing each other s data hence the client should always get the current policy that includes the etag modify the policy and then set the policy with the same etag if there is no existing policy the etag must be empty
+ProjectServiceSetIamPolicy sets iam policy updates the i a m policy for a project since this updates the full policy the policy takes an etag argument that should match with the current policy stored in the system this is to avoid concurrent writes erasing each other s data hence the client should always get the current policy that includes the etag modify the policy and then set the policy with the same etag if there is no existing policy the etag must be empty
 */
 func (a *Client) ProjectServiceSetIamPolicy(params *ProjectServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceSetIamPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -382,7 +382,7 @@ func (a *Client) ProjectServiceSetIamPolicy(params *ProjectServiceSetIamPolicyPa
 }
 
 /*
-ProjectServiceSetName sets name sets the requested project s name
+ProjectServiceSetName sets name updates the requested project s name set name is an asynchronous action meaning that the project update may not be immediately visible to the client the client should poll the returned operation until it is completed to ensure the project is successfully updated for more details on polling an operation consult the h c p operations service wait endpoint documentation https developer hashicorp com hcp api docs operations wait
 */
 func (a *Client) ProjectServiceSetName(params *ProjectServiceSetNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectServiceSetNameOK, error) {
 	// TODO: Validate the params before sending

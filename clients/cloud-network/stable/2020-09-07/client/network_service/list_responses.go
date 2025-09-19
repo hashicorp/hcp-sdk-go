@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ListOK) Code() int {
 }
 
 func (o *ListOK) Error() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] listOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] listOK %s", 200, payload)
 }
 
 func (o *ListOK) String() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] listOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] listOK %s", 200, payload)
 }
 
 func (o *ListOK) GetPayload() *models.HashicorpCloudNetwork20200907ListResponse {
@@ -159,11 +162,13 @@ func (o *ListDefault) Code() int {
 }
 
 func (o *ListDefault) Error() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] List default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] List default %s", o._statusCode, payload)
 }
 
 func (o *ListDefault) String() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] List default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks][%d] List default %s", o._statusCode, payload)
 }
 
 func (o *ListDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

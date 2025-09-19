@@ -15,6 +15,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
@@ -55,7 +56,7 @@ ProjectServiceSetNameOK describes a response with status code 200, with default 
 A successful response.
 */
 type ProjectServiceSetNameOK struct {
-	Payload interface{}
+	Payload *models.HashicorpCloudResourcemanagerProjectSetNameResponse
 }
 
 // IsSuccess returns true when this project service set name o k response has a 2xx status code
@@ -98,14 +99,16 @@ func (o *ProjectServiceSetNameOK) String() string {
 	return fmt.Sprintf("[PUT /resource-manager/2019-12-10/projects/{id}/name][%d] projectServiceSetNameOK %s", 200, payload)
 }
 
-func (o *ProjectServiceSetNameOK) GetPayload() interface{} {
+func (o *ProjectServiceSetNameOK) GetPayload() *models.HashicorpCloudResourcemanagerProjectSetNameResponse {
 	return o.Payload
 }
 
 func (o *ProjectServiceSetNameOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.HashicorpCloudResourcemanagerProjectSetNameResponse)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

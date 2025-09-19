@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PluginRegistrationStatusOK) Code() int {
 }
 
 func (o *PluginRegistrationStatusOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/registration-status][%d] pluginRegistrationStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/registration-status][%d] pluginRegistrationStatusOK %s", 200, payload)
 }
 
 func (o *PluginRegistrationStatusOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/registration-status][%d] pluginRegistrationStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/registration-status][%d] pluginRegistrationStatusOK %s", 200, payload)
 }
 
 func (o *PluginRegistrationStatusOK) GetPayload() *models.HashicorpCloudVault20201125PluginRegistrationStatusResponse {
@@ -159,11 +162,13 @@ func (o *PluginRegistrationStatusDefault) Code() int {
 }
 
 func (o *PluginRegistrationStatusDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/registration-status][%d] PluginRegistrationStatus default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/registration-status][%d] PluginRegistrationStatus default %s", o._statusCode, payload)
 }
 
 func (o *PluginRegistrationStatusDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/registration-status][%d] PluginRegistrationStatus default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/plugin/registration-status][%d] PluginRegistrationStatus default %s", o._statusCode, payload)
 }
 
 func (o *PluginRegistrationStatusDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

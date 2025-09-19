@@ -23,7 +23,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceCreateVariableBody struct {
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceCreateVariableBodyNamespace `json:"namespace,omitempty"`
 
 	// The variable to create
-	Variable *HashicorpCloudWaypointVariable `json:"variable,omitempty"`
+	Variable *HashicorpCloudWaypointV20241122Variable `json:"variable,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service create variable body

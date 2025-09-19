@@ -6,6 +6,7 @@ package network_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ListDependenciesOK) Code() int {
 }
 
 func (o *ListDependenciesOK) Error() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] listDependenciesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] listDependenciesOK %s", 200, payload)
 }
 
 func (o *ListDependenciesOK) String() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] listDependenciesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] listDependenciesOK %s", 200, payload)
 }
 
 func (o *ListDependenciesOK) GetPayload() *models.HashicorpCloudNetwork20200907ListDependenciesResponse {
@@ -159,11 +162,13 @@ func (o *ListDependenciesDefault) Code() int {
 }
 
 func (o *ListDependenciesDefault) Error() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] ListDependencies default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] ListDependencies default %s", o._statusCode, payload)
 }
 
 func (o *ListDependenciesDefault) String() string {
-	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] ListDependencies default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{id}/dependencies][%d] ListDependencies default %s", o._statusCode, payload)
 }
 
 func (o *ListDependenciesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

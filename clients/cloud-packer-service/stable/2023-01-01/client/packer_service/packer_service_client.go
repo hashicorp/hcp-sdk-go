@@ -104,6 +104,8 @@ type ClientService interface {
 
 	PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceRegenerateTFCRunTaskHmacKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceRegenerateTFCRunTaskHmacKeyOK, error)
 
+	PackerServiceSearchExternalArtifact(params *PackerServiceSearchExternalArtifactParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceSearchExternalArtifactOK, error)
+
 	PackerServiceUpdateBucket(params *PackerServiceUpdateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateBucketOK, error)
 
 	PackerServiceUpdateBuild(params *PackerServiceUpdateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateBuildOK, error)
@@ -1066,6 +1068,44 @@ func (a *Client) PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceR
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PackerServiceRegenerateTFCRunTaskHmacKeyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceSearchExternalArtifact s e a r c h search for artifacts using external cloud artifact identifiers platform and region and returns all relevant metadata in a single efficient API call
+*/
+func (a *Client) PackerServiceSearchExternalArtifact(params *PackerServiceSearchExternalArtifactParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceSearchExternalArtifactOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceSearchExternalArtifactParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_SearchExternalArtifact",
+		Method:             "POST",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/_search/external_artifact",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceSearchExternalArtifactReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceSearchExternalArtifactOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceSearchExternalArtifactDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetUtilizationOK) Code() int {
 }
 
 func (o *GetUtilizationOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] getUtilizationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] getUtilizationOK %s", 200, payload)
 }
 
 func (o *GetUtilizationOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] getUtilizationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] getUtilizationOK %s", 200, payload)
 }
 
 func (o *GetUtilizationOK) GetPayload() *models.HashicorpCloudVault20201125GetUtilizationResponse {
@@ -159,11 +162,13 @@ func (o *GetUtilizationDefault) Code() int {
 }
 
 func (o *GetUtilizationDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] GetUtilization default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] GetUtilization default %s", o._statusCode, payload)
 }
 
 func (o *GetUtilizationDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] GetUtilization default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/utilization][%d] GetUtilization default %s", o._statusCode, payload)
 }
 
 func (o *GetUtilizationDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

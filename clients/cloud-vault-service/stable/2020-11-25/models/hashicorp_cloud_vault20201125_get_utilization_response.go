@@ -18,6 +18,9 @@ import (
 // swagger:model hashicorp.cloud.vault_20201125.GetUtilizationResponse
 type HashicorpCloudVault20201125GetUtilizationResponse struct {
 
+	// acme clients
+	AcmeClients *HashicorpCloudVault20201125GetUtilizationResponseValue `json:"acme_clients,omitempty"`
+
 	// clients
 	Clients *HashicorpCloudVault20201125GetUtilizationResponseValue `json:"clients,omitempty"`
 
@@ -29,11 +32,18 @@ type HashicorpCloudVault20201125GetUtilizationResponse struct {
 
 	// non entity tokens
 	NonEntityTokens *HashicorpCloudVault20201125GetUtilizationResponseValue `json:"non_entity_tokens,omitempty"`
+
+	// secret syncs
+	SecretSyncs *HashicorpCloudVault20201125GetUtilizationResponseValue `json:"secret_syncs,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 get utilization response
 func (m *HashicorpCloudVault20201125GetUtilizationResponse) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAcmeClients(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateClients(formats); err != nil {
 		res = append(res, err)
@@ -51,9 +61,32 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) Validate(formats str
 		res = append(res, err)
 	}
 
+	if err := m.validateSecretSyncs(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateAcmeClients(formats strfmt.Registry) error {
+	if swag.IsZero(m.AcmeClients) { // not required
+		return nil
+	}
+
+	if m.AcmeClients != nil {
+		if err := m.AcmeClients.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("acme_clients")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("acme_clients")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -133,9 +166,32 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateNonEntityTok
 	return nil
 }
 
+func (m *HashicorpCloudVault20201125GetUtilizationResponse) validateSecretSyncs(formats strfmt.Registry) error {
+	if swag.IsZero(m.SecretSyncs) { // not required
+		return nil
+	}
+
+	if m.SecretSyncs != nil {
+		if err := m.SecretSyncs.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("secret_syncs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("secret_syncs")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud vault 20201125 get utilization response based on the context it is used
 func (m *HashicorpCloudVault20201125GetUtilizationResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.contextValidateAcmeClients(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateClients(ctx, formats); err != nil {
 		res = append(res, err)
@@ -153,9 +209,34 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) ContextValidate(ctx 
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateSecretSyncs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateAcmeClients(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AcmeClients != nil {
+
+		if swag.IsZero(m.AcmeClients) { // not required
+			return nil
+		}
+
+		if err := m.AcmeClients.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("acme_clients")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("acme_clients")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -235,6 +316,27 @@ func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateNonEn
 				return ve.ValidateName("non_entity_tokens")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("non_entity_tokens")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125GetUtilizationResponse) contextValidateSecretSyncs(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SecretSyncs != nil {
+
+		if swag.IsZero(m.SecretSyncs) { // not required
+			return nil
+		}
+
+		if err := m.SecretSyncs.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("secret_syncs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("secret_syncs")
 			}
 			return err
 		}

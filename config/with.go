@@ -10,9 +10,23 @@ import (
 
 	"github.com/hashicorp/hcp-sdk-go/auth"
 	"github.com/hashicorp/hcp-sdk-go/auth/workload"
+	"github.com/hashicorp/hcp-sdk-go/config/geography"
 	"github.com/hashicorp/hcp-sdk-go/profile"
 	"golang.org/x/oauth2"
 )
+
+// WithGeography will override connection parameters to interact with a specific
+// geographical HCP deployment
+//
+// If used with other HCPConfigOptions, including FromEnv(), this should be called
+// first due to its broad scope of modification to the config.
+func WithGeography(geo string) HCPConfigOption {
+	return func(config *hcpConfig) error {
+		_, err := configFromGeography(config, geography.Geo(geo))
+
+		return err
+	}
+}
 
 // WithClientCredentials credentials is an option that can be used to set
 // HCP client credentials on the configuration.

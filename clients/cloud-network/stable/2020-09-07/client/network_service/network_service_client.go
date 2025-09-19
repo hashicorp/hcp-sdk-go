@@ -7,12 +7,38 @@ package network_service
 
 import (
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new network service API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new network service API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new network service API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -23,7 +49,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -32,9 +58,15 @@ type ClientService interface {
 
 	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error)
 
+	CreateDNSForwarding(params *CreateDNSForwardingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateDNSForwardingOK, error)
+
+	CreateDNSForwardingRule(params *CreateDNSForwardingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateDNSForwardingRuleOK, error)
+
 	CreateHVNRoute(params *CreateHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHVNRouteOK, error)
 
 	CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePeeringOK, error)
+
+	CreatePrivateLinkService(params *CreatePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePrivateLinkServiceOK, error)
 
 	CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTGWAttachmentOK, error)
 
@@ -42,21 +74,35 @@ type ClientService interface {
 
 	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error)
 
+	DeleteDNSForwardingRule(params *DeleteDNSForwardingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteDNSForwardingRuleOK, error)
+
 	DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteHVNRouteOK, error)
 
 	DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePeeringOK, error)
+
+	DeletePrivateLinkService(params *DeletePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePrivateLinkServiceOK, error)
 
 	DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTGWAttachmentOK, error)
 
 	Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOK, error)
 
+	GetDNSForwarding(params *GetDNSForwardingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDNSForwardingOK, error)
+
+	GetDNSForwardingRule(params *GetDNSForwardingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDNSForwardingRuleOK, error)
+
 	GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHVNRouteOK, error)
 
 	GetPeering(params *GetPeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPeeringOK, error)
 
+	GetPrivateLinkService(params *GetPrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPrivateLinkServiceOK, error)
+
 	GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTGWAttachmentOK, error)
 
 	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error)
+
+	ListDNSForwardingRules(params *ListDNSForwardingRulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDNSForwardingRulesOK, error)
+
+	ListDNSForwardings(params *ListDNSForwardingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDNSForwardingsOK, error)
 
 	ListDependencies(params *ListDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDependenciesOK, error)
 
@@ -64,7 +110,11 @@ type ClientService interface {
 
 	ListPeerings(params *ListPeeringsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPeeringsOK, error)
 
+	ListPrivateLinkService(params *ListPrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPrivateLinkServiceOK, error)
+
 	ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTGWAttachmentsOK, error)
+
+	UpdatePrivateLinkService(params *UpdatePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePrivateLinkServiceOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -146,6 +196,82 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
+CreateDNSForwarding creates DNS forwarding creates a new network dns forwarding between h v n v p c v net and target customer v p c v net
+*/
+func (a *Client) CreateDNSForwarding(params *CreateDNSForwardingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateDNSForwardingOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateDNSForwardingParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateDNSForwarding",
+		Method:             "POST",
+		PathPattern:        "/network/2020-09-07/organizations/{dns_forwarding.hvn.location.organization_id}/projects/{dns_forwarding.hvn.location.project_id}/networks/{dns_forwarding.hvn.id}/dnsforwardings",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateDNSForwardingReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateDNSForwardingOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateDNSForwardingDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreateDNSForwardingRule creates DNS forwarding rule creates a new network dns forwarding rule for an existing dns forwarding within a h v n v p c v net
+*/
+func (a *Client) CreateDNSForwardingRule(params *CreateDNSForwardingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateDNSForwardingRuleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateDNSForwardingRuleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateDNSForwardingRule",
+		Method:             "POST",
+		PathPattern:        "/network/2020-09-07/organizations/{dns_forwarding_rule.hvn.location.organization_id}/projects/{dns_forwarding_rule.hvn.location.project_id}/networks/{dns_forwarding_rule.hvn.id}/dnsforwardings/{dns_forwarding_rule.dns_forwarding_id}/rules",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateDNSForwardingRuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateDNSForwardingRuleOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateDNSForwardingRuleDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateHVNRoute hs v n routes
 
 CreateHVNRoute creates a new HVN Route
@@ -220,6 +346,44 @@ func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.Cli
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreatePeeringDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+CreatePrivateLinkService creates private link service creates a new private link service via public api
+*/
+func (a *Client) CreatePrivateLinkService(params *CreatePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePrivateLinkServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreatePrivateLinkServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreatePrivateLinkService",
+		Method:             "POST",
+		PathPattern:        "/network/2020-09-07/organizations/{private_link_service.hvn.location.organization_id}/projects/{private_link_service.hvn.location.project_id}/networks/{private_link_service.hvn.id}/private-link-services",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreatePrivateLinkServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreatePrivateLinkServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreatePrivateLinkServiceDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -338,6 +502,44 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
+DeleteDNSForwardingRule deletes DNS forwarding rule deletes specified dns forwarding rule from a dns forwarding and hvn
+*/
+func (a *Client) DeleteDNSForwardingRule(params *DeleteDNSForwardingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteDNSForwardingRuleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteDNSForwardingRuleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteDNSForwardingRule",
+		Method:             "DELETE",
+		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/dnsforwardings/{dns_forwarding_id}/rules/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteDNSForwardingRuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteDNSForwardingRuleOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteDNSForwardingRuleDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 DeleteHVNRoute deletes h v n route triggers h v n route deletion workflow
 */
 func (a *Client) DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteHVNRouteOK, error) {
@@ -410,6 +612,44 @@ func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.Cli
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeletePeeringDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeletePrivateLinkService deletes private link service deletes specified private link service
+*/
+func (a *Client) DeletePrivateLinkService(params *DeletePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePrivateLinkServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeletePrivateLinkServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeletePrivateLinkService",
+		Method:             "DELETE",
+		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/private-link-services/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeletePrivateLinkServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeletePrivateLinkServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeletePrivateLinkServiceDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -490,6 +730,82 @@ func (a *Client) Get(params *GetParams, authInfo runtime.ClientAuthInfoWriter, o
 }
 
 /*
+GetDNSForwarding gets DNS forwarding returns information about dns forwarding
+*/
+func (a *Client) GetDNSForwarding(params *GetDNSForwardingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDNSForwardingOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetDNSForwardingParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetDNSForwarding",
+		Method:             "GET",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/dnsforwardings/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetDNSForwardingReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetDNSForwardingOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetDNSForwardingDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetDNSForwardingRule gets DNS forwarding rule returns information about a dns forwarding rule
+*/
+func (a *Client) GetDNSForwardingRule(params *GetDNSForwardingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDNSForwardingRuleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetDNSForwardingRuleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetDNSForwardingRule",
+		Method:             "GET",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/dnsforwardings/{dns_forwarding_id}/rules/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetDNSForwardingRuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetDNSForwardingRuleOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetDNSForwardingRuleDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetHVNRoute gets h v n route returns a specific h v n route
 */
 func (a *Client) GetHVNRoute(params *GetHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHVNRouteOK, error) {
@@ -566,6 +882,44 @@ func (a *Client) GetPeering(params *GetPeeringParams, authInfo runtime.ClientAut
 }
 
 /*
+GetPrivateLinkService gets private link returns a private link matching the request
+*/
+func (a *Client) GetPrivateLinkService(params *GetPrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPrivateLinkServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetPrivateLinkServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetPrivateLinkService",
+		Method:             "GET",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/private-link-services/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPrivateLinkServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPrivateLinkServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetPrivateLinkServiceDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetTGWAttachment gets t g w attachment returns existing t g w attachment
 */
 func (a *Client) GetTGWAttachment(params *GetTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTGWAttachmentOK, error) {
@@ -638,6 +992,82 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListDNSForwardingRules lists DNS forwarding rules returns a list of dns forwarding rules matching the request
+*/
+func (a *Client) ListDNSForwardingRules(params *ListDNSForwardingRulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDNSForwardingRulesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListDNSForwardingRulesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListDNSForwardingRules",
+		Method:             "GET",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/dnsforwardings/{dns_forwarding_id}/rules",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListDNSForwardingRulesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListDNSForwardingRulesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListDNSForwardingRulesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListDNSForwardings lists DNS forwardings returns a list of dns forwardings for a given h v n matching the request
+*/
+func (a *Client) ListDNSForwardings(params *ListDNSForwardingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDNSForwardingsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListDNSForwardingsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListDNSForwardings",
+		Method:             "GET",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/dnsforwardings",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListDNSForwardingsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListDNSForwardingsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListDNSForwardingsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -756,6 +1186,44 @@ func (a *Client) ListPeerings(params *ListPeeringsParams, authInfo runtime.Clien
 }
 
 /*
+ListPrivateLinkService lists private link returns a list of private link matching the request
+*/
+func (a *Client) ListPrivateLinkService(params *ListPrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPrivateLinkServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListPrivateLinkServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ListPrivateLinkService",
+		Method:             "GET",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/private-link-services",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListPrivateLinkServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListPrivateLinkServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListPrivateLinkServiceDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ListTGWAttachments lists t g w attachments returns a list of t g w attachments matching the request
 */
 func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTGWAttachmentsOK, error) {
@@ -790,6 +1258,44 @@ func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo r
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListTGWAttachmentsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdatePrivateLinkService updates private link updates a private link matching the request
+*/
+func (a *Client) UpdatePrivateLinkService(params *UpdatePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePrivateLinkServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdatePrivateLinkServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdatePrivateLinkService",
+		Method:             "PATCH",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/private-link-services/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdatePrivateLinkServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdatePrivateLinkServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdatePrivateLinkServiceDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

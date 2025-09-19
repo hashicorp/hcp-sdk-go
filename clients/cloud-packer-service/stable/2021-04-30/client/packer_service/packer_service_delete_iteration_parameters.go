@@ -87,18 +87,6 @@ type PackerServiceDeleteIterationParams struct {
 	*/
 	LocationProjectID string
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure")
-	*/
-	LocationRegionProvider *string
-
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1")
-	*/
-	LocationRegionRegion *string
-
 	/* RollbackChannels.
 
 	   When set to true, any user created channels will be rolled back to the last valid iteration they were assigned to.
@@ -202,28 +190,6 @@ func (o *PackerServiceDeleteIterationParams) SetLocationProjectID(locationProjec
 	o.LocationProjectID = locationProjectID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the packer service delete iteration params
-func (o *PackerServiceDeleteIterationParams) WithLocationRegionProvider(locationRegionProvider *string) *PackerServiceDeleteIterationParams {
-	o.SetLocationRegionProvider(locationRegionProvider)
-	return o
-}
-
-// SetLocationRegionProvider adds the locationRegionProvider to the packer service delete iteration params
-func (o *PackerServiceDeleteIterationParams) SetLocationRegionProvider(locationRegionProvider *string) {
-	o.LocationRegionProvider = locationRegionProvider
-}
-
-// WithLocationRegionRegion adds the locationRegionRegion to the packer service delete iteration params
-func (o *PackerServiceDeleteIterationParams) WithLocationRegionRegion(locationRegionRegion *string) *PackerServiceDeleteIterationParams {
-	o.SetLocationRegionRegion(locationRegionRegion)
-	return o
-}
-
-// SetLocationRegionRegion adds the locationRegionRegion to the packer service delete iteration params
-func (o *PackerServiceDeleteIterationParams) SetLocationRegionRegion(locationRegionRegion *string) {
-	o.LocationRegionRegion = locationRegionRegion
-}
-
 // WithRollbackChannels adds the rollbackChannels to the packer service delete iteration params
 func (o *PackerServiceDeleteIterationParams) WithRollbackChannels(rollbackChannels *bool) *PackerServiceDeleteIterationParams {
 	o.SetRollbackChannels(rollbackChannels)
@@ -273,40 +239,6 @@ func (o *PackerServiceDeleteIterationParams) WriteToRequest(r runtime.ClientRequ
 	// path param location.project_id
 	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
 		return err
-	}
-
-	if o.LocationRegionProvider != nil {
-
-		// query param location.region.provider
-		var qrLocationRegionProvider string
-
-		if o.LocationRegionProvider != nil {
-			qrLocationRegionProvider = *o.LocationRegionProvider
-		}
-		qLocationRegionProvider := qrLocationRegionProvider
-		if qLocationRegionProvider != "" {
-
-			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.LocationRegionRegion != nil {
-
-		// query param location.region.region
-		var qrLocationRegionRegion string
-
-		if o.LocationRegionRegion != nil {
-			qrLocationRegionRegion = *o.LocationRegionRegion
-		}
-		qLocationRegionRegion := qrLocationRegionRegion
-		if qLocationRegionRegion != "" {
-
-			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
-				return err
-			}
-		}
 	}
 
 	if o.RollbackChannels != nil {

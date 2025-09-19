@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
@@ -20,14 +19,22 @@ import (
 // swagger:model hashicorp.cloud.waypoint.v20241122.WaypointService.SendStatusLogBody
 type HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBody struct {
 
-	// action config
-	ActionConfig *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig `json:"action_config,omitempty"`
+	// Action config without ID
+	//
+	// The action config ID to send this to
+	ActionConfig *HashicorpCloudWaypointV20241122ActionConfig `json:"action_config,omitempty"`
+
+	// action run
+	ActionRun *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun `json:"action_run,omitempty"`
+
+	// The run sequence to attach this run to
+	ActionRunSeq string `json:"action_run_seq,omitempty"`
 
 	// namespace
 	Namespace *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyNamespace `json:"namespace,omitempty"`
 
 	// The status log to send
-	StatusLog *HashicorpCloudWaypointStatusLog `json:"status_log,omitempty"`
+	StatusLog *HashicorpCloudWaypointV20241122StatusLog `json:"status_log,omitempty"`
 }
 
 // Validate validates this hashicorp cloud waypoint v20241122 waypoint service send status log body
@@ -35,6 +42,10 @@ func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBody) Valida
 	var res []error
 
 	if err := m.validateActionConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateActionRun(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -63,6 +74,25 @@ func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBody) valida
 				return ve.ValidateName("action_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("action_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBody) validateActionRun(formats strfmt.Registry) error {
+	if swag.IsZero(m.ActionRun) { // not required
+		return nil
+	}
+
+	if m.ActionRun != nil {
+		if err := m.ActionRun.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("action_run")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("action_run")
 			}
 			return err
 		}
@@ -117,6 +147,10 @@ func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBody) Contex
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateActionRun(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateNamespace(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -144,6 +178,27 @@ func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBody) contex
 				return ve.ValidateName("action_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("action_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBody) contextValidateActionRun(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ActionRun != nil {
+
+		if swag.IsZero(m.ActionRun) { // not required
+			return nil
+		}
+
+		if err := m.ActionRun.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("action_run")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("action_run")
 			}
 			return err
 		}
@@ -212,40 +267,20 @@ func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBody) Unmars
 	return nil
 }
 
-// HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig Action config without ID
+// HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun The run to attach this log to
 //
-// # The action config ID to send this to
-//
-// swagger:model HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig
-type HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig struct {
+// swagger:model HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun
+type HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun struct {
 
-	// URL to trigger an action on. Only used in Custom mode.
-	ActionURL string `json:"action_url,omitempty"`
-
-	// The time the action config was created in the database
-	// This is mainly a convenience field for the UI and might not always be set.
-	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
-
-	// Description of the action
-	Description string `json:"description,omitempty"`
-
-	// Give the action config an optional unique (per-namespace) name
-	Name string `json:"name,omitempty"`
-
-	// More explicitly configure the kind of HTTP request to be made
-	Request *HashicorpCloudWaypointActionConfigRequest `json:"request,omitempty"`
+	// specifier
+	Specifier *HashicorpCloudWaypointV20241122RefActionRunSpecifier `json:"specifier,omitempty"`
 }
 
-// Validate validates this hashicorp cloud waypoint v20241122 waypoint service send status log body action config
-func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud waypoint v20241122 waypoint service send status log body action run
+func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCreatedAt(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateRequest(formats); err != nil {
+	if err := m.validateSpecifier(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -255,29 +290,17 @@ func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionCo
 	return nil
 }
 
-func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig) validateCreatedAt(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedAt) { // not required
+func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun) validateSpecifier(formats strfmt.Registry) error {
+	if swag.IsZero(m.Specifier) { // not required
 		return nil
 	}
 
-	if err := validate.FormatOf("action_config"+"."+"created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig) validateRequest(formats strfmt.Registry) error {
-	if swag.IsZero(m.Request) { // not required
-		return nil
-	}
-
-	if m.Request != nil {
-		if err := m.Request.Validate(formats); err != nil {
+	if m.Specifier != nil {
+		if err := m.Specifier.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("action_config" + "." + "request")
+				return ve.ValidateName("action_run" + "." + "specifier")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("action_config" + "." + "request")
+				return ce.ValidateName("action_run" + "." + "specifier")
 			}
 			return err
 		}
@@ -286,11 +309,11 @@ func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionCo
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud waypoint v20241122 waypoint service send status log body action config based on the context it is used
-func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud waypoint v20241122 waypoint service send status log body action run based on the context it is used
+func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateRequest(ctx, formats); err != nil {
+	if err := m.contextValidateSpecifier(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -300,19 +323,19 @@ func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionCo
 	return nil
 }
 
-func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig) contextValidateRequest(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun) contextValidateSpecifier(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.Request != nil {
+	if m.Specifier != nil {
 
-		if swag.IsZero(m.Request) { // not required
+		if swag.IsZero(m.Specifier) { // not required
 			return nil
 		}
 
-		if err := m.Request.ContextValidate(ctx, formats); err != nil {
+		if err := m.Specifier.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("action_config" + "." + "request")
+				return ve.ValidateName("action_run" + "." + "specifier")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("action_config" + "." + "request")
+				return ce.ValidateName("action_run" + "." + "specifier")
 			}
 			return err
 		}
@@ -322,7 +345,7 @@ func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionCo
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -330,8 +353,8 @@ func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionCo
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionConfig
+func (m *HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudWaypointV20241122WaypointServiceSendStatusLogBodyActionRun
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

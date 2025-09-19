@@ -1,6 +1,6 @@
 name: Create Release
 
-on: 
+on:
   # Run Every Wednesday at 12:00 AM UTC
   schedule:
     - cron: '0 0 * * 3'
@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
           token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
 
       - name: Setup Go
-        uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
+        uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
         with:
           cache: true
           go-version-file: 'go.mod'
@@ -40,13 +40,13 @@ jobs:
           GOPRIVATE: 'github.com/hashicorp/*'
         run: |
           go install github.com/hashicorp/go-changelog/cmd/changelog-build@6ec9be372335f39c5df27e232c3669db7f5183a5
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.6
 
       - name: Run Unit Tests and Linter
         run: make test-ci
 
       - name: Upload Coverage Artifact
-        uses: actions/upload-artifact@c7d193f32edcb7bfad88892161225aeda64e9392 # v4.0.0
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: Test Coverage
           path: coverage.html

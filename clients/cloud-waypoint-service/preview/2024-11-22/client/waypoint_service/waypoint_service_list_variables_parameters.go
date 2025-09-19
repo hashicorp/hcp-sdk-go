@@ -122,6 +122,20 @@ type WaypointServiceListVariablesParams struct {
 	// ScopeActionName.
 	ScopeActionName *string
 
+	/* ScopeActionOutputsActionName.
+
+	     ActionName returns the name of the action config reference in response messages
+	and is an output only field.
+	*/
+	ScopeActionOutputsActionName *string
+
+	/* ScopeActionOutputsExternalID.
+
+	     ExternalID returns the ID of the action config reference in response messages
+	and is an output only field.
+	*/
+	ScopeActionOutputsExternalID *string
+
 	// ScopeApplicationID.
 	ScopeApplicationID *string
 
@@ -301,6 +315,28 @@ func (o *WaypointServiceListVariablesParams) WithScopeActionName(scopeActionName
 // SetScopeActionName adds the scopeActionName to the waypoint service list variables params
 func (o *WaypointServiceListVariablesParams) SetScopeActionName(scopeActionName *string) {
 	o.ScopeActionName = scopeActionName
+}
+
+// WithScopeActionOutputsActionName adds the scopeActionOutputsActionName to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) WithScopeActionOutputsActionName(scopeActionOutputsActionName *string) *WaypointServiceListVariablesParams {
+	o.SetScopeActionOutputsActionName(scopeActionOutputsActionName)
+	return o
+}
+
+// SetScopeActionOutputsActionName adds the scopeActionOutputsActionName to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) SetScopeActionOutputsActionName(scopeActionOutputsActionName *string) {
+	o.ScopeActionOutputsActionName = scopeActionOutputsActionName
+}
+
+// WithScopeActionOutputsExternalID adds the scopeActionOutputsExternalID to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) WithScopeActionOutputsExternalID(scopeActionOutputsExternalID *string) *WaypointServiceListVariablesParams {
+	o.SetScopeActionOutputsExternalID(scopeActionOutputsExternalID)
+	return o
+}
+
+// SetScopeActionOutputsExternalID adds the scopeActionOutputsExternalId to the waypoint service list variables params
+func (o *WaypointServiceListVariablesParams) SetScopeActionOutputsExternalID(scopeActionOutputsExternalID *string) {
+	o.ScopeActionOutputsExternalID = scopeActionOutputsExternalID
 }
 
 // WithScopeApplicationID adds the scopeApplicationID to the waypoint service list variables params
@@ -496,6 +532,40 @@ func (o *WaypointServiceListVariablesParams) WriteToRequest(r runtime.ClientRequ
 		if qScopeActionName != "" {
 
 			if err := r.SetQueryParam("scope.action.name", qScopeActionName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ScopeActionOutputsActionName != nil {
+
+		// query param scope.action.outputs.action_name
+		var qrScopeActionOutputsActionName string
+
+		if o.ScopeActionOutputsActionName != nil {
+			qrScopeActionOutputsActionName = *o.ScopeActionOutputsActionName
+		}
+		qScopeActionOutputsActionName := qrScopeActionOutputsActionName
+		if qScopeActionOutputsActionName != "" {
+
+			if err := r.SetQueryParam("scope.action.outputs.action_name", qScopeActionOutputsActionName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ScopeActionOutputsExternalID != nil {
+
+		// query param scope.action.outputs.external_id
+		var qrScopeActionOutputsExternalID string
+
+		if o.ScopeActionOutputsExternalID != nil {
+			qrScopeActionOutputsExternalID = *o.ScopeActionOutputsExternalID
+		}
+		qScopeActionOutputsExternalID := qrScopeActionOutputsExternalID
+		if qScopeActionOutputsExternalID != "" {
+
+			if err := r.SetQueryParam("scope.action.outputs.external_id", qScopeActionOutputsExternalID); err != nil {
 				return err
 			}
 		}

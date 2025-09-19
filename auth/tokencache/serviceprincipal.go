@@ -8,6 +8,8 @@ import (
 	"log"
 
 	"golang.org/x/oauth2"
+
+	"github.com/hashicorp/hcp-sdk-go/config/geography"
 )
 
 const sourceTypeServicePrincipal = sourceType("service-principal")
@@ -18,13 +20,18 @@ func NewServicePrincipalTokenSource(
 	cacheFile string,
 	clientID string,
 	oauthTokenSource oauth2.TokenSource,
-) oauth2.TokenSource {
+	geo string,
+) (oauth2.TokenSource, error) {
+	if !geography.ValidateGeo(geography.Geo(geo)) {
+		return nil, fmt.Errorf("login geography %s invalid. Supported: %v", geo, geography.Geographies)
+	}
 	return &cachingTokenSource{
 		cacheFile:        cacheFile,
 		sourceIdentifier: clientID,
 		sourceType:       sourceTypeServicePrincipal,
 		oauthTokenSource: oauthTokenSource,
-	}
+		geography:        geo,
+	}, nil
 }
 
 func (source *cachingTokenSource) servicePrincipalToken(cachedTokens *cache) (*oauth2.Token, error) {
@@ -41,7 +48,7 @@ func (source *cachingTokenSource) servicePrincipalToken(cachedTokens *cache) (*o
 	}
 
 	// Cache the new token
-	cachedTokens.ServicePrincipals[source.sourceIdentifier] = *cacheEntryFromToken(token)
+	cachedTokens.ServicePrincipals[source.sourceIdentifier] = *cacheEntryFromToken(token, source.geography)
 
 	// Write the cache back to the file
 	if err = cachedTokens.write(source.cacheFile); err != nil {

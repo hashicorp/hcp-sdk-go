@@ -23,8 +23,13 @@ type HashicorpCloudIamServicePrincipal struct {
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
-	// id is the UUID identifier for this service principal.
+	// id is an opaque, globally unique public identifier for the service principal.
 	ID string `json:"id,omitempty"`
+
+	// managed_by is the optional resource_id of the resource which manages this service principal.
+	// The presence of this field denotes that the service principal's lifecycle is not managed by
+	// a user.
+	ManagedBy *string `json:"managed_by,omitempty"`
 
 	// name is the name for this service principal.
 	Name string `json:"name,omitempty"`

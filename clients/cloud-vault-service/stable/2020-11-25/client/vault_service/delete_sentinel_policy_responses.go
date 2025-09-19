@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *DeleteSentinelPolicyOK) Code() int {
 }
 
 func (o *DeleteSentinelPolicyOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sentinel/policy/delete][%d] deleteSentinelPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sentinel/policy/delete][%d] deleteSentinelPolicyOK %s", 200, payload)
 }
 
 func (o *DeleteSentinelPolicyOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sentinel/policy/delete][%d] deleteSentinelPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sentinel/policy/delete][%d] deleteSentinelPolicyOK %s", 200, payload)
 }
 
 func (o *DeleteSentinelPolicyOK) GetPayload() *models.HashicorpCloudVault20201125DeleteSentinelPolicyResponse {
@@ -159,11 +162,13 @@ func (o *DeleteSentinelPolicyDefault) Code() int {
 }
 
 func (o *DeleteSentinelPolicyDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sentinel/policy/delete][%d] DeleteSentinelPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sentinel/policy/delete][%d] DeleteSentinelPolicy default %s", o._statusCode, payload)
 }
 
 func (o *DeleteSentinelPolicyDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sentinel/policy/delete][%d] DeleteSentinelPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/sentinel/policy/delete][%d] DeleteSentinelPolicy default %s", o._statusCode, payload)
 }
 
 func (o *DeleteSentinelPolicyDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

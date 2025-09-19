@@ -28,7 +28,7 @@ func TestTokenCache_ClearLoginCache(t *testing.T) {
 	tokenSource := NewTestTokenSource("")
 
 	// Create the caching token source for logins
-	subject := NewLoginTokenSource(cacheFile, tokenSource, nil)
+	subject, _ := NewLoginTokenSource(cacheFile, tokenSource, nil, "us")
 
 	// Fetch the token once. It should get cached.
 	token, err := subject.Token()

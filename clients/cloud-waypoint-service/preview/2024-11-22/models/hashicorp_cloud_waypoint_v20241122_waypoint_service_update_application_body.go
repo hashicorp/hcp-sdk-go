@@ -23,7 +23,7 @@ type HashicorpCloudWaypointV20241122WaypointServiceUpdateApplicationBody struct 
 	// Any action assignments for this application. To update, you must specify the
 	// field mask for the action_cfg_refs field. Additionally, if you specify the
 	// field mask, but this array is null, it means clearing out any assignments.
-	ActionCfgRefs []*HashicorpCloudWaypointActionCfgRef `json:"action_cfg_refs"`
+	ActionCfgRefs []*HashicorpCloudWaypointV20241122ActionCfgRef `json:"action_cfg_refs"`
 
 	// application
 	Application *HashicorpCloudWaypointV20241122WaypointServiceUpdateApplicationBodyApplication `json:"application,omitempty"`

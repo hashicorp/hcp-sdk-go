@@ -110,18 +110,6 @@ type PackerServiceListBucketAncestryParams struct {
 	*/
 	LocationProjectID string
 
-	/* LocationRegionProvider.
-
-	   provider is the named cloud provider ("aws", "gcp", "azure")
-	*/
-	LocationRegionProvider *string
-
-	/* LocationRegionRegion.
-
-	   region is the cloud region ("us-west1", "us-east1")
-	*/
-	LocationRegionRegion *string
-
 	/* PaginationNextPageToken.
 
 	     Specifies a page token to use to retrieve the next page. Set this to the
@@ -287,28 +275,6 @@ func (o *PackerServiceListBucketAncestryParams) SetLocationProjectID(locationPro
 	o.LocationProjectID = locationProjectID
 }
 
-// WithLocationRegionProvider adds the locationRegionProvider to the packer service list bucket ancestry params
-func (o *PackerServiceListBucketAncestryParams) WithLocationRegionProvider(locationRegionProvider *string) *PackerServiceListBucketAncestryParams {
-	o.SetLocationRegionProvider(locationRegionProvider)
-	return o
-}
-
-// SetLocationRegionProvider adds the locationRegionProvider to the packer service list bucket ancestry params
-func (o *PackerServiceListBucketAncestryParams) SetLocationRegionProvider(locationRegionProvider *string) {
-	o.LocationRegionProvider = locationRegionProvider
-}
-
-// WithLocationRegionRegion adds the locationRegionRegion to the packer service list bucket ancestry params
-func (o *PackerServiceListBucketAncestryParams) WithLocationRegionRegion(locationRegionRegion *string) *PackerServiceListBucketAncestryParams {
-	o.SetLocationRegionRegion(locationRegionRegion)
-	return o
-}
-
-// SetLocationRegionRegion adds the locationRegionRegion to the packer service list bucket ancestry params
-func (o *PackerServiceListBucketAncestryParams) SetLocationRegionRegion(locationRegionRegion *string) {
-	o.LocationRegionRegion = locationRegionRegion
-}
-
 // WithPaginationNextPageToken adds the paginationNextPageToken to the packer service list bucket ancestry params
 func (o *PackerServiceListBucketAncestryParams) WithPaginationNextPageToken(paginationNextPageToken *string) *PackerServiceListBucketAncestryParams {
 	o.SetPaginationNextPageToken(paginationNextPageToken)
@@ -442,40 +408,6 @@ func (o *PackerServiceListBucketAncestryParams) WriteToRequest(r runtime.ClientR
 	// path param location.project_id
 	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
 		return err
-	}
-
-	if o.LocationRegionProvider != nil {
-
-		// query param location.region.provider
-		var qrLocationRegionProvider string
-
-		if o.LocationRegionProvider != nil {
-			qrLocationRegionProvider = *o.LocationRegionProvider
-		}
-		qLocationRegionProvider := qrLocationRegionProvider
-		if qLocationRegionProvider != "" {
-
-			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.LocationRegionRegion != nil {
-
-		// query param location.region.region
-		var qrLocationRegionRegion string
-
-		if o.LocationRegionRegion != nil {
-			qrLocationRegionRegion = *o.LocationRegionRegion
-		}
-		qLocationRegionRegion := qrLocationRegionRegion
-		if qLocationRegionRegion != "" {
-
-			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
-				return err
-			}
-		}
 	}
 
 	if o.PaginationNextPageToken != nil {

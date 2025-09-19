@@ -1,3 +1,61 @@
+## v0.159.0 (September 18, 2025)
+
+## v0.158.0 (September 11, 2025)
+
+## v0.157.0 (September 09, 2025)
+
+## v0.156.0 (September 09, 2025)
+
+## v0.155.0 (August 13, 2025)
+
+## v0.154.0 (August 06, 2025)
+
+## v0.153.0 (July 30, 2025)
+
+BUG FIXES:
+
+* Allow auth between switching HCP geographies [[GH-296](https://github.com/hashicorp/hcp-sdk-go/pull/296)]
+## v0.152.0 (July 16, 2025)
+
+## v0.151.0 (July 10, 2025)
+
+FEATURES:
+
+* Updated config package to allow for distinct defaults supporting different HCP deployment geographies [[GH-273](https://github.com/hashicorp/hcp-sdk-go/pull/273)]
+## v0.150.0 (July 09, 2025)
+
+## v0.149.0 (July 02, 2025)
+
+## v0.148.0 (June 25, 2025)
+
+## v0.147.0 (June 18, 2025)
+
+BUG FIXES:
+
+* Restore preview version of cloud-billing version 2020-11-05 [[GH-295](https://github.com/hashicorp/hcp-sdk-go/pull/295)]
+## v0.146.0 (June 11, 2025)
+
+## v0.145.0 (June 09, 2025)
+
+## v0.144.0 (May 28, 2025)
+
+## v0.143.0 (May 21, 2025)
+
+## v0.142.0 (May 05, 2025)
+
+## v0.141.0 (April 23, 2025)
+
+## v0.140.0 (April 09, 2025)
+
+## v0.139.0 (March 19, 2025)
+
+## v0.138.0 (March 05, 2025)
+
+IMPROVEMENTS:
+
+* Update to Go 1.23 per the [Go support policy](https://go.dev/doc/devel/release#policy). [[GH-278](https://github.com/hashicorp/hcp-sdk-go/pull/278)]
+## v0.137.0 (February 26, 2025)
+
 ## v0.136.0 (February 12, 2025)
 
 ## v0.135.0 (February 05, 2025)
