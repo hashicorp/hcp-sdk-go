@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *UpdateOK) Code() int {
 }
 
 func (o *UpdateOK) Error() string {
-	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] updateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] updateOK %s", 200, payload)
 }
 
 func (o *UpdateOK) String() string {
-	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] updateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] updateOK %s", 200, payload)
 }
 
 func (o *UpdateOK) GetPayload() *models.HashicorpCloudVault20201125UpdateResponse {
@@ -159,11 +162,13 @@ func (o *UpdateDefault) Code() int {
 }
 
 func (o *UpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] Update default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] Update default %s", o._statusCode, payload)
 }
 
 func (o *UpdateDefault) String() string {
-	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] Update default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /vault/2020-11-25/organizations/{cluster.location.organization_id}/projects/{cluster.location.project_id}/clusters/{cluster.id}][%d] Update default %s", o._statusCode, payload)
 }
 
 func (o *UpdateDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

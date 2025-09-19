@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *UnlockOK) Code() int {
 }
 
 func (o *UnlockOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unlock][%d] unlockOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unlock][%d] unlockOK %s", 200, payload)
 }
 
 func (o *UnlockOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unlock][%d] unlockOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unlock][%d] unlockOK %s", 200, payload)
 }
 
 func (o *UnlockOK) GetPayload() *models.HashicorpCloudVault20201125UnlockResponse {
@@ -159,11 +162,13 @@ func (o *UnlockDefault) Code() int {
 }
 
 func (o *UnlockDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unlock][%d] Unlock default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unlock][%d] Unlock default %s", o._statusCode, payload)
 }
 
 func (o *UnlockDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unlock][%d] Unlock default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/unlock][%d] Unlock default %s", o._statusCode, payload)
 }
 
 func (o *UnlockDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

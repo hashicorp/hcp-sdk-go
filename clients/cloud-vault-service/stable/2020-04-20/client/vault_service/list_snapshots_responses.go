@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ListSnapshotsOK) Code() int {
 }
 
 func (o *ListSnapshotsOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] listSnapshotsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] listSnapshotsOK %s", 200, payload)
 }
 
 func (o *ListSnapshotsOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] listSnapshotsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] listSnapshotsOK %s", 200, payload)
 }
 
 func (o *ListSnapshotsOK) GetPayload() *models.HashicorpCloudVault20200420ListSnapshotsResponse {
@@ -159,11 +162,13 @@ func (o *ListSnapshotsDefault) Code() int {
 }
 
 func (o *ListSnapshotsDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] ListSnapshots default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] ListSnapshots default %s", o._statusCode, payload)
 }
 
 func (o *ListSnapshotsDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] ListSnapshots default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{resource.location.organization_id}/projects/{resource.location.project_id}/snapshots][%d] ListSnapshots default %s", o._statusCode, payload)
 }
 
 func (o *ListSnapshotsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

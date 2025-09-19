@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetAvailableTemplatesOK) Code() int {
 }
 
 func (o *GetAvailableTemplatesOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/templates][%d] getAvailableTemplatesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/templates][%d] getAvailableTemplatesOK %s", 200, payload)
 }
 
 func (o *GetAvailableTemplatesOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/templates][%d] getAvailableTemplatesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/templates][%d] getAvailableTemplatesOK %s", 200, payload)
 }
 
 func (o *GetAvailableTemplatesOK) GetPayload() *models.HashicorpCloudVault20201125GetAvailableTemplatesResponse {
@@ -159,11 +162,13 @@ func (o *GetAvailableTemplatesDefault) Code() int {
 }
 
 func (o *GetAvailableTemplatesDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/templates][%d] GetAvailableTemplates default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/templates][%d] GetAvailableTemplates default %s", o._statusCode, payload)
 }
 
 func (o *GetAvailableTemplatesDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/templates][%d] GetAvailableTemplates default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/templates][%d] GetAvailableTemplates default %s", o._statusCode, payload)
 }
 
 func (o *GetAvailableTemplatesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

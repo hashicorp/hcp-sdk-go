@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetClientCountsOK) Code() int {
 }
 
 func (o *GetClientCountsOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] getClientCountsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] getClientCountsOK %s", 200, payload)
 }
 
 func (o *GetClientCountsOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] getClientCountsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] getClientCountsOK %s", 200, payload)
 }
 
 func (o *GetClientCountsOK) GetPayload() *models.HashicorpCloudVault20201125GetClientCountsResponse {
@@ -159,11 +162,13 @@ func (o *GetClientCountsDefault) Code() int {
 }
 
 func (o *GetClientCountsDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] GetClientCounts default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] GetClientCounts default %s", o._statusCode, payload)
 }
 
 func (o *GetClientCountsDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] GetClientCounts default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/clients][%d] GetClientCounts default %s", o._statusCode, payload)
 }
 
 func (o *GetClientCountsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

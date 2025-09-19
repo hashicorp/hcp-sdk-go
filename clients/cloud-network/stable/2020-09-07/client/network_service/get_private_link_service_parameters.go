@@ -115,7 +115,7 @@ type GetPrivateLinkServiceParams struct {
 
 	/* ID.
 
-	   Id is the ID of the private link to fetch
+	   Id is the ID of the private_link to fetch
 	*/
 	ID string
 

@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *RecreateFromSnapshotOK) Code() int {
 }
 
 func (o *RecreateFromSnapshotOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] recreateFromSnapshotOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] recreateFromSnapshotOK %s", 200, payload)
 }
 
 func (o *RecreateFromSnapshotOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] recreateFromSnapshotOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] recreateFromSnapshotOK %s", 200, payload)
 }
 
 func (o *RecreateFromSnapshotOK) GetPayload() *models.HashicorpCloudVault20201125RecreateFromSnapshotResponse {
@@ -159,11 +162,13 @@ func (o *RecreateFromSnapshotDefault) Code() int {
 }
 
 func (o *RecreateFromSnapshotDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] RecreateFromSnapshot default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] RecreateFromSnapshot default %s", o._statusCode, payload)
 }
 
 func (o *RecreateFromSnapshotDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] RecreateFromSnapshot default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/recreatefromsnapshot][%d] RecreateFromSnapshot default %s", o._statusCode, payload)
 }
 
 func (o *RecreateFromSnapshotDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

@@ -66,6 +66,8 @@ type ClientService interface {
 
 	CreatePeering(params *CreatePeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePeeringOK, error)
 
+	CreatePrivateLinkService(params *CreatePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePrivateLinkServiceOK, error)
+
 	CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTGWAttachmentOK, error)
 
 	CreateToken(params *CreateTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTokenOK, error)
@@ -77,6 +79,8 @@ type ClientService interface {
 	DeleteHVNRoute(params *DeleteHVNRouteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteHVNRouteOK, error)
 
 	DeletePeering(params *DeletePeeringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePeeringOK, error)
+
+	DeletePrivateLinkService(params *DeletePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePrivateLinkServiceOK, error)
 
 	DeleteTGWAttachment(params *DeleteTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTGWAttachmentOK, error)
 
@@ -109,6 +113,8 @@ type ClientService interface {
 	ListPrivateLinkService(params *ListPrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPrivateLinkServiceOK, error)
 
 	ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTGWAttachmentsOK, error)
+
+	UpdatePrivateLinkService(params *UpdatePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePrivateLinkServiceOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -344,6 +350,44 @@ func (a *Client) CreatePeering(params *CreatePeeringParams, authInfo runtime.Cli
 }
 
 /*
+CreatePrivateLinkService creates private link service creates a new private link service via public api
+*/
+func (a *Client) CreatePrivateLinkService(params *CreatePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePrivateLinkServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreatePrivateLinkServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreatePrivateLinkService",
+		Method:             "POST",
+		PathPattern:        "/network/2020-09-07/organizations/{private_link_service.hvn.location.organization_id}/projects/{private_link_service.hvn.location.project_id}/networks/{private_link_service.hvn.id}/private-link-services",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreatePrivateLinkServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreatePrivateLinkServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreatePrivateLinkServiceDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateTGWAttachment creates t g w attachment creates a new transit gateway attachment for an h v n
 */
 func (a *Client) CreateTGWAttachment(params *CreateTGWAttachmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTGWAttachmentOK, error) {
@@ -568,6 +612,44 @@ func (a *Client) DeletePeering(params *DeletePeeringParams, authInfo runtime.Cli
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeletePeeringDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeletePrivateLinkService deletes private link service deletes specified private link service
+*/
+func (a *Client) DeletePrivateLinkService(params *DeletePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePrivateLinkServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeletePrivateLinkServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeletePrivateLinkService",
+		Method:             "DELETE",
+		PathPattern:        "/network/2020-09-07/organizations/{location.organization_id}/projects/{location.project_id}/networks/{hvn_id}/private-link-services/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeletePrivateLinkServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeletePrivateLinkServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeletePrivateLinkServiceDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1176,6 +1258,44 @@ func (a *Client) ListTGWAttachments(params *ListTGWAttachmentsParams, authInfo r
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListTGWAttachmentsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpdatePrivateLinkService updates private link updates a private link matching the request
+*/
+func (a *Client) UpdatePrivateLinkService(params *UpdatePrivateLinkServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePrivateLinkServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdatePrivateLinkServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdatePrivateLinkService",
+		Method:             "PATCH",
+		PathPattern:        "/network/2020-09-07/organizations/{hvn.location.organization_id}/projects/{hvn.location.project_id}/networks/{hvn.id}/private-link-services/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdatePrivateLinkServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdatePrivateLinkServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdatePrivateLinkServiceDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
