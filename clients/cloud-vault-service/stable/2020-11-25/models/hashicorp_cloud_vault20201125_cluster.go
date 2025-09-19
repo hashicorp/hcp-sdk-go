@@ -42,6 +42,9 @@ type HashicorpCloudVault20201125Cluster struct {
 	// location is the location of the cluster.
 	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
 
+	// lock origins
+	LockOrigins []*HashicorpCloudVault20201125ClusterLockOrigin `json:"lock_origins"`
+
 	// notifications is the list of notifications currently valid for the cluster.
 	Notifications []*HashicorpCloudVault20201125ClusterNotification `json:"notifications"`
 
@@ -50,6 +53,9 @@ type HashicorpCloudVault20201125Cluster struct {
 
 	// resource_id is UUID of the Vault cluster.
 	ResourceID string `json:"resource_id,omitempty"`
+
+	// snapshot schedule
+	SnapshotSchedule string `json:"snapshot_schedule,omitempty"`
 
 	// state is the current state of the cluster.
 	State *HashicorpCloudVault20201125ClusterState `json:"state,omitempty"`
@@ -76,6 +82,10 @@ func (m *HashicorpCloudVault20201125Cluster) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateLocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLockOrigins(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -185,6 +195,32 @@ func (m *HashicorpCloudVault20201125Cluster) validateLocation(formats strfmt.Reg
 	return nil
 }
 
+func (m *HashicorpCloudVault20201125Cluster) validateLockOrigins(formats strfmt.Registry) error {
+	if swag.IsZero(m.LockOrigins) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.LockOrigins); i++ {
+		if swag.IsZero(m.LockOrigins[i]) { // not required
+			continue
+		}
+
+		if m.LockOrigins[i] != nil {
+			if err := m.LockOrigins[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("lock_origins" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("lock_origins" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVault20201125Cluster) validateNotifications(formats strfmt.Registry) error {
 	if swag.IsZero(m.Notifications) { // not required
 		return nil
@@ -266,6 +302,10 @@ func (m *HashicorpCloudVault20201125Cluster) ContextValidate(ctx context.Context
 	}
 
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLockOrigins(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -366,6 +406,31 @@ func (m *HashicorpCloudVault20201125Cluster) contextValidateLocation(ctx context
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125Cluster) contextValidateLockOrigins(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.LockOrigins); i++ {
+
+		if m.LockOrigins[i] != nil {
+
+			if swag.IsZero(m.LockOrigins[i]) { // not required
+				return nil
+			}
+
+			if err := m.LockOrigins[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("lock_origins" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("lock_origins" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

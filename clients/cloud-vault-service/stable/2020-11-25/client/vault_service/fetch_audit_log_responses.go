@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *FetchAuditLogOK) Code() int {
 }
 
 func (o *FetchAuditLogOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] fetchAuditLogOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] fetchAuditLogOK %s", 200, payload)
 }
 
 func (o *FetchAuditLogOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] fetchAuditLogOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] fetchAuditLogOK %s", 200, payload)
 }
 
 func (o *FetchAuditLogOK) GetPayload() *models.HashicorpCloudVault20201125FetchAuditLogResponse {
@@ -159,11 +162,13 @@ func (o *FetchAuditLogDefault) Code() int {
 }
 
 func (o *FetchAuditLogDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] FetchAuditLog default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] FetchAuditLog default %s", o._statusCode, payload)
 }
 
 func (o *FetchAuditLogDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] FetchAuditLog default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog][%d] FetchAuditLog default %s", o._statusCode, payload)
 }
 
 func (o *FetchAuditLogDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

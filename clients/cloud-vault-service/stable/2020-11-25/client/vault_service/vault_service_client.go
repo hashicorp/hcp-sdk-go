@@ -7,12 +7,38 @@ package vault_service
 
 import (
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new vault service API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new vault service API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new vault service API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -23,7 +49,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -43,8 +69,6 @@ type ClientService interface {
 	DeleteSentinelPolicy(params *DeleteSentinelPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSentinelPolicyOK, error)
 
 	DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSnapshotOK, error)
-
-	DeregisterLinkedCluster(params *DeregisterLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeregisterLinkedClusterOK, error)
 
 	DisableCORS(params *DisableCORSParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DisableCORSOK, error)
 
@@ -66,8 +90,6 @@ type ClientService interface {
 
 	GetCurrentMilestone(params *GetCurrentMilestoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentMilestoneOK, error)
 
-	GetLinkedCluster(params *GetLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLinkedClusterOK, error)
-
 	GetReplicationStatus(params *GetReplicationStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReplicationStatusOK, error)
 
 	GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSnapshotOK, error)
@@ -78,8 +100,6 @@ type ClientService interface {
 
 	List(params *ListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOK, error)
 
-	ListAllClusters(params *ListAllClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAllClustersOK, error)
-
 	ListPerformanceReplicationSecondaries(params *ListPerformanceReplicationSecondariesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPerformanceReplicationSecondariesOK, error)
 
 	ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSnapshotsOK, error)
@@ -89,8 +109,6 @@ type ClientService interface {
 	PluginRegistrationStatus(params *PluginRegistrationStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PluginRegistrationStatusOK, error)
 
 	RecreateFromSnapshot(params *RecreateFromSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecreateFromSnapshotOK, error)
-
-	RegisterLinkedCluster(params *RegisterLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterLinkedClusterOK, error)
 
 	RestoreSnapshot(params *RestoreSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSnapshotOK, error)
 
@@ -422,44 +440,6 @@ func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.C
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteSnapshotDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-DeregisterLinkedCluster deregister linked cluster API
-*/
-func (a *Client) DeregisterLinkedCluster(params *DeregisterLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeregisterLinkedClusterOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeregisterLinkedClusterParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "DeregisterLinkedCluster",
-		Method:             "DELETE",
-		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/deregister/{cluster_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeregisterLinkedClusterReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DeregisterLinkedClusterOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*DeregisterLinkedClusterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -844,44 +824,6 @@ func (a *Client) GetCurrentMilestone(params *GetCurrentMilestoneParams, authInfo
 }
 
 /*
-GetLinkedCluster get linked cluster API
-*/
-func (a *Client) GetLinkedCluster(params *GetLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLinkedClusterOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetLinkedClusterParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetLinkedCluster",
-		Method:             "GET",
-		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/clusters/{cluster_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetLinkedClusterReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetLinkedClusterOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*GetLinkedClusterDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
 GetReplicationStatus get replication status API
 */
 func (a *Client) GetReplicationStatus(params *GetReplicationStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReplicationStatusOK, error) {
@@ -1072,44 +1014,6 @@ func (a *Client) List(params *ListParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
-ListAllClusters list all clusters API
-*/
-func (a *Client) ListAllClusters(params *ListAllClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAllClustersOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewListAllClustersParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ListAllClusters",
-		Method:             "GET",
-		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/vault-clusters",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &ListAllClustersReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ListAllClustersOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*ListAllClustersDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
 ListPerformanceReplicationSecondaries list performance replication secondaries API
 */
 func (a *Client) ListPerformanceReplicationSecondaries(params *ListPerformanceReplicationSecondariesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPerformanceReplicationSecondariesOK, error) {
@@ -1296,44 +1200,6 @@ func (a *Client) RecreateFromSnapshot(params *RecreateFromSnapshotParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*RecreateFromSnapshotDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-RegisterLinkedCluster register linked cluster API
-*/
-func (a *Client) RegisterLinkedCluster(params *RegisterLinkedClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterLinkedClusterOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewRegisterLinkedClusterParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "RegisterLinkedCluster",
-		Method:             "POST",
-		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/link/register",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &RegisterLinkedClusterReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*RegisterLinkedClusterOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*RegisterLinkedClusterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

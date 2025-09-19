@@ -14,17 +14,17 @@ import (
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
-// HashicorpCloudVault20201125DeregisterLinkedClusterResponse hashicorp cloud vault 20201125 deregister linked cluster response
+// HashicorpCloudNetwork20200907DeletePrivateLinkServiceResponse DeletePrivateLinkServiceResponse is a response type for DeletePrivateLinkService endpoint
 //
-// swagger:model hashicorp.cloud.vault_20201125.DeregisterLinkedClusterResponse
-type HashicorpCloudVault20201125DeregisterLinkedClusterResponse struct {
+// swagger:model hashicorp.cloud.network_20200907.DeletePrivateLinkServiceResponse
+type HashicorpCloudNetwork20200907DeletePrivateLinkServiceResponse struct {
 
-	// operation
+	// Operation created to monitor deletion process
 	Operation *cloud.HashicorpCloudOperationOperation `json:"operation,omitempty"`
 }
 
-// Validate validates this hashicorp cloud vault 20201125 deregister linked cluster response
-func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud network 20200907 delete private link service response
+func (m *HashicorpCloudNetwork20200907DeletePrivateLinkServiceResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateOperation(formats); err != nil {
@@ -37,7 +37,7 @@ func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) Validate(fo
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) validateOperation(formats strfmt.Registry) error {
+func (m *HashicorpCloudNetwork20200907DeletePrivateLinkServiceResponse) validateOperation(formats strfmt.Registry) error {
 	if swag.IsZero(m.Operation) { // not required
 		return nil
 	}
@@ -56,8 +56,8 @@ func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) validateOpe
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud vault 20201125 deregister linked cluster response based on the context it is used
-func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud network 20200907 delete private link service response based on the context it is used
+func (m *HashicorpCloudNetwork20200907DeletePrivateLinkServiceResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateOperation(ctx, formats); err != nil {
@@ -70,7 +70,7 @@ func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) ContextVali
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudNetwork20200907DeletePrivateLinkServiceResponse) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Operation != nil {
 
@@ -92,7 +92,7 @@ func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) contextVali
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudNetwork20200907DeletePrivateLinkServiceResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -100,8 +100,8 @@ func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) MarshalBina
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudVault20201125DeregisterLinkedClusterResponse) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudVault20201125DeregisterLinkedClusterResponse
+func (m *HashicorpCloudNetwork20200907DeletePrivateLinkServiceResponse) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudNetwork20200907DeletePrivateLinkServiceResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
