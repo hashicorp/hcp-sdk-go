@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *UpdateSnapshotOK) Code() int {
 }
 
 func (o *UpdateSnapshotOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.snapshot_id}][%d] updateSnapshotOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.snapshot_id}][%d] updateSnapshotOK %s", 200, payload)
 }
 
 func (o *UpdateSnapshotOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.snapshot_id}][%d] updateSnapshotOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.snapshot_id}][%d] updateSnapshotOK %s", 200, payload)
 }
 
 func (o *UpdateSnapshotOK) GetPayload() *models.HashicorpCloudVault20200420UpdateSnapshotResponse {
@@ -159,11 +162,13 @@ func (o *UpdateSnapshotDefault) Code() int {
 }
 
 func (o *UpdateSnapshotDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.snapshot_id}][%d] UpdateSnapshot default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.snapshot_id}][%d] UpdateSnapshot default %s", o._statusCode, payload)
 }
 
 func (o *UpdateSnapshotDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.snapshot_id}][%d] UpdateSnapshot default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{snapshot.location.organization_id}/projects/{snapshot.location.project_id}/snapshots/{snapshot.snapshot_id}][%d] UpdateSnapshot default %s", o._statusCode, payload)
 }
 
 func (o *UpdateSnapshotDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

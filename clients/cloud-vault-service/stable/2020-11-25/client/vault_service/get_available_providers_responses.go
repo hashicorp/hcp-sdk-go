@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetAvailableProvidersOK) Code() int {
 }
 
 func (o *GetAvailableProvidersOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] getAvailableProvidersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] getAvailableProvidersOK %s", 200, payload)
 }
 
 func (o *GetAvailableProvidersOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] getAvailableProvidersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] getAvailableProvidersOK %s", 200, payload)
 }
 
 func (o *GetAvailableProvidersOK) GetPayload() *models.HashicorpCloudVault20201125GetAvailableProvidersResponse {
@@ -159,11 +162,13 @@ func (o *GetAvailableProvidersDefault) Code() int {
 }
 
 func (o *GetAvailableProvidersDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] GetAvailableProviders default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] GetAvailableProviders default %s", o._statusCode, payload)
 }
 
 func (o *GetAvailableProvidersDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] GetAvailableProviders default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/providers][%d] GetAvailableProviders default %s", o._statusCode, payload)
 }
 
 func (o *GetAvailableProvidersDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

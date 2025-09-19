@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetAdminTokenOK) Code() int {
 }
 
 func (o *GetAdminTokenOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] getAdminTokenOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] getAdminTokenOK %s", 200, payload)
 }
 
 func (o *GetAdminTokenOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] getAdminTokenOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] getAdminTokenOK %s", 200, payload)
 }
 
 func (o *GetAdminTokenOK) GetPayload() *models.HashicorpCloudVault20201125GetAdminTokenResponse {
@@ -159,11 +162,13 @@ func (o *GetAdminTokenDefault) Code() int {
 }
 
 func (o *GetAdminTokenDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] GetAdminToken default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] GetAdminToken default %s", o._statusCode, payload)
 }
 
 func (o *GetAdminTokenDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] GetAdminToken default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/admintoken][%d] GetAdminToken default %s", o._statusCode, payload)
 }
 
 func (o *GetAdminTokenDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

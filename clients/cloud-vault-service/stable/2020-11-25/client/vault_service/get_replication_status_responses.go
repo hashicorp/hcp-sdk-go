@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetReplicationStatusOK) Code() int {
 }
 
 func (o *GetReplicationStatusOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] getReplicationStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] getReplicationStatusOK %s", 200, payload)
 }
 
 func (o *GetReplicationStatusOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] getReplicationStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] getReplicationStatusOK %s", 200, payload)
 }
 
 func (o *GetReplicationStatusOK) GetPayload() *models.HashicorpCloudVault20201125GetReplicationStatusResponse {
@@ -159,11 +162,13 @@ func (o *GetReplicationStatusDefault) Code() int {
 }
 
 func (o *GetReplicationStatusDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] GetReplicationStatus default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] GetReplicationStatus default %s", o._statusCode, payload)
 }
 
 func (o *GetReplicationStatusDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] GetReplicationStatus default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/replication-status][%d] GetReplicationStatus default %s", o._statusCode, payload)
 }
 
 func (o *GetReplicationStatusDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

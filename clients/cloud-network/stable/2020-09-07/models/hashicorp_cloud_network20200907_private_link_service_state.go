@@ -42,11 +42,11 @@ const (
 	// HashicorpCloudNetwork20200907PrivateLinkServiceStateDELETING captures enum value "DELETING"
 	HashicorpCloudNetwork20200907PrivateLinkServiceStateDELETING HashicorpCloudNetwork20200907PrivateLinkServiceState = "DELETING"
 
-	// HashicorpCloudNetwork20200907PrivateLinkServiceStateDELETED captures enum value "DELETED"
-	HashicorpCloudNetwork20200907PrivateLinkServiceStateDELETED HashicorpCloudNetwork20200907PrivateLinkServiceState = "DELETED"
-
 	// HashicorpCloudNetwork20200907PrivateLinkServiceStateFAILED captures enum value "FAILED"
 	HashicorpCloudNetwork20200907PrivateLinkServiceStateFAILED HashicorpCloudNetwork20200907PrivateLinkServiceState = "FAILED"
+
+	// HashicorpCloudNetwork20200907PrivateLinkServiceStateUPDATING captures enum value "UPDATING"
+	HashicorpCloudNetwork20200907PrivateLinkServiceStateUPDATING HashicorpCloudNetwork20200907PrivateLinkServiceState = "UPDATING"
 )
 
 // for schema
@@ -54,7 +54,7 @@ var hashicorpCloudNetwork20200907PrivateLinkServiceStateEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudNetwork20200907PrivateLinkServiceState
-	if err := json.Unmarshal([]byte(`["UNSET","CREATING","AVAILABLE","DELETING","DELETED","FAILED"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["UNSET","CREATING","AVAILABLE","DELETING","FAILED","UPDATING"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

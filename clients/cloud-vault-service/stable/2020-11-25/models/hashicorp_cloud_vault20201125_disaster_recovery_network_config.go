@@ -13,20 +13,20 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HashicorpCloudVault20201125RegisterLinkedClusterRequest hashicorp cloud vault 20201125 register linked cluster request
+// HashicorpCloudVault20201125DisasterRecoveryNetworkConfig hashicorp cloud vault 20201125 disaster recovery network config
 //
-// swagger:model hashicorp.cloud.vault_20201125.RegisterLinkedClusterRequest
-type HashicorpCloudVault20201125RegisterLinkedClusterRequest struct {
+// swagger:model hashicorp.cloud.vault_20201125.DisasterRecoveryNetworkConfig
+type HashicorpCloudVault20201125DisasterRecoveryNetworkConfig struct {
 
-	// cluster id
-	ClusterID string `json:"cluster_id,omitempty"`
-
-	// location
+	// location is the location of the disaster recovery hvn.
 	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
+
+	// network_id is the ID of the network the Vault cluster belongs to.
+	NetworkID string `json:"network_id,omitempty"`
 }
 
-// Validate validates this hashicorp cloud vault 20201125 register linked cluster request
-func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this hashicorp cloud vault 20201125 disaster recovery network config
+func (m *HashicorpCloudVault20201125DisasterRecoveryNetworkConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateLocation(formats); err != nil {
@@ -39,7 +39,7 @@ func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) Validate(forma
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) validateLocation(formats strfmt.Registry) error {
+func (m *HashicorpCloudVault20201125DisasterRecoveryNetworkConfig) validateLocation(formats strfmt.Registry) error {
 	if swag.IsZero(m.Location) { // not required
 		return nil
 	}
@@ -58,8 +58,8 @@ func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) validateLocati
 	return nil
 }
 
-// ContextValidate validate this hashicorp cloud vault 20201125 register linked cluster request based on the context it is used
-func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this hashicorp cloud vault 20201125 disaster recovery network config based on the context it is used
+func (m *HashicorpCloudVault20201125DisasterRecoveryNetworkConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateLocation(ctx, formats); err != nil {
@@ -72,7 +72,7 @@ func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) ContextValidat
 	return nil
 }
 
-func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
+func (m *HashicorpCloudVault20201125DisasterRecoveryNetworkConfig) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
 
@@ -94,7 +94,7 @@ func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) contextValidat
 }
 
 // MarshalBinary interface implementation
-func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) MarshalBinary() ([]byte, error) {
+func (m *HashicorpCloudVault20201125DisasterRecoveryNetworkConfig) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -102,8 +102,8 @@ func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) MarshalBinary(
 }
 
 // UnmarshalBinary interface implementation
-func (m *HashicorpCloudVault20201125RegisterLinkedClusterRequest) UnmarshalBinary(b []byte) error {
-	var res HashicorpCloudVault20201125RegisterLinkedClusterRequest
+func (m *HashicorpCloudVault20201125DisasterRecoveryNetworkConfig) UnmarshalBinary(b []byte) error {
+	var res HashicorpCloudVault20201125DisasterRecoveryNetworkConfig
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

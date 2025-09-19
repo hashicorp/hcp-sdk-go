@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *DisableCORSOK) Code() int {
 }
 
 func (o *DisableCORSOK) Error() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] disableCORSOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] disableCORSOK %s", 200, payload)
 }
 
 func (o *DisableCORSOK) String() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] disableCORSOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] disableCORSOK %s", 200, payload)
 }
 
 func (o *DisableCORSOK) GetPayload() models.HashicorpCloudVault20201125DisableCORSResponse {
@@ -157,11 +160,13 @@ func (o *DisableCORSDefault) Code() int {
 }
 
 func (o *DisableCORSDefault) Error() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] DisableCORS default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] DisableCORS default %s", o._statusCode, payload)
 }
 
 func (o *DisableCORSDefault) String() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] DisableCORS default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/disable-cors][%d] DisableCORS default %s", o._statusCode, payload)
 }
 
 func (o *DisableCORSDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

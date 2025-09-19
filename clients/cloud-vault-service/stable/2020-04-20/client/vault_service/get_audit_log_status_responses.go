@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetAuditLogStatusOK) Code() int {
 }
 
 func (o *GetAuditLogStatusOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] getAuditLogStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] getAuditLogStatusOK %s", 200, payload)
 }
 
 func (o *GetAuditLogStatusOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] getAuditLogStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] getAuditLogStatusOK %s", 200, payload)
 }
 
 func (o *GetAuditLogStatusOK) GetPayload() *models.HashicorpCloudVault20200420GetAuditLogStatusResponse {
@@ -159,11 +162,13 @@ func (o *GetAuditLogStatusDefault) Code() int {
 }
 
 func (o *GetAuditLogStatusDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] GetAuditLogStatus default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] GetAuditLogStatus default %s", o._statusCode, payload)
 }
 
 func (o *GetAuditLogStatusDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] GetAuditLogStatus default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/auditlog/{log_id}][%d] GetAuditLogStatus default %s", o._statusCode, payload)
 }
 
 func (o *GetAuditLogStatusDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
