@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *UpdatePublicIpsOK) Code() int {
 }
 
 func (o *UpdatePublicIpsOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] updatePublicIpsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] updatePublicIpsOK %s", 200, payload)
 }
 
 func (o *UpdatePublicIpsOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] updatePublicIpsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] updatePublicIpsOK %s", 200, payload)
 }
 
 func (o *UpdatePublicIpsOK) GetPayload() *models.HashicorpCloudVault20200420UpdatePublicIpsResponse {
@@ -159,11 +162,13 @@ func (o *UpdatePublicIpsDefault) Code() int {
 }
 
 func (o *UpdatePublicIpsDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] UpdatePublicIps default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] UpdatePublicIps default %s", o._statusCode, payload)
 }
 
 func (o *UpdatePublicIpsDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] UpdatePublicIps default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/public-ips][%d] UpdatePublicIps default %s", o._statusCode, payload)
 }
 
 func (o *UpdatePublicIpsDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

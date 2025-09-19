@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *UpgradeMajorVersionOK) Code() int {
 }
 
 func (o *UpgradeMajorVersionOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] upgradeMajorVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] upgradeMajorVersionOK %s", 200, payload)
 }
 
 func (o *UpgradeMajorVersionOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] upgradeMajorVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] upgradeMajorVersionOK %s", 200, payload)
 }
 
 func (o *UpgradeMajorVersionOK) GetPayload() *models.HashicorpCloudVault20201125UpgradeMajorVersionResponse {
@@ -159,11 +162,13 @@ func (o *UpgradeMajorVersionDefault) Code() int {
 }
 
 func (o *UpgradeMajorVersionDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] UpgradeMajorVersion default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] UpgradeMajorVersion default %s", o._statusCode, payload)
 }
 
 func (o *UpgradeMajorVersionDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] UpgradeMajorVersion default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/major-version/upgrade][%d] UpgradeMajorVersion default %s", o._statusCode, payload)
 }
 
 func (o *UpgradeMajorVersionDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

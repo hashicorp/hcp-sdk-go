@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ListPerformanceReplicationSecondariesOK) Code() int {
 }
 
 func (o *ListPerformanceReplicationSecondariesOK) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] listPerformanceReplicationSecondariesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] listPerformanceReplicationSecondariesOK %s", 200, payload)
 }
 
 func (o *ListPerformanceReplicationSecondariesOK) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] listPerformanceReplicationSecondariesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] listPerformanceReplicationSecondariesOK %s", 200, payload)
 }
 
 func (o *ListPerformanceReplicationSecondariesOK) GetPayload() *models.HashicorpCloudVault20201125ListPerformanceReplicationSecondariesResponse {
@@ -159,11 +162,13 @@ func (o *ListPerformanceReplicationSecondariesDefault) Code() int {
 }
 
 func (o *ListPerformanceReplicationSecondariesDefault) Error() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] ListPerformanceReplicationSecondaries default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] ListPerformanceReplicationSecondaries default %s", o._statusCode, payload)
 }
 
 func (o *ListPerformanceReplicationSecondariesDefault) String() string {
-	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] ListPerformanceReplicationSecondaries default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/list-performance-replication-secondaries][%d] ListPerformanceReplicationSecondaries default %s", o._statusCode, payload)
 }
 
 func (o *ListPerformanceReplicationSecondariesDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {

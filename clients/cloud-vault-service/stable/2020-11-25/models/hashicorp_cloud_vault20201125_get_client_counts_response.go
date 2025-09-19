@@ -17,6 +17,9 @@ import (
 // swagger:model hashicorp.cloud.vault_20201125.GetClientCountsResponse
 type HashicorpCloudVault20201125GetClientCountsResponse struct {
 
+	// acme clients
+	AcmeClients string `json:"acme_clients,omitempty"`
+
 	// clients
 	Clients string `json:"clients,omitempty"`
 
@@ -25,6 +28,9 @@ type HashicorpCloudVault20201125GetClientCountsResponse struct {
 
 	// non entity tokens
 	NonEntityTokens string `json:"non_entity_tokens,omitempty"`
+
+	// secret syncs
+	SecretSyncs string `json:"secret_syncs,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20201125 get client counts response

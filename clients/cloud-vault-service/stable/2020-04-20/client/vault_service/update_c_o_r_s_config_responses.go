@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *UpdateCORSConfigOK) Code() int {
 }
 
 func (o *UpdateCORSConfigOK) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-cors-config][%d] updateCORSConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-cors-config][%d] updateCORSConfigOK %s", 200, payload)
 }
 
 func (o *UpdateCORSConfigOK) String() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-cors-config][%d] updateCORSConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-cors-config][%d] updateCORSConfigOK %s", 200, payload)
 }
 
 func (o *UpdateCORSConfigOK) GetPayload() models.HashicorpCloudVault20200420UpdateCORSConfigResponse {
@@ -157,11 +160,13 @@ func (o *UpdateCORSConfigDefault) Code() int {
 }
 
 func (o *UpdateCORSConfigDefault) Error() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-cors-config][%d] UpdateCORSConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-cors-config][%d] UpdateCORSConfig default %s", o._statusCode, payload)
 }
 
 func (o *UpdateCORSConfigDefault) String() string {
-	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-cors-config][%d] UpdateCORSConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /vault/2020-04-20/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/update-cors-config][%d] UpdateCORSConfig default %s", o._statusCode, payload)
 }
 
 func (o *UpdateCORSConfigDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
