@@ -6,6 +6,7 @@ package vault_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *DeletePathsFilterOK) Code() int {
 }
 
 func (o *DeletePathsFilterOK) Error() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] deletePathsFilterOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] deletePathsFilterOK %s", 200, payload)
 }
 
 func (o *DeletePathsFilterOK) String() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] deletePathsFilterOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] deletePathsFilterOK %s", 200, payload)
 }
 
 func (o *DeletePathsFilterOK) GetPayload() *models.HashicorpCloudVault20201125DeletePathsFilterResponse {
@@ -159,11 +162,13 @@ func (o *DeletePathsFilterDefault) Code() int {
 }
 
 func (o *DeletePathsFilterDefault) Error() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] DeletePathsFilter default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] DeletePathsFilter default %s", o._statusCode, payload)
 }
 
 func (o *DeletePathsFilterDefault) String() string {
-	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] DeletePathsFilter default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/paths-filter/delete][%d] DeletePathsFilter default %s", o._statusCode, payload)
 }
 
 func (o *DeletePathsFilterDefault) GetPayload() *cloud.GrpcGatewayRuntimeError {
