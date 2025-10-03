@@ -18,7 +18,7 @@ import (
 // represents the abstract Vault cluster itself, not necessarily whether
 // Vault cluster is currently available or not.
 //
-//   - UNSET: UNSET is a sentinel zero value so that an uninitialized value can be
+//   - CLUSTER_STATE_INVALID: CLUSTER_STATE_INVALID is a sentinel zero value so that an uninitialized value can be
 //
 // detected.
 //   - PENDING: PENDING is the state the cluster is in while it is waiting to be created.
@@ -34,9 +34,6 @@ import (
 // update.
 //   - RESTORING: RESTORING is the state the cluster is in while restoring from a snapshot.
 //   - DELETING: DELETING is the state the cluster is in while it is being de-provisioned.
-//   - DELETED: DELETED is the state the cluster is in when it has been de-provisioned. At
-//
-// this point, the cluster is eligible for garbage collection.
 //   - SEALING: SEALING is the state the cluster is in when it is about to get sealed.
 //   - SEALED: SEALED is the state the cluster is in while a cluster is sealed.
 //   - UNSEALING: UNSEALING is the state the cluster is in when it is about to get unsealed.
@@ -55,8 +52,8 @@ func (m HashicorpCloudVault20200420ClusterState) Pointer() *HashicorpCloudVault2
 
 const (
 
-	// HashicorpCloudVault20200420ClusterStateUNSET captures enum value "UNSET"
-	HashicorpCloudVault20200420ClusterStateUNSET HashicorpCloudVault20200420ClusterState = "UNSET"
+	// HashicorpCloudVault20200420ClusterStateCLUSTERSTATEINVALID captures enum value "CLUSTER_STATE_INVALID"
+	HashicorpCloudVault20200420ClusterStateCLUSTERSTATEINVALID HashicorpCloudVault20200420ClusterState = "CLUSTER_STATE_INVALID"
 
 	// HashicorpCloudVault20200420ClusterStatePENDING captures enum value "PENDING"
 	HashicorpCloudVault20200420ClusterStatePENDING HashicorpCloudVault20200420ClusterState = "PENDING"
@@ -79,9 +76,6 @@ const (
 	// HashicorpCloudVault20200420ClusterStateDELETING captures enum value "DELETING"
 	HashicorpCloudVault20200420ClusterStateDELETING HashicorpCloudVault20200420ClusterState = "DELETING"
 
-	// HashicorpCloudVault20200420ClusterStateDELETED captures enum value "DELETED"
-	HashicorpCloudVault20200420ClusterStateDELETED HashicorpCloudVault20200420ClusterState = "DELETED"
-
 	// HashicorpCloudVault20200420ClusterStateSEALING captures enum value "SEALING"
 	HashicorpCloudVault20200420ClusterStateSEALING HashicorpCloudVault20200420ClusterState = "SEALING"
 
@@ -97,7 +91,7 @@ var hashicorpCloudVault20200420ClusterStateEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVault20200420ClusterState
-	if err := json.Unmarshal([]byte(`["UNSET","PENDING","CREATING","RUNNING","FAILED","UPDATING","RESTORING","DELETING","DELETED","SEALING","SEALED","UNSEALING"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["CLUSTER_STATE_INVALID","PENDING","CREATING","RUNNING","FAILED","UPDATING","RESTORING","DELETING","SEALING","SEALED","UNSEALING"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

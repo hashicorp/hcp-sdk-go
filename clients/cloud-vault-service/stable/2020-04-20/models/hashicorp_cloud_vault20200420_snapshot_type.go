@@ -30,8 +30,8 @@ func (m HashicorpCloudVault20200420SnapshotType) Pointer() *HashicorpCloudVault2
 
 const (
 
-	// HashicorpCloudVault20200420SnapshotTypeTYPEUNSET captures enum value "TYPE_UNSET"
-	HashicorpCloudVault20200420SnapshotTypeTYPEUNSET HashicorpCloudVault20200420SnapshotType = "TYPE_UNSET"
+	// HashicorpCloudVault20200420SnapshotTypeSNAPSHOTTYPEINVALID captures enum value "SNAPSHOT_TYPE_INVALID"
+	HashicorpCloudVault20200420SnapshotTypeSNAPSHOTTYPEINVALID HashicorpCloudVault20200420SnapshotType = "SNAPSHOT_TYPE_INVALID"
 
 	// HashicorpCloudVault20200420SnapshotTypeAUTOMATIC captures enum value "AUTOMATIC"
 	HashicorpCloudVault20200420SnapshotTypeAUTOMATIC HashicorpCloudVault20200420SnapshotType = "AUTOMATIC"
@@ -51,7 +51,7 @@ var hashicorpCloudVault20200420SnapshotTypeEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVault20200420SnapshotType
-	if err := json.Unmarshal([]byte(`["TYPE_UNSET","AUTOMATIC","SCHEDULED","MANUAL","BEFORE_UPGRADE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["SNAPSHOT_TYPE_INVALID","AUTOMATIC","SCHEDULED","MANUAL","BEFORE_UPGRADE"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

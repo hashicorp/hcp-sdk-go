@@ -12,7 +12,6 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20200420AuditLog AuditLog represents a request for audit logs to download
@@ -46,7 +45,7 @@ type HashicorpCloudVault20200420AuditLog struct {
 	IntervalStart strfmt.DateTime `json:"interval_start,omitempty"`
 
 	// location is the location of the cluster.
-	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
 
 	// state is the current state of the download
 	State *HashicorpCloudVault20200420AuditLogState `json:"state,omitempty"`

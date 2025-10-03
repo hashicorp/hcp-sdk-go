@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20200420RestoreSnapshotRequest hashicorp cloud vault 20200420 restore snapshot request
@@ -23,7 +22,7 @@ type HashicorpCloudVault20200420RestoreSnapshotRequest struct {
 	ClusterID string `json:"cluster_id,omitempty"`
 
 	// location
-	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
 
 	// snapshot id
 	SnapshotID string `json:"snapshot_id,omitempty"`

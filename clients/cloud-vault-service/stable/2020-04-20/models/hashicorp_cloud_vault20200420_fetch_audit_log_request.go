@@ -12,7 +12,6 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20200420FetchAuditLogRequest hashicorp cloud vault 20200420 fetch audit log request
@@ -32,7 +31,7 @@ type HashicorpCloudVault20200420FetchAuditLogRequest struct {
 	IntervalStart strfmt.DateTime `json:"interval_start,omitempty"`
 
 	// location
-	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20200420 fetch audit log request

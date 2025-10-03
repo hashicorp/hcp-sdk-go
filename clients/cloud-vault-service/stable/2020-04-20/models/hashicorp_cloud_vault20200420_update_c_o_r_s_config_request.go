@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
 )
 
 // HashicorpCloudVault20200420UpdateCORSConfigRequest hashicorp cloud vault 20200420 update c o r s config request
@@ -29,7 +28,7 @@ type HashicorpCloudVault20200420UpdateCORSConfigRequest struct {
 	ClusterID string `json:"cluster_id,omitempty"`
 
 	// location
-	Location *cloud.HashicorpCloudLocationLocation `json:"location,omitempty"`
+	Location *HashicorpCloudInternalLocationLocation `json:"location,omitempty"`
 }
 
 // Validate validates this hashicorp cloud vault 20200420 update c o r s config request

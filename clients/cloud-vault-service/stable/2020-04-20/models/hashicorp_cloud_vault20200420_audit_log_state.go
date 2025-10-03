@@ -16,7 +16,7 @@ import (
 
 // HashicorpCloudVault20200420AuditLogState State is the state of download.
 //
-//   - UNSET: UNSET is a sentinel zero value so that an uninitialized value can be
+//   - AUDIT_LOG_STATE_INVALID: AUDIT_LOG_STATE_INVALID is a sentinel zero value so that an uninitialized value can be
 //
 // detected.
 //   - PENDING: PENDING is the initial state before the workflow starts.
@@ -41,8 +41,8 @@ func (m HashicorpCloudVault20200420AuditLogState) Pointer() *HashicorpCloudVault
 
 const (
 
-	// HashicorpCloudVault20200420AuditLogStateUNSET captures enum value "UNSET"
-	HashicorpCloudVault20200420AuditLogStateUNSET HashicorpCloudVault20200420AuditLogState = "UNSET"
+	// HashicorpCloudVault20200420AuditLogStateAUDITLOGSTATEINVALID captures enum value "AUDIT_LOG_STATE_INVALID"
+	HashicorpCloudVault20200420AuditLogStateAUDITLOGSTATEINVALID HashicorpCloudVault20200420AuditLogState = "AUDIT_LOG_STATE_INVALID"
 
 	// HashicorpCloudVault20200420AuditLogStatePENDING captures enum value "PENDING"
 	HashicorpCloudVault20200420AuditLogStatePENDING HashicorpCloudVault20200420AuditLogState = "PENDING"
@@ -65,7 +65,7 @@ var hashicorpCloudVault20200420AuditLogStateEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudVault20200420AuditLogState
-	if err := json.Unmarshal([]byte(`["UNSET","PENDING","CREATING","READY","FAILED","EXPIRED"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AUDIT_LOG_STATE_INVALID","PENDING","CREATING","READY","FAILED","EXPIRED"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
