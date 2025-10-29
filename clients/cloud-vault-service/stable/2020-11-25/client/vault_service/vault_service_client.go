@@ -216,7 +216,7 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-CreateSnapshot create snapshot API
+CreateSnapshot creates a snapshot of a vault cluster example name snapshot 1 resource type hashicorp vault cluster location organization id 4000000a 4000 4000 b000 d00000000000 project id 90000000 a000 4000 a000 900000000000 region provider aws region us west 2 id vault cluster
 */
 func (a *Client) CreateSnapshot(params *CreateSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSnapshotOK, error) {
 	// TODO: Validate the params before sending
