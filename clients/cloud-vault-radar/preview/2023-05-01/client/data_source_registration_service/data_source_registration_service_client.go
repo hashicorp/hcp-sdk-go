@@ -180,7 +180,7 @@ func (a *Client) OnboardDataSource(params *OnboardDataSourceParams, authInfo run
 }
 
 /*
-UpdateDataSourceToken update data source token API
+UpdateDataSourceToken updates data source token updates the token and token location of a data source any empty field will be interpreted as an update to empty value specify all fields explicitly when updating
 */
 func (a *Client) UpdateDataSourceToken(params *UpdateDataSourceTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateDataSourceTokenOK, error) {
 	// TODO: Validate the params before sending

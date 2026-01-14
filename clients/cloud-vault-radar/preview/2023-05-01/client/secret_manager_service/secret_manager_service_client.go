@@ -220,7 +220,7 @@ func (a *Client) PatchSecretManagerFeatures(params *PatchSecretManagerFeaturesPa
 }
 
 /*
-UpdateSecretManagerToken update secret manager token API
+UpdateSecretManagerToken updates secret manager token updates the token and token location of a secret manager any empty field will be interpreted as an update to empty value specify all fields explicitly when updating
 */
 func (a *Client) UpdateSecretManagerToken(params *UpdateSecretManagerTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateSecretManagerTokenOK, error) {
 	// TODO: Validate the params before sending

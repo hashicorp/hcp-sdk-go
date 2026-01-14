@@ -204,6 +204,9 @@ type UpdateSecretManagerTokenBody struct {
 
 	// token
 	Token string `json:"token,omitempty"`
+
+	// token location
+	TokenLocation string `json:"token_location,omitempty"`
 }
 
 // Validate validates this update secret manager token body

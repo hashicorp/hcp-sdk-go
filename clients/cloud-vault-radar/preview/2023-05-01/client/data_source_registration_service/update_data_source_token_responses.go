@@ -201,6 +201,9 @@ type UpdateDataSourceTokenBody struct {
 
 	// token
 	Token string `json:"token,omitempty"`
+
+	// token location
+	TokenLocation string `json:"token_location,omitempty"`
 }
 
 // Validate validates this update data source token body

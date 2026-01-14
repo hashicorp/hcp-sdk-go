@@ -216,6 +216,9 @@ type OnboardSecretManagerBody struct {
 	// token
 	Token string `json:"token,omitempty"`
 
+	// token location
+	TokenLocation string `json:"token_location,omitempty"`
+
 	// type
 	Type string `json:"type,omitempty"`
 }

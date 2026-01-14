@@ -14,35 +14,32 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VaultRadar20230501SearchSchema SearchSchema is to be deprecated and will be replaced by SearchSchemaV2
+// VaultRadar20230501SearchSchemaV2 SearchSchemaV2 defines the structure for search requests with support for filtering, pagination, sorting, and grouping.
 //
-// swagger:model vault_radar_20230501SearchSchema
-type VaultRadar20230501SearchSchema struct {
+// swagger:model vault_radar_20230501SearchSchemaV2
+type VaultRadar20230501SearchSchemaV2 struct {
 
-	// filters
-	Filters []*VaultRadar20230501Filter `json:"filters"`
+	// filters is a list of FilterV2 objects to apply filtering criteria.
+	Filters []*VaultRadar20230501FilterV2 `json:"filters"`
 
-	// group by
+	// groupBy is is a comma-delimited string that specifies the field to group the results by e.g., "severity, status".
 	GroupBy string `json:"groupBy,omitempty"`
 
-	// interval
-	Interval string `json:"interval,omitempty"`
-
-	// limit
+	// limit defines the maximum number of results to return. Maximum is 1000.
 	Limit int32 `json:"limit,omitempty"`
 
-	// order by
+	// orderBy is a comma-delimited string of the fields to order the results by e.g., "created, severity".
 	OrderBy string `json:"orderBy,omitempty"`
 
-	// order direction
+	// orderDirection is a comma-delimited string that specifies the direction of ordering e.g. "ASC, DESC".
 	OrderDirection string `json:"orderDirection,omitempty"`
 
-	// page
+	// page specifies the page number for paginated results. First page is 1.
 	Page int32 `json:"page,omitempty"`
 }
 
-// Validate validates this vault radar 20230501 search schema
-func (m *VaultRadar20230501SearchSchema) Validate(formats strfmt.Registry) error {
+// Validate validates this vault radar 20230501 search schema v2
+func (m *VaultRadar20230501SearchSchemaV2) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateFilters(formats); err != nil {
@@ -55,7 +52,7 @@ func (m *VaultRadar20230501SearchSchema) Validate(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *VaultRadar20230501SearchSchema) validateFilters(formats strfmt.Registry) error {
+func (m *VaultRadar20230501SearchSchemaV2) validateFilters(formats strfmt.Registry) error {
 	if swag.IsZero(m.Filters) { // not required
 		return nil
 	}
@@ -81,8 +78,8 @@ func (m *VaultRadar20230501SearchSchema) validateFilters(formats strfmt.Registry
 	return nil
 }
 
-// ContextValidate validate this vault radar 20230501 search schema based on the context it is used
-func (m *VaultRadar20230501SearchSchema) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this vault radar 20230501 search schema v2 based on the context it is used
+func (m *VaultRadar20230501SearchSchemaV2) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateFilters(ctx, formats); err != nil {
@@ -95,7 +92,7 @@ func (m *VaultRadar20230501SearchSchema) ContextValidate(ctx context.Context, fo
 	return nil
 }
 
-func (m *VaultRadar20230501SearchSchema) contextValidateFilters(ctx context.Context, formats strfmt.Registry) error {
+func (m *VaultRadar20230501SearchSchemaV2) contextValidateFilters(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Filters); i++ {
 
@@ -121,7 +118,7 @@ func (m *VaultRadar20230501SearchSchema) contextValidateFilters(ctx context.Cont
 }
 
 // MarshalBinary interface implementation
-func (m *VaultRadar20230501SearchSchema) MarshalBinary() ([]byte, error) {
+func (m *VaultRadar20230501SearchSchemaV2) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -129,8 +126,8 @@ func (m *VaultRadar20230501SearchSchema) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *VaultRadar20230501SearchSchema) UnmarshalBinary(b []byte) error {
-	var res VaultRadar20230501SearchSchema
+func (m *VaultRadar20230501SearchSchemaV2) UnmarshalBinary(b []byte) error {
+	var res VaultRadar20230501SearchSchemaV2
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

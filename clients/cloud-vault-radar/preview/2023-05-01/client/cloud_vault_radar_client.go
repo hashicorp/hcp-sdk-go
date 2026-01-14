@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-radar/preview/2023-05-01/client/data_source_registration_service"
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-radar/preview/2023-05-01/client/event_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-radar/preview/2023-05-01/client/integration_connection_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-radar/preview/2023-05-01/client/integration_subscription_service"
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-vault-radar/preview/2023-05-01/client/resource_service"
@@ -61,6 +62,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudVault
 	cli := new(CloudVaultRadar)
 	cli.Transport = transport
 	cli.DataSourceRegistrationService = data_source_registration_service.New(transport, formats)
+	cli.EventService = event_service.New(transport, formats)
 	cli.IntegrationConnectionService = integration_connection_service.New(transport, formats)
 	cli.IntegrationSubscriptionService = integration_subscription_service.New(transport, formats)
 	cli.ResourceService = resource_service.New(transport, formats)
@@ -112,6 +114,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type CloudVaultRadar struct {
 	DataSourceRegistrationService data_source_registration_service.ClientService
 
+	EventService event_service.ClientService
+
 	IntegrationConnectionService integration_connection_service.ClientService
 
 	IntegrationSubscriptionService integration_subscription_service.ClientService
@@ -129,6 +133,7 @@ type CloudVaultRadar struct {
 func (c *CloudVaultRadar) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.DataSourceRegistrationService.SetTransport(transport)
+	c.EventService.SetTransport(transport)
 	c.IntegrationConnectionService.SetTransport(transport)
 	c.IntegrationSubscriptionService.SetTransport(transport)
 	c.ResourceService.SetTransport(transport)
