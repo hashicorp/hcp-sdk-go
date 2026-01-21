@@ -70,8 +70,6 @@ type ClientService interface {
 
 	SSOManagementServiceVerifyDomainOwnership(params *SSOManagementServiceVerifyDomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceVerifyDomainOwnershipOK, error)
 
-	SSOManagementServiceVerifySSODomainOwnership(params *SSOManagementServiceVerifySSODomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceVerifySSODomainOwnershipOK, error)
-
 	SetTransport(transport runtime.ClientTransport)
 }
 
@@ -380,50 +378,6 @@ func (a *Client) SSOManagementServiceVerifyDomainOwnership(params *SSOManagement
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*SSOManagementServiceVerifyDomainOwnershipDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-	SSOManagementServiceVerifySSODomainOwnership verifies s s o domain ownership checks whether the organization has proven their ownership control of the given domain by adding the required t x t record
-
-	This endpoint differs from the one above because it is intended to be used
-
-for HashiCorp SSO domain ownership verification and not Auth0 SAML SSO. It
-is intended to be used to provide early feedback to the user; we check
-domain ownership in cloud-idp.
-*/
-func (a *Client) SSOManagementServiceVerifySSODomainOwnership(params *SSOManagementServiceVerifySSODomainOwnershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSOManagementServiceVerifySSODomainOwnershipOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewSSOManagementServiceVerifySSODomainOwnershipParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "SSOManagementService_VerifySSODomainOwnership",
-		Method:             "POST",
-		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/verify-sso-domain-ownership",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &SSOManagementServiceVerifySSODomainOwnershipReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*SSOManagementServiceVerifySSODomainOwnershipOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*SSOManagementServiceVerifySSODomainOwnershipDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

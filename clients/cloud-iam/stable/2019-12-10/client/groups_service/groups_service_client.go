@@ -54,6 +54,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	GroupsServiceCountGroups(params *GroupsServiceCountGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCountGroupsOK, error)
+
 	GroupsServiceCountGroupsForPrincipals(params *GroupsServiceCountGroupsForPrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCountGroupsForPrincipalsOK, error)
 
 	GroupsServiceCountMembersForGroups(params *GroupsServiceCountMembersForGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCountMembersForGroupsOK, error)
@@ -77,6 +79,44 @@ type ClientService interface {
 	GroupsServiceUpdateGroupMembers(params *GroupsServiceUpdateGroupMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceUpdateGroupMembersOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+GroupsServiceCountGroups counts groups lists the groups in an organization that match the optional filters
+*/
+func (a *Client) GroupsServiceCountGroups(params *GroupsServiceCountGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupsServiceCountGroupsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGroupsServiceCountGroupsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GroupsService_CountGroups",
+		Method:             "GET",
+		PathPattern:        "/iam/2019-12-10/iam/{parent_resource_name}/groups/count-groups-in-organization",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GroupsServiceCountGroupsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GroupsServiceCountGroupsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GroupsServiceCountGroupsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*

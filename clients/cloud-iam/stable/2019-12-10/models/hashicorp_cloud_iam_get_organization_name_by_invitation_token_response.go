@@ -18,8 +18,14 @@ import (
 // swagger:model hashicorp.cloud.iam.GetOrganizationNameByInvitationTokenResponse
 type HashicorpCloudIamGetOrganizationNameByInvitationTokenResponse struct {
 
+	// organization id
+	OrganizationID string `json:"organization_id,omitempty"`
+
 	// organization name
 	OrganizationName string `json:"organization_name,omitempty"`
+
+	// tfc synced
+	TfcSynced bool `json:"tfc_synced,omitempty"`
 }
 
 // Validate validates this hashicorp cloud iam get organization name by invitation token response

@@ -56,6 +56,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	IamServiceBatchGetPrincipals(params *IamServiceBatchGetPrincipalsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceBatchGetPrincipalsOK, error)
 
+	IamServiceCountUserPrincipalsByOrganization(params *IamServiceCountUserPrincipalsByOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceCountUserPrincipalsByOrganizationOK, error)
+
 	IamServiceCreateUserPrincipal(params *IamServiceCreateUserPrincipalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceCreateUserPrincipalOK, error)
 
 	IamServiceDeleteOrganizationMembership(params *IamServiceDeleteOrganizationMembershipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceDeleteOrganizationMembershipOK, error)
@@ -71,6 +73,8 @@ type ClientService interface {
 	IamServiceGetUserPrincipalsByIDsInOrganization(params *IamServiceGetUserPrincipalsByIDsInOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceGetUserPrincipalsByIDsInOrganizationOK, error)
 
 	IamServiceListUserPrincipalsByOrganization(params *IamServiceListUserPrincipalsByOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceListUserPrincipalsByOrganizationOK, error)
+
+	IamServiceListUserPrincipalsForOrganizationByEmail(params *IamServiceListUserPrincipalsForOrganizationByEmailParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceListUserPrincipalsForOrganizationByEmailOK, error)
 
 	IamServicePing(params *IamServicePingParams, opts ...ClientOption) (*IamServicePingOK, error)
 
@@ -118,6 +122,44 @@ func (a *Client) IamServiceBatchGetPrincipals(params *IamServiceBatchGetPrincipa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*IamServiceBatchGetPrincipalsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+IamServiceCountUserPrincipalsByOrganization counts user principals by organization returns a count of principals that are members of an organization
+*/
+func (a *Client) IamServiceCountUserPrincipalsByOrganization(params *IamServiceCountUserPrincipalsByOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceCountUserPrincipalsByOrganizationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewIamServiceCountUserPrincipalsByOrganizationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "IamService_CountUserPrincipalsByOrganization",
+		Method:             "GET",
+		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/user-principals/count-user-principals",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &IamServiceCountUserPrincipalsByOrganizationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*IamServiceCountUserPrincipalsByOrganizationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*IamServiceCountUserPrincipalsByOrganizationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -422,6 +464,44 @@ func (a *Client) IamServiceListUserPrincipalsByOrganization(params *IamServiceLi
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*IamServiceListUserPrincipalsByOrganizationDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+IamServiceListUserPrincipalsForOrganizationByEmail lists user principals for organization by email searches for user principals in an organization by their email address
+*/
+func (a *Client) IamServiceListUserPrincipalsForOrganizationByEmail(params *IamServiceListUserPrincipalsForOrganizationByEmailParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IamServiceListUserPrincipalsForOrganizationByEmailOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewIamServiceListUserPrincipalsForOrganizationByEmailParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "IamService_ListUserPrincipalsForOrganizationByEmail",
+		Method:             "POST",
+		PathPattern:        "/iam/2019-12-10/organizations/{organization_id}/user-principals/by-email",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &IamServiceListUserPrincipalsForOrganizationByEmailReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*IamServiceListUserPrincipalsForOrganizationByEmailOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*IamServiceListUserPrincipalsForOrganizationByEmailDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
