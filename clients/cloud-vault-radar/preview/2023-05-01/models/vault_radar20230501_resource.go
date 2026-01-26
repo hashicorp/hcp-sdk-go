@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VaultRadar20230501Resource vault radar 20230501 resource
+// VaultRadar20230501Resource deprecated: Use ResourceV2 instead.
 //
 // swagger:model vault_radar_20230501Resource
 type VaultRadar20230501Resource struct {

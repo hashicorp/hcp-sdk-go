@@ -14,17 +14,17 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VaultRadar20230501ResourceListResponse deprecated: Use SearchResourcesResponse instead.
+// VaultRadar20230501SearchResourcesResponse SearchResourcesResponse is the response message containing the search results.
 //
-// swagger:model vault_radar_20230501ResourceListResponse
-type VaultRadar20230501ResourceListResponse struct {
+// swagger:model vault_radar_20230501SearchResourcesResponse
+type VaultRadar20230501SearchResourcesResponse struct {
 
 	// resources
-	Resources []*VaultRadar20230501Resource `json:"resources"`
+	Resources []*VaultRadar20230501ResourceV2 `json:"resources"`
 }
 
-// Validate validates this vault radar 20230501 resource list response
-func (m *VaultRadar20230501ResourceListResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this vault radar 20230501 search resources response
+func (m *VaultRadar20230501SearchResourcesResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateResources(formats); err != nil {
@@ -37,7 +37,7 @@ func (m *VaultRadar20230501ResourceListResponse) Validate(formats strfmt.Registr
 	return nil
 }
 
-func (m *VaultRadar20230501ResourceListResponse) validateResources(formats strfmt.Registry) error {
+func (m *VaultRadar20230501SearchResourcesResponse) validateResources(formats strfmt.Registry) error {
 	if swag.IsZero(m.Resources) { // not required
 		return nil
 	}
@@ -63,8 +63,8 @@ func (m *VaultRadar20230501ResourceListResponse) validateResources(formats strfm
 	return nil
 }
 
-// ContextValidate validate this vault radar 20230501 resource list response based on the context it is used
-func (m *VaultRadar20230501ResourceListResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this vault radar 20230501 search resources response based on the context it is used
+func (m *VaultRadar20230501SearchResourcesResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateResources(ctx, formats); err != nil {
@@ -77,7 +77,7 @@ func (m *VaultRadar20230501ResourceListResponse) ContextValidate(ctx context.Con
 	return nil
 }
 
-func (m *VaultRadar20230501ResourceListResponse) contextValidateResources(ctx context.Context, formats strfmt.Registry) error {
+func (m *VaultRadar20230501SearchResourcesResponse) contextValidateResources(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Resources); i++ {
 
@@ -103,7 +103,7 @@ func (m *VaultRadar20230501ResourceListResponse) contextValidateResources(ctx co
 }
 
 // MarshalBinary interface implementation
-func (m *VaultRadar20230501ResourceListResponse) MarshalBinary() ([]byte, error) {
+func (m *VaultRadar20230501SearchResourcesResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -111,8 +111,8 @@ func (m *VaultRadar20230501ResourceListResponse) MarshalBinary() ([]byte, error)
 }
 
 // UnmarshalBinary interface implementation
-func (m *VaultRadar20230501ResourceListResponse) UnmarshalBinary(b []byte) error {
-	var res VaultRadar20230501ResourceListResponse
+func (m *VaultRadar20230501SearchResourcesResponse) UnmarshalBinary(b []byte) error {
+	var res VaultRadar20230501SearchResourcesResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

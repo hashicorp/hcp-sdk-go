@@ -190,7 +190,7 @@ func (o *ListResourcesDefault) readResponse(response runtime.ClientResponse, con
 }
 
 /*
-ListResourcesBody list resources body
+ListResourcesBody deprecated: Use SearchResourcesRequest instead.
 swagger:model ListResourcesBody
 */
 type ListResourcesBody struct {

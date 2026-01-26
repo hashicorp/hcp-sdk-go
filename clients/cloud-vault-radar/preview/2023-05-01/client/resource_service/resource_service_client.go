@@ -56,11 +56,13 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	ListResources(params *ListResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListResourcesOK, error)
 
+	SearchResources(params *SearchResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchResourcesOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-ListResources list resources API
+ListResources deprecateds use search resources instead
 */
 func (a *Client) ListResources(params *ListResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListResourcesOK, error) {
 	// TODO: Validate the params before sending
@@ -94,6 +96,44 @@ func (a *Client) ListResources(params *ListResourcesParams, authInfo runtime.Cli
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListResourcesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+SearchResources search resources API
+*/
+func (a *Client) SearchResources(params *SearchResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchResourcesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSearchResourcesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "SearchResources",
+		Method:             "POST",
+		PathPattern:        "/2023-05-01/vault-radar/projects/{location.project_id}/resources/search",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &SearchResourcesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SearchResourcesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SearchResourcesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
