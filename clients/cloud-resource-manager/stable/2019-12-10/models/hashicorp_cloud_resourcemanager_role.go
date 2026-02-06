@@ -23,8 +23,6 @@ type HashicorpCloudResourcemanagerRole struct {
 	// ID is the globally unique identifier for this role.
 	// Examples:
 	// * roles/contributor
-	// * organizations/30788e25-a942-470a-9a75-128cc7b97fde/roles/my-custom-role (custom role scoped to an organization)
-	// * projects/30788e25-a942-470a-9a75-128cc7b97fde/roles/my-custom-project-role
 	//
 	// Builtin roles are prefixed with "roles/"
 	ID string `json:"id,omitempty"`

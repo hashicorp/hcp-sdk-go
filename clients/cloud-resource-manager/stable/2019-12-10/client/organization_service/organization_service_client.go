@@ -56,9 +56,13 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	OrganizationServiceCreate(params *OrganizationServiceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceCreateOK, error)
 
+	OrganizationServiceDelete(params *OrganizationServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceDeleteOK, error)
+
 	OrganizationServiceGet(params *OrganizationServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetOK, error)
 
 	OrganizationServiceGetIamPolicy(params *OrganizationServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetIamPolicyOK, error)
+
+	OrganizationServiceGetPreDeletionCheck(params *OrganizationServiceGetPreDeletionCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetPreDeletionCheckOK, error)
 
 	OrganizationServiceGetRole(params *OrganizationServiceGetRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetRoleOK, error)
 
@@ -110,6 +114,44 @@ func (a *Client) OrganizationServiceCreate(params *OrganizationServiceCreatePara
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*OrganizationServiceCreateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+OrganizationServiceDelete warnings bang internal use only delete removes an organization
+*/
+func (a *Client) OrganizationServiceDelete(params *OrganizationServiceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceDeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOrganizationServiceDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "OrganizationService_Delete",
+		Method:             "DELETE",
+		PathPattern:        "/2019-12-10/resource-manager/organizations/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OrganizationServiceDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OrganizationServiceDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OrganizationServiceDeleteDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -186,6 +228,44 @@ func (a *Client) OrganizationServiceGetIamPolicy(params *OrganizationServiceGetI
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*OrganizationServiceGetIamPolicyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+OrganizationServiceGetPreDeletionCheck organization service get pre deletion check API
+*/
+func (a *Client) OrganizationServiceGetPreDeletionCheck(params *OrganizationServiceGetPreDeletionCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetPreDeletionCheckOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOrganizationServiceGetPreDeletionCheckParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "OrganizationService_GetPreDeletionCheck",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/pre-deletion-check",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OrganizationServiceGetPreDeletionCheckReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OrganizationServiceGetPreDeletionCheckOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OrganizationServiceGetPreDeletionCheckDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

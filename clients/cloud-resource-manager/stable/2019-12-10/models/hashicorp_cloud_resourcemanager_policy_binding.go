@@ -23,7 +23,7 @@ type HashicorpCloudResourcemanagerPolicyBinding struct {
 	Members []*HashicorpCloudResourcemanagerPolicyBindingMember `json:"members"`
 
 	// RoleId is the globally unique identifier for the role.
-	// e.g. projects/30788e25-a942-470a-9a75-128cc7b97fde/roles/my-custom-project-role
+	// e.g. roles/admin
 	RoleID string `json:"role_id,omitempty"`
 }
 
