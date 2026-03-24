@@ -1,0 +1,2 @@
+```release-note:feature
+Add `cloud-packer-service` `stable/2022-12-02` BuildService client support for `GetImageByBuildLabels`.
