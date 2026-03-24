@@ -39,6 +39,9 @@ type HashicorpCloudVault20201125ClusterConfig struct {
 	// metrics config
 	MetricsConfig *HashicorpCloudVault20201125ObservabilityConfig `json:"metrics_config,omitempty"`
 
+	// minor version upgrade config
+	MinorVersionUpgradeConfig *HashicorpCloudVault20201125MinorVersionUpgradeConfig `json:"minor_version_upgrade_config,omitempty"`
+
 	// network config
 	NetworkConfig *HashicorpCloudVault20201125NetworkConfig `json:"network_config,omitempty"`
 
@@ -83,6 +86,10 @@ func (m *HashicorpCloudVault20201125ClusterConfig) Validate(formats strfmt.Regis
 	}
 
 	if err := m.validateMetricsConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMinorVersionUpgradeConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -230,6 +237,25 @@ func (m *HashicorpCloudVault20201125ClusterConfig) validateMetricsConfig(formats
 	return nil
 }
 
+func (m *HashicorpCloudVault20201125ClusterConfig) validateMinorVersionUpgradeConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.MinorVersionUpgradeConfig) { // not required
+		return nil
+	}
+
+	if m.MinorVersionUpgradeConfig != nil {
+		if err := m.MinorVersionUpgradeConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("minor_version_upgrade_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("minor_version_upgrade_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *HashicorpCloudVault20201125ClusterConfig) validateNetworkConfig(formats strfmt.Registry) error {
 	if swag.IsZero(m.NetworkConfig) { // not required
 		return nil
@@ -369,6 +395,10 @@ func (m *HashicorpCloudVault20201125ClusterConfig) ContextValidate(ctx context.C
 	}
 
 	if err := m.contextValidateMetricsConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMinorVersionUpgradeConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -520,6 +550,27 @@ func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateMetricsConfig(
 				return ve.ValidateName("metrics_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("metrics_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125ClusterConfig) contextValidateMinorVersionUpgradeConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MinorVersionUpgradeConfig != nil {
+
+		if swag.IsZero(m.MinorVersionUpgradeConfig) { // not required
+			return nil
+		}
+
+		if err := m.MinorVersionUpgradeConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("minor_version_upgrade_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("minor_version_upgrade_config")
 			}
 			return err
 		}

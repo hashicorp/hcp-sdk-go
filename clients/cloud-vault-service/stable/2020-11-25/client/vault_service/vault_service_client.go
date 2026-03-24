@@ -126,6 +126,8 @@ type ClientService interface {
 
 	UpdateMajorVersionUpgradeConfig(params *UpdateMajorVersionUpgradeConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMajorVersionUpgradeConfigOK, error)
 
+	UpdateMinorVersionUpgradeConfig(params *UpdateMinorVersionUpgradeConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMinorVersionUpgradeConfigOK, error)
+
 	UpdatePathsFilter(params *UpdatePathsFilterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePathsFilterOK, error)
 
 	UpdatePublicIps(params *UpdatePublicIpsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePublicIpsOK, error)
@@ -135,6 +137,8 @@ type ClientService interface {
 	UpdateVersion(params *UpdateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVersionOK, error)
 
 	UpgradeMajorVersion(params *UpgradeMajorVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpgradeMajorVersionOK, error)
+
+	UpgradeMinorVersion(params *UpgradeMinorVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpgradeMinorVersionOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -1508,6 +1512,44 @@ func (a *Client) UpdateMajorVersionUpgradeConfig(params *UpdateMajorVersionUpgra
 }
 
 /*
+UpdateMinorVersionUpgradeConfig update minor version upgrade config API
+*/
+func (a *Client) UpdateMinorVersionUpgradeConfig(params *UpdateMinorVersionUpgradeConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMinorVersionUpgradeConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateMinorVersionUpgradeConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateMinorVersionUpgradeConfig",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/minor-version-upgrade-config/update",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateMinorVersionUpgradeConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateMinorVersionUpgradeConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateMinorVersionUpgradeConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 UpdatePathsFilter update paths filter API
 */
 func (a *Client) UpdatePathsFilter(params *UpdatePathsFilterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePathsFilterOK, error) {
@@ -1694,6 +1736,44 @@ func (a *Client) UpgradeMajorVersion(params *UpgradeMajorVersionParams, authInfo
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpgradeMajorVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+UpgradeMinorVersion upgrade minor version API
+*/
+func (a *Client) UpgradeMinorVersion(params *UpgradeMinorVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpgradeMinorVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpgradeMinorVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpgradeMinorVersion",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/minor-version/upgrade",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpgradeMinorVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpgradeMinorVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpgradeMinorVersionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
