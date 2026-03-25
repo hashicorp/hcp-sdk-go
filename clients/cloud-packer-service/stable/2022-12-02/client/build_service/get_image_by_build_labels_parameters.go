@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package build_service
+package buildservice
 
 import (
 	"context"
@@ -34,8 +34,8 @@ func NewGetImageByBuildLabelsParamsWithContext(ctx context.Context) *GetImageByB
 type GetImageByBuildLabelsParams struct {
 	Body *models.GetImageByBuildLabelsRequestBody
 
-	BucketName string
-	ChannelName string
+	BucketName             string
+	ChannelName            string
 	LocationOrganizationID string
 	LocationProjectID      string
 

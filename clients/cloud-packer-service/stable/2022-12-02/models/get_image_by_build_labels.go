@@ -5,7 +5,7 @@ package models
 
 // GetImageByBuildLabelsRequestBody is the request body for GetImageByBuildLabels (2022-12-02).
 type GetImageByBuildLabelsRequestBody struct {
-	Labels         map[string]string `json:"labels,omitempty"`
+	Labels        map[string]string `json:"labels,omitempty"`
 	CloudProvider string            `json:"cloud_provider,omitempty"`
 	Region        string            `json:"region,omitempty"`
 }
