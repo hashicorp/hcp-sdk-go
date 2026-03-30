@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package buildservice
+package build_service
 
 import (
 	"github.com/go-openapi/runtime"
