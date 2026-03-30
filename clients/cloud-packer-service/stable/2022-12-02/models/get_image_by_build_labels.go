@@ -32,9 +32,9 @@ type ExternalArtifactBucket struct {
 
 // ExternalArtifactVersion is the version reference in ExternalArtifact.
 type ExternalArtifactVersion struct {
-	ID          string `json:"id,omitempty"`
-	Name        string `json:"name,omitempty"`
-	Fingerprint string `json:"fingerprint,omitempty"`
+	ID          string          `json:"id,omitempty"`
+	Name        string          `json:"name,omitempty"`
+	Fingerprint string          `json:"fingerprint,omitempty"`
 	RevokeAt    strfmt.DateTime `json:"revoke_at,omitempty"`
 }
 
