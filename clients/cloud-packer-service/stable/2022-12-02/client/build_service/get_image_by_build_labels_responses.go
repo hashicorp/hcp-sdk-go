@@ -75,16 +75,26 @@ func NewGetImageByBuildLabelsDefault(code int) *GetImageByBuildLabelsDefault {
 // GetImageByBuildLabelsDefault is the default error response.
 type GetImageByBuildLabelsDefault struct {
 	_statusCode int
+	Payload     *models.CloudGoogleRPCStatus
 }
 
 func (o *GetImageByBuildLabelsDefault) Code() int {
 	return o._statusCode
 }
 
+func (o *GetImageByBuildLabelsDefault) GetPayload() *models.CloudGoogleRPCStatus {
+	return o.Payload
+}
+
 func (o *GetImageByBuildLabelsDefault) Error() string {
-	return fmt.Sprintf("[POST .../by_labels][%d] getImageByBuildLabels default", o._statusCode)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST .../by_labels][%d] getImageByBuildLabels default %s", o._statusCode, payload)
 }
 
 func (o *GetImageByBuildLabelsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+	o.Payload = new(models.CloudGoogleRPCStatus)
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 	return nil
 }
