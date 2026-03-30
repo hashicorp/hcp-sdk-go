@@ -3,6 +3,8 @@
 
 package models
 
+import "github.com/go-openapi/strfmt"
+
 // GetImageByBuildLabelsRequestBody is the request body for GetImageByBuildLabels (2022-12-02).
 type GetImageByBuildLabelsRequestBody struct {
 	Labels        map[string]string `json:"labels,omitempty"`
@@ -33,7 +35,7 @@ type ExternalArtifactVersion struct {
 	ID          string `json:"id,omitempty"`
 	Name        string `json:"name,omitempty"`
 	Fingerprint string `json:"fingerprint,omitempty"`
-	RevokeAt    string `json:"revoke_at,omitempty"`
+	RevokeAt    strfmt.DateTime `json:"revoke_at,omitempty"`
 }
 
 // Build is the 2022-12-02 build shape (matches API JSON; compatible with 2023-01-01 for parsing).
