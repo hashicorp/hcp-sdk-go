@@ -1,3 +1,8 @@
+## v0.169.0 (April 01, 2026)
+
+FEATURES:
+
+* Add `cloud-packer-service` `stable/2022-12-02` BuildService client support for `GetImageByBuildLabels`. [[GH-310](https://github.com/hashicorp/hcp-sdk-go/pull/310)]
 ## v0.168.0 (March 25, 2026)
 
 ## v0.167.0 (February 10, 2026)
