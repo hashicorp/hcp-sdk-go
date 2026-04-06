@@ -22,7 +22,7 @@ type HashicorpCloudNetwork20200907NetworkProviderNetworkData struct {
 	AwsNetworkData *HashicorpCloudNetwork20200907AWSNetworkData `json:"aws_network_data,omitempty"`
 
 	// azure network data
-	AzureNetworkData HashicorpCloudNetwork20200907AzureNetworkData `json:"azure_network_data,omitempty"`
+	AzureNetworkData *HashicorpCloudNetwork20200907AzureNetworkData `json:"azure_network_data,omitempty"`
 }
 
 // Validate validates this hashicorp cloud network 20200907 network provider network data
@@ -30,6 +30,10 @@ func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) Validate(forma
 	var res []error
 
 	if err := m.validateAwsNetworkData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAzureNetworkData(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -58,11 +62,34 @@ func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) validateAwsNet
 	return nil
 }
 
+func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) validateAzureNetworkData(formats strfmt.Registry) error {
+	if swag.IsZero(m.AzureNetworkData) { // not required
+		return nil
+	}
+
+	if m.AzureNetworkData != nil {
+		if err := m.AzureNetworkData.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_network_data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_network_data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this hashicorp cloud network 20200907 network provider network data based on the context it is used
 func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateAwsNetworkData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAzureNetworkData(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -85,6 +112,27 @@ func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) contextValidat
 				return ve.ValidateName("aws_network_data")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("aws_network_data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907NetworkProviderNetworkData) contextValidateAzureNetworkData(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AzureNetworkData != nil {
+
+		if swag.IsZero(m.AzureNetworkData) { // not required
+			return nil
+		}
+
+		if err := m.AzureNetworkData.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_network_data")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_network_data")
 			}
 			return err
 		}
