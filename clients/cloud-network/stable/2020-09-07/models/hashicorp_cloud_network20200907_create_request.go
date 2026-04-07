@@ -18,6 +18,9 @@ import (
 // swagger:model hashicorp.cloud.network_20200907.CreateRequest
 type HashicorpCloudNetwork20200907CreateRequest struct {
 
+	// azure_config contains Azure-specific create-time configuration.
+	AzureConfig *HashicorpCloudNetwork20200907AzureCreateConfig `json:"azure_config,omitempty"`
+
 	// network is the network object to be created.
 	Network *HashicorpCloudNetwork20200907Network `json:"network,omitempty"`
 }
@@ -26,6 +29,10 @@ type HashicorpCloudNetwork20200907CreateRequest struct {
 func (m *HashicorpCloudNetwork20200907CreateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAzureConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateNetwork(formats); err != nil {
 		res = append(res, err)
 	}
@@ -33,6 +40,25 @@ func (m *HashicorpCloudNetwork20200907CreateRequest) Validate(formats strfmt.Reg
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907CreateRequest) validateAzureConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.AzureConfig) { // not required
+		return nil
+	}
+
+	if m.AzureConfig != nil {
+		if err := m.AzureConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -59,6 +85,10 @@ func (m *HashicorpCloudNetwork20200907CreateRequest) validateNetwork(formats str
 func (m *HashicorpCloudNetwork20200907CreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAzureConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateNetwork(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -66,6 +96,27 @@ func (m *HashicorpCloudNetwork20200907CreateRequest) ContextValidate(ctx context
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudNetwork20200907CreateRequest) contextValidateAzureConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AzureConfig != nil {
+
+		if swag.IsZero(m.AzureConfig) { // not required
+			return nil
+		}
+
+		if err := m.AzureConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
