@@ -118,6 +118,9 @@ type hcpConfig struct {
 
 	// workloadProviderConfig is the config of the workload identity provider to use for authentication.
 	workloadProviderConfig *workload.IdentityProviderConfig
+
+	// cachedTokenFile is the cached token file to use
+	cachedTokenFile string
 }
 
 func (c *hcpConfig) Profile() *profile.UserProfile {
@@ -131,7 +134,7 @@ func (c *hcpConfig) Token() (*oauth2.Token, error) {
 // Logout will log out the user by clearing the currently cached login tokens.
 func (c *hcpConfig) Logout() error {
 	// Get cache file path
-	cacheFile, err := files.TokenCacheFile()
+	cacheFile, err := files.TokenCacheFile(c.cachedTokenFile)
 	if err != nil {
 		return fmt.Errorf("failed to get token cache file: %w", err)
 	}
