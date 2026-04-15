@@ -78,6 +78,18 @@ type PackerServiceCreateRegistryParams struct {
 	*/
 	LocationProjectID string
 
+	/* LocationRegionProvider.
+
+	   unused HCP platform field, HCP Packer does not support the region argument
+	*/
+	LocationRegionProvider *string
+
+	/* LocationRegionRegion.
+
+	   unused HCP platform field, HCP Packer does not support the region argument
+	*/
+	LocationRegionRegion *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -164,6 +176,28 @@ func (o *PackerServiceCreateRegistryParams) SetLocationProjectID(locationProject
 	o.LocationProjectID = locationProjectID
 }
 
+// WithLocationRegionProvider adds the locationRegionProvider to the packer service create registry params
+func (o *PackerServiceCreateRegistryParams) WithLocationRegionProvider(locationRegionProvider *string) *PackerServiceCreateRegistryParams {
+	o.SetLocationRegionProvider(locationRegionProvider)
+	return o
+}
+
+// SetLocationRegionProvider adds the locationRegionProvider to the packer service create registry params
+func (o *PackerServiceCreateRegistryParams) SetLocationRegionProvider(locationRegionProvider *string) {
+	o.LocationRegionProvider = locationRegionProvider
+}
+
+// WithLocationRegionRegion adds the locationRegionRegion to the packer service create registry params
+func (o *PackerServiceCreateRegistryParams) WithLocationRegionRegion(locationRegionRegion *string) *PackerServiceCreateRegistryParams {
+	o.SetLocationRegionRegion(locationRegionRegion)
+	return o
+}
+
+// SetLocationRegionRegion adds the locationRegionRegion to the packer service create registry params
+func (o *PackerServiceCreateRegistryParams) SetLocationRegionRegion(locationRegionRegion *string) {
+	o.LocationRegionRegion = locationRegionRegion
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *PackerServiceCreateRegistryParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -185,6 +219,40 @@ func (o *PackerServiceCreateRegistryParams) WriteToRequest(r runtime.ClientReque
 	// path param location.project_id
 	if err := r.SetPathParam("location.project_id", o.LocationProjectID); err != nil {
 		return err
+	}
+
+	if o.LocationRegionProvider != nil {
+
+		// query param location.region.provider
+		var qrLocationRegionProvider string
+
+		if o.LocationRegionProvider != nil {
+			qrLocationRegionProvider = *o.LocationRegionProvider
+		}
+		qLocationRegionProvider := qrLocationRegionProvider
+		if qLocationRegionProvider != "" {
+
+			if err := r.SetQueryParam("location.region.provider", qLocationRegionProvider); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.LocationRegionRegion != nil {
+
+		// query param location.region.region
+		var qrLocationRegionRegion string
+
+		if o.LocationRegionRegion != nil {
+			qrLocationRegionRegion = *o.LocationRegionRegion
+		}
+		qLocationRegionRegion := qrLocationRegionRegion
+		if qLocationRegionRegion != "" {
+
+			if err := r.SetQueryParam("location.region.region", qLocationRegionRegion); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

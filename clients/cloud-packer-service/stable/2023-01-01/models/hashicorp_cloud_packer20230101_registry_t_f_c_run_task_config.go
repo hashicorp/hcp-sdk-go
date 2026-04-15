@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -23,15 +24,76 @@ type HashicorpCloudPacker20230101RegistryTFCRunTaskConfig struct {
 	// Encrypted HMAC key used by Terraform Cloud to sign the requests to
 	// the HCP Packer run task API.
 	HmacKey string `json:"hmac_key,omitempty"`
+
+	// Run task behaviour in case on untracked image
+	OnUntrackedImage *HashicorpCloudPacker20230101RunTaskBehaviour `json:"on_untracked_image,omitempty"`
 }
 
 // Validate validates this hashicorp cloud packer 20230101 registry t f c run task config
 func (m *HashicorpCloudPacker20230101RegistryTFCRunTaskConfig) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateOnUntrackedImage(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this hashicorp cloud packer 20230101 registry t f c run task config based on context it is used
+func (m *HashicorpCloudPacker20230101RegistryTFCRunTaskConfig) validateOnUntrackedImage(formats strfmt.Registry) error {
+	if swag.IsZero(m.OnUntrackedImage) { // not required
+		return nil
+	}
+
+	if m.OnUntrackedImage != nil {
+		if err := m.OnUntrackedImage.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("on_untracked_image")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("on_untracked_image")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud packer 20230101 registry t f c run task config based on the context it is used
 func (m *HashicorpCloudPacker20230101RegistryTFCRunTaskConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateOnUntrackedImage(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudPacker20230101RegistryTFCRunTaskConfig) contextValidateOnUntrackedImage(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.OnUntrackedImage != nil {
+
+		if swag.IsZero(m.OnUntrackedImage) { // not required
+			return nil
+		}
+
+		if err := m.OnUntrackedImage.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("on_untracked_image")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("on_untracked_image")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

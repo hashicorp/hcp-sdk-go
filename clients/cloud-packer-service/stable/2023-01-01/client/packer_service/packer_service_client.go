@@ -54,11 +54,17 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	PackerServiceAssignChannelVersion(params *PackerServiceAssignChannelVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceAssignChannelVersionOK, error)
+
 	PackerServiceCreateBucket(params *PackerServiceCreateBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateBucketOK, error)
 
 	PackerServiceCreateBuild(params *PackerServiceCreateBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateBuildOK, error)
 
 	PackerServiceCreateChannel(params *PackerServiceCreateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateChannelOK, error)
+
+	PackerServiceCreateEnforcedBlock(params *PackerServiceCreateEnforcedBlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateEnforcedBlockOK, error)
+
+	PackerServiceCreateEnforcedBlockVersion(params *PackerServiceCreateEnforcedBlockVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateEnforcedBlockVersionOK, error)
 
 	PackerServiceCreateRegistry(params *PackerServiceCreateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateRegistryOK, error)
 
@@ -70,6 +76,10 @@ type ClientService interface {
 
 	PackerServiceDeleteChannel(params *PackerServiceDeleteChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteChannelOK, error)
 
+	PackerServiceDeleteEnforcedBlock(params *PackerServiceDeleteEnforcedBlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteEnforcedBlockOK, error)
+
+	PackerServiceDeleteEnforcedBlockVersion(params *PackerServiceDeleteEnforcedBlockVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteEnforcedBlockVersionOK, error)
+
 	PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteRegistryOK, error)
 
 	PackerServiceDeleteVersion(params *PackerServiceDeleteVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteVersionOK, error)
@@ -80,9 +90,19 @@ type ClientService interface {
 
 	PackerServiceGetChannel(params *PackerServiceGetChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetChannelOK, error)
 
+	PackerServiceGetEnforcedBlock(params *PackerServiceGetEnforcedBlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetEnforcedBlockOK, error)
+
+	PackerServiceGetEnforcedBlockLinkedBuckets(params *PackerServiceGetEnforcedBlockLinkedBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetEnforcedBlockLinkedBucketsOK, error)
+
+	PackerServiceGetEnforcedBlockVersions(params *PackerServiceGetEnforcedBlockVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetEnforcedBlockVersionsOK, error)
+
+	PackerServiceGetEnforcedBlocksByBucket(params *PackerServiceGetEnforcedBlocksByBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetEnforcedBlocksByBucketOK, error)
+
 	PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryOK, error)
 
 	PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetRegistryTFCRunTaskAPIParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryTFCRunTaskAPIOK, error)
+
+	PackerServiceGetRunTaskConfig(params *PackerServiceGetRunTaskConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRunTaskConfigOK, error)
 
 	PackerServiceGetSbom(params *PackerServiceGetSbomParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetSbomOK, error)
 
@@ -90,7 +110,17 @@ type ClientService interface {
 
 	PackerServiceListBucketAncestry(params *PackerServiceListBucketAncestryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketAncestryOK, error)
 
+	PackerServiceListBucketPackages(params *PackerServiceListBucketPackagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketPackagesOK, error)
+
+	PackerServiceListBucketPackagesVulnerabilitySummary(params *PackerServiceListBucketPackagesVulnerabilitySummaryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketPackagesVulnerabilitySummaryOK, error)
+
+	PackerServiceListBucketPackagesWithVulnerabilities(params *PackerServiceListBucketPackagesWithVulnerabilitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketPackagesWithVulnerabilitiesOK, error)
+
+	PackerServiceListBucketVulnerabilities(params *PackerServiceListBucketVulnerabilitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketVulnerabilitiesOK, error)
+
 	PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketsOK, error)
+
+	PackerServiceListBuildPackages(params *PackerServiceListBuildPackagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBuildPackagesOK, error)
 
 	PackerServiceListBuilds(params *PackerServiceListBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBuildsOK, error)
 
@@ -98,9 +128,13 @@ type ClientService interface {
 
 	PackerServiceListChannels(params *PackerServiceListChannelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListChannelsOK, error)
 
+	PackerServiceListEnforcedBlocks(params *PackerServiceListEnforcedBlocksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListEnforcedBlocksOK, error)
+
 	PackerServiceListSboms(params *PackerServiceListSbomsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListSbomsOK, error)
 
 	PackerServiceListVersions(params *PackerServiceListVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListVersionsOK, error)
+
+	PackerServiceManageEnforcedBlockLinkedBuckets(params *PackerServiceManageEnforcedBlockLinkedBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceManageEnforcedBlockLinkedBucketsOK, error)
 
 	PackerServiceRegenerateTFCRunTaskHmacKey(params *PackerServiceRegenerateTFCRunTaskHmacKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceRegenerateTFCRunTaskHmacKeyOK, error)
 
@@ -112,13 +146,57 @@ type ClientService interface {
 
 	PackerServiceUpdateChannel(params *PackerServiceUpdateChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateChannelOK, error)
 
+	PackerServiceUpdateEnforcedBlock(params *PackerServiceUpdateEnforcedBlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateEnforcedBlockOK, error)
+
+	PackerServiceUpdateEnforcedBlockVersion(params *PackerServiceUpdateEnforcedBlockVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateEnforcedBlockVersionOK, error)
+
 	PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateRegistryOK, error)
+
+	PackerServiceUpdateRunTaskConfig(params *PackerServiceUpdateRunTaskConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateRunTaskConfigOK, error)
 
 	PackerServiceUpdateVersion(params *PackerServiceUpdateVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateVersionOK, error)
 
 	PackerServiceUploadSbom(params *PackerServiceUploadSbomParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUploadSbomOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+PackerServiceAssignChannelVersion assigns the version from a source channel to a target channel this operation copies the version assignment leaving both channels assigned to the same version it provides a simple way to deploy validated versions e g from staging to production
+*/
+func (a *Client) PackerServiceAssignChannelVersion(params *PackerServiceAssignChannelVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceAssignChannelVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceAssignChannelVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_AssignChannelVersion",
+		Method:             "POST",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/channels/assign",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceAssignChannelVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceAssignChannelVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceAssignChannelVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -232,6 +310,82 @@ func (a *Client) PackerServiceCreateChannel(params *PackerServiceCreateChannelPa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PackerServiceCreateChannelDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceCreateEnforcedBlock es n f o r c e d b l o c k s creates an enforced block in the h c p packer registry
+*/
+func (a *Client) PackerServiceCreateEnforcedBlock(params *PackerServiceCreateEnforcedBlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateEnforcedBlockOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceCreateEnforcedBlockParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_CreateEnforcedBlock",
+		Method:             "PUT",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceCreateEnforcedBlockReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceCreateEnforcedBlockOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceCreateEnforcedBlockDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceCreateEnforcedBlockVersion packer service create enforced block version API
+*/
+func (a *Client) PackerServiceCreateEnforcedBlockVersion(params *PackerServiceCreateEnforcedBlockVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceCreateEnforcedBlockVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceCreateEnforcedBlockVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_CreateEnforcedBlockVersion",
+		Method:             "PUT",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks/{enforced_block_id}/versions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceCreateEnforcedBlockVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceCreateEnforcedBlockVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceCreateEnforcedBlockVersionDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -426,6 +580,82 @@ func (a *Client) PackerServiceDeleteChannel(params *PackerServiceDeleteChannelPa
 }
 
 /*
+PackerServiceDeleteEnforcedBlock deletes an enforced block from the h c p packer registry
+*/
+func (a *Client) PackerServiceDeleteEnforcedBlock(params *PackerServiceDeleteEnforcedBlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteEnforcedBlockOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceDeleteEnforcedBlockParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_DeleteEnforcedBlock",
+		Method:             "DELETE",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks/{enforced_block_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceDeleteEnforcedBlockReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceDeleteEnforcedBlockOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceDeleteEnforcedBlockDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceDeleteEnforcedBlockVersion deletes an enforced block version from the h c p packer registry
+*/
+func (a *Client) PackerServiceDeleteEnforcedBlockVersion(params *PackerServiceDeleteEnforcedBlockVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteEnforcedBlockVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceDeleteEnforcedBlockVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_DeleteEnforcedBlockVersion",
+		Method:             "DELETE",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks/{enforced_block_id}/versions/{enforced_block_version_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceDeleteEnforcedBlockVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceDeleteEnforcedBlockVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceDeleteEnforcedBlockVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 PackerServiceDeleteRegistry deletes the h c p packer registry and any associated resources from the database
 */
 func (a *Client) PackerServiceDeleteRegistry(params *PackerServiceDeleteRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceDeleteRegistryOK, error) {
@@ -616,6 +846,158 @@ func (a *Client) PackerServiceGetChannel(params *PackerServiceGetChannelParams, 
 }
 
 /*
+PackerServiceGetEnforcedBlock packer service get enforced block API
+*/
+func (a *Client) PackerServiceGetEnforcedBlock(params *PackerServiceGetEnforcedBlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetEnforcedBlockOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceGetEnforcedBlockParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_GetEnforcedBlock",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks/{enforced_block_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceGetEnforcedBlockReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceGetEnforcedBlockOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceGetEnforcedBlockDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceGetEnforcedBlockLinkedBuckets gets linked buckets for an enforced block version in the h c p packer registry
+*/
+func (a *Client) PackerServiceGetEnforcedBlockLinkedBuckets(params *PackerServiceGetEnforcedBlockLinkedBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetEnforcedBlockLinkedBucketsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceGetEnforcedBlockLinkedBucketsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_GetEnforcedBlockLinkedBuckets",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks/{enforced_block_id}/versions/{enforced_block_version_id}/buckets",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceGetEnforcedBlockLinkedBucketsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceGetEnforcedBlockLinkedBucketsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceGetEnforcedBlockLinkedBucketsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceGetEnforcedBlockVersions packer service get enforced block versions API
+*/
+func (a *Client) PackerServiceGetEnforcedBlockVersions(params *PackerServiceGetEnforcedBlockVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetEnforcedBlockVersionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceGetEnforcedBlockVersionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_GetEnforcedBlockVersions",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks/{enforced_block_id}/versions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceGetEnforcedBlockVersionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceGetEnforcedBlockVersionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceGetEnforcedBlockVersionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceGetEnforcedBlocksByBucket packer service get enforced blocks by bucket API
+*/
+func (a *Client) PackerServiceGetEnforcedBlocksByBucket(params *PackerServiceGetEnforcedBlocksByBucketParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetEnforcedBlocksByBucketOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceGetEnforcedBlocksByBucketParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_GetEnforcedBlocksByBucket",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks/bucket/{bucket_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceGetEnforcedBlocksByBucketReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceGetEnforcedBlocksByBucketOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceGetEnforcedBlocksByBucketDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 PackerServiceGetRegistry retrieves the h c p packer registry
 */
 func (a *Client) PackerServiceGetRegistry(params *PackerServiceGetRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRegistryOK, error) {
@@ -688,6 +1070,44 @@ func (a *Client) PackerServiceGetRegistryTFCRunTaskAPI(params *PackerServiceGetR
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PackerServiceGetRegistryTFCRunTaskAPIDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceGetRunTaskConfig gets run task related configuration
+*/
+func (a *Client) PackerServiceGetRunTaskConfig(params *PackerServiceGetRunTaskConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceGetRunTaskConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceGetRunTaskConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_GetRunTaskConfig",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceGetRunTaskConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceGetRunTaskConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceGetRunTaskConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -806,6 +1226,158 @@ func (a *Client) PackerServiceListBucketAncestry(params *PackerServiceListBucket
 }
 
 /*
+PackerServiceListBucketPackages retrieves all packages matching the name and or version criteria for a bucket
+*/
+func (a *Client) PackerServiceListBucketPackages(params *PackerServiceListBucketPackagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketPackagesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceListBucketPackagesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_ListBucketPackages",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/packages",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceListBucketPackagesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceListBucketPackagesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceListBucketPackagesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceListBucketPackagesVulnerabilitySummary retrieves a summary of packages with vulnerabilities for a bucket
+*/
+func (a *Client) PackerServiceListBucketPackagesVulnerabilitySummary(params *PackerServiceListBucketPackagesVulnerabilitySummaryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketPackagesVulnerabilitySummaryOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceListBucketPackagesVulnerabilitySummaryParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_ListBucketPackagesVulnerabilitySummary",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/packages/vulnerability-summary",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceListBucketPackagesVulnerabilitySummaryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceListBucketPackagesVulnerabilitySummaryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceListBucketPackagesVulnerabilitySummaryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceListBucketPackagesWithVulnerabilities retrieves packages with their vulnerability details for packages that have vulnerabilities
+*/
+func (a *Client) PackerServiceListBucketPackagesWithVulnerabilities(params *PackerServiceListBucketPackagesWithVulnerabilitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketPackagesWithVulnerabilitiesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceListBucketPackagesWithVulnerabilitiesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_ListBucketPackagesWithVulnerabilities",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/packages/with-vulnerabilities",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceListBucketPackagesWithVulnerabilitiesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceListBucketPackagesWithVulnerabilitiesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceListBucketPackagesWithVulnerabilitiesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceListBucketVulnerabilities retrieves all vulnerabilities for a bucket with their impacted builds channels and packages
+*/
+func (a *Client) PackerServiceListBucketVulnerabilities(params *PackerServiceListBucketVulnerabilitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketVulnerabilitiesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceListBucketVulnerabilitiesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_ListBucketVulnerabilities",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/vulnerabilities",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceListBucketVulnerabilitiesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceListBucketVulnerabilitiesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceListBucketVulnerabilitiesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 PackerServiceListBuckets lists all existing buckets in the h c p packer registry
 */
 func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBucketsOK, error) {
@@ -840,6 +1412,44 @@ func (a *Client) PackerServiceListBuckets(params *PackerServiceListBucketsParams
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PackerServiceListBucketsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceListBuildPackages retrieves all packages matching the name and or version criteria for a build
+*/
+func (a *Client) PackerServiceListBuildPackages(params *PackerServiceListBuildPackagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListBuildPackagesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceListBuildPackagesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_ListBuildPackages",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/buckets/{bucket_name}/versions/{fingerprint}/builds/{build_id}/packages",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceListBuildPackagesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceListBuildPackagesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceListBuildPackagesDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -958,6 +1568,44 @@ func (a *Client) PackerServiceListChannels(params *PackerServiceListChannelsPara
 }
 
 /*
+PackerServiceListEnforcedBlocks packer service list enforced blocks API
+*/
+func (a *Client) PackerServiceListEnforcedBlocks(params *PackerServiceListEnforcedBlocksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListEnforcedBlocksOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceListEnforcedBlocksParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_ListEnforcedBlocks",
+		Method:             "GET",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceListEnforcedBlocksReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceListEnforcedBlocksOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceListEnforcedBlocksDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 PackerServiceListSboms lists every existing sbom for a build
 */
 func (a *Client) PackerServiceListSboms(params *PackerServiceListSbomsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceListSbomsOK, error) {
@@ -1030,6 +1678,44 @@ func (a *Client) PackerServiceListVersions(params *PackerServiceListVersionsPara
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PackerServiceListVersionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceManageEnforcedBlockLinkedBuckets manages linked buckets for an enforced block version in the h c p packer registry
+*/
+func (a *Client) PackerServiceManageEnforcedBlockLinkedBuckets(params *PackerServiceManageEnforcedBlockLinkedBucketsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceManageEnforcedBlockLinkedBucketsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceManageEnforcedBlockLinkedBucketsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_ManageEnforcedBlockLinkedBuckets",
+		Method:             "POST",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks/{enforced_block_id}/versions/{enforced_block_version_id}/buckets",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceManageEnforcedBlockLinkedBucketsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceManageEnforcedBlockLinkedBucketsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceManageEnforcedBlockLinkedBucketsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1224,6 +1910,82 @@ func (a *Client) PackerServiceUpdateChannel(params *PackerServiceUpdateChannelPa
 }
 
 /*
+PackerServiceUpdateEnforcedBlock updates an enforced block in the h c p packer registry
+*/
+func (a *Client) PackerServiceUpdateEnforcedBlock(params *PackerServiceUpdateEnforcedBlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateEnforcedBlockOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceUpdateEnforcedBlockParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_UpdateEnforcedBlock",
+		Method:             "PATCH",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks/{enforced_block_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceUpdateEnforcedBlockReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceUpdateEnforcedBlockOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceUpdateEnforcedBlockDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceUpdateEnforcedBlockVersion updates an enforced block version in the h c p packer registry
+*/
+func (a *Client) PackerServiceUpdateEnforcedBlockVersion(params *PackerServiceUpdateEnforcedBlockVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateEnforcedBlockVersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceUpdateEnforcedBlockVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_UpdateEnforcedBlockVersion",
+		Method:             "PATCH",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/enforced_blocks/{enforced_block_id}/versions/{enforced_block_version_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceUpdateEnforcedBlockVersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceUpdateEnforcedBlockVersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceUpdateEnforcedBlockVersionDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 PackerServiceUpdateRegistry updates the feature tier o r activates deactivates the h c p packer registry deactivating a registry will stop any additional billing for the resource
 */
 func (a *Client) PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateRegistryOK, error) {
@@ -1258,6 +2020,44 @@ func (a *Client) PackerServiceUpdateRegistry(params *PackerServiceUpdateRegistry
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PackerServiceUpdateRegistryDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PackerServiceUpdateRunTaskConfig updates run task related configuration
+*/
+func (a *Client) PackerServiceUpdateRunTaskConfig(params *PackerServiceUpdateRunTaskConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PackerServiceUpdateRunTaskConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPackerServiceUpdateRunTaskConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PackerService_UpdateRunTaskConfig",
+		Method:             "PATCH",
+		PathPattern:        "/packer/2023-01-01/organizations/{location.organization_id}/projects/{location.project_id}/runtasks/config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PackerServiceUpdateRunTaskConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PackerServiceUpdateRunTaskConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PackerServiceUpdateRunTaskConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
