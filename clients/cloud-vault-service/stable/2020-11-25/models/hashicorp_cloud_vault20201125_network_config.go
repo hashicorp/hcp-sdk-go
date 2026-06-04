@@ -22,6 +22,9 @@ type HashicorpCloudVault20201125NetworkConfig struct {
 	// cors config
 	CorsConfig *HashicorpCloudVault20201125CORSConfig `json:"cors_config,omitempty"`
 
+	// custom_domain_config allows configuring a custom domain for the Vault cluster.
+	CustomDomainConfig *HashicorpCloudVault20201125CustomDomainConfig `json:"custom_domain_config,omitempty"`
+
 	// http_proxy_option specifies whether HTTP Proxy should be enabled or disabled.
 	HTTPProxyOption *HashicorpCloudVault20201125HTTPProxyOption `json:"http_proxy_option,omitempty"`
 
@@ -40,6 +43,10 @@ func (m *HashicorpCloudVault20201125NetworkConfig) Validate(formats strfmt.Regis
 	var res []error
 
 	if err := m.validateCorsConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCustomDomainConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -68,6 +75,25 @@ func (m *HashicorpCloudVault20201125NetworkConfig) validateCorsConfig(formats st
 				return ve.ValidateName("cors_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cors_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125NetworkConfig) validateCustomDomainConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.CustomDomainConfig) { // not required
+		return nil
+	}
+
+	if m.CustomDomainConfig != nil {
+		if err := m.CustomDomainConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("custom_domain_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("custom_domain_config")
 			}
 			return err
 		}
@@ -129,6 +155,10 @@ func (m *HashicorpCloudVault20201125NetworkConfig) ContextValidate(ctx context.C
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCustomDomainConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateHTTPProxyOption(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -156,6 +186,27 @@ func (m *HashicorpCloudVault20201125NetworkConfig) contextValidateCorsConfig(ctx
 				return ve.ValidateName("cors_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cors_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125NetworkConfig) contextValidateCustomDomainConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CustomDomainConfig != nil {
+
+		if swag.IsZero(m.CustomDomainConfig) { // not required
+			return nil
+		}
+
+		if err := m.CustomDomainConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("custom_domain_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("custom_domain_config")
 			}
 			return err
 		}

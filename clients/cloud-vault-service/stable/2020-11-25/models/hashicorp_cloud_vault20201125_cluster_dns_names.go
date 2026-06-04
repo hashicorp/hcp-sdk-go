@@ -17,6 +17,9 @@ import (
 // swagger:model hashicorp.cloud.vault_20201125.Cluster.DNSNames
 type HashicorpCloudVault20201125ClusterDNSNames struct {
 
+	// custom is the custom domain name configured for the cluster (e.g., vault.customdomain.online).
+	Custom string `json:"custom,omitempty"`
+
 	// private is the DNS name pointing to the cluster's private IP addresses.
 	Private string `json:"private,omitempty"`
 

@@ -19,6 +19,11 @@ import (
 // swagger:model hashicorp.cloud.vault_20201125.InputNetworkConfig
 type HashicorpCloudVault20201125InputNetworkConfig struct {
 
+	// custom_domain_config is the configuration for custom domain support.
+	// Only is_enabled and custom_domain are writable; custom_domain_updated_at
+	// is a server-managed field and is ignored if sent by the client.
+	CustomDomainConfig *HashicorpCloudVault20201125InputCustomDomainConfig `json:"custom_domain_config,omitempty"`
+
 	// http_proxy_option specifies whether HTTP Proxy should be enabled or disabled.
 	HTTPProxyOption *HashicorpCloudVault20201125HTTPProxyOption `json:"http_proxy_option,omitempty"`
 
@@ -36,6 +41,10 @@ type HashicorpCloudVault20201125InputNetworkConfig struct {
 func (m *HashicorpCloudVault20201125InputNetworkConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCustomDomainConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateHTTPProxyOption(formats); err != nil {
 		res = append(res, err)
 	}
@@ -47,6 +56,25 @@ func (m *HashicorpCloudVault20201125InputNetworkConfig) Validate(formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputNetworkConfig) validateCustomDomainConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.CustomDomainConfig) { // not required
+		return nil
+	}
+
+	if m.CustomDomainConfig != nil {
+		if err := m.CustomDomainConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("custom_domain_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("custom_domain_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -99,6 +127,10 @@ func (m *HashicorpCloudVault20201125InputNetworkConfig) validateIPAllowlist(form
 func (m *HashicorpCloudVault20201125InputNetworkConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateCustomDomainConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateHTTPProxyOption(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -110,6 +142,27 @@ func (m *HashicorpCloudVault20201125InputNetworkConfig) ContextValidate(ctx cont
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *HashicorpCloudVault20201125InputNetworkConfig) contextValidateCustomDomainConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CustomDomainConfig != nil {
+
+		if swag.IsZero(m.CustomDomainConfig) { // not required
+			return nil
+		}
+
+		if err := m.CustomDomainConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("custom_domain_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("custom_domain_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
