@@ -22,7 +22,7 @@ type HashicorpCloudResourcemanagerFailureDetails struct {
 	// Optional list of items that caused the failure.
 	Items []*HashicorpCloudResourcemanagerItemDetail `json:"items"`
 
-	// Human-readable reason for FAIL or UNKNOWN.
+	// Human-readable reason for FAIL, SKIPPED, or UNKNOWN.
 	Reason string `json:"reason,omitempty"`
 }
 

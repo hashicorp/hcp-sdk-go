@@ -21,10 +21,10 @@ type HashicorpCloudResourcemanagerCheckResult struct {
 	// Stable identifier for the check.
 	CheckID *HashicorpCloudResourcemanagerCheckID `json:"check_id,omitempty"`
 
-	// Reasons for the failure, the check did not pass
+	// Reasons for the failure, skipped, or unknown result.
 	FailureDetails *HashicorpCloudResourcemanagerFailureDetails `json:"failure_details,omitempty"`
 
-	// Status of the check: PASS, FAIL, or UNKNOWN.
+	// Status of the check: PASS, FAIL, UNKNOWN, or SKIPPED.
 	Status *HashicorpCloudResourcemanagerCheckStatus `json:"status,omitempty"`
 }
 

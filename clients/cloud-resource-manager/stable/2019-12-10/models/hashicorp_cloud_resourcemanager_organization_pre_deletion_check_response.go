@@ -16,13 +16,13 @@ import (
 
 // HashicorpCloudResourcemanagerOrganizationPreDeletionCheckResponse Response message for GetPreDeletionCheck RPC.
 //
+// This endpoint returns raw check results only. Callers must interpret those
+// results according to their workflow when deciding whether to proceed.
+//
 // swagger:model hashicorp.cloud.resourcemanager.OrganizationPreDeletionCheckResponse
 type HashicorpCloudResourcemanagerOrganizationPreDeletionCheckResponse struct {
 
-	// True if all required checks passed.
-	Deletable bool `json:"deletable,omitempty"`
-
-	// The list of checks performed
+	// The list of checks performed.
 	Results []*HashicorpCloudResourcemanagerCheckResult `json:"results"`
 }
 

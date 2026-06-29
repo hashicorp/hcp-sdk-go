@@ -6,15 +6,12 @@ package organization_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -187,103 +184,5 @@ func (o *OrganizationServiceSetIamPolicyDefault) readResponse(response runtime.C
 		return err
 	}
 
-	return nil
-}
-
-/*
-OrganizationServiceSetIamPolicyBody see OrganizationService.SetIamPolicy
-swagger:model OrganizationServiceSetIamPolicyBody
-*/
-type OrganizationServiceSetIamPolicyBody struct {
-
-	// Policy is the updated IAM policy for the organization. The policy
-	// will be completely replaced and therefore Policy.Etag must be specified
-	// in order to prevent concurrent updates.
-	Policy *models.HashicorpCloudResourcemanagerPolicy `json:"policy,omitempty"`
-}
-
-// Validate validates this organization service set iam policy body
-func (o *OrganizationServiceSetIamPolicyBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validatePolicy(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *OrganizationServiceSetIamPolicyBody) validatePolicy(formats strfmt.Registry) error {
-	if swag.IsZero(o.Policy) { // not required
-		return nil
-	}
-
-	if o.Policy != nil {
-		if err := o.Policy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "policy")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "policy")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this organization service set iam policy body based on the context it is used
-func (o *OrganizationServiceSetIamPolicyBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.contextValidatePolicy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *OrganizationServiceSetIamPolicyBody) contextValidatePolicy(ctx context.Context, formats strfmt.Registry) error {
-
-	if o.Policy != nil {
-
-		if swag.IsZero(o.Policy) { // not required
-			return nil
-		}
-
-		if err := o.Policy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("body" + "." + "policy")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("body" + "." + "policy")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *OrganizationServiceSetIamPolicyBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *OrganizationServiceSetIamPolicyBody) UnmarshalBinary(b []byte) error {
-	var res OrganizationServiceSetIamPolicyBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
 )
 
 // NewProjectServiceTestIamPermissionsParams creates a new ProjectServiceTestIamPermissionsParams object,
@@ -62,7 +64,7 @@ ProjectServiceTestIamPermissionsParams contains all the parameters to send to th
 type ProjectServiceTestIamPermissionsParams struct {
 
 	// Body.
-	Body ProjectServiceTestIamPermissionsBody
+	Body *models.HashicorpCloudResourcemanagerProjectServiceTestIamPermissionsBody
 
 	/* ID.
 
@@ -124,13 +126,13 @@ func (o *ProjectServiceTestIamPermissionsParams) SetHTTPClient(client *http.Clie
 }
 
 // WithBody adds the body to the project service test iam permissions params
-func (o *ProjectServiceTestIamPermissionsParams) WithBody(body ProjectServiceTestIamPermissionsBody) *ProjectServiceTestIamPermissionsParams {
+func (o *ProjectServiceTestIamPermissionsParams) WithBody(body *models.HashicorpCloudResourcemanagerProjectServiceTestIamPermissionsBody) *ProjectServiceTestIamPermissionsParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the project service test iam permissions params
-func (o *ProjectServiceTestIamPermissionsParams) SetBody(body ProjectServiceTestIamPermissionsBody) {
+func (o *ProjectServiceTestIamPermissionsParams) SetBody(body *models.HashicorpCloudResourcemanagerProjectServiceTestIamPermissionsBody) {
 	o.Body = body
 }
 
@@ -152,8 +154,10 @@ func (o *ProjectServiceTestIamPermissionsParams) WriteToRequest(r runtime.Client
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param id

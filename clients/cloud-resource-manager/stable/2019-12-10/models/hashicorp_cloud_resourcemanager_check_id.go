@@ -32,8 +32,15 @@ import (
 //   - CHECK_ID_BILLING_NO_ACTIVE_BILLED_RESOURCES: No active billed resources checks that the billing account does not have
 //
 // any billed resources attached to it anymore.
+//   - CHECK_ID_BILLING_NO_ACCOUNTS: No accounts checks that the organization has no billing accounts
+//
+// remaining.
 //   - CHECK_ID_IDENTITY_NO_NON_OWNER_REMAINS: IDENTITY
 //   - CHECK_ID_RESOURCES_EMPTY: RESOURCES
+//   - CHECK_ID_INFRAGRAPH_NO_CONNECTIONS: INFRAGRAPH
+//
+// No connections checks that the organization has no InfraGraph
+// connection resources remaining.
 //
 // swagger:model hashicorp.cloud.resourcemanager.CheckId
 type HashicorpCloudResourcemanagerCheckID string
@@ -67,6 +74,9 @@ const (
 	// HashicorpCloudResourcemanagerCheckIDCHECKIDBILLINGNOACTIVEBILLEDRESOURCES captures enum value "CHECK_ID_BILLING_NO_ACTIVE_BILLED_RESOURCES"
 	HashicorpCloudResourcemanagerCheckIDCHECKIDBILLINGNOACTIVEBILLEDRESOURCES HashicorpCloudResourcemanagerCheckID = "CHECK_ID_BILLING_NO_ACTIVE_BILLED_RESOURCES"
 
+	// HashicorpCloudResourcemanagerCheckIDCHECKIDBILLINGNOACCOUNTS captures enum value "CHECK_ID_BILLING_NO_ACCOUNTS"
+	HashicorpCloudResourcemanagerCheckIDCHECKIDBILLINGNOACCOUNTS HashicorpCloudResourcemanagerCheckID = "CHECK_ID_BILLING_NO_ACCOUNTS"
+
 	// HashicorpCloudResourcemanagerCheckIDCHECKIDIDENTITYNONONOWNERREMAINS captures enum value "CHECK_ID_IDENTITY_NO_NON_OWNER_REMAINS"
 	HashicorpCloudResourcemanagerCheckIDCHECKIDIDENTITYNONONOWNERREMAINS HashicorpCloudResourcemanagerCheckID = "CHECK_ID_IDENTITY_NO_NON_OWNER_REMAINS"
 
@@ -87,6 +97,9 @@ const (
 
 	// HashicorpCloudResourcemanagerCheckIDCHECKIDRESOURCESNOPROJECTSEXIST captures enum value "CHECK_ID_RESOURCES_NO_PROJECTS_EXIST"
 	HashicorpCloudResourcemanagerCheckIDCHECKIDRESOURCESNOPROJECTSEXIST HashicorpCloudResourcemanagerCheckID = "CHECK_ID_RESOURCES_NO_PROJECTS_EXIST"
+
+	// HashicorpCloudResourcemanagerCheckIDCHECKIDINFRAGRAPHNOCONNECTIONS captures enum value "CHECK_ID_INFRAGRAPH_NO_CONNECTIONS"
+	HashicorpCloudResourcemanagerCheckIDCHECKIDINFRAGRAPHNOCONNECTIONS HashicorpCloudResourcemanagerCheckID = "CHECK_ID_INFRAGRAPH_NO_CONNECTIONS"
 )
 
 // for schema
@@ -94,7 +107,7 @@ var hashicorpCloudResourcemanagerCheckIdEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudResourcemanagerCheckID
-	if err := json.Unmarshal([]byte(`["CHECK_ID_UNSPECIFIED","CHECK_ID_BILLING_IS_ONLY_ACCOUNT","CHECK_ID_BILLING_VALID_ACCOUNT_STATUS","CHECK_ID_BILLING_NO_ACTIVE_CONTRACTS","CHECK_ID_BILLING_NO_UNPAID_INVOICES","CHECK_ID_BILLING_NO_ACTIVE_BILLED_RESOURCES","CHECK_ID_IDENTITY_NO_NON_OWNER_REMAINS","CHECK_ID_IDENTITY_NO_NON_OWNER_GROUP_REMAINS","CHECK_ID_IDENTITY_SSO_NOT_ENABLED","CHECK_ID_IDENTITY_SCIM_NOT_ENABLED","CHECK_ID_IDENTITY_NO_SERVICE_PRINCIPAL_REMAINS","CHECK_ID_RESOURCES_EMPTY","CHECK_ID_RESOURCES_NO_PROJECTS_EXIST"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["CHECK_ID_UNSPECIFIED","CHECK_ID_BILLING_IS_ONLY_ACCOUNT","CHECK_ID_BILLING_VALID_ACCOUNT_STATUS","CHECK_ID_BILLING_NO_ACTIVE_CONTRACTS","CHECK_ID_BILLING_NO_UNPAID_INVOICES","CHECK_ID_BILLING_NO_ACTIVE_BILLED_RESOURCES","CHECK_ID_BILLING_NO_ACCOUNTS","CHECK_ID_IDENTITY_NO_NON_OWNER_REMAINS","CHECK_ID_IDENTITY_NO_NON_OWNER_GROUP_REMAINS","CHECK_ID_IDENTITY_SSO_NOT_ENABLED","CHECK_ID_IDENTITY_SCIM_NOT_ENABLED","CHECK_ID_IDENTITY_NO_SERVICE_PRINCIPAL_REMAINS","CHECK_ID_RESOURCES_EMPTY","CHECK_ID_RESOURCES_NO_PROJECTS_EXIST","CHECK_ID_INFRAGRAPH_NO_CONNECTIONS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

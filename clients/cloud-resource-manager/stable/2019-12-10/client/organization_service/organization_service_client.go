@@ -60,19 +60,29 @@ type ClientService interface {
 
 	OrganizationServiceGet(params *OrganizationServiceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetOK, error)
 
+	OrganizationServiceGetConstraint(params *OrganizationServiceGetConstraintParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetConstraintOK, error)
+
 	OrganizationServiceGetIamPolicy(params *OrganizationServiceGetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetIamPolicyOK, error)
 
 	OrganizationServiceGetPreDeletionCheck(params *OrganizationServiceGetPreDeletionCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetPreDeletionCheckOK, error)
 
+	OrganizationServiceGetResourceControlPolicy(params *OrganizationServiceGetResourceControlPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetResourceControlPolicyOK, error)
+
 	OrganizationServiceGetRole(params *OrganizationServiceGetRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetRoleOK, error)
 
 	OrganizationServiceList(params *OrganizationServiceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceListOK, error)
+
+	OrganizationServiceListConstraints(params *OrganizationServiceListConstraintsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceListConstraintsOK, error)
+
+	OrganizationServiceListProjectsByService(params *OrganizationServiceListProjectsByServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceListProjectsByServiceOK, error)
 
 	OrganizationServiceListRoles(params *OrganizationServiceListRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceListRolesOK, error)
 
 	OrganizationServiceSetIamPolicy(params *OrganizationServiceSetIamPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceSetIamPolicyOK, error)
 
 	OrganizationServiceSetName(params *OrganizationServiceSetNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceSetNameOK, error)
+
+	OrganizationServiceSetResourceControlPolicy(params *OrganizationServiceSetResourceControlPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceSetResourceControlPolicyOK, error)
 
 	OrganizationServiceTestIamPermissions(params *OrganizationServiceTestIamPermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceTestIamPermissionsOK, error)
 
@@ -128,7 +138,7 @@ func (a *Client) OrganizationServiceDelete(params *OrganizationServiceDeletePara
 	op := &runtime.ClientOperation{
 		ID:                 "OrganizationService_Delete",
 		Method:             "DELETE",
-		PathPattern:        "/2019-12-10/resource-manager/organizations/{id}",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -190,6 +200,44 @@ func (a *Client) OrganizationServiceGet(params *OrganizationServiceGetParams, au
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*OrganizationServiceGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+OrganizationServiceGetConstraint gets constraint returns a constraint by its ID
+*/
+func (a *Client) OrganizationServiceGetConstraint(params *OrganizationServiceGetConstraintParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetConstraintOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOrganizationServiceGetConstraintParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "OrganizationService_GetConstraint",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/{constraint_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OrganizationServiceGetConstraintReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OrganizationServiceGetConstraintOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OrganizationServiceGetConstraintDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -270,6 +318,44 @@ func (a *Client) OrganizationServiceGetPreDeletionCheck(params *OrganizationServ
 }
 
 /*
+OrganizationServiceGetResourceControlPolicy gets resource control policy retrieves the current resource control policy for an organization
+*/
+func (a *Client) OrganizationServiceGetResourceControlPolicy(params *OrganizationServiceGetResourceControlPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetResourceControlPolicyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOrganizationServiceGetResourceControlPolicyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "OrganizationService_GetResourceControlPolicy",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/resource-control-policy",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OrganizationServiceGetResourceControlPolicyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OrganizationServiceGetResourceControlPolicyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OrganizationServiceGetResourceControlPolicyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 OrganizationServiceGetRole gets role returns a role and its mapped permissions
 */
 func (a *Client) OrganizationServiceGetRole(params *OrganizationServiceGetRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceGetRoleOK, error) {
@@ -342,6 +428,82 @@ func (a *Client) OrganizationServiceList(params *OrganizationServiceListParams, 
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*OrganizationServiceListDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+OrganizationServiceListConstraints lists constraints lists available constraints in the organization
+*/
+func (a *Client) OrganizationServiceListConstraints(params *OrganizationServiceListConstraintsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceListConstraintsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOrganizationServiceListConstraintsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "OrganizationService_ListConstraints",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/constraints",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OrganizationServiceListConstraintsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OrganizationServiceListConstraintsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OrganizationServiceListConstraintsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+OrganizationServiceListProjectsByService lists projects by service returns the projects within an organization that have resources belonging to the specified service
+*/
+func (a *Client) OrganizationServiceListProjectsByService(params *OrganizationServiceListProjectsByServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceListProjectsByServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOrganizationServiceListProjectsByServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "OrganizationService_ListProjectsByService",
+		Method:             "GET",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/projects-by-service",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OrganizationServiceListProjectsByServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OrganizationServiceListProjectsByServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OrganizationServiceListProjectsByServiceDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -456,6 +618,44 @@ func (a *Client) OrganizationServiceSetName(params *OrganizationServiceSetNamePa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*OrganizationServiceSetNameDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+OrganizationServiceSetResourceControlPolicy sets resource control policy updates the constraints applied to a resource
+*/
+func (a *Client) OrganizationServiceSetResourceControlPolicy(params *OrganizationServiceSetResourceControlPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OrganizationServiceSetResourceControlPolicyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOrganizationServiceSetResourceControlPolicyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "OrganizationService_SetResourceControlPolicy",
+		Method:             "PUT",
+		PathPattern:        "/resource-manager/2019-12-10/organizations/{id}/resource-control-policy",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OrganizationServiceSetResourceControlPolicyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OrganizationServiceSetResourceControlPolicyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*OrganizationServiceSetResourceControlPolicyDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
