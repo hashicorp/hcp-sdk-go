@@ -248,3 +248,12 @@ func TestWith_CredentialFilePath(t *testing.T) {
 		requirepkg.Error(t, apply(config, WithCredentialFilePath(fmt.Sprintf("random-%d", rand.Int()))))
 	})
 }
+
+func TestWith_CachedTokenFile(t *testing.T) {
+	require := requirepkg.New(t)
+
+	config := &hcpConfig{}
+	cachedTokenFile := "/dir/creds-file.json"
+	require.NoError(apply(config, WithCachedTokenFile(cachedTokenFile)))
+	require.Equal(cachedTokenFile, config.cachedTokenFile)
+}
