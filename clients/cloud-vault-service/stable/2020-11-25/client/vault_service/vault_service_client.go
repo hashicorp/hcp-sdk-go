@@ -116,6 +116,8 @@ type ClientService interface {
 
 	Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SealOK, error)
 
+	TestConnectivity(params *TestConnectivityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestConnectivityOK, error)
+
 	Unlock(params *UnlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlockOK, error)
 
 	Unseal(params *UnsealParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnsealOK, error)
@@ -1318,6 +1320,44 @@ func (a *Client) Seal(params *SealParams, authInfo runtime.ClientAuthInfoWriter,
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*SealDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+TestConnectivity test connectivity API
+*/
+func (a *Client) TestConnectivity(params *TestConnectivityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestConnectivityOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewTestConnectivityParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "TestConnectivity",
+		Method:             "POST",
+		PathPattern:        "/vault/2020-11-25/organizations/{location.organization_id}/projects/{location.project_id}/clusters/{cluster_id}/test-connectivity",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &TestConnectivityReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*TestConnectivityOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*TestConnectivityDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
