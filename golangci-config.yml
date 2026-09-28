@@ -1,9 +1,15 @@
 # Copyright IBM Corp. 2021, 2025
 # SPDX-License-Identifier: MPL-2.0
 
+version: "2"
+
 run:
   timeout: 5m
   tests: true
+
+formatters:
+  enable:
+  - goimports
 
 linters:
   enable:
@@ -16,33 +22,38 @@ linters:
   - misspell
   - unconvert
   - staticcheck
-  - gosimple
-  - stylecheck
-  - goimports
   - depguard
-
-linters-settings:
-  depguard:
+  settings:
+    depguard:
+      rules:
+        main:
+          deny:
+            - pkg: "github.com/gogo/status"
+            - pkg: "github.com/gogo/codes"
+            - pkg: "github.com/gogo/protobuf"
+    misspell:
+      locale: US
+  exclusions:
+    # Restore v1 default exclusions removed in v2.
+    # std-error-handling suppresses errcheck on deferred Close, print functions, etc.
+    presets:
+    - std-error-handling
     rules:
-      main:
-        deny:
-          - pkg: "github.com/gogo/status"
-          - pkg: "github.com/gogo/codes"
-          - pkg: "github.com/gogo/protobuf"
-  misspell:
-    locale: US
-
-issues:
-  exclude:
-  - ifElseChain
-  exclude-rules:
-  - path: _test\.go
-    linters:
-    - bodyclose
-  - path: config/with.go
-    linters:
-    - ineffassign
-    - staticcheck
-  - linters:
-    - staticcheck
-    text: "SA1019: package github.com/golang/protobuf"
+    - linters:
+      - gocritic
+      text: ifElseChain
+    # Suppress staticcheck quickfix (QF) suggestions — pre-existing style issues,
+    # not introduced by this Go version bump.
+    - linters:
+      - staticcheck
+      text: "^QF"
+    - path: _test\.go
+      linters:
+      - bodyclose
+    - path: config/with\.go
+      linters:
+      - ineffassign
+      - staticcheck
+    - linters:
+      - staticcheck
+      text: "SA1019: package github.com/golang/protobuf"
