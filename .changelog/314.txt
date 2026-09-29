@@ -1,0 +1,3 @@
+```release-note:improvement
+Fix CI workflows to use golangci-lint v2.14.0, required for Go 1.26 modules.
+```
