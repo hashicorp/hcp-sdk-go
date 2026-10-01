@@ -6,14 +6,12 @@ package project_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -186,43 +184,5 @@ func (o *ProjectServiceSetDescriptionDefault) readResponse(response runtime.Clie
 		return err
 	}
 
-	return nil
-}
-
-/*
-ProjectServiceSetDescriptionBody ProjectSetDescriptionRequest see ProjectService.SetDescription
-swagger:model ProjectServiceSetDescriptionBody
-*/
-type ProjectServiceSetDescriptionBody struct {
-
-	// description is the value the project's description should be updated to.
-	Description string `json:"description,omitempty"`
-}
-
-// Validate validates this project service set description body
-func (o *ProjectServiceSetDescriptionBody) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this project service set description body based on context it is used
-func (o *ProjectServiceSetDescriptionBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *ProjectServiceSetDescriptionBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *ProjectServiceSetDescriptionBody) UnmarshalBinary(b []byte) error {
-	var res ProjectServiceSetDescriptionBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

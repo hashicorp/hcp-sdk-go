@@ -89,12 +89,12 @@ func (o *OrganizationServiceDeleteOK) Code() int {
 
 func (o *OrganizationServiceDeleteOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /2019-12-10/resource-manager/organizations/{id}][%d] organizationServiceDeleteOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/organizations/{id}][%d] organizationServiceDeleteOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceDeleteOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /2019-12-10/resource-manager/organizations/{id}][%d] organizationServiceDeleteOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/organizations/{id}][%d] organizationServiceDeleteOK %s", 200, payload)
 }
 
 func (o *OrganizationServiceDeleteOK) GetPayload() models.HashicorpCloudResourcemanagerOrganizationDeleteResponse {
@@ -161,12 +161,12 @@ func (o *OrganizationServiceDeleteDefault) Code() int {
 
 func (o *OrganizationServiceDeleteDefault) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /2019-12-10/resource-manager/organizations/{id}][%d] OrganizationService_Delete default %s", o._statusCode, payload)
+	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/organizations/{id}][%d] OrganizationService_Delete default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceDeleteDefault) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /2019-12-10/resource-manager/organizations/{id}][%d] OrganizationService_Delete default %s", o._statusCode, payload)
+	return fmt.Sprintf("[DELETE /resource-manager/2019-12-10/organizations/{id}][%d] OrganizationService_Delete default %s", o._statusCode, payload)
 }
 
 func (o *OrganizationServiceDeleteDefault) GetPayload() *cloud.GoogleRPCStatus {

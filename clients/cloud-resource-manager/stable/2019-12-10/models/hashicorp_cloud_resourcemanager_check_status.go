@@ -41,6 +41,9 @@ const (
 
 	// HashicorpCloudResourcemanagerCheckStatusCHECKSTATUSUNKNOWN captures enum value "CHECK_STATUS_UNKNOWN"
 	HashicorpCloudResourcemanagerCheckStatusCHECKSTATUSUNKNOWN HashicorpCloudResourcemanagerCheckStatus = "CHECK_STATUS_UNKNOWN"
+
+	// HashicorpCloudResourcemanagerCheckStatusCHECKSTATUSSKIPPED captures enum value "CHECK_STATUS_SKIPPED"
+	HashicorpCloudResourcemanagerCheckStatusCHECKSTATUSSKIPPED HashicorpCloudResourcemanagerCheckStatus = "CHECK_STATUS_SKIPPED"
 )
 
 // for schema
@@ -48,7 +51,7 @@ var hashicorpCloudResourcemanagerCheckStatusEnum []interface{}
 
 func init() {
 	var res []HashicorpCloudResourcemanagerCheckStatus
-	if err := json.Unmarshal([]byte(`["CHECK_STATUS_UNSPECIFIED","CHECK_STATUS_PASS","CHECK_STATUS_FAIL","CHECK_STATUS_UNKNOWN"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["CHECK_STATUS_UNSPECIFIED","CHECK_STATUS_PASS","CHECK_STATUS_FAIL","CHECK_STATUS_UNKNOWN","CHECK_STATUS_SKIPPED"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

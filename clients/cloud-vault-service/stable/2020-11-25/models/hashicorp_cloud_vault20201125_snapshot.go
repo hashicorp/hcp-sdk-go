@@ -19,6 +19,11 @@ import (
 // swagger:model hashicorp.cloud.vault_20201125.Snapshot
 type HashicorpCloudVault20201125Snapshot struct {
 
+	// bytes is the snapshot size in bytes.
+	// When serialized via grpc-gateway / proto3 JSON mapping, this uint64 field is
+	// returned as a JSON string rather than a JSON number.
+	Bytes string `json:"bytes,omitempty"`
+
 	// cluster_id is the cluster id that this snapshot backs.
 	ClusterID string `json:"cluster_id,omitempty"`
 

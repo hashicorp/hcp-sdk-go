@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -17,18 +18,132 @@ import (
 // swagger:model hashicorp.cloud.resourcemanager.OrganizationCreateRequest
 type HashicorpCloudResourcemanagerOrganizationCreateRequest struct {
 
+	// billing_account_details contains the optional information needed to create
+	// a default billing account for the organization.
+	BillingAccountDetails *HashicorpCloudResourcemanagerBillingAccountDetails `json:"billing_account_details,omitempty"`
+
 	// Name is the user settable name of the organization. Will default to
 	// "<Principal's name>'s Organization" if unset.
 	Name string `json:"name,omitempty"`
+
+	// organization_ownership_details contains the optional information needed to
+	// create an organization ownership and business information record.
+	OrganizationOwnershipDetails *HashicorpCloudResourcemanagerOrganizationOwnershipDetails `json:"organization_ownership_details,omitempty"`
 }
 
 // Validate validates this hashicorp cloud resourcemanager organization create request
 func (m *HashicorpCloudResourcemanagerOrganizationCreateRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateBillingAccountDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOrganizationOwnershipDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this hashicorp cloud resourcemanager organization create request based on context it is used
+func (m *HashicorpCloudResourcemanagerOrganizationCreateRequest) validateBillingAccountDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.BillingAccountDetails) { // not required
+		return nil
+	}
+
+	if m.BillingAccountDetails != nil {
+		if err := m.BillingAccountDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("billing_account_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("billing_account_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudResourcemanagerOrganizationCreateRequest) validateOrganizationOwnershipDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.OrganizationOwnershipDetails) { // not required
+		return nil
+	}
+
+	if m.OrganizationOwnershipDetails != nil {
+		if err := m.OrganizationOwnershipDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("organization_ownership_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("organization_ownership_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this hashicorp cloud resourcemanager organization create request based on the context it is used
 func (m *HashicorpCloudResourcemanagerOrganizationCreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateBillingAccountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateOrganizationOwnershipDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HashicorpCloudResourcemanagerOrganizationCreateRequest) contextValidateBillingAccountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BillingAccountDetails != nil {
+
+		if swag.IsZero(m.BillingAccountDetails) { // not required
+			return nil
+		}
+
+		if err := m.BillingAccountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("billing_account_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("billing_account_details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *HashicorpCloudResourcemanagerOrganizationCreateRequest) contextValidateOrganizationOwnershipDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.OrganizationOwnershipDetails != nil {
+
+		if swag.IsZero(m.OrganizationOwnershipDetails) { // not required
+			return nil
+		}
+
+		if err := m.OrganizationOwnershipDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("organization_ownership_details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("organization_ownership_details")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

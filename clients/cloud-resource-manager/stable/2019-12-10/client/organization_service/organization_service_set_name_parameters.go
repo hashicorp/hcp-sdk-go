@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
 )
 
 // NewOrganizationServiceSetNameParams creates a new OrganizationServiceSetNameParams object,
@@ -62,7 +64,7 @@ OrganizationServiceSetNameParams contains all the parameters to send to the API 
 type OrganizationServiceSetNameParams struct {
 
 	// Body.
-	Body OrganizationServiceSetNameBody
+	Body *models.HashicorpCloudResourcemanagerOrganizationServiceSetNameBody
 
 	/* ID.
 
@@ -124,13 +126,13 @@ func (o *OrganizationServiceSetNameParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the organization service set name params
-func (o *OrganizationServiceSetNameParams) WithBody(body OrganizationServiceSetNameBody) *OrganizationServiceSetNameParams {
+func (o *OrganizationServiceSetNameParams) WithBody(body *models.HashicorpCloudResourcemanagerOrganizationServiceSetNameBody) *OrganizationServiceSetNameParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the organization service set name params
-func (o *OrganizationServiceSetNameParams) SetBody(body OrganizationServiceSetNameBody) {
+func (o *OrganizationServiceSetNameParams) SetBody(body *models.HashicorpCloudResourcemanagerOrganizationServiceSetNameBody) {
 	o.Body = body
 }
 
@@ -152,8 +154,10 @@ func (o *OrganizationServiceSetNameParams) WriteToRequest(r runtime.ClientReques
 		return err
 	}
 	var res []error
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	// path param id

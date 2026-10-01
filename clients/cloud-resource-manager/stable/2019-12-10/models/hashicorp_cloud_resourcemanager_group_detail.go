@@ -22,6 +22,9 @@ type HashicorpCloudResourcemanagerGroupDetail struct {
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// resource name
+	ResourceName string `json:"resource_name,omitempty"`
 }
 
 // Validate validates this hashicorp cloud resourcemanager group detail

@@ -6,14 +6,12 @@ package organization_service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/hashicorp/hcp-sdk-go/clients/cloud-resource-manager/stable/2019-12-10/models"
 	cloud "github.com/hashicorp/hcp-sdk-go/clients/cloud-shared/v1/models"
@@ -186,43 +184,5 @@ func (o *OrganizationServiceTestIamPermissionsDefault) readResponse(response run
 		return err
 	}
 
-	return nil
-}
-
-/*
-OrganizationServiceTestIamPermissionsBody see OrganizationService.TestIamPermissions
-swagger:model OrganizationServiceTestIamPermissionsBody
-*/
-type OrganizationServiceTestIamPermissionsBody struct {
-
-	// Permissions to test.
-	Permissions []string `json:"permissions"`
-}
-
-// Validate validates this organization service test iam permissions body
-func (o *OrganizationServiceTestIamPermissionsBody) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this organization service test iam permissions body based on context it is used
-func (o *OrganizationServiceTestIamPermissionsBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *OrganizationServiceTestIamPermissionsBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *OrganizationServiceTestIamPermissionsBody) UnmarshalBinary(b []byte) error {
-	var res OrganizationServiceTestIamPermissionsBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }
