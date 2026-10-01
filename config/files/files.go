@@ -32,8 +32,8 @@ const (
 )
 
 // TokenCacheFile will return the absolute path to the token cache file.
-// If filePath is non-empty, it will be returned as is. Otherwise, the default path
-// will be constructed based on the user's home directory and DefaultDirectory/TokenCacheFileName.
+// If filePath is non-empty, it will be returned as is. Otherwise, an absolute default path
+// will be constructed from the user's home directory and DefaultDirectory/TokenCacheFileName.
 func TokenCacheFile(filePath string) (string, error) {
 	if filePath != "" {
 		return filePath, nil
