@@ -187,7 +187,7 @@ func TestGetDefaultCredentialFile(t *testing.T) {
 		r.NoError(WriteCredentialFile(f.Name(), cf))
 
 		t.Setenv(EnvHCPCredFile, f.Name())
-		out, err := GetDefaultCredentialFile("")
+		out, err := GetDefaultCredentialFileForTokenCache("")
 		r.NoError(err)
 		r.EqualValues(cf, out)
 	})
@@ -208,7 +208,7 @@ func TestGetDefaultCredentialFile(t *testing.T) {
 		r.NoError(WriteCredentialFile(f.Name(), cf))
 
 		testDefaultHCPCredFilePath = f.Name()
-		out, err := GetDefaultCredentialFile("")
+		out, err := GetDefaultCredentialFileForTokenCache("")
 		testDefaultHCPCredFilePath = ""
 		r.NoError(err)
 		r.EqualValues(cf, out)
@@ -220,14 +220,14 @@ func Test_getCredentialFilePath(t *testing.T) {
 		r := require.New(t)
 		cf := "test-path"
 		t.Setenv(EnvHCPCredFile, cf)
-		p, err := GetCredentialFilePath("")
+		p, err := GetCredentialFilePathForTokenCache("")
 		r.NoError(err)
 		r.Equal(cf, p)
 	})
 
 	t.Run("without  env", func(t *testing.T) {
 		r := require.New(t)
-		p, err := GetCredentialFilePath("")
+		p, err := GetCredentialFilePathForTokenCache("")
 		r.NoError(err)
 		r.Contains(p, files.TokenCacheFileName, "%s", p)
 	})
@@ -235,10 +235,36 @@ func Test_getCredentialFilePath(t *testing.T) {
 	t.Run("with  file path", func(t *testing.T) {
 		r := require.New(t)
 		filePath := "test-cred-file.json"
-		p, err := GetCredentialFilePath(filePath)
+		p, err := GetCredentialFilePathForTokenCache(filePath)
 		r.NoError(err)
 		r.Contains(p, filePath, "%s", p)
 	})
+}
+
+func TestLegacyCredentialFileHelpers(t *testing.T) {
+	r := require.New(t)
+	cf := &CredentialFile{
+		Scheme: CredentialFileSchemeServicePrincipal,
+		Oauth: &OauthConfig{
+			ClientID:     "abc",
+			ClientSecret: "123",
+		},
+	}
+
+	f, err := os.CreateTemp("", "")
+	r.NoError(err)
+	t.Setenv(EnvHCPCredFile, f.Name())
+
+	r.Equal(CredentialFileName, "cred_file.json")
+	r.NoError(WriteDefaultCredentialFile(cf))
+
+	out, err := GetDefaultCredentialFile()
+	r.NoError(err)
+	r.EqualValues(cf, out)
+
+	p, err := GetCredentialFilePath()
+	r.NoError(err)
+	r.Equal(f.Name(), p)
 }
 
 func Test_WriteCredentialFile(t *testing.T) {

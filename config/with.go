@@ -152,7 +152,7 @@ func WithProfile(p *profile.UserProfile) HCPConfigOption {
 	}
 }
 
-// WithCachedTokenFile is an option
+// WithCachedTokenFile configures the path used to read, write, and clear cached authentication tokens.
 func WithCachedTokenFile(tokenFile string) HCPConfigOption {
 	return func(config *hcpConfig) error {
 		config.cachedTokenFile = tokenFile
