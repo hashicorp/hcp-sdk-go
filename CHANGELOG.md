@@ -1,3 +1,9 @@
+## v0.176.0 (October 07, 2026)
+
+IMPROVEMENTS:
+
+* Fix CI workflows to use golangci-lint v2.14.0, required for Go 1.26 modules. [[GH-314](https://github.com/hashicorp/hcp-sdk-go/pull/314)]
+* Update to Go 1.26 per the [Go support policy](https://go.dev/doc/devel/release#policy). [[GH-313](https://github.com/hashicorp/hcp-sdk-go/pull/313)]
 ## v0.175.0 (August 05, 2026)
 
 ## v0.174.0 (July 01, 2026)
